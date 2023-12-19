@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "flakey-devShells": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1701507594,
+        "narHash": "sha256-cXfJRZ+r6hHCf3y9+OZfTYfll6alKYVbrtTtM8bNeRM=",
+        "rev": "cb5943b5904169a3602c0264c84749379008ec27",
+        "revCount": 87,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/GetPsyched/not-so-flakey-devshells/0.2.6/018c29c2-2ae3-7766-ab1a-0fdd9f94b124/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/GetPsyched/not-so-flakey-devshells/0.x.x.tar.gz"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1702312524,
+        "narHash": "sha256-gkZJRDBUCpTPBvQk25G0B7vfbpEYM5s5OZqghkjZsnE=",
+        "path": "/nix/store/4fgs7yzsy2dqnjw8j42qlp9i1vgarzy0-source",
+        "rev": "a9bf124c46ef298113270b1f84a164865987a91c",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flakey-devShells": "flakey-devShells",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
