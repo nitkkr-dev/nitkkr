@@ -1,3 +1,5 @@
+import WorkInProgress from './work-in-progress';
+
 export default function Home() {
-  return <main></main>;
+  return <WorkInProgress />;
 }
