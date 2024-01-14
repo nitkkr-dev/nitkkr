@@ -16,9 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className="flex flex-col">
         <Header />
-        <section>{children}</section>
+        <section className="flex grow">{children}</section>
         <Footer />
       </body>
     </html>
