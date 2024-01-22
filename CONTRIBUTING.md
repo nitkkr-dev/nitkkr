@@ -18,10 +18,23 @@ git checkout -b {feature,fix,refactor,remove}/foo
 
 Pick any one of the above mentioned categories and replace `foo` with one or two words about your change. For example: `refactor/directors-corner`
 
-#### 4. Make your changes, commit and send a pull request
+#### 4. Make your changes and commit
 
-Note that you will need to send a pull request against the `staging` branch, NOT the `master` branch.
+#### 5. Once again, make sure your branch is up-to-date with master
 
-#### 5. Test changes on staging
+```sh
+git rebase origin/master
+git push -f
+```
 
-Once you have incorporated all changes requested in the PR and it is merged, test your changes on \<some-website-url> and make sure everything works the way it is supposed to. After this, open another PR from your branch to `master`.
+If you have any doubt with rebasing, run the following to keep a local backup
+
+```sh
+git checkout -b backup-123
+```
+
+And make sure to checkout back to your working branch
+
+#### 6. Send a PR!
+
+Now, wait until we review your PR and add any requested changes to your PR by pushing to the same branch.
