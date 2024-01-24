@@ -1,5 +1,5 @@
 import GoogleProvider from 'next-auth/providers/google';
-
+import { env } from "@/env/server";
 export const authOptions = {
   callbacks: {
     async signIn({ profile }: any) {
@@ -10,8 +10,8 @@ export const authOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: env.GOOGLE_CLIENT_ID!,
+      clientSecret: env.GOOGLE_CLIENT_SECRET!,
       profile(profile) {
         return {
           id: profile.email,

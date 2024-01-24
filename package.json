@@ -14,13 +14,15 @@
     "test": "npm run format && npm run lint && npm run check-types && npm run build"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.8.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
