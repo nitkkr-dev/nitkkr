@@ -15,7 +15,6 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "next/link-passhref": "error",
     "next/no-img-element": "off",
     "sort-imports": [
       "error",
