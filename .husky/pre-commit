@@ -3,37 +3,32 @@ echo '🏗️👷 Styling, testing and building your project before committing'
 
 npm run format ||
 (
-    echo '🤢🤮🤢🤮 Your styling looks disgusting. 🤢🤮🤢🤮
-            Prettier Check Failed. Run npm run format, add changes and try commit again.';
+    echo 'Prettier Check Failed. Run npm run format, add changes and try commit again.';
     false;
 )
 
 
-# npm run lint ||
-# (
-#         echo '😤🏀👋😤 Get that weak stuff out of here! 😤🏀👋😤 
-#                 ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-#         false; 
-# )
+npm run lint ||
+(
+    echo 'ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+    false; 
+)
 
 
-# npm run check-types ||
-# (
-#     echo '🤡😂❌🤡 Failed Type check. 🤡😂❌🤡
-#             Are you seriously trying to write that? Make the changes required above.'
-#     false;
-# )
+npm run check-types ||
+(
+    echo 'Type checking failed, please fix the errors mentioned above.'
+    false;
+)
 
 
-# echo '🤔🤔🤔🤔... Alright.... Code looks good to me... Trying to build now. 🤔🤔🤔🤔'
+echo 'Trying to build'
 
-# npm run build ||
-# (
-#     echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌
-#             Next build failed: View the errors above to see why. 
-#     '
-#     false;
-# )
+npm run build ||
+(
+    echo 'Next build failed: View the errors above to see why.'
+    false;
+)
 
 
-echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'
+echo 'Tests successful, Commiting the changes'
