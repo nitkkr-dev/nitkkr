@@ -1,0 +1,34 @@
+echo '🏗️👷 Styling, testing and building your project before committing'
+
+
+npm run format ||
+(
+    echo 'Prettier Check Failed. Run npm run format, add changes and try commit again.';
+    false;
+)
+
+
+npm run lint ||
+(
+    echo 'ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+    false; 
+)
+
+
+npm run check-types ||
+(
+    echo 'Type checking failed, please fix the errors mentioned above.'
+    false;
+)
+
+
+echo 'Trying to build'
+
+npm run build ||
+(
+    echo 'Next build failed: View the errors above to see why.'
+    false;
+)
+
+
+echo 'Tests successful, Commiting the changes'
