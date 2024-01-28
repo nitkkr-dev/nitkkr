@@ -7,12 +7,6 @@
   ],
   "plugins": ["react-hooks", "prettier"],
   "rules": {
-    "react/function-component-definition": [
-      "warn",
-      {
-        "namedComponents": "arrow-function"
-      }
-    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "next/no-img-element": "off",
