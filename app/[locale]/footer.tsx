@@ -107,7 +107,7 @@ export default function Footer() {
           />
         </div>
 
-        <div className="flex flex-col items-start justify-center py-5 lg:flex-row">
+        <div className="flex flex-col items-start justify-center py-5 lg:flex-row lg:items-center">
           <div className="px-5 lg:px-10">
             <ul>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
