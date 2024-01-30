@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 import '@/styles/globals.css';
-import Footer from './footer';
-import Header from './header';
+import Footer from './[lang]/footer';
+import Header from './[lang]/header';
 
 export const metadata: Metadata = {
   title: 'National Institute of Technology, Kurukshetra',
