@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 
 export default function DirectorsCorner() {
   return (
-    <div className="pt-20 flex-row items-center w-full h-fit bg-white">
+    <section className="pt-20 flex-row items-center w-full h-fit bg-white">
       <div className="mx-[242px] text-right flex flex-row">
         <HorsesRunning direction="left" />
         <div
@@ -26,7 +26,7 @@ export default function DirectorsCorner() {
             dmSerifDisplay.className
           }
         >
-          <span>DIRECT</span>
+          <h2>DIRECT</h2>
           <Image
             src="/images/sun-red.png"
             alt=""
@@ -34,7 +34,7 @@ export default function DirectorsCorner() {
             height={44}
             className="rotate-[90.66deg] my-auto h-[44px]"
           />
-          <span>R&rsquo;S CORNER</span>
+          <h2>R&rsquo;S CORNER</h2>
         </div>
       </div>
       <div className="mt-[90px] ml-[125px] mr-[120px] rounded-xl border border-red-700 text-black">
@@ -49,14 +49,14 @@ export default function DirectorsCorner() {
           <div
             className={'flex flex-col mr-[33px] ml-[45px] ' + dmSans.className}
           >
-            <span
+            <h2
               className={
                 'text-red-700 text-[52px] font-bold ' + dmSerifDisplay.className
               }
             >
               Professor B.V. Ramana Reddy
-            </span>
-            <span className="text-black text-[32px] font-normal">
+            </h2>
+            <p className="text-black text-[32px] font-normal">
               India, the land of seekers, is at the cusp of becoming Vishwa Guru
               all over again after 1100 years of subjugation, wars, annexures
               and humiliation. It is again a free country due to the sacrifices
@@ -67,11 +67,11 @@ export default function DirectorsCorner() {
               making our nation stronger in every sphere.
               <br />
               <br />
-            </span>
-            <span className="text-black text-[32px] font-bold">
-              I heartily welcome everyone who visits the website of this
-              institution.
-            </span>
+              <b>
+                I heartily welcome everyone who visits the website of this
+                institution.
+              </b>
+            </p>
           </div>
         </div>
       </div>
@@ -85,6 +85,6 @@ export default function DirectorsCorner() {
           Read More
         </button>
       </div>
-    </div>
+    </section>
   );
 }
