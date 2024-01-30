@@ -1,15 +1,17 @@
-import 'server-only'
+type Obj<T> = {
+  [k: string]: T;
+};
 
-interface DictionaryInterface {
-  [k: string]: any;
+interface Dictionary {
+  [k: string]: () => Promise<Obj<Obj<string>>>;
 }
 
-const dictionaries: {[k: string]: () => Promise<DictionaryInterface> } = {
-  "en-GB": () => import('./dictionaries/en.json').then((module) => module.default),
-  "hi-IN": () => import('./dictionaries/hi.json').then((module) => module.default),
-}
- 
-export const getDictionary = async (locale: string): Promise<DictionaryInterface> => {
+const dictionaries: Dictionary = {
+  'en-GB': () => import('./locales/en.json').then((module) => module.default),
+  'hi-IN': () => import('./locales/hi.json').then((module) => module.default),
+};
+
+export const getLocale = async (locale: string) => {
   const fn = dictionaries[locale];
   return await fn();
-}
+};
