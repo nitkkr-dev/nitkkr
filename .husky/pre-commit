@@ -1,7 +1,7 @@
 echo '🏗️👷 Styling, testing and building your project before committing'
 
 
-npm run format ||
+npm run format:check ||
 (
     echo 'Prettier Check Failed. Run npm run format, add changes and try commit again.';
     false;
