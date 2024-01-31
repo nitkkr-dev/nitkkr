@@ -28,7 +28,7 @@ export default function DirectorsCorner() {
         >
           <h2>DIRECT</h2>
           <Image
-            src="/images/sun-red.png"
+            src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PaN9iN-Wh5U0K4D3p08lFy2vBXAuRS7835uwTzaGDtTKWYL0PBZ0Gw4yVjKtcbQMHiscxyh03PgyA4EyTRS0~sXpO14m1RJT8ch27VGGr6fa9zBXWpttPuHgX52tI9S-sodxlmj20HnYYxNObqIDxEkvzgCFJiHsUjVwmxQfOWxwduL80aBRKVUa6bGGSm2V2A2Znl96nJ1yUDdxenBvrTNN4UCFiIJEwyvdr4jVDoWxoqfDveVUcYElzjBjTTYvphifTSeLjEn-uHbX8JmmW1HkqEpThkWsDUVkoGPk~vLBP8LY6fW3aoa7S1ionsMVjG09UsnDCfB7T4Up40LZ6g__"
             alt=""
             width={44}
             height={44}
