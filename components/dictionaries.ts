@@ -3,7 +3,7 @@ type Obj<T> = {
 };
 
 interface Dictionary {
-  [k: string]: () => Promise<Obj<Obj<string>>>;
+  [k: string]: () => Promise<Obj<string>>;
 }
 
 const dictionaries: Dictionary = {
