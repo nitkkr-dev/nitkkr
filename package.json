@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write '*/**/*.{js,jsx,ts,tsx,json,css,md}'",
-    "format:check": "prettier --check '*/**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "format": "prettier --write '**.{js,jsx,ts,tsx,json,css,md}'",
+    "format:check": "prettier --check '**.{js,jsx,ts,tsx,json,css,md}'",
     "check-types": "tsc --pretty --noEmit",
     "prepare": "husky",
     "test": "npm run format:check && npm run lint && npm run check-types && npm run build"
