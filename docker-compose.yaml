@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: isac:1.0
+    build:
+      context: ./
+      dockerfile: Dockerfile_database
+    container_name: 'isac'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=ISAC_ADMIN
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=ISAC
