@@ -17,12 +17,12 @@ const dmSans = DM_Sans({
 
 export default function DirectorsCorner() {
   return (
-    <section className="pt-20 flex-row items-center w-full h-fit bg-white">
+    <section className="pt-20 flex-row items-center w-full h-fit bg-shades-10">
       <div className="mx-[242px] text-right flex flex-row">
         <HorsesRunning direction="left" />
         <div
           className={
-            'text-red-700 text-[54px] font-bold flex ml-[10px] ' +
+            'text-primary-20 text-[54px] font-bold flex ml-[10px] ' +
             dmSerifDisplay.className
           }
         >
@@ -37,7 +37,7 @@ export default function DirectorsCorner() {
           <h2>R&rsquo;S CORNER</h2>
         </div>
       </div>
-      <div className="mt-[90px] ml-[125px] mr-[120px] rounded-xl border border-red-700 text-black">
+      <div className="mt-[90px] ml-[125px] mr-[120px] rounded-xl border border-primary-20 text-shades-20">
         <div className="my-[34px] ml-[28px] flex flex-row">
           <Image
             src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
@@ -51,12 +51,13 @@ export default function DirectorsCorner() {
           >
             <h2
               className={
-                'text-red-700 text-[52px] font-bold ' + dmSerifDisplay.className
+                'text-primary-20 text-[52px] font-bold ' +
+                dmSerifDisplay.className
               }
             >
               Professor B.V. Ramana Reddy
             </h2>
-            <p className="text-black text-[32px] font-normal">
+            <p className="text-2xl font-normal">
               India, the land of seekers, is at the cusp of becoming Vishwa Guru
               all over again after 1100 years of subjugation, wars, annexures
               and humiliation. It is again a free country due to the sacrifices
@@ -78,7 +79,7 @@ export default function DirectorsCorner() {
       <div className="mx-[120px] mt-[60px] text-right">
         <button
           className={
-            'bg-red-700 px-[36px] py-[24px] text-[32px] leading-10 rounded-xl ' +
+            'bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl ' +
             dmSans.className
           }
         >
