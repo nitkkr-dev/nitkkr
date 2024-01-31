@@ -61,7 +61,7 @@ const Notifications: NextPage = () => (
     </section>
 
     <div className="pt-20 items-center w-full h-fit mx-[242px] text-right flex flex-row">
-      <HorsesRunning direction="right" numberOfHorses={12} />
+      <HorsesRunning direction="right" />
       <div
         className={
           'text-red-700 text-[54px] font-bold flex ml-[10px] ' +
