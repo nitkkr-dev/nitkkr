@@ -1,6 +1,6 @@
-import { Input, InputProps } from '../ui/input';
-
 import { AiOutlineUser } from 'react-icons/ai';
+
+import { Input, InputProps } from '../ui/input';
 
 export const NameField = ({
   label = 'Enter Your Name',

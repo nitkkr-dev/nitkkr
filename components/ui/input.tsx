@@ -1,9 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import { IconBaseProps } from 'react-icons';
 
 import { cn } from '@/lib/utils';
-import { IconBaseProps } from 'react-icons';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

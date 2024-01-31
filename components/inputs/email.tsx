@@ -1,5 +1,6 @@
-import { Input, InputProps } from '../ui/input';
 import { MdOutlineEmail } from 'react-icons/md';
+
+import { Input, InputProps } from '../ui/input';
 
 export interface EmailFieldProps
   extends Omit<InputProps, 'type' | 'LeftChild'> {}

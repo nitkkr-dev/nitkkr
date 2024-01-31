@@ -1,19 +1,20 @@
+import { useState } from 'react';
+
 import {
-  SelectValue,
-  SelectTrigger,
-  SelectItem,
-  SelectContent,
   Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { countryCodes } from '@/constants/countryCodes';
-import { FormEvent, useState } from 'react';
 
 export default function PhoneField() {
   const [countryCode, setCountryCode] = useState('+91');
   const [phoneNumber, setPhoneNumber] = useState('9717919020');
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+  function handleSubmit(): void {
     alert(`form submitted: ${countryCode + phoneNumber}`);
   }
 
@@ -50,7 +51,7 @@ export default function PhoneField() {
         </Select>
         <Input
           className="border-0 rounded-r-md focus:ring-0"
-          maxLength="10"
+          maxLength={10}
           placeholder="Enter phone number"
           type="tel"
           value={phoneNumber}
