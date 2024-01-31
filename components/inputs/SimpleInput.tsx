@@ -1,11 +1,12 @@
 
-import { Input } from "../shadcn/ui/input";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { Input } from "../ui/input";
 
 export function InputField() {
   return (
-      <Input
-        placeholder="Enter text"
-      />
+    <Input
+      placeholder="Simple Input"
+    />
   )
 }
 

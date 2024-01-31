@@ -1,4 +1,4 @@
-import { Input, InputProps } from '../shadcn/ui/input';
+import { Input, InputProps } from '../ui/input';
 
 
 import clsx from 'clsx';

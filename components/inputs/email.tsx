@@ -1,13 +1,13 @@
-"use client"
-import { Input, InputProps } from '../shadcn/ui/input';
-import { MdOutlineMarkEmailUnread } from 'react-icons/md';
+
+import { Input, InputProps } from '../ui/input';
+import { MdOutlineEmail } from 'react-icons/md';
 
 export interface EmailFieldProps
-  extends Omit<InputProps, 'type' | 'LeftChild'> {}
+  extends Omit<InputProps, 'type' | 'LeftChild'> { }
 
 export const EmailField = ({
   label = 'Email',
-  placeholder = 'email',
+  placeholder = 'Enter your Email',
   ...props
 }: EmailFieldProps) => {
   return (
@@ -16,7 +16,7 @@ export const EmailField = ({
       placeholder={placeholder}
       type="email"
       {...props}
-      LeftChild= {MdOutlineMarkEmailUnread}
+      LeftChild={MdOutlineEmail}
     />
   );
 };

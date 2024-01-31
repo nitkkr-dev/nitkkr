@@ -2,7 +2,7 @@
 import SimpleInput from '@/components/inputs/SimpleInput';
 import { EmailField } from '@/components/inputs/email';
 import { NameField } from '@/components/inputs/name';
-import Otp from '@/components/inputs/otp';
+import PhoneField from '@/components/inputs/telephone';
 
 import WorkInProgress from '@/components/work-in-progress';
 
@@ -11,5 +11,6 @@ export default function Home() {
     <SimpleInput />
     <NameField/>
     <EmailField/>
+    <PhoneField />
   </div>
 }
