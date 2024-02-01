@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function NotFound() {
+export default function NotFound({ params }: { params: { lang: string } }) {
   return (
     <div className="m-auto max-w-fit text-center">
       <h2>Not Found</h2>

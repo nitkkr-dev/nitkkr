@@ -1,4 +1,4 @@
-export default function Unauthorized() {
+export default function Unauthorized({ lang }: { lang: string }) {
   return (
     <div className="m-auto max-w-fit text-center">
       <h2>Unauthorized!</h2>
