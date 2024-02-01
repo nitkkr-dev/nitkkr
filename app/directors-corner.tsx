@@ -1,31 +1,13 @@
-import { DM_Sans, DM_Serif_Display } from 'next/font/google';
 import Image from 'next/image';
 
 import HorsesRunning from '@/components/horses-running';
-
-const dmSerifDisplay = DM_Serif_Display({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export default function DirectorsCorner() {
   return (
     <section className="pt-20 flex-row items-center w-full h-fit bg-shades-10">
       <div className="mx-[242px] text-right flex flex-row">
         <HorsesRunning direction="left" />
-        <div
-          className={
-            'text-primary-20 text-[54px] font-bold flex ml-[10px] ' +
-            dmSerifDisplay.className
-          }
-        >
+        <div className="text-primary-20 text-[54px] font-bold flex ml-[10px] font-serif">
           <h2>DIRECT</h2>
           <Image
             src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PaN9iN-Wh5U0K4D3p08lFy2vBXAuRS7835uwTzaGDtTKWYL0PBZ0Gw4yVjKtcbQMHiscxyh03PgyA4EyTRS0~sXpO14m1RJT8ch27VGGr6fa9zBXWpttPuHgX52tI9S-sodxlmj20HnYYxNObqIDxEkvzgCFJiHsUjVwmxQfOWxwduL80aBRKVUa6bGGSm2V2A2Znl96nJ1yUDdxenBvrTNN4UCFiIJEwyvdr4jVDoWxoqfDveVUcYElzjBjTTYvphifTSeLjEn-uHbX8JmmW1HkqEpThkWsDUVkoGPk~vLBP8LY6fW3aoa7S1ionsMVjG09UsnDCfB7T4Up40LZ6g__"
@@ -46,15 +28,8 @@ export default function DirectorsCorner() {
             height={473}
             className="rounded-xl"
           />
-          <div
-            className={'flex flex-col mr-[33px] ml-[45px] ' + dmSans.className}
-          >
-            <h2
-              className={
-                'text-primary-20 text-[52px] font-bold ' +
-                dmSerifDisplay.className
-              }
-            >
+          <div className="flex flex-col mr-[33px] ml-[45px] font-sans">
+            <h2 className="text-primary-20 text-[52px] font-bold font-serif">
               Professor B.V. Ramana Reddy
             </h2>
             <p className="text-2xl font-normal">
@@ -77,12 +52,7 @@ export default function DirectorsCorner() {
         </div>
       </div>
       <div className="mx-[120px] mt-[60px] text-right">
-        <button
-          className={
-            'bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl ' +
-            dmSans.className
-          }
-        >
+        <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl font-sans">
           Read More
         </button>
       </div>
