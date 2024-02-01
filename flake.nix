@@ -13,6 +13,8 @@
     {
       devShell.${system} = pkgs.mkShell {
         buildInputs = [
+          pkgs.docker
+
           (flakey-devShell-pkgs.default.override { environments = [ "nix" "nextjs" ]; })
           (flakey-devShell-pkgs.vscodium.override { environments = [ "nix" "nextjs" ]; })
         ];
