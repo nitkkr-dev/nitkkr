@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model students {
+  id Int @id @default(autoincrement())
+  name String
+  roll_no String
+  sex String
+  telephone String
+  personal_email String
+  institution_email String
+  fathers_name String
+  fathers_telephone String
+  mothers_name String
+  mothers_telephone String
+  local_guardian_name String
+  local_guardian_telephone String
+  pincode Int
+  permanent_address String
+  aaadhar String
+  passport_number String
+  category String
+  birthday DateTime
+  application_number String
+  addmission_number String
+  date_of_addmission DateTime
+  is_pwd Boolean
+  addmission_subcategory String
+  image String
+  role_ids Int[]
+}
