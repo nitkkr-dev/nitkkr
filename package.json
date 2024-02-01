@@ -11,7 +11,9 @@
     "format:check": "prettier --check '**.{js,jsx,ts,tsx,json,css,md}'",
     "check-types": "tsc --pretty --noEmit",
     "prepare": "husky",
-    "test": "npm run format:check && npm run lint && npm run check-types && npm run build"
+    "test": "npm run format:check && npm run lint && npm run check-types && npm run build",
+    "database:up": "docker compose up",
+    "database:down":"docker compose down && docker rmi isac:1.0"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.8.0",
