@@ -1,5 +1,6 @@
 import DirectorsCorner from './directors-corner';
 import Notifications from './notifications';
+import Events from './events';
 
 export default function Home({
   params: { locale },
@@ -9,6 +10,7 @@ export default function Home({
   return (
     <main className="w-full">
       <Notifications />
+      <Events />
       <DirectorsCorner locale={locale} />
     </main>
   );
