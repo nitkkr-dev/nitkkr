@@ -4,7 +4,7 @@ import HorsesRunning from '@/components/horses-running';
 
 export default function DirectorsCorner() {
   return (
-    <section className="pt-20 flex-row items-center w-full h-fit bg-shades-10">
+    <section className="pt-20 flex-row items-center w-full h-fit bg-bg">
       <div className="mx-[242px] text-right flex flex-row">
         <HorsesRunning direction="left" />
         <div className="text-primary-20 text-[54px] font-regular flex ml-[10px] font-serif">

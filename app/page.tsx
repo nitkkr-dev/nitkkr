@@ -1,5 +1,5 @@
-import WorkInProgress from '@/components/work-in-progress';
+import DirectorsCorner from '@/app/directors-corner';
 
 export default function Home() {
-  return <WorkInProgress />;
+  return <DirectorsCorner />;
 }
