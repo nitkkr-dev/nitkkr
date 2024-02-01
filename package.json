@@ -14,7 +14,6 @@
     "test": "npm run format:check && npm run lint && npm run check-types && npm run build"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "^0.8.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
