@@ -7,7 +7,7 @@ export default function DirectorsCorner() {
     <section className="pt-20 flex-row items-center w-full h-fit bg-shades-10">
       <div className="mx-[242px] text-right flex flex-row">
         <HorsesRunning direction="left" />
-        <div className="text-primary-20 text-[54px] font-bold flex ml-[10px] font-serif">
+        <div className="text-primary-20 text-[54px] font-regular flex ml-[10px] font-serif">
           <h2>DIRECT</h2>
           <Image
             src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PaN9iN-Wh5U0K4D3p08lFy2vBXAuRS7835uwTzaGDtTKWYL0PBZ0Gw4yVjKtcbQMHiscxyh03PgyA4EyTRS0~sXpO14m1RJT8ch27VGGr6fa9zBXWpttPuHgX52tI9S-sodxlmj20HnYYxNObqIDxEkvzgCFJiHsUjVwmxQfOWxwduL80aBRKVUa6bGGSm2V2A2Znl96nJ1yUDdxenBvrTNN4UCFiIJEwyvdr4jVDoWxoqfDveVUcYElzjBjTTYvphifTSeLjEn-uHbX8JmmW1HkqEpThkWsDUVkoGPk~vLBP8LY6fW3aoa7S1ionsMVjG09UsnDCfB7T4Up40LZ6g__"
@@ -28,11 +28,11 @@ export default function DirectorsCorner() {
             height={473}
             className="rounded-xl"
           />
-          <div className="flex flex-col mr-[33px] ml-[45px] font-sans">
-            <h2 className="text-primary-20 text-[52px] font-bold font-serif">
+          <div className="flex flex-col mr-[33px] ml-[45px] font-sans font-regular">
+            <h2 className="text-primary-20 text-[52px] font-serif">
               Professor B.V. Ramana Reddy
             </h2>
-            <p className="text-2xl font-normal">
+            <p className="text-2xl">
               India, the land of seekers, is at the cusp of becoming Vishwa Guru
               all over again after 1100 years of subjugation, wars, annexures
               and humiliation. It is again a free country due to the sacrifices
