@@ -1,3 +1,4 @@
+'use client';
 import { MdOutlineEmail } from 'react-icons/md';
 
 import { Input, InputProps } from '../ui/input';

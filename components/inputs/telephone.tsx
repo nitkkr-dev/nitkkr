@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 
 import {
@@ -30,15 +31,15 @@ export default function PhoneField() {
 
   return (
     <form
-      className="flex flex-col items-center justify-center space-y-4"
+      className="flex flex-col items-center justify-center"
       onSubmit={handleSubmit}
     >
-      <div className="flex items-center rounded-md border">
+      <div className="flex items-center justify-center rounded-md">
         <Select
           onValueChange={(value) => handleCountryCodeChange(value)}
           defaultValue={countryCode}
         >
-          <SelectTrigger className="w-20">
+          <SelectTrigger className="w-20 h-auto">
             <SelectValue placeholder="+91" />
           </SelectTrigger>
           <SelectContent position="popper">
@@ -50,7 +51,6 @@ export default function PhoneField() {
           </SelectContent>
         </Select>
         <Input
-          className="border-0 rounded-r-md focus:ring-0"
           maxLength={10}
           placeholder="Enter phone number"
           type="tel"

@@ -1,10 +1,12 @@
+'use client';
+
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { Input, InputProps } from '../ui/input';
 
 export const NameField = ({
-  label = 'Enter Your Name',
-  placeholder,
+  label = 'Name',
+  placeholder = 'Enter your Name',
   ...props
 }: InputProps) => {
   return (
