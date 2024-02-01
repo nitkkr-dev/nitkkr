@@ -1,3 +1,31 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+.pnpm-debug.log*
+
+# Dependency directories
 node_modules/
-.next/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
 .env
+.env.local
+.env.test
+.env.production
+
+# Next.js build output
+.next
+out
+
+# OS
+*.DS_STORE
+.DS_STORE

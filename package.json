@@ -16,7 +16,6 @@
     "database:down":"docker compose down && docker rmi isac:1.0"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "^0.8.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
