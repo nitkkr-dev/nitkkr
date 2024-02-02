@@ -19,9 +19,9 @@ const config: Config = {
       sans: ['DM Sans', 'sans-serif'],
     },
     fontWeight: {
-      regular: '400 !important',
-      medium: '500 !important',
-      bold: '700 !important',
+      regular: '400',
+      medium: '500',
+      bold: '700',
     },
     fontSize: {
       '6xl': ['64px', { lineHeight: '72px' }],
