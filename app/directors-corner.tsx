@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import HorsesRunning from '@/components/horses-running';
 
@@ -50,9 +51,11 @@ export default function DirectorsCorner() {
       </blockquote>
 
       <footer className="mx-[120px] mt-[60px] text-right">
-        <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl font-sans">
-          Read More
-        </button>
+        <Link href="https://nitkkr.ac.in/?page_id=703">
+          <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl font-sans">
+            Read More
+          </button>
+        </Link>
       </footer>
     </article>
   );
