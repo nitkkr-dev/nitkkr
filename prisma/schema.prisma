@@ -8,6 +8,120 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model auth_roles {
+	id Int @id @default(autoincrement())
+	permissions String[]  
+}
+
+model departments {
+	id Int @id @default(autoincrement())
+	name String    
+	about_us String    
+	laboratories String    
+	programs String[]    
+	course_coordinators String[]    	
+}
+
+model faculty {
+	id Int @id @default(autoincrement())
+	name String  
+	department_id Int   
+	email String 
+	office_telephone String    
+	joined_on DateTime    
+	is_active Boolean    
+	home_telephone String    
+	designation String    
+	teaching_interests String[]    
+	research_interests String[]    
+	patents String[]    
+	copyrights String[]    
+	journals String[]    
+	confrences String[]    
+	books                String[]    
+	areas_of_interest    String[]    
+	workshops            String[]    
+	research_supervision Json    
+	expert_lectures String[]    
+	awards String[]    
+	admin_roles String[]    
+	outreach String[]    
+	e_content String[]    
+	research_projects String[]    
+	google_scholar_profile String    
+	orchid_profile String    
+	scopus_profile String    
+	image String    
+	role_ids Int[]       
+}
+
+model forms {
+	id Int @id @default(autoincrement())
+	title String    
+	description String    
+	visible_to String[]    
+	questions Int[]    
+	on_submit_message String   
+	is_editing_allowed Boolean    
+	is_single_response Boolean    
+	is_view_analytics_allowed Boolean    
+	is_shuffled Boolean    
+	is_copy_sent Boolean    
+	is_quiz Boolean    
+	expiry_DateTime DateTime    
+	is_active Boolean   
+	persistent_url String    
+	old_persistent_urls String[]    
+	is_published Boolean    
+}
+
+model hod {
+	id Int @id @default(autoincrement())
+	faculty_id Int    
+	department_id Int    
+	message String    
+	created_at DateTime    
+	is_active Boolean       
+ }
+
+model majors {
+	id Int @id @default(autoincrement())
+	name String    
+	alias String  
+	department_id Int    
+	degree String       
+}
+
+model research_work {
+	id Int @id @default(autoincrement())
+}
+
+model roles {
+	id Int @id @default(autoincrement())
+	name String    
+	permissions String
+ }
+
+model sections {
+	id Int @id @default(autoincrement())
+	head_faculty_id Int    
+	name String  
+	about_us String    
+ }
+
+model sponsored_research_projects {
+	id Int @id @default(autoincrement())
+	title String    
+	funding_agency String    
+	faculty_id Int    
+	amount BigInt    
+	start_DateTime DateTime    
+	end_DateTime DateTime    
+	status String   
+	duration_period String    
+	duration_period_type String    
+}
+
 model students {
   id Int @id @default(autoincrement())
   name String
@@ -30,9 +144,138 @@ model students {
   birthday DateTime
   application_number String
   addmission_number String
-  date_of_addmission DateTime
+  DateTime_of_addmission DateTime
   is_pwd Boolean
   addmission_subcategory String
   image String
   role_ids Int[]
+}
+
+model clubs {
+  id Int @id @default(autoincrement())
+	starting_DateTime DateTime
+	is_active Boolean
+	about_us String
+	email String
+	category String
+	department_id Int
+	incharge_faculty_id String[]
+}
+
+model courses {
+  id Int @id @default(autoincrement())
+	code String
+	title String
+	prerequisites String
+	kind String
+	lecture_credits Int
+	tutorial_credits Int
+	practical_credits Int
+	major_id Int
+	semester Int
+	objectives String[]
+	content String[]
+	outcomes String[]
+	books String[]
+	similar String[]
+}
+
+model deans {
+  id Int @id @default(autoincrement())
+	domain String
+	faculty_id Int
+	activity_logs String[]
+	associate_faculty_id Int
+	staff_id String[]
+}
+
+model form_questions {
+  id Int @id @default(autoincrement())
+  form_id Int
+	question String
+	description String
+	is_required Boolean
+	input_type String
+	choices String[]
+	mime_types String[]
+	range String[]
+	page_number Int
+	marks Int
+}
+
+model form_submissions {
+  id Int @id @default(autoincrement())
+  form_id Int
+	email String
+}
+
+model non_teaching_staff {
+  id Int @id @default(autoincrement())
+	name String
+	telephone String[]
+	email String
+	working_section_id Int
+	degisnation String
+	image String
+	working_department_id Int
+	role_ids Int[]
+}
+
+model phd_log {
+  id Int @id @default(autoincrement())
+	student_id Int
+	faculty_id Int
+	department_id Int
+	job_type String
+	registration_id String
+	title    String
+	DateTime_of_joining DateTime
+	DateTime_of_completion DateTime	  
+}
+
+model student_academic_details {
+  student_id Int @id
+	section String
+	batch Int
+	current_semester Int
+	sgpa Float
+	cgpa Float
+	dmc_urls String[]
+	major_id  Int
+	sub_section Int  
+}
+
+model club_members {
+	id Int @id @default(autoincrement())
+  student_id Int
+	club_id   Int
+	position String
+	extra_groups String
+	comments String
+	upDateTimed_by String
+	upDateTimed_at DateTime
+}
+
+model club_socials {
+	 id Int @id @default(autoincrement())
+	club_id   Int
+	platform String
+	link String
+ }
+
+model course_logs {
+	id Int @id @default(autoincrement())
+	session         String
+	course_id Int
+	faculty_id Int
+	major_id  Int
+	semester  Int
+	section String
+	sub_section Int
+}
+
+model faculty_feedback {
+  id Int @id @default(autoincrement())
+	course_log_id Int
+	form_id Int
 }

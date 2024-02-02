@@ -164,6 +164,7 @@ CREATE  TABLE students (
 CREATE  TABLE tbl_0 ( 
  );
 
+
 CREATE  TABLE clubs ( 
 	id                   integer  NOT NULL  ,
 	starting_date        date  NOT NULL  ,
@@ -199,6 +200,7 @@ CREATE  TABLE courses (
 	CONSTRAINT fk_courses_majors FOREIGN KEY ( major_id ) REFERENCES majors( id )   
  );
 
+
 CREATE  TABLE deans ( 
 	id                   integer  NOT NULL  ,
 	"domain"             varchar  NOT NULL  ,
@@ -210,6 +212,7 @@ CREATE  TABLE deans (
 	CONSTRAINT fk_deans_faculty_0 FOREIGN KEY ( associate_faculty_id ) REFERENCES faculty( id )   ,
 	CONSTRAINT fk_deans_faculty_1 FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   
  );
+
 
 CREATE  TABLE form_questions ( 
 	id                   integer  NOT NULL  ,
@@ -226,6 +229,7 @@ CREATE  TABLE form_questions (
 	CONSTRAINT pk_form_questions PRIMARY KEY ( id ),
 	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES forms( id )   
  );
+
 
 CREATE  TABLE form_submissions ( 
 	id                   integer  NOT NULL  ,
@@ -286,7 +290,7 @@ CREATE  TABLE club_members (
     student_id           integer  NOT NULL  ,
 	club_id              integer  NOT NULL  ,
 	"position"           varchar DEFAULT 'member' NOT NULL  ,
-	extra_groups         varchar    ,
+	extra_groups         varchar[]    ,
 	comments             varchar    ,
 	updated_by           varchar  NOT NULL  ,
 	updated_at           date DEFAULT CURRENT_DATE   ,
