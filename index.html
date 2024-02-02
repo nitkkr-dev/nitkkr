@@ -54,6 +54,52 @@
     <a class="next"  id="over">&#10095;</a>
   </div>
 
-  <script src="hi.js"></script>
+  <script>
+    var slideIndex = 0;
+showSlides();
+function showSlides() {
+    var slides = document.getElementsByClassName("mySlides ");
+    for (var i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000);
+}
+var hoverImage = document.getElementById('hover');
+var overlayText = document.getElementById('overlayText');
+var hoverimagee = document.getElementById('hove');
+var over = document.getElementById('over');
+if (hoverImage && overlayText && hoverimagee && over) {
+    hoverImage.addEventListener('mouseover', function () {
+        if (overlayText && over) {
+            overlayText.style.opacity = '1';
+            over.style.opacity = '1';
+        }
+    });
+    hoverImage.addEventListener('mouseout', function () {
+        if (overlayText && over) {
+            overlayText.style.opacity = '0';
+            over.style.opacity = '0';
+        }
+    });
+    hoverimagee.addEventListener('mouseover', function () {
+        if (overlayText && over) {
+            overlayText.style.opacity = '1';
+            over.style.opacity = '1';
+        }
+    });
+    hoverimagee.addEventListener('mouseout', function () {
+        if (overlayText && over) {
+            overlayText.style.opacity = '0';
+            over.style.opacity = '0';
+        }
+    });
+}
+
+  </script>
 </body>
 </html>
