@@ -6,7 +6,7 @@ export default function HorsesRunning({ direction }: { direction: string }) {
       ? ' -scale-y-100 -rotate-180 -mr-[14px] '
       : ' -ml-[14px]';
   return (
-    <>
+    <figure className="flex mx-[15px]">
       {direction === 'right' ? (
         <Image
           width={122.14}
@@ -37,6 +37,6 @@ export default function HorsesRunning({ direction }: { direction: string }) {
           className="-mt-[20px] -scale-y-100 -rotate-180"
         />
       ) : null}
-    </>
+    </figure>
   );
 }
