@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+  <style>
+    button{
+        border:none;
+        background: none;
+        color: #fafafa;
+    }
+.slideshow-container {
+  position: relative;
+  margin: auto;
+  transition:opacity 400ms cubic-bezier(0.42, 0, 0.58, 1);;
+  animation:dissolve 3s infinite;
+}
+
+.mySlides {
+  display: none;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  width: 61;
+  height:67.3;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-size: 50px;
+  cursor: pointer;
+  z-index: 1;
+  
+}
+.prev{
+    left:0;
+}
+.next{
+    right:0;
+}
+
+  </style>
+</head>
+<body>
+  <div id="background" class="slideshow-container">
+    <div class="mySlides">
+      <img src="img1.jpg" style="width:100%" loading="eager" height="1080" width="1920" id="hover">
+    </div>
+
+    <div class="mySlides">
+      <img src="img2.jpg" style="width:100%" loading="lazy" height="1080" width="1920" id="hove">
+    </div>
+
+    <a class="prev"  id="overlayText">&#10094;</a>
+    <a class="next"  id="over">&#10095;</a>
+  </div>
+
+  <script src="hi.js"></script>
+</body>
+</html>
