@@ -5,8 +5,8 @@ import HorsesRunning from '@/components/horses-running';
 
 export default function DirectorsCorner() {
   return (
-    <article className="pt-20 flex-row items-center w-full h-fit bg-bg">
-      <header className="mx-auto text-right flex flex-row text-primary-20 text-[54px] font-regular max-w-fit font-serif">
+    <article className="pt-20 flex-row items-center w-full h-fit font-sans font-regular">
+      <header className="mx-auto text-right flex flex-row text-primary-20 text-[54px] max-w-fit font-serif">
         <HorsesRunning direction="left" />
         <h2>DIRECT</h2>
         <Image
@@ -27,7 +27,7 @@ export default function DirectorsCorner() {
           height={473}
           className="rounded-xl"
         />
-        <section className="flex flex-col mr-[33px] ml-[45px] font-sans font-regular">
+        <section className="flex flex-col mr-[33px] ml-[45px]">
           <h2 className="text-primary-20 text-[52px] font-serif">
             Professor B.V. Ramana Reddy
           </h2>
@@ -52,7 +52,7 @@ export default function DirectorsCorner() {
 
       <footer className="mx-[120px] mt-[60px] text-right">
         <Link href="https://nitkkr.ac.in/?page_id=703">
-          <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl font-sans">
+          <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl">
             Read More
           </button>
         </Link>

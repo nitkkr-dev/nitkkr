@@ -62,7 +62,7 @@ const config: Config = {
         40: '#001D3D',
         50: '#000F1F',
       },
-      bg: '#F9F5EB',
+      root: '#F9F5EB',
       shades: {
         10: '#FFFFFF',
         20: '#000000',
