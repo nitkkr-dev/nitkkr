@@ -1,12 +1,12 @@
-CREATE SCHEMA IF NOT EXISTS "college website";
+CREATE SCHEMA IF NOT EXISTS "college_website";
 
-CREATE  TABLE auth_roles ( 
+CREATE  TABLE college_website.auth_roles ( 
 	id                   integer  NOT NULL  ,
 	permissions          varchar[]  NOT NULL  ,
 	CONSTRAINT pk_auth_roles PRIMARY KEY ( id )
  );
 
-CREATE  TABLE departments ( 
+CREATE  TABLE college_website.departments ( 
 	id                   integer  NOT NULL  ,
 	name                 varchar  NOT NULL  ,
 	about_us             varchar    ,
@@ -16,7 +16,7 @@ CREATE  TABLE departments (
 	CONSTRAINT pk_departments PRIMARY KEY ( id )
  );
 
-CREATE  TABLE faculty ( 
+CREATE  TABLE college_website.faculty ( 
 	id                   integer  NOT NULL  ,
 	name                 varchar  NOT NULL  ,
 	department_id        integer  NOT NULL  ,
@@ -49,10 +49,10 @@ CREATE  TABLE faculty (
 	role_ids             smallint[]  NOT NULL  ,
 	CONSTRAINT pk_faculty PRIMARY KEY ( id ),
 	CONSTRAINT unq_faculty_department_id UNIQUE ( department_id ) ,
-	CONSTRAINT fk_faculty_departments FOREIGN KEY ( department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_faculty_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE forms ( 
+CREATE  TABLE college_website.forms ( 
 	id                   integer  NOT NULL  ,
 	title                varchar  NOT NULL  ,
 	description          varchar  NOT NULL  ,
@@ -73,7 +73,7 @@ CREATE  TABLE forms (
 	CONSTRAINT pk_forms PRIMARY KEY ( id )
  );
 
-CREATE  TABLE hod ( 
+CREATE  TABLE college_website.hod ( 
 	id                   integer  NOT NULL  ,
 	faculty_id           integer  NOT NULL  ,
 	department_id        integer  NOT NULL  ,
@@ -82,33 +82,33 @@ CREATE  TABLE hod (
 	is_active            boolean DEFAULT true NOT NULL  ,
 	CONSTRAINT pk_hod PRIMARY KEY ( id ),
 	CONSTRAINT unq_hod_faculty_id UNIQUE ( faculty_id ) ,
-	CONSTRAINT fk_hod_faculty FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   ,
-	CONSTRAINT fk_hod_departments FOREIGN KEY ( department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_hod_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   ,
+	CONSTRAINT fk_hod_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE majors ( 
+CREATE TABLE college_website.majors ( 
 	id                   integer  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
-	"alias"              char(2)  NOT NULL  ,
+	alias                char(2)  NOT NULL  ,
 	department_id        integer  NOT NULL  ,
 	degree               varchar  NOT NULL  ,
 	CONSTRAINT pk_branches PRIMARY KEY ( id ),
-	CONSTRAINT fk_branches_departments FOREIGN KEY ( department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_branches_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE research_work ( 
+CREATE  TABLE college_website.research_work ( 
 	id                   integer  NOT NULL  ,
 	CONSTRAINT pk_research_work PRIMARY KEY ( id )
  );
 
-CREATE  TABLE roles ( 
+CREATE  TABLE college_website.roles ( 
 	id                   integer  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
 	permissions          varchar[]  NOT NULL  ,
 	CONSTRAINT pk_roles PRIMARY KEY ( id )
  );
 
-CREATE  TABLE sections ( 
+CREATE  TABLE college_website.sections ( 
 	id                   integer  NOT NULL  ,
 	head_faculty_id      smallint  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
@@ -116,7 +116,7 @@ CREATE  TABLE sections (
 	CONSTRAINT pk_sections PRIMARY KEY ( id )
  );
 
-CREATE  TABLE sponsored_research_projects ( 
+CREATE  TABLE college_website.sponsored_research_projects ( 
 	id                   integer  NOT NULL  ,
 	title                varchar  NOT NULL  ,
 	funding_agency       varchar  NOT NULL  ,
@@ -128,10 +128,10 @@ CREATE  TABLE sponsored_research_projects (
 	duration_period      varchar  NOT NULL  ,
 	duration_period_type varchar  NOT NULL  ,
 	CONSTRAINT pk_sponsored_research_projects PRIMARY KEY ( id ),
-	CONSTRAINT fk_sponsored_research_projects_faculty FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   
+	CONSTRAINT fk_sponsored_research_projects_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
  );
 
-CREATE  TABLE students ( 
+CREATE TABLE college_website.students ( 
     id                   integer  NOT NULL  ,
 	roll_number          varchar  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
@@ -161,11 +161,8 @@ CREATE  TABLE students (
 	CONSTRAINT pk_students PRIMARY KEY ( id )
  );
 
-CREATE  TABLE tbl_0 ( 
- );
 
-
-CREATE  TABLE clubs ( 
+CREATE  TABLE college_website.clubs ( 
 	id                   integer  NOT NULL  ,
 	starting_date        date  NOT NULL  ,
 	is_active            boolean  NOT NULL  ,
@@ -175,10 +172,10 @@ CREATE  TABLE clubs (
 	department_id        integer    ,
 	incharge_faculty_id  varchar[]  NOT NULL  ,
 	CONSTRAINT pk_clubs PRIMARY KEY ( id ),
-	CONSTRAINT fk_clubs_departments FOREIGN KEY ( department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_clubs_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE courses ( 
+CREATE TABLE college_website.courses ( 
 	id                   integer  NOT NULL  ,
 	code                 varchar  NOT NULL  ,
 	title                varchar  NOT NULL  ,
@@ -196,25 +193,25 @@ CREATE  TABLE courses (
 	"similar"            varchar[]    ,
 	CONSTRAINT pk_courses PRIMARY KEY ( id ),
 	CONSTRAINT unq_courses_branch_id UNIQUE ( major_id ) ,
-	CONSTRAINT fk_courses_departments FOREIGN KEY ( major_id ) REFERENCES departments( id )   ,
-	CONSTRAINT fk_courses_majors FOREIGN KEY ( major_id ) REFERENCES majors( id )   
+	CONSTRAINT fk_courses_departments FOREIGN KEY ( major_id ) REFERENCES college_website.departments( id )   ,
+	CONSTRAINT fk_courses_majors FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id )   
  );
 
 
-CREATE  TABLE deans ( 
+CREATE TABLE college_website.deans ( 
 	id                   integer  NOT NULL  ,
-	"domain"             varchar  NOT NULL  ,
+	domain           	 varchar  NOT NULL  ,
 	faculty_id           integer  NOT NULL  ,
 	activity_logs        varchar[]    ,
 	associate_faculty_id integer    ,
 	staff_id             varchar[]    ,
 	CONSTRAINT pk_deans PRIMARY KEY ( id ),
-	CONSTRAINT fk_deans_faculty_0 FOREIGN KEY ( associate_faculty_id ) REFERENCES faculty( id )   ,
-	CONSTRAINT fk_deans_faculty_1 FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   
+	CONSTRAINT fk_deans_faculty_0 FOREIGN KEY ( associate_faculty_id ) REFERENCES college_website.faculty( id )   ,
+	CONSTRAINT fk_deans_faculty_1 FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
  );
 
 
-CREATE  TABLE form_questions ( 
+CREATE TABLE college_website.form_questions ( 
 	id                   integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	question             varchar  NOT NULL  ,
@@ -227,19 +224,19 @@ CREATE  TABLE form_questions (
 	page_number          smallint DEFAULT 0 NOT NULL  ,
 	marks                smallint DEFAULT 0 NOT NULL  ,
 	CONSTRAINT pk_form_questions PRIMARY KEY ( id ),
-	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES forms( id )   
+	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
  );
 
 
-CREATE  TABLE form_submissions ( 
+CREATE TABLE college_website.form_submissions ( 
 	id                   integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	email                varchar  NOT NULL  ,
 	CONSTRAINT pk_form_submissions PRIMARY KEY ( id ),
-	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES forms( id )   
+	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
  );
 
-CREATE  TABLE non_teaching_staff ( 
+CREATE TABLE college_website.non_teaching_staff ( 
 	id                   integer  NOT NULL  ,
 	name                 varchar(100)  NOT NULL  ,
 	telephone            varchar[]  NOT NULL  ,
@@ -250,11 +247,11 @@ CREATE  TABLE non_teaching_staff (
 	working_department_id integer  NOT NULL  ,
 	role_ids             smallint[]  NOT NULL  ,
 	CONSTRAINT pk_non_teaching_staff PRIMARY KEY ( id ),
-	CONSTRAINT fk_non_teaching_staff_sections FOREIGN KEY ( working_section_id ) REFERENCES sections( id )   ,
-	CONSTRAINT fk_non_teaching_staff_departments FOREIGN KEY ( working_department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_non_teaching_staff_sections FOREIGN KEY ( working_section_id ) REFERENCES college_website.sections( id )   ,
+	CONSTRAINT fk_non_teaching_staff_departments FOREIGN KEY ( working_department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE phd_log ( 
+CREATE  TABLE college_website.phd_log ( 
 	id                   integer  NOT NULL  ,
 	student_id           integer  NOT NULL  ,
 	faculty_id           integer  NOT NULL  ,
@@ -265,14 +262,14 @@ CREATE  TABLE phd_log (
 	date_of_joining      date DEFAULT CURRENT_DATE NOT NULL  ,
 	date_of_completion   date    ,
 	CONSTRAINT pk_phd_log PRIMARY KEY ( id ),
-	CONSTRAINT fk_phd_log_students FOREIGN KEY ( student_id ) REFERENCES students( id )   ,
-	CONSTRAINT fk_phd_log_faculty FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   ,
-	CONSTRAINT fk_phd_log_departments FOREIGN KEY ( department_id ) REFERENCES departments( id )   
+	CONSTRAINT fk_phd_log_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   ,
+	CONSTRAINT fk_phd_log_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   ,
+	CONSTRAINT fk_phd_log_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
  );
 
-CREATE  TABLE student_academic_details ( 
+CREATE TABLE college_website.student_academic_details ( 
     student_id           integer  NOT NULL  ,
-	"section"            varchar  NOT NULL  ,
+	section          	 varchar  NOT NULL  ,
 	batch                smallint  NOT NULL  ,
 	current_semester     smallint  NOT NULL  ,
 	sgpa                 double precision  NOT NULL  ,
@@ -281,61 +278,68 @@ CREATE  TABLE student_academic_details (
 	major_id             integer  NOT NULL  ,
 	sub_section          integer  NOT NULL  ,
 	CONSTRAINT pk_student_academic_details PRIMARY KEY ( student_id ),
-	CONSTRAINT fk_student_academic_details_students FOREIGN KEY ( student_id ) REFERENCES students( id )   ,
-	CONSTRAINT fk_student_academic_details_branches FOREIGN KEY ( major_id ) REFERENCES majors( id )   
+	CONSTRAINT fk_student_academic_details_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   ,
+	CONSTRAINT fk_student_academic_details_branches FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id )   
  );
 
-CREATE  TABLE club_members ( 
+CREATE  TABLE college_website.club_members ( 
 	id                   integer  NOT NULL  ,
     student_id           integer  NOT NULL  ,
 	club_id              integer  NOT NULL  ,
-	"position"           varchar DEFAULT 'member' NOT NULL  ,
+	position           	 varchar DEFAULT 'member' NOT NULL  ,
 	extra_groups         varchar[]    ,
 	comments             varchar    ,
 	updated_by           varchar  NOT NULL  ,
 	updated_at           date DEFAULT CURRENT_DATE   ,
 	CONSTRAINT pk_club_members PRIMARY KEY ( id ),
-	CONSTRAINT fk_club_members_clubs FOREIGN KEY ( club_id ) REFERENCES clubs( id )   ,
-	CONSTRAINT fk_club_members_students FOREIGN KEY ( student_id ) REFERENCES students( id )   
+	CONSTRAINT fk_club_members_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id )   ,
+	CONSTRAINT fk_club_members_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   
  );
 
-CREATE  TABLE club_socials ( 
+CREATE  TABLE college_website.club_socials ( 
 	id                   integer  NOT NULL  ,
 	club_id              integer  NOT NULL  ,
 	platform             varchar  NOT NULL  ,
 	link                 varchar  NOT NULL  ,
 	CONSTRAINT pk_club_socials PRIMARY KEY ( id ),
-	CONSTRAINT fk_club_socials_clubs FOREIGN KEY ( club_id ) REFERENCES clubs( id )   
+	CONSTRAINT fk_club_socials_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id )   
  );
 
-CREATE  TABLE course_logs ( 
+CREATE  TABLE college_website.course_logs ( 
 	id                   integer  NOT NULL  ,
-	"session"            varchar  NOT NULL  ,
+	session              varchar  NOT NULL  ,
 	course_id            integer  NOT NULL  ,
 	faculty_id           integer  NOT NULL  ,
 	major_id             integer  NOT NULL  ,
 	semester             smallint  NOT NULL  ,
-	"section"            varchar  NOT NULL  ,
+	section              varchar  NOT NULL  ,
 	sub_section          integer  NOT NULL  ,
 	CONSTRAINT pk_course_logs PRIMARY KEY ( id ),
-	CONSTRAINT fk_course_logs_courses FOREIGN KEY ( course_id ) REFERENCES courses( id )   ,
-	CONSTRAINT fk_course_logs_faculty FOREIGN KEY ( faculty_id ) REFERENCES faculty( id )   
+	CONSTRAINT fk_course_logs_courses FOREIGN KEY ( course_id ) REFERENCES college_website.courses( id )   ,
+	CONSTRAINT fk_course_logs_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
  );
 
-CREATE  TABLE faculty_feedback ( 
+CREATE TABLE college_website.faculty_feedback ( 
 	id                   integer  NOT NULL  ,
 	course_log_id        integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	CONSTRAINT pk_faculty_feedback PRIMARY KEY ( id ),
-	CONSTRAINT fk_faculty_feedback_forms FOREIGN KEY ( form_id ) REFERENCES forms( id )   ,
-	CONSTRAINT fk_faculty_feedback_course_logs FOREIGN KEY ( course_log_id ) REFERENCES course_logs( id )   
+	CONSTRAINT fk_faculty_feedback_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   ,
+	CONSTRAINT fk_faculty_feedback_course_logs FOREIGN KEY ( course_log_id ) REFERENCES college_website.course_logs( id )   
  );
 
-CREATE OR REPLACE VIEW persons AS SELECT id, name, institute_email FROM students UNION SELECT id, name, email FROM faculty;
+CREATE  TABLE college_website.persons (
+	id                   integer  NOT NULL  ,
+	name                 varchar  NOT NULL  ,
+	institute_email      varchar  NOT NULL  ,
+	CONSTRAINT pk_persons PRIMARY KEY ( id )
+);
+  
+ 
 
-COMMENT ON TABLE departments IS 'This table will contain information about all the departments of the college';
+COMMENT ON TABLE college_website.departments IS 'This table will contain information about all the departments of the college';
 
-COMMENT ON COLUMN departments.course_coordinators IS 'array of pdf urls , in future it will be array of foreign keyto coordinator table';
+COMMENT ON COLUMN college_website.departments.course_coordinators IS 'array of pdf urls , in future it will be array of foreign keyto coordinator table';
 
-COMMENT ON COLUMN students.category IS 'SC/ST, etc.
+COMMENT ON COLUMN college_website.students.category IS 'SC/ST, etc.
 DASA, SII, MEA';

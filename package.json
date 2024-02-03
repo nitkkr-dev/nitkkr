@@ -13,9 +13,11 @@
     "prepare": "husky",
     "test": "npm run format:check && npm run lint && npm run check-types && npm run build",
     "database:up": "docker compose up",
-    "database:down":"docker compose down && docker rmi isac:1.0"
+    "database:down": "docker compose down && docker rmi isac:1.0"
   },
   "dependencies": {
+    "@prisma/client": "^5.9.1",
+    "@t3-oss/env-nextjs": "^0.8.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
@@ -35,6 +37,7 @@
     "husky": "^9.0.6",
     "postcss": "^8",
     "prettier": "^3.2.4",
+    "prisma": "^5.9.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
