@@ -29,8 +29,6 @@ out
 # OS
 *.DS_STORE
 .DS_STORE
-.next/
-.env
 
 # Prisma
 prisma/generated/client/
