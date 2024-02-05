@@ -1,0 +1,8 @@
+echo '🏗️👷 Testing build before pushing to remote'
+
+
+npm run build ||
+(
+    echo 'Next build failed: View the errors above to see why.'
+    false;
+)
