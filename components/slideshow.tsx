@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Slideshow.module.css';
 
-const Slideshow = (): JSX.Element => {
+export default function Slideshow() {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const slides: string[] = [
@@ -21,7 +21,7 @@ const Slideshow = (): JSX.Element => {
   return (
     <div className={styles.slideshowContainer}>
       {slides.map((slide: string, index: number) => (
-        <div className={index === currentSlide ? styles.mySlides : ${styles.mySlides} ${styles.hidden}} key={index}>
+        <div className={index === currentSlide ? 'mySlides' :'mySlides hidden' } key={index}>
           <Image
             src={slide}
             alt={"slides ${index + 1}"}
@@ -31,10 +31,15 @@ const Slideshow = (): JSX.Element => {
           />
         </div>
       ))}
-      <a className={styles.prev} onClick={prevSlide}>&#10094;</a>
-      <a className={styles.next} onClick={nextSlide}>&#10095;</a>
+      <button className={styles.prev} onClick={prevSlide}>&#10094;</button>
+      <button className={styles.next} onClick={nextSlide}>&#10095;</button>
     </div>
   );
 };
 
-export default Slideshow;
+
+
+
+
+
+           
