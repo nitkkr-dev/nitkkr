@@ -32,3 +32,6 @@ out
 
 # Prisma
 prisma/generated/client/
+
+#vscode workspace config files
+.vscode

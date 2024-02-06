@@ -30,34 +30,30 @@ export default function PhoneField() {
   }
 
   return (
-    <form
-      className="flex flex-col items-center justify-center"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex items-center justify-center rounded-md">
-        <Select
-          onValueChange={(value) => handleCountryCodeChange(value)}
-          defaultValue={countryCode}
-        >
-          <SelectTrigger className="w-20 h-auto">
-            <SelectValue placeholder="+91" />
-          </SelectTrigger>
-          <SelectContent position="popper">
-            {countryCodes.map((country) => (
-              <SelectItem key={country.code} value={country.code}>
-                {country.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Input
-          maxLength={10}
-          placeholder="Enter phone number"
-          type="tel"
-          value={phoneNumber}
-          onChange={handlePhoneNumberChange}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className='flex'>
+      <Select
+        onValueChange={(value) => handleCountryCodeChange(value)}
+        defaultValue={countryCode}
+      >
+        <SelectTrigger className="w-20 h-auto">
+          <SelectValue placeholder="+91" />
+        </SelectTrigger>
+        <SelectContent position="popper">
+          {countryCodes.map((country) => (
+            <SelectItem key={country.code} value={country.code}>
+              {country.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Input
+        className='flex-[1]'
+        maxLength={10}
+        placeholder="Enter phone number"
+        type="tel"
+        value={phoneNumber}
+        onChange={handlePhoneNumberChange}
+      />
     </form>
   );
 }

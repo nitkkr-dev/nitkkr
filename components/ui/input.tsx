@@ -24,8 +24,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const inputClasses = cn(
       'flex h-9 w-full rounded-md border border-input bg-transparent',
-      'text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium',
+      'text-sm transition-colors',
       'placeholder:text-muted-foreground',
+      'file:border-0 file:bg-transparent file:text-sm file:font-medium ',
       'focus-visible:border-black focus-visible:outline-blue-100 focus-visible:outline-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'invalid:border-red-500 invalid:outline-red-100 invalid:outline-offset-2',
