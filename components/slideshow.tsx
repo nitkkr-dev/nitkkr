@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import styles from './Slideshow.module.css';
-
-export default function Slideshow() {
+export default function Slideshow (){
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const slides: string[] = [
@@ -19,27 +17,24 @@ export default function Slideshow() {
   };
 
   return (
-    <div className={styles.slideshowContainer}>
+    <div className="relative">
+      <button className="prev absolute top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-300 hover:opacity-100" onClick={prevSlide}>
+        &#10094;
+      </button>
+      <button className="next absolute top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-300 right-0 hover:opacity-100" onClick={nextSlide}>
+        &#10095;
+      </button>
       {slides.map((slide: string, index: number) => (
         <div className={index === currentSlide ? 'mySlides' :'mySlides hidden' } key={index}>
           <Image
             src={slide}
-            alt={"slides ${index + 1}"}
+            alt={`slides ${index + 1}`}
             width={1920}
             height={1080}
             loading={index === 0 ? 'eager' : 'lazy'} 
           />
         </div>
       ))}
-      <button className={styles.prev} onClick={prevSlide}>&#10094;</button>
-      <button className={styles.next} onClick={nextSlide}>&#10095;</button>
     </div>
   );
 };
-
-
-
-
-
-
-           
