@@ -1,5 +1,9 @@
-import WorkInProgress from '@/components/work-in-progress';
+import Visualizer from '@/components/inputs/Visualizer';
 
 export default function Home() {
-  return <WorkInProgress />;
+  return (
+    <div>
+      <Visualizer />
+    </div>
+  );
 }
