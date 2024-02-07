@@ -8,6 +8,43 @@
 @layer base {
   body {
     min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 56px;
+    line-height: 64px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  h5 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  h6 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 
