@@ -4,6 +4,8 @@ import { IconBaseProps } from 'react-icons';
 
 import { cn } from '@/lib/utils';
 
+import { Label } from './label';
+
 // Define InputProps interface
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,6 +14,8 @@ export interface InputProps
   inputClassName?: string;
   ref?: React.ForwardedRef<HTMLInputElement>;
 
+  required?: boolean;
+
   LeftChild?: React.ComponentType<IconBaseProps>; // Updated to a function that returns ReactNode
   RightChild?: React.ComponentType<IconBaseProps>;
   onRightChildClick?: () => void;
@@ -19,7 +23,17 @@ export interface InputProps
 
 // Define Input component
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, LeftChild, ...props }: InputProps, ref) => {
+  (
+    {
+      className,
+      type,
+      LeftChild,
+      required = false,
+      label,
+      ...props
+    }: InputProps,
+    ref
+  ) => {
     const inputContainerClasses = cn('relative', 'flex items-center');
 
     const inputClasses = cn(
@@ -35,13 +49,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
 
     return (
-      <div className={inputContainerClasses}>
-        {LeftChild && (
-          <div className="absolute left-2 top-[0.70rem] h-4 w-4 text-muted-foreground ">
-            {<LeftChild />}
-          </div>
-        )}
-        <input type={type} className={inputClasses} ref={ref} {...props} />
+      <div>
+        <Label htmlFor="file">{label}</Label>
+        {required && <span style={{ color: '#EC734B' }}>*</span>}
+        <div className={inputContainerClasses}>
+          {LeftChild && (
+            <div className="absolute left-2 top-[0.70rem] h-4 w-4 text-muted-foreground ">
+              {<LeftChild />}
+            </div>
+          )}
+          <input type={type} className={inputClasses} ref={ref} {...props} />
+        </div>
       </div>
     );
   }

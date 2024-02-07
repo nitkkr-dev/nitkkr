@@ -5,18 +5,18 @@ import React from 'react';
 import { EmailField } from './email';
 import { NameField } from './name';
 import PhoneField from './telephone';
-import { DatePickerDemo } from './date';
+import { DatePicker } from './date';
 import { FileUpload } from './fileUpload';
 import { CheckboxReactHookFormMultiple } from './select';
 import { TimeInput } from './timeInput';
 
 export default function Visualizer() {
   return (
-    <div className="m-5 flex flex-col space-y-8">
+    <div className="m-5 flex flex-col">
       <EmailField />
-      <NameField />
-      <DatePickerDemo />
-      <FileUpload />
+      <NameField required />
+      <DatePicker required />
+      <FileUpload required />
       <CheckboxReactHookFormMultiple />
       <PhoneField />
       <TimeInput />
