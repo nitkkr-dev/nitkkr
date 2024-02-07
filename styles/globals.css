@@ -5,6 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* global theme for shadcn components */
 @layer base {
   body {
     @apply font-sans;
