@@ -1,5 +1,9 @@
-import WorkInProgress from '@/components/work-in-progress';
+import DirectorsCorner from '@/app/directors-corner';
 
 export default function Home() {
-  return <WorkInProgress />;
+  return (
+    <main className="w-full">
+      <DirectorsCorner />
+    </main>
+  );
 }
