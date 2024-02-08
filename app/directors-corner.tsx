@@ -21,11 +21,12 @@ export default function DirectorsCorner() {
 
       <blockquote className="my-[34px] ml-[125px] mr-[120px] mt-[90px] flex flex-row rounded-xl border border-primary-20 p-[30px] text-shades-20">
         <Image
-          src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
           alt="O"
-          width={436}
-          height={473}
           className="rounded-xl"
+          height={473}
+          width={436}
+          loading="lazy"
+          src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
         />
         <section className="ml-[45px] mr-[33px] flex flex-col">
           <h2 className="text-[52px] text-primary-20">
