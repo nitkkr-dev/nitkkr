@@ -32,3 +32,4 @@ out
 
 # Prisma
 prisma/generated/client/
+prisma/migarations/
