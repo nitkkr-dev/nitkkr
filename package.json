@@ -41,7 +41,9 @@
     "react-icons": "^5.0.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "react-aria": "^3.25.0",
+    "react-stately": "^3.23.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.6",
