@@ -2,7 +2,7 @@ import DirectorsCorner from '@/app/directors-corner';
 
 export default function Home() {
   return (
-    <main>
+    <main className="w-full">
       <DirectorsCorner />
     </main>
   );
