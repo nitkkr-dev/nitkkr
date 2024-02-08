@@ -13,7 +13,7 @@ export default function HorsesRunning({
     <figure className="mx-[15px] flex">
       {direction === 'right' ? (
         <Image
-          alt="cart"
+          alt="Chariot"
           className="-mt-[20px]"
           height={61.72}
           loading="lazy"
@@ -24,7 +24,7 @@ export default function HorsesRunning({
 
       {[...Array(10)].map((_, index) => (
         <Image
-          alt="horses"
+          alt="Horse"
           className={'my-auto' + directionClass}
           height={60}
           key={index}
@@ -36,7 +36,7 @@ export default function HorsesRunning({
 
       {direction === 'left' ? (
         <Image
-          alt="cart"
+          alt="Chariot"
           className="-mt-[20px] -rotate-180 -scale-y-100"
           height={61.72}
           loading="lazy"
