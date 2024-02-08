@@ -41,4 +41,8 @@
     @apply font-serif;
     @apply text-lg;
   }
+
+  p {
+    @apply mb-2;
+  }
 }
