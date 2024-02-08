@@ -18,11 +18,6 @@ const config: Config = {
       serif: ['DM Serif Display', 'serif'],
       sans: ['DM Sans', 'sans-serif'],
     },
-    fontWeight: {
-      regular: '400',
-      medium: '500',
-      bold: '700',
-    },
     fontSize: {
       '6xl': ['64px', { lineHeight: '72px' }],
       '5xl': ['56px', { lineHeight: '64px' }],
