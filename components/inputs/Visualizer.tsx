@@ -4,11 +4,12 @@ import React from 'react';
 
 import { EmailField } from './email';
 import { NameField } from './name';
-import PhoneField from './telephone';
+import { PhoneField } from './telephone';
 import { DatePicker } from './date';
 import { FileUpload } from './fileUpload';
 import { CheckboxReactHookFormMultiple } from './select';
-import { TimeInput } from './timeInput';
+import { DateTimePicker } from './date-time-picker/date-time-picker';
+import { TimeField } from './date-time-picker/time-field';
 
 export default function Visualizer() {
   return (
@@ -19,7 +20,8 @@ export default function Visualizer() {
       <FileUpload required />
       <CheckboxReactHookFormMultiple />
       <PhoneField />
-      <TimeInput />
+      <DateTimePicker granularity={'minute'} />
+      <TimeField />
     </div>
   );
 }
