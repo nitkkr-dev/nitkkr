@@ -1,6 +1,10 @@
 import Image from 'next/image';
 
-export default function HorsesRunning({ direction }: { direction: string }) {
+export default function HorsesRunning({
+  direction,
+}: {
+  direction: 'left' | 'right';
+}) {
   const directionClass =
     direction === 'left'
       ? ' -scale-y-100 -rotate-180 -mr-[14px] '
