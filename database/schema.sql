@@ -190,7 +190,7 @@ CREATE TABLE college_website.courses (
 	content              varchar  NOT NULL  ,
 	outcomes             varchar[]  NOT NULL  ,
 	books                varchar[]  NOT NULL  ,
-	"similar"            varchar[]    ,
+	"similar"           varchar[]    ,
 	CONSTRAINT pk_courses PRIMARY KEY ( id ),
 	CONSTRAINT unq_courses_branch_id UNIQUE ( major_id ) ,
 	CONSTRAINT fk_courses_departments FOREIGN KEY ( major_id ) REFERENCES college_website.departments( id )   ,
