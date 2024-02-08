@@ -7,67 +7,38 @@
 
 @layer base {
   body {
+    @apply font-sans;
+    @apply bg-root;
     min-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
   }
 
   h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 56px;
-    line-height: 64px;
+    @apply font-serif;
+    @apply text-5xl;
   }
 
   h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 48px;
-    line-height: 56px;
+    @apply font-serif;
+    @apply text-4xl;
   }
 
   h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 40px;
-    line-height: 48px;
+    @apply font-serif;
+    @apply text-3xl;
   }
 
   h4 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 32px;
-    line-height: 40px;
+    @apply font-serif;
+    @apply text-2xl;
   }
 
   h5 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px;
-    line-height: 32px;
+    @apply font-serif;
+    @apply text-xl;
   }
 
   h6 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    line-height: 28px;
+    @apply font-serif;
+    @apply text-lg;
   }
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
