@@ -5,8 +5,8 @@ import HorsesRunning from '@/components/horses-running';
 
 export default function DirectorsCorner() {
   return (
-    <article className="pt-20 flex-row items-center w-full h-fit">
-      <header className="mx-auto text-right flex flex-row text-primary-20 text-[54px] max-w-fit">
+    <article className="h-fit w-full flex-row items-center pt-20">
+      <header className="mx-auto flex max-w-fit flex-row text-right text-[54px] text-primary-20">
         <HorsesRunning direction="left" />
         <h2 className="my-auto">DIRECT</h2>
         <Image
@@ -14,12 +14,12 @@ export default function DirectorsCorner() {
           alt="Chariot design"
           width={44}
           height={44}
-          className="rotate-[90.66deg] my-auto h-[44px]"
+          className="my-auto h-[44px] rotate-[90.66deg]"
         />
         <h2 className="my-auto">R&rsquo;S CORNER</h2>
       </header>
 
-      <blockquote className="mt-[90px] ml-[125px] mr-[120px] rounded-xl border border-primary-20 text-shades-20 my-[34px] flex flex-row p-[30px]">
+      <blockquote className="my-[34px] ml-[125px] mr-[120px] mt-[90px] flex flex-row rounded-xl border border-primary-20 p-[30px] text-shades-20">
         <Image
           src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
           alt="O"
@@ -27,8 +27,8 @@ export default function DirectorsCorner() {
           height={473}
           className="rounded-xl"
         />
-        <section className="flex flex-col mr-[33px] ml-[45px]">
-          <h2 className="text-primary-20 text-[52px]">
+        <section className="ml-[45px] mr-[33px] flex flex-col">
+          <h2 className="text-[52px] text-primary-20">
             Professor B.V. Ramana Reddy
           </h2>
           <p className="text-2xl">
@@ -52,7 +52,7 @@ export default function DirectorsCorner() {
 
       <footer className="mx-[120px] mt-[60px] text-right">
         <Link href="https://nitkkr.ac.in/?page_id=703">
-          <button className="bg-primary-20 px-[36px] py-[24px] text-2xl rounded-xl">
+          <button className="rounded-xl bg-primary-20 px-[36px] py-[24px] text-2xl">
             Read More
           </button>
         </Link>

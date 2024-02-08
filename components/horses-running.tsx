@@ -6,7 +6,7 @@ export default function HorsesRunning({ direction }: { direction: string }) {
       ? ' -scale-y-100 -rotate-180 -mr-[14px] '
       : ' -ml-[14px]';
   return (
-    <figure className="flex mx-[15px]">
+    <figure className="mx-[15px] flex">
       {direction === 'right' ? (
         <Image
           width={122.14}
@@ -34,7 +34,7 @@ export default function HorsesRunning({ direction }: { direction: string }) {
           height={61.72}
           src="https://s3-alpha-sig.figma.com/img/f7e6/2feb/3cf2c5cf97a787ba70bee06984bcb084?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=njXoleH35nMEUIgBD-cL-9eew1RMYWt4qtP~QyyoNATbmwnOCjv~R98vcS6JWRNl3wlL7lHNPza6vlS9A0yt~juberld4Hj-AdeuaVNDRN7V5dbvkIB-XM~s2NrckWWYernXUz~vHOIZADXas~gpDw1vJSYffxQUUc7WvurHxeDgImL8FO2aKD0xxGvcVSzaF89FcO0~COoYZKGkcd4v8Oy6n8UsBtKXPYbpZvwJG3i-Gf~tkSWTcLcvlCWFIrzMp27pu7KmxYjbMFSOaJ80LgIQ3KFth1zP3IrQcbz8dnVgmEDw4DScimyCEdUbqdFW-K0g3R5GLIRUAWBzSQmGqQ__"
           alt="cart"
-          className="-mt-[20px] -scale-y-100 -rotate-180"
+          className="-mt-[20px] -rotate-180 -scale-y-100"
         />
       ) : null}
     </figure>
