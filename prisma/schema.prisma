@@ -162,29 +162,30 @@ model faculty_feedback {
 }
 
 model form_questions {
-  id          Int       @id(map: "pk_form_questions")
-  form_id     Int
-  question    String    @db.VarChar
-  description String    @db.VarChar
-  is_required Boolean   @default(true)
-  input_type  String    @db.VarChar
-  choices     String[]  @db.VarChar
-  mime_types  String[]  @db.VarChar
-  range       String[]  @db.VarChar
-  page_number Int       @default(0) @db.SmallInt
-  marks       Int       @default(0) @db.SmallInt
-  min_date    DateTime? @db.Date
-  max_date    DateTime? @db.Date
-  forms       forms     @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_questions_forms")
+  id                   Int                    @id(map: "pk_form_questions")
+  form_id              Int
+  question             String                 @db.VarChar
+  description          String                 @db.VarChar
+  is_required          Boolean                @default(true)
+  input_type           String                 @db.VarChar
+  choices              String[]               @db.VarChar
+  mime_types           String[]               @db.VarChar
+  range                String[]               @db.VarChar
+  min_date             DateTime?              @db.Date
+  max_date             DateTime?              @db.Date
+  page_number          Int                    @default(0) @db.SmallInt
+  marks                Int                    @default(0) @db.SmallInt
+  forms                forms                  @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_questions_forms")
+  question_submissions question_submissions[]
 }
 
 model form_submissions {
-  id         Int      @id(map: "pk_form_submissions")
-  form_id    Int
-  email      String   @db.VarChar
-  input_type String   @db.VarChar
-  answers    String[] @db.VarChar
-  forms      forms    @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
+  id                   Int                    @id(map: "pk_form_submissions")
+  form_id              Int
+  email                String                 @db.VarChar
+  answers              String[]               @db.VarChar
+  forms                forms                  @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
+  question_submissions question_submissions[]
 }
 
 model forms {
@@ -345,4 +346,13 @@ model students {
   club_members              club_members[]
   phd_log                   phd_log[]
   student_academic_details  student_academic_details?
+}
+
+model question_submissions {
+  id               Int              @id(map: "pk_question_submissions")
+  form_question_id Int
+  answers          String           @db.VarChar
+  submission_id    Int
+  form_questions   form_questions   @relation(fields: [form_question_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_question_submissions_form_questions")
+  form_submissions form_submissions @relation(fields: [submission_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_question_submissions_form_submissions")
 }

@@ -224,10 +224,10 @@ CREATE TABLE college_website.form_questions (
 	choices              varchar[]    ,
 	mime_types           varchar[]    ,
 	range                varchar[]    ,
-	page_number          smallint DEFAULT 0 NOT NULL  ,
-	marks                smallint DEFAULT 0 NOT NULL  ,
 	min_date			 date    ,
 	max_date			 date    ,
+	page_number          smallint DEFAULT 0 NOT NULL  ,
+	marks                smallint DEFAULT 0 NOT NULL  ,
 	CONSTRAINT pk_form_questions PRIMARY KEY ( id ),
 	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
  );
@@ -237,10 +237,19 @@ CREATE TABLE college_website.form_submissions (
 	id                   integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	email                varchar  NOT NULL  ,
-	input_type		     varchar  NOT NULL  ,
 	answers              varchar[]  NOT NULL  ,
 	CONSTRAINT pk_form_submissions PRIMARY KEY ( id ),
 	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
+ );
+
+ CREATE TABLE college_website.question_submissions ( 
+	id                   integer  NOT NULL  ,
+	form_question_id     integer  NOT NULL  ,
+	answers              varchar  NOT NULL  ,
+	submission_id        integer  NOT NULL  ,
+	CONSTRAINT pk_question_submissions PRIMARY KEY ( id ),
+	CONSTRAINT fk_question_submissions_form_questions FOREIGN KEY ( form_question_id ) REFERENCES college_website.form_questions( id ), 
+	CONSTRAINT fk_question_submissions_form_submissions FOREIGN KEY ( submission_id ) REFERENCES college_website.form_submissions( id )     
  );
 
 CREATE TABLE college_website.non_teaching_staff ( 
