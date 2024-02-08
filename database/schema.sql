@@ -55,7 +55,7 @@ CREATE  TABLE college_website.faculty (
 CREATE  TABLE college_website.forms ( 
 	id                   integer  NOT NULL  ,
 	title                varchar  NOT NULL  ,
-	description          varchar  NOT NULL  ,
+	description          varchar ,
 	visible_to           varchar[]  NOT NULL  ,
 	questions            integer[]  NOT NULL  ,
 	on_submit_message    varchar DEFAULT 'Your response has been recorded.' NOT NULL  ,
@@ -70,6 +70,7 @@ CREATE  TABLE college_website.forms (
 	persistent_url       varchar    ,
 	old_persistent_urls  varchar[]    ,
 	is_published         boolean  NOT NULL  ,
+	modifiable_by		 varchar[] NOT NULL   ,             
 	CONSTRAINT pk_forms PRIMARY KEY ( id )
  );
 
@@ -164,6 +165,8 @@ CREATE TABLE college_website.students (
 
 CREATE  TABLE college_website.clubs ( 
 	id                   integer  NOT NULL  ,
+	name                 varchar  NOT NULL  ,
+	alias				 varchar  ,
 	starting_date        date  NOT NULL  ,
 	is_active            boolean  NOT NULL  ,
 	about_us             varchar  NOT NULL  ,
@@ -223,6 +226,8 @@ CREATE TABLE college_website.form_questions (
 	range                varchar[]    ,
 	page_number          smallint DEFAULT 0 NOT NULL  ,
 	marks                smallint DEFAULT 0 NOT NULL  ,
+	min_date			 date    ,
+	max_date			 date    ,
 	CONSTRAINT pk_form_questions PRIMARY KEY ( id ),
 	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
  );
@@ -232,6 +237,8 @@ CREATE TABLE college_website.form_submissions (
 	id                   integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	email                varchar  NOT NULL  ,
+	input_type		     varchar  NOT NULL  ,
+	answers              varchar[]  NOT NULL  ,
 	CONSTRAINT pk_form_submissions PRIMARY KEY ( id ),
 	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
  );
