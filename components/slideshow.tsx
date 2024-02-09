@@ -28,12 +28,6 @@ export default function Slideshow() {
       >
         &#10094;
       </button>
-      <button
-        className="next absolute right-0 top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
-        onClick={nextSlide}
-      >
-        &#10095;
-      </button>
       {slides.map((slide: string, index: number) => (
         <div
           className={`relative ${index === currentSlide ? '' : 'hidden'}`}
@@ -48,6 +42,12 @@ export default function Slideshow() {
           />
         </div>
       ))}
+      <button
+        className="next absolute right-0 top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
+        onClick={nextSlide}
+      >
+        &#10095;
+      </button>
     </div>
   );
 }
