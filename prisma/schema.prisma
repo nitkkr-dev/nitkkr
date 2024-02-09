@@ -1,0 +1,341 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model auth_roles {
+  id          Int      @id(map: "pk_auth_roles")
+  permissions String[] @db.VarChar
+}
+
+model club_members {
+  id           Int       @id(map: "pk_club_members")
+  student_id   Int
+  club_id      Int
+  position     String    @default("member") @db.VarChar
+  extra_groups String[]  @db.VarChar
+  comments     String?   @db.VarChar
+  updated_by   String    @db.VarChar
+  updated_at   DateTime? @default(dbgenerated("CURRENT_DATE")) @db.Date
+  clubs        clubs     @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_members_clubs")
+  students     students  @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_members_students")
+}
+
+model club_socials {
+  id       Int    @id(map: "pk_club_socials")
+  club_id  Int
+  platform String @db.VarChar
+  link     String @db.VarChar
+  clubs    clubs  @relation(fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_socials_clubs")
+}
+
+model clubs {
+  id                  Int            @id(map: "pk_clubs")
+  starting_date       DateTime       @db.Date
+  is_active           Boolean
+  about_us            String         @db.VarChar
+  email               String         @db.VarChar
+  category            String         @db.VarChar
+  department_id       Int?
+  incharge_faculty_id String[]       @db.VarChar
+  club_members        club_members[]
+  club_socials        club_socials[]
+  departments         departments?   @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_clubs_departments")
+}
+
+model course_logs {
+  id               Int                @id(map: "pk_course_logs")
+  session          String             @db.VarChar
+  course_id        Int
+  faculty_id       Int
+  major_id         Int
+  semester         Int                @db.SmallInt
+  section          String             @db.VarChar
+  sub_section      Int
+  courses          courses            @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_course_logs_courses")
+  faculty          faculty            @relation(fields: [faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_course_logs_faculty")
+  faculty_feedback faculty_feedback[]
+}
+
+model courses {
+  id                Int           @id(map: "pk_courses")
+  code              String        @db.VarChar
+  title             String        @db.VarChar
+  prerequisites     String[]      @db.VarChar
+  kind              String        @db.VarChar
+  lecture_credits   Int           @db.SmallInt
+  tutorial_credits  Int?          @db.SmallInt
+  practical_credits Int?          @db.SmallInt
+  major_id          Int           @unique(map: "unq_courses_branch_id")
+  semester          Int           @db.SmallInt
+  objectives        String[]      @db.VarChar
+  content           String        @db.VarChar
+  outcomes          String[]      @db.VarChar
+  books             String[]      @db.VarChar
+  similar           String[]      @db.VarChar
+  course_logs       course_logs[]
+  departments       departments   @relation(fields: [major_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_courses_departments")
+  majors            majors        @relation(fields: [major_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_courses_majors")
+}
+
+model deans {
+  id                                          Int      @id(map: "pk_deans")
+  domain                                      String   @db.VarChar
+  faculty_id                                  Int
+  activity_logs                               String[] @db.VarChar
+  associate_faculty_id                        Int?
+  staff_id                                    String[] @db.VarChar
+  faculty_deans_associate_faculty_idTofaculty faculty? @relation("deans_associate_faculty_idTofaculty", fields: [associate_faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_deans_faculty_0")
+  faculty_deans_faculty_idTofaculty           faculty  @relation("deans_faculty_idTofaculty", fields: [faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_deans_faculty_1")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model departments {
+  id                  Int                  @id(map: "pk_departments")
+  name                String               @db.VarChar
+  about_us            String?              @db.VarChar
+  laboratories        String?              @db.VarChar
+  programs            String[]             @db.VarChar
+  course_coordinators String[]             @db.VarChar
+  clubs               clubs[]
+  courses             courses?
+  faculty             faculty?
+  hod                 hod[]
+  majors              majors[]
+  non_teaching_staff  non_teaching_staff[]
+  phd_log             phd_log[]
+}
+
+model faculty {
+  id                                        Int                           @id(map: "pk_faculty")
+  name                                      String                        @db.VarChar
+  department_id                             Int                           @unique(map: "unq_faculty_department_id")
+  email                                     String                        @db.VarChar
+  office_telephone                          String                        @db.VarChar
+  joined_on                                 DateTime                      @db.Date
+  is_active                                 Boolean
+  home_telephone                            String?                       @db.VarChar
+  designation                               String                        @db.VarChar
+  teaching_interests                        String[]                      @db.VarChar
+  research_interests                        String[]                      @db.VarChar
+  patents                                   String[]                      @db.VarChar
+  copyrights                                String[]                      @db.VarChar
+  journals                                  String[]                      @db.VarChar
+  confrences                                String[]                      @db.VarChar
+  books                                     String[]                      @db.VarChar
+  areas_of_interest                         String[]                      @db.VarChar
+  workshops                                 String[]                      @db.VarChar
+  research_supervision                      Json?
+  expert_lectures                           String[]                      @db.VarChar
+  awards                                    String[]                      @db.VarChar
+  admin_roles                               String[]                      @db.VarChar
+  outreach                                  String[]                      @db.VarChar
+  e_content                                 String[]                      @db.VarChar
+  research_projects                         String[]                      @db.VarChar
+  google_scholar_profile                    String?                       @db.VarChar
+  orchid_profile                            String?                       @db.VarChar
+  scopus_profile                            String?                       @db.VarChar
+  image                                     String                        @db.VarChar
+  role_ids                                  Int[]                         @db.SmallInt
+  course_logs                               course_logs[]
+  deans_deans_associate_faculty_idTofaculty deans[]                       @relation("deans_associate_faculty_idTofaculty")
+  deans_deans_faculty_idTofaculty           deans[]                       @relation("deans_faculty_idTofaculty")
+  departments                               departments                   @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_faculty_departments")
+  hod                                       hod?
+  phd_log                                   phd_log[]
+  sponsored_research_projects               sponsored_research_projects[]
+}
+
+model faculty_feedback {
+  id            Int         @id(map: "pk_faculty_feedback")
+  course_log_id Int
+  form_id       Int
+  course_logs   course_logs @relation(fields: [course_log_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_faculty_feedback_course_logs")
+  forms         forms       @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_faculty_feedback_forms")
+}
+
+model form_questions {
+  id          Int      @id(map: "pk_form_questions")
+  form_id     Int
+  question    String   @db.VarChar
+  description String   @db.VarChar
+  is_required Boolean  @default(true)
+  input_type  String   @db.VarChar
+  choices     String[] @db.VarChar
+  mime_types  String[] @db.VarChar
+  range       String[] @db.VarChar
+  page_number Int      @default(0) @db.SmallInt
+  marks       Int      @default(0) @db.SmallInt
+  forms       forms    @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_questions_forms")
+}
+
+model form_submissions {
+  id      Int    @id(map: "pk_form_submissions")
+  form_id Int
+  email   String @db.VarChar
+  forms   forms  @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
+}
+
+model forms {
+  id                        Int                @id(map: "pk_forms")
+  title                     String             @db.VarChar
+  description               String             @db.VarChar
+  visible_to                String[]           @db.VarChar
+  questions                 Int[]
+  on_submit_message         String             @default("Your response has been recorded.") @db.VarChar
+  is_editing_allowed        Boolean
+  is_single_response        Boolean            @default(true)
+  is_view_analytics_allowed Boolean            @default(false)
+  is_shuffled               Boolean            @default(false)
+  is_copy_sent              Boolean            @default(false)
+  is_quiz                   Boolean            @default(false)
+  expiry_date               DateTime?          @db.Date
+  is_active                 Boolean            @default(true)
+  persistent_url            String?            @db.VarChar
+  old_persistent_urls       String[]           @db.VarChar
+  is_published              Boolean
+  faculty_feedback          faculty_feedback[]
+  form_questions            form_questions[]
+  form_submissions          form_submissions[]
+}
+
+model hod {
+  id            Int         @id(map: "pk_hod")
+  faculty_id    Int         @unique(map: "unq_hod_faculty_id")
+  department_id Int
+  message       String?     @db.VarChar
+  created_at    DateTime    @default(dbgenerated("CURRENT_DATE")) @db.Date
+  is_active     Boolean     @default(true)
+  departments   departments @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_hod_departments")
+  faculty       faculty     @relation(fields: [faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_hod_faculty")
+}
+
+model majors {
+  id                       Int                        @id(map: "pk_branches")
+  name                     String                     @db.VarChar(100)
+  alias                    String                     @db.Char(2)
+  department_id            Int
+  degree                   String                     @db.VarChar
+  courses                  courses?
+  departments              departments                @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_branches_departments")
+  student_academic_details student_academic_details[]
+}
+
+model non_teaching_staff {
+  id                    Int         @id(map: "pk_non_teaching_staff")
+  name                  String      @db.VarChar(100)
+  telephone             String[]    @db.VarChar
+  email                 String?     @db.VarChar
+  working_section_id    Int
+  degisnation           String      @db.VarChar
+  image                 String      @db.VarChar
+  working_department_id Int
+  role_ids              Int[]       @db.SmallInt
+  departments           departments @relation(fields: [working_department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_non_teaching_staff_departments")
+  sections              sections    @relation(fields: [working_section_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_non_teaching_staff_sections")
+}
+
+model persons {
+  id              Int    @id(map: "pk_persons")
+  name            String @db.VarChar
+  institute_email String @db.VarChar
+}
+
+model phd_log {
+  id                 Int         @id(map: "pk_phd_log")
+  student_id         Int
+  faculty_id         Int
+  department_id      Int
+  job_type           String      @db.VarChar
+  registration_id    String      @db.VarChar
+  title              String      @db.VarChar
+  date_of_joining    DateTime    @default(dbgenerated("CURRENT_DATE")) @db.Date
+  date_of_completion DateTime?   @db.Date
+  departments        departments @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_phd_log_departments")
+  faculty            faculty     @relation(fields: [faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_phd_log_faculty")
+  students           students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_phd_log_students")
+}
+
+model research_work {
+  id Int @id(map: "pk_research_work")
+}
+
+model roles {
+  id          Int      @id(map: "pk_roles")
+  name        String   @db.VarChar(100)
+  permissions String[] @db.VarChar
+}
+
+model sections {
+  id                 Int                  @id(map: "pk_sections")
+  head_faculty_id    Int                  @db.SmallInt
+  name               String               @db.VarChar(100)
+  about_us           String               @db.VarChar
+  non_teaching_staff non_teaching_staff[]
+}
+
+model sponsored_research_projects {
+  id                   Int       @id(map: "pk_sponsored_research_projects")
+  title                String    @db.VarChar
+  funding_agency       String    @db.VarChar
+  faculty_id           Int
+  amount               BigInt
+  start_date           DateTime  @db.Date
+  end_date             DateTime? @db.Date
+  status               String    @default("on-going") @db.VarChar
+  duration_period      String    @db.VarChar
+  duration_period_type String    @db.VarChar
+  faculty              faculty   @relation(fields: [faculty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_sponsored_research_projects_faculty")
+}
+
+model student_academic_details {
+  student_id       Int      @id(map: "pk_student_academic_details")
+  section          String   @db.VarChar
+  batch            Int      @db.SmallInt
+  current_semester Int      @db.SmallInt
+  sgpa             Float
+  cgpa             Float
+  dmc_urls         String[] @db.VarChar
+  major_id         Int
+  sub_section      Int
+  majors           majors   @relation(fields: [major_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student_academic_details_branches")
+  students         students @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student_academic_details_students")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model students {
+  id                        Int                       @id(map: "pk_students")
+  roll_number               String                    @db.VarChar
+  name                      String                    @db.VarChar(100)
+  sex                       String                    @db.VarChar
+  telephone                 String[]                  @db.VarChar
+  personal_email            String                    @db.VarChar
+  institute_email           String                    @db.VarChar
+  fathers_name              String                    @db.VarChar(100)
+  fathers_telephone         String                    @db.VarChar
+  mothers_name              String                    @db.VarChar(100)
+  mothers_telephone         String                    @db.VarChar
+  local_guardians_name      String?                   @db.VarChar(100)
+  local_guardians_telephone String?                   @db.VarChar
+  pincode                   Int
+  permanent_address         String                    @db.VarChar
+  aadhaar                   String?                   @db.VarChar(12)
+  passport_number           String?                   @db.VarChar
+  category                  String?                   @db.VarChar
+  birthday                  DateTime                  @db.Date
+  application_number        String                    @db.VarChar
+  admission_category        String                    @db.VarChar
+  date_of_admission         DateTime                  @db.Date
+  is_pwd                    Boolean                   @default(false)
+  admission_subcategory     String?                   @db.VarChar
+  image                     String                    @db.VarChar
+  role_ids                  Int[]                     @db.SmallInt
+  club_members              club_members[]
+  phd_log                   phd_log[]
+  student_academic_details  student_academic_details?
+}

@@ -7,30 +7,42 @@
 
 @layer base {
   body {
+    @apply font-sans;
+    @apply bg-root;
     min-height: 100vh;
   }
-}
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  h1 {
+    @apply font-serif;
+    @apply text-5xl;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  h2 {
+    @apply font-serif;
+    @apply text-4xl;
+  }
+
+  h3 {
+    @apply font-serif;
+    @apply text-3xl;
+  }
+
+  h4 {
+    @apply font-serif;
+    @apply text-2xl;
+  }
+
+  h5 {
+    @apply font-serif;
+    @apply text-xl;
+  }
+
+  h6 {
+    @apply font-serif;
+    @apply text-lg;
+  }
+
+  p {
+    @apply mb-2;
+  }
 }
