@@ -2,12 +2,11 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import {  FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
-
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function Slideshow({ images }: { images: string[] }) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [hovered, setHovered] = useState<boolean>(false);
 
   const prevSlide = (): void => {
     setCurrentSlide((prev: number) =>
@@ -23,19 +22,25 @@ export default function Slideshow({ images }: { images: string[] }) {
   useEffect(() => {
     const intervalId = setInterval(() => {
       nextSlide();
-    }, 3000); 
+    }, 3000);
 
-    
     return () => clearInterval(intervalId);
   }, [currentSlide]);
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <button
-        className="prev absolute top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100 z-10"
+        className={`prev absolute top-1/2 -translate-y-1/2 transform ${
+          hovered ? 'opacity-100' : 'opacity-0'
+        } z-10 transition-opacity duration-300`}
         onClick={prevSlide}
+        style={{ marginLeft: '64px' }}
       >
-         <FaChevronLeft className="text-white"/>
+        <FaChevronLeft className="text-white" style={{ fontSize: '40px' }} />
       </button>
 
       {images.map((image: string, index: number) => (
@@ -53,10 +58,13 @@ export default function Slideshow({ images }: { images: string[] }) {
         </div>
       ))}
       <button
-        className="next absolute right-0 top-1/2 -translate-y-1/2 transform transition-opacity duration-300 hover:opacity-100 z-10"
+        className={`next absolute right-0 top-1/2 -translate-y-1/2 transform ${
+          hovered ? 'opacity-100' : 'opacity-0'
+        } z-10 transition-opacity duration-300`}
         onClick={nextSlide}
+        style={{ marginRight: '64px' }}
       >
-        <FaChevronRight className="text-white"/>
+        <FaChevronRight className="text-white" style={{ fontSize: '40px' }} />
       </button>
     </div>
   );
