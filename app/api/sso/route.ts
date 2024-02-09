@@ -56,9 +56,6 @@ export async function GET(request: NextRequest) {
   hmacPayload.update(base64Payload);
   const calculatedSigPayload = hmacPayload.digest('hex');
 
-  const returnUrl = encodeURIComponent(
-    'http://localhost:4200/session/sso_login'
-  );
   const redirectUrl = `http://localhost:4200/session/sso_login?sso=${base64Payload}&sig=${calculatedSigPayload}`;
   redirect(redirectUrl);
 }
