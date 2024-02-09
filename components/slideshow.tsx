@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import { useState } from 'react';
+
 export default function Slideshow() {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
