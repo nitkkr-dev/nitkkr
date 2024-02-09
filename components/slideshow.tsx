@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function Slideshow({ images }: { images: string[] }) {
@@ -18,15 +18,23 @@ export default function Slideshow({ images }: { images: string[] }) {
       prev === images.length - 1 ? 0 : prev + 1
     );
   };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextSlide();
+    }, 3000); 
+
+    
+    return () => clearInterval(intervalId);
+  }, [currentSlide]);
 
   return (
     <div className="relative">
-      <div
-        className="prev absolute top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
+      <button
+        className="prev absolute top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100 z-10"
         onClick={prevSlide}
       >
-        <FaChevronLeft size={24} />
-      </div>
+        &#10094;
+      </button>
 
       {images.map((image: string, index: number) => (
         <div
@@ -42,12 +50,12 @@ export default function Slideshow({ images }: { images: string[] }) {
           />
         </div>
       ))}
-      <div
-        className="next absolute right-0 top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
+      <button
+        className="next absolute right-0 top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100 z-10"
         onClick={nextSlide}
       >
-        <FaChevronRight size={24} />
-      </div>
+        &#10095;
+      </button>
     </div>
   );
 }
