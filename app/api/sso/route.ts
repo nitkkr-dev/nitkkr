@@ -7,7 +7,6 @@ import { type NextRequest } from 'next/server';
 import { authOptions } from '@/api/auth/auth';
 
 export async function GET(request: NextRequest) {
-  console.log('Its working');
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -16,6 +15,7 @@ export async function GET(request: NextRequest) {
     });
   }
   const searchParams = request.nextUrl.searchParams;
+  console.log(searchParams);
   const discourseConnectSecret = process.env.NEXTAUTH_SECRET;
   const payload = searchParams.get('sso') as string | undefined;
   const sig = searchParams.get('sig') as string | undefined;
@@ -30,16 +30,24 @@ export async function GET(request: NextRequest) {
     discourseConnectSecret as crypto.BinaryLike
   );
   hmac.update(payload);
+  console.log(hmac);
   const calculatedSig = hmac.digest('hex');
-
+  console.log(calculatedSig);
   if (calculatedSig !== sig) {
     return new Response('Invalid signature', {
       status: 401,
     });
   }
-
+  const payloadData = Buffer.from(payload, 'base64').toString('ascii');
+  const parsedPayload = new URLSearchParams(payloadData);
+  const nonce = parsedPayload.get('nonce');
+  const return_sso_url = parsedPayload.get('return_sso_url');
+  
+  console.log('Nonce:', nonce);
+  console.log('Return SSO URL:', return_sso_url);
+  
   const discoursePayload = {
-    nonce: searchParams.get('nonce'),
+    nonce: nonce,
     email: session.user?.email,
     external_id: session.user?.email,
     username: session.user?.email,
@@ -56,6 +64,6 @@ export async function GET(request: NextRequest) {
   hmacPayload.update(base64Payload);
   const calculatedSigPayload = hmacPayload.digest('hex');
 
-  const redirectUrl = `http://localhost:4200/session/sso_login?sso=${base64Payload}&sig=${calculatedSigPayload}`;
+  const redirectUrl = `${return_sso_url}?sso=${base64Payload}&sig=${calculatedSigPayload}`;
   redirect(redirectUrl);
 }
