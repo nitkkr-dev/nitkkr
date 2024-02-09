@@ -62,7 +62,7 @@ export default function Slideshow({ images }: { images: string[] }) {
           hovered ? 'opacity-100' : 'opacity-0'
         } z-10 transition-opacity duration-300`}
         onClick={nextSlide}
-        style={{ marginRight: '64px' }}
+        style={{ marginRight: '64px', boxShadow: '4px 4px 40px 0px #00000040' }}
       >
         <FaChevronRight className="text-white" style={{ fontSize: '40px' }} />
       </button>
