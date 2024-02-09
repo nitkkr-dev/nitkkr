@@ -3,23 +3,18 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function Slideshow() {
+export default function Slideshow({ images }: { images: string[] }) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-
-  const slides: string[] = [
-    'https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg',
-    'https://nitkkr.ac.in/wp-content/uploads/2022/01/24131961_285405678647849_426967072086000359_o.jpg',
-  ];
 
   const prevSlide = (): void => {
     setCurrentSlide((prev: number) =>
-      prev === 0 ? slides.length - 1 : prev - 1
+      prev === 0 ? images.length - 1 : prev - 1
     );
   };
 
   const nextSlide = (): void => {
     setCurrentSlide((prev: number) =>
-      prev === slides.length - 1 ? 0 : prev + 1
+      prev === images.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -31,17 +26,17 @@ export default function Slideshow() {
       >
         &#10094;
       </button>
-      {slides.map((slide: string, index: number) => (
+      {images.map((image: string, index: number) => (
         <div
           className={`relative ${index === currentSlide ? '' : 'hidden'}`}
           key={index}
         >
           <Image
-            src={slide}
-            alt={`slides ${index + 1}`}
-            width={1920}
+            alt={`slide ${index + 1}`}
             height={1080}
             loading={index === 0 ? 'eager' : 'lazy'}
+            width={1920}
+            src={image}
           />
         </div>
       ))}
