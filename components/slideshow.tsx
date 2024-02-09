@@ -35,7 +35,7 @@ export default function Slideshow({ images }: { images: string[] }) {
         className="prev absolute top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100 z-10"
         onClick={prevSlide}
       >
-         <FaArrowLeft />
+         <FaArrowLeft className="text-white"/>
       </button>
 
       {images.map((image: string, index: number) => (
@@ -56,7 +56,7 @@ export default function Slideshow({ images }: { images: string[] }) {
         className="next absolute right-0 top-1/2 -translate-y-1/2 transform transition-opacity duration-300 hover:opacity-100 z-10"
         onClick={nextSlide}
       >
-        <FaArrowRight />
+        <FaArrowRight className="text-white"/>
       </button>
     </div>
   );
