@@ -23,7 +23,7 @@ const collections: string[] = [
     'courses'
 ]
 const collectionMap: CollectionMap = {
-    'students': 'name, institute_email',
+    'students': 'name, email',
     'faculty': 'name',
     'courses': 'title, code',
 }
