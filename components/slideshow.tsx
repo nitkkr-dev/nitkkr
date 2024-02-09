@@ -23,13 +23,13 @@ export default function Slideshow() {
   return (
     <div className="relative">
       <button
-        className="prev absolute top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-300 hover:opacity-100"
+        className="prev absolute top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
         onClick={prevSlide}
       >
         &#10094;
       </button>
       <button
-        className="next absolute top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-300 right-0 hover:opacity-100"
+        className="next absolute right-0 top-1/2 -translate-y-1/2 transform opacity-0 transition-opacity duration-300 hover:opacity-100"
         onClick={nextSlide}
       >
         &#10095;
