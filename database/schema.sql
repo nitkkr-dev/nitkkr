@@ -85,8 +85,8 @@ CREATE  TABLE college_website.hod (
 	is_active            boolean DEFAULT true NOT NULL  ,
 	CONSTRAINT pk_hod PRIMARY KEY ( id ),
 	CONSTRAINT unq_hod_faculty_id UNIQUE ( faculty_id ) ,
-	CONSTRAINT fk_hod_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   ,
-	CONSTRAINT fk_hod_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_hod_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_hod_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
 CREATE TABLE college_website.majors ( 
@@ -96,7 +96,7 @@ CREATE TABLE college_website.majors (
 	department_id        integer  NOT NULL  ,
 	degree               varchar  NOT NULL  ,
 	CONSTRAINT pk_branches PRIMARY KEY ( id ),
-	CONSTRAINT fk_branches_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_branches_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
 CREATE  TABLE college_website.research_work ( 
@@ -131,7 +131,7 @@ CREATE  TABLE college_website.sponsored_research_projects (
 	duration_period      varchar  NOT NULL  ,
 	duration_period_type varchar  NOT NULL  ,
 	CONSTRAINT pk_sponsored_research_projects PRIMARY KEY ( id ),
-	CONSTRAINT fk_sponsored_research_projects_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
+	CONSTRAINT fk_sponsored_research_projects_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE TABLE college_website.students ( 
@@ -177,7 +177,7 @@ CREATE  TABLE college_website.clubs (
 	department_id        integer    ,
 	incharge_faculty_id  varchar[]  NOT NULL  ,
 	CONSTRAINT pk_clubs PRIMARY KEY ( id ),
-	CONSTRAINT fk_clubs_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_clubs_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE 
  );
 
 CREATE TABLE college_website.courses ( 
@@ -198,8 +198,8 @@ CREATE TABLE college_website.courses (
 	"similar"            varchar[]    ,
 	CONSTRAINT pk_courses PRIMARY KEY ( id ),
 	CONSTRAINT unq_courses_branch_id UNIQUE ( major_id ) ,
-	CONSTRAINT fk_courses_departments FOREIGN KEY ( major_id ) REFERENCES college_website.departments( id )   ,
-	CONSTRAINT fk_courses_majors FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id )   
+	CONSTRAINT fk_courses_departments FOREIGN KEY ( major_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_courses_majors FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 
@@ -211,8 +211,8 @@ CREATE TABLE college_website.deans (
 	associate_faculty_id integer    ,
 	staff_id             varchar[]    ,
 	CONSTRAINT pk_deans PRIMARY KEY ( id ),
-	CONSTRAINT fk_deans_faculty_0 FOREIGN KEY ( associate_faculty_id ) REFERENCES college_website.faculty( id )   ,
-	CONSTRAINT fk_deans_faculty_1 FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
+	CONSTRAINT fk_deans_faculty_0 FOREIGN KEY ( associate_faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_deans_faculty_1 FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 
@@ -231,7 +231,7 @@ CREATE TABLE college_website.form_questions (
 	page_number          smallint DEFAULT 0 NOT NULL  ,
 	marks                smallint DEFAULT 0 NOT NULL  ,
 	CONSTRAINT pk_form_questions PRIMARY KEY ( id ),
-	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
+	CONSTRAINT fk_form_questions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
 
@@ -241,7 +241,7 @@ CREATE TABLE college_website.form_submissions (
 	email                varchar  NOT NULL  ,
 	answers              varchar[]  NOT NULL  ,
 	CONSTRAINT pk_form_submissions PRIMARY KEY ( id ),
-	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   
+	CONSTRAINT fk_form_submissions_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
  CREATE TABLE college_website.question_submissions ( 
@@ -250,8 +250,8 @@ CREATE TABLE college_website.form_submissions (
 	answers              varchar  NOT NULL  ,
 	submission_id        integer  NOT NULL  ,
 	CONSTRAINT pk_question_submissions PRIMARY KEY ( id ),
-	CONSTRAINT fk_question_submissions_form_questions FOREIGN KEY ( form_question_id ) REFERENCES college_website.form_questions( id ), 
-	CONSTRAINT fk_question_submissions_form_submissions FOREIGN KEY ( submission_id ) REFERENCES college_website.form_submissions( id )     
+	CONSTRAINT fk_question_submissions_form_questions FOREIGN KEY ( form_question_id ) REFERENCES college_website.form_questions( id ) ON UPDATE CASCADE ON DELETE CASCADE, 
+	CONSTRAINT fk_question_submissions_form_submissions FOREIGN KEY ( submission_id ) REFERENCES college_website.form_submissions( id ) ON UPDATE CASCADE ON DELETE CASCADE     
  );
 
 CREATE TABLE college_website.non_teaching_staff ( 
@@ -265,8 +265,8 @@ CREATE TABLE college_website.non_teaching_staff (
 	working_department_id integer  NOT NULL  ,
 	role_ids             smallint[]  NOT NULL  ,
 	CONSTRAINT pk_non_teaching_staff PRIMARY KEY ( id ),
-	CONSTRAINT fk_non_teaching_staff_sections FOREIGN KEY ( working_section_id ) REFERENCES college_website.sections( id )   ,
-	CONSTRAINT fk_non_teaching_staff_departments FOREIGN KEY ( working_department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_non_teaching_staff_sections FOREIGN KEY ( working_section_id ) REFERENCES college_website.sections( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_non_teaching_staff_departments FOREIGN KEY ( working_department_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
 CREATE  TABLE college_website.phd_log ( 
@@ -280,9 +280,9 @@ CREATE  TABLE college_website.phd_log (
 	date_of_joining      date DEFAULT CURRENT_DATE NOT NULL  ,
 	date_of_completion   date    ,
 	CONSTRAINT pk_phd_log PRIMARY KEY ( id ),
-	CONSTRAINT fk_phd_log_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   ,
-	CONSTRAINT fk_phd_log_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   ,
-	CONSTRAINT fk_phd_log_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_phd_log_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_phd_log_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_phd_log_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE TABLE college_website.student_academic_details ( 
@@ -296,8 +296,8 @@ CREATE TABLE college_website.student_academic_details (
 	major_id             integer  NOT NULL  ,
 	sub_section          integer  NOT NULL  ,
 	CONSTRAINT pk_student_academic_details PRIMARY KEY ( student_id ),
-	CONSTRAINT fk_student_academic_details_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   ,
-	CONSTRAINT fk_student_academic_details_branches FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id )   
+	CONSTRAINT fk_student_academic_details_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_student_academic_details_branches FOREIGN KEY ( major_id ) REFERENCES college_website.majors( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE  TABLE college_website.club_members ( 
@@ -310,8 +310,8 @@ CREATE  TABLE college_website.club_members (
 	updated_by           varchar  NOT NULL  ,
 	updated_at           date DEFAULT CURRENT_DATE   ,
 	CONSTRAINT pk_club_members PRIMARY KEY ( id ),
-	CONSTRAINT fk_club_members_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id )   ,
-	CONSTRAINT fk_club_members_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id )   
+	CONSTRAINT fk_club_members_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_club_members_students FOREIGN KEY ( student_id ) REFERENCES college_website.students( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE  TABLE college_website.club_socials ( 
@@ -320,7 +320,7 @@ CREATE  TABLE college_website.club_socials (
 	platform             varchar  NOT NULL  ,
 	link                 varchar  NOT NULL  ,
 	CONSTRAINT pk_club_socials PRIMARY KEY ( id ),
-	CONSTRAINT fk_club_socials_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id )   
+	CONSTRAINT fk_club_socials_clubs FOREIGN KEY ( club_id ) REFERENCES college_website.clubs( id ) ON UPDATE CASCADE ON DELETE CASCADE  
  );
 
 CREATE  TABLE college_website.course_logs ( 
@@ -333,8 +333,8 @@ CREATE  TABLE college_website.course_logs (
 	section              varchar  NOT NULL  ,
 	sub_section          integer  NOT NULL  ,
 	CONSTRAINT pk_course_logs PRIMARY KEY ( id ),
-	CONSTRAINT fk_course_logs_courses FOREIGN KEY ( course_id ) REFERENCES college_website.courses( id )   ,
-	CONSTRAINT fk_course_logs_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id )   
+	CONSTRAINT fk_course_logs_courses FOREIGN KEY ( course_id ) REFERENCES college_website.courses( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_course_logs_faculty FOREIGN KEY ( faculty_id ) REFERENCES college_website.faculty( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE TABLE college_website.faculty_feedback ( 
@@ -342,8 +342,8 @@ CREATE TABLE college_website.faculty_feedback (
 	course_log_id        integer  NOT NULL  ,
 	form_id              integer  NOT NULL  ,
 	CONSTRAINT pk_faculty_feedback PRIMARY KEY ( id ),
-	CONSTRAINT fk_faculty_feedback_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id )   ,
-	CONSTRAINT fk_faculty_feedback_course_logs FOREIGN KEY ( course_log_id ) REFERENCES college_website.course_logs( id )   
+	CONSTRAINT fk_faculty_feedback_forms FOREIGN KEY ( form_id ) REFERENCES college_website.forms( id ) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_faculty_feedback_course_logs FOREIGN KEY ( course_log_id ) REFERENCES college_website.course_logs( id ) ON UPDATE CASCADE ON DELETE CASCADE
  );
 
 CREATE  TABLE college_website.persons (
