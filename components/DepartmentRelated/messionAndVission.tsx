@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
 import MaxWidthWrapper from './maxWidthWrapper';
 
 export default function MessionAndVission() {
@@ -29,8 +31,10 @@ export default function MessionAndVission() {
           </Link>
         </div>
         <div className="w-1/2">
-          <img
-            className="h-64 w-full rounded-l-md object-cover"
+          <Image
+            width={300}
+            height={300}
+            className="h-64 w-full rounded-md object-cover"
             src="https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130"
             alt="About"
           />

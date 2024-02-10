@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from '../ui/button';
 
 const SubNav = () => {
   const subLinks = [

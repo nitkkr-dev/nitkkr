@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import MaxWidthWrapper from './maxWidthWrapper';
 import HorsesRunning from '../horses-running';
 
@@ -18,11 +19,11 @@ export default function HodMessage() {
     <MaxWidthWrapper className="mb-20 mt-20 rounded-md">
       <div className="flex items-center">
         <HorsesRunning direction="left" />
-        <h1 className="text-4xl">HOD's Message</h1>
+        <h1 className="text-4xl">HOD&apos;s Message</h1>
       </div>
-      <div className="mt-10 rounded-md border border-black bg-gray-300 p-4">
+      <div className="mt-10 rounded-md border border-black  p-4">
         <div className="border-brown flex items-center rounded-md bg-white">
-          <div className="relative h-52 w-52">
+          <div className="relative h-52 w-52 rounded-md">
             <Image
               src={director.image}
               alt="director"

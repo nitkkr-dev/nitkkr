@@ -1,10 +1,11 @@
+import Image from 'next/image';
+
 import AboutDisplay from '@/components/DepartmentRelated/aboutDisplay';
 import HodMessage from '@/components/DepartmentRelated/hodMessage';
 import MaxWidthWrapper from '@/components/DepartmentRelated/maxWidthWrapper';
 import MessionAndVission from '@/components/DepartmentRelated/messionAndVission';
 import SubNav from '@/components/DepartmentRelated/subNav';
 import HorsesRunning from '@/components/horses-running';
-import Image from 'next/image';
 
 export default function Department({ params }: { params: { name: string } }) {
   const departmentData = {
