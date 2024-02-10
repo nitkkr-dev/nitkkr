@@ -1,29 +1,42 @@
+import Link from 'next/link';
+
 import Logo from '@/assets/Logo';
 import SearchIcon from '@/assets/SearchIcon';
 import Button from '@/components/Button';
 import NavButton from '@/components/NavbarButton';
 
 export default function Header() {
+  const items = [
+    { label: 'About Institute', value: '/about' },
+    { label: 'Placement Cell', value: '/placement' },
+    { label: 'Alumni', value: '/alumni' },
+    { label: 'Media', value: '/media' },
+    { label: 'Faculty and Staff', value: '/staff' },
+    { label: 'Archives', value: '/archive' },
+  ];
+
   return (
-    <div className="flex items-center justify-between bg-none p-4">
-      <div className="mx-auto flex items-center justify-between">
+    <nav className="container flex min-w-full max-w-screen-lg flex-wrap justify-between gap-8 bg-none py-6">
+      <Link href="/">
         <Logo />
+      </Link>
 
-        <div className="flex items-center space-x-2">
-          <NavButton text={'About Institute'} path={'about'} />
-          <NavButton text={'Placement Cell'} path={'students'} />
-          <NavButton text={'Alumni'} path={'alumni'} />
-          <NavButton text={'Media'} path={'media'} />
-          <NavButton text={'Staff'} path={'staff'} />
-          <NavButton text={'Administration'} path={'administration'} />
-          <NavButton text={'Archives'} path={'archives'} />
-        </div>
-      </div>
+      <ol className="flex grow gap-4">
+        {items.map(({ label, value }, index) => (
+          <li className="my-auto min-h-fit p-2" key={index}>
+            <NavButton text={label} path={value} />
+          </li>
+        ))}
+      </ol>
 
-      <div className="mx-auto flex items-center justify-end  space-x-2">
-        <SearchIcon />
-        <Button variant="solid" title="Login" />
-      </div>
-    </div>
+      <ol className="inline-flex gap-2">
+        <li>
+          <SearchIcon />
+        </li>
+        <li>
+          <Button variant="solid" title="Login" />
+        </li>
+      </ol>
+    </nav>
   );
 }

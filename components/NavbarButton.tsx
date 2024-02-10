@@ -7,10 +7,7 @@ interface NavButtonProps {
 
 const NavButton: React.FC<NavButtonProps> = ({ text, path }) => {
   return (
-    <Link
-      href={path}
-      className="flex items-center rounded-md bg-transparent px-4 py-2 text-white"
-    >
+    <Link href={path} className="rounded-md bg-transparent text-black">
       {text}
     </Link>
   );
