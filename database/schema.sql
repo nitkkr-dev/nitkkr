@@ -49,7 +49,9 @@ CREATE  TABLE college_website.faculty (
 	role_ids             smallint[]  NOT NULL  ,
 	CONSTRAINT pk_faculty PRIMARY KEY ( id ),
 	CONSTRAINT unq_faculty_department_id UNIQUE ( department_id ) ,
-	CONSTRAINT fk_faculty_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )   
+	CONSTRAINT fk_faculty_departments FOREIGN KEY ( department_id ) REFERENCES college_website.departments( id )
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
  );
 
 CREATE  TABLE college_website.forms ( 
