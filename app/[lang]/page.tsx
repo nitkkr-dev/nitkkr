@@ -1,5 +1,15 @@
-import WorkInProgress from '@/components/work-in-progress';
+import DirectorsCorner from './directors-corner';
+import Notifications from './notifications';
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  return <WorkInProgress lang={params.lang} />;
+export default function Home({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
+  return (
+    <main className="w-full">
+      <Notifications />
+      <DirectorsCorner lang={lang} />
+    </main>
+  );
 }
