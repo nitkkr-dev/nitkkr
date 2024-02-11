@@ -35,7 +35,7 @@ export default function Notifications() {
   ];
 
   return (
-    <article className="min-w-full bg-[url('/images/background-fight.png')] bg-cover bg-[top] bg-no-repeat py-40">
+    <article className="min-w-full bg-notifications bg-cover bg-no-repeat py-40">
       <header className="container mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
         <HorsesRunning direction="left" />
         <h2 className="my-auto">N</h2>
