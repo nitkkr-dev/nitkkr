@@ -32,3 +32,6 @@ out
 
 # Prisma
 prisma/generated/client/
+
+# typesense server data
+typesense-data/
