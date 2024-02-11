@@ -37,9 +37,7 @@ function DateField(props: AriaDatePickerProps<DateValue>) {
       {state.segments.map((segment, i) => (
         <DateSegment key={i} segment={segment} state={state} />
       ))}
-      {state.validationState === 'invalid' && (
-        <span aria-hidden="true">🚫</span>
-      )}
+      {state.isInvalid && <span aria-hidden="true">🚫</span>}
     </div>
   );
 }

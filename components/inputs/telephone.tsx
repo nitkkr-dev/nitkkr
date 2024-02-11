@@ -11,7 +11,6 @@ export const PhoneField = ({
 }: InputProps) => {
   return (
     <Input
-      // remove-arrow is a custom css class defined by me
       className="remove-arrow"
       type="number"
       placeholder={placeholder}

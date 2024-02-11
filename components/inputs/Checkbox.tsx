@@ -1,10 +1,9 @@
 'use client';
-
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
@@ -15,34 +14,15 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { toast } from '@/components/ui/use-toast';
 
-const items = [
-  {
-    id: 'recents',
-    label: 'Recents',
-  },
-  {
-    id: 'home',
-    label: 'Home',
-  },
-  {
-    id: 'applications',
-    label: 'Applications',
-  },
-  {
-    id: 'desktop',
-    label: 'Desktop',
-  },
-  {
-    id: 'downloads',
-    label: 'Downloads',
-  },
-  {
-    id: 'documents',
-    label: 'Documents',
-  },
-] as const;
+import { InputProps } from '../ui/input';
+
+type SelectionMode = 'single' | 'multi';
+
+interface ListProps extends InputProps {
+  items: { id: string; label: string }[];
+  selectionMode?: SelectionMode;
+}
 
 const FormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -50,16 +30,19 @@ const FormSchema = z.object({
   }),
 });
 
-export function CheckboxReactHookFormMultiple() {
+export function CheckboxReactHookFormMultiple({
+  items,
+  selectionMode = 'multi',
+  ...props
+}: ListProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      items: ['recents', 'home'],
-    },
   });
 
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
+    console.log({
       title: 'You submitted the following values:',
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
@@ -77,11 +60,12 @@ export function CheckboxReactHookFormMultiple() {
           name="items"
           render={() => (
             <FormItem>
-              <div className="mb-4">
-                <FormLabel className="text-base">Sidebar</FormLabel>
-                <FormDescription>
-                  Select the items you want to display in the sidebar.
-                </FormDescription>
+              <div>
+                <FormLabel>{props.label ? props.label : 'Check Box'}</FormLabel>
+                {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+                {props.description && (
+                  <FormDescription>{props.description}</FormDescription>
+                )}
               </div>
               {items.map((item) => (
                 <FormField
@@ -96,15 +80,32 @@ export function CheckboxReactHookFormMultiple() {
                       >
                         <FormControl>
                           <Checkbox
-                            checked={field.value?.includes(item.id)}
+                            checked={
+                              selectionMode === 'single'
+                                ? selectedItem === item.id
+                                : field.value?.includes(item.id)
+                            }
                             onCheckedChange={(checked) => {
-                              return checked
-                                ? field.onChange([...field.value, item.id])
-                                : field.onChange(
-                                    field.value?.filter(
+                              if (selectionMode === 'single') {
+                                setSelectedItem(checked ? item.id : null);
+                                form.setValue(
+                                  'items',
+                                  checked ? [item.id] : []
+                                );
+                              } else {
+                                const valueArray = Array.isArray(field.value)
+                                  ? field.value
+                                  : [];
+                                if (checked) {
+                                  field.onChange([...valueArray, item.id]);
+                                } else {
+                                  field.onChange(
+                                    valueArray.filter(
                                       (value) => value !== item.id
                                     )
                                   );
+                                }
+                              }
                             }}
                           />
                         </FormControl>
@@ -120,7 +121,6 @@ export function CheckboxReactHookFormMultiple() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );

@@ -1,12 +1,13 @@
 'use client';
 
-import { AiOutlineUser } from 'react-icons/ai';
+import { PiTextT } from 'react-icons/pi';
 
 import { Input, InputProps } from '../ui/input';
 
-export const NameField = ({
-  label = 'Name',
-  placeholder = 'Enter your Name',
+export const TextField = ({
+  label = 'Text',
+  placeholder = 'Enter your text',
+  LeftChild = PiTextT,
   ...props
 }: InputProps) => {
   return (
@@ -15,7 +16,7 @@ export const NameField = ({
       placeholder={placeholder}
       label={label}
       {...props}
-      LeftChild={AiOutlineUser}
+      LeftChild={LeftChild}
     />
   );
 };

@@ -18,74 +18,91 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Label } from '@/components/ui/label';
 
 import { Calendar } from './calendar';
 import { DateField } from './date-field';
 import { TimeField } from './time-field';
 
-const DateTimePicker = React.forwardRef<
-  HTMLDivElement,
-  DatePickerStateOptions<DateValue>
->((props, forwardedRef) => {
-  const ref = useForwardedRef(forwardedRef);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+interface DateTimePickerProps {
+  required?: boolean;
+  label?: string;
+  description?: string;
+}
 
-  const [open, setOpen] = useState(false);
+// Merge InputProps and DateTimePickerProps to accept all props
+type MergedProps = DateTimePickerProps & DatePickerStateOptions<DateValue>;
 
-  const state = useDatePickerState(props);
-  const {
-    groupProps,
-    fieldProps,
-    buttonProps: _buttonProps,
-    dialogProps,
-    calendarProps,
-  } = useDatePicker(props, state, ref);
-  const { buttonProps } = useButton(_buttonProps, buttonRef);
-  useInteractOutside({
-    ref: contentRef,
-    onInteractOutside: () => {
-      setOpen(false);
-    },
-  });
+const DateTimePicker = React.forwardRef<HTMLDivElement, MergedProps>(
+  (props, forwardedRef) => {
+    const ref = useForwardedRef(forwardedRef);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
 
-  return (
-    <div
-      {...groupProps}
-      ref={ref}
-      className={cn(
-        groupProps.className,
-        'flex items-center rounded-md ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2'
-      )}
-    >
-      <DateField {...fieldProps} />
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            {...buttonProps}
-            variant="outline"
-            className="rounded-l-none"
-            disabled={props.isDisabled}
-            onClick={() => setOpen(true)}
-          >
-            <CalendarIcon className="h-5 w-5" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent ref={contentRef} className="w-full">
-          <div {...dialogProps} className="space-y-3">
-            <Calendar {...calendarProps} />
-            {!!state.hasTime && (
-              <TimeField
-                value={state.timeValue}
-                onChange={state.setTimeValue}
-              />
-            )}
-          </div>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-});
+    const [open, setOpen] = useState(false);
+
+    const state = useDatePickerState(props);
+    const {
+      groupProps,
+      fieldProps,
+      buttonProps: _buttonProps,
+      dialogProps,
+      calendarProps,
+    } = useDatePicker(props, state, ref);
+    const { buttonProps } = useButton(_buttonProps, buttonRef);
+    useInteractOutside({
+      ref: contentRef,
+      onInteractOutside: () => {
+        setOpen(false);
+      },
+    });
+
+    return (
+      <div>
+        <div>
+          <Label>{props.label ? props.label : 'Enter Date-Time'}</Label>
+          {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+        </div>
+        {props.description && (
+          <p className="text-[0.8rem] text-muted-foreground block">
+            {props.description}
+          </p>
+        )}
+        <div
+          {...groupProps}
+          ref={ref}
+          className={cn(groupProps.className, 'flex items-center rounded-md ')}
+        >
+          <DateField {...fieldProps} />
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                {...buttonProps}
+                variant="outline"
+                className="rounded-l-none"
+                disabled={props.isDisabled}
+                onClick={() => setOpen(true)}
+              >
+                <CalendarIcon className="h-5 w-5" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent ref={contentRef} className="w-full">
+              <div {...dialogProps} className="space-y-3">
+                <Calendar {...calendarProps} />
+                {!!state.hasTime && (
+                  <TimeField
+                    value={state.timeValue}
+                    onChange={state.setTimeValue}
+                  />
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
+    );
+  }
+);
 
 DateTimePicker.displayName = 'DateTimePicker';
 
