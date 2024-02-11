@@ -1,5 +1,5 @@
-import { Input } from '@/components/ui/input';
+import { Input, InputProps } from '@/components/ui/input';
 
-export function FileUpload({ label = 'Upload File', required = false }) {
-  return <Input type="file" id="file" label={label} required={required} />;
+export function FileUpload({ label = 'Upload File', ...props }: InputProps) {
+  return <Input type="file" id="file" label={label} {...props} />;
 }
