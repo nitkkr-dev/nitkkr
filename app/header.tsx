@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import SearchIcon from '@/assets/SearchIcon';
 import Button from '@/components/Button';
-import NavButton from '@/components/NavbarButton';
 
 export default function Header() {
   const items = [
@@ -29,7 +28,7 @@ export default function Header() {
       <ol className="flex grow gap-4">
         {items.map(({ label, value }, index) => (
           <li className="my-auto min-h-fit p-2" key={index}>
-            <NavButton text={label} path={value} />
+            <Link href={value}>{label}</Link>
           </li>
         ))}
       </ol>
