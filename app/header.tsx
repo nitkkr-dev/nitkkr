@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import SearchIcon from '@/assets/SearchIcon';
-import Button from '@/components/Button';
 
 export default function Header() {
   const items = [
@@ -38,7 +37,11 @@ export default function Header() {
           <SearchIcon />
         </li>
         <li>
-          <Button variant="solid" title="Login" />
+          <Link href="/login">
+            <button className="rounded-md bg-primary-30 px-4 py-2 text-neutral-10 hover:bg-primary-20">
+              Login
+            </button>
+          </Link>
         </li>
       </ol>
     </nav>
