@@ -54,7 +54,7 @@ export default function Notifications() {
           {notifications.map(({ category }, index) => (
             <li key={index}>
               <button
-                className="w-[448px] rounded-xl border border-primary-20 bg-neutral-10 p-8 font-serif text-primary-20 drop-shadow-2xl hover:bg-primary-20 hover:text-neutral-10"
+                className="w-[448px] rounded-xl border border-primary-20 bg-root p-8 font-serif text-primary-20 drop-shadow-2xl hover:bg-primary-20 hover:text-neutral-10"
                 onClick={() => setCurrentCategory(index)}
               >
                 <h4>{category}</h4>
