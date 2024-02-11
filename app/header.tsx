@@ -14,7 +14,7 @@ export default function Header() {
   ];
 
   return (
-    <nav className="container flex min-w-full max-w-screen-lg flex-wrap justify-between gap-8 bg-none py-6">
+    <nav className="container fixed z-10 flex min-w-full max-w-screen-lg flex-wrap justify-between gap-8 bg-gradient-to-b from-neutral-20 to-transparent py-6">
       <Link href="/">
         <Image
           alt="NIT Kurukshetra's Logo"
