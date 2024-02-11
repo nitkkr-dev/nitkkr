@@ -1,15 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-import { DM_Serif_Display } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import HorsesRunning from '@/components/horses-running';
-
-const dmSerifDisplay = DM_Serif_Display({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 const NotificationButton = ({ category }: { category: string }) => (
   <button
@@ -64,12 +56,7 @@ const Notifications = () => (
 
     <div className="mx-[242px] flex h-fit w-full flex-row items-center pt-20 text-right">
       <HorsesRunning direction="right" />
-      <div
-        className={
-          'ml-[10px] flex text-[54px] font-bold text-red-700 ' +
-          dmSerifDisplay.className
-        }
-      >
+      <div className="ml-[10px] flex text-[54px] font-bold text-red-700">
         <span>N</span>
         <Image
           src="/images/fish-eye.png"
