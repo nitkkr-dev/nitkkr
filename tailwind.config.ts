@@ -20,9 +20,8 @@ const config: Config = {
     },
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        notifications:
+          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://s3-alpha-sig.figma.com/img/cff6/b90c/6d452f4caad45a22f4d4a701c7b48bce?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pXiNpSpLsmtFI9JXmo9h-cYFyP0m07hqsPbJfVVHdSguGKbK3NS4WOOK6-3vGv3IUYr6UllYZ8Wvp3uMKsBQo3rEbgF1Vi8uLAaaGRsBUQiejDJN-IlaB-nWytpj5wT~XNMptN~sh6SMqetjfRMZGo9Bp8fR-ogXQ-FsrrXdNV4SloUXFJ2TwfHKOECkz-ssaC5bjat1IleFWq0gh~EeJmL2mOjfpVtamUQk-OYhfr9arPB-bGqmeRVd9YNQbKr4zj5T5EGjxfSwdEihgoXflSqks5W1jvlPbnCEn-cCzzR1JpD3I~2nsDPatOaAAZa-cTra78ijTK83YITCDXqJNA__')",
       },
       colors: {
         neutral: {
