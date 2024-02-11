@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-import SearchIcon from '@/assets/SearchIcon';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 export default function Header() {
   const items = [
@@ -33,8 +32,10 @@ export default function Header() {
       </ol>
 
       <ol className="inline-flex gap-2">
-        <li>
-          <SearchIcon />
+        <li className="h-10 w-10 rounded-full bg-neutral-10">
+          <Link className="block h-full w-full p-3" href="/search">
+            <FaMagnifyingGlass size={16} />
+          </Link>
         </li>
         <li>
           <Link href="/login">
