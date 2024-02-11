@@ -4,12 +4,13 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 export default function Header() {
   const items = [
-    { label: 'About Institute', value: '/about' },
-    { label: 'Placement Cell', value: '/placement' },
-    { label: 'Alumni', value: '/alumni' },
-    { label: 'Media', value: '/media' },
-    { label: 'Faculty and Staff', value: '/staff' },
-    { label: 'Archives', value: '/archive' },
+    { label: 'Institute', value: '/about' },
+    { label: 'Administration', value: '/administration' },
+    { label: 'Academics', value: '/academics' },
+    { label: 'Sections', value: '/sections' },
+    { label: 'Faculty & Staff', value: '/staff' },
+    { label: 'Training & Placement', value: '/placement' },
+    { label: 'Student Activities', value: '/activities' },
   ];
 
   return (
