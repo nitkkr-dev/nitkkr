@@ -3,13 +3,11 @@ import Link from 'next/link';
 import { getTranslations } from '@/i18n/translations';
 
 export default async function NotFound({
-  params,
+  params: { locale },
 }: {
-  params: { locale: string };
+  params: { catchAll: string[]; locale: string };
 }) {
-  if (params === undefined) return null;
-
-  const text = (await getTranslations(params.locale)).NotFound;
+  const text = (await getTranslations(locale)).NotFound;
 
   return (
     <div className="m-auto max-w-fit text-center">
