@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -54,7 +55,12 @@ export default function Notifications() {
           {notifications.map(({ category }, index) => (
             <li key={index}>
               <button
-                className="w-[448px] rounded-xl border border-primary-20 bg-root p-8 font-serif text-primary-20 drop-shadow-2xl hover:bg-primary-20 hover:text-neutral-10"
+                className={clsx(
+                  'w-[448px] rounded-xl border border-primary-20  p-8 font-serif drop-shadow-2xl ',
+                  index === currentCategory
+                    ? 'bg-primary-20 text-neutral-10'
+                    : 'bg-root text-primary-20 hover:bg-primary-20 hover:text-neutral-10'
+                )}
                 onClick={() => setCurrentCategory(index)}
               >
                 <h4>{category}</h4>
