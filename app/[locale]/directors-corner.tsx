@@ -14,7 +14,7 @@ export default function DirectorsCorner({ locale }: { locale: string }) {
           className="my-auto h-[44px] rotate-[90.66deg]"
           height={44}
           width={44}
-          src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PaN9iN-Wh5U0K4D3p08lFy2vBXAuRS7835uwTzaGDtTKWYL0PBZ0Gw4yVjKtcbQMHiscxyh03PgyA4EyTRS0~sXpO14m1RJT8ch27VGGr6fa9zBXWpttPuHgX52tI9S-sodxlmj20HnYYxNObqIDxEkvzgCFJiHsUjVwmxQfOWxwduL80aBRKVUa6bGGSm2V2A2Znl96nJ1yUDdxenBvrTNN4UCFiIJEwyvdr4jVDoWxoqfDveVUcYElzjBjTTYvphifTSeLjEn-uHbX8JmmW1HkqEpThkWsDUVkoGPk~vLBP8LY6fW3aoa7S1ionsMVjG09UsnDCfB7T4Up40LZ6g__"
+          src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hyce8gJEWAHdIRktC4L53C7THp02z9IWrHq56rgoF5bRtdEd2SRlc6AGfokndv6CtZuG9yFPmsIJqZRnH~-KCixskdbPDzgnxD5NsvOirZzBmDEcLRj2HM9g59XFZSBpGJQjDu1TGz~VMUSS-2A73puf6KduZzjcR4~cEd-gTSlq7ltfcBrgUBIofNcjc-vzAGSUQ3AlY8gc-Pvyadblv85ljUsUPCKJr1bRtqpvxOW77tx~jMCfmtbBshOVIvp56YGCqfBw8U~Z0ZYBoP-XVQurZDggPXbr7t02L9fd2kGCYptvcU9HABbpKXBcP2ZMNh8jTfjNr~kCKmlt8lcSOQ__"
         />
         <h2 className="my-auto">R&rsquo;S CORNER</h2>
       </header>
