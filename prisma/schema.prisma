@@ -9,12 +9,12 @@ datasource db {
 }
 
 model auth_roles {
-  id          Int      @id(map: "pk_auth_roles")
+  id          Int      @id(map: "pk_auth_roles") @default(autoincrement())
   permissions String[] @db.VarChar
 }
 
 model club_members {
-  id           Int       @id(map: "pk_club_members")
+  id           Int       @id(map: "pk_club_members") @default(autoincrement())
   student_id   Int
   club_id      Int
   position     String    @default("member") @db.VarChar
@@ -27,7 +27,7 @@ model club_members {
 }
 
 model club_socials {
-  id       Int    @id(map: "pk_club_socials")
+  id       Int    @id(map: "pk_club_socials") @default(autoincrement())
   club_id  Int
   platform String @db.VarChar
   link     String @db.VarChar
@@ -35,7 +35,7 @@ model club_socials {
 }
 
 model clubs {
-  id                  Int            @id(map: "pk_clubs")
+  id                  Int            @id(map: "pk_clubs") @default(autoincrement())
   starting_date       DateTime       @db.Date
   is_active           Boolean
   about_us            String         @db.VarChar
@@ -49,7 +49,7 @@ model clubs {
 }
 
 model course_logs {
-  id               Int                @id(map: "pk_course_logs")
+  id               Int                @id(map: "pk_course_logs") @default(autoincrement())
   session          String             @db.VarChar
   course_id        Int
   faculty_id       Int
@@ -63,7 +63,7 @@ model course_logs {
 }
 
 model courses {
-  id                Int           @id(map: "pk_courses")
+  id                Int           @id(map: "pk_courses") @default(autoincrement())
   code              String        @db.VarChar
   title             String        @db.VarChar
   prerequisites     String[]      @db.VarChar
@@ -84,7 +84,7 @@ model courses {
 }
 
 model deans {
-  id                                          Int      @id(map: "pk_deans")
+  id                                          Int      @id(map: "pk_deans") @default(autoincrement())
   domain                                      String   @db.VarChar
   faculty_id                                  Int
   activity_logs                               String[] @db.VarChar
@@ -96,7 +96,7 @@ model deans {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model departments {
-  id                  Int                  @id(map: "pk_departments")
+  id                  Int                  @id(map: "pk_departments") @default(autoincrement())
   name                String               @db.VarChar
   about_us            String?              @db.VarChar
   laboratories        String?              @db.VarChar
@@ -112,7 +112,7 @@ model departments {
 }
 
 model faculty {
-  id                                        Int                           @id(map: "pk_faculty")
+  id                                        Int                           @id(map: "pk_faculty") @default(autoincrement())
   name                                      String                        @db.VarChar
   department_id                             Int                           @unique(map: "unq_faculty_department_id")
   email                                     String                        @db.VarChar
@@ -126,7 +126,7 @@ model faculty {
   patents                                   String[]                      @db.VarChar
   copyrights                                String[]                      @db.VarChar
   journals                                  String[]                      @db.VarChar
-  confrences                                String[]                      @db.VarChar
+  conferences                                String[]                      @db.VarChar
   books                                     String[]                      @db.VarChar
   areas_of_interest                         String[]                      @db.VarChar
   workshops                                 String[]                      @db.VarChar
@@ -152,7 +152,7 @@ model faculty {
 }
 
 model faculty_feedback {
-  id            Int         @id(map: "pk_faculty_feedback")
+  id            Int         @id(map: "pk_faculty_feedback") @default(autoincrement())
   course_log_id Int
   form_id       Int
   course_logs   course_logs @relation(fields: [course_log_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_faculty_feedback_course_logs")
@@ -160,7 +160,7 @@ model faculty_feedback {
 }
 
 model form_questions {
-  id          Int      @id(map: "pk_form_questions")
+  id          Int      @id(map: "pk_form_questions") @default(autoincrement())
   form_id     Int
   question    String   @db.VarChar
   description String   @db.VarChar
@@ -175,14 +175,14 @@ model form_questions {
 }
 
 model form_submissions {
-  id      Int    @id(map: "pk_form_submissions")
+  id      Int    @id(map: "pk_form_submissions") @default(autoincrement())
   form_id Int
   email   String @db.VarChar
   forms   forms  @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
 }
 
 model forms {
-  id                        Int                @id(map: "pk_forms")
+  id                        Int                @id(map: "pk_forms") @default(autoincrement())
   title                     String             @db.VarChar
   description               String             @db.VarChar
   visible_to                String[]           @db.VarChar
@@ -205,7 +205,7 @@ model forms {
 }
 
 model hod {
-  id            Int         @id(map: "pk_hod")
+  id            Int         @id(map: "pk_hod") @default(autoincrement())
   faculty_id    Int         @unique(map: "unq_hod_faculty_id")
   department_id Int
   message       String?     @db.VarChar
@@ -216,7 +216,7 @@ model hod {
 }
 
 model majors {
-  id                       Int                        @id(map: "pk_branches")
+  id                       Int                        @id(map: "pk_branches") @default(autoincrement())
   name                     String                     @db.VarChar(100)
   alias                    String                     @db.Char(2)
   department_id            Int
@@ -227,12 +227,12 @@ model majors {
 }
 
 model non_teaching_staff {
-  id                    Int         @id(map: "pk_non_teaching_staff")
+  id                    Int         @id(map: "pk_non_teaching_staff") @default(autoincrement())
   name                  String      @db.VarChar(100)
   telephone             String[]    @db.VarChar
   email                 String?     @db.VarChar
   working_section_id    Int
-  degisnation           String      @db.VarChar
+  designation           String      @db.VarChar
   image                 String      @db.VarChar
   working_department_id Int
   role_ids              Int[]       @db.SmallInt
@@ -241,13 +241,13 @@ model non_teaching_staff {
 }
 
 model persons {
-  id              Int    @id(map: "pk_persons")
+  id              Int    @id(map: "pk_persons") @default(autoincrement())
   name            String @db.VarChar
   institute_email String @db.VarChar
 }
 
 model phd_log {
-  id                 Int         @id(map: "pk_phd_log")
+  id                 Int         @id(map: "pk_phd_log") @default(autoincrement())
   student_id         Int
   faculty_id         Int
   department_id      Int
@@ -262,17 +262,17 @@ model phd_log {
 }
 
 model research_work {
-  id Int @id(map: "pk_research_work")
+  id Int @id(map: "pk_research_work") @default(autoincrement())
 }
 
 model roles {
-  id          Int      @id(map: "pk_roles")
+  id          Int      @id(map: "pk_roles") @default(autoincrement())
   name        String   @db.VarChar(100)
   permissions String[] @db.VarChar
 }
 
 model sections {
-  id                 Int                  @id(map: "pk_sections")
+  id                 Int                  @id(map: "pk_sections") @default(autoincrement())
   head_faculty_id    Int                  @db.SmallInt
   name               String               @db.VarChar(100)
   about_us           String               @db.VarChar
@@ -280,7 +280,7 @@ model sections {
 }
 
 model sponsored_research_projects {
-  id                   Int       @id(map: "pk_sponsored_research_projects")
+  id                   Int       @id(map: "pk_sponsored_research_projects") @default(autoincrement())
   title                String    @db.VarChar
   funding_agency       String    @db.VarChar
   faculty_id           Int
@@ -294,7 +294,7 @@ model sponsored_research_projects {
 }
 
 model student_academic_details {
-  student_id       Int      @id(map: "pk_student_academic_details")
+  student_id       Int      @id(map: "pk_student_academic_details") @default(autoincrement())
   section          String   @db.VarChar
   batch            Int      @db.SmallInt
   current_semester Int      @db.SmallInt
@@ -309,7 +309,7 @@ model student_academic_details {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model students {
-  id                        Int                       @id(map: "pk_students")
+  id                        Int                       @id(map: "pk_students") @default(autoincrement())
   roll_number               String                    @db.VarChar
   name                      String                    @db.VarChar(100)
   sex                       String                    @db.VarChar
