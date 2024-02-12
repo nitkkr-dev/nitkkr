@@ -5,7 +5,7 @@ export default async function WorkInProgress({ locale }: { locale: string }) {
 
   return (
     <div className="m-auto max-w-fit text-center">
-      <h1>{text.title}</h1>
+      <h2>{text.title}</h2>
       <p>{text.description}</p>
     </div>
   );
