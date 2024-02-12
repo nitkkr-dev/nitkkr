@@ -10,12 +10,13 @@ import { FileUpload } from './fileUpload';
 import { CheckboxReactHookFormMultiple } from './Checkbox';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 import { TimeField } from './date-time-picker/time-field';
+import { SelectDropdown } from './selectIItem';
 
 export default function Visualizer() {
   const items = [
     {
-      id: 'recents',
-      label: 'Recents',
+      id: 'recentsID',
+      label: 'RecentsLabel',
     },
     {
       id: 'home',
@@ -39,7 +40,7 @@ export default function Visualizer() {
     },
   ];
   return (
-    <div className="m-5 flex flex-col">
+    <div className="w-2/3 space-y-6">
       <EmailField description="email field hai ye" required />
       <TextField required label="Name" placeholder="Enter your name" />
       <DatePicker required />
@@ -52,7 +53,8 @@ export default function Visualizer() {
       />
       <PhoneField description="this is phone number" />
       <DateTimePicker granularity={'minute'} description={'wrote'} required />
-      <TimeField label="babababa" required />
+      <TimeField label="babababa" required description="abcd" />
+      <SelectDropdown items={items} required description="select karo" />
     </div>
   );
 }
