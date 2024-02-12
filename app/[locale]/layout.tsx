@@ -11,15 +11,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
+  if (params === undefined) return null;
+
   return (
     <html>
       <body className="flex flex-col">
-        <Header />
+        <Header locale={params.locale} />
         <section className="flex grow">{children}</section>
-        <Footer />
+        <Footer locale={params.locale} />
       </body>
     </html>
   );

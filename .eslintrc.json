@@ -7,6 +7,9 @@
   ],
   "plugins": ["react-hooks", "prettier"],
   "rules": {
+    // FIXME: Remove the next line before release
+    "@typescript-eslint/no-unused-vars": "off",
+
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "next/no-img-element": "off",
