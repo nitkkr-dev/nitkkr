@@ -1,9 +1,9 @@
 import WorkInProgress from '@/components/work-in-progress';
 
 export default function StudentActivities({
-  params,
+  params: { locale },
 }: {
-  params: { lang: string };
+  params: { locale: string };
 }) {
-  return <WorkInProgress lang={params.lang} />;
+  return <WorkInProgress locale={locale} />;
 }

@@ -5,15 +5,15 @@ import Unauthorized from '@/components/unauthorized';
 import WorkInProgress from '@/components/work-in-progress';
 
 export default async function Profile({
-  params,
+  params: { locale },
 }: {
-  params: { lang: string };
+  params: { locale: string };
 }) {
   const session = await getServerSession(authOptions);
 
   return session ? (
-    <WorkInProgress lang={params.lang} />
+    <WorkInProgress locale={locale} />
   ) : (
-    <Unauthorized lang={params.lang} />
+    <Unauthorized locale={locale} />
   );
 }

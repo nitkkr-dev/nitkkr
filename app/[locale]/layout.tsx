@@ -14,16 +14,16 @@ export default function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: { locale: string };
 }) {
   if (params === undefined) return null;
 
   return (
     <html>
       <body className="flex flex-col">
-        <Header lang={params.lang} />
+        <Header locale={params.locale} />
         <section className="flex grow">{children}</section>
-        <Footer lang={params.lang} />
+        <Footer locale={params.locale} />
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-export default function Header({ lang }: { lang: string }) {
+export default function Header({ locale }: { locale: string }) {
   const items = [
     { label: 'Institute', value: '/about' },
     { label: 'Administration', value: '/administration' },

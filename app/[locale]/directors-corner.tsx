@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import HorsesRunning from '@/components/horses-running';
 
-export default function DirectorsCorner({ lang }: { lang: string }) {
+export default function DirectorsCorner({ locale }: { locale: string }) {
   return (
     <article className="container my-10 min-w-full">
       <header className="mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
