@@ -16,6 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
+  if (params === undefined) return null;
+
   return (
     <html>
       <body className="flex flex-col">
