@@ -19,7 +19,6 @@ function getPreferredLocale(request: NextRequest): string {
   return match(languages, locales, defaultLocale);
 }
 
-
 async function authCheck() {
   const session = await getServerSession(authOptions);
 
@@ -63,7 +62,8 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/')) {
     const { pathname } = request.nextUrl;
     const pathnameHasLocale = locales.some(
-      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+      (locale) =>
+        pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     );
 
     if (pathnameHasLocale) return;
