@@ -6,7 +6,7 @@ import Header from './header';
 
 export const metadata: Metadata = {
   title: 'National Institute of Technology, Kurukshetra',
-  description: 'The official NIT-KKR website',
+  description: 'Institution of National Importance',
 };
 
 export default function RootLayout({
