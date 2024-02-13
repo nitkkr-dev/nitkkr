@@ -4,66 +4,42 @@ import { FaFacebookSquare, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { MdMailOutline, MdOutlineCall } from 'react-icons/md';
 import { SlLocationPin } from 'react-icons/sl';
 
-const quickLinks = [
-  {
-    text: 'Telephone Directory',
-    link: '',
-  },
-  {
-    text: 'Books and e-library',
-    link: '',
-  },
-  {
-    text: 'Important Links',
-    link: '',
-  },
-  {
-    text: 'Downloads',
-    link: '',
-  },
-  {
-    text: 'RTI',
-    link: '',
-  },
-  {
-    text: 'NIT KKR IT Infrastructure Usage Policy',
-    link: '',
-  },
-  {
-    text: 'NIT KKR @NDL',
-    link: '',
-  },
-  {
-    text: 'Telephone Directory',
-    link: '',
-  },
-];
-
-const aboutUsItems = [
-  { text: 'Council of NITs', link: '' },
-  { text: 'NAD Digilocker', link: '' },
-  { text: 'NIRF (Data & Certificate)', link: '' },
-  { text: 'NBA Accreditation Status', link: '' },
-  { text: 'ARIIA', link: '' },
-  { text: 'Skill Hub (PMKVY 4.0)', link: '' },
-  { text: 'Jobs @ NIT KKR', link: '' },
-];
-
-const departmentsItems = [
-  { text: 'Vigilance Corner', link: '' },
-  { text: 'PRO', link: '' },
-  { text: 'OBC & PWD Cell', link: '' },
-  { text: 'SC/ST Cell', link: '' },
-  { text: 'Join Alumni Association', link: '' },
-  { text: 'User Login', link: '' },
-  { text: 'Contact Us', link: '' },
-];
-
 export default function Footer() {
+  const items = {
+    quickLinks: [
+      { text: 'Telephone Directory', link: '' },
+      { text: 'Books and e-library', link: '' },
+      { text: 'Important Links', link: '' },
+      { text: 'Downloads', link: '' },
+      { text: 'RTI', link: '' },
+      { text: 'NIT KKR IT Infrastructure Usage Policy', link: '' },
+      { text: 'NIT KKR @NDL', link: '' },
+      { text: 'Telephone Directory', link: '' },
+    ],
+    about: [
+      { text: 'Council of NITs', link: '' },
+      { text: 'NAD Digilocker', link: '' },
+      { text: 'NIRF (Data & Certificate)', link: '' },
+      { text: 'NBA Accreditation Status', link: '' },
+      { text: 'ARIIA', link: '' },
+      { text: 'Skill Hub (PMKVY 4.0)', link: '' },
+      { text: 'Jobs @ NIT KKR', link: '' },
+    ],
+    departments: [
+      { text: 'Vigilance Corner', link: '' },
+      { text: 'PRO', link: '' },
+      { text: 'OBC & PWD Cell', link: '' },
+      { text: 'SC/ST Cell', link: '' },
+      { text: 'Join Alumni Association', link: '' },
+      { text: 'User Login', link: '' },
+      { text: 'Contact Us', link: '' },
+    ],
+  };
+
   return (
     <>
-      <div className="flex flex-col justify-center bg-[#000] md:flex-row lg:items-center">
-        <div className="items flex flex-col items-center justify-center px-10">
+      <section className="flex flex-col justify-center bg-[#000] md:flex-row lg:items-center">
+        <blockquote className="items flex flex-col items-center justify-center px-10">
           <Image
             src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gtaYqKeU8izdKAOskR5FvCKz15ZM9I~Fai49G9uVnIM1GLBs1e0sYvodH7rpjGkPIJ2yOczgOM6i~jECdaO3ufZHCUY~~80goh86AFkw~6vyJmKTmFVNUlz5kHfqMFmuaPqjTuoJY7XeFeDdYHTjrvGGNe6ATas9-IYPC2gSKavFZ8L5~tNY1vn-~IDnjdeemmKPOsyWbKDmUJWTfI~s~wsWLnKiwVFYpPjYZtwj-u1-~Dy2SuSFOKALF-AnZk1oSBIJrwnSS~Ox6aAP64YsclxQDO6NyJGWBbZP3s5jgVh6tHrHSzR9irkt9nyZj0ndSptaXYTRx4QFx8MYRfeDdw__"
             alt="NIT KURUKSHETRA LOGO"
@@ -71,32 +47,40 @@ export default function Footer() {
             width={66}
             height={66}
           />
-          <div className="font-display max-w-[250px] pt-3 text-center font-serif text-[22px] text-[#fff]">
+          <header className="font-display max-w-[250px] pt-3 text-center font-serif text-[22px] text-[#fff]">
             National Institute of Technology, Kurukshetra
-          </div>
-          <div className="max-w-[250px] pt-3 text-center font-sans text-[16px] text-[#8B949E]">
+          </header>
+          <aside className="max-w-[250px] pt-3 text-center font-sans text-[16px] text-[#8B949E]">
             WRXF+23G, NIT, Thanesar, Haryana 136119
-          </div>
+          </aside>
 
-          <div>
+          <object>
             <ul className="flex flex-row items-center justify-center pt-3">
               <li className="pr-5">
-                <MdOutlineCall style={{ color: 'white', fontSize: '22px' }} />
+                <a href="">
+                  <MdOutlineCall style={{ color: 'white', fontSize: '22px' }} />
+                </a>
               </li>
               <li className="pr-5">
-                <MdMailOutline style={{ color: 'white', fontSize: '22px' }} />
+                <a href="">
+                  <MdMailOutline style={{ color: 'white', fontSize: '22px' }} />
+                </a>
               </li>
               <li className="pr-5">
-                <CiGlobe style={{ color: 'white', fontSize: '22px' }} />
+                <a href="">
+                  <CiGlobe style={{ color: 'white', fontSize: '22px' }} />
+                </a>
               </li>
               <li className="pr-5">
-                <SlLocationPin style={{ color: 'white', fontSize: '22px' }} />
+                <a href="">
+                  <SlLocationPin style={{ color: 'white', fontSize: '22px' }} />
+                </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </object>
+        </blockquote>
 
-        <div className="flex origin-center rotate-90 items-center justify-center lg:rotate-0">
+        <figure className="flex origin-center rotate-90 items-center justify-center lg:rotate-0">
           <Image
             width={210}
             height={350}
@@ -105,15 +89,15 @@ export default function Footer() {
             alt="Design Glyph"
             layout="fixed"
           />
-        </div>
+        </figure>
 
-        <div className="flex flex-col items-start justify-center py-5 lg:flex-row">
-          <div className="px-5 lg:px-10">
+        <footer className="grid grid-cols-2 py-5 pl-5 lg:grid-cols-3">
+          <menu className="px-5 pb-5 lg:px-10">
             <ul>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 Quick Links
               </li>
-              {quickLinks.map((item, index) => (
+              {items.quickLinks.map((item, index) => (
                 <li
                   key={index}
                   className="py-1 font-medium text-[#8B949E] sm:text-[12px] md:text-[20px]"
@@ -122,13 +106,13 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="px-5 lg:px-10">
+          </menu>
+          <menu className="px-5 pb-5 lg:px-10">
             <ul>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 About Us
               </li>
-              {aboutUsItems.map((item, index) => (
+              {items.about.map((item, index) => (
                 <li
                   key={index}
                   className="py-1 font-medium text-[#8B949E] sm:text-[12px] md:text-[20px]"
@@ -137,13 +121,13 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="px-5 lg:px-10">
+          </menu>
+          <menu className="px-5 pb-5 lg:px-10">
             <ul>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 Departments
               </li>
-              {departmentsItems.map((item, index) => (
+              {items.departments.map((item, index) => (
                 <li
                   key={index}
                   className="py-1 font-medium text-[#8B949E] sm:text-[12px] md:text-[20px]"
@@ -152,35 +136,41 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </div>
+          </menu>
+        </footer>
+      </section>
 
-      <div className="flex items-center justify-between bg-[#101010]">
-        <div className="font-inter py-5 text-[#5A6475] sm:pl-10 lg:pl-20">
+      <span className="flex items-center justify-between bg-[#101010]">
+        <ol className="font-inter py-5 text-[#5A6475] sm:pl-10 lg:pl-20">
           <ul className="flex flex-col items-center justify-center lg:flex-row">
-            <div className="flex flex-row">
+            <menu className="flex flex-row">
               <li className="px-3">© 2022 NIT KKR, Inc.</li>
               <li className="px-3">Terms</li>
-            </div>
+            </menu>
             <li className="pl-3">Privacy (Updated 08/2022)</li>
           </ul>
-        </div>
+        </ol>
 
-        <div>
+        <figure>
           <ul className="flex flex-shrink-0 flex-row items-center justify-center py-5 sm:pr-4 lg:pr-10">
             <li className="pr-5">
-              <FaTwitter style={{ color: 'grey' }} />
+              <a href="">
+                <FaTwitter style={{ color: 'grey', fontSize: '22px' }} />
+              </a>
             </li>
             <li className="pr-5">
-              <FaFacebookSquare style={{ color: 'grey' }} />
+              <a href="">
+                <FaFacebookSquare style={{ color: 'grey', fontSize: '22px' }} />
+              </a>
             </li>
             <li className="pr-5">
-              <FaLinkedinIn style={{ color: 'grey' }} />
+              <a href="">
+                <FaLinkedinIn style={{ color: 'grey', fontSize: '22px' }} />
+              </a>
             </li>
           </ul>
-        </div>
-      </div>
+        </figure>
+      </span>
     </>
   );
 }
