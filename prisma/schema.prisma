@@ -80,7 +80,7 @@ model courses {
   similar           String[]      @db.VarChar
   course_logs       course_logs[]
   departments       departments   @relation(fields: [major_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_courses_departments")
-  majors            majors        @relation(fields: [major_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_courses_majors")
+  majors            majors[]
 }
 
 model deans {
@@ -221,8 +221,9 @@ model majors {
   alias                    String                     @db.Char(2)
   department_id            Int
   degree                   String                     @db.VarChar
-  courses                  courses?
+  coursesId                Int?
   departments              departments                @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_branches_departments")
+  courses                  courses?                   @relation(fields: [coursesId], references: [id])
   student_academic_details student_academic_details[]
 }
 
@@ -244,6 +245,7 @@ model persons {
   id              Int    @id(map: "pk_persons") @default(autoincrement())
   name            String @db.VarChar
   institute_email String @db.VarChar
+  role_ids		  Int[]  @db.SmallInt
 }
 
 model phd_log {
