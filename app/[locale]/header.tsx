@@ -8,7 +8,7 @@ export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
 
   const items = [
-    { label: text.institute, value: '/about' },
+    { label: text.institute, value: '/institute' },
     { label: text.administration, value: '/administration' },
     { label: text.academics, value: '/academics' },
     { label: text.sections, value: '/sections' },
