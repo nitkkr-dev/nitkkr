@@ -1,9 +1,9 @@
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 import { getServerSession } from 'next-auth';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { authOptions } from './app/api/auth/auth';
-import { NextRequest, NextResponse } from './node_modules/next/server';
+import { authOptions } from '@/api/auth/auth';
 import prisma from './prisma/prisma-client';
 
 const locales = ['en', 'hi'];
