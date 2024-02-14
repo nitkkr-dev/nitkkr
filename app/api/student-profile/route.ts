@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import prisma from '../../../prisma/prismClinet';
+import prisma from '../../../prisma/prisma-client';
 
 // Define your API route handler
 export default async function handler(req: NextRequest) {

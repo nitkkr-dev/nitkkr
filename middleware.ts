@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 
 import { authOptions } from './app/api/auth/auth';
 import { NextRequest, NextResponse } from './node_modules/next/server';
-import prisma from './prisma/prismClinet';
+import prisma from './prisma/prisma-client';
 
 const locales = ['en', 'hi'];
 
