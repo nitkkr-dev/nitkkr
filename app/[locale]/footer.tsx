@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <>
       <section className="flex flex-col justify-center bg-[#000] md:flex-row lg:items-center">
-        <blockquote className="items flex flex-col items-center justify-center px-10">
+        <article className="items flex flex-col items-center justify-center px-10">
           <Image
             src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gtaYqKeU8izdKAOskR5FvCKz15ZM9I~Fai49G9uVnIM1GLBs1e0sYvodH7rpjGkPIJ2yOczgOM6i~jECdaO3ufZHCUY~~80goh86AFkw~6vyJmKTmFVNUlz5kHfqMFmuaPqjTuoJY7XeFeDdYHTjrvGGNe6ATas9-IYPC2gSKavFZ8L5~tNY1vn-~IDnjdeemmKPOsyWbKDmUJWTfI~s~wsWLnKiwVFYpPjYZtwj-u1-~Dy2SuSFOKALF-AnZk1oSBIJrwnSS~Ox6aAP64YsclxQDO6NyJGWBbZP3s5jgVh6tHrHSzR9irkt9nyZj0ndSptaXYTRx4QFx8MYRfeDdw__"
             alt="NIT KURUKSHETRA LOGO"
@@ -50,9 +50,9 @@ export default function Footer() {
           <header className="font-display max-w-[250px] pt-3 text-center font-serif text-[22px] text-[#fff]">
             National Institute of Technology, Kurukshetra
           </header>
-          <aside className="max-w-[250px] pt-3 text-center font-sans text-[16px] text-[#8B949E]">
+          <address className="max-w-[250px] pt-3 text-center font-sans text-[16px] text-[#8B949E]">
             WRXF+23G, NIT, Thanesar, Haryana 136119
-          </aside>
+          </address>
 
           <object>
             <ul className="flex flex-row items-center justify-center pt-3">
@@ -78,11 +78,11 @@ export default function Footer() {
               </li>
             </ul>
           </object>
-        </blockquote>
+        </article>
 
         <figure className="flex origin-center rotate-90 items-center justify-center lg:rotate-0">
           <Image
-            width={210}
+            width={200}
             height={350}
             src="https://s3-alpha-sig.figma.com/img/aeae/a206/68c4e501ecf5c3911343c1f3d8428cdf?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=S22f7ZBENQn-7VFFtfnHencMUHU6jvAsYS9gcgivdkyDW2~TCXcFb9ByJoCACBymHLXh50v7hy7SEOi-yEJYm2Xvk~yqKrUMtfCkWRjfh9EDErVFYx7nMQ4kQOSFTqSQWeUs9qymatl-CMJV8nlc-GvQ~bG8Xlij24qfYl~L9mGzSqSWUtPUi6xcmRKcLYbVMdisnKbn5NsDrpZ8ASxHyfBzarMRHULKzDvQEgmep9BoCkaOY-5UwOJF9~Z-Puo~5lVBh3olPUJQud689q3h095Sd9Yv0lZ9HnzpesX0V689O5wCrPen5nSY2lOhL69pKpP4Ixk~ynkZtdRIZFskoQ__"
             className="h-[300px]"
@@ -92,8 +92,8 @@ export default function Footer() {
         </figure>
 
         <footer className="grid grid-cols-2 py-5 pl-5 lg:grid-cols-3">
-          <menu className="px-5 pb-5 lg:px-10">
-            <ul>
+          <aside className="px-5 pb-5 lg:px-10">
+            <menu>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 Quick Links
               </li>
@@ -105,10 +105,10 @@ export default function Footer() {
                   <a href={item.link}>{item.text}</a>
                 </li>
               ))}
-            </ul>
-          </menu>
-          <menu className="px-5 pb-5 lg:px-10">
-            <ul>
+            </menu>
+          </aside>
+          <aside className="px-5 pb-5 lg:px-10">
+            <menu>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 About Us
               </li>
@@ -120,10 +120,10 @@ export default function Footer() {
                   <a href={item.link}>{item.text}</a>
                 </li>
               ))}
-            </ul>
-          </menu>
-          <menu className="px-5 pb-5 lg:px-10">
-            <ul>
+            </menu>
+          </aside>
+          <aside className="px-5 pb-5 lg:px-10">
+            <menu>
               <li className="py-3 font-bold text-[#fff] sm:text-[16px] md:text-[24px]">
                 Departments
               </li>
@@ -135,42 +135,42 @@ export default function Footer() {
                   <a href={item.link}>{item.text}</a>
                 </li>
               ))}
-            </ul>
-          </menu>
+            </menu>
+          </aside>
         </footer>
       </section>
 
-      <span className="flex items-center justify-between bg-[#101010]">
-        <ol className="font-inter py-5 text-[#5A6475] sm:pl-10 lg:pl-20">
-          <ul className="flex flex-col items-center justify-center lg:flex-row">
+      <section className="flex items-center justify-between bg-[#101010]">
+        <footer className="font-inter py-5 text-[#5A6475] sm:pl-10 lg:pl-20">
+          <small className="flex flex-col items-center justify-center lg:flex-row">
             <menu className="flex flex-row">
               <li className="px-3">© 2022 NIT KKR, Inc.</li>
               <li className="px-3">Terms</li>
             </menu>
             <li className="pl-3">Privacy (Updated 08/2022)</li>
-          </ul>
-        </ol>
+          </small>
+        </footer>
 
-        <figure>
+        <small>
           <ul className="flex flex-shrink-0 flex-row items-center justify-center py-5 sm:pr-4 lg:pr-10">
-            <li className="pr-5">
+            <li className="pr-5"> 
               <a href="">
-                <FaTwitter style={{ color: 'grey', fontSize: '22px' }} />
+                <FaTwitter style={{ color: 'grey', fontSize: '18px' }} />
               </a>
             </li>
             <li className="pr-5">
               <a href="">
-                <FaFacebookSquare style={{ color: 'grey', fontSize: '22px' }} />
+                <FaFacebookSquare style={{ color: 'grey', fontSize: '18px' }} />
               </a>
             </li>
             <li className="pr-5">
               <a href="">
-                <FaLinkedinIn style={{ color: 'grey', fontSize: '22px' }} />
+                <FaLinkedinIn style={{ color: 'grey', fontSize: '18px' }} />
               </a>
             </li>
           </ul>
-        </figure>
-      </span>
+        </small>
+      </section>
     </>
   );
 }
