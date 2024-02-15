@@ -8,13 +8,12 @@ export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
 
   const items = [
-    { label: text.institute, value: '/about' },
-    { label: text.administration, value: '/administration' },
+    { label: text.institute, value: '/institute' },
     { label: text.academics, value: '/academics' },
-    { label: text.sections, value: '/sections' },
-    { label: text.faculty, value: '/staff' },
-    { label: text.placement, value: '/placement' },
-    { label: text.activities, value: '/activities' },
+    { label: text.faculty, value: '/faculty-and-staff' },
+    { label: text.placement, value: '/training-and-placement' },
+    { label: text.alumni, value: '/alumni' },
+    { label: text.activities, value: '/student-activities' },
   ];
 
   return (

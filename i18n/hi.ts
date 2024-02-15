@@ -3,12 +3,11 @@ import type { Translations } from './translations';
 const text: Translations = {
   Header: {
     institute: 'संस्थान',
-    administration: 'प्रशासन',
     academics: 'शैक्षिक',
-    sections: 'अनुभाग',
     faculty: 'संकाय और कर्मचारी',
     placement: 'प्रशिक्षण एवं नियुक्ति',
     activities: 'छात्र गतिविधियाँ',
+    alumni: 'भूतपूर्व छात्र',
     logo: 'प्रतीक चिन्ह',
     login: 'लॉगिन',
   },

@@ -3,11 +3,10 @@ import type { Translations } from './translations';
 const text: Translations = {
   Header: {
     institute: 'Institute',
-    administration: 'Administration',
     academics: 'Academics',
-    sections: 'Sections',
     faculty: 'Faculty & Staff',
     placement: 'Training & Placement',
+    alumni: 'Alumni',
     activities: 'Student Activities',
     logo: 'Logo',
     login: 'Login',

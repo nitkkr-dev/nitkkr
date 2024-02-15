@@ -1,6 +1,6 @@
 import WorkInProgress from '@/components/work-in-progress';
 
-export default function Administration({
+export default function Courses({
   params: { locale },
 }: {
   params: { locale: string };

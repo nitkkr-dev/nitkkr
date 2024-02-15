@@ -5,11 +5,10 @@ export async function getTranslations(locale: string): Promise<Translations> {
 export interface Translations {
   Header: {
     institute: string;
-    administration: string;
     academics: string;
-    sections: string;
     faculty: string;
     placement: string;
+    alumni: string;
     activities: string;
     logo: string;
     login: string;
