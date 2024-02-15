@@ -13,7 +13,7 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.academics, value: '/academics' },
     { label: text.sections, value: '/sections' },
     { label: text.faculty, value: '/faculty-and-staff' },
-    { label: text.placement, value: '/placement' },
+    { label: text.placement, value: '/training-and-placement' },
     { label: text.activities, value: '/activities' },
   ];
 
