@@ -17,16 +17,21 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "noEmit": true,
-    "plugins": [{ "name": "next" }],
-
-    /* Path Aliases */
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "~/api/*": ["./app/api/*"],
-      "~/app/*": ["./app/[locale]/*"],
-      "~/assets/*": ["./public/assets/*"],
-      "~/*": ["./*"],
-    },
+      "@/api/*": ["./app/api/*"],
+      "@/app/*": ["./app/[locale]/*"],
+      "@/assets/*": ["./public/assets/*"],
+      "@/*": ["./*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],

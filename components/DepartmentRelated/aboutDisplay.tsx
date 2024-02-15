@@ -7,7 +7,7 @@ import HorsesRunning from '../horses-running';
 export default function AboutDisplay() {
   return (
     <MaxWidthWrapper className="mt-20">
-      <div className='flex items-center justify-center'>
+      <div className="flex items-center justify-center">
         <HorsesRunning direction={'left'} />
         <span className="text-4xl text-primary-20">ABOUT</span>
       </div>
