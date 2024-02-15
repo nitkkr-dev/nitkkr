@@ -14,7 +14,7 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.sections, value: '/sections' },
     { label: text.faculty, value: '/faculty-and-staff' },
     { label: text.placement, value: '/training-and-placement' },
-    { label: text.activities, value: '/activities' },
+    { label: text.activities, value: '/student-activities' },
   ];
 
   return (
