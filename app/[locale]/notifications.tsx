@@ -91,7 +91,7 @@ export default function Notifications() {
           </ol>
 
           <footer className="mt-auto">
-            <Link href="/notifications">
+            <Link href="/noticeboard">
               <button className="w-full px-5 text-lg font-bold text-primary-30">
                 View All
               </button>
