@@ -1,7 +1,9 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
+import LocaleSwitcher from '@/app/locale-switcher';
 import { getTranslations } from '@/i18n/translations';
 
 export default async function Header({ locale }: { locale: string }) {
@@ -37,6 +39,32 @@ export default async function Header({ locale }: { locale: string }) {
 
       <ol className="inline-flex gap-2">
         <li>
+          <button className="flex h-full w-40 rounded-xl border border-neutral-20 bg-neutral-10">
+            <LocaleSwitcher
+              className={clsx(
+                'w-1/2 rounded-xl p-2',
+                locale === 'en'
+                  ? 'border border-primary-10 text-primary-10'
+                  : 'text-neutral-20'
+              )}
+              locale="en"
+            >
+              English
+            </LocaleSwitcher>
+            <LocaleSwitcher
+              className={clsx(
+                'w-1/2 rounded-xl p-2',
+                locale === 'hi'
+                  ? 'border border-primary-10 text-primary-10'
+                  : 'text-neutral-20'
+              )}
+              locale="hi"
+            >
+              हिन्दी
+            </LocaleSwitcher>
+          </button>
+        </li>
+        <li>
           <Link href="/search">
             <button className="flex h-full w-64 gap-3 rounded-xl border border-primary-20 bg-neutral-10 px-4 py-2 text-primary-30 hover:bg-primary-20 hover:text-neutral-10">
               <FaMagnifyingGlass className="my-auto" size={16} />
@@ -49,7 +77,7 @@ export default async function Header({ locale }: { locale: string }) {
         </li>
         <li>
           <Link href="/login">
-            <button className="h-full rounded-xl bg-primary-30 px-4 py-2 text-neutral-10 hover:bg-primary-20">
+            <button className="h-full w-24 rounded-xl bg-primary-30  text-neutral-10 hover:bg-primary-20">
               {text.login}
             </button>
           </Link>
