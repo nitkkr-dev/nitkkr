@@ -9,6 +9,7 @@ const text: Translations = {
     activities: 'छात्र गतिविधियाँ',
     alumni: 'भूतपूर्व छात्र',
     logo: 'प्रतीक चिन्ह',
+    search: 'त्वरित खोज...',
     login: 'लॉगिन',
   },
   NotFound: {

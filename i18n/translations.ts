@@ -11,6 +11,7 @@ export interface Translations {
     alumni: string;
     activities: string;
     logo: string;
+    search: string;
     login: string;
   };
   NotFound: { title: string; description: string; backHome: string };

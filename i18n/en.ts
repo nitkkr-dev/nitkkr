@@ -9,6 +9,7 @@ const text: Translations = {
     alumni: 'Alumni',
     activities: 'Student Activities',
     logo: 'Logo',
+    search: 'Quick Search...',
     login: 'Login',
   },
   NotFound: {
