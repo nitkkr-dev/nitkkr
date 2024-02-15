@@ -21,7 +21,7 @@ export default function HodMessage() {
         <HorsesRunning direction="left" />
         <h1 className="text-4xl text-primary-20">HOD&apos;s Message</h1>
       </div>
-      <div className="mt-10 rounded-md border border-black p-4 bg-white">
+      <div className="mt-10 rounded-md border border-black bg-white p-4">
         <div className="border-brown flex items-center rounded-md">
           <div className="relative h-52 w-52 rounded-md">
             <Image
@@ -32,7 +32,7 @@ export default function HodMessage() {
             />
           </div>
           <div className="flex flex-col justify-between p-4">
-            <h1 className='text-2xl text-primary-20'>{director.name}</h1>
+            <h1 className="text-2xl text-primary-20">{director.name}</h1>
             <span>{director.message}</span>
           </div>
         </div>

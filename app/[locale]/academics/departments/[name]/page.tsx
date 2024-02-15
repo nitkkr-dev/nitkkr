@@ -1,13 +1,12 @@
-import AboutDisplay from '@/components/DepartmentRelated/aboutDisplay';
-import HodMessage from '@/components/DepartmentRelated/hodMessage';
-import MaxWidthWrapper from '@/components/DepartmentRelated/maxWidthWrapper';
-import MessionAndVission from '@/components/DepartmentRelated/messionAndVision';
-import SubNav from '@/components/DepartmentRelated/subNav';
-import HorsesRunning from '@/components/horses-running';
 import Image from 'next/image';
 
+import AboutDisplay from '@/components/DepartmentRelated/aboutDisplay';
+import HodMessage from '@/components/DepartmentRelated/hodMessage';
+import MessionAndVission from '@/components/DepartmentRelated/messionAndVision';
+import SubNav from '@/components/DepartmentRelated/subNav';
+
 export default function Department({
-  params: { locale,name },
+  params: { locale, name },
 }: {
   params: { locale: string; name: string };
 }) {
@@ -36,5 +35,5 @@ export default function Department({
       <MessionAndVission />
       <HodMessage />
     </div>
-  )
+  );
 }

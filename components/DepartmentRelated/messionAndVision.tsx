@@ -6,7 +6,6 @@ import MaxWidthWrapper from './maxWidthWrapper';
 export default function MessionAndVission() {
   return (
     <MaxWidthWrapper>
-    
       <div className="mt-20 flex items-center rounded-md">
         <div className="w-1/2 rounded-md px-4">
           <div>
