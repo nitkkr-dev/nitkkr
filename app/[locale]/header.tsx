@@ -36,14 +36,20 @@ export default async function Header({ locale }: { locale: string }) {
       </ol>
 
       <ol className="inline-flex gap-2">
-        <li className="h-10 w-10 rounded-full bg-neutral-10">
-          <Link className="block h-full w-full p-3" href="/search">
-            <FaMagnifyingGlass size={16} />
+        <li>
+          <Link href="/search">
+            <button className="flex h-full w-64 gap-3 rounded-xl border border-primary-20 bg-neutral-10 px-4 py-2 text-primary-30 hover:bg-primary-20 hover:text-neutral-10">
+              <FaMagnifyingGlass className="my-auto" size={16} />
+              <span className="grow text-left text-neutral-90">
+                {text.search}
+              </span>
+              <kbd className="font-sans font-medium opacity-50">Ctrl K</kbd>
+            </button>
           </Link>
         </li>
         <li>
           <Link href="/login">
-            <button className="rounded-md bg-primary-30 px-4 py-2 text-neutral-10 hover:bg-primary-20">
+            <button className="h-full rounded-xl bg-primary-30 px-4 py-2 text-neutral-10 hover:bg-primary-20">
               {text.login}
             </button>
           </Link>
