@@ -59,7 +59,7 @@ function Calendar(props: CalendarProps<DateValue>) {
             'absolute left-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
           )}
         >
-          <ChevronLeftIcon className="w-4 h-4" />
+          <ChevronLeftIcon className="h-4 w-4" />
         </Button>
         <div className="text-sm font-medium">{title}</div>
         <Button
@@ -70,7 +70,7 @@ function Calendar(props: CalendarProps<DateValue>) {
             'absolute right-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
           )}
         >
-          <ChevronRightIcon className="w-4 h-4" />
+          <ChevronRightIcon className="h-4 w-4" />
         </Button>
       </div>
       <CalendarGrid state={state} />
@@ -98,7 +98,7 @@ function CalendarGrid({ state, ...props }: CalendarGridProps) {
         <tr className="flex">
           {weekDays.map((day, index) => (
             <th
-              className="w-9 rounded-md text-[0.8rem] font-normal text-muted-foreground"
+              className="text-muted-foreground w-9 rounded-md text-[0.8rem] font-normal"
               key={index}
             >
               {day}
@@ -108,7 +108,7 @@ function CalendarGrid({ state, ...props }: CalendarGridProps) {
       </thead>
       <tbody>
         {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
-          <tr className="flex w-full mt-2" key={weekIndex}>
+          <tr className="mt-2 flex w-full" key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex)
               .map((date, i) =>
@@ -151,7 +151,7 @@ function CalendarCell({ state, date }: CalendarCellProps) {
       {...cellProps}
       className={cn(
         cellProps.className,
-        'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md'
+        '[&:has([aria-selected])]:bg-accent relative p-0 text-center text-sm focus-within:relative focus-within:z-20 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md'
       )}
     >
       <Button

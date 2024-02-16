@@ -29,7 +29,7 @@ export function DatePicker({
       <div>
         <Label>{label}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
-        <p className="text-[0.8rem] text-muted-foreground block">
+        <p className="text-muted-foreground block text-[0.8rem]">
           {description}
         </p>
       </div>
@@ -56,7 +56,7 @@ export function DatePicker({
           />
         </PopoverContent>
       </Popover>
-      <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+      <p className="text-muted-foreground block text-[0.8rem] text-red-500">
         {errorMsg}
       </p>
     </div>

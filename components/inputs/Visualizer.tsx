@@ -50,7 +50,7 @@ export default function Visualizer() {
       <DatePicker
         required
         disabled
-        description="bhaklund"
+        description="this is a description"
         errorMsg="mooj kro"
       />
       <FileUpload required accept=".ppt" />

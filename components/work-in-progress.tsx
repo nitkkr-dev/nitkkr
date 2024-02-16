@@ -1,8 +1,12 @@
-export default function WorkInProgress() {
+import { getTranslations } from '@/i18n/translations';
+
+export default async function WorkInProgress({ locale }: { locale: string }) {
+  const text = (await getTranslations(locale)).WorkInProgress;
+
   return (
     <div className="m-auto max-w-fit text-center">
-      <h2>Work In Progress</h2>
-      <p>This page is currently being worked on. Please visit another time</p>
+      <h2>{text.title}</h2>
+      <p>{text.description}</p>
     </div>
   );
 }

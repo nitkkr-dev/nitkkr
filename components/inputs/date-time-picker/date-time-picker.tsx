@@ -65,7 +65,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, MergedProps>(
           {props.required && <span style={{ color: '#EC734B' }}>*</span>}
         </div>
         {props.description && (
-          <p className="text-[0.8rem] text-muted-foreground block">
+          <p className="text-muted-foreground block text-[0.8rem]">
             {props.description}
           </p>
         )}
@@ -100,7 +100,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, MergedProps>(
             </PopoverContent>
           </Popover>
         </div>
-        <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
           {props.errorMsg}
         </p>
       </div>

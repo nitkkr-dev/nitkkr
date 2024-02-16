@@ -57,26 +57,26 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <Label htmlFor="file">{label}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
         {description && (
-          <p className="text-[0.8rem] text-muted-foreground block">
+          <p className="text-muted-foreground block text-[0.8rem]">
             {description}
           </p>
         )}
         <div className={inputContainerClasses}>
           {LeftChild && (
-            <div className="absolute left-2 top-[0.70rem] h-4 w-4 text-muted-foreground ">
+            <div className="text-muted-foreground absolute left-2 top-[0.70rem] h-4 w-4 ">
               <LeftChild />
             </div>
           )}
           <input type={type} className={inputClasses} ref={ref} {...props} />
           {RightChild && (
             <RightChild
-              className="hover:cursor-pointer mx-2 absolute right-2"
+              className="absolute right-2 mx-2 hover:cursor-pointer"
               // onClick={onRightChildClick}
               size={20}
             />
           )}
         </div>
-        <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
           {errorMsg}
         </p>
       </div>

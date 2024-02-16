@@ -22,6 +22,7 @@
     ],
     "paths": {
       "@/api/*": ["./app/api/*"],
+      "@/app/*": ["./app/[locale]/*"],
       "@/assets/*": ["./public/assets/*"],
       "@/*": ["./*"],
     },

@@ -119,7 +119,7 @@ export function CheckboxReactHookFormMultiple({
                 />
               ))}
               <FormMessage />
-              <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+              <p className="text-muted-foreground block text-[0.8rem] text-red-500">
                 {props.errorMsg}
               </p>
             </FormItem>

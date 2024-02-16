@@ -16,6 +16,7 @@
     "database:down": "docker compose down && docker rmi isac:1.0"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.9.1",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -27,12 +28,13 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "@t3-oss/env-nextjs": "^0.8.0",
+    "@types/negotiator": "^0.6.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.1",
     "date-fns": "^3.3.1",
     "lucide-react": "^0.323.0",
+    "negotiator": "^0.6.3",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
@@ -47,7 +49,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "^20.11.6",
+    "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
@@ -59,6 +61,7 @@
     "husky": "^9.0.6",
     "postcss": "^8",
     "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "prisma": "^5.9.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
