@@ -5,16 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* remove-arrow is a custom css class defined by me to remove increase/decrease button when choosing input type='number' */
 .remove-arrow::-webkit-inner-spin-button,
 .remove-arrow::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .remove-arrow {
   -moz-appearance: textfield;
 }
-/* global theme for shadcn components */
+
 @layer base {
   body {
     @apply font-sans;

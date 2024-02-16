@@ -56,7 +56,7 @@ function Calendar(props: CalendarProps<DateValue>) {
           ref={prevButtonRef}
           variant={'outline'}
           className={cn(
-            'absolute left-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+            'absolute left-1 h-7 w-7 bg-neutral-10 p-0 opacity-50 hover:opacity-100'
           )}
         >
           <ChevronLeftIcon className="w-4 h-4" />
@@ -67,7 +67,7 @@ function Calendar(props: CalendarProps<DateValue>) {
           ref={nextButtonRef}
           variant={'outline'}
           className={cn(
-            'absolute right-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+            'absolute right-1 h-7 w-7 bg-neutral-10 p-0 opacity-50 hover:opacity-100'
           )}
         >
           <ChevronRightIcon className="w-4 h-4" />
@@ -164,7 +164,7 @@ function CalendarCell({ state, date }: CalendarCellProps) {
           'h-9 w-9',
           isToday ? 'bg-accent text-accent-foreground' : '',
           isSelected
-            ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground'
+            ? 'text-primary-foreground hover:text-primary-foreground focus:text-primary-foreground bg-neutral-10 hover:bg-neutral-10 focus:bg-neutral-10'
             : '',
           isOutsideVisibleRange ? 'text-muted-foreground opacity-50' : '',
           isDisabled ? 'text-muted-foreground opacity-50' : ''
