@@ -40,21 +40,51 @@ export default function Visualizer() {
     },
   ];
   return (
-    <div className="w-2/3 space-y-6">
-      <EmailField description="email field hai ye" required />
+    <div className="w-full space-y-6">
+      <EmailField
+        description="email field hai ye"
+        required
+        errorMsg="this is a error msg"
+      />
       <TextField required label="Name" placeholder="Enter your name" />
-      <DatePicker required />
+      <DatePicker
+        required
+        disabled
+        description="bhaklund"
+        errorMsg="mooj kro"
+      />
       <FileUpload required accept=".ppt" />
       <CheckboxReactHookFormMultiple
         items={items}
         description="check only one value"
         selectionMode="multi"
         required
+        errorMsg="valo"
       />
-      <PhoneField description="this is phone number" />
-      <DateTimePicker granularity={'minute'} description={'wrote'} required />
-      <TimeField label="babababa" required description="abcd" />
-      <SelectDropdown items={items} required description="select karo" />
+      <PhoneField
+        description="this is phone number"
+        errorMsg="acha yele error khale"
+      />
+      <DateTimePicker
+        granularity={'minute'}
+        description={'wrote'}
+        required
+        isDisabled
+        errorMsg="error "
+      />
+      <TimeField
+        label="babababa"
+        required
+        description="abcd"
+        isDisabled
+        errorMsg="acha error le"
+      />
+      <SelectDropdown
+        items={items}
+        required
+        description="select karo"
+        errorMsg="acha error le"
+      />
     </div>
   );
 }
