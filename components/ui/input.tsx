@@ -1,6 +1,6 @@
 // Import necessary libraries
 import * as React from 'react';
-import { IconBaseProps, IconType } from 'react-icons';
+import { IconBaseProps } from 'react-icons';
 
 import { cn } from '@/lib/utils';
 
@@ -15,8 +15,9 @@ export interface InputProps
   ref?: React.ForwardedRef<HTMLInputElement>;
   description?: string;
   required?: boolean;
+  errorMsg?: string;
 
-  LeftChild?: IconType; // Updated to a function that returns ReactNode
+  LeftChild?: React.ComponentType<IconBaseProps>; // Updated to a function that returns ReactNode
   RightChild?: React.ComponentType<IconBaseProps>;
   onRightChildClick?: () => void;
 }
@@ -29,8 +30,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       description,
       type,
       LeftChild,
+      RightChild,
       required = false,
       label,
+      errorMsg,
       ...props
     }: InputProps,
     ref
@@ -61,11 +64,21 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div className={inputContainerClasses}>
           {LeftChild && (
             <div className="absolute left-2 top-[0.70rem] h-4 w-4 text-muted-foreground ">
-              {<LeftChild />}
+              <LeftChild />
             </div>
           )}
           <input type={type} className={inputClasses} ref={ref} {...props} />
+          {RightChild && (
+            <RightChild
+              className="hover:cursor-pointer mx-2 absolute right-2"
+              // onClick={onRightChildClick}
+              size={20}
+            />
+          )}
         </div>
+        <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+          {errorMsg}
+        </p>
       </div>
     );
   }

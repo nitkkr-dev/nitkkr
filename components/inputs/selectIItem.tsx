@@ -63,7 +63,11 @@ export function SelectDropdown({ items, ...props }: ListProps) {
                   <FormDescription>{props.description}</FormDescription>
                 )}
               </div>
-              <Select onValueChange={field.onChange} defaultValue={items[0].id}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={items[0].id}
+                disabled={props.disabled}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue />
@@ -77,6 +81,9 @@ export function SelectDropdown({ items, ...props }: ListProps) {
                   ))}
                 </SelectContent>
               </Select>
+              <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+                {props.errorMsg}
+              </p>
               <FormMessage />
             </FormItem>
           )}

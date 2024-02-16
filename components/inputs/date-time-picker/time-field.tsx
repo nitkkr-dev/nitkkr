@@ -18,6 +18,7 @@ interface MergedProps extends AriaTimeFieldProps<TimeValue> {
   required?: boolean | null;
   label?: string | null;
   description?: string | null;
+  errorMsg?: string | null;
 }
 
 function TimeField(props: MergedProps) {
@@ -55,6 +56,9 @@ function TimeField(props: MergedProps) {
           <DateSegment key={i} segment={segment} state={state} />
         ))}
       </div>
+      <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+        {props.errorMsg}
+      </p>
     </div>
   );
 }

@@ -28,6 +28,7 @@ interface DateTimePickerProps {
   required?: boolean;
   label?: string;
   description?: string;
+  errorMsg?: string;
 }
 
 // Merge InputProps and DateTimePickerProps to accept all props
@@ -99,6 +100,9 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, MergedProps>(
             </PopoverContent>
           </Popover>
         </div>
+        <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+          {props.errorMsg}
+        </p>
       </div>
     );
   }

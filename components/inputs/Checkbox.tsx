@@ -80,6 +80,7 @@ export function CheckboxReactHookFormMultiple({
                       >
                         <FormControl>
                           <Checkbox
+                            disabled={props.disabled}
                             checked={
                               selectionMode === 'single'
                                 ? selectedItem === item.id
@@ -118,6 +119,9 @@ export function CheckboxReactHookFormMultiple({
                 />
               ))}
               <FormMessage />
+              <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+                {props.errorMsg}
+              </p>
             </FormItem>
           )}
         />

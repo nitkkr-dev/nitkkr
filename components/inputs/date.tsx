@@ -15,7 +15,13 @@ import {
 
 import { Label } from '../ui/label';
 
-export function DatePicker({ label = 'Date', required = false }) {
+export function DatePicker({
+  label = 'Date',
+  required = false,
+  disabled = false,
+  errorMsg = '',
+  description = '',
+}) {
   const [date, setDate] = React.useState<Date>();
 
   return (
@@ -23,11 +29,15 @@ export function DatePicker({ label = 'Date', required = false }) {
       <div>
         <Label>{label}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
+        <p className="text-[0.8rem] text-muted-foreground block">
+          {description}
+        </p>
       </div>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant={'outline'}
+            disabled={disabled}
             className={cn(
               'w-[280px] justify-start text-left font-normal',
               !date && 'text-muted-foreground'
@@ -46,6 +56,9 @@ export function DatePicker({ label = 'Date', required = false }) {
           />
         </PopoverContent>
       </Popover>
+      <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+        {errorMsg}
+      </p>
     </div>
   );
 }
