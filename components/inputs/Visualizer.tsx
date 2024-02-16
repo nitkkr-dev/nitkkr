@@ -49,7 +49,6 @@ export default function Visualizer() {
       <TextField required label="Name" placeholder="Enter your name" />
       <DatePicker
         required
-        disabled
         description="this is a description"
         errorMsg="mooj kro"
       />
@@ -69,14 +68,12 @@ export default function Visualizer() {
         granularity={'minute'}
         description={'wrote'}
         required
-        isDisabled
         errorMsg="error "
       />
       <TimeField
         label="babababa"
         required
         description="abcd"
-        isDisabled
         errorMsg="acha error le"
       />
       <SelectDropdown
