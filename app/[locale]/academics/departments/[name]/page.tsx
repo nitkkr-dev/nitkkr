@@ -6,7 +6,7 @@ import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 import SubNav from '@/components/DepartmentRelated/subNav';
 import MaxWidthWrapper from '@/components/DepartmentRelated/maxWidthWrapper';
 import HorsesRunning from '@/components/horses-running';
-import Gallery from '@/app/gallery/page';
+import DepartmentGallery from '@/components/DepartmentRelated/departmentGallery';
 
 export default function Department({
   params: { locale, name },
@@ -50,10 +50,12 @@ export default function Department({
         {/* about section */}
         <div>
           <div className="flex items-center justify-center">
-            <HorsesRunning direction={'left'} />
-            <span className="text-4xl text-primary-20">ABOUT</span>
+            <HorsesRunning direction={'left'} count={14} />
+            <span className="text-3xl font-semibold text-primary-20">
+              ABOUT
+            </span>
           </div>
-          <div className="flex items-center rounded-md bg-white">
+          <div className="mt-10 flex items-center rounded-md bg-white">
             <div className="relative w-1/2 rounded-md">
               <Image
                 width={300}
@@ -83,7 +85,7 @@ export default function Department({
         <div className="mt-20 flex items-center rounded-md">
           <div className="w-1/2 rounded-md px-4">
             <div>
-              <h1 className="text-4xl text-primary-20">Vission</h1>
+              <h1 className="text-3xl font-semibold text-primary-20">Vision</h1>
               <p className="text-gray-800">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Assumenda molestias temporibus natus, veniam voluptatum fuga,
@@ -92,7 +94,9 @@ export default function Department({
               </p>
             </div>
             <div>
-              <h1 className="text-4xl text-primary-20">Mession</h1>
+              <h1 className="text-3xl font-semibold text-primary-20 ">
+                Mission
+              </h1>
               <p className="text-gray-800">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Assumenda molestias temporibus natus, veniam voluptatum fuga,
@@ -114,10 +118,12 @@ export default function Department({
         {/*  hod's message*/}
         <div className="mt-20">
           <div className="flex items-center">
-            <HorsesRunning direction="left" />
-            <h1 className="text-4xl text-primary-20">HOD&apos;s Message</h1>
+            <HorsesRunning direction="left" count={12} />
+            <h1 className="text-3xl font-semibold text-primary-20">
+              HOD&apos;s Message
+            </h1>
           </div>
-          <div className="mt-10 rounded-md border border-primary-20 bg-root p-4">
+          <div className="mt-10 rounded-md border border-primary-20 bg-white p-4">
             <div className="border-brown flex items-center rounded-md">
               <div className="relative h-52 w-52 rounded-md">
                 <Image
@@ -136,12 +142,12 @@ export default function Department({
         </div>
         {/*Programmes */}
         <div className="mt-10">
-          <div className="flex">
-            <HorsesRunning direction="left" />
-            <span className="text-2xl font-semibold text-primary-20">
+          <div className="flex items-center justify-evenly">
+            <HorsesRunning direction="left" count={5} />
+            <span className="pl-5 text-3xl font-semibold text-primary-20">
               Programmes
             </span>
-            <HorsesRunning direction="right" />
+            <HorsesRunning direction="right" count={5} />
           </div>
           <div className="mx-auto mt-20 max-w-7xl">
             <div className="grid grid-cols-3 gap-4">
@@ -208,11 +214,7 @@ export default function Department({
             </div>
           </div>
         </div>
-        <Gallery
-          params={{
-            locale: locale,
-          }}
-        />
+        <DepartmentGallery />
       </MaxWidthWrapper>
     </div>
   );

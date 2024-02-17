@@ -2,8 +2,10 @@ import Image from 'next/image';
 
 export default function HorsesRunning({
   direction,
+  count,
 }: {
   direction: 'left' | 'right';
+  count: number;
 }) {
   const directionClass =
     direction === 'left'
@@ -22,7 +24,7 @@ export default function HorsesRunning({
         />
       ) : null}
 
-      {[...Array(8)].map((_, index) => (
+      {[...Array(count)].map((_, index) => (
         <Image
           alt="Horse"
           className={'my-auto' + directionClass}
