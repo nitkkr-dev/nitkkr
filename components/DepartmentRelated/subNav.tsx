@@ -11,17 +11,19 @@ const SubNav = () => {
   ];
 
   return (
-    <div className="mb-3 backdrop-blur-md">
-      <div className="border-1 flex justify-evenly space-x-10 rounded-full border  border-white bg-opacity-30 p-3 px-4">
-        {subLinks.map((btn) => (
-          <Link
-            key={btn.key}
-            href={btn.link}
-            className="text-white  transition-all duration-300 hover:scale-105"
-          >
-            {btn.title}
-          </Link>
-        ))}
+    <div className="sticky top-10">
+      <div className="mb-3 ">
+        <div className="border-1 flex justify-evenly space-x-10 rounded-full border  border-white bg-root p-1">
+          {subLinks.map((btn) => (
+            <Link
+              key={btn.key}
+              href={btn.link}
+              className="ransition-all rounded-full p-3 duration-300 hover:bg-primary-20 hover:text-white"
+            >
+              {btn.title}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
