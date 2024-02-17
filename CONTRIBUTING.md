@@ -1,7 +1,7 @@
 #### 1. Clone the respository (for first time setup)
 
 ```sh
-git clone git@github.com:isac-nitkkr/node-modules.git
+git clone git@github.com:nitkkr-dev/nitkkr.git
 ```
 
 #### 2. Make sure the master branch is up-to-date
