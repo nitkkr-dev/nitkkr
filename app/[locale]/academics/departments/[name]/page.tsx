@@ -1,13 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { ImLab } from 'react-icons/im';
 import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
 import SubNav from '@/components/DepartmentRelated/subNav';
 import MaxWidthWrapper from '@/components/DepartmentRelated/maxWidthWrapper';
 import HorsesRunning from '@/components/horses-running';
-
 import Gallery from '@/app/gallery/page';
 
 export default function Department({

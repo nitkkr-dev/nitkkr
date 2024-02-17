@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-
 import { ReactNode } from 'react';
 
 const MaxWidthWrapper = ({
