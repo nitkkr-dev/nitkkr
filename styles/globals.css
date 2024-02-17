@@ -8,7 +8,7 @@
 @layer base {
   body {
     @apply font-sans;
-    @apply bg-root;
+    @apply bg-background;
     min-height: 100vh;
   }
 
