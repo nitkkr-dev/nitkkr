@@ -37,7 +37,7 @@ export default function Notifications() {
 
   return (
     <article className="min-w-full bg-notifications bg-cover bg-no-repeat py-40">
-      <header className="container mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
+      <header className="container mx-auto mb-20 flex max-w-fit flex-row">
         <HorsesRunning direction="left" />
         <h2 className="my-auto">N</h2>
         <Image
@@ -56,20 +56,19 @@ export default function Notifications() {
             <li key={index}>
               <button
                 className={clsx(
-                  'w-[448px] rounded-xl border border-primary-20  p-8 font-serif drop-shadow-2xl ',
-                  index === currentCategory
-                    ? 'bg-primary-20 text-neutral-10'
-                    : 'bg-root text-primary-20 hover:bg-primary-20 hover:text-neutral-10'
+                  'button w-[448px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
+                  index === currentCategory &&
+                    'border-shade-light bg-primary-700 text-shade-light'
                 )}
                 onClick={() => setCurrentCategory(index)}
               >
-                <h4>{category}</h4>
+                {category}
               </button>
             </li>
           ))}
         </ul>
 
-        <section className="grow truncate rounded-xl bg-root px-8 py-6 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
+        <section className="grow truncate rounded-xl bg-background/[0.6] px-8 py-6 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
           <ol className="mb-5 h-[450px] overflow-y-scroll">
             {notifications[currentCategory].items.map(
               ({ label, value }, index) => (
@@ -79,7 +78,7 @@ export default function Notifications() {
                     href={value}
                   >
                     <MdOutlineKeyboardArrowRight
-                      className="my-auto text-primary-30"
+                      className="my-auto text-primary-700"
                       size={24}
                     />
                     <p className="mb-0 truncate text-lg">{label}</p>
@@ -92,7 +91,7 @@ export default function Notifications() {
 
           <footer className="mt-auto">
             <Link href="/noticeboard">
-              <button className="w-full px-5 text-lg font-bold text-primary-30">
+              <button className="w-full px-5 text-lg font-bold text-primary-700">
                 View All
               </button>
             </Link>
