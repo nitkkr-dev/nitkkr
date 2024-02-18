@@ -28,8 +28,8 @@ export default async function Footer({ locale }: { locale: string }) {
             src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i0QrjGZNZsnnvHN~pAnOa-YbIdvwexeTtZuB1etivK5dtpc~-7WqBZshw9~U2zBk5cbQ53JxA6FjUzyHVVcIMJjVsXi17NMULlQjdoylX0RlLxEMiJcf1ZXbFd8DQT9MrHkjyO~oEQYjDgCw87k~ZZ5z9oMSio4dKcc2D8RbTG7pcuCHkAWjhj~qbxKnMtcHHkW1tyoNa8ZO4pcK7F8vnf3~ItFFO1K54grHvqlaCFM2NhjLEzLjLetdxwh7l8KZwaxEEanbdHoAVk~TqIK-sxoQsYPFZGc4W2p0VvtWdl0MzanayIfqq~n0as1Ee6xgl171H7jetTYAF-f0X4NDWw__"
           />
 
-          <figcaption className="flex flex-col text-center font-serif text-xl text-neutral-50">
-            <h5 className="mb-1">{text.nit}</h5>
+          <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-neutral-50">
+            <h5>{text.nit}</h5>
             <small className="font-sans text-neutral-500">
               {text.location}
             </small>
