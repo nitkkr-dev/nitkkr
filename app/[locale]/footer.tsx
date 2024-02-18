@@ -6,8 +6,8 @@ import {
   FaGithub,
   FaInstagram,
   FaLinkedinIn,
-  FaTwitter,
 } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { MdFax, MdMail, MdPhone } from 'react-icons/md';
 
 import CopyToClipboard from '@/components/copy-to-clipboard';
@@ -147,7 +147,7 @@ export default async function Footer({ locale }: { locale: string }) {
           </li>
           <li>
             <Link href="https://twitter.com/NITKURUKSHETRA">
-              <FaTwitter size={18} />
+              <FaXTwitter size={18} />
             </Link>
           </li>
         </ol>
