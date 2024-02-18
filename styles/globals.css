@@ -16,7 +16,7 @@
 @layer base {
   body {
     @apply font-sans;
-    @apply bg-root;
+    @apply bg-background;
     min-height: 100vh;
   }
 
@@ -28,16 +28,19 @@
   h2 {
     @apply font-serif;
     @apply text-4xl;
+    @apply text-primary-700;
   }
 
   h3 {
     @apply font-serif;
     @apply text-3xl;
+    @apply text-primary-700;
   }
 
   h4 {
     @apply font-serif;
     @apply text-2xl;
+    @apply text-primary-700;
   }
 
   h5 {
@@ -52,5 +55,18 @@
 
   p {
     @apply mb-2;
+  }
+}
+
+@layer components {
+  .button {
+    @apply text-primary-700 hover:text-shade-light;
+    @apply bg-shade-light hover:bg-primary-700;
+    @apply border-primary-700 hover:border-shade-light;
+  }
+
+  .button-emphasised {
+    @apply text-neutral-50;
+    @apply bg-primary-700 hover:bg-primary-900;
   }
 }
