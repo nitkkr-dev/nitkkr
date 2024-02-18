@@ -11,14 +11,17 @@ import {
 import { MdFax, MdMail, MdPhone } from 'react-icons/md';
 
 import CopyToClipboard from '@/components/copy-to-clipboard';
+import { getTranslations } from '@/i18n/translations';
 
-export default async function Footer() {
+export default async function Footer({ locale }: { locale: string }) {
+  const text = (await getTranslations(locale)).Footer;
+
   return (
     <footer>
       <article className="container flex min-w-full flex-col justify-start bg-shade-dark py-16 lg:flex-row">
         <figure className="m-auto flex w-80 flex-col gap-4 p-4 lg:mx-0">
           <Image
-            alt="Logo"
+            alt={text.logo}
             className="mx-auto rounded-md bg-neutral-50 p-[6px]"
             height={66}
             width={66}
@@ -26,11 +29,9 @@ export default async function Footer() {
           />
 
           <figcaption className="flex flex-col text-center font-serif text-xl text-neutral-50">
-            <h5 className="mb-1">
-              National Institute of Technology, Kurukshetra
-            </h5>
+            <h5 className="mb-1">{text.nit}</h5>
             <small className="font-sans text-neutral-500">
-              Thanesar, Haryana, India 136119
+              {text.location}
             </small>
           </figcaption>
 
@@ -48,7 +49,7 @@ export default async function Footer() {
         </figure>
 
         <Image
-          alt="Design Glyph"
+          alt={text.design}
           className={clsx(
             '-my-12 mx-auto h-72 rotate-90',
             'lg:-mx-10 lg:my-auto lg:h-96 lg:w-64 lg:rotate-0',
@@ -62,12 +63,12 @@ export default async function Footer() {
 
         <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
           <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
-            <h5 className="mb-3 text-neutral-50">Quick Links</h5>
+            <h5 className="mb-3 text-neutral-50">{text.headings[0]}</h5>
             <ul className="flex flex-col gap-3">
               {[...Array(8)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
-                    Lorem Ipsum
+                    {text.lorem}
                   </Link>
                 </li>
               ))}
@@ -81,12 +82,12 @@ export default async function Footer() {
               'md:col-start-3 md:row-start-1 md:justify-self-center'
             )}
           >
-            <h5 className="mb-3 text-neutral-50">Quick Links</h5>
+            <h5 className="mb-3 text-neutral-50">{text.headings[1]}</h5>
             <ul className="flex flex-col gap-3">
               {[...Array(10)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
-                    Lorem Ipsum
+                    {text.lorem}
                   </Link>
                 </li>
               ))}
@@ -100,12 +101,12 @@ export default async function Footer() {
               'md:col-start-5 md:row-start-1 md:justify-self-end'
             )}
           >
-            <h5 className="mb-3 text-neutral-50">Quick Links</h5>
+            <h5 className="mb-3 text-neutral-50">{text.headings[2]}</h5>
             <ul className="flex flex-col gap-3">
               {[...Array(4)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
-                    Lorem Ipsum
+                    {text.lorem}
                   </Link>
                 </li>
               ))}
@@ -116,10 +117,7 @@ export default async function Footer() {
 
       <article className="container flex min-w-full flex-col justify-between gap-2 bg-neutral-900 py-5 text-neutral-500 sm:flex-row">
         <ol>
-          <li>
-            © 2024 National Institute of Technology Kurukshetra. All Rights
-            Reserved.
-          </li>
+          <li>{text.copyright}</li>
         </ol>
 
         <ol className="flex gap-5">
