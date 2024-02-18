@@ -41,7 +41,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             &nbsp;
             <Link
               className="text-primary-700 hover:underline"
-              href="https://nitkkr.ac.in/?page_id=703"
+              href="/institute/director#message"
             >
               {text.more}
             </Link>
