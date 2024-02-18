@@ -16,13 +16,14 @@
     "database:down": "docker compose down && docker rmi isac:1.0"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^1.4.0",
     "@formatjs/intl-localematcher": "^0.5.4",
     "@prisma/client": "^5.9.1",
     "@types/negotiator": "^0.6.3",
     "clsx": "^2.1.0",
     "negotiator": "^0.6.3",
     "next": "14.0.4",
-    "next-auth": "^4.24.5",
+    "next-auth": "^5.0.0-beta.11",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",

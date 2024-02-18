@@ -1,5 +1,9 @@
-import { PrismaClient } from './generated/client/index';
+import { PrismaClient } from '@/prisma/generated/client';
 
-const prisma: PrismaClient = new PrismaClient();
+declare global {
+  var prisma: PrismaClient | undefined;
+}
 
-export default prisma;
+export const prismadb = globalThis.prisma || new PrismaClient(); //shenanigans for next.js hot reload
+
+if (process.env.NODE_ENV !== 'production') globalThis.prisma = prismadb;

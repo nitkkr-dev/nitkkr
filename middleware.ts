@@ -1,11 +1,12 @@
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
-import { getServerSession } from 'next-auth';
+import NextAuth from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { authOptions } from '@/api/auth/auth';
-import prisma from './prisma/prisma-client';
+import authConfig from './auth.config';
+import { prismadb } from './prisma/prisma-client';
 
+const { auth } = NextAuth(authConfig);
 const locales = ['en', 'hi'];
 
 function getPreferredLocale(request: NextRequest): string {
@@ -20,23 +21,29 @@ function getPreferredLocale(request: NextRequest): string {
 }
 
 async function isAuthorised(requiredPermissions: string[]) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) {
     NextResponse.redirect('/login');
     return false;
   }
 
-  const person = await prisma.persons.findFirst({
+  const person = await prismadb.persons.findFirst({
     where: { institute_email: session.user?.email! },
   });
 
-  let permissions = await prisma.auth_roles.findMany({
+  let permissionsData = await prismadb.auth_roles.findMany({
     where: { id: { in: person?.role_ids || [] } },
   });
+  if (!Array.isArray(permissionsData)) {
+    permissionsData = [];
+  }
 
-  permissions = permissions.reduce(
-    (acc, curr) => [...acc, ...curr.permissions],
-    [] as string[]
+  // Flatten and merge the permissions arrays
+  const permissions: string[] = permissionsData.reduce(
+    (acc: string[], curr: { id: number; permissions: string[] }) => {
+      return [...acc, ...curr.permissions];
+    },
+    []
   );
 
   return requiredPermissions.every((permission) =>
