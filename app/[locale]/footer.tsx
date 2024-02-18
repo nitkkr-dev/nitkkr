@@ -1,7 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CiGlobe } from 'react-icons/ci';
-import { FaFacebook, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+} from 'react-icons/fa';
 import { MdMailOutline, MdOutlineCall } from 'react-icons/md';
 import { SlLocationPin } from 'react-icons/sl';
 
@@ -154,6 +160,16 @@ export default function Footer() {
           <li>
             <Link href="https://www.facebook.com/nitkurukshetraofficialpage">
               <FaFacebook size={18} />
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/nitkkr-dev">
+              <FaGithub size={18} />
+            </Link>
+          </li>
+          <li>
+            <Link href="https://www.instagram.com/nitkurukshetra">
+              <FaInstagram size={18} />
             </Link>
           </li>
           <li>
