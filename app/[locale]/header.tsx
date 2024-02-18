@@ -10,17 +10,17 @@ export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
 
   const items = [
-    { label: text.institute, value: '/institute' },
-    { label: text.academics, value: '/academics' },
-    { label: text.faculty, value: '/faculty-and-staff' },
-    { label: text.placement, value: '/training-and-placement' },
-    { label: text.alumni, value: '/alumni' },
-    { label: text.activities, value: '/student-activities' },
+    { label: text.institute, href: 'institute' },
+    { label: text.academics, href: 'academics' },
+    { label: text.faculty, href: 'faculty-and-staff' },
+    { label: text.placement, href: 'training-and-placement' },
+    { label: text.alumni, href: 'alumni' },
+    { label: text.activities, href: 'student-activities' },
   ];
 
   return (
     <nav className="container fixed z-10 flex min-w-full max-w-screen-lg flex-wrap justify-between gap-8 bg-gradient-to-b from-neutral-500 to-transparent py-6">
-      <Link href="/">
+      <Link href={`/${locale}`}>
         <Image
           alt={text.logo}
           className="rounded-md bg-neutral-50 p-[6px]"
@@ -31,9 +31,9 @@ export default async function Header({ locale }: { locale: string }) {
       </Link>
 
       <ol className="flex grow gap-4">
-        {items.map(({ label, value }, index) => (
+        {items.map(({ label, href }, index) => (
           <li className="my-auto min-h-fit p-2" key={index}>
-            <Link href={value}>{label}</Link>
+            <Link href={`/${locale}/${href}`}>{label}</Link>
           </li>
         ))}
       </ol>
@@ -66,7 +66,7 @@ export default async function Header({ locale }: { locale: string }) {
           </button>
         </li>
         <li>
-          <Link href="/search">
+          <Link href={`/${locale}/search`}>
             <button className="button hover:text-inherit group flex h-full w-64 gap-3 rounded-xl border px-4 py-2">
               <FaMagnifyingGlass className="my-auto" size={16} />
               <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
@@ -77,7 +77,7 @@ export default async function Header({ locale }: { locale: string }) {
           </Link>
         </li>
         <li>
-          <Link href="/login">
+          <Link href={`/${locale}/login`}>
             <button className="button-emphasised h-full w-24 rounded-xl">
               {text.login}
             </button>

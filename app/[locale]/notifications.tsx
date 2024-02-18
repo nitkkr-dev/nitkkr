@@ -8,7 +8,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import HorsesRunning from '@/components/horses-running';
 
-export default function Notifications() {
+export default function Notifications({ locale }: { locale: string }) {
   const [currentCategory, setCurrentCategory] = useState(0);
   const notifications = [
     {
@@ -81,7 +81,7 @@ export default function Notifications() {
                 <li key={index}>
                   <Link
                     className="my-5 inline-flex max-w-full gap-2"
-                    href={value}
+                    href={`/${locale}/${value}`}
                   >
                     <MdOutlineKeyboardArrowRight
                       className="my-auto text-primary-700"
@@ -96,7 +96,7 @@ export default function Notifications() {
           </ol>
 
           <footer className="mt-auto">
-            <Link href="/noticeboard">
+            <Link href={`/${locale}/noticeboard`}>
               <button className="w-full px-5 text-lg font-bold text-primary-700">
                 View All
               </button>

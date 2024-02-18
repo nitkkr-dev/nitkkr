@@ -13,7 +13,7 @@ export default async function NotFound({
     <div className="m-auto max-w-fit text-center">
       <h2>{text.title}</h2>
       <p>{text.description}</p>
-      <Link href="/">{text.backHome}</Link>
+      <Link href={`/${locale}`}>{text.backHome}</Link>
     </div>
   );
 }

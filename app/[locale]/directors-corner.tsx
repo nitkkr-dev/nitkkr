@@ -41,7 +41,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             &nbsp;
             <Link
               className="text-primary-700 hover:underline"
-              href="/institute/director#message"
+              href={`/${locale}/institute/director#message`}
             >
               {text.more}
             </Link>

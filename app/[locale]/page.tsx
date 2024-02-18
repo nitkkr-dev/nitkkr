@@ -8,7 +8,7 @@ export default function Home({
 }) {
   return (
     <main className="w-full">
-      <Notifications />
+      <Notifications locale={locale} />
       <DirectorsCorner locale={locale} />
     </main>
   );
