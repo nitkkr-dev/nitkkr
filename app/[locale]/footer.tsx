@@ -41,11 +41,11 @@ export default function Footer() {
       <section className="flex flex-col justify-center bg-[#000] md:flex-row lg:items-center">
         <article className="items flex flex-col items-center justify-center px-10">
           <Image
-            src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gtaYqKeU8izdKAOskR5FvCKz15ZM9I~Fai49G9uVnIM1GLBs1e0sYvodH7rpjGkPIJ2yOczgOM6i~jECdaO3ufZHCUY~~80goh86AFkw~6vyJmKTmFVNUlz5kHfqMFmuaPqjTuoJY7XeFeDdYHTjrvGGNe6ATas9-IYPC2gSKavFZ8L5~tNY1vn-~IDnjdeemmKPOsyWbKDmUJWTfI~s~wsWLnKiwVFYpPjYZtwj-u1-~Dy2SuSFOKALF-AnZk1oSBIJrwnSS~Ox6aAP64YsclxQDO6NyJGWBbZP3s5jgVh6tHrHSzR9irkt9nyZj0ndSptaXYTRx4QFx8MYRfeDdw__"
-            alt="NIT KURUKSHETRA LOGO"
-            className="pt-5"
-            width={66}
-            height={66}
+            alt="Logo"
+            className="rounded-md bg-neutral-50 p-[6px]"
+            height={88}
+            width={88}
+            src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i0QrjGZNZsnnvHN~pAnOa-YbIdvwexeTtZuB1etivK5dtpc~-7WqBZshw9~U2zBk5cbQ53JxA6FjUzyHVVcIMJjVsXi17NMULlQjdoylX0RlLxEMiJcf1ZXbFd8DQT9MrHkjyO~oEQYjDgCw87k~ZZ5z9oMSio4dKcc2D8RbTG7pcuCHkAWjhj~qbxKnMtcHHkW1tyoNa8ZO4pcK7F8vnf3~ItFFO1K54grHvqlaCFM2NhjLEzLjLetdxwh7l8KZwaxEEanbdHoAVk~TqIK-sxoQsYPFZGc4W2p0VvtWdl0MzanayIfqq~n0as1Ee6xgl171H7jetTYAF-f0X4NDWw__"
           />
           <header className="font-display max-w-[250px] pt-3 text-center font-serif text-[22px] text-[#fff]">
             National Institute of Technology, Kurukshetra
@@ -82,12 +82,13 @@ export default function Footer() {
 
         <figure className="flex origin-center rotate-90 items-center justify-center lg:rotate-0">
           <Image
-            width={200}
-            height={350}
-            src="https://s3-alpha-sig.figma.com/img/aeae/a206/68c4e501ecf5c3911343c1f3d8428cdf?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=S22f7ZBENQn-7VFFtfnHencMUHU6jvAsYS9gcgivdkyDW2~TCXcFb9ByJoCACBymHLXh50v7hy7SEOi-yEJYm2Xvk~yqKrUMtfCkWRjfh9EDErVFYx7nMQ4kQOSFTqSQWeUs9qymatl-CMJV8nlc-GvQ~bG8Xlij24qfYl~L9mGzSqSWUtPUi6xcmRKcLYbVMdisnKbn5NsDrpZ8ASxHyfBzarMRHULKzDvQEgmep9BoCkaOY-5UwOJF9~Z-Puo~5lVBh3olPUJQud689q3h095Sd9Yv0lZ9HnzpesX0V689O5wCrPen5nSY2lOhL69pKpP4Ixk~ynkZtdRIZFskoQ__"
-            className="h-[300px]"
             alt="Design Glyph"
+            className="h-[300px]"
+            height={350}
             layout="fixed"
+            loading="lazy"
+            width={200}
+            src="https://s3-alpha-sig.figma.com/img/aeae/a206/68c4e501ecf5c3911343c1f3d8428cdf?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eysefbHF47V9fcbwJL7e77ddPbtJfWl6b3DF7emcuZhBlKLXHjPbdXhIAZ3YgxLRa7e1sgKNlOklllxc3BQU69urCpUHIz7-ItZNz~E-08VhzH~w2jgaG2fd-d7ubJ3p8SVsg4PJA4khZGPgaWvosix7fQ3kfsV3IQAqBqnjUZfcvrIo0BqwSbboQiHB2jGKVw-RXahWYBmfZfSs3pyQnPf~PLdfEodzauoFy3M65wipE0-QtgzPKsRmtvR9lLekxC4YaoUFgQqgwBDsOCESV8ONT9uka58gAYNBcCLsU3ojXXa70YdPvoOHG9Y0dnfAT~M4ISb~oFn8ok4mBYLS3Q__"
           />
         </figure>
 
@@ -153,7 +154,7 @@ export default function Footer() {
 
         <small>
           <ul className="flex flex-shrink-0 flex-row items-center justify-center py-5 sm:pr-4 lg:pr-10">
-            <li className="pr-5"> 
+            <li className="pr-5">
               <a href="">
                 <FaTwitter style={{ color: 'grey', fontSize: '18px' }} />
               </a>
