@@ -6,7 +6,7 @@ import HorsesRunning from '@/components/horses-running';
 export default function DirectorsCorner({ locale }: { locale: string }) {
   return (
     <article className="container my-10 min-w-full">
-      <header className="mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
+      <header className="mx-auto mb-20 flex max-w-fit flex-row">
         <HorsesRunning direction="left" />
         <h2 className="my-auto">DIRECT</h2>
         <Image
@@ -19,7 +19,7 @@ export default function DirectorsCorner({ locale }: { locale: string }) {
         <h2 className="my-auto">R&rsquo;S CORNER</h2>
       </header>
 
-      <section className="flex flex-row gap-5 rounded-xl border border-primary-20 bg-white p-8 text-shades-20">
+      <section className="flex flex-row gap-5 rounded-xl border border-primary-700 bg-neutral-50 p-8">
         <Image
           alt="Director's photo"
           className="rounded-xl"
@@ -30,7 +30,7 @@ export default function DirectorsCorner({ locale }: { locale: string }) {
         />
 
         <blockquote className="flex flex-col">
-          <h2 className="mb-4 text-primary-20">Professor B.V. Ramana Reddy</h2>
+          <h2 className="mb-4">Professor B.V. Ramana Reddy</h2>
           <p className="text-2xl">
             India, the land of seekers, is at the cusp of becoming Vishwa Guru
             all over again after 1100 years of subjugation, wars, annexures and
@@ -46,7 +46,7 @@ export default function DirectorsCorner({ locale }: { locale: string }) {
             I heartily welcome everyone who visits the website of this
             institution.
           </p>
-          <footer className="max-w-fit text-xl font-bold text-primary-20 hover:underline">
+          <footer className="max-w-fit text-xl font-bold text-primary-700 hover:underline">
             <Link href="https://nitkkr.ac.in/?page_id=703">READ MORE</Link>
           </footer>
         </blockquote>
