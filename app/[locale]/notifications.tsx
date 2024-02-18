@@ -57,8 +57,9 @@ export default function Notifications() {
               <button
                 className={clsx(
                   'button w-[448px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
-                  index === currentCategory &&
-                    'border-shade-light bg-primary-700 text-shade-light'
+                  index === currentCategory
+                    ? 'border-shade-light bg-primary-700 text-shade-light'
+                    : 'bg-opacity-60'
                 )}
                 onClick={() => setCurrentCategory(index)}
               >
