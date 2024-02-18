@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { CiGlobe } from 'react-icons/ci';
-import { FaFacebookSquare, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { MdMailOutline, MdOutlineCall } from 'react-icons/md';
 import { SlLocationPin } from 'react-icons/sl';
 
@@ -141,37 +142,32 @@ export default function Footer() {
         </footer>
       </section>
 
-      <section className="flex items-center justify-between bg-[#101010]">
-        <footer className="font-inter py-5 text-[#5A6475] sm:pl-10 lg:pl-20">
-          <small className="flex flex-col items-center justify-center lg:flex-row">
-            <menu className="flex flex-row">
-              <li className="px-3">© 2022 NIT KKR, Inc.</li>
-              <li className="px-3">Terms</li>
-            </menu>
-            <li className="pl-3">Privacy (Updated 08/2022)</li>
-          </small>
-        </footer>
+      <footer className="container flex min-w-full justify-between bg-neutral-900 py-5 text-neutral-500">
+        <ol>
+          <li>
+            © 2024 National Institute of Technology Kurukshetra. All Rights
+            Reserved.
+          </li>
+        </ol>
 
-        <small>
-          <ul className="flex flex-shrink-0 flex-row items-center justify-center py-5 sm:pr-4 lg:pr-10">
-            <li className="pr-5">
-              <a href="">
-                <FaTwitter style={{ color: 'grey', fontSize: '18px' }} />
-              </a>
-            </li>
-            <li className="pr-5">
-              <a href="">
-                <FaFacebookSquare style={{ color: 'grey', fontSize: '18px' }} />
-              </a>
-            </li>
-            <li className="pr-5">
-              <a href="">
-                <FaLinkedinIn style={{ color: 'grey', fontSize: '18px' }} />
-              </a>
-            </li>
-          </ul>
-        </small>
-      </section>
+        <ol className="flex gap-5">
+          <li>
+            <Link href="https://www.facebook.com/nitkurukshetraofficialpage">
+              <FaFacebook size={18} />
+            </Link>
+          </li>
+          <li>
+            <Link href="https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana">
+              <FaLinkedinIn size={18} />
+            </Link>
+          </li>
+          <li>
+            <Link href="https://twitter.com/NITKURUKSHETRA">
+              <FaTwitter size={18} />
+            </Link>
+          </li>
+        </ol>
+      </footer>
     </>
   );
 }
