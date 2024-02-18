@@ -42,7 +42,11 @@ export default async function Footer({ locale }: { locale: string }) {
             <Link href="mailto:registrar@nitkkr.ac.in">
               <MdMail className="text-neutral-50" size={24} />
             </Link>
-            <CopyToClipboard item="238350" locale={locale}>
+            <CopyToClipboard
+              item="238350"
+              textDefault={text.copyDefault}
+              textSuccess={text.copySuccess}
+            >
               <MdFax className="text-neutral-50" size={24} />
             </CopyToClipboard>
           </address>

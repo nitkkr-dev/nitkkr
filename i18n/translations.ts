@@ -12,6 +12,8 @@ export interface Translations {
     logo: string;
     nit: string;
     location: string;
+    copyDefault: string;
+    copySuccess: string;
     design: string;
     headings: [string, string, string];
     lorem: string;
