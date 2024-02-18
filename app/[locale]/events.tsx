@@ -87,8 +87,8 @@ const Data = {
 
 export default function Events() {
   return (
-    <article className=" min-w-full ">
-      <header className="relative mb-4 flex max-w-fit justify-center text-primary-20 lg:mx-auto">
+    <article className="min-w-full">
+      <header className="relative mb-4 flex max-w-fit justify-center text-primary-700 lg:mx-auto">
         <h2 className="my-auto">ORGANIZED NEWS AND EVENTS</h2>
         <HorsesRunning direction="right" />
         <Image
@@ -102,14 +102,13 @@ export default function Events() {
 
       <section className="h-auto bg-cover">
         <section
-          className=""
           style={{
             backgroundImage: "url('https://i.imgur.com/Iwh3b4c.png')",
             backgroundSize: '100% 100%',
             paddingBottom: '6pc',
           }}
         >
-          <div className=" flex justify-end text-primary-20">
+          <div className="flex justify-end text-primary-700">
             <button className="mr-[8rem] text-lg font-bold">VIEW ALL</button>
           </div>
 
@@ -119,17 +118,17 @@ export default function Events() {
                 <li key={index}>
                   <button
                     className={clsx(
-                      'w-[282px] rounded-xl border border-primary-20 bg-neutral-10 p-8 font-serif text-primary-20 drop-shadow-2xl hover:bg-primary-20 hover:text-neutral-10'
+                      'button w-[282px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl'
                     )}
                   >
-                    <h4>{category}</h4>
+                    {category}
                   </button>
                 </li>
               ))}
             </ul>
-            {/* <div className="ml-[240px] inline-flex h-[490px] w-[282px] flex-col items-start justify-start gap-6 ">
+            {/* <div className="ml-[240px] inline-flex h-[490px] w-[282px] flex-col items-start justify-start gap-6">
               <button
-                className="rounded-xl border border-primary-20 bg-shades-10 px-[50px] py-[34px] leading-10 text-primary-20  hover:bg-red-600 hover:text-white font-serif"
+                className="rounded-xl border border-primary-700 bg-shade-light px-[50px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white font-serif"
                 style={{
                   boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
                 }}
@@ -138,7 +137,7 @@ export default function Events() {
 
               </button>
               <button
-                className="rounded-xl border border-primary-20 bg-shades-10 px-[56px] py-[34px] leading-10 text-primary-20  hover:bg-red-600 hover:text-white"
+                className="rounded-xl border border-primary-700 bg-shade-light px-[56px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white"
                 style={{
                   boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
                 }}
@@ -147,7 +146,7 @@ export default function Events() {
 
               </button>
               <button
-                className="rounded-xl border border-primary-20 bg-shades-10 px-[56px] py-[34px]  text-primary-20 hover:bg-red-600 hover:text-white"
+                className="rounded-xl border border-primary-700 bg-shade-light px-[56px] py-[34px]  text-primary-700 hover:bg-red-600 hover:text-white"
                 style={{
                   boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
                 }}
@@ -156,7 +155,7 @@ export default function Events() {
 
               </button>
               <button
-                className="rounded-xl border border-primary-20 bg-shades-10 px-[58px] py-[34px] leading-10 text-primary-20  hover:bg-red-600 hover:text-white"
+                className="rounded-xl border border-primary-700 bg-shade-light px-[58px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white"
                 style={{
                   boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
                 }}
@@ -166,9 +165,9 @@ export default function Events() {
               </button>
             </div> */}
 
-            <aside className=" flex h-auto flex-col gap-8">
-              <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-10 p-6">
-                <h4 className="text-primary-0">
+            <aside className="flex h-auto flex-col gap-8">
+              <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-50 p-6">
+                <h4 className="text-primary-100">
                   <a href={Data.Featured.information.semesterInfo.link}>
                     {Data.Featured.information.semesterInfo.title}
                   </a>
@@ -179,7 +178,7 @@ export default function Events() {
               </div>
 
               <section className="flex gap-8">
-                <div className="w-[778px] rounded-xl bg-neutral-10">
+                <div className="w-[778px] rounded-xl bg-neutral-50">
                   <Image
                     src={Data.Featured.information.interNitTournament.imageUrl}
                     className="h-auto w-full rounded-xl"
@@ -193,7 +192,7 @@ export default function Events() {
                   />
 
                   <div className="flex flex-col justify-around gap-2 px-4 py-4">
-                    <h4 className="text-primary-0">
+                    <h4 className="text-primary-100">
                       {Data.Featured.information.interNitTournament.title}
                     </h4>
                     <p className="">
@@ -202,11 +201,11 @@ export default function Events() {
                   </div>
                 </div>
 
-                <aside className="flex w-[428px] flex-col justify-around space-x-1 text-primary-0">
+                <aside className="flex w-[428px] flex-col justify-around space-x-1 text-primary-100">
                   {Data.Featured.information.advertisements.map((ad, index) => (
                     <div
                       key={index}
-                      className="rounded-xl bg-neutral-10 px-4 py-6"
+                      className="rounded-xl bg-neutral-50 px-4 py-6"
                     >
                       <h3>
                         <a href={ad.link}>{ad.title}</a>
@@ -218,7 +217,7 @@ export default function Events() {
 
               <section className="flex gap-7">
                 <aside className="flex h-auto w-[453px] flex-col justify-between">
-                  <div className="rounded-xl bg-neutral-10 px-4 py-6 text-primary-0">
+                  <div className="rounded-xl bg-neutral-50 px-4 py-6 text-primary-100">
                     <h3>
                       <a href={Data.Featured.information.tedxRevival.link}>
                         {Data.Featured.information.tedxRevival.title}
@@ -226,7 +225,7 @@ export default function Events() {
                     </h3>
                   </div>
 
-                  <div className="flex flex-col rounded-xl bg-neutral-10">
+                  <div className="flex flex-col rounded-xl bg-neutral-50">
                     <figure>
                       <Image
                         src={Data.Featured.information.dangerInKkr.imageUrl}
@@ -239,7 +238,7 @@ export default function Events() {
                       />
                     </figure>
                     <div className="flex-col gap-3 px-4 py-3">
-                      <h4 className="text-primary-0">
+                      <h4 className="text-primary-100">
                         <a href={Data.Featured.information.dangerInKkr.link}>
                           {Data.Featured.information.dangerInKkr.title}
                         </a>
@@ -249,7 +248,7 @@ export default function Events() {
                   </div>
                 </aside>
 
-                <aside className="flex w-[753px] flex-col rounded-xl bg-neutral-10">
+                <aside className="flex w-[753px] flex-col rounded-xl bg-neutral-50">
                   <figure>
                     <Image
                       src={Data.Featured.information.placementStats.imageUrl}
@@ -265,7 +264,7 @@ export default function Events() {
                   </figure>
 
                   <div className="flex w-[753px] flex-col px-4 py-6">
-                    <h3 className="text-primary-0">
+                    <h3 className="text-primary-100">
                       <a href={Data.Featured.information.placementStats.link}>
                         {Data.Featured.information.placementStats.title}
                       </a>
