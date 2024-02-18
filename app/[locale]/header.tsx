@@ -104,7 +104,7 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li>
             <Button asChild className="xl:hidden" variant="icon">
-              <Link href={`/${locale}/search`}>
+              <Link href={`/${locale}/search`} scroll={false}>
                 <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
               </Link>
             </Button>
@@ -117,7 +117,7 @@ export default async function Header({ locale }: { locale: string }) {
               )}
               variant="secondary"
             >
-              <Link href={`/${locale}/search`}>
+              <Link href={`/${locale}/search`} scroll={false}>
                 <FaMagnifyingGlass size={16} />
                 <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
                   {text.search}
