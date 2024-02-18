@@ -16,6 +16,7 @@ export interface InputProps
   description?: string;
   required?: boolean;
   errorMsg?: string;
+  disabled?: boolean;
 
   LeftChild?: React.ComponentType<IconBaseProps>; // Updated to a function that returns ReactNode
   RightChild?: React.ComponentType<IconBaseProps>;
