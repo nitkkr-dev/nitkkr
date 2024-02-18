@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { EmailField } from './email';
-import { TextField } from './text';
+import TextField from './text';
 import { PhoneField } from './telephone';
 import { DatePicker } from './date';
 import { FileUpload } from './fileUpload';
