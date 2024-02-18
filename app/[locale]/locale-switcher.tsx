@@ -22,7 +22,11 @@ export default function LocaleSwitcher({
   };
 
   return (
-    <Link className={className} href={redirectedPathName(locale)}>
+    <Link
+      className={className}
+      href={redirectedPathName(locale)}
+      scroll={false}
+    >
       {children}
     </Link>
   );
