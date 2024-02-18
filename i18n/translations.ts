@@ -8,6 +8,17 @@ export interface Translations {
     quote: [string, string];
     more: string;
   };
+  Footer: {
+    logo: string;
+    nit: string;
+    location: string;
+    copyDefault: string;
+    copySuccess: string;
+    design: string;
+    headings: [string, string, string];
+    lorem: string;
+    copyright: string;
+  };
   Header: {
     institute: string;
     academics: string;

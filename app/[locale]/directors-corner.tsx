@@ -8,7 +8,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).DirectorsCorner;
 
   return (
-    <article className="container my-10 min-w-full" id="directors-corner">
+    <article className="container mb-32 mt-10 min-w-full" id="directors-corner">
       <Link href="#directors-corner">
         <header className="mx-auto mb-20 flex max-w-fit flex-row">
           <HorsesRunning direction="left" />

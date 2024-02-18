@@ -16,6 +16,18 @@ const text: Translations = {
     ],
     more: 'Read more →',
   },
+  Footer: {
+    logo: 'Logo',
+    nit: 'National Institute of Technology, Kurukshetra',
+    location: 'Thanesar, Haryana, India 136119',
+    copyDefault: 'Copy fax number to clipboard',
+    copySuccess: 'Copied!',
+    design: 'Artwork',
+    headings: ['Quick Links', 'Quick Links', 'Quick Links'],
+    lorem: 'Lorem Ipsum',
+    copyright:
+      '© 2024 National Institute of Technology Kurukshetra. All Rights Reserved.',
+  },
   Header: {
     institute: 'Institute',
     academics: 'Academics',
