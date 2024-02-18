@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import { EmailField } from './email';
+import EmailField from './email';
 import TextField from './text';
-import { PhoneField } from './telephone';
-import { DatePicker } from './date';
-import { FileUpload } from './fileUpload';
+import PhoneField from './telephone';
+import DatePicker from './date';
+import FileUpload from './fileUpload';
 import { CheckboxReactHookFormMultiple } from './Checkbox';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 import { TimeField } from './date-time-picker/time-field';
