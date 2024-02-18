@@ -2,8 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import HorsesRunning from '@/components/horses-running';
+import { getTranslations } from '@/i18n/translations';
 
-export default function DirectorsCorner({ locale }: { locale: string }) {
+export default async function DirectorsCorner({ locale }: { locale: string }) {
+  const text = (await getTranslations(locale)).DirectorsCorner;
+
   return (
     <article className="container my-10 min-w-full">
       <header className="mx-auto mb-20 flex max-w-fit flex-row">
@@ -22,33 +25,28 @@ export default function DirectorsCorner({ locale }: { locale: string }) {
       <section className="flex flex-row gap-5 rounded-xl border border-primary-700 bg-neutral-50 p-8">
         <Image
           alt="Director's photo"
-          className="rounded-xl"
-          height={473}
-          width={436}
+          className="h-[443px] w-96 rounded-xl"
+          height={682}
+          width={591}
           loading="lazy"
           src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
         />
 
         <blockquote className="flex flex-col">
-          <h2 className="mb-4">Professor B.V. Ramana Reddy</h2>
+          <h2 className="mb-4">{text.name}</h2>
           <p className="text-2xl">
-            India, the land of seekers, is at the cusp of becoming Vishwa Guru
-            all over again after 1100 years of subjugation, wars, annexures and
-            humiliation. It is again a free country due to the sacrifices made
-            by our leaders, freedom fighters and has learnt the art of standing
-            tall in the midst of many a challenge of building the nation with
-            its rich diversity, cultures, languages all over again since the
-            last 75 years. Unity in Diversity is our mantra while making our
-            nation stronger in every sphere.
+            {text.quote[0]}
+            &nbsp;
+            <Link
+              className="text-primary-700 hover:underline"
+              href="https://nitkkr.ac.in/?page_id=703"
+            >
+              {text.more}
+            </Link>
+            <br />
             <br />
           </p>
-          <p className="grow text-2xl">
-            I heartily welcome everyone who visits the website of this
-            institution.
-          </p>
-          <footer className="max-w-fit text-xl font-bold text-primary-700 hover:underline">
-            <Link href="https://nitkkr.ac.in/?page_id=703">READ MORE</Link>
-          </footer>
+          <p className="grow text-2xl">{text.quote[1]}</p>
         </blockquote>
       </section>
     </article>
