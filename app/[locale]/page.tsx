@@ -1,3 +1,6 @@
+'use client';
+import Visualizer from '@/components/inputs/Visualizer';
+
 import DirectorsCorner from './directors-corner';
 import Notifications from './notifications';
 

@@ -1,16 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { forwardRef } from 'react';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { SelectIcon } from '@radix-ui/react-select';
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
@@ -20,63 +11,45 @@ import {
 } from '@/components/ui/select';
 
 import { InputProps } from '../ui/input';
+import { Label } from '../ui/label';
 
 interface ListProps extends InputProps {
-  items: { id: string; label: string }[];
+  items: string[];
 }
 
-const FormSchema = z.object({
-  items: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: 'You have to select at least one item.',
-  }),
-});
+const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
+  ({ items, className, ...props }, ref) => {
+    return (
+      <div className={className} ref={ref}>
+        <Label htmlFor={props.name}>
+          {props.label ? props.label : 'Select'}
+        </Label>
+        {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+        {props.description && (
+          <p className="text-muted-foreground block text-[0.8rem]">
+            {props.description}
+          </p>
+        )}
+        <Select disabled={props.disabled}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select an item" />
+          </SelectTrigger>
+          <SelectContent>
+            {items.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+          {props.errorMsg}
+        </p>
+      </div>
+    );
+  }
+);
 
-export function SelectDropdown({ items, ...props }: ListProps) {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
+SelectDropdown.displayName = 'SelectDropdown';
 
-  return (
-    <Form {...form}>
-      <form className="w-2/3 space-y-6">
-        <FormField
-          control={form.control}
-          name="items"
-          render={({ field }) => (
-            <FormItem>
-              <div>
-                <FormLabel>{props.label ? props.label : 'Select'}</FormLabel>
-                {props.required && <span style={{ color: '#EC734B' }}>*</span>}
-                {props.description && (
-                  <FormDescription>{props.description}</FormDescription>
-                )}
-              </div>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={items[0].id}
-                disabled={props.disabled}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {items.map((item) => (
-                    <SelectItem key={item.id} value={item.id}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <p className="text-[0.8rem] text-muted-foreground block text-red-500">
-                {props.errorMsg}
-              </p>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
-  );
-}
+export default SelectDropdown;
