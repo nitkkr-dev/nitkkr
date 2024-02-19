@@ -1,9 +1,15 @@
-import { PrismaClient } from '@/prisma/generated/client';
+import { PrismaClient } from '@prisma/client/edge';
+import { withAccelerate } from '@prisma/extension-accelerate';
 
+const prismaClientSingleton = () => {
+  return new PrismaClient().$extends(withAccelerate());
+};
 declare global {
-  var prisma: PrismaClient | undefined;
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
-export const prismadb = globalThis.prisma || new PrismaClient(); //shenanigans for next.js hot reload
+const prisma = globalThis.prisma ?? prismaClientSingleton();
 
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = prismadb;
+export default prisma;
+
+if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma;

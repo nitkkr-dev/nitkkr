@@ -19,6 +19,7 @@
     "@auth/prisma-adapter": "^1.4.0",
     "@formatjs/intl-localematcher": "^0.5.4",
     "@prisma/client": "^5.9.1",
+    "@prisma/extension-accelerate": "^0.6.3",
     "@types/negotiator": "^0.6.3",
     "clsx": "^2.1.0",
     "negotiator": "^0.6.3",

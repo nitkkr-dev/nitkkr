@@ -4,13 +4,15 @@ import NextAuth from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 import authConfig from './auth.config';
-import { prismadb } from './prisma/prisma-client';
+import prisma from './prisma/prisma-client';
+import { NextURL } from 'next/dist/server/web/next-url';
 
 const { auth } = NextAuth(authConfig);
 const locales = ['en', 'hi'];
 
 function getPreferredLocale(request: NextRequest): string {
   const defaultLocale = 'en';
+  const { nextUrl } = request;
   const languages = new Negotiator({
     headers: {
       'accept-language': request.headers.get('Accept-Language') || '',
@@ -20,18 +22,18 @@ function getPreferredLocale(request: NextRequest): string {
   return match(languages, locales, defaultLocale);
 }
 
-async function isAuthorised(requiredPermissions: string[]) {
+async function isAuthorised(requiredPermissions: string[], nextUrl: NextURL) {
   const session = await auth();
   if (!session) {
-    NextResponse.redirect('/login');
+    NextResponse.redirect(new URL('/login', nextUrl));
     return false;
   }
 
-  const person = await prismadb.persons.findFirst({
+  const person = await prisma.persons.findFirst({
     where: { institute_email: session.user?.email! },
   });
 
-  let permissionsData = await prismadb.auth_roles.findMany({
+  let permissionsData = await prisma.auth_roles.findMany({
     where: { id: { in: person?.role_ids || [] } },
   });
   if (!Array.isArray(permissionsData)) {
@@ -66,9 +68,9 @@ export async function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.includes('/student-profile')) {
     const requiredRoles = ['student'];
-    const hasRequiredRoles = await isAuthorised(requiredRoles);
+    const hasRequiredRoles = await isAuthorised(requiredRoles, request.nextUrl);
     if (!hasRequiredRoles) {
-      NextResponse.redirect('/login');
+      Response.redirect(new URL('/login', request.nextUrl));
     } else return NextResponse.next();
   }
 
