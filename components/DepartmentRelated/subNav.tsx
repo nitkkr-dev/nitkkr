@@ -13,12 +13,12 @@ const SubNav = () => {
   return (
     <div className="sticky top-10">
       <div className="mb-3 ">
-        <div className="border-1 flex justify-evenly space-x-10 rounded-full border  border-white bg-root p-1">
+        <div className="flex justify-evenly space-x-10 rounded-full  bg-background p-1">
           {subLinks.map((btn) => (
             <Link
               key={btn.key}
               href={btn.link}
-              className="ransition-all rounded-full p-3 duration-300 hover:bg-primary-20 hover:text-white"
+              className="ransition-all rounded-full p-3 duration-300 hover:bg-primary-700 hover:text-background"
             >
               {btn.title}
             </Link>

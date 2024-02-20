@@ -15,8 +15,8 @@ export default function DepartmentGallery() {
   return (
     <div>
       <div className="flex items-center space-x-5">
-        <span className="text-3xl font-semibold text-primary-20">Gallery</span>
-        <HorsesRunning direction="right" count={14} />
+        <span className="text-3xl font-semibold text-primary-500">Gallery</span>
+        <HorsesRunning direction="right" count={11} />
       </div>
 
       <Carousel
@@ -30,7 +30,7 @@ export default function DepartmentGallery() {
           {Array.from({ length: 7 }).map((_, idx) => (
             <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/3">
               <div className="group">
-                <Card className="w-full rounded-md border-primary-30 hover:border ">
+                <Card className="w-full rounded-md border-primary-700 hover:border ">
                   <Image
                     alt="Computer Science Conference"
                     className="h-3/5 w-full rounded-md object-cover "
@@ -43,7 +43,7 @@ export default function DepartmentGallery() {
                     width={200}
                   />
                   <CardContent>
-                    <p className="mt-5 group-hover:text-primary-20">
+                    <p className="mt-5 group-hover:text-primary-500">
                       Computer Science Students Hold National conference of CS
                       In NIT KKR...
                     </p>
@@ -54,11 +54,11 @@ export default function DepartmentGallery() {
           ))}
         </CarouselContent>
         <CarouselPrevious
-          className="bg-root text-primary-20 hover:scale-105"
+          className="bg-root text-primary-500 hover:scale-105"
           variant={'ghost'}
         />
         <CarouselNext
-          className="bg-root text-primary-20 hover:scale-105"
+          className="bg-root text-primary-500 hover:scale-105"
           variant={'ghost'}
         />
       </Carousel>
