@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import TemplateComponentProps from '@/templates/props';
+import QuestionPaper from '@/templates/question-paper';
 
 export const ExportAsPDF = async ({
   children,
@@ -11,7 +12,12 @@ export const ExportAsPDF = async ({
   className?: string;
   data: TemplateComponentProps;
 }) => {
-  // Generate PDF with the provided data
+  const ReactDOMServer = (await import('react-dom/server')).default;
+  const htmlBody = ReactDOMServer.renderToStaticMarkup(
+    <QuestionPaper data={data} />
+  );
+
+  // Generate PDF with the above HTML
 
   // Store the PDF in a temporary cache on our S3 bucket
 
