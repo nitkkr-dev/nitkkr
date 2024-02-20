@@ -9,7 +9,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
 
   return (
     <article className="container my-10 min-w-full">
-      <header className="mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
+      <header className="text-primary-20 mx-auto mb-20 flex max-w-fit flex-row">
         <HorsesRunning direction="left" count={5} />
         <h2 className="my-auto">DIRECT</h2>
         <Image

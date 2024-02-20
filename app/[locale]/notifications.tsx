@@ -37,7 +37,7 @@ export default function Notifications({ locale }: { locale: string }) {
 
   return (
     <article className="min-w-full bg-notifications bg-cover bg-no-repeat py-40">
-      <header className="container mx-auto mb-20 flex max-w-fit flex-row text-primary-20">
+      <header className="text-primary-20 container mx-auto mb-20 flex max-w-fit flex-row">
         <HorsesRunning direction="left" count={8} />
         <h2 className="my-auto">N</h2>
         <Image
