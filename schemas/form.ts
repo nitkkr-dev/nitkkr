@@ -19,8 +19,17 @@ export const finalFormSchema = z
     is_shuffled: z.boolean().default(false),
     is_copy_sent: z.boolean().default(false),
     expiry_date: z.date().optional(),
+    is_anonymous: z.boolean().default(false),
   })
   .refine((data) => !data.is_editing_allowed || data.is_single_response, {
     message: 'Cannot edit a multiple response form.',
     path: ['is_editing_allowed'],
-  });
+  })
+  .refine(
+    (data) =>
+      data.is_anonymous && (data.is_editing_allowed || data.is_single_response),
+    {
+      message: 'Cannot be anonymous and stop multiple or make an edit.',
+      path: ['is_anonymous'],
+    }
+  );

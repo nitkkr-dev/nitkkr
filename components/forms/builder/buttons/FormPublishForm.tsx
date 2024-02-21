@@ -53,6 +53,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
       is_single_response: sForm.is_single_response,
       is_shuffled: sForm.is_shuffled,
       is_view_analytics_allowed: sForm.is_view_analytics_allowed,
+      is_anonymous: sForm.is_anonymous,
     },
     mode: 'onSubmit',
   });
@@ -88,14 +89,14 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(publishForm)}
-        className="text-foreground w-[36rem] space-y-2"
+        className="text-foreground space-y-2 md:w-[36rem]"
       >
-        <div className="flex">
+        <div className="md:flex">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
-              <FormItem className="w-[50%] pr-4">
+              <FormItem className="max-w-80 md:w-[50%] md:pr-4">
                 <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input placeholder="Form Name" {...field} />
@@ -108,7 +109,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormItem className="w-[50%]">
+              <FormItem className="max-w-80 md:w-[50%]">
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Textarea
@@ -122,12 +123,12 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
             )}
           />
         </div>
-        <div className="flex ">
+        <div className="md:flex">
           <FormField
             control={form.control}
             name="on_submit_message"
             render={({ field }) => (
-              <FormItem className="w-[50%] pr-4">
+              <FormItem className="max-w-80 md:w-[50%] md:pr-4">
                 <FormLabel>Submit Message</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
@@ -177,13 +178,13 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
             )}
           />
         </div>
-        <div className="flex">
-          <div className="w-[50%]">
+        <div className="md:flex ">
+          <div className="md:w-[50%]">
             <FormField
               control={form.control}
               name="is_editing_allowed"
               render={({ field }) => (
-                <FormItem className="relative flex flex-row items-center justify-between py-3 pr-3">
+                <FormItem className="relative flex flex-row items-center justify-between py-3 md:pr-3">
                   <FormLabel className="mr-2 mt-2">Can be Edited</FormLabel>
                   <FormControl>
                     <Switch
@@ -191,7 +192,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage className="absolute bottom-[-10%]" />
+                  <FormMessage className="absolute bottom-[-20%] leading-3" />
                 </FormItem>
               )}
             />
@@ -199,7 +200,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
               control={form.control}
               name="is_single_response"
               render={({ field }) => (
-                <FormItem className="relative flex flex-row items-center justify-between py-3 pr-3">
+                <FormItem className="relative flex flex-row items-center justify-between py-3 md:pr-3">
                   <FormLabel className="mr-2 mt-2">
                     Only single Response allowed
                   </FormLabel>
@@ -209,17 +210,17 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage className="absolute bottom-[-10%]" />
+                  <FormMessage className="absolute bottom-[-20%] leading-3" />
                 </FormItem>
               )}
             />
           </div>
-          <div className="w-[50%]">
+          <div className="md:w-[50%]">
             <FormField
               control={form.control}
               name="is_shuffled"
               render={({ field }) => (
-                <FormItem className="relative flex flex-row items-center justify-between p-3">
+                <FormItem className="relative flex flex-row items-center justify-between py-3 md:px-3">
                   <FormLabel className="mr-2 mt-2">Shuffled</FormLabel>
                   <FormControl>
                     <Switch
@@ -227,7 +228,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage className="absolute bottom-[-10%]" />
+                  <FormMessage className="absolute bottom-[-20%] leading-3" />
                 </FormItem>
               )}
             />
@@ -235,7 +236,7 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
               control={form.control}
               name="is_view_analytics_allowed"
               render={({ field }) => (
-                <FormItem className="relative flex flex-row items-center justify-between p-3">
+                <FormItem className="relative flex flex-row items-center justify-between py-3 md:px-3">
                   <FormLabel className="mr-2 mt-2">
                     Able to View Analytics
                   </FormLabel>
@@ -245,11 +246,29 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage className="absolute bottom-[-10%]" />
+                  <FormMessage className="leading-3  sm:absolute sm:bottom-[-20%]" />
                 </FormItem>
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="is_anonymous"
+            render={({ field }) => (
+              <FormItem className="relative flex flex-row items-center justify-between py-3 md:px-3">
+                <FormLabel className="mr-2 mt-2">
+                  Will the form be anonymous ?
+                </FormLabel>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage className="absolute bottom-[-1%] leading-3" />
+              </FormItem>
+            )}
+          />
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

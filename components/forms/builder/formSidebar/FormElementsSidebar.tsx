@@ -7,6 +7,7 @@ export default function FormElementsSidebar() {
     <>
       Elements
       <PickerBtn formElement={FormElements.TextField} />
+      <PickerBtn formElement={FormElements.EmailField} />
     </>
   );
 }

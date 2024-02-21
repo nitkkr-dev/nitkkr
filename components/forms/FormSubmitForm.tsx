@@ -99,6 +99,7 @@ export default function FormSubmitForm({
   };
   const onSubmit = async () => {
     const output = await forms.trigger();
+    console.log(output);
     if (!output) return;
     const result = await submitForm(form.id, forms.getValues());
     toast(result);

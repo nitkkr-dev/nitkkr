@@ -2,8 +2,9 @@ import React, { ElementType } from 'react';
 import { ZodOptional, ZodString } from 'zod';
 
 import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormElement';
+import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
 
-export type ElementsType = 'TextField';
+export type ElementsType = 'TextField' | 'EmailField';
 
 export type FormElement = {
   input_type: ElementsType;
@@ -43,4 +44,5 @@ type FormElementsType = {
 
 export const FormElements: FormElementsType = {
   TextField: TextFieldFormElement,
+  EmailField: EmailFieldFormElement,
 };

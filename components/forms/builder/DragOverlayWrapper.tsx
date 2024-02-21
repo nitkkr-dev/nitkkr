@@ -39,7 +39,8 @@ export default function DragOverlayWrapper() {
       const DragDrapElementComponent =
         FormElements[element.input_type].uiFieldComponent;
       node = (
-        <div className="bg-accent pointer pointer-events-none flex h-[120px] w-full rounded-md border px-4 py-2 opacity-80">
+        // TODO: fix element jumping when dragging
+        <div className="bg-accent pointer pointer-events-none mt-48 flex h-[120px] w-[60vw] rounded-md border px-4 py-2 opacity-80">
           <DragDrapElementComponent elementInstance={element} />
         </div>
       );
