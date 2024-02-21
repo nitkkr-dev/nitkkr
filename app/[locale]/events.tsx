@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 import HorsesRunning from '@/components/horses-running';
 
@@ -105,7 +106,7 @@ export default function Events() {
           style={{
             backgroundImage: "url('https://i.imgur.com/Iwh3b4c.png')",
             backgroundSize: '100% 100%',
-            paddingBottom: '6pc',
+            paddingBottom: '96px',
           }}
         >
           <div className="flex justify-end text-primary-700">
@@ -126,51 +127,13 @@ export default function Events() {
                 </li>
               ))}
             </ul>
-            {/* <div className="ml-[240px] inline-flex h-[490px] w-[282px] flex-col items-start justify-start gap-6">
-              <button
-                className="rounded-xl border border-primary-700 bg-shade-light px-[50px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white font-serif"
-                style={{
-                  boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
-                }}
-              >
-                <h4>Featured</h4>
-
-              </button>
-              <button
-                className="rounded-xl border border-primary-700 bg-shade-light px-[56px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white"
-                style={{
-                  boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
-                }}
-              >
-                <h4>Recents</h4>
-
-              </button>
-              <button
-                className="rounded-xl border border-primary-700 bg-shade-light px-[56px] py-[34px]  text-primary-700 hover:bg-red-600 hover:text-white"
-                style={{
-                  boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
-                }}
-              >
-                <h4>Student</h4>
-
-              </button>
-              <button
-                className="rounded-xl border border-primary-700 bg-shade-light px-[58px] py-[34px] leading-10 text-primary-700  hover:bg-red-600 hover:text-white"
-                style={{
-                  boxShadow: '0px 4px 16px 0px rgba(0, 29, 61, 0.20)',
-                }}
-              >
-                <h4>Faculty</h4>
-
-              </button>
-            </div> */}
 
             <aside className="flex h-auto flex-col gap-8">
               <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-50 p-6">
                 <h4 className="text-primary-100">
-                  <a href={Data.Featured.information.semesterInfo.link}>
+                  <Link href={Data.Featured.information.semesterInfo.link}>
                     {Data.Featured.information.semesterInfo.title}
-                  </a>
+                  </Link>
                 </h4>
                 <p className="w-[90%]">
                   {Data.Featured.information.semesterInfo.content}
@@ -195,20 +158,20 @@ export default function Events() {
                     <h4 className="text-primary-100">
                       {Data.Featured.information.interNitTournament.title}
                     </h4>
-                    <p className="">
+                    <p>
                       {Data.Featured.information.interNitTournament.content}
                     </p>
                   </div>
                 </div>
 
-                <aside className="flex w-[428px] flex-col justify-around space-x-1 text-primary-100">
+                <aside className="flex w-[428px] flex-col justify-around space-x-1 ">
                   {Data.Featured.information.advertisements.map((ad, index) => (
                     <div
                       key={index}
                       className="rounded-xl bg-neutral-50 px-4 py-6"
                     >
-                      <h3>
-                        <a href={ad.link}>{ad.title}</a>
+                      <h3 className="text-primary-100">
+                        <Link href={ad.link}>{ad.title}</Link>
                       </h3>
                     </div>
                   ))}
@@ -217,31 +180,28 @@ export default function Events() {
 
               <section className="flex gap-7">
                 <aside className="flex h-auto w-[453px] flex-col justify-between">
-                  <div className="rounded-xl bg-neutral-50 px-4 py-6 text-primary-100">
-                    <h3>
-                      <a href={Data.Featured.information.tedxRevival.link}>
+                  <div className="rounded-xl bg-neutral-50 px-4 py-6">
+                    <h3 className="text-primary-100">
+                      <Link href={Data.Featured.information.tedxRevival.link}>
                         {Data.Featured.information.tedxRevival.title}
-                      </a>
+                      </Link>
                     </h3>
                   </div>
 
                   <div className="flex flex-col rounded-xl bg-neutral-50">
-                    <figure>
-                      <Image
-                        src={Data.Featured.information.dangerInKkr.imageUrl}
-                        className="h-[174px] rounded-t-xl"
-                        alt={Data.Featured.information.dangerInKkr.imageAlt}
-                        width={Data.Featured.information.dangerInKkr.imageWidth}
-                        height={
-                          Data.Featured.information.dangerInKkr.imageHeight
-                        }
-                      />
-                    </figure>
+                    <Image
+                      src={Data.Featured.information.dangerInKkr.imageUrl}
+                      className="h-[174px] rounded-t-xl"
+                      alt={Data.Featured.information.dangerInKkr.imageAlt}
+                      width={Data.Featured.information.dangerInKkr.imageWidth}
+                      height={Data.Featured.information.dangerInKkr.imageHeight}
+                    />
+
                     <div className="flex-col gap-3 px-4 py-3">
                       <h4 className="text-primary-100">
-                        <a href={Data.Featured.information.dangerInKkr.link}>
+                        <Link href={Data.Featured.information.dangerInKkr.link}>
                           {Data.Featured.information.dangerInKkr.title}
-                        </a>
+                        </Link>
                       </h4>
                       <p>{Data.Featured.information.dangerInKkr.content}</p>
                     </div>
@@ -249,25 +209,23 @@ export default function Events() {
                 </aside>
 
                 <aside className="flex w-[753px] flex-col rounded-xl bg-neutral-50">
-                  <figure>
-                    <Image
-                      src={Data.Featured.information.placementStats.imageUrl}
-                      className="h-[400px] rounded-t-xl"
-                      alt={Data.Featured.information.placementStats.imageAlt}
-                      width={
-                        Data.Featured.information.placementStats.imageWidth
-                      }
-                      height={
-                        Data.Featured.information.placementStats.imageHeight
-                      }
-                    />
-                  </figure>
+                  <Image
+                    src={Data.Featured.information.placementStats.imageUrl}
+                    className="h-[400px] rounded-t-xl"
+                    alt={Data.Featured.information.placementStats.imageAlt}
+                    width={Data.Featured.information.placementStats.imageWidth}
+                    height={
+                      Data.Featured.information.placementStats.imageHeight
+                    }
+                  />
 
                   <div className="flex w-[753px] flex-col px-4 py-6">
                     <h3 className="text-primary-100">
-                      <a href={Data.Featured.information.placementStats.link}>
+                      <Link
+                        href={Data.Featured.information.placementStats.link}
+                      >
                         {Data.Featured.information.placementStats.title}
-                      </a>
+                      </Link>
                     </h3>
                     <p>{Data.Featured.information.placementStats.content}</p>
                   </div>
