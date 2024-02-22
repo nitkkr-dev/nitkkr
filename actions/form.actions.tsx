@@ -234,7 +234,7 @@ export async function getFormForSubmission(id: number) {
 
     include: {
       form_questions: true,
-      modifiable_by: true, // TODO: change to visible_to
+      // modifiable_by: true, // TODO: change to visible_to // dont need this
     },
   });
   if (!form || !form.is_published) return <FormNotFound />;
@@ -252,8 +252,7 @@ export async function getFormForSubmission(id: number) {
     return <FormExpired />;
   }
   if (!form.is_anonymous) {
-    if (!form.modifiable_by.some((mod) => mod.id === user.id))
-      return <FormNotFound />;
+    //if (!form.modifiable_by.some((mod) => mod.id === user.id)) return <FormNotFound />;  // Impossible condition
     const response = await prisma.form_submissions.findFirst({
       where: {
         form_id: id,
@@ -306,19 +305,19 @@ export async function submitForm(id: number, formData: Record<string, any>) {
         },
       ],
     },
-    include: {
-      modifiable_by: true, // TODO: change to visible_to
-    },
+    // include: {
+    //   modifiable_by: true, // TODO: change to visible_to
+    // },
   });
   if (!form || !form.is_published)
     return { title: 'Error', description: 'Form not found' };
   if (!user && !form.is_anonymous) throw new UserNotFoundErr();
-  if (
-    form.modifiable_by.some((mod) => mod.id === user.id) &&
-    !form.is_anonymous
-  ) {
-    return { title: 'Error', description: 'Form not accessible' };
-  }
+  // if (
+  //   form.modifiable_by.some((mod) => mod.id === user.id) &&
+  //   !form.is_anonymous
+  // ) {
+  //   return { title: 'Error', description: 'Form not accessible' };
+  // }
   if (!form.is_active)
     return { title: 'Error', description: 'Form is expired' };
   if (form.expiry_date && form.expiry_date < new Date()) {
@@ -356,7 +355,7 @@ export async function submitForm(id: number, formData: Record<string, any>) {
   const submission = await prisma.form_submissions.create({
     data: {
       form_id: id,
-      email: user.institute_email || '',
+      email: form.is_anonymous ? user.institute_email : '',
     },
   });
   await prisma.form_answers.createMany({
