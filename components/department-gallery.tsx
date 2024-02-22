@@ -16,7 +16,7 @@ export default function DepartmentGallery() {
     <div>
       <div className="flex items-center space-x-5">
         <span className="text-3xl font-semibold text-primary-500">Gallery</span>
-        <HorsesRunning direction="right" count={8} />
+        <HorsesRunning direction="right" />
       </div>
 
       <Carousel
