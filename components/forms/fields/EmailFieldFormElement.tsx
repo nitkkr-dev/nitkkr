@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
-import { EmailField } from '@/components/inputs/email';
+import EmailField from '@/components/inputs/email';
 
 import useDragDrop from '../hooks/useDragDrop';
 

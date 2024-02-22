@@ -1,5 +1,11 @@
+import React, { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
+
 import { Input, InputProps } from '@/components/ui/input';
 
-export function FileUpload({ label = 'Upload File', ...props }: InputProps) {
-  return <Input type="file" id="file" label={label} {...props} />;
-}
+const FileUpload = forwardRef<HTMLInputElement, InputProps>(
+  ({ label = 'Upload File', ...props }, ref) => {
+    return <Input type="file" id="file" label={label} {...props} ref={ref} />;
+  }
+);
+FileUpload.displayName = 'FileUpload';
+export default FileUpload;

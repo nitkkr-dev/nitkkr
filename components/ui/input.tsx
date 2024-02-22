@@ -11,11 +11,13 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   alwaysFocused?: boolean;
   label?: string;
-  inputClassName?: string;
   ref?: React.ForwardedRef<HTMLInputElement>;
   description?: string;
   required?: boolean;
   errorMsg?: string;
+  disabled?: boolean;
+  inputClassName?: string;
+  className?: string;
 
   LeftChild?: React.ComponentType<IconBaseProps>; // Updated to a function that returns ReactNode
   RightChild?: React.ComponentType<IconBaseProps>;
@@ -34,6 +36,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       required = false,
       label,
       errorMsg,
+      inputClassName,
+      name,
       ...props
     }: InputProps,
     ref
@@ -48,13 +52,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       'focus-visible:border-black focus-visible:outline-blue-100 focus-visible:outline-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'invalid:border-red-500 invalid:outline-red-100 invalid:outline-offset-2',
-      className,
+      inputClassName,
       LeftChild ? 'pl-7 ' : 'pl-3 ' // Adjusted margin-top
     );
 
     return (
-      <div>
-        <Label htmlFor="file">{label}</Label>
+      <div className={className}>
+        <Label htmlFor={name}>{label}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
         {description && (
           <p className="text-muted-foreground block text-[0.8rem]">
@@ -67,7 +71,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <LeftChild />
             </div>
           )}
-          <input type={type} className={inputClasses} ref={ref} {...props} />
+          <input
+            type={type}
+            className={inputClasses}
+            ref={ref}
+            name={name}
+            {...props}
+          />
           {RightChild && (
             <RightChild
               className="absolute right-2 mx-2 hover:cursor-pointer"
