@@ -8,13 +8,12 @@ import { Label } from '../ui/label';
 
 interface ListProps extends InputProps {
   items: string[]; // Define type for items
-  className?: string;
 }
 
 const CheckboxReactHookFormMultiple = forwardRef<HTMLDivElement, ListProps>(
   ({ items, className, ...props }, ref) => {
     return (
-      <div className={className} ref={ref}>
+      <div className={className} ref={ref} {...props}>
         <Label>{props.label ? props.label : 'Checkbox'}</Label>
         {props.required && <span style={{ color: '#EC734B' }}>*</span>}
         {items.map((item) => (

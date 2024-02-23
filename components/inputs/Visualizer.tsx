@@ -9,6 +9,7 @@ import TimeField from './time';
 import SelectDropdown from './selectIItem';
 import { Button } from '../ui/button';
 import DateTimeField from './date-time';
+import PhoneField from './telephone';
 
 interface FormValues {
   email: string;
@@ -64,6 +65,7 @@ export default function Visualizer() {
         <TimeField ref={timeRef} required />
         <DateTimeField ref={dateTimeRef} />
         <SelectDropdown ref={selectRef} items={items} defaultValue={items[0]} />
+        <PhoneField required />
         <Button type="submit">Submit</Button>
       </div>
     </form>
