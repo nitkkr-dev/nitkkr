@@ -9,12 +9,11 @@ const PhoneField = forwardRef<HTMLInputElement, InputProps>(
     return (
       <Input
         ref={ref}
-        className="remove-arrow"
         type="number"
         placeholder={placeholder}
         label={label}
-        {...props}
         LeftChild={AiOutlinePhone}
+        {...props}
       />
     );
   }

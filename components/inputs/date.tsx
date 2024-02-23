@@ -12,16 +12,9 @@ import {
 } from '@/components/ui/popover';
 
 import { Label } from '../ui/label';
+import { InputProps } from '../ui/input';
 
-export interface GenericProps {
-  label?: string;
-  required?: boolean;
-  disabled?: boolean;
-  errorMsg?: string;
-  description?: string;
-}
-
-const DatePicker = forwardRef<HTMLDivElement, GenericProps>(
+const DatePicker = forwardRef<HTMLDivElement, InputProps>(
   (
     {
       label = 'Date',
