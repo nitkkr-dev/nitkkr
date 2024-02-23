@@ -18,6 +18,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
     "@prisma/client": "^5.9.1",
+    "@radix-ui/react-scroll-area": "^1.0.5",
     "@types/negotiator": "^0.6.3",
     "clsx": "^2.1.0",
     "negotiator": "^0.6.3",
