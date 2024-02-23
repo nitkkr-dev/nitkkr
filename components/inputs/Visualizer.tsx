@@ -1,41 +1,50 @@
-'use client';
 import React, { useRef } from 'react';
 
 import EmailField from './email';
 import TextField from './text';
-import PhoneField from './telephone';
 import DatePicker from './date';
 import FileUpload from './fileUpload';
 import CheckboxReactHookFormMultiple from './Checkbox';
-import { DateTimePicker } from './date-time-picker/date-time-picker';
-import { TimeField } from './date-time-picker/time-field';
+import TimeField from './time';
 import SelectDropdown from './selectIItem';
+import { Button } from '../ui/button';
+import DateTimeField from './date-time';
+
+interface FormValues {
+  email: string;
+  name: string;
+  file: FileList;
+  checkbox: string[];
+  dateTime: string;
+  time: string;
+  select: string;
+}
 
 export default function Visualizer() {
-  const emailRef = useRef(null);
-  const nameRef = useRef(null);
-  const dateRef = useRef(null);
-  const fileRef = useRef(null);
-  const checkboxRef = useRef(null);
-  const phoneRef = useRef(null);
-  const dateTimeRef = useRef(null);
-  const timeRef = useRef(null);
-  const selectRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const checkboxRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const dateTimeRef = useRef<HTMLInputElement>(null);
+  const timeRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const formData = {
-    //   email: emailRef.current.value,
-    //   name: nameRef.current.value,
-    //   date: dateRef.current.value,
-    //   file: fileRef.current.files[0],
-    //   // checkbox: checkboxRef.current.value,
-    //   phone: phoneRef.current.value,
-    //   dateTime: dateTimeRef.current.value,
-    //   // time: timeRef.current.value,
-    //   select: selectRef.current.value,
-    // };
-    console.log('Submitted Data:');
+    const formData: FormValues = {
+      email: emailRef.current?.value || '',
+      name: nameRef.current?.value || '',
+      // date: dateRef.current?.value || '',
+      file: fileRef.current?.files ?? new FileList(),
+      checkbox: checkboxRef.current?.value
+        ? checkboxRef.current?.value.split(',')
+        : [],
+      dateTime: dateTimeRef.current?.value || '',
+      time: timeRef.current?.value || '',
+      select: selectRef.current?.value || '',
+    };
+    console.log('Submitted Data:', formData);
   };
 
   const items = ['item1', 'item2', 'item3', 'item4'];
@@ -43,59 +52,19 @@ export default function Visualizer() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="ml-80 w-80 space-y-6">
-        <EmailField
-          ref={emailRef}
-          description="email field hai ye"
-          required
-          errorMsg="this is a error msg"
-        />
-        <TextField
-          ref={nameRef}
-          required
-          label="Name"
-          placeholder="Enter your name"
-        />
-        <DatePicker
-          ref={dateRef}
-          required
-          description="this is a description"
-          errorMsg="mooj kro"
-        />
-        <FileUpload ref={fileRef} required accept=".ppt" />
+        <EmailField ref={emailRef} required />
+        <TextField ref={nameRef} label="Name" placeholder="Enter your name" />
+        {/* <DatePicker ref={dateRef} required /> */}
+        <FileUpload ref={fileRef} required />
         <CheckboxReactHookFormMultiple
           ref={checkboxRef}
           items={items}
           description="check only one value"
-          required
-          errorMsg="valo"
         />
-        <PhoneField
-          ref={phoneRef}
-          description="this is phone number"
-          errorMsg="acha yele error khale"
-        />
-        <DateTimePicker
-          ref={dateTimeRef}
-          granularity={'minute'}
-          description={'wrote'}
-          required
-          errorMsg="error "
-        />
-        <TimeField
-          label="babababa"
-          required
-          description="abcd"
-          errorMsg="acha error le"
-        />
-        <SelectDropdown
-          ref={selectRef}
-          items={items}
-          required
-          description="select karo"
-          errorMsg="acha error le"
-          defaultValue={items[1]}
-        />
-        <button type="submit">Submit</button>
+        <TimeField ref={timeRef} required />
+        <DateTimeField ref={dateTimeRef} />
+        <SelectDropdown ref={selectRef} items={items} defaultValue={items[0]} />
+        <Button type="submit">Submit</Button>
       </div>
     </form>
   );

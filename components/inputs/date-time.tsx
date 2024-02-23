@@ -1,22 +1,25 @@
 'use client';
-
-import { PiTextT } from 'react-icons/pi';
+import React, { forwardRef } from 'react';
 
 import { Input, InputProps } from '../ui/input';
 
-export const TextField = ({
-  label = 'Text',
-  placeholder = 'Enter your text',
-  LeftChild = PiTextT,
-  ...props
-}: InputProps) => {
-  return (
-    <Input
-      type="text"
-      placeholder={placeholder}
-      label={label}
-      {...props}
-      LeftChild={LeftChild}
-    />
-  );
-};
+const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { label = 'Date & Time', placeholder = 'Enter Date & Time', ...props },
+    ref
+  ) => {
+    return (
+      <Input
+        ref={ref}
+        className=""
+        type="datetime-local"
+        placeholder={placeholder}
+        label={label}
+        {...props}
+      />
+    );
+  }
+);
+DateTimeField.displayName = 'DateTimeField';
+
+export default DateTimeField;

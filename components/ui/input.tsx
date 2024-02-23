@@ -76,6 +76,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={inputClasses}
             ref={ref}
             name={name}
+            required={required}
             {...props}
           />
           {RightChild && (
