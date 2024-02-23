@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import prisma from '../../../prisma/prisma-client';
+import { db } from '~/server/db';
 
 // Define your API route handler
 export default async function handler(req: NextRequest) {
   const id = req.nextUrl.searchParams.get('id'); // Get the id from the request parameters
 
   // Fetch the student data based on the id
-  const student = await prisma.students.findUnique({
+  const student = await db.students.findUnique({
     where: {
       id: Number(id),
     },

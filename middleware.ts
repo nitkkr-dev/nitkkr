@@ -1,10 +1,9 @@
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
-import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { authOptions } from '@/api/auth/auth';
-import prisma from './prisma/prisma-client';
+import { getServerAuthSession } from '~/server/auth';
+import { db } from '~/server/db';
 
 const locales = ['en', 'hi'];
 
@@ -20,17 +19,17 @@ function getPreferredLocale(request: NextRequest): string {
 }
 
 async function isAuthorised(requiredPermissions: string[]) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerAuthSession();
   if (!session) {
     NextResponse.redirect('/login');
     return false;
   }
 
-  const person = await prisma.persons.findFirst({
-    where: { institute_email: session.user?.email! },
+  const person = await db.persons.findFirst({
+    where: { institute_email: session.user.email },
   });
 
-  let permissions = await prisma.auth_roles.findMany({
+  let permissions = await db.auth_roles.findMany({
     where: { id: { in: person?.role_ids || [] } },
   });
 
