@@ -13,7 +13,7 @@ export default function Notifications({ locale }: { locale: string }) {
   const notifications = [
     {
       category: 'Academic',
-      items: [...Array(40)].map(() => {
+      items: [...Array<number>(40)].map(() => {
         return {
           label:
             'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
@@ -23,7 +23,7 @@ export default function Notifications({ locale }: { locale: string }) {
     },
     {
       category: 'Tenders',
-      items: [...Array(4)].map(() => {
+      items: [...Array<number>(4)].map(() => {
         return {
           label:
             'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
