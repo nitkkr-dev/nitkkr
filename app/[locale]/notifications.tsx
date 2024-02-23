@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import HorsesRunning from '@/components/horses-running';
+import HorsesRunning from '~/components/horses-running';
 
 export default function Notifications({ locale }: { locale: string }) {
   const [currentCategory, setCurrentCategory] = useState(0);

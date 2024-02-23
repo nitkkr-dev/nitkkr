@@ -10,8 +10,8 @@ import {
 import { FaXTwitter } from 'react-icons/fa6';
 import { MdFax, MdMail, MdPhone } from 'react-icons/md';
 
-import CopyToClipboard from '@/components/copy-to-clipboard';
-import { getTranslations } from '@/i18n/translations';
+import CopyToClipboard from '~/components/copy-to-clipboard';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
