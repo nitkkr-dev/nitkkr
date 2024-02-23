@@ -22,10 +22,10 @@
 
     /* Path Aliases */
     "paths": {
-      "@/api/*": ["./app/api/*"],
-      "@/app/*": ["./app/[locale]/*"],
-      "@/assets/*": ["./public/assets/*"],
-      "@/*": ["./*"],
+      "~/api/*": ["./app/api/*"],
+      "~/app/*": ["./app/[locale]/*"],
+      "~/assets/*": ["./public/assets/*"],
+      "~/*": ["./*"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/api/auth/auth';
-import Unauthorized from '@/components/unauthorized';
-import WorkInProgress from '@/components/work-in-progress';
+import { authOptions } from '~/api/auth/auth';
+import Unauthorized from '~/components/unauthorized';
+import WorkInProgress from '~/components/work-in-progress';
 
 export default async function Profile({
   params: { locale },

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import HorsesRunning from '@/components/horses-running';
-import { getTranslations } from '@/i18n/translations';
+import HorsesRunning from '~/components/horses-running';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function DirectorsCorner({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).DirectorsCorner;

@@ -1,4 +1,4 @@
-import { getTranslations } from '@/i18n/translations';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function WorkInProgress({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).WorkInProgress;

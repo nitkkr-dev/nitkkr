@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { getTranslations } from '@/i18n/translations';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function NotFound({
   params: { locale },
