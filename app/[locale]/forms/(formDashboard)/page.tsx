@@ -19,7 +19,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Home() {
   return (
-    <div className="container pt-40 ">
+    <section className="container pt-40 ">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <CreateFormBtn />
         <Suspense
@@ -30,7 +30,7 @@ export default function Home() {
           <FormCards />
         </Suspense>
       </div>
-    </div>
+    </section>
   );
 }
 function FormCardSkeleton() {

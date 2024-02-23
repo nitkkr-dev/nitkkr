@@ -26,11 +26,13 @@ export default function FormPageDropable({ page }: { page: number }) {
     <div
       ref={droppable.setNodeRef}
       className={cn(
-        'm-auto mt-4 flex h-[50%] max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto rounded-xl bg-background',
+        'm-auto mt-4 flex h-[50%] max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto rounded-xl bg-background sm:p-4',
         droppable.isOver && 'ring-primary ring-4 ring-inset'
       )}
     >
-      <p className="text-right">{page}</p>
+      <p className="self-end rounded-md bg-primary-300 p-1 text-right">
+        Page: {page + 1}
+      </p>
       {!droppable.isOver &&
         (!elements[page] || elements[page].length === 0) && (
           <p className="text-muted-foreground flex flex-grow items-center text-3xl font-bold">
@@ -39,12 +41,12 @@ export default function FormPageDropable({ page }: { page: number }) {
         )}
 
       {droppable.isOver && (!elements[page] || elements[page].length === 0) && (
-        <div className="w-full p-4">
+        <div className="w-full">
           <div className="bg-primary/20 h-[120px] rounded-md"></div>
         </div>
       )}
       {elements[page] && elements[page].length > 0 && (
-        <div className="flex w-full  flex-col gap-2 p-4">
+        <div className="flex w-full  flex-col gap-2">
           {elements[page].map((element) => (
             <DroppedElement element={element} key={element.Id} />
           ))}
@@ -84,7 +86,6 @@ function DroppedElement({ element }: { element: FormElementInstance }) {
       isDragDropElement: true,
     },
   });
-  console.log('element', element);
   const Element = FormElements[element.input_type].uiFieldComponent;
 
   return (

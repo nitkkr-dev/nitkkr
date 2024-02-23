@@ -48,7 +48,7 @@ function TimeField(props: MergedProps) {
         {...fieldProps}
         ref={ref}
         className={cn(
-          'border-input ring-offset-background focus-within:ring-ring focus-visible:ring-ring inline-flex h-10 w-full flex-1 rounded-md border bg-neutral-10 px-3 py-2 text-sm focus-within:ring-2 focus-within:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+          'border-input focus-within:ring-ring focus-visible:ring-ring bg-neutral-10 inline-flex h-10 w-full flex-1 rounded-md border px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
           props.isDisabled ? 'cursor-not-allowed opacity-50' : ''
         )}
       >
@@ -56,7 +56,7 @@ function TimeField(props: MergedProps) {
           <DateSegment key={i} segment={segment} state={state} />
         ))}
       </div>
-      <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+      <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
         {props.errorMsg}
       </p>
     </div>

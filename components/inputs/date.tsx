@@ -66,7 +66,7 @@ const DatePicker = forwardRef<HTMLDivElement, GenericProps>(
             />
           </PopoverContent>
         </Popover>
-        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+        <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
           {errorMsg}
         </p>
       </div>

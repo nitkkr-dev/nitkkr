@@ -22,7 +22,7 @@ export default function PickerBtn({
       ref={draggable.setNodeRef}
       variant="outline"
       className={cn(
-        'flex h-[120px] w-[120px] cursor-grab flex-col gap-2',
+        'flex aspect-square h-full w-full cursor-grab flex-col gap-2',
         draggable.isDragging && 'ring-primary ring-2'
       )}
       {...draggable.listeners}
@@ -42,7 +42,7 @@ export function PickerBtnDragOverlay({
   return (
     <Button
       variant="outline"
-      className="flex h-[120px] w-[120px] cursor-grab flex-col gap-2"
+      className="flex aspect-square h-full w-full cursor-grab flex-col gap-2"
     >
       <Icon className="text-primary h-8 w-8 cursor-grab" />
       <p className="text-xs">{label}</p>

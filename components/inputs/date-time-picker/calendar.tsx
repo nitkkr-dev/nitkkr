@@ -56,7 +56,7 @@ function Calendar(props: CalendarProps<DateValue>) {
           ref={prevButtonRef}
           variant={'outline'}
           className={cn(
-            'absolute left-1 h-7 w-7 bg-neutral-10 p-0 opacity-50 hover:opacity-100'
+            'bg-neutral-10 absolute left-1 h-7 w-7 p-0 opacity-50 hover:opacity-100'
           )}
         >
           <ChevronLeftIcon className="h-4 w-4" />
@@ -67,7 +67,7 @@ function Calendar(props: CalendarProps<DateValue>) {
           ref={nextButtonRef}
           variant={'outline'}
           className={cn(
-            'absolute right-1 h-7 w-7 bg-neutral-10 p-0 opacity-50 hover:opacity-100'
+            'bg-neutral-10 absolute right-1 h-7 w-7 p-0 opacity-50 hover:opacity-100'
           )}
         >
           <ChevronRightIcon className="h-4 w-4" />

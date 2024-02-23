@@ -6,8 +6,10 @@ export default function FormElementsSidebar() {
   return (
     <>
       Elements
-      <PickerBtn formElement={FormElements.TextField} />
-      <PickerBtn formElement={FormElements.EmailField} />
+      <div className="grid grid-cols-1 place-items-center gap-2 md:grid-cols-2">
+        <PickerBtn formElement={FormElements.TextField} />
+        <PickerBtn formElement={FormElements.EmailField} />
+      </div>
     </>
   );
 }
