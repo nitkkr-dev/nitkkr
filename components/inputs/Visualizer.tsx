@@ -6,7 +6,7 @@ import TextField from './text';
 import PhoneField from './telephone';
 import DatePicker from './date';
 import FileUpload from './fileUpload';
-// import { CheckboxReactHookFormMultiple } from './Checkbox';
+import CheckboxReactHookFormMultiple from './Checkbox';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 import { TimeField } from './date-time-picker/time-field';
 import SelectDropdown from './selectIItem';
@@ -16,7 +16,7 @@ export default function Visualizer() {
   const nameRef = useRef(null);
   const dateRef = useRef(null);
   const fileRef = useRef(null);
-  // const checkboxRef = useRef(null);
+  const checkboxRef = useRef(null);
   const phoneRef = useRef(null);
   const dateTimeRef = useRef(null);
   const timeRef = useRef(null);
@@ -42,7 +42,7 @@ export default function Visualizer() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="w-full space-y-6">
+      <div className="ml-80 w-80 space-y-6">
         <EmailField
           ref={emailRef}
           description="email field hai ye"
@@ -62,14 +62,13 @@ export default function Visualizer() {
           errorMsg="mooj kro"
         />
         <FileUpload ref={fileRef} required accept=".ppt" />
-        {/* <CheckboxReactHookFormMultiple
+        <CheckboxReactHookFormMultiple
           ref={checkboxRef}
           items={items}
           description="check only one value"
-          selectionMode="multi"
           required
           errorMsg="valo"
-        /> */}
+        />
         <PhoneField
           ref={phoneRef}
           description="this is phone number"
