@@ -22,7 +22,7 @@ export default function HorsesRunning({
         />
       ) : null}
 
-      {[...Array(8)].map((_, index) => (
+      {[...Array<number>(8)].map((_, index) => (
         <Image
           alt="Horse"
           className={'my-auto' + directionClass}
