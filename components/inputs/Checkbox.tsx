@@ -12,15 +12,17 @@ interface ListProps extends InputProps {
 }
 
 const CheckboxReactHookFormMultiple = forwardRef<HTMLDivElement, ListProps>(
-  ({ items, className, ...props }: ListProps) => {
+  ({ items, className, ...props }, ref) => {
     return (
-      <div className={className}>
+      <div className={className} ref={ref}>
+        <Label>{props.label ? props.label : 'Checkbox'}</Label>
+        {props.required && <span style={{ color: '#EC734B' }}>*</span>}
         {items.map((item) => (
           <div
             key={item}
             className="flex flex-row items-start space-x-3 space-y-0"
           >
-            <Checkbox disabled={props.disabled} />
+            <Checkbox disabled={props.disabled} required={props.required} />
             <Label className="text-sm font-medium">{item}</Label>
           </div>
         ))}
