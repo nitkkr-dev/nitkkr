@@ -103,11 +103,11 @@ export default function FormSubmitForm({
     if (!output) return;
     const result = await submitForm(form.id, forms.getValues());
     toast(result);
-    Router.push('/forms');
+    Router.push('/en/forms');
   };
 
   return (
-    <div className="m-auto w-screen max-w-lg p-2">
+    <main className="m-auto w-screen max-w-lg p-2">
       <h5>Form Title</h5>
       <h1 className="text-sky-900 text-3xl font-semibold">{form.title}</h1>
       <p className="text-gray-600">{form.description}</p>
@@ -133,7 +133,13 @@ export default function FormSubmitForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Element elementInstance={question} {...field} />
+                        <Element
+                          {...field}
+                          name={question.id?.toString()}
+                          label={question.question}
+                          required={question.is_required}
+                          description={question.description}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -165,6 +171,6 @@ export default function FormSubmitForm({
           </div>
         </form>
       </Form>
-    </div>
+    </main>
   );
 }

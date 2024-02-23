@@ -43,21 +43,7 @@ export const TextFieldFormElement: FormElement = {
       description={elementInstance.description}
     />
   ),
-  formComponent: ({
-    elementInstance,
-    ...props
-  }: {
-    elementInstance: FormElementInstance;
-  }) => (
-    <TextField
-      className="w-full"
-      {...props}
-      name={elementInstance.id?.toString()}
-      label={elementInstance.question}
-      required={elementInstance.is_required}
-      description={elementInstance.description}
-    />
-  ),
+  formComponent: TextField,
   propertiesComponent: PropertiesComponent,
   construct: (Id: string, page_number: number, id?: number) => {
     return {

@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html>
       <body className="flex flex-col">
-        <Header locale={params.locale} />
         <section className="flex grow">{children}</section>
         <Footer locale={params.locale} />
       </body>

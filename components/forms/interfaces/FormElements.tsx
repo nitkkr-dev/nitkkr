@@ -1,8 +1,13 @@
-import React, { ElementType } from 'react';
+import React, {
+  ElementType,
+  ForwardRefExoticComponent,
+  RefAttributes,
+} from 'react';
 import { ZodOptional, ZodString } from 'zod';
 
 import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormElement';
 import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
+import { InputProps } from '@/components/ui/input';
 
 export type ElementsType = 'TextField' | 'EmailField';
 
@@ -13,7 +18,9 @@ export type FormElement = {
     label: string;
   };
   uiFieldComponent: React.FC<{ elementInstance: FormElementInstance }>;
-  formComponent: React.FC<{ elementInstance: FormElementInstance }>;
+  formComponent: ForwardRefExoticComponent<
+    Omit<InputProps, 'ref'> & RefAttributes<HTMLInputElement>
+  >;
   propertiesComponent: React.FC<{ elementInstance: FormElementInstance }>;
   construct: (
     Id: string,
