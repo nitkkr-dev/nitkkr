@@ -1,3 +1,8 @@
+import {
+  getServerSession,
+  type DefaultSession,
+  type NextAuthOptions,
+} from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
@@ -6,7 +11,18 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   );
 }
 
-export const authOptions = {
+declare module 'next-auth' {
+  interface Session extends DefaultSession {
+    user: {
+      id: string;
+      email: string;
+      image: string;
+      // role: UserRole;
+    } & DefaultSession['user'];
+  }
+}
+
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -21,3 +37,5 @@ export const authOptions = {
     }),
   ],
 };
+
+export const getServerAuthSession = () => getServerSession(authOptions);
