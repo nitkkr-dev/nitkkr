@@ -1,7 +1,3 @@
-import { forwardRef } from 'react';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { SelectIcon } from '@radix-ui/react-select';
-
 import {
   Select,
   SelectContent,
@@ -10,45 +6,48 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { InputProps } from '../ui/input';
 import { Label } from '../ui/label';
+import { GenericProps } from './radioItems';
 
-interface ListProps extends InputProps {
+interface ListProps extends GenericProps {
   items: string[];
+  onChange: (value: string) => void;
+  value: string;
 }
 
-const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
-  ({ items, className, ...props }, ref) => {
-    return (
-      <div className={className} ref={ref}>
-        <Label htmlFor={props.name}>
-          {props.label ? props.label : 'Select'}
-        </Label>
-        {props.required && <span style={{ color: '#EC734B' }}>*</span>}
-        {props.description && (
-          <p className="text-muted-foreground block text-[0.8rem]">
-            {props.description}
-          </p>
-        )}
-        <Select disabled={props.disabled} required={props.required}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select an item" />
-          </SelectTrigger>
-          <SelectContent>
-            {items.map((item) => (
-              <SelectItem key={item} value={item}>
-                {item}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
-          {props.errorMsg}
+const SelectDropdown = ({ items, ...props }: ListProps) => {
+  return (
+    <div className={props.className}>
+      <Label htmlFor={props.name}>{props.label ? props.label : 'Select'}</Label>
+      {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+      {props.description && (
+        <p className="text-muted-foreground block text-[0.8rem]">
+          {props.description}
         </p>
-      </div>
-    );
-  }
-);
+      )}
+      <Select
+        disabled={props.disabled}
+        required={props.required}
+        onValueChange={props.onChange}
+        defaultValue={props.value}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Select an item" />
+        </SelectTrigger>
+        <SelectContent>
+          {items.map((item) => (
+            <SelectItem key={item} value={item}>
+              {item}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+        {props.errorMsg}
+      </p>
+    </div>
+  );
+};
 
 SelectDropdown.displayName = 'SelectDropdown';
 

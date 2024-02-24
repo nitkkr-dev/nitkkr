@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import EmailField from './email';
 import TextField from './text';
-import DatePicker from './date';
 import FileUpload from './fileUpload';
 import CheckboxReactHookFormMultiple from './Checkbox';
 import TimeField from './time';
@@ -11,6 +10,7 @@ import { Button } from '../ui/button';
 import DateTimeField from './date-time';
 import PhoneField from './telephone';
 import RadioGeneric from './radioItems';
+import DropdownMenuMulti from './multiDropdown';
 
 interface FormValues {
   email: string;
@@ -20,6 +20,7 @@ interface FormValues {
   dateTime: string;
   time: string;
   select: string;
+  radio: string;
 }
 
 export default function Visualizer() {
@@ -27,24 +28,25 @@ export default function Visualizer() {
   const nameRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
   const dateTimeRef = useRef<HTMLInputElement>(null);
   const timeRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const [radio, setRadio] = useState<string>(''); // State to hold the selected radio value
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData: FormValues = {
       email: emailRef.current?.value || '',
       name: nameRef.current?.value || '',
-      // date: dateRef.current?.value || '',
-      file: fileRef.current?.files ?? new FileList(),
+      file: fileRef.current?.files || new FileList(),
       checkbox: checkboxRef.current?.value
         ? checkboxRef.current?.value.split(',')
         : [],
       dateTime: dateTimeRef.current?.value || '',
       time: timeRef.current?.value || '',
       select: selectRef.current?.value || '',
+      radio: radio, // Set radio value from state
     };
     console.log('Submitted Data:', formData);
   };
@@ -61,7 +63,6 @@ export default function Visualizer() {
           placeholder="Enter your name"
           required
         />
-        {/* <DatePicker ref={dateRef} required /> */}
         <FileUpload ref={fileRef} required />
         <CheckboxReactHookFormMultiple
           ref={checkboxRef}
@@ -71,9 +72,22 @@ export default function Visualizer() {
         />
         <TimeField ref={timeRef} required />
         <DateTimeField ref={dateTimeRef} required />
-        <SelectDropdown ref={selectRef} items={items} required />
-        <PhoneField required />
-        <RadioGeneric items={items} required />
+        <SelectDropdown
+          items={items}
+          required
+          onChange={() => {}}
+          value={items[0]}
+        />
+        <PhoneField ref={phoneRef} required />
+        <RadioGeneric
+          items={items}
+          required
+          value={items[1]}
+          onChange={(value) => {
+            setRadio(value); // Update radio value in state
+          }}
+        />
+        <DropdownMenuMulti items={items} required />
         <Button type="submit">Submit</Button>
       </div>
     </form>
