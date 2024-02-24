@@ -5,7 +5,7 @@ import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
 import { getTranslations } from '~/i18n/translations';
 import HorsesRunning from '~/components/horses-running';
-import DepartmentGallery from '~/components/departmentGallery';
+import DepartmentGallery from '~/components/department-gallery';
 
 export default async function Department({
   params: { locale, name },
