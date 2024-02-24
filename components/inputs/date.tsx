@@ -12,16 +12,9 @@ import {
 } from '@/components/ui/popover';
 
 import { Label } from '../ui/label';
+import { InputProps } from '../ui/input';
 
-export interface GenericProps {
-  label?: string;
-  required?: boolean;
-  disabled?: boolean;
-  errorMsg?: string;
-  description?: string;
-}
-
-const DatePicker = forwardRef<HTMLDivElement, GenericProps>(
+const DatePicker = forwardRef<HTMLDivElement, InputProps>(
   (
     {
       label = 'Date',
@@ -35,7 +28,7 @@ const DatePicker = forwardRef<HTMLDivElement, GenericProps>(
     const [date, setDate] = useState<Date>();
 
     return (
-      <div className="flex flex-col" ref={ref}>
+      <div className="flex flex-col">
         <div>
           <Label>{label}</Label>
           {required && <span style={{ color: '#EC734B' }}>*</span>}
@@ -57,9 +50,10 @@ const DatePicker = forwardRef<HTMLDivElement, GenericProps>(
               {date ? format(date, 'PPP') : <span>Pick a date</span>}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0">
+          <PopoverContent className="w-auto p-0" ref={ref}>
             <Calendar
               mode="single"
+              required={required}
               selected={date}
               onSelect={setDate}
               initialFocus

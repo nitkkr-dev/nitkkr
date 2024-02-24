@@ -30,7 +30,7 @@ const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
             {props.description}
           </p>
         )}
-        <Select disabled={props.disabled}>
+        <Select disabled={props.disabled} required={props.required}>
           <SelectTrigger>
             <SelectValue placeholder="Select an item" />
           </SelectTrigger>
