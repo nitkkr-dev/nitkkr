@@ -10,6 +10,7 @@ import SelectDropdown from './selectIItem';
 import { Button } from '../ui/button';
 import DateTimeField from './date-time';
 import PhoneField from './telephone';
+import RadioGeneric from './radioItems';
 
 interface FormValues {
   email: string;
@@ -54,18 +55,25 @@ export default function Visualizer() {
     <form onSubmit={handleSubmit}>
       <div className="ml-80 w-80 space-y-6">
         <EmailField ref={emailRef} required />
-        <TextField ref={nameRef} label="Name" placeholder="Enter your name" />
+        <TextField
+          ref={nameRef}
+          label="Name"
+          placeholder="Enter your name"
+          required
+        />
         {/* <DatePicker ref={dateRef} required /> */}
         <FileUpload ref={fileRef} required />
         <CheckboxReactHookFormMultiple
           ref={checkboxRef}
           items={items}
           description="check only one value"
+          required
         />
         <TimeField ref={timeRef} required />
-        <DateTimeField ref={dateTimeRef} />
-        <SelectDropdown ref={selectRef} items={items} defaultValue={items[0]} />
+        <DateTimeField ref={dateTimeRef} required />
+        <SelectDropdown ref={selectRef} items={items} required />
         <PhoneField required />
+        <RadioGeneric items={items} required />
         <Button type="submit">Submit</Button>
       </div>
     </form>
