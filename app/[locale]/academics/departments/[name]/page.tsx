@@ -3,11 +3,9 @@ import Link from 'next/link';
 import { ImLab } from 'react-icons/im';
 import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
-import SubNav from '@/components/DepartmentRelated/subNav';
-import MaxWidthWrapper from '@/components/DepartmentRelated/maxWidthWrapper';
-import HorsesRunning from '@/components/horses-running';
-import DepartmentGallery from '@/components/DepartmentRelated/departmentGallery';
-import { getTranslations } from '@/i18n/translations';
+import { getTranslations } from '~/i18n/translations';
+import HorsesRunning from '~/components/horses-running';
+import DepartmentGallery from '~/components/departmentGallery';
 
 export default async function Department({
   params: { locale, name },
@@ -32,6 +30,14 @@ export default async function Department({
       phone: ['1234567890', '1234567890'],
     },
   };
+  const subLinks = [
+    { key: 'About', title: 'About', link: '#' },
+    { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
+    { key: 'HODMessage', title: "HOD's Message", link: '#' },
+    { key: 'Programs', title: 'Programs', link: '#' },
+    { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
+    { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
+  ];
   return (
     <div>
       <header className="relative flex h-[493px] w-screen flex-col items-center overflow-hidden">
@@ -45,7 +51,21 @@ export default async function Department({
           {decodeURIComponent(departmentData.name)}
         </h1>
         <div className="mt-auto">
-          <SubNav />
+          <div className="sticky top-10">
+            <div className="mb-3 ">
+              <div className="flex justify-evenly space-x-10 rounded-full  bg-background p-1">
+                {subLinks.map((btn) => (
+                  <Link
+                    key={btn.key}
+                    href={btn.link}
+                    className="ransition-all rounded-full p-3 duration-300 hover:bg-primary-700 hover:text-background"
+                  >
+                    {btn.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </header>
       {/* About */}
@@ -53,7 +73,7 @@ export default async function Department({
         {/* about section */}
         <section>
           <div className="flex items-center justify-center">
-            <HorsesRunning direction={'left'} count={10} />
+            <HorsesRunning direction={'left'} />
             <h2 className="text-3xl font-semibold text-primary-700">ABOUT</h2>
           </div>
           <article className="mt-10 flex items-center rounded-md bg-neutral-50">
@@ -136,7 +156,7 @@ export default async function Department({
         {/*  hod's message*/}
         <section className="mt-20">
           <div className="flex items-center">
-            <HorsesRunning direction="left" count={9} />
+            <HorsesRunning direction="left" />
             <h1 className="text-3xl font-semibold text-primary-700">
               HOD&apos;s Message
             </h1>
@@ -161,11 +181,11 @@ export default async function Department({
         {/*Programmes */}
         <section className="mt-10">
           <div className="flex items-center justify-evenly">
-            <HorsesRunning direction="left" count={4} />
+            <HorsesRunning direction="left" />
             <h2 className="pl-5 text-3xl font-semibold text-primary-700">
               PROGRAMMES
             </h2>
-            <HorsesRunning direction="right" count={4} />
+            <HorsesRunning direction="right" />
           </div>
           <section className="mx-auto mt-20 max-w-7xl">
             <div className="grid grid-cols-3 gap-4">

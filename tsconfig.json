@@ -1,31 +1,33 @@
 {
   "compilerOptions": {
+    /* Base Options: */
     "allowJs": false,
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "es5",
+
+    /* Strictness */
+    "strict": true,
+
+    /* Bundled projects */
+    "incremental": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "noEmit": true,
+    "plugins": [{ "name": "next" }],
+
+    /* Path Aliases */
     "paths": {
-      "@/api/*": ["./app/api/*"],
-      "@/app/*": ["./app/[locale]/*"],
-      "@/assets/*": ["./public/assets/*"],
-      "@/*": ["./*"]
-    }
+      "~/api/*": ["./app/api/*"],
+      "~/app/*": ["./app/[locale]/*"],
+      "~/assets/*": ["./public/assets/*"],
+      "~/*": ["./*"],
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

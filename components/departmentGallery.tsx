@@ -1,22 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent } from './ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '../ui/carousel';
-import HorsesRunning from '../horses-running';
+} from './ui/carousel';
+import HorsesRunning from './horses-running';
 
 export default function DepartmentGallery() {
   return (
     <div>
       <div className="flex items-center space-x-5">
-        <span className="text-3xl font-semibold text-primary-500">Gallery</span>
-        <HorsesRunning direction="right" count={11} />
+        <h1 className="text-3xl font-semibold text-primary-500">GALLERY</h1>
+        <HorsesRunning direction="right" />
       </div>
 
       <Carousel
