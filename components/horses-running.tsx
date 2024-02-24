@@ -2,10 +2,8 @@ import Image from 'next/image';
 
 export default function HorsesRunning({
   direction,
-  count,
 }: {
   direction: 'left' | 'right';
-  count: number;
 }) {
   const directionClass =
     direction === 'left'
