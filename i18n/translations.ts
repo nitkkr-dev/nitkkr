@@ -37,5 +37,6 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
 }

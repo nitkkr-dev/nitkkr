@@ -50,6 +50,10 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  Unauthorised: {
+    title: 'Unauthorised',
+    description: 'You are not authorised to view this page.',
+  },
   WorkInProgress: {
     title: 'Work In Progress',
     description:

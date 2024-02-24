@@ -46,6 +46,10 @@ const text: Translations = {
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
   },
+  Unauthorised: {
+    title: 'अनधिकृत',
+    description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
+  },
   WorkInProgress: {
     title: 'कार्य प्रगति पर है',
     description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
