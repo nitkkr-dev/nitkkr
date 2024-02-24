@@ -74,13 +74,13 @@ export default function Notifications({ locale }: { locale: string }) {
           ))}
         </ul>
 
-        <section className="grow truncate rounded-xl bg-background/[0.6] px-8 py-6 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
-          <ol className="mb-5 h-[450px] overflow-y-scroll">
+        <section className="grow truncate rounded-xl bg-background/[0.6] px-8 pt-10 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
+          <ol className="h-[438px] overflow-y-scroll">
             {notifications[currentCategory].items.map(
               ({ label, value }, index) => (
                 <li key={index}>
                   <Link
-                    className="my-5 inline-flex max-w-full gap-2"
+                    className="inline-flex max-w-full"
                     href={`/${locale}/${value}`}
                   >
                     <MdOutlineKeyboardArrowRight
@@ -89,15 +89,15 @@ export default function Notifications({ locale }: { locale: string }) {
                     />
                     <p className="mb-0 truncate text-lg">{label}</p>
                   </Link>
-                  <hr />
+                  <hr className="my-5 opacity-20" />
                 </li>
               )
             )}
           </ol>
 
-          <footer className="mt-auto">
+          <footer className="mx-auto mt-auto max-w-fit">
             <Link href={`/${locale}/noticeboard`}>
-              <button className="w-full px-5 text-lg font-bold text-primary-700">
+              <button className="px-5 py-3 text-lg font-bold text-primary-700">
                 View All
               </button>
             </Link>
