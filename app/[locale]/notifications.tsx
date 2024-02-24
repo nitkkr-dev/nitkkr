@@ -77,8 +77,8 @@ export default async function Notifications({
         </ul>
 
         <section className="grow truncate rounded-xl bg-background/[0.6] px-8 pt-10 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
-          <ol className="h-[438px] overflow-y-scroll">
-            <ScrollArea>
+          <ScrollArea className="h-[438px]">
+            <ol>
               {notifications[currentCategory].items.map(
                 ({ label, value }, index) => (
                   <li key={index}>
@@ -96,8 +96,8 @@ export default async function Notifications({
                   </li>
                 )
               )}
-            </ScrollArea>
-          </ol>
+            </ol>
+          </ScrollArea>
 
           <footer className="mx-auto mt-auto max-w-fit">
             <Link href={`/${locale}/noticeboard`}>
