@@ -77,6 +77,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             name={name}
             required={required}
+            maxLength={props.maxLength}
             {...props}
           />
           {RightChild && (
