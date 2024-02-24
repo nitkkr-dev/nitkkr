@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
@@ -49,15 +48,7 @@ export default async function Notifications({
       <Link href="#notifications">
         <header className="container mx-auto mb-20 flex max-w-fit flex-row">
           <HorsesRunning direction="left" />
-          <h2 className="my-auto">N</h2>
-          <Image
-            alt="O"
-            className="-mx-1 my-auto h-10 w-12 rotate-[90.66deg]"
-            height={0}
-            width={0}
-            src="https://s3-alpha-sig.figma.com/img/7db9/c4c1/4eb207d47d921a188206eed6516fae23?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YFIA~KzF5YY2tI~FelEQ9qOgTrm7rQrclT3~cQ2G9oTeWj-TjFVAFWBDk-vVPgwUkuWVA2IyirKlOlHVIzifLp1CCE7eVOmNk0zRiEhuuz1h5z6fKDRV9on7wjD4TTPIdg4cz0eDfxwKdQ9pPephjSYDZrcSEK5FcfOZPterorVhg0EaOcArC7W7bD85ls4bv9hj9eFrGdDWDF-qigj8o5um2Sc26nf5mt-Mebhf5WxgnjCuKxpvY5iEpliVEpYZvTVk2EHg0SPLZOAo9LcOU9UPk4mygXHbbf-4LnRteLlpu75mz468AMTmN1QNP1fCYdWcHiVsnIVhvQavustFsg__"
-          />
-          <h2 className="my-auto">TIFICATIONS</h2>
+          <h2 className="my-auto">{text.title}</h2>
         </header>
       </Link>
 

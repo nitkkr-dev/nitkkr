@@ -2,6 +2,7 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   DirectorsCorner: {
+    title: 'DIRECTOR’S CORNER',
     name: 'Prof. B. V. Ramana Reddy',
     quote: [
       `India, the land of seekers, is at the cusp of becoming Vishwa Guru all
@@ -40,6 +41,7 @@ const text: Translations = {
     login: 'Login',
   },
   Notifications: {
+    title: 'NOTIFICATIONS',
     categories: ['Academic', 'Tenders', 'Workshops', 'Recruitement'],
     viewAll: 'View All',
   },
