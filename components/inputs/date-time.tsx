@@ -13,6 +13,7 @@ const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         className=""
         type="datetime-local"
+        max="9999-12-31T23:59"
         placeholder={placeholder}
         label={label}
         {...props}
