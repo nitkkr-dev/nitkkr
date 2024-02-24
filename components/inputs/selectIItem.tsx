@@ -13,12 +13,12 @@ import {
 import { InputProps } from '../ui/input';
 import { Label } from '../ui/label';
 
-interface ListProps extends InputProps {
+export interface ListProps extends InputProps {
   items: string[];
 }
 
 const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
-  ({ items, className, ...props }, ref) => {
+  ({ items, className, ...props }: ListProps, ref) => {
     return (
       <div className={className} ref={ref}>
         <Label htmlFor={props.name}>

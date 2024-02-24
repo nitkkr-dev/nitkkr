@@ -8,8 +8,11 @@ import { ZodOptional, ZodString } from 'zod';
 import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormElement';
 import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
 import { InputProps } from '@/components/ui/input';
+import SelectDropdown, { ListProps } from '@/components/inputs/selectIItem';
 
 export type ElementsType = 'TextField' | 'EmailField';
+
+type GenericTypes = InputProps | ListProps;
 
 export type FormElement = {
   input_type: ElementsType;
@@ -19,7 +22,7 @@ export type FormElement = {
   };
   uiFieldComponent: React.FC<{ elementInstance: FormElementInstance }>;
   formComponent: ForwardRefExoticComponent<
-    Omit<InputProps, 'ref'> & RefAttributes<HTMLInputElement>
+    Omit<GenericTypes, 'ref'> & RefAttributes<HTMLInputElement>
   >;
   propertiesComponent: React.FC<{ elementInstance: FormElementInstance }>;
   construct: (
