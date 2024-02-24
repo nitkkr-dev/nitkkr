@@ -30,6 +30,10 @@ export interface Translations {
     search: string;
     login: string;
   };
+  Notifications: {
+    categories: [string, string, string, string];
+    viewAll: string;
+  };
   NotFound: { title: string; description: string; backHome: string };
   WorkInProgress: { title: string; description: string };
 }

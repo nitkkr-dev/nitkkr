@@ -39,6 +39,10 @@ const text: Translations = {
     search: 'Quick Search...',
     login: 'Login',
   },
+  Notifications: {
+    categories: ['Academic', 'Tenders', 'Workshops', 'Recruitement'],
+    viewAll: 'View All',
+  },
   NotFound: {
     title: 'Not Found',
     description: 'Could not find requested resource',

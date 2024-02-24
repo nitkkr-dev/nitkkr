@@ -1,18 +1,24 @@
-'use client';
-
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import HorsesRunning from '~/components/horses-running';
+import { getTranslations } from '~/i18n/translations';
+import { getKeys } from '~/lib/utils';
 
-export default function Notifications({ locale }: { locale: string }) {
-  const [currentCategory, setCurrentCategory] = useState(0);
-  const notifications = [
-    {
-      category: 'Academic',
+export default async function Notifications({
+  category: currentCategory,
+  locale,
+}: {
+  category: 'academic' | 'tenders' | 'workshops' | 'recruitement';
+  locale: string;
+}) {
+  const text = (await getTranslations(locale)).Notifications;
+
+  const notifications = {
+    academic: {
+      localisedName: text.categories[0],
       items: [...Array<number>(40)].map(() => {
         return {
           label:
@@ -21,8 +27,8 @@ export default function Notifications({ locale }: { locale: string }) {
         };
       }),
     },
-    {
-      category: 'Tenders',
+    tenders: {
+      localisedName: text.categories[1],
       items: [...Array<number>(4)].map(() => {
         return {
           label:
@@ -31,9 +37,9 @@ export default function Notifications({ locale }: { locale: string }) {
         };
       }),
     },
-    { category: 'Workshops', items: [] },
-    { category: 'Recruitement', items: [] },
-  ];
+    workshops: { localisedName: text.categories[2], items: [] },
+    recruitement: { localisedName: text.categories[3], items: [] },
+  };
 
   return (
     <article
@@ -57,19 +63,23 @@ export default function Notifications({ locale }: { locale: string }) {
 
       <article className="container flex min-w-full gap-20">
         <ul className="flex flex-col gap-10">
-          {notifications.map(({ category }, index) => (
+          {getKeys(notifications).map((category, index) => (
             <li key={index}>
-              <button
-                className={clsx(
-                  'button w-[448px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
-                  index === currentCategory
-                    ? 'border-shade-light bg-primary-700 text-shade-light'
-                    : 'bg-opacity-60'
-                )}
-                onClick={() => setCurrentCategory(index)}
+              <Link
+                href={{ query: { notificationCategory: category } }}
+                scroll={false}
               >
-                {category}
-              </button>
+                <button
+                  className={clsx(
+                    'button w-[448px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
+                    category == currentCategory
+                      ? 'border-shade-light bg-primary-700 text-shade-light'
+                      : 'bg-opacity-60'
+                  )}
+                >
+                  {notifications[category].localisedName}
+                </button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -98,7 +108,7 @@ export default function Notifications({ locale }: { locale: string }) {
           <footer className="mx-auto mt-auto max-w-fit">
             <Link href={`/${locale}/noticeboard`}>
               <button className="px-5 py-3 text-lg font-bold text-primary-700">
-                View All
+                {text.viewAll}
               </button>
             </Link>
           </footer>

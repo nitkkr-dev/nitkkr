@@ -35,6 +35,10 @@ const text: Translations = {
     search: 'त्वरित खोज...',
     login: 'लॉगिन',
   },
+  Notifications: {
+    categories: ['शैक्षणिक', 'निविदाएँ', 'कार्यशालाएं', 'नियुक्ति'],
+    viewAll: 'सारा देखें',
+  },
   NotFound: {
     title: 'नहीं मिला',
     description: 'अनुरोधित संसाधन नहीं मिल सका',
