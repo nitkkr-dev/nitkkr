@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 
 import EmailField from './email';
@@ -45,7 +46,7 @@ export default function Visualizer() {
       time: timeRef.current?.value || '',
       select: selectRef.current?.value || '',
     };
-    console.log('Submitted Data:', formData);
+    console.log('Submitted Data:', event.target);
   };
 
   const items = ['item1', 'item2', 'item3', 'item4'];
@@ -63,7 +64,7 @@ export default function Visualizer() {
           description="check only one value"
         />
         <TimeField ref={timeRef} required />
-        <DateTimeField ref={dateTimeRef} />
+        <DateTimeField ref={dateTimeRef} name="dt" />
         <SelectDropdown ref={selectRef} items={items} defaultValue={items[0]} />
         <PhoneField required />
         <Button type="submit">Submit</Button>

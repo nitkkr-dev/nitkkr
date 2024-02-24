@@ -25,10 +25,11 @@ const propertiesSchema = z.object({
   description: z.string().max(200).optional(),
   required: z.boolean().default(false),
   placeHolder: z.string().max(50),
+  marks: z.coerce.number().nonnegative().default(0),
 });
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
-export default function EmailValidationForm({
+export default function DropdownForm({
   elementInstance,
 }: {
   elementInstance: FormElementInstance;
@@ -42,6 +43,7 @@ export default function EmailValidationForm({
       description: elementInstance.description || '',
       required: elementInstance.is_required,
       placeHolder: '',
+      marks: elementInstance.marks,
     },
   });
   useEffect(() => {
@@ -50,6 +52,7 @@ export default function EmailValidationForm({
       description: elementInstance.description,
       required: elementInstance.is_required,
       placeHolder: '',
+      marks: elementInstance.marks,
     });
   }, [elementInstance, form]);
 
@@ -157,6 +160,33 @@ export default function EmailValidationForm({
             </FormItem>
           )}
         />
+
+        {is_quiz ? (
+          <FormField
+            control={form.control}
+            name="marks"
+            render={({ field }) => (
+              <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
+                <div className="space-y-0.5">
+                  <FormLabel>Marks</FormLabel>
+                </div>
+                <FormControl>
+                  <Input
+                    {...field}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') e.currentTarget.blur();
+                    }}
+                    type="number"
+                    min={0}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ) : (
+          ''
+        )}
       </form>
     </Form>
   );

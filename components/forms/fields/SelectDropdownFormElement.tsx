@@ -1,39 +1,41 @@
-import { MdOutlineEmail } from 'react-icons/md';
+import { RxDropdownMenu } from 'react-icons/rx';
 import { z } from 'zod';
 
+import SelectDropdown from '@/components/inputs/selectIItem';
+import TextField from '@/components/inputs/text';
+
+import DropdownForm from './DropdownFrom';
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '@/components/forms/interfaces/FormElements';
-import EmailField from '@/components/inputs/email';
+} from '../interfaces/FormElements';
 
-import InputBasedForm from './InputBasedForm';
+const input_type: ElementsType = 'SelectDropdown';
 
-const input_type: ElementsType = 'EmailField';
-
-export const EmailFieldFormElement: FormElement = {
+export const SelectDropdownFormElement: FormElement = {
   input_type,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <EmailField
+    <SelectDropdown
       className="w-full"
       readOnly
+      items={elementInstance.choices || []}
       label={elementInstance.question}
       required={elementInstance.is_required}
       description={elementInstance.description}
     />
   ),
-  formComponent: EmailField,
-  propertiesComponent: InputBasedForm,
+  formComponent: TextField,
+  propertiesComponent: DropdownForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Email Field',
+      question: 'Text Field',
       input_type,
       is_required: false,
       page_number,
@@ -41,8 +43,8 @@ export const EmailFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdOutlineEmail,
-    label: 'Email Field',
+    icon: RxDropdownMenu,
+    label: 'Text Field',
   },
   schemaObject: schemaObject,
   schemaObjects: schemaObjects,

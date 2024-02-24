@@ -7,12 +7,13 @@ import { ZodOptional, ZodString } from 'zod';
 
 import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormElement';
 import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
+import { SelectDropdownFormElement } from '@/components/forms/fields/SelectDropdownFormElement';
 import { InputProps } from '@/components/ui/input';
-import SelectDropdown, { ListProps } from '@/components/inputs/selectIItem';
+import { ListProps } from '@/components/inputs/selectIItem';
 
-export type ElementsType = 'TextField' | 'EmailField';
+export type ElementsType = 'TextField' | 'EmailField' | 'SelectDropdown';
 
-type GenericTypes = InputProps | ListProps;
+type GenericTypes = InputProps;
 
 export type FormElement = {
   input_type: ElementsType;
@@ -56,4 +57,5 @@ type FormElementsType = {
 export const FormElements: FormElementsType = {
   TextField: TextFieldFormElement,
   EmailField: EmailFieldFormElement,
+  SelectDropdown: SelectDropdownFormElement,
 };

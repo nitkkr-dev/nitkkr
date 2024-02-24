@@ -13,14 +13,16 @@ import {
 import { InputProps } from '../ui/input';
 import { Label } from '../ui/label';
 
-export interface ListProps extends InputProps {
+export interface ListProps extends Omit<InputProps, 'onChange'> {
   items: string[];
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
-const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
+const SelectDropdown = forwardRef<HTMLInputElement, ListProps>(
   ({ items, className, ...props }: ListProps, ref) => {
     return (
-      <div className={className} ref={ref}>
+      <div className={className}>
         <Label htmlFor={props.name}>
           {props.label ? props.label : 'Select'}
         </Label>
@@ -30,7 +32,12 @@ const SelectDropdown = forwardRef<HTMLDivElement, ListProps>(
             {props.description}
           </p>
         )}
-        <Select disabled={props.disabled} required={props.required}>
+        <Select
+          disabled={props.disabled}
+          required={props.required}
+          onValueChange={props.onChange}
+          defaultValue={props.value}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select an item" />
           </SelectTrigger>

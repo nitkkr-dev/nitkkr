@@ -8,7 +8,7 @@ import {
 } from '@/components/forms/interfaces/FormElements';
 import TextField from '@/components/inputs/text';
 
-import TextValidationForm from './TextValdiationForm';
+import TextValidationForm from './InputBasedForm';
 
 const input_type: ElementsType = 'TextField';
 
