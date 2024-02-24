@@ -4,12 +4,14 @@ import FormExpired from '@/components/forms/FormExpired';
 import FormNotFound from '@/components/forms/FormNotFound';
 import FormSingleResponse from '@/components/forms/FormSingleResponse';
 import FormSubmitForm from '@/components/forms/FormSubmitForm';
-import { ElementsType } from '@/components/forms/interfaces/FormElements';
+import {
+  ElementsType,
+  FormElements,
+} from '@/components/forms/interfaces/FormElements';
 import prisma from '@/lib/prisma';
 import { finalFormSchema, formSchema, formSchemaType } from '@/schemas/form';
 import { form_questions, forms } from '@/prisma/generated/client';
 import { revalidatePath } from 'next/cache';
-import exp from 'constants';
 
 //TODO
 async function currentUser() {
@@ -159,6 +161,58 @@ export async function UpdateFormQuestions(
 
   await Promise.all(upsertOperations);
 }
+export async function UpdateFormQuestionsForSubmission(
+  form_id: number,
+  questions: new_form_questions[]
+) {
+  const user = await currentUser();
+  if (!user) throw new UserNotFoundErr();
+  const schema: {
+    type: string;
+    properties: { [key: string]: object };
+    required: string[];
+    additionalProperties: boolean;
+  } = {
+    type: 'object',
+    properties: {},
+    required: [],
+    additionalProperties: false,
+  };
+  const upsertOperations = questions.map(async (question, index) => {
+    const { Id, id, page_number, ...rest } = question;
+    const page_number_with_index = page_number + index * 0.001;
+    const questionFinal = id
+      ? await prisma.form_questions.upsert({
+          where: {
+            id: id,
+          },
+          update: rest,
+          create: {
+            ...rest,
+            form_id,
+            page_number: page_number_with_index,
+          },
+        })
+      : await prisma.form_questions.create({
+          data: {
+            ...rest,
+            form_id,
+            page_number: page_number_with_index,
+          },
+        });
+
+    if (FormElements[questionFinal.input_type as ElementsType].shouldValidate) {
+      schema.properties[questionFinal.id.toString()] =
+        FormElements[questionFinal.input_type as ElementsType].schemaObjects(
+          question
+        );
+      schema.required.push(questionFinal.id.toString());
+    }
+  });
+
+  await Promise.all(upsertOperations);
+  return schema;
+}
 
 type formSum = Omit<
   forms,
@@ -186,7 +240,7 @@ export async function PublishForm(
     is_published: true,
     id,
   };
-  await UpdateFormQuestions(id, questions);
+  const schema = await UpdateFormQuestionsForSubmission(id, questions);
   return prisma.forms.update({
     where: {
       id,

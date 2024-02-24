@@ -31,6 +31,7 @@ export type FormElement = {
     id?: number
   ) => FormElementInstance;
   schemaObject: (required: boolean) => ZodString | ZodOptional<ZodString>;
+  schemaObjects: (element: FormElementInstance) => object;
   shouldValidate: boolean;
 };
 
