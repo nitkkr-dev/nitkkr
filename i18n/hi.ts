@@ -2,6 +2,7 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   DirectorsCorner: {
+    title: 'निर्देशक का कोना',
     name: 'डा. बी. वी. रमणा रेड्डी',
     quote: [
       `भारत, साधकों की भूमि, ११०० वर्षों की पराधीनता, युद्ध, विलय और अपमान के बाद फिर से विश्व गुरु बन्ने
@@ -35,10 +36,19 @@ const text: Translations = {
     search: 'त्वरित खोज...',
     login: 'लॉगिन',
   },
+  Notifications: {
+    title: 'सूचनाएं',
+    categories: ['शैक्षणिक', 'निविदाएँ', 'कार्यशालाएं', 'नियुक्ति'],
+    viewAll: 'सारा देखें',
+  },
   NotFound: {
     title: 'नहीं मिला',
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
+  },
+  Unauthorised: {
+    title: 'अनधिकृत',
+    description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
   },
   WorkInProgress: {
     title: 'कार्य प्रगति पर है',

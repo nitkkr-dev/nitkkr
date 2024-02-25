@@ -1,15 +1,15 @@
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '~/api/auth/auth';
 import Unauthorized from '~/components/unauthorized';
 import WorkInProgress from '~/components/work-in-progress';
+import { getServerAuthSession } from '~/server/auth';
+
 
 export default async function Profile({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerAuthSession();
 
   return session ? (
     <WorkInProgress locale={locale} />

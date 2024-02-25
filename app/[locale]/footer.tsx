@@ -69,7 +69,7 @@ export default async function Footer({ locale }: { locale: string }) {
           <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
             <h5 className="mb-3 text-neutral-50">{text.headings[0]}</h5>
             <ul className="flex flex-col gap-3">
-              {[...Array(8)].map((value, index) => (
+              {[...Array<number>(8)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
                     {text.lorem}
@@ -88,7 +88,7 @@ export default async function Footer({ locale }: { locale: string }) {
           >
             <h5 className="mb-3 text-neutral-50">{text.headings[1]}</h5>
             <ul className="flex flex-col gap-3">
-              {[...Array(10)].map((value, index) => (
+              {[...Array<number>(10)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
                     {text.lorem}
@@ -107,7 +107,7 @@ export default async function Footer({ locale }: { locale: string }) {
           >
             <h5 className="mb-3 text-neutral-50">{text.headings[2]}</h5>
             <ul className="flex flex-col gap-3">
-              {[...Array(4)].map((value, index) => (
+              {[...Array<number>(4)].map((value, index) => (
                 <li key={index}>
                   <Link className="text-neutral-500" href="">
                     {text.lorem}

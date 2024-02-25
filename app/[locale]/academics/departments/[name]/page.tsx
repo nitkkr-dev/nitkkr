@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ImLab } from 'react-icons/im';
 import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
+
 import { getTranslations } from '~/i18n/translations';
 import HorsesRunning from '~/components/horses-running';
 import DepartmentGallery from '~/components/department-gallery';
