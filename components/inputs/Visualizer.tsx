@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import EmailField from './email';
 import TextField from './text';
@@ -65,7 +65,7 @@ export default function Visualizer() {
         />
         <TimeField ref={timeRef} required />
         <DateTimeField ref={dateTimeRef} name="dt" />
-        <SelectDropdown ref={selectRef} items={items} defaultValue={items[0]} />
+        <SelectDropdown items={items} value={items[0]} />
         <PhoneField required />
         <Button type="submit">Submit</Button>
       </div>

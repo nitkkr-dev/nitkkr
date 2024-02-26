@@ -1,10 +1,11 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -20,13 +21,18 @@ import { Switch } from '@/components/ui/switch';
 import useDragDrop from '../hooks/useDragDrop';
 import { FormElementInstance } from '../interfaces/FormElements';
 
+const choiceArray = z.object({
+  choice: z.string().min(2),
+});
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   description: z.string().max(200).optional(),
   required: z.boolean().default(false),
   placeHolder: z.string().max(50),
   marks: z.coerce.number().nonnegative().default(0),
+  choices: z.array(choiceArray).min(2),
 });
+
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 export default function DropdownForm({
@@ -44,8 +50,20 @@ export default function DropdownForm({
       required: elementInstance.is_required,
       placeHolder: '',
       marks: elementInstance.marks,
+      choices: elementInstance.choices?.map((choiceVal) => {
+        return { choice: choiceVal };
+      }) || [{ choice: 'first choice' }, { choice: 'second choice' }],
     },
   });
+  const {
+    fields: fall,
+    append,
+    remove,
+  } = useFieldArray({
+    control: form.control,
+    name: 'choices',
+  });
+
   useEffect(() => {
     form.reset({
       label: elementInstance.question,
@@ -53,16 +71,20 @@ export default function DropdownForm({
       required: elementInstance.is_required,
       placeHolder: '',
       marks: elementInstance.marks,
+      choices: elementInstance.choices?.map((choiceVal) => {
+        return { choice: choiceVal };
+      }) || [{ choice: 'first choice' }, { choice: 'second choice' }],
     });
   }, [elementInstance, form]);
 
   function applyChanges(values: propertiesFormSchemaType) {
-    const { label, description, required } = values;
+    const { label, description, required, choices } = values;
     updateElement(elementInstance.Id, elementInstance.page_number, {
       ...elementInstance,
       question: label,
       description,
       is_required: required,
+      choices: choices.map((choiceObj) => choiceObj.choice) || [],
     });
   }
 
@@ -160,7 +182,61 @@ export default function DropdownForm({
             </FormItem>
           )}
         />
-
+        <FormField
+          control={form.control}
+          name={'choices.0.choice'}
+          render={({ field }) => (
+            <div className="flex items-start justify-center gap-2">
+              <FormItem className="flex-grow">
+                <FormLabel>Choice 1</FormLabel>
+                <FormControl>
+                  <Input placeholder="Review" {...field} />
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            </div>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name={'choices.1.choice'}
+          render={({ field }) => (
+            <div className="flex items-start justify-center gap-2">
+              <FormItem className="flex-grow">
+                <FormLabel>Choice 2</FormLabel>
+                <FormControl>
+                  <Input placeholder="Review" {...field} />
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            </div>
+          )}
+        />
+        {fall.map((name, index) => (
+          <div className="flex gap-2 " key={index + 2}>
+            <FormField
+              control={form.control}
+              name={`choices.${index + 2}.choice`}
+              render={({ field }) => (
+                <div className="flex items-start justify-center gap-2">
+                  <FormItem className="flex-grow">
+                    <FormLabel>Choice {index + 3}</FormLabel>
+                    <FormControl key={`in${index}`}>
+                      <Input placeholder="Review" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                </div>
+              )}
+            />
+            <Button type="button" onClick={() => remove(index)}>
+              trash
+            </Button>
+          </div>
+        ))}
+        <button type="button" onClick={() => append({ choice: `` })}>
+          Append
+        </button>
         {is_quiz ? (
           <FormField
             control={form.control}

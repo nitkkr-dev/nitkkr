@@ -2,7 +2,6 @@ import { RxDropdownMenu } from 'react-icons/rx';
 import { z } from 'zod';
 
 import SelectDropdown from '@/components/inputs/selectIItem';
-import TextField from '@/components/inputs/text';
 
 import DropdownForm from './DropdownFrom';
 import {
@@ -22,14 +21,14 @@ export const SelectDropdownFormElement: FormElement = {
   }) => (
     <SelectDropdown
       className="w-full"
-      readOnly
+      disabled
       items={elementInstance.choices || []}
       label={elementInstance.question}
       required={elementInstance.is_required}
       description={elementInstance.description}
     />
   ),
-  formComponent: TextField,
+  formComponent: SelectDropdown,
   propertiesComponent: DropdownForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
@@ -44,7 +43,7 @@ export const SelectDropdownFormElement: FormElement = {
   },
   dragBtnElement: {
     icon: RxDropdownMenu,
-    label: 'Text Field',
+    label: 'Select Field',
   },
   schemaObject: schemaObject,
   schemaObjects: schemaObjects,
@@ -58,8 +57,8 @@ function schemaObjects(element: FormElementInstance) {
 }
 function schemaObject(required: boolean) {
   if (required) {
-    return z.string().email({ message: 'Invalid email' });
+    return z.string();
   } else {
-    return z.string().email({ message: 'Invalid email' }).optional();
+    return z.string().optional();
   }
 }

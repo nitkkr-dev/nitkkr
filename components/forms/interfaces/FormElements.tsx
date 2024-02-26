@@ -9,11 +9,11 @@ import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormEle
 import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
 import { SelectDropdownFormElement } from '@/components/forms/fields/SelectDropdownFormElement';
 import { InputProps } from '@/components/ui/input';
-import { ListProps } from '@/components/inputs/selectIItem';
+import { ListProps } from '@/components/inputs/radioItems';
 
 export type ElementsType = 'TextField' | 'EmailField' | 'SelectDropdown';
 
-type GenericTypes = InputProps;
+type Generics = InputProps;
 
 export type FormElement = {
   input_type: ElementsType;
@@ -22,9 +22,11 @@ export type FormElement = {
     label: string;
   };
   uiFieldComponent: React.FC<{ elementInstance: FormElementInstance }>;
-  formComponent: ForwardRefExoticComponent<
-    Omit<GenericTypes, 'ref'> & RefAttributes<HTMLInputElement>
-  >;
+  formComponent:
+    | ForwardRefExoticComponent<
+        Omit<Generics, 'ref'> & RefAttributes<HTMLInputElement>
+      >
+    | React.FC<ListProps>;
   propertiesComponent: React.FC<{ elementInstance: FormElementInstance }>;
   construct: (
     Id: string,

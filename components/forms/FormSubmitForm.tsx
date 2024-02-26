@@ -139,6 +139,7 @@ export default function FormSubmitForm({
                           label={question.question}
                           required={question.is_required}
                           description={question.description}
+                          items={question.choices || []}
                         />
                       </FormControl>
                       <FormMessage />
