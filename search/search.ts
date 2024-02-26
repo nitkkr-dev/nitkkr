@@ -1,6 +1,6 @@
 import Typesense, { Client } from 'typesense'
 import { SearchParams, SearchResponse } from 'typesense/lib/Typesense/Documents'
-
+import { CollectionMap, collectionMap, collections } from './collections'
 const query = 'arya'
 
 const client = new Typesense.Client({
@@ -12,22 +12,6 @@ const client = new Typesense.Client({
     'apiKey': 'xyz',
     'connectionTimeoutSeconds': 2
 })
-
-interface CollectionMap {
-    [key: string]: string
-}
-
-const collections: string[] = [
-    'students',
-    'faculty',
-    'courses'
-]
-const collectionMap: CollectionMap = {
-    'students': 'name, email',
-    'faculty': 'name',
-    'courses': 'title, code',
-}
-
 
 async function performSearch(client: Client, collectionMap: CollectionMap, collections: string[], query: string) {
     let searchResults: SearchResponse<object>[] = []
