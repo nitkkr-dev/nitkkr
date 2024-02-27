@@ -4,7 +4,6 @@ import React, { useRef, useState } from 'react';
 import EmailField from './email';
 import TextField from './text';
 import FileUpload from './fileUpload';
-import CheckboxReactHookFormMultiple from './Checkbox';
 import TimeField from './time';
 import SelectDropdown from './selectIItem';
 import { Button } from '../ui/button';
@@ -12,6 +11,7 @@ import DateTimeField from './date-time';
 import PhoneField from './telephone';
 import RadioGeneric from './radioItems';
 import DropdownMenuMulti from './multiDropdown';
+import CheckboxGeneric from './Checkbox';
 
 interface FormValues {
   email: string;
@@ -65,9 +65,8 @@ export default function Visualizer() {
           required
         />
         <FileUpload ref={fileRef} required />
-        <CheckboxReactHookFormMultiple
-          ref={checkboxRef}
-          items={items}
+        <CheckboxGeneric
+          item="Do you agree to our Conditions?"
           description="check only one value"
           required
         />
