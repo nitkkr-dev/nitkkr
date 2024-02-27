@@ -88,8 +88,8 @@ export default function Visualizer() {
             setRadio(value); // Update radio value in state
           }}
         />
-        <DropdownMenuMulti items={items} required />
-        <FancyMultiSelect />
+        {/* <DropdownMenuMulti items={items} required /> */}
+        <FancyMultiSelect FRAMEWORKS={items} />
         <Button type="submit">Submit</Button>
       </div>
     </form>
