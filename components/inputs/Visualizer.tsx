@@ -12,6 +12,7 @@ import PhoneField from './telephone';
 import RadioGeneric from './radioItems';
 import DropdownMenuMulti from './multiDropdown';
 import CheckboxGeneric from './Checkbox';
+import { FancyMultiSelect } from './multiSelect';
 
 interface FormValues {
   email: string;
@@ -88,6 +89,7 @@ export default function Visualizer() {
           }}
         />
         <DropdownMenuMulti items={items} required />
+        <FancyMultiSelect />
         <Button type="submit">Submit</Button>
       </div>
     </form>
