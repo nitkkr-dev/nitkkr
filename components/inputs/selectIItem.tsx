@@ -11,8 +11,8 @@ import { GenericProps } from './radioItems';
 
 interface ListProps extends GenericProps {
   items: string[];
-  onChange: (value: string) => void;
-  value: string;
+  onChange?: (value: string) => void;
+  value?: string;
 }
 
 const SelectDropdown = ({ items, ...props }: ListProps) => {

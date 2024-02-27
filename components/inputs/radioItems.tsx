@@ -18,8 +18,8 @@ export interface GenericProps {
 }
 interface ListProps extends GenericProps {
   items: string[];
-  onChange: (value: string) => void;
-  value: string;
+  onChange?: (value: string) => void;
+  value?: string;
 }
 
 const RadioGeneric = ({ items, ...props }: ListProps) => {
