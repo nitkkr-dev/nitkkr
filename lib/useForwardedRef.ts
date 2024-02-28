@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 export function useForwardedRef<T>(ref: React.ForwardedRef<T>) {

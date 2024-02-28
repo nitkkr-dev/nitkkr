@@ -1,5 +1,8 @@
 'use client';
 import React, { useRef, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 import EmailField from './email';
 import TextField from './text';
@@ -8,10 +11,15 @@ import TimeField from './time';
 import SelectDropdown from './selectIItem';
 import { Button } from '../ui/button';
 import DateTimeField from './date-time';
-import PhoneField from './telephone';
 import RadioGeneric from './radioItems';
 import CheckboxGeneric from './Checkbox';
-import MultiSelectDropdown from './multiSelectItem';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '../ui/form';
 
 interface FormValues {
   email: string;
@@ -25,71 +33,140 @@ interface FormValues {
 }
 
 export default function Visualizer() {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-  const checkboxRef = useRef<HTMLInputElement>(null);
-  const dateTimeRef = useRef<HTMLInputElement>(null);
-  const timeRef = useRef<HTMLInputElement>(null);
-  const selectRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const [radio, setRadio] = useState<string>(''); // State to hold the selected radio value
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData: FormValues = {
-      email: emailRef.current?.value || '',
-      name: nameRef.current?.value || '',
-      file: fileRef.current?.files || new FileList(),
-      checkbox: checkboxRef.current?.value
-        ? checkboxRef.current?.value.split(',')
-        : [],
-      dateTime: dateTimeRef.current?.value || '',
-      time: timeRef.current?.value || '',
-      select: selectRef.current?.value || '',
-      radio: radio, // Set radio value from state
-    };
-    console.log('Submitted Data:', formData);
-  };
+  const [selected, setSelected] = useState<string[]>([]);
+  const schema = z.object({
+    email: z.string().email('Invalid email address'),
+    name: z.string().min(3, 'Name must be at least 3 characters long'),
+    file: z.any(),
+    checkbox: z.string().min(1, 'Please select at least one option'),
+    dateTime: z.string(),
+    time: z.string(),
+    select: z.string(),
+    radio: z.string(),
+  });
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+  });
 
   const items = ['item1', 'item2', 'item3', 'item4'];
 
+  const onSubmit = (values: z.infer<typeof schema>) => {
+    try {
+      console.log('Form data:', values);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="ml-80 w-80 space-y-6">
-        <EmailField ref={emailRef} required />
-        <TextField
-          ref={nameRef}
-          label="Name"
-          placeholder="Enter your name"
-          required
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="ml-80 w-80 space-y-6"
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <EmailField {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <FileUpload ref={fileRef} required />
-        <CheckboxGeneric
-          item="Do you agree to our Conditions?"
-          description="check only one value"
-          required
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <TextField {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <TimeField ref={timeRef} required />
-        <DateTimeField ref={dateTimeRef} required />
-        <SelectDropdown
-          items={items}
-          required
-          onChange={() => {}}
-          value={items[0]}
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <FileUpload {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <PhoneField ref={phoneRef} required />
-        <RadioGeneric
-          items={items}
-          required
-          value={items[1]}
-          onChange={(value) => {
-            setRadio(value); // Update radio value in state
-          }}
+        <FormField
+          control={form.control}
+          name="checkbox"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <CheckboxGeneric
+                  item="Do you agree to our Conditions?"
+                  description="" // Combine description within label
+                  required={true}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <MultiSelectDropdown items={items} />
+        <FormField
+          control={form.control}
+          name="dateTime"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <DateTimeField description="Enter a time" {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="time"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <TimeField description="Enter a time" {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="select"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <SelectDropdown items={items} {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="radio"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <RadioGeneric items={items} {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit">Submit</Button>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 }
