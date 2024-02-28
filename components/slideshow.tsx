@@ -49,9 +49,10 @@ export default function Slideshow({
         }}
       >
         {images.map(({ image, title, subtitle }, index) => (
-          <figure className="relative" key={index}>
+          <figure className="relative max-h-screen" key={index}>
             <Image
               alt={`slide ${index + 1}`}
+              className="h-full"
               height={1080}
               loading={index === 0 ? 'eager' : 'lazy'}
               width={1920}
