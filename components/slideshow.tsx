@@ -67,19 +67,15 @@ export default function Slideshow({
         ))}
       </section>
 
-      <button
-        className="absolute inset-y-0 p-4 opacity-60 hover:opacity-100"
-        onClick={prevSlide}
-      >
-        <FaChevronLeft className="my-auto text-neutral-100" size={40} />
-      </button>
+      <section className="container absolute inset-0 flex min-w-full justify-between">
+        <button className="opacity-50 hover:opacity-100" onClick={prevSlide}>
+          <FaChevronLeft className="my-auto text-neutral-100" size={40} />
+        </button>
 
-      <button
-        className="absolute inset-y-0 right-0 p-4 opacity-60 hover:opacity-100"
-        onClick={nextSlide}
-      >
-        <FaChevronRight className="my-auto text-neutral-100" size={40} />
-      </button>
+        <button className="opacity-50 hover:opacity-100" onClick={nextSlide}>
+          <FaChevronRight className="my-auto text-neutral-100" size={40} />
+        </button>
+      </section>
     </article>
   );
 }
