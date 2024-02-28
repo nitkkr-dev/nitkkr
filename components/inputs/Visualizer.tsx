@@ -10,9 +10,8 @@ import { Button } from '../ui/button';
 import DateTimeField from './date-time';
 import PhoneField from './telephone';
 import RadioGeneric from './radioItems';
-import DropdownMenuMulti from './multiDropdown';
 import CheckboxGeneric from './Checkbox';
-import { FancyMultiSelect } from './multiSelect';
+import MultiSelectDropdown from './multiSelectItem';
 
 interface FormValues {
   email: string;
@@ -88,8 +87,7 @@ export default function Visualizer() {
             setRadio(value); // Update radio value in state
           }}
         />
-        {/* <DropdownMenuMulti items={items} required /> */}
-        <FancyMultiSelect FRAMEWORKS={items} />
+        <MultiSelectDropdown items={items} />
         <Button type="submit">Submit</Button>
       </div>
     </form>
