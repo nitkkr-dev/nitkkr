@@ -1,53 +1,64 @@
 'use client';
-
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Slideshow({
   images,
 }: {
   images: { image: string; title?: string; subtitle?: string }[];
 }) {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const sliderRef = useRef<Slider | null>(null);
 
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  }, [images.length]);
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  }, [images.length]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 7000);
-
-    return () => clearInterval(intervalId);
-  }, [currentSlide]);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 7000,
+    arrows: false,
+  };
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'ArrowLeft') {
-      prevSlide();
+      sliderRef.current?.slickPrev();
     } else if (event.key === 'ArrowRight') {
-      nextSlide();
+      sliderRef.current?.slickNext();
     }
   };
 
+  useEffect(() => {
+    const sliderNode = sliderRef.current?.innerSlider?.list?.parentNode;
+
+    if (sliderNode) {
+      sliderNode.addEventListener('mouseenter', () =>
+        window.addEventListener('keydown', handleKeyDown)
+      );
+      sliderNode.addEventListener('mouseleave', () =>
+        window.removeEventListener('keydown', handleKeyDown)
+      );
+    }
+
+    return () => {
+      if (sliderNode) {
+        sliderNode.removeEventListener('mouseenter', () =>
+          window.addEventListener('keydown', handleKeyDown)
+        );
+        sliderNode.removeEventListener('mouseleave', () =>
+          window.removeEventListener('keydown', handleKeyDown)
+        );
+      }
+    };
+  }, []);
+
   return (
-    <article
-      className="relative overflow-x-hidden"
-      onMouseEnter={() => window.addEventListener('keydown', handleKeyDown)}
-      onMouseLeave={() => window.removeEventListener('keydown', handleKeyDown)}
-    >
-      <section
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{
-          transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
-          width: `${images.length * 100}%`,
-        }}
-      >
+    <article className="relative overflow-x-hidden">
+      <Slider ref={sliderRef} {...settings}>
         {images.map(({ image, title, subtitle }, index) => (
           <figure className="relative max-h-screen" key={index}>
             <Image
@@ -66,15 +77,20 @@ export default function Slideshow({
             )}
           </figure>
         ))}
-      </section>
-
-      <section className="container absolute inset-0 flex min-w-full justify-between">
-        <button className="opacity-50 hover:opacity-100" onClick={prevSlide}>
-          <FaChevronLeft className="my-auto text-neutral-100" size={40} />
+      </Slider>
+      <section className="absolute inset-0 flex items-center justify-between px-20">
+        <button
+          className="opacity-60 hover:opacity-100"
+          onClick={() => sliderRef.current?.slickPrev()}
+        >
+          <FaChevronLeft className="text-neutral-100" size={40} />
         </button>
 
-        <button className="opacity-50 hover:opacity-100" onClick={nextSlide}>
-          <FaChevronRight className="my-auto text-neutral-100" size={40} />
+        <button
+          className="opacity-60 hover:opacity-100"
+          onClick={() => sliderRef.current?.slickNext()}
+        >
+          <FaChevronRight className="text-neutral-100" size={40} />
         </button>
       </section>
     </article>
