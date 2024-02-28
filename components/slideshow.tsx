@@ -32,48 +32,43 @@ export default function Slideshow({ images }: { images: string[] }) {
   };
 
   return (
-    <div
-      className="relative overflow-hidden"
+    <article
+      className="relative overflow-x-hidden"
       onMouseEnter={() => window.addEventListener('keydown', handleKeyDown)}
       onMouseLeave={() => window.removeEventListener('keydown', handleKeyDown)}
     >
-      <button
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 transform opacity-60 transition-opacity duration-300 hover:opacity-100"
-        onClick={prevSlide}
-      >
-        <FaChevronLeft className="text-white" size={40} />
-      </button>
-
-      <div
+      <section
         className="flex transition-transform duration-500 ease-in-out"
         style={{
           transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
           width: `${images.length * 100}%`,
         }}
       >
-        {images.map((image: string, index: number) => (
-          <div
-            className="relative w-full flex-shrink-0"
+        {images.map((image, index) => (
+          <Image
+            alt={`slide ${index + 1}`}
+            height={1080}
             key={index}
-            style={{ flex: '0 0 auto', width: `${100 / images.length}%` }}
-          >
-            <Image
-              alt={`slide ${index + 1}`}
-              height={1080}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              width={1920}
-              src={image}
-            />
-          </div>
+            loading={index === 0 ? 'eager' : 'lazy'}
+            width={1920}
+            src={image}
+          />
         ))}
-      </div>
+      </section>
 
       <button
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 transform opacity-60 transition-opacity duration-300 hover:opacity-100"
+        className="absolute inset-y-0 p-4 opacity-60 hover:opacity-100"
+        onClick={prevSlide}
+      >
+        <FaChevronLeft className="my-auto text-neutral-100" size={40} />
+      </button>
+
+      <button
+        className="absolute inset-y-0 right-0 p-4 opacity-60 hover:opacity-100"
         onClick={nextSlide}
       >
-        <FaChevronRight className="text-white" size={40} />
+        <FaChevronRight className="my-auto text-neutral-100" size={40} />
       </button>
-    </div>
+    </article>
   );
 }
