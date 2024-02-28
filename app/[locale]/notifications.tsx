@@ -44,7 +44,7 @@ export default async function Notifications({
 
   return (
     <article
-      className="min-w-full bg-notifications bg-cover bg-no-repeat py-40"
+      className="bg-notifications bg-cover bg-no-repeat py-40"
       id="notifications"
     >
       <Link href="#notifications">
