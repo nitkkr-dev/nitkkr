@@ -6,7 +6,6 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function Slideshow({ images }: { images: string[] }) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [hovered, setHovered] = useState<boolean>(false);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -24,26 +23,19 @@ export default function Slideshow({ images }: { images: string[] }) {
     return () => clearInterval(intervalId);
   }, [currentSlide]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (!hovered) return;
-      if (event.key === 'ArrowLeft') {
-        prevSlide();
-      } else if (event.key === 'ArrowRight') {
-        nextSlide();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [hovered]);
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (event.key === 'ArrowRight') {
+      nextSlide();
+    }
+  };
 
   return (
     <div
       className="relative overflow-hidden"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => window.addEventListener('keydown', handleKeyDown)}
+      onMouseLeave={() => window.removeEventListener('keydown', handleKeyDown)}
     >
       <button
         className="absolute left-4 top-1/2 z-10 -translate-y-1/2 transform opacity-60 transition-opacity duration-300 hover:opacity-100"
