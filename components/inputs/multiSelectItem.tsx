@@ -1,12 +1,20 @@
+import { forwardRef, ForwardRefExoticComponent, Ref } from 'react';
+
 import { Label } from '../ui/label';
-import MultipleSelector, { MultipleSelectorProps } from '../ui/multiselect';
+import MultipleSelector, {
+  MultipleSelectorProps,
+  MultipleSelectorRef,
+} from '../ui/multiselect';
 import { GenericProps } from './radioItems';
 
 interface ListProps extends GenericProps, MultipleSelectorProps {
   items: string[];
 }
 
-const MultiSelectDropdown = ({ items, ...props }: ListProps) => {
+const MultiSelectDropdown: ForwardRefExoticComponent<ListProps> = forwardRef<
+  MultipleSelectorRef,
+  ListProps
+>((props, ref) => {
   return (
     <div className={props.className}>
       <Label htmlFor={props.name}>{props.label ? props.label : 'Select'}</Label>
@@ -17,8 +25,11 @@ const MultiSelectDropdown = ({ items, ...props }: ListProps) => {
         </p>
       )}
       <MultipleSelector
-        defaultOptions={items}
+        ref={ref}
+        defaultOptions={props.items}
         placeholder={props.placeholder}
+        onChange={props.onChange}
+        value={props.value}
         emptyIndicator={
           <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
             no results found.
@@ -30,7 +41,7 @@ const MultiSelectDropdown = ({ items, ...props }: ListProps) => {
       </p>
     </div>
   );
-};
+});
 
 MultiSelectDropdown.displayName = 'MultiSelectDropdown';
 export default MultiSelectDropdown;
