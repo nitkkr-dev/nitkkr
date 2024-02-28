@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-import LocaleSwitcher from '~/app/locale-switcher';
+import LocaleSwitcher from '~/components/locale-switcher';
 import { getTranslations } from '~/i18n/translations';
 
 export default async function Header({ locale }: { locale: string }) {
