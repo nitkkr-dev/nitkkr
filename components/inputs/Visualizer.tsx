@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -20,35 +20,27 @@ import {
   FormItem,
   FormMessage,
 } from '../ui/form';
-
-interface FormValues {
-  email: string;
-  name: string;
-  file: FileList;
-  checkbox: string[];
-  dateTime: string;
-  time: string;
-  select: string;
-  radio: string;
-}
+import MultiSelectDropdown from './multiSelectItem';
+import DateField from './date';
 
 export default function Visualizer() {
-  const [selected, setSelected] = useState<string[]>([]);
   const schema = z.object({
     email: z.string().email('Invalid email address'),
     name: z.string().min(3, 'Name must be at least 3 characters long'),
     file: z.any(),
-    checkbox: z.string().min(1, 'Please select at least one option'),
+    checkbox: z.boolean(),
     dateTime: z.string(),
+    date: z.string(),
     time: z.string(),
     select: z.string(),
     radio: z.string(),
+    multiselect: z.string().array(),
   });
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
 
-  const items = ['item1', 'item2', 'item3', 'item4'];
+  const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
 
   const onSubmit = (values: z.infer<typeof schema>) => {
     try {
@@ -90,6 +82,18 @@ export default function Visualizer() {
         />
         <FormField
           control={form.control}
+          name="date"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <DateField {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="file"
           render={({ field }) => (
             <FormItem>
@@ -107,7 +111,6 @@ export default function Visualizer() {
             <FormItem>
               <FormControl>
                 <CheckboxGeneric
-                  item="Do you agree to our Conditions?"
                   description="" // Combine description within label
                   required={true}
                   {...field}
@@ -160,6 +163,18 @@ export default function Visualizer() {
             <FormItem>
               <FormControl>
                 <RadioGeneric items={items} {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="multiselect"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <MultiSelectDropdown items={items} {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
