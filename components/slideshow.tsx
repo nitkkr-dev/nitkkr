@@ -4,7 +4,11 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-export default function Slideshow({ images }: { images: string[] }) {
+export default function Slideshow({
+  images,
+}: {
+  images: { image: string; title?: string; subtitle?: string }[];
+}) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const prevSlide = useCallback(() => {
@@ -44,15 +48,22 @@ export default function Slideshow({ images }: { images: string[] }) {
           width: `${images.length * 100}%`,
         }}
       >
-        {images.map((image, index) => (
-          <Image
-            alt={`slide ${index + 1}`}
-            height={1080}
-            key={index}
-            loading={index === 0 ? 'eager' : 'lazy'}
-            width={1920}
-            src={image}
-          />
+        {images.map(({ image, title, subtitle }, index) => (
+          <figure className="relative" key={index}>
+            <Image
+              alt={`slide ${index + 1}`}
+              height={1080}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              width={1920}
+              src={image}
+            />
+            {title && (
+              <figcaption className="container absolute inset-x-0 bottom-0 min-w-full bg-gradient-to-b from-transparent to-neutral-800 py-6">
+                <h4 className="text-neutral-100">{title}</h4>
+                <p className="text-neutral-100">{subtitle}</p>
+              </figcaption>
+            )}
+          </figure>
         ))}
       </section>
 
