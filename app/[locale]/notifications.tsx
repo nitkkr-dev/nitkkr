@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import HorsesRunning from '~/components/horses-running';
-
 import { getTranslations } from '~/i18n/translations';
 import { getKeys } from '~/lib/utils';
 

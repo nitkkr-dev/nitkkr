@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ImLab } from 'react-icons/im';
 import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
-
 import { getTranslations } from '~/i18n/translations';
 import HorsesRunning from '~/components/horses-running';
 import DepartmentGallery from '~/components/department-gallery';
@@ -13,7 +12,7 @@ export default async function Department({
 }: {
   params: { locale: string; name: string };
 }) {
-  const text = (await getTranslations(locale)).Header;
+  const text = (await getTranslations(locale)).Departments;
 
   const departmentData = {
     name: name.toUpperCase(),
@@ -31,35 +30,28 @@ export default async function Department({
       phone: ['1234567890', '1234567890'],
     },
   };
-  const subLinks = [
-    { key: 'About', title: 'About', link: '#' },
-    { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
-    { key: 'HODMessage', title: "HOD's Message", link: '#' },
-    { key: 'Programs', title: 'Programs', link: '#' },
-    { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
-    { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
-  ];
+
   return (
     <div>
-      <header className="relative flex h-[493px] w-screen flex-col items-center overflow-hidden">
+      <header className="relative flex w-screen flex-col items-center overflow-hidden md:h-auto lg:h-[493px]">
         <Image
           src={departmentData.titleImage}
           alt={departmentData.name}
           fill
           className="relative -z-20 object-cover"
         />
-        <h1 className="mt-48 text-center text-5xl font-bold text-neutral-50">
+        <h1 className="mt-48 text-center text-5xl font-bold text-neutral-50 md:mt-12 md:text-3xl">
           {decodeURIComponent(departmentData.name)}
         </h1>
         <div className="mt-auto">
           <div className="sticky top-10">
             <div className="mb-3 ">
-              <div className="flex justify-evenly space-x-10 rounded-full  bg-background p-1">
-                {subLinks.map((btn) => (
+              <div className="flex justify-evenly space-x-10 rounded-full bg-background p-1 md:justify-start md:space-x-4">
+                {text.subLinks.map((btn) => (
                   <Link
                     key={btn.key}
                     href={btn.link}
-                    className="ransition-all rounded-full p-3 duration-300 hover:bg-primary-700 hover:text-background"
+                    className="rounded-full p-3 transition-all duration-300 hover:bg-primary-700 hover:text-background"
                   >
                     {btn.title}
                   </Link>
@@ -69,16 +61,18 @@ export default async function Department({
           </div>
         </div>
       </header>
-      {/* About */}
+
       <main className="container mt-20">
         {/* about section */}
         <section>
           <div className="flex items-center justify-center">
             <HorsesRunning direction={'left'} />
-            <h2 className="text-3xl font-semibold text-primary-700">ABOUT</h2>
+            <h2 className="font-semibold text-primary-700 md:text-2xl lg:text-3xl">
+              {text.sectionTitles[0]}
+            </h2>
           </div>
-          <article className="mt-10 flex items-center rounded-md bg-neutral-50">
-            <div className="relative w-1/2 rounded-md">
+          <article className="mt-10 flex flex-col items-center rounded-md bg-neutral-50 lg:flex-row">
+            <div className="relative w-full flex-1 rounded-md lg:w-1/2 lg:max-w-md">
               <Image
                 width={300}
                 height={300}
@@ -87,7 +81,7 @@ export default async function Department({
                 alt="About"
               />
             </div>
-            <div className="w-1/2 rounded-md px-4">
+            <div className="mt-4 flex-1 rounded-md px-4 md:mt-0 lg:w-1/2 lg:max-w-md">
               <p className="">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Assumenda eveniet laborum nesciunt quos voluptates. Tempore,
@@ -98,7 +92,7 @@ export default async function Department({
                 minima.
               </p>
               <Link href="#" className="text-primary-700 hover:underline">
-                Read more
+                {text.readMore}
               </Link>
             </div>
           </article>
@@ -108,15 +102,7 @@ export default async function Department({
         <section className="mt-20 flex items-center rounded-md">
           <article className="w-1/2 rounded-md px-4">
             <div className="flex">
-              <h2>VISI</h2>
-              <Image
-                alt="O"
-                className="my-auto h-[44px] rotate-[90.66deg]"
-                height={44}
-                width={44}
-                src="https://s3-alpha-sig.figma.com/img/d003/e4ca/46983bb9c2b53ca4f74a6382f4bfd57d?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hyce8gJEWAHdIRktC4L53C7THp02z9IWrHq56rgoF5bRtdEd2SRlc6AGfokndv6CtZuG9yFPmsIJqZRnH~-KCixskdbPDzgnxD5NsvOirZzBmDEcLRj2HM9g59XFZSBpGJQjDu1TGz~VMUSS-2A73puf6KduZzjcR4~cEd-gTSlq7ltfcBrgUBIofNcjc-vzAGSUQ3AlY8gc-Pvyadblv85ljUsUPCKJr1bRtqpvxOW77tx~jMCfmtbBshOVIvp56YGCqfBw8U~Z0ZYBoP-XVQurZDggPXbr7t02L9fd2kGCYptvcU9HABbpKXBcP2ZMNh8jTfjNr~kCKmlt8lcSOQ__"
-              />
-              <h2>N</h2>
+              <h2>{text.sectionTitles[1]}</h2>
             </div>
             <p className="">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -126,15 +112,7 @@ export default async function Department({
             </p>
             <div>
               <div className="flex">
-                <h2>MISSI</h2>
-                <Image
-                  alt="I"
-                  className="-mx-1 my-auto h-10 w-12 "
-                  height={200}
-                  width={200}
-                  src="https://s3-alpha-sig.figma.com/img/a38a/00e6/8f86a746f17efe38b156d79cc486cd23?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=a7IwVUA5PyLexlxxcRFHUWl-E2K~3Ve-L9dVaQDxufMvqF3Uzod8RbSeEAPayYwuedHX-Vnmgl2cdqxrNGDgR8-uI2fRfQ3fcDa75WBALQZVNhYXrIFG4vAPzxdWo0XA4xPTXez1~GhqCXxjwU8zXHzbiipC9foQIyhAHGBmHYIG6NP90kSRGcTpT8Ar1PWl0cnwUF3sDqhuUss7xbima2metWgC62PZsliN6rZwApnitoCzfd7NdZLhLfPhmlvOQN7Db8X6nnqZI25qRMbFKg4j9Sj~HtFkDWpQVRnp3tBPyj9XOyWYfBXRjuJFNQYAEl9LAC6IMqsc-SCZzR3dZw__"
-                />
-                <h2>N</h2>
+                <h2>{text.sectionTitles[2]}</h2>
               </div>
               <p className="">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -159,7 +137,7 @@ export default async function Department({
           <div className="flex items-center">
             <HorsesRunning direction="left" />
             <h1 className="text-3xl font-semibold text-primary-700">
-              HOD&apos;s Message
+              {text.sectionTitles[3]}
             </h1>
           </div>
           <div className="mt-10 rounded-md border border-primary-700 bg-neutral-50 p-4">
@@ -184,7 +162,7 @@ export default async function Department({
           <div className="flex items-center justify-evenly">
             <HorsesRunning direction="left" />
             <h2 className="pl-5 text-3xl font-semibold text-primary-700">
-              PROGRAMMES
+              {text.sectionTitles[4]}
             </h2>
             <HorsesRunning direction="right" />
           </div>
@@ -239,29 +217,36 @@ export default async function Department({
           </section>
         </section>
         {/* dno title for this */}
-        <article className="relative mt-20 flex flex-1 justify-between space-x-4 p-10">
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50">
+        <article
+          className="relative mt-20 flex flex-1 justify-between space-x-4 bg-clip-text p-10"
+          style={{
+            backgroundImage: `url(${'https://s3-alpha-sig.figma.com/img/32a3/273b/70051ff8670610a0e06d9ff49e7cb675?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6vPstFQBLAj0l7cTLalslHY9fulCefKOvsOineaOXTkm0l4aXO14Q4XlTZP7IsU~Snm3gIr2ITRgpLjRXcoGeokV~I0dV6VcdUeZyWWIEtJa9y0yzn6mqXpGK47f9jKorWWjYgowENmLteeS93qLuSa9ozxzFRqaSunXNfTHj76ltbLC1xtVumVpLVbf~ywkh~lDsyA-VyspcY3gVYnjGi6NaRHcLtJHZVgbIxxGEoG8rzSXzc2OmjRAEgoa8HeGI-WllViUXrDpqIlBu1HLac~a4kV6yV0vVDCwaHZ2-I9ySAiHM-4wWySA77o1acMODptO1KT7LirkEjSUYWASA__'})`,
+            backgroundSize: 'cover',
+          }}
+        >
+          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <MdBadge className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50">
-              Faculty & Staff
+            <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50 ">
+              {text.sectionTitles[5]}
             </span>
           </div>
 
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50">
+          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <ImLab className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50">
-              Laboratories
+              {text.sectionTitles[6]}
             </span>
           </div>
 
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50">
+          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <MdMilitaryTech className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50">
-              Student Achievements
+              {text.sectionTitles[7]}
             </span>
           </div>
         </article>
-        <DepartmentGallery />
+
+        <DepartmentGallery locale={locale} />
       </main>
     </div>
   );

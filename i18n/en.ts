@@ -59,6 +59,43 @@ const text: Translations = {
     description:
       'This page is currently being worked on. Please visit another time',
   },
+  Departments: {
+    subLinks: [
+      { key: 'About', title: 'About', link: '#' },
+      { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
+      { key: 'HODMessage', title: "HOD's Message", link: '#' },
+      { key: 'Programs', title: 'Programmes', link: '#' },
+      { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
+      { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
+    ],
+    departmentTitles: [
+      'Business Administration',
+      'Computer Application',
+      'Chemistry',
+      'Civil Engineering',
+      'Computer Engineering',
+      'Electrical Engineering',
+      'Electronics and Communication Engineering',
+      'Humanities and Social Science',
+      'Civil Engineering',
+      'Mathematics',
+      'Physics',
+      'Renewable Energy and Efficiency School',
+      'VLSI Design and Embedded Systems School',
+    ],
+    sectionTitles: [
+      'About',
+      'Vision',
+      'Mission',
+      "HOD's Message",
+      'Programmes',
+      'Faculty And More',
+      'Laboratories',
+      'Student Achivements',
+      'GALARY',
+    ],
+    readMore: 'Read More',
+  },
 };
 
 export default text;

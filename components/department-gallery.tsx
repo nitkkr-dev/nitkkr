@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { getTranslations } from '~/i18n/translations';
+
 import { Card, CardContent } from './ui/card';
 import {
   Carousel,
@@ -11,11 +13,18 @@ import {
 } from './ui/carousel';
 import HorsesRunning from './horses-running';
 
-export default function DepartmentGallery() {
+export default async function DepartmentGallery({
+  locale,
+}: {
+  locale: string;
+}) {
+  const text = (await getTranslations(locale)).Departments;
   return (
     <div>
       <div className="flex items-center space-x-5">
-        <span className="text-3xl font-semibold text-primary-500">Gallery</span>
+        <span className="text-3xl font-semibold text-primary-500">
+          {text.sectionTitles[8]}
+        </span>
         <HorsesRunning direction="right" />
       </div>
 
