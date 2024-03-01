@@ -1,3 +1,4 @@
+'use client';
 import React, { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 
 import { Input, InputProps } from '@/components/ui/input';

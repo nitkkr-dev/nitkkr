@@ -1,40 +1,39 @@
-import { RxDropdownMenu } from 'react-icons/rx';
+import { MdTextFields } from 'react-icons/md';
 import { z } from 'zod';
 
-import SelectDropdown from '@/components/inputs/selectIItem';
-
-import DropdownForm from './DropdownFrom';
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '../interfaces/FormElements';
+} from '@/components/forms/interfaces/FormElements';
+import TimeField from '@/components/inputs/time';
 
-const input_type: ElementsType = 'SelectDropdown';
+import TextValidationForm from './InputBasedForm';
 
-export const SelectDropdownFormElement: FormElement = {
+const input_type: ElementsType = 'TimeField';
+
+export const TimeFieldFormElement: FormElement = {
   input_type,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <SelectDropdown
+    <TimeField
       className="w-full"
-      disabled
-      items={elementInstance.choices || []}
+      readOnly
       label={elementInstance.question}
       required={elementInstance.is_required}
       description={elementInstance.description}
     />
   ),
-  formComponent: SelectDropdown,
-  propertiesComponent: DropdownForm,
+  formComponent: TimeField,
+  propertiesComponent: TextValidationForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Select Field',
+      question: 'Time Field',
       input_type,
       is_required: false,
       page_number,
@@ -42,8 +41,8 @@ export const SelectDropdownFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: RxDropdownMenu,
-    label: 'Select Field',
+    icon: MdTextFields,
+    label: 'Time Field',
   },
   schemaObject: schemaObject,
   schemaObjects: schemaObjects,
@@ -52,13 +51,13 @@ export const SelectDropdownFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'email',
+    format: 'time',
   };
 }
 function schemaObject(required: boolean) {
   if (required) {
-    return z.string();
+    return z.date();
   } else {
-    return z.string().optional();
+    return z.date().optional();
   }
 }

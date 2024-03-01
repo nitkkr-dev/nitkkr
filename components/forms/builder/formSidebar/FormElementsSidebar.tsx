@@ -10,6 +10,7 @@ export default function FormElementsSidebar() {
         <PickerBtn formElement={FormElements.TextField} />
         <PickerBtn formElement={FormElements.EmailField} />
         <PickerBtn formElement={FormElements.SelectDropdown} />
+        <PickerBtn formElement={FormElements.DateField}/>
       </div>
     </>
   );

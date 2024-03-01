@@ -25,6 +25,7 @@ import {
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { toast } from '../ui/use-toast';
+import { validateResolver } from '@/lib/validateResolver';
 
 interface FormSubmitFormProps {
   form: {
@@ -70,11 +71,33 @@ export default function FormSubmitForm({
   type Inputs = z.infer<typeof FormDataSchema>;
 
   const delta = currentStep - previousStep;
+  const schema = {
+    type: 'object',
+    properties: {
+      firstName: { type: 'string', minLength: 2, maxLength: 20 },
+      lastName: { type: 'string', minLength: 2, maxLength: 20 },
+      email: {
+        type: 'string',
+        format: 'email',
+        errorMessage: 'Invalid email address.',
+      },
+      dob: {
+        type: 'string',
+        format: 'date',
+        formatMinimum: '1900-01-01',
+        formatMaximum: new Date().toISOString().split('T')[0],
+      },
+    },
+    required: ['firstName', 'lastName', 'dob'],
+    additionalProperties: false,
+  };
 
-  const forms = useForm<Inputs>({
-    resolver: zodResolver(FormDataSchema),
+  const resolver = (data: FormData, context: string | undefined) =>
+    validateResolver(data, context, schema);
+  const forms = useForm({
+    context: form.id.toString(),
+    resolver: resolver,
   });
-
   type FieldName = keyof Inputs;
 
   const next = async () => {

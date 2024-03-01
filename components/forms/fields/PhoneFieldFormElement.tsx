@@ -1,40 +1,39 @@
-import { RxDropdownMenu } from 'react-icons/rx';
+import { MdPhone } from 'react-icons/md';
 import { z } from 'zod';
 
-import SelectDropdown from '@/components/inputs/selectIItem';
-
-import DropdownForm from './DropdownFrom';
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '../interfaces/FormElements';
+} from '@/components/forms/interfaces/FormElements';
+import PhoneField from '@/components/inputs/telephone';
 
-const input_type: ElementsType = 'SelectDropdown';
+import TextValidationForm from './InputBasedForm';
 
-export const SelectDropdownFormElement: FormElement = {
+const input_type: ElementsType = 'PhoneField';
+
+export const PhoneFieldFormElement: FormElement = {
   input_type,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <SelectDropdown
+    <PhoneField
       className="w-full"
-      disabled
-      items={elementInstance.choices || []}
+      readOnly
       label={elementInstance.question}
       required={elementInstance.is_required}
       description={elementInstance.description}
     />
   ),
-  formComponent: SelectDropdown,
-  propertiesComponent: DropdownForm,
+  formComponent: PhoneField,
+  propertiesComponent: TextValidationForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Select Field',
+      question: 'Phone Field',
       input_type,
       is_required: false,
       page_number,
@@ -42,8 +41,8 @@ export const SelectDropdownFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: RxDropdownMenu,
-    label: 'Select Field',
+    icon: MdPhone,
+    label: 'Phone Field',
   },
   schemaObject: schemaObject,
   schemaObjects: schemaObjects,
@@ -52,12 +51,11 @@ export const SelectDropdownFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'email',
   };
 }
 function schemaObject(required: boolean) {
   if (required) {
-    return z.string();
+    return z.string().min(1, { message: 'Field is required' });
   } else {
     return z.string().optional();
   }
