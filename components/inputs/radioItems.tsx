@@ -1,8 +1,5 @@
 'use client';
 
-import { forwardRef } from 'react';
-
-import { InputProps } from '../ui/input';
 import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 
@@ -28,7 +25,7 @@ const RadioGeneric = ({ items, ...props }: ListProps) => {
       <Label>{props.label ? props.label : 'Radio Group'}</Label>
       {props.required && <span style={{ color: '#EC734B' }}>*</span>}
       <RadioGroup
-        defaultValue={props.value}
+        defaultValue={props.value as string}
         disabled={props.disabled}
         required={props.required}
         className={props.inputClassName}

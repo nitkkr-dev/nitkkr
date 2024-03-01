@@ -8,9 +8,9 @@ import {
 } from '@/components/forms/interfaces/FormElements';
 import DatePicker from '@/components/inputs/date';
 
-import TextValidationForm from './InputBasedForm';
+import DateBasedForm from './DateBasedForm';
 
-const input_type: ElementsType = 'TimeField';
+const input_type: ElementsType = 'DateField';
 
 export const DateFieldFormElement: FormElement = {
   input_type,
@@ -28,7 +28,7 @@ export const DateFieldFormElement: FormElement = {
     />
   ),
   formComponent: DatePicker,
-  propertiesComponent: TextValidationForm,
+  propertiesComponent: DateBasedForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
@@ -52,6 +52,8 @@ function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
     format: 'date',
+    formatMinimum: element.formatMinimum,
+    formatMaximum: element.formatMaximum,
   };
 }
 function schemaObject(required: boolean) {

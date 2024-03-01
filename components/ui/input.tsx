@@ -58,7 +58,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={className}>
-        <Label htmlFor={name}>{label}</Label>
+        <Label htmlFor={name}>{label ? label : name}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
         {description && (
           <p className="text-muted-foreground block text-[0.8rem]">

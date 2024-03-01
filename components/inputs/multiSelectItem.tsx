@@ -31,12 +31,12 @@ const MultiSelectDropdown: ForwardRefExoticComponent<ListProps> = forwardRef<
         onChange={props.onChange}
         value={props.value}
         emptyIndicator={
-          <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-center text-lg leading-10">
             no results found.
           </p>
         }
       />
-      <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+      <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
         {props.errorMsg}
       </p>
     </div>

@@ -6,7 +6,7 @@ import { Input, InputProps } from '../ui/input';
 
 const DateField = forwardRef<HTMLInputElement, InputProps>(function DateField(
   {
-    label = 'Date',
+    label,
     placeholder = 'Enter your Date',
     LeftChild = MdOutlineDateRange,
     ...props

@@ -5,14 +5,15 @@ import React, {
 } from 'react';
 import { ZodType } from 'zod';
 
-import { TextFieldFormElement } from '@/components/forms/fields/TextFieldFormElement';
-import { TimeFieldFormElement } from '@/components/forms/fields/TimeFieldFormElement';
-import { EmailFieldFormElement } from '@/components/forms/fields/EmailFieldFormElement';
-import { DateFieldFormElement} from '@/components/forms/fields/DateFieldFormElement';
-import { SelectDropdownFormElement } from '@/components/forms/fields/SelectDropdownFormElement';
 import { InputProps } from '@/components/ui/input';
 import { ListProps } from '@/components/inputs/radioItems';
+
+import { TextFieldFormElement } from '../fields/TextFieldFormElement';
+import { TimeFieldFormElement } from '../fields/TimeFieldFormElement';
+import { EmailFieldFormElement } from '../fields/EmailFieldFormElement';
+import { DateFieldFormElement } from '../fields/DateFieldFormElement';
 import { PhoneFieldFormElement } from '../fields/PhoneFieldFormElement';
+import { SelectDropdownFormElement } from '../fields/SelectDropdownFormElement';
 
 export type ElementsType =
   | 'TextField'
@@ -21,6 +22,13 @@ export type ElementsType =
   | 'TimeField'
   | 'PhoneField'
   | 'DateField';
+
+export type validationProperty = {
+  type: string;
+  format?: string;
+  formatMinimum?: string;
+  formatMaximum?: string;
+};
 
 type Generics = InputProps;
 
@@ -43,7 +51,7 @@ export type FormElement = {
     id?: number
   ) => FormElementInstance;
   schemaObject: (required: boolean) => ZodType;
-  schemaObjects: (element: FormElementInstance) => object;
+  schemaObjects: (element: FormElementInstance) => validationProperty;
   shouldValidate: boolean;
 };
 

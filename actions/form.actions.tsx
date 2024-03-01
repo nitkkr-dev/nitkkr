@@ -6,12 +6,16 @@ import FormSingleResponse from '@/components/forms/FormSingleResponse';
 import FormSubmitForm from '@/components/forms/FormSubmitForm';
 import {
   ElementsType,
+  FormElementInstance,
   FormElements,
 } from '@/components/forms/interfaces/FormElements';
 import prisma from '@/lib/prisma';
 import { finalFormSchema, formSchema, formSchemaType } from '@/schemas/form';
-import { form_questions, forms } from '@/prisma/generated/client';
+import { Prisma, form_questions, forms } from '@/prisma/generated/client';
 import { revalidatePath } from 'next/cache';
+import FormSubmitFormNewValid from '@/components/forms/FormSubmitFormNewValid';
+import { validationProperty } from '@/components/forms/interfaces/FormElements';
+import FormSubmitFormFinal from '@/components/forms/FormSubmitFormFinal';
 
 //TODO
 async function currentUser() {
@@ -125,6 +129,8 @@ type new_form_questions = {
   range?: string[] | undefined;
   page_number: number;
   marks: number;
+  formatMinimum?: string;
+  formatMaximum?: string;
 };
 
 export async function UpdateFormQuestions(
@@ -167,19 +173,12 @@ export async function UpdateFormQuestionsForSubmission(
 ) {
   const user = await currentUser();
   if (!user) throw new UserNotFoundErr();
-  const schema: {
-    type: string;
-    properties: { [key: string]: object };
-    required: string[];
-    additionalProperties: boolean;
-  } = {
-    type: 'object',
-    properties: {},
-    required: [],
-    additionalProperties: false,
-  };
+  const properties: { [key: string]: validationProperty } = {};
+  const requiredQuestions: string[] = [];
+
   const upsertOperations = questions.map(async (question, index) => {
-    const { Id, id, page_number, ...rest } = question;
+    const { Id, id, page_number, formatMinimum, formatMaximum, ...rest } =
+      question;
     const page_number_with_index = page_number + index * 0.001;
     const questionFinal = id
       ? await prisma.form_questions.upsert({
@@ -202,29 +201,30 @@ export async function UpdateFormQuestionsForSubmission(
         });
 
     if (FormElements[questionFinal.input_type as ElementsType].shouldValidate) {
-      schema.properties[questionFinal.id.toString()] =
+      properties[questionFinal.id.toString()] =
         FormElements[questionFinal.input_type as ElementsType].schemaObjects(
           question
         );
-      schema.required.push(questionFinal.id.toString());
+      questionFinal.is_required &&
+        requiredQuestions.push(questionFinal.id.toString());
     }
   });
 
   await Promise.all(upsertOperations);
-  return schema;
+  return { properties, requiredQuestions };
 }
 
-type formSum = Omit<
-  forms,
-  | 'id'
-  | 'is_published'
-  | 'questions'
-  | 'is_active'
-  | 'persistent_url'
-  | 'old_persistent_urls'
-  | 'description'
-  | 'expiry_date'
-> & { description?: string; expiry_date?: Date };
+type formSum = {
+  title: string;
+  on_submit_message: string;
+  is_editing_allowed: boolean;
+  is_single_response: boolean;
+  is_anonymous: boolean;
+  is_view_analytics_allowed: boolean;
+  description?: string;
+  expiry_date?: Date;
+  is_quiz: boolean;
+};
 
 export async function PublishForm(
   form: formSum,
@@ -235,17 +235,20 @@ export async function PublishForm(
   if (!validatedFields.success) {
     throw new Error('Invalid form data');
   }
-  const newForm = {
-    ...form,
-    is_published: true,
-    id,
-  };
-  const schema = await UpdateFormQuestionsForSubmission(id, questions);
+  const { properties, requiredQuestions } =
+    await UpdateFormQuestionsForSubmission(id, questions);
+  console.log('schema', properties);
   return prisma.forms.update({
     where: {
       id,
     },
-    data: newForm,
+    data: {
+      ...form,
+      is_published: true,
+      id,
+      question_validations: properties as Prisma.JsonObject,
+      required_questions: requiredQuestions,
+    },
   });
 }
 
@@ -316,27 +319,57 @@ export async function getFormForSubmission(id: number) {
     if (!form.is_single_response && response) return <FormSingleResponse />;
     if (!form.is_editing_allowed && response) return <FormEditNotAllowed />;
   }
+  const questionElements: {
+    id: string;
+    question: string;
+    description?: string;
+    required: boolean;
+    input_type: ElementsType;
+    items?: string[];
+    mime_types?: string[];
+    range?: string[];
+    marks: number;
+  }[][] = [];
   if (form.is_shuffled) {
     form.form_questions = form.form_questions.sort(() => Math.random() - 0.5);
-    form.form_questions = form.form_questions.map((question) => {
-      question.page_number = question.page_number / 1;
-      return question;
-    });
   } else {
     form.form_questions = form.form_questions.sort(
       (a, b) => a.page_number - b.page_number
     );
   }
+  form.form_questions.forEach((question) => {
+    question.page_number = ~~question.page_number;
+    if (!questionElements[question.page_number]) {
+      questionElements[question.page_number] = [];
+    }
+    questionElements[question.page_number].push({
+      question: question.question,
+      id: question.id.toString(),
+      description: question.description || undefined,
+      required: question.is_required,
+      items: question.choices || [],
+      range: question.range || [],
+      mime_types: question.mime_types || [],
+      marks: question.marks,
+      input_type: question.input_type as ElementsType,
+    });
+  });
+  const pages = questionElements.length;
   // TODO editable form
   return (
-    <FormSubmitForm
+    <FormSubmitFormFinal
       form={{
         id: form.id,
         title: form.title,
         description: form.description || undefined,
         on_submit_message: form.on_submit_message,
+        pages: pages,
       }}
-      questions={form.form_questions}
+      questions={questionElements}
+      requiredQuestions={form.required_questions}
+      questionValidations={
+        form.question_validations as { [key: string]: validationProperty }
+      }
     />
   );
 }
@@ -359,19 +392,11 @@ export async function submitForm(id: number, formData: Record<string, any>) {
         },
       ],
     },
-    // include: {
-    //   modifiable_by: true, // TODO: change to visible_to
-    // },
   });
   if (!form || !form.is_published)
     return { title: 'Error', description: 'Form not found' };
   if (!user && !form.is_anonymous) throw new UserNotFoundErr();
-  // if (
-  //   form.modifiable_by.some((mod) => mod.id === user.id) &&
-  //   !form.is_anonymous
-  // ) {
-  //   return { title: 'Error', description: 'Form not accessible' };
-  // }
+
   if (!form.is_active)
     return { title: 'Error', description: 'Form is expired' };
   if (form.expiry_date && form.expiry_date < new Date()) {

@@ -6,7 +6,7 @@ import { Input, InputProps } from '../ui/input';
 
 const EmailField = forwardRef<HTMLInputElement, InputProps>(function EmailField(
   {
-    label = 'Email',
+    label,
     placeholder = 'Enter your Email',
     LeftChild = MdOutlineEmail,
     ...props

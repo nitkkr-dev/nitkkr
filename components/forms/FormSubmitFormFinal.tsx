@@ -1,20 +1,17 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
-import { form_questions, forms } from '@/prisma/generated/client';
 import { submitForm } from '@/actions/form.actions';
 import { validateResolver } from '@/lib/validateResolver';
 
 import {
   ElementsType,
-  FormElementInstance,
   FormElements,
+  validationProperty,
 } from './interfaces/FormElements';
 import {
   Form,
@@ -33,82 +30,63 @@ interface FormSubmitFormProps {
     title: string;
     description: string | undefined;
     on_submit_message: string;
+    pages: number;
   };
-  questions: form_questions[];
+  questions: {
+    id: string;
+    question: string;
+    description?: string | undefined;
+    required: boolean;
+    input_type: ElementsType;
+    items?: string[] | undefined;
+    mime_types?: string[] | undefined;
+    range?: string[] | undefined;
+    marks: number;
+  }[][];
+  requiredQuestions: string[];
+  questionValidations: {
+    [key: string]: validationProperty;
+  };
 }
-export default function FormSubmitForm({
+export default function FormSubmitFormFinal({
   form,
   questions,
+  requiredQuestions,
+  questionValidations,
 }: FormSubmitFormProps) {
   const Router = useRouter();
+  console.log(form.pages);
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
-  const questionElements: FormElementInstance[][] = [];
-  const schemaObject = questions.reduce((acc, question) => {
-    const page = ~~question.page_number;
-    if (!questionElements[page]) {
-      questionElements[page] = [];
-    }
-    const questionElement = {
-      ...question,
-      Id: question.id.toString(),
-      description: question.description || undefined, // to get around postgress and js behaviour of handling empty fields
-      input_type: question.input_type as ElementsType,
-    };
-    questionElements[page].push(questionElement);
-    return FormElements[questionElement.input_type].shouldValidate
-      ? {
-          ...acc,
-          [questionElement.Id]: FormElements[
-            questionElement.input_type
-          ].schemaObject(question.is_required),
-        }
-      : acc;
-  }, {});
-
-  const FormDataSchema = z.object(schemaObject);
-
-  type Inputs = z.infer<typeof FormDataSchema>;
-
   const delta = currentStep - previousStep;
-  const schema = {
+  const jsonSchema: {
+    type: string;
+    properties: { [key: string]: validationProperty };
+    required: string[];
+    additionalProperties: boolean;
+  } = {
     type: 'object',
-    properties: {
-      firstName: { type: 'string', minLength: 2, maxLength: 20 },
-      lastName: { type: 'string', minLength: 2, maxLength: 20 },
-      email: {
-        type: 'string',
-        format: 'email',
-        errorMessage: 'Invalid email address.',
-      },
-      dob: {
-        type: 'string',
-        format: 'date',
-        formatMinimum: '1900-01-01',
-        formatMaximum: new Date().toISOString().split('T')[0],
-      },
-    },
-    required: ['firstName', 'lastName', 'dob'],
+    properties: questionValidations,
+    required: requiredQuestions,
     additionalProperties: false,
   };
-
+  const fields = questions[currentStep].map((question) => question.id);
   const resolver = (data: FormData, context: string | undefined) =>
-    validateResolver(data, context, schema);
+    validateResolver(data, context, jsonSchema);
   const forms = useForm({
     context: form.id.toString(),
     resolver: resolver,
   });
-  type FieldName = keyof Inputs;
-
   const next = async () => {
-    const fields = questionElements[currentStep].map((question) => question.Id);
-    const output = await forms.trigger(fields as FieldName[], {
+    const fields = questions[currentStep].map((question) => question.id);
+    // types cannot be inferred during compile time
+    const output = await forms.trigger(fields as never, {
       shouldFocus: true,
     });
     console.log(output);
     if (!output) return;
 
-    if (currentStep < questionElements.length - 1) {
+    if (currentStep < form.pages - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
     }
@@ -140,11 +118,11 @@ export default function FormSubmitForm({
           className="space-y-8 py-4"
           onSubmit={forms.handleSubmit(onSubmit)}
         >
-          {questionElements[currentStep].map((question) => {
+          {questions[currentStep].map((question) => {
             const Element = FormElements[question.input_type].formComponent;
             return (
               <motion.div
-                key={question.Id}
+                key={question.id}
                 initial={{ x: delta > 0 ? 100 : -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: delta > 0 ? -100 : 100, opacity: 0 }}
@@ -152,17 +130,16 @@ export default function FormSubmitForm({
               >
                 <FormField
                   control={forms.control}
-                  name={question.Id as FieldName}
+                  name={question.id as never} // types cannot be inferred during compile time
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
                         <Element
                           {...field}
-                          name={question.id?.toString()}
                           label={question.question}
-                          required={question.is_required}
-                          description={question.description}
-                          items={question.choices || []}
+                          required={false}
+                          description={question.description || ''}
+                          items={question.items || []}
                         />
                       </FormControl>
                       <FormMessage />
@@ -179,7 +156,7 @@ export default function FormSubmitForm({
               <Button onClick={prev} type="button" disabled={currentStep === 0}>
                 Previous
               </Button>
-              {currentStep === questionElements.length - 1 && (
+              {currentStep === form.pages - 1 && (
                 <Button disabled={forms.formState.isSubmitting} type="submit">
                   Submit
                 </Button>
@@ -187,7 +164,7 @@ export default function FormSubmitForm({
               <Button
                 type="button"
                 onClick={next}
-                disabled={currentStep === questionElements.length - 1}
+                disabled={currentStep === form.pages - 1}
               >
                 Next
               </Button>

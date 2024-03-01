@@ -6,12 +6,7 @@ import { forwardRef } from 'react';
 import { Input, InputProps } from '../ui/input';
 
 const TextField = forwardRef<HTMLInputElement, InputProps>(function TextField(
-  {
-    label = 'Text',
-    placeholder = 'Enter your text',
-    LeftChild = PiTextT,
-    ...props
-  },
+  { label, placeholder = 'Enter your text', LeftChild = PiTextT, ...props },
   ref
 ) {
   return (

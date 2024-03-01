@@ -22,21 +22,8 @@ import {
   FormItem,
   FormMessage,
 } from '../ui/form';
-<<<<<<< HEAD
-
-interface FormValues {
-  email: string;
-  name: string;
-  file: FileList;
-  checkbox: string[];
-  dateTime: string;
-  time: string;
-  select: string;
-}
-=======
 import MultiSelectDropdown from './multiSelectItem';
 import DateField from './date';
->>>>>>> 3134c04 (finished up with generics)
 
 export default function Visualizer() {
   const schema = z.object({
