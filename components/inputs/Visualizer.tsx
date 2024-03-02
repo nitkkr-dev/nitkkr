@@ -22,11 +22,18 @@ import {
 } from '../ui/form';
 import MultiSelectDropdown from './multiSelectItem';
 import DateField from './date';
+import NumberField from './numberfield';
+import PhoneField from './telephone';
+import { Textarea } from '../ui/textarea';
+import TextAreaGeneric from './textAreaField';
 
 export default function Visualizer() {
   const schema = z.object({
     email: z.string().email('Invalid email address'),
     name: z.string().min(3, 'Name must be at least 3 characters long'),
+    phone: z.coerce.number(),
+    number: z.coerce.number(),
+    textarea: z.string(),
     file: z.any(),
     checkbox: z.boolean(),
     dateTime: z.string(),
@@ -75,6 +82,42 @@ export default function Visualizer() {
             <FormItem>
               <FormControl>
                 <TextField {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="textarea"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <TextAreaGeneric {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="number"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <NumberField {...field} required />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <PhoneField {...field} required />
               </FormControl>
               <FormMessage />
             </FormItem>
