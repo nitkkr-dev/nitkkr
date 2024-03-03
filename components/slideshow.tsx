@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Slider from 'react-slick';
@@ -31,30 +31,6 @@ export default function Slideshow({
       sliderRef.current?.slickNext();
     }
   };
-
-  useEffect(() => {
-    const sliderNode = sliderRef.current?.innerSlider?.list?.parentNode;
-
-    if (sliderNode) {
-      sliderNode.addEventListener('mouseenter', () =>
-        window.addEventListener('keydown', handleKeyDown)
-      );
-      sliderNode.addEventListener('mouseleave', () =>
-        window.removeEventListener('keydown', handleKeyDown)
-      );
-    }
-
-    return () => {
-      if (sliderNode) {
-        sliderNode.removeEventListener('mouseenter', () =>
-          window.addEventListener('keydown', handleKeyDown)
-        );
-        sliderNode.removeEventListener('mouseleave', () =>
-          window.removeEventListener('keydown', handleKeyDown)
-        );
-      }
-    };
-  }, []);
 
   return (
     <article
