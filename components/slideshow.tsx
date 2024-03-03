@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
