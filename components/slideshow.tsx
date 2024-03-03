@@ -60,7 +60,7 @@ export default function Slideshow({
         ))}
       </Slider>
 
-      <section className="absolute inset-0 flex items-center justify-between px-20">
+      <section className="container absolute inset-0 flex min-w-full justify-between">
         <button
           className="opacity-60 hover:opacity-100"
           onClick={() => sliderRef.current?.slickPrev()}
