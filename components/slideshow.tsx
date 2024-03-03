@@ -57,7 +57,11 @@ export default function Slideshow({
   }, []);
 
   return (
-    <article className="relative overflow-x-hidden">
+    <article
+      className="relative overflow-x-hidden"
+      onMouseEnter={() => window.addEventListener('keydown', handleKeyDown)}
+      onMouseLeave={() => window.removeEventListener('keydown', handleKeyDown)}
+    >
       <Slider ref={sliderRef} {...settings}>
         {images.map(({ image, title, subtitle }, index) => (
           <figure className="relative max-h-screen" key={index}>
@@ -78,6 +82,7 @@ export default function Slideshow({
           </figure>
         ))}
       </Slider>
+
       <section className="absolute inset-0 flex items-center justify-between px-20">
         <button
           className="opacity-60 hover:opacity-100"
