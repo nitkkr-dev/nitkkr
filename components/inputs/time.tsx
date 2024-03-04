@@ -1,5 +1,6 @@
 'use client';
 import React, { forwardRef } from 'react';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 import { Input, type InputProps } from '../ui/input';
 
@@ -12,6 +13,7 @@ const TimeField = forwardRef<HTMLInputElement, InputProps>(
         type="time"
         placeholder={placeholder}
         label={label}
+        LeftChild={AiOutlineClockCircle}
         {...props}
       />
     );

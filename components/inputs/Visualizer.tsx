@@ -222,7 +222,9 @@ export default function Visualizer() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="bg-primary-500 hover:bg-primary-700">
+          Submit
+        </Button>
       </form>
     </Form>
   );
