@@ -10,6 +10,7 @@ const PhoneField = forwardRef<HTMLInputElement, InputProps>(
       const inputValue = event.target.value.replace(/\D/g, '');
       const truncatedValue = inputValue.slice(0, 10);
       event.target.value = truncatedValue;
+      props.onChange?.(event);
     };
 
     return (
@@ -20,8 +21,8 @@ const PhoneField = forwardRef<HTMLInputElement, InputProps>(
         label={label}
         LeftChild={AiOutlinePhone}
         maxLength={10}
-        onChange={handleInputChange}
         {...props}
+        onChange={handleInputChange}
       />
     );
   }
