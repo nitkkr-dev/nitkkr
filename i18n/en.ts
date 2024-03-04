@@ -92,7 +92,7 @@ const text: Translations = {
       'Faculty And More',
       'Laboratories',
       'Student Achivements',
-      'GALARY',
+      'Galary',
     ],
     readMore: 'Read More',
   },

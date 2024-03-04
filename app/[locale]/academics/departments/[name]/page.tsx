@@ -40,7 +40,7 @@ export default async function Department({
           fill
           className="relative -z-20 object-cover"
         />
-        <h1 className="mt-48 text-center text-5xl font-bold text-neutral-50 md:mt-12 md:text-3xl">
+        <h1 className="pt-52 text-center text-5xl font-bold text-neutral-50 md:mt-12 md:text-3xl">
           {decodeURIComponent(departmentData.name)}
         </h1>
         <div className="mt-auto">
@@ -68,7 +68,7 @@ export default async function Department({
           <div className="flex items-center justify-center">
             <HorsesRunning direction={'left'} />
             <h2 className="font-semibold text-primary-700 md:text-2xl lg:text-3xl">
-              {text.sectionTitles[0]}
+              {text.sectionTitles[0].toLocaleUpperCase()}
             </h2>
           </div>
           <article className="mt-10 flex flex-col items-center rounded-md bg-neutral-50 lg:flex-row">
@@ -102,7 +102,7 @@ export default async function Department({
         <section className="mt-20 flex items-center rounded-md">
           <article className="w-1/2 rounded-md px-4">
             <div className="flex">
-              <h2>{text.sectionTitles[1]}</h2>
+              <h2>{text.sectionTitles[1].toLocaleUpperCase()}</h2>
             </div>
             <p className="">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -112,7 +112,7 @@ export default async function Department({
             </p>
             <div>
               <div className="flex">
-                <h2>{text.sectionTitles[2]}</h2>
+                <h2>{text.sectionTitles[2].toLocaleUpperCase()}</h2>
               </div>
               <p className="">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -137,7 +137,7 @@ export default async function Department({
           <div className="flex items-center">
             <HorsesRunning direction="left" />
             <h1 className="text-3xl font-semibold text-primary-700">
-              {text.sectionTitles[3]}
+              {text.sectionTitles[3].toLocaleUpperCase()}
             </h1>
           </div>
           <div className="mt-10 rounded-md border border-primary-700 bg-neutral-50 p-4">
@@ -170,7 +170,7 @@ export default async function Department({
             <div className="grid grid-cols-3 gap-4">
               <div className="flex flex-col space-y-4">
                 <button className="flex items-center justify-center rounded-md bg-primary-300 px-4 py-2 text-neutral-50">
-                  <span className="text-lg">UNDER GRADUATE</span>
+                  <h1 className="text-lg">UNDER GRADUATE</h1>
                 </button>
                 <span className="flex">
                   <span className="text-primary-300">B. Tech</span>
@@ -188,7 +188,7 @@ export default async function Department({
               </div>
               <div className="flex flex-col space-y-4">
                 <button className="flex items-center justify-center rounded-md bg-primary-700 px-4 py-2 text-neutral-50">
-                  <span className="text-lg">POST GRADUATE</span>
+                  <h1 className="text-lg">POST GRADUATE</h1>
                 </button>
                 <span className="flex">
                   <span className="text-primary-700">M. Tech</span>
@@ -203,7 +203,7 @@ export default async function Department({
               </div>
               <div className="flex flex-col space-y-4">
                 <button className="flex items-center justify-center rounded-md bg-primary-900 px-4 py-2 text-neutral-50">
-                  <span className="text-lg">Doctoral</span>
+                  <h1 className="text-lg">DOCTORAL</h1>
                 </button>
                 <span className="flex">
                   <span className="text-primary-900">PH. D</span>
@@ -226,23 +226,23 @@ export default async function Department({
         >
           <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <MdBadge className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50 ">
+            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50 ">
               {text.sectionTitles[5]}
-            </span>
+            </h3>
           </div>
 
           <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <ImLab className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50">
+            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
               {text.sectionTitles[6]}
-            </span>
+            </h3>
           </div>
 
           <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
             <MdMilitaryTech className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <span className="text-xl font-semibold text-primary-500 group-hover:text-neutral-50">
+            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
               {text.sectionTitles[7]}
-            </span>
+            </h3>
           </div>
         </article>
 

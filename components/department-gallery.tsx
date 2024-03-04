@@ -22,9 +22,9 @@ export default async function DepartmentGallery({
   return (
     <div>
       <div className="flex items-center space-x-5">
-        <span className="text-3xl font-semibold text-primary-500">
-          {text.sectionTitles[8]}
-        </span>
+        <h1 className="text-3xl font-semibold text-primary-500">
+          {text.sectionTitles[8].toLocaleUpperCase()}
+        </h1>
         <HorsesRunning direction="right" />
       </div>
 
