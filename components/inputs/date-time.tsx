@@ -16,7 +16,11 @@ const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
         max="9999-12-31T23:59"
         placeholder={placeholder}
         label={label}
-        {...props}
+        onChange={(event) => {
+          props.onChange?.({
+            target: { value: event.target.value + ':00Z' },
+          } as React.ChangeEvent<HTMLInputElement>);
+        }}
       />
     );
   }
