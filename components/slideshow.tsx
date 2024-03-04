@@ -32,23 +32,21 @@ export default function Slideshow({
       >
         <CarouselContent>
           {images.map(({ image, title, subtitle }, index) => (
-            <CarouselItem key={index}>
-              <figure className="relative max-h-screen">
-                <Image
-                  alt={`slide ${index + 1}`}
-                  className="h-full"
-                  height={1080}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  width={1920}
-                  src={image}
-                />
-                {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 min-w-full bg-gradient-to-b from-transparent to-neutral-800 py-6">
-                    <h4 className="text-neutral-100">{title}</h4>
-                    <p className="text-neutral-100">{subtitle}</p>
-                  </figcaption>
-                )}
-              </figure>
+            <CarouselItem key={index} className="relative max-h-screen">
+              <Image
+                alt={`slide ${index + 1}`}
+                className="h-full"
+                height={1080}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                width={1920}
+                src={image}
+              />
+              {title && (
+                <figcaption className="container absolute inset-x-0 bottom-0 min-w-full bg-gradient-to-b from-transparent to-neutral-800 py-6">
+                  <h4 className="text-neutral-100">{title}</h4>
+                  <p className="text-neutral-100">{subtitle}</p>
+                </figcaption>
+              )}
             </CarouselItem>
           ))}
         </CarouselContent>
