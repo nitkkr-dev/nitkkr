@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react';
 import { AiOutlinePhone } from 'react-icons/ai';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const PhoneField = forwardRef<HTMLInputElement, InputProps>(
   ({ label = 'Phone', placeholder = 'Enter your Number', ...props }, ref) => {

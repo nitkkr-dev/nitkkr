@@ -2,7 +2,7 @@
 import { MdOutlineDateRange } from 'react-icons/md';
 import { forwardRef } from 'react';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const DateField = forwardRef<HTMLInputElement, InputProps>(function DateField(
   {

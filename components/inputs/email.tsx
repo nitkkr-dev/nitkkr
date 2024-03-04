@@ -2,7 +2,7 @@
 import { MdOutlineEmail } from 'react-icons/md';
 import { forwardRef } from 'react';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const EmailField = forwardRef<HTMLInputElement, InputProps>(function EmailField(
   {

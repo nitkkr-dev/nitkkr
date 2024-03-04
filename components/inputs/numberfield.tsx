@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react';
 import { AiOutlineNumber } from 'react-icons/ai';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const NumberField = forwardRef<HTMLInputElement, InputProps>(
   ({ label = 'Number', placeholder = 'Enter a Number', ...props }, ref) => {

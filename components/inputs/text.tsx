@@ -3,7 +3,7 @@
 import { PiTextT } from 'react-icons/pi';
 import { forwardRef } from 'react';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const TextField = forwardRef<HTMLInputElement, InputProps>(function TextField(
   {

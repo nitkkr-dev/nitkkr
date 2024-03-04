@@ -1,7 +1,7 @@
 'use client';
 import React, { forwardRef } from 'react';
 
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 
 const TimeField = forwardRef<HTMLInputElement, InputProps>(
   ({ label = 'Time', placeholder = 'Enter time', ...props }, ref) => {

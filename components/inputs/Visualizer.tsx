@@ -1,18 +1,10 @@
 'use client';
-import React from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import EmailField from './email';
-import TextField from './text';
-import FileUpload from './fileUpload';
-import TimeField from './time';
-import SelectDropdown from './selectIItem';
 import { Button } from '../ui/button';
-import DateTimeField from './date-time';
-import RadioGeneric from './radioItems';
-import CheckboxGeneric from './Checkbox';
 import {
   Form,
   FormControl,
@@ -20,12 +12,19 @@ import {
   FormItem,
   FormMessage,
 } from '../ui/form';
-import MultiSelectDropdown from './multiSelectItem';
+import CheckboxGeneric from './Checkbox';
 import DateField from './date';
+import DateTimeField from './date-time';
+import EmailField from './email';
+import FileUpload from './fileUpload';
+import MultiSelectDropdown from './multiSelectItem';
 import NumberField from './numberfield';
+import RadioGeneric from './radioItems';
+import SelectDropdown from './selectIItem';
 import PhoneField from './telephone';
-import { Textarea } from '../ui/textarea';
+import TextField from './text';
 import TextAreaGeneric from './textAreaField';
+import TimeField from './time';
 
 export default function Visualizer() {
   const schema = z.object({

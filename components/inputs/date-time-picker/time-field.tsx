@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 import {
-  AriaTimeFieldProps,
-  TimeValue,
+  type AriaTimeFieldProps,
+  type TimeValue,
   useLocale,
   useTimeField,
 } from 'react-aria';
