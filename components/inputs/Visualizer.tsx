@@ -204,7 +204,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <RadioGeneric items={items} {...field} required />
+                <RadioGeneric items={items} {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -216,7 +216,12 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <MultiSelectDropdown items={items} {...field} disabled />
+                <MultiSelectDropdown
+                  items={items}
+                  {...field}
+                  required
+                  placeholder="Enter or Select values"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

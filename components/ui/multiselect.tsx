@@ -356,7 +356,7 @@ const MultipleSelector = React.forwardRef<
       >
         <div
           className={cn(
-            'border-input focus-within:ring-ring group rounded-md border px-3 py-2 text-sm ring-offset-background focus-within:ring-1 focus-visible:outline-none focus-visible:ring-1',
+            'border-input focus-within:ring-ring invalid:outline-red-100 group rounded-md border px-3 py-2 text-sm ring-offset-background transition-colors invalid:border-primary-500 invalid:outline-offset-2 focus-within:ring-1 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
             className
           )}
         >
@@ -417,7 +417,7 @@ const MultipleSelector = React.forwardRef<
                   : placeholder
               }
               className={cn(
-                'placeholder:text-muted-foreground ml-2 flex-1 bg-neutral-50 outline-none',
+                'placeholder:text-muted-foreground ml-2 flex-1 bg-neutral-50 outline-none disabled:cursor-not-allowed disabled:opacity-50',
                 inputProps?.className
               )}
             />
