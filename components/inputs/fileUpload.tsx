@@ -1,7 +1,7 @@
 'use client';
-import React, { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 
-import { Input, InputProps } from '@/components/ui/input';
+import { Input, type InputProps } from '~/components/ui/input';
 
 const FileUpload = forwardRef<HTMLInputElement, InputProps>(
   ({ label = 'Upload File', ...props }, ref) => {

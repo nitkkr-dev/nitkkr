@@ -1,8 +1,5 @@
 'use client';
 
-import { forwardRef } from 'react';
-
-import { InputProps } from '../ui/input';
 import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 
@@ -41,7 +38,7 @@ const RadioGeneric = ({ items, ...props }: ListProps) => {
           </div>
         ))}
       </RadioGroup>
-      <p className="marker:text-muted-foreground block text-[0.8rem] text-red-500 ">
+      <p className="marker:text-muted-foreground text-red-500 block text-[0.8rem] ">
         {props.errorMsg}
       </p>
     </div>

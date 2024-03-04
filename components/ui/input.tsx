@@ -1,8 +1,8 @@
 // Import necessary libraries
 import * as React from 'react';
-import { IconBaseProps } from 'react-icons';
+import { type IconBaseProps } from 'react-icons';
 
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
 import { Label } from './label';
 
@@ -49,7 +49,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       'text-sm transition-colors',
       'placeholder:text-muted-foreground',
       'file:border-0 file:bg-neutral-10 file:text-sm file:font-medium ',
-      'focus-visible:border-black focus-visible:outline-blue-100 focus-visible:outline-offset-2',
+      'focus-visible:outline-blue-100 focus-visible:outline-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'invalid:border-red-500 invalid:outline-red-100 invalid:outline-offset-2',
       inputClassName,
@@ -61,13 +61,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <Label htmlFor={name}>{label}</Label>
         {required && <span style={{ color: '#EC734B' }}>*</span>}
         {description && (
-          <p className="text-[0.8rem] text-muted-foreground block">
+          <p className="text-muted-foreground block text-[0.8rem]">
             {description}
           </p>
         )}
         <div className={inputContainerClasses}>
           {LeftChild && (
-            <div className="absolute left-2 top-[0.70rem] h-4 w-4 text-muted-foreground ">
+            <div className="text-muted-foreground absolute left-2 top-[0.70rem] h-4 w-4 ">
               <LeftChild />
             </div>
           )}
@@ -82,13 +82,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           {RightChild && (
             <RightChild
-              className="hover:cursor-pointer mx-2 absolute right-2"
+              className="absolute right-2 mx-2 hover:cursor-pointer"
               // onClick={onRightChildClick}
               size={20}
             />
           )}
         </div>
-        <p className="text-[0.8rem] text-muted-foreground block text-red-500">
+        <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
           {errorMsg}
         </p>
       </div>

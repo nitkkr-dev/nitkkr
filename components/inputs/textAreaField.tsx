@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { Label } from '../ui/label';
-import { GenericProps } from './radioItems';
+import { type GenericProps } from './radioItems';
 import { Textarea } from '../ui/textarea';
 
 interface TextFieldProps extends GenericProps {
@@ -34,7 +34,7 @@ const TextAreaGeneric = React.forwardRef<HTMLTextAreaElement, TextFieldProps>(
           placeholder={placeholder}
           {...props}
         />
-        <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+        <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
           {props.errorMsg}
         </p>
       </div>

@@ -1,9 +1,9 @@
 'use client';
 
-import { Checkbox } from '@/components/ui/checkbox';
+import { Checkbox } from '~/components/ui/checkbox';
 
 import { Label } from '../ui/label';
-import { GenericProps } from './radioItems';
+import { type GenericProps } from './radioItems';
 
 interface CheckboxProps extends GenericProps {
   defaultChecked?: boolean;
@@ -28,7 +28,7 @@ const CheckboxGeneric = ({ ...props }: CheckboxProps) => {
           {props.name}
         </Label>
       </div>
-      <p className="marker:text-muted-foreground block text-[0.8rem] text-red-500 ">
+      <p className="marker:text-muted-foreground text-red-500 block text-[0.8rem] ">
         {props.errorMsg}
       </p>
     </div>

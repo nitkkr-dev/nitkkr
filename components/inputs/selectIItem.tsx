@@ -5,10 +5,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '~/components/ui/select';
 
 import { Label } from '../ui/label';
-import { GenericProps } from './radioItems';
+import { type GenericProps } from './radioItems';
 
 interface ListProps extends GenericProps {
   items: string[];
@@ -43,7 +43,7 @@ const SelectDropdown = ({ items, ...props }: ListProps) => {
           ))}
         </SelectContent>
       </Select>
-      <p className="text-muted-foreground block text-[0.8rem] text-red-500">
+      <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
         {props.errorMsg}
       </p>
     </div>

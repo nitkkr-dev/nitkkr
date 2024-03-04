@@ -1,4 +1,4 @@
-import Visualizer from '@/components/inputs/Visualizer';
+import Visualizer from '~/components/inputs/Visualizer';
 
 import DirectorsCorner from './directors-corner';
 import Notifications from './notifications';
@@ -20,6 +20,7 @@ export default function Home({
     <main className="w-full">
       <Notifications category={notificationCategory} locale={locale} />
       <DirectorsCorner locale={locale} />
+      <Visualizer />
     </main>
   );
 }

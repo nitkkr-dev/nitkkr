@@ -6,7 +6,7 @@ import { X } from 'lucide-react';
 import { Command as CommandPrimitive, useCommandState } from 'cmdk';
 import { forwardRef, useEffect } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '~/lib/utils';
 
 import { Badge } from './badge';
 import { Command, CommandGroup, CommandItem, CommandList } from './command';
@@ -20,9 +20,7 @@ export interface Option {
   /** Group the options by providing key. */
   [key: string]: string | boolean | undefined;
 }
-interface GroupOption {
-  [key: string]: string[];
-}
+type GroupOption = Record<string, string[]>;
 
 export interface MultipleSelectorProps {
   value?: string[];
@@ -82,7 +80,7 @@ export function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = React.useState<T>(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
+    const timer = setTimeout(() => setDebouncedValue(value), delay ?? 500);
 
     return () => {
       clearTimeout(timer);
@@ -104,7 +102,7 @@ function transToGroupOption(options: string[], groupBy?: string) {
 
   const groupOption: GroupOption = {};
   options.forEach((option) => {
-    const key = (option as string) || '';
+    const key = option || '';
     if (!groupOption[key]) {
       groupOption[key] = [];
     }
@@ -183,18 +181,18 @@ const MultipleSelector = React.forwardRef<
     const [open, setOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const [selected, setSelected] = React.useState<string[]>(value || []);
+    const [selected, setSelected] = React.useState<string[]>(value ?? []);
     const [options, setOptions] = React.useState<GroupOption>(
       transToGroupOption(arrayDefaultOptions, groupBy)
     );
     const [inputValue, setInputValue] = React.useState('');
-    const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
+    const debouncedSearchTerm = useDebounce(inputValue, delay ?? 500);
 
     React.useImperativeHandle(
       ref,
       () => ({
         selectedValue: [...selected],
-        input: inputRef.current as HTMLInputElement,
+        input: inputRef.current!,
       }),
       [selected]
     );
@@ -247,7 +245,7 @@ const MultipleSelector = React.forwardRef<
       const doSearch = async () => {
         setIsLoading(true);
         const res = await onSearch?.(debouncedSearchTerm);
-        setOptions(transToGroupOption(res || [], groupBy));
+        setOptions(transToGroupOption(res ?? [], groupBy));
         setIsLoading(false);
       };
 
@@ -358,7 +356,7 @@ const MultipleSelector = React.forwardRef<
       >
         <div
           className={cn(
-            'border-input ring-offset-background focus-within:ring-ring group rounded-md border px-3 py-2 text-sm focus-within:ring-2 focus-within:ring-offset-2',
+            'border-input focus-within:ring-ring group rounded-md border px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-offset-2',
             className
           )}
         >
@@ -376,7 +374,7 @@ const MultipleSelector = React.forwardRef<
                   {option}
                   <button
                     className={cn(
-                      'ring-offset-background focus:ring-ring ml-1 rounded-full outline-none focus:ring-2 focus:ring-offset-2'
+                      'focus:ring-ring ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-offset-2'
                     )}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
