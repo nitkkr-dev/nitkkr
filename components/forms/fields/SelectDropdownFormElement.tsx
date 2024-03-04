@@ -45,20 +45,11 @@ export const SelectDropdownFormElement: FormElement = {
     icon: RxDropdownMenu,
     label: 'Select Field',
   },
-  schemaObject: schemaObject,
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'email',
   };
-}
-function schemaObject(required: boolean) {
-  if (required) {
-    return z.string();
-  } else {
-    return z.string().optional();
-  }
 }

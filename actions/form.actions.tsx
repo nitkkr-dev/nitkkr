@@ -140,7 +140,8 @@ export async function UpdateFormQuestions(
   const user = await currentUser();
   if (!user) throw new UserNotFoundErr();
   const upsertOperations = questions.map(async (question, index) => {
-    const { Id, id, page_number, ...rest } = question;
+    const { Id, id, page_number, formatMinimum, formatMaximum, ...rest } =
+      question;
     const page_number_with_index = page_number + index * 0.001;
     if (!id)
       return prisma.form_questions.create({
@@ -308,6 +309,7 @@ export async function getFormForSubmission(id: number) {
     });
     return <FormExpired />;
   }
+  console.log('form', form);
   if (!form.is_anonymous) {
     //if (!form.modifiable_by.some((mod) => mod.id === user.id)) return <FormNotFound />;  // Impossible condition
     const response = await prisma.form_submissions.findFirst({
@@ -316,6 +318,7 @@ export async function getFormForSubmission(id: number) {
         email: user.institute_email,
       },
     });
+    console.log('response', response);
     if (!form.is_single_response && response) return <FormSingleResponse />;
     if (!form.is_editing_allowed && response) return <FormEditNotAllowed />;
   }
@@ -427,14 +430,14 @@ export async function submitForm(id: number, formData: Record<string, any>) {
             id: response.id,
           },
         });
-        return { title: 'Success', description: form.on_submit_message };
+        // return { title: 'Success', description: form.on_submit_message };
       }
     }
   }
   const submission = await prisma.form_submissions.create({
     data: {
       form_id: id,
-      email: form.is_anonymous ? user.institute_email : '',
+      email: form.is_anonymous ? '' : user.institute_email,
     },
   });
   await prisma.form_answers.createMany({

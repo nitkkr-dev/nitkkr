@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
-import DateField from '@/components/inputs/date';
+import DateTimeField from '@/components/inputs/date-time';
 
 import useDragDrop from '../hooks/useDragDrop';
 import { FormElementInstance } from '../interfaces/FormElements';
@@ -59,7 +59,7 @@ const propertiesSchema = z
   });
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
-export default function DateBasedForm({
+export default function DateTImeBasedForm({
   elementInstance,
 }: {
   elementInstance: FormElementInstance;
@@ -182,7 +182,7 @@ export default function DateBasedForm({
           render={({ field }) => (
             <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <FormControl>
-                <DateField
+                <DateTimeField
                   {...field}
                   label="Minimum Date"
                   onKeyDown={(e) => {
@@ -200,7 +200,7 @@ export default function DateBasedForm({
           render={({ field }) => (
             <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <FormControl>
-                <DateField
+                <DateTimeField
                   {...field}
                   label="Maximum Date"
                   onKeyDown={(e) => {

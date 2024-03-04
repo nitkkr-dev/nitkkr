@@ -80,9 +80,9 @@ export default function TextValidationForm({
           name="label"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Label</FormLabel>
               <FormControl>
                 <Input
+                  label="Label"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
@@ -102,9 +102,9 @@ export default function TextValidationForm({
           name="placeHolder"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>PlaceHolder</FormLabel>
               <FormControl>
                 <Input
+                  label="PlaceHolder"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
@@ -121,9 +121,9 @@ export default function TextValidationForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input
+                  label="Description"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();

@@ -44,7 +44,6 @@ export const EmailFieldFormElement: FormElement = {
     icon: MdOutlineEmail,
     label: 'Email Field',
   },
-  schemaObject: schemaObject,
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };

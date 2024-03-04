@@ -83,6 +83,7 @@ export default function FormSubmitFormFinal({
     const output = await forms.trigger(fields as never, {
       shouldFocus: true,
     });
+    console.log(fields);
     console.log(output);
     if (!output) return;
 
@@ -100,6 +101,7 @@ export default function FormSubmitFormFinal({
   };
   const onSubmit = async () => {
     const output = await forms.trigger();
+    console.log(forms.getValues());
     console.log(output);
     if (!output) return;
     const result = await submitForm(form.id, forms.getValues());

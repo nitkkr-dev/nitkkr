@@ -14,6 +14,8 @@ import { EmailFieldFormElement } from '../fields/EmailFieldFormElement';
 import { DateFieldFormElement } from '../fields/DateFieldFormElement';
 import { PhoneFieldFormElement } from '../fields/PhoneFieldFormElement';
 import { SelectDropdownFormElement } from '../fields/SelectDropdownFormElement';
+import { RadioGenericFormElement } from '../fields/RadioGenericFormElement';
+import { DateTimeFieldFormElement } from '../fields/DateTimeFieldFormElement';
 
 export type ElementsType =
   | 'TextField'
@@ -21,7 +23,9 @@ export type ElementsType =
   | 'SelectDropdown'
   | 'TimeField'
   | 'PhoneField'
-  | 'DateField';
+  | 'DateField'
+  | 'RadioField'
+  | 'DateTimeField';
 
 export type validationProperty = {
   type: string;
@@ -50,7 +54,6 @@ export type FormElement = {
     page_number: number,
     id?: number
   ) => FormElementInstance;
-  schemaObject: (required: boolean) => ZodType;
   schemaObjects: (element: FormElementInstance) => validationProperty;
   shouldValidate: boolean;
 };
@@ -82,4 +85,6 @@ export const FormElements: FormElementsType = {
   TimeField: TimeFieldFormElement,
   PhoneField: PhoneFieldFormElement,
   DateField: DateFieldFormElement,
+  RadioField: RadioGenericFormElement,
+  DateTimeField: DateTimeFieldFormElement,
 };

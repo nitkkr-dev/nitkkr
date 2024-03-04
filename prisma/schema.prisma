@@ -189,7 +189,7 @@ model form_answers {
   id               Int              @id(map: "pk_form_answers") @default(autoincrement())
   question_id      Int
   submission_id    Int
-  answer           String           @db.VarChar
+  answer           Json             @db.JsonB
   form_questions   form_questions   @relation(fields: [question_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_answers_form_questions")
   form_submissions form_submissions @relation(fields: [submission_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_answers_form_submissions")
 }
@@ -215,7 +215,7 @@ model forms {
   old_persistent_urls       String[]           @db.VarChar
   is_published              Boolean            @default(false)
   required_questions        String[]           @db.VarChar
-  question_validations      Json?
+  question_validations      Json?              @db.Json
   faculty_feedback          faculty_feedback[]
   form_questions            form_questions[]
   form_submissions          form_submissions[]

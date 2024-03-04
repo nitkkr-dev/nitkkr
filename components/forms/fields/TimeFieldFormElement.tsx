@@ -1,4 +1,4 @@
-import { MdTextFields } from 'react-icons/md';
+import { MdMoreTime } from 'react-icons/md';
 import { z } from 'zod';
 
 import {
@@ -8,7 +8,7 @@ import {
 } from '@/components/forms/interfaces/FormElements';
 import TimeField from '@/components/inputs/time';
 
-import TextValidationForm from './InputBasedForm';
+import TimeBasedForm from './TimeBasedForm';
 
 const input_type: ElementsType = 'TimeField';
 
@@ -28,7 +28,7 @@ export const TimeFieldFormElement: FormElement = {
     />
   ),
   formComponent: TimeField,
-  propertiesComponent: TextValidationForm,
+  propertiesComponent: TimeBasedForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
@@ -41,10 +41,9 @@ export const TimeFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdTextFields,
+    icon: MdMoreTime,
     label: 'Time Field',
   },
-  schemaObject: schemaObject,
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
@@ -52,12 +51,7 @@ function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
     format: 'time',
+    formatMinimum: element.formatMinimum,
+    formatMaximum: element.formatMaximum,
   };
-}
-function schemaObject(required: boolean) {
-  if (required) {
-    return z.date();
-  } else {
-    return z.date().optional();
-  }
 }

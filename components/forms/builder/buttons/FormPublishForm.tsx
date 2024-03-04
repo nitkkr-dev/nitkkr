@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { FaSpinner } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -40,7 +39,6 @@ import { PublishForm } from '@/actions/form.actions';
 import useDragDrop from '../../hooks/useDragDrop';
 
 export default function FormPublishForm({ sForm }: { sForm: forms }) {
-  const [loading, startTransition] = useTransition();
   const router = useRouter();
   const { elements, is_quiz } = useDragDrop();
   const form = useForm<z.infer<typeof finalFormSchema>>({
@@ -272,8 +270,9 @@ export default function FormPublishForm({ sForm }: { sForm: forms }) {
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button type="submit" disabled={loading}>
-            Proceed {loading && <FaSpinner className="animate-spin" />}
+          <Button type="submit" disabled={form.formState.isLoading}>
+            Proceed{' '}
+            {form.formState.isLoading && <FaSpinner className="animate-spin" />}
           </Button>
         </AlertDialogFooter>
       </form>

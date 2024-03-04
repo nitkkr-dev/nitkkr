@@ -44,7 +44,6 @@ export const PhoneFieldFormElement: FormElement = {
     icon: MdPhone,
     label: 'Phone Field',
   },
-  schemaObject: schemaObject,
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
@@ -52,11 +51,4 @@ function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
   };
-}
-function schemaObject(required: boolean) {
-  if (required) {
-    return z.string().min(1, { message: 'Field is required' });
-  } else {
-    return z.string().optional();
-  }
 }

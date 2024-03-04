@@ -1,24 +1,26 @@
 import { MdDateRange } from 'react-icons/md';
+import { z } from 'zod';
 
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
 } from '@/components/forms/interfaces/FormElements';
-import DatePicker from '@/components/inputs/date';
+import DateTimeField from '@/components/inputs/date-time';
 
 import DateBasedForm from './DateBasedForm';
+import DateTimeBasedForm from './DateTimeBasedForm';
 
-const input_type: ElementsType = 'DateField';
+const input_type: ElementsType = 'DateTimeField';
 
-export const DateFieldFormElement: FormElement = {
+export const DateTimeFieldFormElement: FormElement = {
   input_type,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <DatePicker
+    <DateTimeField
       className="w-full"
       readOnly
       label={elementInstance.question}
@@ -26,13 +28,13 @@ export const DateFieldFormElement: FormElement = {
       description={elementInstance.description}
     />
   ),
-  formComponent: DatePicker,
-  propertiesComponent: DateBasedForm,
+  formComponent: DateTimeField,
+  propertiesComponent: DateTimeBasedForm,
   construct: (Id: string, page_number: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Date Field',
+      question: 'Date-Time Field',
       input_type,
       is_required: false,
       page_number,
@@ -41,7 +43,7 @@ export const DateFieldFormElement: FormElement = {
   },
   dragBtnElement: {
     icon: MdDateRange,
-    label: 'Date Field',
+    label: 'Date-Time Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,7 +51,7 @@ export const DateFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'date',
+    format: 'date-time',
     formatMinimum: element.formatMinimum,
     formatMaximum: element.formatMaximum,
   };

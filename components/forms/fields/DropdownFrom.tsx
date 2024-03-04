@@ -102,9 +102,9 @@ export default function DropdownForm({
           name="label"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Label</FormLabel>
               <FormControl>
                 <Input
+                  label="Label"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
@@ -124,9 +124,9 @@ export default function DropdownForm({
           name="placeHolder"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>PlaceHolder</FormLabel>
               <FormControl>
                 <Input
+                  label="PlaceHolder"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
@@ -143,9 +143,9 @@ export default function DropdownForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input
+                  label="Description"
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
@@ -210,31 +210,37 @@ export default function DropdownForm({
             </div>
           )}
         />
-        {fall.map((name, index) => (
-          <div className="flex gap-2 " key={index + 2}>
-            <FormField
-              control={form.control}
-              name={`choices.${index + 2}.choice`}
-              render={({ field }) => (
-                <div className="flex items-start justify-center gap-2">
-                  <FormItem className="flex-grow">
-                    <FormControl key={`in${index}`}>
-                      <Input
-                        label={`Choice ${index + 3}`}
-                        placeholder="Review"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-xs" />
-                  </FormItem>
-                </div>
-              )}
-            />
-            <Button type="button" onClick={() => remove(index)}>
-              trash
-            </Button>
-          </div>
-        ))}
+        {fall
+          .filter((_, index) => index > 1)
+          .map((name, index) => (
+            <div className="flex gap-2" key={index + 2}>
+              <FormField
+                control={form.control}
+                name={`choices.${index + 2}.choice`}
+                render={({ field }) => (
+                  <div className="flex items-start justify-center gap-2">
+                    <FormItem className="flex-grow">
+                      <FormControl key={`in${index + 2}`}>
+                        <Input
+                          label={`Choice ${index + 3}`}
+                          placeholder="Review"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  </div>
+                )}
+              />
+              <Button
+                type="button"
+                className="mt-6"
+                onClick={() => remove(index + 2)}
+              >
+                trash
+              </Button>
+            </div>
+          ))}
         <button type="button" onClick={() => append({ choice: `` })}>
           Append
         </button>

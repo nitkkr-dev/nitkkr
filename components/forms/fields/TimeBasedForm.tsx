@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
-import DateField from '@/components/inputs/date';
+import TimeField from '@/components/inputs/time';
 
 import useDragDrop from '../hooks/useDragDrop';
 import { FormElementInstance } from '../interfaces/FormElements';
@@ -27,33 +27,30 @@ const propertiesSchema = z
     description: z.string().max(200).optional(),
     required: z.boolean().default(false),
     placeHolder: z.string().max(50),
-    formatMinimum: z.string().transform((dateString, ctx) => {
-      if (dateString && !z.coerce.date().safeParse(dateString).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.invalid_date,
-        });
-      }
-      return dateString;
-    }),
-    formatMaximum: z.string().transform((dateString, ctx) => {
-      if (dateString && !z.coerce.date().safeParse(dateString).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.invalid_date,
-        });
-      }
-      return dateString;
-    }),
+    formatMinimum: z
+      .string()
+      .regex(/^\b(?:[01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\b$/, {
+        message: 'Invalid time.',
+      })
+      .or(z.literal('')),
+    formatMaximum: z
+      .string()
+      .regex(/^\b(?:[01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\b$/, {
+        message: 'Invalid time',
+      })
+      .or(z.literal('')),
     marks: z.coerce.number().nonnegative().default(0),
   })
   .superRefine((data, ctx) => {
-    const minDate = data.formatMinimum ? new Date(data.formatMinimum) : null;
-    const maxDate = data.formatMaximum ? new Date(data.formatMaximum) : null;
-
-    if (minDate && maxDate && minDate > maxDate) {
+    if (
+      data.formatMinimum &&
+      data.formatMaximum &&
+      data.formatMaximum < data.formatMinimum
+    ) {
       ctx.addIssue({
         code: z.ZodIssueCode.invalid_date,
+        message: 'Max time should >= min time',
         path: ['formatMaximum'],
-        message: 'Max date should >= min date',
       });
     }
   });
@@ -182,9 +179,9 @@ export default function DateBasedForm({
           render={({ field }) => (
             <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <FormControl>
-                <DateField
+                <TimeField
                   {...field}
-                  label="Minimum Date"
+                  label="Minimum Time"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
                   }}
@@ -200,9 +197,9 @@ export default function DateBasedForm({
           render={({ field }) => (
             <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
               <FormControl>
-                <DateField
+                <TimeField
                   {...field}
-                  label="Maximum Date"
+                  label="Maximum Time"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') e.currentTarget.blur();
                   }}
