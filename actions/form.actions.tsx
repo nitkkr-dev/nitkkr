@@ -3,7 +3,6 @@ import FormEditNotAllowed from '@/components/forms/FormEditNotAllowed';
 import FormExpired from '@/components/forms/FormExpired';
 import FormNotFound from '@/components/forms/FormNotFound';
 import FormSingleResponse from '@/components/forms/FormSingleResponse';
-import FormSubmitForm from '@/components/forms/FormSubmitForm';
 import {
   ElementsType,
   FormElementInstance,
@@ -13,7 +12,6 @@ import prisma from '@/lib/prisma';
 import { finalFormSchema, formSchema, formSchemaType } from '@/schemas/form';
 import { Prisma, form_questions, forms } from '@/prisma/generated/client';
 import { revalidatePath } from 'next/cache';
-import FormSubmitFormNewValid from '@/components/forms/FormSubmitFormNewValid';
 import { validationProperty } from '@/components/forms/interfaces/FormElements';
 import FormSubmitFormFinal from '@/components/forms/FormSubmitFormFinal';
 
