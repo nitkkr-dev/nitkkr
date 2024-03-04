@@ -53,13 +53,8 @@ export default function Slideshow({
           ))}
         </CarouselContent>
         <section className="container absolute inset-0 flex min-w-full justify-between">
-          <button className="opacity-60 hover:opacity-100">
-            <CarouselPrevious />
-          </button>
-
-          <button className="opacity-60 hover:opacity-100">
-            <CarouselNext />
-          </button>
+          <CarouselPrevious className="relative top-[50%] opacity-60 hover:opacity-100" />
+          <CarouselNext className="relative top-[50%] opacity-60 hover:opacity-100" />
         </section>
       </Carousel>
     </article>
