@@ -18,7 +18,7 @@ import DateTimeField from './date-time';
 import EmailField from './email';
 import FileUpload from './fileUpload';
 import MultiSelectDropdown from './multiSelectItem';
-import NumberField from './numberfield';
+import NumberField from './number';
 import RadioGeneric from './radioItems';
 import SelectDropdown from './selectIItem';
 import PhoneField from './telephone';
