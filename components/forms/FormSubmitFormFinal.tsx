@@ -45,12 +45,14 @@ interface FormSubmitFormProps {
   }[][];
   requiredQuestions: string[];
   questionValidations: Record<string, validationProperty>;
+  answers?: Record<string, string | number | string[]>;
 }
 export default function FormSubmitFormFinal({
   form,
   questions,
   requiredQuestions,
   questionValidations,
+  answers,
 }: FormSubmitFormProps) {
   const Router = useRouter();
   console.log(form.pages);
@@ -73,6 +75,7 @@ export default function FormSubmitFormFinal({
   const forms = useForm({
     context: form.id.toString(),
     resolver: resolver,
+    defaultValues: answers,
   });
   const next = async () => {
     const fields = questions[currentStep].map((question) => question.id);

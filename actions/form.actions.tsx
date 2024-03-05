@@ -13,6 +13,7 @@ import { Prisma, form_questions, forms } from '~/prisma/generated/client';
 import { revalidatePath } from 'next/cache';
 import { validationProperty } from '~/components/forms/interfaces/FormElements';
 import FormSubmitFormFinal from '~/components/forms/FormSubmitFormFinal';
+import { number } from 'zod';
 
 //TODO
 async function currentUser() {
@@ -372,8 +373,27 @@ export async function getFormForSubmission(id: number) {
       input_type: question.input_type as ElementsType,
     });
   });
+
+  const submission = form.is_editing_allowed
+    ? await prisma.form_submissions.findFirst({
+        where: {
+          form_id: id,
+          email: user.institute_email,
+        },
+        include: {
+          form_answers: true,
+        },
+      })
+    : undefined;
+  const answers = submission?.form_answers.reduce(
+    (acc: Record<string, string | number | string[]>, answer) => {
+      acc[answer.question_id] = answer.answer as string | number | string[];
+      return acc;
+    },
+    {}
+  );
+
   const pages = questionElements.length;
-  // TODO editable form
   return (
     <FormSubmitFormFinal
       form={{
@@ -391,6 +411,7 @@ export async function getFormForSubmission(id: number) {
           validationProperty
         >
       }
+      answers={answers}
     />
   );
 }
