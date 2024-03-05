@@ -204,7 +204,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <RadioGeneric items={items} {...field} disabled />
+                <RadioGeneric items={items} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
