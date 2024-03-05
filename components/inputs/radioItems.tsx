@@ -13,7 +13,7 @@ export interface GenericProps {
   inputClassName?: string;
   className?: string;
 }
-interface ListProps extends GenericProps {
+export interface ListProps extends GenericProps {
   items: string[];
   onChange?: (value: string) => void;
   value?: string;
