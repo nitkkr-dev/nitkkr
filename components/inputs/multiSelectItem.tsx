@@ -29,6 +29,7 @@ const MultiSelectDropdown: ForwardRefExoticComponent<MultiListProps> =
           defaultOptions={props.items}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          disabled={props.disabled}
           value={props.value}
           emptyIndicator={
             <p className="text-gray-600 dark:text-gray-400 text-center text-lg leading-10">

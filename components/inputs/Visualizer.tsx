@@ -204,7 +204,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <RadioGeneric items={items} {...field} required />
+                <RadioGeneric items={items} {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -216,13 +216,20 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <MultiSelectDropdown items={items} {...field} disabled />
+                <MultiSelectDropdown
+                  items={items}
+                  {...field}
+                  required
+                  placeholder="Enter or Select values"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="bg-primary-500 hover:bg-primary-700">
+          Submit
+        </Button>
       </form>
     </Form>
   );

@@ -45,13 +45,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputContainerClasses = cn('relative', 'flex items-center');
 
     const inputClasses = cn(
-      'flex h-9 w-full rounded-md border border-input bg-neutral-10',
+      'flex h-9 w-full rounded-md border border-input bg-neutral-50',
       'text-sm transition-colors',
       'placeholder:text-muted-foreground',
-      'file:border-0 file:bg-neutral-10 file:text-sm file:font-medium ',
-      'focus-visible:outline-blue-100 focus-visible:outline-offset-2',
+      'file:border-0 file:bg-neutral-50 file:text-sm file:font-medium ',
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ',
       'disabled:cursor-not-allowed disabled:opacity-50',
-      'invalid:border-red-500 invalid:outline-red-100 invalid:outline-offset-2',
+      'invalid:border-primary-500 invalid:outline-red-100 invalid:outline-offset-2',
       inputClassName,
       LeftChild ? 'pl-7 ' : 'pl-3 ' // Adjusted margin-top
     );

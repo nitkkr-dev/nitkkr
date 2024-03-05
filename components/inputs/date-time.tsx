@@ -1,5 +1,6 @@
 'use client';
 import React, { forwardRef } from 'react';
+import { FaRegCalendarAlt } from 'react-icons/fa';
 
 import { Input, type InputProps } from '../ui/input';
 
@@ -16,6 +17,7 @@ const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
         max="9999-12-31T23:59"
         placeholder={placeholder}
         label={label}
+        LeftChild={FaRegCalendarAlt}
         defaultValue={(props.value as string)?.slice(0, -4)}
         onChange={(event) => {
           props.onChange?.({
