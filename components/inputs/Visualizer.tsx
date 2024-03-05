@@ -18,7 +18,7 @@ import DateTimeField from './date-time';
 import EmailField from './email';
 import FileUpload from './fileUpload';
 import MultiSelectDropdown from './multiSelectItem';
-import NumberField from './numberfield';
+import NumberField from './number';
 import RadioGeneric from './radioItems';
 import SelectDropdown from './selectIItem';
 import PhoneField from './telephone';
@@ -31,7 +31,7 @@ export default function Visualizer() {
     email: z.string().email('Invalid email address'),
     name: z.string().min(3, 'Name must be at least 3 characters long'),
     phone: z.coerce.number(),
-    number: z.coerce.number(),
+    number: z.number(),
     textarea: z.string(),
     file: z.any(),
     checkbox: z.boolean(),

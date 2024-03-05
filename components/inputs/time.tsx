@@ -11,6 +11,7 @@ const TimeField = forwardRef<HTMLInputElement, InputProps>(
         className="pr-2"
         type="time"
         placeholder={placeholder}
+        step={1}
         label={label}
         {...props}
       />
