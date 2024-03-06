@@ -6,6 +6,7 @@ import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 import { getTranslations } from '~/i18n/translations';
 import HorsesRunning from '~/components/horses-running';
 import DepartmentGallery from '~/components/department-gallery';
+import Subnav from '~/components/subnav';
 
 export default async function Department({
   params: { locale, name },
@@ -32,38 +33,22 @@ export default async function Department({
   };
 
   return (
-    <div>
-      <header className="relative flex w-screen flex-col items-center overflow-hidden md:h-auto lg:h-[493px]">
-        <Image
-          src={departmentData.titleImage}
-          alt={departmentData.name}
-          fill
-          className="relative -z-20 object-cover"
-        />
-        <h1 className="pt-52 text-center text-5xl font-bold text-neutral-50 md:mt-12 md:text-3xl">
-          {decodeURIComponent(departmentData.name)}
-        </h1>
-        <div className="mt-auto">
-          <div className="sticky top-10">
-            <div className="mb-3 ">
-              <div className="flex justify-evenly space-x-10 rounded-full bg-background p-1 md:justify-start md:space-x-4">
-                {text.subLinks.map((btn) => (
-                  <Link
-                    key={btn.key}
-                    href={btn.link}
-                    className="rounded-full p-3 transition-all duration-300 hover:bg-primary-700 hover:text-background"
-                  >
-                    {btn.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+    <main className=" w-screen">
+      <header
+        style={{
+          backgroundImage: `url(${departmentData.titleImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="w-full text-center">
+          <h1 className="pt-52 text-background ">
+            {decodeURIComponent(departmentData.name)}
+          </h1>
         </div>
+        <Subnav subLinks={text.subLinks} />
       </header>
-
-      <main className="container mt-20">
-        {/* about section */}
+      <section className="container bg-background">
         <section>
           <div className="flex items-center justify-center">
             <HorsesRunning direction={'left'} />
@@ -162,7 +147,7 @@ export default async function Department({
           <div className="flex items-center justify-evenly">
             <HorsesRunning direction="left" />
             <h2 className="pl-5 text-3xl font-semibold text-primary-700">
-              {text.sectionTitles[4]}
+              {text.sectionTitles[4].toUpperCase()}
             </h2>
             <HorsesRunning direction="right" />
           </div>
@@ -218,27 +203,28 @@ export default async function Department({
         </section>
         {/* dno title for this */}
         <article
-          className="relative mt-20 flex flex-1 justify-between space-x-4 bg-clip-text p-10"
+          className="relative mt-20 flex flex-1 justify-between space-x-4 bg-clip-content p-10"
           style={{
             backgroundImage: `url(${'https://s3-alpha-sig.figma.com/img/32a3/273b/70051ff8670610a0e06d9ff49e7cb675?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6vPstFQBLAj0l7cTLalslHY9fulCefKOvsOineaOXTkm0l4aXO14Q4XlTZP7IsU~Snm3gIr2ITRgpLjRXcoGeokV~I0dV6VcdUeZyWWIEtJa9y0yzn6mqXpGK47f9jKorWWjYgowENmLteeS93qLuSa9ozxzFRqaSunXNfTHj76ltbLC1xtVumVpLVbf~ywkh~lDsyA-VyspcY3gVYnjGi6NaRHcLtJHZVgbIxxGEoG8rzSXzc2OmjRAEgoa8HeGI-WllViUXrDpqIlBu1HLac~a4kV6yV0vVDCwaHZ2-I9ySAiHM-4wWySA77o1acMODptO1KT7LirkEjSUYWASA__'})`,
             backgroundSize: 'cover',
+            opacity: 0.7,
           }}
         >
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
+          <div className="group  flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 ">
             <MdBadge className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50 ">
               {text.sectionTitles[5]}
             </h3>
           </div>
 
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
+          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 ">
             <ImLab className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
               {text.sectionTitles[6]}
             </h3>
           </div>
 
-          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500 group-hover:text-neutral-50 ">
+          <div className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 ">
             <MdMilitaryTech className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
               {text.sectionTitles[7]}
@@ -247,7 +233,7 @@ export default async function Department({
         </article>
 
         <DepartmentGallery locale={locale} />
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
