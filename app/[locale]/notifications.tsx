@@ -19,7 +19,6 @@ export default async function Notifications({
   const notifications = {
     academic: {
       localisedName: text.categories[0],
-
       items: [...Array<number>(40)].map(() => {
         return {
           label:
@@ -28,7 +27,6 @@ export default async function Notifications({
         };
       }),
     },
-
     tenders: {
       localisedName: text.categories[1],
       items: [...Array<number>(4)].map(() => {

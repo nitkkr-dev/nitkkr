@@ -40,9 +40,9 @@ export interface Translations {
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
   Departments: {
-    subLinks: { key: string; title: string; link: string }[];
     departmentTitles: string[];
-    sectionTitles: string[];
     readMore: string;
+    sectionTitles: string[];
+    subLinks: { key: string; link: string; title: string }[];
   };
 }

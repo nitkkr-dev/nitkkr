@@ -55,14 +55,6 @@ const text: Translations = {
     description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
   },
   Departments: {
-    subLinks: [
-      { key: 'About', title: 'परिचय', link: '#' },
-      { key: 'VisionAndMission', title: 'दृष्टि और उद्देश्य', link: '#' },
-      { key: 'HODMessage', title: 'विभागाध्य से संदेश', link: '#' },
-      { key: 'Programs', title: 'कार्यक्रमावली', link: '#' },
-      { key: 'FacultyAndMore', title: 'संकाय', link: '#' },
-      { key: 'PhotoGallery', title: 'चित्र संग्रह', link: '#' },
-    ],
     departmentTitles: [
       'व्यवसाय प्रबंधन',
       'कंप्यूटर अभियांत्रिकी',
@@ -78,6 +70,7 @@ const text: Translations = {
       'मानविकी और सामाजिक विज्ञान',
       'पुनर्नवीकरणीय ऊर्जा और दक्षता स्कूल',
     ],
+    readMore: 'और पढ़ें →',
     sectionTitles: [
       'परिचय',
       'दृष्टि',
@@ -89,7 +82,14 @@ const text: Translations = {
       'छात्र उपलब्धियां',
       'चित्र संग्रह',
     ],
-    readMore: 'और पढ़ें →',
+    subLinks: [
+      { key: 'About', link: '#', title: 'परिचय' },
+      { key: 'VisionAndMission', link: '#', title: 'दृष्टि और उद्देश्य' },
+      { key: 'HODMessage', link: '#', title: 'विभागाध्य से संदेश' },
+      { key: 'Programs', link: '#', title: 'कार्यक्रमावली' },
+      { key: 'FacultyAndMore', link: '#', title: 'संकाय' },
+      { key: 'PhotoGallery', link: '#', title: 'चित्र संग्रह' },
+    ],
   },
 };
 
