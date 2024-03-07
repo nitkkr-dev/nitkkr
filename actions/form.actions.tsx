@@ -1,4 +1,6 @@
 'use server';
+import Ajv, { type ValidateFunction } from 'ajv';
+import AjvFormats from 'ajv-formats';
 import { revalidatePath } from 'next/cache';
 
 import {
@@ -18,6 +20,15 @@ import FormEditNotAllowed from '~/components/forms/FormEditNotAllowed';
 import FormExpired from '~/components/forms/FormExpired';
 import FormNotFound from '~/components/forms/FormNotFound';
 import FormSingleResponse from '~/components/forms/FormSingleResponse';
+
+const ajv = new Ajv({
+  allErrors: true,
+  strict: false,
+  $data: true,
+});
+AjvFormats(ajv);
+
+const schemasCache: Record<string, ValidateFunction<unknown>> = {};
 
 //TODO
 async function currentUser() {
@@ -465,10 +476,7 @@ export async function getFormForSubmission(id: number) {
     />
   );
 }
-export async function submitForm(
-  id: number,
-  formData: Record<string, string | number | string[]>
-) {
+export async function submitForm(id: number, formData: FormData) {
   const user = await currentUser();
 
   const form = await db.forms.findUnique({
@@ -488,8 +496,27 @@ export async function submitForm(
       ],
     },
   });
+
   if (!form || !form.is_published)
     return { title: 'Error', description: 'Form not found' };
+
+  if (!schemasCache[form.id]) {
+    schemasCache[form.id] = ajv.compile({
+      type: 'object',
+      properties: form.question_validations as unknown as Record<
+        string,
+        validationProperty
+      >,
+      additionalProperties: false,
+      required: form.required_questions,
+    });
+  }
+
+  const validate = schemasCache[form.id];
+
+  if (!validate(formData))
+    return { title: 'Error', description: 'Invalid form data' };
+
   if (!user && !form.is_anonymous) throw new UserNotFoundErr();
 
   if (!form.is_active)
