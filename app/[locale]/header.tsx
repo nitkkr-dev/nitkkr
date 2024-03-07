@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 
+import SearchButton from '~/app/search';
 import LocaleSwitcher from '~/components/locale-switcher';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
@@ -98,28 +98,7 @@ export default async function Header({ locale }: { locale: string }) {
             </Button>
           </li>
           <li>
-            <Button asChild className="xl:hidden" variant="icon">
-              <Link href={`/${locale}/search`} scroll={false}>
-                <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              className={cn(
-                'hidden xl:flex',
-                'group h-full w-60 gap-3 bg-neutral-50 px-4'
-              )}
-              variant="secondary"
-            >
-              <Link href={`/${locale}/search`} scroll={false}>
-                <FaMagnifyingGlass size={16} />
-                <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
-                  {text.search}
-                </span>
-                <kbd className="font-sans font-medium opacity-50">Ctrl K</kbd>
-              </Link>
-            </Button>
+            <SearchButton href={`/${locale}/search`} text={text.search} />
           </li>
           <li className="hidden lg:block">
             <Button asChild className="h-full w-16 xl:w-20">
