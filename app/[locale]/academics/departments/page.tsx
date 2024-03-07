@@ -42,6 +42,7 @@ export default async function Departments({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).Departments;
+
   return (
     <main className="container mt-64 flex flex-col items-center">
       <div className="flex">
