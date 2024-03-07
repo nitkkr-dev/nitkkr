@@ -1,6 +1,43 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Departments: {
+    subLinks: [
+      { key: 'About', title: 'About', link: '#' },
+      { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
+      { key: 'HODMessage', title: "HOD's Message", link: '#' },
+      { key: 'Programs', title: 'Programmes', link: '#' },
+      { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
+      { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
+    ],
+    departmentTitles: [
+      'Business Administration',
+      'Computer Application',
+      'Chemistry',
+      'Civil Engineering',
+      'Computer Engineering',
+      'Electrical Engineering',
+      'Electronics and Communication Engineering',
+      'Humanities and Social Science',
+      'Civil Engineering',
+      'Mathematics',
+      'Physics',
+      'Renewable Energy and Efficiency School',
+      'VLSI Design and Embedded Systems School',
+    ],
+    sectionTitles: [
+      'About',
+      'Vision',
+      'Mission',
+      "HOD's Message",
+      'Programmes',
+      'Faculty And More',
+      'Laboratories',
+      'Student Achivements',
+      'Galary',
+    ],
+    readMore: 'Read More',
+  },
   DirectorsCorner: {
     title: 'DIRECTOR’S CORNER',
     name: 'Prof. B. V. Ramana Reddy',
@@ -58,43 +95,6 @@ const text: Translations = {
     title: 'Work In Progress',
     description:
       'This page is currently being worked on. Please visit another time',
-  },
-  Departments: {
-    subLinks: [
-      { key: 'About', title: 'About', link: '#' },
-      { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
-      { key: 'HODMessage', title: "HOD's Message", link: '#' },
-      { key: 'Programs', title: 'Programmes', link: '#' },
-      { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
-      { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
-    ],
-    departmentTitles: [
-      'Business Administration',
-      'Computer Application',
-      'Chemistry',
-      'Civil Engineering',
-      'Computer Engineering',
-      'Electrical Engineering',
-      'Electronics and Communication Engineering',
-      'Humanities and Social Science',
-      'Civil Engineering',
-      'Mathematics',
-      'Physics',
-      'Renewable Energy and Efficiency School',
-      'VLSI Design and Embedded Systems School',
-    ],
-    sectionTitles: [
-      'About',
-      'Vision',
-      'Mission',
-      "HOD's Message",
-      'Programmes',
-      'Faculty And More',
-      'Laboratories',
-      'Student Achivements',
-      'Galary',
-    ],
-    readMore: 'Read More',
   },
 };
 

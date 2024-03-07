@@ -3,6 +3,12 @@ export async function getTranslations(locale: string): Promise<Translations> {
 }
 
 export interface Translations {
+  Departments: {
+    departmentTitles: string[];
+    readMore: string;
+    sectionTitles: string[];
+    subLinks: { key: string; link: string; title: string }[];
+  };
   DirectorsCorner: {
     title: string;
     name: string;
@@ -39,10 +45,4 @@ export interface Translations {
   NotFound: { title: string; description: string; backHome: string };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
-  Departments: {
-    departmentTitles: string[];
-    readMore: string;
-    sectionTitles: string[];
-    subLinks: { key: string; link: string; title: string }[];
-  };
 }
