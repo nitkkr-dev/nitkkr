@@ -1,18 +1,23 @@
 'use server';
+import { revalidatePath } from 'next/cache';
+
+import {
+  type ElementsType,
+  FormElements,
+} from '~/components/forms/interfaces/FormElements';
+import { db } from '~/server/db';
+import {
+  finalFormSchema,
+  formSchema,
+  type formSchemaType,
+} from '~/schemas/form';
+import type { Prisma } from '~/prisma/generated/client';
+import type { validationProperty } from '~/components/forms/interfaces/FormElements';
+import FormSubmitFormFinal from '~/components/forms/FormSubmitFormFinal';
 import FormEditNotAllowed from '~/components/forms/FormEditNotAllowed';
 import FormExpired from '~/components/forms/FormExpired';
 import FormNotFound from '~/components/forms/FormNotFound';
 import FormSingleResponse from '~/components/forms/FormSingleResponse';
-import {
-  ElementsType,
-  FormElements,
-} from '~/components/forms/interfaces/FormElements';
-import prisma from '~/lib/prisma';
-import { finalFormSchema, formSchema, formSchemaType } from '~/schemas/form';
-import { Prisma, form_questions, forms } from '~/prisma/generated/client';
-import { revalidatePath } from 'next/cache';
-import { validationProperty } from '~/components/forms/interfaces/FormElements';
-import FormSubmitFormFinal from '~/components/forms/FormSubmitFormFinal';
 
 //TODO
 async function currentUser() {
@@ -24,7 +29,7 @@ class UserNotFoundErr extends Error {}
 // export async function getFormStats() {
 //   const user = await currentUser();
 //   if (!currentUser) console.log("User not logged in");
-//   const stats = await prisma.forms.aggregate({
+//   const stats = await db.forms.aggregate({
 //     where: {
 //       userId: user.id,
 //     },
@@ -57,10 +62,10 @@ export async function CreateForm(values: formSchemaType) {
   if (!user) throw new UserNotFoundErr();
 
   try {
-    const form = await prisma.forms.create({
+    const form = await db.forms.create({
       data: {
         title: values.title,
-        description: values.description || '',
+        description: values.description ?? '',
         is_editing_allowed: values.isEditable,
         modifiable_by: {
           connect: {
@@ -80,7 +85,7 @@ export async function getForms() {
   const user = await currentUser();
   if (!user) throw new UserNotFoundErr();
 
-  return prisma.forms.findMany({
+  return db.forms.findMany({
     where: {
       modifiable_by: {
         some: {
@@ -102,7 +107,7 @@ export async function getFormById(id: number) {
   const user = await currentUser();
   if (!user) throw new UserNotFoundErr();
 
-  return prisma.forms.findUnique({
+  return db.forms.findUnique({
     where: {
       id,
       modifiable_by: {
@@ -114,7 +119,7 @@ export async function getFormById(id: number) {
   });
 }
 
-type new_form_questions = {
+interface new_form_questions {
   Id: string;
   id?: number;
   question: string;
@@ -128,7 +133,7 @@ type new_form_questions = {
   marks: number;
   formatMinimum?: string;
   formatMaximum?: string;
-};
+}
 
 export async function UpdateFormQuestions(
   form_id: number,
@@ -139,24 +144,47 @@ export async function UpdateFormQuestions(
   const properties: Record<string, validationProperty> = {};
   const requiredQuestions: string[] = [];
   const upsertOperations = questions.map(async (question, index) => {
-    const { Id, id, page_number, formatMinimum, formatMaximum, ...rest } =
-      question;
+    const { id, page_number } = question;
     const page_number_with_index = page_number + index * 0.001;
     const questionFinal = id
-      ? await prisma.form_questions.upsert({
+      ? await db.form_questions.upsert({
           where: {
             id: id,
           },
-          update: rest,
+          update: {
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
+            page_number: page_number_with_index,
+          },
           create: {
-            ...rest,
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
             form_id,
             page_number: page_number_with_index,
           },
         })
-      : await prisma.form_questions.create({
+      : await db.form_questions.create({
           data: {
-            ...rest,
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
             form_id,
             page_number: page_number_with_index,
           },
@@ -173,7 +201,7 @@ export async function UpdateFormQuestions(
   });
 
   await Promise.all(upsertOperations);
-  return prisma.forms.update({
+  return db.forms.update({
     where: {
       id: form_id,
     },
@@ -193,24 +221,47 @@ export async function UpdateFormQuestionsForSubmission(
   const requiredQuestions: string[] = [];
 
   const upsertOperations = questions.map(async (question, index) => {
-    const { Id, id, page_number, formatMinimum, formatMaximum, ...rest } =
-      question;
+    const { id, page_number } = question;
     const page_number_with_index = page_number + index * 0.001;
     const questionFinal = id
-      ? await prisma.form_questions.upsert({
+      ? await db.form_questions.upsert({
           where: {
             id: id,
           },
-          update: rest,
+          update: {
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
+            page_number: page_number_with_index,
+          },
           create: {
-            ...rest,
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
             form_id,
             page_number: page_number_with_index,
           },
         })
-      : await prisma.form_questions.create({
+      : await db.form_questions.create({
           data: {
-            ...rest,
+            question: question.question,
+            description: question.description,
+            is_required: question.is_required,
+            input_type: question.input_type,
+            choices: question.choices,
+            mime_types: question.mime_types,
+            range: question.range,
+            marks: question.marks,
             form_id,
             page_number: page_number_with_index,
           },
@@ -230,7 +281,7 @@ export async function UpdateFormQuestionsForSubmission(
   return { properties, requiredQuestions };
 }
 
-type formSum = {
+interface formSum {
   title: string;
   on_submit_message: string;
   is_editing_allowed: boolean;
@@ -240,7 +291,7 @@ type formSum = {
   description?: string;
   expiry_date?: Date;
   is_quiz: boolean;
-};
+}
 
 export async function PublishForm(
   form: formSum,
@@ -254,7 +305,7 @@ export async function PublishForm(
   const { properties, requiredQuestions } =
     await UpdateFormQuestionsForSubmission(id, questions);
   console.log('schema', properties);
-  return prisma.forms.update({
+  return db.forms.update({
     where: {
       id,
     },
@@ -271,7 +322,7 @@ export async function PublishForm(
 export async function getFormByIdWithQuestions(id: number) {
   const user = await currentUser();
   if (!user) throw new UserNotFoundErr();
-  return prisma.forms.findUnique({
+  return db.forms.findUnique({
     where: {
       id,
       modifiable_by: {
@@ -288,7 +339,7 @@ export async function getFormByIdWithQuestions(id: number) {
 
 export async function getFormForSubmission(id: number) {
   const user = await currentUser();
-  const form = await prisma.forms.findUnique({
+  const form = await db.forms.findUnique({
     where: {
       id,
       OR: [
@@ -314,7 +365,7 @@ export async function getFormForSubmission(id: number) {
   if (!(user || form.is_anonymous)) throw new UserNotFoundErr();
   if (!form.is_active) return <FormExpired />;
   if (form.expiry_date && form.expiry_date < new Date()) {
-    await prisma.forms.update({
+    await db.forms.update({
       where: {
         id,
       },
@@ -327,7 +378,7 @@ export async function getFormForSubmission(id: number) {
   console.log('form', form);
   if (!form.is_anonymous) {
     //if (!form.modifiable_by.some((mod) => mod.id === user.id)) return <FormNotFound />;  // Impossible condition
-    const response = await prisma.form_submissions.findFirst({
+    const response = await db.form_submissions.findFirst({
       where: {
         form_id: id,
         email: user.institute_email,
@@ -363,18 +414,18 @@ export async function getFormForSubmission(id: number) {
     questionElements[question.page_number].push({
       question: question.question,
       id: question.id.toString(),
-      description: question.description || undefined,
+      description: question.description ?? undefined,
       required: question.is_required,
-      items: question.choices || [],
-      range: question.range || [],
-      mime_types: question.mime_types || [],
+      items: question.choices ?? [],
+      range: question.range ?? [],
+      mime_types: question.mime_types ?? [],
       marks: question.marks,
       input_type: question.input_type as ElementsType,
     });
   });
 
   const submission = form.is_editing_allowed
-    ? await prisma.form_submissions.findFirst({
+    ? await db.form_submissions.findFirst({
         where: {
           form_id: id,
           email: user.institute_email,
@@ -398,7 +449,7 @@ export async function getFormForSubmission(id: number) {
       form={{
         id: form.id,
         title: form.title,
-        description: form.description || undefined,
+        description: form.description ?? undefined,
         on_submit_message: form.on_submit_message,
         pages: pages,
       }}
@@ -414,10 +465,13 @@ export async function getFormForSubmission(id: number) {
     />
   );
 }
-export async function submitForm(id: number, formData: Record<string, any>) {
+export async function submitForm(
+  id: number,
+  formData: Record<string, string | number | string[]>
+) {
   const user = await currentUser();
 
-  const form = await prisma.forms.findUnique({
+  const form = await db.forms.findUnique({
     where: {
       id,
       OR: [
@@ -441,7 +495,7 @@ export async function submitForm(id: number, formData: Record<string, any>) {
   if (!form.is_active)
     return { title: 'Error', description: 'Form is expired' };
   if (form.expiry_date && form.expiry_date < new Date()) {
-    await prisma.forms.update({
+    await db.forms.update({
       where: {
         id,
       },
@@ -452,7 +506,7 @@ export async function submitForm(id: number, formData: Record<string, any>) {
     return { title: 'Error', description: 'Form is expired' };
   }
   if (form.is_single_response && !form.is_anonymous) {
-    const response = await prisma.form_submissions.findFirst({
+    const response = await db.form_submissions.findFirst({
       where: {
         form_id: id,
         email: user.institute_email,
@@ -463,7 +517,7 @@ export async function submitForm(id: number, formData: Record<string, any>) {
       if (!form.is_editing_allowed)
         return { title: 'Error', description: 'Form is single response' };
       else {
-        await prisma.form_submissions.delete({
+        await db.form_submissions.delete({
           where: {
             id: response.id,
           },
@@ -472,13 +526,13 @@ export async function submitForm(id: number, formData: Record<string, any>) {
       }
     }
   }
-  const submission = await prisma.form_submissions.create({
+  const submission = await db.form_submissions.create({
     data: {
       form_id: id,
       email: form.is_anonymous ? '' : user.institute_email,
     },
   });
-  await prisma.form_answers.createMany({
+  await db.form_answers.createMany({
     data: Object.entries(formData).map(([questionId, answer]) => ({
       submission_id: submission.id,
       question_id: Number(questionId),
