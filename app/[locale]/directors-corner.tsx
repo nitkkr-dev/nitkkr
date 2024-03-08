@@ -8,7 +8,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).DirectorsCorner;
 
   return (
-    <article className="container mb-32 mt-10 min-w-full" id="directors-corner">
+    <article className="container mb-32 mt-10" id="directors-corner">
       <Link href="#directors-corner">
         <header className="mx-auto mb-20 flex max-w-fit flex-row">
           <HorsesRunning direction="left" />
@@ -28,7 +28,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
 
         <blockquote className="flex flex-col">
           <h2 className="mb-4">{text.name}</h2>
-          <p className="text-2xl">
+          <p className="text-xl">
             {text.quote[0]}
             &nbsp;
             <Link
@@ -40,7 +40,7 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             <br />
             <br />
           </p>
-          <p className="grow text-2xl">{text.quote[1]}</p>
+          <p className="grow text-xl">{text.quote[1]}</p>
         </blockquote>
       </section>
     </article>
