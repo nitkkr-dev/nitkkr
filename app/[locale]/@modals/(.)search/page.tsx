@@ -2,13 +2,13 @@ import Search from '~/app/search/search';
 import { Dialog } from '~/components/dialog';
 
 export default function Page({
-  searchParams,
+  searchParams: { q: query },
 }: {
-  searchParams: Record<string, string | undefined>;
+  searchParams: { q: string };
 }) {
   return (
     <Dialog>
-      <Search search={searchParams.q} />
+      <Search search={query} />
     </Dialog>
   );
 }

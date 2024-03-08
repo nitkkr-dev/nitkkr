@@ -1,11 +1,11 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import Recents from './recent-search';
 import Searchbar from './searchbar';
 import SearchLink from './search-link';
 
-export default function Search({ search }: { search: string | undefined }) {
+export default function Search({ search }: { search?: string }) {
   const links = {
     recents: [
       { label: 'Departments', value: '/departments' },
