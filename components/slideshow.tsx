@@ -24,6 +24,7 @@ export default function Slideshow({
       <Carousel
         className="w-full"
         opts={options}
+        onHoverKeyboardControls
         plugins={[
           Autoplay({
             delay: 7000,

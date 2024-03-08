@@ -1,13 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
-import * as React from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
+import { Button } from '~/components/ui/button';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -19,6 +19,7 @@ interface CarouselProps {
   plugins?: CarouselPlugin;
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: CarouselApi) => void;
+  onHoverKeyboardControls?: boolean;
 }
 
 type CarouselContextProps = {
@@ -49,6 +50,7 @@ const Carousel = React.forwardRef<
   (
     {
       orientation = 'horizontal',
+      onHoverKeyboardControls,
       opts,
       setApi,
       plugins,
@@ -134,16 +136,40 @@ const Carousel = React.forwardRef<
           canScrollNext,
         }}
       >
-        <div
-          ref={ref}
-          onKeyDownCapture={handleKeyDown}
-          className={cn('relative', className)}
-          role="region"
-          aria-roledescription="carousel"
-          {...props}
-        >
-          {children}
-        </div>
+        {onHoverKeyboardControls ? (
+          <div
+            ref={ref}
+            className={cn('relative', className)}
+            role="region"
+            aria-roledescription="carousel"
+            onMouseEnter={() => {
+              window.addEventListener(
+                'keydown',
+                handleKeyDown as unknown as EventListener
+              );
+            }}
+            onMouseLeave={() =>
+              window.removeEventListener(
+                'keydown',
+                handleKeyDown as unknown as EventListener
+              )
+            }
+            {...props}
+          >
+            {children}
+          </div>
+        ) : (
+          <div
+            ref={ref}
+            onKeyDownCapture={handleKeyDown}
+            className={cn('relative', className)}
+            role="region"
+            aria-roledescription="carousel"
+            {...props}
+          >
+            {children}
+          </div>
+        )}
       </CarouselContext.Provider>
     );
   }
@@ -197,11 +223,25 @@ CarouselItem.displayName = 'CarouselItem';
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ ...props }) => {
-  const { scrollPrev, canScrollPrev } = useCarousel();
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    <Button disabled={!canScrollPrev} onClick={scrollPrev} {...props}>
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        'absolute  h-8 w-8 rounded-full',
+        orientation === 'horizontal'
+          ? '-left-12 top-1/2 -translate-y-1/2'
+          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+        className
+      )}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      {...props}
+    >
       <FaChevronLeft className="text-neutral-100" size={40} />
       <span className="sr-only">Previous slide</span>
     </Button>
@@ -212,11 +252,25 @@ CarouselPrevious.displayName = 'CarouselPrevious';
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ ...props }) => {
-  const { scrollNext, canScrollNext } = useCarousel();
+>(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
-    <Button disabled={!canScrollNext} onClick={scrollNext} {...props}>
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
+        'absolute h-8 w-8 rounded-full',
+        orientation === 'horizontal'
+          ? '-right-12 top-1/2 -translate-y-1/2'
+          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+        className
+      )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
       <FaChevronRight className="text-neutral-100" size={40} />
       <span className="sr-only">Next slide</span>
     </Button>
@@ -225,10 +279,10 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = 'CarouselNext';
 
 export {
+  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
   CarouselPrevious,
-  type CarouselApi,
+  CarouselNext,
 };
