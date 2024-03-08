@@ -12,7 +12,7 @@ export default function Searchbar() {
       placeholder="Quick Search..."
       onChange={useDebounceCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-          router.replace(`?q=${e.target.value}`);
+          router.replace(`?q=${e.target.value}`, { scroll: false });
         },
         300
       )}
