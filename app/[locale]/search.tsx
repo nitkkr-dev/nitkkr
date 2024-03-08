@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 import { Button } from '~/components/ui';
@@ -17,8 +17,12 @@ export default function SearchButton({
   isMacOS: boolean;
   text: string;
 }) {
+  const pathname = usePathname();
   const router = useRouter();
-  useCtrl('k', () => router.push(href));
+  useCtrl('k', () => {
+    if (pathname === href) router.back();
+    else router.push(href);
+  });
 
   return (
     <>
