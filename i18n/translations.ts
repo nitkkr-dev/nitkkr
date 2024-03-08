@@ -7,7 +7,7 @@ export interface Translations {
     departmentTitles: string[];
     readMore: string;
     sectionTitles: string[];
-    subLinks: { key: string; link: string; title: string }[];
+    subLinkTitles: string[];
   };
   DirectorsCorner: {
     title: string;

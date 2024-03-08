@@ -29,13 +29,13 @@ const text: Translations = {
       'छात्र उपलब्धियां',
       'चित्र संग्रह',
     ],
-    subLinks: [
-      { key: 'About', link: '#', title: 'परिचय' },
-      { key: 'VisionAndMission', link: '#', title: 'दृष्टि और उद्देश्य' },
-      { key: 'HODMessage', link: '#', title: 'विभागाध्य से संदेश' },
-      { key: 'Programs', link: '#', title: 'कार्यक्रमावली' },
-      { key: 'FacultyAndMore', link: '#', title: 'संकाय' },
-      { key: 'PhotoGallery', link: '#', title: 'चित्र संग्रह' },
+    subLinkTitles: [
+      'परिचय',
+      'दृष्टि और उद्देश्य',
+      'विभागाध्य से संदेश',
+      'कार्यक्रमावली',
+      'संकाय',
+      'चित्र संग्रह',
     ],
   },
   DirectorsCorner: {

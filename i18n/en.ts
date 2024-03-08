@@ -2,13 +2,13 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   Departments: {
-    subLinks: [
-      { key: 'About', title: 'About', link: '#' },
-      { key: 'VisionAndMission', title: 'Vision & Mission', link: '#' },
-      { key: 'HODMessage', title: "HOD's Message", link: '#' },
-      { key: 'Programs', title: 'Programmes', link: '#' },
-      { key: 'FacultyAndMore', title: 'Faculty And More', link: '#' },
-      { key: 'PhotoGallery', title: 'Photo Gallery', link: '#' },
+    subLinkTitles: [
+      'About',
+      'Vision & Mission',
+      "HOD's Message",
+      'Programmes',
+      'Faculty And More',
+      'Photo Gallery',
     ],
     departmentTitles: [
       'Business Administration',

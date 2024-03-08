@@ -6,19 +6,15 @@ import clsx from 'clsx';
 
 import { cn } from '~/lib/utils';
 
-export default function Subnav({
-  subLinks,
-}: {
-  subLinks: { key: string; title: string; link: string }[];
-}) {
+export default function Subnav({ subLinkTitles }: { subLinkTitles: string[] }) {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const checkScrollTop = () => {
       const yOffset = window.scrollY;
-      if (!isSticky && yOffset > 200 && yOffset < 800) {
+      if (!isSticky && yOffset > 200) {
         setIsSticky(true);
-      } else if (isSticky && (yOffset <= 200 || yOffset >= 800)) {
+      } else if (isSticky && yOffset <= 200) {
         setIsSticky(false);
       } else if (yOffset === 0) {
         setIsSticky(false);
@@ -32,7 +28,7 @@ export default function Subnav({
     <div
       className={cn(
         `top-0 z-10 transform pb-10 transition-all duration-300 `,
-        isSticky ? 'fixed w-full' : 'mx-auto max-w-3xl '
+        isSticky ? 'fixed w-full' : 'mx-auto mt-16 max-w-3xl'
       )}
     >
       <nav
@@ -41,13 +37,13 @@ export default function Subnav({
           !isSticky && 'rounded-full'
         )}
       >
-        {subLinks.map((btn) => (
+        {subLinkTitles.map((title, i) => (
           <Link
-            key={btn.key}
-            href={btn.link}
+            key={i}
+            href={'#'}
             className="rounded-full p-2 transition-all duration-300 hover:bg-primary-700 hover:text-background"
           >
-            {btn.title}
+            {title}
           </Link>
         ))}
       </nav>

@@ -34,21 +34,21 @@ export default async function Department({
 
   return (
     <main className=" w-screen">
-      <header
-        style={{
-          backgroundImage: `url(${departmentData.titleImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <header className="relative h-[481px] w-full">
+        <Image
+          alt="department image"
+          className="-z-50 object-cover"
+          src={departmentData.titleImage}
+          fill
+        />
         <div className="w-full text-center">
           <h1 className="pt-52 text-background ">
             {decodeURIComponent(departmentData.name)}
           </h1>
         </div>
-        <Subnav subLinks={text.subLinks} />
+        <Subnav subLinkTitles={text.subLinkTitles} />
       </header>
-      <section className="container bg-background">
+      <section className="container bg-background pt-20">
         <section>
           <div className="flex items-center justify-center">
             <HorsesRunning direction={'left'} />
@@ -202,14 +202,7 @@ export default async function Department({
           </section>
         </section>
         {/* dno title for this */}
-        <article
-          className="relative mt-20 flex flex-1 justify-between space-x-4 bg-clip-content p-10"
-          style={{
-            backgroundImage: `url(${'https://s3-alpha-sig.figma.com/img/32a3/273b/70051ff8670610a0e06d9ff49e7cb675?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6vPstFQBLAj0l7cTLalslHY9fulCefKOvsOineaOXTkm0l4aXO14Q4XlTZP7IsU~Snm3gIr2ITRgpLjRXcoGeokV~I0dV6VcdUeZyWWIEtJa9y0yzn6mqXpGK47f9jKorWWjYgowENmLteeS93qLuSa9ozxzFRqaSunXNfTHj76ltbLC1xtVumVpLVbf~ywkh~lDsyA-VyspcY3gVYnjGi6NaRHcLtJHZVgbIxxGEoG8rzSXzc2OmjRAEgoa8HeGI-WllViUXrDpqIlBu1HLac~a4kV6yV0vVDCwaHZ2-I9ySAiHM-4wWySA77o1acMODptO1KT7LirkEjSUYWASA__'})`,
-            backgroundSize: 'cover',
-            opacity: 0.7,
-          }}
-        >
+        <article className="relative mt-20 flex flex-1 justify-between space-x-4 bg-[url('https://s3-alpha-sig.figma.com/img/32a3/273b/70051ff8670610a0e06d9ff49e7cb675?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6vPstFQBLAj0l7cTLalslHY9fulCefKOvsOineaOXTkm0l4aXO14Q4XlTZP7IsU~Snm3gIr2ITRgpLjRXcoGeokV~I0dV6VcdUeZyWWIEtJa9y0yzn6mqXpGK47f9jKorWWjYgowENmLteeS93qLuSa9ozxzFRqaSunXNfTHj76ltbLC1xtVumVpLVbf~ywkh~lDsyA-VyspcY3gVYnjGi6NaRHcLtJHZVgbIxxGEoG8rzSXzc2OmjRAEgoa8HeGI-WllViUXrDpqIlBu1HLac~a4kV6yV0vVDCwaHZ2-I9ySAiHM-4wWySA77o1acMODptO1KT7LirkEjSUYWASA__')] bg-cover bg-clip-content p-10 opacity-55">
           <div className="group  flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 ">
             <MdBadge className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
             <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50 ">

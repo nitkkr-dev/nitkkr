@@ -1,4 +1,4 @@
-export async function GET(request: Request) {
+export async function GET(_request: Request) {
   return Response.json({
     message: "Welcome to NIT-KKR's official public API",
   });
