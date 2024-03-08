@@ -55,12 +55,12 @@ export default function Slideshow({
         </CarouselContent>
 
         <CarouselPrevious
-          className="absolute left-[10%]  top-[50%] opacity-60 hover:opacity-100"
-          variant={'default'}
+          className="absolute left-[10%]  top-[50%] opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
+          variant={'ghost'}
         />
         <CarouselNext
-          className="absolute right-[10%] top-[50%] opacity-60 hover:opacity-100"
-          variant={'default'}
+          className="absolute right-[10%] top-[50%] opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
+          variant={'ghost'}
         />
       </Carousel>
     </article>
