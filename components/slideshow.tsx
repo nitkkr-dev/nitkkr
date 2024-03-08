@@ -20,9 +20,9 @@ export default function Slideshow({
   const options: EmblaOptionsType = { loop: true, align: 'center' };
 
   return (
-    <article className="relative overflow-x-hidden">
+    <article className="overflow-x-hidden">
       <Carousel
-        className="w-full"
+        className="relative w-full"
         opts={options}
         onHoverKeyboardControls
         plugins={[
@@ -33,8 +33,8 @@ export default function Slideshow({
       >
         <CarouselContent>
           {images.map(({ image, title, subtitle }, index) => (
-            <CarouselItem key={index}>
-              <figure className="relative max-h-screen">
+            <CarouselItem key={index} className="relative max-h-screen">
+              <figure>
                 <Image
                   alt={`slide ${index + 1}`}
                   className="h-full"
@@ -53,10 +53,15 @@ export default function Slideshow({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <section className="container absolute inset-0 flex min-w-full justify-between">
-          <CarouselPrevious className="relative top-[50%] opacity-60 hover:opacity-100" />
-          <CarouselNext className="relative top-[50%] opacity-60 hover:opacity-100" />
-        </section>
+
+        <CarouselPrevious
+          className="absolute left-[10%]  top-[50%] opacity-60 hover:opacity-100"
+          variant={'default'}
+        />
+        <CarouselNext
+          className="absolute right-[10%] top-[50%] opacity-60 hover:opacity-100"
+          variant={'default'}
+        />
       </Carousel>
     </article>
   );
