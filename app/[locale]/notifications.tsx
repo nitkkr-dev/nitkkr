@@ -47,14 +47,14 @@ export default async function Notifications({
       id="notifications"
     >
       <Link href="#notifications">
-        <header className="container mx-auto mb-20 flex max-w-fit flex-row">
+        <header className="container mb-20 flex flex-row justify-center">
           <HorsesRunning direction="left" />
           <h2 className="my-auto">{text.title}</h2>
         </header>
       </Link>
 
-      <article className="container flex min-w-full gap-20">
-        <ul className="flex flex-col gap-10">
+      <article className="container flex justify-between">
+        <ul className="flex w-[30%] flex-col gap-10">
           {getKeys(notifications).map((category, index) => (
             <li key={index}>
               <Link
@@ -63,7 +63,7 @@ export default async function Notifications({
               >
                 <button
                   className={clsx(
-                    'button w-[448px] rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
+                    'button w-full rounded-xl border p-8 font-serif text-2xl drop-shadow-2xl',
                     category == currentCategory
                       ? 'border-shade-light bg-primary-700 text-shade-light'
                       : 'bg-opacity-60'
@@ -76,7 +76,7 @@ export default async function Notifications({
           ))}
         </ul>
 
-        <section className="grow truncate rounded-xl bg-background/[0.6] px-8 pt-10 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
+        <section className="w-[65%] truncate rounded-xl bg-background/[0.6] px-8 pt-10 shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] drop-shadow-2xl">
           <ScrollArea className="h-[438px]">
             <ol>
               {notifications[currentCategory].items.map(

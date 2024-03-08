@@ -40,12 +40,9 @@ export default {
     container: {
       center: true,
       padding: {
-        DEFAULT: '2rem',
-        sm: '4rem',
-        md: '6rem',
-        lg: '8rem',
-        xl: '10rem',
-        '2xl': '12rem',
+        DEFAULT: '1rem',
+        sm: '1.5rem',
+        md: '2rem',
       },
     },
     extend: {
@@ -55,8 +52,8 @@ export default {
       },
     },
     fontFamily: {
-      serif: ['DM Serif Display', 'serif'],
       sans: ['DM Sans', 'sans-serif'],
+      serif: ['DM Serif Display', 'serif'],
     },
     fontSize: {
       '6xl': ['64px', { lineHeight: '72px' }],
