@@ -17,13 +17,14 @@ export default function RootLayout({
   params: { locale: string };
 }) {
   if (params === undefined) return null;
+  const { locale } = params;
 
   return (
-    <html>
+    <html lang={locale}>
       <body className="flex flex-col">
-        <Header locale={params.locale} />
+        <Header locale={locale} />
         <section className="flex grow">{children}</section>
-        <Footer locale={params.locale} />
+        <Footer locale={locale} />
       </body>
     </html>
   );
