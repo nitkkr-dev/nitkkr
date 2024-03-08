@@ -20,7 +20,7 @@ import Tempcreate from '~/components/forms/Tempcreate';
 
 export default function Home() {
   return (
-    <section className="container pt-40 ">
+    <section className="container min-h-screen pt-40">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* <CreateFormBtn />  //no builder*/}
         <Tempcreate />

@@ -33,7 +33,7 @@ const schemasCache: Record<string, ValidateFunction<unknown>> = {};
 
 //TODO
 async function currentUser() {
-  return { id: 1, institute_email: 'akr@gmail.com' };
+  return { id: 1, institute_email: 'example@nitkkr.ac.in' };
 }
 class UserNotFoundErr extends Error {}
 
@@ -317,6 +317,7 @@ export async function PublishForm(
   const { properties, requiredQuestions } =
     await UpdateFormQuestionsForSubmission(id, questions);
   console.log('schema', properties);
+  revalidatePath('/forms');
   return db.forms.update({
     where: {
       id,

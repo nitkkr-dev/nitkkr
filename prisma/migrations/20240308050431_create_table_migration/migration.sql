@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "auth_roles" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "permissions" VARCHAR[],
 
     CONSTRAINT "pk_auth_roles" PRIMARY KEY ("id")
@@ -8,7 +8,7 @@ CREATE TABLE "auth_roles" (
 
 -- CreateTable
 CREATE TABLE "club_members" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "student_id" INTEGER NOT NULL,
     "club_id" INTEGER NOT NULL,
     "position" VARCHAR NOT NULL DEFAULT 'member',
@@ -22,7 +22,7 @@ CREATE TABLE "club_members" (
 
 -- CreateTable
 CREATE TABLE "club_socials" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "club_id" INTEGER NOT NULL,
     "platform" VARCHAR NOT NULL,
     "link" VARCHAR NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE "club_socials" (
 
 -- CreateTable
 CREATE TABLE "clubs" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "starting_date" DATE NOT NULL,
     "is_active" BOOLEAN NOT NULL,
     "about_us" VARCHAR NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE "clubs" (
 
 -- CreateTable
 CREATE TABLE "course_logs" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "session" VARCHAR NOT NULL,
     "course_id" INTEGER NOT NULL,
     "faculty_id" INTEGER NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE "course_logs" (
 
 -- CreateTable
 CREATE TABLE "courses" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "code" VARCHAR NOT NULL,
     "title" VARCHAR NOT NULL,
     "prerequisites" VARCHAR[],
@@ -81,7 +81,7 @@ CREATE TABLE "courses" (
 
 -- CreateTable
 CREATE TABLE "deans" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "domain" VARCHAR NOT NULL,
     "faculty_id" INTEGER NOT NULL,
     "activity_logs" VARCHAR[],
@@ -93,7 +93,7 @@ CREATE TABLE "deans" (
 
 -- CreateTable
 CREATE TABLE "departments" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR NOT NULL,
     "about_us" VARCHAR,
     "laboratories" VARCHAR,
@@ -105,7 +105,7 @@ CREATE TABLE "departments" (
 
 -- CreateTable
 CREATE TABLE "faculty" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR NOT NULL,
     "department_id" INTEGER NOT NULL,
     "email" VARCHAR NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE "faculty" (
     "patents" VARCHAR[],
     "copyrights" VARCHAR[],
     "journals" VARCHAR[],
-    "confrences" VARCHAR[],
+    "conferences" VARCHAR[],
     "books" VARCHAR[],
     "areas_of_interest" VARCHAR[],
     "workshops" VARCHAR[],
@@ -141,7 +141,7 @@ CREATE TABLE "faculty" (
 
 -- CreateTable
 CREATE TABLE "faculty_feedback" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "course_log_id" INTEGER NOT NULL,
     "form_id" INTEGER NOT NULL,
 
@@ -150,16 +150,16 @@ CREATE TABLE "faculty_feedback" (
 
 -- CreateTable
 CREATE TABLE "form_questions" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "form_id" INTEGER NOT NULL,
     "question" VARCHAR NOT NULL,
-    "description" VARCHAR NOT NULL,
+    "description" VARCHAR,
     "is_required" BOOLEAN NOT NULL DEFAULT true,
     "input_type" VARCHAR NOT NULL,
     "choices" VARCHAR[],
     "mime_types" VARCHAR[],
     "range" VARCHAR[],
-    "page_number" SMALLINT NOT NULL DEFAULT 0,
+    "page_number" REAL NOT NULL DEFAULT 0,
     "marks" SMALLINT NOT NULL DEFAULT 0,
 
     CONSTRAINT "pk_form_questions" PRIMARY KEY ("id")
@@ -167,21 +167,32 @@ CREATE TABLE "form_questions" (
 
 -- CreateTable
 CREATE TABLE "form_submissions" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "form_id" INTEGER NOT NULL,
     "email" VARCHAR NOT NULL,
+    "is_submitted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "pk_form_submissions" PRIMARY KEY ("id")
 );
 
 -- CreateTable
+CREATE TABLE "form_answers" (
+    "id" SERIAL NOT NULL,
+    "question_id" INTEGER NOT NULL,
+    "submission_id" INTEGER NOT NULL,
+    "answer" JSONB NOT NULL,
+
+    CONSTRAINT "pk_form_answers" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "forms" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" VARCHAR NOT NULL,
-    "description" VARCHAR NOT NULL,
-    "visible_to" VARCHAR[],
+    "description" VARCHAR,
     "questions" INTEGER[],
     "on_submit_message" VARCHAR NOT NULL DEFAULT 'Your response has been recorded.',
+    "is_anonymous" BOOLEAN NOT NULL DEFAULT false,
     "is_editing_allowed" BOOLEAN NOT NULL,
     "is_single_response" BOOLEAN NOT NULL DEFAULT true,
     "is_view_analytics_allowed" BOOLEAN NOT NULL DEFAULT false,
@@ -192,14 +203,16 @@ CREATE TABLE "forms" (
     "is_active" BOOLEAN NOT NULL DEFAULT true,
     "persistent_url" VARCHAR,
     "old_persistent_urls" VARCHAR[],
-    "is_published" BOOLEAN NOT NULL,
+    "is_published" BOOLEAN NOT NULL DEFAULT false,
+    "required_questions" VARCHAR[],
+    "question_validations" JSON,
 
     CONSTRAINT "pk_forms" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "hod" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "faculty_id" INTEGER NOT NULL,
     "department_id" INTEGER NOT NULL,
     "message" VARCHAR,
@@ -211,7 +224,7 @@ CREATE TABLE "hod" (
 
 -- CreateTable
 CREATE TABLE "majors" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "alias" CHAR(2) NOT NULL,
     "department_id" INTEGER NOT NULL,
@@ -222,12 +235,12 @@ CREATE TABLE "majors" (
 
 -- CreateTable
 CREATE TABLE "non_teaching_staff" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "telephone" VARCHAR[],
     "email" VARCHAR,
     "working_section_id" INTEGER NOT NULL,
-    "degisnation" VARCHAR NOT NULL,
+    "designation" VARCHAR NOT NULL,
     "image" VARCHAR NOT NULL,
     "working_department_id" INTEGER NOT NULL,
     "role_ids" SMALLINT[],
@@ -237,7 +250,7 @@ CREATE TABLE "non_teaching_staff" (
 
 -- CreateTable
 CREATE TABLE "persons" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR NOT NULL,
     "institute_email" VARCHAR NOT NULL,
 
@@ -246,7 +259,7 @@ CREATE TABLE "persons" (
 
 -- CreateTable
 CREATE TABLE "phd_log" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "student_id" INTEGER NOT NULL,
     "faculty_id" INTEGER NOT NULL,
     "department_id" INTEGER NOT NULL,
@@ -261,14 +274,14 @@ CREATE TABLE "phd_log" (
 
 -- CreateTable
 CREATE TABLE "research_work" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
 
     CONSTRAINT "pk_research_work" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "roles" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "permissions" VARCHAR[],
 
@@ -277,7 +290,7 @@ CREATE TABLE "roles" (
 
 -- CreateTable
 CREATE TABLE "sections" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "head_faculty_id" SMALLINT NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "about_us" VARCHAR NOT NULL,
@@ -287,7 +300,7 @@ CREATE TABLE "sections" (
 
 -- CreateTable
 CREATE TABLE "sponsored_research_projects" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" VARCHAR NOT NULL,
     "funding_agency" VARCHAR NOT NULL,
     "faculty_id" INTEGER NOT NULL,
@@ -303,7 +316,7 @@ CREATE TABLE "sponsored_research_projects" (
 
 -- CreateTable
 CREATE TABLE "student_academic_details" (
-    "student_id" INTEGER NOT NULL,
+    "student_id" SERIAL NOT NULL,
     "section" VARCHAR NOT NULL,
     "batch" SMALLINT NOT NULL,
     "current_semester" SMALLINT NOT NULL,
@@ -318,7 +331,7 @@ CREATE TABLE "student_academic_details" (
 
 -- CreateTable
 CREATE TABLE "students" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "roll_number" VARCHAR NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "sex" VARCHAR NOT NULL,
@@ -348,6 +361,18 @@ CREATE TABLE "students" (
     CONSTRAINT "pk_students" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_forms_modifiable_by" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_forms_visible_to" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "unq_courses_branch_id" ON "courses"("major_id");
 
@@ -356,6 +381,18 @@ CREATE UNIQUE INDEX "unq_faculty_department_id" ON "faculty"("department_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "unq_hod_faculty_id" ON "hod"("faculty_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_forms_modifiable_by_AB_unique" ON "_forms_modifiable_by"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_forms_modifiable_by_B_index" ON "_forms_modifiable_by"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_forms_visible_to_AB_unique" ON "_forms_visible_to"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_forms_visible_to_B_index" ON "_forms_visible_to"("B");
 
 -- AddForeignKey
 ALTER TABLE "club_members" ADD CONSTRAINT "fk_club_members_clubs" FOREIGN KEY ("club_id") REFERENCES "clubs"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -403,6 +440,12 @@ ALTER TABLE "form_questions" ADD CONSTRAINT "fk_form_questions_forms" FOREIGN KE
 ALTER TABLE "form_submissions" ADD CONSTRAINT "fk_form_submissions_forms" FOREIGN KEY ("form_id") REFERENCES "forms"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE "form_answers" ADD CONSTRAINT "fk_form_answers_form_questions" FOREIGN KEY ("question_id") REFERENCES "form_questions"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "form_answers" ADD CONSTRAINT "fk_form_answers_form_submissions" FOREIGN KEY ("submission_id") REFERENCES "form_submissions"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
 ALTER TABLE "hod" ADD CONSTRAINT "fk_hod_departments" FOREIGN KEY ("department_id") REFERENCES "departments"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -434,3 +477,15 @@ ALTER TABLE "student_academic_details" ADD CONSTRAINT "fk_student_academic_detai
 
 -- AddForeignKey
 ALTER TABLE "student_academic_details" ADD CONSTRAINT "fk_student_academic_details_students" FOREIGN KEY ("student_id") REFERENCES "students"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "_forms_modifiable_by" ADD CONSTRAINT "_forms_modifiable_by_A_fkey" FOREIGN KEY ("A") REFERENCES "forms"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_forms_modifiable_by" ADD CONSTRAINT "_forms_modifiable_by_B_fkey" FOREIGN KEY ("B") REFERENCES "persons"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_forms_visible_to" ADD CONSTRAINT "_forms_visible_to_A_fkey" FOREIGN KEY ("A") REFERENCES "forms"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_forms_visible_to" ADD CONSTRAINT "_forms_visible_to_B_fkey" FOREIGN KEY ("B") REFERENCES "persons"("id") ON DELETE CASCADE ON UPDATE CASCADE;
