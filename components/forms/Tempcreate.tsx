@@ -1,6 +1,6 @@
 'use client';
 
-import { CreateForm, PublishForm } from '~/actions/form.actions';
+import { createForm, publishForm } from '~/actions/form.actions';
 import { Button } from '~/components/ui/button';
 
 import type { ElementsType } from './interfaces/FormElements';
@@ -61,13 +61,12 @@ const questions = [
 
 const Tempcreate = () => {
   const makeForm = async () => {
-    const formId = await CreateForm({
+    const formId = await createForm({
       title: 'New form',
       description: 'this is a from',
       isEditable: true,
     });
-    console.log(formId);
-    await PublishForm({ ...formData }, formId, questions);
+    await publishForm({ ...formData }, formId, questions);
   };
   return <Button onClick={makeForm}>Create form</Button>;
 };

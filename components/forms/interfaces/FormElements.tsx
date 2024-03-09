@@ -42,7 +42,7 @@ export interface validationProperty {
 
 type Generics = InputProps;
 
-export interface FormElement {
+export type FormElement = {
   input_type: ElementsType;
   dragBtnElement: {
     icon: ElementType;
@@ -61,9 +61,17 @@ export interface FormElement {
     page_number: number,
     id?: number
   ) => FormElementInstance;
-  schemaObjects: (element: FormElementInstance) => validationProperty;
   shouldValidate: boolean;
-}
+} & (
+  | {
+      shouldValidate: true;
+      schemaObjects: (element: FormElementInstance) => validationProperty;
+    }
+  | {
+      shouldValidate?: false;
+      schemaObjects?: never;
+    }
+);
 
 export interface FormElementInstance {
   Id: string;

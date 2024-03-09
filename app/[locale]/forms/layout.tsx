@@ -2,7 +2,7 @@ import { type ReactNode } from 'react';
 
 import { Toaster } from '~/components/ui/toaster';
 
-function layout({ children }: { children: ReactNode }) {
+export default function layout({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
@@ -10,5 +10,3 @@ function layout({ children }: { children: ReactNode }) {
     </>
   );
 }
-
-export default layout;

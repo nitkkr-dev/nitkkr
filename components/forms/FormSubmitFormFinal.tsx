@@ -55,10 +55,11 @@ export default function FormSubmitFormFinal({
   answers,
 }: FormSubmitFormProps) {
   const Router = useRouter();
-  console.log(form.pages);
+
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const delta = currentStep - previousStep;
+
   const jsonSchema: {
     type: string;
     properties: Record<string, validationProperty>;
@@ -77,17 +78,16 @@ export default function FormSubmitFormFinal({
     resolver: resolver,
     defaultValues: answers,
   });
+
   const next = async () => {
     const fields = questions[currentStep].map((question) => question.id);
-    console.log(forms.getValues());
+
     // types cannot be inferred during compile time
     const output = await forms.trigger(fields as never, {
       shouldFocus: true,
     });
-    console.log(fields);
-    console.log(output);
-    if (!output) return;
 
+    if (!output) return;
     if (currentStep < form.pages - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
@@ -101,12 +101,13 @@ export default function FormSubmitFormFinal({
     }
   };
   const onSubmit = async () => {
-    console.log(forms.getValues());
     const output = await forms.trigger();
-    console.log(forms.getValues());
-    console.log(output);
     if (!output) return;
-    const result = await submitForm(form.id, forms.getValues());
+
+    const result = await submitForm(
+      form.id,
+      forms.getValues() as unknown as Record<string, string | number | string[]>
+    );
     toast(result);
     Router.push('/en/forms');
   };
@@ -153,7 +154,6 @@ export default function FormSubmitFormFinal({
               </motion.div>
             );
           })}
-          {/*TODO background of absolute*/}
           <div className="absolute bottom-0 w-full max-w-lg pb-4 pr-4 ">
             <Separator />
             <div className="flex justify-between pt-4">
