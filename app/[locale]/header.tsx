@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { IoMenu } from 'react-icons/io5';
 
 import LocaleSwitcher from '~/components/locale-switcher';
 import { getTranslations } from '~/i18n/translations';
@@ -19,21 +20,32 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <section className="fixed z-10 min-w-full bg-gradient-to-b from-neutral-500 to-transparent py-6">
-      <nav className="container flex flex-wrap justify-between gap-8">
+    <header
+      className={clsx(
+        'fixed z-10 min-w-full',
+        'bg-gradient-to-b from-neutral-500 to-transparent'
+      )}
+    >
+      <nav
+        className={clsx(
+          'container flex justify-between',
+          'gap-4 xl:gap-6 2xl:gap-8',
+          'py-4 sm:py-6 md:py-8'
+        )}
+      >
         <Link href={`/${locale}`}>
           <Image
             alt={text.logo}
             className="rounded-md bg-neutral-50 p-[6px]"
-            height={44}
-            width={44}
-            src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i0QrjGZNZsnnvHN~pAnOa-YbIdvwexeTtZuB1etivK5dtpc~-7WqBZshw9~U2zBk5cbQ53JxA6FjUzyHVVcIMJjVsXi17NMULlQjdoylX0RlLxEMiJcf1ZXbFd8DQT9MrHkjyO~oEQYjDgCw87k~ZZ5z9oMSio4dKcc2D8RbTG7pcuCHkAWjhj~qbxKnMtcHHkW1tyoNa8ZO4pcK7F8vnf3~ItFFO1K54grHvqlaCFM2NhjLEzLjLetdxwh7l8KZwaxEEanbdHoAVk~TqIK-sxoQsYPFZGc4W2p0VvtWdl0MzanayIfqq~n0as1Ee6xgl171H7jetTYAF-f0X4NDWw__"
+            height={40}
+            width={40}
+            src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UZZ9GC45xgjRHI2G-Lpw2LHDGoFff2P~1QpCqKmfzfJjx9P~RKUghocbjZF51rcEBbXPwiAEIuAndxM-KbEOJuyLmGAXnIkGsFzWiQG0LEfHu5rPX~xUFWfBfQWYrieeyVRrUwcevFXf6OYcwbNFJzeR6Pa8QYUiYkg2dIkujyIXSt8yN3HPr7RhlxX0fvPXar5YPVujnb0rd~ZzP-rsETG-e63sxkJ4x4cgUWu5mGOQCQ9dwr0EbLRSL8mhW-oTryHRVPZxMV2MEgW6D9RwncIbSRJE-kL5NCo8s9Sz5Vm3veqg8GXR0vIGxWemlQ1nhyDJ6ig2JF-S9SmLG9Am4g__"
           />
         </Link>
 
-        <ol className="flex grow gap-4">
+        <ol className={clsx('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
           {items.map(({ label, href }, index) => (
-            <li className="my-auto min-h-fit p-2" key={index}>
+            <li className="my-auto min-h-fit" key={index}>
               <Link href={`/${locale}/${href}`}>{label}</Link>
             </li>
           ))}
@@ -41,35 +53,50 @@ export default async function Header({ locale }: { locale: string }) {
 
         <ol className="inline-flex gap-2">
           <li>
-            <button className="flex h-full w-40 rounded-xl border border-neutral-500 bg-neutral-50">
+            <button className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
               <LocaleSwitcher
                 className={clsx(
-                  'w-1/2 rounded-xl p-2',
+                  'inline-flex w-1/2 items-center justify-center rounded-xl',
                   locale === 'en'
                     ? 'border border-primary-700 text-primary-700'
                     : 'text-neutral-500'
                 )}
                 locale="en"
               >
-                English
+                <span className="px-3 md:hidden lg:block 2xl:hidden">EN</span>
+                <span className="hidden px-4 md:block lg:hidden 2xl:block">
+                  English
+                </span>
               </LocaleSwitcher>
               <LocaleSwitcher
                 className={clsx(
-                  'w-1/2 rounded-xl p-2',
+                  'inline-flex w-1/2 items-center justify-center rounded-xl',
                   locale === 'hi'
                     ? 'border border-primary-700 text-primary-700'
                     : 'text-neutral-500'
                 )}
                 locale="hi"
               >
-                हिन्दी
+                <span className="px-3 md:hidden lg:block 2xl:hidden">हिं</span>
+                <span className="hidden px-4 md:block lg:hidden 2xl:block">
+                  हिंदी
+                </span>
               </LocaleSwitcher>
             </button>
           </li>
           <li>
             <Link href={`/${locale}/search`}>
-              <button className="button hover:text-inherit group flex h-full w-64 gap-3 rounded-xl border px-4 py-2">
-                <FaMagnifyingGlass className="my-auto" size={16} />
+              <FaMagnifyingGlass
+                className="p-2 text-primary-700 xl:hidden"
+                size={40}
+              />
+              <button
+                className={clsx(
+                  'hidden xl:flex',
+                  'button hover:text-inherit group h-full w-60 items-center gap-3 rounded-xl border px-4'
+                )}
+              >
+                <FaMagnifyingGlass size={16} />
                 <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
                   {text.search}
                 </span>
@@ -77,15 +104,21 @@ export default async function Header({ locale }: { locale: string }) {
               </button>
             </Link>
           </li>
-          <li>
+          <li className="hidden lg:block">
             <Link href={`/${locale}/login`}>
-              <button className="button-emphasised h-full w-24 rounded-xl">
+              <button className="button-emphasised h-full w-16 rounded-xl xl:w-20">
                 {text.login}
               </button>
             </Link>
           </li>
+          <li className="lg:hidden">
+            <IoMenu
+              className="rounded-md bg-primary-700 p-1 text-neutral-50 hover:cursor-pointer"
+              size={40}
+            />
+          </li>
         </ol>
       </nav>
-    </section>
+    </header>
   );
 }
