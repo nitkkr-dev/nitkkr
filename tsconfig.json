@@ -25,9 +25,18 @@
       "~/api/*": ["./app/api/*"],
       "~/app/*": ["./app/[locale]/*"],
       "~/assets/*": ["./public/assets/*"],
-      "~/*": ["./*"],
-    },
+      "~/*": ["./*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.css",
+    "**/*.json"
+  ],
+  "exclude": ["node_modules"]
 }
