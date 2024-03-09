@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import HorsesRunning from '~/components/horses-running';
+import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 
 export default async function DirectorsCorner({ locale }: { locale: string }) {
@@ -9,12 +9,9 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
 
   return (
     <article className="container mb-32 mt-10" id="directors-corner">
-      <Link href="#directors-corner">
-        <header className="mx-auto mb-20 flex max-w-fit flex-row">
-          <HorsesRunning direction="left" />
-          <h2 className="my-auto">{text.title}</h2>
-        </header>
-      </Link>
+      <Heading glyphDirection="rtl" href="#directors-corner">
+        <h2 className="my-auto min-w-fit">{text.title}</h2>
+      </Heading>
 
       <section className="flex flex-row gap-5 rounded-xl border border-primary-700 bg-neutral-50 p-8">
         <Image
