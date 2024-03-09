@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import HorsesRunning from '~/components/horses-running';
+import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
 import { getTranslations } from '~/i18n/translations';
 import { getKeys } from '~/lib/utils';
@@ -46,12 +46,9 @@ export default async function Notifications({
       className="bg-notifications bg-cover bg-no-repeat py-40"
       id="notifications"
     >
-      <Link href="#notifications">
-        <header className="container mb-20 flex flex-row justify-center">
-          <HorsesRunning direction="left" />
-          <h2 className="my-auto">{text.title}</h2>
-        </header>
-      </Link>
+      <Heading className="container" glyphDirection="rtl" href="#notifications">
+        <h2 className="my-auto w-fit">{text.title}</h2>
+      </Heading>
 
       <article className="container flex justify-between">
         <ul className="flex w-[30%] flex-col gap-10">
