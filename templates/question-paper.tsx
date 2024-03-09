@@ -1,3 +1,5 @@
+import React from 'react';
+
 export enum ExamType {
   MidTerm1,
   MidTerm2,
@@ -21,8 +23,43 @@ export interface QuestionPaperProps {
   time_alloted: string;
 }
 
-export function QuestionPaper({ data }: { data: QuestionPaperProps }) {
-  return <h1>Hello, world!</h1>;
-}
+const QuestionPaper: React.FC<{ data: QuestionPaperProps }> = ({ data }) => {
+  return (
+    <div>
+      <h1>{data.course.name}</h1>
+      <p>Date: {data.date.toLocaleDateString()}</p>
+      <p>Exam Type: {ExamType[data.exam]}</p>
+      <p>Programme: {data.programme}</p>
+      <p>Semester: {data.semester}</p>
+      <p>Time Alloted: {data.time_alloted}</p>
+      <p>Questions:</p>
+      <ul>
+        {data.questions.map((section, sectionIndex) => (
+          <li key={sectionIndex}>
+            <h2>Section {sectionIndex + 1}</h2>
+            <ul>
+              {section.map((subsection, subIndex) => (
+                <li key={subIndex}>
+                  <h3>Subsection {subIndex + 1}</h3>
+                  <ul>
+                    {subsection.map((question, questionIndex) => (
+                      <li key={questionIndex}>
+                        <p>Question: {question.text}</p>
+                        <p>Prompt: {question.prompt}</p>
+                        <p>Image: {question.image}</p>
+                        <p>Marks: {question.marks}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default QuestionPaper;
+
+export default QuestionPaper;
