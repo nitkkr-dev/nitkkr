@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
@@ -6,6 +5,7 @@ import { IoMenu } from 'react-icons/io5';
 
 import LocaleSwitcher from '~/components/locale-switcher';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -21,13 +21,13 @@ export default async function Header({ locale }: { locale: string }) {
 
   return (
     <header
-      className={clsx(
+      className={cn(
         'fixed z-10 min-w-full',
         'bg-gradient-to-b from-neutral-500 to-transparent'
       )}
     >
       <nav
-        className={clsx(
+        className={cn(
           'container flex justify-between',
           'gap-4 xl:gap-6 2xl:gap-8',
           'py-4 sm:py-6 md:py-8'
@@ -43,7 +43,7 @@ export default async function Header({ locale }: { locale: string }) {
           />
         </Link>
 
-        <ol className={clsx('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
+        <ol className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
           {items.map(({ label, href }, index) => (
             <li className="my-auto min-h-fit" key={index}>
               <Link href={`/${locale}/${href}`}>{label}</Link>
@@ -55,7 +55,7 @@ export default async function Header({ locale }: { locale: string }) {
           <li>
             <button className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
               <LocaleSwitcher
-                className={clsx(
+                className={cn(
                   'inline-flex w-1/2 items-center justify-center rounded-xl',
                   locale === 'en'
                     ? 'border border-primary-700 text-primary-700'
@@ -69,7 +69,7 @@ export default async function Header({ locale }: { locale: string }) {
                 </span>
               </LocaleSwitcher>
               <LocaleSwitcher
-                className={clsx(
+                className={cn(
                   'inline-flex w-1/2 items-center justify-center rounded-xl',
                   locale === 'hi'
                     ? 'border border-primary-700 text-primary-700'
@@ -91,7 +91,7 @@ export default async function Header({ locale }: { locale: string }) {
                 size={40}
               />
               <button
-                className={clsx(
+                className={cn(
                   'hidden xl:flex',
                   'button hover:text-inherit group h-full w-60 items-center gap-3 rounded-xl border px-4'
                 )}

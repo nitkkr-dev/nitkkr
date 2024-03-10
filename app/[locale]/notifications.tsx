@@ -1,11 +1,10 @@
-import clsx from 'clsx';
 import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
 import { getTranslations } from '~/i18n/translations';
-import { getKeys } from '~/lib/utils';
+import { cn, getKeys } from '~/lib/utils';
 
 export default async function Notifications({
   category: currentCategory,
@@ -52,7 +51,7 @@ export default async function Notifications({
 
       <article className="container h-[384px] rounded-xl md:h-[512px] lg:flex lg:justify-between">
         <ol
-          className={clsx(
+          className={cn(
             'flex rounded-t-xl bg-primary-700 p-1 sm:p-2',
             'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
           )}
@@ -65,7 +64,7 @@ export default async function Notifications({
                 scroll={false}
               >
                 <button
-                  className={clsx(
+                  className={cn(
                     'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50',
                     'lg:button lg:border lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
                     category === currentCategory
@@ -81,7 +80,7 @@ export default async function Notifications({
         </ol>
 
         <section
-          className={clsx(
+          className={cn(
             `h-full rounded-b-xl bg-background/[0.6]`,
             'lg:w-[65%] lg:rounded-t-xl lg:shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] lg:drop-shadow-2xl',
             'lg:px-6 lg:pt-6 xl:px-8 xl:pt-8'
@@ -89,7 +88,7 @@ export default async function Notifications({
         >
           <ScrollArea
             type="always"
-            className={clsx(
+            className={cn(
               'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
               'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
             )}
@@ -99,7 +98,7 @@ export default async function Notifications({
                 ({ label, value }, index) => (
                   <li key={index}>
                     <Link
-                      className={clsx(
+                      className={cn(
                         'inline-flex max-w-full',
                         'my-2 sm:my-4 xl:my-5'
                       )}

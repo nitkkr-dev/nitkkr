@@ -1,8 +1,9 @@
 import { type UrlObject } from 'url';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { cn } from '~/lib/utils';
 
 function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
   return (
@@ -13,7 +14,7 @@ function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
       {[...Array<number>(4)].map((_, index) => (
         <Image
           alt="Elephant"
-          className={clsx(
+          className={cn(
             'w-16 scale-y-75 sm:w-20 sm:-translate-y-1 md:w-24',
             direction === 'ltr' ? '-mr-4 -scale-x-100' : '-ml-4'
           )}
@@ -35,7 +36,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
     >
       <Image
         alt="Chariot"
-        className={clsx(
+        className={cn(
           '-mt-2 w-16 sm:w-20 md:-mt-3 md:w-24',
           direction === 'rtl' && '-scale-x-100'
         )}
@@ -48,7 +49,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
       {[...Array<number>(8)].map((_, index) => (
         <Image
           alt="Horse"
-          className={clsx(
+          className={cn(
             'my-auto w-16 sm:w-20 md:w-24',
             direction === 'rtl' ? '-mr-3.5 -scale-x-100' : '-ml-3.5'
           )}
@@ -74,9 +75,7 @@ export default function Heading({
   href: string | UrlObject;
 }) {
   return (
-    <header
-      className={clsx('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}
-    >
+    <header className={cn('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}>
       <Link
         className="mx-auto flex max-w-fit flex-nowrap justify-center gap-2 sm:gap-3 md:gap-4"
         href={href}

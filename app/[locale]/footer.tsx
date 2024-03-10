@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -12,6 +11,7 @@ import { MdFax, MdMail, MdPhone } from 'react-icons/md';
 
 import CopyToClipboard from '~/components/copy-to-clipboard';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 
 export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
@@ -55,7 +55,7 @@ export default async function Footer({ locale }: { locale: string }) {
 
           <Image
             alt={text.design}
-            className={clsx(
+            className={cn(
               '-my-12 mx-auto h-72 rotate-90',
               'lg:-mx-10 lg:my-auto lg:h-96 lg:w-64 lg:rotate-0',
               'xl:-mx-4 xl:my-auto xl:h-96 xl:w-64'
@@ -81,7 +81,7 @@ export default async function Footer({ locale }: { locale: string }) {
             </nav>
 
             <nav
-              className={clsx(
+              className={cn(
                 'col-start-1 row-start-2 w-fit',
                 'sm:col-span-2 sm:col-start-5 sm:row-start-1 sm:justify-self-end',
                 'md:col-start-3 md:row-start-1 md:justify-self-center'
@@ -100,7 +100,7 @@ export default async function Footer({ locale }: { locale: string }) {
             </nav>
 
             <nav
-              className={clsx(
+              className={cn(
                 'col-start-1 row-start-3 w-fit',
                 'sm:col-span-2 sm:col-start-3 sm:row-start-2 sm:justify-self-center',
                 'md:col-start-5 md:row-start-1 md:justify-self-end'
