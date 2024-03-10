@@ -15,7 +15,7 @@ const text: Translations = {
       sphere.`,
       'I heartily welcome everyone who visits the website of this institution.',
     ],
-    more: 'Read more →',
+    more: 'Read more',
   },
   Footer: {
     logo: 'Logo',
