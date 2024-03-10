@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
@@ -29,10 +30,13 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             {text.quote[0]}
             &nbsp;
             <Link
-              className="text-primary-700 hover:underline"
+              className="inline-flex items-center gap-1 text-primary-700 hover:underline"
               href={`/${locale}/institute/director#message`}
             >
               {text.more}
+              <span className="rotate-90">
+                <FaArrowUp className="mx-auto animate-bounce" size={16} />
+              </span>
             </Link>
             <br />
             <br />
