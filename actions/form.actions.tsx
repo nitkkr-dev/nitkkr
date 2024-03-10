@@ -16,8 +16,12 @@ import {
 } from '~/schemas/form';
 import type { Prisma } from '~/prisma/generated/client';
 import type { validationProperty } from '~/components/forms/interfaces/FormElements';
-import FormSubmitFormFinal from '~/components/forms/FormSubmitFormFinal';
-import FormInvalidResponse from '~/components/forms/FormInvalidResponse';
+import FormSubmitPage, {
+  type FormSubmitFormProps,
+} from '~/components/forms/FormSubmitPage';
+import FormInvalidResponse, {
+  type FormInvalidResponseProps,
+} from '~/components/forms/FormInvalidResponse';
 
 const ajv = new Ajv({
   allErrors: true,
@@ -357,7 +361,10 @@ export async function getFormByIdWithQuestions(id: number) {
   }
 }
 
-export async function getFormForSubmission(id: number) {
+export async function getFormForSubmission(id: number): Promise<{
+  Element: React.ElementType;
+  props: FormInvalidResponseProps | FormSubmitFormProps;
+}> {
   try {
     const user = await currentUser();
     const form = await db.forms.findUnique({
@@ -384,22 +391,22 @@ export async function getFormForSubmission(id: number) {
     });
 
     if (!form || !form.is_published)
-      return (
-        <FormInvalidResponse
-          title="Form Not Found"
-          content="Sorry, we couldn't find the form you were looking for or you dont have access to it."
-        />
-      );
+      return {
+        Element: FormInvalidResponse,
+        props: {
+          type: 'FormNotFound',
+        },
+      };
 
     if (!(user || form.is_anonymous)) throw new UserNotFoundErr();
 
     if (!form.is_active)
-      return (
-        <FormInvalidResponse
-          title="Form Expired"
-          content="The form you are looking for has expired and is no longer available to submit."
-        />
-      );
+      return {
+        Element: FormInvalidResponse,
+        props: {
+          type: 'FormExpired',
+        },
+      };
 
     if (form.expiry_date && form.expiry_date < new Date()) {
       await db.forms.update({
@@ -411,40 +418,37 @@ export async function getFormForSubmission(id: number) {
         },
       });
 
-      return (
-        <FormInvalidResponse
-          title="Form Expired"
-          content="The form you are looking for has expired and is no longer available to submit."
-        />
-      );
-    }
-
-    if (!form.is_anonymous) {
-      //if (!form.modifiable_by.some((mod) => mod.id === user.id)) return <FormNotFound />;  // Impossible condition
-      const response = await db.form_submissions.findFirst({
-        where: {
-          form_id: id,
-          email: user.institute_email,
+      return {
+        Element: FormInvalidResponse,
+        props: {
+          type: 'FormExpired',
         },
-      });
-
-      if (!form.is_single_response && response)
-        return (
-          <FormInvalidResponse
-            title="Form Edit Not Allowed"
-            content="Sorry, you are not allowed to edit this form once submitted."
-          />
-        );
-
-      if (!form.is_editing_allowed && response)
-        return (
-          <FormInvalidResponse
-            title="Form Edit Not Allowed"
-            content="Sorry, you are not allowed to edit this form once submitted."
-          />
-        );
+      };
     }
 
+    const submission =
+      !form.is_anonymous && form.is_single_response
+        ? await db.form_submissions.findFirst({
+            where: {
+              form_id: id,
+              email: user.institute_email,
+            },
+            include: {
+              form_answers: true,
+            },
+          })
+        : undefined;
+
+    if (submission && !form.is_editing_allowed) {
+      //if (!form.modifiable_by.some((mod) => mod.id === user.id)) return <FormNotFound />;  // Impossible condition
+
+      return {
+        Element: FormInvalidResponse,
+        props: {
+          type: 'FormEditNotAllowed',
+        },
+      };
+    }
     const questionElements: {
       id: string;
       question: string;
@@ -482,18 +486,6 @@ export async function getFormForSubmission(id: number) {
         input_type: question.input_type as ElementsType,
       });
     });
-
-    const submission = form.is_editing_allowed
-      ? await db.form_submissions.findFirst({
-          where: {
-            form_id: id,
-            email: user.institute_email,
-          },
-          include: {
-            form_answers: true,
-          },
-        })
-      : undefined;
     const answers = submission?.form_answers.reduce(
       (acc: Record<string, string | number | string[]>, answer) => {
         acc[answer.question_id] = answer.answer as string | number | string[];
@@ -503,26 +495,25 @@ export async function getFormForSubmission(id: number) {
     );
 
     const pages = questionElements.length;
-    return (
-      <FormSubmitFormFinal
-        form={{
+    return {
+      Element: FormSubmitPage,
+      props: {
+        form: {
           id: form.id,
           title: form.title,
           description: form.description ?? undefined,
           on_submit_message: form.on_submit_message,
           pages: pages,
-        }}
-        questions={questionElements}
-        requiredQuestions={form.required_questions}
-        questionValidations={
-          form.question_validations as unknown as Record<
-            string,
-            validationProperty
-          >
-        }
-        answers={answers}
-      />
-    );
+        },
+        questions: questionElements,
+        requiredQuestions: form.required_questions,
+        questionValidations: form.question_validations as unknown as Record<
+          string,
+          validationProperty
+        >,
+        answers: answers,
+      },
+    };
   } catch (error) {
     console.error('Error getting form for submission:', error);
     throw new Error('Failed to get form for submission');
