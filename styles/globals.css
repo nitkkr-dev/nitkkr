@@ -7,9 +7,6 @@
 
 @layer base {
   body {
-    @apply font-sans;
-    @apply bg-background;
-    @apply text-xs sm:text-sm md:text-base;
     min-height: 100vh;
   }
 
