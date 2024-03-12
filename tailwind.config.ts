@@ -48,7 +48,7 @@ export default {
     extend: {
       backgroundImage: {
         notifications:
-          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://s3-alpha-sig.figma.com/img/cff6/b90c/6d452f4caad45a22f4d4a701c7b48bce?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pXiNpSpLsmtFI9JXmo9h-cYFyP0m07hqsPbJfVVHdSguGKbK3NS4WOOK6-3vGv3IUYr6UllYZ8Wvp3uMKsBQo3rEbgF1Vi8uLAaaGRsBUQiejDJN-IlaB-nWytpj5wT~XNMptN~sh6SMqetjfRMZGo9Bp8fR-ogXQ-FsrrXdNV4SloUXFJ2TwfHKOECkz-ssaC5bjat1IleFWq0gh~EeJmL2mOjfpVtamUQk-OYhfr9arPB-bGqmeRVd9YNQbKr4zj5T5EGjxfSwdEihgoXflSqks5W1jvlPbnCEn-cCzzR1JpD3I~2nsDPatOaAAZa-cTra78ijTK83YITCDXqJNA__')",
+          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://s3-alpha-sig.figma.com/img/cff6/b90c/6d452f4caad45a22f4d4a701c7b48bce?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ofq9jEHFupykPfqgRBlvqj9sHSFZppT4~Bc67eBYuraZ7BWV56CCOl~KksgPTIMTXaatC~DicUIdW1kEa1EnF6QypCyAnO-wXXL90qqlDLz-1DHcUT0rwCoXIwvyHtm8y9mWqTXVJeR7KFXf5zdH0hvwBo6rzstqgbSplXgGSKJtKhGPntPkPefW3kCX09i4XYj7TmL7KVmtcWOKFAUGgsvb2zhJ-9wBGgAXId1Uf-LGpeskNzO7SylQ1TVAQwvoZgrgJeeI1kO0OE0vcfAKR3Jut~kjMKYWay4owWif2Owy1LxhMi3uwZ9LOXr1E8VlE6i5iwLrVyaZdS5I2ZnSHA__')",
       },
     },
     fontFamily: {
