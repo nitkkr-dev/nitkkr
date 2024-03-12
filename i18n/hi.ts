@@ -2,6 +2,7 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   DirectorsCorner: {
+    alt: 'डा. बी. वी. रमणा रेड्डी',
     title: 'निर्देशक का कोना',
     name: 'डा. बी. वी. रमणा रेड्डी',
     quote: [
