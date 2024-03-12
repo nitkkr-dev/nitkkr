@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
+import Footer from '~/app/footer';
+import Header from '~/app/header';
+import { cn } from '~/lib/utils';
 import '~/styles/globals.css';
-import Footer from './footer';
-import Header from './header';
 
 export const metadata: Metadata = {
   title: 'National Institute of Technology, Kurukshetra',
@@ -21,7 +22,12 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className="flex flex-col">
+      <body
+        className={cn(
+          'flex flex-col bg-background',
+          'text-xs sm:text-sm md:text-base'
+        )}
+      >
         <Header locale={locale} />
         <section className="flex grow">{children}</section>
         <Footer locale={locale} />
