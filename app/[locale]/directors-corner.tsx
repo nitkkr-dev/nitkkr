@@ -1,9 +1,20 @@
-import Image from 'next/image';
+import Image, { type ImageProps } from 'next/image';
 import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
+
+const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
+  <Image
+    className={cn('rounded-xl', className)}
+    height={682}
+    width={591}
+    src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
+    {...props}
+  />
+);
 
 export default async function DirectorsCorner({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).DirectorsCorner;
@@ -14,19 +25,34 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
         <h2 className="my-auto min-w-fit">{text.title}</h2>
       </Heading>
 
-      <section className="flex flex-row gap-5 rounded-xl border border-primary-700 bg-neutral-50 p-8">
-        <Image
-          alt="Director's photo"
-          className="h-[443px] w-96 rounded-xl"
-          height={682}
-          width={591}
-          loading="lazy"
-          src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
+      <article
+        className={cn(
+          'gap-5 lg:flex',
+          'p-4 md:p-6 xl:p-8',
+          'rounded-xl border border-primary-700 bg-neutral-50'
+        )}
+      >
+        <figure className="mb-4 flex gap-4 sm:gap-6 md:gap-8 lg:hidden">
+          <DirecotorsImage
+            alt={text.alt}
+            className="h-[92px] w-20 md:h-[111px] md:w-24"
+          />
+          <figcaption className="my-auto">
+            <h3 className="mb-0">{text.name}</h3>
+          </figcaption>
+        </figure>
+
+        <DirecotorsImage
+          alt={text.alt}
+          className={cn(
+            'hidden lg:block',
+            'h-[295px] w-64 xl:h-[443px] xl:w-96'
+          )}
         />
 
-        <blockquote className="flex flex-col">
-          <h2 className="mb-4">{text.name}</h2>
-          <p className="text-xl">
+        <blockquote>
+          <h2 className="mb-4 hidden lg:block">{text.name}</h2>
+          <p className="lg:text-xl">
             {text.quote[0]}
             &nbsp;
             <Link
@@ -35,15 +61,20 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             >
               {text.more}
               <span className="rotate-90">
-                <FaArrowUp className="mx-auto animate-bounce" size={16} />
+                <FaArrowUp
+                  className={cn(
+                    'mx-auto animate-bounce',
+                    'size-2 md:size-3 lg:size-4'
+                  )}
+                />
               </span>
             </Link>
             <br />
             <br />
           </p>
-          <p className="grow text-xl">{text.quote[1]}</p>
+          <p className="grow lg:text-xl">{text.quote[1]}</p>
         </blockquote>
-      </section>
+      </article>
     </article>
   );
 }

@@ -4,6 +4,7 @@ export async function getTranslations(locale: string): Promise<Translations> {
 
 export interface Translations {
   DirectorsCorner: {
+    alt: string;
     title: string;
     name: string;
     quote: [string, string];

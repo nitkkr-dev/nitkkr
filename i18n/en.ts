@@ -2,6 +2,7 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   DirectorsCorner: {
+    alt: 'Prof. B. V. Ramana Reddy',
     title: 'DIRECTOR’S CORNER',
     name: 'Prof. B. V. Ramana Reddy',
     quote: [
