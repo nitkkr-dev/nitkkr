@@ -30,6 +30,26 @@ const text: Translations = {
     copyright:
       '© 2024 National Institute of Technology Kurukshetra. All Rights Reserved.',
   },
+  Form: {
+    FormNotFound: {
+      title: 'Form Not Found',
+      content:
+        'Sorry, we could not find the form you were looking for or you are not authorised to access it.',
+    },
+    FormExpired: {
+      title: 'Form Expired',
+      content: 'The form you are looking for has expired.',
+    },
+    FormEditNotAllowed: {
+      title: 'Form Edit Not Allowed',
+      content:
+        'Sorry, you are not allowed to edit this form after submitting it.',
+    },
+  },
+  FormDetails: {
+    title: 'Form Title',
+    description: 'Form Description',
+  },
   Header: {
     institute: 'Institute',
     academics: 'Academics',

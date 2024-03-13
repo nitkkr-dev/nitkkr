@@ -21,6 +21,15 @@ export interface Translations {
     lorem: string;
     copyright: string;
   };
+  Form: {
+    FormNotFound: { title: string; content: string };
+    FormExpired: { title: string; content: string };
+    FormEditNotAllowed: { title: string; content: string };
+  };
+  FormDetails: {
+    title: string;
+    description: string;
+  };
   Header: {
     institute: string;
     academics: string;

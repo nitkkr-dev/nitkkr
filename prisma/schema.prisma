@@ -5,7 +5,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("LOCAL_DATABASE_URL")
+  //directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model auth_roles {
@@ -126,7 +127,7 @@ model faculty {
   patents                                   String[]                      @db.VarChar
   copyrights                                String[]                      @db.VarChar
   journals                                  String[]                      @db.VarChar
-  conferences                                String[]                      @db.VarChar
+  conferences                               String[]                      @db.VarChar
   books                                     String[]                      @db.VarChar
   areas_of_interest                         String[]                      @db.VarChar
   workshops                                 String[]                      @db.VarChar
@@ -160,34 +161,48 @@ model faculty_feedback {
 }
 
 model form_questions {
-  id          Int      @id(map: "pk_form_questions") @default(autoincrement())
-  form_id     Int
-  question    String   @db.VarChar
-  description String   @db.VarChar
-  is_required Boolean  @default(true)
-  input_type  String   @db.VarChar
-  choices     String[] @db.VarChar
-  mime_types  String[] @db.VarChar
-  range       String[] @db.VarChar
-  page_number Int      @default(0) @db.SmallInt
-  marks       Int      @default(0) @db.SmallInt
-  forms       forms    @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_questions_forms")
+  id           Int            @id(map: "pk_form_questions") @default(autoincrement())
+  form_id      Int
+  question     String         @db.VarChar
+  description  String?        @db.VarChar
+  is_required  Boolean        @default(true)
+  input_type   String         @db.VarChar
+  choices      String[]       @db.VarChar
+  mime_types   String[]       @db.VarChar
+  range        String[]       @db.VarChar
+  page_number  Float          @default(0) @db.Real
+  marks        Int            @default(0) @db.SmallInt
+  forms        forms          @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_questions_forms")
+  form_answers form_answers[]
 }
 
 model form_submissions {
-  id      Int    @id(map: "pk_form_submissions") @default(autoincrement())
-  form_id Int
-  email   String @db.VarChar
-  forms   forms  @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
+  id           Int            @id(map: "pk_form_submissions") @default(autoincrement())
+  form_id      Int
+  email        String         @db.VarChar
+  is_submitted Boolean        @default(false)
+  forms        forms          @relation(fields: [form_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_submissions_forms")
+  form_answers form_answers[]
+}
+
+model form_answers {
+  id               Int              @id(map: "pk_form_answers") @default(autoincrement())
+  question_id      Int
+  submission_id    Int
+  answer           Json             @db.JsonB
+  form_questions   form_questions   @relation(fields: [question_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_answers_form_questions")
+  form_submissions form_submissions @relation(fields: [submission_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_form_answers_form_submissions")
 }
 
 model forms {
   id                        Int                @id(map: "pk_forms") @default(autoincrement())
   title                     String             @db.VarChar
-  description               String             @db.VarChar
-  visible_to                String[]           @db.VarChar
+  description               String?            @db.VarChar
+  modifiable_by             persons[]          @relation("forms_modifiable_by")
+  visible_to                persons[]          @relation("forms_visible_to")
   questions                 Int[]
   on_submit_message         String             @default("Your response has been recorded.") @db.VarChar
+  is_anonymous              Boolean            @default(false)
   is_editing_allowed        Boolean
   is_single_response        Boolean            @default(true)
   is_view_analytics_allowed Boolean            @default(false)
@@ -198,7 +213,9 @@ model forms {
   is_active                 Boolean            @default(true)
   persistent_url            String?            @db.VarChar
   old_persistent_urls       String[]           @db.VarChar
-  is_published              Boolean
+  is_published              Boolean            @default(false)
+  required_questions        String[]           @db.VarChar
+  question_validations      Json?              @db.Json
   faculty_feedback          faculty_feedback[]
   form_questions            form_questions[]
   form_submissions          form_submissions[]
@@ -241,9 +258,11 @@ model non_teaching_staff {
 }
 
 model persons {
-  id              Int    @id(map: "pk_persons") @default(autoincrement())
-  name            String @db.VarChar
-  institute_email String @db.VarChar
+  id               Int     @id(map: "pk_persons") @default(autoincrement())
+  name             String  @db.VarChar
+  institute_email  String  @db.VarChar
+  forms_modifiable forms[] @relation("forms_modifiable_by")
+  forms_visible    forms[] @relation("forms_visible_to")
 }
 
 model phd_log {
