@@ -21,7 +21,7 @@ export default function SearchButton({
   const router = useRouter();
   useCtrl('k', () => {
     if (pathname === href) router.back();
-    else router.push(href);
+    else router.push(href, { scroll: false });
   });
 
   return (
