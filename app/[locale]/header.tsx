@@ -56,7 +56,7 @@ export default async function Header({ locale }: { locale: string }) {
             <button className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
               <LocaleSwitcher
                 className={cn(
-                  'inline-flex w-1/2 items-center justify-center rounded-xl',
+                  'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
                   locale === 'en'
                     ? 'border border-primary-700 text-primary-700'
                     : 'text-neutral-500'
@@ -70,7 +70,7 @@ export default async function Header({ locale }: { locale: string }) {
               </LocaleSwitcher>
               <LocaleSwitcher
                 className={cn(
-                  'inline-flex w-1/2 items-center justify-center rounded-xl',
+                  'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
                   locale === 'hi'
                     ? 'border border-primary-700 text-primary-700'
                     : 'text-neutral-500'
