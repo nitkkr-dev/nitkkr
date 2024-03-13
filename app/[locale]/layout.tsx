@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   description: 'Institution of National Importance',
 };
 
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'hi' }];
+}
+
+export const dynamicParams = false;
+
 export default function RootLayout({
   children,
   params,
