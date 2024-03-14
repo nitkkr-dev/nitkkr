@@ -36,6 +36,11 @@ model club_socials {
 
 model clubs {
   id                  Int            @id(map: "pk_clubs") @default(autoincrement())
+  name                String         @db.VarChar
+  alias               String?        @db.VarChar
+  logo                String         @db.VarChar
+  thumbnail           String         @db.VarChar
+  banner              String         @db.VarChar
   starting_date       DateTime       @db.Date
   is_active           Boolean
   about_us            String         @db.VarChar
@@ -126,7 +131,7 @@ model faculty {
   patents                                   String[]                      @db.VarChar
   copyrights                                String[]                      @db.VarChar
   journals                                  String[]                      @db.VarChar
-  conferences                                String[]                      @db.VarChar
+  conferences                               String[]                      @db.VarChar
   books                                     String[]                      @db.VarChar
   areas_of_interest                         String[]                      @db.VarChar
   workshops                                 String[]                      @db.VarChar

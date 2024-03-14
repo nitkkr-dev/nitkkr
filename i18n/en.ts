@@ -51,6 +51,18 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  StudentActivities: {
+    title: 'Student Activities',
+    headings: {
+      clubs: 'Clubs',
+      council: 'Student Council',
+      events: 'Events',
+      thoughtLab: 'Thought Lab',
+      nss: 'NSS',
+      ncc: 'NCC',
+    },
+    sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
+  },
   Unauthorised: {
     title: 'Unauthorised',
     description: 'You are not authorised to view this page.',

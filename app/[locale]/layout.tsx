@@ -35,7 +35,7 @@ export default function RootLayout({
         )}
       >
         <Header locale={locale} />
-        <section className="flex grow">{children}</section>
+        <section className="grow">{children}</section>
         <Footer locale={locale} />
       </body>
     </html>
