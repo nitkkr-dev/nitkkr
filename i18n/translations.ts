@@ -38,6 +38,20 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  StudentActivities: {
+    title: string;
+    headings: {
+      clubs: string;
+      council: string;
+      events: string;
+      thoughtLab: string;
+      nss: string;
+      ncc: string;
+    };
+    sections: {
+      clubs: { title: string; more: string };
+    };
+  };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
 }

@@ -47,6 +47,18 @@ const text: Translations = {
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
   },
+  StudentActivities: {
+    title: 'छात्र गतिविधियाँ',
+    headings: {
+      clubs: 'संघठनें',
+      council: 'छात्र परिषद',
+      events: 'आयोजनाएँ',
+      thoughtLab: 'विचार प्रयोगशाला',
+      nss: 'एनएसएस',
+      ncc: 'एनसीसी',
+    },
+    sections: { clubs: { title: 'संघठनें', more: 'सभी संघठनो को तलाशें' } },
+  },
   Unauthorised: {
     title: 'अनधिकृत',
     description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
