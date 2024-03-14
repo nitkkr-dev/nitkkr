@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { Suspense } from 'react';
 
+import Spinner from '~/components/spinner';
 import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
+
+import NotificationContent from './notification-content';
 
 export default async function Notifications({
   category: currentCategory,
@@ -65,7 +68,7 @@ export default async function Notifications({
               >
                 <button
                   className={cn(
-                    'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50',
+                    'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50 active:bg-primary-100',
                     'lg:button lg:border lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
                     category === currentCategory
                       ? 'bg-primary-300 lg:bg-primary-700 lg:text-neutral-50'
@@ -86,33 +89,20 @@ export default async function Notifications({
             'lg:px-6 lg:pt-6 xl:px-8 xl:pt-8'
           )}
         >
-          <ScrollArea
-            type="always"
-            className={cn(
-              'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
-              'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
-            )}
-          >
-            <ol>
-              {notifications[currentCategory].items.map(
-                ({ label, value }, index) => (
-                  <li key={index}>
-                    <Link
-                      className={cn(
-                        'inline-flex max-w-full',
-                        'my-2 sm:my-4 xl:my-5'
-                      )}
-                      href={`/${locale}/${value}`}
-                    >
-                      <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                      <p className="mb-0 truncate lg:text-lg">{label}</p>
-                    </Link>
-                    <hr className="opacity-20" />
-                  </li>
-                )
+          <Suspense key={currentCategory} fallback={<Spinner />}>
+            <ScrollArea
+              type="always"
+              className={cn(
+                'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
+                'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
               )}
-            </ol>
-          </ScrollArea>
+            >
+              <NotificationContent
+                currentCategory={currentCategory}
+                locale={locale}
+              />
+            </ScrollArea>
+          </Suspense>
 
           <footer className="mt-auto inline-flex h-[10%] w-full justify-center">
             <Link href={`/${locale}/noticeboard`}>
