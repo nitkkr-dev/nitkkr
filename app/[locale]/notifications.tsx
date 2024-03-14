@@ -1,13 +1,58 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import Spinner from '~/components/spinner';
 import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
+import Spinner from '~/components/spinner';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
 
-import NotificationContent from './notification-content';
+const NotificationContent = async ({
+  currentCategory,
+  locale,
+}: {
+  currentCategory: 'academic' | 'tenders' | 'workshops' | 'recruitement';
+  locale: string;
+}) => {
+  const notifications = [
+    ...[...Array<number>(16)].map(() => {
+      return {
+        label:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        value: '/',
+        category: 'academic',
+      };
+    }),
+    ...[...Array<number>(4)].map(() => {
+      return {
+        label:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        value: '/',
+        category: 'tenders',
+      };
+    }),
+  ];
+
+  return (
+    <ol>
+      {notifications
+        .filter(({ category }) => category == currentCategory)
+        .map(({ label, value }, index) => (
+          <li key={index}>
+            <Link
+              className={cn('inline-flex max-w-full', 'my-2 sm:my-4 xl:my-5')}
+              href={`/${locale}/${value}`}
+            >
+              <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
+              <p className="mb-0 truncate lg:text-lg">{label}</p>
+            </Link>
+            <hr className="opacity-20" />
+          </li>
+        ))}
+    </ol>
+  );
+};
 
 export default async function Notifications({
   category: currentCategory,
@@ -17,31 +62,6 @@ export default async function Notifications({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
-
-  const notifications = {
-    academic: {
-      localisedName: text.categories[0],
-      items: [...Array<number>(40)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    tenders: {
-      localisedName: text.categories[1],
-      items: [...Array<number>(4)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    workshops: { localisedName: text.categories[2], items: [] },
-    recruitement: { localisedName: text.categories[3], items: [] },
-  };
 
   return (
     <article
@@ -59,7 +79,7 @@ export default async function Notifications({
             'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
           )}
         >
-          {getKeys(notifications).map((category, index) => (
+          {getKeys(text.categories).map((category, index) => (
             <li className="flex-auto lg:flex-initial" key={index}>
               <Link
                 className="flex"
@@ -75,7 +95,7 @@ export default async function Notifications({
                       : 'lg:bg-opacity-60'
                   )}
                 >
-                  {notifications[category].localisedName}
+                  {text.categories[category]}
                 </button>
               </Link>
             </li>

@@ -34,7 +34,12 @@ export interface Translations {
   };
   Notifications: {
     title: string;
-    categories: [string, string, string, string];
+    categories: {
+      academic: string;
+      tenders: string;
+      workshops: string;
+      recruitement: string;
+    };
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
