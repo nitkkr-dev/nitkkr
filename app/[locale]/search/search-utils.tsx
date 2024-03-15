@@ -20,7 +20,7 @@ export function Recents() {
     setRecents([]);
   };
   return (
-    <section className="mt-6 md:mt-12">
+    <section className="mt-6 pr-4 md:mt-12 md:pr-12">
       <header className="flex items-center">
         <h5 className="grow text-primary-700">Recent Searches</h5>
         <button
@@ -31,7 +31,7 @@ export function Recents() {
         </button>
       </header>
 
-      <ol className="flex flex-wrap gap-6">
+      <ol className="flex flex-wrap gap-x-6">
         {recents.map(
           (
             { label, value }: { label: string; value: string },

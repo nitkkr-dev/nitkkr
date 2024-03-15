@@ -37,7 +37,7 @@ export default function Search({
       { label: 'Dr. Vikram Singh', value: '/faculty/0' },
     ],
   };
-  const results: CardContent[][] = [
+  const results: (CardContent & { label: string; value: string })[][] = [
     [
       {
         heading: 'NIT Departments',
@@ -207,15 +207,15 @@ export default function Search({
   ];
 
   return (
-    <search className="container flex max-h-svh max-w-[100vw] flex-col gap-4">
+    <search className="flex max-h-full flex-col gap-4">
       <Searchbar />
-      <article className="flex flex-col overflow-y-auto rounded-lg border border-primary-700 bg-background px-4 drop-shadow-2xl md:px-12">
+      <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 drop-shadow-2xl md:pl-12">
         {search ? (
           <>
-            <nav className="flex gap-4 py-5">
-              <ul className="no-scrollbar flex transform space-x-3 overflow-x-scroll">
+            <nav className="pr-4 md:pr-12">
+              <ul className="flex w-full snap-x space-x-3 overflow-auto py-5">
                 {categories.map((category, index) => (
-                  <li key={index}>
+                  <li key={index} className="snap-start">
                     <Link
                       href={{ query: { q: search, c: index } }}
                       replace={true}
@@ -235,64 +235,77 @@ export default function Search({
                 ))}
               </ul>
             </nav>
-            {selectedCategory ? (
-              <Suspense fallback={<h5>loader</h5>}>
-                {/* {search} */}
-                <header className="flex justify-between text-primary-700">
-                  <h4 className="">{categories[selectedCategory]}</h4>
-                </header>
-                <ul className="mb-5 space-y-3">
-                  {results[selectedCategory - 1].map((result, index) => (
-                    <li key={index}>
-                      <SearchCard
-                        index={selectedCategory - 1}
-                        cardContent={result}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </Suspense>
-            ) : (
-              <Suspense fallback={<h5>loader</h5>}>
-                {/* {search} */}
-                <ol className="mb-5 space-y-5">
-                  {categories.slice(1).map((category, index) => (
-                    <li key={index}>
-                      <header className="flex justify-between text-primary-700">
-                        <h4 className="">{category}</h4>
-                        <h6>
-                          <Link
-                            href={{ query: { q: search, c: index + 1 } }}
-                            replace={true}
-                            className="inline-flex hover:underline"
-                          >
-                            VIEW ALL{' '}
-                            <span className="rotate-90">
-                              <FaArrowUp
-                                className="mx-auto inline-block animate-bounce"
-                                size={16}
-                              />
-                            </span>
-                          </Link>
-                        </h6>
-                      </header>
-                      <ul className="space-y-3">
-                        {results[index].map((result, i) => (
-                          <li key={i}>
-                            <SearchCard index={index} cardContent={result} />
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ol>
-              </Suspense>
-            )}
+            <section className="max-h-full w-full snap-y overflow-y-scroll pr-4 md:pr-12">
+              {selectedCategory ? (
+                <Suspense fallback={<h5>loader</h5>}>
+                  {/* {search} */}
+                  <header className="flex justify-between text-primary-700">
+                    <h4 className="">{categories[selectedCategory]}</h4>
+                  </header>
+                  <ul className="mb-5 space-y-3">
+                    {results[selectedCategory - 1].map(
+                      ({ value, label, ...result }, index) => (
+                        <li key={index}>
+                          <SearchLink value={value} label={label}>
+                            <SearchCard
+                              index={selectedCategory - 1}
+                              cardContent={result}
+                            />
+                          </SearchLink>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </Suspense>
+              ) : (
+                <Suspense fallback={<h5>loader</h5>}>
+                  {/* {search} */}
+                  <ol className="mb-5 space-y-5">
+                    {categories.slice(1).map((category, index) => (
+                      <li key={index} className="snap-start">
+                        <header className="flex justify-between text-primary-700">
+                          <h4 className="">{category}</h4>
+                          <h6>
+                            <Link
+                              href={{ query: { q: search, c: index + 1 } }}
+                              replace={true}
+                              className="inline-flex hover:underline"
+                            >
+                              VIEW ALL{' '}
+                              <span className="rotate-90">
+                                <FaArrowUp
+                                  className="mx-auto inline-block animate-bounce"
+                                  size={16}
+                                />
+                              </span>
+                            </Link>
+                          </h6>
+                        </header>
+                        <ul className="space-y-3">
+                          {results[index].map(
+                            ({ value, label, ...result }, i) => (
+                              <li key={i}>
+                                <SearchLink value={value} label={label}>
+                                  <SearchCard
+                                    index={index}
+                                    cardContent={result}
+                                  />
+                                </SearchLink>
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </li>
+                    ))}
+                  </ol>
+                </Suspense>
+              )}
+            </section>
           </>
         ) : (
           <>
             <Recents />
-            <section className="my-12 flex flex-col gap-10 md:flex-row ">
+            <section className="my-12 flex max-w-screen-xl flex-col justify-between gap-10 pr-4 md:flex-row md:pr-12">
               <nav>
                 <h5 className="text-primary-700">Most searched at NITKKR</h5>
                 <ol>
