@@ -15,30 +15,26 @@ export default async function Notifications({
 }) {
   const text = (await getTranslations(locale)).Notifications;
 
-  const notifications = {
-    academic: {
-      localisedName: text.categories[0],
-      items: [...Array<number>(40)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    tenders: {
-      localisedName: text.categories[1],
-      items: [...Array<number>(4)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    workshops: { localisedName: text.categories[2], items: [] },
-    recruitement: { localisedName: text.categories[3], items: [] },
-  };
+  const notifications = [
+    ...[...Array<number>(16)].map((_, index) => {
+      return {
+        id: index,
+        title:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        content: '',
+        category: 'academic',
+      };
+    }),
+    ...[...Array<number>(4)].map((_, index) => {
+      return {
+        id: index,
+        title:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        content: '',
+        category: 'tenders',
+      };
+    }),
+  ];
 
   return (
     <article
@@ -56,7 +52,7 @@ export default async function Notifications({
             'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
           )}
         >
-          {getKeys(notifications).map((category, index) => (
+          {getKeys(text.categories).map((category, index) => (
             <li className="flex-auto lg:flex-initial" key={index}>
               <Link
                 className="flex"
@@ -72,7 +68,7 @@ export default async function Notifications({
                       : 'lg:bg-opacity-60'
                   )}
                 >
-                  {notifications[category].localisedName}
+                  {text.categories[category]}
                 </button>
               </Link>
             </li>
@@ -94,23 +90,23 @@ export default async function Notifications({
             )}
           >
             <ol>
-              {notifications[currentCategory].items.map(
-                ({ label, value }, index) => (
+              {notifications
+                .filter(({ category }) => category == currentCategory)
+                .map(({ id, title }, index) => (
                   <li key={index}>
                     <Link
                       className={cn(
                         'inline-flex max-w-full',
                         'my-2 sm:my-4 xl:my-5'
                       )}
-                      href={`/${locale}/${value}`}
+                      href={`/${locale}/noticeboard/${id}`}
                     >
                       <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                      <p className="mb-0 truncate lg:text-lg">{label}</p>
+                      <p className="mb-0 truncate lg:text-lg">{title}</p>
                     </Link>
                     <hr className="opacity-20" />
                   </li>
-                )
-              )}
+                ))}
             </ol>
           </ScrollArea>
 
