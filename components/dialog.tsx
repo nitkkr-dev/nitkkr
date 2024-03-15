@@ -29,7 +29,7 @@ export function Dialog({
               exit={{ opacity: 0 }}
             />
           </Overlay>
-          <div className="fixed inset-0 z-modal grid place-items-center">
+          <div className="fixed inset-0 z-modal flex h-svh w-svw flex-col items-center justify-center">
             <Content
               asChild
               onPointerDownOutside={(e) => {
