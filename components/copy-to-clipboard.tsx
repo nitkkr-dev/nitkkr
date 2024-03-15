@@ -1,7 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
+
+import { cn } from '~/lib/utils';
 
 export default function CopyToClipboard({
   children,
@@ -30,7 +31,7 @@ export default function CopyToClipboard({
 
   return (
     <a
-      className={clsx('cursor-pointer', className)}
+      className={cn('cursor-pointer', className)}
       onClick={handleCopy}
       title={copied ? textSuccess : textDefault}
     >

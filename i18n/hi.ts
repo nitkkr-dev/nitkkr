@@ -39,6 +39,7 @@ const text: Translations = {
     ],
   },
   DirectorsCorner: {
+    alt: 'डा. बी. वी. रमणा रेड्डी',
     title: 'निर्देशक का कोना',
     name: 'डा. बी. वी. रमणा रेड्डी',
     quote: [
@@ -48,7 +49,7 @@ const text: Translations = {
       खड़े होने की कला सीख ली है। देश को हर क्षेत्र में मजबूत बनाते हुए विविधता में एकता ही हमारा मंत्र है।`,
       'मैं इस संस्था की वेबसाइट पर आने वाले सभी लोगों का हृदय से स्वागत करता हूं।',
     ],
-    more: 'और पढ़ें →',
+    more: 'और पढ़ें',
   },
   Footer: {
     logo: 'प्रतीक चिन्ह',
@@ -82,6 +83,18 @@ const text: Translations = {
     title: 'नहीं मिला',
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
+  },
+  StudentActivities: {
+    title: 'छात्र गतिविधियाँ',
+    headings: {
+      clubs: 'संघठनें',
+      council: 'छात्र परिषद',
+      events: 'आयोजनाएँ',
+      thoughtLab: 'विचार प्रयोगशाला',
+      nss: 'एनएसएस',
+      ncc: 'एनसीसी',
+    },
+    sections: { clubs: { title: 'संघठनें', more: 'सभी संघठनो को तलाशें' } },
   },
   Unauthorised: {
     title: 'अनधिकृत',

@@ -39,6 +39,7 @@ const text: Translations = {
     readMore: 'Read More',
   },
   DirectorsCorner: {
+    alt: 'Prof. B. V. Ramana Reddy',
     title: 'DIRECTOR’S CORNER',
     name: 'Prof. B. V. Ramana Reddy',
     quote: [
@@ -52,7 +53,7 @@ const text: Translations = {
       sphere.`,
       'I heartily welcome everyone who visits the website of this institution.',
     ],
-    more: 'Read more →',
+    more: 'Read more',
   },
   Footer: {
     logo: 'Logo',
@@ -86,6 +87,18 @@ const text: Translations = {
     title: 'Not Found',
     description: 'Could not find requested resource',
     backHome: 'Return Home',
+  },
+  StudentActivities: {
+    title: 'Student Activities',
+    headings: {
+      clubs: 'Clubs',
+      council: 'Student Council',
+      events: 'Events',
+      thoughtLab: 'Thought Lab',
+      nss: 'NSS',
+      ncc: 'NCC',
+    },
+    sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
   },
   Unauthorised: {
     title: 'Unauthorised',
