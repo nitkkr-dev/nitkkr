@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
-import Spinner from '~/components/spinner';
+import MyLoader from '~/components/spinner';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
 
@@ -15,6 +15,7 @@ const NotificationContent = async ({
   currentCategory: 'academic' | 'tenders' | 'workshops' | 'recruitement';
   locale: string;
 }) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const notifications = [
     ...[...Array<number>(16)].map(() => {
       return {
@@ -109,7 +110,12 @@ export default async function Notifications({
             'lg:px-6 lg:pt-6 xl:px-8 xl:pt-8'
           )}
         >
-          <Suspense key={currentCategory} fallback={<Spinner />}>
+          <Suspense
+            key={currentCategory}
+            fallback={[1, 2, 3, 4, 5, 6].map((i) => (
+              <MyLoader key={i} />
+            ))}
+          >
             <ScrollArea
               type="always"
               className={cn(
