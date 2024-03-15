@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import Heading from '~/components/heading';
 import { ScrollArea } from '~/components/scroll-area';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys } from '~/lib/utils';
+import { cn, getKeys, groupBy } from '~/lib/utils';
 
 export default async function Notifications({
   category: currentCategory,
@@ -22,6 +22,10 @@ export default async function Notifications({
         title:
           'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
         content: '',
+        date: new Date().toLocaleString(locale, {
+          dateStyle: 'long',
+          numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+        }),
         category: 'academic',
       };
     }),
@@ -31,10 +35,19 @@ export default async function Notifications({
         title:
           'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
         content: '',
-        category: 'tenders',
+        date: new Date('12-03-2024').toLocaleString(locale, {
+          dateStyle: 'long',
+          numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+        }),
+        category: 'academic',
       };
     }),
   ];
+
+  const notificationsByDate = groupBy(
+    notifications.filter(({ category }) => category == currentCategory),
+    'date'
+  );
 
   return (
     <article
@@ -79,34 +92,38 @@ export default async function Notifications({
           className={cn(
             `h-full rounded-b-xl bg-background/[0.6]`,
             'lg:w-[65%] lg:rounded-t-xl lg:shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] lg:drop-shadow-2xl',
-            'lg:px-6 lg:pt-6 xl:px-8 xl:pt-8'
+            'lg:px-6 lg:pt-8 xl:px-8'
           )}
         >
           <ScrollArea
             type="always"
             className={cn(
               'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
-              'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
+              'px-3 pt-3 md:px-5 md:pt-5 lg:pl-0 lg:pr-4 lg:pt-0 xl:pr-6'
             )}
           >
-            <ol>
-              {notifications
-                .filter(({ category }) => category == currentCategory)
-                .map(({ id, title }, index) => (
+            <ol className="space-y-2 sm:space-y-4 md:space-y-6">
+              {Array.from(notificationsByDate).map(
+                ([date, notifications], index) => (
                   <li key={index}>
-                    <Link
-                      className={cn(
-                        'inline-flex max-w-full',
-                        'my-2 sm:my-4 xl:my-5'
-                      )}
-                      href={`/${locale}/noticeboard/${id}`}
-                    >
-                      <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                      <p className="truncate">{title}</p>
-                    </Link>
+                    <h5 className="text-primary-700">{date}</h5>
+                    <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
+                      {notifications.map(({ id, title }, index) => (
+                        <li key={index}>
+                          <Link
+                            className={cn('inline-flex max-w-full')}
+                            href={`/${locale}/noticeboard/${id}`}
+                          >
+                            <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
+                            <p className="truncate">{title}</p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                     <hr className="opacity-20" />
                   </li>
-                ))}
+                )
+              )}
             </ol>
           </ScrollArea>
 
