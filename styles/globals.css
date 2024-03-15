@@ -48,7 +48,7 @@
   }
 
   p {
-    @apply mb-2;
+    @apply lg:text-lg;
   }
 }
 
