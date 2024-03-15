@@ -3,10 +3,11 @@ import { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import NotificationButtons from '~/components/notification-buttons';
 import { ScrollArea } from '~/components/scroll-area';
 import MyLoader from '~/components/spinner';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys } from '~/lib/utils';
+import { cn } from '~/lib/utils';
 
 const NotificationContent = async ({
   currentCategory,
@@ -15,7 +16,6 @@ const NotificationContent = async ({
   currentCategory: 'academic' | 'tenders' | 'workshops' | 'recruitement';
   locale: string;
 }) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   const notifications = [
     ...[...Array<number>(16)].map(() => {
       return {
@@ -74,34 +74,7 @@ export default async function Notifications({
       </Heading>
 
       <article className="container h-[384px] rounded-xl md:h-[512px] lg:flex lg:justify-between">
-        <ol
-          className={cn(
-            'flex rounded-t-xl bg-primary-700 p-1 sm:p-2',
-            'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
-          )}
-        >
-          {getKeys(text.categories).map((category, index) => (
-            <li className="flex-auto lg:flex-initial" key={index}>
-              <Link
-                className="flex"
-                href={{ query: { notificationCategory: category } }}
-                scroll={false}
-              >
-                <button
-                  className={cn(
-                    'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50 active:bg-primary-100',
-                    'lg:button lg:border lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
-                    category === currentCategory
-                      ? 'bg-primary-300 lg:bg-primary-700 lg:text-neutral-50'
-                      : 'lg:bg-opacity-60'
-                  )}
-                >
-                  {text.categories[category]}
-                </button>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <NotificationButtons category={currentCategory} text={text} />
 
         <section
           className={cn(
