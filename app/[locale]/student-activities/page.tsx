@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
+import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
@@ -50,6 +52,31 @@ export default async function StudentActivities({
       <Heading className="container" glyphDirection="ltr" href="#clubs">
         <h3 className="my-auto">{text.sections.clubs.title}</h3>
       </Heading>
+
+      <section className="container mb-6 text-center">
+        <section className="h-28 md:h-40">
+          <WorkInProgress locale={locale} />
+        </section>
+
+        <Link href={`/${locale}/student-activities/clubs`}>
+          <button
+            className={cn(
+              'inline-flex items-center gap-1 rounded-md border text-primary-700 md:gap-2',
+              'px-2 py-1 md:px-4 md:py-2'
+            )}
+          >
+            {text.sections.clubs.more}
+            <span className="rotate-90">
+              <FaArrowUp
+                className={cn(
+                  'mx-auto animate-bounce',
+                  'size-2 md:size-3 lg:size-4'
+                )}
+              />
+            </span>
+          </button>
+        </Link>
+      </section>
     </>
   );
 }
