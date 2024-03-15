@@ -7,6 +7,7 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
 const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
+  // eslint-disable-next-line jsx-a11y/alt-text
   <Image
     className={cn('rounded-xl', className)}
     height={682}
