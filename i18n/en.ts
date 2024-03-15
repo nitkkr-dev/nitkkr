@@ -43,7 +43,12 @@ const text: Translations = {
   },
   Notifications: {
     title: 'NOTIFICATIONS',
-    categories: ['Academic', 'Tenders', 'Workshops', 'Recruitement'],
+    categories: {
+      academic: 'Academic',
+      tenders: 'Tenders',
+      workshops: 'Workshops',
+      recruitement: 'Recruitement',
+    },
     viewAll: 'View All',
   },
   NotFound: {

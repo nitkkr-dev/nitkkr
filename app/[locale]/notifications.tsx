@@ -1,10 +1,59 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import NotificationButtons from '~/components/notification-buttons';
 import { ScrollArea } from '~/components/scroll-area';
+import MyLoader from '~/components/spinner';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys } from '~/lib/utils';
+import { cn } from '~/lib/utils';
+
+const NotificationContent = async ({
+  currentCategory,
+  locale,
+}: {
+  currentCategory: 'academic' | 'tenders' | 'workshops' | 'recruitement';
+  locale: string;
+}) => {
+  const notifications = [
+    ...[...Array<number>(16)].map(() => {
+      return {
+        label:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        value: '/',
+        category: 'academic',
+      };
+    }),
+    ...[...Array<number>(4)].map(() => {
+      return {
+        label:
+          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+        value: '/',
+        category: 'tenders',
+      };
+    }),
+  ];
+
+  return (
+    <ol>
+      {notifications
+        .filter(({ category }) => category == currentCategory)
+        .map(({ label, value }, index) => (
+          <li key={index}>
+            <Link
+              className={cn('inline-flex max-w-full', 'my-2 sm:my-4 xl:my-5')}
+              href={`/${locale}/${value}`}
+            >
+              <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
+              <p className="mb-0 truncate lg:text-lg">{label}</p>
+            </Link>
+            <hr className="opacity-20" />
+          </li>
+        ))}
+    </ol>
+  );
+};
 
 export default async function Notifications({
   category: currentCategory,
@@ -14,31 +63,6 @@ export default async function Notifications({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
-
-  const notifications = {
-    academic: {
-      localisedName: text.categories[0],
-      items: [...Array<number>(40)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    tenders: {
-      localisedName: text.categories[1],
-      items: [...Array<number>(4)].map(() => {
-        return {
-          label:
-            'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-          value: '/',
-        };
-      }),
-    },
-    workshops: { localisedName: text.categories[2], items: [] },
-    recruitement: { localisedName: text.categories[3], items: [] },
-  };
 
   return (
     <article
@@ -50,34 +74,7 @@ export default async function Notifications({
       </Heading>
 
       <article className="container h-[384px] rounded-xl md:h-[512px] lg:flex lg:justify-between">
-        <ol
-          className={cn(
-            'flex rounded-t-xl bg-primary-700 p-1 sm:p-2',
-            'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
-          )}
-        >
-          {getKeys(notifications).map((category, index) => (
-            <li className="flex-auto lg:flex-initial" key={index}>
-              <Link
-                className="flex"
-                href={{ query: { notificationCategory: category } }}
-                scroll={false}
-              >
-                <button
-                  className={cn(
-                    'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50',
-                    'lg:button lg:border lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
-                    category === currentCategory
-                      ? 'bg-primary-300 lg:bg-primary-700 lg:text-neutral-50'
-                      : 'lg:bg-opacity-60'
-                  )}
-                >
-                  {notifications[category].localisedName}
-                </button>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <NotificationButtons category={currentCategory} text={text} />
 
         <section
           className={cn(
@@ -86,33 +83,25 @@ export default async function Notifications({
             'lg:px-6 lg:pt-6 xl:px-8 xl:pt-8'
           )}
         >
-          <ScrollArea
-            type="always"
-            className={cn(
-              'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
-              'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
-            )}
+          <Suspense
+            key={currentCategory}
+            fallback={[1, 2, 3, 4, 5, 6].map((i) => (
+              <MyLoader key={i} />
+            ))}
           >
-            <ol>
-              {notifications[currentCategory].items.map(
-                ({ label, value }, index) => (
-                  <li key={index}>
-                    <Link
-                      className={cn(
-                        'inline-flex max-w-full',
-                        'my-2 sm:my-4 xl:my-5'
-                      )}
-                      href={`/${locale}/${value}`}
-                    >
-                      <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                      <p className="mb-0 truncate lg:text-lg">{label}</p>
-                    </Link>
-                    <hr className="opacity-20" />
-                  </li>
-                )
+            <ScrollArea
+              type="always"
+              className={cn(
+                'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
+                'px-1 sm:px-2 md:px-3 lg:pl-0 lg:pr-4 xl:pr-6'
               )}
-            </ol>
-          </ScrollArea>
+            >
+              <NotificationContent
+                currentCategory={currentCategory}
+                locale={locale}
+              />
+            </ScrollArea>
+          </Suspense>
 
           <footer className="mt-auto inline-flex h-[10%] w-full justify-center">
             <Link href={`/${locale}/noticeboard`}>

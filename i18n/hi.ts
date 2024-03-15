@@ -39,7 +39,12 @@ const text: Translations = {
   },
   Notifications: {
     title: 'सूचनाएं',
-    categories: ['शैक्षणिक', 'निविदाएँ', 'कार्यशालाएं', 'नियुक्ति'],
+    categories: {
+      academic: 'शैक्षणिक',
+      tenders: 'निविदाएँ',
+      workshops: 'कार्यशालाएं',
+      recruitement: 'नियुक्ति',
+    },
     viewAll: 'सारा देखें',
   },
   NotFound: {
