@@ -332,6 +332,7 @@ CREATE  TABLE college_website.persons (
 	id                   integer  NOT NULL  ,
 	name                 varchar  NOT NULL  ,
 	institute_email      varchar  NOT NULL  ,
+	role_ids			 smallint[]  NOT NULL  ,
 	CONSTRAINT pk_persons PRIMARY KEY ( id )
 );
   
