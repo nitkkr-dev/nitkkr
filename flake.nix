@@ -11,9 +11,11 @@
       flakey-devShell-pkgs = flakey-devShells.outputs.packages.${system};
     in
     {
-      devShell.${system} = pkgs.mkShell {
+      devShell.${system} = with pkgs; mkShell {
         buildInputs = [
-          pkgs.docker
+          docker
+          nodePackages.prisma
+          openssl
 
           (flakey-devShell-pkgs.default.override { environments = [ "nix" "nextjs" ]; })
           (flakey-devShell-pkgs.vscodium.override {
@@ -21,6 +23,11 @@
             extensions = with pkgs.vscode-extensions; [ prisma.prisma ];
           })
         ];
+        env = {
+          PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
+          PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
+          PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
+        };
       };
     };
 }

@@ -1,13 +1,20 @@
 import type { Metadata } from 'next';
 
+import Footer from '~/app/footer';
+import Header from '~/app/header';
+import { cn } from '~/lib/utils';
 import '~/styles/globals.css';
-import Footer from './footer';
-import Header from './header';
 
 export const metadata: Metadata = {
   title: 'National Institute of Technology, Kurukshetra',
   description: 'Institution of National Importance',
 };
+
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'hi' }];
+}
+
+export const dynamicParams = false;
 
 export default function RootLayout({
   children,
@@ -17,13 +24,19 @@ export default function RootLayout({
   params: { locale: string };
 }) {
   if (params === undefined) return null;
+  const { locale } = params;
 
   return (
-    <html>
-      <body className="flex flex-col">
-        <Header locale={params.locale} />
-        <section className="flex grow">{children}</section>
-        <Footer locale={params.locale} />
+    <html lang={locale}>
+      <body
+        className={cn(
+          'flex flex-col bg-background',
+          'text-xs sm:text-sm md:text-base'
+        )}
+      >
+        <Header locale={locale} />
+        <section className="grow">{children}</section>
+        <Footer locale={locale} />
       </body>
     </html>
   );
