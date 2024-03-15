@@ -15,3 +15,5 @@ export default async function Profile({
     <Unauthorized locale={locale} />
   );
 }
+
+export const runtime = 'nodejs';
