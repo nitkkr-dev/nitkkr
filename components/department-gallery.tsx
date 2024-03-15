@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel';
-import HorsesRunning from './horses-running';
+import Heading from './heading';
 
 export default async function DepartmentGallery({
   locale,
@@ -21,12 +21,11 @@ export default async function DepartmentGallery({
   const text = (await getTranslations(locale)).Departments;
   return (
     <div>
-      <div className="flex items-center space-x-5">
-        <h1 className="text-3xl font-semibold text-primary-500">
+      <Heading glyphDirection={'ltr'} href={''}>
+        <h1 className="mt-5 text-3xl font-semibold text-primary-500">
           {text.sectionTitles[8].toLocaleUpperCase()}
         </h1>
-        <HorsesRunning direction="right" />
-      </div>
+      </Heading>
 
       <Carousel
         className="max-w-x w-full"

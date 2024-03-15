@@ -17,7 +17,7 @@ import {
 } from 'react-icons/md';
 import { SiAdobedreamweaver } from 'react-icons/si';
 
-import HorsesRunning from '~/components/horses-running';
+import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 
 const DEPARTMENTS = [
@@ -45,11 +45,9 @@ export default async function Departments({
 
   return (
     <main className="container mt-64 flex flex-col items-center">
-      <div className="flex">
-        <HorsesRunning direction="left" />
-        <h1 className="text-primary-700"> DEPARTMENTS</h1>
-        <HorsesRunning direction="right" />
-      </div>
+      <Heading className="flex" glyphDirection={'dual'} href={''}>
+        <h1 className="mt-2 text-primary-700"> DEPARTMENTS</h1>
+      </Heading>
       <div className="grid grid-cols-1 gap-x-3 gap-y-4 px-3 md:grid-cols-2 lg:grid-cols-4">
         {DEPARTMENTS.map((dept, i) => (
           <Link

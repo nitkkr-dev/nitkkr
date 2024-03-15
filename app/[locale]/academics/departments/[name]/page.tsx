@@ -4,9 +4,9 @@ import { ImLab } from 'react-icons/im';
 import { MdBadge, MdMilitaryTech } from 'react-icons/md';
 
 import { getTranslations } from '~/i18n/translations';
-import HorsesRunning from '~/components/horses-running';
 import DepartmentGallery from '~/components/department-gallery';
 import Subnav from '~/components/subnav';
+import Heading from '~/components/heading';
 
 export default async function Department({
   params: { locale, name },
@@ -51,10 +51,12 @@ export default async function Department({
       <section className="container bg-background pt-20">
         <section>
           <div className="flex items-center justify-center">
-            <HorsesRunning direction={'left'} />
-            <h2 className="font-semibold text-primary-700 md:text-2xl lg:text-3xl">
-              {text.sectionTitles[0].toLocaleUpperCase()}
-            </h2>
+            <Heading glyphDirection={'rtl'} href={''}>
+              <h2 className="mt-5 font-semibold text-primary-700 md:text-2xl lg:text-3xl">
+                {' '}
+                {text.sectionTitles[0].toLocaleUpperCase()}
+              </h2>
+            </Heading>
           </div>
           <article className="mt-10 flex flex-col items-center rounded-md bg-neutral-50 lg:flex-row">
             <div className="relative w-full flex-1 rounded-md lg:w-1/2 lg:max-w-md">
@@ -119,12 +121,12 @@ export default async function Department({
         </section>
         {/*  hod's message*/}
         <section className="mt-20">
-          <div className="flex items-center">
-            <HorsesRunning direction="left" />
-            <h1 className="text-3xl font-semibold text-primary-700">
+          <Heading glyphDirection={'rtl'} href={''}>
+            <h1 className="mt-5 text-3xl font-semibold text-primary-700">
               {text.sectionTitles[3].toLocaleUpperCase()}
             </h1>
-          </div>
+          </Heading>
+
           <div className="mt-10 rounded-md border border-primary-700 bg-neutral-50 p-4">
             <div className="border-brown flex items-center rounded-md">
               <div className="relative h-52 w-52 rounded-md">
@@ -145,11 +147,11 @@ export default async function Department({
         {/*Programmes */}
         <section className="mt-10">
           <div className="flex items-center justify-evenly">
-            <HorsesRunning direction="left" />
-            <h2 className="pl-5 text-3xl font-semibold text-primary-700">
-              {text.sectionTitles[4].toUpperCase()}
-            </h2>
-            <HorsesRunning direction="right" />
+            <Heading glyphDirection={'dual'} href={''} className="items-center">
+              <h2 className="mt-5 pl-5 text-3xl font-semibold text-primary-700">
+                {text.sectionTitles[4].toUpperCase()}
+              </h2>
+            </Heading>
           </div>
           <section className="mx-auto mt-20 max-w-7xl">
             <div className="grid grid-cols-3 gap-4">
