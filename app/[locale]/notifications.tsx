@@ -102,7 +102,7 @@ export default async function Notifications({
                       href={`/${locale}/noticeboard/${id}`}
                     >
                       <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                      <p className="mb-0 truncate lg:text-lg">{title}</p>
+                      <p className="truncate">{title}</p>
                     </Link>
                     <hr className="opacity-20" />
                   </li>
