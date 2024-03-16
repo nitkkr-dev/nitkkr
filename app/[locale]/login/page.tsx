@@ -1,6 +1,13 @@
-import { redirect } from 'next/navigation';
+import LoginPage from './loginpage';
 
-export default function Login({}: { params: { locale: string } }) {
-  // TODO: Code a login page once design is finalised
-  redirect(`/api/auth/signin`);
+export default function Login({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  return (
+    <div className="flex h-screen grow items-center justify-center">
+      <LoginPage locale={locale} />
+    </div>
+  );
 }
