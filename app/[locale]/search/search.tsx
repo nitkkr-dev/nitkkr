@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import { cn } from '~/lib/utils';
+import { getTranslations } from '~/i18n/translations';
 
 import { Recents, Searchbar, SearchLink } from './search-utils';
 import SearchCard, {
@@ -10,13 +11,16 @@ import SearchCard, {
   type CardContentWithLabel,
 } from './search-card';
 
-export default function Search({
+export default async function Search({
   search,
   category,
+  locale,
 }: {
   search?: string;
   category?: string;
+  locale: string;
 }) {
+  const text = (await getTranslations(locale)).Search;
   const parsedCategory = parseInt(category ?? '0');
   const selectedCategory =
     parsedCategory >= 0 && parsedCategory <= 8 ? parsedCategory : 0;
@@ -197,27 +201,16 @@ export default function Search({
       },
     ],
   ];
-  const categories = [
-    'All Results',
-    'Web Pages',
-    'People',
-    'Documents',
-    'Events',
-    'News',
-    'Courses',
-    'Clubs',
-    'Positions',
-  ];
 
   return (
     <search className="flex max-h-full flex-col gap-4">
-      <Searchbar />
+      <Searchbar placeholder={text.placeholders} />
       <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 drop-shadow-2xl md:pl-12">
         {search ? (
           <>
-            <nav className="pr-4 md:pr-12">
-              <ul className="flex w-full snap-x space-x-3 overflow-auto py-5">
-                {categories.map((category, index) => (
+            <nav className="mr-4 md:mr-12">
+              <ul className="flex w-full snap-x space-x-3 overflow-auto pb-3 pt-5">
+                {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
                     <Link
                       href={{ query: { q: search, c: index } }}
@@ -238,12 +231,12 @@ export default function Search({
                 ))}
               </ul>
             </nav>
-            <section className="max-h-full w-full snap-y overflow-y-scroll pr-4 md:pr-12">
+            <section className="mt-2 max-h-full w-full snap-y overflow-y-auto pr-4 md:pr-12">
               {selectedCategory ? (
                 <Suspense fallback={<h5>loader</h5>}>
                   {/* {search} */}
                   <header className="flex justify-between text-primary-700">
-                    <h4 className="">{categories[selectedCategory]}</h4>
+                    <h4 className="">{text.filters[selectedCategory]}</h4>
                   </header>
                   <ul className="mb-5 space-y-3">
                     {results[selectedCategory - 1].map(
@@ -268,17 +261,17 @@ export default function Search({
                 <Suspense fallback={<h5>loader</h5>}>
                   {/* {search} */}
                   <ol className="mb-5 space-y-5">
-                    {categories.slice(1).map((category, index) => (
+                    {text.filters.slice(1).map((category, index) => (
                       <li key={index} className="snap-start">
                         <header className="flex justify-between text-primary-700">
-                          <h4 className="">{category}</h4>
-                          <h6>
+                          <h4>{category}</h4>
+                          <h5>
                             <Link
                               href={{ query: { q: search, c: index + 1 } }}
                               replace={true}
                               className="inline-flex hover:underline"
                             >
-                              VIEW ALL{' '}
+                              {text.viewAll}
                               <span className="rotate-90">
                                 <FaArrowUp
                                   className="mx-auto inline-block animate-bounce"
@@ -286,7 +279,7 @@ export default function Search({
                                 />
                               </span>
                             </Link>
-                          </h6>
+                          </h5>
                         </header>
                         <ul className="space-y-3">
                           {results[index].map(
@@ -312,10 +305,10 @@ export default function Search({
           </>
         ) : (
           <>
-            <Recents />
-            <section className="my-12 flex max-w-screen-xl flex-col justify-between gap-10 pr-4 md:flex-row md:pr-12">
+            <Recents title={text.recents} clearButton={text.clearRecents} />
+            <section className="my-12 mr-4 flex max-w-screen-xl flex-col justify-between gap-10 md:mr-12 md:flex-row">
               <nav>
-                <h5 className="text-primary-700">Most searched at NITKKR</h5>
+                <h5 className="text-primary-700">{text.mostSearched}</h5>
                 <ol>
                   {links.mostSearched.map(({ label, value }, index) => (
                     <li key={index}>
@@ -325,7 +318,7 @@ export default function Search({
                 </ol>
               </nav>
               <nav>
-                <h5 className="text-primary-700">Student Quick Links</h5>
+                <h5 className="text-primary-700">{text.studentQuickLinks}</h5>
                 <ol>
                   {links.studentLinks.map(({ label, value }, index) => (
                     <li key={index}>
@@ -335,7 +328,7 @@ export default function Search({
                 </ol>
               </nav>
               <nav>
-                <h5 className="text-primary-700">Faculty Quick Links</h5>
+                <h5 className="text-primary-700">{text.studentQuickLinks}</h5>
                 <ol>
                   {links.facultyLinks.map(({ label, value }, index) => (
                     <li key={index}>
