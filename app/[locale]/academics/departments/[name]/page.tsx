@@ -40,7 +40,7 @@ export default async function Department({
         locale={locale}
       />
       <section className="container bg-background">
-        <section id="#about">
+        <section id="#about" className="mt-20">
           <div className="flex items-center justify-center">
             <Heading glyphDirection={'rtl'} href={''}>
               <h2 className="mt-5 font-semibold text-primary-700 md:text-2xl lg:text-3xl">
@@ -48,7 +48,7 @@ export default async function Department({
               </h2>
             </Heading>
           </div>
-          <article className="flex h-[481px] flex-col items-stretch justify-center rounded-md bg-neutral-50 lg:flex-row">
+          <article className="flex h-[300px] flex-col items-stretch justify-center rounded-md bg-neutral-50 lg:flex-row">
             <div className="relative h-full w-full lg:w-1/2">
               <Image
                 width={300}
@@ -60,16 +60,6 @@ export default async function Department({
             </div>
             <div className="mt-4 flex h-full flex-col justify-center px-4 lg:w-1/2">
               <p className="overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Expedita distinctio quam ducimus necessitatibus saepe nesciunt
-                animi perspiciatis pariatur doloremque reprehenderit? Laboriosam
-                assumenda, culpa consectetur ab, ipsam ducimus dolor magni
-                commodi omnis aspernatur expedita, neque distinctio. Velit vel
-                sed necessitatibus exercitationem, porro, voluptate omnis amet,
-                rem aliquid incidunt quam! Voluptas commodi eum quod deleniti
-                similique asperiores quam quae debitis, quo consequatur
-                incidunt, qui animi maxime possimus iusto error obcaecati
-                quibusdam pariatur! Ipsam aut earum illo sunt saepe, a nobis
                 quisquam quam exercitationem repellat unde nulla cupiditate,
                 quos modi animi quis. Fuga labore aliquam tempora expedita est
                 nesciunt obcaecati nemo hic ipsa dolores atque, error, alias
@@ -91,7 +81,7 @@ export default async function Department({
         {/*  Mission and Vision*/}
         <section
           id="#missionAndVision"
-          className="mt-20 flex items-stretch rounded-md"
+          className="mt-20 flex h-[300px] items-stretch rounded-md"
         >
           <article className="flex w-1/2 flex-col justify-center rounded-md px-4">
             <h2>{text.sectionTitles[1].toLocaleUpperCase()}</h2>

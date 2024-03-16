@@ -28,16 +28,17 @@ export default function Subnav({
       setIsSticky(yOffset > 200);
     };
     const handleClick = () => {
-      setIsClicked(!isClicked);
+      setIsClicked(true);
     };
 
     window.addEventListener('scroll', checkScrollTop);
     window.addEventListener('click', handleClick);
+
     return () => {
       window.removeEventListener('scroll', checkScrollTop);
       window.removeEventListener('click', handleClick);
     };
-  });
+  }, [isClicked]);
 
   return (
     <header className={cn('relative w-full ', !isClicked && 'h-[481px]')}>
