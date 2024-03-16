@@ -6,12 +6,6 @@
 # testing
 /coverage
 
-# database
-/prisma/db.sqlite
-/prisma/db.sqlite-journal
-# TODO: remove next line once moving to prod
-prisma/generated/client/
-
 # next.js
 /.next/
 /out/

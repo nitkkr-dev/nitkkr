@@ -14,20 +14,10 @@
       devShell.${system} = with pkgs; mkShell {
         buildInputs = [
           docker
-          nodePackages.prisma
-          openssl
 
           (flakey-devShell-pkgs.default.override { environments = [ "nix" "nextjs" ]; })
-          (flakey-devShell-pkgs.vscodium.override {
-            environments = [ "nix" "nextjs" ];
-            extensions = with pkgs.vscode-extensions; [ prisma.prisma ];
-          })
+          (flakey-devShell-pkgs.vscodium.override { environments = [ "nix" "nextjs" ]; })
         ];
-        env = {
-          PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
-          PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
-          PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
-        };
       };
     };
 }
