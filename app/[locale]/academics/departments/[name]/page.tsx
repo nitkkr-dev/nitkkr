@@ -146,12 +146,12 @@ export default async function Department({
           </Heading>
           <section className="] mx-auto grid grid-cols-3 gap-4">
             <div className="flex flex-col">
-              <button className="flex h-[60px] items-center justify-center rounded-t-md bg-primary-700 px-4 py-2 text-neutral-50">
+              <button className="flex h-[60px] items-center justify-center rounded-t-md bg-primary-300 px-4 py-2 text-neutral-50">
                 <h1 className="my-auto text-lg">UNDER GRADUATE</h1>
               </button>
-              <div className="flex items-center space-x-1 text-primary-700">
+              <div className="flex items-center justify-between space-x-1 text-primary-300">
                 <p>B. Tech</p>{' '}
-                <div className="w-[80%] border-b border-l-primary-700" />
+                <div className="w-[85%] border-b border-l-primary-700" />
               </div>
               <div className="flex flex-col space-y-4 ">
                 <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-300 hover:bg-primary-300 hover:text-neutral-50">
@@ -169,9 +169,9 @@ export default async function Department({
               <button className="flex h-[60px] items-center justify-center rounded-t-md bg-primary-700 px-4 py-2 text-neutral-50">
                 <h1 className="my-auto text-lg">POST GRADUATE</h1>
               </button>
-              <div className="flex items-center space-x-1 text-primary-700">
+              <div className="flex items-center justify-between space-x-1 text-primary-700">
                 <p>M. Tech</p>{' '}
-                <div className="w-[80%] border-b border-l-primary-700" />
+                <div className="w-[84%] border-b border-l-primary-700" />
               </div>
               <div className="flex flex-col space-y-4">
                 <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-700 hover:bg-primary-700 hover:text-neutral-50">
@@ -186,9 +186,9 @@ export default async function Department({
               <button className="flex h-[60px] items-center justify-center rounded-t-md bg-primary-900 px-4 py-2 text-neutral-50">
                 <h1 className="my-auto text-lg">DOCTORAL</h1>
               </button>
-              <div className="flex items-center space-x-1 text-primary-700">
+              <div className="flex items-center justify-between space-x-1 text-primary-700">
                 <p>Ph. D</p>{' '}
-                <div className="w-[80%] border-b border-l-primary-700" />
+                <div className="w-[89%] border-b border-l-primary-700" />
               </div>
               <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-900 hover:bg-primary-900 hover:text-neutral-50">
                 More Information
