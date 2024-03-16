@@ -39,9 +39,9 @@ const text: Translations = {
     title: 'सूचनाएं',
     categories: {
       academic: 'शैक्षणिक',
-      tenders: 'निविदाएँ',
-      workshops: 'कार्यशालाएं',
-      recruitement: 'नियुक्ति',
+      tender: 'निविदाएँ',
+      workshop: 'कार्यशालाएं',
+      recruitment: 'नियुक्ति',
     },
     viewAll: 'सारा देखें',
   },
