@@ -8,11 +8,7 @@ export default function Home({
 }: {
   params: { locale: string };
   searchParams: {
-    notificationCategory?:
-      | 'academic'
-      | 'tenders'
-      | 'workshops'
-      | 'recruitement';
+    notificationCategory?: 'academic' | 'tender' | 'workshop' | 'recruitment';
   };
 }) {
   return (

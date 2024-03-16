@@ -5,38 +5,30 @@ import Heading from '~/components/heading';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
+import { db } from '~/server/db';
 
 export default async function Notifications({
   category: currentCategory,
   locale,
 }: {
-  category: 'academic' | 'tenders' | 'workshops' | 'recruitement';
+  category: 'academic' | 'tender' | 'workshop' | 'recruitment';
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
 
-  let randomDate = new Date();
-  const notifications = [...Array<number>(64)].map((_, index) => {
-    randomDate =
-      index % Math.floor(Math.random() * 4) === 0
-        ? new Date(Math.random() * randomDate.getTime())
-        : randomDate;
-    return {
-      id: index,
-      title:
-        'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-      content: '',
-      date: randomDate.toLocaleString(locale, {
+  const notifications = (await db.query.notifications.findMany()).map(
+    (notification) => ({
+      ...notification,
+      createdAt: notification.createdAt.toLocaleString(locale, {
         dateStyle: 'long',
         numberingSystem: locale === 'hi' ? 'deva' : 'roman',
       }),
-      category: currentCategory,
-    };
-  });
+    })
+  );
 
   const notificationsByDate = groupBy(
     notifications.filter(({ category }) => category == currentCategory),
-    'date'
+    'createdAt'
   );
 
   return (
@@ -96,9 +88,9 @@ export default async function Notifications({
           >
             <ol className="space-y-2 sm:space-y-4 md:space-y-6">
               {Array.from(notificationsByDate).map(
-                ([date, notifications], index) => (
+                ([createdAt, notifications], index) => (
                   <li key={index}>
-                    <h5 className="text-primary-700">{date}</h5>
+                    <h5 className="text-primary-700">{createdAt as string}</h5>
                     <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
                       {notifications.map(({ id, title }, index) => (
                         <li key={index}>

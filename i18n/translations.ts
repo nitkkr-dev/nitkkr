@@ -34,9 +34,9 @@ export interface Translations {
     title: string;
     categories: {
       academic: string;
-      tenders: string;
-      workshops: string;
-      recruitement: string;
+      tender: string;
+      workshop: string;
+      recruitment: string;
     };
     viewAll: string;
   };
