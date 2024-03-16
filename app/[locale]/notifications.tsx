@@ -15,34 +15,24 @@ export default async function Notifications({
 }) {
   const text = (await getTranslations(locale)).Notifications;
 
-  const notifications = [
-    ...[...Array<number>(16)].map((_, index) => {
-      return {
-        id: index,
-        title:
-          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-        content: '',
-        date: new Date().toLocaleString(locale, {
-          dateStyle: 'long',
-          numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-        }),
-        category: 'academic',
-      };
-    }),
-    ...[...Array<number>(4)].map((_, index) => {
-      return {
-        id: index,
-        title:
-          'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
-        content: '',
-        date: new Date('12-03-2024').toLocaleString(locale, {
-          dateStyle: 'long',
-          numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-        }),
-        category: 'academic',
-      };
-    }),
-  ];
+  let randomDate = new Date();
+  const notifications = [...Array<number>(64)].map((_, index) => {
+    randomDate =
+      index % Math.floor(Math.random() * 4) === 0
+        ? new Date(Math.random() * randomDate.getTime())
+        : randomDate;
+    return {
+      id: index,
+      title:
+        'Information regarding specialization for the post of Technical Assistant (Ref.:Advt.No.03/2023 No.129)',
+      content: '',
+      date: randomDate.toLocaleString(locale, {
+        dateStyle: 'long',
+        numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+      }),
+      category: currentCategory,
+    };
+  });
 
   const notificationsByDate = groupBy(
     notifications.filter(({ category }) => category == currentCategory),
