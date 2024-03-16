@@ -1,10 +1,18 @@
 'use client';
 
 import { Content, Overlay, Portal, Root } from '@radix-ui/react-dialog';
-import { AnimatePresence, motion } from 'framer-motion';
+import {
+  animate,
+  AnimatePresence,
+  type AnimationSequence,
+  motion,
+} from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
+import { cn } from '~/lib/utils';
+
 export interface DialogProps {
+  shouldCenter?: boolean;
   disableClickOutside?: boolean;
   className?: string;
   children: React.ReactNode;
@@ -14,22 +22,36 @@ export function Dialog({
   disableClickOutside,
   className,
   children,
+  shouldCenter = true,
 }: DialogProps) {
   const router = useRouter();
+  const sequence = [
+    ['#content', { opacity: 0, scale: 0.95 }, { duration: 0.1 }],
+    ['#overlay', { opacity: 0 }, { duration: 0.05 }],
+  ] as AnimationSequence;
 
   return (
-    <Root open onOpenChange={() => router.back()}>
-      <AnimatePresence>
+    <Root
+      open
+      onOpenChange={() => void animate(sequence).then(() => router.back())}
+      key="root"
+    >
+      <AnimatePresence mode="popLayout">
         <Portal forceMount>
           <Overlay asChild>
             <motion.div
               className="bg-main-950/20 fixed inset-0 z-modal backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              id="overlay"
             />
           </Overlay>
-          <div className="fixed inset-0 z-modal flex h-svh w-svw flex-col items-center justify-center">
+          <div
+            className={cn(
+              'fixed inset-0 z-modal flex h-svh w-svw flex-col items-center',
+              shouldCenter && 'justify-center'
+            )}
+          >
             <Content
               asChild
               onPointerDownOutside={(e) => {
@@ -38,9 +60,9 @@ export function Dialog({
             >
               <motion.div
                 className={className}
-                initial={{ y: 4, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 2, opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                id="content"
               >
                 {children}
               </motion.div>

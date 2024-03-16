@@ -7,7 +7,10 @@ export default function Page({
   searchParams: { q: string; c: string };
 }) {
   return (
-    <Dialog className="container mb-12 mt-20 grow overflow-auto">
+    <Dialog
+      className="container mb-12 mt-20 overflow-auto"
+      shouldCenter={false}
+    >
       <Search search={query} category={category} />
     </Dialog>
   );

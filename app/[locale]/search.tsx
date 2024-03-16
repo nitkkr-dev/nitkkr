@@ -1,5 +1,6 @@
 'use client';
 
+import { animate, type AnimationSequence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
@@ -19,8 +20,12 @@ export default function SearchButton({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const sequence = [
+    ['#content', { opacity: 0, scale: 0.95 }, { duration: 0.1 }],
+    ['#overlay', { opacity: 0 }, { duration: 0.05 }],
+  ] as AnimationSequence;
   useCtrl('k', () => {
-    if (pathname === href) router.back();
+    if (pathname === href) void animate(sequence).then(() => router.back());
     else router.push(href, { scroll: false });
   });
 
