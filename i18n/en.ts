@@ -108,6 +108,13 @@ const text: Translations = {
     description:
       'This page is currently being worked on. Please visit another time',
   },
+  LoginText: {
+    title: 'Sign In',
+    enterEmail: 'Enter Your Email',
+    continueButton: 'Continue',
+    orText: 'OR',
+    signInWithGoogle: 'Sign in with Google',
+  },
 };
 
 export default text;

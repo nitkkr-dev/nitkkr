@@ -90,4 +90,11 @@ export interface Translations {
   };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
+  LoginText: {
+    title: string;
+    enterEmail: string;
+    continueButton: string;
+    orText: string;
+    signInWithGoogle: string;
+  };
 }
