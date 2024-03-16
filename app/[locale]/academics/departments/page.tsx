@@ -44,7 +44,7 @@ export default async function Departments({
   const text = (await getTranslations(locale)).Departments;
 
   return (
-    <main className="container mt-64 flex flex-col items-center">
+    <main className="container mb-5 mt-20 flex flex-col items-center">
       <Heading className="flex" glyphDirection={'dual'} href={''}>
         <h1 className="mt-2 text-primary-700"> DEPARTMENTS</h1>
       </Heading>
@@ -53,7 +53,7 @@ export default async function Departments({
           <Link
             key={i}
             href={`/${locale}/academics/departments/${text.departmentTitles[i]}`}
-            className="group flex h-16 items-center space-x-2 rounded-md p-1 shadow-lg hover:bg-primary-700"
+            className="group flex h-16 max-w-48 items-center space-x-2 rounded-md bg-neutral-50 px-1 py-2 shadow-lg hover:bg-primary-700"
           >
             <div className="flex-shrink-0 rounded-md bg-primary-700 p-2 text-background group-hover:bg-background group-hover:text-primary-700">
               {dept}

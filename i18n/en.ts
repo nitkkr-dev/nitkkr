@@ -34,7 +34,7 @@ const text: Translations = {
       'Faculty And More',
       'Laboratories',
       'Student Achivements',
-      'Galary',
+      'Gallery',
     ],
     readMore: 'Read More',
   },

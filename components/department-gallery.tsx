@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 import { getTranslations } from '~/i18n/translations';
 
-import { Card, CardContent } from './ui/card';
+import { Card, CardFooter } from './ui/card';
 import {
   Carousel,
   CarouselContent,
@@ -20,7 +20,7 @@ export default async function DepartmentGallery({
 }) {
   const text = (await getTranslations(locale)).Departments;
   return (
-    <div>
+    <section id="#gallery" className="container">
       <Heading glyphDirection={'ltr'} href={''}>
         <h1 className="mt-5 text-3xl font-semibold text-primary-500">
           {text.sectionTitles[8].toLocaleUpperCase()}
@@ -28,7 +28,7 @@ export default async function DepartmentGallery({
       </Heading>
 
       <Carousel
-        className="max-w-x w-full"
+        className="max-w-x my-5 w-full"
         opts={{
           align: 'start',
           loop: true,
@@ -37,25 +37,22 @@ export default async function DepartmentGallery({
         <CarouselContent>
           {Array.from({ length: 7 }).map((_, idx) => (
             <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/3">
-              <div className="group">
-                <Card className="w-full rounded-md border-primary-700 hover:border ">
-                  <Image
-                    alt="Computer Science Conference"
-                    className="h-3/5 w-full rounded-md object-cover "
-                    height={150}
-                    src="https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130"
-                    style={{
-                      aspectRatio: '200/150',
-                      objectFit: 'cover',
-                    }}
-                    width={200}
-                  />
-                  <CardContent>
-                    <p className="mt-5 group-hover:text-primary-500">
+              <div className="group relative">
+                {/* this url will be replaced url from database, thus have used inline style */}
+                <Card
+                  className="w-full rounded-md border-none"
+                  style={{
+                    backgroundImage: `url('https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <CardFooter className="relative z-10 h-64 opacity-0 transition-opacity duration-300 hover:bg-neutral-900 hover:bg-opacity-25 group-hover:opacity-100">
+                    <h5 className="mt-auto text-neutral-50">
                       Computer Science Students Hold National conference of CS
                       In NIT KKR...
-                    </p>
-                  </CardContent>
+                    </h5>
+                  </CardFooter>
                 </Card>
               </div>
             </CarouselItem>
@@ -70,6 +67,12 @@ export default async function DepartmentGallery({
           variant={'ghost'}
         />
       </Carousel>
-    </div>
+      <Link
+        href="/gallery"
+        className="mx-[32vw] mb-5 block w-fit rounded-md border border-primary-700 text-center hover:text-background"
+      >
+        <p className="px-2 pt-1 text-primary-700">View Full Gallery &rarr;</p>
+      </Link>
+    </section>
   );
 }
