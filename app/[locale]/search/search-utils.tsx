@@ -7,7 +7,13 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { type IconBaseProps } from 'react-icons/lib';
 import { useDebounceCallback } from 'usehooks-ts';
 
-export function Recents() {
+export function Recents({
+  title,
+  clearButton,
+}: {
+  title: string;
+  clearButton: string;
+}) {
   const [recents, setRecents] = useState<{ value: string; label: string }[]>(
     JSON.parse(localStorage.getItem('recentSearches') ?? '[]') as {
       value: string;
@@ -20,14 +26,14 @@ export function Recents() {
     setRecents([]);
   };
   return (
-    <section className="mt-6 pr-4 md:mt-12 md:pr-12">
+    <section className="mr-4 mt-6 md:mr-12 md:mt-12">
       <header className="flex items-center">
-        <h5 className="grow text-primary-700">Recent Searches</h5>
+        <h5 className="grow text-primary-700">{title}</h5>
         <button
           className="rounded-md  p-2 font-semibold text-primary-700 hover:bg-primary-100"
           onClick={clearRecents}
         >
-          Clear recents
+          {clearButton}
         </button>
       </header>
 
@@ -45,13 +51,13 @@ export function Recents() {
   );
 }
 
-export function Searchbar() {
+export function Searchbar({ placeholder }: { placeholder: string }) {
   const router = useRouter();
 
   return (
     <input
       className="min-w-full rounded-lg border border-primary-700 px-4 py-2 focus:outline-none"
-      placeholder="Quick Search..."
+      placeholder={placeholder}
       onChange={useDebounceCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
           router.replace(`?q=${e.target.value}`, { scroll: false });

@@ -54,6 +54,26 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  Search: {
+    placeholders: 'Quick Search...',
+    filters: [
+      'All Results',
+      'Web Pages',
+      'People',
+      'Documents',
+      'Events',
+      'News',
+      'Courses',
+      'Clubs',
+      'Positions',
+    ],
+    recents: 'Recent Searches',
+    clearRecents: 'clear recents',
+    mostSearched: 'Most Searched at NITKKR',
+    studentQuickLinks: 'Student Quick Links',
+    facultyQuickLinks: 'Faculty Quick Links',
+    viewAll: 'View All',
+  },
   StudentActivities: {
     title: 'Student Activities',
     headings: {

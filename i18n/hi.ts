@@ -50,6 +50,26 @@ const text: Translations = {
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
   },
+  Search: {
+    placeholders: 'त्वरित खोज...',
+    filters: [
+      'सभी परिणाम',
+      'वेब पृष्ठ',
+      'लोग',
+      'दस्तावेज़',
+      'आयोजन',
+      'समाचार',
+      'पाठ्यक्रम',
+      'क्लब',
+      'पद',
+    ],
+    recents: 'ताज़ा खोजें',
+    clearRecents: 'हाल की खोजें साफ़ करें',
+    mostSearched: 'NITKKR की सार्वधिक खोजें',
+    studentQuickLinks: 'छात्र त्वरित लिंक',
+    facultyQuickLinks: 'संकाय त्वरित लिंक',
+    viewAll: 'सारा देखें',
+  },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
     headings: {

@@ -41,6 +41,16 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  Search: {
+    placeholders: string;
+    filters: string[];
+    recents: string;
+    clearRecents: string;
+    mostSearched: string;
+    studentQuickLinks: string;
+    facultyQuickLinks: string;
+    viewAll: string;
+  };
   StudentActivities: {
     title: string;
     headings: {
