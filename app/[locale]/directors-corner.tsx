@@ -72,8 +72,8 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
             </Link>
             <br />
             <br />
+            {text.quote[1]}
           </p>
-          <p className="grow lg:text-xl">{text.quote[1]}</p>
         </blockquote>
       </article>
     </article>
