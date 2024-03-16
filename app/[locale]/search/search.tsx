@@ -5,7 +5,10 @@ import { FaArrowUp } from 'react-icons/fa6';
 import { cn } from '~/lib/utils';
 
 import { Recents, Searchbar, SearchLink } from './search-utils';
-import SearchCard, { type CardContent } from './search-card';
+import SearchCard, {
+  type CardContent,
+  type CardContentWithLabel,
+} from './search-card';
 
 export default function Search({
   search,
@@ -37,7 +40,7 @@ export default function Search({
       { label: 'Dr. Vikram Singh', value: '/faculty/0' },
     ],
   };
-  const results: (CardContent & { label: string; value: string })[][] = [
+  const results: CardContentWithLabel[][] = [
     [
       {
         heading: 'NIT Departments',
@@ -248,8 +251,12 @@ export default function Search({
                         <li key={index}>
                           <SearchLink value={value} label={label}>
                             <SearchCard
-                              index={selectedCategory - 1}
-                              cardContent={result}
+                              cardContent={
+                                {
+                                  index,
+                                  ...result,
+                                } as CardContent
+                              }
                             />
                           </SearchLink>
                         </li>
@@ -287,8 +294,9 @@ export default function Search({
                               <li key={i}>
                                 <SearchLink value={value} label={label}>
                                   <SearchCard
-                                    index={index}
-                                    cardContent={result}
+                                    cardContent={
+                                      { index, ...result } as CardContent
+                                    }
                                   />
                                 </SearchLink>
                               </li>
