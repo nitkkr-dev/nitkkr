@@ -253,7 +253,7 @@ export default function Search({
                             <SearchCard
                               cardContent={
                                 {
-                                  index,
+                                  index: selectedCategory - 1,
                                   ...result,
                                 } as CardContent
                               }
