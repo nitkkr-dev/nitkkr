@@ -65,7 +65,7 @@ const text: Translations = {
     ],
     recents: 'ताज़ा खोजें',
     clearRecents: 'हाल की खोजें साफ़ करें',
-    mostSearched: 'NITKKR की सार्वधिक खोजें',
+    mostSearched: 'एनआईटी की सर्वाधिक खोजें',
     studentQuickLinks: 'छात्र त्वरित लिंक',
     facultyQuickLinks: 'संकाय त्वरित लिंक',
     viewAll: 'सारा देखें',

@@ -209,7 +209,7 @@ export default async function Search({
         {search ? (
           <>
             <nav className="mr-4 md:mr-12">
-              <ul className="flex w-full snap-x space-x-3 overflow-auto pb-3 pt-5">
+              <ul className="flex w-full snap-x space-x-2 overflow-auto pb-3 pt-5 sm:space-x-3">
                 {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
                     <Link
@@ -219,7 +219,8 @@ export default async function Search({
                     >
                       <button
                         className={cn(
-                          'button inline-block whitespace-nowrap rounded-md border p-2 text-center font-semibold',
+                          'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
+                          'sm:rounded-md sm:p-2',
                           index === selectedCategory
                             ? 'bg-primary-700 text-neutral-50'
                             : 'bg-opacity-60'
