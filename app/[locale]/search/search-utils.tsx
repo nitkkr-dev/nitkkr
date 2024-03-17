@@ -25,7 +25,7 @@ export function Recents({
     localStorage.removeItem('recentSearches');
     setRecents([]);
   };
-  return (
+  return recents.length ? (
     <section className="mr-4 mt-6 md:mr-12 md:mt-12">
       <header className="flex items-center">
         <h5 className="grow text-primary-700">{title}</h5>
@@ -48,7 +48,7 @@ export function Recents({
         )}
       </ol>
     </section>
-  );
+  ) : null;
 }
 
 export function Searchbar({ placeholder }: { placeholder: string }) {
