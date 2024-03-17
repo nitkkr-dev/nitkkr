@@ -205,7 +205,7 @@ export default async function Search({
   return (
     <search className="flex max-h-full flex-col gap-4">
       <Searchbar placeholder={text.placeholders} />
-      <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 drop-shadow-2xl md:pl-12">
+      <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 md:pl-12">
         {search ? (
           <>
             <nav className="mr-4 md:mr-12">
@@ -214,7 +214,8 @@ export default async function Search({
                   <li key={index} className="snap-start">
                     <Link
                       href={{ query: { q: search, c: index } }}
-                      replace={true}
+                      replace
+                      prefetch
                     >
                       <button
                         className={cn(
@@ -231,7 +232,7 @@ export default async function Search({
                 ))}
               </ul>
             </nav>
-            <section className="mt-2 max-h-full w-full snap-y overflow-y-auto pr-4 md:pr-12">
+            <section className="mt-2 max-h-full w-full overflow-y-auto pr-4 md:pr-12">
               {selectedCategory ? (
                 <Suspense fallback={<h5>loader</h5>}>
                   {/* {search} */}
@@ -262,7 +263,7 @@ export default async function Search({
                   {/* {search} */}
                   <ol className="mb-5 space-y-5">
                     {text.filters.slice(1).map((category, index) => (
-                      <li key={index} className="snap-start">
+                      <li key={index}>
                         <header className="flex justify-between text-primary-700">
                           <h4>{category}</h4>
                           <h5>

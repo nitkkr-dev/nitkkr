@@ -1,10 +1,11 @@
 'use client';
 
-import { animate, type AnimationSequence } from 'framer-motion';
+import { animate } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
+import { sequence } from '~/components/dialog';
 import { Button } from '~/components/ui';
 import { useCtrl } from '~/lib/hooks';
 import { cn } from '~/lib/utils';
@@ -20,10 +21,7 @@ export default function SearchButton({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const sequence = [
-    ['#content', { opacity: 0, scale: 0.95 }, { duration: 0.1 }],
-    ['#overlay', { opacity: 0 }, { duration: 0.05 }],
-  ] as AnimationSequence;
+
   useCtrl('k', () => {
     if (pathname === href) void animate(sequence).then(() => router.back());
     else router.push(href, { scroll: false });
@@ -32,7 +30,7 @@ export default function SearchButton({
   return (
     <>
       <Button asChild className="xl:hidden" variant="icon">
-        <Link href={href} scroll={false}>
+        <Link href={href} prefetch scroll={false}>
           <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
         </Link>
       </Button>
@@ -45,7 +43,7 @@ export default function SearchButton({
         )}
         variant="secondary"
       >
-        <Link href={href} scroll={false}>
+        <Link href={href} prefetch scroll={false}>
           <FaMagnifyingGlass size={16} />
           <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
             {text}
