@@ -44,9 +44,11 @@ export default function Slideshow({
                   src={image}
                 />
                 {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 min-w-full bg-gradient-to-b from-transparent to-neutral-800 py-6">
-                    <h4 className="text-neutral-100">{title}</h4>
-                    <p className="text-neutral-100">{subtitle}</p>
+                  <figcaption className="absolute inset-x-0 bottom-0 min-w-full bg-gradient-to-b from-transparent to-neutral-800 py-6">
+                    <article className="container">
+                      <h4 className="pl-2 text-neutral-100">{title}</h4>
+                      <p className="pl-2 text-neutral-100">{subtitle}</p>
+                    </article>
                   </figcaption>
                 )}
               </figure>
@@ -54,13 +56,13 @@ export default function Slideshow({
           ))}
         </CarouselContent>
 
-        <section className="container absolute inset-0 top-[50%] flex h-0 min-w-full justify-between">
+        <section className="container absolute inset-0 top-[50%] flex h-0 justify-between">
           <CarouselPrevious
-            className="static ml-4 opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0 md:ml-6 xl:ml-8"
+            className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
             variant={'ghost'}
           />
           <CarouselNext
-            className="static mr-4 opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0 md:mr-6 xl:mr-8"
+            className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
             variant={'ghost'}
           />
         </section>
