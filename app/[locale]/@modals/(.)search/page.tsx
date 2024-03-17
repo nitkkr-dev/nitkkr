@@ -10,7 +10,7 @@ export default function Page({
 }) {
   return (
     <Dialog
-      className="container mb-12 mt-20 overflow-auto"
+      className="container mb-12 mt-20 overflow-y-auto"
       shouldCenter={false}
     >
       <Search search={query} category={category} locale={locale} />

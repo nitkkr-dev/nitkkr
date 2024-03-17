@@ -17,6 +17,10 @@ export interface DialogProps {
   className?: string;
   children: React.ReactNode;
 }
+export const sequence = [
+  ['#content', { opacity: 0, scale: 0.97 }, { duration: 0.025 }],
+  ['#overlay', { opacity: 0 }, { duration: 0.025 }],
+] as AnimationSequence;
 
 export function Dialog({
   disableClickOutside,
@@ -25,10 +29,6 @@ export function Dialog({
   shouldCenter = true,
 }: DialogProps) {
   const router = useRouter();
-  const sequence = [
-    ['#content', { opacity: 0, scale: 0.95 }, { duration: 0.1 }],
-    ['#overlay', { opacity: 0 }, { duration: 0.05 }],
-  ] as AnimationSequence;
 
   return (
     <Root
@@ -43,6 +43,7 @@ export function Dialog({
               className="bg-main-950/20 fixed inset-0 z-modal backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              transition={{ duration: 0.025 }}
               id="overlay"
             />
           </Overlay>
@@ -60,7 +61,8 @@ export function Dialog({
             >
               <motion.div
                 className={className}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.025 }}
                 animate={{ opacity: 1, scale: 1 }}
                 id="content"
               >

@@ -89,14 +89,14 @@ const SearchCard: React.FC<{
   switch (cardContent.index) {
     case 0:
       return (
-        <article className="w-full rounded-lg bg-shade-light p-2">
+        <article className="w-full rounded-lg bg-shade-light p-3 md:px-4">
           <h5 className="text-primary-300">{cardContent.heading}</h5>
           <p className="text-neutral-600">{cardContent.content}</p>
         </article>
       );
     case 1:
       return (
-        <article className="rounded-lg bg-shade-light p-2 sm:grid-cols-8 md:grid">
+        <article className="rounded-lg bg-shade-light p-3 sm:grid-cols-8 md:grid md:px-4">
           <header className="col-span-3 flex items-center gap-2">
             <Image
               src={cardContent.image}
@@ -129,14 +129,14 @@ const SearchCard: React.FC<{
       );
     case 2:
       return (
-        <article className="flex w-full items-center gap-2 rounded-lg bg-shade-light p-2">
+        <article className="flex w-full items-center gap-2 rounded-lg bg-shade-light p-3 md:px-4">
           <RxDownload className="inline-block h-14 min-w-14 p-4" />
           <p className=" text-neutral-600">{cardContent.content}</p>
         </article>
       );
     case 3:
       return (
-        <article className="flex w-full items-center gap-8 rounded-lg bg-shade-light p-2">
+        <article className="flex w-full items-center gap-8 rounded-lg bg-shade-light p-3 md:px-4">
           <Image
             src={cardContent.image}
             alt={cardContent.heading}
@@ -165,7 +165,7 @@ const SearchCard: React.FC<{
       );
     case 4:
       return (
-        <article className="w-full rounded-lg bg-shade-light p-2">
+        <article className="w-full rounded-lg bg-shade-light p-3 md:px-4">
           <h5 className="text-primary-300">{cardContent.heading}</h5>
           <div className="flex items-center gap-2">
             <p className="order-1 line-clamp-4 text-neutral-600">
@@ -185,7 +185,7 @@ const SearchCard: React.FC<{
       );
     case 5:
       return (
-        <article className="grid w-full flex-wrap items-center gap-2 rounded-lg bg-shade-light p-2 sm:grid-cols-2">
+        <article className="grid w-full flex-wrap items-center gap-2 rounded-lg bg-shade-light p-3 sm:grid-cols-2 md:px-4">
           <header>
             <h5>{cardContent.heading}</h5>
             <p className=" font-semibold text-primary-300">
@@ -202,7 +202,7 @@ const SearchCard: React.FC<{
       );
     case 6:
       return (
-        <article className="flex w-full flex-wrap gap-2 rounded-lg bg-shade-light p-2">
+        <article className="flex w-full flex-wrap gap-2 rounded-lg bg-shade-light p-3">
           <header className="flex gap-2">
             <Image
               src={cardContent.image}
@@ -230,7 +230,7 @@ const SearchCard: React.FC<{
       );
     case 7:
       return (
-        <article className="flex w-full flex-wrap items-center  gap-5 rounded-lg bg-shade-light p-2">
+        <article className="flex w-full flex-wrap items-center  gap-5 rounded-lg bg-shade-light p-3 md:px-4">
           <header>
             <h5 className="text-primary-300">
               {cardContent.position}
