@@ -34,9 +34,10 @@ export function Recents({
           <li key={index}>
             <LocalStorageLink
               href={value}
-              options={{ filter: true, unshift: true }}
-              storageKey="recentSearches"
               newItem={{ label, value }}
+              options={{ filter: true, unshift: true }}
+              replace
+              storageKey="recentSearches"
             >
               <p className="gap-2 font-medium">
                 <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
