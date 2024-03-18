@@ -40,7 +40,7 @@ export function Recents({
               storageKey="recentSearches"
             >
               <p className="gap-2 font-medium">
-                <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
                 {label}
               </p>
             </LocalStorageLink>

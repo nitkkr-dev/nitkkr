@@ -12,19 +12,38 @@ import SearchCard, {
 } from './search-card';
 import { Recents, Searchbar } from './search-utils';
 
+const categories = [
+  'allResults',
+  'webPages',
+  'people',
+  'documents',
+  'events',
+  'news',
+  'courses',
+  'clubs',
+  'positions',
+];
+
 export default async function Search({
   query,
   category,
   locale,
 }: {
   query?: string;
-  category?: string;
+  category:
+    | 'allResults'
+    | 'webPages'
+    | 'people'
+    | 'documents'
+    | 'events'
+    | 'news'
+    | 'courses'
+    | 'clubs'
+    | 'positions';
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Search;
-  const parsedCategory = parseInt(category ?? '0');
-  const selectedCategory =
-    parsedCategory >= 0 && parsedCategory <= 8 ? parsedCategory : 0;
+  const selectedCategory = categories.indexOf(category);
   const links = {
     recents: [
       { label: 'Departments', value: '/departments' },
@@ -214,7 +233,7 @@ export default async function Search({
                 {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
                     <Link
-                      href={{ query: { query, category: index } }}
+                      href={{ query: { query, category: categories[index] } }}
                       prefetch
                       replace
                     >
@@ -235,7 +254,7 @@ export default async function Search({
               </ul>
             </nav>
             <section className="mt-2 max-h-full w-full overflow-y-auto pr-4 md:pr-12">
-              {selectedCategory ? (
+              {selectedCategory > 0 ? (
                 <Suspense fallback={<h5>loader</h5>}>
                   {/* {search} */}
                   <header className="flex justify-between text-primary-700">
@@ -277,7 +296,12 @@ export default async function Search({
                           <h5>
                             <Link
                               className="inline-flex hover:underline"
-                              href={{ query: { query, category: index + 1 } }}
+                              href={{
+                                query: {
+                                  query,
+                                  category: categories[index + 1],
+                                },
+                              }}
                               replace
                             >
                               {text.viewAll}
@@ -335,7 +359,7 @@ export default async function Search({
                         storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
-                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
                           {label}
                         </p>
                       </LocalStorageLink>
@@ -356,7 +380,7 @@ export default async function Search({
                         storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
-                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
                           {label}
                         </p>
                       </LocalStorageLink>
@@ -377,7 +401,7 @@ export default async function Search({
                         storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
-                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
                           {label}
                         </p>
                       </LocalStorageLink>

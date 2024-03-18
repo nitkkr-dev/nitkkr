@@ -6,11 +6,23 @@ export default function Page({
   searchParams: { query, category },
 }: {
   params: { locale: string };
-  searchParams: { query: string; category: string };
+  searchParams: {
+    query: string;
+    category:
+      | 'allResults'
+      | 'webPages'
+      | 'people'
+      | 'documents'
+      | 'events'
+      | 'news'
+      | 'courses'
+      | 'clubs'
+      | 'positions';
+  };
 }) {
   return (
     <Dialog
-      className="container mb-12 mt-20 overflow-y-auto"
+      className="container mb-10 mt-24 max-w-screen-xl overflow-y-auto"
       shouldCenter={false}
     >
       <Search query={query} category={category} locale={locale} />
