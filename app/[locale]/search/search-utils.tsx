@@ -1,11 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { type IconBaseProps } from 'react-icons/lib';
-import { useDebounceCallback } from 'usehooks-ts';
+import { useDebounceCallback, useLocalStorage } from 'usehooks-ts';
+
+import { LocalStorageLink } from '~/components/link';
 
 export function Recents({
   title,
@@ -14,38 +13,38 @@ export function Recents({
   title: string;
   clearButton: string;
 }) {
-  const [recents, setRecents] = useState<{ value: string; label: string }[]>(
-    JSON.parse(localStorage.getItem('recentSearches') ?? '[]') as {
-      value: string;
-      label: string;
-    }[]
-  );
+  const [recents, setRecents] = useLocalStorage<
+    { label: string; value: string }[]
+  >('recentSearches', []);
 
-  const clearRecents = () => {
-    localStorage.removeItem('recentSearches');
-    setRecents([]);
-  };
   return recents.length ? (
     <section className="mr-4 mt-6 md:mr-12 md:mt-12">
       <header className="flex items-center">
         <h5 className="grow text-primary-700">{title}</h5>
         <button
           className="rounded-md  p-2 font-semibold text-primary-700 hover:bg-primary-100"
-          onClick={clearRecents}
+          onClick={() => setRecents([])}
         >
           {clearButton}
         </button>
       </header>
 
       <ol className="flex flex-wrap gap-x-6">
-        {recents.map(
-          (
-            { label, value }: { label: string; value: string },
-            index: number
-          ) => (
-            <SearchLink value={value} key={index} label={label} />
-          )
-        )}
+        {recents.map(({ label, value }, index) => (
+          <li key={index}>
+            <LocalStorageLink
+              href={value}
+              options={{ filter: true, unshift: true }}
+              storageKey="recentSearches"
+              newItem={{ label, value }}
+            >
+              <p className="gap-2 font-medium">
+                <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                {label}
+              </p>
+            </LocalStorageLink>
+          </li>
+        ))}
       </ol>
     </section>
   ) : null;
@@ -65,38 +64,5 @@ export function Searchbar({ placeholder }: { placeholder: string }) {
         300
       )}
     />
-  );
-}
-
-export function SearchLink({
-  label,
-  value,
-  Icon = FaMagnifyingGlass,
-  children = (
-    <p className="mb-0 gap-2 font-medium">
-      <Icon className="inline-block h-2 text-primary-500" /> {label}
-    </p>
-  ),
-}: {
-  label: string;
-  value: string;
-  Icon?: React.ComponentType<IconBaseProps>;
-  children?: React.ReactNode;
-}) {
-  function addToRecent() {
-    let recents: { value: string; label: string }[] = JSON.parse(
-      localStorage.getItem('recentSearches') ?? '[]'
-    ) as { value: string; label: string }[];
-    recents = recents.filter((item: { value: string }) => item.value !== value);
-    recents.unshift({ value, label });
-    localStorage.setItem(
-      'recentSearches',
-      JSON.stringify(recents.slice(0, 10))
-    );
-  }
-  return (
-    <Link href={value} onClick={addToRecent}>
-      {children}
-    </Link>
   );
 }

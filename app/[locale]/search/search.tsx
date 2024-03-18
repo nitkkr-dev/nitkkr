@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { FaArrowUp } from 'react-icons/fa6';
+import { FaArrowUp, FaMagnifyingGlass } from 'react-icons/fa6';
 
-import { cn } from '~/lib/utils';
+import { LocalStorageLink } from '~/components/link';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 
-import { Recents, Searchbar, SearchLink } from './search-utils';
 import SearchCard, {
   type CardContent,
   type CardContentWithLabel,
 } from './search-card';
+import { Recents, Searchbar } from './search-utils';
 
 export default async function Search({
   query,
@@ -244,7 +245,12 @@ export default async function Search({
                     {results[selectedCategory - 1].map(
                       ({ value, label, ...result }, index) => (
                         <li key={index}>
-                          <SearchLink value={value} label={label}>
+                          <LocalStorageLink
+                            href={value}
+                            options={{ filter: true, unshift: true }}
+                            storageKey="recentSearches"
+                            newItem={{ label, value }}
+                          >
                             <SearchCard
                               cardContent={
                                 {
@@ -253,7 +259,7 @@ export default async function Search({
                                 } as CardContent
                               }
                             />
-                          </SearchLink>
+                          </LocalStorageLink>
                         </li>
                       )
                     )}
@@ -287,13 +293,21 @@ export default async function Search({
                           {results[index].map(
                             ({ value, label, ...result }, i) => (
                               <li key={i}>
-                                <SearchLink value={value} label={label}>
+                                <LocalStorageLink
+                                  href={value}
+                                  options={{
+                                    filter: true,
+                                    unshift: true,
+                                  }}
+                                  storageKey="recentSearches"
+                                  newItem={{ label, value }}
+                                >
                                   <SearchCard
                                     cardContent={
                                       { index, ...result } as CardContent
                                     }
                                   />
-                                </SearchLink>
+                                </LocalStorageLink>
                               </li>
                             )
                           )}
@@ -314,7 +328,17 @@ export default async function Search({
                 <ol>
                   {links.mostSearched.map(({ label, value }, index) => (
                     <li key={index}>
-                      <SearchLink value={value} label={label} />
+                      <LocalStorageLink
+                        href={value}
+                        options={{ filter: true, unshift: true }}
+                        storageKey="recentSearches"
+                        newItem={{ label, value }}
+                      >
+                        <p className="gap-2 font-medium">
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          {label}
+                        </p>
+                      </LocalStorageLink>
                     </li>
                   ))}
                 </ol>
@@ -324,7 +348,17 @@ export default async function Search({
                 <ol>
                   {links.studentLinks.map(({ label, value }, index) => (
                     <li key={index}>
-                      <SearchLink value={value} label={label} />
+                      <LocalStorageLink
+                        href={value}
+                        options={{ filter: true, unshift: true }}
+                        storageKey="recentSearches"
+                        newItem={{ label, value }}
+                      >
+                        <p className="gap-2 font-medium">
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          {label}
+                        </p>
+                      </LocalStorageLink>
                     </li>
                   ))}
                 </ol>
@@ -334,7 +368,17 @@ export default async function Search({
                 <ol>
                   {links.facultyLinks.map(({ label, value }, index) => (
                     <li key={index}>
-                      <SearchLink value={value} label={label} />
+                      <LocalStorageLink
+                        href={value}
+                        options={{ filter: true, unshift: true }}
+                        storageKey="recentSearches"
+                        newItem={{ label, value }}
+                      >
+                        <p className="gap-2 font-medium">
+                          <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
+                          {label}
+                        </p>
+                      </LocalStorageLink>
                     </li>
                   ))}
                 </ol>
