@@ -1,7 +1,14 @@
 'use client';
 
-import Link from 'next/link';
+import Link, { type LinkProps } from 'next/link';
 import { useLocalStorage } from 'usehooks-ts';
+
+export interface LocalStorageLinkProps<T> extends LinkProps {
+  children: React.ReactNode;
+  newItem: T;
+  options?: { filter?: boolean; unshift?: boolean };
+  storageKey: string;
+}
 
 export function LocalStorageLink<T>({
   children,
@@ -9,13 +16,7 @@ export function LocalStorageLink<T>({
   newItem,
   options = { filter: false, unshift: false },
   storageKey: key,
-}: {
-  children: React.ReactNode;
-  href: string;
-  storageKey: string;
-  newItem: T;
-  options?: { filter?: boolean; unshift?: boolean };
-}) {
+}: LocalStorageLinkProps<T>) {
   const [items, setItems] = useLocalStorage<T[]>(key, []);
 
   let filteredItems = items;
