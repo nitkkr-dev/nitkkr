@@ -12,11 +12,11 @@ import SearchCard, {
 } from './search-card';
 
 export default async function Search({
-  search,
+  query,
   category,
   locale,
 }: {
-  search?: string;
+  query?: string;
   category?: string;
   locale: string;
 }) {
@@ -206,14 +206,14 @@ export default async function Search({
     <search className="flex max-h-full flex-col gap-4">
       <Searchbar placeholder={text.placeholders} />
       <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 md:pl-12">
-        {search ? (
+        {query ? (
           <>
             <nav className="mr-4 md:mr-12">
               <ul className="flex w-full snap-x space-x-2 overflow-auto pb-3 pt-5 sm:space-x-3">
                 {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
                     <Link
-                      href={{ query: { q: search, c: index } }}
+                      href={{ query: { q: query, c: index } }}
                       replace
                       prefetch
                     >
@@ -269,7 +269,7 @@ export default async function Search({
                           <h4>{category}</h4>
                           <h5>
                             <Link
-                              href={{ query: { q: search, c: index + 1 } }}
+                              href={{ query: { q: query, c: index + 1 } }}
                               replace={true}
                               className="inline-flex hover:underline"
                             >
