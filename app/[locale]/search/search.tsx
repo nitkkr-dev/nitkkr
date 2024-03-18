@@ -330,7 +330,7 @@ export default async function Search({
                 </ol>
               </nav>
               <nav>
-                <h5 className="text-primary-700">{text.studentQuickLinks}</h5>
+                <h5 className="text-primary-700">{text.facultyQuickLinks}</h5>
                 <ol>
                   {links.facultyLinks.map(({ label, value }, index) => (
                     <li key={index}>
