@@ -215,8 +215,8 @@ export default async function Search({
                   <li key={index} className="snap-start">
                     <Link
                       href={{ query: { query, category: index } }}
-                      replace
                       prefetch
+                      replace
                     >
                       <button
                         className={cn(
@@ -247,9 +247,10 @@ export default async function Search({
                         <li key={index}>
                           <LocalStorageLink
                             href={value}
-                            options={{ filter: true, unshift: true }}
-                            storageKey="recentSearches"
                             newItem={{ label, value }}
+                            options={{ filter: true, unshift: true }}
+                            replace
+                            storageKey="recentSearches"
                           >
                             <SearchCard
                               cardContent={
@@ -275,9 +276,9 @@ export default async function Search({
                           <h4>{category}</h4>
                           <h5>
                             <Link
-                              href={{ query: { query, category: index + 1 } }}
-                              replace={true}
                               className="inline-flex hover:underline"
+                              href={{ query: { query, category: index + 1 } }}
+                              replace
                             >
                               {text.viewAll}
                               <span className="rotate-90">
@@ -295,12 +296,10 @@ export default async function Search({
                               <li key={i}>
                                 <LocalStorageLink
                                   href={value}
-                                  options={{
-                                    filter: true,
-                                    unshift: true,
-                                  }}
-                                  storageKey="recentSearches"
                                   newItem={{ label, value }}
+                                  options={{ filter: true, unshift: true }}
+                                  replace
+                                  storageKey="recentSearches"
                                 >
                                   <SearchCard
                                     cardContent={
@@ -330,9 +329,10 @@ export default async function Search({
                     <li key={index}>
                       <LocalStorageLink
                         href={value}
-                        options={{ filter: true, unshift: true }}
-                        storageKey="recentSearches"
                         newItem={{ label, value }}
+                        options={{ filter: true, unshift: true }}
+                        replace
+                        storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
                           <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
@@ -350,9 +350,10 @@ export default async function Search({
                     <li key={index}>
                       <LocalStorageLink
                         href={value}
-                        options={{ filter: true, unshift: true }}
-                        storageKey="recentSearches"
                         newItem={{ label, value }}
+                        options={{ filter: true, unshift: true }}
+                        replace
+                        storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
                           <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
@@ -370,9 +371,10 @@ export default async function Search({
                     <li key={index}>
                       <LocalStorageLink
                         href={value}
-                        options={{ filter: true, unshift: true }}
-                        storageKey="recentSearches"
                         newItem={{ label, value }}
+                        options={{ filter: true, unshift: true }}
+                        replace
+                        storageKey="recentSearches"
                       >
                         <p className="gap-2 font-medium">
                           <FaMagnifyingGlass className="inline-block h-2 text-primary-500" />
