@@ -5,9 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 import { BsBellFill, BsPeopleFill, BsPersonFill } from 'react-icons/bs';
-import { FaBookmark, FaNewspaper } from 'react-icons/fa';
+import { FaBook, FaBookmark, FaFlask, FaNewspaper } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
-import { MdSchool } from 'react-icons/md';
+import {
+  MdApproval,
+  MdEmojiEvents,
+  MdGroups,
+  MdSchool,
+  MdWork,
+} from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
 import {
@@ -38,11 +44,13 @@ export const LogOut = ({
 
 export const PathnameAwareSuspense = ({
   children,
+  defaultPathname,
 }: {
   children: React.ReactNode;
+  defaultPathname: string;
 }) => {
   const path = usePathname().split('/').splice(3); // ['', 'en|hi', 'profile', ?]
-  const tab = path.length === 0 ? 'personal' : path[0];
+  const tab = path.length === 0 ? defaultPathname : path[0];
   return (
     <Suspense fallback={<Loading />} key={tab}>
       {children}
@@ -53,92 +61,80 @@ export const PathnameAwareSuspense = ({
 export const Tabs = ({
   locale,
   select = false,
-  text,
+  tabs,
+  defaultPath,
+  basePath,
 }: {
   locale: string;
   select?: boolean;
-  text: {
-    bookmarks: string;
-    clubs: string;
-    courses: string;
-    notifications: string;
-    personal: string;
-    quickSend: string;
-    results: string;
-  };
+  tabs: {
+    label: string;
+    href: string;
+  }[];
+  defaultPath: string;
+  basePath: string;
 }) => {
-  const path = usePathname().split('/').slice(3); // ['', 'en|hi', 'profile', ?]
-  const tab = path.length === 0 ? 'personal' : path[0];
+  const pathname = usePathname();
+  const path = pathname.split('/').slice(defaultPath === 'personal' ? 3 : 4); // ['', 'en|hi', 'profile', ?]
+  const tab = path.length === 0 ? defaultPath : path[0];
+  console.log(tab);
 
-  const tabs = [
-    {
-      label: text.personal,
-      href: 'personal',
-      icon: BsPersonFill,
-    },
-    {
-      label: text.notifications,
-      href: 'notifications',
-      icon: BsBellFill,
-    },
-    {
-      label: text.courses,
-      href: 'courses',
-      icon: MdSchool,
-    },
-    {
-      label: text.clubs,
-      href: 'clubs',
-      icon: BsPeopleFill,
-    },
-    {
-      label: text.results,
-      href: 'results',
-      icon: FaNewspaper,
-    },
-    {
-      label: text.bookmarks,
-      href: 'bookmarks',
-      icon: FaBookmark,
-    },
-    {
-      label: text.quickSend,
-      href: 'quick-send',
-      icon: IoMdSend,
-    },
-  ];
+  const icons = {
+    personal: BsPersonFill,
+    notifications: BsBellFill,
+    courses: MdSchool,
+    clubs: BsPeopleFill,
+    results: FaNewspaper,
+    bookmarks: FaBookmark,
+    'quick-send': IoMdSend,
+    qualifications: MdSchool,
+    experience: MdWork,
+    projects: FaFlask,
+    educationCurrent: FaBook,
+    publications: MdApproval,
+    scholars: MdGroups,
+    awards: MdEmojiEvents,
+  };
 
   return select ? (
-    <Select defaultValue={tab} navigate>
+    <Select defaultValue={`/${locale}/${basePath}/${tab}`} navigate>
       <SelectTrigger className="w-[180px] px-4 py-5 text-shade-light md:hidden">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         {tabs.map(({ label, href }, index) => (
-          <SelectItem key={index} value={href}>
+          <SelectItem key={index} value={`/${locale}/${basePath}/${href}`}>
             {label}
           </SelectItem>
         ))}
       </SelectContent>
     </Select>
   ) : (
-    tabs.map(({ label, href, icon: Icon }, index) => (
-      <li key={index}>
-        <Button
-          active={href === tab}
-          asChild
-          className={cn(
-            'flex justify-start gap-2 xl:gap-3',
-            'w-full px-4 py-3 drop-shadow'
-          )}
-          variant="secondary"
-        >
-          <Link href={`/${locale}/profile/${href}`} prefetch scroll={false}>
-            <Icon />
-            {label}
-          </Link>
-        </Button>
-      </li>
-    ))
+    tabs.map(({ label, href }, index) => {
+      const Icon = icons[href as keyof typeof icons];
+      return (
+        <li key={index}>
+          <Button
+            active={href === tab}
+            asChild
+            className={cn(
+              'flex justify-start gap-2 xl:gap-3',
+              'font-bold',
+              'w-full px-4 py-3 drop-shadow'
+            )}
+            variant="secondary"
+          >
+            <Link
+              href={`/${locale}/${basePath}/${href}`}
+              prefetch
+              scroll={false}
+            >
+              <Icon className="lg:size-5" />
+              {label.toUpperCase()}
+            </Link>
+          </Button>
+        </li>
+      );
+    })
   );
 };
