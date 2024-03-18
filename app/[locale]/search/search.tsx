@@ -213,7 +213,7 @@ export default async function Search({
                 {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
                     <Link
-                      href={{ query: { q: query, c: index } }}
+                      href={{ query: { query, category: index } }}
                       replace
                       prefetch
                     >
@@ -269,7 +269,7 @@ export default async function Search({
                           <h4>{category}</h4>
                           <h5>
                             <Link
-                              href={{ query: { q: query, c: index + 1 } }}
+                              href={{ query: { query, category: index + 1 } }}
                               replace={true}
                               className="inline-flex hover:underline"
                             >

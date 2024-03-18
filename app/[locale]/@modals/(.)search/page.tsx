@@ -3,10 +3,10 @@ import { Dialog } from '~/components/dialog';
 
 export default function Page({
   params: { locale },
-  searchParams: { q: query, c: category },
+  searchParams: { query, category },
 }: {
   params: { locale: string };
-  searchParams: { q: string; c: string };
+  searchParams: { query: string; category: string };
 }) {
   return (
     <Dialog
