@@ -19,11 +19,15 @@ const buttonVariants = cva(
           'focus:bg-primary-900',
           'active:bg-primary-900'
         ),
+        defaultDisabled: 'cursor-not-allowed bg-primary-100 text-neutral-50',
         outline: cn(
           'border border-primary-500 text-primary-500',
           'hover:border-primary-700 hover:text-primary-700',
           'focus:border-primary-900 focus:text-primary-900',
           'active:border-primary-900 active:text-primary-900'
+        ),
+        outlineDisabled: cn(
+          'cursor-not-allowed border border-primary-100 text-primary-100'
         ),
         ghost: cn(
           'text-primary-500',
@@ -51,7 +55,19 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button';
+    if (props.disabled) {
+      if (variant === 'default') {
+        variant = 'defaultDisabled';
+      } else if (variant === 'outline') {
+        variant = 'outlineDisabled';
+      } else if (variant === 'ghost' || variant === 'link') {
+        console.warn(
+          'Disabled style does not exist for Ghost and Link variants'
+        );
+      }
+    }
+
+    const Comp = asChild || props.disabled ? Slot : 'button';
     return (
       <Comp
         className={cn(buttonVariants({ variant, className }))}
