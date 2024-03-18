@@ -53,6 +53,10 @@ export interface Translations {
     laboratories: string;
     achievements: string;
   };
+  FacultyAndStaff: {
+    placeholder: string;
+    departmentHead: string;
+  };
   Footer: {
     logo: string;
     nit: string;

@@ -60,6 +60,10 @@ const text: Translations = {
     laboratories: 'प्रयोगशालाएँ',
     achievements: 'छात्र उपलब्धियाँ',
   },
+  FacultyAndStaff: {
+    placeholder: 'नाम या ईमेल से खोजें',
+    departmentHead: 'विभागाध्यक्ष',
+  },
   Footer: {
     logo: 'प्रतीक चिन्ह',
     nit: 'राष्ट्रीय प्रौद्योगिकी संस्थान, कुरूक्षेत्र',

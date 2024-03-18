@@ -64,6 +64,10 @@ const text: Translations = {
     laboratories: 'Laboratories',
     achievements: 'Student Achievements',
   },
+  FacultyAndStaff: {
+    placeholder: 'Search by name or email',
+    departmentHead: 'Head of Department',
+  },
   Footer: {
     logo: 'Logo',
     nit: 'National Institute of Technology, Kurukshetra',
