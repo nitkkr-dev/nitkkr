@@ -125,7 +125,10 @@ export default function FacultyAndStaff({
             All Departments
           </p>
           {allDepartments.map((department) => (
-            <p className="font-sans text-lg font-bold text-shade-dark" key={department}>
+            <p
+              className="font-sans text-lg font-bold text-shade-dark"
+              key={department}
+            >
               {department}
             </p>
           ))}
