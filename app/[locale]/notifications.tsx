@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
-import { ScrollArea } from '~/components/scroll-area';
+import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
 
