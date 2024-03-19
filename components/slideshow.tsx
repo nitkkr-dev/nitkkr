@@ -34,7 +34,7 @@ export default function Slideshow({
         <CarouselContent>
           {images.map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
-              <figure>
+              <figure className="h-full">
                 <Image
                   alt={`slide ${index + 1}`}
                   className="h-full w-full object-cover"
