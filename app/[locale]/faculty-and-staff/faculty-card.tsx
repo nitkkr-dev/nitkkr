@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdEmail } from 'react-icons/md';
-import { MdPhone } from 'react-icons/md';
+import { MdEmail, MdPhone } from 'react-icons/md';
 
 interface FacultyProps {
   profileImage: string;
