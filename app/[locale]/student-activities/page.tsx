@@ -14,9 +14,9 @@ export default async function StudentActivities({
 }) {
   const text = (await getTranslations(locale)).StudentActivities;
 
-  const clubs = await db.clubs.findMany({
-    select: { name: true, logo: true, thumbnail: true },
-  });
+  // const clubs = await db.clubs.findMany({
+  //   select: { name: true, logo: true, thumbnail: true },
+  // });
 
   return (
     <>
