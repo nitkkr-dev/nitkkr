@@ -1,13 +1,10 @@
-import Link from 'next/link';
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
-
 import { getTranslations } from '~/i18n/translations';
 
-// Define an interface for the text object
+import LoginButton from './loginbutton';
 
 const LoginPage = async ({ locale }: { locale: string }) => {
   const text = (await getTranslations(locale)).LoginText;
+
   return (
     <div className="bg-loginBackground flex h-auto grow flex-col items-center justify-center rounded-lg bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay ">
       <div className="mx-16 flex h-auto w-full grow flex-col items-center justify-center">
@@ -32,12 +29,7 @@ const LoginPage = async ({ locale }: { locale: string }) => {
             <span className="mx-2 text-sm text-primary-700">{text.orText}</span>
             <div className="h-px w-full bg-primary-700" />
           </div>
-          <Link href="/api/auth/signin">
-            <button className="text-md mt-5 flex w-full items-center justify-center space-x-3 rounded-md border border-primary-500 bg-shade-light p-4 text-primary-700 hover:bg-neutral-100">
-              <FcGoogle className="h-6 w-6" />
-              <span>{text.signInWithGoogle}</span>
-            </button>
-          </Link>
+          <LoginButton logintext={text.signInWithGoogle} />
         </div>
       </div>
     </div>
