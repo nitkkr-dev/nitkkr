@@ -24,7 +24,7 @@ export default async function Header({ locale }: { locale: string }) {
   return (
     <header
       className={cn(
-        'topbar fixed z-10 min-w-full',
+        'fixed z-10 min-w-full',
         'bg-gradient-to-b from-neutral-500 to-transparent'
       )}
     >

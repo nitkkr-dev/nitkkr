@@ -14,14 +14,28 @@ export default function MobNavButton({ className }: { className: string }) {
       document.removeEventListener('mousedown', handler);
     };
   }, []);
+  const disableDropdown = useCallback(() => {
+    setExpanded(false);
+    document.body.style.touchAction = 'auto';
+    document.body.style.overflow = 'visible';
+    document.body.style.overscrollBehavior = 'auto';
+    document.removeEventListener('mousedown', handler);
+  }, []);
+  const enableDropdown = useCallback(() => {
+    setExpanded(true);
+    document.body.style.touchAction = 'none';
+    document.body.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
+    document.addEventListener('mousedown', handler);
+  }, []);
 
   const handler = useCallback((e: MouseEvent) => {
     if ((e.target as HTMLElement)?.classList.contains('mobNavTrigger')) return;
     if (!mobNav.current!.contains(e.target as HTMLElement)) {
-      setExpanded(false);
+      disableDropdown();
     } else if ((e.target as HTMLElement)?.tagName === 'A') {
       (e.target as HTMLElement)?.click();
-      setExpanded(false);
+      disableDropdown();
     }
   }, []);
 
@@ -30,9 +44,7 @@ export default function MobNavButton({ className }: { className: string }) {
       className={`${className} ${styles.buttonOne} mobNavTrigger`}
       onClick={() => {
         setExpanded(!expanded);
-        expanded
-          ? document.removeEventListener('mousedown', handler)
-          : document.addEventListener('mousedown', handler);
+        expanded ? disableDropdown() : enableDropdown();
       }}
       aria-controls="primary-navigation"
       aria-expanded={expanded}
