@@ -352,7 +352,7 @@ export default async function Search({
                 </h5>
                 <ol>
                   {links.mostSearched.map(({ label, value }, index) => (
-                    <li key={index}>
+                    <li className="mb-2" key={index}>
                       <LocalStorageLink
                         className="inline-flex items-center gap-2 font-medium lg:text-lg"
                         href={value}
@@ -374,7 +374,7 @@ export default async function Search({
                 </h5>
                 <ol>
                   {links.studentLinks.map(({ label, value }, index) => (
-                    <li key={index}>
+                    <li className="mb-2" key={index}>
                       <LocalStorageLink
                         className="inline-flex items-center gap-2 font-medium lg:text-lg"
                         href={value}
@@ -396,7 +396,7 @@ export default async function Search({
                 </h5>
                 <ol>
                   {links.facultyLinks.map(({ label, value }, index) => (
-                    <li key={index}>
+                    <li className="mb-2" key={index}>
                       <LocalStorageLink
                         className="inline-flex items-center gap-2 font-medium lg:text-lg"
                         href={value}
