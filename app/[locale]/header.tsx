@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { IoMenu } from 'react-icons/io5';
 
 import LocaleSwitcher from '~/components/locale-switcher';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+
+import MobNavButton from './mob-nav-button';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -23,7 +24,7 @@ export default async function Header({ locale }: { locale: string }) {
   return (
     <header
       className={cn(
-        'fixed z-10 min-w-full',
+        'topbar fixed z-10 min-w-full',
         'bg-gradient-to-b from-neutral-500 to-transparent'
       )}
     >
@@ -126,11 +127,34 @@ export default async function Header({ locale }: { locale: string }) {
               <Link href={`/${locale}/login`}>{text.login}</Link>
             </Button>
           </li>
-          <li className="lg:hidden">
-            <IoMenu
-              className="rounded-md bg-primary-700 p-1 text-shade-light hover:cursor-pointer"
-              size={40}
-            />
+          <li className="z-30 text-base font-semibold lg:hidden">
+            <nav className="relative flex h-0">
+              <MobNavButton className="peer sticky z-40 h-10 w-10 rounded bg-primary-700 transition-colors aria-expanded:bg-transparent" />
+              <aside
+                className="absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-5 rounded-md border border-primary-500 bg-background px-3 py-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100"
+                id="mobNav"
+              >
+                <ul className="space-y-4 px-2 font-semibold">
+                  {items.map(({ label, href }, index) => (
+                    <li key={index}>
+                      <Link
+                        href={`/${locale}/${href}`}
+                        className="cursor-pointer hover:underline"
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <hr className="solid" />
+                <Link
+                  href={`/${locale}/login`}
+                  className="button button-emphasised rounded text-center"
+                >
+                  {text.login}
+                </Link>
+              </aside>
+            </nav>
           </li>
         </ol>
       </nav>
