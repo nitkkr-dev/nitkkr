@@ -31,7 +31,7 @@ export function Recents({
 
       <ol className="flex flex-wrap gap-x-6">
         {recents.map(({ label, value }, index) => (
-          <li key={index}>
+          <li className="mb-2" key={index}>
             <LocalStorageLink
               className="inline-flex items-center gap-2 font-medium lg:text-lg"
               href={value}
