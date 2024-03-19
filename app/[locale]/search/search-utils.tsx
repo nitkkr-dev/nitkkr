@@ -33,16 +33,15 @@ export function Recents({
         {recents.map(({ label, value }, index) => (
           <li key={index}>
             <LocalStorageLink
+              className="inline-flex items-center gap-2 font-medium lg:text-lg"
               href={value}
               newItem={{ label, value }}
               options={{ filter: true, unshift: true }}
               replace
               storageKey="recentSearches"
             >
-              <p className="gap-2 font-medium">
-                <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
-                {label}
-              </p>
+              <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
+              {label}
             </LocalStorageLink>
           </li>
         ))}
