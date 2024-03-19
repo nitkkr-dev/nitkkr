@@ -20,7 +20,7 @@ export function Recents({
   return recents.length ? (
     <section className="mr-4 mt-6 md:mr-12 md:mt-12">
       <header className="flex items-center">
-        <h5 className="grow text-primary-700">{title}</h5>
+        <h5 className="mb-2 grow text-primary-700 lg:mb-3 xl:mb-4">{title}</h5>
         <button
           className="rounded-md  p-2 font-semibold text-primary-700 hover:bg-primary-100"
           onClick={() => setRecents([])}

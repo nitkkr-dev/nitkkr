@@ -347,7 +347,9 @@ export default async function Search({
             <Recents title={text.recents} clearButton={text.clearRecents} />
             <section className="my-12 mr-4 flex max-w-screen-xl flex-col justify-between gap-10 md:mr-12 md:flex-row">
               <nav>
-                <h5 className="text-primary-700">{text.mostSearched}</h5>
+                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
+                  {text.mostSearched}
+                </h5>
                 <ol>
                   {links.mostSearched.map(({ label, value }, index) => (
                     <li key={index}>
@@ -367,7 +369,9 @@ export default async function Search({
                 </ol>
               </nav>
               <nav>
-                <h5 className="text-primary-700">{text.studentQuickLinks}</h5>
+                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
+                  {text.studentQuickLinks}
+                </h5>
                 <ol>
                   {links.studentLinks.map(({ label, value }, index) => (
                     <li key={index}>
@@ -387,7 +391,9 @@ export default async function Search({
                 </ol>
               </nav>
               <nav>
-                <h5 className="text-primary-700">{text.facultyQuickLinks}</h5>
+                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
+                  {text.facultyQuickLinks}
+                </h5>
                 <ol>
                   {links.facultyLinks.map(({ label, value }, index) => (
                     <li key={index}>
