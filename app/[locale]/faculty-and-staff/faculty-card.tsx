@@ -6,6 +6,8 @@ interface FacultyProps {
   profileImage: string;
   name: string;
   designation: string;
+  deptName: string;
+  isDeptHead: boolean;
   email: string;
   phone: string;
   id: number;
@@ -15,6 +17,7 @@ export default function FacultyCard({
   profileImage,
   name,
   designation,
+  isDeptHead,
   email,
   phone,
   id,
@@ -39,7 +42,7 @@ export default function FacultyCard({
               {name}
             </h1>
             <p className="font-sans text-xl font-medium text-neutral-700">
-              {designation}
+              {designation} {isDeptHead && '(Head of Department)'}
             </p>
           </div>
           <div className="flex flex-col items-start gap-2">
