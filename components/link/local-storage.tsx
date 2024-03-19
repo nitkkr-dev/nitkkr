@@ -5,6 +5,7 @@ import { useLocalStorage } from 'usehooks-ts';
 
 export interface LocalStorageLinkProps<T> extends LinkProps {
   children: React.ReactNode;
+  className?: string;
   newItem: T;
   options?: { filter?: boolean; unshift?: boolean };
   storageKey: string;
@@ -12,6 +13,7 @@ export interface LocalStorageLinkProps<T> extends LinkProps {
 
 export function LocalStorageLink<T>({
   children,
+  className,
   href,
   newItem,
   options = { filter: false, unshift: false },
@@ -28,6 +30,7 @@ export function LocalStorageLink<T>({
 
   return (
     <Link
+      className={className}
       href={href}
       onClick={() =>
         options.unshift
