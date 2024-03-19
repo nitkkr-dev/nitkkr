@@ -7,19 +7,27 @@ import { cn } from '~/lib/utils';
 const buttonVariants = cva(
   cn(
     'inline-flex items-center justify-center whitespace-nowrap transition-colors',
-    'ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-900 focus-visible:ring-offset-2',
+    'ring-offset-shade-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-900 focus-visible:ring-offset-2',
     'rounded sm:rounded-lg lg:rounded-xl'
   ),
   {
     variants: {
       variant: {
-        default: cn(
+        primary: cn(
           'bg-primary-500 text-neutral-50',
           'hover:bg-primary-700',
           'focus:bg-primary-900',
           'active:bg-primary-900'
         ),
-        defaultDisabled: 'cursor-not-allowed bg-primary-100 text-neutral-50',
+        primaryDisabled: 'cursor-not-allowed bg-primary-100 text-neutral-50',
+        secondary: cn(
+          'border border-primary-700 bg-neutral-50 text-primary-700',
+          'hover:bg-primary-700 hover:text-shade-light',
+          'focus:bg-primary-700 focus:text-shade-light',
+          'active:bg-primary-700 active:text-shade-light'
+        ),
+        secondaryDisabled:
+          'border border-primary-100 cursor-not-allowed bg-neutral-50 text-neutral-300',
         outline: cn(
           'border border-primary-500 text-primary-500',
           'hover:border-primary-700 hover:text-primary-700',
@@ -43,7 +51,7 @@ const buttonVariants = cva(
         ),
       },
     },
-    defaultVariants: { variant: 'default' },
+    defaultVariants: { variant: 'primary' },
   }
 );
 
@@ -54,12 +62,14 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant = 'primary', asChild = false, ...props }, ref) => {
     if (props.disabled) {
-      if (variant === 'default') {
-        variant = 'defaultDisabled';
-      } else if (variant === 'outline') {
-        variant = 'outlineDisabled';
+      if (
+        variant === 'primary' ||
+        variant === 'secondary' ||
+        variant === 'outline'
+      ) {
+        variant += 'Disabled';
       } else if (variant === 'ghost' || variant === 'link') {
         console.warn(
           'Disabled style does not exist for Ghost and Link variants'
