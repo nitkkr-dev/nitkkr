@@ -51,16 +51,3 @@
     @apply lg:text-lg;
   }
 }
-
-@layer components {
-  .button {
-    @apply text-primary-700 hover:text-shade-light;
-    @apply bg-shade-light hover:bg-primary-700;
-    @apply border-primary-700;
-  }
-
-  .button-emphasised {
-    @apply text-neutral-50;
-    @apply bg-primary-700 hover:bg-primary-900;
-  }
-}
