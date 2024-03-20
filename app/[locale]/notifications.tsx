@@ -65,7 +65,9 @@ export default async function Notifications({
                 <button
                   className={cn(
                     'flex-auto rounded-xl py-2 text-center font-serif text-neutral-50',
-                    'lg:button lg:border lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
+                    'lg:border lg:border-primary-700 lg:p-8 lg:text-2xl lg:drop-shadow-2xl',
+                    'lg:bg-neutral-50 lg:text-primary-700',
+                    'lg:hover:bg-primary-700 lg:hover:text-neutral-50',
                     category === currentCategory
                       ? 'bg-primary-300 lg:bg-primary-700 lg:text-neutral-50'
                       : 'lg:bg-opacity-60'
