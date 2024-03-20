@@ -49,6 +49,7 @@ const buttonVariants = cva(
           'focus:text-primary-700',
           'active:text-primary-900'
         ),
+        icon: '',
       },
     },
     defaultVariants: { variant: 'primary' },
@@ -72,7 +73,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         variant += 'Disabled';
       } else if (variant === 'ghost' || variant === 'link') {
         console.warn(
-          'Disabled style does not exist for Ghost and Link variants'
+          'Disabled style does not exist for Ghost, Link, and Icon variants'
         );
       }
     }
@@ -80,7 +81,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild || props.disabled ? Slot : 'button';
     return (
       <Comp
-        className={cn(buttonVariants({ variant, className }))}
+        className={cn(
+          buttonVariants({ variant, className }),
+          // Overrides at every breakpoint since custom styles would conflict
+          className?.includes('rounded-full') &&
+            'rounded-full sm:rounded-full md:rounded-full lg:rounded-full'
+        )}
         ref={ref}
         {...props}
       />
