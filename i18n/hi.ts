@@ -33,7 +33,7 @@ const text: Translations = {
     alumni: 'भूतपूर्व छात्र',
     logo: 'प्रतीक चिन्ह',
     search: 'त्वरित खोज...',
-    login: 'लॉगिन',
+    login: 'प्रवेश',
   },
   Notifications: {
     title: 'सूचनाएं',
@@ -106,7 +106,7 @@ const text: Translations = {
   LoginText: {
     title: 'प्रवेश करें',
     enterEmail: 'अपना ईमेल दर्ज करें',
-    continueButton: 'जारी रखें',
+    continueButton: 'अगले चरण पर बढ़ें',
     orText: 'या',
     signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
   },
