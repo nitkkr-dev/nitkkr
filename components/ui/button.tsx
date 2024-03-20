@@ -16,7 +16,7 @@ const buttonVariants = cva(
         primary: cn(
           'bg-primary-500 text-neutral-50',
           'hover:bg-primary-700',
-          'focus:bg-primary-900',
+          'focus:bg-primary-700',
           'active:bg-primary-900'
         ),
         primaryDisabled: 'cursor-not-allowed bg-primary-100 text-neutral-50',
@@ -31,7 +31,7 @@ const buttonVariants = cva(
         outline: cn(
           'border border-primary-500 text-primary-500',
           'hover:border-primary-700 hover:text-primary-700',
-          'focus:border-primary-900 focus:text-primary-900',
+          'focus:border-primary-700 focus:text-primary-700',
           'active:border-primary-900 active:text-primary-900'
         ),
         outlineDisabled: cn(
@@ -40,13 +40,13 @@ const buttonVariants = cva(
         ghost: cn(
           'text-primary-500',
           'hover:bg-primary-500 hover:text-neutral-50',
-          'focus:bg-primary-700 focus:text-neutral-50',
+          'focus:bg-primary-500 focus:text-neutral-50',
           'active:bg-primary-700 active:text-neutral-50'
         ),
         link: cn(
           'text-primary-500 underline-offset-4 hover:underline',
           'hover:text-primary-700',
-          'focus:text-primary-900',
+          'focus:text-primary-700',
           'active:text-primary-900'
         ),
       },
