@@ -1,4 +1,5 @@
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 
 import LoginButton from './login-button';
 
@@ -7,31 +8,34 @@ const LoginPage = async ({ locale }: { locale: string }) => {
 
   return (
     <main className="bg-loginBackground flex h-auto grow flex-col items-center justify-center rounded-lg bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay ">
-      <div className="mx-16 flex h-auto w-full grow flex-col items-center justify-center">
+      <article className="mx-16 flex h-auto w-full grow flex-col items-center justify-center">
         <header className="mb-8 text-center">
           <h3 className="mt-4 text-primary-700">{text.title}</h3>
         </header>
         <section className="w-full max-w-lg space-y-6">
-          <div className="flex flex-col space-y-2">
+          <fieldset className="flex flex-col space-y-2">
             <h6 className="text-primary-700">{text.enterEmail}</h6>
             <input
               id="email"
-              placeholder={text.enterEmail}
+              placeholder="isac@nitkkr.ac.in"
               type="email"
-              className="outline-red-100 rounded-md border border-primary-500 p-5 outline-offset-2 ring-0"
+              className="rounded-md border border-primary-500 p-5 outline-offset-2 outline-primary-100 "
             />
-          </div>
+          </fieldset>
           <button className="text-md w-full rounded-md bg-primary-700 p-4 text-neutral-50 hover:bg-primary-900">
             {text.continueButton}
           </button>
-          <div className="flex items-center justify-center">
-            <div className="h-px w-full bg-primary-700" />
-            <span className="mx-2 text-sm text-primary-700">{text.orText}</span>
-            <div className="h-px w-full bg-primary-700" />
-          </div>
+          <hr
+            className={cn(
+              'h-1 overflow-visible border-0 border-t-[1px] border-primary-500 text-center after:relative after:top-[-13px] after:bg-background after:px-3 after:text-primary-500',
+              locale === 'en'
+                ? "after:content-['OR']"
+                : "after:content-['अथवा']"
+            )}
+          />
           <LoginButton loginText={text.signInWithGoogle} />
         </section>
-      </div>
+      </article>
     </main>
   );
 };
