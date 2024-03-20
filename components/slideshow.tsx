@@ -53,8 +53,8 @@ export default function Slideshow({
         </CarouselContent>
 
         <section className="container absolute inset-0 top-[50%] flex h-0 justify-between">
-          <CarouselPrevious className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0" />
-          <CarouselNext className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0" />
+          <CarouselPrevious className="static" />
+          <CarouselNext className="static" />
         </section>
       </Carousel>
     </article>
