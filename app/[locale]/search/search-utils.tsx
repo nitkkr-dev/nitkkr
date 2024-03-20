@@ -5,6 +5,7 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { useDebounceCallback, useLocalStorage } from 'usehooks-ts';
 
 import { LocalStorageLink } from '~/components/link';
+import { Button } from '~/components/ui';
 
 export function Recents({
   title,
@@ -21,12 +22,13 @@ export function Recents({
     <section className="mr-4 mt-6 md:mr-12 md:mt-12">
       <header className="flex items-center">
         <h5 className="mb-2 grow text-primary-700 lg:mb-3 xl:mb-4">{title}</h5>
-        <button
-          className="rounded-md  p-2 font-semibold text-primary-700 hover:bg-primary-100"
+        <Button
+          className="px-4 py-2 font-semibold"
           onClick={() => setRecents([])}
+          variant="ghost"
         >
           {clearButton}
-        </button>
+        </Button>
       </header>
 
       <ol className="flex flex-wrap gap-x-6">

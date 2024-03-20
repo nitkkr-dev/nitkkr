@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { FaArrowUp, FaMagnifyingGlass } from 'react-icons/fa6';
 
 import { LocalStorageLink } from '~/components/link';
+import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -232,23 +233,25 @@ export default async function Search({
               <ul className="flex w-full snap-x space-x-2 overflow-auto pb-3 pt-5 sm:space-x-3">
                 {text.filters.map((category, index) => (
                   <li key={index} className="snap-start">
-                    <Link
-                      href={{ query: { query, category: categories[index] } }}
-                      prefetch
-                      replace
+                    <Button
+                      asChild
+                      className={cn(
+                        'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
+                        'sm:rounded-md sm:p-2',
+                        index === selectedCategory
+                          ? 'bg-primary-700 text-shade-light'
+                          : 'bg-opacity-60'
+                      )}
+                      variant="secondary"
                     >
-                      <button
-                        className={cn(
-                          'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
-                          'sm:rounded-md sm:p-2',
-                          index === selectedCategory
-                            ? 'bg-primary-700 text-neutral-50'
-                            : 'bg-opacity-60'
-                        )}
+                      <Link
+                        href={{ query: { query, category: categories[index] } }}
+                        prefetch
+                        replace
                       >
                         {category}
-                      </button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -293,9 +296,16 @@ export default async function Search({
                       <li key={index}>
                         <header className="flex justify-between text-primary-700">
                           <h4>{category}</h4>
-                          <h5>
+                          <Button
+                            asChild
+                            className={cn(
+                              'inline-flex h-fit gap-1 md:gap-2',
+                              'text-base sm:text-sm md:text-lg',
+                              'px-2 py-1 md:px-4 md:py-2'
+                            )}
+                            variant="ghost"
+                          >
                             <Link
-                              className="inline-flex hover:underline"
                               href={{
                                 query: {
                                   query,
@@ -307,12 +317,14 @@ export default async function Search({
                               {text.viewAll}
                               <span className="rotate-90">
                                 <FaArrowUp
-                                  className="mx-auto inline-block animate-bounce"
-                                  size={16}
+                                  className={cn(
+                                    'mx-auto animate-bounce',
+                                    'size-2 md:size-3 lg:size-4'
+                                  )}
                                 />
                               </span>
                             </Link>
-                          </h5>
+                          </Button>
                         </header>
                         <ul className="space-y-3">
                           {results[index].map(
