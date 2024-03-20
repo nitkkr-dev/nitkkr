@@ -1,41 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { FaCheck, FaRegCopy } from 'react-icons/fa6';
 
+import { Button } from '~/components/ui';
+import { useCopyToClipboard } from '~/lib/hooks';
 import { cn } from '~/lib/utils';
 
 export default function CopyToClipboard({
   children,
   className,
-  item,
-  textDefault,
-  textSuccess,
+  text,
 }: {
   children: React.ReactNode;
   className?: string;
-  item: string;
-  textDefault: string;
-  textSuccess: string;
+  text: string;
 }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(item);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      console.error('Failed to copy:', error);
-    }
-  };
+  const [copiedText, copy] = useCopyToClipboard();
+  const Icon = copiedText ? FaCheck : FaRegCopy;
 
   return (
-    <a
-      className={cn('cursor-pointer', className)}
-      onClick={handleCopy}
-      title={copied ? textSuccess : textDefault}
+    <Button
+      className={cn('group relative cursor-copy', className)}
+      onClick={() => copy(text)}
+      variant="icon"
     >
       {children}
-    </a>
+      <Icon
+        className={cn(
+          'absolute left-10 fill-neutral-50',
+          'opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+        )}
+      />
+    </Button>
   );
 }
