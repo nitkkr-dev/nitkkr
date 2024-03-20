@@ -18,7 +18,7 @@ export default async function Footer({ locale }: { locale: string }) {
 
   return (
     <footer>
-      <section className="bg-shade-dark py-16">
+      <section className="bg-neutral-900 py-16">
         <article className="container flex flex-col justify-start lg:flex-row">
           <figure className="m-auto flex w-80 flex-col gap-4 p-4 lg:mx-0">
             <Image
@@ -29,7 +29,7 @@ export default async function Footer({ locale }: { locale: string }) {
               src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=peuLWIq0G5TpTDjW3MjLqwOrlRxq21doSVlN4obXcgfOjX-tmjp6Tb6mMV-n6HhlHVQd~8pM5tUrT5cNWFvOhpKp7Lcp2MH9xGUxJPM2UW3-KL6fYoVNfaGl0XNSjallZtXntcKFtvwflht6CSNREdeOKQUL7iUpK0DG0iPrUXDjk7W9Tc1WH0aPi2jVByU8-XqSIfjtBmblDS2r0z9~Qar~QVwwBHUXPSo8YtmQmswE2YK3ambbmxDDFpUhx6vfeQzXqfWjKCqS57sPBMfDvxJyy-aUN4lKWRWtGT4zsirldGhMRKQ32xUNBcGHpsnEjm40ffjoAT2JhEpQcChBLQ__"
             />
 
-            <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-neutral-50">
+            <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-shade-light">
               <h5>{text.nit}</h5>
               <small className="font-sans text-neutral-500">
                 {text.location}
@@ -38,17 +38,17 @@ export default async function Footer({ locale }: { locale: string }) {
 
             <address className="mx-auto flex gap-4">
               <Link href="tel:01744233208">
-                <MdPhone className="text-neutral-50" size={24} />
+                <MdPhone className="text-shade-light" size={24} />
               </Link>
               <Link href="mailto:registrar@nitkkr.ac.in">
-                <MdMail className="text-neutral-50" size={24} />
+                <MdMail className="text-shade-light" size={24} />
               </Link>
               <CopyToClipboard
                 item="238350"
                 textDefault={text.copyDefault}
                 textSuccess={text.copySuccess}
               >
-                <MdFax className="text-neutral-50" size={24} />
+                <MdFax className="text-shade-light" size={24} />
               </CopyToClipboard>
             </address>
           </figure>
@@ -68,7 +68,7 @@ export default async function Footer({ locale }: { locale: string }) {
 
           <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
             <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
-              <h5 className="mb-3 text-neutral-50">{text.headings[0]}</h5>
+              <h5 className="mb-3 text-shade-light">{text.headings[0]}</h5>
               <ul className="flex flex-col gap-3">
                 {[...Array<number>(8)].map((value, index) => (
                   <li key={index}>
@@ -87,7 +87,7 @@ export default async function Footer({ locale }: { locale: string }) {
                 'md:col-start-3 md:row-start-1 md:justify-self-center'
               )}
             >
-              <h5 className="mb-3 text-neutral-50">{text.headings[1]}</h5>
+              <h5 className="mb-3 text-shade-light">{text.headings[1]}</h5>
               <ul className="flex flex-col gap-3">
                 {[...Array<number>(10)].map((value, index) => (
                   <li key={index}>
@@ -106,7 +106,7 @@ export default async function Footer({ locale }: { locale: string }) {
                 'md:col-start-5 md:row-start-1 md:justify-self-end'
               )}
             >
-              <h5 className="mb-3 text-neutral-50">{text.headings[2]}</h5>
+              <h5 className="mb-3 text-shade-light">{text.headings[2]}</h5>
               <ul className="flex flex-col gap-3">
                 {[...Array<number>(4)].map((value, index) => (
                   <li key={index}>

@@ -26,7 +26,7 @@ export default async function StudentActivities({
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96'
         )}
       >
-        <h2 className="container my-auto w-fit text-neutral-50">
+        <h2 className="container my-auto w-fit text-shade-light">
           {text.title}
         </h2>
         <ol className="absolute bottom-5 hidden w-fit gap-4 self-center rounded-full bg-background p-1 lg:flex xl:p-2">

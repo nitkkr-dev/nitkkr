@@ -128,7 +128,7 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li className="lg:hidden">
             <IoMenu
-              className="rounded-md bg-primary-700 p-1 text-neutral-50 hover:cursor-pointer"
+              className="rounded-md bg-primary-700 p-1 text-shade-light hover:cursor-pointer"
               size={40}
             />
           </li>

@@ -14,12 +14,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: cn(
-          'bg-primary-500 text-neutral-50',
+          'bg-primary-500 text-shade-light',
           'hover:bg-primary-700',
           'focus:bg-primary-700',
           'active:bg-primary-900'
         ),
-        primaryDisabled: 'cursor-not-allowed bg-primary-100 text-neutral-50',
+        primaryDisabled: 'cursor-not-allowed bg-primary-100 text-shade-light',
         secondary: cn(
           'border border-primary-700 bg-neutral-50 text-primary-700',
           'hover:bg-primary-700 hover:text-shade-light',
@@ -39,9 +39,9 @@ const buttonVariants = cva(
         ),
         ghost: cn(
           'text-primary-500',
-          'hover:bg-primary-300 hover:text-neutral-50',
-          'focus:bg-primary-300 focus:text-neutral-50',
-          'active:bg-primary-500 active:text-neutral-50'
+          'hover:bg-primary-300 hover:text-shade-light',
+          'focus:bg-primary-300 focus:text-shade-light',
+          'active:bg-primary-500 active:text-shade-light'
         ),
         link: cn(
           'text-primary-500 underline-offset-4 hover:underline',
