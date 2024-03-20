@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
+import { Button } from '~/components/ui';
 import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import { db } from '~/server/db';
 
 export default async function StudentActivities({
   params: { locale },
@@ -39,11 +39,13 @@ export default async function StudentActivities({
             { label: text.headings.ncc, href: '#ncc' },
           ].map(({ label, href }, index) => (
             <li key={index}>
-              <Link href={href}>
-                <button className="rounded-full px-4 py-2 transition-colors duration-300 hover:bg-primary-300">
-                  {label}
-                </button>
-              </Link>
+              <Button
+                asChild
+                className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
+                variant="ghost"
+              >
+                <Link href={href}>{label}</Link>
+              </Button>
             </li>
           ))}
         </ol>
@@ -58,13 +60,15 @@ export default async function StudentActivities({
           <WorkInProgress locale={locale} />
         </section>
 
-        <Link href={`/${locale}/student-activities/clubs`}>
-          <button
-            className={cn(
-              'inline-flex items-center gap-1 rounded-md border text-primary-700 md:gap-2',
-              'px-2 py-1 md:px-4 md:py-2'
-            )}
-          >
+        <Button
+          asChild
+          className={cn(
+            'inline-flex items-center gap-1 rounded-md border text-primary-700 md:gap-2',
+            'px-2 py-1 md:px-4 md:py-2'
+          )}
+          variant="outline"
+        >
+          <Link href={`/${locale}/student-activities/clubs`}>
             {text.sections.clubs.more}
             <span className="rotate-90">
               <FaArrowUp
@@ -74,8 +78,8 @@ export default async function StudentActivities({
                 )}
               />
             </span>
-          </button>
-        </Link>
+          </Link>
+        </Button>
       </section>
     </>
   );

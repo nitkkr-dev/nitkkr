@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
-import { ScrollArea } from '~/components/ui';
+import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
 
@@ -118,11 +118,13 @@ export default async function Notifications({
           </ScrollArea>
 
           <footer className="mt-auto inline-flex h-[10%] w-full justify-center">
-            <Link href={`/${locale}/noticeboard`}>
-              <button className="p-2 font-bold text-primary-700 lg:p-3 lg:text-lg xl:p-4">
-                {text.viewAll}
-              </button>
-            </Link>
+            <Button
+              asChild
+              className="p-2 font-bold text-primary-700 lg:p-3 lg:text-lg xl:p-4"
+              variant="ghost"
+            >
+              <Link href={`/${locale}/noticeboard`}>{text.viewAll}</Link>
+            </Button>
           </footer>
         </section>
       </article>

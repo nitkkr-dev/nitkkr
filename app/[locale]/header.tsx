@@ -4,6 +4,7 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 
 import LocaleSwitcher from '~/components/locale-switcher';
+import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -51,9 +52,14 @@ export default async function Header({ locale }: { locale: string }) {
           ))}
         </ol>
 
-        <ol className="inline-flex gap-2">
-          <li>
-            <button className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
+        <ol className="inline-flex h-10 gap-2">
+          <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
+            <Button
+              asChild
+              className={locale === 'hi' ? 'border-none' : undefined}
+              disabled={locale === 'en'}
+              variant="outline"
+            >
               <LocaleSwitcher
                 className={cn(
                   'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
@@ -68,6 +74,13 @@ export default async function Header({ locale }: { locale: string }) {
                   English
                 </span>
               </LocaleSwitcher>
+            </Button>
+            <Button
+              asChild
+              className={locale === 'en' ? 'border-none' : undefined}
+              disabled={locale === 'hi'}
+              variant="outline"
+            >
               <LocaleSwitcher
                 className={cn(
                   'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
@@ -82,34 +95,36 @@ export default async function Header({ locale }: { locale: string }) {
                   हिंदी
                 </span>
               </LocaleSwitcher>
-            </button>
+            </Button>
           </li>
           <li>
-            <Link href={`/${locale}/search`}>
-              <FaMagnifyingGlass
-                className="p-2 text-primary-700 xl:hidden"
-                size={40}
-              />
-              <button
-                className={cn(
-                  'hidden xl:flex',
-                  'button hover:text-inherit group h-full w-60 items-center gap-3 rounded-xl border px-4'
-                )}
-              >
+            <Button asChild className="xl:hidden" variant="icon">
+              <Link href={`/${locale}/search`}>
+                <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              className={cn(
+                'hidden xl:flex',
+                'group h-full w-60 gap-3 bg-neutral-50 px-4'
+              )}
+              variant="secondary"
+            >
+              <Link href={`/${locale}/search`}>
                 <FaMagnifyingGlass size={16} />
                 <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
                   {text.search}
                 </span>
                 <kbd className="font-sans font-medium opacity-50">Ctrl K</kbd>
-              </button>
-            </Link>
+              </Link>
+            </Button>
           </li>
           <li className="hidden lg:block">
-            <Link href={`/${locale}/login`}>
-              <button className="button-emphasised h-full w-16 rounded-xl xl:w-20">
-                {text.login}
-              </button>
-            </Link>
+            <Button asChild className="h-full w-16 xl:w-20">
+              <Link href={`/${locale}/login`}>{text.login}</Link>
+            </Button>
           </li>
           <li className="lg:hidden">
             <IoMenu
