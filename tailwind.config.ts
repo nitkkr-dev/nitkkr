@@ -75,5 +75,5 @@ export default {
       xs: ['12px', { lineHeight: '20px' }],
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 } satisfies Config;
