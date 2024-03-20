@@ -25,11 +25,7 @@ export default function Slideshow({
         className="w-full"
         opts={options}
         onHoverKeyboardControls
-        plugins={[
-          Autoplay({
-            delay: 7000,
-          }),
-        ]}
+        plugins={[Autoplay({ delay: 7000 })]}
       >
         <CarouselContent>
           {images.map(({ image, title, subtitle }, index) => (
