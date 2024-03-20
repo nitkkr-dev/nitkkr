@@ -10,7 +10,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '~/components/ui/carousel';
+} from '~/components/ui';
 
 export default function Slideshow({
   images,
@@ -22,7 +22,7 @@ export default function Slideshow({
   return (
     <article className="relative overflow-x-hidden">
       <Carousel
-        className=" w-full"
+        className="w-full"
         opts={options}
         onHoverKeyboardControls
         plugins={[
@@ -57,14 +57,8 @@ export default function Slideshow({
         </CarouselContent>
 
         <section className="container absolute inset-0 top-[50%] flex h-0 justify-between">
-          <CarouselPrevious
-            className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
-            variant={'ghost'}
-          />
-          <CarouselNext
-            className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
-            variant={'ghost'}
-          />
+          <CarouselPrevious className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0" />
+          <CarouselNext className="static opacity-60 hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0" />
         </section>
       </Carousel>
     </article>
