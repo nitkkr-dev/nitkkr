@@ -6,7 +6,6 @@ import {
   FaGlobeAfrica,
   FaLaptop,
   FaLeaf,
-  FaSolarPanel,
 } from 'react-icons/fa';
 import { FaGears } from 'react-icons/fa6';
 import { ImLab } from 'react-icons/im';
@@ -14,6 +13,7 @@ import {
   MdDeveloperBoard,
   MdElectricalServices,
   MdHouseSiding,
+  MdOutlineSolarPower,
 } from 'react-icons/md';
 import { SiAdobedreamweaver } from 'react-icons/si';
 
@@ -29,10 +29,10 @@ const DEPARTMENTS = [
   <MdElectricalServices key="electricalServices" />,
   <FaBroadcastTower key="broadcastTower" />,
   <FaLeaf key="leaf" />,
-  <FaGears key="gears" />,
   <AiOutlineCalculator key="calculator" />,
+  <FaGears key="gears" />,
   <FaGlobeAfrica key="globeAfrica" />,
-  <FaSolarPanel key="solarPanel" />,
+  <MdOutlineSolarPower key="solarPanel" />,
   <SiAdobedreamweaver key="dreamweaver" />,
 ];
 

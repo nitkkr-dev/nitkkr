@@ -69,9 +69,11 @@ export default async function DepartmentGallery({
       </Carousel>
       <Link
         href="/gallery"
-        className="mx-[32vw] mb-5 block w-fit rounded-md border border-primary-700 text-center hover:text-background"
+        className="mb-5 flex w-full justify-center text-center hover:text-background"
       >
-        <p className="px-2 pt-1 text-primary-700">View Full Gallery &rarr;</p>
+        <p className="rounded-md border border-primary-700 p-2 text-primary-700 ">
+          View Full Gallery &rarr;
+        </p>
       </Link>
     </section>
   );
