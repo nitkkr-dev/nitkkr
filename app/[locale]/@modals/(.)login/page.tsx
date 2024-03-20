@@ -1,5 +1,5 @@
 import { Dialog } from '~/components/dialog';
-import LoginPage from '~/app/login/loginpage';
+import LoginPage from '~/app/login/login-page';
 
 export default function Login({
   params: { locale },

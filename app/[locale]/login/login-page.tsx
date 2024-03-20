@@ -1,17 +1,17 @@
 import { getTranslations } from '~/i18n/translations';
 
-import LoginButton from './loginbutton';
+import LoginButton from './login-button';
 
 const LoginPage = async ({ locale }: { locale: string }) => {
   const text = (await getTranslations(locale)).LoginText;
 
   return (
-    <div className="bg-loginBackground flex h-auto grow flex-col items-center justify-center rounded-lg bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay ">
+    <main className="bg-loginBackground flex h-auto grow flex-col items-center justify-center rounded-lg bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay ">
       <div className="mx-16 flex h-auto w-full grow flex-col items-center justify-center">
         <header className="mb-8 text-center">
           <h3 className="mt-4 text-primary-700">{text.title}</h3>
         </header>
-        <div className="w-full max-w-lg space-y-6">
+        <section className="w-full max-w-lg space-y-6">
           <div className="flex flex-col space-y-2">
             <h6 className="text-primary-700">{text.enterEmail}</h6>
             <input
@@ -29,10 +29,10 @@ const LoginPage = async ({ locale }: { locale: string }) => {
             <span className="mx-2 text-sm text-primary-700">{text.orText}</span>
             <div className="h-px w-full bg-primary-700" />
           </div>
-          <LoginButton logintext={text.signInWithGoogle} />
-        </div>
+          <LoginButton loginText={text.signInWithGoogle} />
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
