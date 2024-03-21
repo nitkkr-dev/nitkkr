@@ -172,130 +172,115 @@ export default function Faculty({ params }: { params: { id: number } }) {
   const [currentTab, setCurrentTab] = useState(0);
   return (
     <main className="mb-[72px] w-full px-[120px] pt-[258px]">
-      <section>
-        <div className="flex w-full gap-[20px]">
-          <div className=" h-[293px] w-[69vw] rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
-            <div className="px-[42px] py-[28.5px]">
-              <h2 className="text-primary-700">{profile.name}</h2>
-              <span className="text-neutral-40 text-xl font-medium">
-                {profile.designation}
+      <section className="flex w-full gap-[20px]">
+        <article className="h-[293px] w-[69vw] rounded-2xl bg-shade-light px-[42px] py-[28.5px] drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
+          <h2 className="text-primary-700">{profile.name}</h2>
+          <span className="text-neutral-40 text-xl font-medium">
+            {profile.designation}
+          </span>
+          <ul className="mt-[20px] font-medium">
+            <li>
+              <MdMail size={28} className="mr-[12px] inline text-primary-700" />
+              <span className="text-neutral-60 text-xl">{profile.email}</span>
+            </li>
+            <li>
+              <MdCall size={28} className="mr-[12px] inline text-primary-700" />
+              <span className="text-neutral-60 text-xl">
+                {profile.office_telephone}
               </span>
-              <div className="mt-[20px] font-medium">
-                <div>
-                  <MdMail
-                    size={28}
-                    className="mr-[12px] inline text-primary-700"
-                  />
-                  <span className="text-neutral-60 text-xl">
-                    {profile.email}
-                  </span>
-                </div>
-                <div>
-                  <MdCall
-                    size={28}
-                    className="mr-[12px] inline text-primary-700"
-                  />
-                  <span className="text-neutral-60 text-xl">
-                    {profile.office_telephone}
-                  </span>
-                </div>
-                <div>
-                  <MdLocationOn
-                    size={28}
-                    className="mr-[12px] inline text-primary-700"
-                  />
-                  <span className="text-neutral-60 text-xl">NIT Campus</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Image
-            alt="0"
-            width={200}
-            height={200}
-            className="absolute z-10 h-[200px] w-[200px] translate-x-[calc(50vw-20px-100%)] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
-            src="https://s3-alpha-sig.figma.com/img/d8be/da0e/c0b786889eedb113cb80b5b614b1b2a3?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VH9-ydELNDzxK4m1hCNIPpc0BpASzL0Rhh5aHqzavUR1PGDQDVzp1m3ABl4GQfgXAcXF8jZBozczDinIx9FlXkvpptjDEPInQRHlMNh02hY0jCibJGKqLKDCwB8GlSoMGBgCV1~F6HlS9lYVA1159~6Sc7VHZtgutIVzB95b~Bo3sk8vL5~K8Z0239-asryOoiXmgl3gg~GcBIqlzi3yxMQcAwLRKxprk3ZltW1NmMQW8UJh-bo~UfnIE6mGFeTtcjDaixpTr-fBcHSbys0GWVoM3422Tf-GIH6XkFzR-s63nnFaOtEzidYFn9aQ5zYfIITgIT1ziv7cAXrPE5e6IA__"
-          ></Image>
-          <div className="h-[293px] w-[69vw] rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
-            <div className="flex justify-end gap-[16px] py-[36.5px] pr-[42px]">
-              <div className="h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
-                <h1 className="mb-[16px]">24</h1>
-                <span className="text-lg font-bold">PUBLICATIONS</span>
-              </div>
-              <div className=" h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
-                <h1 className="mb-[16px]">12</h1>
-                <span className="text-lg font-bold">CONTINUING EDUCATION</span>
-              </div>
-              <div className="h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
-                <h1 className="mb-[16px]">24</h1>
-                <span className="text-lg font-bold">DOCTORAL STUDENTS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-[32px] flex w-full gap-[76px]">
-          {links.map((link) => (
+            </li>
+            <li>
+              <MdLocationOn
+                size={28}
+                className="mr-[12px] inline text-primary-700"
+              />
+              <span className="text-neutral-60 text-xl">NIT Campus</span>
+            </li>
+          </ul>
+        </article>
+        <Image
+          alt="0"
+          width={200}
+          height={200}
+          className="absolute z-10 h-[200px] w-[200px] translate-x-[calc(50vw-20px-100%)] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
+          src="https://s3-alpha-sig.figma.com/img/d8be/da0e/c0b786889eedb113cb80b5b614b1b2a3?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VH9-ydELNDzxK4m1hCNIPpc0BpASzL0Rhh5aHqzavUR1PGDQDVzp1m3ABl4GQfgXAcXF8jZBozczDinIx9FlXkvpptjDEPInQRHlMNh02hY0jCibJGKqLKDCwB8GlSoMGBgCV1~F6HlS9lYVA1159~6Sc7VHZtgutIVzB95b~Bo3sk8vL5~K8Z0239-asryOoiXmgl3gg~GcBIqlzi3yxMQcAwLRKxprk3ZltW1NmMQW8UJh-bo~UfnIE6mGFeTtcjDaixpTr-fBcHSbys0GWVoM3422Tf-GIH6XkFzR-s63nnFaOtEzidYFn9aQ5zYfIITgIT1ziv7cAXrPE5e6IA__"
+        ></Image>
+        <article className="h-[293px] w-[69vw] rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
+          <ul className="flex justify-end gap-[16px] py-[36.5px] pr-[42px]">
+            <li className="h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
+              <h1 className="mb-[16px]">24</h1>
+              <span className="text-lg font-bold">PUBLICATIONS</span>
+            </li>
+            <li className=" h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
+              <h1 className="mb-[16px]">12</h1>
+              <span className="text-lg font-bold">CONTINUING EDUCATION</span>
+            </li>
+            <li className="h-[220px] w-[210px] rounded-xl bg-primary-700 px-[24px] py-[42px] text-center text-shade-light">
+              <h1 className="mb-[16px]">24</h1>
+              <span className="text-lg font-bold">DOCTORAL STUDENTS</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+      <section className="mt-[32px] flex w-full gap-[76px]">
+        {links.map((link) => (
+          <button
+            className="flex h-[240px] flex-grow basis-0 flex-col rounded-2xl bg-shade-light py-[36px] drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]"
+            key={link.label}
+          >
+            <Image
+              alt={link.label}
+              src={link.icon}
+              height={109}
+              width={109}
+              className="m-auto"
+            ></Image>
+            <h5 className="m-auto">{link.label}</h5>
+          </button>
+        ))}
+      </section>
+      <section className="mt-[32px] flex w-full gap-[36px]">
+        <nav className="flex w-[491px] flex-col gap-[24px]">
+          {profileTabs.map((tab) => (
             <button
-              className="flex h-[240px] flex-grow basis-0 flex-col rounded-2xl bg-shade-light py-[36px] drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]"
-              key={link.label}
+              key={tab.label}
+              className={
+                'h-[84px] w-[491px] rounded-2xl border-[1px] border-primary-700 px-[36px] py-[24px] text-left text-xl font-bold hover:bg-primary-700 hover:text-shade-light hover:drop-shadow-2xl ' +
+                (currentTab === profileTabs.indexOf(tab)
+                  ? 'bg-primary-700 text-shade-light'
+                  : 'bg-shade-light text-primary-700')
+              }
+              onClick={() => setCurrentTab(profileTabs.indexOf(tab))}
             >
-              <Image
-                alt={link.label}
-                src={link.icon}
-                height={109}
-                width={109}
-                className="m-auto"
-              ></Image>
-              <h5 className="m-auto">{link.label}</h5>
+              <tab.icon size={28} className="mr-[16px] inline" />
+              {tab.label.toUpperCase()}
             </button>
           ))}
-        </div>
-        <div className="mt-[32px] flex w-full gap-[36px]">
-          <div className="flex w-[491px] flex-col gap-[24px]">
-            {profileTabs.map((tab) => (
-              <button
-                key={tab.label}
-                className={
-                  'h-[84px] w-[491px] rounded-2xl border-[1px] border-primary-700 px-[36px] py-[24px] text-left text-xl font-bold hover:bg-primary-700 hover:text-shade-light hover:drop-shadow-2xl ' +
-                  (currentTab === profileTabs.indexOf(tab)
-                    ? 'bg-primary-700 text-shade-light'
-                    : 'bg-shade-light text-primary-700')
-                }
-                onClick={() => setCurrentTab(profileTabs.indexOf(tab))}
+        </nav>
+        <div className="flex h-[732px] grow flex-col gap-[24px] rounded-2xl bg-shade-light p-[24px] drop-shadow-[0_4px_24px_rgba(0,43,1,0.1)]">
+          <header className="flex w-full">
+            <h4 className="text-primary-700">
+              {profileTabs[currentTab].label}
+            </h4>
+            {/* TODO: edit button */}
+          </header>
+          <article className="mb-[12px] mr-[8px] flex h-full w-full flex-col gap-[12px] overflow-auto">
+            {profileTabs[currentTab].items.map((item) => (
+              <p
+                key={item.name}
+                className="flex w-full flex-col gap-3 rounded-xl px-6 py-[20px] shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
               >
-                <tab.icon size={28} className="mr-[16px] inline" />
-                {tab.label.toUpperCase()}
-              </button>
+                <span className="text-[24px] font-bold">{item.name}</span>
+                <span className="text-[20px]">{item.value}</span>
+                <span className="text-[20px] text-neutral-600">
+                  {item.caption}
+                </span>
+                <span className="text-[16px] text-neutral-400">
+                  {item.year}
+                </span>
+              </p>
             ))}
-          </div>
-          <div className="flex h-[732px] grow flex-col gap-[24px] rounded-2xl bg-shade-light p-[24px] drop-shadow-[0_4px_24px_rgba(0,43,1,0.1)]">
-            <div className="flex w-full">
-              <h4 className="text-primary-700">
-                {profileTabs[currentTab].label}
-              </h4>
-            </div>
-            <div className="mb-[12px] mr-[8px] flex h-full w-full flex-col gap-[12px] overflow-auto">
-              {profileTabs[currentTab].items.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex w-full flex-col gap-3 rounded-xl px-6 py-[20px] shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
-                >
-                  <span className="text-shade-light0 text-[24px] font-bold">
-                    {item.name}
-                  </span>
-                  <span className="text-shade-light0 text-[20px]">
-                    {item.value}
-                  </span>
-                  <span className="text-[20px] text-neutral-600">
-                    {item.caption}
-                  </span>
-                  <span className="text-[16px] text-neutral-400">
-                    {item.year}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </article>
         </div>
       </section>
     </main>
