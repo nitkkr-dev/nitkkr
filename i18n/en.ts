@@ -54,6 +54,26 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  Search: {
+    placeholders: 'Quick Search...',
+    filters: [
+      'All Results',
+      'Web Pages',
+      'People',
+      'Documents',
+      'Events',
+      'News',
+      'Courses',
+      'Clubs',
+      'Positions',
+    ],
+    recents: 'Recent Searches',
+    clearRecents: 'clear recents',
+    mostSearched: 'Most Searched at NITKKR',
+    studentQuickLinks: 'Student Quick Links',
+    facultyQuickLinks: 'Faculty Quick Links',
+    viewAll: 'View All',
+  },
   StudentActivities: {
     title: 'Student Activities',
     headings: {
@@ -74,6 +94,13 @@ const text: Translations = {
     title: 'Work In Progress',
     description:
       'This page is currently being worked on. Please visit another time',
+  },
+  LoginText: {
+    title: 'Sign In',
+    enterEmail: 'Enter Your Email',
+    continueButton: 'Continue',
+    orText: 'OR',
+    signInWithGoogle: 'Sign in with Google',
   },
 };
 

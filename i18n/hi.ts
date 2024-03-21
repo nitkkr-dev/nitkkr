@@ -33,7 +33,7 @@ const text: Translations = {
     alumni: 'भूतपूर्व छात्र',
     logo: 'प्रतीक चिन्ह',
     search: 'त्वरित खोज...',
-    login: 'लॉगिन',
+    login: 'प्रवेश',
   },
   Notifications: {
     title: 'सूचनाएं',
@@ -49,6 +49,26 @@ const text: Translations = {
     title: 'नहीं मिला',
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
+  },
+  Search: {
+    placeholders: 'त्वरित खोज...',
+    filters: [
+      'सभी परिणाम',
+      'वेब पृष्ठ',
+      'लोग',
+      'दस्तावेज़',
+      'आयोजन',
+      'समाचार',
+      'पाठ्यक्रम',
+      'क्लब',
+      'पद',
+    ],
+    recents: 'ताज़ा खोजें',
+    clearRecents: 'हाल की खोजें साफ़ करें',
+    mostSearched: 'एनआईटी की सर्वाधिक खोजें',
+    studentQuickLinks: 'छात्र त्वरित लिंक',
+    facultyQuickLinks: 'संकाय त्वरित लिंक',
+    viewAll: 'सारा देखें',
   },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
@@ -69,6 +89,13 @@ const text: Translations = {
   WorkInProgress: {
     title: 'कार्य प्रगति पर है',
     description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
+  },
+  LoginText: {
+    title: 'प्रवेश करें',
+    enterEmail: 'अपना ईमेल दर्ज करें',
+    continueButton: 'अगले चरण पर बढ़ें',
+    orText: 'या',
+    signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
   },
 };
 

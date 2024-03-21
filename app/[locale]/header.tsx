@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 
+import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
@@ -99,9 +100,9 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li>
             <Button asChild className="xl:hidden" variant="icon">
-              <Link href={`/${locale}/search`}>
+              <CtrlLink href={`/${locale}/search`} shortcut="k">
                 <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
-              </Link>
+              </CtrlLink>
             </Button>
 
             <Button
@@ -112,13 +113,13 @@ export default async function Header({ locale }: { locale: string }) {
               )}
               variant="secondary"
             >
-              <Link href={`/${locale}/search`}>
+              <CtrlLink href={`/${locale}/search`} shortcut="k">
                 <FaMagnifyingGlass size={16} />
                 <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
                   {text.search}
                 </span>
                 <kbd className="font-sans font-medium opacity-50">Ctrl K</kbd>
-              </Link>
+              </CtrlLink>
             </Button>
           </li>
           <li className="hidden lg:block">

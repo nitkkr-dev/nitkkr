@@ -41,6 +41,16 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  Search: {
+    placeholders: string;
+    filters: string[];
+    recents: string;
+    clearRecents: string;
+    mostSearched: string;
+    studentQuickLinks: string;
+    facultyQuickLinks: string;
+    viewAll: string;
+  };
   StudentActivities: {
     title: string;
     headings: {
@@ -57,4 +67,11 @@ export interface Translations {
   };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
+  LoginText: {
+    title: string;
+    enterEmail: string;
+    continueButton: string;
+    orText: string;
+    signInWithGoogle: string;
+  };
 }
