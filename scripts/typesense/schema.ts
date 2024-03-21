@@ -1,32 +1,22 @@
 import { CollectionCreateSchema } from 'typesense/lib/Typesense/Collections'
 
-export const courseSchema: CollectionCreateSchema = {
-    'name': 'courses',
+export const webPageSchema: CollectionCreateSchema = {
+    'name': 'webPages',
     'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
-            'facet': false
-        },
-        {
-            'name': 'title',
-            'type': 'string',
-            'facet': false
-        },
-        {
-            'name': 'code',
+            'name': 'content',
             'type': 'string',
             'facet': false
         },
     ],
 }
 
-export const clubSchema: CollectionCreateSchema = {
-    'name': 'clubs',
+export const peopleSchema: CollectionCreateSchema = {
+    'name': 'people',
     'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
+            'name': 'image',
+            'type': 'string',
             'facet': false
         },
         {
@@ -35,23 +25,22 @@ export const clubSchema: CollectionCreateSchema = {
             'facet': false
         },
         {
-            'name': 'club_id',
+            'name': 'designation',
             'type': 'string',
             'facet': false
         },
-    ],
-}
-
-export const departmentSchema: CollectionCreateSchema = {
-    'name': 'departments',
-    'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
+            'name': 'email',
+            'type': 'string',
             'facet': false
         },
         {
-            'name': 'name',
+            'name': 'phone',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'address',
             'type': 'string',
             'facet': false
         },
@@ -62,34 +51,118 @@ export const documentSchema: CollectionCreateSchema = {
     'name': 'documents',
     'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
-            'facet': false
-        },
-        {
-            'name': 'title',
-            'type': 'string',
-            'facet': false
-        },
-        {
-            'name': 'url',
+            'name': 'content',
             'type': 'string',
             'facet': false
         },
     ],
 }
 
-export const facultySchema: CollectionCreateSchema = {
-    'name': 'faculty',
+export const eventSchema: CollectionCreateSchema = {
+    'name': 'events',
     'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
+            'name': 'image',
+            'type': 'string',
             'facet': false
         },
         {
-            'name': 'name',
+            'name': 'heading',
             'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'subHeading',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'location',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'date',
+            'type': 'string',
+            'facet': false
+        },
+    ],
+}
+
+export const newsSchema: CollectionCreateSchema = {
+    'name': 'news',
+    'fields': [
+        {
+            'name': 'content',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'image',
+            'type': 'string',
+            'facet': false
+        },
+    ],
+}
+
+export const courseSchema: CollectionCreateSchema = {
+    'name': 'courses',
+    'fields': [
+        {
+            'name': 'subHeading',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'programme',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'programmeDuration',
+            'type': 'string',
+            'facet': false
+        },
+    ],
+}
+
+export const clubSchema: CollectionCreateSchema = {
+    'name': 'clubs',
+    'fields': [
+        {
+            'name': 'image',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'subHeading',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'delegation',
+            'type': 'auto',
+            'facet': false
+        },
+    ],
+}
+
+export const positionSchema: CollectionCreateSchema = {
+    'name': 'positions',
+    'fields': [
+        {
+            'name': 'position',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'organisation',
+            'type': 'string',
+            'facet': false
+        },
+        {
+            'name': 'names',
+            'type': 'string[]',
             'facet': false
         },
         {
@@ -97,45 +170,13 @@ export const facultySchema: CollectionCreateSchema = {
             'type': 'string',
             'facet': false
         },
-    ],
-}
-
-export const sectionSchema: CollectionCreateSchema = {
-    'name': 'sections',
-    'fields': [
         {
-            'name': 'id',
-            'type': 'int32',
-            'facet': false
-        },
-        {
-            'name': 'name',
-            'type': 'string',
-            'facet': false
-        },
-    ],
-}
-
-export const studentSchema: CollectionCreateSchema = {
-    'name': 'students',
-    'fields': [
-        {
-            'name': 'id',
-            'type': 'int32',
-            'facet': false
-        },
-        {
-            'name': 'name',
+            'name': 'phone',
             'type': 'string',
             'facet': false
         },
         {
-            'name': 'roll_number',
-            'type': 'string',
-            'facet': false
-        },
-        {
-            'name': 'email',
+            'name': 'address',
             'type': 'string',
             'facet': false
         },

@@ -2,7 +2,7 @@ import Typesense, { Client } from 'typesense'
 import { readFile } from 'fs/promises'
 import { PathLike } from 'fs'
 import { CollectionCreateSchema } from 'typesense/lib/Typesense/Collections'
-import { courseSchema, clubSchema, departmentSchema, documentSchema, facultySchema, sectionSchema, studentSchema } from './schema'
+import { webPageSchema, peopleSchema, documentSchema, eventSchema, newsSchema, courseSchema, clubSchema, positionSchema } from './schema'
 
 // Run the typesense server on the machine for this to work
 const client = new Typesense.Client({
@@ -38,13 +38,14 @@ async function indexDocument(client: Client, collectionName: string, path: PathL
     console.log(message)
 }
 
+createCollection(client, webPageSchema)
+createCollection(client, peopleSchema)
+createCollection(client, documentSchema)
+createCollection(client, eventSchema)
+createCollection(client, newsSchema)
 createCollection(client, courseSchema)
 createCollection(client, clubSchema)
-createCollection(client, departmentSchema)
-createCollection(client, documentSchema)
-createCollection(client, facultySchema)
-createCollection(client, sectionSchema)
-createCollection(client, studentSchema)
+createCollection(client, positionSchema)
 
 indexDocument(client, 'students', './students_demo.jsonl')
 retrieveAll(client)

@@ -5,22 +5,24 @@ export interface CollectionMap {
 // todo: derive this from collectionMap
 // name of all the collections
 export const collections: string[] = [
+    'webPages',
+    'people',
+    'documents',
+    'events',
+    'news',
     'courses',
     'clubs',
-    'departments',
-    'documents',
-    'faculty',
-    'sections',
-    'students',
+    'positions',
 ]
 
 // collection name : all searchable fields
 export const collectionMap: CollectionMap = {
-    'courses': 'title, code',
-    'clubs': 'name',
-    'documents': 'title',
-    'departments': 'name',
-    'faculty': 'name',
-    'sections': 'name',
-    'students': 'name, email',
+    'webPages': 'content',
+    'people': 'image, name, designation, email, phone, address',
+    'documents': 'content',
+    'events': 'image, heading, subHeading, location, date',
+    'news': 'content, image',
+    'courses': 'subHeading, programme, programmeDuration',
+    'clubs': 'image, subHeading, delegation',
+    'positions': 'position, organisation, names, email, phone, address',
 }
