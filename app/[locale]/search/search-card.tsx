@@ -63,38 +63,38 @@ interface PostionCard {
 }
 
 export type CardContent =
-  | (WebPageCard & { index: 0 })
-  | (PeopleCard & { index: 1 })
-  | (DocumentCard & { index: 2 })
-  | (EventCard & { index: 3 })
-  | (NewsCard & { index: 4 })
-  | (CourseCard & { index: 5 })
-  | (ClubCard & { index: 6 })
-  | (PostionCard & { index: 7 });
+  | (WebPageCard & { category: 'webPages' })
+  | (PeopleCard & { category: 'people' })
+  | (DocumentCard & { category: 'documents' })
+  | (EventCard & { category: 'events' })
+  | (NewsCard & { category: 'news' })
+  | (CourseCard & { category: 'courses' })
+  | (ClubCard & { category: 'clubs' })
+  | (PostionCard & { category: 'positions' });
 
-export type CardContentWithLabel = (
-  | WebPageCard
-  | PeopleCard
-  | DocumentCard
-  | EventCard
-  | NewsCard
-  | CourseCard
-  | ClubCard
-  | PostionCard
-) & { label: string; value: string };
+export interface SearchResult {
+  webPages: (WebPageCard & { label: string; value: string })[];
+  people: (PeopleCard & { label: string; value: string })[];
+  documents: (DocumentCard & { label: string; value: string })[];
+  events: (EventCard & { label: string; value: string })[];
+  news: (NewsCard & { label: string; value: string })[];
+  courses: (CourseCard & { label: string; value: string })[];
+  clubs: (ClubCard & { label: string; value: string })[];
+  positions: (PostionCard & { label: string; value: string })[];
+}
 
 const SearchCard: React.FC<{
   cardContent: CardContent;
 }> = ({ cardContent }) => {
-  switch (cardContent.index) {
-    case 0:
+  switch (cardContent.category) {
+    case 'webPages':
       return (
         <article className="w-full rounded-lg bg-shade-light p-3 md:px-4">
           <h5 className="text-primary-300">{cardContent.heading}</h5>
           <p className="text-neutral-600">{cardContent.content}</p>
         </article>
       );
-    case 1:
+    case 'people':
       return (
         <article className="rounded-lg bg-shade-light p-3 sm:grid-cols-8 md:grid md:px-4">
           <header className="col-span-3 flex items-center gap-2">
@@ -127,14 +127,14 @@ const SearchCard: React.FC<{
           </div>
         </article>
       );
-    case 2:
+    case 'documents':
       return (
         <article className="flex w-full items-center gap-2 rounded-lg bg-shade-light p-3 md:px-4">
           <RxDownload className="inline-block h-14 min-w-14 p-4" />
           <p className="text-neutral-600">{cardContent.content}</p>
         </article>
       );
-    case 3:
+    case 'events':
       return (
         <article className="flex w-full items-center gap-8 rounded-lg bg-shade-light p-3 md:px-4">
           <Image
@@ -163,7 +163,7 @@ const SearchCard: React.FC<{
           </div>
         </article>
       );
-    case 4:
+    case 'news':
       return (
         <article className="w-full rounded-lg bg-shade-light p-3 md:px-4">
           <h5 className="text-primary-300">{cardContent.heading}</h5>
@@ -183,7 +183,7 @@ const SearchCard: React.FC<{
           </div>
         </article>
       );
-    case 5:
+    case 'courses':
       return (
         <article className="grid w-full flex-wrap items-center gap-2 rounded-lg bg-shade-light p-3 sm:grid-cols-2 md:px-4">
           <header>
@@ -200,7 +200,7 @@ const SearchCard: React.FC<{
           </div>
         </article>
       );
-    case 6:
+    case 'clubs':
       return (
         <article className="flex w-full flex-wrap gap-2 rounded-lg bg-shade-light p-3">
           <header className="flex gap-2">
@@ -228,7 +228,7 @@ const SearchCard: React.FC<{
           </ol>
         </article>
       );
-    case 7:
+    case 'positions':
       return (
         <article className="flex w-full flex-wrap items-center  gap-5 rounded-lg bg-shade-light p-3 md:px-4">
           <header>

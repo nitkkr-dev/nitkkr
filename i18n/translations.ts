@@ -44,6 +44,17 @@ export interface Translations {
   Search: {
     placeholder: string;
     categories: string[];
+    categores: {
+      allResults: string;
+      webPages: string;
+      people: string;
+      documents: string;
+      events: string;
+      news: string;
+      courses: string;
+      clubs: string;
+      positions: string;
+    };
     viewAll: string;
     default: {
       recents: string;
