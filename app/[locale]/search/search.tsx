@@ -64,7 +64,7 @@ export default async function Search({
   const selectedCategory = globalCategories.indexOf(category);
 
   return (
-    <search className="max-h-full space-y-4">
+    <search className="flex max-h-full flex-col gap-4">
       <Searchbar placeholder={text.placeholder} />
       <article
         className={cn(
