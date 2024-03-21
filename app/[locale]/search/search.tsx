@@ -13,25 +13,11 @@ import { MdEmojiEvents, MdSchool } from 'react-icons/md';
 import { LocalStorageLink } from '~/components/link';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
+import { cn, getKeys } from '~/lib/utils';
 
-import SearchCard, {
-  type CardContent,
-  type CardContentWithLabel,
-} from './search-card';
+import SearchCard, { type CardContent, type SearchResult } from './search-card';
 import { Recents, Searchbar } from './search-utils';
-
-const globalCategories = [
-  'allResults',
-  'webPages',
-  'people',
-  'documents',
-  'events',
-  'news',
-  'courses',
-  'clubs',
-  'positions',
-];
+import type { searchCategory } from '../@modals/(.)search/page';
 
 const categoryIconMapping = {
   course: MdSchool,
@@ -44,24 +30,19 @@ const categoryIconMapping = {
 
 export default async function Search({
   query,
-  category,
+  selectedCategory,
   locale,
 }: {
   query?: string;
-  category:
-    | 'allResults'
-    | 'webPages'
-    | 'people'
-    | 'documents'
-    | 'events'
-    | 'news'
-    | 'courses'
-    | 'clubs'
-    | 'positions';
+  selectedCategory: searchCategory;
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Search;
-  const selectedCategory = globalCategories.indexOf(category);
+  const currentCategory = getKeys(text.categores)
+    .slice(1)
+    .includes(selectedCategory)
+    ? selectedCategory
+    : 'allResults';
 
   return (
     <search className="flex max-h-full flex-col gap-4">
@@ -77,14 +58,14 @@ export default async function Search({
           <>
             <nav className="mb-5">
               <ul className="flex w-full snap-x space-x-2 overflow-auto sm:space-x-3">
-                {text.categories.map((category, index) => (
+                {getKeys(text.categores).map((category, index) => (
                   <li key={index} className="snap-start">
                     <Button
                       asChild
                       className={cn(
                         'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
                         'sm:rounded-md sm:p-2',
-                        index === selectedCategory
+                        category == currentCategory
                           ? 'bg-primary-700 text-shade-light'
                           : 'bg-opacity-60'
                       )}
@@ -92,12 +73,12 @@ export default async function Search({
                     >
                       <Link
                         href={{
-                          query: { query, category: globalCategories[index] },
+                          query: { query, category: category },
                         }}
                         prefetch
                         replace
                       >
-                        {category}
+                        {text.categores[category]}
                       </Link>
                     </Button>
                   </li>
@@ -111,10 +92,10 @@ export default async function Search({
             >
               <Suspense fallback={<h5>loader</h5>}>
                 <ResultsView
-                  categories={text.categories}
+                  categories={text.categores}
                   locale={locale}
                   query={query}
-                  selectedCategory={selectedCategory}
+                  currentCategory={currentCategory}
                   viewAll={text.viewAll}
                 />
               </Suspense>
@@ -252,17 +233,17 @@ const ResultsView = async ({
   categories,
   locale,
   query,
-  selectedCategory,
+  currentCategory,
   viewAll,
 }: {
-  categories: string[];
+  categories: Record<string, string>;
   locale: string;
   query?: string;
-  selectedCategory: number;
+  currentCategory: searchCategory;
   viewAll: string;
 }) => {
-  const results: CardContentWithLabel[][] = [
-    [
+  const results: SearchResult = {
+    webPages: [
       {
         heading: 'NIT Departments',
         content:
@@ -285,7 +266,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    people: [
       {
         image:
           'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mlbfNQ6wxBAY-4fFaqTYC93tfMAryRfAx90MX9agQ934LlsGw32jCT~ANs0paIfIrybCqF21-25noYI9BAfDQVNpyj7t80k~mITw48TkuN8COo4L2nDP1ZWXcsQKAcfMdHSLUaxBERNdxl3aVTSv52r7o-~tCigNvGkI1T7Q~-bfu8euox~m2PWxJRbJ9pQt7S7qzwz6on0l6Bqzh9D26-TN7Aa7KwWerm4y4pzdeJ9hNZfhISv0aEbPHTGPBRZL9aNFSfvBVrEFlgtoJ3wj9uSi~Z6Q1SG0sX-CKuP57zNusgN8ZBjsJlAiH~6OQcX3nwEHPSJxipdip03kSvd5TA__',
@@ -320,7 +301,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    documents: [
       {
         content:
           'Student Fee Receipt 2023 - 24: Special bill with mess details included along with each item of food including the sauce that the students use to eat samosa ...',
@@ -328,7 +309,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    events: [
       {
         image:
           'https://s3-alpha-sig.figma.com/img/9b4c/ddde/89db0531d592d21458355e7e79bdfc97?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IcmdIhg2lv9wXJrQWvYiCmRSiuwvok1c5MosB1v9LbqVJ2Pguew9qyZRx8lKoa-1Q2T76hYFrpwKq32UIWTw-wKT~Bv2EogKzr7M~qWQesNQSrvp2E4PmwwZRS7zvuJlRv2XgP7zlSUxobfYqCj3pQ1N8gOXc0t6aFqRAD3qJrD0HGSOYjUPuAutPXUEltrkHv8GgLFUHq1u~apYFuSx-Se0YETQyfP3wSMmFzq5YMTe~H-Bnk8t1QOk8R95mepJuVcB-k4oIUtVxz8Fd5pec0D72EsMkbPE-3YHT07naDTCKmZLUbshqReOWrcxUKkxpAWCy2tYdm7VI9PmxR1UNA__',
@@ -340,7 +321,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    news: [
       {
         heading: 'Ceremony of NIT Departments',
         content:
@@ -359,7 +340,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    courses: [
       {
         heading: 'CSPC20',
         subHeading: 'Operating System',
@@ -377,7 +358,7 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-    [
+    clubs: [
       {
         image:
           'https://s3-alpha-sig.figma.com/img/4be8/b8d5/4905138091404e46eae4f448817ee3d9?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YFPsXa-gDKE9P7lxUTpGmZqq8PAgcAhRsUTabekQbTtSpgb~6u-L-yM8Od-TCD1mbCfVHusXYNAHWHf-tmqSwtG1fFfNHWKdlfFggRSMpDjh~jDSPI4Heh3m9n2L5e176SLmoQDSnJa56ajuXhawTSQZNWayNTA-HyxK3dOpMA-qeWkEBEzqUbzO~~sTQXtz0P-PWSY3r~svFPUUAiWqONzeWldHPCr-fADFHnNOWdKgHnsGUPAmBVUqiQbOyBIdsqxJTXjLhoogjGSLT2ljefVWzGhT8OaTJVlVD4CCxWMj3tDtwjWzTZ4Mh5VB1CjYfHIAlDp59J08MFtE9eha5Q__',
@@ -405,7 +386,7 @@ const ResultsView = async ({
         ],
       },
     ],
-    [
+    positions: [
       {
         position: 'Head of Operations',
         organisation: 'ISAC Project Team',
@@ -417,15 +398,15 @@ const ResultsView = async ({
         value: '/faculty/0',
       },
     ],
-  ];
+  };
 
-  return selectedCategory > 0 ? (
+  return currentCategory != 'allResults' ? (
     <>
       <header className="flex justify-between text-primary-700">
-        <h4>{categories[selectedCategory]}</h4>
+        <h4>{categories[currentCategory]}</h4>
       </header>
       <ul className="mb-5 space-y-3">
-        {results[selectedCategory - 1].map(
+        {results[currentCategory as keyof SearchResult].map(
           ({ label, value, ...result }, index) => (
             <li key={index}>
               <LocalStorageLink
@@ -433,7 +414,7 @@ const ResultsView = async ({
                 newItem={{
                   title: label,
                   href: `/${locale}/${value}`,
-                  category: 'FIXME',
+                  category: currentCategory,
                 }}
                 options={{ filter: true, unshift: true }}
                 replace
@@ -442,7 +423,7 @@ const ResultsView = async ({
                 <SearchCard
                   cardContent={
                     {
-                      index: selectedCategory - 1,
+                      category: currentCategory,
                       ...result,
                     } as CardContent
                   }
@@ -455,61 +436,68 @@ const ResultsView = async ({
     </>
   ) : (
     <ol className="space-y-5">
-      {categories.slice(1).map((category, index) => (
-        <li key={index}>
-          <header className="flex justify-between text-primary-700">
-            <h4>{category}</h4>
-            <Button
-              asChild
-              className={cn(
-                'inline-flex h-fit gap-1 md:gap-2',
-                'text-xs font-semibold sm:text-base md:text-sm',
-                'px-2 py-1 md:px-4 md:py-2'
-              )}
-              variant="ghost"
-            >
-              <Link
-                href={{
-                  href: locale,
-                  query: {
-                    query,
-                    category: globalCategories[index + 1],
-                  },
-                }}
-                replace
+      {getKeys(categories)
+        .slice(1)
+        .map((category, index) => (
+          <li key={index}>
+            <header className="flex justify-between text-primary-700">
+              <h4>{categories[category]}</h4>
+              <Button
+                asChild
+                className={cn(
+                  'inline-flex h-fit gap-1 md:gap-2',
+                  'text-xs font-semibold sm:text-base md:text-sm',
+                  'px-2 py-1 md:px-4 md:py-2'
+                )}
+                variant="ghost"
               >
-                {viewAll}
-                <span className="rotate-90">
-                  <FaArrowUp
-                    className={cn('mx-auto animate-bounce', 'size-2 lg:size-3')}
-                  />
-                </span>
-              </Link>
-            </Button>
-          </header>
-          <ul className="space-y-3">
-            {results[index].map(({ value, label, ...result }, i) => (
-              <li key={i}>
-                <LocalStorageLink
-                  href={`/${locale}/${value}`}
-                  newItem={{
-                    title: label,
-                    href: `/${locale}/${value}`,
-                    category: 'FIXME',
+                <Link
+                  href={{
+                    href: locale,
+                    query: {
+                      query,
+                      category: category,
+                    },
                   }}
-                  options={{ filter: true, unshift: true }}
                   replace
-                  storageKey="recentSearches"
                 >
-                  <SearchCard
-                    cardContent={{ index, ...result } as CardContent}
-                  />
-                </LocalStorageLink>
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
+                  {viewAll}
+                  <span className="rotate-90">
+                    <FaArrowUp
+                      className={cn(
+                        'mx-auto animate-bounce',
+                        'size-2 lg:size-3'
+                      )}
+                    />
+                  </span>
+                </Link>
+              </Button>
+            </header>
+            <ul className="space-y-3">
+              {results[category as keyof SearchResult].map(
+                ({ value, label, ...result }, i) => (
+                  <li key={i}>
+                    <LocalStorageLink
+                      href={`/${locale}/${value}`}
+                      newItem={{
+                        title: label,
+                        href: `/${locale}/${value}`,
+                        category: category,
+                      }}
+                      options={{ filter: true, unshift: true }}
+                      replace
+                      storageKey="recentSearches"
+                    >
+                      <SearchCard
+                        cardContent={{ category, ...result } as CardContent}
+                      />
+                    </LocalStorageLink>
+                  </li>
+                )
+              )}
+            </ul>
+          </li>
+        ))}
     </ol>
   );
 };

@@ -63,6 +63,17 @@ const text: Translations = {
       'क्लब',
       'पद',
     ],
+    categores: {
+      allResults: 'सभी परिणाम',
+      webPages: 'वेब पृष्ठ',
+      people: 'लोग',
+      documents: 'दस्तावेज़',
+      events: 'आयोजन',
+      news: 'समाचार',
+      courses: 'पाठ्यक्रम',
+      clubs: 'क्लब',
+      positions: 'पद',
+    },
     viewAll: 'सारा देखें',
     default: {
       recents: 'ताज़ा खोजें',

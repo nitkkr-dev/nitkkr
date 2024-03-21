@@ -67,6 +67,17 @@ const text: Translations = {
       'Clubs',
       'Positions',
     ],
+    categores: {
+      allResults: 'All Results',
+      webPages: 'Web Pages',
+      people: 'People',
+      documents: 'Documents',
+      events: 'Events',
+      news: 'News',
+      courses: 'Courses',
+      clubs: 'Clubs',
+      positions: 'Positions',
+    },
     viewAll: 'View All',
     default: {
       recents: 'Recent Searches',
