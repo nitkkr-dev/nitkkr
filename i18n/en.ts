@@ -55,8 +55,8 @@ const text: Translations = {
     backHome: 'Return Home',
   },
   Search: {
-    placeholders: 'Quick Search...',
-    filters: [
+    placeholder: 'Quick Search...',
+    categories: [
       'All Results',
       'Web Pages',
       'People',
@@ -67,12 +67,25 @@ const text: Translations = {
       'Clubs',
       'Positions',
     ],
-    recents: 'Recent Searches',
-    clearRecents: 'clear recents',
-    mostSearched: 'Most Searched at NITKKR',
-    studentQuickLinks: 'Student Quick Links',
-    facultyQuickLinks: 'Faculty Quick Links',
     viewAll: 'View All',
+    default: {
+      recents: 'Recent Searches',
+      clearRecents: 'clear recents',
+      mostSearched: 'Most Searched at NITKKR',
+      studentLinks: {
+        title: 'Student Quick Links',
+        clubs: 'Clubs',
+        courses: 'Courses',
+        departments: 'Departments',
+        notifications: 'Notifications',
+        results: 'Results',
+      },
+      facultyLinks: {
+        title: 'Faculty Quick Links',
+        notifications: 'Notifications',
+        profile: 'My Profile',
+      },
+    },
   },
   StudentActivities: {
     title: 'Student Activities',

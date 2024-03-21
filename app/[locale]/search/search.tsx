@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { FaArrowUp, FaMagnifyingGlass } from 'react-icons/fa6';
+import { BsPersonFill } from 'react-icons/bs';
+import {
+  FaArrowUp,
+  FaMagnifyingGlass,
+  FaPaperclip,
+  FaSchool,
+} from 'react-icons/fa6';
+import { IoNotifications } from 'react-icons/io5';
+import { MdEmojiEvents, MdSchool } from 'react-icons/md';
 
 import { LocalStorageLink } from '~/components/link';
-import { Button } from '~/components/ui';
+import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -13,7 +21,7 @@ import SearchCard, {
 } from './search-card';
 import { Recents, Searchbar } from './search-utils';
 
-const categories = [
+const globalCategories = [
   'allResults',
   'webPages',
   'people',
@@ -24,6 +32,15 @@ const categories = [
   'clubs',
   'positions',
 ];
+
+const categoryIconMapping = {
+  course: MdSchool,
+  department: FaSchool,
+  document: FaPaperclip,
+  event: MdEmojiEvents,
+  notification: IoNotifications,
+  person: BsPersonFill,
+};
 
 export default async function Search({
   query,
@@ -44,27 +61,206 @@ export default async function Search({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Search;
-  const selectedCategory = categories.indexOf(category);
-  const links = {
-    recents: [
-      { label: 'Departments', value: '/departments' },
-      { label: 'Academic', value: '/academic' },
-      { label: 'Spaghetti', value: '/spaghetti' },
-      { label: 'SPIC MACAY', value: '/clubs/0' },
-    ],
-    mostSearched: [
-      { label: 'Departments', value: '/departments' },
-      { label: 'Dr. Vikram Singh', value: '/faculty/0' },
-    ],
-    studentLinks: [
-      { label: 'Departments', value: '/departments' },
-      { label: 'Dr. Vikram Singh', value: '/faculty/0' },
-    ],
-    facultyLinks: [
-      { label: 'Departments', value: '/departments' },
-      { label: 'Dr. Vikram Singh', value: '/faculty/0' },
+  const selectedCategory = globalCategories.indexOf(category);
+
+  return (
+    <search className="max-h-full space-y-4">
+      <Searchbar placeholder={text.placeholder} />
+      <article
+        className={cn(
+          'flex grow flex-col overflow-auto rounded-lg',
+          'border border-primary-700 bg-background',
+          'p-4 sm:p-8 md:p-12'
+        )}
+      >
+        {query ? (
+          <>
+            <nav className="mb-5">
+              <ul className="flex w-full snap-x space-x-2 overflow-auto sm:space-x-3">
+                {text.categories.map((category, index) => (
+                  <li key={index} className="snap-start">
+                    <Button
+                      asChild
+                      className={cn(
+                        'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
+                        'sm:rounded-md sm:p-2',
+                        index === selectedCategory
+                          ? 'bg-primary-700 text-shade-light'
+                          : 'bg-opacity-60'
+                      )}
+                      variant="secondary"
+                    >
+                      <Link
+                        href={{
+                          query: { query, category: globalCategories[index] },
+                        }}
+                        prefetch
+                        replace
+                      >
+                        {category}
+                      </Link>
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <ScrollArea
+              className="h-svh w-full overflow-y-auto pr-4 sm:pr-6 lg:pr-8"
+              type="always"
+            >
+              <Suspense fallback={<h5>loader</h5>}>
+                <ResultsView
+                  categories={text.categories}
+                  locale={locale}
+                  query={query}
+                  selectedCategory={selectedCategory}
+                  viewAll={text.viewAll}
+                />
+              </Suspense>
+            </ScrollArea>
+          </>
+        ) : (
+          <DefaultView locale={locale} />
+        )}
+      </article>
+    </search>
+  );
+}
+
+export const MiniSearchLink = ({
+  item,
+}: {
+  item: {
+    title: string;
+    href: string;
+    category: string;
+  };
+}) => {
+  const Icon =
+    categoryIconMapping[item.category as keyof typeof categoryIconMapping] ??
+    FaMagnifyingGlass;
+
+  return (
+    <LocalStorageLink
+      className={cn(
+        'inline-flex items-center font-medium lg:text-lg',
+        'gap-2 md:gap-3 lg:gap-4'
+      )}
+      href={item.href}
+      newItem={item}
+      options={{ filter: true, unshift: true }}
+      replace
+      storageKey="recentSearches"
+    >
+      <Icon className={cn('fill-primary-500', 'size-2 md:size-3 lg:size-4')} />
+      {item.title}
+    </LocalStorageLink>
+  );
+};
+
+const DefaultView = async ({ locale }: { locale: string }) => {
+  const text = (await getTranslations(locale)).Search.default;
+
+  const mostSearched = {
+    title: text.mostSearched,
+    links: [
+      { title: 'Departments', href: 'departments', category: 'department' },
+      {
+        title: 'Dr. Vikram Singh',
+        href: 'faculty/0',
+        category: 'person',
+      },
     ],
   };
+  const studentLinks = {
+    title: text.studentLinks.title,
+    links: [
+      {
+        title: text.studentLinks.clubs,
+        href: 'student-activities/clubs',
+        category: 'event',
+      },
+      {
+        title: text.studentLinks.courses,
+        href: 'academics/courses',
+        category: 'course',
+      },
+      {
+        title: text.studentLinks.departments,
+        href: 'departments',
+        category: 'department',
+      },
+      {
+        title: text.studentLinks.notifications,
+        href: 'noticeboard',
+        category: 'notification',
+      },
+      {
+        title: text.studentLinks.results,
+        href: 'noticeboard?category=results',
+        category: 'notification',
+      },
+    ],
+  };
+  const facultyLinks = {
+    title: text.facultyLinks.title,
+    links: [
+      {
+        title: text.facultyLinks.notifications,
+        href: 'noticeboard',
+        category: 'notification',
+      },
+      {
+        title: text.facultyLinks.profile,
+        href: 'profile',
+        category: 'person',
+      },
+    ],
+  };
+
+  return (
+    <>
+      <Recents title={text.recents} clearButton={text.clearRecents} />
+      <section className="flex flex-col justify-between sm:flex-row sm:gap-5 lg:gap-10">
+        {[mostSearched, studentLinks, facultyLinks].map(
+          ({ title, links }, index) => (
+            <nav key={index}>
+              <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">{title}</h5>
+              <ol>
+                {links.map(({ title, href, category }, index) => (
+                  <li className="mb-2" key={index}>
+                    <MiniSearchLink
+                      item={{
+                        title,
+                        href: `/${locale}/${href}`,
+                        category,
+                      }}
+                    />
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        )}
+      </section>
+    </>
+  );
+};
+
+const ResultsView = async ({
+  categories,
+  locale,
+  query,
+  selectedCategory,
+  viewAll,
+}: {
+  categories: string[];
+  locale: string;
+  query?: string;
+  selectedCategory: number;
+  viewAll: string;
+}) => {
   const results: CardContentWithLabel[][] = [
     [
       {
@@ -223,211 +419,97 @@ export default async function Search({
     ],
   ];
 
-  return (
-    <search className="flex max-h-full flex-col gap-4">
-      <Searchbar placeholder={text.placeholders} />
-      <article className="flex grow flex-col overflow-auto rounded-lg border border-primary-700 bg-background pl-4 md:pl-12">
-        {query ? (
-          <>
-            <nav className="mr-4 md:mr-12">
-              <ul className="flex w-full snap-x space-x-2 overflow-auto pb-3 pt-5 sm:space-x-3">
-                {text.filters.map((category, index) => (
-                  <li key={index} className="snap-start">
-                    <Button
-                      asChild
-                      className={cn(
-                        'button inline-block whitespace-nowrap rounded border px-2 py-1 text-center font-semibold',
-                        'sm:rounded-md sm:p-2',
-                        index === selectedCategory
-                          ? 'bg-primary-700 text-shade-light'
-                          : 'bg-opacity-60'
-                      )}
-                      variant="secondary"
-                    >
-                      <Link
-                        href={{ query: { query, category: categories[index] } }}
-                        prefetch
-                        replace
-                      >
-                        {category}
-                      </Link>
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <section className="mt-2 max-h-full w-full overflow-y-auto pr-4 md:pr-12">
-              {selectedCategory > 0 ? (
-                <Suspense fallback={<h5>loader</h5>}>
-                  {/* {search} */}
-                  <header className="flex justify-between text-primary-700">
-                    <h4 className="">{text.filters[selectedCategory]}</h4>
-                  </header>
-                  <ul className="mb-5 space-y-3">
-                    {results[selectedCategory - 1].map(
-                      ({ value, label, ...result }, index) => (
-                        <li key={index}>
-                          <LocalStorageLink
-                            href={value}
-                            newItem={{ label, value }}
-                            options={{ filter: true, unshift: true }}
-                            replace
-                            storageKey="recentSearches"
-                          >
-                            <SearchCard
-                              cardContent={
-                                {
-                                  index: selectedCategory - 1,
-                                  ...result,
-                                } as CardContent
-                              }
-                            />
-                          </LocalStorageLink>
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </Suspense>
-              ) : (
-                <Suspense fallback={<h5>loader</h5>}>
-                  {/* {search} */}
-                  <ol className="mb-5 space-y-5">
-                    {text.filters.slice(1).map((category, index) => (
-                      <li key={index}>
-                        <header className="flex justify-between text-primary-700">
-                          <h4>{category}</h4>
-                          <Button
-                            asChild
-                            className={cn(
-                              'inline-flex h-fit gap-1 md:gap-2',
-                              'text-base sm:text-sm md:text-lg',
-                              'px-2 py-1 md:px-4 md:py-2'
-                            )}
-                            variant="ghost"
-                          >
-                            <Link
-                              href={{
-                                query: {
-                                  query,
-                                  category: categories[index + 1],
-                                },
-                              }}
-                              replace
-                            >
-                              {text.viewAll}
-                              <span className="rotate-90">
-                                <FaArrowUp
-                                  className={cn(
-                                    'mx-auto animate-bounce',
-                                    'size-2 md:size-3 lg:size-4'
-                                  )}
-                                />
-                              </span>
-                            </Link>
-                          </Button>
-                        </header>
-                        <ul className="space-y-3">
-                          {results[index].map(
-                            ({ value, label, ...result }, i) => (
-                              <li key={i}>
-                                <LocalStorageLink
-                                  href={value}
-                                  newItem={{ label, value }}
-                                  options={{ filter: true, unshift: true }}
-                                  replace
-                                  storageKey="recentSearches"
-                                >
-                                  <SearchCard
-                                    cardContent={
-                                      { index, ...result } as CardContent
-                                    }
-                                  />
-                                </LocalStorageLink>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </li>
-                    ))}
-                  </ol>
-                </Suspense>
-              )}
-            </section>
-          </>
-        ) : (
-          <>
-            <Recents title={text.recents} clearButton={text.clearRecents} />
-            <section className="my-12 mr-4 flex max-w-screen-xl flex-col justify-between gap-10 md:mr-12 md:flex-row">
-              <nav>
-                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
-                  {text.mostSearched}
-                </h5>
-                <ol>
-                  {links.mostSearched.map(({ label, value }, index) => (
-                    <li className="mb-2" key={index}>
-                      <LocalStorageLink
-                        className="inline-flex items-center gap-2 font-medium lg:text-lg"
-                        href={value}
-                        newItem={{ label, value }}
-                        options={{ filter: true, unshift: true }}
-                        replace
-                        storageKey="recentSearches"
-                      >
-                        <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
-                        {label}
-                      </LocalStorageLink>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-              <nav>
-                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
-                  {text.studentQuickLinks}
-                </h5>
-                <ol>
-                  {links.studentLinks.map(({ label, value }, index) => (
-                    <li className="mb-2" key={index}>
-                      <LocalStorageLink
-                        className="inline-flex items-center gap-2 font-medium lg:text-lg"
-                        href={value}
-                        newItem={{ label, value }}
-                        options={{ filter: true, unshift: true }}
-                        replace
-                        storageKey="recentSearches"
-                      >
-                        <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
-                        {label}
-                      </LocalStorageLink>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-              <nav>
-                <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">
-                  {text.facultyQuickLinks}
-                </h5>
-                <ol>
-                  {links.facultyLinks.map(({ label, value }, index) => (
-                    <li className="mb-2" key={index}>
-                      <LocalStorageLink
-                        className="inline-flex items-center gap-2 font-medium lg:text-lg"
-                        href={value}
-                        newItem={{ label, value }}
-                        options={{ filter: true, unshift: true }}
-                        replace
-                        storageKey="recentSearches"
-                      >
-                        <FaMagnifyingGlass className="inline-block h-2 text-primary-500 lg:h-3" />
-                        {label}
-                      </LocalStorageLink>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            </section>
-          </>
+  return selectedCategory > 0 ? (
+    <>
+      <header className="flex justify-between text-primary-700">
+        <h4>{categories[selectedCategory]}</h4>
+      </header>
+      <ul className="mb-5 space-y-3">
+        {results[selectedCategory - 1].map(
+          ({ label, value, ...result }, index) => (
+            <li key={index}>
+              <LocalStorageLink
+                href={`/${locale}/${value}`}
+                newItem={{
+                  title: label,
+                  href: `/${locale}/${value}`,
+                  category: 'FIXME',
+                }}
+                options={{ filter: true, unshift: true }}
+                replace
+                storageKey="recentSearches"
+              >
+                <SearchCard
+                  cardContent={
+                    {
+                      index: selectedCategory - 1,
+                      ...result,
+                    } as CardContent
+                  }
+                />
+              </LocalStorageLink>
+            </li>
+          )
         )}
-      </article>
-    </search>
+      </ul>
+    </>
+  ) : (
+    <ol className="space-y-5">
+      {categories.slice(1).map((category, index) => (
+        <li key={index}>
+          <header className="flex justify-between text-primary-700">
+            <h4>{category}</h4>
+            <Button
+              asChild
+              className={cn(
+                'inline-flex h-fit gap-1 md:gap-2',
+                'text-xs font-semibold sm:text-base md:text-sm',
+                'px-2 py-1 md:px-4 md:py-2'
+              )}
+              variant="ghost"
+            >
+              <Link
+                href={{
+                  href: locale,
+                  query: {
+                    query,
+                    category: globalCategories[index + 1],
+                  },
+                }}
+                replace
+              >
+                {viewAll}
+                <span className="rotate-90">
+                  <FaArrowUp
+                    className={cn('mx-auto animate-bounce', 'size-2 lg:size-3')}
+                  />
+                </span>
+              </Link>
+            </Button>
+          </header>
+          <ul className="space-y-3">
+            {results[index].map(({ value, label, ...result }, i) => (
+              <li key={i}>
+                <LocalStorageLink
+                  href={`/${locale}/${value}`}
+                  newItem={{
+                    title: label,
+                    href: `/${locale}/${value}`,
+                    category: 'FIXME',
+                  }}
+                  options={{ filter: true, unshift: true }}
+                  replace
+                  storageKey="recentSearches"
+                >
+                  <SearchCard
+                    cardContent={{ index, ...result } as CardContent}
+                  />
+                </LocalStorageLink>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
   );
-}
+};

@@ -107,20 +107,20 @@ const SearchCard: React.FC<{
             />
             <div className="ml-2">
               <h5 className="text-primary-300">{cardContent.name}</h5>
-              <p className=" text-neutral-600">{cardContent.designation}</p>
+              <p className="text-neutral-600">{cardContent.designation}</p>
             </div>
           </header>
 
           <div className="col-span-5 flex h-max flex-wrap items-center gap-x-10 gap-y-2 pt-2">
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdEmail className="mr-2 inline-block" />
               {cardContent.email}
             </p>
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdPhone className="mr-2 inline-block" />
               {cardContent.phone}
             </p>
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdLocationOn className="mr-2 inline-block" />
               {cardContent.address}
             </p>
@@ -131,7 +131,7 @@ const SearchCard: React.FC<{
       return (
         <article className="flex w-full items-center gap-2 rounded-lg bg-shade-light p-3 md:px-4">
           <RxDownload className="inline-block h-14 min-w-14 p-4" />
-          <p className=" text-neutral-600">{cardContent.content}</p>
+          <p className="text-neutral-600">{cardContent.content}</p>
         </article>
       );
     case 3:
@@ -148,14 +148,14 @@ const SearchCard: React.FC<{
           <div className="flex w-full grow flex-wrap gap-x-20 lg:justify-evenly">
             <header>
               <h5 className="text-primary-300">{cardContent.heading}</h5>
-              <p className=" text-neutral-600">{cardContent.subHeading}</p>
+              <p className="text-neutral-600">{cardContent.subHeading}</p>
             </header>
             <div>
-              <p className=" text-neutral-600">
+              <p className="text-neutral-600">
                 <MdLocationOn className="mr-2 inline-block" />
                 {cardContent.location}
               </p>
-              <p className=" text-neutral-600">
+              <p className="text-neutral-600">
                 <MdCalendarToday className="mr-2 inline-block" />
                 {cardContent.date}
               </p>
@@ -188,13 +188,13 @@ const SearchCard: React.FC<{
         <article className="grid w-full flex-wrap items-center gap-2 rounded-lg bg-shade-light p-3 sm:grid-cols-2 md:px-4">
           <header>
             <h5>{cardContent.heading}</h5>
-            <p className=" font-semibold text-primary-300">
+            <p className="font-semibold text-primary-300">
               {cardContent.subHeading}
             </p>
           </header>
           <div>
-            <p className=" text-sm md:text-base">{cardContent.programme}</p>
-            <p className=" text-sm text-primary-300 md:text-base">
+            <p className="text-sm md:text-base">{cardContent.programme}</p>
+            <p className="text-sm text-primary-300 md:text-base">
               {cardContent.programmeDuration}
             </p>
           </div>
@@ -213,7 +213,7 @@ const SearchCard: React.FC<{
             />
             <div>
               <h5 className="text-primary-300">{cardContent.heading}</h5>
-              <p className=" font-semibold">{cardContent.subHeading}</p>
+              <p className="font-semibold">{cardContent.subHeading}</p>
             </div>
           </header>
           <ol className="flex grow flex-wrap items-center justify-between gap-x-8 px-4 md:flex-nowrap md:justify-around">
@@ -222,7 +222,7 @@ const SearchCard: React.FC<{
                 <h6 className="font-sans font-medium text-neutral-600">
                   {member.post}
                 </h6>
-                <p className=" text-neutral-600">{member.name}</p>
+                <p className="text-neutral-600">{member.name}</p>
               </li>
             ))}
           </ol>
@@ -238,18 +238,18 @@ const SearchCard: React.FC<{
                 {cardContent.organisation}
               </strong>
             </h5>
-            <p className=" font-semibold">{cardContent.names.join(', ')}</p>
+            <p className="font-semibold">{cardContent.names.join(', ')}</p>
           </header>
           <div className="xl:m-auto">
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdEmail className="mr-2 inline-block" />
               {cardContent.email}
             </p>
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdPhone className="mr-2 inline-block" />
               {cardContent.phone}
             </p>
-            <p className=" text-neutral-600">
+            <p className="text-neutral-600">
               <MdLocationOn className="mr-2 inline-block" />
               {cardContent.address}
             </p>
