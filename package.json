@@ -13,7 +13,9 @@
     "prepare": "husky",
     "test": "npm run format:check && npm run lint && npm run check-types && npm run build",
     "database:up": "docker compose up",
-    "database:down": "docker compose down && docker rmi isac:1.0"
+    "database:down": "docker compose down && docker rmi isac:1.0",
+    "database:init": "prisma db push",
+    "database:populate": "tsc scripts/populate-db.ts && node scripts/populate-db.js"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",

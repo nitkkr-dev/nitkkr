@@ -47,7 +47,7 @@ model clubs {
   email               String         @db.VarChar
   category            String         @db.VarChar
   department_id       Int?
-  incharge_faculty_id String[]       @db.VarChar
+  incharge_faculty_id Int[]       
   club_members        club_members[]
   club_socials        club_socials[]
   departments         departments?   @relation(fields: [department_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_clubs_departments")
@@ -109,7 +109,7 @@ model departments {
   course_coordinators String[]             @db.VarChar
   clubs               clubs[]
   courses             courses?
-  faculty             faculty?
+  faculty             faculty[]
   hod                 hod[]
   majors              majors[]
   non_teaching_staff  non_teaching_staff[]
@@ -119,7 +119,7 @@ model departments {
 model faculty {
   id                                        Int                           @id(map: "pk_faculty") @default(autoincrement())
   name                                      String                        @db.VarChar
-  department_id                             Int                           @unique(map: "unq_faculty_department_id")
+  department_id                             Int                           
   email                                     String                        @db.VarChar
   office_telephone                          String                        @db.VarChar
   joined_on                                 DateTime                      @db.Date
