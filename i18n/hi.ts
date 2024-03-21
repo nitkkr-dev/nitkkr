@@ -51,8 +51,8 @@ const text: Translations = {
     backHome: 'घर लौटें',
   },
   Search: {
-    placeholders: 'त्वरित खोज...',
-    filters: [
+    placeholder: 'त्वरित खोज...',
+    categories: [
       'सभी परिणाम',
       'वेब पृष्ठ',
       'लोग',
@@ -63,12 +63,25 @@ const text: Translations = {
       'क्लब',
       'पद',
     ],
-    recents: 'ताज़ा खोजें',
-    clearRecents: 'हाल की खोजें साफ़ करें',
-    mostSearched: 'एनआईटी की सर्वाधिक खोजें',
-    studentQuickLinks: 'छात्र त्वरित लिंक',
-    facultyQuickLinks: 'संकाय त्वरित लिंक',
     viewAll: 'सारा देखें',
+    default: {
+      recents: 'ताज़ा खोजें',
+      clearRecents: 'हाल की खोजें साफ़ करें',
+      mostSearched: 'एनआईटी की सर्वाधिक खोजें',
+      studentLinks: {
+        title: 'छात्र संबंधित त्वरित लिंक',
+        clubs: 'संघठनें',
+        courses: 'पाठ्यक्रम',
+        departments: 'विभाग',
+        notifications: 'सूचनाएं',
+        results: 'परिणाम',
+      },
+      facultyLinks: {
+        title: 'संकाय संबंधित त्वरित लिंक',
+        notifications: 'सूचनाएं',
+        profile: 'मेरा विवरण',
+      },
+    },
   },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',

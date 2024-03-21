@@ -42,14 +42,27 @@ export interface Translations {
   };
   NotFound: { title: string; description: string; backHome: string };
   Search: {
-    placeholders: string;
-    filters: string[];
-    recents: string;
-    clearRecents: string;
-    mostSearched: string;
-    studentQuickLinks: string;
-    facultyQuickLinks: string;
+    placeholder: string;
+    categories: string[];
     viewAll: string;
+    default: {
+      recents: string;
+      clearRecents: string;
+      mostSearched: string;
+      studentLinks: {
+        title: string;
+        clubs: string;
+        courses: string;
+        departments: string;
+        notifications: string;
+        results: string;
+      };
+      facultyLinks: {
+        title: string;
+        notifications: string;
+        profile: string;
+      };
+    };
   };
   StudentActivities: {
     title: string;
