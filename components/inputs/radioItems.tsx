@@ -22,8 +22,10 @@ interface ListProps extends GenericProps {
 const RadioGeneric = ({ items, ...props }: ListProps) => {
   return (
     <div className={props.className}>
-      <Label>{props.label ? props.label : 'Radio Group'}</Label>
-      {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+      <Label className="text-neutral-500">
+        {props.label ? props.label : 'Radio Group'}
+      </Label>
+      {props.required && <span className="text-primary-700">*</span>}
       <RadioGroup
         defaultValue={props.value}
         disabled={props.disabled}
@@ -34,11 +36,11 @@ const RadioGeneric = ({ items, ...props }: ListProps) => {
         {items.map((item) => (
           <div key={item} className="flex items-center space-x-2">
             <RadioGroupItem value={item} required={props.required} />
-            <Label>{item}</Label>
+            <Label className="text-md">{item}</Label>
           </div>
         ))}
       </RadioGroup>
-      <p className="marker:text-muted-foreground text-red-500 block text-[0.8rem] ">
+      <p className="block text-[0.8rem] text-primary-500 marker:text-neutral-500 ">
         {props.errorMsg}
       </p>
     </div>

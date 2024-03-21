@@ -46,11 +46,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const inputClasses = cn(
       'flex h-9 w-full rounded-md border border-input bg-neutral-50',
-      'text-sm transition-colors',
-      'placeholder:text-muted-foreground',
+      'text-md transition-colors',
+      'placeholder:text-neutral-500',
       'file:border-0 file:bg-neutral-50 file:text-sm file:font-medium ',
       'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ',
-      'disabled:cursor-not-allowed disabled:opacity-50',
+      'disabled:cursor-not-allowed disabled:ring-0 disabled:border-0 disabled:bg-neutral-200/30',
       'invalid:border-primary-500 invalid:outline-red-100 invalid:outline-offset-2',
       inputClassName,
       LeftChild ? 'pl-7 ' : 'pl-3 ' // Adjusted margin-top
@@ -58,16 +58,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={className}>
-        <Label htmlFor={name}>{label}</Label>
-        {required && <span style={{ color: '#EC734B' }}>*</span>}
+        <Label className="text-neutral-500" htmlFor={name}>
+          {label}
+        </Label>
+        {required && <span className="text-primary-700">*</span>}
         {description && (
-          <p className="text-muted-foreground block text-[0.8rem]">
-            {description}
-          </p>
+          <p className="block text-[0.8rem] text-neutral-500">{description}</p>
         )}
         <div className={inputContainerClasses}>
           {LeftChild && (
-            <div className="text-muted-foreground absolute left-2 top-[0.70rem] h-4 w-4 ">
+            <div className="absolute left-2 top-[0.70rem] h-5 w-5 text-neutral-500 ">
               <LeftChild />
             </div>
           )}
@@ -88,9 +88,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             />
           )}
         </div>
-        <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
-          {errorMsg}
-        </p>
+        <p className="block text-[0.8rem] text-primary-500">{errorMsg}</p>
       </div>
     );
   }

@@ -80,7 +80,14 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <TextField {...field} required />
+                <TextField
+                  {...field}
+                  required
+                  placeholder="beat"
+                  description="something in the way"
+                  errorMsg="peepeepoopoo"
+                  disabled
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,7 +99,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <TextAreaGeneric {...field} required />
+                <TextAreaGeneric {...field} required disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -128,7 +135,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <DateField {...field} required />
+                <DateField {...field} required disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -140,7 +147,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <FileUpload {...field} required />
+                <FileUpload {...field} required disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -156,6 +163,7 @@ export default function Visualizer() {
                   description="" // Combine description within label
                   required={true}
                   {...field}
+                  disabled
                 />
               </FormControl>
               <FormMessage />
@@ -168,7 +176,12 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <DateTimeField description="Enter a time" {...field} required />
+                <DateTimeField
+                  description="Enter a time asdasd"
+                  {...field}
+                  required
+                  disabled
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -192,7 +205,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <SelectDropdown items={items} {...field} required />
+                <SelectDropdown items={items} {...field} required disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -204,7 +217,7 @@ export default function Visualizer() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <RadioGeneric items={items} {...field} />
+                <RadioGeneric items={items} {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -221,6 +234,7 @@ export default function Visualizer() {
                   {...field}
                   required
                   placeholder="Enter or Select values"
+                  disabled
                 />
               </FormControl>
               <FormMessage />
