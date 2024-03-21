@@ -13,22 +13,22 @@ interface CheckboxProps extends GenericProps {
 const CheckboxGeneric = ({ ...props }: CheckboxProps) => {
   return (
     <div className={props.className}>
-      <Label htmlFor={props.name}>
+      <Label className="text-neutral-500" htmlFor={props.name}>
         {props.label ? props.label : 'Checkbox'}
       </Label>
-      {props.required && <span style={{ color: '#EC734B' }}>*</span>}
-      <div className="flex flex-row items-start space-x-3 space-y-0">
+      {props.required && <span className="text-primary-700">*</span>}
+      <div className="flex flex-row items-center space-x-2 space-y-0">
         <Checkbox
           disabled={props.disabled}
           required={props.required}
           defaultChecked={props.defaultChecked}
           onCheckedChange={props.onChange}
         />
-        <Label className="text-sm font-medium" htmlFor={props.name}>
+        <Label className="text-md font-medium" htmlFor={props.name}>
           {props.name}
         </Label>
       </div>
-      <p className="marker:text-muted-foreground text-red-500 block text-[0.8rem] ">
+      <p className="block text-[0.8rem] text-primary-500 marker:text-neutral-500 ">
         {props.errorMsg}
       </p>
     </div>

@@ -137,7 +137,7 @@ const CommandEmpty = forwardRef<
   return (
     <div
       ref={forwardedRef}
-      className={cn('py-6 text-center text-sm', className)}
+      className={cn('text-md py-6 text-center', className)}
       cmdk-empty=""
       role="presentation"
       {...props}
@@ -356,7 +356,10 @@ const MultipleSelector = React.forwardRef<
       >
         <div
           className={cn(
-            'border-input focus-within:ring-ring invalid:outline-red-100 group rounded-md border px-3 py-2 text-sm ring-offset-background transition-colors invalid:border-primary-500 invalid:outline-offset-2 focus-within:ring-1 focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+            'border-input focus-within:ring-ring invalid:outline-red-100 text-md group rounded-md border px-3 py-2 ring-offset-background',
+            'transition-colors invalid:border-primary-500 invalid:outline-offset-2 focus-within:ring-1',
+            'focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed',
+            'disabled:border-0 disabled:bg-neutral-200/30 disabled:outline-none disabled:ring-0', //disabled: doesnt seem to work here
             className
           )}
         >
@@ -366,7 +369,7 @@ const MultipleSelector = React.forwardRef<
                 <Badge
                   key={option}
                   className={cn(
-                    'data-[disabled]:text-muted data-[disabled]:bg-neutral-400 data-[disabled]:hover:bg-neutral-400',
+                    'data-[disabled]:cursor-not-allowed data-[disabled]:border-0 data-[disabled]:bg-neutral-200/30 data-[disabled]:ring-0',
                     'data-[fixed]:text-muted bg-primary-300 data-[fixed]:bg-neutral-400 data-[fixed]:hover:bg-neutral-400',
                     badgeClassName
                   )}
@@ -417,7 +420,7 @@ const MultipleSelector = React.forwardRef<
                   : placeholder
               }
               className={cn(
-                'placeholder:text-muted-foreground ml-2 flex-1 bg-neutral-50 outline-none disabled:cursor-not-allowed disabled:opacity-50',
+                'ml-2 flex-1 bg-neutral-50 outline-none placeholder:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-50',
                 inputProps?.className
               )}
             />
@@ -462,7 +465,7 @@ const MultipleSelector = React.forwardRef<
                                 onChange?.(newOptions);
                               }}
                               className={cn(
-                                'cursor-pointer hover:bg-neutral-200'
+                                'cursor-pointer hover:bg-neutral-200/30'
                               )}
                             >
                               {option}

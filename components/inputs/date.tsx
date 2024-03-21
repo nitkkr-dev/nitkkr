@@ -18,6 +18,7 @@ const DateField = forwardRef<HTMLInputElement, InputProps>(function DateField(
       ref={ref}
       label={label}
       placeholder={placeholder}
+      className="placeholder:text-neutral-500"
       type="date"
       max="9999-12-31"
       LeftChild={LeftChild}

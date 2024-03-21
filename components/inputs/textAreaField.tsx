@@ -20,10 +20,12 @@ const TextAreaGeneric = React.forwardRef<HTMLTextAreaElement, TextFieldProps>(
   ) => {
     return (
       <div className={props.className}>
-        <Label htmlFor={props.name}>{label}</Label>
-        {props.required && <span style={{ color: '#EC734B' }}>*</span>}
+        <Label className="text-neutral-500" htmlFor={props.name}>
+          {label}
+        </Label>
+        {props.required && <span className="text-primary-700">*</span>}
         {props.description && (
-          <p className="text-muted-foreground block text-[0.8rem]">
+          <p className="block text-[0.8rem] text-neutral-500">
             {props.description}
           </p>
         )}
@@ -34,9 +36,7 @@ const TextAreaGeneric = React.forwardRef<HTMLTextAreaElement, TextFieldProps>(
           placeholder={placeholder}
           {...props}
         />
-        <p className="text-muted-foreground text-red-500 block text-[0.8rem]">
-          {props.errorMsg}
-        </p>
+        <p className="block text-[0.8rem] text-primary-500">{props.errorMsg}</p>
       </div>
     );
   }

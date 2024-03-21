@@ -17,6 +17,7 @@ const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
         max="9999-12-31T23:59"
         placeholder={placeholder}
         label={label}
+        disabled={props.disabled}
         LeftChild={FaRegCalendarAlt}
         onChange={(event) => {
           props.onChange?.({

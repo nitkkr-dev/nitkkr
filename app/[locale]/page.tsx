@@ -1,5 +1,6 @@
 import DirectorsCorner from '~/app/directors-corner';
 import Notifications from '~/app/notifications';
+import Visualizer from '~/components/inputs/Visualizer';
 import Slideshow from '~/components/slideshow';
 
 export default function Home({
@@ -33,6 +34,7 @@ export default function Home({
         ]}
       />
       <Notifications category={notificationCategory} locale={locale} />
+      <Visualizer />
       <DirectorsCorner locale={locale} />
     </main>
   );
