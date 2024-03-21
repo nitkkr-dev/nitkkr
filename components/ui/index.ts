@@ -1,3 +1,6 @@
+export { Toaster } from './toaster';
+export * from './toast';
+
 export * from './button';
 export * from './card';
 export * from './hamburger-button';
