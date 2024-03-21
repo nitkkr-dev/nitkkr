@@ -35,6 +35,9 @@ export default {
         light: '#FFFFFF',
         dark: '#000000',
       },
+      'toast-success': '#27B13D',
+      'toast-warning': '#D95C26',
+      'toast-error': '#C5291D',
       transparent: 'transparent',
     },
     container: {
