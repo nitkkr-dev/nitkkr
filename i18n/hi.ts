@@ -52,18 +52,7 @@ const text: Translations = {
   },
   Search: {
     placeholder: 'त्वरित खोज...',
-    categories: [
-      'सभी परिणाम',
-      'वेब पृष्ठ',
-      'लोग',
-      'दस्तावेज़',
-      'आयोजन',
-      'समाचार',
-      'पाठ्यक्रम',
-      'क्लब',
-      'पद',
-    ],
-    categores: {
+    categories: {
       allResults: 'सभी परिणाम',
       webPages: 'वेब पृष्ठ',
       people: 'लोग',
