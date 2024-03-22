@@ -6,6 +6,7 @@ import { Button } from '~/components/ui';
 import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import { db } from '~/server/db';
 
 export default async function StudentActivities({
   params: { locale },
@@ -14,9 +15,9 @@ export default async function StudentActivities({
 }) {
   const text = (await getTranslations(locale)).StudentActivities;
 
-  // const clubs = await db.clubs.findMany({
-  //   select: { name: true, logo: true, thumbnail: true },
-  // });
+  const clubs = await db.query.clubs.findMany({
+    columns: { name: true, logo: true, thumbnail: true },
+  });
 
   return (
     <>
