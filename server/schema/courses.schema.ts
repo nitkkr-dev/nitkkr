@@ -9,7 +9,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { departments, faculty } from '.';
+import { courseLogs, coursesToMajors, departments, faculty } from '.';
 
 export const courses = pgTable('courses', {
   id: smallserial('id').primaryKey(),
@@ -49,11 +49,13 @@ export const courses = pgTable('courses', {
     .notNull(),
 });
 
-export const coursesRelations = relations(courses, ({ one }) => ({
+export const coursesRelations = relations(courses, ({ many, one }) => ({
   coordinator: one(faculty, {
     fields: [courses.coordinatorId],
     references: [faculty.id],
   }),
+  courseLogs: many(courseLogs),
+  coursesToMajors: many(coursesToMajors),
   department: one(departments, {
     fields: [courses.departmentId],
     references: [departments.id],

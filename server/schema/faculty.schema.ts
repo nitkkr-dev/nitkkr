@@ -8,7 +8,16 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { departments, persons } from '.';
+import {
+  clubs,
+  courseLogs,
+  courses,
+  departments,
+  doctorates,
+  persons,
+  sections,
+  sponsoredResearchProjects,
+} from '.';
 
 export const faculty = pgTable('faculty', {
   id: integer('id')
@@ -82,11 +91,17 @@ export const faculty = pgTable('faculty', {
   scopusId: text('scopus_id'),
 });
 
-export const facultyRelations = relations(faculty, ({ one }) => ({
+export const facultyRelations = relations(faculty, ({ many, one }) => ({
+  clubs: many(clubs),
+  courseLogs: many(courseLogs),
+  courses: many(courses),
   department: one(departments, {
     fields: [faculty.departmentId],
     references: [departments.id],
   }),
+  doctorates: many(doctorates),
+  sections: many(sections),
+  sponsoredResearchProjects: many(sponsoredResearchProjects),
   person: one(persons, {
     fields: [faculty.id],
     references: [persons.id],
