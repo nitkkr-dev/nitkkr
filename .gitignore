@@ -32,3 +32,16 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+# Next.js build output
+.next
+out
+
+# OS
+*.DS_STORE
+.DS_STORE
+
+# Prisma
+prisma/generated/client/
+
+# typesense server data
+typesense-data/
