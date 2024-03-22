@@ -43,8 +43,7 @@ export interface Translations {
   NotFound: { title: string; description: string; backHome: string };
   Search: {
     placeholder: string;
-    categories: string[];
-    categores: {
+    categories: {
       allResults: string;
       webPages: string;
       people: string;

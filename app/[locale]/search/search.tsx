@@ -38,7 +38,7 @@ export default async function Search({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Search;
-  const currentCategory = getKeys(text.categores)
+  const currentCategory = getKeys(text.categories)
     .slice(1)
     .includes(selectedCategory)
     ? selectedCategory
@@ -58,7 +58,7 @@ export default async function Search({
           <>
             <nav className="mb-5">
               <ul className="flex w-full snap-x space-x-2 overflow-auto sm:space-x-3">
-                {getKeys(text.categores).map((category, index) => (
+                {getKeys(text.categories).map((category, index) => (
                   <li key={index} className="snap-start">
                     <Button
                       asChild
@@ -78,7 +78,7 @@ export default async function Search({
                         prefetch
                         replace
                       >
-                        {text.categores[category]}
+                        {text.categories[category]}
                       </Link>
                     </Button>
                   </li>
@@ -92,7 +92,7 @@ export default async function Search({
             >
               <Suspense fallback={<h5>loader</h5>}>
                 <ResultsView
-                  categories={text.categores}
+                  categories={text.categories}
                   locale={locale}
                   query={query}
                   currentCategory={currentCategory}

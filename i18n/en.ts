@@ -56,18 +56,7 @@ const text: Translations = {
   },
   Search: {
     placeholder: 'Quick Search...',
-    categories: [
-      'All Results',
-      'Web Pages',
-      'People',
-      'Documents',
-      'Events',
-      'News',
-      'Courses',
-      'Clubs',
-      'Positions',
-    ],
-    categores: {
+    categories: {
       allResults: 'All Results',
       webPages: 'Web Pages',
       people: 'People',
