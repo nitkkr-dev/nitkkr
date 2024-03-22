@@ -21,19 +21,19 @@ import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 
 const DEPARTMENTS = [
-  <FaBriefcase key="briefcase" />,
-  <MdDeveloperBoard key="developerBoard" />,
-  <ImLab key="lab" />,
-  <MdHouseSiding key="houseSiding" />,
-  <FaLaptop key="laptop" />,
-  <MdElectricalServices key="electricalServices" />,
-  <FaBroadcastTower key="broadcastTower" />,
-  <FaLeaf key="leaf" />,
-  <AiOutlineCalculator key="calculator" />,
-  <FaGears key="gears" />,
-  <FaGlobeAfrica key="globeAfrica" />,
-  <MdOutlineSolarPower key="solarPanel" />,
-  <SiAdobedreamweaver key="dreamweaver" />,
+  <FaBriefcase key="briefcase" className="h-6 w-6" />,
+  <MdDeveloperBoard key="developerBoard" className="h-6 w-6" />,
+  <ImLab key="lab" className="h-6 w-6" />,
+  <MdHouseSiding key="houseSiding" className="h-6 w-6" />,
+  <FaLaptop key="laptop" className="h-6 w-6" />,
+  <MdElectricalServices key="electricalServices" className="h-6 w-6" />,
+  <FaBroadcastTower key="broadcastTower" className="h-6 w-6" />,
+  <FaLeaf key="leaf" className="h-6 w-6" />,
+  <AiOutlineCalculator key="calculator" className="h-6 w-6" />,
+  <FaGears key="gears" className="h-6 w-6" />,
+  <FaGlobeAfrica key="globeAfrica" className="h-6 w-6" />,
+  <MdOutlineSolarPower key="solarPanel" className="h-6 w-6" />,
+  <SiAdobedreamweaver key="dreamweaver" className="h-6 w-6" />,
 ];
 
 export default async function Departments({
@@ -48,18 +48,18 @@ export default async function Departments({
       <Heading className="flex" glyphDirection={'dual'} href={''}>
         <h1 className="mt-2 text-primary-700"> DEPARTMENTS</h1>
       </Heading>
-      <div className="grid grid-cols-1 gap-x-3 gap-y-4 px-3 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-y-7 px-2 sm:grid-cols-2 sm:gap-x-14 md:grid-cols-3 lg:grid-cols-4">
         {DEPARTMENTS.map((dept, i) => (
           <Link
             key={i}
             href={`/${locale}/academics/departments/${text.departmentTitles[i]}`}
-            className="group flex h-16 max-w-48 items-center space-x-2 rounded-md bg-neutral-50 px-1 py-2 shadow-lg hover:bg-primary-700"
+            className="group flex h-16 max-w-48 items-center space-x-3 rounded-md bg-neutral-50 px-1 py-2 shadow-lg hover:bg-primary-700"
           >
             <div className="flex-shrink-0 rounded-md bg-primary-700 p-2 text-background group-hover:bg-background group-hover:text-primary-700">
               {dept}
             </div>
             <h5 className="text-sm text-primary-700 group-hover:text-background">
-              {text.departmentTitles[i]}
+              {text.departmentTitles[i].toUpperCase()}
             </h5>
           </Link>
         ))}
