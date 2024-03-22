@@ -8,7 +8,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { persons } from '.';
+import { clubMembers, doctorates, persons } from '.';
 
 export const students = pgTable('students', {
   id: integer('id')
@@ -38,7 +38,10 @@ export const students = pgTable('students', {
   admissionSubcategory: varchar('admission_subcategory'),
 });
 
-export const studentsRelations = relations(students, ({ one }) => ({
+export const studentsRelations = relations(students, ({ many, one }) => ({
+  // TODO: Explore possibility to make a transitive relation to clubs
+  clubMembers: many(clubMembers),
+  doctorates: many(doctorates),
   person: one(persons, {
     fields: [students.id],
     references: [persons.id],

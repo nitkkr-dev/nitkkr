@@ -11,7 +11,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { departments, faculty, persons } from '.';
+import { clubMembers, clubSocials, departments, faculty, persons } from '.';
 
 export const clubs = pgTable('clubs', {
   id: smallserial('id').primaryKey(),
@@ -40,7 +40,9 @@ export const clubs = pgTable('clubs', {
     .notNull(),
 });
 
-export const clubsRelations = relations(clubs, ({ one }) => ({
+export const clubsRelations = relations(clubs, ({ many, one }) => ({
+  clubMembers: many(clubMembers),
+  clubSocials: many(clubSocials),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
