@@ -14,14 +14,14 @@ export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'hi' }];
 }
 
-export const dynamicParams = false;
-
 export default function RootLayout({
   children,
   params,
+  modals,
 }: {
   children: React.ReactNode;
   params: { locale: string };
+  modals: React.ReactNode;
 }) {
   if (params === undefined) return null;
   const { locale } = params;
@@ -35,7 +35,8 @@ export default function RootLayout({
         )}
       >
         <Header locale={locale} />
-        <section className="grow">{children}</section>
+        <section>{modals}</section>
+        <section className="flex grow">{children}</section>
         <Footer locale={locale} />
       </body>
     </html>
