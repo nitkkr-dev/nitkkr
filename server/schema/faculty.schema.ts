@@ -9,7 +9,6 @@ import {
 } from 'drizzle-orm/pg-core';
 
 import {
-  clubs,
   courseLogs,
   courses,
   departments,
@@ -92,7 +91,6 @@ export const faculty = pgTable('faculty', {
 });
 
 export const facultyRelations = relations(faculty, ({ many, one }) => ({
-  clubs: many(clubs),
   courseLogs: many(courseLogs),
   courses: many(courses),
   department: one(departments, {

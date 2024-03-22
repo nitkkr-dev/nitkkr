@@ -48,10 +48,12 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     references: [departments.id],
   }),
   facultyIncharge1: one(faculty, {
+    relationName: 'facultyIncharge1',
     fields: [clubs.facultyInchargeId1],
     references: [faculty.id],
   }),
   facultyIncharge2: one(faculty, {
+    relationName: 'facultyIncharge2',
     fields: [clubs.facultyInchargeId2],
     references: [faculty.id],
   }),
