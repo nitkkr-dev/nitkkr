@@ -19,6 +19,7 @@ const DateTimeField = forwardRef<HTMLInputElement, InputProps>(
         label={label}
         disabled={props.disabled}
         LeftChild={FaRegCalendarAlt}
+        defaultValue={(props.value as string)?.slice(0, -4)}
         onChange={(event) => {
           props.onChange?.({
             target: { value: event.target.value + ':00Z' },

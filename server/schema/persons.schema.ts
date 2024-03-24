@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
   date,
@@ -10,6 +10,10 @@ import {
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
+import {
+  formsModifiableByPersons,
+  formsVisibleToPersons,
+} from './forms.schema';
 
 export const persons = pgTable(
   'persons',
@@ -33,3 +37,7 @@ export const persons = pgTable(
     };
   }
 );
+export const personsRelation = relations(persons, ({ many }) => ({
+  modifiableForms: many(formsModifiableByPersons),
+  fillableForms: many(formsVisibleToPersons),
+}));
