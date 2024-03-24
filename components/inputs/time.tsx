@@ -13,6 +13,7 @@ const TimeField = forwardRef<HTMLInputElement, InputProps>(
         type="time"
         placeholder={placeholder}
         label={label}
+        step={1}
         LeftChild={AiOutlineClockCircle}
         {...props}
       />

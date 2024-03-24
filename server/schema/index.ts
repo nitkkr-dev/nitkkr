@@ -8,6 +8,7 @@ export * from './deans.schema';
 export * from './departments.schema';
 export * from './doctorates.schema';
 export * from './faculty.schema';
+export * from './forms.schema';
 export * from './hod.schema';
 export * from './majors.schema';
 export * from './notifications.schema';
