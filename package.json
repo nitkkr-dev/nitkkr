@@ -15,7 +15,8 @@
     "database:up": "docker compose up",
     "database:down": "docker compose down && docker rmi isac:1.0",
     "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate:pg --schema ./server/schema/departments.schema.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
