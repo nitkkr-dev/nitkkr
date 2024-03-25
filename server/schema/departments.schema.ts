@@ -1,5 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import { char, pgTable, smallserial, text, varchar } from 'drizzle-orm/pg-core';
+import { char, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
 
 import {
   clubs,
@@ -11,7 +11,7 @@ import {
 } from '.';
 
 export const departments = pgTable('departments', {
-  id: smallserial('id').primaryKey(),
+  id: serial('id').primaryKey(),
   name: varchar('name', { length: 64 }).notNull(),
   alias: char('alias', { length: 2 }).notNull(),
   type: varchar('type', {
