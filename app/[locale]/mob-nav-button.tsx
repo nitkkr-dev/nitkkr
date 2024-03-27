@@ -15,28 +15,28 @@ export default function MobNavButton({ className }: { className: string }) {
       document.removeEventListener('mousedown', handler);
     };
   }, []);
-  const disableDropdown = useCallback(() => {
-    setExpanded(false);
-    document.body.style.touchAction = 'auto';
-    document.body.style.overflow = 'visible';
-    document.body.style.overscrollBehavior = 'auto';
-    document.removeEventListener('mousedown', handler);
-  }, []);
-  const enableDropdown = useCallback(() => {
-    setExpanded(true);
-    document.body.style.touchAction = 'none';
-    document.body.style.overflow = 'hidden';
-    document.body.style.overscrollBehavior = 'none';
-    document.addEventListener('mousedown', handler);
-  }, []);
+
+  useEffect(() => {
+    if (expanded === true) {
+      document.body.style.touchAction = 'none';
+      document.body.style.overflow = 'hidden';
+      document.body.style.overscrollBehavior = 'none';
+      document.addEventListener('mousedown', handler);
+    } else {
+      document.body.style.touchAction = 'auto';
+      document.body.style.overflow = 'visible';
+      document.body.style.overscrollBehavior = 'auto';
+      document.removeEventListener('mousedown', handler);
+    }
+  }, [expanded]);
 
   const handler = useCallback((e: MouseEvent) => {
     if ((e.target as HTMLElement)?.classList.contains('mobNavTrigger')) return;
     if (!mobNav.current!.contains(e.target as HTMLElement)) {
-      disableDropdown();
+      setExpanded(false);
     } else if ((e.target as HTMLElement)?.tagName === 'A') {
       (e.target as HTMLElement)?.click();
-      disableDropdown();
+      setExpanded(false);
     }
   }, []);
 
@@ -49,10 +49,7 @@ export default function MobNavButton({ className }: { className: string }) {
         'mobNavTrigger p-1',
         className
       )}
-      onClick={() => {
-        setExpanded(!expanded);
-        expanded ? disableDropdown() : enableDropdown();
-      }}
+      onClick={() => setExpanded(!expanded)}
     >
       <svg className="mobNavTrigger" viewBox="0 0 100 100">
         <rect
