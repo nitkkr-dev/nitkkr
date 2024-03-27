@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
-import styles from '~/styles/buttonStyles.module.css';
 
 export default function MobNavButton({ className }: { className: string }) {
   const [expanded, setExpanded] = useState(false);
@@ -45,40 +44,40 @@ export default function MobNavButton({ className }: { className: string }) {
     <Button
       aria-controls="primary-navigation"
       aria-expanded={expanded}
-      className={cn(styles.buttonOne, 'mobNavTrigger', className)}
+      className={cn(
+        'hamburger-button fill-shade-light aria-expanded:fill-primary-700',
+        'mobNavTrigger p-1',
+        className
+      )}
       onClick={() => {
         setExpanded(!expanded);
         expanded ? disableDropdown() : enableDropdown();
       }}
     >
-      <svg
-        fill="var(--button-color)"
-        className={`${styles.hamburger} mobNavTrigger`}
-        viewBox="0 0 100 100"
-      >
+      <svg className="mobNavTrigger" viewBox="0 0 100 100">
         <rect
-          className={`${styles.line} ${styles.top} mobNavTrigger`}
-          width="80"
+          className="line top mobNavTrigger"
           height="10"
+          rx="5"
+          width="80"
           x="10"
           y="25"
-          rx="5"
         />
         <rect
-          className={`${styles.line} ${styles.middle} mobNavTrigger`}
-          width="80"
+          className="line middle mobNavTrigger"
           height="10"
+          rx="5"
+          width="80"
           x="10"
           y="45"
-          rx="5"
         />
         <rect
-          className={`${styles.line} ${styles.bottom} mobNavTrigger`}
-          width="80"
+          className="line bottom mobNavTrigger"
           height="10"
+          rx="5"
+          width="80"
           x="10"
           y="65"
-          rx="5"
         />
       </svg>
     </Button>
