@@ -1,7 +1,11 @@
 /* button one */
 
 .buttonOne {
-  --button-color: #333;
+  --button-color: #ffffff;
+}
+
+.buttonOne[aria-expanded='true'] {
+  --button-color: #c5291d;
 }
 
 .hamburger {

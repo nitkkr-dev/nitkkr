@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { Button } from '~/components/ui/button';
+import { cn } from '~/lib/utils';
 import styles from '~/styles/buttonStyles.module.css';
 
 export default function MobNavButton({ className }: { className: string }) {
@@ -40,14 +42,14 @@ export default function MobNavButton({ className }: { className: string }) {
   }, []);
 
   return (
-    <button
-      className={`${className} ${styles.buttonOne} mobNavTrigger`}
+    <Button
+      aria-controls="primary-navigation"
+      aria-expanded={expanded}
+      className={cn(styles.buttonOne, 'mobNavTrigger', className)}
       onClick={() => {
         setExpanded(!expanded);
         expanded ? disableDropdown() : enableDropdown();
       }}
-      aria-controls="primary-navigation"
-      aria-expanded={expanded}
     >
       <svg
         fill="var(--button-color)"
@@ -79,6 +81,6 @@ export default function MobNavButton({ className }: { className: string }) {
           rx="5"
         />
       </svg>
-    </button>
+    </Button>
   );
 }

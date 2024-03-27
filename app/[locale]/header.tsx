@@ -137,22 +137,20 @@ export default async function Header({ locale }: { locale: string }) {
                 <ul className="space-y-4 px-2 font-semibold">
                   {items.map(({ label, href }, index) => (
                     <li key={index}>
-                      <Link
-                        href={`/${locale}/${href}`}
-                        className="cursor-pointer hover:underline"
+                      <Button
+                        asChild
+                        className="text-shade-dark"
+                        variant="link"
                       >
-                        {label}
-                      </Link>
+                        <Link href={`/${locale}/${href}`}>{label}</Link>
+                      </Button>
                     </li>
                   ))}
                 </ul>
-                <hr className="solid" />
-                <Link
-                  href={`/${locale}/login`}
-                  className="button button-emphasised rounded text-center"
-                >
-                  {text.login}
-                </Link>
+                <hr className="opacity-50" />
+                <Button asChild className="rounded py-2 text-center">
+                  <Link href={`/${locale}/login`}>{text.login}</Link>
+                </Button>
               </aside>
             </nav>
           </li>
