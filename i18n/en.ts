@@ -1,6 +1,43 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Departments: {
+    subLinkTitles: [
+      'About',
+      'Vision & Mission',
+      "HOD's Message",
+      'Programmes',
+      'Faculty And More',
+      'Photo Gallery',
+    ],
+    departmentTitles: [
+      'Business Administration',
+      'Computer Application',
+      'Chemistry',
+      'Civil Engineering',
+      'Computer Engineering',
+      'Electrical Engineering',
+      'Electronics and Communication Engineering',
+      'Humanities and Social Science',
+      'Mathematics',
+      'Mechanical engineering',
+      'Physics',
+      'Renewable Energy and Efficiency School',
+      'VLSI Design and Embedded Systems School',
+    ],
+    sectionTitles: [
+      'About',
+      'Vision',
+      'Mission',
+      "HOD's Message",
+      'Programmes',
+      'Faculty And More',
+      'Laboratories',
+      'Student Achivements',
+      'Gallery',
+    ],
+    readMore: 'Read More',
+  },
   DirectorsCorner: {
     alt: 'Prof. B. V. Ramana Reddy',
     title: 'DIRECTOR’S CORNER',
