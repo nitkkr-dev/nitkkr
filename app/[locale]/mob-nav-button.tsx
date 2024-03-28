@@ -1,59 +1,65 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useScrollLock } from 'usehooks-ts';
 
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
 export default function MobNavButton({ className }: { className: string }) {
-  const [expanded, setExpanded] = useState(false);
-  const mobNav: React.MutableRefObject<HTMLElement | null> = useRef(null);
+  const { lock, unlock } = useScrollLock({
+    autoLock: false,
+    widthReflow: true,
+  });
+  const buttonRef: React.MutableRefObject<HTMLButtonElement | null> =
+    useRef(null);
 
   useEffect(() => {
-    mobNav.current = document.getElementById('mobNav');
     return () => {
       document.removeEventListener('mousedown', handler);
     };
   }, []);
 
-  useEffect(() => {
-    if (expanded === true) {
-      document.body.style.touchAction = 'none';
-      document.body.style.overflow = 'hidden';
-      document.body.style.overscrollBehavior = 'none';
-      document.addEventListener('mousedown', handler);
+  const triggerDropdown = () => {
+    if (buttonRef.current!.getAttribute('aria-expanded') === 'true') {
+      closeDropDown();
     } else {
-      document.body.style.touchAction = 'auto';
-      document.body.style.overflow = 'visible';
-      document.body.style.overscrollBehavior = 'auto';
-      document.removeEventListener('mousedown', handler);
+      openDropDown();
     }
-  }, [expanded]);
+  };
+
+  const openDropDown = useCallback(() => {
+    buttonRef.current!.setAttribute('aria-expanded', 'true');
+    lock();
+    document.addEventListener('mousedown', handler);
+  }, []);
+
+  const closeDropDown = useCallback(() => {
+    buttonRef.current!.setAttribute('aria-expanded', 'false');
+    unlock();
+    document.removeEventListener('mousedown', handler);
+  }, []);
 
   const handler = useCallback((e: MouseEvent) => {
-    if ((e.target as HTMLElement)?.classList.contains('mobNavTrigger')) return;
-    if (!mobNav.current!.contains(e.target as HTMLElement)) {
-      setExpanded(false);
-    } else if ((e.target as HTMLElement)?.tagName === 'A') {
-      (e.target as HTMLElement)?.click();
-      setExpanded(false);
-    }
+    if ((e.target as HTMLElement)?.classList.contains('DropDownIgnore')) return;
+    closeDropDown();
   }, []);
 
   return (
     <Button
       aria-controls="primary-navigation"
-      aria-expanded={expanded}
+      aria-expanded={false}
+      ref={buttonRef}
       className={cn(
         'hamburger-button fill-shade-light aria-expanded:fill-primary-700',
-        'mobNavTrigger p-1',
+        'DropDownIgnore p-1',
         className
       )}
-      onClick={() => setExpanded(!expanded)}
+      onClick={triggerDropdown}
     >
-      <svg className="mobNavTrigger" viewBox="0 0 100 100">
+      <svg className="DropDownIgnore" viewBox="0 0 100 100">
         <rect
-          className="line top mobNavTrigger"
+          className="line top DropDownIgnore"
           height="10"
           rx="5"
           width="80"
@@ -61,7 +67,7 @@ export default function MobNavButton({ className }: { className: string }) {
           y="25"
         />
         <rect
-          className="line middle mobNavTrigger"
+          className="line middle DropDownIgnore"
           height="10"
           rx="5"
           width="80"
@@ -69,7 +75,7 @@ export default function MobNavButton({ className }: { className: string }) {
           y="45"
         />
         <rect
-          className="line bottom mobNavTrigger"
+          className="line bottom DropDownIgnore"
           height="10"
           rx="5"
           width="80"

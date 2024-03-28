@@ -127,19 +127,16 @@ export default async function Header({ locale }: { locale: string }) {
               <Link href={`/${locale}/login`}>{text.login}</Link>
             </Button>
           </li>
-          <li className="z-30 text-base font-semibold lg:hidden">
+          <li className="z-30  font-semibold lg:hidden">
             <nav className="relative flex h-0">
-              <MobNavButton className="peer sticky z-40 h-10 w-10 rounded bg-primary-700 transition-colors aria-expanded:bg-transparent" />
-              <aside
-                className="absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-5 rounded-md border border-primary-500 bg-background px-3 py-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100"
-                id="mobNav"
-              >
-                <ul className="space-y-4 px-2 font-semibold">
+              <MobNavButton className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent" />
+              <aside className="DropDownIgnore absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-4 rounded-md border border-primary-500 bg-background p-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100">
+                <ul className="DropDownIgnore space-y-4 text-base font-semibold">
                   {items.map(({ label, href }, index) => (
-                    <li key={index}>
+                    <li key={index} className="w-fit">
                       <Button
                         asChild
-                        className="text-shade-dark"
+                        className="text-left text-shade-dark"
                         variant="link"
                       >
                         <Link href={`/${locale}/${href}`}>{label}</Link>
@@ -147,8 +144,11 @@ export default async function Header({ locale }: { locale: string }) {
                     </li>
                   ))}
                 </ul>
-                <hr className="opacity-50" />
-                <Button asChild className="rounded py-2 text-center">
+                <hr className="DropDownIgnore opacity-50" />
+                <Button
+                  asChild
+                  className="bg-primary-900 py-2 text-center sm:rounded"
+                >
                   <Link href={`/${locale}/login`}>{text.login}</Link>
                 </Button>
               </aside>
