@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useCallback, useEffect } from 'react';
-import { useScrollLock, useToggle } from 'usehooks-ts';
+import { useEffect } from 'react';
+import { useEventCallback, useScrollLock, useToggle } from 'usehooks-ts';
 
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
@@ -27,10 +27,10 @@ export default function MobNavButton({ className }: { className: string }) {
     };
   }, [dropdownOpen]);
 
-  const handler = useCallback((e: MouseEvent) => {
-    if ((e.target as HTMLElement)?.dataset.dropdownignore) return;
+  const handler = useEventCallback((event: MouseEvent) => {
+    if ((event.target as HTMLElement)?.dataset.dropdownignore) return;
     setDropdownState(false);
-  }, []);
+  });
 
   return (
     <Button
