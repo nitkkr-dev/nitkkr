@@ -129,9 +129,18 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li className="z-30  font-semibold lg:hidden">
             <nav className="relative flex h-0">
-              <MobNavButton className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent" />
-              <aside className="DropDownIgnore absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-4 rounded-md border border-primary-500 bg-background p-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100">
-                <ul className="DropDownIgnore space-y-4 text-base font-semibold">
+              <MobNavButton
+                className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
+                data-dropdownignore={true}
+              />
+              <aside
+                className="absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-4 rounded-md border border-primary-500 bg-background p-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100"
+                data-dropdownignore={true}
+              >
+                <ul
+                  className="space-y-4 text-base font-semibold"
+                  data-dropdownignore={true}
+                >
                   {items.map(({ label, href }, index) => (
                     <li key={index} className="w-fit">
                       <Button
@@ -144,7 +153,7 @@ export default async function Header({ locale }: { locale: string }) {
                     </li>
                   ))}
                 </ul>
-                <hr className="DropDownIgnore opacity-50" />
+                <hr className="opacity-50" data-dropdownignore={true} />
                 <Button
                   asChild
                   className="bg-primary-900 py-2 text-center sm:rounded"
