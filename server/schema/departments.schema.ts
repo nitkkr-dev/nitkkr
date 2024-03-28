@@ -13,7 +13,7 @@ import {
 export const departments = pgTable('departments', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 64 }).notNull(),
-  alias: char('alias', { length: 2 }).notNull(),
+  alias: char('alias', { length: 4 }).notNull(),
   type: varchar('type', {
     enum: ['engineering', 'science', 'school'],
   }).notNull(),
