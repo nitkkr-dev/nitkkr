@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
-import { useScrollLock } from 'usehooks-ts';
+import React, { useCallback, useEffect } from 'react';
+import { useScrollLock, useToggle } from 'usehooks-ts';
 
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
@@ -11,51 +11,37 @@ export default function MobNavButton({ className }: { className: string }) {
     autoLock: false,
     widthReflow: true,
   });
-  const buttonRef: React.MutableRefObject<HTMLButtonElement | null> =
-    useRef(null);
+  const [dropdownOpen, toggleDropdown, setDropdownState] = useToggle(false);
 
   useEffect(() => {
-    return () => {
-      document.removeEventListener('mousedown', handler);
-    };
-  }, []);
-
-  const triggerDropdown = () => {
-    if (buttonRef.current!.getAttribute('aria-expanded') === 'true') {
-      closeDropDown();
+    if (dropdownOpen) {
+      lock();
+      document.addEventListener('click', handler);
     } else {
-      openDropDown();
+      unlock();
+      document.removeEventListener('click', handler);
     }
-  };
-
-  const openDropDown = useCallback(() => {
-    buttonRef.current!.setAttribute('aria-expanded', 'true');
-    lock();
-    document.addEventListener('mousedown', handler);
-  }, []);
-
-  const closeDropDown = useCallback(() => {
-    buttonRef.current!.setAttribute('aria-expanded', 'false');
-    unlock();
-    document.removeEventListener('mousedown', handler);
-  }, []);
+    return () => {
+      unlock();
+      document.removeEventListener('click', handler);
+    };
+  }, [dropdownOpen]);
 
   const handler = useCallback((e: MouseEvent) => {
     if ((e.target as HTMLElement)?.classList.contains('DropDownIgnore')) return;
-    closeDropDown();
+    setDropdownState(false);
   }, []);
 
   return (
     <Button
       aria-controls="primary-navigation"
-      aria-expanded={false}
-      ref={buttonRef}
+      aria-expanded={dropdownOpen}
       className={cn(
         'hamburger-button fill-shade-light aria-expanded:fill-primary-700',
         'DropDownIgnore p-1',
         className
       )}
-      onClick={triggerDropdown}
+      onClick={toggleDropdown}
     >
       <svg className="DropDownIgnore" viewBox="0 0 100 100">
         <rect
