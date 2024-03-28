@@ -41,7 +41,6 @@ const sectionsData: InferInsertModel<typeof sections>[] = [
 ];
 
 export const populateSections = async () => {
-    await db.delete(sections);
-    await db.insert(sections).values(sectionsData);
-}
-
+  await db.delete(sections);
+  await db.insert(sections).values(sectionsData);
+};

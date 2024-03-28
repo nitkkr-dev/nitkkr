@@ -27,6 +27,13 @@
       "~/*": ["./*"],
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server/sample-data/departments.ts", "populateDB.mts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "server/sample-data/departments.ts",
+    "populateDB.mts",
+  ],
   "exclude": ["node_modules"],
 }
