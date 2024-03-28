@@ -230,7 +230,7 @@ const SearchCard: React.FC<{
       );
     case 'positions':
       return (
-        <article className="flex w-full flex-wrap items-center  gap-5 rounded-lg bg-shade-light p-3 md:px-4">
+        <article className="flex w-full flex-wrap items-center gap-5 rounded-lg bg-shade-light p-3 md:px-4">
           <header>
             <h5 className="text-primary-300">
               {cardContent.position}
