@@ -51,3 +51,34 @@
     @apply lg:text-lg;
   }
 }
+
+@layer components {
+  .hamburger-button .line {
+    transition:
+      y 150ms ease-in 150ms,
+      rotate 150ms ease-in,
+      opacity 0ms 150ms;
+    transform-origin: center;
+  }
+
+  .hamburger-button[aria-expanded='true'] .line {
+    transition:
+      y 150ms ease-in,
+      rotate 150ms ease-in 150ms,
+      opacity 0ms 150ms;
+  }
+
+  .hamburger-button[aria-expanded='true'] .top {
+    rotate: 45deg;
+    y: 45px;
+  }
+
+  .hamburger-button[aria-expanded='true'] .middle {
+    opacity: 0;
+  }
+
+  .hamburger-button[aria-expanded='true'] .bottom {
+    rotate: -45deg;
+    y: 45px;
+  }
+}
