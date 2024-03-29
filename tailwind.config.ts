@@ -52,6 +52,9 @@ export default {
         studentActivities:
           "url('https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kompE3PGAJZpl95XpJ80kR~4JBG40bM-uUhl0-O3K0k0QXk~CzNZUxJHItS4CRM1h0BS0EL-5xdNi6xkIFamIFTUviKykzfuJU~uLuuQ~RF7eGn-E1EEdmQS~E2PExM2oj~UfUTqrNNt70~doCAdaHhMshJcIIIF2KLwkQWfrLltqR7QwsYkxTdFj84qBcRnIh~V9ngs0MKHysj6F8MPiRY15qRQP1cWlHUQToyEORyzQ-RVbdCbxGeV4WwOojk0gtb~7s3TNK4ycePpM9n6ODrMRcrnBaalvLQLxWY6DGrp-QRBEx6gyEQmbpRkyf3vCpp-oMRbSOCrqxwxhOqyWg__')",
       },
+      zIndex: {
+        modal: '100',
+      },
     },
     fontFamily: {
       sans: ['DM Sans', 'sans-serif'],

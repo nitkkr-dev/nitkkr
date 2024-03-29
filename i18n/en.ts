@@ -54,6 +54,39 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  Search: {
+    placeholder: 'Quick Search...',
+    categories: {
+      allResults: 'All Results',
+      webPages: 'Web Pages',
+      people: 'People',
+      documents: 'Documents',
+      events: 'Events',
+      news: 'News',
+      courses: 'Courses',
+      clubs: 'Clubs',
+      positions: 'Positions',
+    },
+    viewAll: 'View All',
+    default: {
+      recents: 'Recent Searches',
+      clearRecents: 'clear recents',
+      mostSearched: 'Most Searched at NITKKR',
+      studentLinks: {
+        title: 'Student Quick Links',
+        clubs: 'Clubs',
+        courses: 'Courses',
+        departments: 'Departments',
+        notifications: 'Notifications',
+        results: 'Results',
+      },
+      facultyLinks: {
+        title: 'Faculty Quick Links',
+        notifications: 'Notifications',
+        profile: 'My Profile',
+      },
+    },
+  },
   StudentActivities: {
     title: 'Student Activities',
     headings: {
