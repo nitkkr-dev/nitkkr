@@ -34,7 +34,9 @@ export const clubs = pgTable('clubs', {
   ),
   isActive: boolean('is_active').default(true).notNull(),
   createdOn: date('created_on').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at')
+    .$onUpdate(() => new Date())
+    .notNull(),
   updatedBy: integer('updated_by')
     .references(() => persons.id)
     .notNull(),
