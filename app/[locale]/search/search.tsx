@@ -279,7 +279,7 @@ const ResultsView = async ({
     people: [
       {
         image:
-          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mlbfNQ6wxBAY-4fFaqTYC93tfMAryRfAx90MX9agQ934LlsGw32jCT~ANs0paIfIrybCqF21-25noYI9BAfDQVNpyj7t80k~mITw48TkuN8COo4L2nDP1ZWXcsQKAcfMdHSLUaxBERNdxl3aVTSv52r7o-~tCigNvGkI1T7Q~-bfu8euox~m2PWxJRbJ9pQt7S7qzwz6on0l6Bqzh9D26-TN7Aa7KwWerm4y4pzdeJ9hNZfhISv0aEbPHTGPBRZL9aNFSfvBVrEFlgtoJ3wj9uSi~Z6Q1SG0sX-CKuP57zNusgN8ZBjsJlAiH~6OQcX3nwEHPSJxipdip03kSvd5TA__',
+          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XhXTOOqpZTPz-m0h7A5KbB2XSpwDWcMLJSi80TUlwh-KietPuleAlrO9FPUQxOpkzo0EznSirToNDvYjctfrlo2RRapLzfFz9zdbyupA1mbOhUz3dTr2EFuQIJsD5a1p4ByFbXscyAlmQgiOuwhK-YBGs8IyIqL-BSD9TPGH3b0tphRUh~q58Ca1jbGWK-~UO7w49aYGd~RK4UvdX5OY6fOxPMqYyGkdhyfSpi4RHp0QZa3skEOZDwHrvUnudZQaXNI56jTrWwxZWdvUcQ88a9MfCDUj54dyUESDXXduuuOZ~g9jcP0nVpNOu-trLwTkMB88kTGinugh2ynm6e~2vA__',
         name: 'Dr. Saket Raman',
         designation: 'Assistant Professor',
         email: 'saketraman123@gmail.com',
@@ -290,7 +290,7 @@ const ResultsView = async ({
       },
       {
         image:
-          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mlbfNQ6wxBAY-4fFaqTYC93tfMAryRfAx90MX9agQ934LlsGw32jCT~ANs0paIfIrybCqF21-25noYI9BAfDQVNpyj7t80k~mITw48TkuN8COo4L2nDP1ZWXcsQKAcfMdHSLUaxBERNdxl3aVTSv52r7o-~tCigNvGkI1T7Q~-bfu8euox~m2PWxJRbJ9pQt7S7qzwz6on0l6Bqzh9D26-TN7Aa7KwWerm4y4pzdeJ9hNZfhISv0aEbPHTGPBRZL9aNFSfvBVrEFlgtoJ3wj9uSi~Z6Q1SG0sX-CKuP57zNusgN8ZBjsJlAiH~6OQcX3nwEHPSJxipdip03kSvd5TA__',
+          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XhXTOOqpZTPz-m0h7A5KbB2XSpwDWcMLJSi80TUlwh-KietPuleAlrO9FPUQxOpkzo0EznSirToNDvYjctfrlo2RRapLzfFz9zdbyupA1mbOhUz3dTr2EFuQIJsD5a1p4ByFbXscyAlmQgiOuwhK-YBGs8IyIqL-BSD9TPGH3b0tphRUh~q58Ca1jbGWK-~UO7w49aYGd~RK4UvdX5OY6fOxPMqYyGkdhyfSpi4RHp0QZa3skEOZDwHrvUnudZQaXNI56jTrWwxZWdvUcQ88a9MfCDUj54dyUESDXXduuuOZ~g9jcP0nVpNOu-trLwTkMB88kTGinugh2ynm6e~2vA__',
         name: 'Dr. Saket Raman',
         designation: 'Assistant Professor',
         email: 'saketraman123@gmail.com',
@@ -301,7 +301,7 @@ const ResultsView = async ({
       },
       {
         image:
-          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mlbfNQ6wxBAY-4fFaqTYC93tfMAryRfAx90MX9agQ934LlsGw32jCT~ANs0paIfIrybCqF21-25noYI9BAfDQVNpyj7t80k~mITw48TkuN8COo4L2nDP1ZWXcsQKAcfMdHSLUaxBERNdxl3aVTSv52r7o-~tCigNvGkI1T7Q~-bfu8euox~m2PWxJRbJ9pQt7S7qzwz6on0l6Bqzh9D26-TN7Aa7KwWerm4y4pzdeJ9hNZfhISv0aEbPHTGPBRZL9aNFSfvBVrEFlgtoJ3wj9uSi~Z6Q1SG0sX-CKuP57zNusgN8ZBjsJlAiH~6OQcX3nwEHPSJxipdip03kSvd5TA__',
+          'https://s3-alpha-sig.figma.com/img/588b/ab64/04ae89380965f576d620e92665f81865?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XhXTOOqpZTPz-m0h7A5KbB2XSpwDWcMLJSi80TUlwh-KietPuleAlrO9FPUQxOpkzo0EznSirToNDvYjctfrlo2RRapLzfFz9zdbyupA1mbOhUz3dTr2EFuQIJsD5a1p4ByFbXscyAlmQgiOuwhK-YBGs8IyIqL-BSD9TPGH3b0tphRUh~q58Ca1jbGWK-~UO7w49aYGd~RK4UvdX5OY6fOxPMqYyGkdhyfSpi4RHp0QZa3skEOZDwHrvUnudZQaXNI56jTrWwxZWdvUcQ88a9MfCDUj54dyUESDXXduuuOZ~g9jcP0nVpNOu-trLwTkMB88kTGinugh2ynm6e~2vA__',
         name: 'Dr. Saket Raman',
         designation: 'Assistant Professor',
         email: 'saketraman123@gmail.com',
@@ -322,7 +322,7 @@ const ResultsView = async ({
     events: [
       {
         image:
-          'https://s3-alpha-sig.figma.com/img/9b4c/ddde/89db0531d592d21458355e7e79bdfc97?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IcmdIhg2lv9wXJrQWvYiCmRSiuwvok1c5MosB1v9LbqVJ2Pguew9qyZRx8lKoa-1Q2T76hYFrpwKq32UIWTw-wKT~Bv2EogKzr7M~qWQesNQSrvp2E4PmwwZRS7zvuJlRv2XgP7zlSUxobfYqCj3pQ1N8gOXc0t6aFqRAD3qJrD0HGSOYjUPuAutPXUEltrkHv8GgLFUHq1u~apYFuSx-Se0YETQyfP3wSMmFzq5YMTe~H-Bnk8t1QOk8R95mepJuVcB-k4oIUtVxz8Fd5pec0D72EsMkbPE-3YHT07naDTCKmZLUbshqReOWrcxUKkxpAWCy2tYdm7VI9PmxR1UNA__',
+          'https://s3-alpha-sig.figma.com/img/3594/7246/458fa3566201bcb931432b99f3505bd1?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JE3JkUvyroRJv7X~Q2nMVJLUTTdj-714yFzTrwDHoztj-U2pSpe2Ww-zdhLFVJEQG-pCzVURGkNVfUWO5vnDBtim7bsus9VDKSjS-itDFqT~bqY4~5TEaoilZ6fAdTopqXpBVvkCqdqBrbvLRiRfNdhXi2CcQSs35BhWQDTOtxarSyn5y~G~kG3L7y8R94HGjc29K5JTmqHJe3nWW98f7Po3AsWQ~nd2AJ86~K-kk0xNprKfWCEfwXwucWX3g-00q7f5leGYggtai1VBISJOXdbvfCs7-YYbc4pwevjsIVnyp7zn9qzOrxgu--exgkMuAxHzjCe3cWIRsAgFR5xwGQ__',
         heading: 'NITKKR Annual Fest 2023',
         subHeading: 'The biggest event of the year is here',
         location: 'NIT Kurukshetra',
@@ -343,7 +343,7 @@ const ResultsView = async ({
         heading:
           'NITTKR Launches first robots to compete with Boston robotics!',
         image:
-          'https://s3-alpha-sig.figma.com/img/bf2a/5c15/7f8cfedaa2b77202e9b1578cfcb112fd?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OTTlyTBkDlRxzDHZrPcdggouZ3FnD7XA~XrFtEiCXI333-crUWTQbWtD4kxp7D2tHGHMQaRc3-MJX8BIKcwsFs6A1VIJHpA0x-Uwju675RsiQ8EMW3w6Wlf9xI9dhaKzppER3eRQB0lVWhTj26aypVIMNL8hqrcDqgF-887kWYjlFGiTipCLYHf9~dPzPZ35of5fsIQrQT8X8zqIHCgLRtwCXbDi0n-Nv02ka6-njbkfFpRtVyGGClsSzwRCEf1Tq1i4ab-7gZHFWuV1w8WTYw4C5iDULTpUFnLEyApx54eS3U2SIpNSJ0J2oqqDn9dFlm6Q3ZXHb6KqNLNv~SPzTA__',
+          'https://s3-alpha-sig.figma.com/img/bf2a/5c15/7f8cfedaa2b77202e9b1578cfcb112fd?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=o3UtzggmWXV8QNnveUg7giywRj1Bu7giRDO2N9b8-r1cvWkGaFkg-0TKcHbyxGZScvcuI2O8zHUL~B3L0UMbZsbbAW2udMB2YvS8UenIYbh2svhIPCFTGv3I3lomok7Da1bJq45xMe4dmxbCyuRtK1huKc6lQbN2dl~UkSwsIGiADY4SSAG8aIYlq2wyZdOLWsz~e2tlkeIasgY5KlHT-obmgxxRvys-rLUdS1ojb8XOBV8Vf7XCoyJQFGTyOY~wL6IraFS8YLSfHPxL2es01FGWp1x-FMLg8eXdQAWfVWFTTgde7YsEQM5pTWxVrioGl-rr84KH8hFFGjHVcrBzKg__',
         content:
           'The NITKKR Robotics Student Fellowship (NITKKR AUTOBOTS) program offers graduate students the opportunity to research alongside experts on the specific topic of robotics ...The NITKKR Robotics Student Fellowship (NITKKR AUTOBOTS) program offers graduate students the opportunity to research alongside experts on the specific topic of robotics ...',
         label: 'Dr. Vikram Singh',
@@ -371,7 +371,7 @@ const ResultsView = async ({
     clubs: [
       {
         image:
-          'https://s3-alpha-sig.figma.com/img/4be8/b8d5/4905138091404e46eae4f448817ee3d9?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YFPsXa-gDKE9P7lxUTpGmZqq8PAgcAhRsUTabekQbTtSpgb~6u-L-yM8Od-TCD1mbCfVHusXYNAHWHf-tmqSwtG1fFfNHWKdlfFggRSMpDjh~jDSPI4Heh3m9n2L5e176SLmoQDSnJa56ajuXhawTSQZNWayNTA-HyxK3dOpMA-qeWkEBEzqUbzO~~sTQXtz0P-PWSY3r~svFPUUAiWqONzeWldHPCr-fADFHnNOWdKgHnsGUPAmBVUqiQbOyBIdsqxJTXjLhoogjGSLT2ljefVWzGhT8OaTJVlVD4CCxWMj3tDtwjWzTZ4Mh5VB1CjYfHIAlDp59J08MFtE9eha5Q__',
+          'https://s3-alpha-sig.figma.com/img/4be8/b8d5/4905138091404e46eae4f448817ee3d9?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GIX3KIWowX3mSUg10CtwjL9GTrNnat2z7~Ljlv~aeZFHXg7Im6~vkprBFAR~5Jj1oFEfypq-hiFoA8cGqRRJokXIxmXsDirHPzOToXnAKGtPxtWcsyJ4Femas~J62X7QBZ5Bh3HldQhVt0iW70n5jaF09E9wint2UEh7V0UN8hwI52CJwKoR4BbC5awj1~IZ-m0jbjDcgXejQuw2WUxv3q5G7tg3BBSq5yLzBfI99UshgxG-Kay4VGx86L5iqCY28F58bUBPXgcvFMGWXYlh0S9wMt9zGX7tmWQFjA7D9qBJoFO8mr6FD04XTGTAwijPcsAADra~CGBn4HpCY8QGAA__',
         heading: 'SPIC MACAY',
         subHeading: 'Musical and Cultural Club of NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
