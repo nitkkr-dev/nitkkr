@@ -246,7 +246,7 @@ const ResultsView = async ({
   currentCategory,
   viewAll,
 }: {
-  categories: Record<string, string>;
+  categories: Record<searchCategory, string>;
   locale: string;
   query?: string;
   currentCategory: searchCategory;
@@ -410,38 +410,36 @@ const ResultsView = async ({
     ],
   };
 
-  return currentCategory != 'allResults' ? (
+  return currentCategory !== 'allResults' ? (
     <>
       <header className="flex justify-between text-primary-700">
         <h4>{categories[currentCategory]}</h4>
       </header>
       <ul className="mb-5 space-y-3">
-        {results[currentCategory as keyof SearchResult].map(
-          ({ label, value, ...result }, index) => (
-            <li key={index}>
-              <LocalStorageLink
-                href={`/${locale}/${value}`}
-                newItem={{
-                  title: label,
-                  href: `/${locale}/${value}`,
-                  category: currentCategory,
-                }}
-                options={{ filter: true, unshift: true }}
-                replace
-                storageKey="recentSearches"
-              >
-                <SearchCard
-                  cardContent={
-                    {
-                      category: currentCategory,
-                      ...result,
-                    } as CardContent
-                  }
-                />
-              </LocalStorageLink>
-            </li>
-          )
-        )}
+        {results[currentCategory].map(({ label, value, ...result }, index) => (
+          <li key={index}>
+            <LocalStorageLink
+              href={`/${locale}/${value}`}
+              newItem={{
+                title: label,
+                href: `/${locale}/${value}`,
+                category: currentCategory,
+              }}
+              options={{ filter: true, unshift: true }}
+              replace
+              storageKey="recentSearches"
+            >
+              <SearchCard
+                cardContent={
+                  {
+                    category: currentCategory,
+                    ...result,
+                  } as CardContent
+                }
+              />
+            </LocalStorageLink>
+          </li>
+        ))}
       </ul>
     </>
   ) : (
