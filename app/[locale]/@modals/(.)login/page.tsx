@@ -1,4 +1,4 @@
-import LoginPage from '~/app/login/login-page';
+import LoginModal from '~/app/login/login';
 import { Dialog } from '~/components/dialog';
 import { cn } from '~/lib/utils';
 
@@ -20,7 +20,7 @@ export default function Login({
           'p-2 sm:p-6 md:p-10 lg:p-16'
         )}
       >
-        <LoginPage locale={locale} />
+        <LoginModal locale={locale} />
       </section>
     </Dialog>
   );

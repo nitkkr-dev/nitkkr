@@ -4,9 +4,9 @@ import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
-import LoginButton from './login-button';
+import LoginButton from './sign-in-with-google-button';
 
-const LoginPage = async ({ locale }: { locale: string }) => {
+const Login = async ({ locale }: { locale: string }) => {
   const text = (await getTranslations(locale)).Login;
 
   return (
@@ -54,4 +54,4 @@ const LoginPage = async ({ locale }: { locale: string }) => {
   );
 };
 
-export default LoginPage;
+export default Login;
