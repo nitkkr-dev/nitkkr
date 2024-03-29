@@ -20,9 +20,9 @@ const CustomCarousel = ({
   itemClassName?: string;
 }) => {
   return (
-    <article className={cn('container relative px-14', className)}>
+    <article className={cn('container relative px-10 lg:px-14', className)}>
       <Carousel
-        className="static w-full"
+        className="static"
         opts={{
           align: 'start',
           loop: true,
