@@ -1,5 +1,6 @@
-import { Dialog } from '~/components/dialog';
 import LoginPage from '~/app/login/login-page';
+import { Dialog } from '~/components/dialog';
+import { cn } from '~/lib/utils';
 
 export default function Login({
   params: { locale },
@@ -7,8 +8,20 @@ export default function Login({
   params: { locale: string };
 }) {
   return (
-    <Dialog className="rounded-md border border-primary-500 bg-background p-20 px-32 drop-shadow-2xl">
-      <LoginPage locale={locale} />
+    <Dialog
+      className={cn(
+        'container',
+        'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[768px]'
+      )}
+    >
+      <section
+        className={cn(
+          'rounded-lg border border-primary-500 bg-background',
+          'p-2 sm:p-6 md:p-10 lg:p-16'
+        )}
+      >
+        <LoginPage locale={locale} />
+      </section>
     </Dialog>
   );
 }
