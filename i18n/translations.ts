@@ -30,6 +30,12 @@ export interface Translations {
     search: string;
     login: string;
   };
+  Login: {
+    title: string;
+    enterEmail: string;
+    continueButton: string;
+    signInWithGoogle: string;
+  };
   Notifications: {
     title: string;
     categories: {

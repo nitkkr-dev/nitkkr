@@ -39,6 +39,12 @@ const text: Translations = {
     search: 'Quick Search...',
     login: 'Login',
   },
+  Login: {
+    title: 'Sign In',
+    enterEmail: 'Enter your email',
+    continueButton: 'Continue (Not implemented)',
+    signInWithGoogle: 'Sign in with Google',
+  },
   Notifications: {
     title: 'NOTIFICATIONS',
     categories: {
