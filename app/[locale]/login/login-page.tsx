@@ -1,3 +1,4 @@
+import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -22,9 +23,7 @@ const LoginPage = async ({ locale }: { locale: string }) => {
               className="rounded-md border border-primary-500 p-5 outline-offset-2 outline-primary-100 "
             />
           </fieldset>
-          <button className="text-md w-full rounded-md bg-primary-700 p-4 text-neutral-50 hover:bg-primary-900">
-            {text.continueButton}
-          </button>
+          <Button className="w-full p-4">{text.continueButton}</Button>
           <hr
             className={cn(
               'h-1 overflow-visible border-0 border-t-[1px] border-primary-500 text-center after:relative after:top-[-13px] after:bg-background after:px-3 after:text-primary-500',
