@@ -1,5 +1,7 @@
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { userAgent } from 'next/server';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 
@@ -10,6 +12,9 @@ import { cn } from '~/lib/utils';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
+
+  const agent = userAgent({ headers: headers() });
+  const isMacOS = agent.os.name === 'Mac OS';
 
   const items = [
     { label: text.institute, href: 'institute' },
@@ -117,7 +122,9 @@ export default async function Header({ locale }: { locale: string }) {
                 <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
                   {text.search}
                 </span>
-                <kbd className="font-sans font-medium opacity-50">Ctrl K</kbd>
+                <kbd className="font-sans font-medium opacity-50">
+                  {isMacOS ? '⌘' : 'Ctrl'} K
+                </kbd>
               </Link>
             </Button>
           </li>
