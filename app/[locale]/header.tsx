@@ -3,11 +3,9 @@ import Link from 'next/link';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 import LocaleSwitcher from '~/components/locale-switcher';
-import { Button } from '~/components/ui';
+import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-
-import MobNavButton from './mob-nav-button';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -129,7 +127,7 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
-              <MobNavButton
+              <HamburgerButton
                 className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
                 data-dropdownignore={true}
               />

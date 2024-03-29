@@ -6,7 +6,7 @@ import { useEventCallback, useScrollLock, useToggle } from 'usehooks-ts';
 import { Button } from '~/components/ui/button';
 import { cn } from '~/lib/utils';
 
-export default function MobNavButton({ className }: { className: string }) {
+const HamburgerButton = ({ className }: { className: string }) => {
   const { lock, unlock } = useScrollLock({
     autoLock: false,
     widthReflow: true,
@@ -71,4 +71,6 @@ export default function MobNavButton({ className }: { className: string }) {
       </svg>
     </Button>
   );
-}
+};
+
+export { HamburgerButton };
