@@ -131,7 +131,9 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
           <li className="hidden lg:block">
             <Button asChild className="h-full w-16 xl:w-20">
-              <Link href={`/${locale}/login`}>{text.login}</Link>
+              <Link href={`/${locale}/login`} prefetch scroll={false}>
+                {text.login}
+              </Link>
             </Button>
           </li>
           <li className="lg:hidden">
