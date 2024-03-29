@@ -127,19 +127,24 @@ export default async function Header({ locale }: { locale: string }) {
               <Link href={`/${locale}/login`}>{text.login}</Link>
             </Button>
           </li>
-          <li className="z-30  font-semibold lg:hidden">
+          <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
               <MobNavButton
                 className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
                 data-dropdownignore={true}
               />
               <aside
-                className="absolute -right-2 -top-2 flex w-80 max-w-[calc(100vw-1rem)] transform cursor-default flex-col gap-y-4 rounded-md border border-primary-500 bg-background p-6 opacity-0 transition-opacity peer-aria-expanded:opacity-100"
+                className={cn(
+                  'absolute -right-2 -top-2',
+                  'hidden peer-aria-expanded:flex',
+                  'border border-primary-500 bg-background',
+                  'w-72 max-w-[calc(100vw-1rem)] flex-col gap-y-4 rounded-md p-6'
+                )}
                 data-dropdownignore={true}
               >
                 <ul
                   className="space-y-4 text-base font-semibold"
-                  data-dropdownignore={true}
+                  data-dropdownignore
                 >
                   {items.map(({ label, href }, index) => (
                     <li key={index} className="w-fit">
