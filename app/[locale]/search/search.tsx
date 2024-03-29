@@ -17,7 +17,6 @@ import { cn, getKeys } from '~/lib/utils';
 
 import SearchCard, { type CardContent, type SearchResult } from './search-card';
 import { Recents, Searchbar } from './search-utils';
-import type { searchCategory } from '../@modals/(.)search/page';
 
 const categoryIconMapping = {
   course: MdSchool,
@@ -27,6 +26,17 @@ const categoryIconMapping = {
   notification: IoNotifications,
   person: BsPersonFill,
 };
+
+export type searchCategory =
+  | 'allResults'
+  | 'webPages'
+  | 'people'
+  | 'documents'
+  | 'events'
+  | 'news'
+  | 'courses'
+  | 'clubs'
+  | 'positions';
 
 export default async function Search({
   query,

@@ -1,16 +1,5 @@
-import Search from '~/app/search/search';
+import Search, { type searchCategory } from '~/app/search/search';
 import { Dialog } from '~/components/dialog';
-
-export type searchCategory =
-  | 'allResults'
-  | 'webPages'
-  | 'people'
-  | 'documents'
-  | 'events'
-  | 'news'
-  | 'courses'
-  | 'clubs'
-  | 'positions';
 
 export default function Page({
   params: { locale },
