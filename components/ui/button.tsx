@@ -78,7 +78,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
     }
 
-    const Comp = asChild || props.disabled ? Slot : 'button';
+    const Comp =
+      asChild || (props.disabled && typeof props.children !== 'string')
+        ? Slot
+        : 'button';
     return (
       <Comp
         className={cn(

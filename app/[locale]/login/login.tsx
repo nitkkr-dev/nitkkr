@@ -38,7 +38,7 @@ const Login = async ({ locale }: { locale: string }) => {
             type="email"
           />
         </fieldset>
-        <Button className="w-full p-2 sm:p-3 md:p-4">
+        <Button className="w-full p-2 sm:p-3 md:p-4" disabled>
           {text.continueButton}
         </Button>
         <hr

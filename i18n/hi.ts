@@ -38,7 +38,7 @@ const text: Translations = {
   Login: {
     title: 'प्रवेश करें',
     enterEmail: 'अपना ईमेल दर्ज करें',
-    continueButton: 'अगले चरण पर बढ़ें',
+    continueButton: 'अगले चरण पर बढ़ें (तैयार नहीं)',
     signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
   },
   Notifications: {
