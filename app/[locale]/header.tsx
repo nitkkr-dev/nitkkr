@@ -3,11 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { userAgent } from 'next/server';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
-import { IoMenu } from 'react-icons/io5';
 
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
-import { Button } from '~/components/ui';
+import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -136,11 +135,46 @@ export default async function Header({ locale }: { locale: string }) {
               </Link>
             </Button>
           </li>
-          <li className="lg:hidden">
-            <IoMenu
-              className="rounded-md bg-primary-700 p-1 text-shade-light hover:cursor-pointer"
-              size={40}
-            />
+          <li className="z-30 font-semibold lg:hidden">
+            <nav className="relative flex h-0">
+              <HamburgerButton
+                className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
+                data-dropdownignore={true}
+              />
+              <aside
+                className={cn(
+                  'absolute -right-2 -top-2',
+                  'hidden peer-aria-expanded:flex',
+                  'border border-primary-500 bg-background',
+                  'w-72 max-w-[calc(100vw-1rem)] flex-col gap-y-4 rounded-md p-6'
+                )}
+                data-dropdownignore={true}
+              >
+                <ul
+                  className="space-y-4 text-base font-semibold"
+                  data-dropdownignore
+                >
+                  {items.map(({ label, href }, index) => (
+                    <li key={index} className="w-fit">
+                      <Button
+                        asChild
+                        className="text-left text-shade-dark"
+                        variant="link"
+                      >
+                        <Link href={`/${locale}/${href}`}>{label}</Link>
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+                <hr className="opacity-50" data-dropdownignore={true} />
+                <Button
+                  asChild
+                  className="bg-primary-900 py-2 text-center sm:rounded"
+                >
+                  <Link href={`/${locale}/login`}>{text.login}</Link>
+                </Button>
+              </aside>
+            </nav>
           </li>
         </ol>
       </nav>
