@@ -18,6 +18,7 @@ export function LocalStorageLink<T>({
   newItem,
   options = { filter: false, unshift: false },
   storageKey: key,
+  ...props
 }: LocalStorageLinkProps<T>) {
   const [items, setItems] = useLocalStorage<T[]>(key, []);
 
@@ -37,6 +38,7 @@ export function LocalStorageLink<T>({
           ? setItems([newItem, ...filteredItems])
           : setItems([...filteredItems, newItem])
       }
+      {...props}
     >
       {children}
     </Link>

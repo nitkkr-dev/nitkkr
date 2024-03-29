@@ -19,6 +19,7 @@ export function CtrlLink({
   className,
   href,
   shortcut,
+  ...props
 }: CtrlLinkProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -29,7 +30,7 @@ export function CtrlLink({
   });
 
   return (
-    <Link className={className} href={href} prefetch scroll={false}>
+    <Link className={className} href={href} prefetch scroll={false} {...props}>
       {children}
     </Link>
   );
