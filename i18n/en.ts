@@ -108,7 +108,7 @@ const text: Translations = {
     description:
       'This page is currently being worked on. Please visit another time',
   },
-  LoginText: {
+  Login: {
     title: 'Sign In',
     enterEmail: 'Enter Your Email',
     continueButton: 'Continue',

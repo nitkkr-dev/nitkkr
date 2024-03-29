@@ -90,7 +90,7 @@ export interface Translations {
   };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
-  LoginText: {
+  Login: {
     title: string;
     enterEmail: string;
     continueButton: string;

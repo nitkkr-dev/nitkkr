@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 import LoginButton from './login-button';
 
 const LoginPage = async ({ locale }: { locale: string }) => {
-  const text = (await getTranslations(locale)).LoginText;
+  const text = (await getTranslations(locale)).Login;
 
   return (
     <main className="bg-loginBackground flex h-auto grow flex-col items-center justify-center rounded-lg bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay ">

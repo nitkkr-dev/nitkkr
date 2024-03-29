@@ -103,7 +103,7 @@ const text: Translations = {
     title: 'कार्य प्रगति पर है',
     description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
   },
-  LoginText: {
+  Login: {
     title: 'प्रवेश करें',
     enterEmail: 'अपना ईमेल दर्ज करें',
     continueButton: 'अगले चरण पर बढ़ें',
