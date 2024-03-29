@@ -34,9 +34,9 @@ export default function RootLayout({
           'text-xs sm:text-sm md:text-base'
         )}
       >
+        {modals}
         <Header locale={locale} />
-        <section>{modals}</section>
-        <section className="flex grow">{children}</section>
+        <section className="grow">{children}</section>
         <Footer locale={locale} />
       </body>
     </html>
