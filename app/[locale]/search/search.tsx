@@ -259,11 +259,11 @@ const ResultsView = async ({
         content:
           '... The NITKKR Departments are the mission of the colleges to provide a segregated and conclusive study program to all indivisduals seeking admission in the various fields of the college ...',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
       {
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
         heading: 'NIT Departments',
         content:
           '... The NITKKR Departments are the mission of the colleges to provide a segregated and conclusive study program to all indivisduals seeking admission in the various fields of the college ...',
@@ -273,7 +273,7 @@ const ResultsView = async ({
         content:
           '... The NITKKR Departments are the mission of the colleges to provide a segregated and conclusive study program to all indivisduals seeking admission in the various fields of the college ...',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     people: [
@@ -286,7 +286,7 @@ const ResultsView = async ({
         phone: '+91-1744-233482 (off-Direct no)',
         address: 'MBA 205, District Attorney Office, NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
       {
         image:
@@ -297,7 +297,7 @@ const ResultsView = async ({
         phone: '+91-1744-233482 (off-Direct no)',
         address: 'MBA 205, District Attorney Office, NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
       {
         image:
@@ -308,7 +308,7 @@ const ResultsView = async ({
         phone: '+91-1744-233482 (off-Direct no)',
         address: 'MBA 205, District Attorney Office, NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     documents: [
@@ -316,7 +316,7 @@ const ResultsView = async ({
         content:
           'Student Fee Receipt 2023 - 24: Special bill with mess details included along with each item of food including the sauce that the students use to eat samosa ...',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     events: [
@@ -328,7 +328,7 @@ const ResultsView = async ({
         location: 'NIT Kurukshetra',
         date: '12th - 15th March 2023',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     news: [
@@ -337,7 +337,7 @@ const ResultsView = async ({
         content:
           'The NITKKR Departments are the mission of the colleges to provide a segregated and conclusive study program to all indivisduals seeking admission in the various fields of the college ...',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
       {
         heading:
@@ -347,7 +347,7 @@ const ResultsView = async ({
         content:
           'The NITKKR Robotics Student Fellowship (NITKKR AUTOBOTS) program offers graduate students the opportunity to research alongside experts on the specific topic of robotics ...The NITKKR Robotics Student Fellowship (NITKKR AUTOBOTS) program offers graduate students the opportunity to research alongside experts on the specific topic of robotics ...',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     courses: [
@@ -357,7 +357,7 @@ const ResultsView = async ({
         programme: "Bachelor's of Technology",
         programmeDuration: '(B. Tech. - 4 years)',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
       {
         heading: 'CSPC62',
@@ -365,7 +365,7 @@ const ResultsView = async ({
         programme: "Bachelor's of Technology",
         programmeDuration: '(B. Tech. - 4 years)',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
     clubs: [
@@ -375,7 +375,7 @@ const ResultsView = async ({
         heading: 'SPIC MACAY',
         subHeading: 'Musical and Cultural Club of NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
         delegation: [
           {
             post: 'Secretary',
@@ -405,7 +405,7 @@ const ResultsView = async ({
         phone: '+91-1744-233482 (off-Direct no)',
         address: 'MBA 205, District Attorney Office, NIT Kurukshetra',
         label: 'Dr. Vikram Singh',
-        value: '/faculty/0',
+        value: 'faculty/0',
       },
     ],
   };
