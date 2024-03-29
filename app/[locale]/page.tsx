@@ -12,7 +12,7 @@ export default function Home({
   };
 }) {
   return (
-    <main className="w-full">
+    <>
       <Slideshow
         images={[
           {
@@ -34,6 +34,6 @@ export default function Home({
       />
       <Notifications category={notificationCategory} locale={locale} />
       <DirectorsCorner locale={locale} />
-    </main>
+    </>
   );
 }
