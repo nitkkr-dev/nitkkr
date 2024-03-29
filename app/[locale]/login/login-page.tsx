@@ -25,7 +25,9 @@ const LoginPage = async ({ locale }: { locale: string }) => {
       </header>
       <section className="w-full space-y-4 md:space-y-6">
         <fieldset className="flex flex-col space-y-2">
-          <h6 className="text-primary-700">{text.enterEmail}</h6>
+          <label className="font-semibold text-primary-700" htmlFor="email">
+            {text.enterEmail}
+          </label>
           <input
             className={cn(
               'rounded-md border border-primary-500 outline-none',
@@ -41,7 +43,7 @@ const LoginPage = async ({ locale }: { locale: string }) => {
         </Button>
         <hr
           className={cn(
-            'overflow-visible text-center text-primary-500',
+            'overflow-visible text-center font-serif text-primary-500',
             'after:relative after:top-[-13px] after:bg-background after:px-3',
             locale === 'en' ? "after:content-['OR']" : "after:content-['अथवा']"
           )}
