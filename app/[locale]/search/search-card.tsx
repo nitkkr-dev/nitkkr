@@ -177,7 +177,7 @@ const SearchCard: React.FC<{
                 alt={cardContent.heading}
                 width={124}
                 height={69}
-                className="h-20 min-w-36 rounded border object-cover"
+                className="h-20 min-w-36 rounded object-cover"
               />
             )}
           </div>
@@ -209,7 +209,7 @@ const SearchCard: React.FC<{
               alt={cardContent.heading}
               width={60}
               height={60}
-              className="aspect-square min-h-full w-14 rounded border object-cover py-2"
+              className="aspect-square min-h-full w-14 rounded object-cover py-2"
             />
             <div>
               <h5 className="text-primary-300">{cardContent.heading}</h5>
@@ -230,7 +230,7 @@ const SearchCard: React.FC<{
       );
     case 'positions':
       return (
-        <article className="flex w-full flex-wrap items-center  gap-5 rounded-lg bg-shade-light p-3 md:px-4">
+        <article className="flex w-full flex-wrap items-center gap-5 rounded-lg bg-shade-light p-3 md:px-4">
           <header>
             <h5 className="text-primary-300">
               {cardContent.position}
