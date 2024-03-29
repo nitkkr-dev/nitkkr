@@ -35,6 +35,12 @@ const text: Translations = {
     search: 'त्वरित खोज...',
     login: 'प्रवेश',
   },
+  Login: {
+    title: 'प्रवेश करें',
+    enterEmail: 'अपना ईमेल दर्ज करें',
+    continueButton: 'अगले चरण पर बढ़ें',
+    signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
+  },
   Notifications: {
     title: 'सूचनाएं',
     categories: {
@@ -102,13 +108,6 @@ const text: Translations = {
   WorkInProgress: {
     title: 'कार्य प्रगति पर है',
     description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
-  },
-  Login: {
-    title: 'प्रवेश करें',
-    enterEmail: 'अपना ईमेल दर्ज करें',
-    continueButton: 'अगले चरण पर बढ़ें',
-    orText: 'या',
-    signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
   },
 };
 

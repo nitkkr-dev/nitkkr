@@ -39,6 +39,12 @@ const text: Translations = {
     search: 'Quick Search...',
     login: 'Login',
   },
+  Login: {
+    title: 'Sign In',
+    enterEmail: 'Enter your email',
+    continueButton: 'Continue',
+    signInWithGoogle: 'Sign in with Google',
+  },
   Notifications: {
     title: 'NOTIFICATIONS',
     categories: {
@@ -107,13 +113,6 @@ const text: Translations = {
     title: 'Work In Progress',
     description:
       'This page is currently being worked on. Please visit another time',
-  },
-  Login: {
-    title: 'Sign In',
-    enterEmail: 'Enter Your Email',
-    continueButton: 'Continue',
-    orText: 'OR',
-    signInWithGoogle: 'Sign in with Google',
   },
 };
 

@@ -30,6 +30,12 @@ export interface Translations {
     search: string;
     login: string;
   };
+  Login: {
+    title: string;
+    enterEmail: string;
+    continueButton: string;
+    signInWithGoogle: string;
+  };
   Notifications: {
     title: string;
     categories: {
@@ -90,11 +96,4 @@ export interface Translations {
   };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
-  Login: {
-    title: string;
-    enterEmail: string;
-    continueButton: string;
-    orText: string;
-    signInWithGoogle: string;
-  };
 }
