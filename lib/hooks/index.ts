@@ -1,2 +1,2 @@
 export * from './copy-to-clipboard';
-export * from './ctrl-*';
+export * from './ctrl-x';
