@@ -241,7 +241,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <FaChevronLeft className={cn('text-neutral-100', className)} size={40} />
+      <FaChevronLeft size={40} />
     </Button>
   );
 });
@@ -268,7 +268,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <FaChevronRight className={cn('text-neutral-100', className)} size={40} />
+      <FaChevronRight size={40} />
     </Button>
   );
 });
