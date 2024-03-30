@@ -18,7 +18,7 @@ export const finalFormSchema = z
     isViewAnalyticsAllowed: z.boolean().default(false),
     isShuffled: z.boolean().default(false),
     isCopySent: z.boolean().default(false),
-    expiryDate: z
+    endedAt: z
       .date()
       .min(new Date(), { message: "form cannot expire before it's creation." })
       .optional(),

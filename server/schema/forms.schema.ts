@@ -1,17 +1,19 @@
 import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
-  date,
   integer,
+  json,
+  jsonb,
   pgTable,
   real,
   serial,
   smallint,
+  timestamp,
   varchar,
-  json,
-  jsonb,
 } from 'drizzle-orm/pg-core';
+
 import { persons } from '.';
+
 //temp
 export interface validationProperty {
   type: string;
@@ -36,8 +38,6 @@ export const forms = pgTable('forms', {
   isShuffled: boolean('is_shuffled').default(false).notNull(),
   isCopySent: boolean('is_copy_sent').default(false).notNull(),
   isQuiz: boolean('is_quiz').default(false).notNull(),
-  expiryDate: date('date', { mode: 'date' }),
-  isActive: boolean('is_active').default(true).notNull(),
   persistentUrl: varchar('persistent_url'),
   oldPersistentUrls: varchar('old_persistent_urls')
     .array()
@@ -51,6 +51,8 @@ export const forms = pgTable('forms', {
   questionValidations: json('question_validations').$type<
     Record<string, validationProperty>
   >(),
+  isActive: boolean('is_active').default(true).notNull(),
+  endedAt: timestamp('ended_at'),
 });
 export const formRelations = relations(forms, ({ many }) => ({
   questions: many(formQuestions),
@@ -163,7 +165,7 @@ export const formAnswers = pgTable('form_answers', {
   submissionId: integer('submission_id').notNull(),
   value: jsonb('value').notNull(),
 });
-export const formAnswersRelations = relations(formAnswers, ({ one, many }) => ({
+export const formAnswersRelations = relations(formAnswers, ({ one }) => ({
   questions: one(formQuestions, {
     fields: [formAnswers.questionId],
     references: [formQuestions.id],

@@ -1,9 +1,9 @@
 import { Separator } from '../ui/separator';
 import FormDetails from './FormDetails';
 import FormSubmitForm from './FormSubmitForm';
-import type {
-  ElementsType,
-  validationProperty,
+import {
+  type ElementsType,
+  type validationProperty,
 } from './interfaces/FormElements';
 
 export interface FormSubmitFormProps {

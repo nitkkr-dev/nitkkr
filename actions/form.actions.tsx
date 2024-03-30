@@ -2,33 +2,33 @@
 
 import Ajv, { type ValidateFunction } from 'ajv';
 import AjvFormats from 'ajv-formats';
+import { and, eq, or } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
+import FormInvalidResponse, {
+  type FormInvalidResponseProps,
+} from '~/components/forms/FormInvalidResponse';
+import FormSubmitPage, {
+  type FormSubmitFormProps,
+} from '~/components/forms/FormSubmitPage';
 import {
-  type ElementsType,
   FormElements,
+  type ElementsType,
+  type validationProperty,
 } from '~/components/forms/interfaces/FormElements';
-import { and, eq, or } from 'drizzle-orm';
-import { db } from '~/server/db';
-import {
-  forms,
-  formsModifiableByPersons,
-  formQuestions,
-  formSubmissions,
-  formAnswers,
-} from '~/server/schema';
 import {
   finalFormSchema,
   formSchema,
   type formSchemaType,
 } from '~/schemas/form';
-import type { validationProperty } from '~/components/forms/interfaces/FormElements';
-import FormSubmitPage, {
-  type FormSubmitFormProps,
-} from '~/components/forms/FormSubmitPage';
-import FormInvalidResponse, {
-  type FormInvalidResponseProps,
-} from '~/components/forms/FormInvalidResponse';
+import { db } from '~/server/db';
+import {
+  formAnswers,
+  formQuestions,
+  formSubmissions,
+  forms,
+  formsModifiableByPersons,
+} from '~/server/schema';
 
 const ajv = new Ajv({
   allErrors: true,
@@ -313,7 +313,7 @@ interface formSum {
   isAnonymous: boolean;
   isViewAnalyticsAllowed: boolean;
   description?: string;
-  expiryDate?: Date;
+  endedAt?: Date;
   isQuiz: boolean;
 }
 
@@ -340,7 +340,7 @@ export async function publishForm(
         isSingleResponse: form.isSingleResponse,
         isAnonymous: form.isAnonymous,
         isViewAnalyticsAllowed: form.isViewAnalyticsAllowed,
-        expiryDate: form.expiryDate,
+        endedAt: form.endedAt,
         isQuiz: form.isQuiz,
         isPublished: true,
         questionValidations: properties,
@@ -435,7 +435,7 @@ export async function getFormForSubmission(id: number): Promise<{
         },
       };
 
-    if (form.expiryDate && form.expiryDate < new Date()) {
+    if (form.endedAt && form.endedAt < new Date()) {
       await db.update(forms).set({ isActive: false });
 
       return {
@@ -555,7 +555,7 @@ export async function submitForm(
         questionValidations: forms.questionValidations,
         requiredQuestions: forms.requiredQuestions,
         isAnonymous: forms.isAnonymous,
-        expiryDate: forms.expiryDate,
+        endedAt: forms.endedAt,
         isSingleResponse: forms.isSingleResponse,
         isEditingAllowed: forms.isEditingAllowed,
         onSubmitMessage: forms.onSubmitMessage,
@@ -598,7 +598,7 @@ export async function submitForm(
     if (!form.isActive)
       return { title: 'Error', description: 'Form is expired' };
 
-    if (form.expiryDate && form.expiryDate < new Date()) {
+    if (form.endedAt && form.endedAt < new Date()) {
       await db.update(forms).set({ isActive: true }).where(eq(forms.id, id));
       return { title: 'Error', description: 'Form is expired' };
     }

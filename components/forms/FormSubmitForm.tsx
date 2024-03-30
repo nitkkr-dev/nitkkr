@@ -1,17 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { submitForm } from '~/actions/form.actions';
 import { validateResolver } from '~/lib/validateResolver';
 
-import {
-  FormElements,
-  type validationProperty,
-} from './interfaces/FormElements';
+import { Button } from '../ui/button';
 import {
   Form,
   FormControl,
@@ -19,10 +16,13 @@ import {
   FormItem,
   FormMessage,
 } from '../ui/form';
-import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { toast } from '../ui/use-toast';
 import type { FormSubmitFormProps } from './FormSubmitPage';
+import {
+  FormElements,
+  type validationProperty,
+} from './interfaces/FormElements';
 
 export default function FormSubmitForm({
   locale,
