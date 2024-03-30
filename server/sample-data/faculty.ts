@@ -308,7 +308,6 @@ const sectionsData = [
 ];
 
 export const populateFaculty = async () => {
-  await db.delete(faculty);
   const ids = await db
     .insert(persons)
     .values(personsData)

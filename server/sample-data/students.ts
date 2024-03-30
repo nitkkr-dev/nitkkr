@@ -250,7 +250,6 @@ const studentsData = [
 ];
 
 export const populateStudents = async () => {
-  await db.delete(students);
   const ids = await db.insert(persons).values(personsData).returning({
     id: persons.id,
   });

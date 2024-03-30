@@ -1,3 +1,5 @@
+import { populateClubMembers } from "./server/sample-data/club-members.js";
+import { populateClubs } from "./server/sample-data/clubs.js";
 import { populateDepartments } from "./server/sample-data/departments.js";
 import { populateFaculty } from "./server/sample-data/faculty.js";
 import { populateNonTeachingStaff } from "./server/sample-data/non-teaching-staff.js";
@@ -10,6 +12,8 @@ const populate = async () => {
     // await populateStudents();
     // await populateSections();
     // await populateNonTeachingStaff();
+    // await populateClubs();
+    // await populateClubMembers();
 }
 
 await populate();
