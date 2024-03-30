@@ -13,7 +13,7 @@ export default function Page({
 }) {
   return (
     <Dialog
-      className="container mb-10 mt-24 max-w-screen-xl overflow-y-auto"
+      className="container mb-10 mt-24 overflow-y-auto xl:max-w-screen-xl"
       shouldCenter={false}
     >
       <Search query={query} selectedCategory={category} locale={locale} />
