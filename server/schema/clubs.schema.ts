@@ -5,7 +5,7 @@ import {
   integer,
   pgTable,
   smallint,
-  smallserial,
+  serial,
   text,
   timestamp,
   varchar,
@@ -14,7 +14,7 @@ import {
 import { clubMembers, clubSocials, departments, faculty, persons } from '.';
 
 export const clubs = pgTable('clubs', {
-  id: smallserial('id').primaryKey(),
+  id: serial('id').primaryKey(),
   name: varchar('name', { length: 128 }).notNull(),
   alias: varchar('alias', { length: 16 }),
   tagline: varchar('tagline', { length: 256 }).notNull(),

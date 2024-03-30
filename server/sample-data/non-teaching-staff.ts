@@ -96,7 +96,6 @@ export const populateNonTeachingStaff = async () => {
   const ids = await db.insert(persons).values(personsData).returning({
     id: persons.id,
   });
-  await db.delete(nonTeachingStaff);
   const dataWithIds = nonTeachingStaffData.map((data, index) => ({
     ...data,
     id: ids[index].id,

@@ -117,6 +117,5 @@ const departmentsData: DepartmentsData = [
   },
 ];
 export const populateDepartments = async () => {
-  await db.delete(departments);
   await db.insert(departments).values(departmentsData).returning();
 };
