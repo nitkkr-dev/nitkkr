@@ -25,7 +25,9 @@ export const clubMembers = pgTable('club_members', {
     .default(sql`'{}'`),
   comments: text('comments'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at')
+    .$onUpdate(() => new Date())
+    .notNull(),
   updatedBy: integer('updated_by')
     .references(() => persons.id)
     .notNull(),

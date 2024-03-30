@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
+import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -56,20 +57,23 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
           <p className="lg:text-xl">
             {text.quote[0]}
             &nbsp;
-            <Link
-              className="inline-flex items-center gap-1 text-primary-700 hover:underline"
-              href={`/${locale}/institute/director#message`}
+            <Button
+              asChild
+              className="inline-flex items-center gap-1"
+              variant="link"
             >
-              {text.more}
-              <span className="rotate-90">
-                <FaArrowUp
-                  className={cn(
-                    'mx-auto animate-bounce',
-                    'size-2 md:size-3 lg:size-4'
-                  )}
-                />
-              </span>
-            </Link>
+              <Link href={`/${locale}/institute/director#message`}>
+                {text.more}
+                <span className="rotate-90">
+                  <FaArrowUp
+                    className={cn(
+                      'mx-auto animate-bounce',
+                      'size-2 md:size-3 lg:size-4'
+                    )}
+                  />
+                </span>
+              </Link>
+            </Button>
             <br />
             <br />
             {text.quote[1]}

@@ -17,7 +17,9 @@ export const notifications = pgTable(
       enum: ['academic', 'tender', 'workshop', 'recruitment'],
     }).notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .$onUpdate(() => new Date())
+      .notNull(),
   },
   (notifications) => {
     return {

@@ -30,6 +30,12 @@ export interface Translations {
     search: string;
     login: string;
   };
+  Login: {
+    title: string;
+    enterEmail: string;
+    continueButton: string;
+    signInWithGoogle: string;
+  };
   Notifications: {
     title: string;
     categories: {
@@ -41,6 +47,39 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  Search: {
+    placeholder: string;
+    categories: {
+      allResults: string;
+      webPages: string;
+      people: string;
+      documents: string;
+      events: string;
+      news: string;
+      courses: string;
+      clubs: string;
+      positions: string;
+    };
+    viewAll: string;
+    default: {
+      recents: string;
+      clearRecents: string;
+      mostSearched: string;
+      studentLinks: {
+        title: string;
+        clubs: string;
+        courses: string;
+        departments: string;
+        notifications: string;
+        results: string;
+      };
+      facultyLinks: {
+        title: string;
+        notifications: string;
+        profile: string;
+      };
+    };
+  };
   StudentActivities: {
     title: string;
     headings: {

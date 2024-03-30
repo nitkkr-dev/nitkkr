@@ -87,6 +87,7 @@ export const faculty = pgTable('faculty', {
     .notNull(),
   googleScholarId: text('google_scholar_id'),
   orchidId: text('orchid_id'),
+  researcherId: text('researcher_id'),
   scopusId: text('scopus_id'),
 });
 
