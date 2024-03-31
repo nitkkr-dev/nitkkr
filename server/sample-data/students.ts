@@ -69,6 +69,7 @@ const personsData: PersonsData[] = [
 const studentsData = [
   {
     rollNumber: '12112239',
+    telephone: ['1234567890', '1234567891'],
     personalEmail: 'example@gmail.com',
     fathersName: 'John Doe Sr.',
     fathersTelephone: '1234567890',

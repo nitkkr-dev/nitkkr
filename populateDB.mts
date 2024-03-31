@@ -1,6 +1,8 @@
 import { populateClubMembers } from "./server/sample-data/club-members.js";
 import { populateClubs } from "./server/sample-data/clubs.js";
+import { populateDeans } from "./server/sample-data/deans.js";
 import { populateDepartments } from "./server/sample-data/departments.js";
+import { populateDoctorates } from "./server/sample-data/doctorates.js";
 import { populateFaculty } from "./server/sample-data/faculty.js";
 import { populateNonTeachingStaff } from "./server/sample-data/non-teaching-staff.js";
 import { populateSections } from "./server/sample-data/sections.js";
@@ -14,6 +16,8 @@ const populate = async () => {
     // await populateNonTeachingStaff();
     // await populateClubs();
     // await populateClubMembers();
+    // await populateDeans();
+    // await populateDoctorates();
 }
 
 await populate();

@@ -9,12 +9,16 @@ const personsData: PersonsData[] = [
     email: 'viks@nitkkr.ac.in',
     image: '',
     sex: 'M',
+    roleIds: [],
+    isActive: true,
   },
   {
     name: 'Dr. J.K. Chhabra',
     email: 'jitenderchhabra@nitkkr.ac.in',
     image: '',
     sex: 'M',
+    roleIds: [],
+    isActive: true,
   },
   {
     name: 'Dr. Awadhesh Kumar Singh',
@@ -70,6 +74,12 @@ const personsData: PersonsData[] = [
     image: '',
     sex: 'F',
   },
+  {
+    name: 'Neeraj Kaushik',
+    email: 'neeraj.kaushik@nitkkr.ac.in',
+    image: '',
+    sex: 'M',
+  },
 ];
 
 const facultyData = [
@@ -92,6 +102,9 @@ const facultyData = [
       'Social Network Science & Applications',
       'ML/DL & AI for real-world Scenarios.',
     ],
+    teachingInterests: [],
+    patents: [],
+    copyrights: [],
     journals: [
       'Chandradeep Kumar, Vikram Singh, ‘Improving Hamming-Distance Computation for Adaptive Similarity Search Approach’, Int. J. of Intelligent Information Technologies (IJIIT), Dec 2021',
       'Progressive Intent Model for Similarity Search’, In IEEE Transactions on Information Theory, 2020 (Accepted)',
@@ -109,6 +122,8 @@ const facultyData = [
       'Jay Patel and Vikram Singh. “Query morphing: A proximity-based approach for data exploration and query reformulation.” In Proceeding of Int. Conf. on Mining Intelligence and Knowledge Exploration(MIKE’2017), pp. 261-273. Springer, Cham, 2017.',
       'Pawan K., Reuben A. Vikram Singh, ‘ Extracting Emotion Quotient of Information Virality over Twitter Data’. In Proceedings of 18th Int. Conf. on Distributed Computing and Technologies (ICDCIT), Jan 2022, Springer Nature.',
     ],
+    books: [],
+    workshops: [],
     expertLectures: [
       'Tutorial on ‘AIM for IDEA: An Adaptive Intent Modeling for Interactive Data Exploration and Analysis, co-located to 9th int. Conference on Big Data Analytics (BDA 2021), 15-18 Dec 2021, IIIT Allahabad (UP), India.',
       'Expert Talk on ‘Modeling Swarm Behaviour ‘Soft Data’ for AI-enabled System Design‘, AICTE-ATAL Sponsored FDP on “Bio-inspired Algorithms and Optimization Tech. for Emerging Research Areas in Computer Applications”, 10 Dec 2021, Dept. of Computer Sci. & Engg., Netaji Subhash Institute of Technology (NSIT), New Delhi, India',
@@ -272,6 +287,29 @@ const facultyData = [
     orchidId: '',
     scopusId: '',
   },
+  {
+    designation: 'Associate Professor',
+    officeTelephone: '1234567890',
+    homeTelephone: '0987654321',
+    departmentId: 1,
+    researchSupervision: {},
+    areasOfInterest: [
+      'Marketing Research',
+      'Services Marketing',
+      'Operations Research',
+      'Statistics',
+    ],
+    awards: [
+      'Emerald Highly Commended Paper Award 2018 for the research paper titled ‘A framework for untapped creativity: leveraging components of individual creativity for organizational innovation’',
+      'First Prize on All India Level in National Conference on Research Paper Presentation AIMA-CME, New Delhi, May 22, 2007',
+      'Gold Medalist in MMS Program, 1998',
+      '62 nd Position in State in Senior Secondary Examination',
+      '14 th Position in State & 2nd Position in District in Matriculation Examination',
+    ],
+    googleScholarId: '',
+    orchidId: '',
+    scopusId: '',
+  },
 ];
 
 const sectionsData = [
@@ -317,4 +355,9 @@ export const populateFaculty = async () => {
     id: ids[index].id,
   }));
   await db.insert(faculty).values(facultyDataWithPersonIds);
+  const sectionDataWithHeadFaculty = sectionsData.map((section, index) => ({
+    ...section,
+    headFacultyId: ids[index].id,
+  }));
+  await db.insert(sections).values(sectionDataWithHeadFaculty);
 };

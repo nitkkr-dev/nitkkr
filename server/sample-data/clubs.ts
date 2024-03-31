@@ -17,6 +17,7 @@ const clubsData: ClubData[] = [
     category: 'cultural',
     departmentId: 1,
     facultyInchargeId1: 45,
+    facultyInchargeId2: 46,
     updatedBy: 45,
   },
   {

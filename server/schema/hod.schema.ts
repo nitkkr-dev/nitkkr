@@ -5,14 +5,14 @@ import {
   integer,
   pgTable,
   smallint,
-  smallserial,
+  serial,
   text,
 } from 'drizzle-orm/pg-core';
 
 import { departments, faculty } from '.';
 
 export const hod = pgTable('hod', {
-  id: smallserial('id').primaryKey(),
+  id: serial('id').primaryKey(),
   facultyId: integer('faculty_id')
     .references(() => faculty.id)
     .notNull(),
