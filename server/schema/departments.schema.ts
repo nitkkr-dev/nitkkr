@@ -1,10 +1,10 @@
 import { relations, sql } from 'drizzle-orm';
-import { char, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
+import { char, pgTable, smallserial, text, varchar } from 'drizzle-orm/pg-core';
 
 import { clubs, courses, doctorates, faculty, majors, staff } from '.';
 
 export const departments = pgTable('departments', {
-  id: serial('id').primaryKey(),
+  id: smallserial('id').primaryKey(),
   name: varchar('name', { length: 64 }).notNull(),
   alias: char('alias', { length: 4 }).notNull(),
   type: varchar('type', {

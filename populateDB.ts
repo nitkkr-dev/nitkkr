@@ -1,0 +1,31 @@
+import { populateClubMembers } from './server/sample-data/club-members';
+import { populateClubs } from './server/sample-data/clubs';
+import { populateCourses } from './server/sample-data/courses';
+import { populateDeans } from './server/sample-data/deans';
+import { populateDepartments } from './server/sample-data/departments';
+import { populateDoctorates } from './server/sample-data/doctorates';
+import { populateFaculty } from './server/sample-data/faculty';
+import { populateMajors } from './server/sample-data/majors';
+import { populateNonTeachingStaff } from './server/sample-data/non-teaching-staff';
+import { populateNotifications } from './server/sample-data/notifications';
+import { populateRoles } from './server/sample-data/roles';
+import { populateSections } from './server/sample-data/sections';
+import { populateSponsoredResearchProjects } from './server/sample-data/sponsored-research-projects';
+import { populateStudents } from './server/sample-data/students';
+
+export const populate = async () => {
+  await populateDepartments();
+  await populateFaculty();
+  await populateStudents();
+  await populateSections();
+  await populateNonTeachingStaff();
+  await populateClubs();
+  await populateClubMembers();
+  await populateDeans();
+  await populateDoctorates();
+  await populateSponsoredResearchProjects();
+  await populateNotifications();
+  await populateCourses();
+  await populateMajors();
+  await populateRoles();
+};
