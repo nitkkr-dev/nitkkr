@@ -5,6 +5,7 @@ import { FaArrowUp } from 'react-icons/fa6';
 import Heading from '~/components/heading';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+import { populate } from '~/populateDB';
 import { cn } from '~/lib/utils';
 
 const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
@@ -20,6 +21,7 @@ const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
 
 export default async function DirectorsCorner({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).DirectorsCorner;
+  await populate();
 
   return (
     <article className="container mb-32 mt-10" id="directors-corner">

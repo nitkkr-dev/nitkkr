@@ -1,5 +1,5 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, persons, students } from '../db';
+import { db, persons, studentAcademicDetails, students } from '../db';
 
 type PersonsData = InferInsertModel<typeof persons>;
 
@@ -250,6 +250,109 @@ const studentsData = [
   },
 ];
 
+const studentAcademicDetailsData = [
+  {
+    section: 'A',
+    batch: 2,
+    currentSemester: 3,
+    sgpa: 8.9,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 2,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 8.5,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 10,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 8.5,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 8.5,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 10,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 2,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 8.5,
+    cgpa: 10,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 4,
+    currentSemester: 7,
+    sgpa: 10,
+    cgpa: 8.5,
+    dmcUrls: [],
+    majorId: 2,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 3,
+    currentSemester: 5,
+    sgpa: 8.5,
+    cgpa: 10,
+    dmcUrls: [],
+    majorId: 1,
+    subSection: 1,
+  },
+  {
+    section: 'A',
+    batch: 1,
+    currentSemester: 1,
+    sgpa: 10,
+    cgpa: 10,
+    dmcUrls: [],
+    majorId: 2,
+    subSection: 1,
+  },
+];
+
 export const populateStudents = async () => {
   const ids = await db.insert(persons).values(personsData).returning({
     id: persons.id,
@@ -258,5 +361,14 @@ export const populateStudents = async () => {
     ...student,
     id: ids[index].id,
   }));
+  const studentAcademicDetailsDataWithIds = studentAcademicDetailsData.map(
+    (studentAcademicDetail, index) => ({
+      ...studentAcademicDetail,
+      id: ids[index].id,
+    })
+  );
   await db.insert(students).values(studentsDataWithIds);
+  await db
+    .insert(studentAcademicDetails)
+    .values(studentAcademicDetailsDataWithIds);
 };
