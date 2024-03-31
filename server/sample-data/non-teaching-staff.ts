@@ -9,6 +9,8 @@ const personsData: PersonsData[] = [
     email: 'example@gmail.com',
     image: '',
     sex: 'M',
+    roleIds: [],
+    isActive: true,
   },
   {
     name: 'Emma Wilson',

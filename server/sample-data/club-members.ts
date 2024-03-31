@@ -4,12 +4,16 @@ const clubMembersData = [
   {
     studentId: 56,
     clubId: 1,
+    position: 'president',
+    internalGroups: [],
     comments: '',
     updatedBy: 45,
   },
   {
     studentId: 57,
     clubId: 1,
+    position: 'secretary',
+    internalGroups: [],
     comments: '',
     updatedBy: 45,
   },

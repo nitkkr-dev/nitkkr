@@ -4,14 +4,14 @@ import {
   integer,
   pgTable,
   smallint,
-  smallserial,
+  serial,
   varchar,
 } from 'drizzle-orm/pg-core';
 
 import { departments, faculty, students } from '.';
 
 export const doctorates = pgTable('doctorates', {
-  id: smallserial('id').primaryKey(),
+  id: serial('id').primaryKey(),
   registrationNumber: varchar('registration_number', { length: 16 })
     .unique()
     .notNull(),

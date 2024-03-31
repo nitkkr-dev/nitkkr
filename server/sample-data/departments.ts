@@ -1,5 +1,5 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, departments } from '../db';
+import { db, departments, hod } from '../db';
 
 type DepartmentsData = InferInsertModel<typeof departments>[];
 type DepartmentsData = InferInsertModel<typeof departments>[];
@@ -97,5 +97,12 @@ const departmentsData: DepartmentsData = [
     }
 ]
 export const populateDepartments = async () => {
-  await db.insert(departments).values(departmentsData).returning();
+  const ids = await db.insert(departments).values(departmentsData).returning({
+    id: departments.id,
+  });
+  const hodDataWithDepartmentId = hodData.map((hod, index) => ({
+    ...hod,
+    departmentId: ids[index].id,
+  }));
+  await db.insert(hod).values(hodDataWithDepartmentId);
 };
