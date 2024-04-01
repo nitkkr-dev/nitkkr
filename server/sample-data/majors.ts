@@ -22,14 +22,14 @@ const majorData: MajorData[] = [
 
 const coursesToMajorData = [
   {
-    courseId: 1,
+    courseId: 5,
     semester: 1,
     lectureCredits: 3,
     tutorialCredits: 1,
     practicalCredits: 2,
   },
   {
-    courseId: 2,
+    courseId: 6,
     semester: 2,
     lectureCredits: 3,
     tutorialCredits: 1,

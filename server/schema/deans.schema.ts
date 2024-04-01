@@ -1,10 +1,16 @@
 import { relations, sql } from 'drizzle-orm';
-import { integer, pgTable, serial, text, varchar } from 'drizzle-orm/pg-core';
+import {
+  integer,
+  pgTable,
+  smallserial,
+  text,
+  varchar,
+} from 'drizzle-orm/pg-core';
 
 import { faculty } from '.';
 
 export const deans = pgTable('deans', {
-  id: serial('id').primaryKey(),
+  id: smallserial('id').primaryKey(),
   domain: varchar('domain').notNull(),
   facultyId: integer('faculty_id')
     .references(() => faculty.id)

@@ -7,8 +7,8 @@ const doctoratesData: DoctoratesData[] = [
   {
     registrationNumber: '1234567890',
     departmentId: 1,
-    studentId: 53,
-    supervisorId: 45,
+    studentId: 34,
+    supervisorId: 18,
     type: 'full-time',
     title: 'Doctorate in Computer Science',
     endedOn: '2022-12-31',
@@ -16,8 +16,8 @@ const doctoratesData: DoctoratesData[] = [
   {
     registrationNumber: '0987654321',
     departmentId: 2,
-    studentId: 54,
-    supervisorId: 46,
+    studentId: 35,
+    supervisorId: 20,
     type: 'part-time',
     title: 'Doctorate in Mathematics',
     endedOn: '2022-12-31',

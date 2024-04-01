@@ -6,16 +6,16 @@ type DeansData = InferInsertModel<typeof deans>;
 const deansData: DeansData[] = [
   {
     domain: 'Student Affairs',
-    facultyId: 45,
+    facultyId: 18,
     activityLogs: [],
-    associateFacultyId: 45,
+    associateFacultyId: 19,
     staffId: [],
   },
   {
     domain: 'Industrial and International Relations',
-    facultyId: 46,
+    facultyId: 20,
     activityLogs: [],
-    associateFacultyId: 46,
+    associateFacultyId: 21,
     staffId: [],
   },
 ];
