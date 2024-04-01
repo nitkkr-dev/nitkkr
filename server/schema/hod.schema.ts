@@ -6,7 +6,7 @@ import {
   smallint,
   smallserial,
   text,
-  timestamp,
+  date,
 } from 'drizzle-orm/pg-core';
 
 import { departments, faculty } from '.';
@@ -21,7 +21,7 @@ export const hod = pgTable('hod', {
     .notNull(),
   message: text('message'),
   isActive: boolean('is_active').default(true).notNull(),
-  createdOn: timestamp('created_on').defaultNow().notNull(),
+  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
 });
 
 export const hodRelations = relations(hod, ({ one }) => ({

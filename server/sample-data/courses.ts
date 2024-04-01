@@ -7,8 +7,8 @@ const courseData: Courses[] = [
   {
     code: 'CSPC-11',
     title: 'Introduction to Computer Science',
-    coordinatorId: 45,
-    departmentId: 4,
+    coordinatorId: 18,
+    departmentId: 1,
     prerequisites: [],
     nature: 'C',
     objectives: [],
@@ -21,7 +21,7 @@ const courseData: Courses[] = [
   {
     code: 'EEPC-21',
     title: 'Data Structures',
-    coordinatorId: 48,
+    coordinatorId: 20,
     departmentId: 5,
     prerequisites: ['CSPC-11'],
     nature: 'C',
@@ -37,7 +37,7 @@ const courseData: Courses[] = [
 const courseLogsData = [
   {
     session: '2022-23',
-    facultyId: 45,
+    facultyId: 18,
     majorId: 1,
     semester: 1,
     section: 'A',
@@ -45,7 +45,7 @@ const courseLogsData = [
   },
   {
     session: '2022-23',
-    facultyId: 48,
+    facultyId: 20,
     majorId: 2,
     semester: 2,
     section: 'A',

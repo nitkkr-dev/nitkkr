@@ -18,7 +18,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Chemistry',
-    alias: 'Chem',
+    alias: 'Ch',
     type: 'science',
     about:
       'The Department of Chemistry started in 1963 and is one of the oldest departments of the institute. Chemistry is basically all about knowing and investigating the structures and reactions of substances of matter and covers an important part of science that bridges many aspects of other sciences, physical and biological, opening a door to many technological developments. Over the years, the Department has done high-profile research in a variety of areas, including coordination, analytical, bioinorganic, supramolecular, computational, organometallic, materials, organic, and polymer chemistry. The results of many of these research endeavours have been published in national and international journals of repute. The faculty also offers consultancy services to chemical industries in the region.',
@@ -42,7 +42,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Computer Engineering',
-    alias: 'CSE',
+    alias: 'CS',
     type: 'engineering',
     about:
       "The department started offering B.Tech. Programme in Computer Engineering in 1987 with initial intake of 30 students and subsequently raised to 210.  Department also started B.Tech programme in Information Technology (IT) in 2006 with present intake of 140 students. Department of Computer Engineering is offering a new undergraduate program  from the 2023-24 academic session in Artificial Intelligence & Machine Learning (AI & ML) with an intake of 60. The curriculum of the B.Tech. program in AI&ML emphasizes the foundations of computational mathematics as well as key areas of computer science, while also incorporating fundamental concepts and the latest advancements in artificial intelligence, data science and machine learning. By offering core courses in computer science and engineering, the program equips students with the necessary skills to navigate the dynamic landscape of IT requirements preparing for the future. The department is proud to have a record of almost 100% placement for last 10 years. The department also offers two M.Tech. programs, one in Computer Engineering and other in Cyber Security. Department started Ph.D. program in 2002. So far 56 Ph.D.s have been awarded and 31 PhDs are in progress. Faculty of the department have specialized areas for advanced studies and research in Distributed Computing, Software Engineering, Computer Networks, Database and Data Mining, Natural Language Processing, Information and Cyber Security, Image Processing, etc. The department is well equipped with state-of-the-art laboratories of all major domains of Computer Engineering and Information Technology with excellent Intranet, servers, hardware and software support. Each year, many students of the department get selected for higher studies in world's most reputed Universities and Institutes. The department is equally active in research with many quality publications each year in IEEE, Science direct, ACM, Springer, Wiley etc. For the overall development we also cover the other aspects of life like Health management, moral and ethical development of the students.",
@@ -62,7 +62,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Electronics & Communication Engineering',
-    alias: 'ECE',
+    alias: 'EC',
     type: 'engineering',
     about:
       'The branch of Electronics and Communication Engineering was started in the year 1971 under the aegis of Electrical Engineering Department. The “Department of Electronics and Communication Engineering” came into existence in the year 1973. In 1987, Computer Engineering branch was also started and the department was renamed as “Electronics, Communication and Computer Engineering”. In 2003, the Department was again renamed as “Electronics and Communication Engineering” because of inception of “Computer Engineering Department” separately. The Department is well equipped with the state-of-the- art laboratories and research facilities in almost all the domain of ECE engineering. Currently, the Department is offering B Tech, M Tech and Ph.D. Courses. The Ph.D. course is offered in the various specializations like Wireless Communication, Optical Communication, MIMO systems, Photonics Crystal Fiber Sensors, Security, Signal Processing, Speech Processing, VLSI, Embedded Systems etc. The Departments UG program B. Tech ECE is NBA Accredited for six years i .e. from Academic Year 2017-18 to 2022-23. The Department of Electronics and Communication Engineering is offering a new undergraduate program in Industrial Internet of Things(IIoT) from the AY 2023-24. The curriculum of B Tech program in IIoT will focus on the technologies used for connected machines, devices, sensors, actuators etc in industrial applications like agriculture, healthcare, smart manufacturing, intelligent logistics etc.',
@@ -72,7 +72,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Humanities & Social Sciences',
-    alias: 'HSS',
+    alias: 'HS',
     type: 'school',
     about:
       'The Department of Humanities and Social Sciences, one of the thirteen teaching Departments of the Institute, equips students with the knowledge and social skills that help them successfully manage people and technology. The Department is continuously involved in expanding the teaching-learning process to integrate humanistic values and social concerns with technical education. The Department also provides doctoral (Ph.D.) facilities in the areas of English, Economics, Psychology, Management and Intellectual Property Rights. Apart from teaching and research, the Department has been actively involved in organizing various programs like seminars, conferences, workshops, summer schools, etc.',
@@ -84,7 +84,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Mathematics',
-    alias: 'Math',
+    alias: 'Ma',
     type: 'science',
     about:
       'Department of Mathematics at NIT Kurukshetra was born on 1966 with Professor P.D.S. Verma (D.Sc.) as the founder Chairman, is a well-known centre for education and research in Mathematics. It has undergraduate programs with opportunities for specialization in all major areas of Mathematics leading to Doctorate of Philosophy degree. In particular, the department offers excellent courses to the students of B. Tech and M. Tech. programs which are of special interest and are rewarding many students in getting admission abroad for further higher studies. The department is successfully running Ph.D. program with a reasonably high number of scholars registered. Further, we are in the process to start M.Sc. program from the AY 2023-24.',
@@ -106,7 +106,7 @@ const departmentsData: DepartmentsData = [
   },
   {
     name: 'Physics',
-    alias: 'Phy',
+    alias: 'Ph',
     type: 'science',
     about:
       'The Physics Department is one of the oldest departments of the Institute which has been providing the fundamental knowledge of Physics to the engineering graduates of various streams. The department participates in the undergraduate core courses to all the students of B.Tech. first year and open elective courses to B.Tech. fourth year students. The Department runs two post graduates programs one in Instrumentation and other in Nanotechnology. The faculty members are carrying out research in the cutting edge technologies and guiding students in all major area of Physics leading to the degree of Doctor of Philosophy. The department has conducted five National conferences, four short term courses and one workshop. The M. Tech. program in Instrumentation is a four semester programme started in 1985 with the aim to develop and utilise technical skills for innovative academic and research development in instrumentation. The M. Tech. program in Nanotechnology is a four semester programme started in 2005 with the aim to generate technically skilled manpower for innovations in the field of nanotechnology. The Department has well equipped research laboratories with sophisticated equipments such as x-ray diffractometer, scanning electron microscope (SEM), Photoluminescence spectrometer (PL), X-ray fluorescence spectrometer (XRF), UV/Visible spectrophotometer, video image analyzer, Keithley source meter, Potentiostat, Probe Station, Spin-coating unit, etc. The department also participates actively in the School of Materials Science and Technology in the Post-graduate and research programs.',
@@ -118,60 +118,43 @@ const departmentsData: DepartmentsData = [
 ];
 const hodData = [
   {
-    facultyId: 45,
+    facultyId: 15,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 46,
+    facultyId: 16,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 47,
+    facultyId: 17,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 48,
+    facultyId: 18,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 49,
+    facultyId: 19,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 50,
+    facultyId: 20,
     message: '',
     isActive: true,
   },
   {
-    facultyId: 51,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 52,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 53,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 54,
+    facultyId: 21,
     message: '',
     isActive: true,
   },
 ];
 export const populateDepartments = async () => {
-  const ids = await db.insert(departments).values(departmentsData).returning({
-    id: departments.id,
-  });
+  const ids = await db.select({ id: departments.id }).from(departments);
 
   const hodDataWithDepartmentId = hodData.map((hod, index) => ({
     ...hod,
