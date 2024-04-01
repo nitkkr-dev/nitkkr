@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaBook, FaFlask } from 'react-icons/fa';
 import {
   MdApproval,
   MdEmojiEvents,
   MdGroups,
+  MdOutlineAdd,
+  MdOutlineArrowBack,
+  MdOutlineEdit,
   MdSchool,
   MdWork,
 } from 'react-icons/md';
@@ -62,6 +65,7 @@ const profileTabs = [
   {
     label: 'Publications',
     icon: MdApproval,
+    filter: true,
     items: [
       {
         name: 'Sustainable finishes in textiles, Conference Proceedings',
@@ -69,6 +73,47 @@ const profileTabs = [
           'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
         caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
         year: 'August 2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Journal',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Journal',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Book/Chapter',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Book/Chapter',
       },
     ],
   },
@@ -99,8 +144,21 @@ const profileTabs = [
   },
 ];
 
-export default function FacultyDetails() {
+export default function FacultyDetails({ isUser }: { isUser: boolean }) {
   const [currentTab, setCurrentTab] = useState(0);
+  const [currentFilter, setCurrentFilter] = useState(0);
+  const [editActive, setEditActive] = useState(false);
+
+  const tags = profileTabs[currentTab].filter
+    ? [
+        ...new Set(
+          profileTabs[currentTab].items.map((item) =>
+            'tag' in item ? item.tag : null
+          )
+        ),
+      ]
+    : [];
+
   return (
     <section className="mt-[32px] flex w-full gap-[36px]">
       <nav className="flex w-[491px] flex-col gap-[24px]">
@@ -108,7 +166,7 @@ export default function FacultyDetails() {
           <button
             key={tab.label}
             className={
-              'h-[84px] w-[491px] rounded-2xl border-[1px] border-primary-700 px-[36px] py-[24px] text-left text-xl font-bold hover:bg-primary-700 hover:text-shade-light hover:drop-shadow-2xl ' +
+              'h-[84px] w-[491px] rounded-2xl border-[1px] border-primary-700 px-[36px] py-[24px] text-left text-xl font-bold transition-colors hover:bg-primary-700 hover:text-shade-light hover:drop-shadow-2xl ' +
               (currentTab === profileTabs.indexOf(tab)
                 ? 'bg-primary-700 text-shade-light'
                 : 'bg-shade-light text-primary-700')
@@ -120,17 +178,78 @@ export default function FacultyDetails() {
           </button>
         ))}
       </nav>
-      <div className="flex h-[732px] grow flex-col gap-[24px] rounded-2xl bg-shade-light p-[24px] drop-shadow-[0_4px_24px_rgba(0,43,1,0.1)]">
-        <header className="flex w-full">
-          <h4 className="text-primary-700">{profileTabs[currentTab].label}</h4>
-          {/* TODO: edit button */}
-        </header>
-        <article className="mb-[12px] mr-[8px] flex h-full w-full flex-col gap-[12px] overflow-auto">
-          {profileTabs[currentTab].items.map((item) => (
-            <p
-              key={item.name}
-              className="flex w-full flex-col gap-3 rounded-xl px-6 py-[20px] shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
+      <div
+        className={
+          'flex h-[732px] grow flex-col gap-[24px] rounded-2xl border-[1px] py-[24px] drop-shadow-[0_4px_24px_rgba(0,43,1,0.1)] transition-colors ' +
+          (editActive
+            ? 'border-primary-700 bg-neutral-100'
+            : 'border-shade-light bg-shade-light')
+        }
+      >
+        <header className="mx-[24px] flex">
+          {editActive && (
+            <MdOutlineArrowBack
+              size={36}
+              onClick={() => setEditActive(false)}
+              className="my-auto mr-[16px] cursor-pointer text-primary-700"
+            />
+          )}
+          <h4 className="my-auto text-primary-700">
+            {editActive ? 'Edit ' : ''}
+            {profileTabs[currentTab].label}
+          </h4>
+          {profileTabs[currentTab].filter && (
+            <ul className="ml-[20px] mr-auto flex gap-[20px] ">
+              {tags.map((tag, index) => (
+                <li
+                  key={index}
+                  value={index + 1}
+                  className={
+                    'my-auto cursor-pointer select-none rounded-s border-[1px] border-primary-700 px-[8px] py-[2px] text-primary-700 transition-colors hover:bg-primary-700 hover:text-shade-light ' +
+                    (currentFilter === tags.indexOf(tag)
+                      ? 'bg-primary-700 text-shade-light'
+                      : 'bg-shade-light text-primary-700')
+                  }
+                  onClick={() =>
+                    currentFilter !== index
+                      ? setCurrentFilter(index)
+                      : setCurrentFilter(0)
+                  }
+                >
+                  <h5>{tag}</h5>
+                </li>
+              ))}
+            </ul>
+          )}
+          {isUser && (
+            <button
+              className="ml-auto flex gap-2 rounded-s bg-primary-500 px-3 py-2 text-lg font-medium text-shade-light"
+              onClick={() => setEditActive(true)}
             >
+              {editActive ? (
+                <>
+                  <MdOutlineAdd size={15} className="my-auto" /> Add
+                </>
+              ) : (
+                <>
+                  <MdOutlineEdit size={15} className="my-auto" /> Edit
+                </>
+              )}
+            </button>
+          )}
+        </header>
+        <article className="mb-[12px] flex h-full flex-col gap-[12px] overflow-auto">
+          {profileTabs[currentTab].items.map((item, index) => (
+            <p
+              key={index}
+              className="relative ml-[24px] mr-[32px] flex flex-col gap-3 rounded-xl bg-shade-light px-6 py-[20px] shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
+            >
+              {editActive && (
+                <MdOutlineEdit
+                  size={28}
+                  className="absolute right-[16px] top-[16px] cursor-pointer text-primary-700"
+                />
+              )}
               <span className="text-[24px] font-bold">{item.name}</span>
               <span className="text-[20px]">{item.value}</span>
               <span className="text-[20px] text-neutral-600">
