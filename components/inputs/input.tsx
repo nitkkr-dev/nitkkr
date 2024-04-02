@@ -13,6 +13,7 @@ export type ValidityStateWithError = {
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   customValidator?: () => ValidityStateWithError;
+  description?: string;
   id: string;
   label?: string;
   reserveSpaceForError?: boolean;
@@ -45,6 +46,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       className,
       customValidator = () => ({}) as ValidityStateWithError,
+      description,
       label,
       onBlur,
       onChange,
@@ -73,6 +75,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           >
             {label}
           </Label>
+        )}
+        {description && (
+          <small className="!mt-0 block text-neutral-700">{description}</small>
         )}
         <input
           aria-errormessage={
