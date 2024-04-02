@@ -1,29 +1,68 @@
-import { forwardRef } from 'react';
+'use client';
+
+import { forwardRef, useEffect, useState } from 'react';
 import { FaExclamationCircle } from 'react-icons/fa';
 
 import { Label } from '~/components/ui';
-import { cn } from '~/lib/utils';
+import { cn, getKeys } from '~/lib/utils';
+
+export type ValidityStateWithError = {
+  [K in keyof ValidityStateFlags]: (input: HTMLInputElement) => string;
+};
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  errorMessage?: boolean;
+  customValidator?: () => ValidityStateWithError;
   id: string;
   label?: string;
   reserveSpaceForError?: boolean;
+  showError?: boolean;
 }
+
+const defaultErrors: ValidityStateWithError = {
+  // These attributes are in order of error priority
+  valueMissing: () => 'Please fill out this field.',
+  typeMismatch: (input) => `Please enter a valid ${input.type}.`,
+  patternMismatch: () => 'Please match the requested format.',
+  tooShort: (input) =>
+    `Please use at least ${input.minLength} character(s) (currently using ${input.value.length} character(s)).`,
+  tooLong: (input) =>
+    `Please shorten this text to ${input.maxLength} character(s) or less (currently using ${input.value.length} character(s)).`,
+  rangeUnderflow: (input) =>
+    `Please select a value that is no less than ${input.min}.`,
+  rangeOverflow: (input) =>
+    `Please select a value that is no more than ${input.max}.`,
+  stepMismatch: ({ valueAsNumber, step }) => {
+    const nearest_lower = valueAsNumber - (valueAsNumber % Number(step));
+    const nearest_upper = nearest_lower + Number(step);
+    return `Please select a valid value. The two nearest valid values are ${nearest_lower} and ${nearest_upper}.`;
+  },
+  badInput: () => 'Please enter a valid value.',
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      errorMessage,
+      customValidator = () => ({}) as ValidityStateWithError,
       label,
+      onBlur,
+      onChange,
       reserveSpaceForError = false,
+      showError = true,
       type,
       ...props
     },
     ref
   ) => {
+    const [errorMessage, setErrorMessage] = useState<string>();
+    const [focusedOnce, setFocusedOnce] = useState(false);
+
+    useEffect(() => {
+      const input = document.getElementById(props.id) as HTMLInputElement;
+      validate(input, customValidator);
+    }, []);
+
     return (
       <fieldset className="space-y-2">
         {label && (
@@ -37,7 +76,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <input
           aria-errormessage={
-            props['aria-invalid'] && props['aria-invalid'] !== 'false'
+            showError &&
+            props['aria-invalid'] &&
+            props['aria-invalid'] !== 'false'
               ? `${props.id}-error`
               : undefined
           }
@@ -47,30 +88,66 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary-700',
             'disabled:cursor-not-allowed disabled:border-neutral-300 disabled:bg-neutral-100',
             'file:border-0 file:bg-transparent file:text-sm file:font-medium',
-            errorMessage &&
+            focusedOnce &&
               'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
             className
           )}
+          onBlur={(event) => {
+            if (!focusedOnce) setFocusedOnce(true);
+            onBlur && onBlur(event);
+          }}
+          onChange={(event) => {
+            if (!event.isDefaultPrevented()) {
+              validate(event.target, customValidator);
+            }
+            onChange && onChange(event);
+          }}
+          onInvalid={(event) => {
+            setErrorMessage(event.currentTarget.validationMessage);
+          }}
           ref={ref}
           type={type}
           {...props}
         />
-        <p
-          className={cn(
-            'flex items-center gap-2 text-sm text-primary-500 sm:text-base',
-            reserveSpaceForError
-              ? cn('invisible', errorMessage && 'peer-invalid:visible')
-              : cn('hidden', errorMessage && 'peer-invalid:flex')
-          )}
-          id={`${props.id}-error`}
-        >
-          <FaExclamationCircle />
-          {errorMessage ?? 'Unrendered text to reserve line height'}
-        </p>
+        {showError && (
+          <p
+            className={cn(
+              'flex items-center gap-2 text-sm text-primary-500 sm:text-base',
+              reserveSpaceForError
+                ? cn('invisible', focusedOnce && 'peer-invalid:visible')
+                : cn('hidden', focusedOnce && 'peer-invalid:flex')
+            )}
+            id={`${props.id}-error`}
+          >
+            <FaExclamationCircle />
+            {errorMessage ?? 'Unrendered text to reserve line height'}
+          </p>
+        )}
       </fieldset>
     );
   }
 );
 Input.displayName = 'Input';
+
+const validate = (
+  input: HTMLInputElement,
+  customValidator: () => ValidityStateWithError
+) => {
+  let error: string | undefined;
+  const validityState = input.validity;
+  const customValidity = customValidator();
+
+  if (!validityState.valid) {
+    getKeys(defaultErrors).forEach((state) => {
+      if (error ?? !validityState[state]) return;
+      const errorCallback = customValidity[state] ?? defaultErrors[state];
+      if (!errorCallback) return;
+      error = errorCallback(input);
+    });
+  }
+
+  input.setCustomValidity(error ?? '');
+  return input.checkValidity();
+};
 
 export { Input };
