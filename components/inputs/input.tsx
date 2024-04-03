@@ -1,7 +1,23 @@
 'use client';
 
-import { forwardRef, useEffect, useState } from 'react';
+import * as React from 'react';
+import { BsCalendarFill } from 'react-icons/bs';
 import { FaExclamationCircle } from 'react-icons/fa';
+import {
+  FaCalendar,
+  FaCalendarWeek,
+  FaClock,
+  FaHashtag,
+  FaLink,
+  FaLock,
+  FaMagnifyingGlass,
+  FaPhone,
+  FaUpload,
+} from 'react-icons/fa6';
+import { IoText } from 'react-icons/io5';
+import { type IconType } from 'react-icons/lib';
+import { LuCalendarClock } from 'react-icons/lu';
+import { MdEmail } from 'react-icons/md';
 
 import { Label } from '~/components/ui';
 import { cn, getKeys } from '~/lib/utils';
@@ -18,6 +34,8 @@ export interface InputProps
   label?: string;
   reserveSpaceForError?: boolean;
   showError?: boolean;
+  type: React.HTMLInputTypeAttribute;
+  LeftChild?: IconType;
 }
 
 const defaultErrors: ValidityStateWithError = {
@@ -41,7 +59,7 @@ const defaultErrors: ValidityStateWithError = {
   badInput: () => 'Please enter a valid value.',
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
@@ -53,17 +71,33 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       reserveSpaceForError = false,
       showError = true,
       type,
+
+      LeftChild,
       ...props
     },
     ref
   ) => {
-    const [errorMessage, setErrorMessage] = useState<string>();
-    const [focusedOnce, setFocusedOnce] = useState(false);
+    const [errorMessage, setErrorMessage] = React.useState<string>();
+    const [focusedOnce, setFocusedOnce] = React.useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
       const input = document.getElementById(props.id) as HTMLInputElement;
       validate(input, customValidator);
     }, []);
+
+    if (type === 'date') LeftChild = FaCalendar;
+    if (type === 'datetime-local') LeftChild = LuCalendarClock;
+    if (type === 'email') LeftChild = MdEmail;
+    if (type === 'file') LeftChild = FaUpload;
+    if (type === 'month') LeftChild = BsCalendarFill;
+    if (type === 'number') LeftChild = FaHashtag;
+    if (type === 'password') LeftChild = FaLock;
+    if (type === 'search') LeftChild = FaMagnifyingGlass;
+    if (type === 'tel') LeftChild = FaPhone;
+    if (type === 'text') LeftChild = IoText;
+    if (type === 'time') LeftChild = FaClock;
+    if (type === 'url') LeftChild = FaLink;
+    if (type === 'week') LeftChild = FaCalendarWeek;
 
     return (
       <fieldset className="space-y-2">
