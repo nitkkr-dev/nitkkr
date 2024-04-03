@@ -26,7 +26,7 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="fixed z-10 min-w-full bg-background">
+    <header className="header-sticky-ness fixed z-10 min-w-full bg-background">
       <nav
         className={cn(
           'container flex justify-between',

@@ -21,36 +21,46 @@ export default async function StudentActivities({
 
   return (
     <>
+      <style>
+        {`@media (min-width: 640px) {
+          .header-sticky-ness {
+            position: absolute;
+          }
+        }`}
+      </style>
+
       <article
         className={cn(
-          'relative flex flex-col bg-studentActivities bg-cover bg-top bg-no-repeat',
+          'absolute flex w-full flex-col bg-studentActivities bg-cover bg-top bg-no-repeat',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96'
         )}
       >
         <h2 className="container my-auto w-fit text-shade-light">
           {text.title}
         </h2>
-        <ol className="absolute bottom-5 hidden w-fit gap-4 self-center rounded-full bg-background p-1 lg:flex xl:p-2">
-          {[
-            { label: text.headings.clubs, href: '#clubs' },
-            { label: text.headings.council, href: '#council' },
-            { label: text.headings.events, href: '#events' },
-            { label: text.headings.thoughtLab, href: '#thought-lab' },
-            { label: text.headings.nss, href: '#nss' },
-            { label: text.headings.ncc, href: '#ncc' },
-          ].map(({ label, href }, index) => (
-            <li key={index}>
-              <Button
-                asChild
-                className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
-                variant="ghost"
-              >
-                <Link href={href}>{label}</Link>
-              </Button>
-            </li>
-          ))}
-        </ol>
       </article>
+
+      <hr className="h-52 sm:h-44 md:h-52 lg:h-60 xl:h-[18.5rem]" />
+      <ol className="sticky top-6 mx-auto hidden w-fit gap-4 self-center rounded-full bg-background p-1 sm:flex xl:p-2 ">
+        {[
+          { label: text.headings.clubs, href: '#clubs' },
+          { label: text.headings.council, href: '#council' },
+          { label: text.headings.events, href: '#events' },
+          { label: text.headings.thoughtLab, href: '#thought-lab' },
+          { label: text.headings.nss, href: '#nss' },
+          { label: text.headings.ncc, href: '#ncc' },
+        ].map(({ label, href }, index) => (
+          <li key={index}>
+            <Button
+              asChild
+              className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
+              variant="ghost"
+            >
+              <Link href={href}>{label}</Link>
+            </Button>
+          </li>
+        ))}
+      </ol>
 
       <Heading
         className="container"
