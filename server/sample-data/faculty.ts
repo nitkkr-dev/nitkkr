@@ -1,5 +1,5 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, faculty, persons, sections } from '../db';
+import { db, faculty, persons } from '../db';
 
 type PersonsData = InferInsertModel<typeof persons>;
 
@@ -84,6 +84,7 @@ const personsData: PersonsData[] = [
 
 const facultyData = [
   {
+    employee_id: '1',
     designation: 'Assistant Professor',
     officeTelephone: '01744233530',
     homeTelephone: '0987654321',
@@ -175,6 +176,7 @@ const facultyData = [
     scopusId: '',
   },
   {
+    employee_id: '2',
     designation: 'Professor',
     officeTelephone: '1744-233482',
     homeTelephone: '9416733789',
@@ -228,6 +230,7 @@ const facultyData = [
     scopusProfile: '',
   },
   {
+    employee_id: '3',
     designation: 'Professor',
     officeTelephone: '233481',
     homeTelephone: '09416570992',
@@ -243,6 +246,7 @@ const facultyData = [
     scopusProfile: '',
   },
   {
+    employee_id: '4',
     designation: 'Professor',
     officeTelephone: '01744-233300',
     homeTelephone: '01744-233349',
@@ -257,6 +261,7 @@ const facultyData = [
     scopusProfile: '',
   },
   {
+    employee_id: '5',
     designation: 'Associate Professor',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
@@ -276,6 +281,7 @@ const facultyData = [
     scopusId: '',
   },
   {
+    employee_id: '6',
     designation: 'Associate Professor',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
@@ -293,6 +299,7 @@ const facultyData = [
     scopusId: '',
   },
   {
+    employee_id: '7',
     designation: 'Associate Professor',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
