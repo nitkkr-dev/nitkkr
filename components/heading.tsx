@@ -64,15 +64,17 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
 }
 
 export default function Heading({
-  children,
   className,
   glyphDirection,
+  heading: Comp,
   href,
+  text,
 }: {
-  children: React.ReactNode;
   className?: string;
   glyphDirection: 'rtl' | 'dual' | 'ltr';
+  heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   href: string | UrlObject;
+  text: string;
 }) {
   return (
     <header className={cn('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}>
@@ -83,14 +85,14 @@ export default function Heading({
         {glyphDirection === 'dual' && (
           <>
             <Elephants direction="rtl" />
-            {children}
+            <Comp className="my-auto">{text}</Comp>
             <Elephants direction="ltr" />
           </>
         )}
 
-        {glyphDirection === 'ltr' && children}
+        <Comp className="my-auto">{glyphDirection === 'ltr' && text}</Comp>
         {glyphDirection !== 'dual' && <Horses direction={glyphDirection} />}
-        {glyphDirection === 'rtl' && children}
+        <Comp className="my-auto">{glyphDirection === 'rtl' && text}</Comp>
       </Link>
     </header>
   );

@@ -52,9 +52,13 @@ export default async function StudentActivities({
         </ol>
       </article>
 
-      <Heading className="container" glyphDirection="ltr" href="#clubs">
-        <h3 className="my-auto">{text.sections.clubs.title}</h3>
-      </Heading>
+      <Heading
+        className="container"
+        glyphDirection="ltr"
+        heading="h3"
+        href="#clubs"
+        text={text.sections.clubs.title}
+      />
 
       <section className="container mb-6 text-center">
         <section className="h-28 md:h-40">

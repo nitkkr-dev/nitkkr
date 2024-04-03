@@ -36,9 +36,13 @@ export default async function Notifications({
       className="bg-notifications bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
       id="notifications"
     >
-      <Heading className="container" glyphDirection="rtl" href="#notifications">
-        <h2 className="my-auto w-fit">{text.title}</h2>
-      </Heading>
+      <Heading
+        className="container"
+        glyphDirection="rtl"
+        heading="h2"
+        href="#notifications"
+        text={text.title}
+      />
 
       <article className="container h-[384px] rounded-xl md:h-[512px] lg:flex lg:justify-between">
         <ol

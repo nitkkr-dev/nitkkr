@@ -23,9 +23,12 @@ export default async function DirectorsCorner({ locale }: { locale: string }) {
 
   return (
     <article className="container mb-32 mt-10" id="directors-corner">
-      <Heading glyphDirection="rtl" href="#directors-corner">
-        <h2 className="my-auto min-w-fit">{text.title}</h2>
-      </Heading>
+      <Heading
+        glyphDirection="rtl"
+        heading="h2"
+        href="#directors-corner"
+        text={text.title}
+      />
 
       <article
         className={cn(
