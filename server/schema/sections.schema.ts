@@ -1,7 +1,7 @@
 import { relations } from 'drizzle-orm';
 import { integer, pgTable, smallserial, varchar } from 'drizzle-orm/pg-core';
 
-import { faculty, nonTeachingStaff } from '.';
+import { faculty, staff } from '.';
 
 export const sections = pgTable('sections', {
   id: smallserial('id').primaryKey(),
@@ -17,5 +17,5 @@ export const sectionsRelations = relations(sections, ({ many, one }) => ({
     fields: [sections.headFacultyId],
     references: [faculty.id],
   }),
-  nonTeachingStaff: many(nonTeachingStaff),
+  staff: many(staff),
 }));

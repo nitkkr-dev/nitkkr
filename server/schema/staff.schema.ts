@@ -9,8 +9,8 @@ import {
 
 import { departments, persons, sections } from '.';
 
-export const nonTeachingStaff = pgTable(
-  'non_teaching_staff',
+export const staff = pgTable(
+  'staff',
   {
     id: integer('id')
       .primaryKey()
@@ -28,29 +28,26 @@ export const nonTeachingStaff = pgTable(
       .references(() => departments.id)
       .notNull(),
   },
-  (nonTeachingStaff) => {
+  (staff) => {
     return {
-      nonTeachingStaffEmployeeIdIndex: uniqueIndex(
-        'non_teaching_staff_employee_id_idx'
-      ).on(nonTeachingStaff.employee_id),
+      staffEmployeeIdIndex: uniqueIndex('staff_employee_id_idx').on(
+        staff.employee_id
+      ),
     };
   }
 );
 
-export const nonTeachingStaffRelations = relations(
-  nonTeachingStaff,
-  ({ one }) => ({
-    department: one(departments, {
-      fields: [nonTeachingStaff.workingDepartmentId],
-      references: [departments.id],
-    }),
-    person: one(persons, {
-      fields: [nonTeachingStaff.id],
-      references: [persons.id],
-    }),
-    section: one(sections, {
-      fields: [nonTeachingStaff.workingSectionId],
-      references: [sections.id],
-    }),
-  })
-);
+export const staffRelations = relations(staff, ({ one }) => ({
+  department: one(departments, {
+    fields: [staff.workingDepartmentId],
+    references: [departments.id],
+  }),
+  person: one(persons, {
+    fields: [staff.id],
+    references: [persons.id],
+  }),
+  section: one(sections, {
+    fields: [staff.workingSectionId],
+    references: [sections.id],
+  }),
+}));

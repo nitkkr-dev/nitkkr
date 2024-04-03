@@ -1,14 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { char, pgTable, smallserial, text, varchar } from 'drizzle-orm/pg-core';
 
-import {
-  clubs,
-  courses,
-  doctorates,
-  faculty,
-  majors,
-  nonTeachingStaff,
-} from '.';
+import { clubs, courses, doctorates, faculty, majors, staff } from '.';
 
 export const departments = pgTable('departments', {
   id: smallserial('id').primaryKey(),
@@ -33,5 +26,5 @@ export const departmentsRelations = relations(departments, ({ many }) => ({
   doctorates: many(doctorates),
   faculty: many(faculty),
   majors: many(majors),
-  nonTeachingStaff: many(nonTeachingStaff),
+  staff: many(staff),
 }));
