@@ -1,9 +1,9 @@
 import WorkInProgress from '~/components/work-in-progress';
 
-export default function Section({
+export default function CentralLibrary({
   params: { locale },
 }: {
-  params: { locale: string; name: string };
+  params: { locale: string };
 }) {
   return <WorkInProgress locale={locale} />;
 }

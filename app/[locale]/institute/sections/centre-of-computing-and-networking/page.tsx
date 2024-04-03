@@ -1,9 +1,9 @@
 import WorkInProgress from '~/components/work-in-progress';
 
-export default function Course({
+export default function CenterOfComputingAndNetworking({
   params: { locale },
 }: {
-  params: { locale: string; code: string };
+  params: { locale: string };
 }) {
   return <WorkInProgress locale={locale} />;
 }
