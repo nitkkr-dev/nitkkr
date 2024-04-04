@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { ImLab } from 'react-icons/im';
 import { MdBadge, MdEmail, MdMilitaryTech } from 'react-icons/md';
 import { FaPhoneAlt, FaRegCalendarAlt } from 'react-icons/fa';
+import { IconType } from 'react-icons/lib';
 
 import { getTranslations } from '~/i18n/translations';
 import Subnav from '~/components/subnav';
 import Heading from '~/components/heading';
 import {
+  buttonVariants,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -15,6 +17,106 @@ import {
   CarouselPrevious,
 } from '~/components/ui';
 import { Card, CardFooter } from '~/components/ui/card';
+import { cn } from '~/lib/utils';
+
+interface HodDetailProps {
+  icon: IconType;
+  items: string[];
+}
+
+const HodDetail: React.FC<HodDetailProps> = ({ icon: Icon, items }) => {
+  return (
+    <div className="flex items-center space-x-1">
+      <Icon className="font-semibolde text-base text-primary-700" />
+      <div className="flex flex-col text-neutral-700">
+        {items.map((item, index) => (
+          <p className="text-sm lg:text-base" key={index}>
+            {item}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+interface AchievementLinkProps {
+  href: string;
+  icon: IconType;
+  title: string;
+}
+
+const AchievementLink: React.FC<AchievementLinkProps> = ({
+  href,
+  icon: Icon,
+  title,
+}) => {
+  return (
+    <Link
+      href={href}
+      className="group flex h-48 w-full flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 lg:h-64 lg:w-80"
+    >
+      <Icon className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
+      <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
+        {title}
+      </h3>
+    </Link>
+  );
+};
+
+interface ProgrammesSectionItemProps {
+  title: string;
+  programmeType: string;
+  items: string[];
+  textColor: string;
+  bgHoverColor: string;
+}
+
+const ProgrammesSectionItem: React.FC<ProgrammesSectionItemProps> = ({
+  title,
+  programmeType,
+  items,
+  bgHoverColor,
+  textColor,
+}) => {
+  return (
+    <div className="flex flex-col">
+      <button
+        className={cn(
+          'flex h-[60px] items-center justify-center rounded-md px-4 py-2 text-neutral-50',
+          bgHoverColor
+        )}
+      >
+        <h1 className="my-auto text-lg">{title.toUpperCase()}</h1>
+      </button>
+      <div
+        className={cn('flex items-center justify-between space-x-1', textColor)}
+      >
+        <p>{programmeType}</p>{' '}
+        <div
+          className={cn(
+            'border-b border-l-primary-700',
+            items.length > 1 ? 'w-[80%]' : 'w-[86%]'
+          )}
+        />
+      </div>
+      <div className="flex flex-col space-y-4 ">
+        {items.map((item, i) => (
+          <button
+            key={i}
+            className={cn(
+              'rounded-md bg-neutral-50 px-4 py-2',
+              textColor,
+              `hover:${bgHoverColor}`,
+              `hover:text-neutral-50`
+            )}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default async function Department({
   params: { locale, name },
@@ -38,55 +140,52 @@ export default async function Department({
       />
       <section className="container">
         {/* about */}
-        <section id="about" className="mt-20">
-          <Heading glyphDirection={'rtl'} href={''}>
-            <h2 className="font-semibold text-primary-700 md:text-2xl lg:text-3xl">
-              {text.sectionTitles[0].toLocaleUpperCase()}
-            </h2>
-          </Heading>
-          <article className="flex h-[50vh] items-center space-x-4 rounded-md bg-neutral-50">
-            <div className="relative flex h-full w-1/2">
-              <Image
-                className="h-full w-full rounded-l-md"
-                fill
-                alt={departmentData.name}
-                src={
-                  'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
-                }
-              />
-            </div>
-            <span className="w-1/2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Explicabo molestiae voluptatem quas omnis ullam eligendi,
-              dignissimos adipisci corrupti maxime exercitationem totam illum
-              reiciendis neque officia accusantium? Qui omnis ad suscipit autem
-              doloremque delectus aliquam dicta! Beatae nemo similique et
-              deserunt tenetur iure reiciendis optio incidunt delectus maxime
-              expedita libero, perspiciatis, veritatis debitis molestiae culpa
-              porro blanditiis omnis. Corporis at quod quia amet odit quisquam
-              exercitationem in quaerat nam, ut officia laudantium voluptates id
-              vel possimus, saepe, consectetur ipsa aut laborum. Ad ex cum ipsa
-              blanditiis a totam eum quos, illum minima sunt quibusdam libero
-              officia fugiat nisi culpa deserunt quia.
-              <span> </span>
+        <Heading glyphDirection={'rtl'} href={''}>
+          <h2>ABOUT</h2>
+        </Heading>
+        <section className="flex w-full flex-col-reverse justify-between rounded-b-md rounded-t-md bg-neutral-50 lg:flex lg:h-[44vh] lg:flex-row lg:items-center lg:justify-between lg:rounded-r-md">
+          <Image
+            className="w-full rounded-b-md lg:h-full lg:w-2/5 lg:rounded-l-md"
+            alt="department front"
+            width={300}
+            height={300}
+            src={
+              'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
+            }
+          />
+          <div className="p-2 lg:w-3/5">
+            <p className="inline-block text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aspernatur natus porro ut consectetur dolores, saepe earum itaque
+              minus vel corrupti maxime ipsum totam eligendi est mollitia
+              assumenda fuga placeat deleniti aut provident tempora
+              consequuntur? Ea vel atque consequuntur error eveniet modi
+              maiores. Nihil porro blanditiis doloremque pariatur dolores
+              consequuntur a libero assumenda dicta architecto aspernatur facere
+              officia quasi tempore repellat ipsam rerum, suscipit perspiciatis?
+              Doloribus id repellendus molestias soluta ad dolore aliquam
+              laboriosam porro veniam vel velit magni quaerat, dicta molestiae
+              illo quae temporibus eaque officia fuga? Incidunt quae, vel ipsam
+              cupiditate consequatur, molestias totam deserunt quisquam
+              blanditiis ut quo.
               <Link
-                href={'read more'}
-                className="text-primary-700 hover:underline"
+                href={''}
+                className={cn('ml-2', buttonVariants({ variant: 'link' }))}
               >
                 READ MORE &rarr;
               </Link>
-            </span>
-          </article>
+            </p>
+          </div>
         </section>
 
         {/*  Mission and Vision*/}
         <section
           id="missionAndVision"
-          className="mt-20 flex h-[400px] items-center space-x-4 rounded-md"
+          className="mt-20 items-center lg:flex lg:justify-between lg:space-x-4 "
         >
-          <div className="mb-2 mt-2 flex h-full w-1/2 flex-col justify-between">
-            <section className="flex flex-col space-y-3 ">
-              <h2 className="mb-0">
+          <section className="flex h-full flex-col justify-between space-y-7 lg:w-1/2">
+            <div className="flex flex-col">
+              <h2 className="m-0">
                 {text.sectionTitles[1].toLocaleUpperCase()}
               </h2>
               <p>
@@ -96,9 +195,9 @@ export default async function Department({
                 cupiditate cumque corrupti provident doloribus! Blanditiis
                 quaerat itaque atque illo, modi est fugiat.
               </p>
-            </section>
-            <section className="mt-auto flex flex-col space-y-3">
-              <h2 className="mb-0">
+            </div>
+            <div className="flex flex-col">
+              <h2 className="m-0">
                 {text.sectionTitles[2].toLocaleUpperCase()}
               </h2>
               <p>
@@ -108,90 +207,81 @@ export default async function Department({
                 cupiditate cumque corrupti provident doloribus! Blanditiis
                 quaerat itaque atque illo, modi est fugiat.
               </p>
-            </section>
-          </div>
-          <div className="relative flex h-full w-1/2">
+            </div>
+          </section>
+          <div className="relative hidden lg:block lg:h-full lg:w-1/2">
             <Image
               className="h-full w-full rounded-md"
-              fill
               alt={departmentData.name}
-              src={
-                'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
-              }
+              width={300}
+              height={400}
+              src="https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130"
             />
           </div>
         </section>
 
         {/*  hod's message*/}
-        <section id="hodMessage" className="mt-20 w-full">
-          <Heading glyphDirection={'rtl'} href={''}>
-            <h1 className="mt-5 text-3xl font-semibold text-primary-700">
-              {text.sectionTitles[3].toLocaleUpperCase()}
-            </h1>
-          </Heading>
-          <section className="flex h-[55vh] w-full space-x-5 rounded-md border border-primary-700 bg-neutral-50 p-10">
-            <div className="w-[16vw] flex-shrink-0 p-1">
-              <div className="h-full w-full">
-                <div className="relative h-3/4 w-full">
-                  <Image
-                    className="h-auto max-w-full rounded-md"
-                    src={
-                      'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
-                    }
-                    alt="hod"
-                    fill
-                  />
-                </div>
-                <div className="mt-2 flex h-1/5 flex-col justify-between space-y-1">
-                  <span className="flex items-center space-x-2">
-                    <MdEmail className="text-xs text-primary-700" />
-                    <p className="text-xs text-neutral-700">
-                      jitenderchhabra@nitkkr.ac.in
-                    </p>
-                  </span>
-                  <span className="flex items-center space-x-2 text-xs">
-                    <FaPhoneAlt className="text-xs text-primary-700" />
-                    <span className="items-start">
-                      <p className="text-xs text-neutral-700">
-                        {'+91-1744-233482 (Off-Direct)'}
-                      </p>
-                      <p className="text-xs text-neutral-700">
-                        {'9416733789 (Mob)'}
-                      </p>
-                    </span>
-                  </span>
-                  <span className="flex items-center space-x-2 text-xs">
-                    <FaRegCalendarAlt className="text-xs text-primary-700" />
-                    <p className="text-xs text-neutral-700">
-                      Dated Academic Session 2010 - 2025
-                    </p>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="w-4/5">
-              <h3 className="font-semibold">Professor J.K. Chhabra</h3>
-              <p className="mt-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident enim, reprehenderit incidunt suscipit, quam ipsam
-                voluptas velit esse, perferendis necessitatibus quis id commodi
-                labore officiis porro numquam tempore saepe obcaecati modi
-                dolores quasi molestiae? Quod, voluptate nulla quae ut harum
-                dolore nemo placeat magnam esse praesentium laboriosam eligendi
-                corrupti tempore quasi ipsam minus optio neque architecto
-                corporis sit ex error. Hic fugiat voluptatem sit deserunt,
-                quaerat, voluptatum blanditiis est ipsam asperiores temporibus
-                ea dolor nam corporis beatae neque totam odit! Incidunt porro,
-                sit obcaecati animi officiis at amet tempora. Provident
-                molestias error minima nihil, placeat est perferendis iure at
-                sequi.
-              </p>
-              <h5 className="mt-5">
-                I heartily welcome everyone who visits the website of this
-                institution.
-              </h5>
+        <section className="mt-20 rounded-md border border-primary-700 bg-neutral-50 p-5 lg:flex lg:space-x-4">
+          <section className="hidden w-full flex-col lg:flex lg:w-1/4">
+            <Image
+              src={
+                'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
+              }
+              alt="hod"
+              width={350}
+              height={450}
+              className="h-[295px] w-64 rounded-md xl:h-[300px] xl:w-96"
+            />
+            <div className=" lg:mt-4 lg:space-y-1">
+              <HodDetail
+                icon={MdEmail}
+                items={['jitenderchhabra@nitkkr.ac.in']}
+              />
+              <HodDetail
+                icon={FaPhoneAlt}
+                items={['+91-1744-233482 (Off-Direct)', '9416733789 (Mob)']}
+              />
+              <HodDetail
+                icon={FaRegCalendarAlt}
+                items={['Dated Academic Session 2010 - 2025']}
+              />
             </div>
           </section>
+          <div className="flex w-full flex-col space-y-20 lg:w-3/4">
+            <blockquote>
+              <div className="mb-5 flex items-center space-x-5">
+                <Image
+                  src={
+                    'https://www.figma.com/file/2UXH7QR1dUT8KXgdGuYaC1/image/cf46d1812e6285efda1f8172b7fc3634c6d76130'
+                  }
+                  alt="hod"
+                  width={150}
+                  height={200}
+                  className="block rounded-md lg:hidden "
+                />
+                <h3 className="mb-2">Professor R.K. Chhabra</h3>
+              </div>
+              <p className="text-base">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                magni dolorum ad eligendi consequatur excepturi repudiandae,
+                consectetur quisquam qui quae, eum at ipsum amet. Eum similique
+                incidunt minima adipisci repellat doloribus doloremque totam
+                omnis alias ad, id quas suscipit corporis iste error! Veritatis
+                fugiat quaerat vitae! Cum autem non accusamus nemo, voluptatum
+                error iure possimus illum a quis eaque voluptates nostrum
+                commodi omnis in necessitatibus repellendus nam! Recusandae
+                laboriosam natus doloribus quam debitis inventore et,
+                reprehenderit iusto. Eveniet similique eaque nisi nostrum
+                dignissimos, numquam dolorem, doloremque eligendi eum quo dolor.
+                Iure eveniet qui aperiam neque cumque. Quidem cupiditate impedit
+                harum?
+              </p>
+            </blockquote>
+            <h5 className="mt-4">
+              I heartily welcome everyone who visits the website of this
+              institution.
+            </h5>
+          </div>
         </section>
 
         {/*Programmes */}
@@ -201,92 +291,49 @@ export default async function Department({
               {text.sectionTitles[4].toUpperCase()}
             </h2>
           </Heading>
-          <section className="] mx-auto grid grid-cols-3 gap-4">
-            <div className="flex flex-col">
-              <button className="flex h-[60px] items-center justify-center rounded-md bg-primary-300 px-4 py-2 text-neutral-50">
-                <h1 className="my-auto text-lg">UNDER GRADUATE</h1>
-              </button>
-              <div className="flex items-center justify-between space-x-1 text-primary-300">
-                <p>B. Tech</p>{' '}
-                <div className="w-[85%] border-b border-l-primary-700" />
-              </div>
-              <div className="flex flex-col space-y-4 ">
-                <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-300 hover:bg-primary-300 hover:text-neutral-50">
-                  B.tech Computer Engineering
-                </button>
-                <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-300 hover:bg-primary-300 hover:text-neutral-50">
-                  Information Technology
-                </button>
-                <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-300 hover:bg-primary-300 hover:text-neutral-50">
-                  Artificial Intelligence / Machine Learning
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <button className="flex h-[60px] items-center justify-center rounded-md bg-primary-700 px-4 py-2 text-neutral-50">
-                <h1 className="my-auto text-lg">POST GRADUATE</h1>
-              </button>
-              <div className="flex items-center justify-between space-x-1 text-primary-700">
-                <p>M. Tech</p>{' '}
-                <div className="w-[84%] border-b border-l-primary-700" />
-              </div>
-              <div className="flex flex-col space-y-4">
-                <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-700 hover:bg-primary-700 hover:text-neutral-50">
-                  M.tech Computer Engineering
-                </button>
-                <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-700 hover:bg-primary-700 hover:text-neutral-50">
-                  Cyber Security
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-col ">
-              <button className="flex h-[60px] items-center justify-center rounded-md bg-primary-900 px-4 py-2 text-neutral-50">
-                <h1 className="my-auto text-lg">DOCTORAL</h1>
-              </button>
-              <div className="flex items-center justify-between space-x-1 text-primary-700">
-                <p>Ph. D</p>{' '}
-                <div className="w-[89%] border-b border-l-primary-700" />
-              </div>
-              <button className="rounded-md bg-neutral-50 px-4 py-2 text-primary-900 hover:bg-primary-900 hover:text-neutral-50">
-                More Information
-              </button>
-            </div>
+          <section className="mx-auto grid grid-cols-1 gap-y-7 lg:grid-cols-3 lg:gap-4">
+            <ProgrammesSectionItem
+              title={'UNDER GRADUATE'}
+              programmeType={'B. Tech'}
+              items={[
+                'B.tech Computer Engineering',
+                ' Information Technology',
+                'Artificial Intelligence / Machine Learning',
+              ]}
+              textColor={'text-primary-300'}
+              bgHoverColor={'bg-primary-300'}
+            />
+            <ProgrammesSectionItem
+              title={'POST GRADUATE'}
+              programmeType={'M. Tech'}
+              items={['M.tech Computer Engineering', ' Cyber Security']}
+              textColor={'text-primary-700'}
+              bgHoverColor={'bg-primary-700'}
+            />
+            <ProgrammesSectionItem
+              title={'DOCTORAL'}
+              programmeType={'Ph. D'}
+              items={['More Information']}
+              textColor={'text-primary-900'}
+              bgHoverColor={'bg-primary-900'}
+            />
           </section>
         </section>
         {/* dno title for this */}
-        <article
-          id="achivements"
-          className="relative mt-20 flex flex-1 justify-center space-x-32 bg-[url('https://s3-alpha-sig.figma.com/img/32a3/273b/70051ff8670610a0e06d9ff49e7cb675?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6vPstFQBLAj0l7cTLalslHY9fulCefKOvsOineaOXTkm0l4aXO14Q4XlTZP7IsU~Snm3gIr2ITRgpLjRXcoGeokV~I0dV6VcdUeZyWWIEtJa9y0yzn6mqXpGK47f9jKorWWjYgowENmLteeS93qLuSa9ozxzFRqaSunXNfTHj76ltbLC1xtVumVpLVbf~ywkh~lDsyA-VyspcY3gVYnjGi6NaRHcLtJHZVgbIxxGEoG8rzSXzc2OmjRAEgoa8HeGI-WllViUXrDpqIlBu1HLac~a4kV6yV0vVDCwaHZ2-I9ySAiHM-4wWySA77o1acMODptO1KT7LirkEjSUYWASA__')] bg-cover bg-clip-content "
-        >
-          <Link
-            href={''}
-            className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 "
-          >
-            <MdBadge className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50 ">
-              {text.sectionTitles[5]}
-            </h3>
-          </Link>
 
-          <Link
-            href={''}
-            className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 "
-          >
-            <ImLab className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
-              {text.sectionTitles[6]}
-            </h3>
-          </Link>
-
-          <Link
-            href={''}
-            className="group flex h-64 w-80 flex-col items-center justify-center rounded-lg border-2 border-primary-500 p-4 font-semibold transition-all duration-300 hover:bg-primary-500/80 group-hover:text-neutral-50 "
-          >
-            <MdMilitaryTech className="mb-2 h-12 w-12 text-primary-500 group-hover:text-neutral-50" />
-            <h3 className="text-lg font-semibold text-primary-500 group-hover:text-neutral-50">
-              {text.sectionTitles[7]}
-            </h3>
-          </Link>
+        <article className="mt-20 flex flex-col items-center space-y-10 lg:flex lg:flex-row lg:items-center lg:justify-between lg:space-y-0 ">
+          {[
+            { icon: MdBadge, title: text.sectionTitles[5] },
+            { icon: ImLab, title: text.sectionTitles[6] },
+            { icon: MdMilitaryTech, title: text.sectionTitles[7] },
+          ].map((obj, i) => (
+            <AchievementLink
+              key={i}
+              href={''}
+              icon={obj.icon}
+              title={obj.title}
+            />
+          ))}
         </article>
 
         <section id="gallery" className="container mt-20">
@@ -327,8 +374,8 @@ export default async function Department({
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-primary-500 " />
-            <CarouselNext className="text-primary-500" />
+            <CarouselPrevious className="text-base text-primary-500" />
+            <CarouselNext className="text-base text-primary-500" />
           </Carousel>
           <div className="mb-5 flex w-full justify-center text-center hover:text-background">
             <Link

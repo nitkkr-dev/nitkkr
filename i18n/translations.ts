@@ -4,7 +4,12 @@ export async function getTranslations(locale: string): Promise<Translations> {
 
 export interface Translations {
   Departments: {
-    departmentTitles: string[];
+    departmentTitles: {
+      ENGINEERING: { title: string; subTitle: string[] };
+      SCIENCES: { title: string; subTitle: string[] };
+      SCHOOL: { title: string; subTitle: string[] };
+      MISCELLANEOUS: { title: string; subTitle: string[] };
+    };
     readMore: string;
     sectionTitles: string[];
     subLinkTitles: string[];

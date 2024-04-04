@@ -10,21 +10,37 @@ const text: Translations = {
       'Faculty And More',
       'Photo Gallery',
     ],
-    departmentTitles: [
-      'Business Administration',
-      'Computer Application',
-      'Chemistry',
-      'Civil Engineering',
-      'Computer Engineering',
-      'Electrical Engineering',
-      'Electronics and Communication Engineering',
-      'Humanities and Social Science',
-      'Mathematics',
-      'Mechanical engineering',
-      'Physics',
-      'Renewable Energy and Efficiency School',
-      'VLSI Design and Embedded Systems School',
-    ],
+    departmentTitles: {
+      ENGINEERING: {
+        title: 'Engineering',
+        subTitle: [
+          'Civil Engineering',
+          'Computer Engineering',
+          'Electrical Engineering',
+          'Electronics and Communication Engineering',
+          'Mechanical engineering',
+        ],
+      },
+      SCIENCES: {
+        title: 'Sciences',
+        subTitle: ['Chemistry', 'Mathematics', 'Physics'],
+      },
+      SCHOOL: {
+        title: 'School',
+        subTitle: [
+          'Renewable Energy and Efficiency School',
+          'VLSI Design and Embedded Systems School',
+        ],
+      },
+      MISCELLANEOUS: {
+        title: 'Miscellaneous',
+        subTitle: [
+          'Business Administration',
+          'Computer Application',
+          'Humanities and Social Science',
+        ],
+      },
+    },
     sectionTitles: [
       'About',
       'Vision',

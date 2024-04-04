@@ -57,17 +57,19 @@ export default function Subnav({
       <h1
         className={cn(
           'text-background',
-          isSticky ? 'absolute left-0 top-0 w-full pt-5 text-center' : 'mt-auto'
+          isSticky
+            ? 'absolute left-0 top-0 w-full pt-5 text-center'
+            : 'my-auto text-center  md:mt-auto'
         )}
       >
         {decodeURI(departmentData.name)}
       </h1>
       <nav
         className={cn(
-          'z-50 mx-auto',
+          'z-50 mx-auto hidden md:flex',
           isSticky
-            ? 'fixed top-0 mx-10 flex h-[100px] w-full items-center space-x-5 bg-neutral-50'
-            : 'mb-10 mt-auto rounded-full bg-background p-2'
+            ? 'md:fixed md:top-0 md:mx-10 md:flex md:h-[100px] md:w-full md:items-center md:space-x-5 md:bg-neutral-50'
+            : 'md:mb-10 md:mt-auto md:rounded-full md:bg-background md:p-2'
         )}
       >
         <div className={cn(isSticky && 'mx-14 flex w-full justify-between')}>
