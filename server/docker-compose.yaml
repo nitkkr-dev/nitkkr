@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   postgres:
     image: isac:1.0
@@ -8,6 +8,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=ISAC_ADMIN
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=ISAC
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DATABASE
