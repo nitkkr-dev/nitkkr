@@ -2,6 +2,7 @@ import { InferInsertModel } from 'drizzle-orm';
 import { db, faculty, persons } from '../db';
 
 type PersonsData = InferInsertModel<typeof persons>;
+type FacultyData = InferInsertModel<typeof faculty>;
 
 const personsData: PersonsData[] = [
   {
@@ -82,10 +83,11 @@ const personsData: PersonsData[] = [
   },
 ];
 
-const facultyData = [
+const facultyData: Omit<FacultyData, 'id'>[] = [
   {
     employee_id: '1',
     designation: 'Assistant Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '01744233530',
     homeTelephone: '0987654321',
     departmentId: 4,
@@ -178,6 +180,7 @@ const facultyData = [
   {
     employee_id: '2',
     designation: 'Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '1744-233482',
     homeTelephone: '9416733789',
     departmentId: 4,
@@ -224,14 +227,15 @@ const facultyData = [
     researchProjects: [
       'Project entitled “Design and Development of a Novel Approach (non-cryptographic) for Secure Storage on External Media and Lossless Retrieval”, funded by DRDO Govt of India, completed.',
     ],
-    googleScholarProfile: '',
-    orchidProfile: '',
+    googleScholarId: '',
+    orchidId: '',
     researcherId: '2',
-    scopusProfile: '',
+    scopusId: '',
   },
   {
     employee_id: '3',
     designation: 'Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '233481',
     homeTelephone: '09416570992',
     departmentId: 4,
@@ -241,13 +245,14 @@ const facultyData = [
       'Mobile Computing',
     ],
     researchSupervision: { ongoing: 6, completed: 1 },
-    googleScholarProfile: '',
-    orchidProfile: '',
-    scopusProfile: '',
+    googleScholarId: '',
+    orchidId: '',
+    scopusId: '',
   },
   {
     employee_id: '4',
     designation: 'Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '01744-233300',
     homeTelephone: '01744-233349',
     departmentId: 3,
@@ -255,14 +260,15 @@ const facultyData = [
       'Experimental Hydraulics Soft computing techniques in water resources engg Water resources management Water Quality',
     ],
     researchSupervision: { ongoing: 6, completed: 4 },
-    googleScholarProfile: '',
-    orchidProfile: '',
+    googleScholarId: '',
+    orchidId: '',
     researcherId: '3',
-    scopusProfile: '',
+    scopusId: '',
   },
   {
     employee_id: '5',
     designation: 'Associate Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
     departmentId: 2,
@@ -283,6 +289,7 @@ const facultyData = [
   {
     employee_id: '6',
     designation: 'Associate Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
     departmentId: 5,
@@ -301,6 +308,7 @@ const facultyData = [
   {
     employee_id: '7',
     designation: 'Associate Professor',
+    officeAddress: 'MBA-307',
     officeTelephone: '1234567890',
     homeTelephone: '0987654321',
     departmentId: 1,

@@ -1,11 +1,12 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, clubs, clubSocials } from '../db';
+import { clubSocials, clubs, db } from '../db';
 
 type ClubData = InferInsertModel<typeof clubs>;
 const clubsData: ClubData[] = [
   {
     name: 'Fine Arts',
     alias: 'FA',
+    tagline: 'we are the best',
     email: 'finearts@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -23,6 +24,7 @@ const clubsData: ClubData[] = [
   {
     name: 'Institute Software Application Club',
     alias: 'ISAC',
+    tagline: 'we are the best',
     email: 'isac@nitkkr.aci.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -38,7 +40,7 @@ const clubsData: ClubData[] = [
   },
   {
     name: 'Aeromodelling Club',
-    alias: 'AMC',
+    tagline: 'we are the best',
     email: 'amc@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -55,6 +57,7 @@ const clubsData: ClubData[] = [
   {
     name: 'SPICMACAY',
     alias: 'SPICMACAY',
+    tagline: 'we are the best',
     email: 'spicmacay@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -71,6 +74,7 @@ const clubsData: ClubData[] = [
   {
     name: 'Music & Dramatics',
     alias: 'MAD',
+    tagline: 'we are the best',
     email: 'mad@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -86,7 +90,7 @@ const clubsData: ClubData[] = [
   },
   {
     name: 'Technobyte',
-    alias: 'Technobyte',
+    tagline: 'we are the best',
     email: 'technobyte@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
@@ -103,6 +107,7 @@ const clubsData: ClubData[] = [
   {
     name: 'HIKING AND TREKKING CLUB',
     alias: 'HTC',
+    tagline: 'we are the best',
     email: 'htc@nitkkr.ac.in',
     logo: 'https://s3-alpha-sig.figma.com/img/2073/a440/3dc8f3170ac55aab898fb0bc229910d2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QPiyy5nU70f1cxo7gfF2fzdE2hYGyhx00WiCf8TCSYJZh-hJtD~~M3oY-E~KclLC1zVY9TjWvc~49ryCE8kzv-6DH2-oxqdkRkNOaOOMSgQS9sHT~zKfuiha1d4-8XMsXwzYs81-XeSP-~hdqcM3Xtnu2tL~huAy9rINTyHRmWpxoA2ujiUepCvHazIzQ-bYyMGJmsUBczfHb0QR9bav58ixEYe6hKZ~QdlvBlryIWFQKXLhzvizH-syIMWYAsYlKUhUXMRMrkNt3fGSoYF2AjEWFG4PIe3a5BAgnBHcQol9h2CMzor8guCDvqYpqLViGlpWiGSrpJsOP2GP0wQJRg__',
     thumbnail:
