@@ -17,6 +17,7 @@ export const clubs = pgTable('clubs', {
   id: smallserial('id').primaryKey(),
   name: varchar('name', { length: 128 }).notNull(),
   alias: varchar('alias', { length: 16 }),
+  tagline: varchar('tagline', { length: 256 }).notNull(),
   email: varchar('email').notNull(),
   logo: text('logo').notNull(),
   thumbnail: text('thumbnail').notNull(),
