@@ -35,3 +35,6 @@ yarn-error.log*
 
 # typesense server data
 typesense-data/
+
+# script output
+junk/

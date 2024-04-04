@@ -16,7 +16,8 @@
     "database:up": "docker compose up",
     "database:down": "docker compose down && docker rmi isac:1.0",
     "db:push": "drizzle-kit push:pg",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "typesense:init": "tsc server/typesense/init.ts --outDir junk && node junk/init.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.556.0",
