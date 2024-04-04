@@ -17,6 +17,7 @@
     "database:down": "docker compose down && docker rmi isac:1.0",
     "db:push": "drizzle-kit push:pg",
     "db:studio": "drizzle-kit studio",
+    "typesense": "mkdir -p typesense-data && typesense-server --data-dir ./typesense-data --api-key=TYPESENSE_API_KEY --enable-cors",
     "typesense:init": "tsc server/typesense/init.ts --outDir junk && node junk/init.js"
   },
   "dependencies": {
