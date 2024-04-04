@@ -2,7 +2,7 @@
 'use client';
 
 import * as React from 'react';
-import { X } from 'lucide-react';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { Command as CommandPrimitive, useCommandState } from 'cmdk';
 import { forwardRef, useEffect } from 'react';
 
@@ -390,7 +390,7 @@ const MultipleSelector = React.forwardRef<
                     }}
                     onClick={() => handleUnselect(option)}
                   >
-                    <X className="h-3 w-3 text-neutral-50 hover:text-neutral-900" />
+                    <Cross2Icon className="h-3 w-3 text-neutral-50 hover:text-neutral-900" />
                   </button>
                 </Badge>
               );
