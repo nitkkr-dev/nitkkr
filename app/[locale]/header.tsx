@@ -138,7 +138,7 @@ export default async function Header({ locale }: { locale: string }) {
           <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
               <HamburgerButton
-                className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
+                className="peer z-40 size-10 rounded transition-colors aria-expanded:bg-transparent"
                 data-dropdownignore={true}
               />
               <aside
