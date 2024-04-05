@@ -5,8 +5,8 @@ import { FaArrowUp } from 'react-icons/fa6';
 import Heading from '~/components/heading';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { populate } from '~/populateDB';
 import { cn } from '~/lib/utils';
+import { populate } from '~/populateDB';
 
 const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
   // eslint-disable-next-line jsx-a11y/alt-text

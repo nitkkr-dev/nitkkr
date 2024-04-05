@@ -1,13 +1,14 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, courses, courseLogs } from '../db';
+import { courseLogs, courses, coursesToMajors, db, majors } from '../db';
 
 type Courses = InferInsertModel<typeof courses>;
+type MajorData = InferInsertModel<typeof majors>;
 
 const courseData: Courses[] = [
   {
     code: 'CSPC-11',
     title: 'Introduction to Computer Science',
-    coordinatorId: 18,
+    coordinatorId: 2,
     departmentId: 1,
     prerequisites: [],
     nature: 'C',
@@ -21,7 +22,7 @@ const courseData: Courses[] = [
   {
     code: 'EEPC-21',
     title: 'Data Structures',
-    coordinatorId: 20,
+    coordinatorId: 1,
     departmentId: 5,
     prerequisites: ['CSPC-11'],
     nature: 'C',
@@ -34,10 +35,43 @@ const courseData: Courses[] = [
   },
 ];
 
+const majorData: MajorData[] = [
+  {
+    name: 'Computer Science and Engineering',
+    degree: 'B. Tech.',
+    departmentId: 1,
+    objectives: [],
+    educationalObjectives: [],
+  },
+  {
+    name: 'Electronics and Communication Engineering',
+    degree: 'B. Tech.',
+    departmentId: 3,
+    objectives: [],
+    educationalObjectives: [],
+  },
+];
+
+const coursesToMajorData = [
+  {
+    courseId: 2,
+    semester: 1,
+    lectureCredits: 3,
+    tutorialCredits: 1,
+    practicalCredits: 2,
+  },
+  {
+    courseId: 1,
+    semester: 2,
+    lectureCredits: 3,
+    tutorialCredits: 1,
+    practicalCredits: 2,
+  },
+];
 const courseLogsData = [
   {
     session: '2022-23',
-    facultyId: 18,
+    facultyId: 3,
     majorId: 1,
     semester: 1,
     section: 'A',
@@ -45,7 +79,7 @@ const courseLogsData = [
   },
   {
     session: '2022-23',
-    facultyId: 20,
+    facultyId: 1,
     majorId: 2,
     semester: 2,
     section: 'A',
@@ -54,10 +88,20 @@ const courseLogsData = [
 ];
 
 export const populateCourses = async () => {
-  const ids = await db.insert(courses).values(courseData).returning();
+  const courseIds = await db.insert(courses).values(courseData).returning();
+  const majorIds = await db.insert(majors).values(majorData).returning({
+    id: majors.id,
+  });
+  const coursesToMajorDataWithMajorIds = coursesToMajorData.map(
+    (courseToMajor, index) => ({
+      ...courseToMajor,
+      majorId: majorIds[index].id,
+    })
+  );
+  await db.insert(coursesToMajors).values(coursesToMajorDataWithMajorIds);
   const courseLogsDataWithIds = courseLogsData.map((data, i) => ({
     ...data,
-    courseId: ids[i].id,
+    courseId: courseIds[i].id,
   }));
   await db.insert(courseLogs).values(courseLogsDataWithIds);
 };

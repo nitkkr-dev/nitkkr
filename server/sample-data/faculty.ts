@@ -1,8 +1,9 @@
 import { InferInsertModel } from 'drizzle-orm';
-import { db, faculty, persons } from '../db';
+import { db, faculty, hod, persons } from '../db';
 
 type PersonsData = InferInsertModel<typeof persons>;
 type FacultyData = InferInsertModel<typeof faculty>;
+type HodData = InferInsertModel<typeof hod>;
 
 const personsData: PersonsData[] = [
   {
@@ -333,7 +334,7 @@ const facultyData: Omit<FacultyData, 'id'>[] = [
   },
 ];
 
-export const populateFaculty = async () => {
+export const populateFaculty = async (hodDataWithDepartmentId: HodData[]) => {
   const ids = await db
     .insert(persons)
     .values(personsData)
@@ -343,4 +344,5 @@ export const populateFaculty = async () => {
     id: ids[index].id,
   }));
   await db.insert(faculty).values(facultyDataWithPersonIds);
+  await db.insert(hod).values(hodDataWithDepartmentId);
 };

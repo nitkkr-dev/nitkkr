@@ -5,7 +5,6 @@ import { populateDeans } from './server/sample-data/deans';
 import { populateDepartments } from './server/sample-data/departments';
 import { populateDoctorates } from './server/sample-data/doctorates';
 import { populateFaculty } from './server/sample-data/faculty';
-import { populateMajors } from './server/sample-data/majors';
 import { populateNotifications } from './server/sample-data/notifications';
 import { populateRoles } from './server/sample-data/roles';
 import { populateSections } from './server/sample-data/sections';
@@ -14,8 +13,8 @@ import { populateStaff } from './server/sample-data/staff';
 import { populateStudents } from './server/sample-data/students';
 
 export const populate = async () => {
-  await populateDepartments();
-  await populateFaculty();
+  await populateFaculty(await populateDepartments());
+  await populateCourses();
   await populateStudents();
   await populateSections();
   await populateStaff();
@@ -25,7 +24,5 @@ export const populate = async () => {
   await populateDoctorates();
   await populateSponsoredResearchProjects();
   await populateNotifications();
-  await populateCourses();
-  await populateMajors();
   await populateRoles();
 };

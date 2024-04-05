@@ -17,9 +17,9 @@ const clubsData: ClubData[] = [
       'Fine Arts and Modelling club is one of the official clubs of NIT Kurukshetra. It is the hub of artists who come together to ameliorate and sustain art culture in the college. And while doing the same, it provides ample opportunities to those with artistic inclination to hone and flaunt their skills with art and craft.',
     category: 'cultural',
     departmentId: 1,
-    facultyInchargeId1: 18,
-    facultyInchargeId2: 19,
-    updatedBy: 18,
+    facultyInchargeId1: 1,
+    facultyInchargeId2: 2,
+    updatedBy: 1,
   },
   {
     name: 'Institute Software Application Club',
@@ -35,8 +35,8 @@ const clubsData: ClubData[] = [
       'ISAC is a student club constituted with the aim of designing and maintaining SW applications for the emerging needs of the Institute (National Institute of Technology, Kurukshetra).',
     category: 'technical',
     departmentId: 4,
-    facultyInchargeId1: 18,
-    updatedBy: 18,
+    facultyInchargeId1: 1,
+    updatedBy: 1,
   },
   {
     name: 'Aeromodelling Club',
@@ -50,9 +50,9 @@ const clubsData: ClubData[] = [
     aboutUs:
       'Founded in 2007 by  Kamal Kant Gaur and cofounded by flying enthusiasts Dipesh, Rupesh, Suman and under able guidance of Dr.G.L Pahuja, the club has come afar since then. The love for aircraft, fervour to fly, apt juggle between the academics and hobby ,perseverance, untiring labour, deft leadership  and promising members has carried the legacy  of excellence and made club stand this tall. The club has big name in the college’s annual techfest   ‘ Techspardha’ .Its events are one of the most awaited and participated and also garners mush spectators. Hot air balloon making event famed as FLAME KITE and CHUCK GLIDER making event, are flagship events in TECHSPARDHA.',
     category: 'technical',
-    departmentId: 10,
-    facultyInchargeId1: 20,
-    updatedBy: 20,
+    departmentId: 1,
+    facultyInchargeId1: 4,
+    updatedBy: 4,
   },
   {
     name: 'SPICMACAY',
@@ -68,8 +68,8 @@ const clubsData: ClubData[] = [
       'SPICMACAY (Society for the Promotion of Indian Classical Music and Culture Amongst Youth) is a non-political nationwide voluntary movement that organizes programs of classical music and dance, folk arts, crafts, yoga, classic cinema screenings and much more inside the schools and colleges throughout the world to make students more aware about the Indian and world heritage. It was founded by a renowned professor of IIT Delhi, Dr. Kiran Seth in 1977. SPICMACAY in NIT Kurukshetra, is an official club which provides a great platform for all the talented performers. The club is not just an exquisite platform to showcase the talent but also an opportunity to grow and learn from other fellow performers and enhance their pre-acquired skills. It also organizes various workshops where famous and approachable artists are invited to learn more and improve.',
     category: 'cultural',
     departmentId: 3,
-    facultyInchargeId1: 21,
-    updatedBy: 21,
+    facultyInchargeId1: 4,
+    updatedBy: 4,
   },
   {
     name: 'Music & Dramatics',
@@ -85,8 +85,8 @@ const clubsData: ClubData[] = [
       'Music and Dramatics Club has an important role to play in various fests and pre-shows of NIT Kurukshetra and is the principle organizer of dance, music, dramatic events of annual cultural fests and pre-shows for year-long.',
     category: 'cultural',
     departmentId: 2,
-    facultyInchargeId1: 20,
-    updatedBy: 20,
+    facultyInchargeId1: 4,
+    updatedBy: 4,
   },
   {
     name: 'Technobyte',
@@ -101,8 +101,8 @@ const clubsData: ClubData[] = [
       'Technobyte is the official technical society for Computer science, Information Technology and AI & ML students at NIT Kurukshetra. Its primary objective is to cultivate and enhance students’ technical and managerial skills within this field. The society accomplishes this by arranging various workshops that delve into the latest technologies, orchestrating events, and hosting guest lectures by prominent industry figures, all of which take place during Techspardha also provides CP & DSA, Web-D workshops throughout the year. The overarching vision is to steer students towards achieving excellence as technical experts. This is realized by furnishing an environment conducive to imbibing the core principles of computer technology, thereby empowering them to make positive contributions to society.',
     category: 'technical',
     departmentId: 4,
-    facultyInchargeId1: 21,
-    updatedBy: 21,
+    facultyInchargeId1: 4,
+    updatedBy: 4,
   },
   {
     name: 'HIKING AND TREKKING CLUB',
@@ -118,8 +118,8 @@ const clubsData: ClubData[] = [
       'Hiking and trekking club as the name proposes, is in charge of sorting out Trips, Excursions and Adventure Activities close by conferring learning about Safety, Health and Environment. We as a group for the most part concentrate on the Overall advancement of the understudies i.e. from comprehensive Management aptitudes to powerful Health. By offering presentation to different and unrehearsed requests on different outings, HTC sustains and give better shape to one’s Character and Personality.',
     category: 'cultural',
     departmentId: 6,
-    facultyInchargeId1: 21,
-    updatedBy: 21,
+    facultyInchargeId1: 4,
+    updatedBy: 4,
   },
 ];
 

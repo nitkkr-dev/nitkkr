@@ -9,7 +9,7 @@ const sponsoredResearchProjectsData: SponsoredResearchProjectsData[] = [
   {
     title: 'Drizzle ORM',
     fundingAgency: 'Open Source',
-    facultyId: 18,
+    facultyId: 1,
     amount: 100000,
     status: 'on-going',
     durationPeriod: '1',
@@ -18,7 +18,7 @@ const sponsoredResearchProjectsData: SponsoredResearchProjectsData[] = [
   {
     title: 'Drizzle ORM',
     fundingAgency: 'Open Source',
-    facultyId: 21,
+    facultyId: 2,
     amount: 100000,
     status: 'on-going',
     durationPeriod: '1',

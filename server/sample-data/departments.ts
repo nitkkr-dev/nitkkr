@@ -2,6 +2,7 @@ import { InferInsertModel } from 'drizzle-orm';
 import { db, departments, hod } from '../db';
 
 type DepartmentsData = InferInsertModel<typeof departments>[];
+type HodData = Omit<InferInsertModel<typeof hod>, 'departmentId'>;
 
 const departmentsData: DepartmentsData = [
   {
@@ -116,49 +117,21 @@ const departmentsData: DepartmentsData = [
     mission: '',
   },
 ];
-const hodData = [
-  {
-    facultyId: 15,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 16,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 17,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 18,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 19,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 20,
-    message: '',
-    isActive: true,
-  },
-  {
-    facultyId: 21,
-    message: '',
-    isActive: true,
-  },
+const hodData: HodData[] = [
+  { facultyId: 1, message: '' },
+  { facultyId: 2, message: '' },
+  { facultyId: 3, message: '' },
+  { facultyId: 4, message: '' },
 ];
-export const populateDepartments = async () => {
-  const ids = await db.select({ id: departments.id }).from(departments);
 
+export const populateDepartments = async () => {
+  const ids = await db
+    .insert(departments)
+    .values(departmentsData)
+    .returning({ id: departments.id });
   const hodDataWithDepartmentId = hodData.map((hod, index) => ({
     ...hod,
     departmentId: ids[index].id,
   }));
-  await db.insert(hod).values(hodDataWithDepartmentId);
+  return hodDataWithDepartmentId;
 };
