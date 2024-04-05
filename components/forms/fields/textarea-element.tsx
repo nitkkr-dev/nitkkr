@@ -1,38 +1,38 @@
-import { MdPhone } from 'react-icons/md';
+import { MdAreaChart } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import PhoneField from '~/components/inputs/telephone';
+} from '~/components/forms/interfaces/form-elements';
+import TextAreaField from '~/components/inputs/textAreaField';
 
 //import TextValidationForm from './InputBasedForm';
 
-const inputType: ElementsType = 'PhoneField';
+const inputType: ElementsType = 'TextAreaField';
 
-export const PhoneFieldFormElement: FormElement = {
+export const TextAreaFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <PhoneField
+    <TextAreaField
       className="w-full"
-      readOnly
+      disabled
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: PhoneField,
+  formComponent: TextAreaField,
   //propertiesComponent: TextValidationForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Phone Field',
+      question: 'Text Area Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +40,8 @@ export const PhoneFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdPhone,
-    label: 'Phone Field',
+    icon: MdAreaChart,
+    label: 'TextArea Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,

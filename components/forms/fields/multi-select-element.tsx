@@ -1,38 +1,39 @@
-import { MdOutlineEmail } from 'react-icons/md';
+import { RxDropdownMenu } from 'react-icons/rx';
 
+import MultiSelect from '~/components/inputs/multiSelectItem';
+
+//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import EmailField from '~/components/inputs/email';
+} from '../interfaces/form-elements';
 
-//import InputBasedForm from './InputBasedForm';
+const inputType: ElementsType = 'MultiSelectField';
 
-const inputType: ElementsType = 'EmailField';
-
-export const EmailFieldFormElement: FormElement = {
+export const MultiSelectFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <EmailField
+    <MultiSelect
       className="w-full"
-      readOnly
+      disabled
+      items={elementInstance.choices ?? []}
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: EmailField,
-  //propertiesComponent: InputBasedForm,
+  formComponent: MultiSelect,
+  //propertiesComponent: DropdownForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Email Field',
+      question: 'Multi Select Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,15 +41,17 @@ export const EmailFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdOutlineEmail,
-    label: 'Email Field',
+    icon: RxDropdownMenu,
+    label: 'Multi Select Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
 function schemaObjects(element: FormElementInstance) {
   return {
-    type: 'string',
-    format: 'email',
+    type: 'array',
+    items: {
+      type: 'string',
+    },
   };
 }

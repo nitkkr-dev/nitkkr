@@ -1,24 +1,24 @@
-import { MdDateRange } from 'react-icons/md';
+import { MdPhone } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import DatePicker from '~/components/inputs/date';
+} from '~/components/forms/interfaces/form-elements';
+import PhoneField from '~/components/inputs/telephone';
 
-//import DateBasedForm from './DateBasedForm';
+//import TextValidationForm from './InputBasedForm';
 
-const inputType: ElementsType = 'DateField';
+const inputType: ElementsType = 'PhoneField';
 
-export const DateFieldFormElement: FormElement = {
+export const PhoneFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <DatePicker
+    <PhoneField
       className="w-full"
       readOnly
       label={elementInstance.question}
@@ -26,13 +26,13 @@ export const DateFieldFormElement: FormElement = {
       description={elementInstance.description}
     />
   ),
-  formComponent: DatePicker,
-  //propertiesComponent: DateBasedForm,
+  formComponent: PhoneField,
+  //propertiesComponent: TextValidationForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Date Field',
+      question: 'Phone Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +40,8 @@ export const DateFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdDateRange,
-    label: 'Date Field',
+    icon: MdPhone,
+    label: 'Phone Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,8 +49,5 @@ export const DateFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'date',
-    formatMinimum: element.formatMinimum,
-    formatMaximum: element.formatMaximum,
   };
 }

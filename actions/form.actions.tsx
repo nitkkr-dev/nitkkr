@@ -7,27 +7,27 @@ import { revalidatePath } from 'next/cache';
 
 import FormInvalidResponse, {
   type FormInvalidResponseProps,
-} from '~/components/forms/FormInvalidResponse';
+} from '~/components/forms/form-invalid-response';
 import FormSubmitPage, {
   type FormSubmitFormProps,
-} from '~/components/forms/FormSubmitPage';
+} from '~/components/forms/form-submit-page';
 import {
-  FormElements,
   type ElementsType,
+  FormElements,
   type validationProperty,
-} from '~/components/forms/interfaces/FormElements';
+} from '~/components/forms/interfaces/form-elements';
 import {
   finalFormSchema,
   formSchema,
   type formSchemaType,
-} from '~/schemas/form';
+} from '~/components/forms/schemas/form';
 import { db } from '~/server/db';
 import {
   formAnswers,
   formQuestions,
-  formSubmissions,
   forms,
   formsModifiableByPersons,
+  formSubmissions,
 } from '~/server/schema';
 
 const ajv = new Ajv({
@@ -56,7 +56,7 @@ export async function createForm(values: formSchemaType) {
   if (!user) throw new UserNotFoundErr();
 
   try {
-    return await db.transaction(async (tx) => {
+    return await db.transaction(async () => {
       const [form] = await db
         .insert(forms)
         .values({
@@ -108,7 +108,7 @@ export async function getFormById(id: number) {
 
   try {
     return db
-      .selectDistinct()
+      .select()
       .from(forms)
       .where(eq(forms.id, id))
       .innerJoin(
@@ -377,7 +377,7 @@ export async function getFormByIdWithQuestions(id: number) {
                   )
               )
             )
-          : eq(forms.isAnonymous, true),
+          : eq(forms.id, id),
     });
   } catch (error) {
     console.error('Error fetching form by ID with questions:', error);

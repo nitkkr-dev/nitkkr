@@ -1,24 +1,24 @@
-import { MdTextFields } from 'react-icons/md';
+import { MdDateRange } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import TextField from '~/components/inputs/text';
+} from '~/components/forms/interfaces/form-elements';
+import DateTimeField from '~/components/inputs/date-time';
 
-//import TextValidationForm from './InputBasedForm';
+//import DateTimeBasedForm from './DateTimeBasedForm';
 
-const inputType: ElementsType = 'TextField';
+const inputType: ElementsType = 'DateTimeField';
 
-export const TextFieldFormElement: FormElement = {
+export const DateTimeFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <TextField
+    <DateTimeField
       className="w-full"
       readOnly
       label={elementInstance.question}
@@ -26,13 +26,13 @@ export const TextFieldFormElement: FormElement = {
       description={elementInstance.description}
     />
   ),
-  formComponent: TextField,
-  //propertiesComponent: TextValidationForm,
+  formComponent: DateTimeField,
+  //propertiesComponent: DateTimeBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Text Field',
+      question: 'Date-Time Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +40,8 @@ export const TextFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdTextFields,
-    label: 'Text Field',
+    icon: MdDateRange,
+    label: 'Date-Time Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,5 +49,8 @@ export const TextFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
+    format: 'date-time',
+    formatMinimum: element.formatMinimum,
+    formatMaximum: element.formatMaximum,
   };
 }

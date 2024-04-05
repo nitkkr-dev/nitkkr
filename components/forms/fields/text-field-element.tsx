@@ -1,24 +1,24 @@
-import { MdMoreTime } from 'react-icons/md';
+import { MdTextFields } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import TimeField from '~/components/inputs/time';
+} from '~/components/forms/interfaces/form-elements';
+import TextField from '~/components/inputs/text';
 
-//import TimeBasedForm from './TimeBasedForm';
+//import TextValidationForm from './InputBasedForm';
 
-const inputType: ElementsType = 'TimeField';
+const inputType: ElementsType = 'TextField';
 
-export const TimeFieldFormElement: FormElement = {
+export const TextFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <TimeField
+    <TextField
       className="w-full"
       readOnly
       label={elementInstance.question}
@@ -26,13 +26,13 @@ export const TimeFieldFormElement: FormElement = {
       description={elementInstance.description}
     />
   ),
-  formComponent: TimeField,
-  //propertiesComponent: TimeBasedForm,
+  formComponent: TextField,
+  //propertiesComponent: TextValidationForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Time Field',
+      question: 'Text Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +40,8 @@ export const TimeFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdMoreTime,
-    label: 'Time Field',
+    icon: MdTextFields,
+    label: 'Text Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,8 +49,5 @@ export const TimeFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'time',
-    formatMinimum: element.formatMinimum,
-    formatMaximum: element.formatMaximum,
   };
 }

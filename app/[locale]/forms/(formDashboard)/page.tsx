@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from '~/components/ui/card';
 import { Skeleton } from '~/components/ui/skeleton';
-import Tempcreate from '~/components/forms/Tempcreate';
+import Tempcreate from '~/components/forms/temp-create';
 
 export default function Home() {
   return (

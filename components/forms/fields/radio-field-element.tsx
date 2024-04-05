@@ -1,38 +1,39 @@
-import { MdNumbers } from 'react-icons/md';
+import { MdRadioButtonChecked } from 'react-icons/md';
 
+import RadioGeneric from '~/components/inputs/radioItems';
+
+//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import NumberField from '~/components/inputs/numberfield';
+} from '../interfaces/form-elements';
 
-//import TextValidationForm from './InputBasedForm';
+const inputType: ElementsType = 'RadioField';
 
-const inputType: ElementsType = 'NumberField';
-
-export const NumberFieldFormElement: FormElement = {
+export const RadioGenericFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <NumberField
+    <RadioGeneric
       className="w-full"
-      readOnly
+      disabled
+      items={elementInstance.choices ?? []}
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: NumberField,
-  //propertiesComponent: TextValidationForm,
+  formComponent: RadioGeneric,
+  //propertiesComponent: DropdownForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Number Field',
+      question: 'Radio Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,14 +41,14 @@ export const NumberFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdNumbers,
-    label: 'Number Field',
+    icon: MdRadioButtonChecked,
+    label: 'Radio Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
 function schemaObjects(element: FormElementInstance) {
   return {
-    type: 'number',
+    type: 'string',
   };
 }

@@ -1,10 +1,10 @@
 import { Separator } from '../ui/separator';
-import FormDetails from './FormDetails';
-import FormSubmitForm from './FormSubmitForm';
+import FormDetails from './form-details';
+import FormSubmitForm from './form-submit-form';
 import {
   type ElementsType,
   type validationProperty,
-} from './interfaces/FormElements';
+} from './interfaces/form-elements';
 
 export interface FormSubmitFormProps {
   form: {

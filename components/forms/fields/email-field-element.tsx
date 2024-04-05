@@ -1,39 +1,38 @@
-import { MdRadioButtonChecked } from 'react-icons/md';
+import { MdOutlineEmail } from 'react-icons/md';
 
-import RadioGeneric from '~/components/inputs/radioItems';
-
-//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '../interfaces/FormElements';
+} from '~/components/forms/interfaces/form-elements';
+import EmailField from '~/components/inputs/email';
 
-const inputType: ElementsType = 'RadioField';
+//import InputBasedForm from './InputBasedForm';
 
-export const RadioGenericFormElement: FormElement = {
+const inputType: ElementsType = 'EmailField';
+
+export const EmailFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <RadioGeneric
+    <EmailField
       className="w-full"
-      disabled
-      items={elementInstance.choices ?? []}
+      readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: RadioGeneric,
-  //propertiesComponent: DropdownForm,
+  formComponent: EmailField,
+  //propertiesComponent: InputBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Radio Field',
+      question: 'Email Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -41,8 +40,8 @@ export const RadioGenericFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdRadioButtonChecked,
-    label: 'Radio Field',
+    icon: MdOutlineEmail,
+    label: 'Email Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -50,5 +49,6 @@ export const RadioGenericFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
+    format: 'email',
   };
 }

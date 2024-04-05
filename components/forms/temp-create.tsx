@@ -3,7 +3,7 @@
 import { createForm, publishForm } from '~/actions/form.actions';
 import { Button } from '~/components/ui/button';
 
-import type { ElementsType } from './interfaces/FormElements';
+import type { ElementsType } from './interfaces/form-elements';
 
 const Tempcreate = () => {
   const makeForm = async () => {

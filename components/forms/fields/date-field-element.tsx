@@ -1,38 +1,38 @@
-import { MdAreaChart } from 'react-icons/md';
+import { MdDateRange } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import TextAreaField from '~/components/inputs/textAreaField';
+} from '~/components/forms/interfaces/form-elements';
+import DatePicker from '~/components/inputs/date';
 
-//import TextValidationForm from './InputBasedForm';
+//import DateBasedForm from './DateBasedForm';
 
-const inputType: ElementsType = 'TextAreaField';
+const inputType: ElementsType = 'DateField';
 
-export const TextAreaFieldFormElement: FormElement = {
+export const DateFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <TextAreaField
+    <DatePicker
       className="w-full"
-      disabled
+      readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: TextAreaField,
-  //propertiesComponent: TextValidationForm,
+  formComponent: DatePicker,
+  //propertiesComponent: DateBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Text Area Field',
+      question: 'Date Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +40,8 @@ export const TextAreaFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdAreaChart,
-    label: 'TextArea Field',
+    icon: MdDateRange,
+    label: 'Date Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,5 +49,8 @@ export const TextAreaFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
+    format: 'date',
+    formatMinimum: element.formatMinimum,
+    formatMaximum: element.formatMaximum,
   };
 }

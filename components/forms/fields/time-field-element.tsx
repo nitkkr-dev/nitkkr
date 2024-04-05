@@ -1,39 +1,38 @@
-import { RxDropdownMenu } from 'react-icons/rx';
+import { MdMoreTime } from 'react-icons/md';
 
-import SelectDropdown from '~/components/inputs/selectIItem';
-
-//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '../interfaces/FormElements';
+} from '~/components/forms/interfaces/form-elements';
+import TimeField from '~/components/inputs/time';
 
-const inputType: ElementsType = 'SelectDropdown';
+//import TimeBasedForm from './TimeBasedForm';
 
-export const SelectDropdownFormElement: FormElement = {
+const inputType: ElementsType = 'TimeField';
+
+export const TimeFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <SelectDropdown
+    <TimeField
       className="w-full"
-      disabled
-      items={elementInstance.choices ?? []}
+      readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: SelectDropdown,
-  //propertiesComponent: DropdownForm,
+  formComponent: TimeField,
+  //propertiesComponent: TimeBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Select Field',
+      question: 'Time Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -41,8 +40,8 @@ export const SelectDropdownFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: RxDropdownMenu,
-    label: 'Select Field',
+    icon: MdMoreTime,
+    label: 'Time Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -50,5 +49,8 @@ export const SelectDropdownFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
+    format: 'time',
+    formatMinimum: element.formatMinimum,
+    formatMaximum: element.formatMaximum,
   };
 }

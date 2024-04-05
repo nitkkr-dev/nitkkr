@@ -8,17 +8,17 @@ import { type MultiListProps } from '~/components/inputs/multiSelectItem';
 import { type ListProps } from '~/components/inputs/radioItems';
 import { type InputProps } from '~/components/ui/input';
 
-import { DateFieldFormElement } from '../fields/DateFieldFormElement';
-import { DateTimeFieldFormElement } from '../fields/DateTimeFieldFormElement';
-import { EmailFieldFormElement } from '../fields/EmailFieldFormElement';
-import { MultiSelectFormElement } from '../fields/MultiSelectFormElement';
-import { NumberFieldFormElement } from '../fields/NumberFieldFormElement';
-import { PhoneFieldFormElement } from '../fields/PhoneFieldFormElement';
-import { RadioGenericFormElement } from '../fields/RadioGenericFormElement';
-import { SelectDropdownFormElement } from '../fields/SelectDropdownFormElement';
-import { TextAreaFieldFormElement } from '../fields/TextAreaFormElement';
-import { TextFieldFormElement } from '../fields/TextFieldFormElement';
-import { TimeFieldFormElement } from '../fields/TimeFieldFormElement';
+import { DateFieldFormElement } from '../fields/date-field-element';
+import { DateTimeFieldFormElement } from '../fields/date-time-field-element';
+import { EmailFieldFormElement } from '../fields/email-field-element';
+import { MultiSelectFormElement } from '../fields/multi-select-element';
+import { NumberFieldFormElement } from '../fields/number-field-element';
+import { PhoneFieldFormElement } from '../fields/phone-field-element';
+import { RadioGenericFormElement } from '../fields/radio-field-element';
+import { SelectDropdownFormElement } from '../fields/select-field-element';
+import { TextAreaFieldFormElement } from '../fields/textarea-element';
+import { TextFieldFormElement } from '../fields/text-field-element';
+import { TimeFieldFormElement } from '../fields/time-field-element';
 
 export type ElementsType =
   | 'TextField'

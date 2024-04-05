@@ -18,11 +18,11 @@ import {
 } from '../ui/form';
 import { Separator } from '../ui/separator';
 import { toast } from '../ui/use-toast';
-import type { FormSubmitFormProps } from './FormSubmitPage';
+import type { FormSubmitFormProps } from './form-submit-page';
 import {
   FormElements,
   type validationProperty,
-} from './interfaces/FormElements';
+} from './interfaces/form-elements';
 
 export default function FormSubmitForm({
   locale,

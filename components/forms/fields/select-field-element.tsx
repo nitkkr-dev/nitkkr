@@ -1,38 +1,39 @@
-import { MdDateRange } from 'react-icons/md';
+import { RxDropdownMenu } from 'react-icons/rx';
 
+import SelectDropdown from '~/components/inputs/selectIItem';
+
+//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '~/components/forms/interfaces/FormElements';
-import DateTimeField from '~/components/inputs/date-time';
+} from '../interfaces/form-elements';
 
-//import DateTimeBasedForm from './DateTimeBasedForm';
+const inputType: ElementsType = 'SelectDropdown';
 
-const inputType: ElementsType = 'DateTimeField';
-
-export const DateTimeFieldFormElement: FormElement = {
+export const SelectDropdownFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <DateTimeField
+    <SelectDropdown
       className="w-full"
-      readOnly
+      disabled
+      items={elementInstance.choices ?? []}
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: DateTimeField,
-  //propertiesComponent: DateTimeBasedForm,
+  formComponent: SelectDropdown,
+  //propertiesComponent: DropdownForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Date-Time Field',
+      question: 'Select Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -40,8 +41,8 @@ export const DateTimeFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdDateRange,
-    label: 'Date-Time Field',
+    icon: RxDropdownMenu,
+    label: 'Select Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
@@ -49,8 +50,5 @@ export const DateTimeFieldFormElement: FormElement = {
 function schemaObjects(element: FormElementInstance) {
   return {
     type: 'string',
-    format: 'date-time',
-    formatMinimum: element.formatMinimum,
-    formatMaximum: element.formatMaximum,
   };
 }

@@ -1,39 +1,38 @@
-import { RxDropdownMenu } from 'react-icons/rx';
+import { MdNumbers } from 'react-icons/md';
 
-import MultiSelect from '~/components/inputs/multiSelectItem';
-
-//import DropdownForm from './DropdownFrom';
 import type {
   ElementsType,
   FormElement,
   FormElementInstance,
-} from '../interfaces/FormElements';
+} from '~/components/forms/interfaces/form-elements';
+import NumberField from '~/components/inputs/numberfield';
 
-const inputType: ElementsType = 'MultiSelectField';
+//import TextValidationForm from './InputBasedForm';
 
-export const MultiSelectFormElement: FormElement = {
+const inputType: ElementsType = 'NumberField';
+
+export const NumberFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <MultiSelect
+    <NumberField
       className="w-full"
-      disabled
-      items={elementInstance.choices ?? []}
+      readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: MultiSelect,
-  //propertiesComponent: DropdownForm,
+  formComponent: NumberField,
+  //propertiesComponent: TextValidationForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Multi Select Field',
+      question: 'Number Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -41,17 +40,14 @@ export const MultiSelectFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: RxDropdownMenu,
-    label: 'Multi Select Field',
+    icon: MdNumbers,
+    label: 'Number Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
 function schemaObjects(element: FormElementInstance) {
   return {
-    type: 'array',
-    items: {
-      type: 'string',
-    },
+    type: 'number',
   };
 }
