@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { MdDateRange } from 'react-icons/md';
 
 import type {
@@ -5,11 +6,14 @@ import type {
   FormElement,
   FormElementInstance,
 } from '~/components/forms/interfaces/form-elements';
-import DatePicker from '~/components/inputs/date';
-
+import { Input, type InputProps } from '~/components/inputs';
 //import DateBasedForm from './DateBasedForm';
 
 const inputType: ElementsType = 'DateField';
+// Input.defaultProps = {
+//   type: 'date',
+// };
+// Error: Cannot assign to a client module from a server module
 
 export const DateFieldFormElement: FormElement = {
   inputType,
@@ -18,15 +22,22 @@ export const DateFieldFormElement: FormElement = {
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <DatePicker
-      className="w-full"
+    <Input
+      id={elementInstance.Id}
+      max="9999-12-31"
+      type="date"
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: DatePicker,
+  // eslint-disable-next-line react/display-name
+  formComponent: forwardRef<HTMLInputElement, InputProps>(
+    ({ ...restProps }, ref) => (
+      <Input {...restProps} ref={ref} max="9999-12-31" type="date" />
+    )
+  ),
   //propertiesComponent: DateBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {

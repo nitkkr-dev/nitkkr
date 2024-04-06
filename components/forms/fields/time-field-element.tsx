@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { MdMoreTime } from 'react-icons/md';
 
 import type {
@@ -5,7 +6,7 @@ import type {
   FormElement,
   FormElementInstance,
 } from '~/components/forms/interfaces/form-elements';
-import TimeField from '~/components/inputs/time';
+import { Input, type InputProps } from '~/components/inputs';
 
 //import TimeBasedForm from './TimeBasedForm';
 
@@ -18,15 +19,22 @@ export const TimeFieldFormElement: FormElement = {
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <TimeField
-      className="w-full"
+    <Input
+      id={elementInstance.Id}
+      type="time"
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: TimeField,
+  // eslint-disable-next-line react/display-name
+  formComponent: forwardRef<HTMLInputElement, InputProps>(
+    ({ ...restProps }, ref) => {
+      return <Input {...restProps} ref={ref} step={1} type="time" />;
+    }
+  ),
+
   //propertiesComponent: TimeBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {

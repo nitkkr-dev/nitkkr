@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { MdOutlineEmail } from 'react-icons/md';
 
 import type {
@@ -5,7 +6,7 @@ import type {
   FormElement,
   FormElementInstance,
 } from '~/components/forms/interfaces/form-elements';
-import EmailField from '~/components/inputs/email';
+import { Input, type InputProps } from '~/components/inputs';
 
 //import InputBasedForm from './InputBasedForm';
 
@@ -18,15 +19,19 @@ export const EmailFieldFormElement: FormElement = {
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <EmailField
-      className="w-full"
+    <Input
+      id={elementInstance.Id}
+      type="email"
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: EmailField,
+  // eslint-disable-next-line react/display-name
+  formComponent: forwardRef<HTMLInputElement, InputProps>(
+    ({ ...restProps }, ref) => <Input {...restProps} ref={ref} type="email" />
+  ),
   //propertiesComponent: InputBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {

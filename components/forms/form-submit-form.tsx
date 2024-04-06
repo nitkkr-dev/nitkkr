@@ -111,8 +111,9 @@ export default function FormSubmitForm({
                     <FormControl>
                       <Element
                         {...field}
+                        id={question.id}
                         label={question.question}
-                        required={false}
+                        required={question.required}
                         description={question.description ?? ''}
                         items={question.items ?? []}
                       />

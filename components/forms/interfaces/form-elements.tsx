@@ -6,8 +6,9 @@ import type {
 
 import { type MultiListProps } from '~/components/inputs/multiSelectItem';
 import { type ListProps } from '~/components/inputs/radioItems';
-import { type InputProps } from '~/components/ui/input';
+import { type InputProps } from '~/components/inputs';
 
+import { CheckBoxFieldFormElement } from '../fields/checkbox-field-element';
 import { DateFieldFormElement } from '../fields/date-field-element';
 import { DateTimeFieldFormElement } from '../fields/date-time-field-element';
 import { EmailFieldFormElement } from '../fields/email-field-element';
@@ -31,7 +32,8 @@ export type ElementsType =
   | 'DateTimeField'
   | 'NumberField'
   | 'TextAreaField'
-  | 'MultiSelectField';
+  | 'MultiSelectField'
+  | 'CheckBoxField';
 
 export interface validationProperty {
   type: string;
@@ -105,4 +107,5 @@ export const FormElements: FormElementsType = {
   NumberField: NumberFieldFormElement,
   TextAreaField: TextAreaFieldFormElement,
   MultiSelectField: MultiSelectFormElement,
+  CheckBoxField: CheckBoxFieldFormElement,
 };

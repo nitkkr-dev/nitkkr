@@ -22,10 +22,13 @@ export interface ListProps extends GenericProps {
 const RadioGeneric = ({ items, ...props }: ListProps) => {
   return (
     <div className={props.className}>
-      <Label className="text-neutral-500">
+      <Label
+        className="text-neutral-500"
+        required={props.required ?? false}
+        disabled={props.disabled ?? false}
+      >
         {props.label ? props.label : 'Radio Group'}
       </Label>
-      {props.required && <span className="text-primary-700">*</span>}
       <RadioGroup
         defaultValue={props.value}
         disabled={props.disabled}
@@ -36,7 +39,13 @@ const RadioGeneric = ({ items, ...props }: ListProps) => {
         {items.map((item) => (
           <div key={item} className="flex items-center space-x-2">
             <RadioGroupItem value={item} required={props.required} />
-            <Label className="text-md">{item}</Label>
+            <Label
+              className="text-md"
+              disabled={props.disabled ?? false}
+              required={false}
+            >
+              {item}
+            </Label>
           </div>
         ))}
       </RadioGroup>

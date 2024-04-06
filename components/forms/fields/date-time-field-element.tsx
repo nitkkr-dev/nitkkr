@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { MdDateRange } from 'react-icons/md';
 
 import type {
@@ -5,7 +6,7 @@ import type {
   FormElement,
   FormElementInstance,
 } from '~/components/forms/interfaces/form-elements';
-import DateTimeField from '~/components/inputs/date-time';
+import { Input, type InputProps } from '~/components/inputs';
 
 //import DateTimeBasedForm from './DateTimeBasedForm';
 
@@ -18,15 +19,31 @@ export const DateTimeFieldFormElement: FormElement = {
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <DateTimeField
-      className="w-full"
+    <Input
+      id={elementInstance.Id}
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: DateTimeField,
+  // eslint-disable-next-line react/display-name
+  formComponent: forwardRef<HTMLInputElement, InputProps>(
+    ({ onChange, value, ...restProps }, ref) => (
+      <Input
+        {...restProps}
+        ref={ref}
+        type="datetime-local"
+        max="9999-12-31T23:59"
+        defaultValue={(value as string)?.slice(0, -4)}
+        onChange={(event) => {
+          onChange?.({
+            target: { value: event.target.value + ':00Z' },
+          } as React.ChangeEvent<HTMLInputElement>);
+        }}
+      />
+    )
+  ),
   //propertiesComponent: DateTimeBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { MdPhone } from 'react-icons/md';
+import { MdCheckBox } from 'react-icons/md';
 
 import type {
   ElementsType,
@@ -8,11 +8,11 @@ import type {
 } from '~/components/forms/interfaces/form-elements';
 import { Input, type InputProps } from '~/components/inputs';
 
-//import TextValidationForm from './InputBasedForm';
+//import InputBasedForm from './InputBasedForm';
 
-const inputType: ElementsType = 'PhoneField';
+const inputType: ElementsType = 'CheckBoxField';
 
-export const PhoneFieldFormElement: FormElement = {
+export const CheckBoxFieldFormElement: FormElement = {
   inputType,
   uiFieldComponent: ({
     elementInstance,
@@ -21,7 +21,7 @@ export const PhoneFieldFormElement: FormElement = {
   }) => (
     <Input
       id={elementInstance.Id}
-      type="tel"
+      type="checkbox"
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
@@ -30,33 +30,26 @@ export const PhoneFieldFormElement: FormElement = {
   ),
   // eslint-disable-next-line react/display-name
   formComponent: forwardRef<HTMLInputElement, InputProps>(
-    ({ onChange, ...props }, ref) => {
-      const handleInputChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-      ) => {
-        const inputValue = event.target.value.replace(/\D/g, '');
-        const truncatedValue = inputValue.slice(0, 10);
-        event.target.value = truncatedValue;
-        onChange?.(event);
-      };
-
-      return (
-        <Input
-          {...props}
-          ref={ref}
-          type="tel"
-          maxLength={10}
-          onChange={handleInputChange}
-        />
-      );
-    }
+    ({ onChange, value, ...restProps }, ref) => (
+      <Input
+        {...restProps}
+        ref={ref}
+        type="checkbox"
+        onChange={(event) => {
+          onChange?.({
+            target: { value: event.target.checked },
+          } as unknown as React.ChangeEvent<HTMLInputElement>);
+        }}
+        defaultChecked={value as unknown as boolean}
+      />
+    )
   ),
-  //propertiesComponent: TextValidationForm,
+  //propertiesComponent: InputBasedForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {
       Id,
       id,
-      question: 'Phone Field',
+      question: 'CheckBox Field',
       inputType,
       isRequired: false,
       pageNumber,
@@ -64,14 +57,14 @@ export const PhoneFieldFormElement: FormElement = {
     };
   },
   dragBtnElement: {
-    icon: MdPhone,
-    label: 'Phone Field',
+    icon: MdCheckBox,
+    label: 'CheckBox Field',
   },
   schemaObjects: schemaObjects,
   shouldValidate: true,
 };
 function schemaObjects(element: FormElementInstance) {
   return {
-    type: 'string',
+    type: 'boolean',
   };
 }

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { MdTextFields } from 'react-icons/md';
 
 import type {
@@ -5,7 +6,7 @@ import type {
   FormElement,
   FormElementInstance,
 } from '~/components/forms/interfaces/form-elements';
-import TextField from '~/components/inputs/text';
+import { Input, type InputProps } from '~/components/inputs';
 
 //import TextValidationForm from './InputBasedForm';
 
@@ -18,15 +19,18 @@ export const TextFieldFormElement: FormElement = {
   }: {
     elementInstance: FormElementInstance;
   }) => (
-    <TextField
-      className="w-full"
+    <Input
+      id={elementInstance.Id}
       readOnly
       label={elementInstance.question}
       required={elementInstance.isRequired}
       description={elementInstance.description}
     />
   ),
-  formComponent: TextField,
+  // eslint-disable-next-line react/display-name
+  formComponent: forwardRef<HTMLInputElement, InputProps>(
+    ({ ...restProps }, ref) => <Input {...restProps} ref={ref} type="text" />
+  ),
   //propertiesComponent: TextValidationForm,
   construct: (Id: string, pageNumber: number, id?: number) => {
     return {

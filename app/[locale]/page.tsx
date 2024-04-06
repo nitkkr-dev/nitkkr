@@ -1,6 +1,6 @@
 import DirectorsCorner from '~/app/directors-corner';
 import Notifications from '~/app/notifications';
-import Visualizer from '~/components/inputs/Visualizer';
+import { Input } from '~/components/inputs';
 import Slideshow from '~/components/slideshow';
 
 export default function Home({
@@ -34,8 +34,13 @@ export default function Home({
         ]}
       />
       <Notifications category={notificationCategory} locale={locale} />
-      <Visualizer />
       <DirectorsCorner locale={locale} />
+      <Input
+        id="checkbox"
+        label="are u sure u wanna check this?"
+        placeholder="enter stuff brotha"
+        type="checkbox"
+      />
     </>
   );
 }

@@ -15,10 +15,14 @@ const MultiSelectDropdown: ForwardRefExoticComponent<MultiListProps> =
   forwardRef<MultipleSelectorRef, MultiListProps>((props, ref) => {
     return (
       <div className={props.className}>
-        <Label className="text-neutral-500" htmlFor={props.name}>
+        <Label
+          className="text-neutral-500"
+          htmlFor={props.name}
+          required={props.required ?? false}
+          disabled={props.disabled ?? false}
+        >
           {props.label ? props.label : 'Select'}
         </Label>
-        {props.required && <span className="text-primary-700">*</span>}
         {props.description && (
           <p className="block text-[0.8rem] text-neutral-500">
             {props.description}

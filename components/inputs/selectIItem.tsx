@@ -19,10 +19,14 @@ interface ListProps extends GenericProps {
 const SelectDropdown = ({ items, ...props }: ListProps) => {
   return (
     <div className={props.className}>
-      <Label className="text-neutral-500" htmlFor={props.name}>
+      <Label
+        className="text-neutral-500"
+        htmlFor={props.name}
+        disabled={props.disabled ?? false}
+        required={props.required ?? false}
+      >
         {props.label ? props.label : 'Select'}
       </Label>
-      {props.required && <span className="text-primary-700">*</span>}
       {props.description && (
         <p className="block text-[0.8rem] text-neutral-500">
           {props.description}

@@ -58,10 +58,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={className}>
-        <Label className="text-neutral-500" htmlFor={name}>
+        <Label
+          className="text-neutral-500"
+          htmlFor={name}
+          disabled={props.disabled ?? false}
+          required={required}
+        >
           {label}
         </Label>
-        {required && <span className="text-primary-700">*</span>}
         {description && (
           <p className="block text-[0.8rem] text-neutral-500">{description}</p>
         )}
