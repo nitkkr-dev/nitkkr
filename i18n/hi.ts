@@ -89,6 +89,22 @@ const text: Translations = {
       },
     },
   },
+  Section: {
+    about: 'परिचय',
+    gallery: 'छवियां',
+
+    Account: {},
+    CentralLibrary: {},
+    CentralWorkshop: {},
+    CentreOfComputingAndNetworking: {},
+    ElectricalMaintenance: {},
+    Estate: {},
+    GeneralAdministration: {},
+    HealthCentre: {},
+    Security: {},
+    Sports: {},
+    Store: {},
+  },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
     headings: {

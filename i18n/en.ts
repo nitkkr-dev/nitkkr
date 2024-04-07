@@ -93,6 +93,22 @@ const text: Translations = {
       },
     },
   },
+  Section: {
+    about: 'ABOUT',
+    gallery: 'GALLERY',
+
+    Account: {},
+    CentralLibrary: {},
+    CentralWorkshop: {},
+    CentreOfComputingAndNetworking: {},
+    ElectricalMaintenance: {},
+    Estate: {},
+    GeneralAdministration: {},
+    HealthCentre: {},
+    Security: {},
+    Sports: {},
+    Store: {},
+  },
   StudentActivities: {
     title: 'Student Activities',
     headings: {

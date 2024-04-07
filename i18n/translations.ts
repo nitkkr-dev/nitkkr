@@ -80,6 +80,22 @@ export interface Translations {
       };
     };
   };
+  Section: {
+    about: string;
+    gallery: string;
+
+    Account: {};
+    CentralLibrary: {};
+    CentralWorkshop: {};
+    CentreOfComputingAndNetworking: {};
+    ElectricalMaintenance: {};
+    Estate: {};
+    GeneralAdministration: {};
+    HealthCentre: {};
+    Security: {};
+    Sports: {};
+    Store: {};
+  };
   StudentActivities: {
     title: string;
     headings: {

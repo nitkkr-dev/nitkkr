@@ -1,6 +1,13 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+export function capitalise(text: string, separator = ' ') {
+  return text
+    .split(separator)
+    .map((value) => value[0].toUpperCase() + value.slice(1))
+    .join(separator);
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
