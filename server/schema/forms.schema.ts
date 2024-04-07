@@ -72,5 +72,5 @@ export const formSubmissions = pgTable('form_submissions', {
   formId: integer('form_id')
     .references(() => forms.id)
     .notNull(),
-  email: varchar('email').notNull(),
+  email: varchar('email', { length: 256 }).notNull(),
 });

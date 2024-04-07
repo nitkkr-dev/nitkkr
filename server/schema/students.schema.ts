@@ -19,7 +19,7 @@ export const students = pgTable('students', {
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  personalEmail: varchar('personal_email').notNull(),
+  personalEmail: varchar('personal_email', { length: 256 }).notNull(),
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),
   fathersTelephone: varchar('fathers_telephone').notNull(),
   mothersName: varchar('mothers_name', { length: 100 }).notNull(),
