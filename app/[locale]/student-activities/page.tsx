@@ -31,7 +31,7 @@ export default async function StudentActivities({
 
       <article
         className={cn(
-          'absolute flex w-full flex-col bg-studentActivities bg-cover bg-top bg-no-repeat',
+          'absolute flex w-full flex-col bg-studentActivities bg-cover bg-top bg-no-repeat max-sm:static',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96'
         )}
       >
@@ -40,8 +40,14 @@ export default async function StudentActivities({
         </h2>
       </article>
 
-      <hr className="h-52 sm:h-44 md:h-52 lg:h-60 xl:h-[18.5rem]" />
-      <ol className="sticky top-6 mx-auto hidden w-fit gap-4 self-center rounded-full bg-background p-1 sm:flex xl:p-2 ">
+      <ol
+        className={cn(
+          'p-1 xl:p-2',
+          'hidden sm:flex sm:gap-4',
+          'sticky top-6 mx-auto w-fit self-center rounded-full bg-background',
+          'sm:mt-44 md:mt-52 lg:mt-60 xl:mt-[18.5rem]'
+        )}
+      >
         {[
           { label: text.headings.clubs, href: '#clubs' },
           { label: text.headings.council, href: '#council' },
