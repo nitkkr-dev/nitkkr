@@ -31,7 +31,7 @@ export const students = pgTable('students', {
   pincode: char('pincode', { length: 6 }).notNull(),
   permanentAddress: varchar('permanent_address').notNull(),
   category: varchar('category').notNull(),
-  birthday: date('birthday').notNull(),
+  birthday: date('birthday', { mode: 'date' }).notNull(),
   applicationNumber: varchar('application_number').notNull(),
   admissionCategory: varchar('admission_category').notNull(),
   admissionSubcategory: varchar('admission_subcategory'),

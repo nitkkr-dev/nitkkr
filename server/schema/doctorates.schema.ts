@@ -26,8 +26,8 @@ export const doctorates = pgTable('doctorates', {
     .notNull(),
   type: varchar('type', { enum: ['part-time', 'full-time'] }).notNull(),
   title: varchar('title', { length: 256 }).notNull(),
-  createdOn: date('created_on').defaultNow().notNull(),
-  endedOn: date('ended_on'),
+  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
+  endedOn: date('ended_on', { mode: 'date' }),
 });
 
 export const doctoratesRelations = relations(doctorates, ({ one }) => ({

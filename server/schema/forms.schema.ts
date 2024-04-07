@@ -32,7 +32,7 @@ export const forms = pgTable('forms', {
   isShuffled: boolean('is_shuffled').default(false).notNull(),
   isCopySent: boolean('is_copy_sent').default(false).notNull(),
   isQuiz: boolean('is_quiz').default(false).notNull(),
-  expiryDate: date('expiry_date'),
+  expiryDate: date('expiry_date', { mode: 'date' }),
   isActive: boolean('is_active').default(true).notNull(),
   persistentUrl: varchar('persistent_url'),
   oldPersistentUrls: varchar('old_persistent_urls')

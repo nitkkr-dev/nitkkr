@@ -24,8 +24,8 @@ export const sponsoredResearchProjects = pgTable(
     status: varchar('status').default('on-going').notNull(),
     durationPeriod: varchar('duration_period').notNull(),
     durationPeriodType: varchar('duration_period_type').notNull(),
-    createdOn: date('created_on').defaultNow().notNull(),
-    endedOn: date('ended_on'),
+    createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
+    endedOn: date('ended_on', { mode: 'date' }),
   }
 );
 

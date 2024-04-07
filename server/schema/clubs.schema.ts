@@ -38,7 +38,7 @@ export const clubs = pgTable('clubs', {
     .default(sql`'{}'`)
     .notNull(),
   isActive: boolean('is_active').default(true).notNull(),
-  createdOn: date('created_on').defaultNow().notNull(),
+  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
     .$onUpdate(() => new Date())
     .notNull(),
