@@ -6,6 +6,7 @@ import { faculty, staff } from '.';
 export const sections = pgTable('sections', {
   id: smallserial('id').primaryKey(),
   name: varchar('name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 256 }).notNull(),
   aboutUs: varchar('about_us').notNull(),
   headFacultyId: integer('head_faculty_id')
     .references(() => faculty.id)
