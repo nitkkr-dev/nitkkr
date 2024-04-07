@@ -14,7 +14,7 @@ export const students = pgTable('students', {
   id: integer('id')
     .primaryKey()
     .references(() => persons.id),
-  rollNumber: varchar('roll_number').notNull(),
+  rollNumber: varchar('roll_number', { length: 9 }).notNull(),
   telephone: varchar('telephone', { length: 13 })
     .array()
     .default(sql`'{}'`)
@@ -30,12 +30,12 @@ export const students = pgTable('students', {
   }),
   pincode: char('pincode', { length: 6 }).notNull(),
   permanentAddress: varchar('permanent_address').notNull(),
-  category: varchar('category'),
+  category: varchar('category').notNull(),
   birthday: date('birthday').notNull(),
   applicationNumber: varchar('application_number').notNull(),
   admissionCategory: varchar('admission_category').notNull(),
-  isPwd: boolean('is_pwd').default(false).notNull(),
   admissionSubcategory: varchar('admission_subcategory'),
+  isPwd: boolean('is_pwd').default(false).notNull(),
 });
 
 export const studentsRelations = relations(students, ({ many, one }) => ({
