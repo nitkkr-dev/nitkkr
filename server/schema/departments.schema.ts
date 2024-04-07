@@ -10,6 +10,7 @@ export const departments = pgTable('departments', {
   type: varchar('type', {
     enum: ['engineering', 'science', 'school'],
   }).notNull(),
+  banner: varchar('banner').notNull(),
   about: text('about').notNull(),
   laboratories: text('laboratories'),
   photos: text('photos')

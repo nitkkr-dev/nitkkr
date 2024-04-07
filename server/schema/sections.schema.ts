@@ -13,6 +13,7 @@ export const sections = pgTable('sections', {
   id: smallserial('id').primaryKey(),
   name: varchar('name', { length: 100 }).notNull(),
   email: varchar('email', { length: 256 }).notNull(),
+  banner: varchar('banner').notNull(),
   aboutUs: varchar('about_us').notNull(),
   headFacultyId: integer('head_faculty_id')
     .references(() => faculty.id)
