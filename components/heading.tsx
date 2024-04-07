@@ -22,7 +22,7 @@ function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
           height={1268}
           key={index}
           width={2186}
-          src="https://s3-alpha-sig.figma.com/img/7c64/28ec/4184074b7b895dea6d05eb5273c77aed?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JW40wYrTLmrbVpu04RXQBJJn6Jq-pKjLgM5fJSpXWVmizrVDOiHcbDhTM3NuHKoS8bK0EnuBIJQWilRm99~1E-kkHyu66pShKEzD~Z3uxGruNa3PnYo4FK8KvrY827QIg~H37EJhFNgfNzPXG8xUU~HLbN-ny7QHsyF7q6q-U~NokoWLZPOAq-pGHSNLrHMiUBjWX69sZ7Ojrf8mmHthzNqxQR1-YVeQ9a2V0TRJ12hfmJinjy8Dr-PqhkqwWdjLl9QqAY9cLD4cJ8QDPg6nJ0Wog-zUwoqjxMtDvtx0D~NUTkMbigG8QUlGTloTRlfFf0opwjxuilQFFjeZdEdRvQ__"
+          src="elephants.png"
         />
       ))}
     </figure>
@@ -44,7 +44,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
         height={407}
         loading="lazy"
         width={602}
-        src="https://s3-alpha-sig.figma.com/img/f7e6/2feb/3cf2c5cf97a787ba70bee06984bcb084?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A~IN0bq6xLOvHSO6NCHidLBb3C9UyGnVfEsYVSMNs-CubXVR0ZzZ5eW4Weos3N0RammglIYGO536ji3qhWST~gTsb9I~i-SaWXf5LgP7fsbJ6VCOj06rjqquXXwtQh4EF50vqaBCfY0lTwYA8mkMBu7DP3NqHVrel5oW8yhrOmtSgO62Ir2OMCt0Oz9Pem21FXwVgpwB1VPjsAOhIXLrPDcq5KjJRtAHMekAo-M940XPLD2F9RPms-oaPjM3PAwzDU-K1E6KSP7afn6e1idZxCkGFkA8IhMnze73es0t8Tn7TIOVhkMkfRX5rB4K30VygxRckdEgzG8D629a4Q4uKg__"
+        src="chariot.png"
       />
 
       {[...Array<number>(16)].map((_, index) => (
@@ -57,7 +57,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
           height={250}
           key={index}
           width={375}
-          src="https://s3-alpha-sig.figma.com/img/5e24/161c/6eb09a82be6d186473ad0178c35ade74?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O2~acMlZ5Sw9jzzFr6sQCVWsS50lgdzyOOagvGUxLEDfcxBcT7zq9DvKo9-Xemy6n1XDTn9QIBbI-IK~R5dnivQpIZHbyrmi-s~ApoUf8BpoLKrn8S1~uyaffCIIZq03MHST2jtSWBloj2xhUuk739ob-7cf8o8XW4~TUIEMuVaqscYb25jBGW6JgGLltNdl1V77ctOgVjhXIYaWckcRDXHGVp9LRENQlZPbKeTvh8zcxWyBAqVdZqrs6wrybWB0WyGzdqzMQmUXl4FInDexaaz54Sb~-aM648uYWv37PmcLIEuokxUNNHn7OSwk0HQ1ZtO3BzbAnxuvYlLZa6pEpQ__"
+          src="horses.png"
         />
       ))}
     </figure>

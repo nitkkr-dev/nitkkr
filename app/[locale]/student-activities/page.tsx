@@ -24,7 +24,7 @@ export default async function StudentActivities({
     <>
       <ImageHeader
         title={text.title}
-        className="bg-[url('https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=I3EFtbYl6L~nszaSXE0x6uGEB4EkjiGOAH-2TdKsUmqlwPcbCJCt8YW0N4aKJV0a~gcITFFFkRmukDCL9QiKbyBgoHpaNLDRnpflBJmAtV2D77vUDM907z1kwdI4vl6f7QbhC5fMQvFMaKNb4dwvGuHDCPNzSAka37qghFTmi-HAcdO14Ef8IILJyycJJQK-bWnsR~51DYcfFJnDIpC313t5lz60Hxkd~KZYw1iKDOKg5HIwKCRLYXwf8XMWKgXfS7wDyL8JzGOTZC4ublj99upEyU2NwXzRjlzklm8NnutpdqeoqE2xWCOUdfxuFfxYOfPj8f89SO7cIcglKwupCA__')]"
+        className="bg-[url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')]"
         headings={[
           { label: text.headings.clubs, href: '#clubs' },
           { label: text.headings.council, href: '#council' },
