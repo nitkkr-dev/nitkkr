@@ -1,11 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    loader: 'custom',
+    loaderFile: './lib/loader.ts',
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3-alpha-sig.figma.com',
+        hostname: 'isac-nitkkr-private.s3.ap-southeast-2.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com',
       },
     ],
   },
