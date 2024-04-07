@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
   date,
@@ -33,6 +33,10 @@ export const clubs = pgTable('clubs', {
   facultyInchargeId2: integer('faculty_incharge_id2').references(
     () => faculty.id
   ),
+  images: text('images')
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
   isActive: boolean('is_active').default(true).notNull(),
   createdOn: date('created_on').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')

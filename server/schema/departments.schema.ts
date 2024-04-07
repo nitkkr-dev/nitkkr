@@ -18,6 +18,10 @@ export const departments = pgTable('departments', {
     .notNull(),
   vision: text('vision').notNull(),
   mission: text('mission').notNull(),
+  images: text('images')
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
 });
 
 export const departmentsRelations = relations(departments, ({ many }) => ({
