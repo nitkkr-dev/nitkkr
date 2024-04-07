@@ -2,6 +2,7 @@ import { type UrlObject } from 'url';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 import { cn } from '~/lib/utils';
 
@@ -69,15 +70,18 @@ export default function Heading({
   heading: Comp,
   href,
   text,
-}: {
-  className?: string;
+  ...props
+}: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
   glyphDirection: 'rtl' | 'dual' | 'ltr';
   heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   href: string | UrlObject;
   text: string;
 }) {
   return (
-    <header className={cn('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}>
+    <header
+      className={cn('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}
+      {...props}
+    >
       <Link
         className="mx-auto flex max-w-fit flex-nowrap justify-center gap-2 sm:gap-3 md:gap-4"
         href={href}
