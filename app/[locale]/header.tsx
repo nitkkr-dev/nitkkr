@@ -26,17 +26,12 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header
-      className={cn(
-        'fixed z-10 min-w-full',
-        'bg-gradient-to-b from-neutral-500 to-transparent'
-      )}
-    >
+    <header className="fixed z-10 min-w-full bg-background">
       <nav
         className={cn(
           'container flex justify-between',
           'gap-4 xl:gap-6 2xl:gap-8',
-          'py-4 sm:py-6 md:py-8'
+          'py-2 sm:py-4 md:py-6'
         )}
       >
         <Link href={`/${locale}`}>
@@ -138,7 +133,7 @@ export default async function Header({ locale }: { locale: string }) {
           <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
               <HamburgerButton
-                className="peer z-40 size-10 rounded transition-colors aria-expanded:bg-transparent"
+                className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
                 data-dropdownignore={true}
               />
               <aside
