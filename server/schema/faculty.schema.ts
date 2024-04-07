@@ -1,7 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import {
   integer,
-  jsonb,
   pgTable,
   smallint,
   text,
@@ -69,7 +68,6 @@ export const faculty = pgTable(
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    researchSupervision: jsonb('research_supervision').notNull(),
     expertLectures: text('expert_lectures')
       .array()
       .default(sql`'{}'`)
