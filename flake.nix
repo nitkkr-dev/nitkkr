@@ -16,7 +16,17 @@
           docker
 
           (flakey-devShell-pkgs.default.override { environments = [ "nix" "nextjs" ]; })
-          (flakey-devShell-pkgs.vscodium.override { environments = [ "nix" "nextjs" ]; })
+          (flakey-devShell-pkgs.vscodium.override {
+            environments = [ "nix" "nextjs" ];
+            extensions = vscode-utils.extensionsFromVscodeMarketplace [
+              {
+                name = "pretty-ts-errors";
+                publisher = "yoavbls";
+                version = "0.5.3";
+                sha256 = "sha256-JSCyTzz10eoUNu76wNUuvPVVKq4KaVKobS1CAPqgXUA=";
+              }
+            ];
+          })
         ];
       };
     };
