@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useToast } from '~/lib/hooks'; //temp
+
 export default function LocaleSwitcher({
   children,
   className,
@@ -13,6 +15,7 @@ export default function LocaleSwitcher({
   locale: string;
 }) {
   const pathName = usePathname();
+  const { toast } = useToast(); //temp
   const redirectedPathName = (locale: string) => {
     if (!pathName) return '/';
 
@@ -26,6 +29,13 @@ export default function LocaleSwitcher({
       className={className}
       href={redirectedPathName(locale)}
       scroll={false}
+      onClick={() =>
+        toast({
+          variant: locale === 'en' ? 'success' : 'warning',
+          title: 'toast invoked',
+          description: 'This is what I look like',
+        })
+      }
     >
       {children}
     </Link>

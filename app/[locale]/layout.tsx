@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import Footer from '~/app/footer';
 import Header from '~/app/header';
+import { Toaster } from '~/components/ui';
 import { cn } from '~/lib/utils';
 import '~/styles/globals.css';
 
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Header locale={locale} />
         <section className="grow">{children}</section>
         <Footer locale={locale} />
+        <Toaster /> {/*temp for preview*/}
       </body>
     </html>
   );
