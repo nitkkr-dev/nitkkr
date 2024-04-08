@@ -55,6 +55,7 @@ export default {
       },
       zIndex: {
         modal: '100',
+        nav: '90',
       },
     },
     fontFamily: {

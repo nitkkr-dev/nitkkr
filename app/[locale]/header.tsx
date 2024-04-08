@@ -31,7 +31,7 @@ export default async function Header({ locale }: { locale: string }) {
   const session = await getServerAuthSession();
 
   return (
-    <header className="header-sticky-ness sticky top-0 z-10 min-w-full bg-background">
+    <header className="header-sticky-ness sticky top-0 z-nav min-w-full bg-background">
       <nav
         className={cn(
           'container flex justify-between',
