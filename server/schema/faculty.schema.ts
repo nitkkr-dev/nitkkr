@@ -24,7 +24,7 @@ export const faculty = pgTable(
     id: integer('id')
       .primaryKey()
       .references(() => persons.id),
-    employee_id: varchar('employee_id', { length: 8 }).notNull(),
+    employeeId: varchar('employee_id', { length: 8 }).notNull(),
     designation: varchar('designation').notNull(),
     officeAddress: varchar('college_address', { length: 16 }).notNull(),
     officeTelephone: varchar('office_telephone', { length: 13 }).notNull(),
@@ -96,7 +96,7 @@ export const faculty = pgTable(
   (faculty) => {
     return {
       facultyEmployeeIdIndex: uniqueIndex('faculty_employee_id_idx').on(
-        faculty.employee_id
+        faculty.employeeId
       ),
     };
   }

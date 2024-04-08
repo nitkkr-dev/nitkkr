@@ -35,15 +35,15 @@ export const courses = pgTable('courses', {
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  essential_reading: text('essential_reading')
+  essentialReading: text('essential_reading')
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  supplementary_reading: text('supplementary_reading')
+  supplementaryReading: text('supplementary_reading')
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  similar_courses: varchar('similar_courses', { length: 7 })
+  similarCourses: varchar('similar_courses', { length: 7 })
     .array()
     .default(sql`'{}'`)
     .notNull(),

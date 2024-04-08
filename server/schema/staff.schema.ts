@@ -15,7 +15,7 @@ export const staff = pgTable(
     id: integer('id')
       .primaryKey()
       .references(() => persons.id),
-    employee_id: varchar('employee_id', { length: 8 }).notNull(),
+    employeeId: varchar('employee_id', { length: 8 }).notNull(),
     telephone: varchar('telephone', { length: 13 })
       .array()
       .default(sql`'{}'`)
@@ -31,7 +31,7 @@ export const staff = pgTable(
   (staff) => {
     return {
       staffEmployeeIdIndex: uniqueIndex('staff_employee_id_idx').on(
-        staff.employee_id
+        staff.employeeId
       ),
     };
   }

@@ -5,14 +5,14 @@ import { db, faculty, staff } from '~/server/db';
 
 export async function generateStaticParams() {
   const facultyIds = db
-    .select({ employee_id: faculty.employee_id })
+    .select({ employee_id: faculty.employeeId })
     .from(faculty);
-  const staffIds = db.select({ employee_id: staff.employee_id }).from(staff);
+  const staffIds = db.select({ employee_id: staff.employeeId }).from(staff);
   return await union(facultyIds, staffIds);
 }
 
 export default function FacultyOrStaff({
-  params: { locale },
+  params: { locale, employee_id: employeeId },
 }: {
   params: { locale: string; employee_id: string };
 }) {

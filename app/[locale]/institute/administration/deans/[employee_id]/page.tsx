@@ -5,13 +5,13 @@ import { db, deans, faculty } from '~/server/db';
 
 export async function generateStaticParams() {
   return await db
-    .select({ employee_id: faculty.employee_id })
+    .select({ employee_id: faculty.employeeId })
     .from(faculty)
     .innerJoin(deans, eq(faculty.id, deans.facultyId));
 }
 
 export default function Dean({
-  params: { locale },
+  params: { locale, employee_id: employeeId },
 }: {
   params: { locale: string; employee_id: string };
 }) {
