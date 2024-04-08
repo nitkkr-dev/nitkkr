@@ -2,7 +2,7 @@ import { type UrlObject } from 'url';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 import { cn } from '~/lib/utils';
 
