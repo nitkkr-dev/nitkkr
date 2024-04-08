@@ -202,7 +202,58 @@ export interface Translations {
     gallery: string;
 
     Account: {};
-    CentralLibrary: {};
+    CentralLibrary: {
+      name: string;
+      heading: {
+        about: string;
+        aboutText: string;
+        totalAreaLibraryHours: string;
+        facilities: string;
+        quickLinks: string;
+        contactUs: string;
+        libraryCommittee: string;
+        gallery: string;
+        totalFloorAreaText: string;
+        libraryHoursText: string;
+        libraryHours: string;
+        totalFloorArea: string;
+      };
+      facilities: {
+        bookBankFacilities: string;
+        libraryAutomation: string;
+        audioVideoCenter: string;
+        jGatePlus: string;
+        nptel: string;
+        remoteAccess: string;
+        antiPlagiarism: string;
+
+        bookBankFacilitiesText: string;
+
+        libraryAutomationText: string;
+        audioVideoCenterText: string;
+        jGatePlusText: string;
+        nptelText: string;
+        remoteAccessText: string;
+        antiPlagiarismText: string;
+      };
+      quickLinks: {
+        CollectionResources: string;
+        Knimbus: string;
+        membershipPrivileges: string;
+      };
+      contactUs: {
+        name: string;
+        designation: string;
+        phoneNumber: string;
+        email: string;
+      };
+      libraryCommittee: {
+        srNo: string;
+        name: string;
+        generalDesignation: string;
+        libraryCommitteeDesignation: string;
+      };
+    };
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
