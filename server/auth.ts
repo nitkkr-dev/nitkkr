@@ -1,6 +1,7 @@
 import {
   getServerSession,
   type DefaultSession,
+  type DefaultUser,
   type NextAuthOptions,
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
@@ -12,13 +13,13 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 }
 
 declare module 'next-auth' {
+  interface User extends DefaultUser {
+    email: string;
+    image: string | null;
+  }
+
   interface Session extends DefaultSession {
-    user: {
-      id: string;
-      email: string;
-      image: string;
-      // role: UserRole;
-    };
+    user: User;
   }
 }
 
@@ -29,9 +30,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
         return {
-          id: profile.email,
-          email: profile.email,
-          image: profile.picture,
+          id: profile.email as string,
+          email: profile.email as string,
+          image: profile.picture as string | null,
         };
       },
     }),
