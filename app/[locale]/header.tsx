@@ -1,7 +1,9 @@
+import { Slot } from '@radix-ui/react-slot';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { userAgent } from 'next/server';
+import { BsPersonFill } from 'react-icons/bs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 import { CtrlLink } from '~/components/link';
@@ -9,6 +11,7 @@ import LocaleSwitcher from '~/components/locale-switcher';
 import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import { getServerAuthSession } from '~/server/auth';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -24,6 +27,8 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.alumni, href: 'alumni' },
     { label: text.activities, href: 'student-activities' },
   ];
+
+  const session = await getServerAuthSession();
 
   return (
     <header className="header-sticky-ness sticky top-0 z-10 min-w-full bg-background">
@@ -124,16 +129,24 @@ export default async function Header({ locale }: { locale: string }) {
             </Button>
           </li>
           <li className="hidden lg:block">
-            <Button asChild className="h-full w-16 xl:w-20">
-              <Link href={`/${locale}/login`} prefetch scroll={false}>
-                {text.login}
-              </Link>
-            </Button>
+            {session ? (
+              <ProfileImage
+                alt={text.profile.alt}
+                href={`/${locale}/profile`}
+                src={session.user.image}
+              />
+            ) : (
+              <Button asChild className="h-full w-16 xl:w-20">
+                <Link href={`/${locale}/login`} prefetch scroll={false}>
+                  {text.login}
+                </Link>
+              </Button>
+            )}
           </li>
           <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
               <HamburgerButton
-                className="peer sticky z-40 h-10 w-10 rounded bg-primary-900 transition-colors aria-expanded:bg-transparent"
+                className="peer sticky z-40 size-10 transition-colors aria-expanded:bg-transparent"
                 data-dropdownignore={true}
               />
               <aside
@@ -162,12 +175,25 @@ export default async function Header({ locale }: { locale: string }) {
                   ))}
                 </ul>
                 <hr className="opacity-50" data-dropdownignore={true} />
-                <Button
-                  asChild
-                  className="bg-primary-900 py-2 text-center sm:rounded"
-                >
-                  <Link href={`/${locale}/login`}>{text.login}</Link>
-                </Button>
+                {session ? (
+                  <Button
+                    asChild
+                    className="mx-auto flex w-fit gap-4 px-3 text-sm"
+                    variant="link"
+                  >
+                    <Link href={`/${locale}/profile`}>
+                      <ProfileImage
+                        alt={text.profile.alt}
+                        src={session.user.image}
+                      />
+                      {text.profile.view}
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button asChild className="py-2 text-center">
+                    <Link href={`/${locale}/login`}>{text.login}</Link>
+                  </Button>
+                )}
               </aside>
             </nav>
           </li>
@@ -176,3 +202,40 @@ export default async function Header({ locale }: { locale: string }) {
     </header>
   );
 }
+
+const ProfileImage = ({
+  alt,
+  className,
+  href,
+  src,
+}: {
+  alt: string;
+  className?: string;
+  href?: string;
+  src: string | null;
+}) => {
+  const Comp = ({ children }: { children: React.ReactNode }) =>
+    href ? <Link href={href}>{children}</Link> : <Slot>{children}</Slot>;
+
+  return (
+    <Button
+      asChild
+      className={cn('size-10 overflow-hidden rounded-full', className)}
+      variant="outline"
+    >
+      <Comp>
+        {src ? (
+          <Image
+            alt={alt}
+            className="rounded-full"
+            height={40}
+            src={src}
+            width={40}
+          />
+        ) : (
+          <BsPersonFill className="mt-3" size={40} />
+        )}
+      </Comp>
+    </Button>
+  );
+};

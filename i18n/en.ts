@@ -38,6 +38,7 @@ const text: Translations = {
     logo: 'Logo',
     search: 'Quick Search...',
     login: 'Login',
+    profile: { alt: 'Profile image', view: 'View Profile' },
   },
   Login: {
     title: 'Sign In',
