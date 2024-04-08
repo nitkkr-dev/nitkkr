@@ -13,6 +13,12 @@ export default function Home({
 }) {
   return (
     <>
+      <style>
+        {`.header-sticky-ness {
+          position: fixed;
+        }`}
+      </style>
+
       <Slideshow
         images={[
           {
