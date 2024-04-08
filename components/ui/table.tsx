@@ -15,7 +15,7 @@ const Table = React.forwardRef<
       'relative w-full rounded-md border border-primary-700 px-2 py-3 shadow-2xl',
       scrollAreaClassName
     )}
-    scrollBarClassName="mt-16 pb-16"
+    scrollBarClassName="mt-[60px] pb-[60px]"
   >
     <table
       ref={ref}
