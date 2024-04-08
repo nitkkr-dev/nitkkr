@@ -29,6 +29,7 @@ export interface Translations {
     logo: string;
     search: string;
     login: string;
+    profile: { alt: string; view: string };
   };
   Login: {
     title: string;

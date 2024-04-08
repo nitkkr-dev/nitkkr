@@ -34,6 +34,7 @@ const text: Translations = {
     logo: 'प्रतीक चिन्ह',
     search: 'त्वरित खोज...',
     login: 'प्रवेश',
+    profile: { alt: 'मेरी छवि', view: 'विवरण देखें' },
   },
   Login: {
     title: 'प्रवेश करें',
