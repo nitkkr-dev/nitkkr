@@ -1,9 +1,9 @@
 import { type UrlObject } from 'url';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
+import MaybeLink from '~/components/maybe-link';
 import { cn } from '~/lib/utils';
 
 function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
@@ -74,18 +74,24 @@ export default function Heading({
 }: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
   glyphDirection: 'rtl' | 'dual' | 'ltr';
   heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  href: string | UrlObject;
+  href?: string | UrlObject;
   text: string;
 }) {
+  const styles = cn(
+    'gap-2 sm:gap-3 md:gap-4',
+    'mx-auto flex max-w-fit flex-nowrap justify-center'
+  );
+
   return (
     <header
-      className={cn('my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12', className)}
+      className={cn(
+        'my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12',
+        !href && styles,
+        className
+      )}
       {...props}
     >
-      <Link
-        className="mx-auto flex max-w-fit flex-nowrap justify-center gap-2 sm:gap-3 md:gap-4"
-        href={href}
-      >
+      <MaybeLink className={cn(href && styles)} href={href}>
         {glyphDirection === 'dual' && (
           <>
             <Elephants direction="rtl" />
@@ -97,7 +103,7 @@ export default function Heading({
         <Comp className="my-auto">{glyphDirection === 'ltr' && text}</Comp>
         {glyphDirection !== 'dual' && <Horses direction={glyphDirection} />}
         <Comp className="my-auto">{glyphDirection === 'rtl' && text}</Comp>
-      </Link>
+      </MaybeLink>
     </header>
   );
 }
