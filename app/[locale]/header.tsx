@@ -1,4 +1,3 @@
-import { Slot } from '@radix-ui/react-slot';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +7,7 @@ import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
+import MaybeLink from '~/components/maybe-link';
 import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
@@ -214,16 +214,13 @@ const ProfileImage = ({
   href?: string;
   src: string | null;
 }) => {
-  const Comp = ({ children }: { children: React.ReactNode }) =>
-    href ? <Link href={href}>{children}</Link> : <Slot>{children}</Slot>;
-
   return (
     <Button
       asChild
       className={cn('size-10 overflow-hidden rounded-full', className)}
       variant="outline"
     >
-      <Comp>
+      <MaybeLink href={href}>
         {src ? (
           <Image
             alt={alt}
@@ -235,7 +232,7 @@ const ProfileImage = ({
         ) : (
           <BsPersonFill className="mt-3" size={40} />
         )}
-      </Comp>
+      </MaybeLink>
     </Button>
   );
 };
