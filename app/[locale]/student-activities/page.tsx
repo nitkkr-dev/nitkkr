@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/ui';
 import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
@@ -21,52 +22,18 @@ export default async function StudentActivities({
 
   return (
     <>
-      <style>
-        {`@media (min-width: 640px) {
-          .header-sticky-ness {
-            position: absolute;
-          }
-        }`}
-      </style>
-
-      <article
-        className={cn(
-          'absolute flex w-full flex-col bg-studentActivities bg-cover bg-top bg-no-repeat max-sm:static',
-          'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96'
-        )}
-      >
-        <h2 className="container my-auto w-fit text-shade-light">
-          {text.title}
-        </h2>
-      </article>
-
-      <ol
-        className={cn(
-          'p-1 xl:p-2',
-          'hidden sm:flex sm:gap-4',
-          'sticky top-6 mx-auto w-fit self-center rounded-full bg-background',
-          'sm:mt-44 md:mt-52 lg:mt-60 xl:mt-[18.5rem]'
-        )}
-      >
-        {[
+      <ImageHeader
+        title={text.title}
+        className="bg-[url('https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=I3EFtbYl6L~nszaSXE0x6uGEB4EkjiGOAH-2TdKsUmqlwPcbCJCt8YW0N4aKJV0a~gcITFFFkRmukDCL9QiKbyBgoHpaNLDRnpflBJmAtV2D77vUDM907z1kwdI4vl6f7QbhC5fMQvFMaKNb4dwvGuHDCPNzSAka37qghFTmi-HAcdO14Ef8IILJyycJJQK-bWnsR~51DYcfFJnDIpC313t5lz60Hxkd~KZYw1iKDOKg5HIwKCRLYXwf8XMWKgXfS7wDyL8JzGOTZC4ublj99upEyU2NwXzRjlzklm8NnutpdqeoqE2xWCOUdfxuFfxYOfPj8f89SO7cIcglKwupCA__')]"
+        headings={[
           { label: text.headings.clubs, href: '#clubs' },
           { label: text.headings.council, href: '#council' },
           { label: text.headings.events, href: '#events' },
           { label: text.headings.thoughtLab, href: '#thought-lab' },
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
-        ].map(({ label, href }, index) => (
-          <li key={index}>
-            <Button
-              asChild
-              className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
-              variant="ghost"
-            >
-              <Link href={href}>{label}</Link>
-            </Button>
-          </li>
-        ))}
-      </ol>
+        ]}
+      />
 
       <Heading
         className="container"
