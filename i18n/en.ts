@@ -111,7 +111,7 @@ const text: Translations = {
     Store: {},
   },
   StudentActivities: {
-    title: 'Student Activities',
+    title: 'STUDENT ACTIVITIES',
     headings: {
       clubs: 'Clubs',
       council: 'Student Council',
