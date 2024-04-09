@@ -1,6 +1,15 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Departments: {
+    headings: {
+      about: 'परिचय',
+      vision: 'दृष्टि और उद्देश्य',
+      hod: 'विभागाध्यक्ष का संदेश',
+      programmes: 'कार्यक्रम',
+      gallery: 'चित्र',
+    },
+  },
   DirectorsCorner: {
     alt: 'डा. बी. वी. रमणा रेड्डी',
     title: 'निर्देशक का कोना',
@@ -92,7 +101,7 @@ const text: Translations = {
   },
   Section: {
     about: 'परिचय',
-    gallery: 'छवियां',
+    gallery: 'चित्र',
 
     Account: {},
     CentralLibrary: {},
