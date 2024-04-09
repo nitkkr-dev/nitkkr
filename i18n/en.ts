@@ -1,6 +1,15 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Departments: {
+    headings: {
+      about: 'About',
+      vision: 'Vision & Mission',
+      hod: "HOD's Message",
+      programmes: 'Programmes',
+      gallery: 'Gallery',
+    },
+  },
   DirectorsCorner: {
     alt: 'Prof. B. V. Ramana Reddy',
     title: 'DIRECTOR’S CORNER',
