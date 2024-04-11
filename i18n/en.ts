@@ -41,7 +41,8 @@ const text: Translations = {
       minutes: 'Minutes',
     },
   },
-  Departments: {
+  Departments: { title: 'DEPARTMENTS' },
+  Department: {
     headings: {
       about: 'About',
       vision: 'Vision & Mission',

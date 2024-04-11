@@ -14,7 +14,7 @@ export default async function Department({
 }: {
   params: { locale: string; name: string };
 }) {
-  const text = (await getTranslations(locale)).Departments;
+  const text = (await getTranslations(locale)).Department;
 
   const department = await db.query.departments.findFirst({
     where: (departments, { eq }) => eq(departments.urlName, name),
