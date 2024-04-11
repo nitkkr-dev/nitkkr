@@ -18,10 +18,6 @@ export const departments = pgTable('departments', {
   mission: text('mission').notNull(),
   vissionMissionImage: varchar('vission_mission_image').notNull(),
   laboratories: text('laboratories'),
-  photos: text('photos')
-    .array()
-    .default(sql`'{}'`)
-    .notNull(),
   images: text('images')
     .array()
     .default(sql`'{}'`)
