@@ -4,7 +4,7 @@ import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
-import Account from './account';
+import Accounts from './accounts';
 import CentralLibrary from './central-library';
 import CentralWorkshop from './central-workshop';
 import CentreOfComputingAndNetworking from './centre-of-computing-and-networking';
@@ -17,11 +17,11 @@ import Sports from './sports';
 import Store from './store';
 
 const pageMapping = {
-  account: Account,
+  accounts: Accounts,
   'central-library': CentralLibrary,
   'central-workshop': CentralWorkshop,
   'centre-of-computing-and-networking': CentreOfComputingAndNetworking,
-  'electrical-maintenanec': ElectricalMaintenance,
+  'electrical-maintenance': ElectricalMaintenance,
   estate: Estate,
   'general-administration': GeneralAdministration,
   'health-centre': HealthCentre,
