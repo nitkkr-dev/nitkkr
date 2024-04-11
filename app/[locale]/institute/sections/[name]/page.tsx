@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
-import { capitalise } from '~/lib/utils';
 import { db } from '~/server/db';
 
 import Account from './account';
@@ -43,7 +42,7 @@ export default async function Section({
   const text = (await getTranslations(locale)).Section;
 
   const section = await db.query.sections.findFirst({
-    where: (section, { eq }) => eq(section.name, capitalise(name, '-')),
+    where: (section, { eq }) => eq(section.urlName, name),
   });
   // Edge case if 404 occurs on runtime
   if (!section) notFound();

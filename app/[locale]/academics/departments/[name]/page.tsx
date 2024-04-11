@@ -3,16 +3,10 @@ import { notFound } from 'next/navigation';
 import ImageHeader from '~/components/image-header';
 import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
-import { capitalise } from '~/lib/utils';
 import { db, departments } from '~/server/db';
 
 export async function generateStaticParams() {
-  const departmentNames = await db
-    .select({ name: departments.name })
-    .from(departments);
-  return departmentNames.map(({ name }) => ({
-    name: name.toLowerCase().replace(' ', '-'),
-  }));
+  return await db.select({ name: departments.urlName }).from(departments);
 }
 
 export default async function Department({
@@ -23,8 +17,7 @@ export default async function Department({
   const text = (await getTranslations(locale)).Departments;
 
   const department = await db.query.departments.findFirst({
-    where: (departments, { eq }) =>
-      eq(departments.name, capitalise(name.replace('-', ' '))),
+    where: (departments, { eq }) => eq(departments.urlName, name),
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
