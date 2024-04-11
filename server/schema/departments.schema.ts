@@ -10,15 +10,18 @@ export const departments = pgTable('departments', {
   type: varchar('type', {
     enum: ['engineering', 'science', 'school'],
   }).notNull(),
+  icon: varchar('icon').notNull(),
   banner: varchar('banner').notNull(),
   about: text('about').notNull(),
+  aboutImage: varchar('about_image').notNull(),
+  vision: text('vision').notNull(),
+  mission: text('mission').notNull(),
+  vissionMissionImage: varchar('vission_mission_image').notNull(),
   laboratories: text('laboratories'),
   photos: text('photos')
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  vision: text('vision').notNull(),
-  mission: text('mission').notNull(),
   images: text('images')
     .array()
     .default(sql`'{}'`)
