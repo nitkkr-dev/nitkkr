@@ -41,11 +41,24 @@ const text: Translations = {
   Department: {
     headings: {
       about: 'परिचय',
-      vision: 'दृष्टि और उद्देश्य',
-      hod: 'विभागाध्यक्ष का संदेश',
-      programmes: 'कार्यक्रम',
+      vision: 'दृष्टि',
+      and: 'और',
+      mission: 'उद्देश्य',
+      hod: {
+        title: 'विभागाध्यक्ष का संदेश',
+        session: (from: string) => `शैक्षणिक सत्र ${from} - वर्तमान`,
+      },
+      programmes: {
+        title: 'कार्यक्रम',
+        undergrad: 'पूर्वस्नातक',
+        postgrad: 'स्नातकोत्तर',
+        doctorate: 'डॉक्टरेट',
+      },
       gallery: 'चित्र',
     },
+    facultyAndStaff: 'संकाय और कर्मचारी',
+    laboratories: 'प्रयोगशालाएँ',
+    achievements: 'छात्र उपलब्धियाँ',
   },
   Footer: {
     logo: 'प्रतीक चिन्ह',
