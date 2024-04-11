@@ -37,7 +37,8 @@ const text: Translations = {
       minutes: 'विवरण',
     },
   },
-  Departments: {
+  Departments: { title: 'विभाग' },
+  Department: {
     headings: {
       about: 'परिचय',
       vision: 'दृष्टि और उद्देश्य',

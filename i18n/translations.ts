@@ -33,7 +33,8 @@ export interface Translations {
       minutes: string;
     };
   };
-  Departments: {
+  Departments: { title: string };
+  Department: {
     headings: {
       about: string;
       vision: string;
