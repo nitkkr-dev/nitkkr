@@ -18,7 +18,7 @@ const Login = async ({ locale }: { locale: string }) => {
         'flex h-auto w-full grow flex-col items-center justify-center',
         'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]',
         'bg-background bg-logo bg-contain bg-center bg-no-repeat bg-blend-overlay',
-        'md:p-18 p-4 sm:p-12 '
+        'p-4 sm:p-12 md:p-20'
       )}
     >
       <header className="mb-8 text-center">
