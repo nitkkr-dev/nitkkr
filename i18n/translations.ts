@@ -38,10 +38,20 @@ export interface Translations {
     headings: {
       about: string;
       vision: string;
-      hod: string;
-      programmes: string;
+      and: string;
+      mission: string;
+      hod: { title: string; session: (from: string) => string };
+      programmes: {
+        title: string;
+        undergrad: string;
+        postgrad: string;
+        doctorate: string;
+      };
       gallery: string;
     };
+    facultyAndStaff: string;
+    laboratories: string;
+    achievements: string;
   };
   Footer: {
     logo: string;

@@ -45,11 +45,24 @@ const text: Translations = {
   Department: {
     headings: {
       about: 'About',
-      vision: 'Vision & Mission',
-      hod: "HOD's Message",
-      programmes: 'Programmes',
+      vision: 'Vision',
+      and: '&',
+      mission: 'Mission',
+      hod: {
+        title: 'HOD’s Message',
+        session: (from: string) => `Academic Session ${from} - current`,
+      },
+      programmes: {
+        title: 'Programmes',
+        undergrad: 'Under Graduate',
+        postgrad: 'Post Graduate',
+        doctorate: 'Doctorate',
+      },
       gallery: 'Gallery',
     },
+    facultyAndStaff: 'Faculty & Staff',
+    laboratories: 'Laboratories',
+    achievements: 'Student Achievements',
   },
   Footer: {
     logo: 'Logo',
