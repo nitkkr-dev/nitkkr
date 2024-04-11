@@ -8,7 +8,7 @@ export const departments = pgTable('departments', {
   name: varchar('name', { length: 64 }).notNull(),
   alias: char('alias', { length: 2 }).notNull(),
   type: varchar('type', {
-    enum: ['engineering', 'science', 'school'],
+    enum: ['engineering', 'science', 'school', 'miscellaneous'],
   }).notNull(),
   icon: varchar('icon').notNull(),
   banner: varchar('banner').notNull(),
