@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 
 import { useToast } from '~/lib/hooks'; //temp
 
+import { ToastAction } from './ui';
+
 export default function LocaleSwitcher({
   children,
   className,
@@ -34,6 +36,11 @@ export default function LocaleSwitcher({
           variant: locale === 'en' ? 'success' : 'warning',
           title: 'toast invoked',
           description: 'This is what I look like',
+          action: (
+            <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+          ),
+          showCloseBtn: locale === 'en',
+          duration: 50000,
         })
       }
     >
