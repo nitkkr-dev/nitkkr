@@ -52,6 +52,7 @@ export default async function Section({
   return (
     <>
       <Heading
+        className="container"
         glyphDirection="ltr"
         heading="h3"
         href="#about"
@@ -62,6 +63,7 @@ export default async function Section({
       <SectionPage locale={locale} />
 
       <Heading
+        className="container"
         glyphDirection="ltr"
         heading="h3"
         href="#gallery"

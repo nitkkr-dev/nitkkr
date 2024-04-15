@@ -12,7 +12,7 @@ function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
       dir={direction}
       className="flex h-12 overflow-x-hidden sm:h-16 md:h-20"
     >
-      {[...Array<number>(4)].map((_, index) => (
+      {[...Array<number>(9)].map((_, index) => (
         <Image
           alt="Elephant"
           className={cn(
@@ -47,7 +47,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
         src="https://s3-alpha-sig.figma.com/img/f7e6/2feb/3cf2c5cf97a787ba70bee06984bcb084?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A~IN0bq6xLOvHSO6NCHidLBb3C9UyGnVfEsYVSMNs-CubXVR0ZzZ5eW4Weos3N0RammglIYGO536ji3qhWST~gTsb9I~i-SaWXf5LgP7fsbJ6VCOj06rjqquXXwtQh4EF50vqaBCfY0lTwYA8mkMBu7DP3NqHVrel5oW8yhrOmtSgO62Ir2OMCt0Oz9Pem21FXwVgpwB1VPjsAOhIXLrPDcq5KjJRtAHMekAo-M940XPLD2F9RPms-oaPjM3PAwzDU-K1E6KSP7afn6e1idZxCkGFkA8IhMnze73es0t8Tn7TIOVhkMkfRX5rB4K30VygxRckdEgzG8D629a4Q4uKg__"
       />
 
-      {[...Array<number>(8)].map((_, index) => (
+      {[...Array<number>(16)].map((_, index) => (
         <Image
           alt="Horse"
           className={cn(
@@ -77,10 +77,7 @@ export default function Heading({
   href?: string | UrlObject;
   text: string;
 }) {
-  const styles = cn(
-    'gap-2 sm:gap-3 md:gap-4',
-    'mx-auto flex max-w-fit flex-nowrap justify-center'
-  );
+  const styles = cn('flex max-w-fit flex-nowrap', 'gap-2 sm:gap-3 md:gap-4');
 
   return (
     <header
@@ -95,14 +92,18 @@ export default function Heading({
         {glyphDirection === 'dual' && (
           <>
             <Elephants direction="rtl" />
-            <Comp className="my-auto">{text}</Comp>
+            <Comp className="my-auto min-w-fit">{text}</Comp>
             <Elephants direction="ltr" />
           </>
         )}
 
-        <Comp className="my-auto">{glyphDirection === 'ltr' && text}</Comp>
+        {glyphDirection === 'ltr' && (
+          <Comp className="my-auto min-w-fit">{text}</Comp>
+        )}
         {glyphDirection !== 'dual' && <Horses direction={glyphDirection} />}
-        <Comp className="my-auto">{glyphDirection === 'rtl' && text}</Comp>
+        {glyphDirection === 'rtl' && (
+          <Comp className="my-auto min-w-fit">{text}</Comp>
+        )}
       </MaybeLink>
     </header>
   );
