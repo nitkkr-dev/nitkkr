@@ -17,7 +17,7 @@ export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
 
   return (
-    <footer>
+    <footer className="mt-8 sm:mt-10 md:mt-12 lg:mt-20">
       <section className="bg-neutral-900 py-16">
         <article className="container flex flex-col justify-start lg:flex-row">
           <figure className="m-auto flex w-80 flex-col gap-4 p-4 lg:mx-0">
