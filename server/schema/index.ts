@@ -1,6 +1,7 @@
 export * from './club-members.schema';
 export * from './club-socials.schema';
 export * from './clubs.schema';
+export * from './committees.schema';
 export * from './course-logs.schema';
 export * from './course-to-majors.schema';
 export * from './courses.schema';
