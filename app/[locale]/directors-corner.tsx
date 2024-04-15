@@ -13,7 +13,7 @@ const DirecotorsImage = ({ className, ...props }: Omit<ImageProps, 'src'>) => (
     className={cn('rounded-xl', className)}
     height={682}
     width={591}
-    src="https://nitkkr.ac.in/wp-content/uploads/2022/02/directorim.jpg"
+    src="director.jpg"
     {...props}
   />
 );

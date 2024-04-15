@@ -26,7 +26,7 @@ export default async function Footer({ locale }: { locale: string }) {
               className="mx-auto rounded-md bg-neutral-50 p-[6px]"
               height={66}
               width={66}
-              src="https://s3-alpha-sig.figma.com/img/18b7/a13d/8bbb852e070e69b3de2a5ac59d20f501?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=peuLWIq0G5TpTDjW3MjLqwOrlRxq21doSVlN4obXcgfOjX-tmjp6Tb6mMV-n6HhlHVQd~8pM5tUrT5cNWFvOhpKp7Lcp2MH9xGUxJPM2UW3-KL6fYoVNfaGl0XNSjallZtXntcKFtvwflht6CSNREdeOKQUL7iUpK0DG0iPrUXDjk7W9Tc1WH0aPi2jVByU8-XqSIfjtBmblDS2r0z9~Qar~QVwwBHUXPSo8YtmQmswE2YK3ambbmxDDFpUhx6vfeQzXqfWjKCqS57sPBMfDvxJyy-aUN4lKWRWtGT4zsirldGhMRKQ32xUNBcGHpsnEjm40ffjoAT2JhEpQcChBLQ__"
+              src="logo.png"
             />
 
             <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-shade-light">
@@ -59,7 +59,7 @@ export default async function Footer({ locale }: { locale: string }) {
             height={256}
             loading="lazy"
             width={256}
-            src="https://s3-alpha-sig.figma.com/img/aeae/a206/68c4e501ecf5c3911343c1f3d8428cdf?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Vea-fL6qFdLQXkfPBzO~oQFrA8C529TUpRoFvz5Jw7CDoMfZm7Nxp7mdrLXK19sdCSgzYH9Xm2~vmsBfDswsOYdpeXa2UxtPiWAvZXIquwuW6GvrL7byXs6X1s9wSjyol~XqHCugGyeXBJ~Hi2ytzdg3AIChb8nOp5jBRzjQOBquqiNMZAiI6wTl59Hvpi6oTs4iS~FwfXFTHnZ7I-cAv7APKA34fYOVHgcxRkkXQKLPqzgh8lo4npVmwml3UpkOCo2-Hzgkp1uHdAKcYCmZWLLKKghmgPwzB8muo1LO0dZjoL4YPcrRzTPV545AEDP7MmJmLXyEp94j5Xu9UWKHNg__"
+            src="pillar.png"
           />
 
           <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">

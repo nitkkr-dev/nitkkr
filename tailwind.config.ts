@@ -47,11 +47,11 @@ export default {
     },
     extend: {
       backgroundImage: {
-        logo: "url('https://upload.wikimedia.org/wikipedia/en/7/75/National_Institute_of_Technology%2C_Kurukshetra_Logo.png')",
+        logo: "url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/logo-transparent.png')",
         notifications:
-          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://s3-alpha-sig.figma.com/img/cff6/b90c/6d452f4caad45a22f4d4a701c7b48bce?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ofq9jEHFupykPfqgRBlvqj9sHSFZppT4~Bc67eBYuraZ7BWV56CCOl~KksgPTIMTXaatC~DicUIdW1kEa1EnF6QypCyAnO-wXXL90qqlDLz-1DHcUT0rwCoXIwvyHtm8y9mWqTXVJeR7KFXf5zdH0hvwBo6rzstqgbSplXgGSKJtKhGPntPkPefW3kCX09i4XYj7TmL7KVmtcWOKFAUGgsvb2zhJ-9wBGgAXId1Uf-LGpeskNzO7SylQ1TVAQwvoZgrgJeeI1kO0OE0vcfAKR3Jut~kjMKYWay4owWif2Owy1LxhMi3uwZ9LOXr1E8VlE6i5iwLrVyaZdS5I2ZnSHA__')",
+          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/mahabharat.jpg')",
         studentActivities:
-          "url('https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kompE3PGAJZpl95XpJ80kR~4JBG40bM-uUhl0-O3K0k0QXk~CzNZUxJHItS4CRM1h0BS0EL-5xdNi6xkIFamIFTUviKykzfuJU~uLuuQ~RF7eGn-E1EEdmQS~E2PExM2oj~UfUTqrNNt70~doCAdaHhMshJcIIIF2KLwkQWfrLltqR7QwsYkxTdFj84qBcRnIh~V9ngs0MKHysj6F8MPiRY15qRQP1cWlHUQToyEORyzQ-RVbdCbxGeV4WwOojk0gtb~7s3TNK4ycePpM9n6ODrMRcrnBaalvLQLxWY6DGrp-QRBEx6gyEQmbpRkyf3vCpp-oMRbSOCrqxwxhOqyWg__')",
+          "url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')",
       },
       zIndex: {
         modal: '100',
