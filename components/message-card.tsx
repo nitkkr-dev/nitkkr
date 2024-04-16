@@ -3,20 +3,19 @@ import Link from 'next/link';
 import { FaArrowUp, FaCalendar, FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
+import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
-import { Button } from './ui';
-
-export default function messageCard({
+export default function MessageCard({
   className,
   details,
   image,
+  locale,
   more,
   name,
   quote,
   quoteBelow,
   readMorePath,
-  locale,
 }: {
   className?: string;
   details?: {
@@ -25,12 +24,12 @@ export default function messageCard({
     session: string;
   };
   image: string;
+  locale: string;
   more?: string;
   name: string;
   quote: string;
   quoteBelow?: string;
   readMorePath?: string;
-  locale: string;
 }) {
   return (
     <article
@@ -99,7 +98,7 @@ export default function messageCard({
             </li>
             <li className="flex items-center gap-2">
               <FaCalendar className="fill-primary-700" />
-              {details.phone}
+              {details.session}
             </li>
           </ul>
         </footer>
