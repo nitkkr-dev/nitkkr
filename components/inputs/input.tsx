@@ -66,54 +66,74 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }, []);
 
     return (
-      <fieldset className="space-y-2">
-        {label && (
-          <Label
-            disabled={Boolean(props.disabled)}
-            htmlFor={props.id}
-            required={Boolean(props.required)}
-          >
-            {label}
-          </Label>
-        )}
-        {description && (
-          <small className="!mt-0 block text-neutral-700">{description}</small>
-        )}
-        <input
-          aria-errormessage={
-            showError &&
-            props['aria-invalid'] &&
-            props['aria-invalid'] !== 'false'
-              ? `${props.id}-error`
-              : undefined
-          }
+      <>
+        <fieldset
           className={cn(
-            'peer flex w-full rounded-lg px-3 py-2 text-xs sm:text-sm',
-            'border border-secondary-700 bg-neutral-50 placeholder:text-neutral-400',
-            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary-700',
-            'disabled:cursor-not-allowed disabled:border-neutral-300 disabled:bg-neutral-100',
-            'file:border-0 file:bg-transparent file:text-sm file:font-medium',
-            focusedOnce &&
-              'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
-            className
+            'space-y-2',
+            (type === 'checkbox' || type === 'radio') &&
+              'inline-flex gap-2 space-y-0'
           )}
-          onBlur={(event) => {
-            if (!focusedOnce) setFocusedOnce(true);
-            onBlur && onBlur(event);
-          }}
-          onChange={(event) => {
-            if (!event.isDefaultPrevented()) {
-              validate(event.target, customValidator);
+        >
+          {label && type !== 'checkbox' && type !== 'radio' && (
+            <Label
+              disabled={Boolean(props.disabled)}
+              htmlFor={props.id}
+              required={Boolean(props.required)}
+            >
+              {label}
+            </Label>
+          )}
+          {description && (
+            <small className="!mt-0 block text-neutral-700">
+              {description}
+            </small>
+          )}
+          <input
+            aria-errormessage={
+              showError &&
+              props['aria-invalid'] &&
+              props['aria-invalid'] !== 'false'
+                ? `${props.id}-error`
+                : undefined
             }
-            onChange && onChange(event);
-          }}
-          onInvalid={(event) => {
-            setErrorMessage(event.currentTarget.validationMessage);
-          }}
-          ref={ref}
-          type={type}
-          {...props}
-        />
+            className={cn(
+              'peer flex w-full rounded-lg px-3 py-2 text-xs sm:text-sm',
+              'border border-secondary-700 bg-neutral-50 placeholder:text-neutral-400',
+              'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary-700',
+              'disabled:cursor-not-allowed disabled:border-neutral-300 disabled:bg-neutral-100',
+              'file:border-0 file:bg-transparent file:text-sm file:font-medium',
+              focusedOnce &&
+                'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
+              (type === 'checkbox' || type === 'radio') && 'h-5 w-5 ', //incomplete
+              className
+            )}
+            onBlur={(event) => {
+              if (!focusedOnce) setFocusedOnce(true);
+              onBlur && onBlur(event);
+            }}
+            onChange={(event) => {
+              if (!event.isDefaultPrevented()) {
+                validate(event.target, customValidator);
+              }
+              onChange && onChange(event);
+            }}
+            onInvalid={(event) => {
+              setErrorMessage(event.currentTarget.validationMessage);
+            }}
+            ref={ref}
+            type={type}
+            {...props}
+          />
+          {(type === 'checkbox' || type === 'radio') && label && (
+            <Label
+              disabled={Boolean(props.disabled)}
+              htmlFor={props.id}
+              required={Boolean(props.required)}
+            >
+              {label}
+            </Label>
+          )}
+        </fieldset>
         {showError && (
           <p
             className={cn(
@@ -128,7 +148,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {errorMessage ?? 'Unrendered text to reserve line height'}
           </p>
         )}
-      </fieldset>
+      </>
     );
   }
 );
