@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useDebounceCallback, useLocalStorage } from 'usehooks-ts';
 
+import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 
 import { MiniSearchLink } from './search';
@@ -50,8 +51,9 @@ export function Searchbar({ placeholder }: { placeholder: string }) {
   const router = useRouter();
 
   return (
-    <input
-      className="min-w-full rounded-lg border border-primary-700 px-4 py-2 focus:outline-none"
+    <Input
+      className="border-primary-700 focus-visible:ring-primary-700"
+      id="search"
       placeholder={placeholder}
       onChange={useDebounceCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +61,7 @@ export function Searchbar({ placeholder }: { placeholder: string }) {
         },
         300
       )}
+      type="search"
     />
   );
 }
