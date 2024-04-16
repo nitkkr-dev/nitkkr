@@ -3,6 +3,16 @@ export async function getTranslations(locale: string): Promise<Translations> {
 }
 
 export interface Translations {
+  Main: {
+    director: {
+      alt: string;
+      title: string;
+      name: string;
+      quote: [string, string];
+      more: string;
+    };
+  };
+
   Committee: {
     building: string;
     financial: string;
@@ -31,13 +41,6 @@ export interface Translations {
       programmes: string;
       gallery: string;
     };
-  };
-  DirectorsCorner: {
-    alt: string;
-    title: string;
-    name: string;
-    quote: [string, string];
-    more: string;
   };
   Footer: {
     logo: string;

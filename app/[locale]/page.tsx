@@ -1,8 +1,10 @@
-import DirectorsCorner from '~/app/directors-corner';
 import Notifications from '~/app/notifications';
+import Heading from '~/components/heading';
+import MessageCard from '~/components/message-card';
 import Slideshow from '~/components/slideshow';
+import { getTranslations } from '~/i18n/translations';
 
-export default function Home({
+export default async function Home({
   params: { locale },
   searchParams: { notificationCategory = 'academic' },
 }: {
@@ -11,6 +13,8 @@ export default function Home({
     notificationCategory?: 'academic' | 'tender' | 'workshop' | 'recruitment';
   };
 }) {
+  const text = (await getTranslations(locale)).Main;
+
   return (
     <>
       <style>
@@ -39,7 +43,24 @@ export default function Home({
         ]}
       />
       <Notifications category={notificationCategory} locale={locale} />
-      <DirectorsCorner locale={locale} />
+
+      <section className="container mb-32 mt-10" id="directors-corner">
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          href="#directors-corner"
+          text={text.director.title}
+        />
+        <MessageCard
+          image="director.jpg"
+          locale={locale}
+          more={text.director.more}
+          name={text.director.name}
+          quote={text.director.quote[0]}
+          quoteBelow={text.director.quote[1]}
+          readMorePath={`/${locale}/institute/director#message`}
+        />
+      </section>
     </>
   );
 }
