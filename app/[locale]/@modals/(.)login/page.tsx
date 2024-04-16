@@ -11,13 +11,13 @@ export default function Login({
     <Dialog
       className={cn(
         'container',
-        'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[768px]'
+        'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]'
       )}
     >
       <section
         className={cn(
           'rounded-lg border border-primary-500 bg-background',
-          'p-2 sm:p-6 md:p-10 lg:p-16'
+          'p-2 sm:p-6 md:p-10'
         )}
       >
         <LoginModal locale={locale} />
