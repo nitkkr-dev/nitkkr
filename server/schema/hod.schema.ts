@@ -19,7 +19,7 @@ export const hod = pgTable('hod', {
   departmentId: smallint('department_id')
     .references(() => departments.id)
     .notNull(),
-  message: text('message'),
+  message: text('message').notNull(),
   isActive: boolean('is_active').default(true).notNull(),
   createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
 });
