@@ -89,7 +89,7 @@ const text: Translations = {
     signInWithGoogle: 'गूगल द्वारा प्रवेश करें',
   },
   Notifications: {
-    title: 'सूचनाएं',
+    title: 'सूचनाएँ',
     categories: {
       academic: 'शैक्षणिक',
       tender: 'निविदाएँ',
@@ -102,6 +102,18 @@ const text: Translations = {
     title: 'नहीं मिला',
     description: 'अनुरोधित संसाधन नहीं मिल सका',
     backHome: 'घर लौटें',
+  },
+  Profile: {
+    tabs: {
+      personal: { title: 'व्यक्तिगत विवरण' },
+      notifications: { title: 'सूचनाएँ' },
+      courses: { title: 'पाठ्यक्रम' },
+      clubs: { title: 'संघठन' },
+      results: { title: 'परिणाम और विस्तृत अंक प्रमाण पत्र' },
+      bookmarks: { title: 'बुकमार्क्स' },
+      quickSend: { title: 'त्वरित प्रेषण' },
+    },
+    logout: 'प्रस्थान करें',
   },
   Search: {
     placeholder: 'त्वरित खोज...',
@@ -126,12 +138,12 @@ const text: Translations = {
         clubs: 'संघठनें',
         courses: 'पाठ्यक्रम',
         departments: 'विभाग',
-        notifications: 'सूचनाएं',
+        notifications: 'सूचनाएँ',
         results: 'परिणाम',
       },
       facultyLinks: {
         title: 'संकाय संबंधित त्वरित लिंक',
-        notifications: 'सूचनाएं',
+        notifications: 'सूचनाएँ',
         profile: 'मेरा विवरण',
       },
     },

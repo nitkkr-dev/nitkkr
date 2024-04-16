@@ -23,7 +23,9 @@ declare module 'next-auth' {
 
   interface Session extends DefaultSession {
     person: {
+      id: number;
       image: string;
+      name: string;
       role: { permissions: (typeof roles.permissions.enumValues)[number][] };
     };
     user: User;
@@ -34,7 +36,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session }) {
       session.person = (await db.query.persons.findFirst({
-        columns: { image: true },
+        columns: { id: true, image: true, name: true },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },
       }))!;
