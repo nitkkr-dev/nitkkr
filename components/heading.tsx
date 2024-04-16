@@ -77,7 +77,7 @@ export default function Heading({
   href?: string | UrlObject;
   text: string;
 }) {
-  const styles = cn('flex max-w-fit flex-nowrap', 'gap-2 sm:gap-3 md:gap-4');
+  const styles = 'flex flex-nowrap gap-2 sm:gap-3 md:gap-4';
 
   return (
     <header
