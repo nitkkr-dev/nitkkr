@@ -5,13 +5,14 @@ import Heading from '~/components/heading';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
+import type { notifications as notificationsSchema } from '~/server/db';
 import { db } from '~/server/db';
 
 export default async function Notifications({
   category: currentCategory,
   locale,
 }: {
-  category: 'academic' | 'tender' | 'workshop' | 'recruitment';
+  category: (typeof notificationsSchema.category.enumValues)[number];
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;

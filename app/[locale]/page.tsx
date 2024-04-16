@@ -3,6 +3,7 @@ import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import Slideshow from '~/components/slideshow';
 import { getTranslations } from '~/i18n/translations';
+import { type notifications } from '~/server/schema';
 
 export default async function Home({
   params: { locale },
@@ -10,7 +11,7 @@ export default async function Home({
 }: {
   params: { locale: string };
   searchParams: {
-    notificationCategory?: 'academic' | 'tender' | 'workshop' | 'recruitment';
+    notificationCategory?: (typeof notifications.category.enumValues)[number];
   };
 }) {
   const text = (await getTranslations(locale)).Main;
