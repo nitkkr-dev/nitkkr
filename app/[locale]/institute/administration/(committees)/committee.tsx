@@ -12,7 +12,8 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { committeeMembers, db } from '~/server/db';
+import type { committeeMembers } from '~/server/db';
+import { db } from '~/server/db';
 
 export default async function Committee({
   locale,
