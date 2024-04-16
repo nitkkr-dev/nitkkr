@@ -1,6 +1,26 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Committee: {
+    building: 'BUILDING & WORK COMMITTEE',
+    financial: 'FINANCIAL COMMITTEE',
+    governor: 'BOARD OF GOVERNORS',
+    members: {
+      title: 'Members',
+      serial: 'Sr. No.',
+      nomination: 'Nomination',
+      name: 'Name',
+      servingAs: 'Serving As',
+    },
+    meetings: {
+      title: 'Meetings',
+      serial: 'Meeting No.',
+      date: 'Date',
+      place: 'Place',
+      agenda: 'Agenda',
+      minutes: 'Minutes',
+    },
+  },
   Departments: {
     headings: {
       about: 'About',

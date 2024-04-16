@@ -1,9 +1,9 @@
-import WorkInProgress from '~/components/work-in-progress';
+import Committee from '../committee';
 
 export default function BuildingAndWorkCommittee({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <Committee locale={locale} type="building" />;
 }

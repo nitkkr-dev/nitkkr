@@ -1,6 +1,26 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Committee: {
+    building: 'निर्माण एवं कार्य समिति',
+    financial: 'वित्तीय समिति',
+    governor: 'राज्यपाल मंडल',
+    members: {
+      title: 'सदस्य',
+      serial: 'क्रम संख्या',
+      nomination: 'नामांकन',
+      name: 'नाम',
+      servingAs: 'के रूप में सेवारत',
+    },
+    meetings: {
+      title: 'बैठकें',
+      serial: 'बैठक संख्या',
+      date: 'दिनांक',
+      place: 'स्थान',
+      agenda: 'कार्यसूची',
+      minutes: 'विवरण',
+    },
+  },
   Departments: {
     headings: {
       about: 'परिचय',
