@@ -9,7 +9,7 @@ export default function ImageHeader({
   headings,
 }: {
   className?: string;
-  title: string;
+  title?: string;
   headings?: { label: string; href: string }[];
 }) {
   return (
@@ -31,10 +31,18 @@ export default function ImageHeader({
           className
         )}
       >
-        <h1 className="container my-auto text-center text-shade-light">
-          {title}
-        </h1>
+        {title && (
+          <h1 className="container my-auto text-center text-shade-light">
+            {title}
+          </h1>
+        )}
       </section>
+      <hr
+        className={cn(
+          'invisible hidden sm:block',
+          'mt-56 sm:mt-64 md:mt-72 lg:mt-80 xl:mt-96 2xl:mt-[448px]'
+        )}
+      />
 
       {headings && (
         <>
