@@ -107,6 +107,18 @@ const text: Translations = {
     description: 'Could not find requested resource',
     backHome: 'Return Home',
   },
+  Profile: {
+    tabs: {
+      personal: { title: 'PERSONAL DETAILS' },
+      notifications: { title: 'NOTIFICATIONS' },
+      courses: { title: 'COURSES' },
+      clubs: { title: 'CLUBS' },
+      results: { title: 'RESULTS & DMCs' },
+      bookmarks: { title: 'BOOKMARKS' },
+      quickSend: { title: 'QUICK SEND' },
+    },
+    logout: 'LOG OUT',
+  },
   Search: {
     placeholder: 'Quick Search...',
     categories: {

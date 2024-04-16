@@ -91,6 +91,18 @@ export interface Translations {
     viewAll: string;
   };
   NotFound: { title: string; description: string; backHome: string };
+  Profile: {
+    logout: string;
+    tabs: {
+      personal: { title: string };
+      notifications: { title: string };
+      courses: { title: string };
+      clubs: { title: string };
+      results: { title: string };
+      bookmarks: { title: string };
+      quickSend: { title: string };
+    };
+  };
   Search: {
     placeholder: string;
     categories: {
