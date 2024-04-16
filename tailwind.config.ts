@@ -35,6 +35,9 @@ export default {
         light: '#FFFFFF',
         dark: '#000000',
       },
+      success: '#27B13D',
+      warning: '#D95C26',
+      error: '#C5291D',
       transparent: 'transparent',
     },
     container: {
@@ -54,8 +57,9 @@ export default {
           "url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')",
       },
       zIndex: {
-        modal: '100',
-        nav: '90',
+        modal: '90',
+        nav: '80',
+        toast: '100',
       },
     },
     fontFamily: {
@@ -75,5 +79,5 @@ export default {
       xs: ['12px', { lineHeight: '20px' }],
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 } satisfies Config;
