@@ -11,18 +11,30 @@ import { faculty } from '.';
 
 export const deans = pgTable('deans', {
   id: smallserial('id').primaryKey(),
-  domain: varchar('domain').notNull(),
+  domain: varchar('domain', {
+    enum: [
+      'academic',
+      'estate-and-construction',
+      'faculty-welfare',
+      'industry-and-international-relations',
+      'planning-and-development',
+      'research-and-consultancy',
+      'student-welfare',
+    ],
+  })
+    .unique()
+    .notNull(),
   facultyId: integer('faculty_id')
     .references(() => faculty.id)
-    .notNull(),
-  activityLogs: text('activity_logs')
-    .array()
-    .default(sql`'{}'`)
     .notNull(),
   associateFacultyId: integer('associate_faculty_id').references(
     () => faculty.id
   ),
-  staffId: integer('staff_id')
+  staffIds: integer('staff_ids')
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
+  activityLogs: text('activity_logs')
     .array()
     .default(sql`'{}'`)
     .notNull(),
