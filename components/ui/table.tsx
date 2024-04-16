@@ -12,7 +12,8 @@ const Table = React.forwardRef<
 >(({ className, scrollAreaClassName, ...props }, ref) => (
   <ScrollArea
     className={cn(
-      'relative w-full rounded-md border border-primary-700 px-2 py-3 shadow-2xl',
+      'relative w-full rounded-md border border-primary-700 shadow-2xl',
+      'px-2 py-3',
       scrollAreaClassName
     )}
     scrollBarClassName="mt-[60px] pb-[60px]"
@@ -87,7 +88,8 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'h-12 px-4 text-left align-middle font-serif font-normal text-primary-700 [&:has([role=checkbox])]:pr-0',
+      'h-12 text-left align-middle font-serif font-normal text-primary-700 [&:has([role=checkbox])]:pr-0',
+      'px-1 py-2 sm:px-2 md:px-3 lg:px-4',
       'text-sm sm:text-base md:text-lg',
       className
     )}
@@ -103,7 +105,8 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      'px-4 py-2 align-middle [&:has([role=checkbox])]:pr-0',
+      'align-middle [&:has([role=checkbox])]:pr-0',
+      'px-1 py-2 sm:px-2 md:px-3 lg:px-4',
       className
     )}
     {...props}
