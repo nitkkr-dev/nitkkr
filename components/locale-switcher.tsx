@@ -25,6 +25,7 @@ export default function LocaleSwitcher({
     <Link
       className={className}
       href={redirectedPathName(locale)}
+      prefetch
       scroll={false}
     >
       {children}

@@ -52,7 +52,9 @@ export default async function Header({ locale }: { locale: string }) {
         <ol className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
           {items.map(({ label, href }, index) => (
             <li className="my-auto min-h-fit" key={index}>
-              <Link href={`/${locale}/${href}`}>{label}</Link>
+              <Link href={`/${locale}/${href}`} prefetch>
+                {label}
+              </Link>
             </li>
           ))}
         </ol>
