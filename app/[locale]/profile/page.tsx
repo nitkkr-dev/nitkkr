@@ -1,17 +1,9 @@
-import Unauthorized from '~/components/unauthorized';
-import WorkInProgress from '~/components/work-in-progress';
-import { getServerAuthSession } from '~/server/auth';
+import Personal from './personal/page';
 
 export default async function Profile({
-  params: { locale },
+  params,
 }: {
   params: { locale: string };
 }) {
-  const session = await getServerAuthSession();
-
-  return session ? (
-    <WorkInProgress locale={locale} />
-  ) : (
-    <Unauthorized locale={locale} />
-  );
+  return <Personal params={params} />;
 }
