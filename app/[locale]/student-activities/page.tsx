@@ -18,7 +18,13 @@ export default async function StudentActivities({
   const text = (await getTranslations(locale)).StudentActivities;
 
   const clubs = await db.query.clubs.findMany({
-    columns: { alias: true, name: true, logo: true, thumbnail: true },
+    columns: {
+      alias: true,
+      name: true,
+      logo: true,
+      thumbnail: true,
+      urlName: true,
+    },
   });
 
   return (
@@ -46,36 +52,39 @@ export default async function StudentActivities({
 
       <section className="container mb-6 text-center">
         <CustomCarousel itemClassName="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
-          {clubs.map(({ alias, name, logo, thumbnail }, index) => (
-            <Card
-              className="mx-auto flex aspect-square size-48 flex-col p-3 sm:size-56 md:size-64"
+          {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
+            <Link
+              className="drop-shadow hover:drop-shadow-xl"
+              href={`/${locale}/student-activities/clubs/${urlName}`}
               key={index}
             >
-              <CardTitle
-                className={cn(
-                  'flex items-center justify-center gap-2 text-neutral-900',
-                  'text-lg sm:text-xl md:text-2xl'
-                )}
-              >
-                <Image
-                  alt={alias ?? name}
-                  className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
-                  height={0}
-                  src={logo}
-                  width={0}
-                />
-                {alias ?? name}
-              </CardTitle>
-              <CardDescription className="grow">
-                <Image
-                  alt={alias ?? name}
-                  className="size-full rounded-md object-cover"
-                  height={0}
-                  src={thumbnail}
-                  width={0}
-                />
-              </CardDescription>
-            </Card>
+              <Card className="mx-auto flex aspect-square size-48 flex-col p-3 sm:size-56 md:size-64">
+                <CardTitle
+                  className={cn(
+                    'flex items-center justify-center gap-2 text-neutral-900',
+                    'text-lg sm:text-xl md:text-2xl'
+                  )}
+                >
+                  <Image
+                    alt={alias ?? name}
+                    className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
+                    height={0}
+                    src={logo}
+                    width={0}
+                  />
+                  {alias ?? name}
+                </CardTitle>
+                <CardDescription className="grow">
+                  <Image
+                    alt={alias ?? name}
+                    className="size-full rounded-md object-cover"
+                    height={0}
+                    src={thumbnail}
+                    width={0}
+                  />
+                </CardDescription>
+              </Card>
+            </Link>
           ))}
         </CustomCarousel>
 
