@@ -1,12 +1,5 @@
-import { relations, sql } from 'drizzle-orm';
-import {
-  boolean,
-  char,
-  date,
-  integer,
-  pgTable,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { boolean, char, integer, pgTable, varchar } from 'drizzle-orm/pg-core';
 
 import { clubMembers, doctorates, persons } from '.';
 
@@ -15,27 +8,39 @@ export const students = pgTable('students', {
     .primaryKey()
     .references(() => persons.id),
   rollNumber: varchar('roll_number', { length: 9 }).notNull(),
-  telephone: varchar('telephone', { length: 13 })
-    .array()
-    .default(sql`'{}'`)
-    .notNull(),
+
+  // Contact
   personalEmail: varchar('personal_email', { length: 256 }).notNull(),
+  telephone: varchar('telephone', { length: 13 }).notNull(),
+  alternateTelephone: varchar('alternate_telephone', { length: 13 }),
+
+  // Guardian Info
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),
-  fathersTelephone: varchar('fathers_telephone').notNull(),
-  mothersName: varchar('mothers_name', { length: 100 }).notNull(),
-  mothersTelephone: varchar('mothers_telephone').notNull(),
+  fathersTelephone: varchar('fathers_telephone', { length: 13 }).notNull(),
+  fathersEmail: varchar('fathers_email', { length: 256 }),
+  mothersName: varchar('mothers_name', { length: 100 }),
+  mothersTelephone: varchar('mothers_telephone'),
   localGuardiansName: varchar('local_guardians_name', { length: 100 }),
   localGuardiansTelephone: varchar('local_guardians_telephone', {
     length: 100,
   }),
-  pincode: char('pincode', { length: 6 }).notNull(),
-  permanentAddress: varchar('permanent_address').notNull(),
-  category: varchar('category').notNull(),
-  birthday: date('birthday', { mode: 'date' }).notNull(),
-  applicationNumber: varchar('application_number').notNull(),
-  admissionCategory: varchar('admission_category').notNull(),
-  admissionSubcategory: varchar('admission_subcategory'),
+
+  // Address
+  permanentAddress: varchar('permanent_address'),
+  pincode: char('pincode', { length: 6 }),
+
+  // Admission
+  applicationNumber: varchar('application_number'),
+  candidateCategory: varchar('candidate_category', {
+    enum: ['GEN-EWS', 'OBC-NCL', 'SC', 'ST'],
+  }).notNull(),
   isPwd: boolean('is_pwd').default(false).notNull(),
+  admissionCategory: varchar('admission_category', {
+    enum: ['DASA', 'MEA', 'OPEN', 'SII'],
+  }).notNull(),
+  admissionSubcategory: varchar('admission_subcategory', {
+    enum: ['CIWG', 'CSAB', 'SAARC'],
+  }),
 });
 
 export const studentsRelations = relations(students, ({ many, one }) => ({

@@ -15,8 +15,10 @@ export const studentAcademicDetails = pgTable('student_academic_details', {
     .primaryKey()
     .references(() => students.id)
     .notNull(),
-  section: varchar('section').notNull(),
   batch: smallint('batch').notNull(),
+  section: varchar('section').notNull(),
+  subSection: smallint('sub_section').notNull(),
+  // Current semester is kept for cases where a student repeats an AY
   currentSemester: smallint('current_semester').notNull(),
   sgpa: doublePrecision('sgpa').notNull(),
   cgpa: doublePrecision('cgpa').notNull(),
@@ -27,7 +29,6 @@ export const studentAcademicDetails = pgTable('student_academic_details', {
   majorId: smallint('major_id')
     .references(() => majors.id)
     .notNull(),
-  subSection: integer('sub_section').notNull(),
 });
 
 export const studentAcademicDetailsRelations = relations(
