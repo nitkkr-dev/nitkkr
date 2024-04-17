@@ -14,6 +14,9 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
 
+    AWS_ACCESS_KEY_ID: z.string(),
+    AWS_ACCESS_KEY_SECRET: z.string(),
+    AWS_S3_REGION: z.string(),
     AWS_PUBLIC_S3_URL: z.string().url(),
     AWS_PRIVATE_S3_URL: z.string().url(),
   },
