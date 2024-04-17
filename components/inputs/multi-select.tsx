@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { Command as CommandPrimitive, useCommandState } from 'cmdk';
@@ -23,13 +24,13 @@ export interface Option {
   /** Group the options by providing key. */
   [key: string]: string | boolean | undefined;
 }
-type GroupOption = Record<string, Option[]>;
+type GroupOption = Record<string, string[]>;
 
-interface MultipleSelectorProps {
-  value?: Option[];
-  defaultOptions?: Option[];
+export interface MultipleSelectorProps {
+  value?: string[];
+  defaultOptions?: string[];
   /** manually controlled options */
-  options?: Option[];
+  options?: string[];
   placeholder?: string;
   /** Loading component. */
   loadingIndicator?: React.ReactNode;
@@ -43,8 +44,8 @@ interface MultipleSelectorProps {
    **/
   triggerSearchOnFocus?: boolean;
   /** async search */
-  onSearch?: (value: string) => Promise<Option[]>;
-  onChange?: (options: Option[]) => void;
+  onSearch?: (value: string) => Promise<string[]>;
+  onChange?: (options: string[]) => void;
   /** Limit the maximum number of selected options. */
   maxSelected?: number;
   /** When the number of selected options exceeds the limit, the onMaxSelected will be called. */
@@ -75,7 +76,7 @@ interface MultipleSelectorProps {
 }
 
 export interface MultipleSelectorRef {
-  selectedValue: Option[];
+  selectedValue: string[];
   input: HTMLInputElement;
 }
 
@@ -93,7 +94,7 @@ export function useDebounce<T>(value: T, delay?: number): T {
   return debouncedValue;
 }
 
-function transToGroupOption(options: Option[], groupBy?: string) {
+function transToGroupOption(options: string[], groupBy?: string) {
   if (options.length === 0) {
     return {};
   }
@@ -105,7 +106,7 @@ function transToGroupOption(options: Option[], groupBy?: string) {
 
   const groupOption: GroupOption = {};
   options.forEach((option) => {
-    const key = (option[groupBy] as string) || '';
+    const key = option || '';
     if (!groupOption[key]) {
       groupOption[key] = [];
     }
@@ -114,13 +115,11 @@ function transToGroupOption(options: Option[], groupBy?: string) {
   return groupOption;
 }
 
-function removePickedOption(groupOption: GroupOption, picked: Option[]) {
+function removePickedOption(groupOption: GroupOption, picked: string[]) {
   const cloneOption = JSON.parse(JSON.stringify(groupOption)) as GroupOption;
 
   for (const [key, value] of Object.entries(cloneOption)) {
-    cloneOption[key] = value.filter(
-      (val) => !picked.find((p) => p.value === val.value)
-    );
+    cloneOption[key] = value.filter((val) => !picked.find((p) => p === val));
   }
   return cloneOption;
 }
@@ -142,7 +141,7 @@ const CommandEmpty = forwardRef<
   return (
     <div
       ref={forwardedRef}
-      className={cn('py-6 text-center text-sm', className)}
+      className={cn('py-6 text-center text-xs sm:text-sm', className)}
       cmdk-empty=""
       role="presentation"
       {...props}
@@ -186,7 +185,7 @@ const MultipleSelector = React.forwardRef<
     const [open, setOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const [selected, setSelected] = React.useState<Option[]>(value ?? []);
+    const [selected, setSelected] = React.useState<string[]>(value ?? []);
     const [options, setOptions] = React.useState<GroupOption>(
       transToGroupOption(arrayDefaultOptions, groupBy)
     );
@@ -203,12 +202,12 @@ const MultipleSelector = React.forwardRef<
     );
 
     const handleUnselect = React.useCallback(
-      (option: Option) => {
-        const newOptions = selected.filter((s) => s.value !== option.value);
+      (option: string) => {
+        const newOptions = selected.filter((s) => s !== option);
         setSelected(newOptions);
         onChange?.(newOptions);
       },
-      [onChange, selected]
+      [selected]
     );
 
     const handleKeyDown = React.useCallback(
@@ -226,7 +225,7 @@ const MultipleSelector = React.forwardRef<
           }
         }
       },
-      [handleUnselect, selected]
+      [selected]
     );
 
     useEffect(() => {
@@ -267,7 +266,7 @@ const MultipleSelector = React.forwardRef<
       };
 
       void exec();
-    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
+    }, [debouncedSearchTerm, open]);
 
     const CreatableItem = () => {
       if (!creatable) return undefined;
@@ -286,7 +285,7 @@ const MultipleSelector = React.forwardRef<
               return;
             }
             setInputValue('');
-            const newOptions = [...selected, { value, label: value }];
+            const newOptions = [...selected, value];
             setSelected(newOptions);
             onChange?.(newOptions);
           }}
@@ -349,7 +348,7 @@ const MultipleSelector = React.forwardRef<
           commandProps?.onKeyDown?.(e);
         }}
         className={cn(
-          'overflow-visible bg-transparent',
+          'overflow-visible bg-neutral-50',
           commandProps?.className
         )}
         shouldFilter={
@@ -361,7 +360,10 @@ const MultipleSelector = React.forwardRef<
       >
         <div
           className={cn(
-            'border-input focus-within:ring-ring group rounded-md border px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-offset-2',
+            'focus-within:ring-ring invalid:outline-red-100 group rounded-md border border-neutral-800 px-3 py-2 text-xs ring-offset-background sm:text-sm',
+            'transition-colors invalid:border-primary-500 invalid:outline-offset-2 focus-within:ring-1',
+            'focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed',
+            'disabled:border-0 disabled:bg-neutral-200/30 disabled:outline-none disabled:ring-0', //disabled: doesnt seem to work here
             className
           )}
         >
@@ -369,20 +371,17 @@ const MultipleSelector = React.forwardRef<
             {selected.map((option) => {
               return (
                 <Badge
-                  key={option.value}
+                  key={option}
                   className={cn(
-                    'data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground',
-                    'data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground',
+                    'data-[disabled]:cursor-not-allowed data-[disabled]:border-0 data-[disabled]:bg-neutral-200/30 data-[disabled]:ring-0',
+                    'bg-primary-300 data-[fixed]:bg-neutral-400 data-[fixed]:text-neutral-700 data-[fixed]:hover:bg-neutral-400',
                     badgeClassName
                   )}
-                  data-fixed={option.fixed}
-                  data-disabled={disabled}
                 >
-                  {option.label}
+                  {option}
                   <button
                     className={cn(
-                      'focus:ring-ring ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-offset-2',
-                      (disabled ?? option.fixed) && 'hidden'
+                      'ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2'
                     )}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -395,7 +394,7 @@ const MultipleSelector = React.forwardRef<
                     }}
                     onClick={() => handleUnselect(option)}
                   >
-                    <RxCross2 className="text-muted-foreground hover:text-foreground h-3 w-3" />
+                    <RxCross2 className="h-3 w-3 text-neutral-50 hover:text-neutral-900" />
                   </button>
                 </Badge>
               );
@@ -425,15 +424,15 @@ const MultipleSelector = React.forwardRef<
                   : placeholder
               }
               className={cn(
-                'placeholder:text-muted-foreground ml-2 flex-1 bg-transparent outline-none',
+                'ml-2 flex-1 bg-neutral-50 outline-none placeholder:text-neutral-500 disabled:cursor-not-allowed disabled:opacity-50',
                 inputProps?.className
               )}
             />
           </div>
         </div>
-        <div className="relative mt-2">
+        <div className="relative">
           {open && (
-            <CommandList className="bg-popover text-popover-foreground absolute top-0 z-10 w-full rounded-md border shadow-md outline-none animate-in">
+            <CommandList className="absolute top-0 z-10 w-full rounded-md border bg-neutral-50 text-neutral-800 shadow-md outline-none animate-in">
               {isLoading ? (
                 <>{loadingIndicator}</>
               ) : (
@@ -453,9 +452,8 @@ const MultipleSelector = React.forwardRef<
                         {dropdowns.map((option) => {
                           return (
                             <CommandItem
-                              key={option.value}
-                              value={option.value}
-                              disabled={option.disable}
+                              key={option}
+                              value={option}
                               onMouseDown={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -471,12 +469,10 @@ const MultipleSelector = React.forwardRef<
                                 onChange?.(newOptions);
                               }}
                               className={cn(
-                                'cursor-pointer',
-                                option.disable &&
-                                  'text-muted-foreground cursor-default'
+                                'cursor-pointer hover:bg-neutral-200/30'
                               )}
                             >
-                              {option.label}
+                              {option}
                             </CommandItem>
                           );
                         })}
@@ -494,4 +490,4 @@ const MultipleSelector = React.forwardRef<
 );
 
 MultipleSelector.displayName = 'MultipleSelector';
-export default MultipleSelector;
+export { MultipleSelector };
