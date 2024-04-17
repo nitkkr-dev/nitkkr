@@ -11,7 +11,7 @@ import {
 
 import { departments, faculty } from '.';
 
-export const hod = pgTable('hod', {
+export const departmentHeads = pgTable('department_heads', {
   id: smallserial('id').primaryKey(),
   facultyId: integer('faculty_id')
     .references(() => faculty.id)
@@ -24,13 +24,16 @@ export const hod = pgTable('hod', {
   createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
 });
 
-export const hodRelations = relations(hod, ({ one }) => ({
-  department: one(departments, {
-    fields: [hod.departmentId],
-    references: [departments.id],
-  }),
-  faculty: one(faculty, {
-    fields: [hod.facultyId],
-    references: [faculty.id],
-  }),
-}));
+export const departmentHeadsRelations = relations(
+  departmentHeads,
+  ({ one }) => ({
+    department: one(departments, {
+      fields: [departmentHeads.departmentId],
+      references: [departments.id],
+    }),
+    faculty: one(faculty, {
+      fields: [departmentHeads.facultyId],
+      references: [faculty.id],
+    }),
+  })
+);
