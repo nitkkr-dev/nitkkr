@@ -32,7 +32,7 @@ export const students = pgTable('students', {
   // Admission
   applicationNumber: varchar('application_number'),
   candidateCategory: varchar('candidate_category', {
-    enum: ['GEN-EWS', 'OBC-NCL', 'SC', 'ST'],
+    enum: ['GEN-EWS', 'OBC-NCL', 'OP', 'SC', 'ST'],
   }).notNull(),
   isPwd: boolean('is_pwd').default(false).notNull(),
   admissionCategory: varchar('admission_category', {
