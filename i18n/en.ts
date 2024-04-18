@@ -21,6 +21,7 @@ const text: Translations = {
     },
   },
 
+  Clubs: { title: 'CLUBS' },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
     financial: 'FINANCIAL COMMITTEE',
