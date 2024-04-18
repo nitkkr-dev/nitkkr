@@ -51,7 +51,7 @@ export default async function StudentActivities({
       />
 
       <section className="container mb-6 text-center">
-        <CustomCarousel itemClassName="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+        <CustomCarousel>
           {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
             <Link
               className="drop-shadow hover:drop-shadow-xl"
