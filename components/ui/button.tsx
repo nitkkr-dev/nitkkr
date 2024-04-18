@@ -27,7 +27,7 @@ const buttonVariants = cva(
           'active:bg-primary-700 active:text-shade-light'
         ),
         secondaryDisabled:
-          'border border-primary-100 cursor-not-allowed bg-neutral-50 text-neutral-300',
+          'cursor-not-allowed border border-primary-100 bg-neutral-50 text-neutral-300',
         outline: cn(
           'border border-primary-500 text-primary-500',
           'hover:border-primary-700 hover:text-primary-700',
