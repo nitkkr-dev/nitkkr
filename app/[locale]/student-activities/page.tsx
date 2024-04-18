@@ -31,7 +31,6 @@ export default async function StudentActivities({
     <>
       <ImageHeader
         title={text.title}
-        className="bg-[url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')]"
         headings={[
           { label: text.headings.clubs, href: '#clubs' },
           { label: text.headings.council, href: '#council' },
@@ -40,6 +39,7 @@ export default async function StudentActivities({
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
         ]}
+        src="https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png"
       />
 
       <Heading

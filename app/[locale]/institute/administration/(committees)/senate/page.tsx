@@ -9,7 +9,7 @@ export default async function Senate({
 }) {
   return (
     <>
-      <ImageHeader className="bg-[url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/senate.png')]" />
+      <ImageHeader src="https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/senate.png" />
       <Committee locale={locale} type="senate" />
     </>
   );

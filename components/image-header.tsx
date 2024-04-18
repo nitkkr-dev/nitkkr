@@ -7,10 +7,12 @@ export default function ImageHeader({
   className,
   title,
   headings,
+  src,
 }: {
   className?: string;
   title?: string;
   headings?: { label: string; href: string }[];
+  src: string;
 }) {
   return (
     <>
@@ -30,6 +32,7 @@ export default function ImageHeader({
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]',
           className
         )}
+        style={{ backgroundImage: `url('${src}')` }}
       >
         {title && (
           <h1 className="container my-auto text-center text-shade-light">

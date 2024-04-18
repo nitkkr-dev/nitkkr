@@ -25,7 +25,6 @@ export default async function Department({
     <>
       <ImageHeader
         title={department.name}
-        className="bg-[url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')]"
         headings={[
           { label: text.headings.about, href: '#about' },
           { label: text.headings.vision, href: '#vision-mission' },
@@ -33,6 +32,7 @@ export default async function Department({
           { label: text.headings.programmes, href: '#programmes' },
           { label: text.headings.gallery, href: '#gallery' },
         ]}
+        src={department.banner}
       />
       <WorkInProgress locale={locale} />
     </>
