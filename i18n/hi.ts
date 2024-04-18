@@ -16,7 +16,7 @@ const text: Translations = {
       more: 'और पढ़ें',
     },
   },
-
+  Clubs: { title: 'संघठनें' },
   Committee: {
     building: 'निर्माण एवं कार्य समिति',
     financial: 'वित्तीय समिति',

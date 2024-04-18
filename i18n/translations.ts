@@ -13,6 +13,7 @@ export interface Translations {
     };
   };
 
+  Clubs: { title: string };
   Committee: {
     building: string;
     financial: string;
