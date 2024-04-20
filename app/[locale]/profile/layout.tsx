@@ -1,12 +1,13 @@
 import Image from 'next/image';
 
+import { Button } from '~/components/ui';
 import Unauthorized from '~/components/unauthorized';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import { getSession } from '~/server/auth';
+import { getSession, signOut } from '~/server/auth';
 import { db } from '~/server/db';
 
-import { LogOut, PathnameAwareSuspense, Tabs } from './client-utils';
+import { PathnameAwareSuspense, Tabs } from './client-utils';
 
 export default async function ProfileLayout({
   children,
@@ -78,7 +79,16 @@ export default async function ProfileLayout({
           />
         </ol>
 
-        <LogOut className="px-3 py-2" text={text.logout} />
+        <form
+          action={async () => {
+            'use server';
+            await signOut({ redirectTo: '/' });
+          }}
+        >
+          <Button className="px-3 py-2" variant="ghost">
+            {text.logout}
+          </Button>
+        </form>
       </article>
 
       <Tabs

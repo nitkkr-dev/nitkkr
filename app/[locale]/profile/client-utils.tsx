@@ -1,6 +1,5 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Suspense } from 'react';
@@ -19,22 +18,6 @@ import {
 import Loading from '~/components/loading';
 import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
-
-export const LogOut = ({
-  className,
-  text,
-}: {
-  className?: string;
-  text: string;
-}) => (
-  <Button
-    className={className}
-    onClick={() => signOut({ callbackUrl: '/' })}
-    variant="ghost"
-  >
-    {text}
-  </Button>
-);
 
 export const PathnameAwareSuspense = ({
   children,

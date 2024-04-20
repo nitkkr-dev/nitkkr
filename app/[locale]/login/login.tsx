@@ -1,10 +1,11 @@
+import { FcGoogle } from 'react-icons/fc';
+
 import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import { signIn } from '~/server/auth';
 import { getS3Url } from '~/server/s3';
-
-import LoginButton from './sign-in-with-google-button';
 
 const Login = async ({ locale }: { locale: string }) => {
   const text = (await getTranslations(locale)).Login;
@@ -43,7 +44,25 @@ const Login = async ({ locale }: { locale: string }) => {
             locale === 'en' ? "after:content-['OR']" : "after:content-['अथवा']"
           )}
         />
-        <LoginButton loginText={text.signInWithGoogle} />
+
+        <form
+          action={async () => {
+            'use server';
+            await signIn('google', { redirectTo: `/${locale}/profile` });
+          }}
+        >
+          <Button
+            className={cn(
+              'p-2 sm:p-3 md:p-4',
+              'w-full space-x-3 bg-neutral-50 hover:bg-neutral-100'
+            )}
+            type="submit"
+            variant="outline"
+          >
+            <FcGoogle className="size-4 sm:size-5 md:size-6" />
+            <span>{text.signInWithGoogle}</span>
+          </Button>
+        </form>
       </section>
     </article>
   );
