@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { getTranslations } from '~/i18n/translations';
 import { capitalise } from '~/lib/utils';
-import { getServerAuthSession } from '~/server/auth';
+import { getSession } from '~/server/auth';
 import { db } from '~/server/db';
 
 export default async function Clubs({
@@ -12,7 +12,7 @@ export default async function Clubs({
 }) {
   const text = (await getTranslations(locale)).Profile.tabs.clubs;
 
-  const session = (await getServerAuthSession())!;
+  const session = (await getSession())!;
   const student = (await db.query.students.findFirst({
     columns: {},
     where: (student, { eq }) => eq(student.id, session.person.id),

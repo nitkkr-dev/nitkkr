@@ -1,5 +1,5 @@
 import { getTranslations } from '~/i18n/translations';
-import { getServerAuthSession } from '~/server/auth';
+import { getSession } from '~/server/auth';
 import { db } from '~/server/db';
 
 export default async function Personal({
@@ -9,7 +9,7 @@ export default async function Personal({
 }) {
   const text = (await getTranslations(locale)).Profile.tabs.personal;
 
-  const session = (await getServerAuthSession())!;
+  const session = (await getSession())!;
   const person = (await db.query.persons.findFirst({
     columns: {
       alternateTelephone: true,

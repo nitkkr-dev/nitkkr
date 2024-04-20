@@ -1,21 +1,9 @@
-import {
-  getServerSession,
-  type DefaultSession,
-  type DefaultUser,
-  type NextAuthOptions,
-} from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import NextAuth, { type DefaultSession, type User } from 'next-auth';
+import Google from 'next-auth/providers/google';
 
-import { env } from '~/lib/env';
 import { db, roles } from '~/server/db';
 
 declare module 'next-auth' {
-  // A nicer way to assert that `email` will not be
-  // undefined since we only use the Google provider as of now.
-  interface User extends DefaultUser {
-    email: string;
-  }
-
   interface Session extends DefaultSession {
     person: {
       id: number;
@@ -29,7 +17,12 @@ declare module 'next-auth' {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+export const {
+  auth: getSession,
+  handlers,
+  signIn,
+  signOut,
+} = NextAuth({
   callbacks: {
     async session({ session }) {
       session.person = (await db.query.persons.findFirst({
@@ -50,19 +43,7 @@ export const authOptions: NextAuthOptions = {
       );
     },
   },
-  providers: [
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-      profile(profile) {
-        return {
-          id: profile.email as string,
-          email: profile.email as string,
-          image: profile.picture as string | null,
-        };
-      },
-    }),
-  ],
-};
-
-export const getServerAuthSession = () => getServerSession(authOptions);
+  // FIXME: Sign out and Error pages
+  pages: { signIn: '/login' },
+  providers: [Google],
+});

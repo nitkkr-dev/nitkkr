@@ -41,7 +41,7 @@
     "jiti": "^1.21.0",
     "negotiator": "^0.6.3",
     "next": "14.2.3",
-    "next-auth": "^4.24.5",
+    "next-auth": "^5.0.0-beta.16",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",

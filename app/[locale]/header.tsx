@@ -12,7 +12,7 @@ import MaybeLink from '~/components/maybe-link';
 import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import { getServerAuthSession } from '~/server/auth';
+import { getSession } from '~/server/auth';
 import { db } from '~/server/db';
 
 export default async function Header({ locale }: { locale: string }) {
@@ -205,7 +205,7 @@ const AuthAction = async ({
   mobile?: boolean;
   text: { alt: string; login: string; view: string };
 }) => {
-  const session = await getServerAuthSession();
+  const session = await getSession();
 
   if (session) {
     let id = '';

@@ -9,10 +9,9 @@ export const env = createEnv({
 
     POSTGRES_URL: z.string().url(),
 
-    NEXTAUTH_URL: z.string().url(),
-    NEXTAUTH_SECRET: z.string(),
-    GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string(),
+    AUTH_SECRET: z.string(),
+    AUTH_GOOGLE_ID: z.string(),
+    AUTH_GOOGLE_SECRET: z.string(),
 
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_ACCESS_KEY_SECRET: z.string(),

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Unauthorized from '~/components/unauthorized';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import { getServerAuthSession } from '~/server/auth';
+import { getSession } from '~/server/auth';
 import { db } from '~/server/db';
 
 import { LogOut, PathnameAwareSuspense, Tabs } from './client-utils';
@@ -15,7 +15,7 @@ export default async function ProfileLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const session = await getServerAuthSession();
+  const session = await getSession();
   if (!session) return <Unauthorized locale={locale} />;
 
   const text = (await getTranslations(locale)).Profile;
