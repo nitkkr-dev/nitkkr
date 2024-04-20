@@ -14,6 +14,10 @@ import {
   SelectValue,
 } from '~/components/inputs';
 import Loading from '~/components/loading';
+import {
+  DepartmentCardSkeleton,
+  DepartmentNameSkeleton,
+} from '~/components/skeletons';
 import { NoResultStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
@@ -37,7 +41,7 @@ export default async function FacultyAndStaff({
           'border border-primary-700 bg-neutral-50'
         )}
       >
-        <Suspense fallback={<Loading className="max-xl:hidden" />}>
+        <Suspense fallback={<DepartmentNameSkeleton />}>
           <Departments department={departmentName} />
         </Suspense>
       </search>
@@ -59,7 +63,12 @@ export default async function FacultyAndStaff({
         </search>
 
         <ol className="space-y-4">
-          <Suspense fallback={<Loading />} key={`${query}-${departmentName}`}>
+          <Suspense
+            fallback={Array.from({ length: 10 }).map((_, index) => (
+              <DepartmentCardSkeleton key={index} />
+            ))}
+            key={`${query}-${departmentName}`}
+          >
             <FacultyList
               department={departmentName}
               deptartmentHeadText={text.departmentHead}

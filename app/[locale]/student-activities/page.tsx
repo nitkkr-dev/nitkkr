@@ -6,7 +6,7 @@ import { BouncyArrowButton } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import Loading from '~/components/loading';
+import { StudentActivityCarouselSkeleton } from '~/components/skeletons';
 import { Card, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
@@ -43,7 +43,7 @@ export default async function StudentActivities({
       />
 
       <section className="container mb-6 text-center">
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<StudentActivityCarouselSkeleton />}>
           <ClubsCarousel locale={locale} />
         </Suspense>
         <BouncyArrowButton

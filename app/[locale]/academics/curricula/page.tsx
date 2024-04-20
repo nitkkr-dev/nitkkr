@@ -5,8 +5,8 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import Loading from '~/components/loading';
 import { PaginationWithLogic } from '~/components/pagination';
+import { CurriculaSkeleton } from '~/components/skeletons';
 import {
   Table,
   TableBody,
@@ -43,25 +43,25 @@ export default async function Curricula({
       <search className="container">
         {/* FIXME: Add input and filters here */}
       </search>
-
+      {/* FIXME: Make Tables mobile friendly by adding horizontal scrolling*/}
       <main className="container">
-        <Suspense fallback={<Loading />}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.code}</TableHead>
-                <TableHead>{text.title}</TableHead>
-                <TableHead>{text.major}</TableHead>
-                <TableHead>{text.credits}</TableHead>
-                <TableHead>{text.totalCredits}</TableHead>
-                <TableHead className="text-center">{text.syllabus}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{text.code}</TableHead>
+              <TableHead>{text.title}</TableHead>
+              <TableHead>{text.major}</TableHead>
+              <TableHead>{text.credits}</TableHead>
+              <TableHead>{text.totalCredits}</TableHead>
+              <TableHead className="text-center">{text.syllabus}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <Suspense fallback={<CurriculaSkeleton />}>
               <Courses page={page} />
-            </TableBody>
-          </Table>
-        </Suspense>
+            </Suspense>
+          </TableBody>
+        </Table>
         <PaginationWithLogic
           currentPage={page}
           query={db.select({ count: count() }).from(courses)}
