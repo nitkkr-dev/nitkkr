@@ -6,6 +6,8 @@ import {
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
+import { db } from '~/server/db';
+
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error(
     'GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be defined in your environment.'
@@ -24,6 +26,18 @@ declare module 'next-auth' {
 }
 
 export const authOptions: NextAuthOptions = {
+  callbacks: {
+    async signIn({ user: { email } }) {
+      if (!email) return false;
+
+      return Boolean(
+        await db.query.persons.findFirst({
+          columns: { id: true },
+          where: (person, { eq }) => eq(person.email, email),
+        })
+      );
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
