@@ -135,7 +135,9 @@ export default async function Header({ locale }: { locale: string }) {
               <ProfileImage
                 alt={text.profile.alt}
                 href={`/${locale}/profile`}
-                src={session.user.image}
+                // FIXME: Remove session.user.image once
+                // everyone's image is fed to the database
+                src={session.user.image ?? session.person.image}
               />
             ) : (
               <Button asChild className="h-full w-16 xl:w-20">
@@ -186,7 +188,9 @@ export default async function Header({ locale }: { locale: string }) {
                     <Link href={`/${locale}/profile`}>
                       <ProfileImage
                         alt={text.profile.alt}
-                        src={session.user.image}
+                        // FIXME: Remove session.user.image once
+                        // everyone's image is fed to the database
+                        src={session.user.image ?? session.person.image}
                       />
                       {text.profile.view}
                     </Link>
@@ -214,7 +218,7 @@ const ProfileImage = ({
   alt: string;
   className?: string;
   href?: string;
-  src: string | null;
+  src: string;
 }) => {
   return (
     <Button

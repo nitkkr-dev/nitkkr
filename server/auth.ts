@@ -6,7 +6,7 @@ import {
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { db } from '~/server/db';
+import { db, roles } from '~/server/db';
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error(
@@ -15,18 +15,31 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 }
 
 declare module 'next-auth' {
+  // A nicer way to assert that `email` will not be
+  // undefined since we only use the Google provider as of now.
   interface User extends DefaultUser {
     email: string;
-    image: string | null;
   }
 
   interface Session extends DefaultSession {
+    person: {
+      image: string;
+      role: { permissions: (typeof roles.permissions.enumValues)[number][] };
+    };
     user: User;
   }
 }
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    async session({ session }) {
+      session.person = (await db.query.persons.findFirst({
+        columns: { image: true },
+        where: ({ email }, { eq }) => eq(email, session.user.email),
+        with: { role: { columns: { permissions: true } } },
+      }))!;
+      return session;
+    },
     async signIn({ user: { email } }) {
       if (!email) return false;
 
