@@ -6,7 +6,6 @@ export * from './dialog';
 export * from './label';
 export * from './radio-group';
 export * from './scroll-area';
-export * from './skeleton';
 export * from './table';
 export * from './toast';
 export * from './toaster';
