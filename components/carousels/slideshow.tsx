@@ -10,13 +10,13 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '~/components/ui';
+} from '~/components/carousels';
 
-export default function Slideshow({
+const Slideshow = ({
   images,
 }: {
   images: { image: string; title?: string; subtitle?: string }[];
-}) {
+}) => {
   const options: EmblaOptionsType = { loop: true, align: 'center' };
 
   return (
@@ -59,4 +59,6 @@ export default function Slideshow({
       </Carousel>
     </article>
   );
-}
+};
+
+export { Slideshow };

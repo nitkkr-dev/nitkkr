@@ -5,7 +5,7 @@ import { FaTrophy } from 'react-icons/fa6';
 import { HiMiniBeaker } from 'react-icons/hi2';
 import { MdBadge } from 'react-icons/md';
 
-import CustomCarousel from '~/components/carousel';
+import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import MessageCard from '~/components/message-card';
@@ -263,7 +263,7 @@ export default async function Department({
             heading="h3"
             text={text.headings.gallery.toUpperCase()}
           />
-          <CustomCarousel className="my-5 w-full">
+          <GalleryCarousel className="my-5 w-full">
             {department.images.map((image, index) => (
               <Image
                 alt={String(index)}
@@ -274,7 +274,7 @@ export default async function Department({
                 width={0}
               />
             ))}
-          </CustomCarousel>
+          </GalleryCarousel>
         </article>
       )}
     </>

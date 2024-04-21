@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowUp } from 'react-icons/fa6';
 
-import CustomCarousel from '~/components/carousel';
+import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { Button, Card, CardDescription, CardTitle } from '~/components/ui';
@@ -51,7 +51,7 @@ export default async function StudentActivities({
       />
 
       <section className="container mb-6 text-center">
-        <CustomCarousel>
+        <GalleryCarousel>
           {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
             <Link
               className="drop-shadow hover:drop-shadow-xl"
@@ -86,7 +86,7 @@ export default async function StudentActivities({
               </Card>
             </Link>
           ))}
-        </CustomCarousel>
+        </GalleryCarousel>
 
         <Button
           asChild
