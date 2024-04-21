@@ -3,6 +3,7 @@ export * from './card';
 export * from './hamburger-button';
 export * from './label';
 export * from './naive-carousel';
+export * from './radio-group';
 export * from './scroll-area';
 export * from './select';
 export * from './table';
