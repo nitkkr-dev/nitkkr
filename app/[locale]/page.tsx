@@ -1,7 +1,7 @@
 import Notifications from '~/app/notifications';
+import { Slideshow } from '~/components/carousels';
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
-import Slideshow from '~/components/slideshow';
 import { getTranslations } from '~/i18n/translations';
 import { type notifications } from '~/server/db';
 

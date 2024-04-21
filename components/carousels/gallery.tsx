@@ -5,10 +5,10 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselProps,
-} from '~/components/ui';
+} from '~/components/carousels';
 import { cn } from '~/lib/utils';
 
-const CustomCarousel = ({
+const GalleryCarousel = ({
   carouselProps,
   children,
   className,
@@ -49,4 +49,4 @@ const CustomCarousel = ({
   );
 };
 
-export default CustomCarousel;
+export { GalleryCarousel };
