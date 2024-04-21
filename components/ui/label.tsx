@@ -8,10 +8,10 @@ import { cn } from '~/lib/utils';
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
-    disabled: boolean;
-    required: boolean;
+    disabled?: boolean;
+    required?: boolean;
   }
->(({ className, disabled, required, ...props }, ref) => (
+>(({ className, disabled = false, required = false, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
     className={cn(
