@@ -90,6 +90,10 @@ const text: Translations = {
       '© 2024 National Institute of Technology Kurukshetra. All Rights Reserved.',
   },
   Forms: { title: 'FORMS' },
+  FormDetails: {
+    title: 'Form Title',
+    description: 'Form Description',
+  },
   Header: {
     institute: 'Institute',
     academics: 'Academics',

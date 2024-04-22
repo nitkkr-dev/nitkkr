@@ -78,6 +78,10 @@ export interface Translations {
     copyright: string;
   };
   Forms: { title: string };
+  FormDetails: {
+    title: string;
+    description: string;
+  };
   Header: {
     institute: string;
     academics: string;
