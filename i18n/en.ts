@@ -109,7 +109,52 @@ const text: Translations = {
   },
   Profile: {
     tabs: {
-      personal: { title: 'PERSONAL DETAILS' },
+      personal: {
+        title: 'PERSONAL DETAILS',
+        basic: {
+          title: 'Basic',
+          name: 'Name',
+          rollNumber: 'Roll Number',
+          sex: 'Sex',
+          dateOfBirth: 'Date of Birth',
+        },
+        contact: {
+          title: 'Contact',
+          email: 'Institute email',
+          personalEmail: 'Personal email',
+          telephone: 'Telephone',
+          alternateTelephone: 'Alternate telephone',
+        },
+        institute: {
+          title: 'Institute',
+          degree: 'Degree',
+          major: 'Major',
+          currentSemester: 'Current semester',
+          section: 'Section',
+        },
+        admission: {
+          title: 'Admission',
+          applicationNumber: 'Application number',
+          candidateCategory: 'Candidate category',
+          admissionCategory: 'Admission category',
+          admissionSubcategory: 'Admission Sub-category',
+          dateOfAdmission: 'Date of Admission',
+        },
+        guardians: {
+          title: 'Guardians',
+          father: 'Father',
+          mother: 'Mother',
+          local: 'Local Guardian',
+          name: 'Name',
+          telephone: 'Telephone',
+          email: 'Email',
+        },
+        address: {
+          title: 'Address',
+          permanent: 'Permanent Address',
+          pinCode: 'Pin code',
+        },
+      },
       notifications: { title: 'NOTIFICATIONS' },
       courses: { title: 'COURSES' },
       clubs: { title: 'CLUBS' },

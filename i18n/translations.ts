@@ -94,7 +94,52 @@ export interface Translations {
   Profile: {
     logout: string;
     tabs: {
-      personal: { title: string };
+      personal: {
+        title: string;
+        basic: {
+          title: string;
+          name: string;
+          rollNumber: string;
+          sex: string;
+          dateOfBirth: string;
+        };
+        contact: {
+          title: string;
+          email: string;
+          personalEmail: string;
+          telephone: string;
+          alternateTelephone: string;
+        };
+        institute: {
+          title: string;
+          degree: string;
+          major: string;
+          currentSemester: string;
+          section: string;
+        };
+        admission: {
+          title: string;
+          applicationNumber: string;
+          candidateCategory: string;
+          admissionCategory: string;
+          admissionSubcategory: string;
+          dateOfAdmission: string;
+        };
+        guardians: {
+          title: string;
+          father: string;
+          mother: string;
+          local: string;
+          name: string;
+          telephone: string;
+          email: string;
+        };
+        address: {
+          title: string;
+          permanent: string;
+          pinCode: string;
+        };
+      };
       notifications: { title: string };
       courses: { title: string };
       clubs: { title: string };
