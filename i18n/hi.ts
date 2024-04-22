@@ -105,7 +105,52 @@ const text: Translations = {
   },
   Profile: {
     tabs: {
-      personal: { title: 'व्यक्तिगत विवरण' },
+      personal: {
+        title: 'व्यक्तिगत विवरण',
+        basic: {
+          title: 'मूलभूत',
+          name: 'नाम',
+          rollNumber: 'रोल संख्या',
+          sex: 'लिंग',
+          dateOfBirth: 'जन्मदिन',
+        },
+        contact: {
+          title: 'संपर्क',
+          email: 'संस्थान ईमेल',
+          personalEmail: 'व्यक्तिगत ईमेल',
+          telephone: 'टेलीफ़ोन',
+          alternateTelephone: 'वैकल्पिक टेलीफ़ोन',
+        },
+        institute: {
+          title: 'संस्था',
+          degree: 'उपाधि',
+          major: 'प्रमुख', // FIXME
+          currentSemester: 'मौजूदा छमाही',
+          section: 'अनुभाग',
+        },
+        admission: {
+          title: 'प्रवेश',
+          applicationNumber: 'प्रवेश संख्या',
+          candidateCategory: 'उम्मीदवार श्रेणी',
+          admissionCategory: 'प्रवेश श्रेणी',
+          admissionSubcategory: 'प्रवेश उपश्रेणी',
+          dateOfAdmission: 'प्रवेश की तिथि',
+        },
+        guardians: {
+          title: 'अभिभावक',
+          father: 'पिता',
+          mother: 'माता',
+          local: 'स्थानीय संरक्षक',
+          name: 'नाम',
+          telephone: 'टेलीफ़ोन',
+          email: 'ईमेल',
+        },
+        address: {
+          title: 'पता',
+          permanent: 'स्थायी पता',
+          pinCode: 'पिन कोड',
+        },
+      },
       notifications: { title: 'सूचनाएँ' },
       courses: { title: 'पाठ्यक्रम' },
       clubs: { title: 'संघठन' },

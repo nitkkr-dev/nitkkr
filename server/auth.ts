@@ -6,7 +6,7 @@ import {
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { db, roles } from '~/server/db';
+import { db, persons, roles } from '~/server/db';
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error(
@@ -24,9 +24,13 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     person: {
       id: number;
-      image: string;
       name: string;
+      email: string;
+      image: string;
+      sex: (typeof persons.sex.enumValues)[number];
+      dateOfBirth: Date | null;
       role: { permissions: (typeof roles.permissions.enumValues)[number][] };
+      createdOn: Date;
     };
     user: User;
   }
@@ -36,7 +40,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session }) {
       session.person = (await db.query.persons.findFirst({
-        columns: { id: true, image: true, name: true },
+        columns: {
+          id: true,
+          createdOn: true,
+          dateOfBirth: true,
+          email: true,
+          image: true,
+          name: true,
+          sex: true,
+        },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },
       }))!;

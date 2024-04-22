@@ -1,5 +1,6 @@
-import WorkInProgress from '~/components/work-in-progress';
 import { getTranslations } from '~/i18n/translations';
+import { getServerAuthSession } from '~/server/auth';
+import { db } from '~/server/db';
 
 export default async function Personal({
   params: { locale },
@@ -8,6 +9,16 @@ export default async function Personal({
 }) {
   const text = (await getTranslations(locale)).Profile.tabs.personal;
 
+  const session = (await getServerAuthSession())!;
+  const student = (await db.query.students.findFirst({
+    where: (student, { eq }) => eq(student.id, session.person.id),
+  }))!;
+  const studentAcademicDetails =
+    (await db.query.studentAcademicDetails.findFirst({
+      where: (studentAcademic, { eq }) => eq(studentAcademic.id, student.id),
+      with: { major: { columns: { degree: true, name: true } } },
+    }))!;
+
   return (
     <>
       <header className="mb-4 max-md:hidden">
@@ -15,7 +26,130 @@ export default async function Personal({
         <hr className="border border-primary-700 opacity-50" />
       </header>
 
-      <WorkInProgress locale={locale} />
+      <dl>
+        <Section
+          items={[
+            `${text.basic.name}: ${session.person.name}`,
+            `${text.basic.rollNumber}: ${student.rollNumber}`,
+            `${text.basic.sex}: ${session.person.sex}`,
+            `${text.basic.dateOfBirth}: ${
+              session.person.dateOfBirth
+                ? session.person.dateOfBirth.toLocaleDateString(locale, {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                    numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+                  })
+                : '-'
+            }`,
+          ]}
+          title={text.basic.title}
+        />
+
+        <Section
+          items={[
+            `${text.contact.email}: ${session.person.email}`,
+            `${text.contact.personalEmail}: ${student.personalEmail}`,
+            `${text.contact.telephone}: ${student.telephone}`,
+            `${text.contact.alternateTelephone}: ${student.alternateTelephone ?? '-'}`,
+          ]}
+          title={text.contact.title}
+        />
+
+        <Section
+          items={[
+            `${text.institute.degree}: ${studentAcademicDetails.major.degree}`,
+            `${text.institute.major}: ${studentAcademicDetails.major.name}`,
+            `${text.institute.currentSemester}: ${studentAcademicDetails.currentSemester}`,
+            `${text.institute.section}: ${studentAcademicDetails.section}-${studentAcademicDetails.subSection}`,
+          ]}
+          title={text.institute.title}
+        />
+
+        <Section
+          items={[
+            `${text.admission.applicationNumber}: ${student.applicationNumber ?? '-'}`,
+            `${text.admission.candidateCategory}: ${student.candidateCategory}`,
+            `${text.admission.admissionCategory}: ${student.admissionCategory}`,
+            `${text.admission.admissionSubcategory}: ${student.admissionSubcategory ?? '-'}`,
+            `${text.admission.dateOfAdmission}: ${session.person.createdOn.toLocaleDateString(
+              locale,
+              {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+              }
+            )}`,
+          ]}
+          title={text.admission.title}
+        />
+
+        <Section title={text.guardians.title}>
+          <p className="text-base font-semibold">{text.guardians.father}</p>
+          <article className="mb-2 text-neutral-600 *:text-base">
+            <p>
+              {text.guardians.name}: {student.fathersName}
+            </p>
+            <p>
+              {text.guardians.telephone}: {student.fathersTelephone}
+            </p>
+            <p>
+              {text.guardians.email}: {student.fathersEmail ?? '-'}
+            </p>
+          </article>
+          <p className="text-base font-semibold">{text.guardians.mother}</p>
+          <article className="mb-2 text-neutral-600 *:text-base">
+            <p>
+              {text.guardians.name}: {student.mothersName ?? '-'}
+            </p>
+            <p>
+              {text.guardians.telephone}: {student.mothersTelephone ?? '-'}
+            </p>
+          </article>
+          <p className="text-base font-semibold">{text.guardians.local}</p>
+          <article className="text-neutral-600 *:text-base">
+            <p>
+              {text.guardians.name}: {student.localGuardiansName ?? '-'}
+            </p>
+            <p>
+              {text.guardians.telephone}:{' '}
+              {student.localGuardiansTelephone ?? '-'}
+            </p>
+          </article>
+        </Section>
+
+        <Section
+          items={[
+            `${text.address.permanent}: ${student.permanentAddress}`,
+            `${text.address.pinCode}: ${student.pincode}`,
+          ]}
+          title={text.address.title}
+        />
+      </dl>
     </>
   );
 }
+
+const Section = ({
+  children,
+  items = [],
+  title,
+}: {
+  children?: React.ReactNode;
+  items?: string[];
+  title: string;
+}) => (
+  <>
+    <dt>
+      <h5 className="font-semibold text-shade-dark">{title}</h5>
+    </dt>
+    <dd className="text-neutral-600 *:text-base">
+      {items.map((item, index) => (
+        <p key={index}>{item}</p>
+      ))}
+      {children}
+    </dd>
+    <hr className="my-4 text-neutral-700" />
+  </>
+);
