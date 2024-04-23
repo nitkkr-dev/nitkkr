@@ -3,12 +3,12 @@ import { type CollectionCreateSchema } from 'typesense/lib/Typesense/Collections
 const clubSchema: CollectionCreateSchema = {
   name: 'clubs',
   fields: [
-    { name: 'image', type: 'string', index: false },
+    { name: 'logo', type: 'string', index: false },
     { name: 'name', type: 'string' },
     { name: 'tagline', type: 'string' },
-    { name: 'admins', type: 'object[]', index: false, optional: true },
+    // { name: 'admins', type: 'object[]', index: false, optional: true },
   ],
-  default_sorting_field: 'name',
+  // default_sorting_field: 'name',
   enable_nested_fields: true,
 };
 
@@ -20,21 +20,21 @@ const courseSchema: CollectionCreateSchema = {
     { name: 'programme', type: 'string', index: false },
     { name: 'department', type: 'string', index: false },
   ],
-  default_sorting_field: 'code',
+  // default_sorting_field: 'code',
 };
 
 const facultyAndStaffSchema: CollectionCreateSchema = {
   name: 'faculty_and_staff',
   fields: [
     { name: 'employee_id', type: 'string', index: false },
-    { name: 'image', type: 'string', index: false },
+    { name: 'image', type: 'image', index: false },
     { name: 'name', type: 'string' },
     { name: 'designation', type: 'string', index: false },
     { name: 'email', type: 'string' },
     { name: 'phone', type: 'string' },
     { name: 'address', type: 'string', index: false },
   ],
-  default_sorting_field: 'name',
+  // default_sorting_field: 'name',
 };
 
 export const schema = [clubSchema, courseSchema, facultyAndStaffSchema];
