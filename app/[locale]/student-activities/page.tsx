@@ -38,7 +38,7 @@ export default async function StudentActivities({
         className="container"
         glyphDirection="ltr"
         heading="h3"
-        href="#clubs"
+        id="clubs"
         text={text.sections.clubs.title}
       />
 

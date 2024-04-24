@@ -263,10 +263,11 @@ export default async function Department({
       </nav>
 
       {imageCount !== 0 && (
-        <article className="container" id="gallery">
+        <article className="container">
           <Heading
             glyphDirection="rtl"
             heading="h3"
+            id="gallery"
             text={text.headings.gallery.toUpperCase()}
           />
           <GalleryCarousel className="my-5 w-full">

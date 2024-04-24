@@ -40,7 +40,12 @@ export default async function Committee({
         <Heading glyphDirection="dual" heading="h1" text={text[type]} />
       )}
 
-      <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
+      <Heading
+        glyphDirection="ltr"
+        heading="h2"
+        id="members"
+        text={text.members.title}
+      />
       <Suspense fallback={<Loading />}>
         <Table>
           <TableHeader>
@@ -60,7 +65,12 @@ export default async function Committee({
         </Table>
       </Suspense>
 
-      <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
+      <Heading
+        glyphDirection="ltr"
+        heading="h2"
+        id="meetings"
+        text={text.meetings.title}
+      />
       <Suspense fallback={<Loading />}>
         <Table>
           <TableHeader>

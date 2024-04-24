@@ -82,11 +82,11 @@ export default async function Home({
 
       <Notifications category={notificationCategory} locale={locale} />
 
-      <section className="container mb-32 mt-10" id="directors-corner">
+      <section className="container mb-32 mt-10">
         <Heading
           glyphDirection="rtl"
           heading="h2"
-          href="#directors-corner"
+          id="directors-corner"
           text={text.director.title}
         />
         <MessageCard

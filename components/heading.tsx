@@ -1,9 +1,8 @@
-import { type UrlObject } from 'url';
-
 import Image from 'next/image';
+import Link from 'next/link';
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-import MaybeLink from '~/components/maybe-link';
+import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
 function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
@@ -68,43 +67,44 @@ export default function Heading({
   className,
   glyphDirection,
   heading: Comp,
-  href,
   text,
   ...props
 }: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
   glyphDirection: 'rtl' | 'dual' | 'ltr';
   heading: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  href?: string | UrlObject;
   text: string;
 }) {
-  const styles = 'flex flex-nowrap gap-2 sm:gap-3 md:gap-4';
-
   return (
     <header
       className={cn(
+        'group relative',
         'my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12',
-        !href && styles,
+        'flex flex-nowrap items-center space-x-2 sm:space-x-3 md:space-x-4',
         className
       )}
       {...props}
     >
-      <MaybeLink className={cn(href && styles)} href={href}>
-        {glyphDirection === 'dual' && (
-          <>
-            <Elephants direction="rtl" />
-            <Comp className="my-auto min-w-fit">{text}</Comp>
-            <Elephants direction="ltr" />
-          </>
-        )}
+      {glyphDirection === 'dual' && <Elephants direction="rtl" />}
+      {glyphDirection === 'rtl' && <Horses direction={glyphDirection} />}
+      <Comp className="my-auto min-w-fit">{text}</Comp>
+      {glyphDirection === 'ltr' && <Horses direction={glyphDirection} />}
+      {glyphDirection === 'dual' && <Elephants direction="ltr" />}
 
-        {glyphDirection === 'ltr' && (
-          <Comp className="my-auto min-w-fit">{text}</Comp>
-        )}
-        {glyphDirection !== 'dual' && <Horses direction={glyphDirection} />}
-        {glyphDirection === 'rtl' && (
-          <Comp className="my-auto min-w-fit">{text}</Comp>
-        )}
-      </MaybeLink>
+      {glyphDirection !== 'dual' && (
+        <Button
+          asChild
+          className={cn(
+            '!ml-0 w-0',
+            'hidden animate-in fade-in zoom-in group-hover:inline',
+            // FIXME: First/last ordering
+            glyphDirection === 'ltr' && 'order-first after:md:pr-2',
+            glyphDirection === 'rtl' && 'order-last before:md:pl-2'
+          )}
+          variant="link"
+        >
+          <Link href={`#${props.id}`}>#</Link>
+        </Button>
+      )}
     </header>
   );
 }

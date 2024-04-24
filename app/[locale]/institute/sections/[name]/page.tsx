@@ -55,7 +55,7 @@ export default async function Section({
         className="container"
         glyphDirection="ltr"
         heading="h3"
-        href="#about"
+        id="about"
         text={text.about}
       />
       <p className="container">{section.aboutUs}</p>
@@ -66,7 +66,7 @@ export default async function Section({
         className="container"
         glyphDirection="ltr"
         heading="h3"
-        href="#gallery"
+        id="gallery"
         text={text.gallery}
       />
     </>
