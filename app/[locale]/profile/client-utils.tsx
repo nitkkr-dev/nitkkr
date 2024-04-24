@@ -3,6 +3,7 @@
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 import { BsBellFill, BsPeopleFill, BsPersonFill } from 'react-icons/bs';
 import { FaBookmark, FaNewspaper } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
@@ -15,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs';
+import Loading from '~/components/loading';
 import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
@@ -33,6 +35,20 @@ export const LogOut = ({
     {text}
   </Button>
 );
+
+export const PathnameAwareSuspense = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const path = usePathname().split('/').splice(3); // ['', 'en|hi', 'profile', ?]
+  const tab = path.length === 0 ? 'personal' : path[0];
+  return (
+    <Suspense fallback={<Loading />} key={tab}>
+      {children}
+    </Suspense>
+  );
+};
 
 export const Tabs = ({
   locale,
