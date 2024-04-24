@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa6';
 
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import Loading from '~/components/loading';
 import { Button, Card, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
@@ -16,16 +18,6 @@ export default async function StudentActivities({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).StudentActivities;
-
-  const clubs = await db.query.clubs.findMany({
-    columns: {
-      alias: true,
-      name: true,
-      logo: true,
-      thumbnail: true,
-      urlName: true,
-    },
-  });
 
   return (
     <>
@@ -51,43 +43,9 @@ export default async function StudentActivities({
       />
 
       <section className="container mb-6 text-center">
-        <GalleryCarousel>
-          {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
-            <Link
-              className="drop-shadow hover:drop-shadow-xl"
-              href={`/${locale}/student-activities/clubs/${urlName}`}
-              key={index}
-            >
-              <Card className="mx-auto flex aspect-square size-48 flex-col p-3 sm:size-56 md:size-64">
-                <CardTitle
-                  className={cn(
-                    'flex items-center justify-center gap-2 text-neutral-900',
-                    'text-lg sm:text-xl md:text-2xl'
-                  )}
-                >
-                  <Image
-                    alt={alias ?? name}
-                    className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
-                    height={0}
-                    src={logo}
-                    width={0}
-                  />
-                  {alias ?? name}
-                </CardTitle>
-                <CardDescription className="grow">
-                  <Image
-                    alt={alias ?? name}
-                    className="size-full rounded-md object-cover"
-                    height={0}
-                    src={thumbnail}
-                    width={0}
-                  />
-                </CardDescription>
-              </Card>
-            </Link>
-          ))}
-        </GalleryCarousel>
-
+        <Suspense fallback={<Loading />}>
+          <ClubsCarousel locale={locale} />
+        </Suspense>
         <Button
           asChild
           className={cn(
@@ -114,3 +72,54 @@ export default async function StudentActivities({
     </>
   );
 }
+
+const ClubsCarousel = async ({ locale }: { locale: string }) => {
+  const clubs = await db.query.clubs.findMany({
+    columns: {
+      alias: true,
+      name: true,
+      logo: true,
+      thumbnail: true,
+      urlName: true,
+    },
+  });
+
+  return (
+    <GalleryCarousel>
+      {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
+        <Link
+          className="drop-shadow hover:drop-shadow-xl"
+          href={`/${locale}/student-activities/clubs/${urlName}`}
+          key={index}
+        >
+          <Card className="mx-auto flex aspect-square size-48 flex-col p-3 sm:size-56 md:size-64">
+            <CardTitle
+              className={cn(
+                'flex items-center justify-center gap-2 text-neutral-900',
+                'text-lg sm:text-xl md:text-2xl'
+              )}
+            >
+              <Image
+                alt={alias ?? name}
+                className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
+                height={0}
+                src={logo}
+                width={0}
+              />
+              {alias ?? name}
+            </CardTitle>
+            <CardDescription className="grow">
+              <Image
+                alt={alias ?? name}
+                className="size-full rounded-md object-cover"
+                height={0}
+                src={thumbnail}
+                width={0}
+              />
+            </CardDescription>
+          </Card>
+        </Link>
+      ))}
+    </GalleryCarousel>
+  );
+};
