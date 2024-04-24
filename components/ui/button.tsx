@@ -59,11 +59,21 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  active?: boolean;
   asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = 'primary',
+      active = false,
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
     if (props.disabled) {
       if (
         variant === 'primary' ||
@@ -78,6 +88,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
     }
 
+    let activeStyles = '';
+    if (active) {
+      if (variant === 'primary') activeStyles = 'bg-primary-700';
+      else if (variant === 'secondary')
+        activeStyles = 'bg-primary-700 text-shade-light';
+      else if (variant === 'outline')
+        activeStyles = 'border-primary-700 text-primary-700';
+      else if (variant === 'ghost')
+        activeStyles = 'bg-primary-300 text-shade-light';
+      else if (variant === 'link') activeStyles = 'text-primary-700';
+    }
+
     const Comp =
       asChild || (props.disabled && typeof props.children !== 'string')
         ? Slot
@@ -86,6 +108,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, className }),
+          activeStyles,
           // Overrides at every breakpoint since custom styles would conflict
           className?.includes('rounded-full') &&
             'rounded-full sm:rounded-full md:rounded-full lg:rounded-full'
