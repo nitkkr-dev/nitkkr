@@ -59,7 +59,7 @@ export default async function Departments({
                         'rounded bg-primary-700 fill-neutral-50 drop-shadow'
                       )}
                       height={0}
-                      src={department.icon}
+                      src={`departments/${department.alias}/icon.png`}
                       width={0}
                     />
                     <span>{department.name.toUpperCase()}</span>

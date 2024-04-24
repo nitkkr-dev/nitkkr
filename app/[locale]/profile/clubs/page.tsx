@@ -21,7 +21,7 @@ export default async function Clubs({
         columns: { position: true },
         with: {
           club: {
-            columns: { alias: true, logo: true, name: true, tagline: true },
+            columns: { alias: true, name: true, tagline: true, urlName: true },
           },
         },
       },
@@ -37,13 +37,13 @@ export default async function Clubs({
 
       <ul className="space-y-4">
         {student.clubMembers.map(
-          ({ club: { alias, logo, name, tagline }, position }, index) => (
+          ({ club: { alias, name, tagline, urlName }, position }, index) => (
             <li className="flex gap-4" key={index}>
               <Image
                 alt={alias ?? name}
                 className="h-16 min-w-16 rounded-md"
                 height={0}
-                src={logo}
+                src={`clubs/${urlName}/logo.png`}
                 width={0}
               />
               <section>

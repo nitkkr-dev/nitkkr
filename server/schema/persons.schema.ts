@@ -20,7 +20,6 @@ export const persons = pgTable(
     type: varchar('type', { enum: ['faculty', 'staff', 'student'] }).notNull(),
     name: varchar('name', { length: 256 }).notNull(),
     email: varchar('email', { length: 256 }).notNull(),
-    image: text('image').notNull(),
     sex: varchar('sex', { enum: ['M', 'F', 'O'] }).notNull(),
     dateOfBirth: date('date_of_birth', { mode: 'date' }),
     roleId: smallint('role_id')
