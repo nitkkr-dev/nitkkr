@@ -75,18 +75,12 @@ export default async function StudentActivities({
 
 const ClubsCarousel = async ({ locale }: { locale: string }) => {
   const clubs = await db.query.clubs.findMany({
-    columns: {
-      alias: true,
-      name: true,
-      logo: true,
-      thumbnail: true,
-      urlName: true,
-    },
+    columns: { alias: true, name: true, urlName: true },
   });
 
   return (
     <GalleryCarousel>
-      {clubs.map(({ alias, name, logo, thumbnail, urlName }, index) => (
+      {clubs.map(({ alias, name, urlName }, index) => (
         <Link
           className="drop-shadow hover:drop-shadow-xl"
           href={`/${locale}/student-activities/clubs/${urlName}`}
@@ -103,7 +97,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
                 alt={alias ?? name}
                 className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
                 height={0}
-                src={logo}
+                src={`clubs/${urlName}/logo.png`}
                 width={0}
               />
               {alias ?? name}
@@ -113,7 +107,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
                 alt={alias ?? name}
                 className="size-full rounded-md object-cover"
                 height={0}
-                src={thumbnail}
+                src={`clubs/${urlName}/thumbnail.png`}
                 width={0}
               />
             </CardDescription>

@@ -47,8 +47,8 @@ export default async function ProfileLayout({
             className="mx-auto size-28 rounded-full border border-primary-700"
             height={0}
             // FIXME: Remove session.user.image once
-            // everyone's image is fed to the database
-            src={session.user.image ?? session.person.image}
+            // everyone's image is fed to the bucket
+            src={session.user.image ?? `persons/${session.person.id}/image.png`}
             width={0}
           />
           <figcaption>

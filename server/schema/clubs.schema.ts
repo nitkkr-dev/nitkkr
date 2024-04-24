@@ -20,9 +20,6 @@ export const clubs = pgTable('clubs', {
   alias: varchar('alias', { length: 16 }),
   tagline: varchar('tagline', { length: 256 }).notNull(),
   email: varchar('email', { length: 256 }).notNull(),
-  logo: text('logo').notNull(),
-  thumbnail: text('thumbnail').notNull(),
-  banner: text('banner').notNull(),
   aboutUs: varchar('about_us').notNull(),
   category: varchar('category', {
     enum: ['committee', 'cultural', 'crew', 'technical'],
