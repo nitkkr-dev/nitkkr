@@ -46,32 +46,7 @@ import { staffData } from './staff.sample';
 import { studentAcademicDetailsData } from './student-academic-details.sample';
 import { studentsData } from './students.sample';
 
-export async function populate(truncate = true) {
-  if (truncate) {
-    await db.delete(notifications);
-    await db.delete(courseLogs);
-    await db.delete(coursesToMajors);
-    await db.delete(courses);
-    await db.delete(studentAcademicDetails);
-    await db.delete(majors);
-    await db.delete(doctorates);
-    await db.delete(staff);
-    await db.delete(sections);
-    await db.delete(deans);
-    await db.delete(clubMembers);
-    await db.delete(sponsoredResearchProjects);
-    await db.delete(students);
-    await db.delete(departmentHeads);
-    await db.delete(clubSocials);
-    await db.delete(clubs);
-    await db.delete(faculty);
-    await db.delete(departments);
-    await db.delete(persons);
-    await db.delete(roles);
-    await db.delete(committeeMeetings);
-    await db.delete(committeeMembers);
-  }
-
+export async function populate() {
   await db.insert(committeeMeetings).values(committeeMeetingsData);
   await db.insert(committeeMembers).values(committeeMembersData);
   const insertedRoles = await db.insert(roles).values(rolesData).returning();
