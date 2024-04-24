@@ -18,7 +18,9 @@
           (flakey-devShell-pkgs.default.override { environments = [ "nix" "nextjs" ]; })
           (flakey-devShell-pkgs.vscodium.override {
             environments = [ "nix" "nextjs" ];
-            extensions = vscode-utils.extensionsFromVscodeMarketplace [
+            extensions = with vscode-extensions; [
+              eamodio.gitlens
+            ] ++ vscode-utils.extensionsFromVscodeMarketplace [
               {
                 name = "pretty-ts-errors";
                 publisher = "yoavbls";
