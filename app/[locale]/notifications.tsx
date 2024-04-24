@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import Loading from '~/components/loading';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
@@ -16,21 +18,6 @@ export default async function Notifications({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
-
-  const notifications = (await db.query.notifications.findMany()).map(
-    (notification) => ({
-      ...notification,
-      createdAt: notification.createdAt.toLocaleString(locale, {
-        dateStyle: 'long',
-        numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-      }),
-    })
-  );
-
-  const notificationsByDate = groupBy(
-    notifications.filter(({ category }) => category == currentCategory),
-    'createdAt'
-  );
 
   return (
     <article
@@ -92,27 +79,9 @@ export default async function Notifications({
             )}
           >
             <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-              {Array.from(notificationsByDate).map(
-                ([createdAt, notifications], index) => (
-                  <li key={index}>
-                    <h5 className="text-primary-700">{createdAt as string}</h5>
-                    <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
-                      {notifications.map(({ id, title }, index) => (
-                        <li key={index}>
-                          <Link
-                            className={cn('inline-flex max-w-full')}
-                            href={`/${locale}/noticeboard/${id}`}
-                          >
-                            <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                            <p className="truncate">{title}</p>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <hr className="opacity-20" />
-                  </li>
-                )
-              )}
+              <Suspense fallback={<Loading />} key={currentCategory}>
+                <NotificationsList category={currentCategory} locale={locale} />
+              </Suspense>
             </ol>
           </ScrollArea>
 
@@ -130,3 +99,45 @@ export default async function Notifications({
     </article>
   );
 }
+
+const NotificationsList = async ({
+  category,
+  locale,
+}: {
+  category: (typeof notificationsSchema.category.enumValues)[number];
+  locale: string;
+}) => {
+  const notifications = (
+    await db.query.notifications.findMany({
+      where: (notification, { eq }) => eq(notification.category, category),
+    })
+  ).map((notification) => ({
+    ...notification,
+    createdAt: notification.createdAt.toLocaleString(locale, {
+      dateStyle: 'long',
+      numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+    }),
+  }));
+
+  return Array.from(groupBy(notifications, 'createdAt')).map(
+    ([createdAt, notifications], index) => (
+      <li key={index}>
+        <h5 className="text-primary-700">{createdAt as string}</h5>
+        <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
+          {notifications.map(({ id, title }, index) => (
+            <li key={index}>
+              <Link
+                className={cn('inline-flex max-w-full')}
+                href={`/${locale}/noticeboard/${id}`}
+              >
+                <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
+                <p className="truncate">{title}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <hr className="opacity-20" />
+      </li>
+    )
+  );
+};
