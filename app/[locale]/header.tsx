@@ -218,8 +218,8 @@ const AuthAction = async ({
             alt={text.alt}
             className={className}
             // FIXME: Remove session.user.image once
-            // everyone's image is fed to the database
-            src={session.user.image ?? session.person.image}
+            // everyone's image is fed to the bucket
+            src={session.user.image ?? `persons/${session.person.id}/image.png`}
           />
           {text.view}
         </Link>
@@ -229,9 +229,9 @@ const AuthAction = async ({
         alt={text.alt}
         className={className}
         // FIXME: Remove session.user.image once
-        // everyone's image is fed to the database
+        // everyone's image is fed to the bucket
         href={`/${locale}/profile`}
-        src={session.user.image ?? session.person.image}
+        src={session.user.image ?? `persons/${session.person.id}/image.png`}
       />
     );
   } else {

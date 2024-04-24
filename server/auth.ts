@@ -26,7 +26,6 @@ declare module 'next-auth' {
       id: number;
       name: string;
       email: string;
-      image: string;
       sex: (typeof persons.sex.enumValues)[number];
       dateOfBirth: Date | null;
       role: { permissions: (typeof roles.permissions.enumValues)[number][] };
@@ -45,7 +44,6 @@ export const authOptions: NextAuthOptions = {
           createdOn: true,
           dateOfBirth: true,
           email: true,
-          image: true,
           name: true,
           sex: true,
         },

@@ -11,13 +11,9 @@ export const departments = pgTable('departments', {
   type: varchar('type', {
     enum: ['engineering', 'science', 'school', 'miscellaneous'],
   }).notNull(),
-  icon: varchar('icon').notNull(),
-  banner: varchar('banner').notNull(),
   about: text('about').notNull(),
-  aboutImage: varchar('about_image').notNull(),
   vision: text('vision').notNull(),
   mission: text('mission').notNull(),
-  vissionMissionImage: varchar('vission_mission_image').notNull(),
   laboratories: text('laboratories'),
   images: text('images')
     .array()

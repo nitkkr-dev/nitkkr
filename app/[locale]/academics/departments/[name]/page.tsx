@@ -41,7 +41,7 @@ export default async function Department({
           officeAddress: true,
           officeTelephone: true,
         },
-        with: { person: { columns: { email: true, name: true, image: true } } },
+        with: { person: { columns: { email: true, id: true, name: true } } },
       },
     },
   });
@@ -64,7 +64,7 @@ export default async function Department({
           { label: text.headings.programmes.title, href: '#programmes' },
           { label: text.headings.gallery, href: '#gallery' },
         ]}
-        src={department.banner}
+        src={`departments/${department.alias}/banner.png`}
       />
 
       <Heading
@@ -88,7 +88,7 @@ export default async function Department({
           alt={text.headings.about}
           className="w-full max-md:rounded-b md:order-first md:rounded-l"
           height={0}
-          src={department.aboutImage}
+          src={`departments/${department.alias}/about.png`}
           width={0}
         />
       </article>
@@ -122,7 +122,7 @@ export default async function Department({
           alt={text.headings.vision}
           className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
           height={0}
-          src={department.aboutImage}
+          src={`departments/${department.alias}/vision-mission.png`}
           width={0}
         />
       </article>
@@ -148,7 +148,7 @@ export default async function Department({
                   })
                 ),
               }}
-              image={departmentHead.faculty.person.image}
+              image={`persons/${departmentHead.faculty.person.id}/image.png`}
               locale={locale}
               name={departmentHead.faculty.person.name}
               quote={departmentHead.message}
