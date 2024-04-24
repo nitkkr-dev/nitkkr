@@ -2,6 +2,7 @@ import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { userAgent } from 'next/server';
+import { Suspense } from 'react';
 import { BsPersonFill } from 'react-icons/bs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
@@ -27,8 +28,6 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.alumni, href: 'alumni' },
     { label: text.activities, href: 'student-activities' },
   ];
-
-  const session = await getServerAuthSession();
 
   return (
     <header className="header-sticky-ness sticky top-0 z-nav min-w-full bg-background">
@@ -131,21 +130,16 @@ export default async function Header({ locale }: { locale: string }) {
             </Button>
           </li>
           <li className="hidden lg:block">
-            {session ? (
-              <ProfileImage
-                alt={text.profile.alt}
-                href={`/${locale}/profile`}
-                // FIXME: Remove session.user.image once
-                // everyone's image is fed to the database
-                src={session.user.image ?? session.person.image}
+            <Suspense>
+              <AuthAction
+                locale={locale}
+                text={{
+                  alt: text.profile.alt,
+                  login: text.login,
+                  view: text.profile.view,
+                }}
               />
-            ) : (
-              <Button asChild className="h-full w-16 xl:w-20">
-                <Link href={`/${locale}/login`} prefetch scroll={false}>
-                  {text.login}
-                </Link>
-              </Button>
-            )}
+            </Suspense>
           </li>
           <li className="z-30 font-semibold lg:hidden">
             <nav className="relative flex h-0">
@@ -179,27 +173,17 @@ export default async function Header({ locale }: { locale: string }) {
                   ))}
                 </ul>
                 <hr className="opacity-50" data-dropdownignore={true} />
-                {session ? (
-                  <Button
-                    asChild
-                    className="mx-auto flex w-fit gap-4 px-3 text-sm"
-                    variant="link"
-                  >
-                    <Link href={`/${locale}/profile`}>
-                      <ProfileImage
-                        alt={text.profile.alt}
-                        // FIXME: Remove session.user.image once
-                        // everyone's image is fed to the database
-                        src={session.user.image ?? session.person.image}
-                      />
-                      {text.profile.view}
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button asChild className="py-2 text-center">
-                    <Link href={`/${locale}/login`}>{text.login}</Link>
-                  </Button>
-                )}
+                <Suspense>
+                  <AuthAction
+                    locale={locale}
+                    mobile
+                    text={{
+                      alt: text.profile.alt,
+                      login: text.login,
+                      view: text.profile.view,
+                    }}
+                  />
+                </Suspense>
               </aside>
             </nav>
           </li>
@@ -208,6 +192,62 @@ export default async function Header({ locale }: { locale: string }) {
     </header>
   );
 }
+
+const AuthAction = async ({
+  className,
+  locale,
+  mobile = false,
+  text,
+}: {
+  className?: string;
+  locale: string;
+  mobile?: boolean;
+  text: { alt: string; login: string; view: string };
+}) => {
+  const session = await getServerAuthSession();
+
+  if (session) {
+    return mobile ? (
+      <Button
+        asChild
+        className="mx-auto flex w-fit gap-4 px-3 text-sm"
+        variant="link"
+      >
+        <Link href={`/${locale}/profile`}>
+          <ProfileImage
+            alt={text.alt}
+            className={className}
+            // FIXME: Remove session.user.image once
+            // everyone's image is fed to the database
+            src={session.user.image ?? session.person.image}
+          />
+          {text.view}
+        </Link>
+      </Button>
+    ) : (
+      <ProfileImage
+        alt={text.alt}
+        className={className}
+        // FIXME: Remove session.user.image once
+        // everyone's image is fed to the database
+        href={`/${locale}/profile`}
+        src={session.user.image ?? session.person.image}
+      />
+    );
+  } else {
+    return mobile ? (
+      <Button asChild className="py-2 text-center">
+        <Link href={`/${locale}/login`}>{text.login}</Link>
+      </Button>
+    ) : (
+      <Button asChild className="h-full w-16 xl:w-20">
+        <Link href={`/${locale}/login`} prefetch scroll={false}>
+          {text.login}
+        </Link>
+      </Button>
+    );
+  }
+};
 
 const ProfileImage = ({
   alt,

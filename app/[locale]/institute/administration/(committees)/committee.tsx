@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { Suspense } from 'react';
 
 import Heading from '~/components/heading';
 import {
@@ -14,6 +15,7 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import type { committeeMembers } from '~/server/db';
 import { db } from '~/server/db';
+import Loading from '~/components/loading';
 
 export default async function Committee({
   locale,
@@ -27,10 +29,6 @@ export default async function Committee({
   const members = await db.query.committeeMembers.findMany({
     orderBy: (member, { asc }) => [asc(member.serial)],
     where: (member, { eq }) => eq(member.committeeType, type),
-  });
-  const meetings = await db.query.committeeMeetings.findMany({
-    orderBy: (meeting, { desc }) => [desc(meeting.meetingNumber)],
-    where: (meeting, { eq }) => eq(meeting.committeeType, type),
   });
 
   return (
@@ -71,55 +69,71 @@ export default async function Committee({
       </Table>
 
       <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{text.meetings.serial}</TableHead>
-            <TableHead>{text.meetings.date}</TableHead>
-            <TableHead>{text.meetings.place}</TableHead>
-            <TableHead className="text-center">
-              {text.meetings.agenda}
-            </TableHead>
-            <TableHead className="text-center">
-              {text.meetings.minutes}
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {meetings.map((meeting, index) => (
-            <TableRow key={index}>
-              <TableCell>{meeting.meetingNumber}</TableCell>
-              <TableCell>
-                {meeting.createdAt.toLocaleString(locale, {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: false,
-                  numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-                })}
-              </TableCell>
-              <TableCell>{meeting.place}</TableCell>
-              <TableCell className="text-center">
-                <Button asChild variant="link">
-                  <Link href={meeting.agendaUrl}>
-                    <FaExternalLinkAlt />
-                  </Link>
-                </Button>
-              </TableCell>
-              <TableCell className="text-center">
-                <Button asChild variant="link">
-                  <Link href={meeting.minutesUrl}>
-                    <FaExternalLinkAlt />
-                  </Link>
-                </Button>
-              </TableCell>
+      <Suspense fallback={<Loading />}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{text.meetings.serial}</TableHead>
+              <TableHead>{text.meetings.date}</TableHead>
+              <TableHead>{text.meetings.place}</TableHead>
+              <TableHead className="text-center">
+                {text.meetings.agenda}
+              </TableHead>
+              <TableHead className="text-center">
+                {text.meetings.minutes}
+              </TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            <Meetings locale={locale} type={type} />
+          </TableBody>
+        </Table>
+      </Suspense>
     </section>
   );
 }
+
+const Meetings = async ({
+  locale,
+  type,
+}: {
+  locale: string;
+  type: (typeof committeeMembers.committeeType.enumValues)[number];
+}) => {
+  const meetings = await db.query.committeeMeetings.findMany({
+    orderBy: (meeting, { desc }) => [desc(meeting.meetingNumber)],
+    where: (meeting, { eq }) => eq(meeting.committeeType, type),
+  });
+
+  return meetings.map((meeting, index) => (
+    <TableRow key={index}>
+      <TableCell>{meeting.meetingNumber}</TableCell>
+      <TableCell>
+        {meeting.createdAt.toLocaleString(locale, {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+          numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+        })}
+      </TableCell>
+      <TableCell>{meeting.place}</TableCell>
+      <TableCell className="text-center">
+        <Button asChild variant="link">
+          <Link href={meeting.agendaUrl}>
+            <FaExternalLinkAlt />
+          </Link>
+        </Button>
+      </TableCell>
+      <TableCell className="text-center">
+        <Button asChild variant="link">
+          <Link href={meeting.minutesUrl}>
+            <FaExternalLinkAlt />
+          </Link>
+        </Button>
+      </TableCell>
+    </TableRow>
+  ));
+};

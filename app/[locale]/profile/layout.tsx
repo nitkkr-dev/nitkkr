@@ -6,7 +6,7 @@ import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 
-import { LogOut, Tabs } from './client-utils';
+import { LogOut, PathnameAwareSuspense, Tabs } from './client-utils';
 
 export default async function ProfileLayout({
   children,
@@ -93,7 +93,9 @@ export default async function ProfileLayout({
         }}
       />
 
-      <main className="w-full">{children}</main>
+      <main className="w-full">
+        <PathnameAwareSuspense>{children}</PathnameAwareSuspense>
+      </main>
     </section>
   );
 }
