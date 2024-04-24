@@ -129,11 +129,11 @@ export const Tabs = ({
     tabs.map(({ label, href, icon: Icon }, index) => (
       <li key={index}>
         <Button
+          active={href === tab}
           asChild
           className={cn(
             'flex justify-start gap-2 xl:gap-3',
-            'w-full px-4 py-3 drop-shadow',
-            href === tab && 'bg-primary-700 text-shade-light'
+            'w-full px-4 py-3 drop-shadow'
           )}
           variant="secondary"
         >
