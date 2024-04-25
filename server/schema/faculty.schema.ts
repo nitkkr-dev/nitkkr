@@ -25,12 +25,35 @@ export const faculty = pgTable(
       .primaryKey()
       .references(() => persons.id),
     employeeId: varchar('employee_id', { length: 8 }).notNull(),
-    designation: varchar('designation').notNull(),
+
+    // Contact
     officeAddress: varchar('college_address', { length: 16 }).notNull(),
     officeTelephone: varchar('office_telephone', { length: 13 }).notNull(),
     homeTelephone: varchar('home_telephone', { length: 13 }),
+
+    // Meta
+    designation: varchar('designation', {
+      enum: [
+        'Assistant Professor Grade-I',
+        'Assistant Professor Grade-II',
+        'Associate Professor',
+        'Professor',
+      ],
+    }).notNull(),
     departmentId: smallint('department_id')
       .references(() => departments.id)
+      .notNull(),
+
+    // Socials
+    googleScholarId: text('google_scholar_id'),
+    orcidId: text('orcid_id'),
+    researchGateId: text('research_gate_id'),
+    scopusId: text('scopus_id'),
+
+    // Miscellaneous
+    qualifications: text('qualifications')
+      .array()
+      .default(sql`'{}'`)
       .notNull(),
     areasOfInterest: text('areas_of_interest')
       .array()
@@ -49,6 +72,10 @@ export const faculty = pgTable(
       .default(sql`'{}'`)
       .notNull(),
     copyrights: text('copyrights')
+      .array()
+      .default(sql`'{}'`)
+      .notNull(),
+    publications: text('publications')
       .array()
       .default(sql`'{}'`)
       .notNull(),
@@ -88,10 +115,6 @@ export const faculty = pgTable(
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    googleScholarId: text('google_scholar_id'),
-    orchidId: text('orchid_id'),
-    researcherId: text('researcher_id'),
-    scopusId: text('scopus_id'),
   },
   (faculty) => {
     return {
