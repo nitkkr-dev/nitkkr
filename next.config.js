@@ -1,5 +1,11 @@
+import createJiti from 'jiti';
+import { fileURLToPath } from 'node:url';
+const jiti = createJiti(fileURLToPath(import.meta.url));
+
+const { env } = jiti('./lib/env');
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   images: {
     loader: 'custom',
     loaderFile: './lib/loader.ts',
@@ -16,4 +22,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default config;
