@@ -224,7 +224,10 @@ export default async function Department({
         {[
           {
             label: text.facultyAndStaff,
-            href: `/${locale}/faculty-and-staff`,
+            href: {
+              pathname: `/${locale}/faculty-and-staff`,
+              query: { department: department.urlName },
+            },
             icon: MdBadge,
           },
           {
@@ -248,7 +251,6 @@ export default async function Department({
             key={index}
             variant="secondary"
           >
-            {/* FIXME: Link should include a department filter */}
             <Link href={href}>
               <Icon className="size-12" />
               <p className="font-serif font-semibold sm:text-lg md:text-xl">
