@@ -15,6 +15,7 @@ export interface InputProps
   customValidator?: () => ValidityStateWithError;
   description?: string;
   id: string;
+  inputClassName?: string;
   label?: string;
   reserveSpaceForError?: boolean;
   showError?: boolean;
@@ -47,6 +48,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       customValidator = () => ({}) as ValidityStateWithError,
       description,
+      inputClassName,
       label,
       onBlur,
       onChange,
@@ -71,7 +73,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             'space-y-2',
             (type === 'checkbox' || type === 'radio') &&
-              'inline-flex gap-2 space-y-0'
+              'inline-flex gap-2 space-y-0',
+            className
           )}
         >
           {label && type !== 'checkbox' && type !== 'radio' && (
@@ -105,7 +108,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               focusedOnce &&
                 'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
               (type === 'checkbox' || type === 'radio') && 'h-5 w-5 ', //incomplete
-              className
+              inputClassName
             )}
             onBlur={(event) => {
               if (!focusedOnce) setFocusedOnce(true);

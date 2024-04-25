@@ -52,7 +52,7 @@ export function Searchbar({ placeholder }: { placeholder: string }) {
 
   return (
     <Input
-      className="border-primary-700 focus-visible:ring-primary-700"
+      inputClassName="border-primary-700 focus-visible:ring-primary-700"
       id="search"
       placeholder={placeholder}
       onChange={useDebounceCallback(
