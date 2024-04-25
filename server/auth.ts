@@ -6,13 +6,8 @@ import {
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
+import { env } from '~/lib/env';
 import { db, persons, roles } from '~/server/db';
-
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  throw new Error(
-    'GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be defined in your environment.'
-  );
-}
 
 declare module 'next-auth' {
   // A nicer way to assert that `email` will not be
@@ -65,8 +60,8 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
         return {
           id: profile.email as string,
