@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 import { BsBellFill, BsPeopleFill, BsPersonFill } from 'react-icons/bs';
 import { FaBookmark, FaNewspaper } from 'react-icons/fa';
@@ -67,7 +67,6 @@ export const Tabs = ({
     results: string;
   };
 }) => {
-  const router = useRouter();
   const path = usePathname().split('/').slice(3); // ['', 'en|hi', 'profile', ?]
   const tab = path.length === 0 ? 'personal' : path[0];
 

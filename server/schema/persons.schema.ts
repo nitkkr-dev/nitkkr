@@ -5,7 +5,6 @@ import {
   pgTable,
   serial,
   smallint,
-  text,
   timestamp,
   uniqueIndex,
   varchar,
