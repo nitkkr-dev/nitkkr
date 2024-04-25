@@ -7,7 +7,7 @@ export const env = createEnv({
       .enum(['development', 'production', 'test'])
       .default('development'),
 
-    DATABASE_URL: z.string().url(),
+    POSTGRES_URL: z.string().url(),
 
     NEXTAUTH_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string(),
