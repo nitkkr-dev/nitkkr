@@ -1,8 +1,8 @@
 import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { env } from '~/lib/env';
 import { cn } from '~/lib/utils';
+import { getS3Url } from '~/server/s3';
 
 import LoginButton from './sign-in-with-google-button';
 
@@ -18,7 +18,7 @@ const Login = async ({ locale }: { locale: string }) => {
         'p-4 sm:p-12 md:p-20'
       )}
       style={{
-        backgroundImage: `url('${env.AWS_PUBLIC_S3_URL}/assets/logo-transparent.png')`,
+        backgroundImage: `url('${getS3Url()}/assets/logo-transparent.png')`,
       }}
     >
       <header className="mb-8 text-center">
