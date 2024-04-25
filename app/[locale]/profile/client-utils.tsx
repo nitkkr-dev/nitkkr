@@ -110,10 +110,7 @@ export const Tabs = ({
   ];
 
   return select ? (
-    <Select
-      onValueChange={(value) => router.push(`/${locale}/profile/${value}`)}
-      defaultValue={tab}
-    >
+    <Select defaultValue={tab} navigate>
       <SelectTrigger className="w-[180px] px-4 py-5 text-shade-light md:hidden">
         <SelectValue />
       </SelectTrigger>
