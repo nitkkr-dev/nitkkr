@@ -107,6 +107,7 @@ const Departments = async ({
       {departments.map(({ name, urlName }, index) => (
         <li key={index}>
           <Button
+            active={urlName === currentDepartment?.urlName}
             asChild
             className="font-semibold text-shade-dark"
             variant="link"
