@@ -25,3 +25,4 @@ export const getS3Url = (type: 'private' | 'public' = 'public') =>
     : `https://${env.AWS_PRIVATE_S3_NAME}.s3.${env.AWS_S3_REGION}.amazonaws.com`;
 
 export * from './count-children';
+export * from './upload';
