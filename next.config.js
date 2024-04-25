@@ -12,11 +12,11 @@ const config = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'isac-nitkkr-private.s3.ap-southeast-2.amazonaws.com',
+        hostname: env.AWS_PUBLIC_S3_URL.replace(/^https:\/\//, ''),
       },
       {
         protocol: 'https',
-        hostname: 'isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com',
+        hostname: env.AWS_PRIVATE_S3_URL.replace(/^https:\/\//, ''),
       },
     ],
   },
