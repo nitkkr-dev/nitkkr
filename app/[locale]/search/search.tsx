@@ -10,13 +10,14 @@ import {
 import { IoNotifications } from 'react-icons/io5';
 import { MdEmojiEvents, MdSchool } from 'react-icons/md';
 
+import { Input } from '~/components/inputs';
 import { LocalStorageLink } from '~/components/link';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
 
 import SearchCard, { type CardContent, type SearchResult } from './search-card';
-import { Recents, Searchbar } from './search-utils';
+import { Recents } from './search-utils';
 
 const categoryIconMapping = {
   course: MdSchool,
@@ -56,7 +57,13 @@ export default async function Search({
 
   return (
     <search className="flex max-h-full flex-col gap-4">
-      <Searchbar placeholder={text.placeholder} />
+      <Input
+        debounceTo="query"
+        id="search"
+        inputClassName="border-primary-700 focus-visible:ring-primary-700"
+        placeholder={text.placeholder}
+        type="search"
+      />
       <article
         className={cn(
           'flex grow flex-col overflow-auto rounded-lg',

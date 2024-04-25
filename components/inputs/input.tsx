@@ -1,7 +1,9 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { forwardRef, useEffect, useState } from 'react';
 import { FaExclamationCircle } from 'react-icons/fa';
+import { useDebounceCallback } from 'usehooks-ts';
 
 import { Label } from '~/components/ui';
 import { cn, getKeys } from '~/lib/utils';
@@ -13,6 +15,8 @@ export type ValidityStateWithError = {
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   customValidator?: () => ValidityStateWithError;
+  debounceEvery?: number;
+  debounceTo?: string;
   description?: string;
   id: string;
   inputClassName?: string;
@@ -47,6 +51,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       className,
       customValidator = () => ({}) as ValidityStateWithError,
+      debounceEvery,
+      debounceTo,
       description,
       inputClassName,
       label,
@@ -61,6 +67,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [errorMessage, setErrorMessage] = useState<string>();
     const [focusedOnce, setFocusedOnce] = useState(false);
+
+    const router = useRouter();
+    const debounceCallback = useDebounceCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        router.replace(`?${debounceTo}=${event.target.value}`, {
+          scroll: false,
+        });
+      },
+      debounceEvery ?? 300
+    );
 
     useEffect(() => {
       const input = document.getElementById(props.id) as HTMLInputElement;
@@ -118,6 +134,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               if (!event.isDefaultPrevented()) {
                 validate(event.target, customValidator);
               }
+              debounceTo && debounceCallback(event);
               onChange && onChange(event);
             }}
             onInvalid={(event) => {

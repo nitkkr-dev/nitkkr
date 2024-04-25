@@ -1,9 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useDebounceCallback, useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from 'usehooks-ts';
 
-import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 
 import { MiniSearchLink } from './search';
@@ -45,23 +43,4 @@ export function Recents({
       </ol>
     </section>
   ) : null;
-}
-
-export function Searchbar({ placeholder }: { placeholder: string }) {
-  const router = useRouter();
-
-  return (
-    <Input
-      inputClassName="border-primary-700 focus-visible:ring-primary-700"
-      id="search"
-      placeholder={placeholder}
-      onChange={useDebounceCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-          router.replace(`?query=${e.target.value}`, { scroll: false });
-        },
-        300
-      )}
-      type="search"
-    />
-  );
 }
