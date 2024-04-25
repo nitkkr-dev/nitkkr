@@ -21,8 +21,12 @@ export default async function Notifications({
 
   return (
     <article
-      className="bg-notifications bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
+      className="bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
       id="notifications"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/assets/mahabharat.jpg')",
+      }}
     >
       <Heading
         className="container"

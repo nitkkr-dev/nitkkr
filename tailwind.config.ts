@@ -49,13 +49,6 @@ export default {
       },
     },
     extend: {
-      backgroundImage: {
-        logo: "url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/logo-transparent.png')",
-        notifications:
-          "linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/mahabharat.jpg')",
-        studentActivities:
-          "url('https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png')",
-      },
       zIndex: {
         modal: '90',
         nav: '80',

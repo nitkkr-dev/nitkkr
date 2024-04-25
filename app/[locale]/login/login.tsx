@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-
 import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
@@ -12,12 +10,11 @@ const Login = async ({ locale }: { locale: string }) => {
 
   return (
     <article
-      // Using clsx instead here due to a bug in twMerge where it thinks
-      // bg-logo and bg-background are the same so it removes one of them.
-      className={clsx(
+      className={cn(
         'flex h-auto w-full grow flex-col items-center justify-center',
         'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]',
-        'bg-background bg-logo bg-contain bg-center bg-no-repeat bg-blend-overlay',
+        'bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay',
+        "bg-[url('https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/assets/logo-transparent.png')]",
         'p-4 sm:p-12 md:p-20'
       )}
     >
