@@ -13,8 +13,16 @@ export const env = createEnv({
     NEXTAUTH_SECRET: z.string(),
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
+
+    AWS_PUBLIC_S3_URL: z.string().url(),
+    AWS_PRIVATE_S3_URL: z.string().url(),
   },
-  experimental__runtimeEnv: {},
+  client: {
+    NEXT_PUBLIC_AWS_S3_URL: z.string().url(),
+  },
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_AWS_S3_URL: process.env.NEXT_PUBLIC_AWS_S3_URL,
+  },
 
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

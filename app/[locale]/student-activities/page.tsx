@@ -31,7 +31,7 @@ export default async function StudentActivities({
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
         ]}
-        src="https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/admin-block.png"
+        src="assets/admin-block.png"
       />
 
       <Heading

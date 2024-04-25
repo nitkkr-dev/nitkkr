@@ -1,6 +1,7 @@
 import { Input } from '~/components/inputs';
 import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+import { env } from '~/lib/env';
 import { cn } from '~/lib/utils';
 
 import LoginButton from './sign-in-with-google-button';
@@ -14,9 +15,11 @@ const Login = async ({ locale }: { locale: string }) => {
         'flex h-auto w-full grow flex-col items-center justify-center',
         'max-w-[384px] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]',
         'bg-background bg-contain bg-center bg-no-repeat bg-blend-overlay',
-        "bg-[url('https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/assets/logo-transparent.png')]",
         'p-4 sm:p-12 md:p-20'
       )}
+      style={{
+        backgroundImage: `url('${env.AWS_PUBLIC_S3_URL}/assets/logo-transparent.png')`,
+      }}
     >
       <header className="mb-8 text-center">
         <h3 className="mt-4 text-primary-700">{text.title}</h3>

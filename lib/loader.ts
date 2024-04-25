@@ -1,5 +1,7 @@
 'use client';
 
+import { env } from '~/lib/env';
+
 export default function imageLoader({
   src,
 }: {
@@ -9,5 +11,5 @@ export default function imageLoader({
 }) {
   return src.startsWith('http')
     ? src
-    : `https://isac-nitkkr-public.s3.ap-southeast-2.amazonaws.com/assets/${src}`;
+    : `${env.NEXT_PUBLIC_AWS_S3_URL}/assets/${src}`;
 }
