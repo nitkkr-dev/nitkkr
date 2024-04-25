@@ -39,7 +39,7 @@ const Select = ({
     <SelectContext.Provider value={{ variant }}>
       <SelectPrimitive.Root
         onValueChange={(value) => {
-          navigate && router.push(value);
+          navigate && router.replace(value);
           onValueChange && onValueChange(value);
         }}
         {...props}
