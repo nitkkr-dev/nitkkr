@@ -6,10 +6,10 @@ import Heading from '~/components/heading';
 import Loading from '~/components/loading';
 import { Button, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { env } from '~/lib/env';
 import { cn, getKeys, groupBy } from '~/lib/utils';
 import type { notifications as notificationsSchema } from '~/server/db';
 import { db } from '~/server/db';
+import { getS3Url } from '~/server/s3';
 
 export default async function Notifications({
   category: currentCategory,
@@ -25,7 +25,7 @@ export default async function Notifications({
       className="bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
       id="notifications"
       style={{
-        backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('${env.AWS_PUBLIC_S3_URL}/assets/mahabharat.jpg')`,
+        backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.6) 0%, rgba(249, 245, 235, 0.8) 85%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/assets/mahabharat.jpg')`,
       }}
     >
       <Heading

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import { Button } from '~/components/ui';
-import { env } from '~/lib/env';
 import { cn } from '~/lib/utils';
+import { getS3Url } from '~/server/s3';
 
 export default function ImageHeader({
   className,
@@ -34,7 +34,7 @@ export default function ImageHeader({
           className
         )}
         style={{
-          backgroundImage: `url('${env.AWS_PUBLIC_S3_URL}/${src}')`,
+          backgroundImage: `url('${getS3Url()}/${src}')`,
         }}
       >
         {title && (

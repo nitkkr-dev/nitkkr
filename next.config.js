@@ -10,14 +10,8 @@ const config = {
     loader: 'custom',
     loaderFile: './lib/loader.ts',
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: env.AWS_PUBLIC_S3_URL.replace(/^https:\/\//, ''),
-      },
-      {
-        protocol: 'https',
-        hostname: env.AWS_PRIVATE_S3_URL.replace(/^https:\/\//, ''),
-      },
+      { protocol: 'https', hostname: env.AWS_PUBLIC_S3_NAME },
+      { protocol: 'https', hostname: env.AWS_PRIVATE_S3_NAME },
     ],
   },
 };

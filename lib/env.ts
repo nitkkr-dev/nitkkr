@@ -17,8 +17,8 @@ export const env = createEnv({
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_ACCESS_KEY_SECRET: z.string(),
     AWS_S3_REGION: z.string(),
-    AWS_PUBLIC_S3_URL: z.string().url(),
-    AWS_PRIVATE_S3_URL: z.string().url(),
+    AWS_PUBLIC_S3_NAME: z.string(),
+    AWS_PRIVATE_S3_NAME: z.string(),
   },
   client: {
     NEXT_PUBLIC_AWS_S3_URL: z.string().url(),
