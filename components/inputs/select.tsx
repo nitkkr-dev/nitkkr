@@ -2,6 +2,7 @@
 
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva } from 'class-variance-authority';
+import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { RxCheck, RxChevronDown, RxChevronUp } from 'react-icons/rx';
 
@@ -24,14 +25,25 @@ function useSelect() {
 }
 
 const Select = ({
+  navigate = false,
+  onValueChange,
   variant = 'ui',
   ...props
 }: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
+  navigate?: boolean;
   variant?: 'form' | 'ui';
 }) => {
+  const router = useRouter();
+
   return (
     <SelectContext.Provider value={{ variant }}>
-      <SelectPrimitive.Root {...props} />
+      <SelectPrimitive.Root
+        onValueChange={(value) => {
+          navigate && router.push(value);
+          onValueChange && onValueChange(value);
+        }}
+        {...props}
+      />
     </SelectContext.Provider>
   );
 };
