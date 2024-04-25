@@ -1,4 +1,4 @@
-import { relations, sql } from 'drizzle-orm';
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   date,
@@ -6,7 +6,6 @@ import {
   pgTable,
   smallint,
   smallserial,
-  text,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -31,10 +30,6 @@ export const clubs = pgTable('clubs', {
   facultyInchargeId2: integer('faculty_incharge_id2').references(
     () => faculty.id
   ),
-  images: text('images')
-    .array()
-    .default(sql`'{}'`)
-    .notNull(),
   isActive: boolean('is_active').default(true).notNull(),
   createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at')

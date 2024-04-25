@@ -13,6 +13,7 @@ import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
+import { countChildren } from '~/server/s3';
 
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
@@ -30,6 +31,8 @@ export default async function Department({
     with: { majors: { columns: { degree: true, name: true } } },
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
+
+  const imageCount = await countChildren(`departments/${name}/images`);
 
   const departmentHead = await db.query.departmentHeads.findFirst({
     where: (departmentHead, { eq }) =>
@@ -256,7 +259,7 @@ export default async function Department({
         ))}
       </nav>
 
-      {department.images.length !== 0 && (
+      {imageCount !== 0 && (
         <article className="container" id="gallery">
           <Heading
             glyphDirection="rtl"
@@ -264,13 +267,13 @@ export default async function Department({
             text={text.headings.gallery.toUpperCase()}
           />
           <GalleryCarousel className="my-5 w-full">
-            {department.images.map((image, index) => (
+            {[...Array<number>(imageCount)].map((_, index) => (
               <Image
                 alt={String(index)}
                 className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
                 height={0}
                 key={index}
-                src={image}
+                src={`departments/${name}/images/${index + 1}.png`}
                 width={0}
               />
             ))}

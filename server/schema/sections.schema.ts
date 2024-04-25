@@ -1,11 +1,5 @@
-import { relations, sql } from 'drizzle-orm';
-import {
-  integer,
-  pgTable,
-  smallserial,
-  text,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { integer, pgTable, smallserial, varchar } from 'drizzle-orm/pg-core';
 
 import { faculty, staff } from '.';
 
@@ -17,10 +11,6 @@ export const sections = pgTable('sections', {
   aboutUs: varchar('about_us').notNull(),
   headFacultyId: integer('head_faculty_id')
     .references(() => faculty.id)
-    .notNull(),
-  images: text('images')
-    .array()
-    .default(sql`'{}'`)
     .notNull(),
 });
 
