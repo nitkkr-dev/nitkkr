@@ -41,6 +41,15 @@ const text: Translations = {
       minutes: 'Minutes',
     },
   },
+  Curricula: {
+    pageTitle: 'CURRICULA',
+    code: 'Code',
+    title: 'Title',
+    major: 'Major',
+    credits: 'L-T-P',
+    totalCredits: 'Credits',
+    syllabus: 'Syllabus',
+  },
   Departments: { title: 'DEPARTMENTS' },
   Department: {
     headings: {

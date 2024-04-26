@@ -33,6 +33,15 @@ export interface Translations {
       minutes: string;
     };
   };
+  Curricula: {
+    pageTitle: string;
+    code: string;
+    title: string;
+    major: string;
+    credits: string;
+    totalCredits: string;
+    syllabus: string;
+  };
   Departments: { title: string };
   Department: {
     headings: {

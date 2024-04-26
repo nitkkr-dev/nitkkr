@@ -37,6 +37,15 @@ const text: Translations = {
       minutes: 'विवरण',
     },
   },
+  Curricula: {
+    pageTitle: 'पाठ्यक्रम',
+    code: 'कोड',
+    title: 'शीर्षक',
+    major: 'क्रमादेश',
+    credits: 'एल-टी-पी',
+    totalCredits: 'क्रेडिट्स',
+    syllabus: 'पाठ्यक्रम',
+  },
   Departments: { title: 'विभाग' },
   Department: {
     headings: {
@@ -128,7 +137,7 @@ const text: Translations = {
         institute: {
           title: 'संस्था',
           degree: 'उपाधि',
-          major: 'प्रमुख', // FIXME
+          major: 'क्रमादेश',
           currentSemester: 'मौजूदा छमाही',
           section: 'अनुभाग',
         },
