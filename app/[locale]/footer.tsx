@@ -20,7 +20,7 @@ export default async function Footer({ locale }: { locale: string }) {
     <footer className="mt-8 sm:mt-10 md:mt-12 lg:mt-20">
       <section className="bg-neutral-900 py-16">
         <article className="container flex flex-col justify-start lg:flex-row">
-          <figure className="m-auto flex w-80 flex-col gap-4 p-4 lg:mx-0">
+          <figure className="m-auto flex max-w-80 flex-col gap-4 p-4 lg:mx-0">
             <Image
               alt={text.logo}
               className="mx-auto rounded-md bg-neutral-50 p-[6px]"
