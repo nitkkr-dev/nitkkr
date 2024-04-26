@@ -1,19 +1,26 @@
 import { client } from '.';
-import { selectAll } from './db_data';
+import { selectClubs, selectCourses, selectFacultyAndStaff } from './db_data';
 
-async function addData(data: any, collectionName: any) {
-  const insert = await client
-    .collections(collectionName)
+export async function populateTypesense(): Promise<void> {
+  const clubData = await selectClubs();
+  const courseData = await selectCourses();
+  const facultyAndStaffData = await selectFacultyAndStaff();
+
+  const insertClubs = await client
+    .collections('clubs')
     .documents()
-    .import(data, { action: 'create' });
-  console.debug(insert);
-}
+    .import(clubData, { action: 'create' });
+  console.debug(insertClubs);
 
-export async function addAllData() {
-  const results = await selectAll();
-  for (const [collectionName, data] of results) {
-    await addData(data, collectionName);
-  }
-}
+  const insertCourses = await client
+    .collections('courses')
+    .documents()
+    .import(courseData, { action: 'create' });
+  console.debug(insertCourses);
 
-addAllData();
+  const insertFacultyAndStaff = await client
+    .collections('faculty_and_staff')
+    .documents()
+    .import(facultyAndStaffData, { action: 'create' });
+  console.debug(insertFacultyAndStaff);
+}

@@ -1,17 +1,15 @@
-import { selectAll } from '~/server/typesense/db_data';
 import { createCollectionsFromSchema } from '~/server/typesense/init';
-import { addAllData } from '~/server/typesense/data_init';
+import { populateTypesense } from '~/server/typesense/data_init';
 
-export async function GET(request: Request) {
-  const results = await selectAll();
-
-  // init schemas
-  const schemaRes = await createCollectionsFromSchema();
-  console.log(schemaRes);
-
-  // upsert all the data
-  const res = await addAllData();
-  console.log(res);
-
-  return Response.json('OK');
+export async function GET() {
+  try {
+    await createCollectionsFromSchema();
+    await populateTypesense();
+    return Response.json(
+      'Files succesfully imported into Typesense. Check the console for progress.'
+    );
+  } catch (error) {
+    console.error('An error occurred:', error);
+    return new Response('Error occurred', { status: 500 });
+  }
 }

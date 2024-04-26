@@ -1,16 +1,17 @@
 import { eq } from 'drizzle-orm';
+
 import {
-  db,
   clubs,
   courses,
+  db,
   departments,
-  majors,
-  staff,
-  persons,
   faculty,
+  majors,
+  persons,
+  staff,
 } from '../db';
 
-export async function selectAll() {
+export async function selectClubs() {
   const clubResults = await db
     .select({
       logo: clubs.logo,
@@ -19,6 +20,10 @@ export async function selectAll() {
     })
     .from(clubs);
 
+  return clubResults;
+}
+
+export async function selectCourses() {
   const courseResults = await db
     .select({
       code: courses.code,
@@ -30,6 +35,10 @@ export async function selectAll() {
     .leftJoin(departments, eq(courses.departmentId, departments.id))
     .leftJoin(majors, eq(courses.departmentId, majors.departmentId));
 
+  return courseResults;
+}
+
+export async function selectFacultyAndStaff() {
   const facultyResults = await db
     .select({
       employee_id: faculty.employee_id,
@@ -55,14 +64,7 @@ export async function selectAll() {
     .from(staff)
     .leftJoin(persons, eq(staff.id, persons.id));
 
-  // but phone numbers are diff type in staff and faculty
   const facultyAndStaffResults = [...facultyResults, ...staffResults];
 
-  const results = [
-    ['clubs', clubResults],
-    ['courses', courseResults],
-    ['faculty_and_staff', facultyResults],
-  ];
-
-  return results;
+  return facultyAndStaffResults;
 }
