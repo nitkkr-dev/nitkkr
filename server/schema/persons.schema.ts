@@ -23,9 +23,7 @@ export const persons = pgTable(
 
     sex: varchar('sex', { enum: ['M', 'F', 'O'] }).notNull(),
     dateOfBirth: date('date_of_birth', { mode: 'date' }),
-    roleId: smallint('role_id')
-      .references(() => roles.id)
-      .notNull(),
+    roleId: smallint('role_id').references(() => roles.id),
     type: varchar('type', { enum: ['faculty', 'staff', 'student'] }).notNull(),
     isActive: boolean('is_active').default(true).notNull(),
     createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),

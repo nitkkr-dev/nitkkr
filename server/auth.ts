@@ -25,7 +25,9 @@ declare module 'next-auth' {
       alternateTelephone: string | null;
       sex: (typeof persons.sex.enumValues)[number];
       dateOfBirth: Date | null;
-      role: { permissions: (typeof roles.permissions.enumValues)[number][] };
+      role: {
+        permissions: (typeof roles.permissions.enumValues)[number][];
+      } | null;
       createdOn: Date;
     };
     user: User;
