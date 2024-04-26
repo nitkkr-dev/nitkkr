@@ -40,11 +40,12 @@ export default async function Department({
       eq(departmentHead.isActive, true),
     with: {
       faculty: {
-        columns: {
-          officeAddress: true,
-          officeTelephone: true,
+        columns: { officeAddress: true },
+        with: {
+          person: {
+            columns: { email: true, id: true, name: true, telephone: true },
+          },
         },
-        with: { person: { columns: { email: true, id: true, name: true } } },
       },
     },
   });
@@ -143,7 +144,7 @@ export default async function Department({
             <MessageCard
               details={{
                 email: departmentHead.faculty.person.email,
-                phone: departmentHead.faculty.officeTelephone,
+                phone: departmentHead.faculty.person.telephone,
                 session: text.headings.hod.session(
                   departmentHead.createdOn.toLocaleString(locale, {
                     year: 'numeric',

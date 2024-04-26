@@ -25,11 +25,7 @@ export const faculty = pgTable(
       .primaryKey()
       .references(() => persons.id),
     employeeId: varchar('employee_id', { length: 8 }).notNull(),
-
-    // Contact
     officeAddress: varchar('college_address', { length: 16 }).notNull(),
-    officeTelephone: varchar('office_telephone', { length: 13 }).notNull(),
-    homeTelephone: varchar('home_telephone', { length: 13 }),
 
     // Meta
     designation: varchar('designation', {

@@ -21,6 +21,8 @@ declare module 'next-auth' {
       id: number;
       name: string;
       email: string;
+      telephone: string;
+      alternateTelephone: string | null;
       sex: (typeof persons.sex.enumValues)[number];
       dateOfBirth: Date | null;
       role: { permissions: (typeof roles.permissions.enumValues)[number][] };
@@ -35,12 +37,14 @@ export const authOptions: NextAuthOptions = {
     async session({ session }) {
       session.person = (await db.query.persons.findFirst({
         columns: {
+          alternateTelephone: true,
           id: true,
           createdOn: true,
           dateOfBirth: true,
           email: true,
           name: true,
           sex: true,
+          telephone: true,
         },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },

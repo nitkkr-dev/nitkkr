@@ -18,6 +18,9 @@ export const persons = pgTable(
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 256 }).notNull(),
     email: varchar('email', { length: 256 }).notNull(),
+    telephone: varchar('telephone', { length: 13 }).notNull(),
+    alternateTelephone: varchar('alternate_telephone', { length: 13 }),
+
     sex: varchar('sex', { enum: ['M', 'F', 'O'] }).notNull(),
     dateOfBirth: date('date_of_birth', { mode: 'date' }),
     roleId: smallint('role_id')

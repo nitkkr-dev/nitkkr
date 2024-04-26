@@ -1,4 +1,4 @@
-import { relations, sql } from 'drizzle-orm';
+import { relations } from 'drizzle-orm';
 import {
   integer,
   pgTable,
@@ -16,10 +16,6 @@ export const staff = pgTable(
       .primaryKey()
       .references(() => persons.id),
     employeeId: varchar('employee_id', { length: 8 }).notNull(),
-    telephone: varchar('telephone', { length: 13 })
-      .array()
-      .default(sql`'{}'`)
-      .notNull(),
     workingSectionId: smallint('working_section_id')
       .references(() => sections.id)
       .notNull(),

@@ -146,12 +146,11 @@ const FacultyList = async ({
       designation: true,
       employeeId: true,
       id: true,
-      officeTelephone: true,
     },
     where: currentDepartment
       ? (faculty, { eq }) => eq(faculty.departmentId, currentDepartment.id)
       : undefined,
-    with: { person: { columns: { email: true, name: true } } },
+    with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
 
   return faculty
@@ -195,7 +194,7 @@ const FacultyList = async ({
                 </li>
                 <li className="flex items-center gap-2">
                   <FaPhone className="fill-primary-700" />
-                  {faculty.officeTelephone}
+                  {faculty.person.telephone}
                 </li>
               </ul>
             </main>

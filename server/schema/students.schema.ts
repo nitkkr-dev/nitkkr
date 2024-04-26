@@ -8,11 +8,7 @@ export const students = pgTable('students', {
     .primaryKey()
     .references(() => persons.id),
   rollNumber: varchar('roll_number', { length: 9 }).notNull(),
-
-  // Contact
   personalEmail: varchar('personal_email', { length: 256 }).notNull(),
-  telephone: varchar('telephone', { length: 13 }).notNull(),
-  alternateTelephone: varchar('alternate_telephone', { length: 13 }),
 
   // Guardian Info
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),

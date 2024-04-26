@@ -50,8 +50,8 @@ export default async function Personal({
           items={[
             `${text.contact.email}: ${session.person.email}`,
             `${text.contact.personalEmail}: ${student.personalEmail}`,
-            `${text.contact.telephone}: ${student.telephone}`,
-            `${text.contact.alternateTelephone}: ${student.alternateTelephone ?? '-'}`,
+            `${text.contact.telephone}: ${session.person.telephone}`,
+            `${text.contact.alternateTelephone}: ${session.person.alternateTelephone ?? '-'}`,
           ]}
           title={text.contact.title}
         />
