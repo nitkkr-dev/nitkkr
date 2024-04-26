@@ -48,7 +48,9 @@ export default async function ProfileLayout({
             height={0}
             // FIXME: Remove session.user.image once
             // everyone's image is fed to the bucket
-            src={session.user.image ?? `persons/${session.person.id}/image.png`}
+            src={
+              session.user.image ?? `persons/${student.rollNumber}/image.png`
+            }
             width={0}
           />
           <figcaption>

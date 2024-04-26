@@ -13,6 +13,7 @@ import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
+import { db } from '~/server/db';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -207,6 +208,24 @@ const AuthAction = async ({
   const session = await getServerAuthSession();
 
   if (session) {
+    let id = '';
+    if (session.person.type === 'faculty') {
+      id = (await db.query.faculty.findFirst({
+        columns: { employeeId: true },
+        where: (faculty, { eq }) => eq(faculty.id, session.person.id),
+      }))!.employeeId;
+    } else if (session.person.type === 'staff') {
+      id = (await db.query.staff.findFirst({
+        columns: { employeeId: true },
+        where: (staff, { eq }) => eq(staff.id, session.person.id),
+      }))!.employeeId;
+    } else if (session.person.type === 'student') {
+      id = (await db.query.students.findFirst({
+        columns: { rollNumber: true },
+        where: (student, { eq }) => eq(student.id, session.person.id),
+      }))!.rollNumber;
+    }
+
     return mobile ? (
       <Button
         asChild
@@ -219,7 +238,7 @@ const AuthAction = async ({
             className={className}
             // FIXME: Remove session.user.image once
             // everyone's image is fed to the bucket
-            src={session.user.image ?? `persons/${session.person.id}/image.png`}
+            src={session.user.image ?? `persons/${id}/image.png`}
           />
           {text.view}
         </Link>
@@ -231,7 +250,7 @@ const AuthAction = async ({
         // FIXME: Remove session.user.image once
         // everyone's image is fed to the bucket
         href={`/${locale}/profile`}
-        src={session.user.image ?? `persons/${session.person.id}/image.png`}
+        src={session.user.image ?? `persons/${id}/image.png`}
       />
     );
   } else {

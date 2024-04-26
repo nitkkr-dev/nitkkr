@@ -28,6 +28,7 @@ declare module 'next-auth' {
       role: {
         permissions: (typeof roles.permissions.enumValues)[number][];
       } | null;
+      type: 'faculty' | 'staff' | 'student';
       createdOn: Date;
     };
     user: User;
@@ -47,6 +48,7 @@ export const authOptions: NextAuthOptions = {
           name: true,
           sex: true,
           telephone: true,
+          type: true,
         },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },

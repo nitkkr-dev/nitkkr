@@ -40,7 +40,7 @@ export default async function Department({
       eq(departmentHead.isActive, true),
     with: {
       faculty: {
-        columns: { officeAddress: true },
+        columns: { employeeId: true, officeAddress: true },
         with: {
           person: {
             columns: { email: true, id: true, name: true, telephone: true },
@@ -152,7 +152,7 @@ export default async function Department({
                   })
                 ),
               }}
-              image={`persons/${departmentHead.faculty.person.id}/image.png`}
+              image={`persons/${departmentHead.faculty.employeeId}/image.png`}
               locale={locale}
               name={departmentHead.faculty.person.name}
               quote={departmentHead.message}
