@@ -10,8 +10,21 @@ export default async function Personal({
   const text = (await getTranslations(locale)).Profile.tabs.personal;
 
   const session = (await getServerAuthSession())!;
+  const person = (await db.query.persons.findFirst({
+    columns: {
+      alternateTelephone: true,
+      createdOn: true,
+      dateOfBirth: true,
+      email: true,
+      id: true,
+      name: true,
+      sex: true,
+      telephone: true,
+    },
+    where: (person, { eq }) => eq(person.id, session.person.id),
+  }))!;
   const student = (await db.query.students.findFirst({
-    where: (student, { eq }) => eq(student.id, session.person.id),
+    where: (student, { eq }) => eq(student.id, person.id),
   }))!;
   const studentAcademicDetails =
     (await db.query.studentAcademicDetails.findFirst({
@@ -29,18 +42,16 @@ export default async function Personal({
       <dl>
         <Section
           items={[
-            `${text.basic.name}: ${session.person.name}`,
+            `${text.basic.name}: ${person.name}`,
             `${text.basic.rollNumber}: ${student.rollNumber}`,
-            `${text.basic.sex}: ${session.person.sex}`,
+            `${text.basic.sex}: ${person.sex}`,
             `${text.basic.dateOfBirth}: ${
-              session.person.dateOfBirth
-                ? session.person.dateOfBirth.toLocaleDateString(locale, {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                    numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-                  })
-                : '-'
+              person.dateOfBirth?.toLocaleDateString(locale, {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                numberingSystem: locale === 'hi' ? 'deva' : 'roman',
+              }) ?? '-'
             }`,
           ]}
           title={text.basic.title}
@@ -48,10 +59,10 @@ export default async function Personal({
 
         <Section
           items={[
-            `${text.contact.email}: ${session.person.email}`,
+            `${text.contact.email}: ${person.email}`,
             `${text.contact.personalEmail}: ${student.personalEmail}`,
-            `${text.contact.telephone}: ${session.person.telephone}`,
-            `${text.contact.alternateTelephone}: ${session.person.alternateTelephone ?? '-'}`,
+            `${text.contact.telephone}: ${person.telephone}`,
+            `${text.contact.alternateTelephone}: ${person.alternateTelephone ?? '-'}`,
           ]}
           title={text.contact.title}
         />
@@ -72,7 +83,7 @@ export default async function Personal({
             `${text.admission.candidateCategory}: ${student.candidateCategory}`,
             `${text.admission.admissionCategory}: ${student.admissionCategory}`,
             `${text.admission.admissionSubcategory}: ${student.admissionSubcategory ?? '-'}`,
-            `${text.admission.dateOfAdmission}: ${session.person.createdOn.toLocaleDateString(
+            `${text.admission.dateOfAdmission}: ${person.createdOn.toLocaleDateString(
               locale,
               {
                 day: '2-digit',

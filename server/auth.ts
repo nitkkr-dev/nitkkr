@@ -7,7 +7,7 @@ import {
 import GoogleProvider from 'next-auth/providers/google';
 
 import { env } from '~/lib/env';
-import { db, persons, roles } from '~/server/db';
+import { db, roles } from '~/server/db';
 
 declare module 'next-auth' {
   // A nicer way to assert that `email` will not be
@@ -20,16 +20,10 @@ declare module 'next-auth' {
     person: {
       id: number;
       name: string;
-      email: string;
-      telephone: string;
-      alternateTelephone: string | null;
-      sex: (typeof persons.sex.enumValues)[number];
-      dateOfBirth: Date | null;
       role: {
         permissions: (typeof roles.permissions.enumValues)[number][];
       } | null;
       type: 'faculty' | 'staff' | 'student';
-      createdOn: Date;
     };
     user: User;
   }
@@ -39,17 +33,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session }) {
       session.person = (await db.query.persons.findFirst({
-        columns: {
-          alternateTelephone: true,
-          id: true,
-          createdOn: true,
-          dateOfBirth: true,
-          email: true,
-          name: true,
-          sex: true,
-          telephone: true,
-          type: true,
-        },
+        columns: { id: true, name: true, type: true },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },
       }))!;
