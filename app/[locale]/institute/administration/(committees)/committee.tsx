@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { Suspense } from 'react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import Heading from '~/components/heading';
+import Loading from '~/components/loading';
 import {
   Button,
   Table,
@@ -13,9 +14,7 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import type { committeeMembers } from '~/server/db';
-import { db } from '~/server/db';
-import Loading from '~/components/loading';
+import { committeeMembers, db } from '~/server/db';
 
 export default async function Committee({
   locale,
@@ -26,11 +25,6 @@ export default async function Committee({
 }) {
   const text = (await getTranslations(locale)).Committee;
 
-  const members = await db.query.committeeMembers.findMany({
-    orderBy: (member, { asc }) => [asc(member.serial)],
-    where: (member, { eq }) => eq(member.committeeType, type),
-  });
-
   return (
     <section className="container">
       {type !== 'senate' && (
@@ -38,35 +32,24 @@ export default async function Committee({
       )}
 
       <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{text.members.serial}</TableHead>
-            {type === 'governor' && (
-              <TableHead>{text.members.nomination}</TableHead>
-            )}
-            <TableHead>{text.members.name}</TableHead>
-            <TableHead>{text.members.servingAs}</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {members.map((member, index) => (
-            <TableRow key={index}>
-              <TableCell>{member.serial}</TableCell>
+      <Suspense fallback={<Loading />}>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{text.members.serial}</TableHead>
               {type === 'governor' && (
-                <TableCell>{member.nomination}</TableCell>
+                <TableHead>{text.members.nomination}</TableHead>
               )}
-              <TableCell>
-                {member.name}
-                <br />
-                {member.place}
-              </TableCell>
-              <TableCell>{member.servingAs}</TableCell>
+              <TableHead>{text.members.name}</TableHead>
+              <TableHead>{text.members.servingAs}</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            <Members type={type} />
+          </TableBody>
+        </Table>
+      </Suspense>
 
       <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
       <Suspense fallback={<Loading />}>
@@ -93,12 +76,36 @@ export default async function Committee({
   );
 }
 
+const Members = async ({
+  type,
+}: {
+  type: (typeof committeeMembers.committeeType.enumValues)[number];
+}) => {
+  const members = await db.query.committeeMembers.findMany({
+    orderBy: (member, { asc }) => [asc(member.serial)],
+    where: (member, { eq }) => eq(member.committeeType, type),
+  });
+
+  return members.map((member, index) => (
+    <TableRow key={index}>
+      <TableCell>{member.serial}</TableCell>
+      {type === 'governor' && <TableCell>{member.nomination}</TableCell>}
+      <TableCell>
+        {member.name}
+        <br />
+        {member.place}
+      </TableCell>
+      <TableCell>{member.servingAs}</TableCell>
+    </TableRow>
+  ));
+};
+
 const Meetings = async ({
   locale,
   type,
 }: {
   locale: string;
-  type: (typeof committeeMembers.committeeType.enumValues)[number];
+  type: (typeof committeeMeetings.committeeType.enumValues)[number];
 }) => {
   const meetings = await db.query.committeeMeetings.findMany({
     orderBy: (meeting, { desc }) => [desc(meeting.meetingNumber)],
