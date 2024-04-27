@@ -1,9 +1,11 @@
+import { count, sql } from 'drizzle-orm';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
+import { PaginationWithLogic } from '~/components/pagination';
 import {
   Button,
   Table,
@@ -14,16 +16,23 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { committeeMembers, db } from '~/server/db';
+import type { committeeMembers } from '~/server/db';
+import { committeeMeetings, db } from '~/server/db';
 
 export default async function Committee({
   locale,
+  searchParams,
   type,
 }: {
   locale: string;
+  searchParams: { meetingPage?: string };
   type: (typeof committeeMembers.committeeType.enumValues)[number];
 }) {
   const text = (await getTranslations(locale)).Committee;
+
+  const meetingPage = isNaN(Number(searchParams.meetingPage ?? '1'))
+    ? 1
+    : Math.max(Number(searchParams.meetingPage ?? '1'), 1);
 
   return (
     <section className="container">
@@ -68,10 +77,17 @@ export default async function Committee({
             </TableRow>
           </TableHeader>
           <TableBody>
-            <Meetings locale={locale} type={type} />
+            <Meetings locale={locale} page={meetingPage} type={type} />
           </TableBody>
         </Table>
       </Suspense>
+      <PaginationWithLogic
+        currentPage={meetingPage}
+        query={db
+          .select({ count: count() })
+          .from(committeeMeetings)
+          .where(sql`${committeeMeetings.committeeType} = ${type}`)}
+      />
     </section>
   );
 }
@@ -102,14 +118,18 @@ const Members = async ({
 
 const Meetings = async ({
   locale,
+  page,
   type,
 }: {
   locale: string;
+  page: number;
   type: (typeof committeeMeetings.committeeType.enumValues)[number];
 }) => {
   const meetings = await db.query.committeeMeetings.findMany({
     orderBy: (meeting, { desc }) => [desc(meeting.meetingNumber)],
     where: (meeting, { eq }) => eq(meeting.committeeType, type),
+    limit: 10,
+    offset: (page - 1) * 10,
   });
 
   return meetings.map((meeting, index) => (
