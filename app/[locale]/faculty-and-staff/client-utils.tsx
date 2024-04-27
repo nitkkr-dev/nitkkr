@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { MdEmail } from 'react-icons/md';
-import { FaPhone } from 'react-icons/fa';
+import { FaPhone } from 'react-icons/fa6';
 import { useDebounceCallback } from 'usehooks-ts';
 
 import {
@@ -20,10 +20,8 @@ import { Button } from '~/components/ui';
 import { type departments as departmentsTable } from '~/server/db';
 
 export const Tabs = ({
-  select = false,
   departments,
 }: {
-  select?: boolean;
   departments: Pick<
     InferSelectModel<typeof departmentsTable>,
     'id' | 'name' | 'urlName'
@@ -33,43 +31,44 @@ export const Tabs = ({
   const query = searchParams.get('query') ?? '';
   const currentDepartmentUrl = searchParams.get('department') ?? undefined;
 
-  return select ? (
-    <Select
-      defaultValue={
-        currentDepartmentUrl && `department=${currentDepartmentUrl}`
-      }
-      onValueChange={(value) =>
-        window.history.replaceState(null, '', `?query=${query}&${value}`)
-      }
-    >
-      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue placeholder="Choose a department" />
-      </SelectTrigger>
-      <SelectContent>
+  return (
+    <>
+      <Select
+        defaultValue={
+          currentDepartmentUrl && `department=${currentDepartmentUrl}`
+        }
+        onValueChange={(value) =>
+          window.history.replaceState(null, '', `?query=${query}&${value}`)
+        }
+      >
+        <SelectTrigger className="px-4 py-5 xl:hidden">
+          <SelectValue placeholder="Choose a department" />
+        </SelectTrigger>
+        <SelectContent>
+          {departments.map(({ name, urlName }, index) => (
+            <SelectItem key={index} value={`department=${urlName}`}>
+              {name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <ol className="hidden w-full space-y-4 xl:inline">
         {departments.map(({ name, urlName }, index) => (
-          <SelectItem key={index} value={`department=${urlName}`}>
-            {name}
-          </SelectItem>
+          <li key={index}>
+            <Button
+              active={urlName === currentDepartmentUrl}
+              className="font-semibold text-shade-dark"
+              variant={'link'}
+              onClick={() =>
+                window.history.replaceState(null, '', `?department=${urlName}`)
+              }
+            >
+              {name}
+            </Button>
+          </li>
         ))}
-      </SelectContent>
-    </Select>
-  ) : (
-    <ol className="w-full space-y-4">
-      {departments.map(({ name, urlName }, index) => (
-        <li key={index}>
-          <Button
-            active={urlName === currentDepartmentUrl}
-            className="font-semibold text-shade-dark"
-            variant={'link'}
-            onClick={() =>
-              window.history.replaceState(null, '', `?department=${urlName}`)
-            }
-          >
-            {name}
-          </Button>
-        </li>
-      ))}
-    </ol>
+      </ol>
+    </>
   );
 };
 
@@ -167,7 +166,7 @@ export const SearchInput = ({
   );
   return (
     <Input
-      className="sm:grow"
+      className="!my-0 max-xl:order-first max-sm:!mb-4"
       defaultValue={defaultValue}
       id="faculty-or-staff"
       onChange={debounceCallback}
