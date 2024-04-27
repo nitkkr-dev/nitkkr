@@ -30,7 +30,7 @@ export default function RootLayout({
   const { locale } = params;
 
   return (
-    <html lang={locale}>
+    <html className="scroll-smooth" lang={locale}>
       <body
         className={cn(
           'flex flex-col bg-background',
