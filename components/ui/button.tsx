@@ -109,6 +109,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           buttonVariants({ variant, className }),
           activeStyles,
+          props.disabled &&
+            (asChild ? 'pointer-events-none' : 'cursor-not-allowed'),
           // Overrides at every breakpoint since custom styles would conflict
           className?.includes('rounded-full') &&
             'rounded-full sm:rounded-full md:rounded-full lg:rounded-full'
