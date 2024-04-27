@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cn } from '~/lib/utils';
 
-import { ScrollArea } from '.';
+import { ScrollArea, ScrollBar } from '.';
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -20,9 +20,13 @@ const Table = React.forwardRef<
   >
     <table
       ref={ref}
-      className={cn('w-full caption-bottom text-sm', className)}
+      className={cn(
+        'w-max caption-bottom text-sm max-md:max-w-screen-sm md:w-full',
+        className
+      )}
       {...props}
     />
+    <ScrollBar orientation="horizontal" />
   </ScrollArea>
 ));
 Table.displayName = 'Table';
@@ -88,9 +92,9 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'h-12 text-left align-middle font-serif font-normal text-primary-700 [&:has([role=checkbox])]:pr-0',
+      'h-12 min-w-16 text-left align-middle font-serif text-primary-700 [&:has([role=checkbox])]:pr-0',
       'px-1 py-2 sm:px-2 md:px-3 lg:px-4',
-      'text-sm sm:text-base md:text-lg',
+      'text-[15px] sm:text-base md:text-lg',
       className
     )}
     {...props}
