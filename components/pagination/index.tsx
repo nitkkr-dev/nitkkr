@@ -98,6 +98,7 @@ const PaginationEllipsis = ({
 );
 PaginationEllipsis.displayName = 'PaginationEllipsis';
 
+export * from './pagination';
 export {
   Pagination,
   PaginationContent,
