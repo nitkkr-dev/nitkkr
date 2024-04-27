@@ -22,7 +22,7 @@ export default async function ProfileLayout({
 
   const student = (await db.query.students.findFirst({
     columns: { rollNumber: true },
-    where: (student, { eq }) => eq(student.id, session.person.id),
+    where: (student, { eq }) => eq(student.id, session.user.personId),
   }))!;
 
   return (
@@ -43,7 +43,7 @@ export default async function ProfileLayout({
       >
         <figure className="space-y-4">
           <Image
-            alt={session.person.name}
+            alt={session.user.name}
             className="mx-auto size-28 rounded-full border border-primary-700"
             height={0}
             // FIXME: Remove session.user.image once
@@ -58,7 +58,7 @@ export default async function ProfileLayout({
               {student.rollNumber}
             </p>
             <p className="font-serif text-lg font-medium">
-              {session.person.name}
+              {session.user.name}
             </p>
           </figcaption>
         </figure>

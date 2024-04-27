@@ -209,20 +209,20 @@ const AuthAction = async ({
 
   if (session) {
     let id = '';
-    if (session.person.type === 'faculty') {
+    if (session.user.type === 'faculty') {
       id = (await db.query.faculty.findFirst({
         columns: { employeeId: true },
-        where: (faculty, { eq }) => eq(faculty.id, session.person.id),
+        where: (faculty, { eq }) => eq(faculty.id, session.user.personId),
       }))!.employeeId;
-    } else if (session.person.type === 'staff') {
+    } else if (session.user.type === 'staff') {
       id = (await db.query.staff.findFirst({
         columns: { employeeId: true },
-        where: (staff, { eq }) => eq(staff.id, session.person.id),
+        where: (staff, { eq }) => eq(staff.id, session.user.personId),
       }))!.employeeId;
-    } else if (session.person.type === 'student') {
+    } else if (session.user.type === 'student') {
       id = (await db.query.students.findFirst({
         columns: { rollNumber: true },
-        where: (student, { eq }) => eq(student.id, session.person.id),
+        where: (student, { eq }) => eq(student.id, session.user.personId),
       }))!.rollNumber;
     }
 

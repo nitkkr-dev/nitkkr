@@ -15,7 +15,7 @@ export default async function Clubs({
   const session = (await getServerAuthSession())!;
   const student = (await db.query.students.findFirst({
     columns: {},
-    where: (student, { eq }) => eq(student.id, session.person.id),
+    where: (student, { eq }) => eq(student.id, session.user.personId),
     with: {
       clubMembers: {
         columns: { position: true },
