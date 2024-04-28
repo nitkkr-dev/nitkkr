@@ -3,7 +3,8 @@ import { client } from '~/server/typesense';
 const query_fields = [
   { name: 'clubs', fields: ['name', 'tagline'] },
   { name: 'courses', fields: ['code', 'title'] },
-  { name: 'faculty_and_staff', fields: ['name', 'email', 'phone'] },
+  { name: 'faculty', fields: ['name', 'email', 'phone'] },
+  { name: 'staff', fields: ['name', 'email', 'phone'] },
 ];
 
 export async function search(query: string) {
