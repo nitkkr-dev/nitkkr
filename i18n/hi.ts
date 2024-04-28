@@ -83,6 +83,7 @@ const text: Translations = {
     copyright:
       '© २०२४ राष्ट्रीय प्रौद्योगिकी संस्थान कुरूक्षेत्र। सर्वाधिकार आरक्षित।',
   },
+  Forms: { title: 'फॉर्म्स' },
   Header: {
     institute: 'संस्थान',
     academics: 'शैक्षिक',

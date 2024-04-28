@@ -75,6 +75,7 @@ export interface Translations {
     lorem: string;
     copyright: string;
   };
+  Forms: { title: string };
   Header: {
     institute: string;
     academics: string;
