@@ -23,21 +23,32 @@ const courseSchema: CollectionCreateSchema = {
   // default_sorting_field: 'code',
 };
 
-const facultyAndStaffSchema: CollectionCreateSchema = {
-  name: 'faculty_and_staff',
+const facultySchema: CollectionCreateSchema = {
+  name: 'faculty',
   fields: [
-    { name: 'employee_id', type: 'string', index: false },
-    { name: 'image', type: 'image', index: false },
+    { name: 'employeeId', type: 'string', index: false },
+    { name: 'image', type: 'string', index: false },
     { name: 'name', type: 'string' },
     { name: 'designation', type: 'string', index: false },
     { name: 'email', type: 'string' },
     { name: 'phone', type: 'string' },
-    { name: 'address', type: 'string', index: false },
+    { name: 'officeAddress', type: 'string', index: false },
   ],
-  // default_sorting_field: 'name',
 };
 
-export const schema = [clubSchema, courseSchema, facultyAndStaffSchema];
+const staffSchema: CollectionCreateSchema = {
+  name: 'staff',
+  fields: [
+    { name: 'employeeId', type: 'string', index: false },
+    { name: 'image', type: 'string', index: false },
+    { name: 'name', type: 'string' },
+    { name: 'designation', type: 'string', index: false },
+    { name: 'email', type: 'string' },
+    { name: 'phone', type: 'string' },
+  ],
+};
+
+export const schema = [clubSchema, courseSchema, facultySchema, staffSchema];
 
 // export const documentSchema: CollectionCreateSchema = {
 //   name: 'documents',

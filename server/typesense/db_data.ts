@@ -14,7 +14,7 @@ import {
 export async function selectClubs() {
   const clubResults = await db
     .select({
-      logo: clubs.logo,
+      urlName: clubs.urlName,
       name: clubs.name,
       tagline: clubs.tagline,
     })
@@ -38,33 +38,33 @@ export async function selectCourses() {
   return courseResults;
 }
 
-export async function selectFacultyAndStaff() {
+export async function selectFaculty() {
   const facultyResults = await db
     .select({
-      employee_id: faculty.employee_id,
-      image: persons.id,
+      employeeId: faculty.employeeId,
       name: persons.name,
       designation: faculty.designation,
       email: persons.email,
-      phone: faculty.officeTelephone,
-      address: faculty.officeAddress,
+      phone: persons.telephone,
+      officeAddress: faculty.officeAddress,
     })
     .from(faculty)
     .leftJoin(persons, eq(faculty.id, persons.id));
 
+  return facultyResults;
+}
+
+export async function selectStaff() {
   const staffResults = await db
     .select({
-      employee_id: staff.employee_id,
-      image: persons.image,
+      employeeId: staff.employeeId,
       name: persons.name,
       designation: staff.designation,
       email: persons.email,
-      phone: staff.telephone,
+      phone: persons.telephone,
     })
     .from(staff)
     .leftJoin(persons, eq(staff.id, persons.id));
 
-  const facultyAndStaffResults = [...facultyResults, ...staffResults];
-
-  return facultyAndStaffResults;
+  return staffResults;
 }
