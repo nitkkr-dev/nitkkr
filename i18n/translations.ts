@@ -66,6 +66,7 @@ export interface Translations {
     placeholder: string;
     departmentHead: string;
   };
+  FAQ: { title: string };
   Footer: {
     logo: string;
     nit: string;

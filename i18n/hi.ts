@@ -73,6 +73,7 @@ const text: Translations = {
     placeholder: 'नाम या ईमेल से खोजें',
     departmentHead: 'विभागाध्यक्ष',
   },
+  FAQ: { title: 'अक्सर पूछे जाने वाले प्रश्न' },
   Footer: {
     logo: 'प्रतीक चिन्ह',
     nit: 'राष्ट्रीय प्रौद्योगिकी संस्थान, कुरूक्षेत्र',

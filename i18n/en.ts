@@ -77,6 +77,7 @@ const text: Translations = {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
   },
+  FAQ: { title: 'Frequently Asked Questions' },
   Footer: {
     logo: 'Logo',
     nit: 'National Institute of Technology, Kurukshetra',
