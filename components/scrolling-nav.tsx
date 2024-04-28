@@ -26,7 +26,13 @@ const ScrollingNav = ({
         variant="ghost"
         active={hash === href}
       >
-        <Link href={href} onClick={() => setHash(href)}>
+        <Link
+          href={href}
+          onClick={(event) => {
+            (event.target as HTMLButtonElement).blur(); // to be removed, focus styles overrides both active and normal styles on the button causing visual bug
+            setHash(href);
+          }}
+        >
           {label}
         </Link>
       </Button>

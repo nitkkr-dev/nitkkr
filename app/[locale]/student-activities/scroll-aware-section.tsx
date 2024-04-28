@@ -13,7 +13,7 @@ const ScrollAwareSection = ({
   location: string;
 }) => {
   const { ref } = useIntersectionObserver({
-    threshold: 0.5,
+    rootMargin: '-10% 0px -90% 0px',
     onChange: (isIntersecting) => {
       if (!isIntersecting) return;
       window.history.replaceState(null, '', `#${location}`);
