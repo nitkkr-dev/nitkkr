@@ -12,6 +12,8 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 
+import ScrollAwareSection from './scroll-aware-section';
+
 export default async function StudentActivities({
   params: { locale },
 }: {
@@ -34,15 +36,16 @@ export default async function StudentActivities({
         src="assets/admin-block.png"
       />
 
-      <Heading
-        className="container"
-        glyphDirection="ltr"
-        heading="h3"
-        href="#clubs"
-        text={text.sections.clubs.title}
-      />
-
-      <section className="container mb-6 text-center">
+      <ScrollAwareSection
+        className="container mb-6 text-center"
+        location="clubs"
+      >
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#clubs"
+          text={text.sections.clubs.title}
+        />
         <Suspense fallback={<Loading />}>
           <ClubsCarousel locale={locale} />
         </Suspense>
@@ -68,7 +71,43 @@ export default async function StudentActivities({
             </span>
           </Link>
         </Button>
-      </section>
+      </ScrollAwareSection>
+      <ScrollAwareSection
+        className="container mb-6 text-center"
+        location="council"
+      >
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#council"
+          text={text.sections.clubs.title}
+        />
+        <Suspense fallback={<Loading />}>
+          <ClubsCarousel locale={locale} />
+        </Suspense>
+        <Button
+          asChild
+          className={cn(
+            'px-2 py-1 md:px-4 md:py-2',
+            'mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8',
+            'inline-flex items-center gap-1 md:gap-2',
+            'rounded-md border font-bold text-primary-700'
+          )}
+          variant="outline"
+        >
+          <Link href={`/${locale}/student-activities/clubs`}>
+            {text.sections.clubs.more}
+            <span className="rotate-90">
+              <FaArrowUp
+                className={cn(
+                  'mx-auto animate-bounce',
+                  'size-2 md:size-3 lg:size-4'
+                )}
+              />
+            </span>
+          </Link>
+        </Button>
+      </ScrollAwareSection>
     </>
   );
 }

@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
-import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
+
+import ScrollingNav from './scrolling-nav';
 
 export default function ImageHeader({
   className,
@@ -55,17 +54,7 @@ export default function ImageHeader({
               'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
             )}
           >
-            {headings.map(({ label, href }, index) => (
-              <li key={index}>
-                <Button
-                  asChild
-                  className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
-                  variant="ghost"
-                >
-                  <Link href={href}>{label}</Link>
-                </Button>
-              </li>
-            ))}
+            <ScrollingNav headings={headings} />
           </ol>
           <hr className="invisible hidden sm:block" />
         </>
