@@ -26,7 +26,7 @@ export default async function Footer({ locale }: { locale: string }) {
               className="mx-auto rounded-md bg-neutral-50 p-[6px]"
               height={66}
               width={66}
-              src="logo.png"
+              src="assets/logo.png"
             />
 
             <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-shade-light">
@@ -59,7 +59,7 @@ export default async function Footer({ locale }: { locale: string }) {
             height={256}
             loading="lazy"
             width={256}
-            src="pillar.png"
+            src="assets/pillar.png"
           />
 
           <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">

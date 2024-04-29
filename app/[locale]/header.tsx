@@ -45,7 +45,7 @@ export default async function Header({ locale }: { locale: string }) {
             className="rounded-md bg-neutral-50 p-[6px]"
             height={40}
             width={40}
-            src="logo.png"
+            src="assets/logo.png"
           />
         </Link>
 

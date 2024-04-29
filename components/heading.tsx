@@ -22,7 +22,7 @@ function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
           height={1268}
           key={index}
           width={2186}
-          src="elephants.png"
+          src="assets/elephants.png"
         />
       ))}
     </figure>
@@ -44,7 +44,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
         height={407}
         loading="lazy"
         width={602}
-        src="chariot.png"
+        src="assets/chariot.png"
       />
 
       {[...Array<number>(16)].map((_, index) => (
@@ -57,7 +57,7 @@ function Horses({ direction }: { direction: 'rtl' | 'ltr' }) {
           height={250}
           key={index}
           width={375}
-          src="horses.png"
+          src="assets/horses.png"
         />
       ))}
     </figure>

@@ -9,7 +9,5 @@ export default function imageLoader({
   src: string;
   width: number;
 }) {
-  return src.startsWith('http')
-    ? src
-    : `${env.NEXT_PUBLIC_AWS_S3_URL}/assets/${src}`;
+  return src.startsWith('http') ? src : `${env.NEXT_PUBLIC_AWS_S3_URL}/${src}`;
 }
