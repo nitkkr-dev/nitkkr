@@ -1,15 +1,11 @@
 import { forwardRef } from 'react';
-import { MdAreaChart } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
-  FormElementInstance,
-} from '~/components/forms/interfaces/form-elements';
+} from '~/components/form/interfaces/form-elements';
 import { Textarea, type TextareaProps } from '~/components/inputs';
 import { Label } from '~/components/ui';
-
-//import TextValidationForm from './InputBasedForm';
 
 const inputType: ElementsType = 'TextAreaField';
 
@@ -61,40 +57,5 @@ TextAreaGeneric.displayName = 'TextAreaGeneric';
 
 export const TextAreaFieldFormElement: FormElement = {
   inputType,
-  uiFieldComponent: ({
-    elementInstance,
-  }: {
-    elementInstance: FormElementInstance;
-  }) => (
-    <TextAreaGeneric
-      className="w-full"
-      disabled
-      label={elementInstance.question}
-      required={elementInstance.isRequired}
-      description={elementInstance.description}
-    />
-  ),
   formComponent: TextAreaGeneric,
-  //propertiesComponent: TextValidationForm,
-  construct: (Id: string, pageNumber: number, id?: number) => {
-    return {
-      Id,
-      id,
-      question: 'Text Area Field',
-      inputType,
-      isRequired: false,
-      pageNumber,
-      marks: 0,
-    };
-  },
-  dragBtnElement: {
-    icon: MdAreaChart,
-    label: 'TextArea Field',
-  },
-  schemaObjects: (element: FormElementInstance) => {
-    return {
-      type: 'string',
-    };
-  },
-  shouldValidate: true,
 };

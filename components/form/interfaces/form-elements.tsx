@@ -1,8 +1,4 @@
-import type {
-  ElementType,
-  ForwardRefExoticComponent,
-  RefAttributes,
-} from 'react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 import { type InputProps, type MultipleSelectorRef } from '~/components/inputs';
 
@@ -54,13 +50,9 @@ export interface GenericProps {
   className?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type FormElement = {
   inputType: ElementsType;
-  dragBtnElement: {
-    icon: ElementType;
-    label: string;
-  };
-  uiFieldComponent: React.FC<{ elementInstance: FormElementInstance }>;
   formComponent:
     | ForwardRefExoticComponent<InputProps & RefAttributes<HTMLInputElement>>
     | ForwardRefExoticComponent<
@@ -75,39 +67,7 @@ export type FormElement = {
     | ForwardRefExoticComponent<
         TextAreaGenericProps & RefAttributes<HTMLTextAreaElement>
       >;
-  //propertiesComponent: React.FC<{ elementInstance: FormElementInstance }>;
-  construct: (
-    Id: string,
-    pageNumber: number,
-    id?: number
-  ) => FormElementInstance;
-  shouldValidate: boolean;
-} & (
-  | {
-      shouldValidate: true;
-      schemaObjects: (element: FormElementInstance) => validationProperty;
-    }
-  | {
-      shouldValidate?: false;
-      schemaObjects?: never;
-    }
-);
-
-export interface FormElementInstance {
-  Id: string;
-  id?: number;
-  question: string;
-  description?: string;
-  isRequired: boolean;
-  inputType: ElementsType;
-  choices?: string[];
-  mimeTypes?: string[];
-  range?: string[];
-  pageNumber: number;
-  marks: number;
-  formatMaximum?: string;
-  formatMinimum?: string;
-}
+};
 
 type FormElementsType = {
   [Key in ElementsType]: FormElement;

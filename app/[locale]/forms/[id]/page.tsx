@@ -1,19 +1,17 @@
-//import { getFormForSubmission } from '~/actions/form.actions';
-//temp
-import FormSubmitPage from '~/components/forms/form-submit-page';
-import { type ElementsType } from '~/components/forms/interfaces/form-elements';
-
 // FIXME: This will contain both ids from forms and persistent URLs.
 // Old persistent URLs should trigger a redirect.
 // export async function generateStaticParams() {}
+import { redirect } from 'next/navigation';
 
-export default function Form({
-  params: { locale },
+import FormSubmitPage from '~/components/form/form-submit-page';
+import { type ElementsType } from '~/components/form/interfaces/form-elements';
+
+export default async function Form({
+  params: { locale, id },
 }: {
   params: { locale: string; id: string };
 }) {
-  //const { Element, props } = await getFormForSubmission(Number(id));
-  //return <Element {...props} locale={locale} />;
+  if (!id) return redirect('/');
   const form = {
     id: 30,
     title: 'New form',

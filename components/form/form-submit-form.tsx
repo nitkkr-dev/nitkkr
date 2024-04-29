@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-//import { submitForm } from '~/actions/form.actions';
 import { validateResolver } from '~/lib/validateResolver';
 import { Button } from '~/components/ui';
 import {
@@ -14,7 +13,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '~/components/ui/form';
+} from '~/components/form/form';
 import { toast } from '~/lib/hooks';
 
 import type { FormSubmitFormProps } from './form-submit-page';
@@ -83,12 +82,6 @@ export default function FormSubmitForm({
     const output = await forms.trigger();
     if (!output) return;
 
-    // const result = await submitForm(
-    //   form.id,
-    //   values() as unknown as Record<string, string | number | string[]>
-    // );
-    //toast(result);
-    //Router.push(`/${locale}/forms`);
     console.log(output);
     console.log(values);
 

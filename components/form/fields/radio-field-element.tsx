@@ -1,16 +1,9 @@
 import { forwardRef } from 'react';
 import type * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { MdRadioButtonChecked } from 'react-icons/md';
-
-//import DropdownForm from './DropdownFrom';
 
 import { Label, RadioGroup, RadioGroupItem } from '~/components/ui';
 
-import type {
-  ElementsType,
-  FormElement,
-  FormElementInstance,
-} from '../interfaces/form-elements';
+import type { ElementsType, FormElement } from '../interfaces/form-elements';
 
 export interface RadioGenericProps
   extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
@@ -68,41 +61,5 @@ RadioGeneric.displayName = 'RadioGeneric';
 
 export const RadioGenericFormElement: FormElement = {
   inputType,
-  uiFieldComponent: ({
-    elementInstance,
-  }: {
-    elementInstance: FormElementInstance;
-  }) => (
-    <RadioGeneric
-      className="w-full"
-      disabled
-      items={elementInstance.choices ?? []}
-      label={elementInstance.question}
-      required={elementInstance.isRequired}
-      description={elementInstance.description}
-    />
-  ),
   formComponent: RadioGeneric,
-  //propertiesComponent: DropdownForm,
-  construct: (Id: string, pageNumber: number, id?: number) => {
-    return {
-      Id,
-      id,
-      question: 'Radio Field',
-      inputType,
-      isRequired: false,
-      pageNumber,
-      marks: 0,
-    };
-  },
-  dragBtnElement: {
-    icon: MdRadioButtonChecked,
-    label: 'Radio Field',
-  },
-  schemaObjects: (element: FormElementInstance) => {
-    return {
-      type: 'string',
-    };
-  },
-  shouldValidate: true,
 };

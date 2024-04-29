@@ -1,6 +1,4 @@
-import { RxDropdownMenu } from 'react-icons/rx';
 import type * as SelectPrimitive from '@radix-ui/react-select';
-//import DropdownForm from './DropdownFrom';
 import {
   type ComponentPropsWithoutRef,
   type ElementRef,
@@ -16,11 +14,7 @@ import {
   SelectValue,
 } from '~/components/inputs';
 
-import type {
-  ElementsType,
-  FormElement,
-  FormElementInstance,
-} from '../interfaces/form-elements';
+import type { ElementsType, FormElement } from '../interfaces/form-elements';
 
 const inputType: ElementsType = 'SelectDropdown';
 
@@ -79,41 +73,5 @@ SelectDropdown.displayName = 'SelectDropdown';
 
 export const SelectDropdownFormElement: FormElement = {
   inputType,
-  uiFieldComponent: ({
-    elementInstance,
-  }: {
-    elementInstance: FormElementInstance;
-  }) => (
-    <SelectDropdown
-      className="w-full"
-      disabled
-      items={elementInstance.choices ?? []}
-      label={elementInstance.question}
-      required={elementInstance.isRequired}
-      description={elementInstance.description}
-    />
-  ),
   formComponent: SelectDropdown,
-  //propertiesComponent: DropdownForm,
-  construct: (Id: string, pageNumber: number, id?: number) => {
-    return {
-      Id,
-      id,
-      question: 'Select Field',
-      inputType,
-      isRequired: false,
-      pageNumber,
-      marks: 0,
-    };
-  },
-  dragBtnElement: {
-    icon: RxDropdownMenu,
-    label: 'Select Field',
-  },
-  schemaObjects: (element: FormElementInstance) => {
-    return {
-      type: 'string',
-    };
-  },
-  shouldValidate: true,
 };

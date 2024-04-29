@@ -1,33 +1,15 @@
 import { forwardRef } from 'react';
-import { MdNumbers } from 'react-icons/md';
 
 import type {
   ElementsType,
   FormElement,
-  FormElementInstance,
-} from '~/components/forms/interfaces/form-elements';
+} from '~/components/form/interfaces/form-elements';
 import { Input, type InputProps } from '~/components/inputs';
-
-//import TextValidationForm from './InputBasedForm';
 
 const inputType: ElementsType = 'NumberField';
 
 export const NumberFieldFormElement: FormElement = {
   inputType,
-  uiFieldComponent: ({
-    elementInstance,
-  }: {
-    elementInstance: FormElementInstance;
-  }) => (
-    <Input
-      id={elementInstance.Id}
-      type="number"
-      readOnly
-      label={elementInstance.question}
-      required={elementInstance.isRequired}
-      description={elementInstance.description}
-    />
-  ),
   // eslint-disable-next-line react/display-name
   formComponent: forwardRef<HTMLInputElement, InputProps>(
     ({ onChange, value, ...restProps }, ref) => {
@@ -53,26 +35,4 @@ export const NumberFieldFormElement: FormElement = {
       );
     }
   ),
-  //propertiesComponent: TextValidationForm,
-  construct: (Id: string, pageNumber: number, id?: number) => {
-    return {
-      Id,
-      id,
-      question: 'Number Field',
-      inputType,
-      isRequired: false,
-      pageNumber,
-      marks: 0,
-    };
-  },
-  dragBtnElement: {
-    icon: MdNumbers,
-    label: 'Number Field',
-  },
-  schemaObjects: (element: FormElementInstance) => {
-    return {
-      type: 'number',
-    };
-  },
-  shouldValidate: true,
 };
