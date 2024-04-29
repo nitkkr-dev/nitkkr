@@ -27,3 +27,4 @@ export const typesense =
 if (env.NODE_ENV !== 'production') globalForTypesense.typesense = typesense;
 
 export * as schema from './schema';
+export * from './utils';
