@@ -1,6 +1,12 @@
 import Heading from '~/components/heading';
-import WorkInProgress from '~/components/work-in-progress';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+import { db } from '~/server/db';
 
 export default async function FrequentlyAskedQuestions({
   params: { locale },
@@ -9,10 +15,27 @@ export default async function FrequentlyAskedQuestions({
 }) {
   const text = (await getTranslations(locale)).FAQ;
 
+  const faqs = await db.query.faqs.findMany({
+    columns: { description: true, title: true },
+  });
+
   return (
-    <>
-      <Heading glyphDirection="dual" heading="h2" text={text.title} />;
-      <WorkInProgress locale={locale} />
-    </>
+    <article>
+      <Heading
+        className="container"
+        glyphDirection="dual"
+        heading="h2"
+        text={text.title}
+      />
+
+      <Accordion type="single" collapsible className="container w-full">
+        {faqs.map(({ description, title }, index) => (
+          <AccordionItem key={index} value={title}>
+            <AccordionTrigger>{title}</AccordionTrigger>
+            <AccordionContent>{description}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </article>
   );
 }
