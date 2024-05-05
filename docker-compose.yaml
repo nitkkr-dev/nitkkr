@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  typesense:
+    image: typesense/typesense:26.0
+    restart: on-failure
+    ports:
+      - '$TYPESENSE_PORT:$TYPESENSE_PORT'
+    volumes:
+      - ./typesense-data:/data
+    command: '--data-dir /data --api-key=$TYPESENSE_API_KEY --enable-cors'
