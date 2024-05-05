@@ -10,6 +10,7 @@ export * from './department-heads.schema';
 export * from './departments.schema';
 export * from './doctorates.schema';
 export * from './faculty.schema';
+export * from './faq.schema';
 export * from './majors.schema';
 export * from './notifications.schema';
 export * from './persons.schema';
