@@ -1,9 +1,11 @@
+import { count } from 'drizzle-orm';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
+import { PaginationWithLogic } from '~/components/pagination';
 import {
   Button,
   Table,
@@ -14,14 +16,20 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { db } from '~/server/db';
+import { courses, db } from '~/server/db';
 
 export default async function Curricula({
   params: { locale },
+  searchParams,
 }: {
   params: { locale: string };
+  searchParams: { page?: string };
 }) {
   const text = (await getTranslations(locale)).Curricula;
+
+  const page = isNaN(Number(searchParams.page ?? '1'))
+    ? 1
+    : Math.max(Number(searchParams.page ?? '1'), 1);
 
   return (
     <>
@@ -50,16 +58,20 @@ export default async function Curricula({
               </TableRow>
             </TableHeader>
             <TableBody>
-              <Courses />
+              <Courses page={page} />
             </TableBody>
           </Table>
         </Suspense>
+        <PaginationWithLogic
+          currentPage={page}
+          query={db.select({ count: count() }).from(courses)}
+        />
       </main>
     </>
   );
 }
 
-const Courses = async () => {
+const Courses = async ({ page }: { page: number }) => {
   const courses = await db.query.courses.findMany({
     columns: { code: true, title: true },
     with: {
@@ -72,6 +84,8 @@ const Courses = async () => {
         with: { major: { columns: { name: true } } },
       },
     },
+    limit: 10,
+    offset: (page - 1) * 10,
   });
 
   return courses.map(({ code, coursesToMajors, title }, index) =>
