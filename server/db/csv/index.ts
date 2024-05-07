@@ -89,6 +89,7 @@ export async function populate() {
   for (let i = 1; i < rolesCsv.length; i++) {
     const data = convertToData(rolesCsv[i], rolesHeaders);
     await db.insert(schemas.roles).values({
+      id: Number(data.id),
       name: data.name,
       permissions: data.permissions
         ? (data.permissions.split(',') as 'ADMIN'[])
@@ -98,7 +99,6 @@ export async function populate() {
 
   for (let i = 1; i < departmentsCsv.length; i++) {
     const data = convertToData(departmentsCsv[i], departmentsHeaders);
-
     await db.insert(schemas.departments).values({
       name: data.name,
       urlName: data.urlName,
@@ -113,7 +113,6 @@ export async function populate() {
 
   for (let i = 1; i < majorsCsv.length; i++) {
     const data = convertToData(majorsCsv[i], majorsHeaders);
-
     const departmentId = await db
       .select({ id: schemas.departments.id })
       .from(schemas.departments)
@@ -132,9 +131,8 @@ export async function populate() {
     });
   }
 
-  for (let i = 1, j = 1, k = 1, l = 1; i < personsCsv.length; i++) {
+  for (let i = 1, j = 1, k = 1; i < personsCsv.length; i++) {
     const data = convertToData(personsCsv[i], personsHeaders);
-
     const personData = await db
       .insert(schemas.persons)
       .values({
@@ -143,7 +141,7 @@ export async function populate() {
         email: data.email,
         telephone: data.telephone,
         sex: data.sex as 'M' | 'F' | 'O',
-        dateOfBirth: new Date(data.dateOfBirth),
+        dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : new Date(),
         roleId: Number(data.roleId),
         isActive: data.isActive === 'true',
         createdOn: data.createdOn ? new Date(data.createdOn) : new Date(),
@@ -153,7 +151,6 @@ export async function populate() {
 
     if (personData.type === 'student') {
       const studentData = convertToData(studentCsv[j], studentHeaders);
-
       const studentId = await db
         .insert(schemas.students)
         .values({
@@ -192,7 +189,6 @@ export async function populate() {
           rollNumber: schemas.students.rollNumber,
         })
         .then((res) => res[0]);
-
       const academicData = studentAcademicDetailsCsv.find((row) => {
         return (
           convertToData(row, studentAcademicDetailsHeaders).rollNumber ===
@@ -203,6 +199,19 @@ export async function populate() {
         academicData!,
         studentAcademicDetailsHeaders
       );
+      const majorId = await db.select({ id: schemas.majors.id }).from(schemas.majors).where(and(
+        eq(schemas.majors.name, academicDetails.major),
+        eq(
+          schemas.majors.degree,
+          academicDetails.degree as
+            | 'B. Tech.'
+            | 'M. Tech.'
+            | 'MCA'
+            | 'MBA'
+            | 'M. Sc.'
+            | 'Ph. D.'
+        )
+      )).then(res => res[0]);
 
       await db.insert(schemas.studentAcademicDetails).values({
         id: studentId.id,
@@ -212,12 +221,12 @@ export async function populate() {
         currentSemester: Number(academicDetails.currentSemester),
         sgpa: Number(academicDetails.sgpa),
         cgpa: Number(academicDetails.cgpa),
-        majorId: Number(academicDetails.majorId),
+        majorId: majorId.id,
       });
       j++;
     } else if (personData.type === 'faculty') {
       const facultyData = convertToData(facultyCsv[k], facultyHeaders);
-
+      const departmentId = await db.select({ id: schemas.departments.id }).from(schemas.departments).where(eq(schemas.departments.alias, facultyData.departmentAlias)).then(res => res[0]);
       await db.insert(schemas.faculty).values({
         id: personData.id,
         employeeId: facultyData.employeeId,
@@ -227,46 +236,14 @@ export async function populate() {
           | 'Associate Professor'
           | 'Professor',
         officeAddress: facultyData.officeAddress,
-        departmentId: Number(facultyData.departmentId),
+        departmentId: departmentId.id,
       });
       k++;
-    } else {
-      const staffData = convertToData(staffCsv[l], staffHeaders);
-
-      await db.insert(schemas.staff).values({
-        id: personData.id,
-        employeeId: staffData.employeeId,
-        workingSectionId: Number(staffData.workingSectionId),
-        designation: staffData.designation,
-        workingDepartmentId: Number(staffData.workingDepartmentId),
-      });
-      l++;
     }
-  }
-
-  for (let i = 1; i < departmentHeadsCsv.length; i++) {
-    const data = convertToData(departmentHeadsCsv[i], departmentHeadsHeaders);
-    const departmentId = await db
-      .select({ id: schemas.departments.id })
-      .from(schemas.departments)
-      .where(eq(schemas.departments.alias, data.departmentAlias))
-      .then((res) => res[0]);
-
-    const facultyId = await db
-      .select({ id: schemas.persons.id })
-      .from(schemas.persons)
-      .where(eq(schemas.persons.name, data.facultyName));
-    await db.insert(schemas.departmentHeads).values({
-      facultyId: facultyId[0].id,
-      departmentId: departmentId.id,
-      message: data.message,
-      isActive: data.isActive === 'true',
-    });
   }
 
   for (let i = 1; i < sectionsCsv.length; i++) {
     const data = convertToData(sectionsCsv[i], sectionsHeaders);
-
     const headFacultyId = await db
       .select({ id: schemas.persons.id })
       .from(schemas.persons)
@@ -279,6 +256,41 @@ export async function populate() {
       headFacultyId: headFacultyId[0].id,
     });
   }
+
+  for(let l=1;l<staffCsv.length;l++) {
+    const staffData = convertToData(staffCsv[l], staffHeaders);
+    const sectionId = await db.select({ id: schemas.sections.id }).from(schemas.sections).where(eq(schemas.sections.urlName, staffData.workingSectionUrl)).then(res => res[0]);
+    const departmentId = await db.select({ id: schemas.departments.id }).from(schemas.departments).where(eq(schemas.departments.alias, staffData.workingDepartmentAlias)).then(res => res[0]);
+    const personData = await db.select({ id: schemas.persons.id }).from(schemas.persons).where(eq(schemas.persons.name, staffData.name)).then(res => res[0]);
+    await db.insert(schemas.staff).values({
+      id: personData.id,
+      employeeId: staffData.employeeId,
+      workingSectionId: sectionId.id,
+      designation: staffData.designation,
+      workingDepartmentId: departmentId.id,
+    });
+  }
+
+
+  for (let i = 1; i < departmentHeadsCsv.length; i++) {
+    const data = convertToData(departmentHeadsCsv[i], departmentHeadsHeaders);
+    const departmentId = await db
+      .select({ id: schemas.departments.id })
+      .from(schemas.departments)
+      .where(eq(schemas.departments.alias, data.departmentAlias))
+      .then((res) => res[0]);
+    const facultyId = await db
+      .select({ id: schemas.persons.id })
+      .from(schemas.persons)
+      .where(eq(schemas.persons.name, data.facultyName));
+    await db.insert(schemas.departmentHeads).values({
+      facultyId: facultyId[0].id,
+      departmentId: departmentId.id,
+      message: data.message,
+      isActive: data.isActive === 'true',
+    });
+  }
+
 
   for (let i = 1; i < coursesCsv.length; i++) {
     const data = convertToData(coursesCsv[i], coursesHeaders);
@@ -293,7 +305,6 @@ export async function populate() {
       .from(schemas.departments)
       .where(eq(schemas.departments.alias, data.departmentAlias))
       .then((res) => res[0]);
-
     const id = await db
       .insert(schemas.courses)
       .values({
@@ -310,7 +321,7 @@ export async function populate() {
         supplementaryReading: data.supplementaryReading.split(','),
         similarCourses: data.similarCourses.split(','),
       })
-      .returning();
+      .returning({ id: schemas.courses.id });
 
     const courseToMajorData = convertToData(
       coursesToMajorsCsv[i],
@@ -377,7 +388,6 @@ export async function populate() {
       .from(schemas.faculty)
       .where(eq(schemas.faculty.employeeId, data.facultyEmployeeId))
       .then((res) => res[0]);
-
     await db.insert(schemas.courseLogs).values({
       session: data.session,
       courseId: courseId.id,
@@ -391,7 +401,6 @@ export async function populate() {
 
   for (let i = 1; i < notificationsCsv.length; i++) {
     const data = convertToData(notificationsCsv[i], notificationsHeaders);
-
     await db.insert(schemas.notifications).values({
       title: data.title,
       content: data.content,
@@ -485,14 +494,13 @@ export async function populate() {
         | 'student-welfare',
       facultyId: facultyId.id,
       activityLogs: data.activityLogs.split(','),
-      associateFacultyId: associateFacultyId.id,
-      staffIds: data.staffIds.split(',') as unknown as number[],
+      associateFacultyId: associateFacultyId ? associateFacultyId.id : null,
+      staffIds: data.staffIds ? data.staffIds.split(',') as unknown as number[] : [],
     });
   }
 
   for (let i = 1; i < committeeMembersCsv.length; i++) {
     const data = convertToData(committeeMembersCsv[i], committeeMembersHeaders);
-
     await db.insert(schemas.committeeMembers).values({
       committeeType: data.committeeType as
         | 'building'
@@ -565,9 +573,9 @@ export async function populate() {
           | 'cultural'
           | 'crew'
           | 'technical',
-        departmentId: departmentId.id,
+        departmentId: departmentId ? departmentId.id : null,
         facultyInchargeId1: facultyInchargeId.id,
-        facultyInchargeId2: facultyInchargeId2.id ?? null,
+        facultyInchargeId2: facultyInchargeId2 ? facultyInchargeId2.id : null,
         isActive: data.isActive === 'true',
         createdOn: data.createdOn ? new Date(data.createdOn) : new Date(),
         updatedBy: updatedBy.id,
@@ -590,6 +598,7 @@ export async function populate() {
       });
     }
   }
+
 
   for (let i = 1; i < clubMembersCsv.length; i++) {
     const data = convertToData(clubMembersCsv[i], clubMembersHeaders);
