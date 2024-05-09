@@ -15,7 +15,7 @@
     "test": "npm run format:check && npm run lint && npm run check-types && npm run build",
     "database:up": "docker compose up",
     "database:down": "docker compose down && docker rmi isac:1.0",
-    "db:push": "drizzle-kit push:pg",
+    "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
@@ -35,7 +35,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
-    "drizzle-orm": "^0.30.8",
+    "drizzle-orm": "^0.30.10",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
     "framer-motion": "^11.0.5",
@@ -58,7 +58,7 @@
     "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "autoprefixer": "^10.0.1",
-    "drizzle-kit": "^0.20.17",
+    "drizzle-kit": "^0.21.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
