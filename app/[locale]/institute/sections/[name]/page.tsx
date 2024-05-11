@@ -51,15 +51,6 @@ export default async function Section({
 
   return (
     <>
-      <Heading
-        className="container"
-        glyphDirection="ltr"
-        heading="h3"
-        href="#about"
-        text={text.about}
-      />
-      <p className="container">{section.aboutUs}</p>
-
       <SectionPage locale={locale} />
 
       <Heading
