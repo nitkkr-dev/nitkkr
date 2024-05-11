@@ -56,6 +56,17 @@ const text: Translations = {
       minutes: 'Minutes',
     },
   },
+  Convocation: {
+    about: 'About',
+    guest: 'Guest’s Message',
+    student: 'Toppers and Award winners',
+    gallery: 'Gallery',
+    notification: 'Notifications',
+    srNo: 'Sr. No.',
+    depratment: 'Depratment',
+    name: 'Name',
+    rankOrAward: 'Rank/Award',
+  },
   Curricula: {
     pageTitle: 'CURRICULA',
     code: 'Code',
