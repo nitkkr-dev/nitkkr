@@ -76,6 +76,17 @@ const text: Translations = {
       minutes: 'विवरण',
     },
   },
+  Convocation: {
+    about: 'परिचय',
+    guest: 'मुख्य अतिथि का संदेश',
+    student: 'टॉपर्स और पुरस्कार विजेता',
+    gallery: 'चित्र',
+    notification: 'सूचनाएं',
+    srNo: 'क्रमांक',
+    name: 'नाम',
+    depratment: 'विभाग',
+    rankOrAward: 'पदवी/पुरस्कार',
+  },
   Curricula: {
     pageTitle: 'पाठ्यक्रम',
     code: 'कोड',
