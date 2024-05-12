@@ -5,7 +5,8 @@ import Heading from '~/components/heading';
 import { Card, CardDescription } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { capitalise, cn, groupBy } from '~/lib/utils';
-import { clubs as clubsSchema, db } from '~/server/db';
+import type { clubs as clubsSchema } from '~/server/db';
+import { db } from '~/server/db';
 
 export default async function Clubs({
   params: { locale },
