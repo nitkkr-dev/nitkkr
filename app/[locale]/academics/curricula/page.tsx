@@ -88,7 +88,7 @@ const Courses = async ({ page }: { page: number }) => {
     offset: (page - 1) * 10,
   });
 
-  return courses.map(({ code, coursesToMajors, title }, index) =>
+  return courses.map(({ code, coursesToMajors, title }) =>
     coursesToMajors.map(
       ({ lectureCredits, practicalCredits, tutorialCredits, major }, index) => (
         <TableRow key={index}>
