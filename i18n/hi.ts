@@ -43,6 +43,7 @@ const text: Translations = {
     guest: 'मुख्य अतिथि का संदेश',
     student: 'Toppers and Award winners',
     gallery: 'चित्र',
+    updates: 'सूचनाएं और समय-सीमा',
   },
   Curricula: {
     pageTitle: 'पाठ्यक्रम',

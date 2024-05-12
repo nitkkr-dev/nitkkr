@@ -13,9 +13,10 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
+import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
-export default function Convocation({
+export default async function Convocation({
   params: { locale },
 }: {
   params: { locale: string };
@@ -109,20 +110,20 @@ export default function Convocation({
       rankOrAward: 'Padma bhushan',
     },
   ];
-  // const text = await
+  const text = (await getTranslations(locale)).Convocation;
 
   return (
     <>
       <ImageHeader
         title={'Convocation 2023'}
         headings={[
-          { label: 'About', href: '#about' },
-          { label: "Cheef Guest's Message", href: '#Cheef-Guest-Message' },
+          { label: text.about, href: '#about' },
+          { label: text.guest, href: '#Cheef-Guest-Message' },
           {
-            label: 'Toppers and Award winners',
+            label: text.student,
             href: '#toppers-and-award-winners',
           },
-          { label: 'Gallery', href: '#gallery' },
+          { label: text.gallery, href: '#gallery' },
         ]}
         src={`https://nitkkr.ac.in/wp-content/uploads/2022/12/IMG_0496-scaled.jpg`}
       />
@@ -132,7 +133,7 @@ export default function Convocation({
         glyphDirection="rtl"
         heading="h3"
         id="about"
-        text={'About'}
+        text={text.about}
       />
       <article
         id="about"
@@ -171,7 +172,7 @@ export default function Convocation({
         glyphDirection="ltr"
         heading="h3"
         id="degree-recipent"
-        text={"Cheef Guest's Message"}
+        text={text.guest}
       />
       <article
         id="Cheef-Guest-Message"
@@ -206,7 +207,7 @@ export default function Convocation({
         glyphDirection="dual"
         heading="h3"
         id=""
-        text={'Updates and Deadlines'}
+        text={text.updates}
       />
       <section
         className={cn(
@@ -236,7 +237,7 @@ export default function Convocation({
         glyphDirection="dual"
         heading="h3"
         id=""
-        text={'Toppers and Award Winners'}
+        text={text.student}
       />
       <section id="toppers-and-award-winners" className="container">
         <Table className="container">
@@ -270,7 +271,7 @@ export default function Convocation({
       </section>
 
       <article className="container" id="gallery">
-        <Heading glyphDirection="ltr" heading="h3" text={'Gallery'} />
+        <Heading glyphDirection="ltr" heading="h3" text={text.gallery} />
         <GalleryCarousel className="my-5 w-full">
           {[...Array<number>(7)].map((_, index) => (
             <div
