@@ -38,6 +38,12 @@ const text: Translations = {
       minutes: 'विवरण',
     },
   },
+  Convocation: {
+    about: 'परिचय',
+    guest: 'मुख्य अतिथि का संदेश',
+    student: 'Toppers and Award winners',
+    gallery: 'चित्र',
+  },
   Curricula: {
     pageTitle: 'पाठ्यक्रम',
     code: 'कोड',

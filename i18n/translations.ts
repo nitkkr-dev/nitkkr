@@ -34,6 +34,12 @@ export interface Translations {
       minutes: string;
     };
   };
+  Convocation: {
+    about: string;
+    guest: string;
+    student: string;
+    gallery: string;
+  };
   Curricula: {
     pageTitle: string;
     code: string;
