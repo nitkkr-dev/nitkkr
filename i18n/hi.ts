@@ -221,7 +221,6 @@ const text: Translations = {
         facilities: 'सुविधाएँ',
         quickLinks: 'त्वरित लिंक्स',
         contactUs: 'संपर्क करें',
-        libraryCommittee: 'पुस्तकालय समिति',
         gallery: 'गैलरी',
         libraryHours: 'पुस्तकालय का समय',
         totalFloorArea: 'कुल फ़्लोर क्षेत्र और पढ़ाई का स्थान',
@@ -269,6 +268,7 @@ const text: Translations = {
         email: 'ईमेल',
       },
       libraryCommittee: {
+        libraryCommitteeTitle: 'पुस्तकालय समिति',
         srNo: 'क्रमांक',
         name: 'नाम',
         generalDesignation: 'सामान्य पद',

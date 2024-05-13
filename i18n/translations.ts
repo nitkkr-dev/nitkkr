@@ -210,7 +210,6 @@ export interface Translations {
         facilities: string;
         quickLinks: string;
         contactUs: string;
-        libraryCommittee: string;
         gallery: string;
         totalFloorAreaText: string;
         libraryHoursText: string;
@@ -247,6 +246,7 @@ export interface Translations {
         email: string;
       };
       libraryCommittee: {
+        libraryCommitteeTitle: string;
         srNo: string;
         name: string;
         generalDesignation: string;

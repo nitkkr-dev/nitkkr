@@ -75,87 +75,6 @@ export default async function CentralLibrary({
     },
   ];
 
-  const libraryCommitteeData = [
-    {
-      srNo: '1',
-      name: 'Dr. Saraswati Setia',
-      generalDesignation: 'Professor, CED',
-      libraryCommitteeDesignation: 'Chairman',
-    },
-    {
-      srNo: '2',
-      name: 'Dr. Babita Saini',
-      generalDesignation: 'Associate Prof., CED',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '3',
-      name: 'Dr. Ajay K. Prabhakar',
-      generalDesignation: 'Assistant Prof., CED',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '4',
-      name: 'Dr. Punit Kumar',
-      generalDesignation: 'Professor, MED',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '5',
-      name: 'Dr. Sandeep Kakran',
-      generalDesignation: 'Assistant Prof., EED',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '6',
-      name: 'Dr. Banavathu Bhaskara Rao',
-      generalDesignation: 'Assistant Prof., ECE',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '7',
-      name: 'Dr. Mohit Dua',
-      generalDesignation: 'Assistant Prof., CoED',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '8',
-      name: 'Dr. A K Tripathi',
-      generalDesignation: 'Assistant Prof., Physics Deptt.',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '9',
-      name: 'Dr. Chetti Prabhakar',
-      generalDesignation: 'Assistant Prof., Chem. Deptt.',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '10',
-      name: 'Dr. Raghvendra Pratap Singh',
-      generalDesignation: 'Assistant Prof., Math Dept',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '11',
-      name: 'Dr. Ashwani',
-      generalDesignation: 'Assistant Prof., Humanities',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '12',
-      name: 'Dr. Priyanka Sihag',
-      generalDesignation: 'Assistant Prof., DBA',
-      libraryCommitteeDesignation: 'Member',
-    },
-    {
-      srNo: '13',
-      name: 'Dr. Kapil',
-      generalDesignation: 'Assistant Prof., DCA',
-      libraryCommitteeDesignation: 'Member',
-    },
-  ];
-
   const text = (await getTranslations(locale)).Section.CentralLibrary;
   return (
     <>
@@ -170,7 +89,6 @@ export default async function CentralLibrary({
           { label: text.heading.facilities, href: '#facilities' },
           { label: text.heading.quickLinks, href: '#quick-links' },
           { label: text.heading.contactUs, href: '#contact-us' },
-          { label: text.heading.libraryCommittee, href: '#library-committee' },
           { label: text.heading.gallery, href: '#gallery' },
         ]}
         src="https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1716163200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qoPok32PRLjY7OQvi3o28HExWRKIBY2a8-JSD9mblI92lIkMLaTvBUXlYPfXt1-hzwjXtBKbKd~oK960ceuIDxWqif8q37tAPYmewJ4X8dThbo2CLjIvpT22z3OVb-FBDprxWI1rMy4av0aXcSZSo~zcKHmHdFbA9kxYWzvv7F0TsGXaOsLAbc3zTtafuN9iAjF52aWHBDBbViTPTuO7mjaQDQRHss5JfhypyjF~6j3I5e-B9WkZOuLxMEvaB5P4O82pmIv7ch-Hzl0uGrrMK7zVPdQQoy2WyG65y41uFEkGstBkgXxswu~16IUPu0Q7Znf0kGrIOOoIie-hqxwhrA__"
@@ -381,40 +299,6 @@ export default async function CentralLibrary({
                   <TableCell>{entry.designation}</TableCell>
                   <TableCell>{entry.phoneNumber}</TableCell>
                   <TableCell>{entry.email}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Suspense>
-
-        <Heading
-          glyphDirection="rtl"
-          heading="h3"
-          text={text.heading.libraryCommittee}
-          href="#library-committee"
-          id="library-committee"
-        />
-        <Suspense fallback={<Loading />}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.libraryCommittee.srNo}</TableHead>
-                <TableHead>{text.libraryCommittee.name}</TableHead>
-                <TableHead>
-                  {text.libraryCommittee.generalDesignation}
-                </TableHead>
-                <TableHead>
-                  {text.libraryCommittee.libraryCommitteeDesignation}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {libraryCommitteeData.map((entry, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{entry.srNo}</TableCell>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.generalDesignation}</TableCell>
-                  <TableCell>{entry.libraryCommitteeDesignation}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
