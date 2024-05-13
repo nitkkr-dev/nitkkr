@@ -1,3 +1,5 @@
+import { string } from 'zod';
+
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
@@ -208,7 +210,69 @@ export interface Translations {
     ElectricalMaintenance: {};
     Estate: {};
     GeneralAdministration: {};
-    HealthCentre: {};
+    HealthCentre: {
+      name: string;
+      headings: {
+        about: string;
+        staff: string;
+        timings: string;
+        facilities: string;
+        aboutText: string;
+        staffText: string;
+        insurance: string;
+        immunization: string;
+      };
+      facilities: {
+        counsellor: string;
+        immunization: string;
+        hospitals: string;
+        insurance: string;
+        ambulance1: string;
+        ambulance2: string;
+        ambulance3: string;
+        ambulanceTel: string;
+        opd: string;
+        dental: string;
+        lab: string;
+        pharmacy: string;
+        radiology: string;
+        ecg: string;
+        casualty1: string;
+        casualty2: string;
+      };
+      staff: {
+        sr: string;
+        name: string;
+        designation: string;
+        phone: string;
+        officers: string;
+        other: string;
+      };
+      timings: {
+        day: string;
+        from: string;
+        to: string;
+        tod: string;
+      };
+      hospitals: {
+        sr: string;
+        name: string;
+        field: string;
+        contact: string;
+      };
+      insurance: {
+        text: string;
+        link: string;
+        text2: string;
+      };
+      immunization: {
+        text1: string;
+        timings: string;
+        text2: string;
+        text3: string;
+        schedule: string;
+      };
+    };
     Security: {};
     Sports: {};
     Store: {};
