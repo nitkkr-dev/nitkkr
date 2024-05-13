@@ -3,9 +3,9 @@ import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
 export default async function GeneralAdministration({
-  locale,
+  params: { locale },
 }: {
-  locale: string;
+  params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).Section.GeneralAdministration;
 
