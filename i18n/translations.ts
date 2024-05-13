@@ -252,6 +252,39 @@ export interface Translations {
         generalDesignation: string;
         libraryCommitteeDesignation: string;
       };
+      CollectionAndResources: {
+        title: string;
+        totalDocuments: string;
+        noOfDocuments: string;
+        totalBooks: string;
+        noOfBooks: string;
+        bookBank: string;
+        noOfBookBank: string;
+        backSets: string;
+        noOfBackSets: string;
+        standards: string;
+        noOfStandards: string;
+        cdsDvds: string;
+        noOfCdsDvds: string;
+        eBooks: string;
+        noOfEBooks: string;
+        thesis: string;
+        noOfThesis: string;
+        eresources: string;
+        Eresources: {
+          currentJournalsHeading: string;
+          currentJournalsDescription: string;
+          eShodhSindhuHeading: string;
+          eShodhSindhuDescription: string;
+        };
+        EResourcesTable: {
+          Heading: {
+            SrNo: string;
+            ElectronicResources: string;
+            Url: string;
+          };
+        };
+      };
     };
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
