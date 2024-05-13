@@ -104,8 +104,8 @@ export default async function libraryCommittee({
   return (
     <section className="container">
       <Heading
-        glyphDirection="rtl"
-        heading="h3"
+        glyphDirection="dual"
+        heading="h2"
         text={text.libraryCommitteeTitle}
         href="#library-committee"
         id="library-committee"

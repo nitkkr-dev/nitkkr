@@ -314,6 +314,38 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
           },
         },
       },
+      MembershipPrivileges: {
+        title: 'Membership & Privileges',
+        membershipPrivilegesText:
+          'Students, Faculty Members, Research Scholars and Staff of the Institute are admitted as members of the library. Library membership forms can be obtained and submitted at the circulation counter in the library. The number of books that may be borrowed by each category of members and the period of loan is as follows:',
+        privileges: 'Privileges',
+        Privileges: {
+          conditionOnLoan: 'Conditions on Loan',
+          conditionOnLoanOne:
+            'The librarian reserves the right to recall any book issued to the members even prior to the due date of return.',
+          conditionOnLoanTwo:
+            'Reference books, thesis and other special reading materials shall not ordinarily be loaned to members.',
+          conditionOnLoanThree:
+            'Bound/Unbound volumes of periodicals will be lent to teachers only. However, the latest issue shall not be lent out.',
+          conditionOnLoanFour:
+            'Members should return Library books on or before the due date, failing which an overdue charge of Rs. 1.00 per day per book shall be levied for first 15 days and thereafter, Rs. 2.00 per day per book.',
+          lossOfBooks: 'Loss Of Books',
+          lossOfBooksDescription:
+            'Members shall have to replace the books lost by them or will have to pay double the price of the book. If a book lost belongs to a set and is not available separately, the members shall have to replace the whole set or pay double the price of the set.',
+          careOfBooks: 'Care Of Books',
+          careofBooksDescriptionOne:
+            'The Library books are for the benefit of not only the present but also for the future members of the Library. They should, therefore, be handled with every care and consideration.',
+          careofBooksDescriptionTwo:
+            'Damaging and defacing of books is highly objectionable and may lead to cancellation of membership privileges and replacement of damaged book by a new one.',
+          otherFacilities: 'Other Facilities',
+          reprographicFacilities: 'Reprographic Facilities: ',
+          reprographicFacilitiesDescription:
+            'Reprographic Facilities: A contractor is appointed to provide the Reprographic Services to the readers. Reproduction from books, periodicals & other material is provided @ 60 paisa per copy.',
+          binding: 'Binding: ',
+          bindingDescription:
+            'The Library has its own bindery, which binds library books, and college reports and undertakes binding work for various departments and other sections of the Institute. The Library is equipped with cutting, stitching, spiral binding & lamination machines.',
+        },
+      },
     },
     CentralWorkshop: {},
     CentreOfComputingAndNetworking: {},

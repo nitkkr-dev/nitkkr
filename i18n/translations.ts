@@ -285,6 +285,28 @@ export interface Translations {
           };
         };
       };
+      MembershipPrivileges: {
+        title: string;
+        membershipPrivilegesText: string;
+        privileges: string;
+        Privileges: {
+          conditionOnLoan: string;
+          conditionOnLoanOne: string;
+          conditionOnLoanTwo: string;
+          conditionOnLoanThree: string;
+          conditionOnLoanFour: string;
+          lossOfBooks: string;
+          lossOfBooksDescription: string;
+          careOfBooks: string;
+          careofBooksDescriptionOne: string;
+          careofBooksDescriptionTwo: string;
+          otherFacilities: string;
+          reprographicFacilities: string;
+          reprographicFacilitiesDescription: string;
+          binding: string;
+          bindingDescription: string;
+        };
+      };
     };
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
