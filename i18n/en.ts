@@ -180,6 +180,16 @@ const text: Translations = {
     },
     logout: 'LOG OUT',
   },
+  Scholarships: {
+    NSP: 'National Scholarship Portal (NSP).',
+    HCS: 'Har-Chhatravratti Scholarship Portal',
+    PMBS: 'Prime Ministers Special Scholarship Scheme to J&K Students',
+    RSSO: 'Rajasthan Single Sign-On (SSO) Scholarship',
+    UPS: 'Uttar Pradesh Scholarship (UPS)',
+    PMSSS: 'Post Matric Bihar Scholarship',
+    MMVY: 'Mukhyamantri Medhavi Vidyarthi Yojana',
+    note: 'Note',
+  },
   Search: {
     placeholder: 'Quick Search...',
     categories: {

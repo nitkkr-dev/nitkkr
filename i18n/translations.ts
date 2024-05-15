@@ -164,6 +164,16 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Scholarships: {
+    NSP: string;
+    PMSSS: string;
+    HCS: string;
+    RSSO: string;
+    UPS: string;
+    PMBS: string;
+    MMVY: string;
+    note: string;
+  };
   Search: {
     placeholder: string;
     categories: {

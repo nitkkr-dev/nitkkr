@@ -4,13 +4,16 @@ import { ReactNode } from 'react';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { buttonVariants } from '~/components/ui';
+import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
-export default function Scholarships({
+export default async function Scholarships({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const text = (await getTranslations(locale)).Scholarships;
+
   return (
     <>
       <ImageHeader
@@ -55,11 +58,7 @@ export default function Scholarships({
         src={`https://nitkkr.ac.in/wp-content/uploads/2022/12/IMG_0496-scaled.jpg`}
       />
       <main className="container">
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'National Scholarship Portal (NSP).'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.NSP} />
         <ScholarshipDisplay
           about={
             "The National Scholarships Portal (NSP) is a comprehensive platform designed to streamline scholarship services for students. It encompasses various stages of scholarship processes, including student application, receipt, processing, sanction, and disbursal. NSP operates as a Mission Mode Project (MMP) under the National e-Governance Plan (NeGP), aligning with the government's digital initiatives."
@@ -85,11 +84,7 @@ export default function Scholarships({
             ))}
           </ol>
         </ScholarshipDisplay>
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Prime Ministers Special Scholarship Scheme to J&K Students'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.PMSSS} />
         <ScholarshipDisplay
           about={
             'PMSSS or Prime Minister’s Special Scholarship Scheme is a financial opportunity offered by the All India Council for Technical Education (AICTE). PMSSS 2023, also known as AICTE JK Scholarship 2023. The aim of PMSSS is to financially assist the students of the Jammu and Kashmir and Ladakh regions.'
@@ -97,11 +92,7 @@ export default function Scholarships({
           color="bg-neutral-50"
           readMore="https://www.aicte-india.org/bureaus/jk"
         />
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Har-Chhatravratti Scholarship Portal'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.HCS} />
         <ScholarshipDisplay
           about={
             "The 'Har-Chhatravratti' portal, developed by the Department of Higher Education, is a centralized platform facilitating the scholarship process for deserving students. It aligns with the state's focus on Access, Equity, and Quality in Higher Education. The portal integrates 15 scholarship schemes from 7 government departments, ensuring accessibility, transparency, and efficiency in scholarship disbursement."
@@ -122,11 +113,7 @@ export default function Scholarships({
             departments.
           </p>
         </ScholarshipDisplay>
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Rajasthan Single Sign-On (SSO) Scholarship'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.RSSO} />
         <ScholarshipDisplay
           about={
             'The SSO scheme in Rajasthan facilitates scholarship access for students. Residents can easily apply for this scheme through online registration, leveraging the SSO ID as a single sign-in for various official services. This includes accessing labor cards, Aadhar cards, food security, government farms, and more.'
@@ -147,11 +134,7 @@ export default function Scholarships({
             portal.
           </p>
         </ScholarshipDisplay>
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Uttar Pradesh Scholarship (UPS)'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.PMBS} />
         <ScholarshipDisplay
           about={
             "The Bihar government launched the Post Matric Scholarship Scheme with the primary goal of assisting and motivating students to pursue higher education. The benefit of the Bihar Post Matric Scholarship is that it offers financial aid, specifically in the form of incentive money, to students who fall under the SC/ST/BC/EBC categories. The Bihar Post Matric Scholarship is a financial assistance program designed to help students from economically disadvantaged families pursue higher education.The award amount for the Bihar Post Matric Scholarship varies depending on the course and level of study. The scholarship covers tuition fees, maintenance allowance, and other expenses related to the student's education."
@@ -159,22 +142,14 @@ export default function Scholarships({
           color="bg-neutral-50"
           readMore="https://www.pmsonline.bih.nic.in/"
         />
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Uttar Pradesh Scholarship (UPS)'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.UPS} />
         <ScholarshipDisplay
           about={
             'Uttar Pradesh government has launched several scholarship opportunities for the students of the state. Every scholarship has its own set of eligibility criteria that students need to fulfill and be eligible to apply for the scholarship opportunity. One of the key criteria that are applicable for Uttar Pradesh scholarships is to be a permanent resident of Uttar Pradesh (UP) or hold a domicile of UP. Complete information related to other aspects like academic qualifications, family income limit, etc. leads to the successful application of scholarships.'
           }
           readMore=" https://scholarship.up.gov.in/"
         />
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h1'}
-          text={'Mukhyamantri Medhavi Vidyarthi Yojana (MMVY)'}
-        />
+        <Heading glyphDirection={'dual'} heading={'h1'} text={text.MMVY} />
         <ScholarshipDisplay
           about={
             'Mukhyamantri Medhavi Vidyarthi Yojana is a state program run by the Government of Madhya Pradesh. This merit scholarship is available for those who have passed the 12th standard with 70% marks and are currently pursuing a Graduate, Postgraduate or professional courses. The amount of the scholarship varies from course to course and based on the type of college.'
@@ -183,7 +158,7 @@ export default function Scholarships({
           readMore="https://scholarshipportal.mp.nic.in/"
         />
         <section className="mt-10">
-          <Heading glyphDirection={'rtl'} heading={'h1'} text={'Note'} />
+          <Heading glyphDirection={'rtl'} heading={'h1'} text={text.note} />
           <p className="rounded-xl bg-neutral-50 p-5 text-lg text-primary-700">
             Notifications of all kind of scholarships will be circulated and
             uploaded in the Institute through Notice Boards in
