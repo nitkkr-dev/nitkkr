@@ -41,9 +41,9 @@ const text: Translations = {
   Convocation: {
     about: 'परिचय',
     guest: 'मुख्य अतिथि का संदेश',
-    student: 'Toppers and Award winners',
+    student: 'टॉपर्स और पुरस्कार विजेता',
     gallery: 'चित्र',
-    updates: 'सूचनाएं और समय-सीमा',
+    notification: 'सूचनाएं',
   },
   Curricula: {
     pageTitle: 'पाठ्यक्रम',

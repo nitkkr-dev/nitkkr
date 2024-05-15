@@ -47,7 +47,7 @@ const text: Translations = {
     guest: 'Guest’s Message',
     student: 'Toppers and Award winners',
     gallery: 'Gallery',
-    updates: 'Updates and Deadlines',
+    notification: 'Notifications',
   },
   Curricula: {
     pageTitle: 'CURRICULA',

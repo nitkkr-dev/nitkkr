@@ -39,7 +39,7 @@ export interface Translations {
     guest: string;
     student: string;
     gallery: string;
-    updates: string;
+    notification: string;
   };
   Curricula: {
     pageTitle: string;
