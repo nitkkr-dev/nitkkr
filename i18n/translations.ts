@@ -42,6 +42,21 @@ export interface Translations {
     credits: string;
     totalCredits: string;
     syllabus: string;
+    Details: {
+      courseCode: string;
+      title: string;
+      coordinator: string;
+      prerequisites: string;
+      nature: string;
+      objectives: string;
+      content: string;
+      outcomes: string;
+      essentialReading: string;
+      supplementaryReading: string;
+      similarCourses: string;
+      headOfDepartment: string;
+      referenceBooks: string;
+    };
   };
   Dean: {
     deanTitles: {
