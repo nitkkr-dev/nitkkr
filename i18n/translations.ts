@@ -209,7 +209,110 @@ export interface Translations {
     GeneralAdministration: {};
     HealthCentre: {};
     Security: {};
-    Sports: {};
+    Sports: {
+      title: string;
+      headings: {
+        about: string;
+        swimmingPool: string;
+      };
+      about: {
+        title: string;
+        profTableTitle: { name: string; details: string };
+        headPosition: string;
+        email: string;
+        phone: string;
+      };
+      swimmingPool: {
+        title: string;
+        welcome: string;
+        about: string;
+        aboutDescription: string;
+        location: string;
+        membershipListQuestion: string;
+        membershipPre: string;
+        membershipList: string[];
+        membershipPost: string;
+        membershipHowQuestion: string;
+        membershipHow: string;
+        membershipHowList: string[];
+        membershipApplicationForm: string;
+        ApplicationFormList: string[];
+        subscriptionsTitle: string;
+        subscriptionsTableTitle: {
+          category: string;
+          duration8: string;
+          duration3: string;
+        };
+        subscriptionsTable: {
+          category: string;
+          duration8: string;
+          duration3: string;
+        }[];
+        administrativeTitle: string;
+        inchargeTitle: string;
+        inchargedetails: string;
+        committeeTitle: string;
+        committeeDetails: string;
+        responsibilitiesTitle: string;
+        responsibilitiesList: string[];
+        spcTitle: string;
+        spcSubTitle: string;
+        spcList: { name: string; role: string }[];
+        manpower: string;
+        manpowerSubTitle: string;
+        manpowerListPretext: string;
+        manpowerListTitle: { sNo: string; name: string; quantity: string };
+        manpowerList: { name: string; quantity: string }[];
+        maintenance: string;
+        maintenanceSubTitle: string;
+        maintenanceListTitle: { sNo: string; name: string; quantity: string };
+        maintenanceList: { name: string; quantity: string }[];
+        chemicals: string;
+        chemicalsSubTitle: string;
+        chemicalsListTitle: {
+          sNo: string;
+          description: string;
+          quantity: string;
+          unit: string;
+        };
+        chemicalsList: {
+          description: string;
+          quantity: string;
+          unit: string;
+        }[];
+        guidelinesTitle: string;
+        guidelines: string[];
+        conductTitle: string;
+        conduct: string[];
+        safetyTitle: string;
+        safety: string[];
+        eventsTitle: string;
+        eventsListTitles: {
+          sNo: string;
+          events: string;
+          men: string;
+          women: string;
+        };
+        eventsTable: { eventMale: string; eventFemale: string }[];
+        roadmapTitle: string;
+        roadmapTableTitles: {
+          event: string;
+          jan: string;
+          feb: string;
+          mar: string;
+          apr: string;
+          may: string;
+          jun: string;
+          jul: string;
+          aug: string;
+          sep: string;
+          oct: string;
+          nov: string;
+          dec: string;
+        };
+        roadmapEvents: string[];
+      };
+    };
     Store: {};
   };
   Status: {
