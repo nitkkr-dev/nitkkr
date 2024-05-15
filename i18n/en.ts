@@ -74,6 +74,21 @@ const text: Translations = {
     credits: 'L-T-P',
     totalCredits: 'Credits',
     syllabus: 'Syllabus',
+    Details: {
+      courseCode: 'Course Code: ',
+      title: 'Course Details',
+      coordinator: 'Coordinator',
+      prerequisites: 'Prerequisites',
+      nature: 'Course Nature: ',
+      objectives: 'Objectives',
+      content: 'Content',
+      outcomes: 'Outcomes',
+      essentialReading: 'Essential Reading',
+      supplementaryReading: 'Supplementary Reading',
+      similarCourses: 'Similar Courses',
+      headOfDepartment: 'Head of Department',
+      referenceBooks: 'Reference Books',
+    },
   },
   Dean: {
     deanTitles: {
