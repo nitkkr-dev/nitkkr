@@ -9,8 +9,46 @@ import { cn } from '~/lib/utils';
 import '~/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'National Institute of Technology, Kurukshetra',
+  metadataBase: new URL('https://nitkkr-dev.vercel.app'),
+  alternates: {
+    canonical: 'https://nitkkr-dev.vercel.app',
+    languages: {
+      en: 'https://nitkkr-dev.vercel.app/en',
+      hi: 'https://nitkkr-dev.vercel.app/hi',
+    },
+  },
+
+  title: {
+    default: 'NIT Kurukshetra',
+    template: '%s | NIT Kurukshetra',
+  },
   description: 'Institution of National Importance',
+
+  creator: 'Institute Software Application Club',
+  authors: [
+    {
+      name: 'Institute Software Application Club',
+      url: 'https://nitkkr-dev.vercel.app/student-activities/clubs/institute-software-application-club',
+    },
+  ],
+
+  openGraph: {
+    title: 'NIT Kurukshetra',
+    description: 'Institution of National Importance',
+    url: 'https://nitkkr-dev.vercel.app',
+    siteName: 'NIT Kurukshetra',
+    type: 'website',
+
+    locale: 'en',
+    alternateLocale: 'hi',
+
+    countryName: 'India',
+    emails: 'registrar@nitkkr.ac.in',
+    phoneNumbers: '+01744-233208',
+    faxNumbers: '238350',
+  },
+
+  robots: 'index, follow',
 };
 
 export async function generateStaticParams() {
