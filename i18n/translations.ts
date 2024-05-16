@@ -16,6 +16,17 @@ export interface Translations {
     description: string;
     about: string;
   };
+  Awards: {
+    aboutTitle: string;
+    descriptionTitle: string;
+    criterionTitle: string;
+    awards: {
+      title: string;
+      about: string;
+      description?: string;
+      criterion?: string[];
+    }[];
+  };
   Main: {
     director: {
       alt: string;
