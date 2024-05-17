@@ -612,21 +612,6 @@ const data: ConvocationData = {
   },
 };
 
-export const convocationList: { year: string }[] = [
-  {
-    year: '19th',
-  },
-  {
-    year: '18th',
-  },
-  {
-    year: '17th',
-  },
-  {
-    year: '16th',
-  },
-];
-
 export function getConvocationData(year: string) {
   return data.years[year];
 }

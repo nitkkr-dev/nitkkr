@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { cn } from '~/lib/utils';
 import Heading from '~/components/heading';
 
-import { convocationList } from './utils';
-
 export default async function Convocation({
   params: { locale },
 }: {
@@ -22,7 +20,7 @@ export default async function Convocation({
           'xl:grid-cols-4 xl:gap-8'
         )}
       >
-        {convocationList.map((convocation, i) => (
+        {['19th', '18th', '17th', '16th'].map((convocation, i) => (
           <li key={i}>
             <Link
               className={cn(
@@ -30,7 +28,7 @@ export default async function Convocation({
                 'group bg-neutral-50 font-serif hover:bg-primary-500',
                 'rounded p-2 drop-shadow hover:drop-shadow-lg xl:p-3'
               )}
-              href={`/${locale}/academics/convocation/${convocation.year}`}
+              href={`/${locale}/academics/convocation/${convocation}`}
             >
               <h5
                 className={cn(
@@ -40,7 +38,7 @@ export default async function Convocation({
                   'rounded bg-primary-700 fill-neutral-50 text-neutral-50 drop-shadow group-hover:bg-neutral-50 group-hover:text-primary-700'
                 )}
               >
-                {convocation.year}
+                {convocation}
               </h5>
               <h5
                 className={cn(
