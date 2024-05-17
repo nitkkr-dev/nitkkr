@@ -6,6 +6,7 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import {
   buttonVariants,
+  ScrollArea,
   Table,
   TableBody,
   TableCell,
@@ -50,17 +51,7 @@ export default async function Page({
         id="about"
         text={text.about}
       />
-      <article
-        id="about"
-        className="container flex flex-row-reverse drop-shadow max-md:flex-col"
-      >
-        <Image
-          alt={'About'}
-          className="w-full object-cover max-md:rounded-b md:order-first md:rounded-r"
-          height={0}
-          width={0}
-          src={`https://nitkkr.ac.in/wp-content/uploads/2022/12/IMG_0496-scaled.jpg`}
-        />
+      <article className="container flex max-w-full drop-shadow max-md:flex-col">
         <p
           className={cn(
             'p-2 sm:p-3 md:p-4',
@@ -69,8 +60,14 @@ export default async function Page({
         >
           {data.about}
         </p>
+        <Image
+          alt={text.about}
+          className="w-full max-md:rounded-b md:order-first md:w-1/2 md:rounded-l"
+          height={300}
+          width={300}
+          src="https://nitkkr.ac.in/wp-content/uploads/2022/12/IMG_0496-scaled.jpg"
+        />
       </article>
-
       <Heading
         className="container"
         glyphDirection="dual"
@@ -78,29 +75,25 @@ export default async function Page({
         id=""
         text={text.notification}
       />
-      <section
-        className={cn(
-          'container',
-          'grid w-full grid-cols-1 gap-4',
-          'max-h-[50dvh] overflow-y-auto rounded-xl border border-primary-500 p-5'
-        )}
-      >
-        {data.notifications.map((link, i) => (
-          <Link
-            key={i}
-            className={cn(
-              buttonVariants({
-                variant: 'outline',
-              }),
-              'mx-auto w-full p-4 text-lg font-semibold hover:bg-primary-500 hover:text-neutral-50'
-            )}
-            href={link.href}
-          >
-            <span className="line-clamp-1 text-ellipsis break-words uppercase">
-              {link.title}
-            </span>
-          </Link>
-        ))}
+      <section className="container max-h-[400px] w-full overflow-y-auto rounded-md border border-primary-500">
+        <ul className={cn('w-full space-y-5 py-5')}>
+          {data.notifications.map((note, i) => (
+            <li
+              key={i}
+              className="group w-full rounded-lg border border-primary-500 p-5 hover:bg-primary-500"
+            >
+              <Link
+                href={note.href}
+                className={cn(
+                  'line-clamp-1 max-w-full text-ellipsis',
+                  'text-lg font-semibold text-primary-500 group-hover:text-neutral-50'
+                )}
+              >
+                {note.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <Heading
@@ -115,16 +108,16 @@ export default async function Page({
           <TableHeader>
             <TableRow>
               <TableHead>
-                <h5>Sr. No.</h5>
+                <h5>{text.srNo}</h5>
               </TableHead>
               <TableHead>
-                <h5>Name</h5>
+                <h5>{text.name}</h5>
               </TableHead>
               <TableHead>
-                <h5>Department</h5>
+                <h5>{text.depratment}</h5>
               </TableHead>
               <TableHead>
-                <h5>Rank/Award</h5>
+                <h5>{text.rankOrAward}</h5>
               </TableHead>
             </TableRow>
           </TableHeader>

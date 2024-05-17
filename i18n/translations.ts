@@ -40,6 +40,10 @@ export interface Translations {
     student: string;
     gallery: string;
     notification: string;
+    srNo: string;
+    name: string;
+    depratment: string;
+    rankOrAward: string;
   };
   Curricula: {
     pageTitle: string;

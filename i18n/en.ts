@@ -48,6 +48,10 @@ const text: Translations = {
     student: 'Toppers and Award winners',
     gallery: 'Gallery',
     notification: 'Notifications',
+    srNo: 'Sr. No.',
+    depratment: 'Depratment',
+    name: 'Name',
+    rankOrAward: 'Rank/Award',
   },
   Curricula: {
     pageTitle: 'CURRICULA',
