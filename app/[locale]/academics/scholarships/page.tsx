@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import { buttonVariants } from '~/components/ui';
+import { buttonVariants } from '~/components/buttons';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
