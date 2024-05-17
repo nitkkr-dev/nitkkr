@@ -165,14 +165,55 @@ export interface Translations {
     };
   };
   Scholarships: {
-    NSP: string;
-    PMSSS: string;
-    HCS: string;
-    RSSO: string;
-    UPS: string;
-    PMBS: string;
-    MMVY: string;
-    note: string;
+    NSP: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMSSS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    HCS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    RSSO: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMBS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    UPS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    MMVY: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    note: {
+      title: string;
+      description: string;
+    };
+    visitPortal: string;
+    description: string;
+    about: string;
+    objectives: string;
   };
   Search: {
     placeholder: string;
