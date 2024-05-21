@@ -2,20 +2,15 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { validateResolver } from '~/lib/validateResolver';
+//import { submitForm } from '~/actions/form.actions';
 import { Button } from '~/components/ui';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '~/components/form/form';
 import { toast } from '~/lib/hooks';
+import { validateResolver } from '~/lib/validateResolver';
 
+import { Form, FormControl, FormField, FormItem, FormMessage } from './form';
 import type { FormSubmitFormProps } from './form-submit-page';
 import {
   FormElements,
@@ -24,13 +19,22 @@ import {
 
 export default function FormSubmitForm({
   form,
+  locale,
+  id,
   questions,
   requiredQuestions,
   questionValidations,
   answers,
 }: FormSubmitFormProps) {
   const Router = useRouter();
-
+  useEffect(() => {
+    if (form.id.toString() != id || form.url != id)
+      window.history.replaceState(
+        {},
+        '',
+        `/${locale}/forms/${form.url ?? form.id}`
+      );
+  }, []);
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const delta = currentStep - previousStep;
@@ -82,6 +86,12 @@ export default function FormSubmitForm({
     const output = await forms.trigger();
     if (!output) return;
 
+    // const result = await submitForm(
+    //   form.id,
+    //   values() as unknown as Record<string, string | number | string[]>
+    // );
+    //toast(result);
+    //Router.push(`/${locale}/forms`);
     console.log(output);
     console.log(values);
 

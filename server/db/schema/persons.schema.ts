@@ -10,7 +10,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { roles } from '.';
+import { formsModifiableByPersons, formsVisibleToPersons, roles } from '.';
 
 export const persons = pgTable(
   'persons',
@@ -38,9 +38,11 @@ export const persons = pgTable(
   }
 );
 
-export const personsRelations = relations(persons, ({ one }) => ({
+export const personsRelations = relations(persons, ({ one, many }) => ({
   role: one(roles, {
     fields: [persons.roleId],
     references: [roles.id],
   }),
+  modifiableForms: many(formsModifiableByPersons),
+  fillableForms: many(formsVisibleToPersons),
 }));

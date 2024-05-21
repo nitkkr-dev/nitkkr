@@ -9,11 +9,13 @@ import {
 export interface FormSubmitFormProps {
   form: {
     id: number;
+    url: string | null;
     title: string;
     description: string | undefined;
     onSubmitMessage: string;
     pages: number;
   };
+  id: string;
   questions: {
     id: string;
     question: string;
@@ -23,21 +25,22 @@ export interface FormSubmitFormProps {
     items?: string[] | undefined;
     mimeTypes?: string[] | undefined;
     range?: string[] | undefined;
-    pageNumber: number;
     marks: number;
   }[][];
   requiredQuestions: string[];
   questionValidations: Record<string, validationProperty>;
   answers?: Record<string, string | number | string[] | boolean>;
+  locale: string;
 }
 export default function FormSubmitPage({
   locale,
   form,
+  id,
   questions,
   requiredQuestions,
   questionValidations,
   answers,
-}: { locale: string } & FormSubmitFormProps) {
+}: FormSubmitFormProps) {
   return (
     <main className="m-auto min-h-screen w-screen max-w-lg p-2">
       <FormDetails
@@ -48,6 +51,8 @@ export default function FormSubmitPage({
       <hr />
       <FormSubmitForm
         form={form}
+        id={id}
+        locale={locale}
         questions={questions}
         requiredQuestions={requiredQuestions}
         questionValidations={questionValidations}

@@ -77,7 +77,16 @@ export interface Translations {
     lorem: string;
     copyright: string;
   };
-  Forms: { title: string };
+  Forms: {
+    title: string;
+    FormNotFound: { title: string; content: string };
+    FormExpired: { title: string; content: string };
+    FormEditNotAllowed: { title: string; content: string };
+    FormDetails: {
+      title: string;
+      description: string;
+    };
+  };
   FormDetails: {
     title: string;
     description: string;
