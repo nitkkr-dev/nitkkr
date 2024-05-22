@@ -12,6 +12,9 @@ import {
 export const forms = pgTable('forms', {
   id: serial('id').primaryKey(),
   title: varchar('title').notNull(),
+  type: varchar('type', {
+    enum: ['all', 'academic', 'factulty feedback', 'placement', 'other'],
+  }).notNull(),
   description: varchar('description').notNull(),
   visibleTo: smallint('visible_to')
     .array()

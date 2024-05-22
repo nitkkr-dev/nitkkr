@@ -77,7 +77,19 @@ export interface Translations {
     lorem: string;
     copyright: string;
   };
-  Forms: { title: string };
+  Forms: {
+    title: string;
+    placeholder: string;
+    types: string[];
+    loginPlease: {
+      unathorised: string;
+      login: string;
+    };
+    active: string;
+    inactive: string;
+    opened: string;
+    download: string;
+  };
   Header: {
     institute: string;
     academics: string;

@@ -85,7 +85,19 @@ const text: Translations = {
     copyright:
       '© २०२४ राष्ट्रीय प्रौद्योगिकी संस्थान कुरूक्षेत्र। सर्वाधिकार आरक्षित।',
   },
-  Forms: { title: 'फॉर्म्स' },
+  Forms: {
+    title: 'फॉर्म्स',
+    placeholder: 'शैक्षिक, प्रतिपुष्टि, नियुक्तियाँ, आदि खोजें...',
+    active: 'सक्रिय',
+    inactive: 'बंद',
+    opened: 'खुला',
+    download: 'डाउनलोड',
+    loginPlease: {
+      unathorised: 'अनधिकृत',
+      login: 'लॉग इन',
+    },
+    types: ['शैक्षिक', 'तथ्यपरक प्रतिपुष्टि', 'नियुक्तियाँ', 'आदि'],
+  },
   Header: {
     institute: 'संस्थान',
     academics: 'शैक्षिक',

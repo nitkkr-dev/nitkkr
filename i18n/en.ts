@@ -89,7 +89,19 @@ const text: Translations = {
     copyright:
       '© 2024 National Institute of Technology Kurukshetra. All Rights Reserved.',
   },
-  Forms: { title: 'FORMS' },
+  Forms: {
+    title: 'Forms',
+    placeholder: 'Search Academic, Feedback, Placements, etc...',
+    active: 'Active',
+    inactive: 'Closed',
+    opened: 'Opened',
+    download: 'Download',
+    loginPlease: {
+      unathorised: 'Not authenticated',
+      login: 'Login',
+    },
+    types: ['All', 'Academic', 'Factulty Feedback', 'Placement', 'Other'],
+  },
   Header: {
     institute: 'Institute',
     academics: 'Academics',
