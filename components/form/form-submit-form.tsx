@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-//import { submitForm } from '~/actions/form.actions';
+import { submitForm } from '~/actions/form.actions';
 import { Button } from '~/components/ui';
 import { toast } from '~/lib/hooks';
 import { validateResolver } from '~/lib/validateResolver';
@@ -28,7 +28,7 @@ export default function FormSubmitForm({
 }: FormSubmitFormProps) {
   const Router = useRouter();
   useEffect(() => {
-    if (form.id.toString() != id || form.url != id)
+    if (form.id.toString() != id && form.url != id)
       window.history.replaceState(
         {},
         '',
@@ -86,20 +86,12 @@ export default function FormSubmitForm({
     const output = await forms.trigger();
     if (!output) return;
 
-    // const result = await submitForm(
-    //   form.id,
-    //   values() as unknown as Record<string, string | number | string[]>
-    // );
-    //toast(result);
-    //Router.push(`/${locale}/forms`);
-    console.log(output);
-    console.log(values);
-
-    toast({
-      title: 'Success',
-      description: 'form has been recorded',
-    });
-    Router.push('/');
+    const result = await submitForm(
+      form.id,
+      values as unknown as Record<string, string | number | string[]>
+    );
+    toast(result);
+    Router.push(`/${locale}/forms`);
   };
 
   return (
