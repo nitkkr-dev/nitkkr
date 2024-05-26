@@ -2,7 +2,16 @@ import { type SearchResponseHit } from 'typesense/lib/Typesense/Documents';
 
 import { getKeys } from '~/lib/utils';
 
-import { typesense } from '.';
+import {
+  ClubsDocumentSchema,
+  CommitteesDocumentSchema,
+  CoursesDocumentSchema,
+  DepartmentsDocumentSchema,
+  FacultyDocumentSchema,
+  SectionsDocumentSchema,
+  StaffDocumentSchema,
+  typesense,
+} from '.';
 
 const queryFields = {
   clubs: ['alias', 'name', 'tagline'],
@@ -32,6 +41,14 @@ export async function search(
       [collection_name as keyof typeof queryFields]: hits ?? [],
     }))
     .reduce((acc, obj) => ({ ...acc, ...obj }), {}) as {
-    [x in (typeof collections)[number]]: SearchResponseHit<object>[];
+    [x in (typeof collections)[number]]: SearchResponseHit<
+      | ClubsDocumentSchema
+      | CommitteesDocumentSchema
+      | CoursesDocumentSchema
+      | DepartmentsDocumentSchema
+      | FacultyDocumentSchema
+      | SectionsDocumentSchema
+      | StaffDocumentSchema
+    >[];
   };
 }
