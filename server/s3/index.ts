@@ -17,7 +17,7 @@ const globalForS3 = globalThis as unknown as {
 
 export const s3 = globalForS3.s3 ?? createS3Connection();
 
-if (process.env.NODE_ENV !== 'production') globalForS3.s3 = s3;
+if (env.NODE_ENV !== 'production') globalForS3.s3 = s3;
 
 export const getS3Url = (type: 'private' | 'public' = 'public') =>
   type === 'public'

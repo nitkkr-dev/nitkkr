@@ -13,7 +13,7 @@ const createTypesenseClient = () =>
           : { protocol: 'http' }),
       },
     ],
-    apiKey: process.env.TYPESENSE_API_KEY!,
+    apiKey: env.TYPESENSE_API_KEY,
     connectionTimeoutSeconds: 2,
   });
 
