@@ -12,12 +12,15 @@ const queryFields = {
   staff: ['email', 'name', 'telephone'],
 };
 
-export async function search(query: string) {
+export async function search(
+  query: string,
+  collections = getKeys(queryFields)
+) {
   if (query === '') return [];
 
   return (
     await Promise.all(
-      getKeys(queryFields).map((collection) => {
+      collections.map((collection) => {
         return typesense
           .collections(collection)
           .documents()
