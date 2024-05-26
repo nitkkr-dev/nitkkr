@@ -1,3 +1,5 @@
+import { type SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+
 import { getKeys } from '~/lib/utils';
 
 import { typesense } from '.';
@@ -26,12 +28,10 @@ export async function search(
       })
     )
   )
-    .filter(
-      ({ found, request_params: { collection_name } }) =>
-        found && !!collection_name
-    )
     .map(({ hits, request_params: { collection_name } }) => ({
       [collection_name as keyof typeof queryFields]: hits ?? [],
     }))
-    .reduce((acc, obj) => ({ ...acc, ...obj }), {});
+    .reduce((acc, obj) => ({ ...acc, ...obj }), {}) as {
+    [x in (typeof collections)[number]]: SearchResponseHit<object>[];
+  };
 }
