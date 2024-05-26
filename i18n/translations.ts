@@ -203,7 +203,88 @@ export interface Translations {
 
     Account: {};
     CentralLibrary: {};
-    CentralWorkshop: {};
+    CentralWorkshop: {
+      title: string;
+      organization: string;
+      organizationSub: string;
+      organizationDetails: string[];
+      services: string;
+      servicesSub: string;
+      servicesDetails: string[];
+      tableTitle: {
+        sno: string;
+        name: string;
+        quantity: string;
+      };
+      miscTitle: string;
+      facilities: {
+        title: string;
+        sub: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      equipmentDetails: string;
+      machineShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      productionShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      fittingShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      patternShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      foundryShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      weldingShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      camLabs: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      staffTitle: string;
+      staffTableTitle: {
+        name: string;
+        designation: string;
+      };
+    };
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
     Estate: {};
