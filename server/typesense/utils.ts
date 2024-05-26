@@ -16,8 +16,6 @@ export async function search(
   query: string,
   collections = getKeys(queryFields)
 ) {
-  if (query === '') return [];
-
   return (
     await Promise.all(
       collections.map((collection) => {
@@ -33,7 +31,7 @@ export async function search(
         found && !!collection_name
     )
     .map(({ hits, request_params: { collection_name } }) => ({
-      [collection_name!]: hits!,
+      [collection_name as keyof typeof queryFields]: hits ?? [],
     }))
     .reduce((acc, obj) => ({ ...acc, ...obj }), {});
 }
