@@ -3,16 +3,8 @@ interface Notification {
   href: string;
 }
 
-interface Topper {
-  name: string;
-  department: string;
-  rankOrAward: string;
-}
-
 interface YearData {
   notifications: Notification[];
-  toppers: Topper[];
-  about: string;
 }
 
 interface ConvocationData {
@@ -20,6 +12,10 @@ interface ConvocationData {
 }
 
 const notification19 = [
+  {
+    title: 'Toppers and Award winners',
+    href: 'https://nitkkr.ac.in/wp-content/uploads/2023/11/Topper-and-Award-Winner-Tentative-List-19th-Convocation.pdf',
+  },
   {
     title: 'Final candidates list IIITs',
     href: 'https://nitkkr.ac.in/wp-content/uploads/2024/02/FINAL-LIST-OF-DEGREE-RECIPIENTS-IN-19TH-CONVOCATION-AS-ON-01-02-2024-IIITS.pdf',
@@ -65,52 +61,6 @@ const notification19 = [
     href: 'https://nitkkr.ac.in/wp-content/uploads/2023/11/TentativeListofDegreeRecipientsfor19thConvocationUpdated-09-11-2023.pdf',
   },
 ];
-
-const toppers19 = [
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-  {
-    name: 'Rohit bana',
-    department: 'Computer Science',
-    rankOrAward: 'Padma bhushan',
-  },
-];
-
-const about19 =
-  'Graduation promises the donning of a new and challenging life. The end of college life marks the beginning of a journey that our mentors and parents had been preparing us for. The fun and frolic, the ups and downs, are all small stepping stones to the stage where one has to honestly play the role of an able and responsible citizen. NIT Kurukshetra witnessed its 19th Convocation with a lots of overwhelmed students. The college has conferred the various degrees to 1000+ students till now and brimming with enthusiasm and preparations NIT Kurukshetra is set to reward students with various degrees, scholarships, and merits of hard work. Indian president Smt. Droupadi Murmu had graced the occasion with her benign presence.';
 
 const notification18 = [
   {
@@ -219,8 +169,6 @@ const notification18 = [
     href: 'https://forms.gle/oS14vXJHkeQkBLp36',
   },
 ];
-const about18 =
-  'The 18th (Diamond Jubilee year) Convocation of NIT Kurukshetra is scheduled to be held on 29th November 2022 (Tuesday). The Hon’ble President of India has kindly consented to be the Chief Guest on the occasion. All the invitees to the 18th Convocation, degree recipients, faculty, and staff members are advised to follow the Kirmich Road Main Gate of NIT Kurukshetra to enter the Institute premises on 29 November 2022. The dress code for the convocation is specified for all attendees, with specific convocation apparel provided for all senators and dignitaries. The convocation, initially planned for October 2022, was rescheduled to November 2022 due to administrative reasons.';
 
 const notification17 = [
   {
@@ -582,32 +530,23 @@ const notification12 = [
   },
 ];
 
+// This is an array of object coz, someone amy want to add some othere data to it, in future.
 const data: ConvocationData = {
   years: {
     '19th': {
       notifications: notification19,
-      toppers: toppers19,
-      about: about19,
     },
     '18th': {
       notifications: notification18,
-      toppers: toppers19,
-      about: about19,
     },
     '17th': {
       notifications: notification17,
-      toppers: toppers19,
-      about: about19,
     },
     '16th': {
       notifications: notification16,
-      toppers: toppers19,
-      about: about19,
     },
     '12th': {
       notifications: notification12,
-      toppers: toppers19,
-      about: about19,
     },
   },
 };
