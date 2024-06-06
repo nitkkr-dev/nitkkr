@@ -205,7 +205,14 @@ export interface Translations {
     CentralLibrary: {};
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
-    ElectricalMaintenance: {};
+    ElectricalMaintenance: {
+      title: string;
+      about: string;
+      related: string;
+      relatedList: string[];
+      responsibilities: string;
+      responsibilitiesList: string[];
+    };
     Estate: {};
     GeneralAdministration: {};
     HealthCentre: {};
