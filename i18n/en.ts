@@ -453,6 +453,53 @@ const text: Translations = {
       gallery: 'Photo Gallery',
       administration: 'Administration',
     },
+    infrastructure: {
+      heading: `Campus and Infrastructure`,
+      headings: [`Campus`, `Infrastructure`, `How to reach`],
+      campus: [
+        `Kurukshetra, steeped in history and mythology, is a place of great spiritual significance, where Lord Krishna, delivered the divine message of “Shrimad Bhagwad Gita”.  The place from where knowledge spread far and wide was chosen as his capital by King Harshwardhana.  It is one of the premier centres of pilgrimage attracting devotees in a steady stream all-round the year. Kurukshetra is a railway junction on the Delhi-Karnal-Ambala section of the Northern Railway.  It is about 160 kms. from Delhi.  The Institute campus is about 10 kms. from Pipli, a well known road junction on the Sher Shah Suri Marg and about 5km from Kurukshetra Railway station.`,
+        ` The campus extends over an area of 300 acres imaginatively laid down on a picturesque landscape. It presents a spectacle of harmony in architecture and natural beauty. The campus has been organised into three functional sectors: Hostels for the students, Instructional buildings and Residential sector for the staff. `,
+        `Hostels for students are located towards Eastern side of the campus in the form of cluster. Three storey buildings of hostels provide comfortable accommodation and pleasing environment to students. `,
+        `National Institute of Technology Kurukshetra (NITK) enjoys the reputation of being a centre of excellence, facilitating quality technical and management education, research and training. It has been confered the status of being an Institution of National Importance. `,
+        `A Dataquest-IDC-NASSCOM survey placed the institute among the top twenty engineering institutions in the country. The institute scored high on all the parameters such as Placement, Intellectual Capital, Infrastructure, Industry Interface and Recruiter’s Perception. Established in the year 1963, NITK has made rapid strides toward excellence. A sprawling lush green campus, outstanding infrastructure, state-of-the-art support system, contemporary curriculum and a dedicated faculty provide an enabling environment for quality teaching, learning and research. The institute recognizes the significance of Institute-industry Interface and promotes interaction with the industry through student placements, consultancy services, joint research projects and jointly organizing workshops, seminars, conferences, etc. Further strengthening of this bond with the industry is currently a matter of priority for the institute.`,
+        `Presently, NITK offers undergraduate (B. Tech.) as well as post graduate (M. Tech.) programs in Civil, Computer Science, Electrical, Electronics and Communication, Mechanical Engineering, Industrial Engineering and Management, Information Technology and Master of Business Administration (MBA) – Marketing, Finance, Human Resource Management, Information Technology along with programs in Engineering, Technology, Applied Sciences, and Humanities & Social Sciences at doctorate level. The institute also offers excellent facilities for advanced research in the emerging areas of science and technology. The curriculum is constantly updated to meet the growing demand and needs of the country in different areas of technology and management.`,
+        `NIT Kurukshetra campus:`,
+      ],
+
+      infra: [
+        `The infrastructure is also geared up to enable the institute develop technical personnel of high quality. There are a number of projects that are being carried out by the institute provided by DST, MHRD, CSIR, AICTE and UGC. Teaching and research programs are supported by a central library (with more than one lakh volumes of Books, Bound Journals, IS Codes, Theses, Video CDs etc. The library also has the facility of online journals of IEL, ASCE, ACM, ASME, SAE, IEEE, etc.), an Audio Visual Aid Centre developed under a project of Ministry of Human Resource Development (MHRD). A modern centre for communication and networking has been provided with 24 hours internet facility with a 2Mbps leased line.`,
+        `NITK looks toward the future with renewed vigor. The institute has recently drawn up a twenty year road map that details strategies to successfully implement the vision of the Institute and effectively meet the challenges of the future. On successfully covering the milestones in the road map, the institute is assured of a place in the forefront of the elite institutes of the country. `,
+      ],
+      library: {
+        heading: `Library`,
+        text: [
+          `The library is housed in a separate building with a covered area of 3600 sq.m. With its ample resources, space and services, the library caters to the needs of faculty, research scholars and students very effectively and efficiently. To keep them abreast of the latest development in research, it now subscribes to electronic resources through INDEST consortium set up by the MHRD. The library contains 100000 books, 6028 back volumes and 3659 e-books. The library subscribes to 158 prints and approximately 2800 online journals in the fields of science, management and technology. The library remains accessible to its users 24 x 7.`,
+        ],
+      },
+      computing: {
+        heading: `Computing Facilities`,
+        text: [
+          `The Centre of Computing and Networking (CCN) is the centralized facility for students, faculty and staff of the institute. It has been provided with 24 hours internet facility with a 2 Mbps leased line. NITK believes that information technology forms an integral part of management. NITK’s intranet captures all that is learnt in the institution and disseminates the same to all its stakeholders on demand. The lab is equipped to handle intensive computing applications and is equipped with the latest hardware, both for client and server computing. The Wi-Fi infrastructure ensures that each stakeholder on the campus is able to connect to our digital nervous system from anywhere.`,
+        ],
+      },
+      senate: {
+        heading: `Senate Hall`,
+        text: [
+          `NITK has a state-of-the-art Senate Hall. It is an aesthetically designed and conveniently located conference-cum-canteen facility. The senate hall makes the institute well-equipped to hold conferences, seminars, workshops, etc. All the lectures of guest faculty and corporate managers are arranged here. The Training and Placement Cell is also housed on the first floor`,
+        ],
+      },
+      sports: {
+        heading: `Sports Complex`,
+        text: [
+          `The complex has an expansive and lush green playground comprising basket ball, volley ball, lawn tennis, badminton, and racquet ball courts, besides cricket and football grounds. It also has a mini-gymnasium and a 400 m athletic track. This provides variety recreation to the students. A plethora of activities on a regular basis and events organized on a national scale, instill and strengthen the spirit of team performance and accomplishment through sheer dedication and zeal.`,
+        ],
+      },
+      address: [
+        `National Institute of Technology Kurukshetra – 136119 (India) `,
+        `Telephone No : +91-1744-233212(O)`,
+        `FAX : +91-1744-238050`,
+      ],
+    },
   },
   NotFound: {
     title: 'Not Found',
