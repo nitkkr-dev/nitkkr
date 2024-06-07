@@ -229,4 +229,46 @@ export interface Translations {
   };
   Unauthorised: { title: string; description: string };
   WorkInProgress: { title: string; description: string };
+
+  infrastucture: {
+    heading: string;
+    campus: {
+      heading: string;
+      nitcampus: string;
+      campus1: string;
+      campus2: string;
+      campus3: string;
+      campus4: string;
+      campus5: string;
+      campus6: string;
+    };
+
+    infra: {
+      heading: string;
+      infra1: string;
+      infra2: string;
+    };
+    library: {
+      heading: string;
+      about: string;
+    };
+    computing: {
+      heading: string;
+      about: string;
+    };
+    senate: {
+      heading: string;
+      about: string;
+    };
+    sports: {
+      heading: string;
+      about: string;
+    };
+    address: {
+      heading: string;
+      line1: string;
+      line2: string;
+      line3: string;
+    };
+  };
 }
