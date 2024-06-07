@@ -179,15 +179,14 @@ const text: Translations = {
   Search: {
     placeholder: 'त्वरित खोज...',
     categories: {
-      allResults: 'सभी परिणाम',
-      webPages: 'वेब पृष्ठ',
-      people: 'लोग',
-      documents: 'दस्तावेज़',
-      events: 'आयोजन',
-      news: 'समाचार',
-      courses: 'पाठ्यक्रम',
+      all: 'सभी परिणाम',
       clubs: 'क्लब',
-      positions: 'पद',
+      committees: 'समितियां',
+      courses: 'पाठ्यक्रम',
+      departments: 'विभाग',
+      faculty: 'लोग',
+      sections: 'खंड',
+      staff: 'कर्मचारी',
     },
     viewAll: 'सारा देखें',
     default: {
