@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '~/components/inputs';
 import Loading from '~/components/loading';
+import { NoResultStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
@@ -153,11 +154,14 @@ const FacultyList = async ({
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
 
-  return faculty
-    .filter(({ person }) =>
-      person.name.toLowerCase().includes((query ?? '').toLowerCase())
-    )
-    .map((faculty, index) => {
+  const filteredFaculty = faculty.filter(({ person }) =>
+    person.name.toLowerCase().includes((query ?? '').toLowerCase())
+  );
+
+  return filteredFaculty.length === 0 ? (
+    <NoResultStatus locale={locale} />
+  ) : (
+    filteredFaculty.map((faculty, index) => {
       const isDepartmentHead = departmentHeads.find(
         ({ facultyId }) => facultyId === faculty.id
       );
@@ -201,5 +205,6 @@ const FacultyList = async ({
           </Link>
         </li>
       );
-    });
+    })
+  );
 };

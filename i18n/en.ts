@@ -230,6 +230,10 @@ const text: Translations = {
     Store: {},
   },
   Status: {
+    NoResult: {
+      title: 'No results found',
+      description: 'No result matched your given query.',
+    },
     Unauthorised: {
       title: 'Unauthorised',
       description: 'You are not authorised to view this page.',

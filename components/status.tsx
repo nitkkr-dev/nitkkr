@@ -20,11 +20,15 @@ export const CustomStatus = async ({
   type,
 }: {
   locale: string;
-  type: 'Unauthorised' | 'WorkInProgress';
+  type: 'NoResult' | 'Unauthorised' | 'WorkInProgress';
 }) => {
   const text = (await getTranslations(locale)).Status[type];
   return <Status title={text.title} description={text.description} />;
 };
+
+export const NoResultStatus = async ({ locale }: { locale: string }) => (
+  <CustomStatus locale={locale} type="NoResult" />
+);
 
 export const UnauthorisedStatus = async ({ locale }: { locale: string }) => (
   <CustomStatus locale={locale} type="Unauthorised" />

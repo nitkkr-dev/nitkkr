@@ -226,13 +226,17 @@ const text: Translations = {
     Store: {},
   },
   Status: {
+    NoResult: {
+      title: 'कोई परिणाम नहीं मिला',
+      description: 'आपके दिए गए प्रश्न से कोई परिणाम मेल नहीं खाता।',
+    },
     Unauthorised: {
       title: 'अनधिकृत',
       description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
     },
     WorkInProgress: {
       title: 'कार्य प्रगति पर है',
-      description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
+      description: 'इस पेज पर अभी काम चल रहा है। कृपया दूसरी बार आएं',
     },
   },
   StudentActivities: {

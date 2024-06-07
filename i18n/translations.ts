@@ -214,6 +214,7 @@ export interface Translations {
     Store: {};
   };
   Status: {
+    NoResult: { title: string; description: string };
     Unauthorised: { title: string; description: string };
     WorkInProgress: { title: string; description: string };
   };
