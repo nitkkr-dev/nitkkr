@@ -247,6 +247,17 @@ export interface Translations {
       gallery: string;
       administration: string;
     };
+    infrastructure: {
+      heading: string;
+      headings: string[];
+      campus: string[];
+      infra: string[];
+      library: { heading: string; text: string[] };
+      computing: { heading: string; text: string[] };
+      senate: { heading: string; text: string[] };
+      sports: { heading: string; text: string[] };
+      address: string[];
+    };
   };
   Hostels: {
     title: string;
