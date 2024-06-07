@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { FaArrowUp } from 'react-icons/fa6';
 
-import { Button } from '~/components/buttons';
+import { BouncyArrowButton } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -47,28 +46,19 @@ export default async function StudentActivities({
         <Suspense fallback={<Loading />}>
           <ClubsCarousel locale={locale} />
         </Suspense>
-        <Button
-          asChild
-          className={cn(
-            'px-2 py-1 md:px-4 md:py-2',
-            'mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8',
-            'inline-flex items-center gap-1 md:gap-2',
-            'rounded-md border font-bold text-primary-700'
-          )}
-          variant="outline"
-        >
-          <Link href={`/${locale}/student-activities/clubs`}>
-            {text.sections.clubs.more}
-            <span className="rotate-90">
-              <FaArrowUp
-                className={cn(
-                  'mx-auto animate-bounce',
-                  'size-2 md:size-3 lg:size-4'
-                )}
-              />
-            </span>
-          </Link>
-        </Button>
+        <BouncyArrowButton
+          buttonProps={{
+            className: cn(
+              'px-2 py-1 md:px-4 md:py-2',
+              'mt-4 sm:mt-5 md:mt-6 lg:mt-7 xl:mt-8',
+              'inline-flex items-center gap-1 md:gap-2',
+              'rounded-md border font-bold text-primary-700'
+            ),
+            variant: 'outline',
+          }}
+          linkProps={{ href: `/${locale}/student-activities/clubs` }}
+          text={text.sections.clubs.more}
+        />
       </section>
     </>
   );

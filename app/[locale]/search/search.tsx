@@ -1,16 +1,11 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { BsPersonFill } from 'react-icons/bs';
-import {
-  FaArrowUp,
-  FaMagnifyingGlass,
-  FaPaperclip,
-  FaSchool,
-} from 'react-icons/fa6';
+import { FaMagnifyingGlass, FaPaperclip, FaSchool } from 'react-icons/fa6';
 import { IoNotifications } from 'react-icons/io5';
 import { MdEmojiEvents, MdSchool } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
+import { BouncyArrowButton, Button } from '~/components/buttons';
 import { Input } from '~/components/inputs';
 import { LocalStorageLink } from '~/components/link';
 import { ScrollArea } from '~/components/ui';
@@ -452,36 +447,22 @@ const ResultsView = async ({
           <li key={index}>
             <header className="flex justify-between text-primary-700">
               <h4>{categories[category]}</h4>
-              <Button
-                asChild
-                className={cn(
-                  'inline-flex h-fit gap-1 md:gap-2',
-                  'text-xs font-semibold sm:text-base md:text-sm',
-                  'px-2 py-1 md:px-4 md:py-2'
-                )}
-                variant="ghost"
-              >
-                <Link
-                  href={{
-                    href: locale,
-                    query: {
-                      query,
-                      category: category,
-                    },
-                  }}
-                  replace
-                >
-                  {viewAll}
-                  <span className="rotate-90">
-                    <FaArrowUp
-                      className={cn(
-                        'mx-auto animate-bounce',
-                        'size-2 lg:size-3'
-                      )}
-                    />
-                  </span>
-                </Link>
-              </Button>
+              <BouncyArrowButton
+                arrowClassName="md:size-2 lg:size-3"
+                buttonProps={{
+                  className: cn(
+                    'inline-flex h-fit gap-1 md:gap-2',
+                    'text-xs font-semibold sm:text-base md:text-sm',
+                    'px-2 py-1 md:px-4 md:py-2'
+                  ),
+                  variant: 'ghost',
+                }}
+                linkProps={{
+                  href: { query: { query, category } },
+                  replace: true,
+                }}
+                text={viewAll}
+              />
             </header>
             <ul className="space-y-3">
               {results[category as keyof SearchResult].map(

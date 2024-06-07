@@ -92,11 +92,13 @@ export default async function Home({
         <MessageCard
           image="director.jpg"
           locale={locale}
-          more={text.director.more}
           name={text.director.name}
           quote={text.director.quote[0]}
           quoteBelow={text.director.quote[1]}
-          readMorePath={`/${locale}/institute/director#message`}
+          readMore={{
+            text: text.director.more,
+            href: `/${locale}/institute/director#message`,
+          }}
         />
       </section>
     </>

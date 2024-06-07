@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { FaArrowUp, FaCalendar, FaPhone } from 'react-icons/fa6';
+import { FaCalendar, FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
+import { BouncyArrowButton } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 export default function MessageCard({
@@ -11,11 +10,10 @@ export default function MessageCard({
   details,
   image,
   locale,
-  more,
   name,
   quote,
   quoteBelow,
-  readMorePath,
+  readMore,
 }: {
   className?: string;
   details?: {
@@ -29,7 +27,7 @@ export default function MessageCard({
   name: string;
   quote: string;
   quoteBelow?: string;
-  readMorePath?: string;
+  readMore?: { text: string; href: string };
 }) {
   return (
     <article
@@ -57,24 +55,15 @@ export default function MessageCard({
       >
         {quote}
         &nbsp;
-        {readMorePath && (
-          <Button
-            asChild
-            className="inline-flex items-center gap-1"
-            variant="link"
-          >
-            <Link href={`/${locale}${readMorePath}`}>
-              {more}
-              <span className="rotate-90">
-                <FaArrowUp
-                  className={cn(
-                    'mx-auto animate-bounce',
-                    'size-2 md:size-3 lg:size-4'
-                  )}
-                />
-              </span>
-            </Link>
-          </Button>
+        {readMore && (
+          <BouncyArrowButton
+            buttonProps={{
+              className: 'inline-flex items-center gap-1',
+              variant: 'link',
+            }}
+            linkProps={{ href: `/${locale}${readMore.href}` }}
+            text={readMore.text}
+          />
         )}
         {quoteBelow && (
           <>
