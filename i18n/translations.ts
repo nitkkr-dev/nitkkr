@@ -90,6 +90,38 @@ export interface Translations {
     login: string;
     profile: { alt: string; view: string };
   };
+  Institute: {
+    welcome: string;
+    profile: {
+      title: string;
+      vision: { title: string; content: string[] };
+      mission: { title: string; content: string[] };
+      history: { title: string; content: string[]; readMore: string };
+    };
+    admission: {
+      title: string;
+      process: { title: string; content: string[] };
+      education: { title: string; content: string[] };
+    };
+    nirf: {
+      title: string;
+      year: string;
+      result: string;
+      nirfCertificate: string;
+      dataFile: string;
+    };
+    funds: { title: string; content: string };
+    collaboration: { title: string; content: string[] };
+    quickLinks: {
+      title: string;
+      campus: string;
+      documentary: string;
+      organisationChart: string;
+      sections: string;
+      gallery: string;
+      administration: string;
+    };
+  };
   Login: {
     title: string;
     enterEmail: string;
