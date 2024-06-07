@@ -12,8 +12,8 @@ import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
 
+import SearchCard, { type CardContent, type SearchResult } from './cards';
 import { Recents } from './client-utils';
-import SearchCard, { type CardContent, type SearchResult } from './search-card';
 
 const categoryIconMapping = {
   course: MdSchool,
