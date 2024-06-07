@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useEventCallback, useScrollLock, useToggle } from 'usehooks-ts';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 const HamburgerButton = ({ className }: { className: string }) => {

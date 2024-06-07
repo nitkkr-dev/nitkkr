@@ -9,6 +9,7 @@ import { FaBookmark, FaNewspaper } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 import { MdSchool } from 'react-icons/md';
 
+import { Button } from '~/components/buttons';
 import {
   Select,
   SelectContent,
@@ -17,7 +18,6 @@ import {
   SelectValue,
 } from '~/components/inputs';
 import Loading from '~/components/loading';
-import { Button } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
 export const LogOut = ({

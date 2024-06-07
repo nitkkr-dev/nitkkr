@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaArrowUp } from 'react-icons/fa6';
 
+import { Button } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
-import { Button, Card, CardDescription, CardTitle } from '~/components/ui';
+import { Card, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';

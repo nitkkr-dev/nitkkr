@@ -2,7 +2,7 @@
 
 import { useLocalStorage } from 'usehooks-ts';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 
 import { MiniSearchLink } from './search';
 

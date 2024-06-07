@@ -2,7 +2,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (

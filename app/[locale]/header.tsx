@@ -6,10 +6,10 @@ import { Suspense } from 'react';
 import { BsPersonFill } from 'react-icons/bs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
+import { Button, HamburgerButton } from '~/components/buttons';
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import MaybeLink from '~/components/maybe-link';
-import { Button, HamburgerButton } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';

@@ -2,7 +2,7 @@
 
 import { FaCheck, FaRegCopy } from 'react-icons/fa6';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { useCopyToClipboard } from '~/lib/hooks';
 import { cn } from '~/lib/utils';
 

@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
+import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
-import { Button, ScrollArea } from '~/components/ui';
+import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
 import type { notifications as notificationsSchema } from '~/server/db';

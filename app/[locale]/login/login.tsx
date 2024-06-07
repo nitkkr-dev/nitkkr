@@ -1,5 +1,5 @@
+import { Button } from '~/components/buttons';
 import { Input } from '~/components/inputs';
-import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';

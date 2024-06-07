@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 const LoginButton = ({ loginText }: { loginText: string }) => {

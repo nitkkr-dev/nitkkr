@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
+import { Button } from '~/components/buttons';
 import {
   Input,
   Select,
@@ -13,7 +14,6 @@ import {
   SelectValue,
 } from '~/components/inputs';
 import Loading from '~/components/loading';
-import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';

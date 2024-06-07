@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
 

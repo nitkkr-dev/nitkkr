@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FaArrowUp, FaCalendar, FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
-import { Button } from '~/components/ui';
+import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 export default function MessageCard({

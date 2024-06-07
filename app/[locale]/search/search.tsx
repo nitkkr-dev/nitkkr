@@ -10,9 +10,10 @@ import {
 import { IoNotifications } from 'react-icons/io5';
 import { MdEmojiEvents, MdSchool } from 'react-icons/md';
 
+import { Button } from '~/components/buttons';
 import { Input } from '~/components/inputs';
 import { LocalStorageLink } from '~/components/link';
-import { Button, ScrollArea } from '~/components/ui';
+import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys } from '~/lib/utils';
 

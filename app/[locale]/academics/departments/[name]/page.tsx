@@ -5,11 +5,11 @@ import { FaTrophy } from 'react-icons/fa6';
 import { HiMiniBeaker } from 'react-icons/hi2';
 import { MdBadge } from 'react-icons/md';
 
+import { Button } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import MessageCard from '~/components/message-card';
-import { Button } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';

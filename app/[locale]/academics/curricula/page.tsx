@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
+import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
 import { PaginationWithLogic } from '~/components/pagination';
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
