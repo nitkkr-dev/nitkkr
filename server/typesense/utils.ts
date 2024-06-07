@@ -1,3 +1,5 @@
+'use server';
+
 import { type SearchResponseHit } from 'typesense/lib/Typesense/Documents';
 
 import { getKeys } from '~/lib/utils';
