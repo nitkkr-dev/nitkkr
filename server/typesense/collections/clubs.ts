@@ -21,3 +21,16 @@ export const populateClubs = async () => {
 export type ClubsDocumentSchema = Awaited<
   ReturnType<typeof populateClubs>
 >[number];
+
+export const isClubDocument = (
+  document: any
+): document is ClubsDocumentSchema => {
+  return (
+    document &&
+    (typeof document.alias === 'string' ||
+      typeof document.alias === 'object') &&
+    typeof document.name === 'string' &&
+    typeof document.tagline === 'string' &&
+    typeof document.urlName === 'string'
+  );
+};

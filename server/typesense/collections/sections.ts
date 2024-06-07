@@ -20,3 +20,14 @@ export const populateSections = async () => {
 export type SectionsDocumentSchema = Awaited<
   ReturnType<typeof populateSections>
 >[number];
+
+export const isSectionDocument = (
+  document: any
+): document is SectionsDocumentSchema => {
+  return (
+    document &&
+    typeof document.email === 'string' &&
+    typeof document.name === 'string' &&
+    typeof document.urlName === 'string'
+  );
+};

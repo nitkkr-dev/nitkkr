@@ -19,3 +19,13 @@ export const populateCourses = async () => {
 export type CoursesDocumentSchema = Awaited<
   ReturnType<typeof populateCourses>
 >[number];
+
+export const isCourseDocument = (
+  document: any
+): document is CoursesDocumentSchema => {
+  return (
+    document &&
+    typeof document.code === 'string' &&
+    typeof document.title === 'string'
+  );
+};

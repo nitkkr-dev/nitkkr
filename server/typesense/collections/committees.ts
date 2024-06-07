@@ -26,3 +26,16 @@ export const populateCommittees = async () => {
 export type CommitteesDocumentSchema = Awaited<
   ReturnType<typeof populateCommittees>
 >[number];
+
+export const isCommitteeDocument = (
+  document: any
+): document is CommitteesDocumentSchema => {
+  return (
+    document &&
+    typeof document.committeeType === 'string' &&
+    typeof document.name === 'string' &&
+    (typeof document.nomination === 'string' ||
+      typeof document.nomination === 'object') &&
+    typeof document.servingAs === 'string'
+  );
+};

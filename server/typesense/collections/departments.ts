@@ -27,3 +27,14 @@ export const populateDepartments = async () => {
 export type DepartmentsDocumentSchema = Awaited<
   ReturnType<typeof populateDepartments>
 >[number];
+
+export const isDepartmentDocument = (
+  document: any
+): document is DepartmentsDocumentSchema => {
+  return (
+    document &&
+    typeof document.name === 'string' &&
+    typeof document.majors === 'object' &&
+    typeof document.urlName === 'string'
+  );
+};
