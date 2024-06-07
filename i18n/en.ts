@@ -229,6 +229,17 @@ const text: Translations = {
     Sports: {},
     Store: {},
   },
+  Status: {
+    Unauthorised: {
+      title: 'Unauthorised',
+      description: 'You are not authorised to view this page.',
+    },
+    WorkInProgress: {
+      title: 'Work In Progress',
+      description:
+        'This page is currently being worked on. Please visit another time',
+    },
+  },
   StudentActivities: {
     title: 'STUDENT ACTIVITIES',
     headings: {
@@ -240,15 +251,6 @@ const text: Translations = {
       ncc: 'NCC',
     },
     sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
-  },
-  Unauthorised: {
-    title: 'Unauthorised',
-    description: 'You are not authorised to view this page.',
-  },
-  WorkInProgress: {
-    title: 'Work In Progress',
-    description:
-      'This page is currently being worked on. Please visit another time',
   },
 };
 

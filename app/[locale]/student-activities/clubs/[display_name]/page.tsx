@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { clubs, db } from '~/server/db';
 
 export async function generateStaticParams() {
@@ -10,5 +10,5 @@ export default function Club({
 }: {
   params: { locale: string; display_name: string };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

@@ -225,6 +225,16 @@ const text: Translations = {
     Sports: {},
     Store: {},
   },
+  Status: {
+    Unauthorised: {
+      title: 'अनधिकृत',
+      description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
+    },
+    WorkInProgress: {
+      title: 'कार्य प्रगति पर है',
+      description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
+    },
+  },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
     headings: {
@@ -236,14 +246,6 @@ const text: Translations = {
       ncc: 'एनसीसी',
     },
     sections: { clubs: { title: 'संघठनें', more: 'सभी संघठनो को तलाशें' } },
-  },
-  Unauthorised: {
-    title: 'अनधिकृत',
-    description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
-  },
-  WorkInProgress: {
-    title: 'कार्य प्रगति पर है',
-    description: 'इस पेज पर अभी काम चल रहा है. कृपया दूसरी बार आएं',
   },
 };
 

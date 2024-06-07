@@ -1,9 +1,9 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 
 export default function Programmes({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

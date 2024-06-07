@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { db, deans } from '~/server/db';
 
 export async function generateStaticParams() {
@@ -10,5 +10,5 @@ export default function Dean({
 }: {
   params: { locale: string; name: (typeof deans.domain.enumValues)[number] };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

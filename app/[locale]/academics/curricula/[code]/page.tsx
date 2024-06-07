@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { courses, db } from '~/server/db';
 
 export async function generateStaticParams() {
@@ -10,5 +10,5 @@ export default function Curriculum({
 }: {
   params: { locale: string; code: string };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

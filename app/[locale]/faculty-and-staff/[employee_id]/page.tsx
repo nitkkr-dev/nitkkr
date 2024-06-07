@@ -1,6 +1,6 @@
 import { union } from 'drizzle-orm/pg-core';
 
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { db, faculty, staff } from '~/server/db';
 
 export async function generateStaticParams() {
@@ -16,5 +16,5 @@ export default function FacultyOrStaff({
 }: {
   params: { locale: string; employee_id: string };
 }) {
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
@@ -13,5 +13,5 @@ export default async function ElectricalMaintenance({
     where: (section, { eq }) => eq(section.urlName, 'electrical-maintenance'),
   }))!;
 
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }

@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 
 export default async function Bookmarks({
@@ -15,7 +15,7 @@ export default async function Bookmarks({
         <hr className="border border-primary-700 opacity-50" />
       </header>
 
-      <WorkInProgress locale={locale} />
+      <WorkInProgressStatus locale={locale} />
     </>
   );
 }

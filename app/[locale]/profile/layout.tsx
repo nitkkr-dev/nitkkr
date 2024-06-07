@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Unauthorized from '~/components/unauthorized';
+import { UnauthorisedStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -16,7 +16,7 @@ export default async function ProfileLayout({
   params: { locale: string };
 }) {
   const session = await getServerAuthSession();
-  if (!session) return <Unauthorized locale={locale} />;
+  if (!session) return <UnauthorisedStatus locale={locale} />;
 
   const text = (await getTranslations(locale)).Profile;
 

@@ -213,6 +213,10 @@ export interface Translations {
     Sports: {};
     Store: {};
   };
+  Status: {
+    Unauthorised: { title: string; description: string };
+    WorkInProgress: { title: string; description: string };
+  };
   StudentActivities: {
     title: string;
     headings: {
@@ -227,6 +231,4 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
-  Unauthorised: { title: string; description: string };
-  WorkInProgress: { title: string; description: string };
 }

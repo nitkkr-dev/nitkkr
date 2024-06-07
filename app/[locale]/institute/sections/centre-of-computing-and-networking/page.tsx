@@ -1,4 +1,4 @@
-import WorkInProgress from '~/components/work-in-progress';
+import { WorkInProgressStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
@@ -15,5 +15,5 @@ export default async function CentreOfComputingAndNetworking({
       eq(section.urlName, 'centre-of-computing-and-networking'),
   }))!;
 
-  return <WorkInProgress locale={locale} />;
+  return <WorkInProgressStatus locale={locale} />;
 }
