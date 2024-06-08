@@ -2,9 +2,11 @@ import { count, sql } from 'drizzle-orm';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa6';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
+import { DownloadLink } from '~/components/link/download';
 import Loading from '~/components/loading';
 import { PaginationWithLogic } from '~/components/pagination';
 import {
@@ -16,6 +18,7 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+import { convertToCSV } from '~/lib/utils';
 import type { committeeMembers } from '~/server/db';
 import { committeeMeetings, db } from '~/server/db';
 
@@ -74,6 +77,7 @@ export default async function Committee({
               <TableHead className="text-center">
                 {text.meetings.minutes}
               </TableHead>
+              <TableHead className="text-center">Export to CSV</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -159,6 +163,17 @@ const Meetings = async ({
           <Link href={meeting.minutesUrl}>
             <FaExternalLinkAlt />
           </Link>
+        </Button>
+      </TableCell>
+      <TableCell className="text-center">
+        <Button asChild variant="link">
+          <DownloadLink
+            content={convertToCSV(meetings)}
+            fileName="board-of-governor-meetings.csv"
+            fileType="text/csv"
+          >
+            <FaDownload />
+          </DownloadLink>
         </Button>
       </TableCell>
     </TableRow>
