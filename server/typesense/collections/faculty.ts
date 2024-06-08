@@ -35,3 +35,17 @@ export const populateFaculty = async () => {
 export type FacultyDocumentSchema = Awaited<
   ReturnType<typeof populateFaculty>
 >[number];
+
+export const isFacultyDocument = (
+  document: any
+): document is FacultyDocumentSchema => {
+  return (
+    document &&
+    typeof document.designation === 'string' &&
+    typeof document.email === 'string' &&
+    typeof document.employeeId === 'string' &&
+    typeof document.name === 'string' &&
+    typeof document.officeAddress === 'string' &&
+    typeof document.telephone === 'string'
+  );
+};

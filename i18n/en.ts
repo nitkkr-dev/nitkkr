@@ -183,15 +183,14 @@ const text: Translations = {
   Search: {
     placeholder: 'Quick Search...',
     categories: {
-      allResults: 'All Results',
-      webPages: 'Web Pages',
-      people: 'People',
-      documents: 'Documents',
-      events: 'Events',
-      news: 'News',
-      courses: 'Courses',
+      all: 'All Results',
       clubs: 'Clubs',
-      positions: 'Positions',
+      committees: 'Committees',
+      courses: 'Courses',
+      departments: 'Departments',
+      faculty: 'People',
+      sections: 'Sections',
+      staff: 'Staff',
     },
     viewAll: 'View All',
     default: {

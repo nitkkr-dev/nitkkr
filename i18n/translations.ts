@@ -167,15 +167,14 @@ export interface Translations {
   Search: {
     placeholder: string;
     categories: {
-      allResults: string;
-      webPages: string;
-      people: string;
-      documents: string;
-      events: string;
-      news: string;
-      courses: string;
+      all: string;
       clubs: string;
-      positions: string;
+      committees: string;
+      courses: string;
+      departments: string;
+      faculty: string;
+      sections: string;
+      staff: string;
     };
     viewAll: string;
     default: {
