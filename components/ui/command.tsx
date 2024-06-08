@@ -5,7 +5,7 @@ import { Command as CommandPrimitive } from 'cmdk';
 import * as React from 'react';
 import { RxMagnifyingGlass } from 'react-icons/rx';
 
-import { Dialog, DialogContent } from '~/components/ui/dialog';
+import { Dialog, DialogContent } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
 const Command = React.forwardRef<
