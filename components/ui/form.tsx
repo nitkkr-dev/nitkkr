@@ -7,8 +7,6 @@ import { Controller, FormProvider, useFormContext } from 'react-hook-form';
 import { Label } from '~/components/ui';
 import { cn } from '~/lib/utils';
 
-const Form = FormProvider;
-
 interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
@@ -163,12 +161,12 @@ const FormMessage = React.forwardRef<
 FormMessage.displayName = 'FormMessage';
 
 export {
-  Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormProvider,
   useFormField,
 };
