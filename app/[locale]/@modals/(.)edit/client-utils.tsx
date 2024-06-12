@@ -10,16 +10,16 @@ import { Input } from '~/components/inputs';
 import { FormField, FormItem, FormMessage } from '~/components/ui';
 import type { committeeMeetings } from '~/server/db';
 import { type Translations } from '~/i18n/translations';
+import { addEditMeeting } from '~/actions/committee.actions';
+import { useToast } from '~/lib/hooks';
 
 export default function MeetingEdit({
-  locale,
   number,
   meetingType,
   existingData,
   text,
 }: {
-  locale: string;
-  number?: string;
+  number?: number;
   meetingType: (typeof committeeMeetings.committeeType.enumValues)[number];
   existingData?: Omit<
     typeof committeeMeetings.$inferSelect,
@@ -27,6 +27,7 @@ export default function MeetingEdit({
   >;
   text: Translations['Committee'];
 }) {
+  const { toast } = useToast();
   const router = useRouter();
   const meetingSchema = z
     .object({
@@ -86,6 +87,22 @@ export default function MeetingEdit({
     },
   });
 
+  const addOrEditMeeting = async (data: meetingOutput) => {
+    const result = await addEditMeeting(
+      data.place,
+      data.agendaUrl,
+      data.minutesUrl,
+      data.createdAt,
+      meetingType,
+      number
+    );
+    toast({
+      title: result.status === 'success' ? text.edit.success : text.edit.error,
+      variant: result.status,
+    });
+    router.back();
+  };
+
   return (
     <>
       <h3>
@@ -93,7 +110,7 @@ export default function MeetingEdit({
         {` ${meetingType.charAt(0).toUpperCase() + meetingType.slice(1)} ${number ? text.meetings.serial + number : text.edit.meeting}`}
       </h3>
       <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(async (data) => console.log(data))}>
+        <form onSubmit={form.handleSubmit(addOrEditMeeting)}>
           <FormField
             control={form.control}
             name="place"

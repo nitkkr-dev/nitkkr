@@ -62,8 +62,7 @@ export default async function Edit({
     }
     return (
       <MeetingEdit
-        locale={locale}
-        number={number}
+        number={Number(number)}
         meetingType={categoryToEdit}
         existingData={existingData}
         text={text}

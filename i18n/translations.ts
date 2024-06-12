@@ -44,6 +44,8 @@ export interface Translations {
       edit: string;
       meeting: string;
       submit: string;
+      success: string;
+      error: string;
       back: string;
     };
   };

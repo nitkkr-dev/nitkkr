@@ -52,6 +52,8 @@ const text: Translations = {
       edit: 'Edit',
       submit: 'submit',
       meeting: 'Meeting',
+      success: 'The meeting has been successfully added/edited',
+      error: 'An error occurred. Please try again later',
       back: 'back',
     },
   },
