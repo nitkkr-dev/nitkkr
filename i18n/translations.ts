@@ -424,7 +424,22 @@ export interface Translations {
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
-    Estate: {};
+    Estate: {
+      name: string;
+      links: string[];
+      headings: string[];
+      subheadings: string[];
+
+      about: string[];
+
+      project: {
+        completed: string[];
+
+        ongoing: string[];
+        future: string[];
+      };
+      seniority: string[];
+    };
     GeneralAdministration: {};
     HealthCentre: {};
     Security: {};
