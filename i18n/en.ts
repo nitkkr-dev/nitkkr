@@ -503,7 +503,193 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     CentralWorkshop: {},
     CentreOfComputingAndNetworking: {},
     ElectricalMaintenance: {},
-    Estate: {},
+    Estate: {
+      name: `Estate`,
+      links: [
+        `House Allotment Rules 2014`,
+        `House Allotment Rules 2017`,
+        `Rate List`,
+        `Online Complaint`,
+      ],
+      headings: [
+        `About`,
+        'Building & Works Committee',
+        'Committees of Estate Section',
+        'Details of Campus & Available Infrastructure',
+        'Projects',
+        'Organization Chart of Estate Section',
+        'House Allotment Rules 2014 & 2017',
+        'Rate List',
+        'Seniority List',
+      ],
+
+      subheadings: [
+        'ESTATE AFFAIRS COMMITTEE (EAC)',
+        'SPACE ALLOCATION COMMITTEE (SAC)',
+        'PROGRESS REVIEW COMMITTEE (PRC)',
+        'LICENSING COMMITTEE (LC)',
+        'HOUSE ALLOTMENT COMMITTEE (HAC) – Teaching',
+        'House Allotment Committee (HAC) Non-Teaching Staff',
+        'DETAILS OF GENERAL INFRASTRUCTURE',
+        'ACADEMIC AREA',
+        'HOSTEL AREA',
+        'Boys Hostels (UG + PG)',
+        'Girls Hostels',
+        'RESIDENTIAL AREA',
+        'SUPPORTING FACILITIES',
+        'Completed Project in Last Three Years',
+        'On-Going Projects',
+        'Future Projects',
+      ],
+
+      about: [
+        `Estate Section is involved in construction of new buildings and other infrastructure facilities, maintenance of civil & electrical works, horticulture & landscaping works, sanitation & cleanliness works and outsourcing of skilled, semiskilled, unskilled workers required in various sections/departments of the Institute. And also maintain the records regarding allotment of houses, furniture and lease of lands, shops & canteens and maintain all types of inventories. The section is headed by Dean (Estate), who is assisted by Prof. I/C (Estate & Construction), Prof. I/C (Sanitation & Cleanliness), Prof. I/C (Electrical Maintenance) and Prof. I/C (Horticulture & Landscaping).`,
+        `The office work is supervised by Superintendent SG-II who is assisted by Senior Accountant, Assistant SG-I & Attendant. The technical work is headed by Assistant Engineer (Civil) & Assistant Engineer (Elect.). The Assistant Engineer (Civil) cum Estate Officer is supported by two Junior Engineers (Civil) & one Junior Engineer (Mechanical) and the Assistant Engineer (Elect.) is supported by one Junior Engineer (Elect.).  The budget requirements for various maintenance works are met through non-plan grant. The new works budgetary requirement is met from plan grant of the year. The Road Map for next 25 years of the Estate Section is being prepared by CPWD in view of the future expansion of the Institute.`,
+      ],
+
+      project: {
+        completed: [
+          '1. Construction of 3 Storey bearer barrack comprising of 2 Blocks to accommodate 96 bearers.',
+          '2. Provision for two nos. Institute Main Gates',
+
+          '3. Construction of Boundary Wall (left out stretches) for a length of about 800 mtr. and Gate (near UHBVN office)',
+
+          '4. Installation of Cold Water Tank Supply Pipe line to the solar water heating system installed in the hostel no.1 to 9 boys hostel, Girls hostel no. 1 & 2',
+
+          '5. Replacement of C.I./A.C. water supply lines with Centrifugally Cast (Spun) Iron Pipes Class L.A. in the Residences, Hostels & Instructional Building',
+
+          '6. Provision of re-surfacing and widening of existing roads in residential campus and institutional area',
+          '7. Construction of Swimming Pool',
+
+          '8. Construction of 600 Seater Girls Hostel (Multi-Storeyed Framed Structure, Ground Floor+5)',
+          '9. Construction of Sewage Treatment Plant (STP)',
+
+          '10. Providing Concertina coil over the Institute boundary for security purpose',
+
+          '11. Provision of Permanent/Temporary Huts for security guards at various locations in the Institute at NIT, Kurukshetra.',
+
+          '12. Providing & Installation of 16/20 meter High Mast lights at Sports Ground and various other location',
+
+          '13. Provision of DG power backup at various locations in the Institute covering instructional buildings and related facilities',
+          '14. Provision of DG power backup in boys & girls hostels',
+
+          '15. Replacement of existing LT Panels with MCB’s in the Institute',
+
+          '16. Provision of Aviation Light & Lightening conductor in the Mega Boys Hostel (1000 capacity) at NIT, Kurukshetra.',
+
+          '17. Providing & Installation of electrical Sub-Station HT/LT distribution including street lighting and feeder pillar etc. in non-residential area',
+        ],
+        ongoing: [
+          '1. Preparation of Institute Master Plan of NITK.',
+
+          '2. Construction of 300 Seaters Multi-purpose boys hostel including 100 suits for foreign students, research scholars and married PG Students. (Multi-storeyed framed structure). (Ground Floor +5).',
+
+          '3. Replacement of existing Electrical wirings in Instructional building at NIT, Kurukshetra',
+
+          '4. Providing & Installation of Electrical Sub-station HT/LT Distribution and feeder pillars in residential area',
+
+          '5. Providing Kitchen equipment in 600 seater Girls Hostel (multi-storeyed) RCC framed structure (Ground+5)',
+        ],
+        future: [
+          '1. Provision of lifts for persons with disabilities (PwD) at various locations in the Institute',
+
+          '2. Providing audio system in Board Room, Golden Jubilee Administrative Building including Jubilee Hall & Senate Hall',
+
+          '3. Furnishing floor with tiles in the common room, dining hall, warden office and MMCA office in the old boy’s hostel No. 1 to 6 and girl’s hostel No.-1',
+
+          '4. Provision of construction of Verandah for non-teaching staff club situated in F-type quarters',
+          '5. Construction of Indoor Badminton Hall in Sports Complex',
+
+          '6. Construction of shed for covering the sports complex stairs',
+
+          '7. Provision of access to Golden Jubilee Administrative Building by providing a gate & parking shed for two wheelers along the in-side boundary wall towards west',
+
+          '8. Provision of shed for parking only for four wheelers in the existing parking near NIT Market',
+
+          '9. Providing Air-conditioning in Dining Halls of Boy’s & Girls Hostels at NIT, Kurukshetra.',
+
+          '10. Construction of Additional floor over the existing building of Computer Application Department',
+          '11. Construction of Labs Complex (G+5)',
+
+          '12. Construction of Additional floor over the existing building of Computer Engineering Department',
+
+          '13. Construction of additional 3 nos. lecture hall on 2nd floor over the existing building of ECE Department and construction of additional floor over the Electronics & Communication Engineering Department',
+
+          '14. Construction of Additional (6 nos. Lecture Hall) over the existing 12 nos. Lecture Hall Complex',
+
+          '15. Construction of Additional floor over the existing AB Block.',
+
+          '16. Construction of Additional floor over the existing building of Examination Hall',
+
+          '17. Construction of Additional floor over the existing Old MBA Block (New Workshop Building)',
+
+          '18. Construction of extension existing corridor form Old MBA Block to 12 Nos. LHC and MBA/MCA building',
+          '19. Construction of Gymnasium Hall',
+          '20. Construction of Community Centre/Convention/SAC',
+
+          '21. Providing peripheral road along the external boundary wall of the Institute for security and maintenance purpose',
+
+          '22. Construction of Multi-storeyed building for faculty/officers having 40 apartments',
+
+          '23. Construction of multi-storeyed 20 Nos. Type-II & 20 Nos. Type-III quarters for Non-Teaching Staff',
+
+          '24. Construction, Installation & Commissioning of 33/11KV Sub-Station at NIT, Kurukshetra',
+
+          '25. Replacement of rewiring in All old Boys, Girls Hostels and Residential Area.',
+          '26. Construction of State of Arts Centre',
+
+          '27. Construction of Additional Lecture Hall Complex (18 Nos. Lecture Hall)',
+        ],
+      },
+
+      seniority: [
+        '09.04.2024 Seniority list of applicants for the houses notified against notification No.EO/3353/161 dt. 12.03.2024',
+
+        '23.01.2024 Seniority List of applicants(NT) against notification dated 02.01.2024',
+
+        '18.12.2023 seniority list of applicants(T) against notification dated 02.11.2023',
+
+        '12-09-2023 seniority list of applicants(NT) against notification No.EO/3353/552 dated 28.07.2023',
+
+        '18-07-2023 seniority list of applicants against notification No. EO/3352/547 dated 24.07.2023',
+
+        '17-05-2023 seniority list of applicants(T) against notification dated 18.4.2023',
+
+        '16-02-2023 Seniority List of Applicants for Houses notified vide notification No. EO/3352/51 dated18.01.2023',
+
+        '13-12-2022 seniority list of applicants for houses notified vide notification No.EO/3352/690 dated 03.11.2022',
+
+        '16-08-2022 Seniority list of applicants(T) for houses notified on dated 23.06.2022 16082022',
+
+        '15-06-2022 Seniority list of applicants for the houses notified vide notification No.EO3353299 dated 17.05.2022',
+        '05-04-2022 Seniority list of applicants(T) April 2022',
+        '10-03-2022 Seniority List of applicants (F)',
+        '05-08-2021 Seniority List of applicants(T)',
+        '05-08-2021 Seniority list of applicants(NT)',
+
+        '05-01-2020 Seniority_list_of_applicants_NT__for_allotment_of_F-type_houses',
+        '03-11-2020 Seniority_list_of_applicantsTeaching',
+        '06-08-2020 Seniority_list_of_applicants_Teaching Aug.2020',
+
+        '18-02-2020 Seniority list of applicants NT against notified houses on 23.01.2020',
+        'seniority_list_of_applicants__Teaching_',
+        'seniority_list_of_applicants_NT_for_F-type_houses',
+        'seniority_list_of_applicants_Teaching_03-10-2019',
+        'seniority_list_of_applicants_NT 19-09-2019',
+
+        'Seniority List of applicants for houses notified vide notification No EO/3352/298 dated 16/5/2019',
+        'seniority_list_of_applicants_for__E_F_type_houses',
+        'seniority_list_of_applicants_for_notified_E-type_houses',
+        'Seniority list of applicants(NT)',
+
+        'Seniority List of Applicants for Houses notified vide notification No. EO/3352/468 Dated 24.07.2018',
+
+        'Seniority List of Applicants for Houses notified vide notification No. EO/3352/246 dated 16.04.2018',
+        'Seniority List of Applicants for houses notified vide notification No. EO/3353/735 & 736 dated 23.11.2017',
+        'Seniority_Non-Teaching',
+        'Seniority_List_of_Applicants',
+      ],
+    },
     GeneralAdministration: {},
     HealthCentre: {},
     Security: {},
