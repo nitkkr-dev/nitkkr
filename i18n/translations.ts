@@ -332,7 +332,17 @@ export interface Translations {
     about: string;
     gallery: string;
 
-    Account: {};
+    Account: {
+      title: string;
+      about: string;
+      reportTitle: string;
+      report: string;
+      forms: string;
+      formsList: string[];
+      quickLinksTitle: string;
+      quickLinks: string[];
+    };
+
     Library: {
       name: string;
       heading: {
