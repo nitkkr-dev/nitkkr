@@ -121,6 +121,19 @@ const text: Translations = {
     totalCredits: 'Credits',
     syllabus: 'Syllabus',
   },
+  Dean: {
+    deanTitles: {
+      academic: 'Dean, Academic',
+      'estate-and-construction': 'Dean, Estate & Construction',
+      'faculty-welfare': 'Dean, Faculty Welfare',
+      'industry-and-international-relations':
+        'Dean, Industry & International Relations',
+      'planning-and-development': 'Dean, Planning & Development',
+      'research-and-consultancy': 'Dean, Research & Consultancy',
+      'student-welfare': 'Dean, Student Welfare',
+    },
+    responsibilities: 'Responsibilities',
+  },
   Departments: { title: 'DEPARTMENTS' },
   Department: {
     headings: {

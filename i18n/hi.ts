@@ -118,6 +118,20 @@ const text: Translations = {
     totalCredits: 'क्रेडिट्स',
     syllabus: 'पाठ्यक्रम',
   },
+  Dean: {
+    deanTitles: {
+      academic: 'शैक्षिक डीन',
+      'estate-and-construction': 'भूमि और निर्माण डीन',
+      'faculty-welfare': 'संकाय कल्याण डीन',
+      'industry-and-international-relations':
+        'उद्योग और अंतरराष्ट्रीय संबंध डीन',
+      'planning-and-development': 'नियोजन और विकास डीन',
+      'research-and-consultancy': 'अनुसंधान और परामर्श डीन',
+      'student-welfare': 'छात्र कल्याण डीन',
+    },
+    responsibilities: 'जिम्मेदारियाँ',
+  },
+
   Departments: { title: 'विभाग' },
   Department: {
     headings: {
