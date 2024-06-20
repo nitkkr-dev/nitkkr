@@ -77,6 +77,18 @@ export interface Translations {
     totalCredits: string;
     syllabus: string;
   };
+  Dean: {
+    deanTitles: {
+      academic: string;
+      'estate-and-construction': string;
+      'faculty-welfare': string;
+      'industry-and-international-relations': string;
+      'planning-and-development': string;
+      'research-and-consultancy': string;
+      'student-welfare': string;
+    };
+    responsibilities: string;
+  };
   Departments: { title: string };
   Department: {
     headings: {
