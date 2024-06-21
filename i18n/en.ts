@@ -255,6 +255,63 @@ const text: Translations = {
     },
     sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
   },
+  TrainingAndPlacement: {
+    title: 'Training and Placement',
+    headings: {
+      ourrecruiters: 'Our Recruiters',
+      stats: 'Placement Statistics',
+      guidelines: 'Guidelines',
+      about: 'About us',
+      forrecruiters: 'For Recruiters',
+      faq: 'FAQ',
+    },
+    about: {
+      content: [
+        `NIT Kurukshetra is one of the premier technical institutes in the country. Founded in 1963 as Regional Engineering College Kurukshetra, the institute was rechristened as the National Institute of Technology Kurukshetra on June 26, 2002. The institute offers 4-year B. Tech degree courses in seven engineering streams, 2-year M. Tech degree courses in 22 areas of specialization of science & technology, and postgraduate courses leading to the degree in MBA and MCA. The infrastructure is geared to enable the institute to run out of technical personnel of high quality. In addition to providing knowledge in various disciplines of engineering and technology at the undergraduate and post-graduate levels, the institute is actively engaged in research activities in emerging areas including Nanotechnology, Ergonomics, Robotics, CAD/CAM, Energy and Environment. The placement record of the institute has been commendable and consistent due to strong vigour and commitment to generating talent.`,
+        `The Training and Placement (T&P)Cell is a nodal point of contact for companies seeking to establish a fruitful relationship with the institute. The cell is being headed by Prof. In-charge, and supported by Faculty In-charge, Placement Coordination Committee of Students (PCC) and the secretariat. The placement team works tirelessly to ensure that top notch opportunities are brought to the students & manages all interactions between the visiting companies and the institute. The cell provides all the possible assistance to the recruiters for Pre Placement Talks, Conducting Tests and Interviews with the company personnel. It also aims to fine-tune the students that they require not just for placements but also as they embark on their corporate carrier.`,
+      ],
+      tnpbrochure: `T&P brochure (2023-24)`,
+      tnpteam: `T&P Team (2023-24)`,
+      facilities: {
+        heading: `NIT Kurukshetra assures the best possible support and facilities to the recruiting companies.`,
+        content: [
+          'Auditorium and Lecture halls, fully equipped with the latest multimedia and Wi-Fi for Pre-Placement Talks (PPTs), workshops etc.',
+          'Facility of Tele Conferencing, Video Conferencing and online interviews.',
+          'Seminar and Conference rooms for Group discussions and Personal Interviews.',
+          'On-campus accommodation with moderate facilities in the Guest House for the recruiting panel.',
+          'Complete assistance by the student coordinators at each level of the placement process.',
+          'Highly motivated and experienced staff to synchronize the whole process.',
+          'Pickup services from nearest Airport, and Kurukshetra Railway Station. The services can also be availed from Delhi.',
+        ],
+      },
+    },
+    stats: {
+      content: [
+        `Academic Session 2022-23 `,
+        `Academic Session 2021-22`,
+        `Academic Session 2020-21 FN`,
+        `Academic-Session-2019-20 FN `,
+        `Academic Session 2018-19 FN`,
+        `Academic Session 2018_19`,
+        `Academic Session 2017_18`,
+        `Academic Session 2017-18 FN `,
+        `Academic Session 2016_17`,
+      ],
+    },
+    ourrecruiters: {
+      about: `Training and Placement Cell, NIT Kurukshetra conducts all recruitment-related activities of the institute. The placement team works tirelessly to ensure that top-notch opportunities are brought to the students & manages all interactions between the visiting companies and the institute. NIT Kurukshetra assures the best facilities and supports possible to the recruiting companies.`,
+    },
+    forrecruiters: {
+      build: `Build a relationship`,
+      invitaion: `Invitaion`,
+      reach: `Reach Us`,
+    },
+    guidelines: {
+      protocol: `Placement Protocol`,
+      tnpguidelines: `T&P Cell Guidelines`,
+      internguidlines: `UG Internship/Industrial Guidlines`,
+    },
+  },
 };
 
 export default text;
