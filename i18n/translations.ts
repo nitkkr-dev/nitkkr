@@ -347,4 +347,44 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
+  TrainingAndPlacement: {
+    title: string;
+    headings: {
+      ourrecruiters: string;
+      stats: string;
+      guidelines: string;
+      about: string;
+      faq: string;
+      forrecruiters: string;
+    };
+    about: {
+      content: string[];
+      tnpteam: string;
+      tnpbrochure: string;
+      facilities: {
+        heading: string;
+        content: string[];
+      };
+    };
+    stats: {
+      content: string[];
+    };
+    ourrecruiters: {
+      about: string;
+    };
+    forrecruiters: {
+      build: string;
+      invitaion: string;
+      reach: string;
+    };
+    guidelines: {
+      protocol: string;
+      tnpguidelines: string;
+      internguidlines: string;
+    };
+    faq: {
+      questions: string[];
+      answers: string[][];
+    };
+  };
 }
