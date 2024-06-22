@@ -210,7 +210,31 @@ export interface Translations {
     HealthCentre: {};
     Security: {};
     Sports: {};
-    Store: {};
+    Store: {
+      title: string;
+      about: string;
+      functions: string;
+      functionList: string[];
+      incharge: {
+        post: string;
+        telephone: string;
+        email: string;
+      };
+      tender: string;
+      archivedTenders: string;
+      purchaseRulesTitle: string;
+      purchaseRules: string[];
+      availableItems: string;
+      listItemsInStore: string;
+      listItemsPrice: string;
+      teqip: string;
+      teqipSub: string;
+      teqipList: string[];
+      forms: string;
+      procurement: string;
+      subForms: string;
+      urgencyCertificate: string;
+    };
   };
   Status: {
     NoResult: { title: string; description: string };
