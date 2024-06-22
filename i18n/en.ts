@@ -41,6 +41,21 @@ const text: Translations = {
       agenda: 'Agenda',
       minutes: 'Minutes',
     },
+    errors: {
+      required: 'is required',
+      invalid: 'invalid',
+    },
+    edit: {
+      url: 'url',
+      time: 'time',
+      add: 'Add',
+      edit: 'Edit',
+      submit: 'submit',
+      meeting: 'Meeting',
+      success: 'The meeting has been successfully added/edited',
+      error: 'An error occurred. Please try again later',
+      back: 'back',
+    },
   },
   Curricula: {
     pageTitle: 'CURRICULA',

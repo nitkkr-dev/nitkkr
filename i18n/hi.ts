@@ -37,6 +37,21 @@ const text: Translations = {
       agenda: 'कार्यसूची',
       minutes: 'विवरण',
     },
+    errors: {
+      required: 'आवश्यक है',
+      invalid: 'अमान्य',
+    },
+    edit: {
+      url: 'यूआरएल',
+      time: 'time',
+      add: 'जोड़ें',
+      edit: 'संपादित करें',
+      submit: 'प्रस्तुत',
+      success: 'बैठक सफलतापूर्वक जोड़ी गई/संपादित की गई है',
+      error: 'कोई त्रुटि हुई है। कृपया बाद में पुनः प्रयास करें',
+      meeting: 'बैठक',
+      back: 'वापस',
+    },
   },
   Curricula: {
     pageTitle: 'पाठ्यक्रम',
