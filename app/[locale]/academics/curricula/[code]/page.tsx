@@ -15,7 +15,7 @@ export default async function Curriculum({
 }: {
   params: { locale: string; code: string };
 }) {
-  const text = (await getTranslations(locale)).Curricula.Details;
+  const text = (await getTranslations(locale)).Curriculum;
   const courses = (await db.query.courses.findFirst({
     where: (course, { eq }) => eq(course.code, code),
     with: {
@@ -33,7 +33,6 @@ export default async function Curriculum({
     },
   }))!;
 
-  console.log(courses);
   return (
     <>
       <Heading
@@ -48,13 +47,16 @@ export default async function Curriculum({
         <section className="md:flex md:space-x-10">
           <section className="space-y-4 md:h-auto md:w-[60%]">
             <h5>
-              {text.courseCode} <b>{courses.code}</b>
+              {text.courseCode}: <strong>{courses.code}</strong>
             </h5>
             <section>
               <h5 className="mb-2">{text.prerequisites}</h5>
               <ol className="container flex list-disc flex-col space-y-4">
-                {courses.prerequisites.map((prerequisite, idx) => (
-                  <Link href={`/academics/curricula/${prerequisite}`} key={idx}>
+                {courses.prerequisites.map((prerequisite, index) => (
+                  <Link
+                    href={`/academics/curricula/${prerequisite}`}
+                    key={index}
+                  >
                     <li>
                       <p className="text-primary-100 underline">
                         {prerequisite}
@@ -71,12 +73,12 @@ export default async function Curriculum({
             </section>
 
             <h5>
-              {text.nature} <b>{courses.nature}</b>
+              {text.nature}: <strong>{courses.nature}</strong>
             </h5>
           </section>
 
           <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[640px]">
-            <h4 className="mb-6">{text.headOfDepartment}</h4>
+            <h4 className="mb-6">{text.coordinator}</h4>
             <section className="flex space-x-4">
               <Image
                 alt={courses.coordinator.person.name}
@@ -138,8 +140,8 @@ export default async function Curriculum({
             text={text.outcomes}
           />
           <ol className="container list-decimal space-y-4">
-            {courses.outcomes.map((outcome, idx) => (
-              <li key={idx}>
+            {courses.outcomes.map((outcome, index) => (
+              <li key={index}>
                 <p>{outcome}</p>
               </li>
             ))}
@@ -156,8 +158,8 @@ export default async function Curriculum({
           <div>
             <h4>{text.essentialReading}</h4>
             <ol className="container flex list-disc flex-col space-y-4">
-              {courses.essentialReading.map((book, idx) => (
-                <Link href={`/${book}`} key={idx}>
+              {courses.essentialReading.map((book, index) => (
+                <Link href={`/${book}`} key={index}>
                   <li>
                     <p className="text-primary-100 underline">{book}</p>
                   </li>
@@ -168,8 +170,8 @@ export default async function Curriculum({
           <div>
             <h4>{text.supplementaryReading}</h4>
             <ol className="container flex list-disc flex-col space-y-4">
-              {courses.supplementaryReading.map((book, idx) => (
-                <Link href={`/${book}`} key={idx}>
+              {courses.supplementaryReading.map((book, index) => (
+                <Link href={`/${book}`} key={index}>
                   <li>
                     <p className="text-primary-100 underline">{book}</p>
                   </li>
@@ -187,8 +189,8 @@ export default async function Curriculum({
             text={text.similarCourses}
           />
           <ol className="container flex list-disc flex-col space-y-4">
-            {courses.similarCourses.map((course, idx) => (
-              <Link href={`/academics/curricula/${course}`} key={idx}>
+            {courses.similarCourses.map((course, index) => (
+              <Link href={`/academics/curricula/${course}`} key={index}>
                 <li>
                   <p className="text-primary-100 underline">{course}</p>
                 </li>
