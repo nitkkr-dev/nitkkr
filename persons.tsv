@@ -1,0 +1,9 @@
+type	name	email	telephone	alternateTelephone	sex	dateOfBirth	roleId	isActive	createdOn
+faculty	Awadhesh Kumar Singh	aksingh@nitkkr.ac.in	01744-233481		M	1963-07-01	3		
+faculty	Jitender Kumar Chhabra	jitenderchhabra@nitkkr.ac.in	01744-233482		M	1972-01-13	3		
+student	Priyanshu Tripathi	priyanshu_12022005@nitkkr.ac.in	+919999999999	+919999999999	M	2003-03-26	2		
+student	Saket Raman	saket_12012097@nitkkr.ac.in	+919999999999	+919999999999	M	2002-02-17	2		
+faculty	Vikram Singh	viks@nitkkr.ac.in	01744-233530		M	1983-09-09	3		
+faculty	Hari Singh	hsinghfme@nitkkr.ac.in	01744-233530		M		3		
+staff	Kewal Singh	kewal	9896580115		M		4		
+staff	Anil Kumar	anil	9812063142		M		4		
