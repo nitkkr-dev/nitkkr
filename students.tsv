@@ -1,0 +1,3 @@
+rollNumber	personalEmail	fathersName	fathersTelephone	fathersEmail	mothersName	mothersTelephone	localGuardiansName	localGuardiansTelephone	pincode	permanentAddress	candidateCategory	applicationNumber	admissionCategory	admissionSubCategory	isPwd
+12022005	foo@bar.dev	foo	foo	foo@bar.dev	bar	bar			136119	NIT Kurukshetra, Kurukshetra, Haryana	GEN-EWS	1	DASA	CIWG	false
+12012097	foo@bar.dev	foo	foo	foo@bar.dev	bar	bar			136119	foobar	GEN-EWS	2	OPEN		

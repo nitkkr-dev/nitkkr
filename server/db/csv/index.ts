@@ -199,19 +199,25 @@ export async function populate() {
         academicData!,
         studentAcademicDetailsHeaders
       );
-      const majorId = await db.select({ id: schemas.majors.id }).from(schemas.majors).where(and(
-        eq(schemas.majors.name, academicDetails.major),
-        eq(
-          schemas.majors.degree,
-          academicDetails.degree as
-            | 'B. Tech.'
-            | 'M. Tech.'
-            | 'MCA'
-            | 'MBA'
-            | 'M. Sc.'
-            | 'Ph. D.'
+      const majorId = await db
+        .select({ id: schemas.majors.id })
+        .from(schemas.majors)
+        .where(
+          and(
+            eq(schemas.majors.name, academicDetails.major),
+            eq(
+              schemas.majors.degree,
+              academicDetails.degree as
+                | 'B. Tech.'
+                | 'M. Tech.'
+                | 'MCA'
+                | 'MBA'
+                | 'M. Sc.'
+                | 'Ph. D.'
+            )
+          )
         )
-      )).then(res => res[0]);
+        .then((res) => res[0]);
 
       await db.insert(schemas.studentAcademicDetails).values({
         id: studentId.id,
@@ -226,7 +232,11 @@ export async function populate() {
       j++;
     } else if (personData.type === 'faculty') {
       const facultyData = convertToData(facultyCsv[k], facultyHeaders);
-      const departmentId = await db.select({ id: schemas.departments.id }).from(schemas.departments).where(eq(schemas.departments.alias, facultyData.departmentAlias)).then(res => res[0]);
+      const departmentId = await db
+        .select({ id: schemas.departments.id })
+        .from(schemas.departments)
+        .where(eq(schemas.departments.alias, facultyData.departmentAlias))
+        .then((res) => res[0]);
       await db.insert(schemas.faculty).values({
         id: personData.id,
         employeeId: facultyData.employeeId,
@@ -257,11 +267,23 @@ export async function populate() {
     });
   }
 
-  for(let l=1;l<staffCsv.length;l++) {
+  for (let l = 1; l < staffCsv.length; l++) {
     const staffData = convertToData(staffCsv[l], staffHeaders);
-    const sectionId = await db.select({ id: schemas.sections.id }).from(schemas.sections).where(eq(schemas.sections.urlName, staffData.workingSectionUrl)).then(res => res[0]);
-    const departmentId = await db.select({ id: schemas.departments.id }).from(schemas.departments).where(eq(schemas.departments.alias, staffData.workingDepartmentAlias)).then(res => res[0]);
-    const personData = await db.select({ id: schemas.persons.id }).from(schemas.persons).where(eq(schemas.persons.name, staffData.name)).then(res => res[0]);
+    const sectionId = await db
+      .select({ id: schemas.sections.id })
+      .from(schemas.sections)
+      .where(eq(schemas.sections.urlName, staffData.workingSectionUrl))
+      .then((res) => res[0]);
+    const departmentId = await db
+      .select({ id: schemas.departments.id })
+      .from(schemas.departments)
+      .where(eq(schemas.departments.alias, staffData.workingDepartmentAlias))
+      .then((res) => res[0]);
+    const personData = await db
+      .select({ id: schemas.persons.id })
+      .from(schemas.persons)
+      .where(eq(schemas.persons.name, staffData.name))
+      .then((res) => res[0]);
     await db.insert(schemas.staff).values({
       id: personData.id,
       employeeId: staffData.employeeId,
@@ -270,7 +292,6 @@ export async function populate() {
       workingDepartmentId: departmentId.id,
     });
   }
-
 
   for (let i = 1; i < departmentHeadsCsv.length; i++) {
     const data = convertToData(departmentHeadsCsv[i], departmentHeadsHeaders);
@@ -290,7 +311,6 @@ export async function populate() {
       isActive: data.isActive === 'true',
     });
   }
-
 
   for (let i = 1; i < coursesCsv.length; i++) {
     const data = convertToData(coursesCsv[i], coursesHeaders);
@@ -495,7 +515,9 @@ export async function populate() {
       facultyId: facultyId.id,
       activityLogs: data.activityLogs.split(','),
       associateFacultyId: associateFacultyId ? associateFacultyId.id : null,
-      staffIds: data.staffIds ? data.staffIds.split(',') as unknown as number[] : [],
+      staffIds: data.staffIds
+        ? (data.staffIds.split(',') as unknown as number[])
+        : [],
     });
   }
 
@@ -598,7 +620,6 @@ export async function populate() {
       });
     }
   }
-
 
   for (let i = 1; i < clubMembersCsv.length; i++) {
     const data = convertToData(clubMembersCsv[i], clubMembersHeaders);
