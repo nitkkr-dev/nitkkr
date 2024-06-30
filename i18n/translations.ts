@@ -231,4 +231,55 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
+  TrainingAndPlacement: {
+    title: string;
+    headings: {
+      ourrecruiters: string;
+      stats: string;
+      guidelines: string;
+      about: string;
+      faq: string;
+      forrecruiters: string;
+    };
+    about: {
+      line1: string;
+      line2: string;
+      tnpteam: string;
+      tnpbrochure: string;
+      facilities: {
+        heading: string;
+        point1: string;
+        point2: string;
+        point3: string;
+        point4: string;
+        point5: string;
+        point6: string;
+        point7: string;
+      };
+    };
+    stats: {
+      line1: string;
+      line2: string;
+      line3: string;
+      line4: string;
+      line5: string;
+      line6: string;
+      line7: string;
+      line8: string;
+      line9: string;
+    };
+    ourrecruiters: {
+      about: string;
+    };
+    forrecruiters: {
+      build: string;
+      invitaion: string;
+      reach: string;
+    };
+    guidelines: {
+      protocol: string;
+      tnpguidelines: string;
+      internguidlines: string;
+    };
+  };
 }
