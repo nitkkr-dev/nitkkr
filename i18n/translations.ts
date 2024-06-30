@@ -1,6 +1,12 @@
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
+export interface HostelDetails {
+  name: string;
+  overview: string[];
+  staffOverview: string[];
+  facilities: string[];
+}
 
 export interface Translations {
   Main: {
@@ -89,6 +95,38 @@ export interface Translations {
     search: string;
     login: string;
     profile: { alt: string; view: string };
+  };
+  Hostels: {
+    title: string;
+    notificationsTitle: string;
+    notifications: string[];
+    rulesTitle: string;
+    hostelDetails: {
+      name: string;
+      overview: string;
+      staffOverview: string;
+      facilities: string;
+      contact: string;
+      email: string;
+    };
+
+    hostels: {
+      boys: Record<
+        | 'h1'
+        | 'h2'
+        | 'h3'
+        | 'h4'
+        | 'h5'
+        | 'h6'
+        | 'h7'
+        | 'h8'
+        | 'h9'
+        | 'h10'
+        | 'h11',
+        HostelDetails
+      >;
+      girls: Record<'bhagirathi' | 'cauvery' | 'kalpanaChawla', HostelDetails>;
+    };
   };
   Login: {
     title: string;

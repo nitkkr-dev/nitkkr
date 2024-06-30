@@ -102,6 +102,291 @@ const text: Translations = {
     login: 'Login',
     profile: { alt: 'Profile image', view: 'View Profile' },
   },
+  Hostels: {
+    title: 'Hostels',
+    notificationsTitle: 'Hostel Notifications',
+    notifications: [
+      'letter no. 227 – Installation and maintenance of antiragging complaint boxes in 1st year hostels',
+      'letter no. 232 – Anti ragging compliance',
+      'letter no. 232 – Anti ragging compliance',
+      'letter no. 233- Anti ragging posters',
+      'letter no. 238 – Student Council For Guidance of 1st Year Students',
+      'Letter no. 241- Prevetion of Ragging in Campus- regarding (1)',
+      'letter no. 226 – Regarding Orientation program of B.Tech. 1st Year',
+      'letter no. 249 – cheking of Anti-Ragging Boxes in 1st year hostels',
+      'letter no. 249 – cheking of Anti-Ragging Boxes in 1st year hostels',
+      'letter no. 250 – Advisory to Senior Students regarding interaction with 1st year students (1)',
+      'letter no. 254 – Regarding Interaction of Faculty members with 1st year students in Hostels',
+      'letter no. 251 – Punishment details against students if found involved in ragging',
+      'Advisory on conjuctivities (Eye Flu) prevention',
+      'National Institute of Technology Kurukshetra invites bids for milk and milk items',
+      'National Institute of Technology Kurukshetra invites bids for Atta',
+      'National Institute of Technology Kurukshetra invites bids for Quotations for Ration items',
+      'Hostel allotment and hostel mess and other charges for B.Tech courses',
+      'National Institute of Technology Kurukshetra invites bids for Electrical items',
+      'Regarding mess & elec. advance',
+      'Pharmacist engaged to provide medical facilities during night hours',
+      'notification for disciplinary action',
+      'Advisory to Students Regarding Public Display of Affection',
+      'Notification for Entry Timings in the Instititute',
+      'Immediate measures to enhance cyber security and action points to be followed in the institute',
+      'Penalty in delay of hostel dues payments',
+      'millet based food item canteen in hostel premises',
+      '21-01-2023 Notification regarding applicability of hostel seat rent to students',
+      'Notification 2022-23: Notifications regarding dues list defaulters',
+    ],
+    rulesTitle: 'Hostel Rules & Conducts',
+    hostelDetails: {
+      name: 'Hostel Name: ',
+      overview: 'Hostel Overview',
+      staffOverview: 'Hostel Staff Overview',
+      facilities: 'Hostel Facilities Overview',
+      contact: 'Contact us: ',
+      email: 'Email: ',
+    },
+
+    hostels: {
+      boys: {
+        h1: {
+          name: 'Abhimanyu Bhawan (H-1)',
+          overview: [
+            'Abhimanyu Bhawan has capacity of 228 students. Total 76 rooms are available for occupancy (all the rooms are triple seated). Abhimanyu Bhawan is a triple-storey building, in which two blocks have been made, which are divided into (A & B) block respectively.',
+            'Each room is provided with 3 LAN connections for accessing the internet.',
+            'Abhimanyu Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Abhimanyu Bhawan has 30 CCTV cameras for hostel security.',
+            'Abhimanyu Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, T.T. Table, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h2: {
+          name: 'Bhishma Bhawan (H-2)',
+          overview: [
+            'Bhishma Bhawan has a capacity of 246 students. Total 82 rooms are available for occupancy (82 rooms are triple seated and 3 rooms are single seated). Bhishma Bhawan is a triple-storey building, in which two blocks have been made, which are divided into (A & B) block respectively.',
+            'Each room is provided with 3 LAN connections for accessing the internet.',
+            'Bhishma Bhawan has a dining hall, common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate in three shifts & a night watchman are provided for security of the hostel.',
+            'Bhishma Bhawan has 30 CCTV cameras for hostel security.',
+            'Bhishma Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 gardeners are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big 49” LED TV, Newspaper, T.T. Table, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, two badminton courts are prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, 5 concrete benches have been provided for students.',
+          ],
+        },
+        h3: {
+          name: 'Chakradhar Bhawan (H-3)',
+          overview: [
+            'Chakradhar Bhawan has a capacity of 248 students. Total 84 rooms are available for occupancy (82 rooms are triple seated and 2 rooms are single seated). Chakradhar Bhawan is a triple-storey building, in which two blocks have been made, which are divided into (A & B) block respectively.',
+            'Each room is provided with 3 LAN connections for accessing the internet.',
+            'Chakradhar Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate in three shifts & a night watchman are provided for security of the hostel.',
+            'Chakradhar Bhawan has 29 CCTV cameras for hostel security.',
+            'Chakradhar Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 gardeners are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big 43” LED TV, Newspaper, T.T. Table, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, two badminton courts (1 cemented) are prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, 5 concrete benches have been provided for students.',
+          ],
+        },
+        h4: {
+          name: 'Dronacharya Bhawan (H-4)',
+          overview: [
+            'Dronacharya Bhawan has a capacity to accommodate 240 students. A total of 240 rooms are available for occupancy and all the rooms are single seated. Dronacharya Bhawan has a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Dronacharya Bhawan has one big dining hall, one common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchmen are provided for security of the hostel.',
+            'Dronacharya Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 gardeners are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, and Chess Board.',
+            'In hostel premises, one badminton court is available for facilitating outdoor games to students. A volleyball court is also available in the Hostel.',
+          ],
+        },
+        h5: {
+          name: 'Eklavya Bhawan (H-5)',
+          overview: [
+            'Eklavya Bhawan has a capacity to accommodate 240 students. A total of 240 rooms are available for occupancy and all the rooms are single seated. Eklavya Bhawan has a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Eklavya Bhawan has one big dining hall, one common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchmen are provided for security of the hostel.',
+            'Eklavya Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 gardeners are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, T.T. Table, Carom Board, and Chess Board.',
+            'In hostel premises, one concrete badminton court is prepared for facilitating outdoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h6: {
+          name: 'Fanibhushan Bhawan (H-6)',
+          overview: [
+            'Fanibhushan Bhawan has a capacity of 162 students. A total of 162 rooms are available for occupancy (all the rooms are single seated). Fanibhushan Bhawan is a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Fanibhushan Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 1 gardener is available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, T.T. Table, Carom Board, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+            'Air conditioner facility in dining hall, electric geyser, fire extinguisher, water cooler, and CCTV facilities are provided for students.',
+          ],
+        },
+        h7: {
+          name: 'Gurunanak Bhawan (H-7)',
+          overview: [
+            'Gurunanak Bhawan has a capacity of 288 students. Total 144 rooms are available for occupancy (all the rooms are double seated). Gurunanak Bhawan is a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Each room is provided with 2 LAN connections for accessing the internet.',
+            'Gurunanak Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Gurunanak Bhawan has 30 CCTV cameras for hostel security.',
+            'Gurunanak Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h8: {
+          name: 'Harish Chandra Bhawan (H-8)',
+          overview: [
+            'Harish Chandra Bhawan has a capacity of 160 students. A total of 80 rooms are available for occupancy (all the rooms are double seated). Harish Chandra Bhawan is a double-storey building, in which two blocks have been made, which are divided into (A & B) block respectively.',
+            'Each room is provided with 2 LAN connections for accessing the internet.',
+            'Harish Chandra Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Harish Chandra Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h9: {
+          name: 'Ishwar Bhawan (H-9)',
+          overview: [
+            'Ishwar Bhawan has a capacity of 320 students. A total of 160 rooms are available for occupancy (all the rooms are double seated). Ishwar Bhawan is a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Each room is provided with 2 LAN connections for accessing the internet.',
+            'Ishwar Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Ishwar Bhawan has 30 CCTV cameras for hostel security.',
+            'Ishwar Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h10: {
+          name: 'Jainendra Bhawan (H-10)',
+          overview: [
+            'Jainendra Bhawan has a capacity of 224 students. Total 112 rooms are available for occupancy (all the rooms are double seated). Jainendra Bhawan is a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Each room is provided with 2 LAN connections for accessing the internet.',
+            'Jainendra Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Jainendra Bhawan has 30 CCTV cameras for hostel security.',
+            'Jainendra Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+        h11: {
+          name: 'Krishna Bhawan (H-11)',
+          overview: [
+            'Krishna Bhawan has a capacity of 252 students. A total of 126 rooms are available for occupancy (all the rooms are double seated). Krishna Bhawan is a three-storey building, in which three blocks have been made, which are divided into (A, B & C) block respectively.',
+            'Each room is provided with 2 LAN connections for accessing the internet.',
+            'Krishna Bhawan has a dining hall, 1 common room, and is well surrounded by beautiful green lawns.',
+          ],
+          staffOverview: [
+            'For managing, Hostel Supervisor & Assistant Hostel Supervisor are available in the Hostel from 09:00 AM to 10:00 PM. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Krishna Bhawan has 30 CCTV cameras for hostel security.',
+            'Krishna Bhawan has mess staff & MTW staff, who are available for providing meal facilities to students on regular mess timings. Additionally, one sweeper is placed in each block for regular cleaning of corridors & washrooms, and 2 malis are available for maintaining the hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students with big LED TV, Newspaper, Magazine, Carom Board, Wi-Fi connection, and Chess Board.',
+            'In hostel premises, one badminton court is prepared for facilitating indoor games to students. A volleyball ground is also available in the Hostel.',
+            'In the hostel lawns, concrete benches have been provided for students.',
+          ],
+        },
+      },
+      girls: {
+        bhagirathi: {
+          name: 'Bhagirathi Bhawan',
+          overview: [
+            'Bhagirathi Bhawan has capacity of 198 students. Total 198 rooms are available for occupancy (all the rooms are single seated). Bhagirathi Bhawan is three-storey building, in which threeblocks have been made, which are divided into (A, B & C) block respectively.',
+            'Bhagirathi Bhawan has big dining hall, 1 common room,3 guest rooms, 2 store, 2 kitchen, 2 office 2 I Net center,1 night attendant room, 4 inside beautiful green loan & also surrounded by beautiful green lawns',
+          ],
+          staffOverview: [
+            'For managing Hostel, Supervisor is available in the Hostel from 09.00 AM to 5.00 PM and day attendant & night attendant are also doing punctual duty. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Bhagirathi Bhawan has 3 scale sweepers & 3 MTW sweepers, in which 4 sweepers are placed in blocks, one in each block for regular cleaning of corridors & Washrooms and 2 for outside, also 1 Mali is available for maintaining hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students in which Colour TV and speaker is available for students.',
+            'In the hostel 01 parking shed is available where students can park their bicycle.',
+          ],
+        },
+        cauvery: {
+          name: 'Bhagirathi Bhawan',
+          overview: [
+            'Bhagirathi Bhawan has capacity of 198 students. Total 198 rooms are available for occupancy (all the rooms are single seated). Bhagirathi Bhawan is three-storey building, in which threeblocks have been made, which are divided into (A, B & C) block respectively.',
+            'Bhagirathi Bhawan has big dining hall, 1 common room,3 guest rooms, 2 store, 2 kitchen, 2 office 2 I Net center,1 night attendant room, 4 inside beautiful green loan & also surrounded by beautiful green lawns',
+          ],
+          staffOverview: [
+            'For managing Hostel, Supervisor is available in the Hostel from 09.00 AM to 5.00 PM and day attendant & night attendant are also doing punctual duty. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Bhagirathi Bhawan has 3 scale sweepers & 3 MTW sweepers, in which 4 sweepers are placed in blocks, one in each block for regular cleaning of corridors & Washrooms and 2 for outside, also 1 Mali is available for maintaining hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students in which Colour TV and speaker is available for students.',
+            'In the hostel 01 parking shed is available where students can park their bicycle.',
+          ],
+        },
+        kalpanaChawla: {
+          name: 'Bhagirathi Bhawan',
+          overview: [
+            'Bhagirathi Bhawan has capacity of 198 students. Total 198 rooms are available for occupancy (all the rooms are single seated). Bhagirathi Bhawan is three-storey building, in which threeblocks have been made, which are divided into (A, B & C) block respectively.',
+            'Bhagirathi Bhawan has big dining hall, 1 common room,3 guest rooms, 2 store, 2 kitchen, 2 office 2 I Net center,1 night attendant room, 4 inside beautiful green loan & also surrounded by beautiful green lawns',
+          ],
+          staffOverview: [
+            'For managing Hostel, Supervisor is available in the Hostel from 09.00 AM to 5.00 PM and day attendant & night attendant are also doing punctual duty. Security guards at the hostel gate & night watchman are provided for security of the hostel.',
+            'Bhagirathi Bhawan has 3 scale sweepers & 3 MTW sweepers, in which 4 sweepers are placed in blocks, one in each block for regular cleaning of corridors & Washrooms and 2 for outside, also 1 Mali is available for maintaining hostel lawn.',
+          ],
+          facilities: [
+            'Common room available for students in which Colour TV and speaker is available for students.',
+            'In the hostel 01 parking shed is available where students can park their bicycle.',
+          ],
+        },
+      },
+    },
+  },
   Login: {
     title: 'Sign In',
     enterEmail: 'Enter your email',

@@ -73,3 +73,6 @@ export function Dialog({
     </Root>
   );
 }
+40, 41;
+91, 93;
+123, 125;
