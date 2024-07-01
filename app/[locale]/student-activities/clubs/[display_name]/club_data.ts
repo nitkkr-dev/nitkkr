@@ -422,12 +422,12 @@ const spicmacay: Club = {
   facultyInCharge1: {
     name: 'Prof. Mahesh Aeidapu',
     contact: '',
-    id: 0,
+    id: 3,
   },
   facultyInCharge2: {
     name: 'Prof. Karan Sharma',
     contact: '',
-    id: 0,
+    id: 4,
   },
 };
 
