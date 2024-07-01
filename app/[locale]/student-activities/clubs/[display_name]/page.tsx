@@ -30,44 +30,48 @@ export default async function Club({
   const data = club_data[display_name];
 
   let profs = null;
-  if (data?.facultyInCharge1 && data?.facultyInCharge2) {
+  if (data?.facultyInCharge1?.id && data?.facultyInCharge2?.id) {
     profs = await db.query.faculty.findMany({
       where: or(
-        eq(faculty.id, data.facultyInCharge1?.id ?? 0),
-        eq(faculty.id, data.facultyInCharge2?.id ?? 0)
+        eq(faculty.id, data.facultyInCharge1?.id),
+        eq(faculty.id, data.facultyInCharge2?.id)
       ),
       with: {
         person: true,
       },
     });
   }
+
   if (!data) {
     return <CustomStatus locale={locale} type={'NoResult'} />;
   }
+
   return (
     <main className="container">
       <Heading glyphDirection={'dual'} heading={'h1'} text={data.name} />
-      <figure className="w-full rounded-lg bg-neutral-50 p-4 shadow-lg">
-        <div className="float-left mb-4 mr-4">
-          <Image
-            src={
-              data.images?.[0] ??
-              'https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg'
-            }
-            width={550}
-            height={550}
-            objectFit="cover"
-            alt="Institute Administration"
-            className="rounded-lg shadow-lg"
+      <figure className="flex flex-col bg-neutral-50 md:flex-row">
+        <Image
+          src={
+            data.images?.[0] ??
+            'https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg'
+          }
+          alt="img"
+          width={0}
+          height={0}
+          className="w-full rounded-md object-cover md:w-1/2"
+        />
+        <section className="w-full p-5 md:w-1/2">
+          <Heading
+            glyphDirection={'ltr'}
+            heading={'h3'}
+            text="About Us"
+            className="m-0 p-0"
           />
-        </div>
-        <section>
-          <Heading glyphDirection={'ltr'} heading={'h1'} text="About Us" />
           <p className="text-gray-700 text-lg">{data.aboutUs}</p>
         </section>
-        <div className="clearfix"></div>
       </figure>
-      {profs != null && (
+
+      {profs != null && profs.length > 0 && (
         <>
           <Heading
             glyphDirection={'rtl'}
@@ -87,55 +91,58 @@ export default async function Club({
                   height={100}
                   className="absolute -left-10 -top-10 aspect-square rounded-full"
                 />
+
                 <section className="mt-4 space-y-4">
                   <h1>{prof.person.name}</h1>
-                  <div className="flex items-center space-x-2">
-                    <MdOutlineEmail className="h-6 w-6 text-primary-700" />
-                    <p className="text-base text-neutral-700">
-                      {prof.person?.email}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <MdPhone className="h-6 w-6 text-primary-700" />
-                    <p className="text-base text-neutral-700">
-                      {prof.person?.telephone}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <MdPinDrop className="h-6 w-6 text-primary-700" />
-                    <p className="text-base text-neutral-700">NIT Campus</p>
-                  </div>
+                  <ul>
+                    {[
+                      { icon: MdOutlineEmail, info: prof.person?.email },
+                      { icon: MdPhone, info: prof.person?.telephone },
+                      { icon: MdPinDrop, info: 'NIT Campus' },
+                    ].map((item, index) => (
+                      <li key={index} className="flex items-center space-x-2">
+                        <item.icon className="h-6 w-6 text-primary-700" />
+                        <p className="text-base text-neutral-700">
+                          {item.info}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
                 </section>
               </Card>
             ))}
           </section>
         </>
       )}
-      <Heading glyphDirection={'ltr'} heading={'h1'} text={'RSVP'} />
-      <section>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Phone no.</TableHead>
-              {data.RSVP && data.RSVP?.length > 2 && (
-                <TableHead>Email</TableHead>
-              )}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.RSVP?.map((secy, i) => (
-              <TableRow key={i}>
-                <TableCell>{secy.name}</TableCell>
-                <TableCell>{secy.contact}</TableCell>
-                {data.RSVP && data.RSVP?.length > 2 && (
-                  <TableCell>{secy.email}</TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </section>
+      {(data.RSVP ?? []).length > 0 && (
+        <>
+          <Heading glyphDirection={'ltr'} heading={'h3'} text={'RSVP'} />
+          <section>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Phone no.</TableHead>
+                  {data.RSVP && data.RSVP?.length > 2 && (
+                    <TableHead>Email</TableHead>
+                  )}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {data.RSVP?.map((secy, i) => (
+                  <TableRow key={i}>
+                    <TableCell>{secy.name}</TableCell>
+                    <TableCell>{secy.contact}</TableCell>
+                    {data.RSVP && data.RSVP?.length > 2 && (
+                      <TableCell>{secy.email}</TableCell>
+                    )}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </section>
+        </>
+      )}
       {data.images != null && data.images?.length > 0 && (
         <article className="container" id="gallery">
           <Heading glyphDirection="rtl" heading="h3" text={'Gallery'} />
