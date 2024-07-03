@@ -3,6 +3,13 @@ import Link from 'next/link';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { courses, db } from '~/server/db';
 
@@ -35,49 +42,55 @@ export default async function Curriculum({
 
   return (
     <>
-      <Heading
-        className="container"
-        glyphDirection="dual"
-        heading="h1"
-        id="heading"
-        text={courses.title}
+      <ImageHeader
+        title={`${courses.code}\n${courses.title}`} // to break course code and title into two different lines
+        src={`courses/${courses.code}/image.png`}
+        className="whitespace-pre-line bg-neutral-300"
       />
 
-      <main className="container">
+      <main className="container mt-10">
         <section className="md:flex md:space-x-10">
-          <section className="space-y-4 md:h-auto md:w-[60%]">
-            <h5>
-              {text.courseCode}: <strong>{courses.code}</strong>
-            </h5>
+          <section className="my-auto space-y-4 md:h-auto md:w-[60%]">
             <section>
-              <h5 className="mb-2">{text.prerequisites}</h5>
-              <ol className="container flex list-disc flex-col space-y-4">
+              <h5 className="mb-2 flex space-x-3 align-baseline">
+                {text.prerequisites}:
                 {courses.prerequisites.map((prerequisite, index) => (
                   <Link
                     href={`/academics/curricula/${prerequisite}`}
                     key={index}
+                    className="ml-2"
                   >
-                    <li>
-                      <p className="text-primary-100 underline">
-                        {prerequisite}
-                      </p>
-                    </li>
+                    <p className="text-primary-300 underline">{prerequisite}</p>
                   </Link>
                 ))}
-              </ol>
+              </h5>
             </section>
 
-            <section className="space-y-4">
-              <h5>{text.objectives}</h5>
+            <section className="flex space-x-2 align-baseline">
+              <h5>{text.objectives}:</h5>
               <p>{courses.objectives}</p>
             </section>
 
             <h5>
               {text.nature}: <strong>{courses.nature}</strong>
             </h5>
+            <section>
+              <h5 className="mb-2 flex space-x-3 align-baseline">
+                {text.similarCourses}:
+                {courses.similarCourses.map((course, index) => (
+                  <Link
+                    href={`/academics/curricula/${course}`}
+                    key={index}
+                    className="ml-2"
+                  >
+                    <p className="text-primary-300 underline">{course}</p>
+                  </Link>
+                ))}
+              </h5>
+            </section>
           </section>
 
-          <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[640px]">
+          <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[540px]">
             <h4 className="mb-6">{text.coordinator}</h4>
             <section className="flex space-x-4">
               <Image
@@ -89,11 +102,7 @@ export default async function Curriculum({
               />
               <div>
                 <h5 className="mb-1">{courses.coordinator.person.name}</h5>
-                <p>{courses.coordinator.designation}</p>
-                <p>
-                  <MdPhone className="mr-2 inline-block fill-primary-500" />
-                  {courses.coordinator.person.telephone}
-                </p>
+                <p className="font-medium">{courses.coordinator.designation}</p>
                 <p>
                   <a
                     className="text-primary-500 underline"
@@ -103,6 +112,10 @@ export default async function Curriculum({
 
                     {courses.coordinator.person.email}
                   </a>
+                </p>
+                <p>
+                  <MdPhone className="mr-2 inline-block fill-primary-500" />
+                  {courses.coordinator.person.telephone}
                 </p>
               </div>
             </section>
@@ -117,18 +130,22 @@ export default async function Curriculum({
             text={text.content}
           />
           <section>
-            {courses.content.map((section, index) => (
-              <div key={index} className="mb-8">
-                <h4 className="mb-4">{section.topic}</h4>
-                <ol className="list-decimal space-y-2 pl-5">
-                  {section.subtopics.map((subtopic, subIndex) => (
-                    <li key={subIndex}>
-                      <p>{subtopic}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
+            <Accordion type="single" collapsible>
+              {courses.content.map((section, index) => (
+                <AccordionItem key={index} value={section.topic}>
+                  <AccordionTrigger>{section.topic}</AccordionTrigger>
+                  <AccordionContent>
+                    <ol className="list-decimal space-y-2 pl-5">
+                      {section.subtopics.map((subtopic, subIndex) => (
+                        <li key={subIndex}>
+                          <p>{subtopic}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </section>
         </article>
 
@@ -139,16 +156,16 @@ export default async function Curriculum({
             id="heading"
             text={text.outcomes}
           />
-          <ol className="container list-decimal space-y-4">
+          <ol className="list-decimal space-y-4 font-serif text-primary-500">
             {courses.outcomes.map((outcome, index) => (
               <li key={index}>
-                <p>{outcome}</p>
+                <h5>{outcome}</h5>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className="space-y-4">
+        <section className="space-y-10">
           <Heading
             glyphDirection="rtl"
             heading="h2"
@@ -156,47 +173,33 @@ export default async function Curriculum({
             text={text.referenceBooks}
           />
           <div>
-            <h4>{text.essentialReading}</h4>
-            <ol className="container flex list-disc flex-col space-y-4">
+            <h5 className="mb-4">{text.essentialReading}</h5>
+            <ol className="flex list-disc flex-col space-y-5">
               {courses.essentialReading.map((book, index) => (
                 <Link href={`/${book}`} key={index}>
                   <li>
-                    <p className="text-primary-100 underline">{book}</p>
+                    <p className="font-medium text-primary-300 underline">
+                      {book}
+                    </p>
                   </li>
                 </Link>
               ))}
             </ol>
           </div>
-          <div>
-            <h4>{text.supplementaryReading}</h4>
-            <ol className="container flex list-disc flex-col space-y-4">
+          <div className="rounded-xl border border-primary-500 bg-neutral-50 p-6">
+            <h5 className="mb-4">{text.supplementaryReading}</h5>
+            <ol className="flex list-disc flex-col space-y-4">
               {courses.supplementaryReading.map((book, index) => (
                 <Link href={`/${book}`} key={index}>
                   <li>
-                    <p className="text-primary-100 underline">{book}</p>
+                    <p className="font-medium text-primary-300 underline">
+                      {book}
+                    </p>
                   </li>
                 </Link>
               ))}
             </ol>
           </div>
-        </section>
-
-        <section>
-          <Heading
-            glyphDirection="rtl"
-            heading="h2"
-            id="heading"
-            text={text.similarCourses}
-          />
-          <ol className="container flex list-disc flex-col space-y-4">
-            {courses.similarCourses.map((course, index) => (
-              <Link href={`/academics/curricula/${course}`} key={index}>
-                <li>
-                  <p className="text-primary-100 underline">{course}</p>
-                </li>
-              </Link>
-            ))}
-          </ol>
         </section>
       </main>
     </>
