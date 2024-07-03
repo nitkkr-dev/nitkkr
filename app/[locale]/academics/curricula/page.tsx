@@ -88,6 +88,8 @@ const Courses = async ({ page }: { page: number }) => {
     offset: (page - 1) * 10,
   });
 
+  console.log(courses);
+
   return courses.map(({ code, coursesToMajors, title }) =>
     coursesToMajors.map(
       ({ lectureCredits, practicalCredits, tutorialCredits, major }, index) => (
