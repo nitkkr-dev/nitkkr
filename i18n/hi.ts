@@ -122,7 +122,10 @@ const text: Translations = {
     courseCode: 'कोर्स कोड',
     title: 'कोर्स विवरण',
     coordinator: 'समन्वयक',
-    prerequisites: 'आवश्यक शर्तें',
+    prerequisites: {
+      title: 'आवश्यकताएँ',
+      none: 'इस कोर्स के लिए कोई आवश्यकता नहीं',
+    },
     nature: 'कोर्स प्रकृति',
     objectives: 'उद्देश्य',
     content: 'सामग्री',
