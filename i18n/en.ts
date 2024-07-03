@@ -79,7 +79,10 @@ const text: Translations = {
     courseCode: 'Course Code',
     title: 'Course Details',
     coordinator: 'Course Coordinator',
-    prerequisites: 'Prerequisites',
+    prerequisites: {
+      title: 'Prerequisites',
+      none: 'No prerequisites for this course',
+    },
     nature: 'Course Nature',
     objectives: 'Objectives',
     content: 'Content',

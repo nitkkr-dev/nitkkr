@@ -52,7 +52,10 @@ export interface Translations {
     courseCode: string;
     title: string;
     coordinator: string;
-    prerequisites: string;
+    prerequisites: {
+      title: string;
+      none: string;
+    };
     nature: string;
     objectives: string;
     content: string;
