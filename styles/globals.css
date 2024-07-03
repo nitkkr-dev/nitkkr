@@ -41,6 +41,7 @@
   h5 {
     @apply font-serif;
     @apply text-base sm:text-lg md:text-xl;
+    @apply text-primary-700;
   }
 
   h6 {

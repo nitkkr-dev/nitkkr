@@ -206,7 +206,7 @@ const DefaultView = async ({ locale }: { locale: string }) => {
         {[mostSearched, studentLinks, facultyLinks].map(
           ({ title, links }, index) => (
             <nav key={index}>
-              <h5 className="mb-2 text-primary-700 lg:mb-3 xl:mb-4">{title}</h5>
+              <h5 className="mb-2 lg:mb-3 xl:mb-4">{title}</h5>
               <ol>
                 {links.map(({ title, href, category }, index) => (
                   <li className="mb-2" key={index}>

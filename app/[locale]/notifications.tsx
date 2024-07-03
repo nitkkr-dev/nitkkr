@@ -127,7 +127,7 @@ const NotificationsList = async ({
   return Array.from(groupBy(notifications, 'createdAt')).map(
     ([createdAt, notifications], index) => (
       <li key={index}>
-        <h5 className="text-primary-700">{createdAt as string}</h5>
+        <h5>{createdAt as string}</h5>
         <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
           {notifications.map(({ id, title }, index) => (
             <li key={index}>
