@@ -1,8 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { courses, db } from '~/server/db';
 
@@ -16,7 +24,7 @@ export default async function Curriculum({
   params: { locale: string; code: string };
 }) {
   const text = (await getTranslations(locale)).Curriculum;
-  const courses = (await db.query.courses.findFirst({
+  const course = await db.query.courses.findFirst({
     where: (course, { eq }) => eq(course.code, code),
     with: {
       coordinator: {
@@ -31,85 +39,93 @@ export default async function Curriculum({
         },
       },
     },
-  }))!;
+  });
+  if (!course) notFound();
 
   return (
     <>
-      <Heading
-        className="container"
-        glyphDirection="dual"
-        heading="h1"
-        id="heading"
-        text={courses.title}
+      <ImageHeader
+        title={`${course.code}\n${course.title}`} // to break course code and title into two different lines
+        src={`slideshow/image01.jpg`} //fixme: add specific images for course
+        className="whitespace-pre-line bg-neutral-300"
       />
 
-      <main className="container">
-        <section className="md:flex md:space-x-10">
-          <section className="space-y-4 md:h-auto md:w-[60%]">
-            <h5>
-              {text.courseCode}: <strong>{courses.code}</strong>
-            </h5>
-            <section>
-              <h5 className="mb-2">{text.prerequisites}</h5>
-              <ol className="container flex list-disc flex-col space-y-4">
-                {courses.prerequisites.map((prerequisite, index) => (
+      <main className="container mt-10">
+        <section className="md:flex">
+          <section className="container my-auto space-y-3 md:w-[60%]">
+            <h5 className="my-auto flex text-center">
+              {text.prerequisites.title}:
+              {course.prerequisites.length > 0 ? (
+                course.prerequisites.map((prerequisite, index) => (
                   <Link
                     href={`/academics/curricula/${prerequisite}`}
                     key={index}
+                    className="ml-2"
                   >
-                    <li>
-                      <p className="text-primary-100 underline">
-                        {prerequisite}
-                      </p>
-                    </li>
+                    <p>{prerequisite}</p>
                   </Link>
-                ))}
-              </ol>
-            </section>
-
-            <section className="space-y-4">
-              <h5>{text.objectives}</h5>
-              <p>{courses.objectives}</p>
-            </section>
+                ))
+              ) : (
+                <p className="my-auto ml-2">{text.prerequisites.none}</p>
+              )}
+            </h5>
 
             <h5>
-              {text.nature}: <strong>{courses.nature}</strong>
+              {text.nature}: <strong>{course.nature}</strong>
+            </h5>
+
+            <h5>{text.objectives}:</h5>
+            {course.objectives.map((objective, index) => (
+              <li key={index}>{objective}</li>
+            ))}
+
+            <h5 className="mb-2 flex">
+              {text.similarCourses}:
+              {course.similarCourses.map((course, index) => (
+                <Link
+                  href={`/academics/curricula/${course}`}
+                  key={index}
+                  className="ml-2"
+                >
+                  <p className="text-primary-300 underline">{course}</p>
+                </Link>
+              ))}
             </h5>
           </section>
 
-          <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[640px]">
+          <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[540px]">
             <h4 className="mb-6">{text.coordinator}</h4>
-            <section className="flex space-x-4">
+            <article className="flex space-x-4">
               <Image
-                alt={courses.coordinator.person.name}
+                alt={course.coordinator.person.name}
                 className="size-32 rounded-lg bg-neutral-200"
-                src={`persons/${courses.coordinator.id}/image.png`}
+                src={`persons/${course.coordinator.id}/image.png`}
                 height={0}
                 width={0}
               />
-              <div>
-                <h5 className="mb-1">{courses.coordinator.person.name}</h5>
-                <p>{courses.coordinator.designation}</p>
-                <p>
-                  <MdPhone className="mr-2 inline-block fill-primary-500" />
-                  {courses.coordinator.person.telephone}
-                </p>
+              <section>
+                <h5 className="mb-1">{course.coordinator.person.name}</h5>
+                <p className="font-medium">{course.coordinator.designation}</p>
                 <p>
                   <a
                     className="text-primary-500 underline"
-                    href={`mailto:${courses.coordinator.person.email}`}
+                    href={`mailto:${course.coordinator.person.email}`}
                   >
                     <MdEmail className="mr-2 inline-block fill-primary-500" />
 
-                    {courses.coordinator.person.email}
+                    {course.coordinator.person.email}
                   </a>
                 </p>
-              </div>
-            </section>
+                <p>
+                  <MdPhone className="mr-2 inline-block fill-primary-500" />
+                  {course.coordinator.person.telephone}
+                </p>
+              </section>
+            </article>
           </aside>
         </section>
 
-        <article>
+        <article className="container">
           <Heading
             glyphDirection="ltr"
             heading="h2"
@@ -117,86 +133,60 @@ export default async function Curriculum({
             text={text.content}
           />
           <section>
-            {courses.content.map((section, index) => (
-              <div key={index} className="mb-8">
-                <h4 className="mb-4">{section.topic}</h4>
-                <ol className="list-decimal space-y-2 pl-5">
-                  {section.subtopics.map((subtopic, subIndex) => (
-                    <li key={subIndex}>
-                      <p>{subtopic}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
+            <Accordion type="single" collapsible>
+              {course.content.map((section, index) => (
+                <AccordionItem key={index} value={section.title}>
+                  <AccordionTrigger>{section.title}</AccordionTrigger>
+                  <AccordionContent>
+                    <ol className="list-decimal space-y-2 pl-5">
+                      {section.topics.map((topic, subIndex) => (
+                        <li key={subIndex}>
+                          <p>{topic}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </section>
         </article>
 
-        <section>
+        <section className="container">
           <Heading
             glyphDirection="ltr"
             heading="h2"
             id="heading"
             text={text.outcomes}
           />
-          <ol className="container list-decimal space-y-4">
-            {courses.outcomes.map((outcome, index) => (
+          <ol className="list-decimal space-y-4 px-12 font-serif text-primary-500">
+            {course.outcomes.map((outcome, index) => (
               <li key={index}>
-                <p>{outcome}</p>
+                <h5>{outcome}</h5>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className="space-y-4">
+        <section className="container">
           <Heading
             glyphDirection="rtl"
             heading="h2"
             id="heading"
             text={text.referenceBooks}
           />
-          <div>
-            <h4>{text.essentialReading}</h4>
-            <ol className="container flex list-disc flex-col space-y-4">
-              {courses.essentialReading.map((book, index) => (
-                <Link href={`/${book}`} key={index}>
-                  <li>
-                    <p className="text-primary-100 underline">{book}</p>
-                  </li>
-                </Link>
-              ))}
-            </ol>
-          </div>
-          <div>
-            <h4>{text.supplementaryReading}</h4>
-            <ol className="container flex list-disc flex-col space-y-4">
-              {courses.supplementaryReading.map((book, index) => (
-                <Link href={`/${book}`} key={index}>
-                  <li>
-                    <p className="text-primary-100 underline">{book}</p>
-                  </li>
-                </Link>
-              ))}
-            </ol>
-          </div>
-        </section>
 
-        <section>
-          <Heading
-            glyphDirection="rtl"
-            heading="h2"
-            id="heading"
-            text={text.similarCourses}
-          />
-          <ol className="container flex list-disc flex-col space-y-4">
-            {courses.similarCourses.map((course, index) => (
-              <Link href={`/academics/curricula/${course}`} key={index}>
-                <li>
-                  <p className="text-primary-100 underline">{course}</p>
+          <section className="rounded-xl border border-primary-500 bg-neutral-50">
+            <ol className="flex list-disc flex-col space-y-4 p-12">
+              {course.essentialReading.map((book, index) => (
+                <li key={index}>
+                  <p className="font-medium text-primary-300 underline">
+                    {book}
+                  </p>
                 </li>
-              </Link>
-            ))}
-          </ol>
+              ))}
+            </ol>
+          </section>
         </section>
       </main>
     </>
