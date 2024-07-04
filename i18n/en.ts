@@ -228,6 +228,9 @@ const text: Translations = {
     Sports: {},
     Store: {},
   },
+  Sections: {
+    title: 'Sections',
+  },
   Status: {
     NoResult: {
       title: 'No results found',
