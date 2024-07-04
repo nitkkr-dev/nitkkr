@@ -318,6 +318,9 @@ export interface Translations {
     Sports: {};
     Store: {};
   };
+  Sections: {
+    title: string;
+  };
   Status: {
     NoResult: { title: string; description: string };
     Unauthorised: { title: string; description: string };
