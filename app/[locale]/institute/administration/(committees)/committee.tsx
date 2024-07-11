@@ -29,6 +29,7 @@ export default async function Committee({
   type: (typeof committeeMembers.committeeType.enumValues)[number];
 }) {
   const text = (await getTranslations(locale)).Committee;
+  const isAdmin = true; //isAdmin();
 
   const meetingPage = isNaN(Number(searchParams.meetingPage ?? '1'))
     ? 1
@@ -74,10 +75,24 @@ export default async function Committee({
               <TableHead className="text-center">
                 {text.meetings.minutes}
               </TableHead>
+              {isAdmin && (
+                <TableHead className="text-center">
+                  <Button asChild variant="link">
+                    <Link
+                      className="underline"
+                      href={`/${locale}/edit?type=${type}`}
+                      scroll={false}
+                    >
+                      {text.edit.add} <FaExternalLinkAlt size={15} />
+                    </Link>
+                  </Button>
+                  /{text.edit.edit}
+                </TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
-            <Meetings locale={locale} page={meetingPage} type={type} />
+            <Meetings locale={locale} page={meetingPage} type={type} isAdmin />
           </TableBody>
         </Table>
       </Suspense>
@@ -120,10 +135,12 @@ const Meetings = async ({
   locale,
   page,
   type,
+  isAdmin,
 }: {
   locale: string;
   page: number;
   type: (typeof committeeMeetings.committeeType.enumValues)[number];
+  isAdmin: boolean;
 }) => {
   const meetings = await db.query.committeeMeetings.findMany({
     orderBy: (meeting, { desc }) => [desc(meeting.meetingNumber)],
@@ -161,6 +178,18 @@ const Meetings = async ({
           </Link>
         </Button>
       </TableCell>
+      {isAdmin && (
+        <TableCell className="text-center">
+          <Button asChild variant="link">
+            <Link
+              href={`/${locale}/edit?no=${meeting.meetingNumber}&type=${type}`}
+              scroll={false}
+            >
+              <FaExternalLinkAlt />
+            </Link>
+          </Button>
+        </TableCell>
+      )}
     </TableRow>
   ));
 };
