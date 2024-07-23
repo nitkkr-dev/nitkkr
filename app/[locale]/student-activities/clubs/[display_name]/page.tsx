@@ -1,11 +1,19 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
-import { MdOutlineEmail, MdPhone, MdPinDrop } from 'react-icons/md';
-import { eq, or } from 'drizzle-orm';
+import Link from 'next/link';
+import { eq } from 'drizzle-orm';
+import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { MdMailOutline } from 'react-icons/md';
+import { FaXTwitter } from 'react-icons/fa6';
 
+import ImageHeader from '~/components/image-header';
 import Heading from '~/components/heading';
-import { clubs, db, faculty } from '~/server/db';
+import { clubs, db, studentAcademicDetails } from '~/server/db';
+import { cn } from '~/lib/utils';
 import {
   Card,
+  CardContent,
+  CardFooter,
   Table,
   TableBody,
   TableCell,
@@ -13,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
+import { countChildren } from '~/server/s3';
 import { GalleryCarousel } from '~/components/carousels';
-import { CustomStatus } from '~/components/status';
-
-import { club_data } from './club_data';
+import { getTranslations } from '~/i18n/translations';
+import { dummy_club_data } from './club_data';
 
 export async function generateStaticParams() {
   return await db.select({ display_name: clubs.urlName }).from(clubs);
@@ -27,139 +35,188 @@ export default async function Club({
 }: {
   params: { locale: string; display_name: string };
 }) {
-  const data = club_data[display_name];
+  const club = await db.query.clubs.findFirst({
+    where: eq(clubs.name, display_name),
+    with: {
+      clubMembers: true,
+      clubSocials: true,
+      facultyIncharge1: true,
+      facultyIncharge2: true,
+    },
+  });
 
-  let profs = null;
-  if (data?.facultyInCharge1?.id && data?.facultyInCharge2?.id) {
-    profs = await db.query.faculty.findMany({
-      where: or(
-        eq(faculty.id, data.facultyInCharge1?.id),
-        eq(faculty.id, data.facultyInCharge2?.id)
-      ),
-      with: {
-        person: true,
-      },
-    });
-  }
+  const detailed_members = await Promise.all(
+    club?.clubMembers.map(async (member) => {
+      const academicDetails = await db.query.studentAcademicDetails.findFirst({
+        where: eq(studentAcademicDetails.id, member.studentId),
+        with: {
+          major: true,
+          student: {
+            with: {
+              person: {
+                columns: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      return { ...member, academicDetails };
+    }) ?? []
+  );
+  const text = await getTranslations(locale);
+  const imageCount = await countChildren(`clubs/${display_name}/images`);
+  type SocialPlatform = 'instagram' | 'twitter' | 'mail' | 'linkdin';
 
-  if (!data) {
-    return <CustomStatus locale={locale} type={'NoResult'} />;
-  }
+  const socialIcons: Record<SocialPlatform, ReactNode> = {
+    instagram: <FaInstagram className="size-14" />,
+    twitter: <FaXTwitter className="size-14" />,
+    mail: <MdMailOutline className="size-14" />,
+    linkdin: <FaLinkedinIn className="size-14" />,
+  };
 
   return (
-    <main className="container">
-      <Heading glyphDirection={'dual'} heading={'h1'} text={data.name} />
-      <figure className="flex flex-col bg-neutral-50 md:flex-row">
+    <>
+      <ImageHeader src={`clubs/${display_name}/banner.png`} />
+      <header className="container flex items-center justify-center space-x-7">
         <Image
-          src={
-            data.images?.[0] ??
-            'https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg'
-          }
-          alt="img"
+          alt={display_name}
+          src="https://s3-alpha-sig.figma.com/img/7402/b5d8/0d0e5a22248e48c7ff86855c04d25708?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RkSGzZZvYJnbKdrcupFwI~YfhQ5wVMa2XUPrrIHwmmFufne3DexsEjfO2Gkaa~S8WkO0I4vP3Gus-6rpjTawVhc5RMQbnQJBymaC8l4ibeWKQq-SqcDXPBZhv5T2~fBspLZuTvv3-uql22JGdkccqHN03RJq~cetCxZoM04TIsWLwVJDhJbF5ulcdEcyyxDPVkv86-tTcaJyFHwBF3Y8ZfJrP-2TlxoeI431PYQC97YOgiBRQkh~0mYYenZ6GAqtzc75sUqTjz7DwWmqT86exVOE28jy8jsaYwwv33U4X-2LHlQLv~GN5w-UNHy668EpqDeABZUaYHieb9zn3odufw__"
+          className="h-24 w-24 rounded-full"
           width={0}
           height={0}
-          className="w-full rounded-md object-cover md:w-1/2"
         />
-        <section className="w-full p-5 md:w-1/2">
-          <Heading
-            glyphDirection={'ltr'}
-            heading={'h3'}
-            text="About Us"
-            className="m-0 p-0"
+        <h1 className="text-4xl font-bold">{display_name.toUpperCase()}</h1>
+      </header>
+      <main className="container">
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          text={text.club.about.toUpperCase()}
+        />
+        <article className="flex drop-shadow max-md:flex-col">
+          <p
+            className={cn(
+              'p-2 sm:p-3 md:p-4',
+              'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
+            )}
+          >
+            {club?.aboutUs ?? dummy_club_data.aboutUs}
+          </p>
+          <Image
+            alt={display_name}
+            className="w-full max-md:rounded-b md:order-first md:rounded-l"
+            height={0}
+            src={`clubs/${display_name}/about.png`}
+            width={0}
           />
-          <p className="text-gray-700 text-lg">{data.aboutUs}</p>
-        </section>
-      </figure>
-
-      {profs != null && profs.length > 0 && (
-        <>
-          <Heading
-            glyphDirection={'rtl'}
-            heading={'h1'}
-            text={'Professor in-charge'}
-          />
-          <section className="container grid grid-cols-1 items-center md:grid-cols-2">
-            {profs.map((prof, i) => (
-              <Card
-                key={i}
-                className="relative mx-auto flex w-full max-w-md flex-col items-center justify-center rounded-lg border-none bg-neutral-50 p-6 text-center shadow-lg"
-              >
-                <Image
-                  src="https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg"
-                  alt="img"
-                  width={100}
-                  height={100}
-                  className="absolute -left-10 -top-10 aspect-square rounded-full"
-                />
-
-                <section className="mt-4 space-y-4">
-                  <h1>{prof.person.name}</h1>
-                  <ul>
-                    {[
-                      { icon: MdOutlineEmail, info: prof.person?.email },
-                      { icon: MdPhone, info: prof.person?.telephone },
-                      { icon: MdPinDrop, info: 'NIT Campus' },
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center space-x-2">
-                        <item.icon className="h-6 w-6 text-primary-700" />
-                        <p className="text-base text-neutral-700">
-                          {item.info}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </Card>
-            ))}
-          </section>
-        </>
-      )}
-      {(data.RSVP ?? []).length > 0 && (
-        <>
-          <Heading glyphDirection={'ltr'} heading={'h3'} text={'RSVP'} />
-          <section>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Phone no.</TableHead>
-                  {data.RSVP && data.RSVP?.length > 2 && (
-                    <TableHead>Email</TableHead>
-                  )}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.RSVP?.map((secy, i) => (
-                  <TableRow key={i}>
-                    <TableCell>{secy.name}</TableCell>
-                    <TableCell>{secy.contact}</TableCell>
-                    {data.RSVP && data.RSVP?.length > 2 && (
-                      <TableCell>{secy.email}</TableCell>
-                    )}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </section>
-        </>
-      )}
-      {data.images != null && data.images?.length > 0 && (
-        <article className="container" id="gallery">
-          <Heading glyphDirection="rtl" heading="h3" text={'Gallery'} />
-          <GalleryCarousel className="my-5 w-full">
-            {[...Array<number>(data.images.length)].map((_, index) => (
-              <Image
-                alt={String(index)}
-                className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
-                height={0}
-                key={index}
-                src={data?.images?.[index] ?? ''}
-                width={0}
-              />
-            ))}
-          </GalleryCarousel>
         </article>
-      )}
-    </main>
+        <Heading
+          glyphDirection="ltr"
+          heading="h2"
+          text={text.club.postHolders.toUpperCase()}
+        />
+        <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
+          {detailed_members
+            .filter((member) => member.position in ['President', 'Secratary'])
+            .map((member, i) => (
+              <li key={i}>
+                <Card className="bg-white flex h-[350px] w-[300px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
+                  <CardContent className="p-4">
+                    <Image
+                      alt={member.academicDetails?.student.person.name ?? ''}
+                      src="https://s3-alpha-sig.figma.com/img/11bb/5a75/71de47cf6351c8dd4b4affd3dfb2b03e?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CKqjkyEl1-p-FCFeqtIWWdQ47HhtB2aX3vxSFXqp8oqGtCCBrn8S1~Wai0XYh0VeEzSdpqNPgfSYbhd3UoXHb8RtHjY~DWuzpuTtkDAtwjON7vE1gaOqFYNhj03uJTq-B-bZ5XoKjL8umvdMsuPegvcHjqiNTuqcyIE0XdPeuRKK6FD~1Epmzhm6ZX7-DVHO4gpxY9ZoCyfOaZOpMwjO8nrKpvkJUw6e1LiN5r-QCY8vNYbpCfozStexx9ojQ~GyTlQqyZNvAyhkcXHq3Fui7ikDWrXZ~1Nw0wm3ZEeBQnEV3kR7K64n6SFTWdr5X1SDKmAtd3iDM8Yw5k6Qe27JEg__"
+                      width={0}
+                      height={0}
+                      className="h-48 w-full rounded-lg object-cover"
+                    />
+                  </CardContent>
+                  <CardFooter className="flex flex-col">
+                    <h3 className="text-gray-800 m-0 p-0 text-xl font-semibold text-primary-700">
+                      {member.academicDetails?.student.person.name}
+                    </h3>
+                    <h5 className="text-md text-gray-600 m-0 p-0 font-medium text-primary-700">
+                      {member.position}
+                    </h5>
+                    <p className="text-gray-500 m-0 p-0 text-sm text-primary-700">
+                      {member.academicDetails?.batch}
+                    </p>
+                  </CardFooter>
+                </Card>
+              </li>
+            ))}
+        </ul>
+        <Heading
+          glyphDirection="ltr"
+          heading="h1"
+          text={text.club.ourmMembers.toUpperCase()}
+        />
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Roll Number</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Batch</TableHead>
+              <TableHead>Degree</TableHead>
+              <TableHead>Major</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {detailed_members.map((member, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  {member.academicDetails?.student.rollNumber}
+                </TableCell>
+                <TableCell>
+                  {member.academicDetails?.student.person.name}
+                </TableCell>
+                <TableCell>{member.academicDetails?.batch}</TableCell>
+                <TableCell>{member.academicDetails?.major.degree}</TableCell>
+                <TableCell>{member.academicDetails?.major.name}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        {imageCount !== 0 && (
+          <article className="container" id="gallery">
+            <Heading
+              glyphDirection="rtl"
+              heading="h3"
+              text={text.club.gallery.toUpperCase()}
+            />
+            <GalleryCarousel className="my-5 w-full">
+              {[...Array<number>(imageCount)].map((_, index) => (
+                <Image
+                  alt={String(index)}
+                  className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
+                  height={0}
+                  key={index}
+                  src={`clubs/${display_name}/images/${index + 1}.png`}
+                  width={0}
+                />
+              ))}
+            </GalleryCarousel>
+          </article>
+        )}
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          text={text.club.contacts.toUpperCase()}
+        />
+        <ul className="ml-auto flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-10">
+          {club?.clubSocials.map((social, i) => (
+            <li
+              key={i}
+              className="flex items-center justify-center rounded-full border border-primary-500 bg-neutral-50 p-3 text-primary-500 transition-transform duration-300 hover:scale-110 md:p-4 lg:p-6"
+            >
+              <Link href={social.link}>
+                {socialIcons[social.platform as SocialPlatform]}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </>
   );
 }
