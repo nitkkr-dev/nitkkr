@@ -12,7 +12,13 @@ export interface Translations {
       more: string;
     };
   };
-
+  club: {
+    about: string;
+    ourmMembers: string;
+    postHolders: string;
+    gallery: string;
+    contacts: string;
+  };
   Clubs: { title: string };
   Committee: {
     building: string;
