@@ -1,15 +1,14 @@
-import type { ReactNode } from 'react';
+import { eq } from 'drizzle-orm';
 import Image from 'next/image';
 import Link from 'next/link';
-import { eq } from 'drizzle-orm';
+import type { ReactNode } from 'react';
 import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { MdMailOutline } from 'react-icons/md';
 import { FaXTwitter } from 'react-icons/fa6';
+import { MdMailOutline } from 'react-icons/md';
 
-import ImageHeader from '~/components/image-header';
+import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
-import { clubs, db, studentAcademicDetails } from '~/server/db';
-import { cn } from '~/lib/utils';
+import ImageHeader from '~/components/image-header';
 import {
   Card,
   CardContent,
@@ -21,9 +20,11 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
-import { countChildren } from '~/server/s3';
-import { GalleryCarousel } from '~/components/carousels';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
+import { clubs, db, studentAcademicDetails } from '~/server/db';
+import { countChildren } from '~/server/s3';
+
 import { dummy_club_data } from './club_data';
 
 export async function generateStaticParams() {
@@ -65,6 +66,7 @@ export default async function Club({
       return { ...member, academicDetails };
     }) ?? []
   );
+  console.log(detailed_members);
   const text = await getTranslations(locale);
   const imageCount = await countChildren(`clubs/${display_name}/images`);
   type SocialPlatform = 'instagram' | 'twitter' | 'mail' | 'linkdin';
@@ -79,15 +81,15 @@ export default async function Club({
   return (
     <>
       <ImageHeader src={`clubs/${display_name}/banner.png`} />
-      <header className="container flex items-center justify-center space-x-7">
+      <header className="container m-auto flex items-center justify-center">
         <Image
           alt={display_name}
           src="https://s3-alpha-sig.figma.com/img/7402/b5d8/0d0e5a22248e48c7ff86855c04d25708?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RkSGzZZvYJnbKdrcupFwI~YfhQ5wVMa2XUPrrIHwmmFufne3DexsEjfO2Gkaa~S8WkO0I4vP3Gus-6rpjTawVhc5RMQbnQJBymaC8l4ibeWKQq-SqcDXPBZhv5T2~fBspLZuTvv3-uql22JGdkccqHN03RJq~cetCxZoM04TIsWLwVJDhJbF5ulcdEcyyxDPVkv86-tTcaJyFHwBF3Y8ZfJrP-2TlxoeI431PYQC97YOgiBRQkh~0mYYenZ6GAqtzc75sUqTjz7DwWmqT86exVOE28jy8jsaYwwv33U4X-2LHlQLv~GN5w-UNHy668EpqDeABZUaYHieb9zn3odufw__"
-          className="h-24 w-24 rounded-full"
+          className="h-32 w-32 rounded-full bg-primary-100"
           width={0}
           height={0}
         />
-        <h1 className="text-4xl font-bold">{display_name.toUpperCase()}</h1>
+        <h1 className="mx-2 my-auto text-4xl">{display_name.toUpperCase()}</h1>
       </header>
       <main className="container">
         <Heading
@@ -119,7 +121,7 @@ export default async function Club({
         />
         <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
           {detailed_members
-            .filter((member) => member.position in ['President', 'Secratary'])
+            .filter((member) => member.position in ['President', 'Secretary'])
             .map((member, i) => (
               <li key={i}>
                 <Card className="bg-white flex h-[350px] w-[300px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
@@ -149,7 +151,7 @@ export default async function Club({
         </ul>
         <Heading
           glyphDirection="ltr"
-          heading="h1"
+          heading="h2"
           text={text.club.ourmMembers.toUpperCase()}
         />
         <Table>
@@ -182,7 +184,7 @@ export default async function Club({
           <article className="container" id="gallery">
             <Heading
               glyphDirection="rtl"
-              heading="h3"
+              heading="h2"
               text={text.club.gallery.toUpperCase()}
             />
             <GalleryCarousel className="my-5 w-full">
