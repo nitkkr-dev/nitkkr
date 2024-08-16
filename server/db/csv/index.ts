@@ -1,5 +1,6 @@
-import { and, eq } from 'drizzle-orm';
 import fs from 'fs';
+
+import { and, eq } from 'drizzle-orm';
 
 import { db } from '~/server/db';
 import * as schemas from '~/server/db/schema';
@@ -608,11 +609,8 @@ export async function populate() {
     const clubSocialRows = clubSocialsCsv.filter(
       (row) => convertToData(row, clubSocialsHeaders).clubAlias === data.alias
     );
-    for (let j = 0; j < clubSocialRows.length; j++) {
-      const clubSocialData = convertToData(
-        clubSocialRows[j],
-        clubSocialsHeaders
-      );
+    for (const clubSocialIndex of clubSocialRows) {
+      const clubSocialData = convertToData(clubSocialIndex, clubSocialsHeaders);
       await db.insert(schemas.clubSocials).values({
         clubId: clubId.id,
         platform: clubSocialData.platform,
