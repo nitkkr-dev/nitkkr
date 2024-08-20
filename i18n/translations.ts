@@ -86,6 +86,17 @@ export interface Translations {
     departmentsDetails: string;
     programmesDetails: string;
     coursesDetails: string;
+  };  club: {
+    about: string;
+    ourmMembers: string;
+    postHolders: string;
+    gallery: string;
+    contacts: string;
+    rollNumber: string;
+    name: string;
+    batch: string;
+    degree: string;
+    major: string;
   };
   Clubs: { title: string };
   Committee: {
