@@ -26,6 +26,7 @@ import { clubs, db, studentAcademicDetails } from '~/server/db';
 import { countChildren } from '~/server/s3';
 
 import { dummy_club_data } from './club_data';
+import { LuFacebook } from 'react-icons/lu';
 
 export async function generateStaticParams() {
   return await db.select({ display_name: clubs.urlName }).from(clubs);
@@ -37,7 +38,7 @@ export default async function Club({
   params: { locale: string; display_name: string };
 }) {
   const club = await db.query.clubs.findFirst({
-    where: eq(clubs.name, display_name),
+    where: eq(clubs.urlName, display_name),
     with: {
       clubMembers: true,
       clubSocials: true,
@@ -66,16 +67,22 @@ export default async function Club({
       return { ...member, academicDetails };
     }) ?? []
   );
-  console.log(detailed_members);
+
   const text = await getTranslations(locale);
   const imageCount = await countChildren(`clubs/${display_name}/images`);
-  type SocialPlatform = 'instagram' | 'twitter' | 'mail' | 'linkdin';
+   type SocialPlatform =
+    | 'instagram'
+    | 'twitter'
+    | 'mail'
+    | 'linkdin'
+    | 'facebook';
 
   const socialIcons: Record<SocialPlatform, ReactNode> = {
     instagram: <FaInstagram className="size-14" />,
     twitter: <FaXTwitter className="size-14" />,
     mail: <MdMailOutline className="size-14" />,
     linkdin: <FaLinkedinIn className="size-14" />,
+    facebook: <LuFacebook className="size-14" />,
   };
 
   return (
@@ -121,7 +128,6 @@ export default async function Club({
         />
         <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
           {detailed_members
-            .filter((member) => member.position in ['President', 'Secretary'])
             .map((member, i) => (
               <li key={i}>
                 <Card className="bg-white flex h-[350px] w-[300px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
@@ -157,11 +163,11 @@ export default async function Club({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Roll Number</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Batch</TableHead>
-              <TableHead>Degree</TableHead>
-              <TableHead>Major</TableHead>
+              <TableHead>{text.club.rollNumber}</TableHead>
+              <TableHead>{text.club.name}</TableHead>
+              <TableHead>{text.club.batch}</TableHead>
+              <TableHead>{text.club.degree}</TableHead>
+              <TableHead>{text.club.major}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

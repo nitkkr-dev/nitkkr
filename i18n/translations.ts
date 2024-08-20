@@ -18,6 +18,11 @@ export interface Translations {
     postHolders: string;
     gallery: string;
     contacts: string;
+    rollNumber: string;
+    name: string;
+    batch: string;
+    degree: string;
+    major: string;
   };
   Clubs: { title: string };
   Committee: {

@@ -22,6 +22,11 @@ const text: Translations = {
     postHolders: 'पदाधिकारी',
     gallery: 'गैलरी',
     contacts: 'संपर्क',
+    rollNumber: 'रोल नंबर',
+    name: 'नाम',
+    batch: 'बैच',
+    degree: 'डिग्री',
+    major: 'मेजर',
   },
   Clubs: { title: 'संघठनें' },
   Committee: {

@@ -26,6 +26,11 @@ const text: Translations = {
     postHolders: 'Post Holders',
     gallery: 'Gallery',
     contacts: 'Contacts us',
+    rollNumber: 'Roll Number',
+    name: 'Name',
+    batch: 'Batch',
+    degree: 'Degree',
+    major: 'Major',
   },
   Clubs: { title: 'CLUBS' },
   Committee: {
