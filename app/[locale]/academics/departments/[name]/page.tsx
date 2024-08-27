@@ -237,7 +237,7 @@ export default async function Department({
             icon: HiMiniBeaker,
           },
           {
-            label: text.facultyAndStaff,
+            label: text.achievements,
             href: `/${locale}/academics/departments/${name}/achievements`,
             icon: FaTrophy,
           },

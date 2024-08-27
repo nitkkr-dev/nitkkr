@@ -1,6 +1,19 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Administration: {
+    welcome: 'Welcome to the Administration Section',
+    boardOfGovernors: 'Board of Governors',
+    buildingAndWork: 'Building & Work Committee',
+    financial: 'Financial Committee',
+    senate: 'Senate',
+    committees: 'Committees',
+    director: 'Director',
+    deans: 'Deans',
+    and: 'and',
+    description:
+      'Our Department has rapidly advanced, modernizing labs with cutting-edge facilities and aligning curricula with industry demands. Faculty excel in innovative hardware design, signal processing, VLSI design, and data communication systems, contributing significantly to research. Our robust infrastructure supports UG, PG, and Ph.D. programs, while our computer center, equipped with state-of-the-art PCs and networking resources, empowers students, faculty, and staff alike.',
+  },
   Main: {
     director: {
       alt: 'Prof. B. V. Ramana Reddy',
