@@ -36,19 +36,16 @@ export default async function Home({
         <CarouselContent>
           {[
             {
-              image:
-                'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/slideshow/1.png',
+              image: 'slideshow/1.png',
               title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
               subtitle:
                 'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
             },
             {
-              image:
-                'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/slideshow/2.png',
+              image: 'slideshow/2.png',
             },
             {
-              image:
-                'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/slideshow/3.png',
+              image: 'slideshow/3.png',
             },
           ].map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
