@@ -36,19 +36,16 @@ export default async function Home({
         <CarouselContent>
           {[
             {
-              image:
-                'https://nitkkr.ac.in/wp-content/uploads/2023/11/IMG20220903190255-1-scaled.jpg',
+              image: 'slideshow/1.png',
               title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
               subtitle:
                 'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
             },
             {
-              image:
-                'https://nitkkr.ac.in/wp-content/uploads/2022/01/24131961_285405678647849_426967072086000359_o.jpg',
+              image: 'slideshow/2.png',
             },
             {
-              image:
-                'https://nitkkr.ac.in/wp-content/uploads/2022/12/IMG_0496-scaled.jpg',
+              image: 'slideshow/3.png',
             },
           ].map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
@@ -90,7 +87,7 @@ export default async function Home({
           text={text.director.title}
         />
         <MessageCard
-          image="director.jpg"
+          image="assets/director.jpg"
           locale={locale}
           name={text.director.name}
           quote={text.director.quote[0]}
