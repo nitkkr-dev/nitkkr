@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { IconType } from 'react-icons';
+import { BsHddNetworkFill } from 'react-icons/bs';
 import {
   MdLibraryBooks,
   MdOutlineAccountBalance,
@@ -13,12 +14,11 @@ import {
   MdOutlineSportsTennis,
   MdOutlineStore,
 } from 'react-icons/md';
-import { BsHddNetworkFill } from 'react-icons/bs';
 
 import Heading from '~/components/heading';
+import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
-import { getTranslations } from '~/i18n/translations';
 
 export default async function Sections({
   params: { locale },
@@ -26,16 +26,17 @@ export default async function Sections({
   params: { locale: string };
 }) {
   const sections = await db.query.sections.findMany();
+  console.log('section =>', sections);
 
   const sectionIcons: Record<string, IconType> = {
     accounts: MdOutlineAccountBalance,
-    'central-library': MdLibraryBooks,
     'central-workshop': MdOutlineGroupWork,
-    'centre-of-computing-and-networking': BsHddNetworkFill,
+    'centre-of-computing-networking': BsHddNetworkFill,
     'electrical-maintenance': MdOutlineElectricalServices,
     estate: MdOutlineRealEstateAgent,
     'general-administration': MdOutlineAdminPanelSettings,
     'health-centre': MdOutlineHealthAndSafety,
+    library: MdLibraryBooks,
     security: MdOutlineSecurity,
     sports: MdOutlineSportsTennis,
     store: MdOutlineStore,
@@ -61,6 +62,7 @@ export default async function Sections({
         >
           {sections.map((section, i) => {
             const Icon = sectionIcons[section.urlName];
+            if (!Icon) return null;
             return (
               <li key={i}>
                 <Link
