@@ -10,7 +10,14 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { clubMembers, clubSocials, departments, faculty, persons } from '.';
+import {
+  clubMembers,
+  clubSocials,
+  departments,
+  faculty,
+  persons,
+  events,
+} from '.';
 
 export const clubs = pgTable('clubs', {
   id: smallserial('id').primaryKey(),
@@ -30,6 +37,9 @@ export const clubs = pgTable('clubs', {
   facultyInchargeId2: integer('faculty_incharge_id2').references(
     () => faculty.id
   ),
+  facultyInchargeId3: integer('faculty_incharge_id3').references(
+    () => faculty.id
+  ),
   isActive: boolean('is_active').default(true).notNull(),
   createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
@@ -43,6 +53,7 @@ export const clubs = pgTable('clubs', {
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
+  clubEvents: many(events),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
@@ -55,6 +66,11 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
   facultyIncharge2: one(faculty, {
     relationName: 'facultyIncharge2',
     fields: [clubs.facultyInchargeId2],
+    references: [faculty.id],
+  }),
+  facultyIncharge3: one(faculty, {
+    relationName: 'facultyIncharge3',
+    fields: [clubs.facultyInchargeId3],
     references: [faculty.id],
   }),
 }));
