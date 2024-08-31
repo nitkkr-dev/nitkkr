@@ -12,12 +12,10 @@ import { clubs, persons } from '.';
 export const events = pgTable('events', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 128 }).notNull(),
-  description: varchar('description', { length: 512 }),
+  description: varchar('description'),
   startDate: timestamp('date').notNull(),
   endDate: timestamp('date').notNull(),
-  clubId: integer('club_id')
-    .references(() => clubs.id)
-    .notNull(),
+  clubId: integer('club_id').references(() => clubs.id),
   updatedAt: timestamp('updated_at')
     .$onUpdate(() => new Date())
     .notNull(),

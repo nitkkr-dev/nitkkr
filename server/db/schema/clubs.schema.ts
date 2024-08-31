@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   boolean,
   date,
@@ -27,6 +27,11 @@ export const clubs = pgTable('clubs', {
   tagline: varchar('tagline', { length: 256 }).notNull(),
   email: varchar('email', { length: 256 }).notNull(),
   aboutUs: varchar('about_us').notNull(),
+  howToJoinUs: varchar('how_to_join_us').notNull(),
+  whyToJoinUs: varchar('why_to_join_us').notNull(),
+  notifications: varchar('notifications')
+    .array()
+    .default(sql`'{}'`),
   category: varchar('category', {
     enum: ['committee', 'cultural', 'crew', 'technical'],
   }).notNull(),
@@ -51,9 +56,9 @@ export const clubs = pgTable('clubs', {
 });
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
+  clubEvents: many(events),
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
-  clubEvents: many(events),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
