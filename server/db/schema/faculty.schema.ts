@@ -13,6 +13,7 @@ import {
   courses,
   departments,
   doctorates,
+  hostels,
   persons,
   sections,
   sponsoredResearchProjects,
@@ -134,5 +135,15 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   person: one(persons, {
     fields: [faculty.id],
     references: [persons.id],
+  }),
+  wardensHostel: one(hostels, {
+    fields: [faculty.id],
+    references: [hostels.id],
+    relationName: 'wardens',
+  }),
+  deputyWardensHostel: one(hostels, {
+    fields: [faculty.employeeId],
+    references: [hostels.id],
+    relationName: 'deputy_wardens',
   }),
 }));
