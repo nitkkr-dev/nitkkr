@@ -8,7 +8,7 @@ export const students = pgTable('students', {
     .primaryKey()
     .references(() => persons.id),
   rollNumber: varchar('roll_number', { length: 9 }).notNull(),
-  personalEmail: varchar('personal_email', { length: 256 }).notNull(),
+  personalEmail: varchar('personal_email', { length: 256 }),
 
   // Guardian Info
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),
@@ -28,7 +28,7 @@ export const students = pgTable('students', {
   // Admission
   applicationNumber: varchar('application_number'),
   candidateCategory: varchar('candidate_category', {
-    enum: ['GEN-EWS', 'OBC-NCL', 'OP', 'SC', 'ST'],
+    enum: ['GEN-EWS', 'OBC-NCL', 'OPEN', 'SC', 'ST'],
   }).notNull(),
   isPwd: boolean('is_pwd').default(false).notNull(),
   admissionCategory: varchar('admission_category', {
