@@ -1,3 +1,35 @@
 name	degree	departmentAlias
-Computer Science and Engineering	B. Tech	CS
-Mechanical Engineering	B. Tech	ME
+Computer Science and Engineering	B. Tech.	CS
+Mechanical Engineering	B. Tech.	ME
+Electrical Engineering	B. Tech.	EE
+Civil Engineering	B. Tech.	CE
+Information Technology	B. Tech.	CS
+Electronics and Communication Engineering	B. Tech.	EC
+Production and Industrial Engineering	B. Tech.	ME
+Artificial Intelligence / Machine Learning	B. Tech.	CS
+Industrial Internet of Things	B. Tech.	EE
+Mathematics and Computing	B. Tech.	CS
+Environmental Engineering	M. Tech.	CE
+Geotechnical Engineering	M. Tech.	CE
+Structural Engineering	M. Tech.	CE
+Transportation Engineering	M. Tech.	CE
+Water and Resources Engineering	M. Tech.	CE
+Computer Science and Engineering	M. Tech.	CS
+Cyber Security	M. Tech.	CS
+Control Systems	M. Tech.	EE
+Power Electronics and Drives	M. Tech.	EE
+Power System	M. Tech.	EE
+Communication Systems	M. Tech.	EC
+Machine Design	M. Tech.	ME
+Production and Industrial Engineering	M. Tech.	ME
+Thermal Engineering	M. Tech.	ME
+Instrumentation	M. Tech.	EE
+Nanomaterials and Nanotechnology	M. Tech.	ME
+Renewable Energy Systems	M. Tech.	RE
+Embedded System Design	M. Tech.	VL
+VLSI Design	M. Tech.	VL
+MBA	MBA	BA
+MCA	MCA	CA
+Chemistry	M. Sc.	CH
+Mathematics	M. Sc.	MA
+Physics	M. Sc.	PH
