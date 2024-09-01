@@ -61,6 +61,7 @@ export async function populate() {
   const clubSocialsCsv = fs
     .readFileSync('club-socials.tsv', 'utf-8')
     .split('\n');
+  const hostelsCsv = fs.readFileSync('hostels.tsv', 'utf-8').split('\n');
 
   const departmentsHeaders = departmentsCsv[0].split('\t');
   const personsHeaders = personsCsv[0].split('\t');
@@ -86,6 +87,23 @@ export async function populate() {
   const clubsHeaders = clubsCsv[0].split('\t');
   const clubMembersHeaders = clubMembersCsv[0].split('\t');
   const clubSocialsHeaders = clubSocialsCsv[0].split('\t');
+  const hostelsHeaders = hostelsCsv[0].split('\t');
+
+  for (let i = 1; i < hostelsCsv.length; i++) {
+    const data = convertToData(hostelsCsv[i], hostelsHeaders);
+    await db.insert(schemas.hostels).values({
+      address: data.address,
+      name: data.name,
+      urlName: data.urlName,
+      email: data.email,
+      telephone: data.telephone,
+      alternateTelephone: data.alternateTelephone,
+      type: data.type as 'boys' | 'girls',
+      overview: data.overview.split('\\|'),
+      staffOverview: data.staffOverview.split('\\|'),
+      facilities: data.facilities.split('\\|'),
+    });
+  }
 
   for (let i = 1; i < rolesCsv.length; i++) {
     const data = convertToData(rolesCsv[i], rolesHeaders);
