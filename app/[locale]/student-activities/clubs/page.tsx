@@ -68,7 +68,7 @@ export default async function Clubs({
                       <Image
                         alt={alias ?? name}
                         className="size-full scale-50 rounded-full object-cover"
-                        src={`clubs/${urlName}/logo.png`}
+                        src={`clubs/${urlName}/nitlogo.png`}
                         width={0}
                         height={0}
                       />

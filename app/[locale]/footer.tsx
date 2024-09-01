@@ -26,7 +26,7 @@ export default async function Footer({ locale }: { locale: string }) {
               className="mx-auto rounded-md bg-neutral-50 p-[6px]"
               height={66}
               width={66}
-              src="assets/logo.png"
+              src="assets/nitlogo.png"
             />
 
             <figcaption className="flex flex-col gap-2 text-center font-serif text-xl text-shade-light">
