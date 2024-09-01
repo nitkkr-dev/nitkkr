@@ -4,11 +4,11 @@ import { Suspense } from 'react';
 import { BsBook, BsTag } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa';
 
+import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +19,7 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
-export default async function CentralLibrary({
+export default async function Library({
   params: { locale },
 }: {
   params: { locale: string };
@@ -75,7 +75,7 @@ export default async function CentralLibrary({
     },
   ];
 
-  const text = (await getTranslations(locale)).Section.CentralLibrary;
+  const text = (await getTranslations(locale)).Section.Library;
   return (
     <>
       <ImageHeader
@@ -91,7 +91,8 @@ export default async function CentralLibrary({
           { label: text.heading.contactUs, href: '#contact-us' },
           { label: text.heading.gallery, href: '#gallery' },
         ]}
-        src="https://s3-alpha-sig.figma.com/img/517c/938c/4f33a5d7314ae27b1f5889ad51bef040?Expires=1716163200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qoPok32PRLjY7OQvi3o28HExWRKIBY2a8-JSD9mblI92lIkMLaTvBUXlYPfXt1-hzwjXtBKbKd~oK960ceuIDxWqif8q37tAPYmewJ4X8dThbo2CLjIvpT22z3OVb-FBDprxWI1rMy4av0aXcSZSo~zcKHmHdFbA9kxYWzvv7F0TsGXaOsLAbc3zTtafuN9iAjF52aWHBDBbViTPTuO7mjaQDQRHss5JfhypyjF~6j3I5e-B9WkZOuLxMEvaB5P4O82pmIv7ch-Hzl0uGrrMK7zVPdQQoy2WyG65y41uFEkGstBkgXxswu~16IUPu0Q7Znf0kGrIOOoIie-hqxwhrA__"
+        src="institute/sections/central-library/header.jpg"
+        className="bg-neutral-700 bg-blend-overlay"
       />
 
       <Heading
@@ -108,7 +109,7 @@ export default async function CentralLibrary({
           alt={text.heading.about}
           className="aspect-video w-full max-md:rounded-b md:order-first md:rounded-l"
           height={100}
-          src={`https://s3-alpha-sig.figma.com/img/29d7/c2cb/c18149bcac28159a4a64c259f7c34e4b?Expires=1716163200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mpvMNgtYW5tNAPkXdlxRpAWsJQy1nHvs8igFvQa~SreOk64S22Wct-R~38Zf6qkuTE6vL3KmeGrwzmU-5HKl11EayHHp7QMQIdQ1mJZlzita6MkspPFTllKzyrDW42cEO47IziDLB~ndD5Tulgf-P8c7yM44kG1lxRRmS81wmvAYzohW~dy9OwWSxHPQ36dpdijDJuvyz1uBgAOWbI0m3Tfhngv65xW7lTVcrBb9CLN7W0briu8J5ixP-xrP5xwg42aWw3Zbs3xU0OyJPCE2IcE92XDhREy7QHXs2bWfANQl3uTQpBNvauhyeaeEGje9~q6I9FXhgVkaYm4QY-bnlw__`}
+          src="institute/sections/central-library/library1.jpg"
           width={100}
         />
         <p
@@ -129,33 +130,21 @@ export default async function CentralLibrary({
         id="vision-mission"
       >
         <section className="md:w-full">
-          <Heading
-            className="!my-0"
-            glyphDirection="ltr"
-            heading="h3"
-            href="#total-area-library-hours"
-            id="total-area-library-hours"
-            text={text.heading.totalFloorArea}
-          />
+          <h3>{text.heading.totalFloorArea}</h3>
+
           <p>{text.heading.totalFloorAreaText}</p>
 
-          <Heading
-            className="!mb-0"
-            glyphDirection="ltr"
-            heading="h3"
-            href="#library-hours"
-            id="library-hours"
-            text={text.heading.libraryHours}
-          />
+          <h3 className="mt-10">{text.heading.libraryHours}</h3>
+
           <pre className="font-sans lg:text-lg">
             {text.heading.libraryHoursText}
           </pre>
         </section>
         <Image
           alt={text.heading.about}
-          className="aspect-video w-full max-md:rounded-b md:rounded-l"
+          className="aspect-video w-full rounded-md"
           height={100}
-          src={`https://s3-alpha-sig.figma.com/img/29d7/c2cb/c18149bcac28159a4a64c259f7c34e4b?Expires=1716163200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mpvMNgtYW5tNAPkXdlxRpAWsJQy1nHvs8igFvQa~SreOk64S22Wct-R~38Zf6qkuTE6vL3KmeGrwzmU-5HKl11EayHHp7QMQIdQ1mJZlzita6MkspPFTllKzyrDW42cEO47IziDLB~ndD5Tulgf-P8c7yM44kG1lxRRmS81wmvAYzohW~dy9OwWSxHPQ36dpdijDJuvyz1uBgAOWbI0m3Tfhngv65xW7lTVcrBb9CLN7W0briu8J5ixP-xrP5xwg42aWw3Zbs3xU0OyJPCE2IcE92XDhREy7QHXs2bWfANQl3uTQpBNvauhyeaeEGje9~q6I9FXhgVkaYm4QY-bnlw__`}
+          src="institute/sections/central-library/library2.jpg"
           width={100}
         />
       </article>
@@ -176,7 +165,7 @@ export default async function CentralLibrary({
             <p>{text.facilities.bookBankFacilitiesText}</p>
           </li>
 
-          <li className="bg-neutral-50 p-3">
+          <li className="rounded-md border border-primary-500 bg-neutral-50 p-3">
             <h5>{text.facilities.libraryAutomation}</h5>
             <p>
               {text.facilities.libraryAutomationText}
@@ -191,7 +180,7 @@ export default async function CentralLibrary({
             <p>{text.facilities.audioVideoCenterText}</p>
           </li>
 
-          <li className="bg-neutral-50 p-3">
+          <li className="rounded-md border border-primary-500 bg-neutral-50 p-3">
             <h5>{text.facilities.jGatePlus}</h5>
             <p>{text.facilities.jGatePlusText}</p>
           </li>
@@ -208,7 +197,7 @@ export default async function CentralLibrary({
             </p>
           </li>
 
-          <li className="bg-neutral-50 p-3">
+          <li className="rounded-md border border-primary-500 bg-neutral-50 p-3">
             <h5>{text.facilities.remoteAccess}</h5>
             <p>{text.facilities.remoteAccessText}</p>
           </li>
@@ -238,17 +227,17 @@ export default async function CentralLibrary({
           {[
             {
               label: text.quickLinks.collectionResources,
-              href: `/${locale}/institute/sections/central-library/collection-and-resources`,
+              href: `/${locale}/institute/sections/library/collection-and-resources`,
               icon: BsBook,
             },
             {
               label: text.quickLinks.libraryCommittee,
-              href: `/${locale}/institute/sections/central-library/library-committee`,
+              href: `/${locale}/institute/sections/library/library-committee`,
               icon: FaUsers,
             },
             {
               label: text.quickLinks.membershipPrivileges,
-              href: `/${locale}/institute/sections/central-library/membership-and-privileges`,
+              href: `/${locale}/institute/sections/library/membership-and-privileges`,
               icon: BsTag,
             },
           ].map(({ label, href, icon: Icon }, index) => (
@@ -293,8 +282,8 @@ export default async function CentralLibrary({
             </TableHeader>
 
             <TableBody>
-              {contactUsData.map((entry, idx) => (
-                <TableRow key={idx}>
+              {contactUsData.map((entry, index) => (
+                <TableRow key={index}>
                   <TableCell>{entry.name}</TableCell>
                   <TableCell>{entry.designation}</TableCell>
                   <TableCell>{entry.phoneNumber}</TableCell>

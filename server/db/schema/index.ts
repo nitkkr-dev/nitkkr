@@ -12,6 +12,7 @@ export * from './doctorates.schema';
 export * from './faculty.schema';
 export * from './faq.schema';
 export * from './hostels.schema';
+export * from './library.schema';
 export * from './majors.schema';
 export * from './notifications.schema';
 export * from './persons.schema';

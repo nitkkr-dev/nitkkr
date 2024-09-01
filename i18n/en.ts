@@ -217,7 +217,7 @@ const text: Translations = {
     gallery: 'GALLERY',
 
     Account: {},
-    CentralLibrary: {
+    Library: {
       name: 'Central Library',
       heading: {
         about: 'About',
@@ -297,8 +297,8 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         noOfCdsDvds: '832',
         noOfEBooks: '12,272',
         noOfThesis: '6,355',
-        eresources: 'E-Resources',
-        Eresources: {
+        eresources: {
+          title: 'E-Resources',
           currentJournalsHeading: 'Current Journals',
           currentJournalsDescription:
             'The library subscribes to 45 print and approximately 4200+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals is displayed in the Periodical Section of the Library and may be via Library Intranet site : http://172.16.0.52',
@@ -306,11 +306,11 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
           eShodhSindhuDescription:
             'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: http://172.16.0.52',
         },
-        EResourcesTable: {
-          Heading: {
-            SrNo: 'Sr. No.',
-            ElectronicResources: 'Electronic Resources',
-            Url: 'URL',
+        eResourcesTable: {
+          heading: {
+            srno: 'Sr. No.',
+            electronicResources: 'Electronic Resources',
+            url: 'URL',
           },
         },
       },
@@ -318,8 +318,8 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         title: 'Membership & Privileges',
         membershipPrivilegesText:
           'Students, Faculty Members, Research Scholars and Staff of the Institute are admitted as members of the library. Library membership forms can be obtained and submitted at the circulation counter in the library. The number of books that may be borrowed by each category of members and the period of loan is as follows:',
-        privileges: 'Privileges',
-        Privileges: {
+        privileges: {
+          title: 'Privileges',
           conditionOnLoan: 'Conditions on Loan',
           conditionOnLoanOne:
             'The librarian reserves the right to recall any book issued to the members even prior to the due date of return.',

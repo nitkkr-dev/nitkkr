@@ -201,7 +201,7 @@ export interface Translations {
     gallery: string;
 
     Account: {};
-    CentralLibrary: {
+    Library: {
       name: string;
       heading: {
         about: string;
@@ -270,26 +270,23 @@ export interface Translations {
         noOfEBooks: string;
         thesis: string;
         noOfThesis: string;
-        eresources: string;
-        Eresources: {
+        eresources: {
+          title: string;
           currentJournalsHeading: string;
           currentJournalsDescription: string;
           eShodhSindhuHeading: string;
           eShodhSindhuDescription: string;
         };
-        EResourcesTable: {
-          Heading: {
-            SrNo: string;
-            ElectronicResources: string;
-            Url: string;
+        eResourcesTable: {
+          heading: {
+            srno: string;
+            electronicResources: string;
+            url: string;
           };
         };
       };
       MembershipPrivileges: {
-        title: string;
-        membershipPrivilegesText: string;
-        privileges: string;
-        Privileges: {
+        privileges: {
           conditionOnLoan: string;
           conditionOnLoanOne: string;
           conditionOnLoanTwo: string;
@@ -305,7 +302,10 @@ export interface Translations {
           reprographicFacilitiesDescription: string;
           binding: string;
           bindingDescription: string;
+          title: string;
         };
+        title: string;
+        membershipPrivilegesText: string;
       };
     };
     CentralWorkshop: {};

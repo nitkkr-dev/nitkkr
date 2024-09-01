@@ -46,7 +46,7 @@ export default async function MembershipAndPrivileges({
       periodOfLoan: 'Full Semester',
     },
   ];
-  const text = (await getTranslations(locale)).Section.CentralLibrary
+  const text = (await getTranslations(locale)).Section.Library
     .MembershipPrivileges;
   return (
     <>
@@ -72,8 +72,8 @@ export default async function MembershipAndPrivileges({
             </TableHeader>
 
             <TableBody>
-              {LoanTableData.map((entry, idx) => (
-                <TableRow key={idx}>
+              {LoanTableData.map((entry, index) => (
+                <TableRow key={index}>
                   <TableCell>{entry.category}</TableCell>
                   <TableCell>{entry.noOfBooksLoan}</TableCell>
                   <TableCell>{entry.periodOfLoan}</TableCell>
@@ -91,56 +91,56 @@ export default async function MembershipAndPrivileges({
           heading="h3"
           href="#heading"
           id="heading"
-          text={text.privileges}
+          text={text.privileges.title}
         />
         <article className="container mb-10">
-          <h4>{text.Privileges.conditionOnLoan}</h4>
+          <h4>{text.privileges.conditionOnLoan}</h4>
           <ol className="container flex list-decimal flex-col space-y-2">
             <li>
-              <p>{text.Privileges.conditionOnLoanOne}</p>
+              <p>{text.privileges.conditionOnLoanOne}</p>
             </li>
             <li>
-              <p>{text.Privileges.conditionOnLoanTwo}</p>
+              <p>{text.privileges.conditionOnLoanTwo}</p>
             </li>
             <li>
-              <p>{text.Privileges.conditionOnLoanThree}</p>
+              <p>{text.privileges.conditionOnLoanThree}</p>
             </li>
             <li>
-              <p>{text.Privileges.conditionOnLoanFour}</p>
+              <p>{text.privileges.conditionOnLoanFour}</p>
             </li>
           </ol>
         </article>
 
         <article className="container mb-10">
-          <h4>{text.Privileges.lossOfBooks}</h4>
-          <p>{text.Privileges.lossOfBooksDescription}</p>
+          <h4>{text.privileges.lossOfBooks}</h4>
+          <p>{text.privileges.lossOfBooksDescription}</p>
         </article>
 
         <article className="container mb-10">
-          <h4>{text.Privileges.careOfBooks}</h4>
+          <h4>{text.privileges.careOfBooks}</h4>
           <ol className="container flex list-decimal flex-col space-y-2">
             <li>
-              <p>{text.Privileges.careofBooksDescriptionOne}</p>
+              <p>{text.privileges.careofBooksDescriptionOne}</p>
             </li>
             <li>
-              <p>{text.Privileges.careofBooksDescriptionTwo}</p>
+              <p>{text.privileges.careofBooksDescriptionTwo}</p>
             </li>
           </ol>
         </article>
 
         <article className="container">
-          <h4>{text.Privileges.otherFacilities}</h4>
+          <h4>{text.privileges.otherFacilities}</h4>
           <ol className="container flex list-disc flex-col space-y-2">
             <li>
               <p>
-                <b>{text.Privileges.reprographicFacilities}</b>
-                {text.Privileges.reprographicFacilitiesDescription}
+                <strong>{text.privileges.reprographicFacilities}</strong>
+                {text.privileges.reprographicFacilitiesDescription}
               </p>
             </li>
             <li>
               <p>
-                <b>{text.Privileges.binding}</b>
-                {text.Privileges.bindingDescription}
+                <strong>{text.privileges.binding}</strong>
+                {text.privileges.bindingDescription}
               </p>
             </li>
           </ol>
