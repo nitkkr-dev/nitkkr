@@ -43,7 +43,7 @@ export default async function Clubs({
                 alt={alias ?? name}
                 className="h-16 min-w-16 rounded-md"
                 height={0}
-                src={`clubs/${urlName}/logo.png`}
+                src={`clubs/${urlName}/nitlogo.png`}
                 width={0}
               />
               <section>

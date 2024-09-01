@@ -31,7 +31,7 @@ export default async function StudentActivities({
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
         ]}
-        src="assets/admin-block.png"
+        src="student-activities/header.jpg"
       />
 
       <Heading
@@ -88,7 +88,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
                 alt={alias ?? name}
                 className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
                 height={0}
-                src={`clubs/${urlName}/logo.png`}
+                src={`clubs/${urlName}/nitlogo.png`}
                 width={0}
               />
               {alias ?? name}
