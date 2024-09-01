@@ -25,8 +25,7 @@ export const hostels = pgTable('hostels', {
 
 export const hostelsRelations = relations(hostels, ({ many }) => ({
   hostelStaff: many(hostelStaff),
-  wardens: many(faculty, { relationName: 'wardens' }),
-  deputyWardens: many(faculty, { relationName: 'deputy_wardens' }),
+  hostelFaculty: many(hostelFaculty),
 }));
 
 export const hostelStaff = pgTable('hostel_staff', {
@@ -47,5 +46,26 @@ export const hostelStaffRelations = relations(hostelStaff, ({ one }) => ({
   staff: one(staff, {
     fields: [hostelStaff.staffId],
     references: [staff.id],
+  }),
+}));
+
+export const hostelFaculty = pgTable('hostel_faculty', {
+  hostelId: serial('hostel_id')
+    .references(() => hostels.id)
+    .notNull(),
+  facultyId: serial('faculty_id')
+    .references(() => faculty.id)
+    .notNull(),
+  post: varchar('post', { enum: ['warden', 'deputy_warden'] }).notNull(),
+});
+
+export const hostelFacultyRelations = relations(hostelFaculty, ({ one }) => ({
+  hostel: one(hostels, {
+    fields: [hostelFaculty.hostelId],
+    references: [hostels.id],
+  }),
+  faculty: one(faculty, {
+    fields: [hostelFaculty.facultyId],
+    references: [faculty.id],
   }),
 }));
