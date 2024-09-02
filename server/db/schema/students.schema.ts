@@ -12,9 +12,15 @@ export const students = pgTable('students', {
 
   // Guardian Info
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),
+  fathersTelephoneCountryCode: varchar('fathers_telephone_country_code', {
+    length: 3,
+  }).notNull(),
   fathersTelephone: varchar('fathers_telephone', { length: 13 }).notNull(),
   fathersEmail: varchar('fathers_email', { length: 256 }),
   mothersName: varchar('mothers_name', { length: 100 }),
+  mothersTelephoneCountryCode: varchar('mothers_telephone_country_code', {
+    length: 3,
+  }),
   mothersTelephone: varchar('mothers_telephone'),
   localGuardiansName: varchar('local_guardians_name', { length: 100 }),
   localGuardiansTelephone: varchar('local_guardians_telephone', {

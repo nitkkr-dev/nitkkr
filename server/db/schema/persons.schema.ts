@@ -18,7 +18,9 @@ export const persons = pgTable(
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 256 }).notNull(),
     email: varchar('email', { length: 256 }).notNull(),
+    countryCode: varchar('country_code', { length: 3 }),
     telephone: varchar('telephone', { length: 13 }).notNull(),
+    alternateCountryCode: varchar('alternate_country_code', { length: 3 }),
     alternateTelephone: varchar('alternate_telephone', { length: 13 }),
 
     sex: varchar('sex', { enum: ['M', 'F', 'O'] }).notNull(),
