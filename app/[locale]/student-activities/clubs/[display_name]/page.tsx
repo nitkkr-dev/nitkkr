@@ -40,10 +40,10 @@ export default async function Club({
     with: {
       clubMembers: true,
       clubSocials: true,
-      clubNotifications: true,
+      // clubNotifications: true,
       facultyIncharge1: true,
       facultyIncharge2: true,
-      facultyIncharge3: true,
+      // facultyIncharge3: true,
     },
   });
 
@@ -147,6 +147,36 @@ export default async function Club({
     },
   ];
 
+  const dummyNotifications = [
+    {
+      content: 'Meeting scheduled for all club members at 5 PM.',
+      updatedAt: new Date('2024-09-01T14:30:00Z'),
+    },
+    {
+      content: 'New event: Coding Marathon on 12th September. Register now!',
+      updatedAt: new Date('2024-09-02T10:15:00Z'),
+    },
+    {
+      content: 'Reminder: Submit your project reports by Friday.',
+      updatedAt: new Date('2024-09-03T08:45:00Z'),
+    },
+    {
+      content: "Club membership renewals are open. Don't forget to renew!",
+      updatedAt: new Date('2024-09-04T11:00:00Z'),
+    },
+    {
+      content: 'Workshop on Android development scheduled for next week.',
+      updatedAt: new Date('2024-09-05T09:30:00Z'),
+    },
+  ];
+
+  const dummyClubData = {
+    howToJoinUs:
+      'To join our club, simply fill out the membership form available on our website or attend our weekly meetings held every Friday at 5 PM in the main auditorium.',
+    whyToJoinUs:
+      'Joining our club gives you the opportunity to network with like-minded individuals, enhance your skills through various workshops, and participate in exciting events and competitions throughout the year.',
+  };
+
   return (
     <>
       <ImageHeader src={`clubs/${display_name}/banner.png`} />
@@ -199,7 +229,7 @@ export default async function Club({
               heading="h3"
               text={text.club.howToJoinUs.toUpperCase()}
             />
-            <p>{club?.howToJoinUs}</p>
+            <p>{dummyClubData?.howToJoinUs}</p>
 
             <Heading
               className="!mb-0"
@@ -207,14 +237,14 @@ export default async function Club({
               heading="h3"
               text={text.club.whyToJoinUs.toUpperCase()}
             />
-            <p>{club?.whyToJoinUs}</p>
+            <p>{dummyClubData?.whyToJoinUs}</p>
           </section>
 
           <Image
             alt={text.club.howToJoinUs}
             className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
             height={0}
-            src={`club/${display_name}/why-and-how-to-join.png`}
+            src={facultyInchage[0].image}
             width={0}
           />
         </article>
@@ -236,10 +266,11 @@ export default async function Club({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {club?.clubNotifications.map((note, i) => (
+              {/* {club?.clubNotifications.map((note, i) => ( */}
+              {dummyNotifications.map((note, i) => (
                 <TableRow key={i}>
                   <TableCell>{note.content}</TableCell>
-                  <TableCell>{note.updatedAt.toISOString()}</TableCell>
+                  <TableCell>{note.updatedAt.toDateString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -282,11 +313,11 @@ export default async function Club({
           heading="h2"
           text={text.club.faculty.toUpperCase()}
         />
-        <ul className="flex w-full flex-col flex-wrap items-center gap-10 bg-neutral-50 md:flex-row">
+        <ul className="flex w-full flex-col flex-wrap items-center gap-10 md:flex-row">
           {facultyInchage.map((faculty, idx) => (
             <li
               key={idx}
-              className="bg-white flex w-[80%] flex-col items-center rounded-lg border border-primary-500 p-4 sm:w-full sm:flex-row lg:w-[48%]"
+              className="flex w-[80%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
             >
               <Image
                 src={faculty.image}
@@ -297,7 +328,7 @@ export default async function Club({
               />
               <section className="ml-6 mt-4 space-y-8 text-center md:mt-0 lg:text-left">
                 <>
-                  <h2 className="text-gray-800 m-0 text-2xl font-semibold">
+                  <h2 className="text-gray-800 m-0 text-start text-2xl font-semibold">
                     {faculty.name}
                   </h2>
                   <span className="text-gray-600 text-lg">{faculty.title}</span>
@@ -409,7 +440,7 @@ export default async function Club({
         )}
 
         {/* socials */}
-        <ul className="ml-auto flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-10">
+        <ul className="ml-auto mt-16 flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-10">
           {club?.clubSocials.map((social, i) => (
             <li
               key={i}

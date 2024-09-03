@@ -67,10 +67,10 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     fields: [clubs.facultyInchargeId2],
     references: [faculty.id],
   }),
-  facultyIncharge3: one(faculty, {
-    relationName: 'facultyIncharge3',
-    fields: [clubs.facultyInchargeId3],
-    references: [faculty.id],
-  }),
-  clubNotifications: many(notifications),
+  // facultyIncharge3: one(faculty, {
+  //   relationName: 'facultyIncharge3',
+  //   fields: [clubs.facultyInchargeId3],
+  //   references: [faculty.id],
+  // }),
+  // clubNotifications: many(notifications),
 }));
