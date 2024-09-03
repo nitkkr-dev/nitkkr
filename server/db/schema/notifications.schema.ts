@@ -23,7 +23,7 @@ export const notifications = pgTable(
     updatedAt: timestamp('updated_at')
       .$onUpdate(() => new Date())
       .notNull(),
-    clubId: integer('club_id').references(() => clubs.id),
+    // clubId: integer('club_id').references(() => clubs.id),
   },
   (notifications) => {
     return {
