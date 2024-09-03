@@ -1,4 +1,14 @@
-import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import {
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uniqueIndex,
+  varchar,
+} from 'drizzle-orm/pg-core';
+
+import { clubs } from '.';
 
 export const notifications = pgTable(
   'notifications',
@@ -16,6 +26,13 @@ export const notifications = pgTable(
       .timestamp()
       .$onUpdate(() => new Date())
       .notNull(),
-  }),
-  (table) => [uniqueIndex('notifications_title_idx').on(table.title)]
+    clubId: integer('club_id').references(() => clubs.id),
+  },
+  (notifications) => {
+    return {
+      notificationsTitleIndex: uniqueIndex('notifications_title_idx').on(
+        notifications.title
+      ),
+    };
+  }
 );

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { MdMailOutline } from 'react-icons/md';
+import { MdEmail, MdMailOutline, MdOutlineLocalPhone } from 'react-icons/md';
 import { LuFacebook } from 'react-icons/lu';
 
 import { GalleryCarousel } from '~/components/carousels';
@@ -40,8 +40,10 @@ export default async function Club({
     with: {
       clubMembers: true,
       clubSocials: true,
+      clubNotifications: true,
       facultyIncharge1: true,
       facultyIncharge2: true,
+      facultyIncharge3: true,
     },
   });
 
@@ -83,6 +85,68 @@ export default async function Club({
     facebook: <LuFacebook className="size-14" />,
   };
 
+  const events = [
+    {
+      title: 'Event 1',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      title: 'Event 2',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      title: 'Event 3',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      title: 'Event 4',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      title: 'Event 5',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+  ];
+
+  const facultyInchage = [
+    {
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      name: 'Awdesh Kumar',
+      title: 'HOD Computer Engineering',
+      email: 'awdesh@gmail.com',
+      phone: '1234567890',
+    },
+    {
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      name: 'Awdesh Kumar',
+      title: 'HOD Computer Engineering',
+      email: 'awdesh@gmail.com',
+      phone: '1234567890',
+    },
+  ];
+
   return (
     <>
       <ImageHeader src={`clubs/${display_name}/banner.png`} />
@@ -97,6 +161,7 @@ export default async function Club({
         <h1 className="mx-2 my-auto text-4xl">{display_name.toUpperCase()}</h1>
       </header>
       <main className="container">
+        {/* about */}
         <Heading
           glyphDirection="rtl"
           heading="h2"
@@ -119,6 +184,140 @@ export default async function Club({
             width={0}
           />
         </article>
+        {/* why and how to join */}
+        <article
+          className={cn(
+            'container md:flex md:gap-2',
+            'md:my-12 lg:my-16 xl:my-20'
+          )}
+          id="why and how to join"
+        >
+          <section className="md:w-1/2">
+            <Heading
+              className="!mb-0"
+              glyphDirection="ltr"
+              heading="h3"
+              text={text.club.howToJoinUs.toUpperCase()}
+            />
+            <p>{club?.howToJoinUs}</p>
+
+            <Heading
+              className="!mb-0"
+              glyphDirection="ltr"
+              heading="h3"
+              text={text.club.whyToJoinUs.toUpperCase()}
+            />
+            <p>{club?.whyToJoinUs}</p>
+          </section>
+
+          <Image
+            alt={text.club.howToJoinUs}
+            className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
+            height={0}
+            src={`club/${display_name}/why-and-how-to-join.png`}
+            width={0}
+          />
+        </article>
+
+        {/* notifications */}
+        <Heading
+          className="container"
+          glyphDirection="dual"
+          heading="h3"
+          id=""
+          text={text.club.notification.toUpperCase()}
+        />
+        <section className="container w-full">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Note</TableHead>
+                <TableHead>Date</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {club?.clubNotifications.map((note, i) => (
+                <TableRow key={i}>
+                  <TableCell>{note.content}</TableCell>
+                  <TableCell>{note.updatedAt.toISOString()}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </section>
+
+        {/* Events */}
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          text={text.club.event.toUpperCase()}
+        />
+        <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {events.map((event, i) => (
+            <li key={i} className="w-auto">
+              <Link
+                href={{
+                  pathname: `/${locale}/student-activities/clubs/${display_name}/event`,
+                  query: { club_event: JSON.stringify(event) },
+                }}
+              >
+                <Card className="flex h-64 w-full flex-col justify-between border-none">
+                  <CardContent
+                    className="relative flex h-full w-full justify-center rounded-lg bg-cover p-4"
+                    style={{ backgroundImage: `url(${event.image[0]})` }}
+                  >
+                    <h1 className="my-auto text-4xl font-bold text-background">
+                      {event.title}
+                    </h1>
+                  </CardContent>
+                </Card>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Faculty incharge */}
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          text={text.club.faculty.toUpperCase()}
+        />
+        <ul className="flex w-full flex-col flex-wrap items-center gap-10 bg-neutral-50 md:flex-row">
+          {facultyInchage.map((faculty, idx) => (
+            <li
+              key={idx}
+              className="bg-white flex w-[80%] flex-col items-center rounded-lg border border-primary-500 p-4 sm:w-full sm:flex-row lg:w-[48%]"
+            >
+              <Image
+                src={faculty.image}
+                alt={faculty.name}
+                width={200}
+                height={200}
+                className="h-52  w-52 rounded-lg "
+              />
+              <section className="ml-6 mt-4 space-y-8 text-center md:mt-0 lg:text-left">
+                <>
+                  <h2 className="text-gray-800 m-0 text-2xl font-semibold">
+                    {faculty.name}
+                  </h2>
+                  <span className="text-gray-600 text-lg">{faculty.title}</span>
+                </>
+                <section>
+                  <span className="flex items-center space-x-2">
+                    <MdEmail className="text-primary-700" />
+                    <span className="text-gray-600">{faculty.email}</span>
+                  </span>
+                  <span className="mt-2 flex items-center space-x-2">
+                    <MdOutlineLocalPhone className="text-primary-700" />
+                    <span className="text-gray-600">{faculty.phone}</span>
+                  </span>
+                </section>
+              </section>
+            </li>
+          ))}
+        </ul>
+
+        {/* post holders */}
         <Heading
           glyphDirection="ltr"
           heading="h2"
@@ -152,10 +351,12 @@ export default async function Club({
             </li>
           ))}
         </ul>
+
+        {/* members */}
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="rtl"
           heading="h2"
-          text={text.club.ourmMembers.toUpperCase()}
+          text={text.club.ourMembers.toUpperCase()}
         />
         <Table>
           <TableHeader>
@@ -183,6 +384,8 @@ export default async function Club({
             ))}
           </TableBody>
         </Table>
+
+        {/* gallery */}
         {imageCount !== 0 && (
           <article className="container" id="gallery">
             <Heading
@@ -204,11 +407,8 @@ export default async function Club({
             </GalleryCarousel>
           </article>
         )}
-        <Heading
-          glyphDirection="rtl"
-          heading="h2"
-          text={text.club.contacts.toUpperCase()}
-        />
+
+        {/* socials */}
         <ul className="ml-auto flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-10">
           {club?.clubSocials.map((social, i) => (
             <li
