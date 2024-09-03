@@ -9,6 +9,7 @@ export * from './deans.schema';
 export * from './department-heads.schema';
 export * from './departments.schema';
 export * from './doctorates.schema';
+export * from './events';
 export * from './faculty.schema';
 export * from './faq.schema';
 export * from './majors.schema';

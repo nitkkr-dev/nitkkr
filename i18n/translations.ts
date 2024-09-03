@@ -14,15 +14,19 @@ export interface Translations {
   };
   club: {
     about: string;
-    ourmMembers: string;
-    postHolders: string;
-    gallery: string;
-    contacts: string;
-    rollNumber: string;
-    name: string;
     batch: string;
     degree: string;
+    event: string;
+    faculty: string;
+    gallery: string;
+    howToJoinUs: string;
+    ourMembers: string;
     major: string;
+    name: string;
+    notification: string;
+    postHolders: string;
+    rollNumber: string;
+    whyToJoinUs: string;
   };
   Clubs: { title: string };
   Committee: {
