@@ -30,6 +30,62 @@ export async function generateStaticParams() {
   return await db.select({ display_name: clubs.urlName }).from(clubs);
 }
 
+interface ClubEvent {
+  id: number;
+  title: string;
+  date: string;
+  image: [string];
+  description: string;
+}
+
+const events = [
+  {
+    id: 0,
+    title: 'Event 1',
+    date: '2021-10-10',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+    ],
+    description: 'This is the description of the event',
+  },
+  {
+    id: 1,
+    title: 'Event 2',
+    date: '2021-10-10',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+    ],
+    description: 'This is the description of the event',
+  },
+  {
+    id: 2,
+    title: 'Event 3',
+    date: '2021-10-10',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+    ],
+    description: 'This is the description of the event',
+  },
+  {
+    id: 3,
+    title: 'Event 4',
+    date: '2021-10-10',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+    ],
+    description: 'This is the description of the event',
+  },
+  {
+    id: 4,
+    title: 'Event 5',
+    date: '2021-10-10',
+    image: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+    ],
+    description: 'This is the description of the event',
+  },
+] as ClubEvent[];
+
 export default async function Club({
   params: { locale, display_name },
 }: {
@@ -85,49 +141,6 @@ export default async function Club({
     facebook: <LuFacebook className="size-14" />,
   };
 
-  const events = [
-    {
-      title: 'Event 1',
-      date: '2021-10-10',
-      image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      ],
-      description: 'This is the description of the event',
-    },
-    {
-      title: 'Event 2',
-      date: '2021-10-10',
-      image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      ],
-      description: 'This is the description of the event',
-    },
-    {
-      title: 'Event 3',
-      date: '2021-10-10',
-      image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      ],
-      description: 'This is the description of the event',
-    },
-    {
-      title: 'Event 4',
-      date: '2021-10-10',
-      image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      ],
-      description: 'This is the description of the event',
-    },
-    {
-      title: 'Event 5',
-      date: '2021-10-10',
-      image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      ],
-      description: 'This is the description of the event',
-    },
-  ];
-
   const facultyInchage = [
     {
       image:
@@ -179,7 +192,10 @@ export default async function Club({
 
   return (
     <>
-      <ImageHeader src={`clubs/${display_name}/banner.png`} />
+      <ImageHeader
+        src={`clubs/${display_name}/banner.png`}
+        className="container"
+      />
       <header className="container m-auto flex items-center justify-center">
         <Image
           alt={display_name}
@@ -197,7 +213,7 @@ export default async function Club({
           heading="h2"
           text={text.club.about.toUpperCase()}
         />
-        <article className="flex drop-shadow max-md:flex-col">
+        <article className="flex drop-shadow max-md:flex-col md:gap-4">
           <p
             className={cn(
               'p-2 sm:p-3 md:p-4',
@@ -208,7 +224,7 @@ export default async function Club({
           </p>
           <Image
             alt={display_name}
-            className="w-full max-md:rounded-b md:order-first md:rounded-l"
+            className="w-full max-md:rounded-b md:order-first md:rounded-lg"
             height={0}
             src={`clubs/${display_name}/about.png`}
             width={0}
@@ -216,29 +232,20 @@ export default async function Club({
         </article>
         {/* why and how to join */}
         <article
-          className={cn(
-            'container md:flex md:gap-2',
-            'md:my-12 lg:my-16 xl:my-20'
-          )}
+          className={cn('md:flex md:gap-2', 'md:my-12 lg:my-16 xl:my-20')}
           id="why and how to join"
         >
-          <section className="md:w-1/2">
-            <Heading
-              className="!mb-0"
-              glyphDirection="ltr"
-              heading="h3"
-              text={text.club.howToJoinUs.toUpperCase()}
-            />
-            <p>{dummyClubData?.howToJoinUs}</p>
+          <article className="flex flex-col justify-center space-y-10 md:w-1/2">
+            <section>
+              <h3>{text.club.howToJoinUs}</h3>
+              <p>{dummyClubData?.howToJoinUs}</p>
+            </section>
 
-            <Heading
-              className="!mb-0"
-              glyphDirection="ltr"
-              heading="h3"
-              text={text.club.whyToJoinUs.toUpperCase()}
-            />
-            <p>{dummyClubData?.whyToJoinUs}</p>
-          </section>
+            <section>
+              <h3>{text.club.whyToJoinUs}</h3>
+              <p>{dummyClubData?.whyToJoinUs}</p>
+            </section>
+          </article>
 
           <Image
             alt={text.club.howToJoinUs}
@@ -251,13 +258,12 @@ export default async function Club({
 
         {/* notifications */}
         <Heading
-          className="container"
-          glyphDirection="dual"
-          heading="h3"
-          id=""
+          glyphDirection="ltr"
+          heading="h2"
+          id="notifications"
           text={text.club.notification.toUpperCase()}
         />
-        <section className="container w-full">
+        <section className="w-full">
           <Table>
             <TableHeader>
               <TableRow>
@@ -287,9 +293,10 @@ export default async function Club({
           {events.map((event, i) => (
             <li key={i} className="w-auto">
               <Link
+                scroll={false}
                 href={{
                   pathname: `/${locale}/student-activities/clubs/${display_name}/event`,
-                  query: { club_event: JSON.stringify(event) },
+                  query: { club_event: event.id },
                 }}
               >
                 <Card className="flex h-64 w-full flex-col justify-between border-none">
@@ -313,7 +320,7 @@ export default async function Club({
           heading="h2"
           text={text.club.faculty.toUpperCase()}
         />
-        <ul className="flex w-full flex-col flex-wrap items-center gap-10 md:flex-row">
+        <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
           {facultyInchage.map((faculty, idx) => (
             <li
               key={idx}
@@ -328,7 +335,7 @@ export default async function Club({
               />
               <section className="ml-6 mt-4 space-y-8 text-center md:mt-0 lg:text-left">
                 <>
-                  <h2 className="text-gray-800 m-0 text-start text-2xl font-semibold">
+                  <h2 className="text-gray-800 m-0 text-start text-2xl">
                     {faculty.name}
                   </h2>
                   <span className="text-gray-600 text-lg">{faculty.title}</span>
@@ -418,7 +425,7 @@ export default async function Club({
 
         {/* gallery */}
         {imageCount !== 0 && (
-          <article className="container" id="gallery">
+          <article id="gallery">
             <Heading
               glyphDirection="rtl"
               heading="h2"

@@ -4,6 +4,7 @@ import { GalleryCarousel } from '~/components/carousels';
 import { Dialog } from '~/components/dialog';
 
 interface ClubEvent {
+  id: number;
   title: string;
   date: string;
   image: [string];
@@ -16,7 +17,56 @@ export default function EventPage({
   params: { locale: string };
   searchParams: { club_event: string };
 }) {
-  const clubEvent = JSON.parse(searchParams.club_event) as ClubEvent;
+  const events = [
+    {
+      id: 0,
+      title: 'Event 1',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      id: 1,
+      title: 'Event 2',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      id: 2,
+      title: 'Event 3',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      id: 3,
+      title: 'Event 4',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+    {
+      id: 4,
+      title: 'Event 5',
+      date: '2021-10-10',
+      image: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      ],
+      description: 'This is the description of the event',
+    },
+  ] as ClubEvent[];
+
+  const id = parseInt(searchParams.club_event);
+  const clubEvent = events[id];
   const imageCount = clubEvent.image.length;
 
   return (

@@ -5,5 +5,5 @@ export default function Event({
 }: {
   params: { locale: string; display_name: string };
 }) {
-  redirect(`/${locale}/student-activities/clubs/${display_name}/events`);
+  redirect(`/${locale}/student-activities/clubs/${display_name}`);
 }
