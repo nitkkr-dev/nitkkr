@@ -2,8 +2,8 @@ import type { Translations } from './translations';
 
 const text: Translations = {
   Administration: {
-    welcome: 'Welcome to the Administration Section',
-    boardOfGovernors: 'Board of Governors',
+    title: 'Administration Section',
+    boardOfGoverners: 'Board of Governers',
     buildingAndWork: 'Building & Work Committee',
     financial: 'Financial Committee',
     senate: 'Senate',
@@ -12,7 +12,8 @@ const text: Translations = {
     deans: 'Deans',
     and: 'and',
     description:
-      'Our Department has rapidly advanced, modernizing labs with cutting-edge facilities and aligning curricula with industry demands. Faculty excel in innovative hardware design, signal processing, VLSI design, and data communication systems, contributing significantly to research. Our robust infrastructure supports UG, PG, and Ph.D. programs, while our computer center, equipped with state-of-the-art PCs and networking resources, empowers students, faculty, and staff alike.',
+      'Our Department offers diverse programs and has grown significantly, modernizing laboratories with state-of-the-art facilities, aligning the curriculum with industry needs, enhancing student placements, and promoting impactful faculty research. excel in innovative hardware design, modeling, and algorithm development, particularly in data communication, wireless networks, signal processing, and VLSI design. With robust infrastructure and well-equipped computer centers, we support UG, PG, and Ph.D. programs, providing comprehensive resources for students, faculty, and staff.',
+    about: 'About',
   },
   Main: {
     director: {
