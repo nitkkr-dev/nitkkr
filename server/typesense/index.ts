@@ -28,5 +28,5 @@ if (env.NODE_ENV !== 'production') globalForTypesense.typesense = typesense;
 
 export * from './init';
 export * from './sample';
-export * as schema from './schema';
+export * from './collections';
 export * from './utils';
