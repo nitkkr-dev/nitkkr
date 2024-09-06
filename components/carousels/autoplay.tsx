@@ -1,6 +1,7 @@
 'use client';
 
 import Autoplay, { type AutoplayOptionsType } from 'embla-carousel-autoplay';
+import Fade from 'embla-carousel-fade';
 
 import { Carousel, type CarouselProps } from '~/components/carousels';
 
@@ -18,7 +19,7 @@ const AutoplayCarousel = ({
       className="w-full"
       opts={{ loop: true, align: 'center' }}
       onHoverKeyboardControls
-      plugins={[Autoplay(autoplayOptions)]}
+      plugins={[Autoplay(autoplayOptions), Fade()]}
       {...carouselProps}
     >
       {children}
