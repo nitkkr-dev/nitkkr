@@ -27,11 +27,6 @@ export const clubs = pgTable('clubs', {
   tagline: varchar('tagline', { length: 256 }).notNull(),
   email: varchar('email', { length: 256 }).notNull(),
   aboutUs: varchar('about_us').notNull(),
-  howToJoinUs: varchar('how_to_join_us').notNull(),
-  whyToJoinUs: varchar('why_to_join_us').notNull(),
-  notifications: varchar('notifications')
-    .array()
-    .default(sql`'{}'`),
   category: varchar('category', {
     enum: ['committee', 'cultural', 'crew', 'technical'],
   }).notNull(),
@@ -40,9 +35,6 @@ export const clubs = pgTable('clubs', {
     .references(() => faculty.id)
     .notNull(),
   facultyInchargeId2: integer('faculty_incharge_id2').references(
-    () => faculty.id
-  ),
-  facultyInchargeId3: integer('faculty_incharge_id3').references(
     () => faculty.id
   ),
   isActive: boolean('is_active').default(true).notNull(),
@@ -71,11 +63,6 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
   facultyIncharge2: one(faculty, {
     relationName: 'facultyIncharge2',
     fields: [clubs.facultyInchargeId2],
-    references: [faculty.id],
-  }),
-  facultyIncharge3: one(faculty, {
-    relationName: 'facultyIncharge3',
-    fields: [clubs.facultyInchargeId3],
     references: [faculty.id],
   }),
 }));
