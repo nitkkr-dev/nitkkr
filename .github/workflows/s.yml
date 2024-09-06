@@ -1,0 +1,52 @@
+name: GDrive to S3 Upload
+
+on:
+  push:
+    branches:
+      - feat/drive-to-s3
+
+jobs:
+  upload-to-s3:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout repository (optional if you need repo files)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      # Step 3: Download folder from Google Drive
+      - name: Set up Google Drive API
+        run: |
+          sudo apt-get install -y python3-pip
+          pip install gdown
+
+      - name: Download folder from Google Drive
+        run: |
+          gdown https://drive.google.com/uc?id=1YLdE1YjT1qSU8ank-ZVhYs5cl0jQohS8 -O downloaded_folder.zip
+
+      # Step 4: Unzip the downloaded folder
+      - name: Unzip downloaded folder
+        run: unzip downloaded_folder.zip -d downloaded_folder
+
+      # Step 5: Rename existing S3 folder to backup
+      - name: Rename S3 folder to backup
+        run: |
+          aws s3 mv s3://isac-nitkkr-public/isaac-s3-images/ s3://isac-nitkkr-public/isaac-s3-images-backup/ --recursive
+
+      # Step 6: Upload the downloaded folder to S3
+      - name: Upload folder to S3
+        run: |
+          aws s3 cp downloaded_folder/ s3://isac-nitkkr-public/isaac-s3-images/ --recursive
+
+      # Step 7: Delete backup folder from S3 (only if previous steps were successful)
+      - name: Delete backup folder from S3
+        if: success()
+        run: |
+          aws s3 rm s3://isac-nitkkr-public/isaac-s3-images-backup/ --recursive
