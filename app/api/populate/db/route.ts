@@ -28,8 +28,24 @@ import { populate as populateFromSample } from '~/server/db/sample';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const from = searchParams.get('from') === 'csv' ? 'csv' : 'sample';
-  const truncate = (searchParams.get('truncate') ?? 'true') === 'true';
+  const from =
+    searchParams.get('from') === 'csv'
+      ? 'csv'
+      : searchParams.get('from') === 'sample'
+        ? 'sample'
+        : undefined;
+  const truncate =
+    searchParams.get('truncate') === 'true'
+      ? true
+      : searchParams.get('truncate') === 'false'
+        ? false
+        : undefined;
+  if (from === undefined || truncate === undefined) {
+    return Response.json({
+      status: 500,
+      message: 'search params incorrect or insufficient',
+    });
+  }
 
   if (truncate) {
     await db.delete(notifications);
