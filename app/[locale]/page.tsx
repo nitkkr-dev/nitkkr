@@ -14,15 +14,24 @@ import {
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
-import { type notifications } from '~/server/db';
+import { type events, type notifications } from '~/server/db';
+
+import Events from './events';
 
 export default async function Home({
   params: { locale },
-  searchParams: { notificationCategory = 'academic' },
+  searchParams: {
+    notificationCategory = 'academic',
+    eventsCategory = 'featured',
+  },
 }: {
   params: { locale: string };
   searchParams: {
     notificationCategory?: (typeof notifications.category.enumValues)[number];
+    eventsCategory?:
+      | (typeof events.category.enumValues)[number]
+      | 'recents'
+      | 'featured';
   };
 }) {
   const text = (await getTranslations(locale)).Main;
@@ -125,6 +134,7 @@ export default async function Home({
       </AutoplayCarousel>
 
       <Notifications category={notificationCategory} locale={locale} />
+      <Events category={eventsCategory} locale={locale} />
 
       <section className="container mb-32 mt-10" id="directors-corner">
         <Heading

@@ -70,6 +70,17 @@ const text: Translations = {
     laboratories: 'प्रयोगशालाएँ',
     achievements: 'छात्र उपलब्धियाँ',
   },
+  Events: {
+    title: 'कार्यक्रम और समाचार',
+    categories: {
+      featured: 'विशेष',
+      recents: 'हाल ही में',
+      student: 'छात्र',
+      faculty: 'शिक्षक',
+    },
+    viewAll: 'सभी देखें',
+  },
+
   FacultyAndStaff: {
     placeholder: 'नाम या ईमेल से खोजें',
     departmentHead: 'विभागाध्यक्ष',
