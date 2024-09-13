@@ -25,13 +25,14 @@ export default async function Sections({
 }: {
   params: { locale: string };
 }) {
+  const text = (await getTranslations(locale)).Sections;
+
   const sections = await db.query.sections.findMany();
-  console.log('section =>', sections);
 
   const sectionIcons: Record<string, IconType> = {
     accounts: MdOutlineAccountBalance,
     'central-workshop': MdOutlineGroupWork,
-    'centre-of-computing-networking': BsHddNetworkFill,
+    'centre-of-computing-and-networking': BsHddNetworkFill,
     'electrical-maintenance': MdOutlineElectricalServices,
     estate: MdOutlineRealEstateAgent,
     'general-administration': MdOutlineAdminPanelSettings,
@@ -41,7 +42,6 @@ export default async function Sections({
     sports: MdOutlineSportsTennis,
     store: MdOutlineStore,
   };
-  const text = (await getTranslations(locale)).Sections;
 
   return (
     <main className="container">
