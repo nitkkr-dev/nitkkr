@@ -43,7 +43,7 @@
     "framer-motion": "^11.0.5",
     "jiti": "^1.21.0",
     "negotiator": "^0.6.3",
-    "next": "14.2.4",
+    "next": "^14.2.12",
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
