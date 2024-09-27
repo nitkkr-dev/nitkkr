@@ -1,0 +1,180 @@
+{
+  "events": [
+    {
+      "imageSrc": "events/image1.jpg",
+      "title": "Inter/NIT Results Out!",
+      "content": "The 2023/24 Inter NIT Tournaments in all sports have concluded recently, with the teams of NIT Kurukshetra putting forth a valiant effort and contributing to a successful event. The university's athletes showcased their dedication and sportsmanship, resulting in commendable performances across various disciplines.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2023/09/10",
+      "endDate": "2023/09/10",
+      "createdAt": "2023/09/10",
+      "updatedAt": "2023/09/10"
+    },
+    {
+      "imageSrc": "events/image2.jpg",
+      "title": "New Library Inauguration!",
+      "content": "The new library at NIT Kurukshetra was inaugurated with modern facilities and a large collection of books to enhance the learning experience for students.",
+      "category": "faculty",
+      "isFeatured": true,
+      "startDate": "2024/01/15",
+      "endDate": "2024/01/15",
+      "createdAt": "2024/01/15",
+      "updatedAt": "2024/01/15"
+    },
+    {
+      "imageSrc": "events/image3.jpg",
+      "title": "Alumni Meet 2024!",
+      "content": "NIT Kurukshetra hosted its annual alumni meet, welcoming graduates from various batches to reconnect and share their experiences with current students.",
+      "category": "student",
+      "isFeatured": false,
+      "startDate": "2024/02/28",
+      "endDate": "2024/02/28",
+      "createdAt": "2024/02/28",
+      "updatedAt": "2024/02/28"
+    },
+    {
+      "imageSrc": "events/image4.jpg",
+      "title": "Valorant Tournament in NIT",
+      "content": "The much/awaited Valorant Tournament is Live! Antriksh Kumar, the best player of the tournament, has been awarded a cash prize of Rs. 10,000, and Aditya Karna has been declared the worst Valorant player of the tournament.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2023/11/22",
+      "endDate": "2023/11/22",
+      "createdAt": "2023/11/22",
+      "updatedAt": "2023/11/22"
+    },
+    {
+      "imageSrc": "events/image5.jpg",
+      "title": "Campus Placement Success!",
+      "content": "The placement season at NIT Kurukshetra has been a huge success, with many students securing offers from top companies in various industries.",
+      "category": "student",
+      "isFeatured": false,
+      "startDate": "2024/05/20",
+      "endDate": "2024/05/20",
+      "createdAt": "2024/05/20",
+      "updatedAt": "2024/05/20"
+    },
+    {
+      "imageSrc": "events/image6.jpg",
+      "title": "Cultural Fest Brings Vibrancy!",
+      "content": "The Cultural Fest at NIT Kurukshetra brought vibrant performances, music, and dance, showcasing the diverse talents of the students.",
+      "category": "student",
+      "isFeatured": false,
+      "startDate": "2023/10/05",
+      "endDate": "2023/10/05",
+      "createdAt": "2023/10/05",
+      "updatedAt": "2023/10/05"
+    },
+    {
+      "imageSrc": "events/image7.jpg",
+      "title": "Workshop on AI and Machine Learning",
+      "content": "A special workshop on Artificial Intelligence and Machine Learning was conducted by the CSE department, attended by faculty and students to explore cutting/edge technologies and their applications.",
+      "category": "faculty",
+      "isFeatured": true,
+      "startDate": "2024/03/15",
+      "endDate": "2024/03/16",
+      "createdAt": "2024/03/15",
+      "updatedAt": "2024/03/16"
+    },
+    {
+      "imageSrc": "events/image8.jpg",
+      "title": "Hackathon 2024",
+      "content": "The annual Hackathon event was successfully held at NIT Kurukshetra, with students participating in innovative problem/solving and coding challenges.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2024/04/10",
+      "endDate": "2024/04/11",
+      "createdAt": "2024/04/10",
+      "updatedAt": "2024/04/11"
+    },
+    {
+      "imageSrc": "events/image9.jpg",
+      "title": "Faculty Development Program",
+      "content": "A faculty development program on modern teaching techniques and research methodologies was held at NIT Kurukshetra, aiming to enhance academic excellence.",
+      "category": "faculty",
+      "isFeatured": false,
+      "startDate": "2024/05/05",
+      "endDate": "2024/05/06",
+      "createdAt": "2024/05/05",
+      "updatedAt": "2024/05/06"
+    },
+    {
+      "imageSrc": "events/image10.jpg",
+      "title": "Coding Bootcamp 2024",
+      "content": "A two/week intensive coding bootcamp was organized, helping students develop their programming skills and prepare for tech competitions.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2024/06/20",
+      "endDate": "2024/07/03",
+      "createdAt": "2024/06/20",
+      "updatedAt": "2024/07/03"
+    },
+    {
+      "imageSrc": "events/image11.jpg",
+      "title": "NIT Sports Day 2024",
+      "content": "NIT Kurukshetra celebrated its annual Sports Day with great enthusiasm, featuring multiple competitions in athletics and team sports.",
+      "category": "student",
+      "isFeatured": false,
+      "startDate": "2024/02/05",
+      "endDate": "2024/02/05",
+      "createdAt": "2024/02/05",
+      "updatedAt": "2024/02/05"
+    },
+    {
+      "imageSrc": "events/image12.jpg",
+      "title": "Research Symposium 2024",
+      "content": "A research symposium was held at NIT Kurukshetra, where faculty presented their research papers and discussed future collaborations in academic research.",
+      "category": "faculty",
+      "isFeatured": true,
+      "startDate": "2024/09/12",
+      "endDate": "2024/09/12",
+      "createdAt": "2024/09/12",
+      "updatedAt": "2024/09/12"
+    },
+    {
+      "imageSrc": "events/image13.jpg",
+      "title": "Annual Science Fair 2024",
+      "content": "Students from various departments displayed their science and engineering projects at the annual science fair, showcasing innovations and creative problem/solving.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2024/08/18",
+      "endDate": "2024/08/19",
+      "createdAt": "2024/08/18",
+      "updatedAt": "2024/08/19"
+    },
+    {
+      "imageSrc": "events/image14.jpg",
+      "title": "New Research Lab Inauguration",
+      "content": "A new state/of/the/art research laboratory was inaugurated at NIT Kurukshetra, boosting faculty and student research capabilities.",
+      "category": "faculty",
+      "isFeatured": false,
+      "startDate": "2024/07/10",
+      "endDate": "2024/07/10",
+      "createdAt": "2024/07/10",
+      "updatedAt": "2024/07/10"
+    },
+    {
+      "imageSrc": "events/image15.jpg",
+      "title": "Cultural Evening 2024",
+      "content": "The Cultural Evening organized by the Student Council featured performances from different cultures, making it a vibrant celebration of diversity.",
+      "category": "student",
+      "isFeatured": true,
+      "startDate": "2024/10/22",
+      "endDate": "2024/10/22",
+      "createdAt": "2024/10/22",
+      "updatedAt": "2024/10/22"
+    },
+    {
+      "imageSrc": "events/image16.jpg",
+      "title": "Faculty/Student Interaction Program",
+      "content": "An interaction program was organized to foster better collaboration and communication between faculty and students, focusing on improving the academic environment.",
+      "category": "faculty",
+      "isFeatured": false,
+      "startDate": "2024/03/30",
+      "endDate": "2024/03/30",
+      "createdAt": "2024/03/30",
+      "updatedAt": "2024/03/30"
+    }
+  ]
+}
