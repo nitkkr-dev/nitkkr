@@ -118,6 +118,16 @@ const text: Translations = {
     },
     viewAll: 'View All',
   },
+  Events: {
+    title: 'EVENTS & NEWS',
+    categories: {
+      featured: 'Featured',
+      recents: 'Recents',
+      student: 'Student',
+      faculty: 'Faculty',
+    },
+    viewAll: 'View All',
+  },
   NotFound: {
     title: 'Not Found',
     description: 'Could not find requested resource',

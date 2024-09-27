@@ -106,6 +106,16 @@ export interface Translations {
     };
     viewAll: string;
   };
+  Events: {
+    title: string;
+    categories: {
+      featured: string;
+      recents: string;
+      student: string;
+      faculty: string;
+    };
+    viewAll: string;
+  };
   NotFound: { title: string; description: string; backHome: string };
   Profile: {
     logout: string;
