@@ -50,12 +50,6 @@ function extractPhoneNumber(
   }
   return null;
 }
-const adjustDate = (dateStr: string): Date => {
-  const [year, month, day] = dateStr.split('/').map(Number);
-  const date = new Date(year, month - 1, day);
-  date.setDate(date.getDate() + 2);
-  return date;
-};
 
 export async function populate() {
   const map: Record<string, number> = {};
@@ -68,51 +62,12 @@ export async function populate() {
     map[dept.name] = dept.id;
   }
 
-  const Csv = fs.readFileSync('staff-data.tsv', 'utf-8').split('\n');
+  const Csv = fs.readFileSync('sections.tsv', 'utf-8').split('\n');
   const Headers = Csv[0].split('\t');
-  // const staffCsv = fs.readFileSync('staff-data.tsv', 'utf-8').split('\n');
-  // const staffHeaders = staffCsv[0].split('\t');
 
-  // await db.transaction(async (tx) => {
-  //   for (let i = 1; i < staffCsv.length; i++) {
-  //     const staffData = convertToData(staffCsv[i], staffHeaders);
-
-  //     console.log(staffData);
-  //     const phone = extractPhoneNumber(staffData.Contact);
-  //     const { id } = await tx
-  //       .insert(schemas.persons)
-  //       .values({
-  //         type: 'staff',
-  //         name: staffData.Name,
-  //         email: staffData["Institute's Email ID"],
-  //         countryCode: phone?.countryCode,
-  //         telephone: phone?.number,
-  //         sex: staffData.Gender,
-  //         dateOfBirth: adjustDate(staffData['Date of Birth']),
-  //         createdOn: adjustDate(staffData['Date of Joining']),
-  //       })
-  //       .returning({ id: schemas.persons.id })
-  //       .then((res) => res[0]);
-
-  //     const deptId = await tx
-  //       .select({ id: schemas.departments.id })
-  //       .from(schemas.departments)
-  //       .where(eq(schemas.departments.name, staffData.Dept))
-  //       .then((res) => res[0].id);
-
-  //     const sectionId = await tx
-  //       .select({ id: schemas.sections.id })
-  //       .from(schemas.sections)
-  //       .where(eq(schemas.sections.name, staffData.Dept))
-  //       .then((res) => res[0].id);
-
-  //     await tx.insert(schemas.staff).values({
-  //       id: id,
-  //       employeeId: staffData['Emp No.'],
-  //       workingSectionId: sectionId,
-  //       designation: staffData.Designation,
-  //       workingDepartmentId: deptId,
-  //     });
-  //   }
-  // });
+  await db.transaction(async (tx) => {
+    for (let i = 1; i < Csv.length; i++) {
+      const Data = convertToData(Csv[i], Headers);
+    }
+  });
 }

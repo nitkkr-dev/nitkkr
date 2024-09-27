@@ -13,6 +13,7 @@ import {
   departments,
   doctorates,
   faculty,
+  hostels,
   majors,
   notifications,
   persons,
@@ -55,6 +56,7 @@ export async function GET(request: Request) {
     await db.delete(studentAcademicDetails);
     await db.delete(majors);
     await db.delete(doctorates);
+    await db.delete(hostels);
     await db.delete(staff);
     await db.delete(sections);
     await db.delete(deans);

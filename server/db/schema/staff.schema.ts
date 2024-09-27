@@ -16,13 +16,13 @@ export const staff = pgTable(
       .primaryKey()
       .references(() => persons.id),
     employeeId: varchar('employee_id', { length: 8 }).notNull(),
-    workingSectionId: smallint('working_section_id')
-      .references(() => sections.id)
-      .notNull(),
+    workingSectionId: smallint('working_section_id').references(
+      () => sections.id
+    ),
     designation: varchar('designation').notNull(),
-    workingDepartmentId: smallint('working_department_id')
-      .references(() => departments.id)
-      .notNull(),
+    workingDepartmentId: smallint('working_department_id').references(
+      () => departments.id
+    ),
   },
   (staff) => {
     return {
