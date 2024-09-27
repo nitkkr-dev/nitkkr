@@ -1,8 +1,8 @@
 import {
   getServerSession,
   type DefaultSession,
-  type DefaultUser,
   type NextAuthOptions,
+  type User,
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -10,33 +10,31 @@ import { env } from '~/lib/env';
 import { db, roles } from '~/server/db';
 
 declare module 'next-auth' {
-  // A nicer way to assert that `email` will not be
-  // undefined since we only use the Google provider as of now.
-  interface User extends DefaultUser {
-    email: string;
-  }
-
   interface Session extends DefaultSession {
-    person: {
-      id: number;
+    user: User & {
+      personId: number;
       name: string;
+      email: string;
+      type: 'faculty' | 'staff' | 'student';
       role: {
         permissions: (typeof roles.permissions.enumValues)[number][];
       } | null;
-      type: 'faculty' | 'staff' | 'student';
     };
-    user: User;
   }
 }
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session }) {
-      session.person = (await db.query.persons.findFirst({
+      const { id, name, type, role } = (await db.query.persons.findFirst({
         columns: { id: true, name: true, type: true },
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },
       }))!;
+      session.user.personId = id;
+      session.user.name = name;
+      session.user.type = type;
+      session.user.role = role;
       return session;
     },
     async signIn({ user: { email } }) {
