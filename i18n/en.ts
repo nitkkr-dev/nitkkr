@@ -20,7 +20,33 @@ const text: Translations = {
       more: 'Read more',
     },
   },
+  Academics: {
+    notifications: 'Notifications',
+    stats: 'Stats',
+    title: 'Academics',
+    departments: 'Departments',
+    programs: 'Programs',
+    courses: 'Courses',
+    regularFacultyMembers: 'Regular Faculty Members',
+    postGraduatePrograms: 'Post Graduate Programs',
+    underGraduatePrograms: 'Undergraduate Programs',
+    underGraduate: 'Under Graduate',
+    postGraduate: 'Post Graduate',
+    doctorate: 'Doctorate',
+    viewAll: 'View All',
+    convocation: 'Convocation',
+    awards: 'Awards',
+    scholarships: 'Scholarships',
 
+    departmentsDetails:
+      'The departments have all shown exponential growth, in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members. The faculty members have made a mark in the area of innovative hardware design, modeling & analysis and developing new techniques and algorithms, in the fields of data communication systems and wireless networks, signal processing and VLSI design.',
+    aboutDetail:
+      'NIT is a leading research university and the seventh-oldest  college in the India. At the heart of the University’s teaching, research  and scholarship is a commitment to academic excellence, intellectual  freedom and making an impact to better serve people, communities and  society. The University is renowned for its distinctive undergraduate  experience rooted in its flexible yet rigorous Open Curriculum.',
+    coursesDetails:
+      'The departments have all shown exponential growth, in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members.The faculty members have made a mark in the area of innovative hardware design, modeling & analysis and developing new techniques and algorithms, in the fields of data communication systems and wireless networks, signal processing and VLSI design.',
+    programmesDetails:
+      'The departments have all shown exponential growth, in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members.The faculty members have made a mark in the area of innovative hardware design, modeling & analysis and developing new techniques and algorithms, in the fields of data communication systems and wireless networks, signal processing and VLSI design.',
+  },
   Clubs: { title: 'CLUBS' },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
