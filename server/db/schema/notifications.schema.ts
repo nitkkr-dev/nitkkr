@@ -14,7 +14,7 @@ export const notifications = pgTable(
     title: varchar('title', { length: 256 }).unique().notNull(),
     content: text('content'),
     category: varchar('category', {
-      enum: ['academic', 'tender', 'workshop', 'recruitment'],
+      enum: ['academic', 'tender', 'workshop', 'recruitment', 'hostel'],
     }).notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at')
