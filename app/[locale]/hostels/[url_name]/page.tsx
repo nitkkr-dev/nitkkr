@@ -15,9 +15,7 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { db, hostels } from '~/server/db';
 
-export async function generateStaticParams() {
-  return await db.select({ url_name: hostels.urlName }).from(hostels);
-}
+export const dynamic = 'force-dynamic';
 
 export default async function Hostel({
   params: { locale, url_name },
