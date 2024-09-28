@@ -10,6 +10,11 @@ import { Button, HamburgerButton } from '~/components/buttons';
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import MaybeLink from '~/components/maybe-link';
+import {
+  NavigationMenu,
+  NavigationMenuCustomListItem,
+  NavigationMenuList,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -22,11 +27,84 @@ export default async function Header({ locale }: { locale: string }) {
   const isMacOS = agent.os.name === 'Mac OS';
 
   const items = [
-    { label: text.institute, href: 'institute' },
-    { label: text.academics, href: 'academics' },
+    {
+      label: text.institute,
+      href: 'institute',
+      listItems: [
+        {
+          title: 'Institute Profile',
+          href: '/institute/profile',
+          description:
+            'Get to know our institute’s vision, mission, and values.',
+        },
+        {
+          title: 'Administration',
+          href: '/institute/administration',
+          description: 'Meet the leadership team guiding our institution.',
+        },
+        {
+          title: 'Sections',
+          href: '/institute/sections',
+          description:
+            'Explore the various sections that support campus life and academics.',
+        },
+        {
+          title: 'Campus Infrastructure',
+          href: '/institute/campus-infra',
+          description:
+            'Discover the state-of-the-art facilities and infrastructure on campus.',
+        },
+      ],
+    },
+    {
+      label: text.academics,
+      href: 'academics',
+      listItems: [
+        {
+          title: 'Departments',
+          href: '/academics/departments',
+          description:
+            'Explore the diverse academic departments and their offerings.',
+        },
+        {
+          title: 'Programmes',
+          href: '/academics/programmes',
+          description:
+            'Discover our range of undergraduate and postgraduate programmes.',
+        },
+        {
+          title: 'Courses & Curricula',
+          href: '/academics/curricula',
+          description: 'Browse through the detailed list of courses available.',
+        },
+        {
+          title: 'Convocation',
+          href: '/academics/convocation',
+          description: 'Get information on upcoming convocation ceremonies.',
+        },
+        {
+          title: 'Awards',
+          href: '/academics/awards',
+          description:
+            'Recognizing excellence in academics, research, and beyond.',
+        },
+        {
+          title: 'Scholarship',
+          href: '/academics/scholarships',
+          description:
+            'Learn about scholarships, eligibility, and application details.',
+        },
+        {
+          title: 'Academic Notifications',
+          href: '/academics/notifications',
+          description:
+            'Stay updated with the latest academic announcements and deadlines.',
+        },
+      ],
+    },
     { label: text.faculty, href: 'faculty-and-staff' },
     { label: text.placement, href: 'training-and-placement' },
-    { label: text.alumni, href: 'alumni' },
+    // { label: text.alumni, href: 'alumni' },
     { label: text.activities, href: 'student-activities' },
   ];
 
@@ -48,16 +126,26 @@ export default async function Header({ locale }: { locale: string }) {
             src="assets/nitlogo.png"
           />
         </Link>
-
-        <ol className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
-          {items.map(({ label, href }, index) => (
-            <li className="my-auto min-h-fit" key={index}>
-              <Link href={`/${locale}/${href}`} prefetch>
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <NavigationMenu>
+          <NavigationMenuList
+            className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}
+          >
+            {items.map(({ label, href, listItems }, index) => (
+              <NavigationMenuCustomListItem
+                key={index}
+                triggerName={label}
+                locale={locale}
+                listItems={listItems}
+                href={href}
+                imageDetails={{
+                  src: `${href}/image01.jpg`,
+                  alt: label,
+                  href: '/' + href,
+                }}
+              />
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
         <ol className="inline-flex h-10 gap-2">
           <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
