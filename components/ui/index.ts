@@ -4,6 +4,7 @@ export * from './card';
 export * from './command';
 export * from './dialog';
 export * from './label';
+export * from './navigation-menu';
 export * from './radio-group';
 export * from './scroll-area';
 export * from './table';
