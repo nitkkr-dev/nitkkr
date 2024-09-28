@@ -24,24 +24,17 @@ import {
   studentAcademicDetails,
   students,
 } from '~/server/db';
-import { populate as populateFromCsv } from '~/server/db/csv';
-import { populate as populateFromSample } from '~/server/db/sample';
+import { populate as populateFromCsv } from '~/server/db/populate';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const from =
-    searchParams.get('from') === 'csv'
-      ? 'csv'
-      : searchParams.get('from') === 'sample'
-        ? 'sample'
-        : undefined;
   const truncate =
     searchParams.get('truncate') === 'true'
       ? true
       : searchParams.get('truncate') === 'false'
         ? false
         : undefined;
-  if (from === undefined || truncate === undefined) {
+  if (truncate === undefined) {
     return Response.json({
       status: 500,
       message: 'search params incorrect or insufficient',
@@ -75,8 +68,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    if (from === 'sample') await populateFromSample();
-    else if (from === 'csv') await populateFromCsv();
+    await populateFromCsv();
   } catch (error) {
     console.error(error);
     return Response.json(error, { status: 500 });

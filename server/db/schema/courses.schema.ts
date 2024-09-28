@@ -1,7 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import {
-  char,
   integer,
+  json,
   pgTable,
   smallint,
   smallserial,
@@ -28,7 +28,9 @@ export const courses = pgTable('courses', {
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  content: text('content').notNull(),
+  content: json('content')
+    .$type<{ title: string; topics: string[] }[]>()
+    .notNull(),
   outcomes: text('outcomes')
     .array()
     .default(sql`'{}'`)
