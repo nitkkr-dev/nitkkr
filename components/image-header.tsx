@@ -50,7 +50,7 @@ export default function ImageHeader({
             className={cn(
               'p-1 xl:p-2',
               'hidden sm:flex sm:gap-1 md:gap-2',
-              'sticky top-6 z-nav mx-auto w-fit rounded-full',
+              'sticky top-6 z-10 mx-auto w-fit rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
               'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
             )}
