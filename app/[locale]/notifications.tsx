@@ -105,7 +105,7 @@ export default async function Notifications({
   );
 }
 
-const NotificationsList = async ({
+export const NotificationsList = async ({
   category,
   locale,
 }: {
