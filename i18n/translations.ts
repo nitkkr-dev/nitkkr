@@ -262,6 +262,18 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Programmes: {
+    btechAbout: string;
+    mtechAbout: string;
+    courseOfStudy: string;
+    departmentAndSchools: string;
+    noOfSeats: string;
+    secialization: string;
+    discipline: string;
+    btech: string;
+    mtech: string;
+    seatDistribution: string;
+  };
   Search: {
     placeholder: string;
     categories: {

@@ -333,6 +333,20 @@ const text: Translations = {
     },
     logout: 'LOG OUT',
   },
+  Programmes: {
+    btechAbout:
+      'The Institute offers courses of study leading to B.Tech., M.Tech. degree and research facilities leading to the degree of Doctor of Philosophy. The medium of instructions and examination is English. The Institute has assumed the status of deemed University. The courses include study at the Institute, visits to work sites and practical training. In the Institute Workshops and in approved Engineering works. There is NIT (A Deemed University) Examination at the end of each semester. Courses of study are offered in the following disciplines:',
+    mtechAbout:
+      'Teaching in each academic year is divided into two semesters. The duration of the course is four semesters for regular students and six semesters for part-time students (for NIT, Kurukshetra employees only). All the admitted candidates would be governed by the Academic Regulations for Post-Graduate Programmes, as laid down by the National Institute of Technology (Institution of National Importance), Kurukshetra. The M.Tech seats are first filled by GATE-qualified candidates, then by industry-sponsored candidates and if seats remain vacant, by other candidates. The non-GATE candidates are not eligible for scholarships.',
+    courseOfStudy: 'Courses of Study:',
+    departmentAndSchools: 'Deptt./ Schools',
+    noOfSeats: 'No. of Seats',
+    secialization: 'Specialization',
+    discipline: 'Discipline',
+    btech: 'B. tech',
+    mtech: 'M. tech',
+    seatDistribution: 'Seat Distribution',
+  },
   Search: {
     placeholder: 'Quick Search...',
     categories: {
