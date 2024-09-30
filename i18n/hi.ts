@@ -140,7 +140,7 @@ const text: Translations = {
     login: 'प्रवेश',
     profile: { alt: 'मेरी छवि', view: 'विवरण देखें' },
   },
-  Institute: {
+  InstituteProfile: {
     welcome: 'एनआईटी कुरुक्षेत्र में आपका स्वागत है',
     profile: {
       title: 'संस्थान प्रोफाइल',

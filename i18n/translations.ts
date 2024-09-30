@@ -119,7 +119,7 @@ export interface Translations {
     login: string;
     profile: { alt: string; view: string };
   };
-  Institute: {
+  InstituteProfile: {
     welcome: string;
     profile: {
       title: string;

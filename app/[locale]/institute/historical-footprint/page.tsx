@@ -6,7 +6,7 @@ export default async function HistoricalFootprint({
 }: {
   params: { locale: string };
 }) {
-  const text = (await getTranslations(locale)).Institute;
+  const text = (await getTranslations(locale)).InstituteProfile;
   return (
     <main className="container">
       <Heading

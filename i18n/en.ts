@@ -185,7 +185,7 @@ const text: Translations = {
     },
     viewAll: 'View All',
   },
-  Institute: {
+  InstituteProfile: {
     welcome: 'Welcome to NIT Kurukshetra',
     profile: {
       title: 'Institute Profile',
