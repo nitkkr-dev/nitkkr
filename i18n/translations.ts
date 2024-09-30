@@ -262,6 +262,57 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Scholarships: {
+    NSP: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMSSS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    HCS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    RSSO: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMBS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    UPS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    MMVY: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    note: {
+      title: string;
+      description: string;
+    };
+    visitPortal: string;
+    description: string;
+    about: string;
+    objectives: string;
+  };
   Search: {
     placeholder: string;
     categories: {
