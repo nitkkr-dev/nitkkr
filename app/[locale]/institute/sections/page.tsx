@@ -29,6 +29,8 @@ export default async function Sections({
 
   const sections = await db.query.sections.findMany();
 
+  console.log(sections);
+
   const sectionIcons: Record<string, IconType> = {
     accounts: MdOutlineAccountBalance,
     'central-workshop': MdOutlineGroupWork,
