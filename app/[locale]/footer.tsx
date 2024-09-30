@@ -16,6 +16,37 @@ import { cn } from '~/lib/utils';
 export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
 
+  const quickLinks = [
+    { name: 'Telephone Directory', href: '#' },
+    { name: 'Books and e-Library', href: '#' },
+    { name: 'Important Links', href: '#' },
+    { name: 'Downloads', href: '#' },
+    { name: 'RTI', href: '#' },
+    { name: 'NIT KKR IT Infrastructure Usage Policy', href: '#' },
+    { name: 'NIT KKR @NDL', href: '#' },
+    { name: 'Telephone Directory', href: '#' },
+  ];
+
+  const aboutUs = [
+    { name: 'Council of NITs', href: '#' },
+    { name: 'NAD Digilocker', href: '#' },
+    { name: 'NIRF (Data & Certificate)', href: '#' },
+    { name: 'NBA Accreditation Status', href: '#' },
+    { name: 'ARIIA', href: '#' },
+    { name: 'Skill Hub (PMKVY 4.0)', href: '#' },
+    { name: 'Jobs @ NIT KKR', href: '#' },
+  ];
+
+  const departments = [
+    { name: 'Vigilance Corner', href: '#' },
+    { name: 'PRO', href: '#' },
+    { name: 'OBC & PWD Cell', href: '#' },
+    { name: 'SC/ST Cell', href: '#' },
+    { name: 'Join Alumni Association', href: '#' },
+    { name: 'User Login', href: '#' },
+    { name: 'Contact Us', href: '#' },
+  ];
+
   return (
     <footer className="mt-8 sm:mt-10 md:mt-12 lg:mt-20">
       <section className="bg-neutral-900 py-16">
@@ -64,12 +95,12 @@ export default async function Footer({ locale }: { locale: string }) {
 
           <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
             <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
-              <h5 className="mb-3 text-shade-light">{text.headings[0]}</h5>
+              <h5 className="mb-3 text-shade-light">Quick Links</h5>
               <ul className="flex flex-col gap-3">
-                {[...Array<number>(8)].map((value, index) => (
+                {quickLinks.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href="">
-                      {text.lorem}
+                    <Link className="text-neutral-500" href={item.href}>
+                      {item.name}
                     </Link>
                   </li>
                 ))}
@@ -83,12 +114,12 @@ export default async function Footer({ locale }: { locale: string }) {
                 'md:col-start-3 md:row-start-1 md:justify-self-center'
               )}
             >
-              <h5 className="mb-3 text-shade-light">{text.headings[1]}</h5>
+              <h5 className="mb-3 text-shade-light">About Us</h5>
               <ul className="flex flex-col gap-3">
-                {[...Array<number>(10)].map((value, index) => (
+                {aboutUs.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href="">
-                      {text.lorem}
+                    <Link className="text-neutral-500" href={item.href}>
+                      {item.name}
                     </Link>
                   </li>
                 ))}
@@ -102,12 +133,12 @@ export default async function Footer({ locale }: { locale: string }) {
                 'md:col-start-5 md:row-start-1 md:justify-self-end'
               )}
             >
-              <h5 className="mb-3 text-shade-light">{text.headings[2]}</h5>
+              <h5 className="mb-3 text-shade-light">Departments</h5>
               <ul className="flex flex-col gap-3">
-                {[...Array<number>(4)].map((value, index) => (
+                {departments.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href="">
-                      {text.lorem}
+                    <Link className="text-neutral-500" href={item.href}>
+                      {item.name}
                     </Link>
                   </li>
                 ))}
