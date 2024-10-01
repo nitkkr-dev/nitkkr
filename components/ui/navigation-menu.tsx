@@ -43,7 +43,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = cva(
-  'hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 group flex max-w-fit rounded-md bg-background transition-colors hover:bg-neutral-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-neutral-100/50 data-[state=open]:bg-neutral-100/50 lg:text-lg'
+  'hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 group flex max-w-fit rounded-md bg-background transition-colors hover:bg-neutral-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-neutral-100/50 data-[state=open]:bg-neutral-100/50'
 );
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -55,7 +55,7 @@ const NavigationMenuTrigger = React.forwardRef<
     className={cn(navigationMenuTriggerStyle(), 'group', className)}
     {...props}
   >
-    <p className="w-fit min-w-0 text-pretty text-left">{children}</p>
+    <p className="w-fit min-w-0 text-pretty text-left text-base">{children}</p>
     <RxChevronDown
       className="relative top-[1px] my-auto ml-1 w-5 transition duration-200 group-data-[state=open]:rotate-180"
       aria-hidden="true"
@@ -151,7 +151,7 @@ const NavigationMenuCustomListItem = React.forwardRef<
                 width={0}
                 height={0}
               />
-              <section className="relative z-30 flex h-3/4 w-full flex-col justify-end bg-gradient-to-b from-primary-500/25 to-primary-500 p-2 focus:shadow-md">
+              <section className="relative z-30 flex h-full w-full flex-col justify-end rounded-xl bg-gradient-to-b from-primary-500/0 to-primary-500 p-2 focus:shadow-md">
                 <h5 className="!mb-0 origin-bottom-left text-shade-light transition-transform duration-500 ease-in-out group-hover:scale-150">
                   {imageDetails.alt + '→'}
                 </h5>
