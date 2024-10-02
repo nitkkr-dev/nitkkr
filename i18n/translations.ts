@@ -59,7 +59,29 @@ export interface Translations {
     };
     slideshow: { image: string; title: string; subtitle: string }[];
   };
+  Academics: {
+    notifications: string;
+    stats: string;
+    title: string;
+    departments: string;
+    programs: string;
+    courses: string;
+    regularFacultyMembers: string;
+    postGraduatePrograms: string;
+    underGraduatePrograms: string;
+    underGraduate: string;
+    postGraduate: string;
+    doctorate: string;
+    viewAll: string;
+    convocation: string;
+    awards: string;
+    scholarships: string;
 
+    aboutDetail: string;
+    departmentsDetails: string;
+    programmesDetails: string;
+    coursesDetails: string;
+  };
   Clubs: { title: string };
   Committee: {
     building: string;
