@@ -221,6 +221,16 @@ const text: Translations = {
     },
     responsibilities: 'Responsibilities',
   },
+  Deans: {
+    title: 'Deans',
+    academic: 'Academics',
+    estateAndConstruction: 'Estate and Construction',
+    facultyWelfare: 'Faculty Welfare',
+    industryAndInternationalRelations: 'Industry and International Relations',
+    planningAndDevelopment: 'Planning and Development',
+    researchAndConsultancy: 'Research and Consultancy',
+    studentWelfare: 'Student Welfare',
+  },
   Departments: { title: 'DEPARTMENTS' },
   Department: {
     headings: {
