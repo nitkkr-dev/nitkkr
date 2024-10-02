@@ -1,5 +1,3 @@
-import { string } from 'zod';
-
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
@@ -151,6 +149,16 @@ export interface Translations {
       'student-welfare': string;
     };
     responsibilities: string;
+  };
+  Deans: {
+    title: string;
+    academic: string;
+    estateAndConstruction: string;
+    facultyWelfare: string;
+    industryAndInternationalRelations: string;
+    planningAndDevelopment: string;
+    researchAndConsultancy: string;
+    studentWelfare: string;
   };
   Departments: { title: string };
   Department: {
