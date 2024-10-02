@@ -90,6 +90,33 @@ export interface Translations {
     login: string;
     profile: { alt: string; view: string };
   };
+  Hostels: {
+    title: string;
+    boysHostels: string;
+    girlsHostels: string;
+    misc: string;
+    notificationsTitle: string;
+    rulesTitle: string;
+    hostelDetails: {
+      name: string;
+      overview: string;
+      staffOverview: string;
+      facilities: string;
+      contact: string;
+      email: string;
+      wardens: string;
+      faculty: string;
+      staff: string;
+      general: string;
+      hostelsStaffTable: {
+        name: string;
+        designation: string;
+        hostelPost: string;
+        contact: string;
+        email: string;
+      };
+    };
+  };
   Login: {
     title: string;
     enterEmail: string;
