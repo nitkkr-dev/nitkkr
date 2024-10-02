@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import Loading from '~/components/loading';
+import { NotificationSkeleton } from '~/components/skeletons';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, getKeys, groupBy } from '~/lib/utils';
@@ -84,7 +84,12 @@ export default async function Notifications({
             )}
           >
             <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-              <Suspense fallback={<Loading />} key={currentCategory}>
+              <Suspense
+                fallback={Array.from({ length: 5 }).map((_, index) => (
+                  <NotificationSkeleton count={(index % 2) + 1} key={index} />
+                ))}
+                key={currentCategory}
+              >
                 <NotificationsList category={currentCategory} locale={locale} />
               </Suspense>
             </ol>

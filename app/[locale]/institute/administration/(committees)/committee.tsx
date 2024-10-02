@@ -5,8 +5,8 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import Loading from '~/components/loading';
 import { PaginationWithLogic } from '~/components/pagination';
+import { MeetingsSkeleton } from '~/components/skeletons';
 import {
   Table,
   TableBody,
@@ -41,46 +41,51 @@ export default async function Committee({
       )}
 
       <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
-      <Suspense fallback={<Loading />}>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.members.serial}</TableHead>
-              {type === 'governor' && (
-                <TableHead>{text.members.nomination}</TableHead>
-              )}
-              <TableHead>{text.members.name}</TableHead>
-              <TableHead>{text.members.servingAs}</TableHead>
-            </TableRow>
-          </TableHeader>
 
-          <TableBody>
-            <Members type={type} />
-          </TableBody>
-        </Table>
-      </Suspense>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{text.members.serial}</TableHead>
+            {type === 'governor' && (
+              <TableHead>{text.members.nomination}</TableHead>
+            )}
+            <TableHead>{text.members.name}</TableHead>
+            <TableHead>{text.members.servingAs}</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          <Members type={type} />
+        </TableBody>
+      </Table>
 
       <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
-      <Suspense fallback={<Loading />}>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.meetings.serial}</TableHead>
-              <TableHead>{text.meetings.date}</TableHead>
-              <TableHead>{text.meetings.place}</TableHead>
-              <TableHead className="text-center">
-                {text.meetings.agenda}
-              </TableHead>
-              <TableHead className="text-center">
-                {text.meetings.minutes}
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{text.meetings.serial}</TableHead>
+            <TableHead>{text.meetings.date}</TableHead>
+            <TableHead>{text.meetings.place}</TableHead>
+            <TableHead className="text-center">
+              {text.meetings.agenda}
+            </TableHead>
+            <TableHead className="text-center">
+              {text.meetings.minutes}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          <Suspense
+            fallback={Array.from({ length: 10 }).map((_, index) => (
+              <MeetingsSkeleton key={index} />
+            ))}
+            key={meetingPage}
+          >
             <Meetings locale={locale} page={meetingPage} type={type} />
-          </TableBody>
-        </Table>
-      </Suspense>
+          </Suspense>
+        </TableBody>
+      </Table>
       <PaginationWithLogic
         currentPage={meetingPage}
         query={db
