@@ -43,6 +43,16 @@ export interface Translations {
     totalCredits: string;
     syllabus: string;
   };
+  Deans: {
+    title: string;
+    academic: string;
+    estateAndConstruction: string;
+    facultyWelfare: string;
+    industryAndInternationalRelations: string;
+    planningAndDevelopment: string;
+    researchAndConsultancy: string;
+    studentWelfare: string;
+  };
   Departments: { title: string };
   Department: {
     headings: {

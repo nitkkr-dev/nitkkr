@@ -47,6 +47,16 @@ const text: Translations = {
     totalCredits: 'क्रेडिट्स',
     syllabus: 'पाठ्यक्रम',
   },
+  Deans: {
+    title: 'Deans',
+    academic: 'शैक्षणिक',
+    estateAndConstruction: 'एस्टेट और निर्माण',
+    facultyWelfare: 'शिक्षक कल्याण',
+    industryAndInternationalRelations: 'उद्योग और अंतर्राष्ट्रीय संबंध',
+    planningAndDevelopment: 'योजना और विकास',
+    researchAndConsultancy: 'अनुसंधान और परामर्श',
+    studentWelfare: 'छात्र कल्याण',
+  },
   Departments: { title: 'विभाग' },
   Department: {
     headings: {
