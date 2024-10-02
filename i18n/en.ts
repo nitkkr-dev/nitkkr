@@ -363,7 +363,48 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     Estate: {},
     GeneralAdministration: {},
     HealthCentre: {},
-    Security: {},
+    Security: {
+      heading: 'Security',
+      about: [
+        'The Security Section is responsible for providing effective security cover for men and material of the Institute and for ensuring that security measures at the Institute are strictly adhered to.',
+
+        'NIT, Kurukshetra Security Section provides useful information on safety, crime awareness, and preventive measures to reduce resident’s chance of becoming a crime victim.',
+
+        'NIT, Kurukshetra Security, under the direction of Ajeet Singh Yadav, Security Officer, 01 Security Guard as permanent staff of NIT, Kurukshetra and 04 Security Supervisors, 11 Security Guard with Weapon, 123 Security Guards and 01 CCTV Control Room Operator on Outsourcing basis hired from Diamond Security Personnel.',
+
+        'The Campus Security Staff members are highly trained professionals and forces background. They receive on-campus training that include: day to day functioning of the Security Section, cultural diversity, sexual harassment, anti-ragging, procedures to deal with various incidents & accidents, first aid, fire prevention, fire fighting, events security, community policing, and crime prevention.',
+
+        'Security staff is provided with dedicated vehicles like Gypsy and Bi-cycles to carry out patrolling on and off campus. The staff looks after the perimeter, gates, static posts, & patrolling of the campus.',
+
+        'Mobile Security Control Room, which is operational 24 hours a day, utilizes a number of technologies to decrease response times to calls for service and increase the effectiveness of the campus security personnel. These technologies include:',
+
+        '67 CCTV cameras installed in the NIT, Kurukshetra to ensure safety of students, staff members and property of the institute.',
+
+        'The campus of the institute is well secured and surrounded by boundary walls and CCTV cameras. There are security guards at every entrance gate, who check all the vehicles entering the campus. Inside the campus, a number of security booths keep a strict vigil.',
+        'Security Control Room Number 90346-51015',
+        'Wireless Communications',
+
+        'Round the clock availability of security officers in the campus and control rooms to monitor the campus activities.',
+
+        'Security Section maintains a close liaison with local emergency services like POLICE, FIRE BRIGADE & HOSPITALS.',
+
+        'Embracing a community based philosophy, Security Section strives to prevent crime, provide assistance to victim(s), and investigate reported incidents in cooperation with other campus authorities and city, state, and central law enforcement agencies. It functions in concert with other service oriented departments like WORKs & NIT Health Centre to ensure a safe and secure environment in which students, faculty, and staff may enjoy rewarding academic and social experiences. To this end, Security Section works in partnership with students, faculty, staff and the community. A close working relationship exists between Security Section and the Dean of Student, Counseling Services, Student Representatives & the NIT Community through, NIT Employees Union, Officers Association and Faculty Forum.',
+
+        'Security Section provides security & safety awareness training to the fresh students who join NIT, Kurukshetra every year through the Orientation session.',
+
+        'All the members of the Security Section welcome you to campus and wish you the best during your stay at NIT, Kurukshetra Campus. We are here to help you have a safe and pleasant visit or college experience.',
+
+        'Do not hesitate to call upon us for assistance whenever you have a concern for your safety & security. Remember preventing crime is a shared responsibility between NIT Security Section & community it serves.',
+        'Ajeet Singh Yadav',
+        ' Security Officer Security Section',
+        ' National Institute of Technology, Kurukshetra',
+        ' Kurukshetra, Haryana – 136119, INDIA',
+        'Tel : +91-01744-233296 (O)',
+        'Mob : 89506-50020 ',
+        'Emai ID : securenitkkr@gmail.com',
+      ],
+    },
+
     Sports: {},
     Store: {},
   },
