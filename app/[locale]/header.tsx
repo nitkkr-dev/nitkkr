@@ -10,6 +10,14 @@ import { Button, HamburgerButton } from '~/components/buttons';
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import MaybeLink from '~/components/maybe-link';
+import {
+  NavigationMenu,
+  NavigationMenuCustomListItem,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -28,6 +36,43 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.placement, href: 'training-and-placement' },
     { label: text.alumni, href: 'alumni' },
     { label: text.activities, href: 'student-activities' },
+  ];
+  const components: { title: string; href: string; description: string }[] = [
+    {
+      title: 'Alert Dialog',
+      href: '/docs/primitives/alert-dialog',
+      description:
+        'A modal dialog that interrupts the user with important content and expects a response.',
+    },
+    {
+      title: 'Hover Card',
+      href: '/docs/primitives/hover-card',
+      description:
+        'For sighted users to preview content available behind a link.',
+    },
+    {
+      title: 'Progress',
+      href: '/docs/primitives/progress',
+      description:
+        'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+    },
+    {
+      title: 'Scroll-area',
+      href: '/docs/primitives/scroll-area',
+      description: 'Visually or semantically separates content.',
+    },
+    {
+      title: 'Tabs',
+      href: '/docs/primitives/tabs',
+      description:
+        'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+    },
+    {
+      title: 'Tooltip',
+      href: '/docs/primitives/tooltip',
+      description:
+        'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+    },
   ];
 
   return (
@@ -48,16 +93,28 @@ export default async function Header({ locale }: { locale: string }) {
             src="assets/nitlogo.png"
           />
         </Link>
-
-        <ol className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}>
-          {items.map(({ label, href }, index) => (
-            <li className="my-auto min-h-fit" key={index}>
-              <Link href={`/${locale}/${href}`} prefetch>
-                {label}
+        <NavigationMenu>
+          <NavigationMenuList
+            className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}
+          >
+            <NavigationMenuCustomListItem
+              triggerName={items[0].label}
+              imageDetails={{
+                src: 'https://s3-alpha-sig.figma.com/img/054e/19b7/43c945f2ee30e43f797f944b1c02fe2e?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TjH6LvDVUoTwEvUvc02-8DAwccrJ9YRqDqTy5h-0O0cYSVWG03it8-zr5OSBcjGVuu5TMnV7ZlnEiM3CIHQ3mQAy7Z3~Bv2sbCL8plMbE0GDxzmjpaVkKPAfgbMpuyofWABnyQjH4cda6qWEzeBuGEw~KQfFxVuAA-wHYTA6GL~B776fRbfdfzNxtSqucrIEqfGG1nUMFEdxvTLMPCqXTjErPikIs2rDXtAZ3K3U4suPFFqLRyBQ9H0B3DAGDzxZ64CIVLkAaE~ALCRy1BBUDyXrU24E1~BeTobiCoR0q1WcnBOPMKpnUb0c2qTyaDz8BxMe9hMMI9vGnv4fxdqGBA__',
+                alt: items[0].label,
+                href: items[0].href,
+              }}
+              listItems={components}
+            />
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Documentation
+                </NavigationMenuLink>
               </Link>
-            </li>
-          ))}
-        </ol>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
         <ol className="inline-flex h-10 gap-2">
           <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
