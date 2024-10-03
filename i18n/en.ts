@@ -1,6 +1,20 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Administration: {
+    title: 'Administration Section',
+    boardOfGoverners: 'Board of Governers',
+    buildingAndWork: 'Building & Work Committee',
+    financial: 'Financial Committee',
+    senate: 'Senate',
+    committees: 'Committees',
+    director: 'Director',
+    deans: 'Deans',
+    and: 'and',
+    description:
+      'Our Department offers diverse programs and has grown significantly, modernizing laboratories with state-of-the-art facilities, aligning the curriculum with industry needs, enhancing student placements, and promoting impactful faculty research. excel in innovative hardware design, modeling, and algorithm development, particularly in data communication, wireless networks, signal processing, and VLSI design. With robust infrastructure and well-equipped computer centers, we support UG, PG, and Ph.D. programs, providing comprehensive resources for students, faculty, and staff.',
+    about: 'About',
+  },
   Main: {
     director: {
       alt: 'Prof. B. V. Ramana Reddy',
