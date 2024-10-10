@@ -33,6 +33,21 @@ export interface Translations {
       agenda: string;
       minutes: string;
     };
+    errors: {
+      required: string;
+      invalid: string;
+    };
+    edit: {
+      url: string;
+      time: string;
+      add: string;
+      edit: string;
+      meeting: string;
+      submit: string;
+      success: string;
+      error: string;
+      back: string;
+    };
   };
   Curricula: {
     pageTitle: string;

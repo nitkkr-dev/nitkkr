@@ -58,6 +58,7 @@ const useFormField = () => {
 
 interface FormItemContextValue {
   id: string;
+  reserveSpaceForError?: boolean;
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
@@ -66,13 +67,21 @@ const FormItemContext = React.createContext<FormItemContextValue>(
 
 const FormItem = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  React.HTMLAttributes<HTMLDivElement> & { reserveSpaceForError?: boolean }
+>(({ className, reserveSpaceForError, ...props }, ref) => {
   const id = React.useId();
 
   return (
-    <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn('space-y-2', className)} {...props} />
+    <FormItemContext.Provider value={{ id, reserveSpaceForError }}>
+      <div
+        ref={ref}
+        className={cn(
+          'space-y-2',
+          reserveSpaceForError && 'relative pb-6',
+          className
+        )}
+        {...props}
+      />
     </FormItemContext.Provider>
   );
 });
@@ -143,6 +152,7 @@ const FormMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
+  const { reserveSpaceForError } = React.useContext(FormItemContext);
   const body = error ? String(error?.message) : children;
 
   if (!body) {
@@ -153,7 +163,11 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-[0.8rem] font-medium text-primary-500', className)}
+      className={cn(
+        'text-[0.8rem] font-medium text-primary-500',
+        reserveSpaceForError && 'absolute bottom-0',
+        className
+      )}
       {...props}
     >
       {body}
