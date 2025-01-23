@@ -1,15 +1,26 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegBuilding } from 'react-icons/fa';
-import { GrGroup, GrMoney } from 'react-icons/gr';
-import { MdOutlineBadge } from 'react-icons/md';
+import { Suspense } from 'react';
+import { MdOutlineChecklist } from 'react-icons/md';
+import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
+import { LuShipWheel } from 'react-icons/lu';
+import { VscMortarBoard } from 'react-icons/vsc';
+import { HiCurrencyRupee } from 'react-icons/hi';
+import { BsTools } from 'react-icons/bs';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import { Card, CardTitle } from '~/components/ui';
+import Loading from '~/components/loading';
+import {
+  CardTitle,
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import HeadingWithButtons from '~/components/headingWithButtons';
 
 export default async function Administration({
   params: { locale },
@@ -26,57 +37,71 @@ export default async function Administration({
       />
 
       <main className="container mt-20">
+        <p className="mx-8 font-sans text-xl">{text.description}</p>
+        <HeadingWithButtons
+          direction={'rtl'}
+          heading={text.boardOfGovernors}
+          buttonArray={[
+            {
+              label: text.constitutionOfBoG,
+              href: `/${locale}/institue/administration/constitution-of-bog`,
+              icon: TbContract,
+            },
+            {
+              label: text.bogAgenda,
+              href: `/${locale}/institue/administration/bog-agenda`,
+              icon: TbNotebook,
+            },
+            {
+              label: text.bogMinutes,
+              href: `/${locale}/institue/administration/bog-minutes`,
+              icon: MdOutlineChecklist,
+            },
+          ]}
+        />
         <Heading
-          glyphDirection={'ltr'}
+          glyphDirection="ltr"
           heading={'h2'}
-          text={text.about.toUpperCase()}
+          text={text.senate.toUpperCase()}
           className="container"
         />
-        <article className="flex drop-shadow max-md:flex-col max-md:items-center">
-          <p className="p-4 max-md:rounded-t md:w-full md:rounded-lg">
-            {text.description}
-          </p>
-          <Image
-            src="slideshow/image01.jpg"
-            alt="administration"
-            className="mx-10 w-full rounded-lg md:order-first"
-            height={0}
-            width={0}
-          />
-        </article>
-        <Heading
-          glyphDirection={'rtl'}
-          heading={'h2'}
-          text={text.committees.toUpperCase()}
-          className="container"
-        />
+        <section className="container">
+          <CardTitle className="text-2xl">{text.composition}</CardTitle>
+          <Suspense fallback={<Loading />}>
+            <Table className="w-full">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>S. No.</TableHead>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Served As</TableHead>
+                </TableRow>
+              </TableHeader>
+            </Table>
+          </Suspense>
+        </section>
         <nav
           className={cn(
             'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
+            'my-10',
             'flex flex-col gap-5 lg:flex-row lg:justify-around'
           )}
         >
           {[
             {
-              label: text.boardOfDirectors,
-              href: `/${locale}/institue/administration/board-of-governors`,
-              icon: MdOutlineBadge,
+              label: text.senateMeetingAgenda,
+              href: `/${locale}/institue/administration/senate--meeting-agenda`,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              icon: TbNotebook,
             },
             {
-              label: text.buildingAndWork,
-              href: `/${locale}/institue/administration/building-and-work-committee`,
-              icon: FaRegBuilding,
+              label: text.senateMeetingMinutes,
+              href: `/${locale}/institue/administration/senate-meeting-minutes`,
+              icon: MdOutlineChecklist,
             },
             {
-              label: text.financial,
-              href: `/${locale}/institue/administration/financial-committee`,
-              icon: GrMoney,
-            },
-            {
-              label: text.senate,
-              href: `/${locale}/institue/administration/senate`,
-              icon: GrGroup,
+              label: text.scsaMeetingMinutes,
+              href: `/${locale}/institue/administration/scsa-meeting-minutes`,
+              icon: MdOutlineChecklist,
             },
           ].map(({ label, href, icon: Icon }, index) => (
             <Button
@@ -98,34 +123,72 @@ export default async function Administration({
             </Button>
           ))}
         </nav>
+        <HeadingWithButtons
+          direction={'ltr'}
+          heading={text.administrationHeads}
+          buttonArray={[
+            {
+              label: text.director,
+              href: `/${locale}/institue/administration/constitution-of-bog`,
+              icon: LuShipWheel,
+            },
+            {
+              label: text.deans,
+              href: `/${locale}/institue/administration/bog-agenda`,
+              icon: VscMortarBoard,
+            },
+            {
+              label: text.otherOfficers,
+              href: `/${locale}/institue/administration/bog-minutes`,
+              icon: TbBuildings,
+            },
+          ]}
+        />
+        <HeadingWithButtons
+          direction={'rtl'}
+          heading={text.committees}
+          buttonArray={[
+            {
+              label: text.financial,
+              href: `/${locale}/institue/administration/constitution-of-bog`,
+              icon: HiCurrencyRupee,
+            },
+            {
+              label: text.buildingAndWork,
+              href: `/${locale}/institue/administration/bog-agenda`,
+              icon: BsTools,
+            },
+          ]}
+        />
         <Heading
-          glyphDirection={'dual'}
+          glyphDirection={'ltr'}
           heading={'h2'}
-          text={(
-            text.director +
-            ' ' +
-            text.and +
-            ' ' +
-            text.deans
-          ).toUpperCase()}
+          text={text.actsAndStatues.toUpperCase()}
           className="container"
         />
-        <section className="mb-32 mt-10 flex flex-wrap justify-center gap-5 md:justify-between">
-          <Card className="group flex min-h-64 w-full items-center justify-center border-primary-700 bg-neutral-50 p-12 hover:bg-primary-500 md:w-[48%]">
-            <Link href={`/${locale}/institute/administration/director`}>
-              <CardTitle className="text-center text-3xl font-semibold group-hover:text-neutral-50">
-                {text.director}
-              </CardTitle>
-            </Link>
-          </Card>
-          <Card className="group flex min-h-64 w-full items-center justify-center border-primary-700 bg-neutral-50 p-12 hover:bg-primary-500 md:w-[48%]">
-            <Link href={`/${locale}/institute/administration/deans`}>
-              <CardTitle className="text-center text-3xl font-semibold group-hover:text-neutral-50">
-                {text.deans}
-              </CardTitle>
-            </Link>
-          </Card>
-        </section>
+        <nav
+          className={cn(
+            'container',
+            'my-10',
+            'flex flex-col gap-5 lg:flex-row lg:justify-around'
+          )}
+        >
+          <ul>
+            {(text.actsPoints as { link: string; text: string }[]).map(
+              (item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              )
+            )}
+          </ul>
+        </nav>
       </main>
     </>
   );

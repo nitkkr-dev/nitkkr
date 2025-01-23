@@ -1,20 +1,34 @@
 export async function getTranslations(locale: string): Promise<Translations> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
   return import(`./${locale}.ts`).then((module) => module.default);
 }
 
 export interface Translations {
   Administration: {
     title: string;
-    boardOfDirectors: string;
+    boardOfGovernors: string;
+    bogAgenda: string;
+    bogMinutes: string;
+    constitutionOfBoG: string;
     buildingAndWork: string;
     financial: string;
     senate: string;
-    committees: string;
+    composition: string;
+    sNo: string;
+    name: string;
+    servedAs: string;
+    senateMeetingAgenda: string;
+    senateMeetingMinutes: string;
+    scsaMeetingMinutes: string;
+    administrationHeads: string;
     director: string;
     deans: string;
+    otherOfficers: string;
+    committees: string;
+    actsAndStatues: string;
+    actsPoints: object[];
     and: string;
     description: string;
-    about: string;
   };
   Awards: {
     aboutTitle: string;
@@ -638,8 +652,8 @@ export interface Translations {
         designation: string;
       };
     };
-    CentreOfComputingAndNetworking: {};
-    ElectricalMaintenance: {};
+    CentreOfComputingAndNetworking: object;
+    ElectricalMaintenance: object;
     Estate: {
       name: string;
       links: string[];
@@ -656,7 +670,7 @@ export interface Translations {
       };
       seniority: string[];
     };
-    GeneralAdministration: {};
+    GeneralAdministration: object;
     HealthCentre: {
       name: string;
       headings: {
@@ -725,9 +739,9 @@ export interface Translations {
         schedule: string;
       };
     };
-    Security: {};
-    Sports: {};
-    Store: {};
+    Security: object;
+    Sports: object;
+    Store: object;
   };
   Sections: {
     title: string;

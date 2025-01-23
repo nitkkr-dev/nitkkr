@@ -90,15 +90,45 @@ const text: Translations = {
   },
   Administration: {
     title: 'प्रशासन खंड',
-    boardOfDirectors: 'बोर्ड ऑफ डायरेक्टर्स',
+    boardOfGovernors: 'बोर्ड ऑफ डायरेक्टर्स',
+    constitutionOfBoG: 'बोर्ड ऑफ डायरेक्टर्स का गठन',
+    bogAgenda: 'बोर्ड ऑफ डायरेक्टर्स का एजेंडा',
+    bogMinutes: 'बोर्ड ऑफ डायरेक्टर्स की कार्यवाही',
     buildingAndWork: 'बिल्डिंग और कार्य समिति',
     financial: 'वित्तीय समिति',
     senate: 'सीनेट',
-    committees: 'समितियाँ',
+    composition: 'संयोजन',
+    sNo: 'क्रमांक',
+    name: 'नाम',
+    servedAs: 'के रूप में सेवा की',
+    senateMeetingAgenda: 'सीनेट मीटिंग का एजेंडा',
+    senateMeetingMinutes: 'सीनेट मीटिंग की कार्यवाही',
+    scsaMeetingMinutes: 'एससीएसए मीटिंग की कार्यवाही',
+    administrationHeads: 'प्रशासनिक प्रमुख',
     director: 'निर्देशक',
     deans: 'डीन्स',
+    otherOfficers: 'अन्य अधिकारी',
+    committees: 'समितियाँ',
+    actsAndStatues: 'कानून और विधान',
+    actsPoints: [
+      {
+        text: 'NIT अधिनियम 2007',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
+      },
+      {
+        text: 'NIT अधिनियम (संशोधन) 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2012.pdf',
+      },
+      {
+        text: 'NIT अधिनियम संशोधन राजपत्र अधिसूचना 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_ACT_Amendment_Gazette_Notification_2012.pdf',
+      },
+      {
+        text: 'NIT अधिनियम 2007 के तहत प्रथम उपविधान',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/First_Statutes_Under_NIT_Act_2007.pdf',
+      }
+    ],
     and: 'और',
-    about: 'विभाग के बारे में',
     description:
       'हमारा विभाग विभिन्न कार्यक्रम प्रदान करता है और उल्लेखनीय रूप से विकसित हुआ है, अत्याधुनिक सुविधाओं से युक्त प्रयोगशालाओं का आधुनिकीकरण किया गया है, पाठ्यक्रम को उद्योग की आवश्यकताओं के अनुरूप ढाला गया है, छात्र प्लेसमेंट को बेहतर बनाया गया है, और संकाय अनुसंधान को प्रोत्साहित किया गया है।  संकाय हार्डवेयर डिज़ाइन, मॉडलिंग, और एल्गोरिदम विकास में उत्कृष्टता प्राप्त करता है, विशेष रूप से डेटा संचार, वायरलेस नेटवर्क, सिग्नल प्रोसेसिंग, और VLSI डिज़ाइन के क्षेत्रों में। मजबूत बुनियादी ढांचे और अच्छी तरह से सुसज्जित कंप्यूटर केंद्रों के साथ, हम यूजी, पीजी, और पीएचडी कार्यक्रमों का समर्थन करते हैं, और छात्रों, संकाय, और स्टाफ को व्यापक संसाधन प्रदान करते हैं।',
   },

@@ -92,17 +92,47 @@ const text: Translations = {
   },
   Administration: {
     title: 'Administration Section',
-    boardOfDirectors: 'Board of Directors',
+    boardOfGovernors: 'Board of Governors',
+    constitutionOfBoG: 'Constitution of BoG',
+    bogAgenda: 'BoG Agenda',
+    bogMinutes: 'BoG Minutes',
     buildingAndWork: 'Building & Work Committee',
     financial: 'Financial Committee',
     senate: 'Senate',
-    committees: 'Committees',
+    composition: 'Composition of Senate as per the NIT Act 2007:',
+    sNo: 'S. No.',
+    name: 'Name',
+    servedAs: 'Served As',
+    senateMeetingAgenda: 'Senate Meeting Agenda',
+    senateMeetingMinutes: 'Senate Meeting Minutes',
+    scsaMeetingMinutes: 'SCSA Meeting Minutes',
+    administrationHeads: 'Administration Heads',
     director: 'Director',
     deans: 'Deans',
+    otherOfficers: 'Other Officers',
+    committees: 'Committees',
+    actsAndStatues: 'NIT ACTS & STATUES',
+    actsPoints: [
+      {
+        text: 'NIT Act 2007',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
+      },
+      {
+        text: 'NIT Act (Amendment) 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2012.pdf',
+      },
+      {
+        text: 'NIT Act Amendment Gazette Notification 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_ACT_Amendment_Gazette_Notification_2012.pdf',
+      },
+      {
+        text: 'First Statutes under NIT Act 2007',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/First_Statutes_Under_NIT_Act_2007.pdf',
+      }
+    ],
     and: 'and',
     description:
-      'Our Department offers diverse programs and has grown significantly, modernizing laboratories with state-of-the-art facilities, aligning the curriculum with industry needs, enhancing student placements, and promoting impactful faculty research. excel in innovative hardware design, modeling, and algorithm development, particularly in data communication, wireless networks, signal processing, and VLSI design. With robust infrastructure and well-equipped computer centers, we support UG, PG, and Ph.D. programs, providing comprehensive resources for students, faculty, and staff.',
-    about: 'About',
+      'Squirrel Girl (Doreen Allene Green) is a superheroine appearing in American comic books published by Marvel Comics. Created by writer Will Murray and writer-artist Steve Ditko, the character first appeared in Marvel Super-Heroes vol. 2 #8, a.k.a. Marvel Super-Heroes Winter Special (cover-dated Winter 1991). Murray created the character out of a desire to write lighthearted stories, in contrast to the heavily dramatic tales that were then the norm in mainstream comics.',
   },
   Main: {
     director: {
