@@ -1,52 +1,64 @@
-name: GDrive to S3 Upload
+name: Sync Google Drive to S3
 
 on:
-  push:
-    branches:
-      - feat/drive-to-s3
+  workflow_dispatch: #can be triggered manually
+  schedule:
+    - cron: "0 0 * * *" # every day at 00:00 utc
 
 jobs:
-  upload-to-s3:
+  sync:
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout repository (optional if you need repo files)
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Step 2: Configure AWS credentials
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
-
-      # Step 3: Download folder from Google Drive
-      - name: Set up Google Drive API
+      - name: Install AWS CLI and GDrive
         run: |
-          sudo apt-get install -y python3-pip
-          pip install gdown
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          curl -Ls https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 > gdrive
+          chmod +x gdrive
+          sudo mv gdrive /usr/local/bin/
+          aws --version
+          gdrive version
 
-      - name: Download folder from Google Drive
+      - name: Authenticate GDrive
+        env:
+          GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
         run: |
-          gdown https://drive.google.com/uc?id=1YLdE1YjT1qSU8ank-ZVhYs5cl0jQohS8 -O downloaded_folder.zip
+          echo "${GDRIVE_TOKEN}" > ~/.gdrive_token
+          gdrive about
 
-      # Step 4: Unzip the downloaded folder
-      - name: Unzip downloaded folder
-        run: unzip downloaded_folder.zip -d downloaded_folder
-
-      # Step 5: Rename existing S3 folder to backup
-      - name: Rename S3 folder to backup
+      - name: Download Folder from Google Drive
         run: |
-          aws s3 mv s3://isac-nitkkr-public/isaac-s3-images/ s3://isac-nitkkr-public/isaac-s3-images-backup/ --recursive
+          mkdir -p downloads
+          gdrive download --recursive --path downloads/ <YOUR_GOOGLE_DRIVE_FOLDER_ID>
 
-      # Step 6: Upload the downloaded folder to S3
-      - name: Upload folder to S3
+      - name: Unzip Downloaded Folder
         run: |
-          aws s3 cp downloaded_folder/ s3://isac-nitkkr-public/isaac-s3-images/ --recursive
+          for zip_file in downloads/*.zip; do
+            unzip -o "$zip_file" -d downloads/unzipped/
+          done
 
-      # Step 7: Delete backup folder from S3 (only if previous steps were successful)
-      - name: Delete backup folder from S3
+      - name: Rename Existing Folder in S3 to Backup
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+        run: |
+          aws s3 mv s3://your-bucket-name/isaac-s3-images/ s3://your-bucket-name/backup/ --recursive
+
+      - name: Upload Folder to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+        run: |
+          aws s3 cp downloads/unzipped/ s3://your-bucket-name/isaac-s3-images/ --recursive --acl public-read
+
+      - name: Delete Backup Folder from S3
         if: success()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws s3 rm s3://isac-nitkkr-public/isaac-s3-images-backup/ --recursive
+          aws s3 rm s3://your-bucket-name/backup/ --recursive
