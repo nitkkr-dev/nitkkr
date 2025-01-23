@@ -20,7 +20,7 @@ import {
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import HeadingWithButtons from '~/components/headingWithButtons';
+import HeadingWithButtons from '~/components/heading-with-buttons';
 
 export default async function Administration({
   params: { locale },
@@ -34,6 +34,13 @@ export default async function Administration({
       <ImageHeader
         src="slideshow/image01.jpg"
         title={text.title.toUpperCase()}
+        headings={[
+          { label: text.boardOfGovernors, href: '#board-of-governors' },
+          { label: text.senate, href: '#senate' },
+          { label: text.administrationHeads, href: '#administration-heads' },
+          { label: text.committees, href: '#committees' },
+          { label: text.actsAndStatutes, href: '#acts-and-statutes' },
+        ]}
       />
 
       <main className="container mt-20">
@@ -44,36 +51,41 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.constitutionOfBoG,
-              href: `/${locale}/institue/administration/constitution-of-bog`,
+              href: `/${locale}/institute/administration/constitution-of-bog`,
               icon: TbContract,
             },
             {
               label: text.bogAgenda,
-              href: `/${locale}/institue/administration/bog-agenda`,
+              href: `/${locale}/institute/administration/bog-agenda`,
               icon: TbNotebook,
             },
             {
               label: text.bogMinutes,
-              href: `/${locale}/institue/administration/bog-minutes`,
+              href: `/${locale}/institute/administration/bog-minutes`,
               icon: MdOutlineChecklist,
             },
           ]}
+          id="board-of-governors"
         />
         <Heading
           glyphDirection="ltr"
-          heading={'h2'}
+          heading={'h3'}
           text={text.senate.toUpperCase()}
           className="container"
+          id="senate"
+          href="#senate"
         />
         <section className="container">
-          <CardTitle className="text-2xl">{text.composition}</CardTitle>
+          <CardTitle className="text-2xl text-primary-300">
+            {text.composition}
+          </CardTitle>
           <Suspense fallback={<Loading />}>
             <Table className="w-full">
               <TableHeader>
                 <TableRow>
-                  <TableHead>S. No.</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Served As</TableHead>
+                  <TableHead>{text.sNo}</TableHead>
+                  <TableHead>{text.name}</TableHead>
+                  <TableHead>{text.servedAs}</TableHead>
                 </TableRow>
               </TableHeader>
             </Table>
@@ -89,18 +101,17 @@ export default async function Administration({
           {[
             {
               label: text.senateMeetingAgenda,
-              href: `/${locale}/institue/administration/senate--meeting-agenda`,
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              href: `/${locale}/institute/administration/senate-meeting-agenda`,
               icon: TbNotebook,
             },
             {
               label: text.senateMeetingMinutes,
-              href: `/${locale}/institue/administration/senate-meeting-minutes`,
+              href: `/${locale}/institute/administration/senate-meeting-minutes`,
               icon: MdOutlineChecklist,
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institue/administration/scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/scsa-meeting-minutes`,
               icon: MdOutlineChecklist,
             },
           ].map(({ label, href, icon: Icon }, index) => (
@@ -129,20 +140,21 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.director,
-              href: `/${locale}/institue/administration/constitution-of-bog`,
+              href: `/${locale}/institute/administration/director`,
               icon: LuShipWheel,
             },
             {
               label: text.deans,
-              href: `/${locale}/institue/administration/bog-agenda`,
+              href: `/${locale}/institute/administration/deans`,
               icon: VscMortarBoard,
             },
             {
               label: text.otherOfficers,
-              href: `/${locale}/institue/administration/bog-minutes`,
+              href: `/${locale}/institute/administration/`,
               icon: TbBuildings,
             },
           ]}
+          id="administration-heads"
         />
         <HeadingWithButtons
           direction={'rtl'}
@@ -150,45 +162,68 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.financial,
-              href: `/${locale}/institue/administration/constitution-of-bog`,
+              href: `/${locale}/institute/administration/financial-committee`,
               icon: HiCurrencyRupee,
             },
             {
               label: text.buildingAndWork,
-              href: `/${locale}/institue/administration/bog-agenda`,
+              href: `/${locale}/institute/administration/building-and-work-committee`,
               icon: BsTools,
             },
           ]}
+          id="committees"
         />
         <Heading
           glyphDirection={'ltr'}
           heading={'h2'}
-          text={text.actsAndStatues.toUpperCase()}
+          text={text.actsAndStatutes.toUpperCase()}
           className="container"
+          id="acts-and-statutes"
+          href="#acts-and-statutes"
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          <ul>
-            {(text.actsPoints as { link: string; text: string }[]).map(
-              (item, index) => (
-                <li key={index}>
+        <ol className="container grid list-decimal justify-center text-lg">
+          {text.actsPoints.map((item, index) => (
+            <li key={index}>
+              <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                <p className="mx-8 font-sans underline">{item.text}</p>
+              </Link>
+            </li>
+          ))}
+        </ol>
+        <footer className="container m-5 rounded-md border-primary-500 bg-neutral-50 p-5 shadow-md">
+          <h5 className="mb-5 text-primary-300">{text.approvalHeading}</h5>
+          <p>{text.approvalDescription}</p>
+          <ul className="container my-10 list-disc">
+            {text.pointsOfApproval.slice(0, 4).map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="mx-4 font-sans underline">{item.text}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <article>
+            {text.pointsOfApproval.slice(4).map((item, index) => (
+              <div key={index}>
+                {item.link ? (
                   <Link
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {item.text}
+                    <p className="my-5 underline">{item.text}</p>
                   </Link>
-                </li>
-              )
-            )}
-          </ul>
-        </nav>
+                ) : (
+                  <p className="my-5">{item.text}</p>
+                )}
+              </div>
+            ))}
+          </article>
+        </footer>
       </main>
     </>
   );

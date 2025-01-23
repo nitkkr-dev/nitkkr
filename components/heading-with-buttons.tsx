@@ -9,6 +9,7 @@ export default function HeadingWithButtons({
   direction,
   heading,
   buttonArray,
+  id,
 }: {
   direction: 'rtl' | 'dual' | 'ltr';
   heading: string;
@@ -17,14 +18,17 @@ export default function HeadingWithButtons({
     href: string;
     icon: IconType;
   }[];
+  id: string;
 }) {
   return (
     <>
       <Heading
         glyphDirection={direction}
-        heading={'h2'}
+        heading={'h3'}
         text={heading.toUpperCase()}
         className="container"
+        id={id}
+        href={`#${id}`}
       />
       <nav
         className={cn(

@@ -25,10 +25,19 @@ export interface Translations {
     deans: string;
     otherOfficers: string;
     committees: string;
-    actsAndStatues: string;
-    actsPoints: object[];
+    actsAndStatutes: string;
+    actsPoints: {
+      text: string;
+      link: string;
+    }[];
     and: string;
     description: string;
+    approvalHeading: string;
+    approvalDescription: string;
+    pointsOfApproval: {
+      text: string;
+      link: string;
+    }[];
   };
   Awards: {
     aboutTitle: string;
