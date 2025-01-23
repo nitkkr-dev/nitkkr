@@ -1,6 +1,8 @@
 name: Sync Google Drive to S3
 
 on:
+  push:
+    branches: drive-to-s3
   workflow_dispatch: #can be triggered manually
   schedule:
     - cron: "0 0 * * *" # every day at 00:00 utc
