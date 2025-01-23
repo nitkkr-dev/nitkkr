@@ -2,66 +2,37 @@ name: Sync Google Drive to S3
 
 on:
   push:
-    branches: drive-to-s3
-    
-  workflow_dispatch: #can be triggered manually
+    branches: feat/drive-to-s3
+
+  workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *" # every day at 00:00 utc
+    - cron: "0 0 * * *" # every day at 00:00 UTC
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install AWS CLI and GDrive
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          curl -Ls https://github.com/prasmussen/gdrive/releases/download/2.1.0/gdrive-linux-x64 > gdrive
-          chmod +x gdrive
-          sudo mv gdrive /usr/local/bin/
-          aws --version
-          gdrive version
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Authenticate GDrive
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client boto3
+
+      - name: Run Drive to S3 Script
         env:
-          GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
-        run: |
-          echo "${GDRIVE_TOKEN}" > ~/.gdrive_token
-          gdrive about
-
-      - name: Download Folder from Google Drive
-        run: |
-          mkdir -p downloads
-          gdrive download --recursive --path downloads/ <YOUR_GOOGLE_DRIVE_FOLDER_ID>
-
-      - name: Unzip Downloaded Folder
-        run: |
-          for zip_file in downloads/*.zip; do
-            unzip -o "$zip_file" -d downloads/unzipped/
-          done
-
-      - name: Rename Existing Folder in S3 to Backup
-        env:
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-south-1
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          S3_UPLOAD_PATH: ${{ secrets.S3_UPLOAD_PATH }}
         run: |
-          aws s3 mv s3://your-bucket-name/isaac-s3-images/ s3://your-bucket-name/backup/ --recursive
-
-      - name: Upload Folder to S3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-south-1
-        run: |
-          aws s3 cp downloads/unzipped/ s3://your-bucket-name/isaac-s3-images/ --recursive --acl public-read
-
-      - name: Delete Backup Folder from S3
-        if: success()
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: |
-          aws s3 rm s3://your-bucket-name/backup/ --recursive
+          python ./.github/workflows/drive_to_s3.py
