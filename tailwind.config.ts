@@ -72,6 +72,7 @@ export default {
     fontFamily: {
       sans: ['DM Sans', 'sans-serif'],
       serif: ['DM Serif Display', 'serif'],
+      fingerpaint: ['Fingerpaint', 'sans-serif'],
     },
     fontSize: {
       '6xl': ['64px', { lineHeight: '72px' }],

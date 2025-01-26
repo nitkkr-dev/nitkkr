@@ -8,9 +8,25 @@ export default async function Status({
   description: string;
 }) {
   return (
-    <article className="m-auto max-w-fit text-center">
-      <h2>{title}</h2>
-      <p>{description}</p>
+    <article className="flex items-center justify-center h-screen bg-[#FDF8F2] text-[#DB4437]">
+      <div className="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-16">
+        <div className="text-center md:text-left">
+          <h1
+            className="font-fingerpaint text-[190px] leading-[280.06px]"
+            style={{ fontWeight: 400 }}
+          >
+            {title}
+          </h1>
+          <p className="text-2xl mt-4">{description}</p>
+        </div>
+        <div>
+          <img
+            src="/assets/work-in-progress.svg"
+            alt="Work in Progress"
+            className="max-w-md"
+          />
+        </div>
+      </div>
     </article>
   );
 }

@@ -377,7 +377,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       description: 'You are not authorised to view this page.',
     },
     WorkInProgress: {
-      title: 'Work In Progress',
+      title: '501',
       description:
         'This page is currently being worked on. Please visit another time',
     },
