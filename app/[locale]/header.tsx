@@ -6,7 +6,13 @@ import { Suspense } from 'react';
 import { BsPersonFill } from 'react-icons/bs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-import { Button, HamburgerButton } from '~/components/buttons';
+import {
+  Button,
+  HamburgerButton,
+  NavButton,
+  NavStyleSwitcher,
+  SwitchNavButton,
+} from '~/components/buttons';
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import MaybeLink from '~/components/maybe-link';
@@ -231,48 +237,54 @@ export default async function Header({ locale }: { locale: string }) {
             </Suspense>
           </li>
           <li className="z-30 font-semibold lg:hidden">
-            <nav className="relative flex h-0">
-              <HamburgerButton
-                className="peer sticky z-40 size-10 transition-colors aria-expanded:bg-transparent"
-                data-dropdownignore={true}
-              />
+            <nav className="flex h-0">
+              <HamburgerButton className="peer sticky z-40 size-10 transition-colors aria-expanded:bg-transparent" />
               <aside
                 className={cn(
-                  'absolute -right-2 -top-2',
-                  'hidden peer-aria-expanded:flex',
-                  'border border-primary-500 bg-background',
-                  'w-72 max-w-[calc(100vw-1rem)] flex-col gap-y-4 rounded-md p-6'
+                  'fixed left-0 top-0',
+                  'hidden peer-aria-expanded:block',
+                  'bg-background',
+                  'h-screen w-screen '
                 )}
-                data-dropdownignore={true}
               >
-                <ul
-                  className="space-y-4 text-base font-semibold"
-                  data-dropdownignore
-                >
-                  {items.map(({ label, href }, index) => (
-                    <li key={index} className="w-fit">
-                      <Button
-                        asChild
-                        className="text-left text-shade-dark"
-                        variant="link"
-                      >
-                        <Link href={`/${locale}/${href}`}>{label}</Link>
-                      </Button>
+                <NavStyleSwitcher />
+                <main className="container flex h-full flex-col justify-between gap-4 gap-y-4 p-6 py-2 sm:py-4 md:py-6 xl:gap-6 2xl:gap-8">
+                  <header></header>
+                  <ul className="nav-column-default space-y-4 text-base font-semibold duration-300 animate-in slide-in-from-left slide-out-to-left">
+                    {items.map(({ label, href }, index) => (
+                      <li key={index} className="w-fit">
+                        <NavButton
+                          asChild
+                          className="text-left text-shade-dark"
+                          variant="link"
+                        >
+                          <Link href={`/${locale}/${href}`}>{label}</Link>
+                        </NavButton>
+                      </li>
+                    ))}
+                    <li>
+                      <SwitchNavButton
+                        column="1"
+                        text={text.profile.view}
+                        props={{ className: 'text-left text-shade-dark' }}
+                      />
                     </li>
-                  ))}
-                </ul>
-                <hr className="opacity-50" data-dropdownignore={true} />
-                <Suspense>
-                  <AuthAction
-                    locale={locale}
-                    mobile
-                    text={{
-                      alt: text.profile.alt,
-                      login: text.login,
-                      view: text.profile.view,
-                    }}
-                  />
-                </Suspense>
+                  </ul>
+                  <footer className="flex flex-col gap-y-4">
+                    <hr className="opacity-50" />
+                    <Suspense>
+                      <AuthAction
+                        locale={locale}
+                        mobile
+                        text={{
+                          alt: text.profile.alt,
+                          login: text.login,
+                          view: text.profile.view,
+                        }}
+                      />
+                    </Suspense>
+                  </footer>
+                </main>
               </aside>
             </nav>
           </li>
@@ -343,15 +355,15 @@ const AuthAction = async ({
     );
   } else {
     return mobile ? (
-      <Button asChild className="py-2 text-center">
+      <NavButton asChild className="py-2 text-center">
         <Link href={`/${locale}/login`}>{text.login}</Link>
-      </Button>
+      </NavButton>
     ) : (
-      <Button asChild className="h-full w-16 xl:w-20">
+      <NavButton asChild className="h-full w-16 xl:w-20">
         <Link href={`/${locale}/login`} prefetch scroll={false}>
           {text.login}
         </Link>
-      </Button>
+      </NavButton>
     );
   }
 };

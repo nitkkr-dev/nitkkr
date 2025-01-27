@@ -1,47 +1,28 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useEventCallback, useScrollLock, useToggle } from 'usehooks-ts';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
-import { Button } from '~/components/buttons';
+import { dropdownAtom, NavCurrValueAtom } from '~/state/default';
+import { Button, type ButtonProps } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 const HamburgerButton = ({ className }: { className: string }) => {
-  const { lock, unlock } = useScrollLock({
-    autoLock: false,
-    widthReflow: true,
-  });
-  const [dropdownOpen, toggleDropdown, setDropdownState] = useToggle(false);
-
-  useEffect(() => {
-    if (dropdownOpen) {
-      lock();
-      document.addEventListener('click', handler);
-    } else {
-      unlock();
-      document.removeEventListener('click', handler);
-    }
-    return () => {
-      unlock();
-      document.removeEventListener('click', handler);
-    };
-  }, [dropdownOpen]);
-
-  const handler = useEventCallback((event: MouseEvent) => {
-    if ((event.target as HTMLElement)?.dataset.dropdownignore) return;
-    setDropdownState(false);
-  });
+  const [isDropdownOpen, setDropdownOpen] = useAtom(dropdownAtom);
+  const setNavCurrValue = useSetAtom(NavCurrValueAtom);
 
   return (
     <Button
       aria-controls="primary-navigation"
-      aria-expanded={dropdownOpen}
+      aria-expanded={isDropdownOpen}
       className={cn(
         'hamburger-button fill-shade-light aria-expanded:fill-primary-700',
         'p-1',
         className
       )}
-      onClick={toggleDropdown}
+      onClick={() => {
+        setDropdownOpen(!isDropdownOpen);
+        //!isDropdownOpen && setNavCurrValue({ current: 'default', prev: '' });
+      }}
     >
       <svg viewBox="0 0 100 100">
         <rect
@@ -73,4 +54,62 @@ const HamburgerButton = ({ className }: { className: string }) => {
   );
 };
 
-export { HamburgerButton };
+const NavStyleSwitcher = () => {
+  const NavCurr = useAtomValue(NavCurrValueAtom);
+  return (
+    <style>{`.nav-column-${NavCurr.current}{
+      animation-name: enter;
+        --tw-enter-opacity: initial;
+        --tw-enter-scale: initial;
+        --tw-enter-rotate: initial;
+        --tw-enter-translate-y: initial;
+      }
+    .nav-column-${NavCurr.prev}{
+    animation-name: exit;
+    animation-duration: 150ms;
+    --tw-exit-opacity: initial;
+    --tw-exit-scale: initial;
+    --tw-exit-rotate: initial;
+    --tw-exit-translate-x: initial;
+    --tw-exit-translate-y: initial;
+    }`}</style>
+  );
+};
+
+const SwitchNavButton = ({
+  text,
+  column,
+  props,
+}: {
+  text: string;
+  column: string;
+  props: ButtonProps;
+}) => {
+  const [navCurrValue, setNavCurrValue] = useAtom(NavCurrValueAtom);
+
+  return (
+    <Button
+      onClick={() =>
+        setNavCurrValue({ prev: navCurrValue.current, current: column })
+      }
+      {...props}
+    >
+      {text}
+    </Button>
+  );
+};
+
+interface NavButtonProps extends ButtonProps {
+  children: React.ReactNode;
+  className?: string;
+}
+const NavButton = ({ children, ...props }: NavButtonProps) => {
+  const setDropdownOpen = useSetAtom(dropdownAtom);
+
+  return (
+    <Button onClick={() => setDropdownOpen(false)} {...props}>
+      {children}
+    </Button>
+  );
+};
+export { HamburgerButton, NavButton, NavStyleSwitcher, SwitchNavButton };
