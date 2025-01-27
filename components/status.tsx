@@ -32,7 +32,7 @@ export default async function Status({
           </p>
         </div>
         <Image
-          src="/assets/work-in-progress.svg"
+          src="/assets/error-1.png"
           alt="Work in Progress"
           width={400}
           height={400}

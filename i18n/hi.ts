@@ -377,6 +377,10 @@ const text: Translations = {
       title: 'कार्य प्रगति पर है',
       description: 'इस पेज पर अभी काम चल रहा है। कृपया दूसरी बार आएं',
     },
+    NotAcceptable: {
+      title: 'कार्य प्रगति पर है',
+      description: 'इस पेज पर अभी काम चल रहा है। कृपया दूसरी बार आएं',
+    },
   },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
