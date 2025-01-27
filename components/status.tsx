@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getTranslations } from '~/i18n/translations';
 
 export default async function Status({
@@ -8,24 +10,34 @@ export default async function Status({
   description: string;
 }) {
   return (
-    <article className="flex items-center justify-center h-screen bg-[#FDF8F2] text-[#DB4437]">
-      <div className="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-16">
-        <div className="text-center md:text-left">
+    <article className="flex h-screen items-center justify-center text-error">
+      <div className="flex items-center space-x-12">
+        <div className="text-center">
           <h1
-            className="font-fingerpaint text-[190px] leading-[280.06px]"
-            style={{ fontWeight: 400 }}
+            className="font-fingerpaint text-[190px] leading-none"
+            style={{
+              fontWeight: 400,
+              background: 'linear-gradient(to right, #E7695F, #E13F32)',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+            }}
           >
             {title}
           </h1>
-          <p className="text-2xl mt-4">{description}</p>
+          <p
+            className="font-poppins text-center text-[40px] leading-[48px] text-[#D27D78]"
+            style={{ fontWeight: 500, width: '361px', height: '48px' }}
+          >
+            {description}
+          </p>
         </div>
-        <div>
-          <img
-            src="/assets/work-in-progress.svg"
-            alt="Work in Progress"
-            className="max-w-md"
-          />
-        </div>
+        <Image
+          src="/assets/work-in-progress.svg"
+          alt="Work in Progress"
+          width={400}
+          height={400}
+          className="max-w-xs"
+        />
       </div>
     </article>
   );
@@ -36,7 +48,7 @@ export const CustomStatus = async ({
   type,
 }: {
   locale: string;
-  type: 'NoResult' | 'Unauthorised' | 'WorkInProgress';
+  type: 'NoResult' | 'Unauthorised' | 'WorkInProgress' | 'NotAcceptable';
 }) => {
   const text = (await getTranslations(locale)).Status[type];
   return <Status title={text.title} description={text.description} />;
@@ -52,4 +64,7 @@ export const UnauthorisedStatus = async ({ locale }: { locale: string }) => (
 
 export const WorkInProgressStatus = async ({ locale }: { locale: string }) => (
   <CustomStatus locale={locale} type="WorkInProgress" />
+);
+export const NotAcceptable = async ({ locale }: { locale: string }) => (
+  <CustomStatus locale={locale} type="NotAcceptable" />
 );
