@@ -8,13 +8,19 @@ export const students = pgTable('students', {
     .primaryKey()
     .references(() => persons.id),
   rollNumber: varchar('roll_number', { length: 9 }).notNull(),
-  personalEmail: varchar('personal_email', { length: 256 }).notNull(),
+  personalEmail: varchar('personal_email', { length: 256 }),
 
   // Guardian Info
   fathersName: varchar('fathers_name', { length: 100 }).notNull(),
+  fathersTelephoneCountryCode: varchar('fathers_telephone_country_code', {
+    length: 3,
+  }).notNull(),
   fathersTelephone: varchar('fathers_telephone', { length: 13 }).notNull(),
   fathersEmail: varchar('fathers_email', { length: 256 }),
   mothersName: varchar('mothers_name', { length: 100 }),
+  mothersTelephoneCountryCode: varchar('mothers_telephone_country_code', {
+    length: 3,
+  }),
   mothersTelephone: varchar('mothers_telephone'),
   localGuardiansName: varchar('local_guardians_name', { length: 100 }),
   localGuardiansTelephone: varchar('local_guardians_telephone', {
@@ -28,7 +34,7 @@ export const students = pgTable('students', {
   // Admission
   applicationNumber: varchar('application_number'),
   candidateCategory: varchar('candidate_category', {
-    enum: ['GEN-EWS', 'OBC-NCL', 'OP', 'SC', 'ST'],
+    enum: ['GEN-EWS', 'OBC-NCL', 'OPEN', 'SC', 'ST'],
   }).notNull(),
   isPwd: boolean('is_pwd').default(false).notNull(),
   admissionCategory: varchar('admission_category', {

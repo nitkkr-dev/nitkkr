@@ -81,7 +81,7 @@ const ClubCard = ({
     >
       <header className="flex gap-2">
         <Image
-          src={`clubs/${document.urlName}/logo.png`}
+          src={`clubs/${document.urlName}/nitlogo.png`}
           alt={document.alias ?? document.name}
           width={60}
           height={60}

@@ -5,13 +5,13 @@ import { type SearchResponseHit } from 'typesense/lib/Typesense/Documents';
 import { getKeys } from '~/lib/utils';
 
 import {
-  ClubsDocumentSchema,
-  CommitteesDocumentSchema,
-  CoursesDocumentSchema,
-  DepartmentsDocumentSchema,
-  FacultyDocumentSchema,
-  SectionsDocumentSchema,
-  StaffDocumentSchema,
+  type ClubsDocumentSchema,
+  type CommitteesDocumentSchema,
+  type CoursesDocumentSchema,
+  type DepartmentsDocumentSchema,
+  type FacultyDocumentSchema,
+  type SectionsDocumentSchema,
+  type StaffDocumentSchema,
   typesense,
 } from '.';
 

@@ -118,6 +118,16 @@ const text: Translations = {
     },
     viewAll: 'View All',
   },
+  Events: {
+    title: 'EVENTS & NEWS',
+    categories: {
+      featured: 'Featured',
+      recents: 'Recents',
+      student: 'Student',
+      faculty: 'Faculty',
+    },
+    viewAll: 'View All',
+  },
   NotFound: {
     title: 'Not Found',
     description: 'Could not find requested resource',
@@ -217,7 +227,136 @@ const text: Translations = {
     gallery: 'GALLERY',
 
     Account: {},
-    CentralLibrary: {},
+    Library: {
+      name: 'Central Library',
+      heading: {
+        about: 'About',
+        totalAreaLibraryHours: 'Total Area & Library Hours',
+        facilities: 'Facilities',
+        quickLinks: 'Quick Links',
+        contactUs: 'Contact Us',
+        gallery: 'Gallery',
+        libraryHours: 'Library Hours',
+        totalFloorArea: 'Total Floor Area & Reading Space',
+        totalFloorAreaText:
+          'The library is a growing organism. To meet all the requirements, sufficient space has been added for stacking, reading, and other services. The Library has a reading capacity of 500 readers and sufficient space for stacking new documents, a digital library and Audio audio-visual centre. The total area of the library at present is 36711sq-ft.',
+        libraryHoursText: `Reading Facilities: 24x07x365
+Stack and Circulation: 
+All Working Days: 08.30 am to 05:30 pm 
+Saturdays & Holidays: 09.00 am to 05.00 pm`,
+        aboutText:
+          'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researchers, scholars, and students.',
+      },
+      facilities: {
+        bookBankFacilities: 'Book Bank Facilities',
+        libraryAutomation:
+          'Library Automation System, Web-OPAC, and Circulation',
+        audioVideoCenter: 'Audio-Video Center',
+        jGatePlus: 'J-Gate Plus',
+        nptel: 'NPTEL Web & Video Courses',
+        remoteAccess: 'Remote Access Service: KNIMBUS',
+        antiPlagiarism: 'Anti-Plagiarism Software (Turnitin)',
+        bookBankFacilitiesText:
+          'The Library Book Bank is one of the richest Book Banks in the country. All B. Tech, M.Tech, MBA and MCA students are given 6-8 books for the full semester from Book Bank.',
+        libraryAutomationText:
+          'The library is providing automated services in all sections of the library using KOHA software. All the books are bar-coded, and members are also given Bar-Coded membership cards for smooth circulation of documents in the library. The database of the library is updated regularly, and readers can search the documents using Web-OPAC (Online Public Access Catalogue) at:',
+        audioVideoCenterText:
+          'The library has a fully air-conditioned audiovisual centre for seminars, conferences, guest lectures, user awareness programs, etc. with a seating capacity of 100 participants. It is also equipped with a videoconferencing facility.',
+        jGatePlusText:
+          'J-Gate Custom Content for Consortium (JCCC) is a virtual library of journal literature created as a customized e-journals access gateway and database solution. It acts as a one-point access to 7900+ journals subscribed currently under UGC INFONET Digital library consortium as well as university libraries designated as Inter Library Loan (ILL) Centers besides index to open access journals.',
+        nptelText:
+          'The Library has procured NPTEL Web & Video Courses designed & developed by IIT, Chennai in various discipline of Engineering & Sciences for the use of Faculty Members, Research Scholars and Students. Users can access these video courses through Library storage server: ',
+        remoteAccessText:
+          'To provide the off-campus access to subscribed e-resources, the library has subscribed to the KNIMBUS service. The users can create their account either by visiting the URL nitkkr.knimbus.com or by writing to us at librarian@nitkkr.ac.in. After creating the account, the users can log in and access all the e-resources from anywhere.',
+        antiPlagiarismText:
+          'The library has subscribed to anti-plagiarism software Turnitin for all the Faculty Members, Research Scholars and Students. The users can check the plagiarism of their research papers, articles, theses, dissertations, etc. using this facility.',
+      },
+      quickLinks: {
+        collectionResources: 'Collection & Resources',
+        libraryCommittee: 'Library Committee',
+        membershipPrivileges: 'Membership Privileges',
+      },
+      contactUs: {
+        name: 'Name',
+        designation: 'Designation & Qualification',
+        phoneNumber: 'Phone Number',
+        email: 'Email',
+      },
+      libraryCommittee: {
+        libraryCommitteeTitle: 'Library Committee',
+        srNo: 'Sr. No.',
+        name: 'Name',
+        generalDesignation: 'General Designation',
+        libraryCommitteeDesignation: 'Library Committee Designation',
+      },
+      CollectionAndResources: {
+        title: 'Collection & Resources',
+        totalDocuments: 'TOTAL DOCUMENTS',
+        noOfDocuments: '1,72,237',
+        totalBooks: 'LIBRARY BOOKS',
+        noOfBooks: '54,325',
+        bookBank: 'Book Bank',
+        backSets: 'Back Sets',
+        standards: 'Standards',
+        cdsDvds: 'CDs/DVDs',
+        eBooks: 'e-Books',
+        thesis: 'Thesis',
+        noOfBookBank: '81,259',
+        noOfBackSets: '7,097',
+        noOfStandards: '10,097',
+        noOfCdsDvds: '832',
+        noOfEBooks: '12,272',
+        noOfThesis: '6,355',
+        eresources: {
+          title: 'E-Resources',
+          currentJournalsHeading: 'Current Journals',
+          currentJournalsDescription:
+            'The library subscribes to 45 print and approximately 4200+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals is displayed in the Periodical Section of the Library and may be via Library Intranet site : http://172.16.0.52',
+          eShodhSindhuHeading: 'e-Shodh Sindhu (eSS)',
+          eShodhSindhuDescription:
+            'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: http://172.16.0.52',
+        },
+        eResourcesTable: {
+          heading: {
+            srno: 'Sr. No.',
+            electronicResources: 'Electronic Resources',
+            url: 'URL',
+          },
+        },
+      },
+      MembershipPrivileges: {
+        title: 'Membership & Privileges',
+        membershipPrivilegesText:
+          'Students, Faculty Members, Research Scholars and Staff of the Institute are admitted as members of the library. Library membership forms can be obtained and submitted at the circulation counter in the library. The number of books that may be borrowed by each category of members and the period of loan is as follows:',
+        privileges: {
+          title: 'Privileges',
+          conditionOnLoan: 'Conditions on Loan',
+          conditionOnLoanOne:
+            'The librarian reserves the right to recall any book issued to the members even prior to the due date of return.',
+          conditionOnLoanTwo:
+            'Reference books, thesis and other special reading materials shall not ordinarily be loaned to members.',
+          conditionOnLoanThree:
+            'Bound/Unbound volumes of periodicals will be lent to teachers only. However, the latest issue shall not be lent out.',
+          conditionOnLoanFour:
+            'Members should return Library books on or before the due date, failing which an overdue charge of Rs. 1.00 per day per book shall be levied for first 15 days and thereafter, Rs. 2.00 per day per book.',
+          lossOfBooks: 'Loss Of Books',
+          lossOfBooksDescription:
+            'Members shall have to replace the books lost by them or will have to pay double the price of the book. If a book lost belongs to a set and is not available separately, the members shall have to replace the whole set or pay double the price of the set.',
+          careOfBooks: 'Care Of Books',
+          careofBooksDescriptionOne:
+            'The Library books are for the benefit of not only the present but also for the future members of the Library. They should, therefore, be handled with every care and consideration.',
+          careofBooksDescriptionTwo:
+            'Damaging and defacing of books is highly objectionable and may lead to cancellation of membership privileges and replacement of damaged book by a new one.',
+          otherFacilities: 'Other Facilities',
+          reprographicFacilities: 'Reprographic Facilities: ',
+          reprographicFacilitiesDescription:
+            'Reprographic Facilities: A contractor is appointed to provide the Reprographic Services to the readers. Reproduction from books, periodicals & other material is provided @ 60 paisa per copy.',
+          binding: 'Binding: ',
+          bindingDescription:
+            'The Library has its own bindery, which binds library books, and college reports and undertakes binding work for various departments and other sections of the Institute. The Library is equipped with cutting, stitching, spiral binding & lamination machines.',
+        },
+      },
+    },
     CentralWorkshop: {},
     CentreOfComputingAndNetworking: {},
     ElectricalMaintenance: {},
@@ -228,8 +367,12 @@ const text: Translations = {
     Sports: {
       title: 'Sports Section',
       headings: {
-        about: 'About Us',
-        swimmingPool: 'Swimming Pool',
+        Sports: 'SPORTS',
+        Department: 'DEPARTMENT OF PHYSICAL EDUCATION AND SPORTS',
+
+        admin: 'ADMINISTRATION HEADS',
+        facilities: 'FACILITIES',
+        gallery: 'Gallery',
       },
       about: {
         title: 'DEPARTMENT OF PHYSICAL EDUCATION AND SPORTS',
@@ -238,6 +381,48 @@ const text: Translations = {
         email: 'Mail ID :',
         phone: 'Mob. No.:',
       },
+      sports: {
+        name: 'Name',
+        designation: 'Designation & Qualification',
+        phone: 'Phone Number',
+        mail: 'Email',
+        about:
+          'The Engineering Curriculum demands dedicated and sustained efforts from every student. As a result, our students remain busy with their studies throughout the year. Nevertheless, realizing the importance of the sports and games in the overall development of the students, we have tried out best to provide sport facilities to them as much as we could. The Institute lays adequate emphasis on student participation in various outdoor and indoor games and track and field Sports. All sports and games activities are directed by a Sports Committee comprising of students, faculty members and Sports personnel (Director Sports and Lecturers Physical Education). The Committee is responsible for laying down the policies and programme for sports and games.',
+        prize:
+          'A senior faculty member designated as President Sports co-ordinates the activities. Students who distinguish themselves by their outstanding performance in sports are eligible for a number of awards including the ‘Best Sportsman of the year’ award and Institute colours. On recommendations of the Sports Committee, a cash prize of Rs. 500/- and a trophy is awarded to the Best Sportsman of the year.',
+        department:
+          'The Institute lays adequate emphasis on student participation in various outdoor and indoor games and track and field sports. Extensive and well laid out fields for sports and games are available on the campus. Badminton courts, tennis courts, cricket pitch, hockey ground, football ground, volleyball court with lights and basketball court with lights, Kabaddi ground and a stadium etc. are some of the facilities available to the students. Director of Sports and Lecturer Physical Education help the students to develop their interest in games and coach them to acceptable standards.',
+        dept1:
+          'Gymnasium centre has been provided for health upkeep of students and staff members. It is fitted with the latest and state-of-the-art equipments for different physical exercises.',
+        dept2:
+          'All sports and games activities are directed by a Sports Committee comprising of President Sports, Director of Sports, Lecturers Physical Education, Prof-In-Charge of various games and Captain of various games and sports. The Committee is responsible for laying down the policies and programme for sports and games.',
+        dept3:
+          'To keep the engineering students physically fit, the physical education and sports is introduced as compulsory subject for engineering student in 1st & 2nd Semester with One Credit from 2006-07.',
+        facilities:
+          'Extensive and well laid out fields for sports and games are available on the campus for the students. Badminton courts, Tennis courts with Chain Link Iron mess around the courts, Cricket Pitch, Volleyball courts with Light and with Chain Link Iron mess encloser and basketball and a stadium etc. facilities are available to the students. Trained sports personnel help the students to develop their interest in games and coach them to acceptable standards.    ',
+        gallery: 'Gallery',
+        employeeTable: [
+          {
+            name: 'Dr. P.C. Tewari',
+            designation: 'Prof.in-Charge (Physical Education)',
+            phone: '+91 09896- 434963',
+            mail: 'pctewari1@nitkkr.ac.in',
+          },
+          {
+            name: 'Pallavi Rai',
+            designation: 'Prof.in-Charge (Physical Education)',
+            phone: '+91 09896- 434963',
+            mail: 'pallaviraisaso@nitkkr.ac.in',
+          },
+          {
+            name: 'Lt. Shahabuddin',
+            designation: 'S.A.S Officer',
+            phone: '+91 09466- 128133',
+            mail: 'sahab.sabu7@gmail.com',
+          },
+        ],
+      },
+
       swimmingPool: {
         title: 'SWIMMING POOL',
         welcome: 'Welcome to the swimming pool of NIT Kurukshetra',

@@ -18,7 +18,7 @@ const Login = async ({ locale }: { locale: string }) => {
         'p-4 sm:p-12 md:p-20'
       )}
       style={{
-        backgroundImage: `url('${getS3Url()}/assets/logo-transparent.png')`,
+        backgroundImage: `url('${getS3Url()}/assets/nitlogo-transparent.png')`,
       }}
     >
       <header className="mb-8 text-center">

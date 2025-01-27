@@ -106,6 +106,16 @@ export interface Translations {
     };
     viewAll: string;
   };
+  Events: {
+    title: string;
+    categories: {
+      featured: string;
+      recents: string;
+      student: string;
+      faculty: string;
+    };
+    viewAll: string;
+  };
   NotFound: { title: string; description: string; backHome: string };
   Profile: {
     logout: string;
@@ -201,7 +211,113 @@ export interface Translations {
     gallery: string;
 
     Account: {};
-    CentralLibrary: {};
+    Library: {
+      name: string;
+      heading: {
+        about: string;
+        aboutText: string;
+        totalAreaLibraryHours: string;
+        facilities: string;
+        quickLinks: string;
+        contactUs: string;
+        gallery: string;
+        totalFloorAreaText: string;
+        libraryHoursText: string;
+        libraryHours: string;
+        totalFloorArea: string;
+      };
+      facilities: {
+        bookBankFacilities: string;
+        libraryAutomation: string;
+        audioVideoCenter: string;
+        jGatePlus: string;
+        nptel: string;
+        remoteAccess: string;
+        antiPlagiarism: string;
+
+        bookBankFacilitiesText: string;
+
+        libraryAutomationText: string;
+        audioVideoCenterText: string;
+        jGatePlusText: string;
+        nptelText: string;
+        remoteAccessText: string;
+        antiPlagiarismText: string;
+      };
+      quickLinks: {
+        collectionResources: string;
+        libraryCommittee: string;
+        membershipPrivileges: string;
+      };
+      contactUs: {
+        name: string;
+        designation: string;
+        phoneNumber: string;
+        email: string;
+      };
+      libraryCommittee: {
+        libraryCommitteeTitle: string;
+        srNo: string;
+        name: string;
+        generalDesignation: string;
+        libraryCommitteeDesignation: string;
+      };
+      CollectionAndResources: {
+        title: string;
+        totalDocuments: string;
+        noOfDocuments: string;
+        totalBooks: string;
+        noOfBooks: string;
+        bookBank: string;
+        noOfBookBank: string;
+        backSets: string;
+        noOfBackSets: string;
+        standards: string;
+        noOfStandards: string;
+        cdsDvds: string;
+        noOfCdsDvds: string;
+        eBooks: string;
+        noOfEBooks: string;
+        thesis: string;
+        noOfThesis: string;
+        eresources: {
+          title: string;
+          currentJournalsHeading: string;
+          currentJournalsDescription: string;
+          eShodhSindhuHeading: string;
+          eShodhSindhuDescription: string;
+        };
+        eResourcesTable: {
+          heading: {
+            srno: string;
+            electronicResources: string;
+            url: string;
+          };
+        };
+      };
+      MembershipPrivileges: {
+        privileges: {
+          conditionOnLoan: string;
+          conditionOnLoanOne: string;
+          conditionOnLoanTwo: string;
+          conditionOnLoanThree: string;
+          conditionOnLoanFour: string;
+          lossOfBooks: string;
+          lossOfBooksDescription: string;
+          careOfBooks: string;
+          careofBooksDescriptionOne: string;
+          careofBooksDescriptionTwo: string;
+          otherFacilities: string;
+          reprographicFacilities: string;
+          reprographicFacilitiesDescription: string;
+          binding: string;
+          bindingDescription: string;
+          title: string;
+        };
+        title: string;
+        membershipPrivilegesText: string;
+      };
+    };
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
@@ -212,8 +328,11 @@ export interface Translations {
     Sports: {
       title: string;
       headings: {
-        about: string;
-        swimmingPool: string;
+        Department: string;
+        Sports: string;
+        admin: string;
+        facilities: string;
+        gallery: string;
       };
       about: {
         title: string;
@@ -221,6 +340,26 @@ export interface Translations {
         headPosition: string;
         email: string;
         phone: string;
+      };
+      sports: {
+        name: string;
+        designation: string;
+        phone: string;
+        mail: string;
+        about: string;
+        prize: string;
+        department: string;
+        dept1: string;
+        dept2: string;
+        dept3: string;
+        facilities: string;
+        gallery: string;
+        employeeTable: {
+          name: string;
+          designation: string;
+          phone: string;
+          mail: string;
+        }[];
       };
       swimmingPool: {
         title: string;
