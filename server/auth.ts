@@ -1,13 +1,13 @@
 import {
-  getServerSession,
   type DefaultSession,
   type DefaultUser,
+  getServerSession,
   type NextAuthOptions,
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { env } from '~/lib/env';
-import { db, roles } from '~/server/db';
+import { db, type roles } from '~/server/db';
 
 declare module 'next-auth' {
   // A nicer way to assert that `email` will not be
