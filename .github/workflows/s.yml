@@ -13,19 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
+      # Install dependencies
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client boto3
+          pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client boto3 pillow
 
+      # Run the Drive to S3 script
       - name: Run Drive to S3 Script
         env:
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
