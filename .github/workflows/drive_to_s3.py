@@ -12,7 +12,7 @@ GOOGLE_CREDENTIALS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON")  # Path to Servic
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")  # Your S3 bucket name
-S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH", "isaac-s3-images/")  # Destination folder in S3 (empty means root)
+S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH", "issac-s3-images/")  # Destination folder in S3 (empty means root)
 
 # Authenticate with Google Drive
 def authenticate_google_drive(credentials_json):
@@ -26,8 +26,8 @@ def authenticate_google_drive(credentials_json):
         )
     return build("drive", "v3", credentials=credentials)
 
-# Recursively download image files from Google Drive
-def download_images_from_drive(service, folder_id, download_path):
+# Recursively download files from Google Drive
+def download_files_from_drive(service, folder_id, download_path):
     os.makedirs(download_path, exist_ok=True)
 
     # List all files and folders inside the current folder
@@ -47,10 +47,10 @@ def download_images_from_drive(service, folder_id, download_path):
         if mime_type == "application/vnd.google-apps.folder":
             # If it's a folder, recurse into it
             print(f"Found folder: {file_name}, entering...")
-            download_images_from_drive(service, file_id, os.path.join(download_path, file_name))
-        elif mime_type.startswith("image/"):
-            # If it's an image, download it
-            print(f"Downloading image: {file_name}...")
+            download_files_from_drive(service, file_id, os.path.join(download_path, file_name))
+        elif mime_type.startswith("image/") or mime_type == "application/pdf":
+            # If it's an image or PDF, download it
+            print(f"Downloading file: {file_name} (type: {mime_type})...")
             request = service.files().get_media(fileId=file_id)
             fh = io.FileIO(file_path, "wb")
             downloader = MediaIoBaseDownload(fh, request)
@@ -59,10 +59,10 @@ def download_images_from_drive(service, folder_id, download_path):
                 status, done = downloader.next_chunk()
                 print(f"Download progress: {int(status.progress() * 100)}%")
         else:
-            # Skip non-image files
-            print(f"Skipping non-image file: {file_name} (type: {mime_type})")
+            # Skip unsupported files
+            print(f"Skipping unsupported file: {file_name} (type: {mime_type})")
 
-    print(f"Completed downloading images from folder: {folder_id}")
+    print(f"Completed downloading files from folder: {folder_id}")
 
 # Convert .jpg_ files to .jpg format
 def convert_jpg_underscore_to_jpg(folder_path):
@@ -81,7 +81,7 @@ def convert_jpg_underscore_to_jpg(folder_path):
                 except Exception as e:
                     print(f"Failed to convert {old_file_path}: {e}")
 
-# Upload images to S3, preserving directory structure
+# Upload files to S3, preserving directory structure
 def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, aws_secret_access_key):
     s3_client = boto3.client(
         "s3",
@@ -98,7 +98,7 @@ def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, a
             print(f"Uploading {local_path} to s3://{bucket_name}/{s3_key}...")
             s3_client.upload_file(local_path, bucket_name, s3_key)
 
-    print("All images uploaded successfully!")
+    print("All files uploaded successfully!")
 
 # Main script
 if __name__ == "__main__":
@@ -107,9 +107,9 @@ if __name__ == "__main__":
     BACKUP_FOLDER = "backup"
 
     try:
-        # Authenticate and download images from Google Drive
+        # Authenticate and download files from Google Drive
         drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
-        download_images_from_drive(drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER)
+        download_files_from_drive(drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER)
 
         # Convert .jpg_ files to .jpg
         convert_jpg_underscore_to_jpg(DOWNLOAD_FOLDER)
