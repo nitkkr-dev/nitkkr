@@ -4,7 +4,6 @@ import boto3
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
-from PIL import Image  # For image conversion
 
 # Configurations
 GDRIVE_FOLDER_ID = os.getenv("GDRIVE_FOLDER_ID")  # Google Drive Folder ID
@@ -12,7 +11,7 @@ GOOGLE_CREDENTIALS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON")  # Path to Servic
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")  # Your S3 bucket name
-S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH", "issac-s3-images/")  # Destination folder in S3 (empty means root)
+S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH")  # Destination folder in S3 (empty means root)
 
 # Authenticate with Google Drive
 def authenticate_google_drive(credentials_json):
@@ -42,6 +41,11 @@ def download_files_from_drive(service, folder_id, download_path):
         file_id = file["id"]
         file_name = file["name"]
         mime_type = file["mimeType"]
+
+        # Fix for .jpg+ issue: Ensure the file extension is correct
+        if file_name.endswith(".jpg+"):
+            file_name = file_name[:-1]  # Remove the trailing '+' to make it .jpg
+
         file_path = os.path.join(download_path, file_name)
 
         if mime_type == "application/vnd.google-apps.folder":
@@ -64,22 +68,18 @@ def download_files_from_drive(service, folder_id, download_path):
 
     print(f"Completed downloading files from folder: {folder_id}")
 
-# Convert .jpg_ files to .jpg format
-def convert_jpg_underscore_to_jpg(folder_path):
+# Rename .jpg_ files to .jpg
+def rename_jpg_underscore_to_jpg(folder_path):
     for root, _, files in os.walk(folder_path):
         for file in files:
             if file.endswith(".jpg_"):
                 old_file_path = os.path.join(root, file)
                 new_file_path = os.path.join(root, file[:-1])  # Remove the trailing underscore
-                print(f"Converting {old_file_path} to {new_file_path}...")
+                print(f"Renaming {old_file_path} to {new_file_path}...")
                 try:
-                    # Open the image and save it in .jpg format
-                    with Image.open(old_file_path) as img:
-                        img.save(new_file_path, "JPEG")
-                    # Remove the old file
-                    os.remove(old_file_path)
+                    os.rename(old_file_path, new_file_path)
                 except Exception as e:
-                    print(f"Failed to convert {old_file_path}: {e}")
+                    print(f"Failed to rename {old_file_path}: {e}")
 
 # Upload files to S3, preserving directory structure
 def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, aws_secret_access_key):
@@ -111,8 +111,8 @@ if __name__ == "__main__":
         drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
         download_files_from_drive(drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER)
 
-        # Convert .jpg_ files to .jpg
-        convert_jpg_underscore_to_jpg(DOWNLOAD_FOLDER)
+        # Rename .jpg_ files to .jpg
+        rename_jpg_underscore_to_jpg(DOWNLOAD_FOLDER)
 
         # Upload to S3
         upload_to_s3(DOWNLOAD_FOLDER, S3_BUCKET_NAME, S3_UPLOAD_PATH, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
