@@ -4,6 +4,7 @@ import boto3
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
+from PIL import Image  # For image conversion
 
 # Configurations
 GDRIVE_FOLDER_ID = os.getenv("GDRIVE_FOLDER_ID")  # Google Drive Folder ID
@@ -63,6 +64,23 @@ def download_images_from_drive(service, folder_id, download_path):
 
     print(f"Completed downloading images from folder: {folder_id}")
 
+# Convert .jpg_ files to .jpg format
+def convert_jpg_underscore_to_jpg(folder_path):
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith(".jpg_"):
+                old_file_path = os.path.join(root, file)
+                new_file_path = os.path.join(root, file[:-1])  # Remove the trailing underscore
+                print(f"Converting {old_file_path} to {new_file_path}...")
+                try:
+                    # Open the image and save it in .jpg format
+                    with Image.open(old_file_path) as img:
+                        img.save(new_file_path, "JPEG")
+                    # Remove the old file
+                    os.remove(old_file_path)
+                except Exception as e:
+                    print(f"Failed to convert {old_file_path}: {e}")
+
 # Upload images to S3, preserving directory structure
 def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, aws_secret_access_key):
     s3_client = boto3.client(
@@ -86,10 +104,36 @@ def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, a
 if __name__ == "__main__":
     # Define download folder
     DOWNLOAD_FOLDER = "downloads"
+    BACKUP_FOLDER = "backup"
 
-    # Authenticate and download images from Google Drive
-    drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
-    download_images_from_drive(drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER)
+    try:
+        # Authenticate and download images from Google Drive
+        drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
+        download_images_from_drive(drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER)
 
-    # Upload to S3
-    upload_to_s3(DOWNLOAD_FOLDER, S3_BUCKET_NAME, S3_UPLOAD_PATH, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+        # Convert .jpg_ files to .jpg
+        convert_jpg_underscore_to_jpg(DOWNLOAD_FOLDER)
+
+        # Upload to S3
+        upload_to_s3(DOWNLOAD_FOLDER, S3_BUCKET_NAME, S3_UPLOAD_PATH, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+
+        # Rename the folder to backup and upload it
+        os.rename(DOWNLOAD_FOLDER, BACKUP_FOLDER)
+        print(f"Renamed {DOWNLOAD_FOLDER} to {BACKUP_FOLDER} for backup.")
+        upload_to_s3(BACKUP_FOLDER, S3_BUCKET_NAME, S3_UPLOAD_PATH, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+
+        # Delete the backup folder after successful upload
+        for root, dirs, files in os.walk(BACKUP_FOLDER, topdown=False):
+            for name in files:
+                os.remove(os.path.join(root, name))
+            for name in dirs:
+                os.rmdir(os.path.join(root, name))
+        os.rmdir(BACKUP_FOLDER)
+        print(f"Deleted backup folder: {BACKUP_FOLDER}")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # If any step fails, the original folder is retained for debugging
+        if os.path.exists(BACKUP_FOLDER):
+            os.rename(BACKUP_FOLDER, DOWNLOAD_FOLDER)
+            print(f"Restored {BACKUP_FOLDER} to {DOWNLOAD_FOLDER} due to failure.")
