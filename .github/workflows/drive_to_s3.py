@@ -11,7 +11,7 @@ GOOGLE_CREDENTIALS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON")  # Path to Servic
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")  # Your S3 bucket name
-S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH", "isaac-images/")  # Destination folder in S3 (empty means root)
+S3_UPLOAD_PATH = os.getenv("S3_UPLOAD_PATH", "isaac-s3-images/")  # Destination folder in S3 (empty means root)
 
 # Authenticate with Google Drive
 def authenticate_google_drive(credentials_json):
