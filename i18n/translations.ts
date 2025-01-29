@@ -353,7 +353,9 @@ export interface Translations {
       heading: string;
       headings: string[];
       campus: string[];
+      gallery: string[];
       infra: string[];
+      facilities: string[];
       library: { heading: string; text: string[] };
       computing: { heading: string; text: string[] };
       senate: { heading: string; text: string[] };
