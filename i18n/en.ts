@@ -228,8 +228,12 @@ const text: Translations = {
     Sports: {
       title: 'Sports Section',
       headings: {
-        about: 'About Us',
-        swimmingPool: 'Swimming Pool',
+        Sports: 'SPORTS',
+        Department: 'DEPARTMENT OF PHYSICAL EDUCATION AND SPORTS',
+
+        admin: 'ADMINISTRATION HEADS',
+        facilities: 'FACILITIES',
+        gallery: 'Gallery',
       },
       about: {
         title: 'DEPARTMENT OF PHYSICAL EDUCATION AND SPORTS',
@@ -237,6 +241,47 @@ const text: Translations = {
         headPosition: 'Prof.in-Charge (Physical Education)',
         email: 'Mail ID :',
         phone: 'Mob. No.:',
+      },
+      sports: {
+        name: 'Name',
+        designation: 'Designation & Qualification',
+        phone: 'Phone Number',
+        mail: 'Email',
+        about:
+          'The Engineering Curriculum demands dedicated and sustained efforts from every student. As a result, our students remain busy with their studies throughout the year. Nevertheless, realizing the importance of the sports and games in the overall development of the students, we have tried out best to provide sport facilities to them as much as we could. The Institute lays adequate emphasis on student participation in various outdoor and indoor games and track and field Sports. All sports and games activities are directed by a Sports Committee comprising of students, faculty members and Sports personnel (Director Sports and Lecturers Physical Education). The Committee is responsible for laying down the policies and programme for sports and games.',
+        prize:
+          'A senior faculty member designated as President Sports co-ordinates the activities. Students who distinguish themselves by their outstanding performance in sports are eligible for a number of awards including the ‘Best Sportsman of the year’ award and Institute colours. On recommendations of the Sports Committee, a cash prize of Rs. 500/- and a trophy is awarded to the Best Sportsman of the year.',
+        department:
+          'The Institute lays adequate emphasis on student participation in various outdoor and indoor games and track and field sports. Extensive and well laid out fields for sports and games are available on the campus. Badminton courts, tennis courts, cricket pitch, hockey ground, football ground, volleyball court with lights and basketball court with lights, Kabaddi ground and a stadium etc. are some of the facilities available to the students. Director of Sports and Lecturer Physical Education help the students to develop their interest in games and coach them to acceptable standards.',
+        dept1:
+          'Gymnasium centre has been provided for health upkeep of students and staff members. It is fitted with the latest and state-of-the-art equipments for different physical exercises.',
+        dept2:
+          'All sports and games activities are directed by a Sports Committee comprising of President Sports, Director of Sports, Lecturers Physical Education, Prof-In-Charge of various games and Captain of various games and sports. The Committee is responsible for laying down the policies and programme for sports and games.',
+        dept3:
+          'To keep the engineering students physically fit, the physical education and sports is introduced as compulsory subject for engineering student in 1st & 2nd Semester with One Credit from 2006-07.',
+        facilities:
+          'Extensive and well laid out fields for sports and games are available on the campus for the students. Badminton courts, Tennis courts with Chain Link Iron mess around the courts, Cricket Pitch, Volleyball courts with Light and with Chain Link Iron mess encloser and basketball and a stadium etc. facilities are available to the students. Trained sports personnel help the students to develop their interest in games and coach them to acceptable standards.    ',
+        gallery: 'Gallery',
+        employeeTable: [
+          {
+            name: 'Dr. P.C. Tewari',
+            designation: 'Prof.in-Charge (Physical Education)',
+            phone: '+91 09896- 434963',
+            mail: 'pctewari1@nitkkr.ac.in',
+          },
+          {
+            name: 'Pallavi Rai',
+            designation: 'Prof.in-Charge (Physical Education)',
+            phone: '+91 09896- 434963',
+            mail: 'pallaviraisaso@nitkkr.ac.in',
+          },
+          {
+            name: 'Lt. Shahabuddin',
+            designation: 'S.A.S Officer',
+            phone: '+91 09466- 128133',
+            mail: 'sahab.sabu7@gmail.com',
+          },
+        ],
       },
       swimmingPool: {
         title: 'SWIMMING POOL',

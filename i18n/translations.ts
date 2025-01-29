@@ -212,8 +212,11 @@ export interface Translations {
     Sports: {
       title: string;
       headings: {
-        about: string;
-        swimmingPool: string;
+        Department: string;
+        Sports: string;
+        admin: string;
+        facilities: string;
+        gallery: string;
       };
       about: {
         title: string;
@@ -221,6 +224,26 @@ export interface Translations {
         headPosition: string;
         email: string;
         phone: string;
+      };
+      sports: {
+        name: string;
+        designation: string;
+        phone: string;
+        mail: string;
+        about: string;
+        prize: string;
+        department: string;
+        dept1: string;
+        dept2: string;
+        dept3: string;
+        facilities: string;
+        gallery: string;
+        employeeTable: {
+          name: string;
+          designation: string;
+          phone: string;
+          mail: string;
+        }[];
       };
       swimmingPool: {
         title: string;
