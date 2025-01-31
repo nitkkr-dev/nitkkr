@@ -1,6 +1,6 @@
 import { S3Client } from '@aws-sdk/client-s3';
 
-import { env } from '~/lib/env';
+import { env } from '~/lib/env/server';
 
 const createS3Connection = () =>
   new S3Client({
