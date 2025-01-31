@@ -2,7 +2,7 @@ import createJiti from 'jiti';
 import { fileURLToPath } from 'node:url';
 const jiti = createJiti(fileURLToPath(import.meta.url));
 
-const { env } = jiti('./lib/env');
+const { env } = jiti('./lib/env/server');
 
 /** @type {import('next').NextConfig} */
 const config = {

@@ -1,6 +1,6 @@
 import { Client } from 'typesense';
 
-import { env } from '~/lib/env';
+import { env } from '~/lib/env/server';
 
 const createTypesenseClient = () =>
   new Client({
