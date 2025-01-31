@@ -1,5 +1,9 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
+import { loadEnvConfig } from '@next/env';
+
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
 export const env = createEnv({
   server: {
@@ -24,12 +28,7 @@ export const env = createEnv({
     TYPESENSE_PORT: z.coerce.number(),
     TYPESENSE_API_KEY: z.string(),
   },
-  client: {
-    NEXT_PUBLIC_AWS_S3_URL: z.string().url(),
-  },
-  experimental__runtimeEnv: {
-    NEXT_PUBLIC_AWS_S3_URL: process.env.NEXT_PUBLIC_AWS_S3_URL,
-  },
+  experimental__runtimeEnv: process.env,
 
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
