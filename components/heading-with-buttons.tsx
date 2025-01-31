@@ -2,34 +2,21 @@ import Link from 'next/link';
 import { type IconType } from 'react-icons';
 
 import { Button } from '~/components/buttons';
-import Heading from '~/components/heading';
 import { cn } from '~/lib/utils';
 
 export default function HeadingWithButtons({
-  direction,
-  heading,
   buttonArray,
-  id,
+  itemClassName,
 }: {
-  direction: 'rtl' | 'dual' | 'ltr';
-  heading: string;
   buttonArray: {
     label: string;
     href: string;
     icon: IconType;
   }[];
-  id: string;
+  itemClassName?: string;
 }) {
   return (
     <>
-      <Heading
-        glyphDirection={direction}
-        heading={'h3'}
-        text={heading.toUpperCase()}
-        className="container"
-        id={id}
-        href={`#${id}`}
-      />
       <nav
         className={cn(
           'container',
@@ -50,7 +37,7 @@ export default function HeadingWithButtons({
           >
             <Link href={href}>
               <Icon className="size-12" />
-              <p className="font-serif text-xl font-semibold md:text-lg xl:text-xl">
+              <p className={cn('font-serif font-semibold', itemClassName)}>
                 {label}
               </p>
             </Link>
