@@ -396,7 +396,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
   },
   Institute: {
     infrastructure: {
-      heading: `Campus and Infrastructure`,
+      heading: `CAMPUS AND INFRASTRUCTURE`,
       headings: [
         `Campus`,
         `Gallery`,
