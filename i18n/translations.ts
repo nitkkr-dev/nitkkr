@@ -233,9 +233,8 @@ export interface Translations {
         about: string;
         prize: string;
         department: string;
-        dept1: string;
-        dept2: string;
-        dept3: string;
+        dept: string[];
+        
         facilities: string;
         gallery: string;
         employeeTable: {

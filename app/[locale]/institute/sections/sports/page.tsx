@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import {
@@ -78,26 +80,29 @@ export default async function Sports({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {text.sports.employeeTable.map(
-              ({ name, designation, phone, mail }, index) => (
-                <TableRow key={index}>
-                  <TableCell>{name}</TableCell>
-                  <TableCell>{designation}</TableCell>
-                  <TableCell>{phone}</TableCell>
-                  <TableCell>{mail}</TableCell>
-                </TableRow>
-              )
-            )}
+          {await DelayedStaff({ 
+            id: section.id, 
+            headId: section.headFacultyId, 
+            localeText: {
+              fullName: text.sports.name,
+              email: text.sports.mail,
+              phone: text.sports.phone,
+              headPosition: text.sports.designation
+            } 
+          })}
           </TableBody>
         </Table>
         <p>{text.sports.department}</p>
-        <div className="bg-white text-gray-800 rounded-lg p-4 shadow">
-          <p>{text.sports.dept1}</p>
+
+        
+        <article className="rounded-lg border-[0.5px] border-primary-300 bg-shade-light p-4 shadow">
+          <p>{text.sports.dept[0]}</p>
           <br />
-          <p>{text.sports.dept2}</p>
+          <p>{text.sports.dept[1]}</p>
           <br />
-          <p>{text.sports.dept3}</p>
-        </div>
+          <p>{text.sports.dept[2]}</p>
+        </article>
+
         <Heading
           glyphDirection="rtl"
           heading="h2"
@@ -127,6 +132,7 @@ const DelayedStaff = async ({
   id: number;
   headId: number;
   localeText: {
+    fullName: string;
     email: string;
     phone: string;
     headPosition: string;
