@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -80,16 +80,25 @@ export default async function Sports({
             </TableRow>
           </TableHeader>
           <TableBody>
-          {await DelayedStaff({ 
-            id: section.id, 
-            headId: section.headFacultyId, 
-            localeText: {
-              fullName: text.sports.name,
-              email: text.sports.mail,
-              phone: text.sports.phone,
-              headPosition: text.sports.designation
-            } 
-          })}
+          <Suspense
+              fallback={
+                <TableRow>
+                  <TableCell colSpan={2} rowSpan={2}>
+                    Loading...
+                  </TableCell>
+                </TableRow>
+              }
+            >
+              <DelayedStaff
+                id={section.id}
+                headId={section.headFacultyId}
+                localeText={{
+                  email: text.about.email,
+                  phone: text.about.phone,
+                  headPosition: text.about.headPosition,
+                }}
+              />
+            </Suspense>
           </TableBody>
         </Table>
         <p>{text.sports.department}</p>
@@ -132,7 +141,6 @@ const DelayedStaff = async ({
   id: number;
   headId: number;
   localeText: {
-    fullName: string;
     email: string;
     phone: string;
     headPosition: string;
