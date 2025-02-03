@@ -1,13 +1,13 @@
 import { union } from 'drizzle-orm/pg-core';
 import Image from 'next/image';
+import Link from 'next/link';
 import { type ReactNode } from 'react';
 import { MdCall, MdLocationOn, MdMail } from 'react-icons/md';
-import Link from 'next/link';
 
-import { getServerAuthSession } from '~/server/auth';
-import { db, faculty, staff } from '~/server/db';
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
 import { getTranslations } from '~/i18n/translations';
+import { getServerAuthSession } from '~/server/auth';
+import { db, faculty, staff } from '~/server/db';
 
 export async function generateStaticParams() {
   const facultyIds = db
@@ -26,6 +26,7 @@ export default async function FacultyOrStaffLayout({
 }) {
   const auth = await getServerAuthSession();
   const text = (await getTranslations(locale)).FacultyAndStaff;
+
   const tabs = [
     {
       label: text.tabs.qualifications,
