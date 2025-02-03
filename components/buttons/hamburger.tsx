@@ -8,7 +8,7 @@ import { cn } from '~/lib/utils';
 
 const HamburgerButton = ({ className }: { className: string }) => {
   const [isDropdownOpen, setDropdownOpen] = useAtom(dropdownAtom);
-  const setNavCurrValue = useSetAtom(NavCurrValueAtom);
+  const [navCurrValue, setNavCurrValue] = useAtom(NavCurrValueAtom);
 
   return (
     <Button
@@ -21,7 +21,9 @@ const HamburgerButton = ({ className }: { className: string }) => {
       )}
       onClick={() => {
         setDropdownOpen(!isDropdownOpen);
-        //!isDropdownOpen && setNavCurrValue({ current: 'default', prev: '' });
+        !isDropdownOpen
+          ? setNavCurrValue({ current: 'default', prev: '' })
+          : setNavCurrValue({ current: '', prev: navCurrValue.current });
       }}
     >
       <svg viewBox="0 0 100 100">
@@ -57,22 +59,52 @@ const HamburgerButton = ({ className }: { className: string }) => {
 const NavStyleSwitcher = () => {
   const NavCurr = useAtomValue(NavCurrValueAtom);
   return (
-    <style>{`.nav-column-${NavCurr.current}{
-      animation-name: enter;
+    <style>{`
+      @keyframes slideInRight {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOutLeft {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-100%);
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      .nav-column-${NavCurr.current}{
+        animation-name: slideInRight;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
         --tw-enter-opacity: initial;
         --tw-enter-scale: initial;
         --tw-enter-rotate: initial;
         --tw-enter-translate-y: initial;
+        visibility: visible;
+        height: auto;
       }
-    .nav-column-${NavCurr.prev}{
-    animation-name: exit;
-    animation-duration: 150ms;
-    --tw-exit-opacity: initial;
-    --tw-exit-scale: initial;
-    --tw-exit-rotate: initial;
-    --tw-exit-translate-x: initial;
-    --tw-exit-translate-y: initial;
-    }`}</style>
+      .nav-column-${NavCurr.prev}{
+        animation-name: slideOutLeft;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
+        --tw-exit-opacity: initial;
+        --tw-exit-scale: initial;
+        --tw-exit-rotate: initial;
+        --tw-exit-translate-x: initial;
+        --tw-exit-translate-y: initial;
+        height:0;
+      }`}</style>
   );
 };
 

@@ -119,16 +119,16 @@ export default async function Header({ locale }: { locale: string }) {
       <nav
         className={cn(
           'container flex justify-between',
-          'gap-4 xl:gap-6 2xl:gap-8',
+          'sm:gap-4 xl:gap-6 2xl:gap-8',
           'py-2 sm:py-4 md:py-6'
         )}
       >
         <Link href={`/${locale}`}>
           <Image
             alt={text.logo}
-            className="rounded-md bg-neutral-50 p-[6px]"
-            height={40}
-            width={40}
+            className="rounded-md bg-neutral-50"
+            height={45}
+            width={45}
             src="assets/nitlogo.png"
           />
         </Link>
@@ -242,35 +242,53 @@ export default async function Header({ locale }: { locale: string }) {
               <aside
                 className={cn(
                   'fixed left-0 top-0',
-                  'hidden peer-aria-expanded:block',
+                  'invisible opacity-0 peer-aria-expanded:visible peer-aria-expanded:opacity-100',
+                  'transition-all',
+                  'translate-y-[-100%] peer-aria-expanded:translate-y-0',
                   'bg-background',
                   'h-screen w-screen '
                 )}
               >
                 <NavStyleSwitcher />
-                <main className="container flex h-full flex-col justify-between gap-4 gap-y-4 p-6 py-2 sm:py-4 md:py-6 xl:gap-6 2xl:gap-8">
-                  <header></header>
-                  <ul className="nav-column-default space-y-4 text-base font-semibold duration-300 animate-in slide-in-from-left slide-out-to-left">
-                    {items.map(({ label, href }, index) => (
+                <main className="container flex h-dvh max-h-dvh flex-col px-6 xl:gap-6 2xl:gap-8">
+                  <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
+                    <SwitchNavButton
+                      column="default"
+                      text={'〉'}
+                      props={{
+                        className:
+                          'nav-column-academics  nav-column-institute invisible my-auto !h-full text-xl mx-2 font-bold',
+                        variant: 'link',
+                      }}
+                    />
+                  </header>
+                  <ul className="nav-column-default space-y-4 text-base font-semibold">
+                    {items.map(({ label, href, listItems }, index) => (
                       <li key={index} className="w-fit">
-                        <NavButton
-                          asChild
-                          className="text-left text-shade-dark"
-                          variant="link"
-                        >
-                          <Link href={`/${locale}/${href}`}>{label}</Link>
-                        </NavButton>
+                        {listItems ? (
+                          <SwitchNavButton
+                            column={href}
+                            text={label + '>'}
+                            props={{
+                              className: 'text-left text-shade-dark',
+                              variant: 'link',
+                            }}
+                          />
+                        ) : (
+                          <NavButton
+                            asChild
+                            className="text-left text-shade-dark"
+                            variant="link"
+                          >
+                            <Link href={`/${locale}/${href}`}>{label}</Link>
+                          </NavButton>
+                        )}
                       </li>
                     ))}
-                    <li>
-                      <SwitchNavButton
-                        column="1"
-                        text={text.profile.view}
-                        props={{ className: 'text-left text-shade-dark' }}
-                      />
-                    </li>
                   </ul>
-                  <footer className="flex flex-col gap-y-4">
+                  <MobileSubNavMenu locale={locale} {...items[0]} />
+                  <MobileSubNavMenu locale={locale} {...items[1]} />
+                  <footer className="mt-auto flex flex-col gap-y-4 py-4">
                     <hr className="opacity-50" />
                     <Suspense>
                       <AuthAction
@@ -399,5 +417,71 @@ const ProfileImage = ({
         )}
       </MaybeLink>
     </Button>
+  );
+};
+
+const MobileSubNavMenu = ({
+  label,
+  href,
+  listItems,
+  locale,
+}: {
+  label: string;
+  href: string;
+  listItems?: {
+    title: string;
+    href: string;
+    description: string;
+  }[];
+  locale: string;
+}) => {
+  if (!listItems) return null;
+  return (
+    <article
+      className={`nav-column-${href} invisible flex h-0 flex-col overflow-y-auto`}
+    >
+      <NavButton asChild variant="icon">
+        <Link
+          href={'/' + href}
+          className="group relative mb-6 !flex aspect-[5/2] min-h-20 select-none !flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
+        >
+          <Image
+            className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
+            alt={href}
+            src={`${href}/image01.jpg`}
+            width={0}
+            height={0}
+          />
+          <section className="relative z-30 flex h-full w-full flex-col justify-end rounded-xl bg-gradient-to-b from-primary-500/0 to-primary-500 p-2 focus:shadow-md">
+            <h2 className="!mb-0 origin-bottom-left text-shade-light transition-transform duration-500 ease-in-out group-hover:scale-125">
+              {label + '→'}
+            </h2>
+          </section>
+        </Link>
+      </NavButton>
+      <ul
+        className={'grid w-full gap-2 overflow-y-auto overflow-x-hidden pb-1'}
+      >
+        {listItems.map(({ title, description, href }, index) => (
+          <li key={index}>
+            <NavButton variant="icon" asChild>
+              <Link
+                className={cn(
+                  'group !flex max-w-full origin-left select-none flex-col !items-start space-y-1 !whitespace-break-spaces rounded-xl px-1 py-3 leading-none no-underline outline-none transition-colors duration-500 ease-in-out hover:bg-neutral-50 focus:bg-neutral-50'
+                )}
+                href={`/${locale}/${href}`}
+              >
+                <h4 className="mb-0 origin-bottom-left font-sans font-semibold leading-none text-shade-dark transition-colors transition-transform group-hover:scale-105 group-hover:text-primary-500 group-focus:text-primary-500">
+                  {title}
+                </h4>
+                <p className="line-clamp-3 origin-top-left text-sm  leading-snug !text-neutral-600 transition-colors transition-transform group-hover:scale-105 group-hover:text-primary-500 group-focus:text-primary-500">
+                  {description}
+                </p>
+              </Link>
+            </NavButton>
+          </li>
+        ))}
+      </ul>
+    </article>
   );
 };
