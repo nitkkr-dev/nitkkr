@@ -38,12 +38,6 @@ export default async function Header({ locale }: { locale: string }) {
       href: 'institute',
       listItems: [
         {
-          title: 'Institute Profile',
-          href: '/institute/profile',
-          description:
-            'Get to know our institute’s vision, mission, and values.',
-        },
-        {
           title: 'Administration',
           href: '/institute/administration',
           description: 'Meet the leadership team guiding our institution.',

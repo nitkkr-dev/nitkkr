@@ -68,8 +68,8 @@ export default async function Home({
                 />
 
                 {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 justify-start pb-8 lg:block">
-                    <article className="max-w-[90%]">
+                  <figcaption className="absolute inset-x-0 bottom-0 justify-start bg-gradient-to-b from-transparent to-neutral-800/80 pb-8 lg:block">
+                    <article className="container max-w-[90%]">
                       <h4 className="pl-2 text-sm text-neutral-100 md:text-2xl">
                         {title}
                       </h4>
