@@ -68,13 +68,13 @@ export default async function Home({
                 'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
             },
           ].map(({ image, title, subtitle }, index) => (
-            <CarouselItem key={index} className="relative max-h-screen">
-              <figure className="relative h-full">
+            <CarouselItem key={index} className="relative max-h-dvh">
+              <figure className="relative h-dvh">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-800/80"></div>
-                <article className="absolute inset-x-0 top-[35%] mx-auto text-center drop-shadow-md">
+                <article className="absolute inset-x-0 top-[50%] m-auto translate-y-[-50%] text-center drop-shadow-md">
                   <h4 className="text-shade-light">एनआईटी कुरूक्षेत्</h4>
-                  <h1 className="text-lg text-shade-light md:text-4xl lg:text-6xl">
+                  <h1 className="text-xl text-shade-light sm:text-2xl md:text-4xl lg:text-6xl">
                     NIT KURUKSHETRA
                   </h1>
                 </article>
@@ -89,8 +89,8 @@ export default async function Home({
                 />
 
                 {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 justify-start pb-8 lg:block">
-                    <article className="max-w-[90%]">
+                  <figcaption className="absolute inset-x-0 bottom-0 justify-start bg-gradient-to-b from-transparent to-neutral-800/80 pb-8 lg:block">
+                    <article className="container max-w-[90%]">
                       <h4 className="pl-2 text-sm text-neutral-100 md:text-2xl">
                         {title}
                       </h4>

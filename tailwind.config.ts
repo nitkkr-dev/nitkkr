@@ -50,6 +50,7 @@ export default {
     },
     extend: {
       zIndex: {
+        tabs: '10',
         modal: '90',
         nav: '80',
         toast: '100',
