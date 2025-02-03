@@ -29,6 +29,22 @@ export default async function Administration({
 }) {
   const text = (await getTranslations(locale)).Administration;
 
+  const actPointsLinks = [
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2012.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_ACT_Amendment_Gazette_Notification_2012.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/First_Statutes_Under_NIT_Act_2007.pdf',
+  ];
+
+  const pointsOfApprovalLinks = [
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/RECtoNITK-LetterandNotification-26-06-02.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-Act-2007EnfircementNotification-15-08-07.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/EnforcementandNotificationofFirstStatutesofNIT-11-05-09.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/Gazette_Notification_NIT_Amendment_Act_2012.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-ACT-2007.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-FirstStatutes.pdf',
+  ];
+
   return (
     <>
       <ImageHeader
@@ -181,11 +197,15 @@ export default async function Administration({
           id="acts-and-statutes"
           href="#acts-and-statutes"
         />
-        <ol className="container grid list-decimal justify-center text-lg">
+        <ol className="container mx-auto w-fit list-decimal text-lg">
           {text.actsPoints.map((item, index) => (
             <li key={index}>
-              <Link href={item.link} target="_blank" rel="noopener noreferrer">
-                <p className="mx-8 font-sans underline">{item.text}</p>
+              <Link
+                href={actPointsLinks[index]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <p className="mx-8 font-sans underline">{item}</p>
               </Link>
             </li>
           ))}
@@ -197,11 +217,11 @@ export default async function Administration({
             {text.pointsOfApproval.slice(0, 4).map((item, index) => (
               <li key={index}>
                 <Link
-                  href={item.link}
+                  href={pointsOfApprovalLinks[index]}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <p className="mx-4 font-sans underline">{item.text}</p>
+                  <p className="mx-4 font-sans underline">{item}</p>
                 </Link>
               </li>
             ))}
@@ -209,16 +229,16 @@ export default async function Administration({
           <article>
             {text.pointsOfApproval.slice(4).map((item, index) => (
               <div key={index}>
-                {item.link ? (
+                {pointsOfApprovalLinks[index + 4] ? (
                   <Link
-                    href={item.link}
+                    href={pointsOfApprovalLinks[index + 4]}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <p className="my-5 underline">{item.text}</p>
+                    <p className="my-5 underline">{item}</p>
                   </Link>
                 ) : (
-                  <p className="my-5">{item.text}</p>
+                  <p className="my-5">{item}</p>
                 )}
               </div>
             ))}

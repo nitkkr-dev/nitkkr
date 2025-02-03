@@ -25,18 +25,12 @@ export interface Translations {
     otherOfficers: string;
     committees: string;
     actsAndStatutes: string;
-    actsPoints: {
-      text: string;
-      link: string;
-    }[];
+    actsPoints: string[];
     and: string;
     description: string;
     approvalHeading: string;
     approvalDescription: string;
-    pointsOfApproval: {
-      text: string;
-      link: string;
-    }[];
+    pointsOfApproval: string[];
   };
   Main: {
     director: {
