@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaGlobeAsia, FaRegEnvelope } from 'react-icons/fa';
 import { FaGears } from 'react-icons/fa6';
 import { MdArticle } from 'react-icons/md';
 import { RiBriefcase4Line } from 'react-icons/ri';
-import Image from 'next/image';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
@@ -77,7 +77,7 @@ export default async function TrainingAndPlacement({
           href="#stats"
           text={text.headings.stats.toUpperCase()}
         />
-        <article className="container flex items-center justify-center max-md:flex-col">
+        <article className="container">
           <Suspense fallback={<Loading />}>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
               {[
