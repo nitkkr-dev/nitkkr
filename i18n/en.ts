@@ -1,6 +1,91 @@
 import type { Translations } from './translations';
 
 const text: Translations = {
+  Administration: {
+    title: 'Administration',
+    boardOfGovernors: 'Board of Governors',
+    constitutionOfBoG: 'Constitution of BoG',
+    bogAgenda: 'BoG Agenda',
+    bogMinutes: 'BoG Minutes',
+    buildingAndWork: 'Building & Work Committee',
+    financial: 'Financial Committee',
+    senate: 'Senate',
+    composition: 'Composition of Senate as per the NIT Act 2007:',
+    sNo: 'S. No.',
+    name: 'Name',
+    servedAs: 'Served As',
+    senateMeetingAgenda: 'Senate Meeting Agenda',
+    senateMeetingMinutes: 'Senate Meeting Minutes',
+    scsaMeetingMinutes: 'SCSA Meeting Minutes',
+    administrationHeads: 'Administration Heads',
+    director: 'Director',
+    deans: 'Deans',
+    otherOfficers: 'Other Officers',
+    committees: 'Committees',
+    actsAndStatutes: 'NIT Acts & Statutes',
+    actsPoints: [
+      {
+        text: 'NIT Act 2007',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
+      },
+      {
+        text: 'NIT Act (Amendment) 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2012.pdf',
+      },
+      {
+        text: 'NIT Act Amendment Gazette Notification 2012',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_ACT_Amendment_Gazette_Notification_2012.pdf',
+      },
+      {
+        text: 'First Statutes under NIT Act 2007',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/First_Statutes_Under_NIT_Act_2007.pdf',
+      },
+    ],
+    and: 'and',
+    description:
+      'Our department offers various programs and has developed remarkably, with the modernization of laboratories equipped with state-of-the-art facilities, curriculum tailored to industry requirements, enhanced student placements, and encouragement of faculty research. The faculty excels in hardware design, modeling, and algorithm development, particularly in the fields of data communication, wireless networks, signal processing, and VLSI design. With a strong infrastructure and well-equipped computer centers, we support UG, PG, and Ph.D. programs, providing extensive resources to students, faculty, and staff.',
+    approvalHeading: 'Approval Of MHRD-GOI/BOG',
+    approvalDescription:
+      'Various approvals received from MHRD  (now MoE) and/or the Government of India (GoI) (From conversion from  Regional Engineering College (REC) to National Institute of Technology,  Kurukshetra with “An Institution of National Importance” status.',
+    pointsOfApproval: [
+      {
+        text: 'Conversion  of Regional Engineering College(REC) to National Institute of  Technology (NIT) : “An Institution of National Importance” [ dated:  26-06-2002]',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/RECtoNITK-LetterandNotification-26-06-02.pdf',
+      },
+      {
+        text: 'Enforcement of NIT ACT -2007 BY MHRD',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-Act-2007EnfircementNotification-15-08-07.pdf',
+      },
+      {
+        text: 'ENFORCEMENT OF FIRST STATUTES OF NIT ACT-2007 ( ASSENTED BY THE PRESIDENT IN 2009) BY MHRD',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/EnforcementandNotificationofFirstStatutesofNIT-11-05-09.pdf',
+      },
+      {
+        text: 'GAZETTE NOTIFICATION OF AMENDMENT OF NIT ACT-2007 ( ACT NO 28 OF 2012)',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/Gazette_Notification_NIT_Amendment_Act_2012.pdf',
+      },
+      {
+        text: 'NIT  ACT -2007 ( ACT NO 29 OF 2007) PASSED BY THE PARLIAMENT IN 2007 ,  ASSENTED BY THE PRESIDENT ON 05TH JUNE-2007 AND PUBLISHED IN THE GAZETTE  OF INDIA ON 06TH JUNE-2007, NOTIFIED BY THE MHRD FROM 15TH  AUGUST,2007.',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-ACT-2007.pdf',
+      },
+      {
+        text: 'FIRST  STATUTES OF THE NIT-ACT-2007 PUBLISHED IN THE GAZETTE OF INDIA ON 23RD  APRIL-2009 NOTIFIED BY MHRD AFTER ASSENTED BY THE PRESIDENT OF  INDIA(VISITOR OF ALL NITs)',
+        link: 'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT-FirstStatutes.pdf',
+      },
+      {
+        text: 'AMENDMENT  OF (NIT ACT-2007 )-2012  ( ACT NO 28 OF 2012) PASSED BY THE PARLIAMENT  IN 2012, PUBLISHED IN THE GAZETTE OF INDIA ON 07TH JUNE-2012. (  COMPREHENSIVE ACT)',
+        link: '',
+      },
+      {
+        text: 'Policy on Scholarship and Service Conditions of JRF/SRF and other R&D Person working in CFTI including NITs',
+        link: '',
+      },
+      {
+        text: 'FAQ on OM',
+        link: '',
+      },
+    ],
+  },
   Main: {
     director: {
       alt: 'Prof. B. V. Ramana Reddy',

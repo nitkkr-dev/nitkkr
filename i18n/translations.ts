@@ -3,6 +3,41 @@ export async function getTranslations(locale: string): Promise<Translations> {
 }
 
 export interface Translations {
+  Administration: {
+    title: string;
+    boardOfGovernors: string;
+    bogAgenda: string;
+    bogMinutes: string;
+    constitutionOfBoG: string;
+    buildingAndWork: string;
+    financial: string;
+    senate: string;
+    composition: string;
+    sNo: string;
+    name: string;
+    servedAs: string;
+    senateMeetingAgenda: string;
+    senateMeetingMinutes: string;
+    scsaMeetingMinutes: string;
+    administrationHeads: string;
+    director: string;
+    deans: string;
+    otherOfficers: string;
+    committees: string;
+    actsAndStatutes: string;
+    actsPoints: {
+      text: string;
+      link: string;
+    }[];
+    and: string;
+    description: string;
+    approvalHeading: string;
+    approvalDescription: string;
+    pointsOfApproval: {
+      text: string;
+      link: string;
+    }[];
+  };
   Main: {
     director: {
       alt: string;
