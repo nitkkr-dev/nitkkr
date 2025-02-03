@@ -144,7 +144,7 @@ export default async function FacultyOrStaffLayout({
             width={200}
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
-            src={`/faculty-and-staff/'${faculty.id}.svg`}
+            src={`faculty-and-staff/'${faculty.id}.svg`}
           />
         </section>
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
@@ -187,7 +187,7 @@ export default async function FacultyOrStaffLayout({
               >
                 <Image
                   alt={key}
-                  src={`/faculty-and-staff/${key}.svg`}
+                  src={`faculty-and-staff/${key}.svg`}
                   height={0}
                   width={0}
                   className="mx-auto h-[50%] w-[50%]"
