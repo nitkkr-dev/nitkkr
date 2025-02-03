@@ -7,18 +7,98 @@ import { getTranslations, type Translations } from '~/i18n/translations';
 import { groupBy } from '~/lib/utils';
 
 export default async function FacultySection({
-  params: { locale, faculty_section },
+  params: { locale, faculty_section, employee_id },
 }: {
   params: {
     locale: string;
     faculty_section: keyof Translations['FacultyAndStaff']['tabs'];
+    employee_id: string;
   };
 }) {
   const title = (await getTranslations(locale)).FacultyAndStaff.tabs[
     faculty_section
   ];
 
-  const profileTabs = {
+  const jkchabbraProfile = {
+    qualifications: [
+      {
+        name: 'B.Tech (CSE)',
+        value: '2nd Topper',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+      {
+        name: 'M.Tech (CSE)',
+        value: 'Gold Medalist',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+      {
+        name: 'Ph.D. (S/w Engg)',
+        value: '',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+    ],
+    publications: [
+      {
+        name: 'Programming with C (4th Edition)',
+        value: 'McGraw Hill',
+        caption: 'Byron Gottfried, USA & Jitender Kumar Chhabra',
+        year: '',
+        tag: 'Book',
+      },
+      {
+        name: 'Conceptual Programming Tips for Interviews and Competitive Exams',
+        value: 'McGraw Hill',
+        caption: 'Jitender Kumar Chhabra',
+        year: '',
+        tag: 'Book',
+      },
+    ],
+    experience: [
+      {
+        name: 'Teaching & Research Experience',
+        value: '30 years',
+        caption: 'Professor, Computer Engineering, NIT Kurukshetra',
+        year: '1995 - Present',
+      },
+    ],
+    projects: [
+      {
+        name: 'Novel Approach for Secure Storage on External Media',
+        value: 'DRDO, Govt of India',
+        caption:
+          'Design and development of a non-cryptographic secure storage and lossless retrieval system',
+        year: 'Completed',
+      },
+    ],
+    educationCurrent: [
+      {
+        name: 'Online Lecture Series on Data Structures & Algorithms',
+        value: 'YouTube',
+        caption: 'Channel: @JitenderKrChhabraProfCseNITKKR',
+        year: 'Ongoing',
+      },
+    ],
+    scholars: [
+      {
+        name: 'Ph.D. Supervision',
+        value: '6 Completed, 1 Ongoing',
+        caption: 'Ph.D. scholars under guidance at NIT Kurukshetra',
+        year: '',
+      },
+    ],
+    awards: [
+      {
+        name: 'Best Teacher Award',
+        value: 'NIT Kurukshetra',
+        caption: 'Awarded for excellence in teaching and research',
+        year: '',
+      },
+    ],
+  };
+  const defaultProfileTabs = {
     qualifications: [
       {
         name: 'Ph.D.',
@@ -119,9 +199,13 @@ export default async function FacultySection({
       },
     ],
   };
+  const profileTabs =
+    employee_id === '114' ? jkchabbraProfile : defaultProfileTabs;
+
   if (!profileTabs[faculty_section]) {
     return notFound();
   }
+
   const hasTag = 'tag' in profileTabs[faculty_section][0];
 
   const dataToDisplay = hasTag
