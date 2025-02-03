@@ -1,15 +1,26 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegBuilding } from 'react-icons/fa';
-import { GrGroup, GrMoney } from 'react-icons/gr';
-import { MdOutlineBadge } from 'react-icons/md';
+import { Suspense } from 'react';
+import { MdOutlineChecklist } from 'react-icons/md';
+import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
+import { LuShipWheel } from 'react-icons/lu';
+import { VscMortarBoard } from 'react-icons/vsc';
+import { HiCurrencyRupee } from 'react-icons/hi';
+import { BsTools } from 'react-icons/bs';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import { Card, CardTitle } from '~/components/ui';
+import Loading from '~/components/loading';
+import {
+  CardTitle,
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import HeadingWithButtons from '~/components/heading-with-buttons';
 
 export default async function Administration({
   params: { locale },
@@ -23,60 +34,85 @@ export default async function Administration({
       <ImageHeader
         src="slideshow/image01.jpg"
         title={text.title.toUpperCase()}
+        headings={[
+          { label: text.boardOfGovernors, href: '#board-of-governors' },
+          { label: text.senate, href: '#senate' },
+          { label: text.administrationHeads, href: '#administration-heads' },
+          { label: text.committees, href: '#committees' },
+          { label: text.actsAndStatutes, href: '#acts-and-statutes' },
+        ]}
       />
 
       <main className="container mt-20">
-        <Heading
-          glyphDirection={'ltr'}
-          heading={'h2'}
-          text={text.about.toUpperCase()}
-          className="container"
+        <p className="mx-8 font-sans text-xl">{text.description}</p>
+        <HeadingWithButtons
+          direction={'rtl'}
+          heading={text.boardOfGovernors}
+          buttonArray={[
+            {
+              label: text.constitutionOfBoG,
+              href: `/${locale}/institute/administration/constitution-of-bog`,
+              icon: TbContract,
+            },
+            {
+              label: text.bogAgenda,
+              href: `/${locale}/institute/administration/bog-agenda`,
+              icon: TbNotebook,
+            },
+            {
+              label: text.bogMinutes,
+              href: `/${locale}/institute/administration/bog-minutes`,
+              icon: MdOutlineChecklist,
+            },
+          ]}
+          id="board-of-governors"
         />
-        <article className="flex drop-shadow max-md:flex-col max-md:items-center">
-          <p className="p-4 max-md:rounded-t md:w-full md:rounded-lg">
-            {text.description}
-          </p>
-          <Image
-            src="slideshow/image01.jpg"
-            alt="administration"
-            className="mx-10 w-full rounded-lg md:order-first"
-            height={0}
-            width={0}
-          />
-        </article>
         <Heading
-          glyphDirection={'rtl'}
-          heading={'h2'}
-          text={text.committees.toUpperCase()}
+          glyphDirection="ltr"
+          heading={'h3'}
+          text={text.senate.toUpperCase()}
           className="container"
+          id="senate"
+          href="#senate"
         />
+        <section className="container">
+          <CardTitle className="text-2xl text-primary-300">
+            {text.composition}
+          </CardTitle>
+          <Suspense fallback={<Loading />}>
+            <Table className="w-full">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{text.sNo}</TableHead>
+                  <TableHead>{text.name}</TableHead>
+                  <TableHead>{text.servedAs}</TableHead>
+                </TableRow>
+              </TableHeader>
+            </Table>
+          </Suspense>
+        </section>
         <nav
           className={cn(
             'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
+            'my-10',
             'flex flex-col gap-5 lg:flex-row lg:justify-around'
           )}
         >
           {[
             {
-              label: text.boardOfDirectors,
-              href: `/${locale}/institue/administration/board-of-governors`,
-              icon: MdOutlineBadge,
+              label: text.senateMeetingAgenda,
+              href: `/${locale}/institute/administration/senate-meeting-agenda`,
+              icon: TbNotebook,
             },
             {
-              label: text.buildingAndWork,
-              href: `/${locale}/institue/administration/building-and-work-committee`,
-              icon: FaRegBuilding,
+              label: text.senateMeetingMinutes,
+              href: `/${locale}/institute/administration/senate-meeting-minutes`,
+              icon: MdOutlineChecklist,
             },
             {
-              label: text.financial,
-              href: `/${locale}/institue/administration/financial-committee`,
-              icon: GrMoney,
-            },
-            {
-              label: text.senate,
-              href: `/${locale}/institue/administration/senate`,
-              icon: GrGroup,
+              label: text.scsaMeetingMinutes,
+              href: `/${locale}/institute/administration/scsa-meeting-minutes`,
+              icon: MdOutlineChecklist,
             },
           ].map(({ label, href, icon: Icon }, index) => (
             <Button
@@ -98,34 +134,96 @@ export default async function Administration({
             </Button>
           ))}
         </nav>
-        <Heading
-          glyphDirection={'dual'}
-          heading={'h2'}
-          text={(
-            text.director +
-            ' ' +
-            text.and +
-            ' ' +
-            text.deans
-          ).toUpperCase()}
-          className="container"
+        <HeadingWithButtons
+          direction={'ltr'}
+          heading={text.administrationHeads}
+          buttonArray={[
+            {
+              label: text.director,
+              href: `/${locale}/institute/administration/director`,
+              icon: LuShipWheel,
+            },
+            {
+              label: text.deans,
+              href: `/${locale}/institute/administration/deans`,
+              icon: VscMortarBoard,
+            },
+            {
+              label: text.otherOfficers,
+              href: `/${locale}/institute/administration/`,
+              icon: TbBuildings,
+            },
+          ]}
+          id="administration-heads"
         />
-        <section className="mb-32 mt-10 flex flex-wrap justify-center gap-5 md:justify-between">
-          <Card className="group flex min-h-64 w-full items-center justify-center border-primary-700 bg-neutral-50 p-12 hover:bg-primary-500 md:w-[48%]">
-            <Link href={`/${locale}/institute/administration/director`}>
-              <CardTitle className="text-center text-3xl font-semibold group-hover:text-neutral-50">
-                {text.director}
-              </CardTitle>
-            </Link>
-          </Card>
-          <Card className="group flex min-h-64 w-full items-center justify-center border-primary-700 bg-neutral-50 p-12 hover:bg-primary-500 md:w-[48%]">
-            <Link href={`/${locale}/institute/administration/deans`}>
-              <CardTitle className="text-center text-3xl font-semibold group-hover:text-neutral-50">
-                {text.deans}
-              </CardTitle>
-            </Link>
-          </Card>
-        </section>
+        <HeadingWithButtons
+          direction={'rtl'}
+          heading={text.committees}
+          buttonArray={[
+            {
+              label: text.financial,
+              href: `/${locale}/institute/administration/financial-committee`,
+              icon: HiCurrencyRupee,
+            },
+            {
+              label: text.buildingAndWork,
+              href: `/${locale}/institute/administration/building-and-work-committee`,
+              icon: BsTools,
+            },
+          ]}
+          id="committees"
+        />
+        <Heading
+          glyphDirection={'ltr'}
+          heading={'h2'}
+          text={text.actsAndStatutes.toUpperCase()}
+          className="container"
+          id="acts-and-statutes"
+          href="#acts-and-statutes"
+        />
+        <ol className="container grid list-decimal justify-center text-lg">
+          {text.actsPoints.map((item, index) => (
+            <li key={index}>
+              <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                <p className="mx-8 font-sans underline">{item.text}</p>
+              </Link>
+            </li>
+          ))}
+        </ol>
+        <footer className="container m-5 rounded-md border-primary-500 bg-neutral-50 p-5 shadow-md">
+          <h5 className="mb-5 text-primary-300">{text.approvalHeading}</h5>
+          <p>{text.approvalDescription}</p>
+          <ul className="container my-10 list-disc">
+            {text.pointsOfApproval.slice(0, 4).map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="mx-4 font-sans underline">{item.text}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <article>
+            {text.pointsOfApproval.slice(4).map((item, index) => (
+              <div key={index}>
+                {item.link ? (
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <p className="my-5 underline">{item.text}</p>
+                  </Link>
+                ) : (
+                  <p className="my-5">{item.text}</p>
+                )}
+              </div>
+            ))}
+          </article>
+        </footer>
       </main>
     </>
   );
