@@ -16,7 +16,6 @@ export default async function Status({
           <h1
             className="font-fingerpaint text-[80px] leading-none sm:text-[120px] md:text-[150px] lg:text-[190px]"
             style={{
-              fontWeight: 400,
               background: 'linear-gradient(to top, #E7695F, #E13F32)',
               WebkitBackgroundClip: 'text',
               color: 'transparent',
