@@ -37,13 +37,11 @@ export default function RootLayout({
           'text-xs sm:text-sm md:text-base'
         )}
       >
-        <Suspense fallback={<Loading />}>
-          {modals}
-          <Header locale={locale} />
-          <section className="grow">{children}</section>
-          <Footer locale={locale} />
-          <Toaster />
-        </Suspense>
+        {modals}
+        <Header locale={locale} />
+        <section className="grow">{children}</section>
+        <Footer locale={locale} />
+        <Toaster />
       </body>
     </html>
   );
