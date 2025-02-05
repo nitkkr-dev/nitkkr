@@ -38,21 +38,19 @@ export default async function CampusInfra({
             id="campus"
             text={text.headings[0].toUpperCase()}
           />
-          <article className="flex gap-6 max-md:flex-col">
-            <p>
-              {text.campus.map((item, index) => (
-                <span
-                  key={index}
-                  className={`block rounded-lg p-2 ${
-                    index === 0 || index === 5
-                      ? 'mb-4 mt-1 border border-primary-300 bg-neutral-50'
-                      : ''
-                  } ${index === 1 ? 'font-serif text-primary-300 sm:text-xl' : ''}`}
-                >
-                  {item}
-                </span>
-              ))}
-            </p>
+          <article>
+            {text.campus.map((item, index) => (
+              <p
+                key={index}
+                className={`block rounded-lg p-2 ${
+                  index === 0 || index === 5
+                    ? 'mb-4 mt-1 border border-primary-300 bg-neutral-50 p-4'
+                    : ''
+                } ${index === 1 ? 'font-serif text-primary-300 sm:text-xl' : ''}`}
+              >
+                {item}
+              </p>
+            ))}
           </article>
         </section>
         <section className="mx-8">
@@ -89,13 +87,11 @@ export default async function CampusInfra({
             href="#infrastructure"
             text={text.headings[2].toUpperCase()}
           />
-          <article className="flex max-md:flex-col">
-            <article>
-              <p className="my-1">{text.infra[0]}</p>
-              <p className="mt-4 rounded-lg border border-primary-300 bg-neutral-50 p-4 shadow-md">
-                {text.infra[1]}{' '}
-              </p>
-            </article>
+          <article>
+            <p className="my-1 p-2">{text.infra[0]}</p>
+            <p className="mt-4 rounded-lg border border-primary-300 bg-neutral-50 p-4 shadow-md">
+              {text.infra[1]}{' '}
+            </p>
           </article>
         </section>
         <section className="mx-8">
@@ -118,18 +114,16 @@ export default async function CampusInfra({
                   <Image
                     src={`institute/campus-infrastructure/${image}`}
                     width={200}
-                    height={100}
+                    height={200}
                     layout="responsive"
                     alt={`Image of ${key}`}
-                    className="w-full rounded-lg shadow-md md:w-1/2"
+                    className="rounded-lg shadow-md"
                   />
-                  <div className="flex flex-col gap-4">
-                    <h5 className="text-primary-300">
+                  <div className="max-xl:w-full">
+                    <h5 className="mb-3 text-primary-300">
                       {(text[key] as { heading: string }).heading}
                     </h5>
-                    <p className="h-100 md:w-3/4">
-                      {(text[key] as { text: string[] }).text[0]}
-                    </p>
+                    <p>{(text[key] as { text: string[] }).text[0]}</p>
                   </div>
                 </article>
               }
