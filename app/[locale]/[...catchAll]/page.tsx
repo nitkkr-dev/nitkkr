@@ -11,11 +11,11 @@ export default async function NotFound({
   const text = (await getTranslations(locale)).NotFound;
 
   return (
-    <article className="flex h-screen items-center justify-center text-error">
-      <div className="flex flex-col items-center space-y-8 md:flex-row md:space-x-20 md:space-y-0">
-        <div className="text-center md:text-left">
+    <article className="flex h-screen items-center justify-center px-4 text-error md:px-12 lg:px-24">
+      <div className="flex w-full max-w-6xl flex-col items-center space-y-8 text-center md:flex-row md:space-x-20 md:space-y-0">
+        <div className="w-full md:w-1/2">
           <h1
-            className="font-fingerpaint text-[80px] leading-none sm:text-[120px] md:text-[150px] lg:text-[190px]"
+            className="text-center font-fingerpaint text-[80px] leading-none sm:text-[120px] md:text-center md:text-[150px] lg:text-[190px]"
             style={{
               background: 'linear-gradient(to top, #E7695F, #E13F32)',
               WebkitBackgroundClip: 'text',
@@ -25,7 +25,7 @@ export default async function NotFound({
             {text.title}
           </h1>
           <p
-            className="font-poppins text-center text-[24px] leading-[32px] sm:text-[32px] sm:leading-[40px] md:text-[40px] md:leading-[48px]"
+            className="font-poppins text-center text-[24px] leading-[32px] sm:text-[32px] sm:leading-[40px] md:text-center md:text-[40px] md:leading-[48px]"
             style={{
               fontWeight: 500,
               maxWidth: '361px',
@@ -34,22 +34,22 @@ export default async function NotFound({
           >
             {text.description}
           </p>
-          <div className="w-[404px] text-center">
+          <div className="mt-4 w-full text-center">
             <Link
               href={`/${locale}`}
-              className="decoration-skip-ink-none block text-center text-[30px] font-medium leading-[48px] decoration-[from-font]"
+              className="decoration-skip-ink-none block text-center text-[30px] leading-[38px] decoration-[from-font] sm:text-[35px] sm:leading-[44px] md:text-[40px] md:leading-[48px]"
             >
               {text.backHome}
             </Link>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex w-full justify-center md:w-1/2">
           <Image
             src="assets/error-2.png"
             alt="Work in Progress"
             width={661}
             height={513}
-            className="ml-4 h-auto w-[300px]  opacity-50 sm:ml-8 sm:w-[400px] md:ml-12 md:w-[500px] lg:w-[661px]"
+            className="h-auto w-[300px] opacity-50 sm:w-[400px] md:w-[500px] lg:w-[661px]"
           />
         </div>
       </div>
