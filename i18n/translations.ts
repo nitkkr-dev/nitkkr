@@ -327,21 +327,20 @@ export interface Translations {
     Security: {
       title: string;
       article: string[];
-      aspects:{
+      aspects: {
         technologies: {
-        title: string;
-        content1: string;
-        features: string[];
-        liaison: string;
+          title: string;
+          content1: string;
+          features: string[];
+          liaison: string;
+        };
+        securityandsupport: {
+          title: string;
+          content: string[];
+          features: string[];
+          liaison: string;
+        };
       };
-      securityandsupport: {
-        title: string;
-        content: string[];
-        features: string[];
-        liaison: string;
-      }};
-      
-      
     };
     Sports: {};
     Store: {};

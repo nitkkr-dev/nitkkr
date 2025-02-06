@@ -24,15 +24,14 @@ export default async function Security({
         className="w-full"
       ></ImageHeader>
 
-      <section className="mt-10 my-0 border-none  font-sans tracking-wide shadow-none  ">
-         
-          <ol className="text-xl px-4 py-6 sm:px-8 md:px-10 lg:px-24">
-            {text.article.map((description, index) => (
-        <li key={index} className="mb-4">{description}</li>
-      ))}
-      </ol>
-          
-      
+      <section className="my-0 mt-10 border-none  font-sans tracking-wide shadow-none  ">
+        <ol className="px-4 py-6 text-xl sm:px-8 md:px-10 lg:px-24">
+          {text.article.map((description, index) => (
+            <li key={index} className="mb-4">
+              {description}
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="mt-12 ">
@@ -45,22 +44,20 @@ export default async function Security({
           />
         </article>
 
-        <section className="mx-4 my-0 text-lg border-[#971F16] bg-neutral-50 py-4 tracking-wide text-black mb-4 text-justify font-sans  mb-4 sm:mx-6 md:mx-10 lg:mx-24">
-              {text.aspects.technologies.content1}
-            
-            <ol className="list-disc  px-5 sm:px-8 md:px-10">
-              {text.aspects.technologies.features.map((feature, id) => (
-                <li
-                  key={id}
-                  className="text-black mb-4 text-justify font-sans leading-[20px]"
-                >
-                  {feature}
-                </li>
-              ))}
-            </ol>
-              {text.aspects.technologies.liaison}
-            
-          
+        <section className="text-black mx-4 my-0 mb-4 border-[#971F16] bg-neutral-50 py-4 text-justify font-sans text-lg  tracking-wide sm:mx-6 md:mx-10 lg:mx-24">
+          {text.aspects.technologies.content1}
+
+          <ol className="list-disc  px-5 sm:px-8 md:px-10">
+            {text.aspects.technologies.features.map((feature, id) => (
+              <li
+                key={id}
+                className="text-black mb-4 text-justify font-sans leading-[20px]"
+              >
+                {feature}
+              </li>
+            ))}
+          </ol>
+          {text.aspects.technologies.liaison}
         </section>
       </section>
 
@@ -74,14 +71,19 @@ export default async function Security({
           />
         </article>
 
-        <section className="bg-white mx-4 text-lg border-[#971F16] bg-neutral-50 py-4 font-sans  sm:mx-6 md:mx-10 lg:mx-24">
-          
-            <ol className="px-5 sm:px-8 md:px-10">
-            {text.aspects.securityandsupport.content.map((description, index) => (
-        <li key={index} className="text-black mb-4 text-justify font-sans leading-[20px]">{description}</li>
-      ))}
-      </ol>
-          
+        <section className="bg-white mx-4 border-[#971F16] bg-neutral-50 py-4 font-sans text-lg  sm:mx-6 md:mx-10 lg:mx-24">
+          <ol className="px-5 sm:px-8 md:px-10">
+            {text.aspects.securityandsupport.content.map(
+              (description, index) => (
+                <li
+                  key={index}
+                  className="text-black mb-4 text-justify font-sans leading-[20px]"
+                >
+                  {description}
+                </li>
+              )
+            )}
+          </ol>
         </section>
       </section>
     </>
