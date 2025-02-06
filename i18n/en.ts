@@ -129,9 +129,9 @@ const text: Translations = {
     viewAll: 'View All',
   },
   NotFound: {
-    title: 'Not Found',
-    description: 'Could not find requested resource',
-    backHome: 'Return Home',
+    title: '404',
+    description: 'Not found ',
+    backHome: 'Looks like you’re lost let’s get you back home',
   },
   Profile: {
     tabs: {

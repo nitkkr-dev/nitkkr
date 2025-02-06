@@ -10,8 +10,8 @@ export default async function Status({
   description: string;
 }) {
   return (
-    <article className="flex items-center justify-center h-screen text-error">  
-      <div className="flex flex-col items-center space-y-8 md:flex-row md:space-y-0 md:space-x-12">
+    <article className="flex h-screen items-center justify-center text-error">
+      <div className="flex flex-col items-center space-y-8 md:flex-row md:space-x-20 md:space-y-0">
         <div className="text-center md:text-left">
           <h1
             className="font-fingerpaint text-[80px] leading-none sm:text-[120px] md:text-[150px] lg:text-[190px]"
@@ -24,7 +24,7 @@ export default async function Status({
             {title}
           </h1>
           <p
-            className="font-poppins text-center text-[24px] leading-[32px] sm:text-[32px] sm:leading-[40px] md:text-[40px] md:leading-[48px] text-[#D27D78]"
+            className="font-poppins text-center text-[24px] leading-[32px] text-[#D27D78] sm:text-[32px] sm:leading-[40px] md:text-[40px] md:leading-[48px]"
             style={{
               fontWeight: 500,
               maxWidth: '361px',
@@ -34,13 +34,15 @@ export default async function Status({
             {description}
           </p>
         </div>
-        <Image
-          src="assets/error-1.png"
-          alt="Work in Progress"
-          width={300}
-          height={300}
-          className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80"
-        />
+        <div className="flex justify-center">
+          <Image
+            src="assets/error-1.png"
+            alt="Work in Progress"
+            width={661}
+            height={513}
+            className="ml-4 h-auto w-[300px] -scale-x-100 opacity-50 sm:ml-8 sm:w-[400px] md:ml-12 md:w-[500px] lg:w-[661px]"
+          />
+        </div>
       </div>
     </article>
   );
