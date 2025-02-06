@@ -37,13 +37,15 @@ export default function RootLayout({
           'text-xs sm:text-sm md:text-base'
         )}
       >
-        <Suspense fallback={<Loading />}>
-          {modals}
+        <Suspense fallback={<Loading />}>{modals}</Suspense>
+        <main className="flex min-h-screen flex-col">
           <Header locale={locale} />
-          <section className="grow">{children}</section>
-          <Footer locale={locale} />
-          <Toaster />
-        </Suspense>
+          <section className="grow">
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </section>
+        </main>
+        <Footer locale={locale} />
+        <Toaster />
       </body>
     </html>
   );
