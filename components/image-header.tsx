@@ -29,12 +29,12 @@ export default function ImageHeader({
 
       <section
         className={cn(
-          'absolute flex w-full bg-cover bg-top max-sm:static',
+          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-sm:static',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]',
           className
         )}
         style={{
-          backgroundImage: `url('${getS3Url()}/${src}')`,
+          backgroundImage: `url('${getS3Url()}/${src ? src : 'assets/landingpagebg-1.png'}')`, // FIXME: remove this hack once we have good images
         }}
       >
         {title && (

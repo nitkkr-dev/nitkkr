@@ -11,7 +11,7 @@ export default async function Senate({
 }) {
   return (
     <>
-      <ImageHeader src="assets/senate.png" />
+      <ImageHeader src="institute/administration/committees/senate/header.jpg" />
       <Committee locale={locale} searchParams={searchParams} type="senate" />
     </>
   );
