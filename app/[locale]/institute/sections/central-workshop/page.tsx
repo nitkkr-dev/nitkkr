@@ -1,6 +1,9 @@
-import { Fragment, Suspense } from 'react';
-
+// **Server Component**: Fetches data & passes it to a Client Component
+import { getTranslations } from '~/i18n/translations';
+import { db } from '~/server/db';
+import WorkshopContent from './WorkshopContent';
 import ImageHeader from '~/components/image-header';
+import Heading from '~/components/heading';
 import {
   Table,
   TableBody,
@@ -9,90 +12,81 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
-import { getTranslations } from '~/i18n/translations';
-import { db } from '~/server/db';
+import { Suspense } from 'react';
 
-export default async function CentralWorkshop({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+const categories = Object.freeze([
+  'machineShop',
+  'productionShop',
+  'fittingShop',
+  'patternShop',
+  'foundryShop',
+  'weldingShop',
+  'camLabs',
+]);
+
+export default async function CentralWorkshop({ params: { locale } }) {
   const text = (await getTranslations(locale)).Section.CentralWorkshop;
-
-  const section = (await db.query.sections.findFirst({
+  const section = await db.query.sections.findFirst({
     where: (section, { eq }) => eq(section.urlName, 'central-workshop'),
-  }))!;
+  });
   return (
     <>
-      <ImageHeader title={text.title} src="assets/central-workshop.jpg" />
+      <ImageHeader
+        title={text.title}
+        headings={[
+          { label: 'Services & Facilities', href: '#services' },
+          { label: 'Shop Details', href: '#shops' },
+          { label: 'Administration Details', href: '#admin' },
+        ]}
+        src="assets/central-workshop.jpg"
+      />
       <section className="container">
-        <p>{section?.aboutUs}</p>
-        <h4>{text.organization}</h4>
         <h5>{text.organizationSub}</h5>
         <ul className="mb-5 mt-1 list-inside list-disc">
           {text.organizationDetails.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <h4>{text.services}</h4>
+        <Heading
+          className="container"
+          id="services"
+          glyphDirection="ltr"
+          heading="h4"
+          text="Services & Facilities"
+        />
         <h5>{text.servicesSub}</h5>
         <ul className="mb-5 mt-1 list-inside list-disc">
           {text.servicesDetails.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-        {Object.freeze([
-          'facilities',
-          'machineShop',
-          'productionShop',
-          'fittingShop',
-          'patternShop',
-          'foundryShop',
-          'weldingShop',
-          'camLabs',
-        ] as const).map((category, index) => (
-          <Fragment key={index}>
-            <h4>{text[category].title}</h4>
-            {category === 'facilities' && <h5>{text[category].sub}</h5>}
-            <Table scrollAreaClassName={index === 0 ? 'mb-10' : 'mb-7'}>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.tableTitle.sno}</TableHead>
-                  <TableHead>{text.tableTitle.name}</TableHead>
-                  <TableHead className="text-center">
-                    {text.tableTitle.quantity}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {text[category].data.map(({ name, quantity }, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{name}</TableCell>
-                    <TableCell className="text-center">{quantity}</TableCell>
-                  </TableRow>
-                ))}
-                {'miscDetails' in text[category] && (
-                  <>
-                    <TableRow>
-                      <TableHead colSpan={3}>{text.miscTitle}</TableHead>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={3}>
-                        {/* @ts-expect-error: current ts version doesnt properly narrow type */}
-                        {text[category].miscDetails as string}
-                      </TableCell>
-                    </TableRow>
-                  </>
-                )}
-              </TableBody>
-            </Table>
-            {index == 0 && (
-              <h4 className="text-shade-dark">{text.equipmentDetails}</h4>
-            )}
-          </Fragment>
-        ))}
-        <h4>{text.staffTitle}</h4>
+        <h5>{text.facilities.sub}</h5>
+        <Table scrollAreaClassName="mb-7">
+          <TableHeader>
+            <TableRow>
+              <TableHead>{text.tableTitle.sno}</TableHead>
+              <TableHead>{text.tableTitle.name}</TableHead>
+              <TableHead className="text-center">
+                {text.tableTitle.quantity}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {text.facilities.data.map(({ name, quantity }, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{name}</TableCell>
+                <TableCell className="text-center">{quantity}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <div id="shops">
+          <h4>Lab Wise Details of Machinery and Equipment</h4>
+          <WorkshopContent text={text} section={section} />;
+        </div>
+        <h4 id="admin">{text.staffTitle}</h4>
         <Table>
           <TableHeader>
             <TableRow>
@@ -132,3 +126,4 @@ const DelayedStaff = async ({ id }: { id: number }) => {
     </TableRow>
   ));
 };
+// **Server Component**: Fetches data & passes it to a Client Component
