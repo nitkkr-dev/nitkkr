@@ -12,21 +12,21 @@ export async function populate() {
       }),
       { action: 'create' }
     );
-
-  await typesense
-    .collections('committees')
-    .documents()
-    .import(
-      await db.query.committeeMembers.findMany({
-        columns: {
-          committeeType: true,
-          name: true,
-          nomination: true,
-          servingAs: true,
-        },
-      }),
-      { action: 'create' }
-    );
+  // TODO: Add back committee members
+  // await typesense
+  //   .collections('committees')
+  //   .documents()
+  //   .import(
+  //     await db.query.committeeMembers.findMany({
+  //       columns: {
+  //         committeeType: true,
+  //         name: true,
+  //         nomination: true,
+  //         servingAs: true,
+  //       },
+  //     }),
+  //     { action: 'create' }
+  //   );
 
   await typesense
     .collections('courses')
@@ -85,24 +85,25 @@ export async function populate() {
       { action: 'create' }
     );
 
-  await typesense
-    .collections('staff')
-    .documents()
-    .import(
-      (
-        await db.query.staff.findMany({
-          columns: { designation: true, employeeId: true },
-          with: {
-            person: { columns: { email: true, name: true, telephone: true } },
-          },
-        })
-      ).map(({ designation, employeeId, person }) => ({
-        designation,
-        email: person.email,
-        employeeId,
-        name: person.name,
-        telephone: person.telephone,
-      })),
-      { action: 'create' }
-    );
+  // TODO: Add staff members
+  // await typesense
+  //   .collections('staff')
+  //   .documents()
+  //   .import(
+  //     (
+  //       await db.query.staff.findMany({
+  //         columns: { designation: true, employeeId: true },
+  //         with: {
+  //           person: { columns: { email: true, name: true, telephone: true } },
+  //         },
+  //       })
+  //     ).map(({ designation, employeeId, person }) => ({
+  //       designation,
+  //       email: person.email,
+  //       employeeId,
+  //       name: person.name,
+  //       telephone: person.telephone,
+  //     })),
+  //     { action: 'create' }
+  //   );
 }
