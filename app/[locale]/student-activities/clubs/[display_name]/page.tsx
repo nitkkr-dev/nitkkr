@@ -194,71 +194,53 @@ export default async function Club({
     <>
       <ImageHeader
         src={`clubs/${display_name}/banner.png`}
-        className="container"
-      />
-      <header className="container m-auto flex items-center justify-center">
-        <Image
-          alt={display_name}
-          src="https://s3-alpha-sig.figma.com/img/7402/b5d8/0d0e5a22248e48c7ff86855c04d25708?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RkSGzZZvYJnbKdrcupFwI~YfhQ5wVMa2XUPrrIHwmmFufne3DexsEjfO2Gkaa~S8WkO0I4vP3Gus-6rpjTawVhc5RMQbnQJBymaC8l4ibeWKQq-SqcDXPBZhv5T2~fBspLZuTvv3-uql22JGdkccqHN03RJq~cetCxZoM04TIsWLwVJDhJbF5ulcdEcyyxDPVkv86-tTcaJyFHwBF3Y8ZfJrP-2TlxoeI431PYQC97YOgiBRQkh~0mYYenZ6GAqtzc75sUqTjz7DwWmqT86exVOE28jy8jsaYwwv33U4X-2LHlQLv~GN5w-UNHy668EpqDeABZUaYHieb9zn3odufw__"
-          className="h-32 w-32 rounded-full bg-primary-100"
-          width={0}
-          height={0}
-        />
-        <h1 className="mx-2 my-auto text-4xl">{display_name.toUpperCase()}</h1>
-      </header>
-      <main className="container">
-        {/* about */}
-        <Heading
-          glyphDirection="rtl"
-          heading="h2"
-          text={text.club.about.toUpperCase()}
-        />
-        <article className="flex drop-shadow max-md:flex-col md:gap-4">
+        className="relative"
+      >
+        <header className="m-auto flex items-center justify-center max-w-[46rem] container ">
+          <Image
+            alt={display_name}
+            src="https://s3-alpha-sig.figma.com/img/7402/b5d8/0d0e5a22248e48c7ff86855c04d25708?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RkSGzZZvYJnbKdrcupFwI~YfhQ5wVMa2XUPrrIHwmmFufne3DexsEjfO2Gkaa~S8WkO0I4vP3Gus-6rpjTawVhc5RMQbnQJBymaC8l4ibeWKQq-SqcDXPBZhv5T2~fBspLZuTvv3-uql22JGdkccqHN03RJq~cetCxZoM04TIsWLwVJDhJbF5ulcdEcyyxDPVkv86-tTcaJyFHwBF3Y8ZfJrP-2TlxoeI431PYQC97YOgiBRQkh~0mYYenZ6GAqtzc75sUqTjz7DwWmqT86exVOE28jy8jsaYwwv33U4X-2LHlQLv~GN5w-UNHy668EpqDeABZUaYHieb9zn3odufw__"
+            className="h-32 w-32 rounded-full bg-primary-100"
+            width={32}
+            height={32}
+          />
+          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">{display_name.toUpperCase()}</h1>
+        </header>
+      </ImageHeader>
+      
+      <main className="container mt-12">
+        <article className="drop-shadow">
           <p
             className={cn(
-              'p-2 sm:p-3 md:p-4',
-              'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
+              'max-md:rounded-t md:w-full md:rounded-r'
             )}
           >
             {club?.aboutUs}
           </p>
-          <Image
-            alt={display_name}
-            className="w-full max-md:rounded-b md:order-first md:rounded-lg"
-            height={0}
-            src={`clubs/${display_name}/about.png`}
-            width={0}
-          />
         </article>
         {/* why and how to join */}
         <article
-          className={cn('md:flex md:gap-2', 'md:my-12 lg:my-16 xl:my-20')}
+          className={cn('md:flex md:gap-2 mt-16')}
           id="why and how to join"
         >
-          <article className="flex flex-col justify-center space-y-10 md:w-1/2">
-            <section>
-              <h3>{text.club.howToJoinUs}</h3>
-              <p>{dummyClubData?.howToJoinUs}</p>
+          <article className="flex flex-col justify-center ">
+            <section className="flex flex-col lg:flex-row">
+              <h3 className='lg:w-1/3 text-xl md:text-2xl lg:text-3xl'>{text.club.whyToJoinUs.toUpperCase()}</h3>
+              <p className='lg:w-2/3 '>{dummyClubData?.whyToJoinUs}</p>
             </section>
 
-            <section>
-              <h3>{text.club.whyToJoinUs}</h3>
-              <p>{dummyClubData?.whyToJoinUs}</p>
+            <section className='flex flex-col lg:flex-row pt-12'>
+              <h3 className='lg:w-1/3 text-xl md:text-2xl lg:text-3xl'>{text.club.howToJoinUs.toUpperCase()}</h3>
+              <p className='lg:w-2/3'>{dummyClubData?.howToJoinUs}</p>
             </section>
+
           </article>
 
-          <Image
-            alt={text.club.howToJoinUs}
-            className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
-            height={0}
-            src={facultyInchage[0].image}
-            width={0}
-          />
         </article>
 
         {/* notifications */}
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="rtl"
           heading="h2"
           id="notifications"
           text={text.club.notification.toUpperCase()}
@@ -285,7 +267,7 @@ export default async function Club({
 
         {/* Events */}
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="ltr"
           heading="h2"
           text={text.club.event.toUpperCase()}
         />

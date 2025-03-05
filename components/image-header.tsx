@@ -9,11 +9,13 @@ export default function ImageHeader({
   title,
   headings,
   src,
+  children,
 }: {
   className?: string;
   title?: string;
   headings?: { label: string; href: string }[];
   src: string;
+  children?: React.ReactNode;
 }) {
   return (
     <>
@@ -42,9 +44,10 @@ export default function ImageHeader({
             {title}
           </h1>
         )}
+        {children}
       </section>
 
-      {headings ? (
+      {headings && 
         <>
           <ol
             className={cn(
@@ -69,14 +72,8 @@ export default function ImageHeader({
           </ol>
           <hr className="invisible hidden sm:block" />
         </>
-      ) : (
-        <hr
-          className={cn(
-            'invisible hidden sm:block',
-            'mt-56 sm:mt-64 md:mt-72 lg:mt-80 xl:mt-96 2xl:mt-[448px]'
-          )}
-        />
-      )}
+     
+      }
     </>
   );
 }
