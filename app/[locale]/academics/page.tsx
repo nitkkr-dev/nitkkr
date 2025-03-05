@@ -1,6 +1,6 @@
 import { WorkInProgressStatus } from '~/components/status';
 
-export default function Academics({
+export default async function Academics({
   params: { locale },
 }: {
   params: { locale: string };

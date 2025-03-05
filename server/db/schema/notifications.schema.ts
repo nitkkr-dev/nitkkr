@@ -1,4 +1,5 @@
 import {
+  integer,
   pgTable,
   serial,
   text,
@@ -6,6 +7,8 @@ import {
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
+
+import { clubs } from '.';
 
 export const notifications = pgTable(
   'notifications',
@@ -20,6 +23,7 @@ export const notifications = pgTable(
     updatedAt: timestamp('updated_at')
       .$onUpdate(() => new Date())
       .notNull(),
+    // clubId: integer('club_id').references(() => clubs.id),
   },
   (notifications) => {
     return {
