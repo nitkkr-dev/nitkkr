@@ -2,9 +2,9 @@
 
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
-import { dropdownAtom, NavCurrValueAtom } from '~/state/default';
 import { Button, type ButtonProps } from '~/components/buttons';
 import { cn } from '~/lib/utils';
+import { dropdownAtom, NavCurrValueAtom } from '~/state/default';
 
 const HamburgerButton = ({ className }: { className: string }) => {
   const [isDropdownOpen, setDropdownOpen] = useAtom(dropdownAtom);
@@ -112,10 +112,12 @@ const SwitchNavButton = ({
   text,
   column,
   props,
+  children,
 }: {
-  text: string;
+  text?: string;
   column: string;
   props: ButtonProps;
+  children?: React.ReactNode;
 }) => {
   const [navCurrValue, setNavCurrValue] = useAtom(NavCurrValueAtom);
 
@@ -126,7 +128,7 @@ const SwitchNavButton = ({
       }
       {...props}
     >
-      {text}
+      {children ?? text}
     </Button>
   );
 };
