@@ -55,7 +55,13 @@ export default async function Events({
         href="#events"
         text={text.title}
       />
-
+      <Image
+        alt="arjuna"
+        src="assets/arjuna-1.png"
+        width={0}
+        height={0}
+        className="absolute bottom-0 left-0 opacity-80 lg:size-[28rem]"
+      />
       <article className="container relative lg:flex lg:gap-16">
         <ol
           className={cn(
@@ -121,7 +127,7 @@ export default async function Events({
             linkProps={{ href: `/${locale}/events` }}
             text={text.viewAll}
           />
-          <ol className="grid grid-cols-1 grid-rows-6 gap-6 lg:grid-cols-5 lg:grid-rows-3">
+          <ol className="z-10 grid grid-cols-1 grid-rows-6 gap-6 lg:grid-cols-5 lg:grid-rows-3">
             {events.map(({ title, content, startDate }, index) => (
               <li
                 key={index}
@@ -167,14 +173,6 @@ export default async function Events({
           </ol>
         </section>
       </article>
-      {/* fixme: button overlap issue */}
-      {/* <Image
-        alt="arjuna"
-        src="assets/arjuna-1.png"
-        width={0}
-        height={0}
-        className="absolute bottom-0 left-0 lg:size-[28rem]"
-      /> */}
     </article>
   );
 }
