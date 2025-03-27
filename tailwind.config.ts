@@ -72,6 +72,8 @@ export default {
     fontFamily: {
       sans: ['DM Sans', 'sans-serif'],
       serif: ['DM Serif Display', 'serif'],
+      fingerpaint: ['Finger Paint', 'sans-serif'],
+      Poppins: ['Poppins', 'sans-serif'],
     },
     fontSize: {
       '6xl': ['64px', { lineHeight: '72px' }],

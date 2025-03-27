@@ -366,16 +366,20 @@ const text: Translations = {
   },
   Status: {
     NoResult: {
-      title: 'कोई परिणाम नहीं मिला',
+      title: '404',
       description: 'आपके दिए गए प्रश्न से कोई परिणाम मेल नहीं खाता।',
     },
     Unauthorised: {
-      title: 'अनधिकृत',
+      title: '403',
       description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
     },
     WorkInProgress: {
-      title: 'कार्य प्रगति पर है',
+      title: '501',
       description: 'इस पेज पर अभी काम चल रहा है। कृपया दूसरी बार आएं',
+    },
+    NotAcceptable: {
+      title: '406',
+      description: 'अस्वीकार्य दुबारा प्रयास करें।',
     },
   },
   StudentActivities: {
