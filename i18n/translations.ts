@@ -66,6 +66,15 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    tabs: {
+      qualifications: string;
+      experience: string;
+      projects: string;
+      educationCurrent: string;
+      publications: string;
+      scholars: string;
+      awards: string;
+    };
   };
   FAQ: { title: string };
   Footer: {
