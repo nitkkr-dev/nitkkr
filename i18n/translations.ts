@@ -324,7 +324,24 @@ export interface Translations {
     Estate: {};
     GeneralAdministration: {};
     HealthCentre: {};
-    Security: {};
+    Security: {
+      title: string;
+      article: string[];
+      aspects: {
+        technologies: {
+          title: string;
+          content1: string;
+          features: string[];
+          liaison: string;
+        };
+        securityandsupport: {
+          title: string;
+          content: string[];
+          features: string[];
+          liaison: string;
+        };
+      };
+    };
     Sports: {};
     Store: {};
   };
