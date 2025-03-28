@@ -4,16 +4,14 @@ import { type IconType } from 'react-icons';
 import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
-export default function HeadingWithButtons({
+export default function ButtonGroup({
   buttonArray,
-  itemClassName,
 }: {
   buttonArray: {
     label: string;
     href: string;
     icon: IconType;
   }[];
-  itemClassName?: string;
 }) {
   return (
     <>
@@ -37,7 +35,7 @@ export default function HeadingWithButtons({
           >
             <Link href={href}>
               <Icon className="size-12" />
-              <p className={cn('font-serif font-semibold', itemClassName)}>
+              <p className="whitespace-normal font-serif font-semibold">
                 {label}
               </p>
             </Link>
