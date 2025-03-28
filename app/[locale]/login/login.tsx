@@ -26,7 +26,7 @@ const Login = async ({ locale }: { locale: string }) => {
       </header>
       <section className="w-full space-y-4 md:space-y-6">
         <Input
-          inputClassName="sm:px-4 sm:py-3 md:px-5 md:py-4"
+          classNames={{ input: 'sm:px-4 sm:py-3 md:px-5 md:py-4' }}
           id="email"
           label={text.enterEmail}
           placeholder="isac@nitkkr.ac.in"
