@@ -14,12 +14,12 @@ export type ValidityStateWithError = {
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
+  classNames?: { input?: string };
   customValidator?: () => ValidityStateWithError;
   debounceEvery?: number;
   debounceTo?: string;
   description?: string;
   id: string;
-  inputClassName?: string;
   label?: string;
   reserveSpaceForError?: boolean;
   showError?: boolean;
@@ -50,11 +50,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
+      classNames,
       customValidator = () => ({}) as ValidityStateWithError,
       debounceEvery,
       debounceTo,
       description,
-      inputClassName,
       label,
       onBlur,
       onChange,
@@ -124,7 +124,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               focusedOnce &&
                 'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
               (type === 'checkbox' || type === 'radio') && 'h-5 w-5 ', //incomplete
-              inputClassName
+              classNames?.input
             )}
             onBlur={(event) => {
               if (!focusedOnce) setFocusedOnce(true);
