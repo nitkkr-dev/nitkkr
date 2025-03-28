@@ -20,7 +20,22 @@ const text: Translations = {
       more: 'Read more',
     },
   },
-
+  club: {
+    about: 'About',
+    batch: 'Batch',
+    degree: 'Degree',
+    event: 'Events',
+    faculty: 'Faculty Incharge',
+    gallery: 'Gallery',
+    howToJoinUs: 'How to Join Us?',
+    major: 'Major',
+    name: 'Name',
+    notification: 'Notifications',
+    ourMembers: 'Our Members',
+    postHolders: 'Post Holders',
+    rollNumber: 'Roll Number',
+    whyToJoinUs: 'Why Join Us?',
+  },
   Clubs: { title: 'CLUBS' },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
