@@ -51,6 +51,23 @@ const text: Translations = {
     totalCredits: 'Credits',
     syllabus: 'Syllabus',
   },
+  Curriculum: {
+    courseCode: 'Course Code',
+    title: 'Course Details',
+    coordinator: 'Course Coordinator',
+    prerequisites: {
+      title: 'Prerequisites',
+      none: 'No prerequisites for this course',
+    },
+    nature: 'Course Nature',
+    objectives: 'Objectives',
+    content: 'Content',
+    outcomes: 'Outcomes',
+    essentialReading: 'Essential Reading',
+    supplementaryReading: 'Supplementary Reading',
+    similarCourses: 'Similar Courses',
+    referenceBooks: 'Reference Books',
+  },
   Departments: { title: 'DEPARTMENTS' },
   Department: {
     headings: {
