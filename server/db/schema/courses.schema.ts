@@ -2,6 +2,7 @@ import { relations, sql } from 'drizzle-orm';
 import {
   char,
   integer,
+  json,
   pgTable,
   smallint,
   smallserial,
@@ -13,7 +14,7 @@ import { courseLogs, coursesToMajors, departments, faculty } from '.';
 
 export const courses = pgTable('courses', {
   id: smallserial('id').primaryKey(),
-  code: varchar('code', { length: 7 }).unique().notNull(),
+  code: varchar('code', { length: 8 }).unique().notNull(),
   title: varchar('title', { length: 128 }).notNull(),
   coordinatorId: integer('coordinator_id')
     .references(() => faculty.id)
@@ -25,12 +26,14 @@ export const courses = pgTable('courses', {
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  nature: char('nature', { length: 3 }).notNull(),
+  nature: char('nature', { length: 20 }).notNull(),
   objectives: text('objectives')
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  content: text('content').notNull(),
+  content: json('content')
+    .$type<{ title: string; topics: string[] }[]>()
+    .notNull(),
   outcomes: text('outcomes')
     .array()
     .default(sql`'{}'`)

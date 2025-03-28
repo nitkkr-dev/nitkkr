@@ -43,6 +43,35 @@ export interface Translations {
     totalCredits: string;
     syllabus: string;
   };
+  Curriculum: {
+    courseCode: string;
+    title: string;
+    coordinator: string;
+    prerequisites: {
+      title: string;
+      none: string;
+    };
+    nature: string;
+    objectives: string;
+    content: string;
+    outcomes: string;
+    essentialReading: string;
+    supplementaryReading: string;
+    similarCourses: string;
+    referenceBooks: string;
+  };
+  Dean: {
+    deanTitles: {
+      academic: string;
+      'estate-and-construction': string;
+      'faculty-welfare': string;
+      'industry-and-international-relations': string;
+      'planning-and-development': string;
+      'research-and-consultancy': string;
+      'student-welfare': string;
+    };
+    responsibilities: string;
+  };
   Departments: { title: string };
   Department: {
     headings: {
@@ -89,6 +118,65 @@ export interface Translations {
     search: string;
     login: string;
     profile: { alt: string; view: string };
+  };
+  Institute: {
+    welcome: string;
+    profile: {
+      title: string;
+      vision: { title: string; content: string[] };
+      mission: { title: string; content: string[] };
+      history: { title: string; content: string[]; readMore: string };
+    };
+    admission: {
+      title: string;
+      process: { title: string; content: string[] };
+      education: { title: string; content: string[] };
+    };
+    nirf: {
+      title: string;
+      year: string;
+      result: string;
+      nirfCertificate: string;
+      dataFile: string;
+    };
+    funds: { title: string; content: string };
+    collaboration: { title: string; content: string[] };
+    quickLinks: {
+      title: string;
+      campus: string;
+      documentary: string;
+      organisationChart: string;
+      sections: string;
+      gallery: string;
+      administration: string;
+    };
+  };
+  Hostels: {
+    title: string;
+    boysHostels: string;
+    girlsHostels: string;
+    misc: string;
+    notificationsTitle: string;
+    rulesTitle: string;
+    hostelDetails: {
+      name: string;
+      overview: string;
+      staffOverview: string;
+      facilities: string;
+      contact: string;
+      email: string;
+      wardens: string;
+      faculty: string;
+      staff: string;
+      general: string;
+      hostelsStaffTable: {
+        name: string;
+        designation: string;
+        hostelPost: string;
+        contact: string;
+        email: string;
+      };
+    };
   };
   Login: {
     title: string;
@@ -321,12 +409,30 @@ export interface Translations {
     CentralWorkshop: {};
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
-    Estate: {};
+    Estate: {
+      name: string;
+      links: string[];
+      headings: string[];
+      subheadings: string[];
+
+      about: string[];
+
+      project: {
+        completed: string[];
+
+        ongoing: string[];
+        future: string[];
+      };
+      seniority: string[];
+    };
     GeneralAdministration: {};
     HealthCentre: {};
     Security: {};
     Sports: {};
     Store: {};
+  };
+  Sections: {
+    title: string;
   };
   Status: {
     NoResult: { title: string; description: string };
@@ -345,6 +451,46 @@ export interface Translations {
     };
     sections: {
       clubs: { title: string; more: string };
+    };
+  };
+  TrainingAndPlacement: {
+    title: string;
+    headings: {
+      ourrecruiters: string;
+      stats: string;
+      guidelines: string;
+      about: string;
+      faq: string;
+      forrecruiters: string;
+    };
+    about: {
+      content: string[];
+      tnpteam: string;
+      tnpbrochure: string;
+      facilities: {
+        heading: string;
+        content: string[];
+      };
+    };
+    stats: {
+      content: string[];
+    };
+    ourrecruiters: {
+      about: string;
+    };
+    forrecruiters: {
+      build: string;
+      invitaion: string;
+      reach: string;
+    };
+    guidelines: {
+      protocol: string;
+      tnpguidelines: string;
+      internguidlines: string;
+    };
+    faq: {
+      questions: string[];
+      answers: string[][];
     };
   };
 }
