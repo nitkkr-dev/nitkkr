@@ -44,7 +44,9 @@ export default async function Search({
       <Input
         debounceTo="query"
         id="search"
-        inputClassName="border-primary-700 focus-visible:ring-primary-700"
+        classNames={{
+          input: 'border-primary-700 focus-visible:ring-primary-700',
+        }}
         placeholder={text.placeholder}
         type="search"
       />
@@ -269,7 +271,7 @@ const ResultsView = async ({
               <h4>{categories[category]}</h4>
               {currentCategory === 'all' && (
                 <BouncyArrowButton
-                  arrowClassName="md:size-2 lg:size-3"
+                  classNames={{ arrow: 'md:size-2 lg:size-3' }}
                   buttonProps={{
                     className: cn(
                       'inline-flex h-fit gap-1 md:gap-2',

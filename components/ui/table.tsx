@@ -7,16 +7,19 @@ import { ScrollArea } from '.';
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement> & {
-    scrollAreaClassName?: string;
+    classNames?: {
+      scrollArea?: string;
+      scrollBar?: string;
+    };
   }
->(({ className, scrollAreaClassName, ...props }, ref) => (
+>(({ className, classNames, ...props }, ref) => (
   <ScrollArea
     className={cn(
       'relative w-full rounded-md border border-primary-700 shadow-2xl',
       'px-2 py-3',
-      scrollAreaClassName
+      classNames?.scrollArea
     )}
-    scrollBarClassName="mt-[60px] pb-[60px]"
+    classNames={{ scrollBar: classNames?.scrollBar ?? 'mt-[60px] pb-[60px]' }}
   >
     <table
       ref={ref}

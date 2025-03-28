@@ -12,12 +12,12 @@ const GalleryCarousel = ({
   carouselProps,
   children,
   className,
-  itemClassName,
+  classNames,
 }: {
   carouselProps?: CarouselProps;
   children: React.ReactNode[];
   className?: string;
-  itemClassName?: string;
+  classNames?: { item?: string };
 }) => {
   return (
     <article className={cn('container relative px-10 lg:px-14', className)}>
@@ -35,7 +35,7 @@ const GalleryCarousel = ({
               key={index}
               className={cn(
                 'sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
-                itemClassName
+                classNames?.item
               )}
             >
               {child}

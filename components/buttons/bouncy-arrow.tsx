@@ -5,12 +5,12 @@ import { Button, type ButtonProps } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
 export const BouncyArrowButton = ({
-  arrowClassName,
+  classNames,
   buttonProps,
   linkProps,
   text,
 }: {
-  arrowClassName?: string;
+  classNames?: { arrow?: string };
   buttonProps?: ButtonProps;
   linkProps: LinkProps;
   text: string;
@@ -23,7 +23,7 @@ export const BouncyArrowButton = ({
           className={cn(
             'mx-auto animate-bounce',
             'size-2 md:size-3 lg:size-4',
-            arrowClassName
+            classNames?.arrow
           )}
         />
       </span>

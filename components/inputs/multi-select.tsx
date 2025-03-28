@@ -56,7 +56,7 @@ export interface MultipleSelectorProps {
   /** Group the options base on provided key. */
   groupBy?: string;
   className?: string;
-  badgeClassName?: string;
+  classNames?: { badge?: string };
   /**
    * First item selected is a default behavior by cmdk. That is why the default is true.
    * This is a workaround solution by add a dummy item.
@@ -172,7 +172,7 @@ const MultipleSelector = React.forwardRef<
       disabled,
       groupBy,
       className,
-      badgeClassName,
+      classNames,
       selectFirstItem = true,
       creatable = false,
       triggerSearchOnFocus = false,
@@ -375,7 +375,7 @@ const MultipleSelector = React.forwardRef<
                   className={cn(
                     'data-[disabled]:cursor-not-allowed data-[disabled]:border-0 data-[disabled]:bg-neutral-200/30 data-[disabled]:ring-0',
                     'bg-primary-300 data-[fixed]:bg-neutral-400 data-[fixed]:text-neutral-700 data-[fixed]:hover:bg-neutral-400',
-                    badgeClassName
+                    classNames?.badge
                   )}
                 >
                   {option}

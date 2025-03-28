@@ -19,7 +19,7 @@ export interface InputProps
   debounceTo?: string;
   description?: string;
   id: string;
-  inputClassName?: string;
+  classNames?: { input?: string };
   label?: string;
   reserveSpaceForError?: boolean;
   showError?: boolean;
@@ -54,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       debounceEvery,
       debounceTo,
       description,
-      inputClassName,
+      classNames,
       label,
       onBlur,
       onChange,
@@ -124,7 +124,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               focusedOnce &&
                 'invalid:border-primary-500 invalid:focus-visible:ring-primary-500',
               (type === 'checkbox' || type === 'radio') && 'h-5 w-5 ', //incomplete
-              inputClassName
+              classNames?.input
             )}
             onBlur={(event) => {
               if (!focusedOnce) setFocusedOnce(true);
