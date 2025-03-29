@@ -125,7 +125,7 @@ export default async function CollectionAndResources({
       </section>
 
       <section className="container my-10">
-        <Table scrollAreaClassName="h-96">
+        <Table classNames={{ scrollArea: 'h-96' }}>
           <TableHeader>
             <TableRow>
               <TableHead>{text.eResourcesTable.heading.srno}</TableHead>
