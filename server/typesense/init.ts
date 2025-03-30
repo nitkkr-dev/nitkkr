@@ -7,10 +7,10 @@ const createTypesenseClient = () => {
   return new Client({
     nodes: [
       {
-        host: env.TYPESENSE_HOST,
-        port: env.TYPESENSE_PORT,
+        host: env.TYPESENSE_HOES,
+        port: env.TYPESENSE_POR,
         ...(env.NODE_ENV === 'production'
-          ? { protocol: 'https' }
+          ? { protocol: 'http' }
           : { protocol: 'http' }),
       },
     ],

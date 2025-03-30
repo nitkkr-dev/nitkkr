@@ -24,8 +24,8 @@ export const env = createEnv({
     AWS_PUBLIC_S3_NAME: z.string(),
     AWS_PRIVATE_S3_NAME: z.string(),
 
-    TYPESENSE_HOST: z.string(),
-    TYPESENSE_PORT: z.coerce.number(),
+    TYPESENSE_HOES: z.string(),
+    TYPESENSE_POR: z.coerce.number(),
     TYPESENSE_API_KEY: z.string(),
   },
   experimental__runtimeEnv: process.env,
