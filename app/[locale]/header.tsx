@@ -245,15 +245,12 @@ export default async function Header({ locale }: { locale: string }) {
                 )}
               >
                 <NavStyleSwitcher />
-                <main className="container flex h-dvh max-h-dvh flex-col px-6 xl:gap-6 2xl:gap-8">
+                <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
                   <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
                     <SwitchNavButton
+                      className="nav-column-academics nav-column-institute invisible my-auto aspect-square !h-full text-xl font-bold"
                       column="default"
-                      props={{
-                        className:
-                          'nav-column-academics nav-column-institute invisible my-auto !h-full text-xl font-bold',
-                        variant: 'link',
-                      }}
+                      variant="link"
                     >
                       <MdArrowBackIosNew className="size-8" />
                     </SwitchNavButton>
@@ -263,12 +260,10 @@ export default async function Header({ locale }: { locale: string }) {
                       <li key={index} className="w-fit">
                         {listItems ? (
                           <SwitchNavButton
+                            className="text-left text-shade-dark"
                             column={href}
                             text={label + '>'}
-                            props={{
-                              className: 'text-left text-shade-dark',
-                              variant: 'link',
-                            }}
+                            variant="link"
                           />
                         ) : (
                           <NavButton
