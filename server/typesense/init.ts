@@ -10,7 +10,7 @@ const createTypesenseClient = () => {
         host: env.TYPESENSE_HOST,
         port: env.TYPESENSE_PORT,
         ...(env.NODE_ENV === 'production'
-          ? { protocol: 'https' }
+          ? { protocol: 'http' } // ssl certs required for https
           : { protocol: 'http' }),
       },
     ],
