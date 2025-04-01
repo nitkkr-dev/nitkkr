@@ -6,15 +6,29 @@ import { ScrollArea } from '~/components/ui';
 import { getTranslations, type Translations } from '~/i18n/translations';
 import { groupBy } from '~/lib/utils';
 
+type FacultySectionProps =
+  | {
+      params: {
+        locale: string;
+        faculty_section: keyof Translations['FacultyAndStaff']['tabs'];
+        employee_id: string;
+      };
+      asProfile?: never;
+    }
+  | {
+      params?: never;
+      asProfile: {
+        id: number;
+        locale: string;
+        faculty_section: keyof Translations['FacultyAndStaff']['tabs'];
+      };
+    };
+
 export default async function FacultySection({
-  params: { locale, faculty_section, employee_id },
-}: {
-  params: {
-    locale: string;
-    faculty_section: keyof Translations['FacultyAndStaff']['tabs'];
-    employee_id: string;
-  };
-}) {
+  params,
+  asProfile,
+}: FacultySectionProps) {
+  const { locale, faculty_section } = params ?? asProfile;
   const title = (await getTranslations(locale)).FacultyAndStaff.tabs[
     faculty_section
   ];
@@ -200,7 +214,7 @@ export default async function FacultySection({
     ],
   };
   const profileTabs =
-    employee_id === '114' ? jkchabbraProfile : defaultProfileTabs;
+    params?.employee_id === '114' ? jkchabbraProfile : defaultProfileTabs;
 
   if (!profileTabs[faculty_section]) {
     return notFound();
