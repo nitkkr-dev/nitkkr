@@ -129,9 +129,9 @@ const text: Translations = {
     viewAll: 'View All',
   },
   NotFound: {
-    title: 'Not Found',
-    description: 'Could not find requested resource',
-    backHome: 'Return Home',
+    title: '404',
+    description: 'Not found ',
+    backHome: 'Looks like you’re lost let’s get you back home',
   },
   Profile: {
     tabs: {
@@ -369,17 +369,20 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
   },
   Status: {
     NoResult: {
-      title: 'No results found',
-      description: 'No result matched your given query.',
+      title: '404',
+      description: 'Not found Looks like you’re lost, let’s get you back home',
     },
     Unauthorised: {
-      title: 'Unauthorised',
-      description: 'You are not authorised to view this page.',
+      title: '403',
+      description: 'Unauthorized',
     },
     WorkInProgress: {
-      title: 'Work In Progress',
-      description:
-        'This page is currently being worked on. Please visit another time',
+      title: '501',
+      description: 'Work In Progress',
+    },
+    NotAcceptable: {
+      title: '406',
+      description: 'Not Acceptable Please try again',
     },
   },
   StudentActivities: {

@@ -332,6 +332,7 @@ export interface Translations {
     NoResult: { title: string; description: string };
     Unauthorised: { title: string; description: string };
     WorkInProgress: { title: string; description: string };
+    NotAcceptable: { title: string; description: string };
   };
   StudentActivities: {
     title: string;
