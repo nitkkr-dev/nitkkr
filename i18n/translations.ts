@@ -347,4 +347,20 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
+
+  Institute: {
+    infrastructure: {
+      heading: string;
+      headings: string[];
+      campus: string[];
+      gallery: string[];
+      infra: string[];
+      facilities: string[];
+      library: { heading: string; text: string[] };
+      computing: { heading: string; text: string[] };
+      senate: { heading: string; text: string[] };
+      sports: { heading: string; text: string[] };
+      address: string[];
+    };
+  };
 }
