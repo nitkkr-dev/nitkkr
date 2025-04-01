@@ -16,7 +16,22 @@ const text: Translations = {
       more: 'और पढ़ें',
     },
   },
-
+  club: {
+    about: 'परिचय',
+    batch: 'बैच',
+    degree: 'डिग्री',
+    event: 'आयोजन',
+    faculty: 'संकाय',
+    gallery: 'गैलरी',
+    howToJoinUs: 'हमारे साथ कैसे जुड़ें',
+    major: 'मेजर',
+    name: 'नाम',
+    notification: 'सूचना',
+    ourMembers: 'हमारे सदस्य',
+    postHolders: 'पदाधिकारी',
+    rollNumber: 'रोल नंबर',
+    whyToJoinUs: 'हमारे साथ क्यों जुड़ें',
+  },
   Clubs: { title: 'संघठनें' },
   Committee: {
     building: 'निर्माण एवं कार्य समिति',
