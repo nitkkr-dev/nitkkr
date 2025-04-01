@@ -47,6 +47,23 @@ const text: Translations = {
     totalCredits: 'क्रेडिट्स',
     syllabus: 'पाठ्यक्रम',
   },
+  Curriculum: {
+    courseCode: 'कोर्स कोड',
+    title: 'कोर्स विवरण',
+    coordinator: 'समन्वयक',
+    prerequisites: {
+      title: 'आवश्यकताएँ',
+      none: 'इस कोर्स के लिए कोई आवश्यकता नहीं',
+    },
+    nature: 'कोर्स प्रकृति',
+    objectives: 'उद्देश्य',
+    content: 'सामग्री',
+    outcomes: 'परिणाम',
+    essentialReading: 'आवश्यक पाठ्य',
+    supplementaryReading: 'परिशिष्ट पाठ्य',
+    similarCourses: 'समान कोर्स',
+    referenceBooks: 'संदर्भ पुस्तकें',
+  },
   Departments: { title: 'विभाग' },
   Department: {
     headings: {

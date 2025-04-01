@@ -43,6 +43,23 @@ export interface Translations {
     totalCredits: string;
     syllabus: string;
   };
+  Curriculum: {
+    courseCode: string;
+    title: string;
+    coordinator: string;
+    prerequisites: {
+      title: string;
+      none: string;
+    };
+    nature: string;
+    objectives: string;
+    content: string;
+    outcomes: string;
+    essentialReading: string;
+    supplementaryReading: string;
+    similarCourses: string;
+    referenceBooks: string;
+  };
   Departments: { title: string };
   Department: {
     headings: {
