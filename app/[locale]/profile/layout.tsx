@@ -1,12 +1,13 @@
 import Image from 'next/image';
 
 import { UnauthorisedStatus } from '~/components/status';
+import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
-import { ScrollArea } from '~/components/ui';
 
+import { FacultyOrStaffComponent } from '../faculty-and-staff/utils';
 import { LogOut, PathnameAwareSuspense, Tabs } from './client-utils';
 
 export default async function ProfileLayout({
@@ -18,7 +19,12 @@ export default async function ProfileLayout({
 }) {
   const session = await getServerAuthSession();
   if (!session) return <UnauthorisedStatus locale={locale} />;
-
+  else if (session.person.type == 'faculty')
+    return (
+      <FacultyOrStaffComponent id={session.person.id} locale={locale}>
+        {children}
+      </FacultyOrStaffComponent>
+    );
   const text = (await getTranslations(locale)).Profile;
 
   const student = (await db.query.students.findFirst({
