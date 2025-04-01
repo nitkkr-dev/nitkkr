@@ -4,12 +4,14 @@ import { db } from '~/server/db';
 
 export default async function Personal({
   params: { locale },
+  id,
 }: {
   params: { locale: string };
+  id?: number;
 }) {
   const text = (await getTranslations(locale)).Profile.tabs.personal;
 
-  const session = (await getServerAuthSession())!;
+  const personId = id ?? (await getServerAuthSession())!.person.id;
   const person = (await db.query.persons.findFirst({
     columns: {
       alternateTelephone: true,
@@ -21,7 +23,7 @@ export default async function Personal({
       sex: true,
       telephone: true,
     },
-    where: (person, { eq }) => eq(person.id, session.person.id),
+    where: (person, { eq }) => eq(person.id, personId),
   }))!;
   const student = (await db.query.students.findFirst({
     where: (student, { eq }) => eq(student.id, person.id),

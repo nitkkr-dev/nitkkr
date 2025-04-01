@@ -6,7 +6,6 @@ import { MdCall, MdLocationOn, MdMail } from 'react-icons/md';
 
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
 import { getTranslations } from '~/i18n/translations';
-import { getServerAuthSession } from '~/server/auth';
 import { db, faculty, staff } from '~/server/db';
 
 export async function generateStaticParams() {
@@ -20,11 +19,16 @@ export async function generateStaticParams() {
 export default async function FacultyOrStaffLayout({
   children,
   params: { locale, employee_id: employeeId },
+  asProfile,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   params: { locale: string; employee_id: string };
+  asProfile?: {
+    id: number;
+    locale: string;
+  };
 }) {
-  const auth = await getServerAuthSession();
+  // const auth = await getServerAuthSession();
   const text = (await getTranslations(locale)).FacultyAndStaff;
 
   const tabs = [
@@ -58,7 +62,10 @@ export default async function FacultyOrStaffLayout({
     },
   ];
   const faculty = await db.query.faculty.findFirst({
-    where: (faculty, { eq }) => eq(faculty.employeeId, employeeId),
+    where: (faculty, { eq }) =>
+      !!asProfile
+        ? eq(faculty.id, asProfile.id)
+        : eq(faculty.employeeId, employeeId),
     columns: {
       id: true,
       officeAddress: true,
@@ -205,14 +212,14 @@ export default async function FacultyOrStaffLayout({
           tabs={tabs}
           select
           defaultPath="qualifications"
-          basePath={`faculty-and-staff/${employeeId}`}
+          basePath={`${!!asProfile ? 'profile' : 'faculty-and-staff'}/${employeeId}`}
         />
         <ol className="flex flex-col justify-between max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
           <Tabs
             locale={locale}
             tabs={tabs}
             defaultPath="qualifications"
-            basePath={`faculty-and-staff/${employeeId}`}
+            basePath={`${!!asProfile ? 'profile' : 'faculty-and-staff'}/${employeeId}`}
           />
         </ol>
         <article className="flex w-full flex-col rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6">
