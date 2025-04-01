@@ -77,6 +77,15 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
+    tabs: {
+      qualifications: 'Education Qualifications',
+      experience: 'Experience',
+      projects: 'Projects',
+      educationCurrent: 'Continuing Education',
+      publications: 'Publications',
+      scholars: 'Research Scholars',
+      awards: 'Awards and Honors',
+    },
   },
   FAQ: { title: 'Frequently Asked Questions' },
   Footer: {
@@ -241,8 +250,8 @@ const text: Translations = {
         totalFloorAreaText:
           'The library is a growing organism. To meet all the requirements, sufficient space has been added for stacking, reading, and other services. The Library has a reading capacity of 500 readers and sufficient space for stacking new documents, a digital library and Audio audio-visual centre. The total area of the library at present is 36711sq-ft.',
         libraryHoursText: `Reading Facilities: 24x07x365
-Stack and Circulation: 
-All Working Days: 08.30 am to 05:30 pm 
+Stack and Circulation:
+All Working Days: 08.30 am to 05:30 pm
 Saturdays & Holidays: 09.00 am to 05.00 pm`,
         aboutText:
           'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researchers, scholars, and students.',
