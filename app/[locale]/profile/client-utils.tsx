@@ -64,6 +64,7 @@ export const Tabs = ({
   tabs,
   defaultPath,
   basePath,
+  pathLength = 3,
 }: {
   locale: string;
   select?: boolean;
@@ -73,11 +74,11 @@ export const Tabs = ({
   }[];
   defaultPath: string;
   basePath: string;
+  pathLength?: number;
 }) => {
   const pathname = usePathname();
-  const path = pathname.split('/').slice(defaultPath === 'personal' ? 3 : 4); // ['', 'en|hi', 'profile', ?]
+  const path = pathname.split('/').slice(pathLength); // ['', 'en|hi', 'profile', ?]
   const tab = path.length === 0 ? defaultPath : path[0];
-  console.log(tab);
 
   const icons = {
     personal: BsPersonFill,
