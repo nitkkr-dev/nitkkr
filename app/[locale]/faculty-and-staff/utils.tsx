@@ -94,7 +94,7 @@ export async function FacultyOrStaffComponent({
             width={200}
             height={200}
             className="absolute right-0 top-0 z-10 mr-3 size-32 translate-y-[-50%] rounded-full border-[1rem] border-background object-cover sm:mr-6 sm:size-40 lg:mr-8 lg:size-48 xl:hidden"
-            src={`assets/images/faculty/'${faculty.id}.jpg`}
+            src={`fallback/user-image.jpg`}
           />
           <ul className="flex h-full flex-col justify-center font-medium">
             <li>
@@ -136,7 +136,7 @@ export async function FacultyOrStaffComponent({
             width={200}
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
-            src={`faculty-and-staff/'${faculty.id}.svg`}
+            src={`fallback/user-image.jpg`}
           />
         </section>
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
