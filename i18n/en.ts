@@ -132,7 +132,7 @@ const text: Translations = {
     ],
     and: 'and',
     description:
-      'Squirrel Girl (Doreen Allene Green) is a superheroine appearing in American comic books published by Marvel Comics. Created by writer Will Murray and writer-artist Steve Ditko, the character first appeared in Marvel Super-Heroes vol. 2 #8, a.k.a. Marvel Super-Heroes Winter Special (cover-dated Winter 1991). Murray created the character out of a desire to write lighthearted stories, in contrast to the heavily dramatic tales that were then the norm in mainstream comics.',
+      'The Administration Section of NIT Kurukshetra is responsible for the overall administration of the Institute. The Administration Section is headed by the Director, who is assisted by the Deans and other officers.',
     approvalHeading: 'Approval Of MHRD-GOI/BOG',
     approvalDescription:
       'Various approvals received from MHRD  (now MoE) and/or the Government of India (GoI) (From conversion from  Regional Engineering College (REC) to National Institute of Technology,  Kurukshetra with “An Institution of National Importance” status.',
