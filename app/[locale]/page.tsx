@@ -73,7 +73,7 @@ export default async function Home({
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-800/80"></div>
                 <article className="absolute inset-x-0 top-[50%] m-auto translate-y-[-50%] text-center drop-shadow-md">
-                  <h4 className="text-shade-light">एनआईटी कुरूक्षेत्</h4>
+                  <h4 className="text-shade-light">एनआईटी कुरुक्षेत्र</h4>
                   <h1 className="text-xl text-shade-light sm:text-2xl md:text-4xl lg:text-6xl">
                     NIT KURUKSHETRA
                   </h1>
