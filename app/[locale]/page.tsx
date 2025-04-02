@@ -51,7 +51,7 @@ export default async function Home({
               image: 'slideshow/image01.jpg',
               title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
               subtitle:
-                'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
+                'Over 300 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
             },
             {
               image: 'slideshow/image02.jpg',
