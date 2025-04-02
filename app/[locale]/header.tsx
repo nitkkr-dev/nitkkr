@@ -5,6 +5,7 @@ import { userAgent } from 'next/server';
 import { Suspense } from 'react';
 import { BsPersonFill } from 'react-icons/bs';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { MdArrowBackIosNew } from 'react-icons/md';
 
 import {
   Button,
@@ -37,12 +38,6 @@ export default async function Header({ locale }: { locale: string }) {
       label: text.institute,
       href: 'institute',
       listItems: [
-        {
-          title: 'Institute Profile',
-          href: '/institute/profile',
-          description:
-            'Get to know our institute’s vision, mission, and values.',
-        },
         {
           title: 'Administration',
           href: '/institute/administration',
@@ -250,29 +245,25 @@ export default async function Header({ locale }: { locale: string }) {
                 )}
               >
                 <NavStyleSwitcher />
-                <main className="container flex h-dvh max-h-dvh flex-col px-6 xl:gap-6 2xl:gap-8">
+                <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
                   <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
                     <SwitchNavButton
+                      className="nav-column-academics nav-column-institute invisible my-auto aspect-square !h-full text-xl font-bold"
                       column="default"
-                      text={'〉'}
-                      props={{
-                        className:
-                          'nav-column-academics  nav-column-institute invisible my-auto !h-full text-xl mx-2 font-bold',
-                        variant: 'link',
-                      }}
-                    />
+                      variant="link"
+                    >
+                      <MdArrowBackIosNew className="size-8" />
+                    </SwitchNavButton>
                   </header>
                   <ul className="nav-column-default space-y-4 text-base font-semibold">
                     {items.map(({ label, href, listItems }, index) => (
                       <li key={index} className="w-fit">
                         {listItems ? (
                           <SwitchNavButton
+                            className="text-left text-shade-dark"
                             column={href}
                             text={label + '>'}
-                            props={{
-                              className: 'text-left text-shade-dark',
-                              variant: 'link',
-                            }}
+                            variant="link"
                           />
                         ) : (
                           <NavButton
@@ -442,7 +433,7 @@ const MobileSubNavMenu = ({
     >
       <NavButton asChild variant="icon">
         <Link
-          href={'/' + href}
+          href={`/${locale}/${href}`}
           className="group relative mb-6 !flex aspect-[5/2] min-h-20 select-none !flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
         >
           <Image

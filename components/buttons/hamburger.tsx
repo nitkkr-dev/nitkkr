@@ -1,10 +1,11 @@
 'use client';
 
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { forwardRef } from 'react';
 
-import { dropdownAtom, NavCurrValueAtom } from '~/state/default';
 import { Button, type ButtonProps } from '~/components/buttons';
 import { cn } from '~/lib/utils';
+import { dropdownAtom, NavCurrValueAtom } from '~/state/default';
 
 const HamburgerButton = ({ className }: { className: string }) => {
   const [isDropdownOpen, setDropdownOpen] = useAtom(dropdownAtom);
@@ -108,15 +109,13 @@ const NavStyleSwitcher = () => {
   );
 };
 
-const SwitchNavButton = ({
-  text,
-  column,
-  props,
-}: {
-  text: string;
-  column: string;
-  props: ButtonProps;
-}) => {
+const SwitchNavButton = forwardRef<
+  HTMLButtonElement,
+  ButtonProps & {
+    column: string;
+    text?: string;
+  }
+>(({ children, column, text, ...props }, ref) => {
   const [navCurrValue, setNavCurrValue] = useAtom(NavCurrValueAtom);
 
   return (
@@ -124,24 +123,23 @@ const SwitchNavButton = ({
       onClick={() =>
         setNavCurrValue({ prev: navCurrValue.current, current: column })
       }
+      ref={ref}
       {...props}
     >
-      {text}
+      {children ?? text}
     </Button>
   );
-};
+});
+SwitchNavButton.displayName = 'SwitchNavButton';
 
-interface NavButtonProps extends ButtonProps {
-  children: React.ReactNode;
-  className?: string;
-}
-const NavButton = ({ children, ...props }: NavButtonProps) => {
-  const setDropdownOpen = useSetAtom(dropdownAtom);
+const NavButton = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ ...props }, ref) => {
+    const setDropdownOpen = useSetAtom(dropdownAtom);
+    return (
+      <Button onClick={() => setDropdownOpen(false)} ref={ref} {...props} />
+    );
+  }
+);
+NavButton.displayName = 'NavButton';
 
-  return (
-    <Button onClick={() => setDropdownOpen(false)} {...props}>
-      {children}
-    </Button>
-  );
-};
 export { HamburgerButton, NavButton, NavStyleSwitcher, SwitchNavButton };

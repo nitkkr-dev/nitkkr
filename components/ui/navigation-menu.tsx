@@ -150,9 +150,9 @@ const NavigationMenuCustomListItem = React.forwardRef<
   return (
     <NavigationMenuItem {...props} ref={ref}>
       <NavigationMenuTrigger>{triggerName}</NavigationMenuTrigger>
-      <NavigationMenuContent className="flex gap-4 p-6 xl:gap-6 2xl:gap-8">
+      <NavigationMenuContent className="flex max-h-[calc(100vh-82px)] gap-4 p-6 xl:gap-6 2xl:gap-8">
         {imageDetails && (
-          <Link href={imageDetails.href} passHref legacyBehavior>
+          <Link href={`/${locale}/${href}`} passHref legacyBehavior>
             <NavigationMenuLink
               className="group relative flex select-none flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
               style={{ minWidth: `${70 * imageHeight}px` }}
@@ -192,7 +192,7 @@ const NavigationMenuCustomListItem = React.forwardRef<
                   <h6 className="font-sans font-semibold leading-none text-shade-dark group-hover:text-primary-500 group-focus:text-primary-500">
                     {title}
                   </h6>
-                  <p className="line-clamp-3 text-sm leading-snug text-neutral-700 group-hover:text-primary-500 group-focus:text-primary-500">
+                  <p className="line-clamp-2 overflow-ellipsis text-sm leading-snug text-neutral-700 group-hover:text-primary-500 group-focus:text-primary-500">
                     {description}
                   </p>
                 </Link>
