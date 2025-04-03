@@ -19,6 +19,10 @@ const text: Translations = {
       ],
       more: 'Read more',
     },
+    title: {
+      primary: 'NIT KURUKSHETRA',
+      secondary: 'एनआईटी कुरुक्षेत्र',
+    },
   },
 
   Clubs: { title: 'CLUBS' },
