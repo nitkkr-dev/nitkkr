@@ -11,6 +11,10 @@ export interface Translations {
       quote: [string, string];
       more: string;
     };
+    title: {
+      primary: string;
+      secondary: string;
+    };
   };
 
   Clubs: { title: string };
