@@ -3,6 +3,52 @@ export async function getTranslations(locale: string): Promise<Translations> {
 }
 
 export interface Translations {
+  Administration: {
+    title: string;
+    boardOfGovernors: string;
+    bogAgenda: string;
+    bogMinutes: string;
+    constitutionOfBoG: string;
+    buildingAndWork: string;
+    financial: string;
+    senate: string;
+    composition: string;
+    sNo: string;
+    name: string;
+    servedAs: string;
+    senateMeetingAgenda: string;
+    senateMeetingMinutes: string;
+    scsaMeetingMinutes: string;
+    administrationHeads: string;
+    director: string;
+    deans: string;
+    otherOfficers: string;
+    committees: string;
+    actsAndStatutes: string;
+    actsPoints: {
+      text: string;
+      link: string;
+    }[];
+    and: string;
+    description: string;
+    approvalHeading: string;
+    approvalDescription: string;
+    pointsOfApproval: {
+      text: string;
+      link: string;
+    }[];
+  };
+  Awards: {
+    aboutTitle: string;
+    descriptionTitle: string;
+    criterionTitle: string;
+    awards: {
+      title: string;
+      about: string;
+      description?: string;
+      criterion?: string[];
+    }[];
+  };
   Main: {
     director: {
       alt: string;
@@ -12,7 +58,29 @@ export interface Translations {
       more: string;
     };
   };
+  Academics: {
+    notifications: string;
+    stats: string;
+    title: string;
+    departments: string;
+    programs: string;
+    courses: string;
+    regularFacultyMembers: string;
+    postGraduatePrograms: string;
+    underGraduatePrograms: string;
+    underGraduate: string;
+    postGraduate: string;
+    doctorate: string;
+    viewAll: string;
+    convocation: string;
+    awards: string;
+    scholarships: string;
 
+    aboutDetail: string;
+    departmentsDetails: string;
+    programmesDetails: string;
+    coursesDetails: string;
+  };
   Clubs: { title: string };
   Committee: {
     building: string;
@@ -34,6 +102,17 @@ export interface Translations {
       minutes: string;
     };
   };
+  Convocation: {
+    about: string;
+    guest: string;
+    student: string;
+    gallery: string;
+    notification: string;
+    srNo: string;
+    name: string;
+    depratment: string;
+    rankOrAward: string;
+  };
   Curricula: {
     pageTitle: string;
     code: string;
@@ -42,6 +121,45 @@ export interface Translations {
     credits: string;
     totalCredits: string;
     syllabus: string;
+  };
+  Curriculum: {
+    courseCode: string;
+    title: string;
+    coordinator: string;
+    prerequisites: {
+      title: string;
+      none: string;
+    };
+    nature: string;
+    objectives: string;
+    content: string;
+    outcomes: string;
+    essentialReading: string;
+    supplementaryReading: string;
+    similarCourses: string;
+    referenceBooks: string;
+  };
+  Dean: {
+    deanTitles: {
+      academic: string;
+      'estate-and-construction': string;
+      'faculty-welfare': string;
+      'industry-and-international-relations': string;
+      'planning-and-development': string;
+      'research-and-consultancy': string;
+      'student-welfare': string;
+    };
+    responsibilities: string;
+  };
+  Deans: {
+    title: string;
+    academic: string;
+    estateAndConstruction: string;
+    facultyWelfare: string;
+    industryAndInternationalRelations: string;
+    planningAndDevelopment: string;
+    researchAndConsultancy: string;
+    studentWelfare: string;
   };
   Departments: { title: string };
   Department: {
@@ -66,6 +184,15 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    tabs: {
+      qualifications: string;
+      experience: string;
+      projects: string;
+      educationCurrent: string;
+      publications: string;
+      scholars: string;
+      awards: string;
+    };
   };
   FAQ: { title: string };
   Footer: {
@@ -89,6 +216,76 @@ export interface Translations {
     search: string;
     login: string;
     profile: { alt: string; view: string };
+  };
+  Institute: {
+    welcome: string;
+    profile: {
+      title: string;
+      vision: { title: string; content: string[] };
+      mission: { title: string; content: string[] };
+      history: { title: string; content: string[]; readMore: string };
+    };
+    admission: {
+      title: string;
+      process: { title: string; content: string[] };
+      education: { title: string; content: string[] };
+    };
+    nirf: {
+      title: string;
+      year: string;
+      result: string;
+      nirfCertificate: string;
+      dataFile: string;
+    };
+    funds: { title: string; content: string };
+    collaboration: { title: string; content: string[] };
+    quickLinks: {
+      title: string;
+      campus: string;
+      documentary: string;
+      organisationChart: string;
+      sections: string;
+      gallery: string;
+      administration: string;
+    };
+    infrastructure: {
+      heading: string;
+      headings: string[];
+      campus: string[];
+      infra: string[];
+      library: { heading: string; text: string[] };
+      computing: { heading: string; text: string[] };
+      senate: { heading: string; text: string[] };
+      sports: { heading: string; text: string[] };
+      address: string[];
+    };
+  };
+  Hostels: {
+    title: string;
+    boysHostels: string;
+    girlsHostels: string;
+    misc: string;
+    notificationsTitle: string;
+    rulesTitle: string;
+    hostelDetails: {
+      name: string;
+      overview: string;
+      staffOverview: string;
+      facilities: string;
+      contact: string;
+      email: string;
+      wardens: string;
+      faculty: string;
+      staff: string;
+      general: string;
+      hostelsStaffTable: {
+        name: string;
+        designation: string;
+        hostelPost: string;
+        contact: string;
+        email: string;
+      };
+    };
   };
   Login: {
     title: string;
@@ -174,6 +371,69 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Programmes: {
+    btechAbout: string;
+    mtechAbout: string;
+    courseOfStudy: string;
+    departmentAndSchools: string;
+    noOfSeats: string;
+    secialization: string;
+    discipline: string;
+    btech: string;
+    mtech: string;
+    seatDistribution: string;
+  };
+  Scholarships: {
+    NSP: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMSSS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    HCS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    RSSO: {
+      abbreviation: string;
+      title: string;
+      about: string;
+      objectives: string[];
+      description: string;
+    };
+    PMBS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    UPS: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    MMVY: {
+      abbreviation: string;
+      title: string;
+      about: string;
+    };
+    note: {
+      title: string;
+      description: string;
+    };
+    visitPortal: string;
+    description: string;
+    about: string;
+    objectives: string;
+  };
   Search: {
     placeholder: string;
     categories: {
@@ -210,7 +470,17 @@ export interface Translations {
     about: string;
     gallery: string;
 
-    Account: {};
+    Account: {
+      title: string;
+      about: string;
+      reportTitle: string;
+      report: string;
+      forms: string;
+      formsList: string[];
+      quickLinksTitle: string;
+      quickLinks: string[];
+    };
+
     Library: {
       name: string;
       heading: {
@@ -318,15 +588,182 @@ export interface Translations {
         membershipPrivilegesText: string;
       };
     };
-    CentralWorkshop: {};
+
+    CentralWorkshop: {
+      title: string;
+      organization: string;
+      organizationSub: string;
+      organizationDetails: string[];
+      services: string;
+      servicesSub: string;
+      servicesDetails: string[];
+      tableTitle: {
+        sno: string;
+        name: string;
+        quantity: string;
+      };
+      miscTitle: string;
+      facilities: {
+        title: string;
+        sub: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      equipmentDetails: string;
+      machineShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      productionShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      fittingShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      patternShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+        miscDetails: string;
+      };
+      foundryShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      weldingShop: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      camLabs: {
+        title: string;
+        data: {
+          name: string;
+          quantity: string;
+        }[];
+      };
+      staffTitle: string;
+      staffTableTitle: {
+        name: string;
+        designation: string;
+      };
+    };
     CentreOfComputingAndNetworking: {};
     ElectricalMaintenance: {};
-    Estate: {};
+    Estate: {
+      name: string;
+      links: string[];
+      headings: string[];
+      subheadings: string[];
+
+      about: string[];
+
+      project: {
+        completed: string[];
+
+        ongoing: string[];
+        future: string[];
+      };
+      seniority: string[];
+    };
     GeneralAdministration: {};
-    HealthCentre: {};
+    HealthCentre: {
+      name: string;
+      headings: {
+        about: string;
+        staff: string;
+        timings: string;
+        facilities: string;
+        ambulance: string;
+        casualty: string;
+        opd: string;
+        dental: string;
+        lab: string;
+        pharmacy: string;
+        radiology: string;
+        ecg: string;
+        aboutText: string;
+        staffText: string;
+        insurance: string;
+        immunization: string;
+      };
+      facilities: {
+        counsellor: string;
+        immunization: string;
+        hospitals: string;
+        insurance: string;
+        ambulance: string[];
+
+        opd: string;
+        dental: string;
+        lab: string;
+        pharmacy: string;
+        radiology: string;
+        ecg: string;
+        casualty: string[];
+      };
+      staff: {
+        sr: string;
+        name: string;
+        designation: string;
+        phone: string;
+        officers: string;
+        other: string;
+      };
+      timings: {
+        day: string;
+        from: string;
+        to: string;
+        tod: string;
+      };
+      hospitals: {
+        sr: string;
+        name: string;
+        field: string;
+        contact: string;
+      };
+      insurance: {
+        text: string;
+        link: string;
+        text2: string;
+      };
+      immunization: {
+        text1: string;
+        timings: string;
+        text2: string;
+        text3: string;
+        schedule: string;
+      };
+    };
     Security: {};
     Sports: {};
     Store: {};
+  };
+  Sections: {
+    title: string;
   };
   Status: {
     NoResult: { title: string; description: string };
@@ -345,6 +782,46 @@ export interface Translations {
     };
     sections: {
       clubs: { title: string; more: string };
+    };
+  };
+  TrainingAndPlacement: {
+    title: string;
+    headings: {
+      ourrecruiters: string;
+      stats: string;
+      guidelines: string;
+      about: string;
+      faq: string;
+      forrecruiters: string;
+    };
+    about: {
+      content: string[];
+      tnpteam: string;
+      tnpbrochure: string;
+      facilities: {
+        heading: string;
+        content: string[];
+      };
+    };
+    stats: {
+      content: string[];
+    };
+    ourrecruiters: {
+      about: string;
+    };
+    forrecruiters: {
+      build: string;
+      invitaion: string;
+      reach: string;
+    };
+    guidelines: {
+      protocol: string;
+      tnpguidelines: string;
+      internguidlines: string;
+    };
+    faq: {
+      questions: string[];
+      answers: string[][];
     };
   };
 }

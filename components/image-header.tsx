@@ -29,12 +29,12 @@ export default function ImageHeader({
 
       <section
         className={cn(
-          'absolute flex w-full bg-cover bg-top max-sm:static',
+          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-sm:static',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]',
           className
         )}
         style={{
-          backgroundImage: `url('${getS3Url()}/${src}')`,
+          backgroundImage: `url('${getS3Url()}/${src ? src : 'assets/landingpagebg-1.png'}')`, // FIXME: remove this hack once we have good images
         }}
       >
         {title && (
@@ -50,7 +50,7 @@ export default function ImageHeader({
             className={cn(
               'p-1 xl:p-2',
               'hidden sm:flex sm:gap-1 md:gap-2',
-              'sticky top-6 z-nav mx-auto w-fit rounded-full',
+              'sticky top-6 z-tabs mx-auto w-fit rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
               'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
             )}

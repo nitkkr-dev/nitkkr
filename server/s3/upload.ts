@@ -1,6 +1,6 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 
-import { env } from '~/lib/env';
+import { env } from '~/lib/env/server';
 
 import { s3 } from '.';
 

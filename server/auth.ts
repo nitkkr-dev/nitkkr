@@ -6,7 +6,7 @@ import {
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { env } from '~/lib/env';
+import { env } from '~/lib/env/server';
 import { db, roles } from '~/server/db';
 
 declare module 'next-auth' {

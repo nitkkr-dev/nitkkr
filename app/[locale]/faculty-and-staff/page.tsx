@@ -179,7 +179,7 @@ const FacultyList = async ({
               alt={faculty.person.name}
               className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
               height={0}
-              src={`persons/${faculty.id}/image.png`}
+              src={`fallback/user-image.jpg`}
               width={0}
             />
             <main>
