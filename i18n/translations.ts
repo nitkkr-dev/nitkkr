@@ -347,4 +347,8 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
+  DirectorMessage: {
+    title: String;
+    message: String[];
+  };
 }
