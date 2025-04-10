@@ -1,19 +1,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { FaTrophy } from 'react-icons/fa6';
+import { FaPhone, FaTrophy } from 'react-icons/fa6';
 import { HiMiniBeaker } from 'react-icons/hi2';
-import { MdBadge } from 'react-icons/md';
+import { MdBadge, MdEmail } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
 import { countChildren } from '~/server/s3';
+
+const hodProfile = {
+  name: 'Jitender Kumar Chhabra',
+  designation: 'Professor & Head of Department',
+  email: 'jk.chhabra@nitkkr.ac.in',
+  phone: '+91-1744-233-488',
+  message: [
+    'Welcome to the Department of Computer Engineering at NIT Kurukshetra. Our department has been at the forefront of computer science education and research since its inception, consistently producing industry-ready professionals and innovative researchers.',
+    'We are committed to excellence in teaching, research, and innovation. Our state-of-the-art laboratories, experienced faculty, and strong industry connections provide students with the perfect environment for learning and growth.',
+  ],
+};
 
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
@@ -131,35 +141,51 @@ export default async function Department({
         />
       </article>
 
-      {departmentHead && (
-        <>
-          <Heading
-            className="container"
-            glyphDirection="rtl"
-            heading="h3"
-            id="hod-message"
-            text={text.headings.hod.title.toUpperCase()}
+      <section className="container" id="hod-message">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href="#hod-message"
+          text="HOD's Message"
+        />
+        <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
+          <Image
+            alt={hodProfile.name}
+            className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
+            height={256}
+            width={256}
+            src="/placeholder-person.jpg"
           />
-          <section className="container">
-            <MessageCard
-              details={{
-                email: departmentHead.faculty.person.email,
-                phone: departmentHead.faculty.person.telephone,
-                session: text.headings.hod.session(
-                  departmentHead.createdOn.toLocaleString(locale, {
-                    year: 'numeric',
-                    numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-                  })
-                ),
-              }}
-              image={`persons/${departmentHead.faculty.employeeId}/image.png`}
-              locale={locale}
-              name={departmentHead.faculty.person.name}
-              quote={departmentHead.message}
-            />
-          </section>
-        </>
-      )}
+          <div className="flex flex-col justify-between">
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-xl font-medium text-primary-500">
+                  {hodProfile.name}
+                </h4>
+                <p className="text-lg font-medium">{hodProfile.designation}</p>
+              </div>
+              <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
+                {hodProfile.message.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </blockquote>
+            </div>
+            <div className="mt-4 flex items-center gap-4">
+              <a
+                className="text-primary-500 hover:underline"
+                href={`mailto:${hodProfile.email}`}
+              >
+                <MdEmail className="mr-2 inline-block fill-primary-500" />
+                {hodProfile.email}
+              </a>
+              <span className="text-primary-500">
+                <FaPhone className="mr-2 inline-block fill-primary-500" />
+                {hodProfile.phone}
+              </span>
+            </div>
+          </div>
+        </article>
+      </section>
 
       <Heading
         className="container"
