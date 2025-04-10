@@ -1,8 +1,13 @@
 import Image from 'next/image';
-import { BsLinkedin } from 'react-icons/bs';
-import { FaFacebook, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { BsCalendar3, BsClockFill } from 'react-icons/bs';
+import {
+  FaFacebook,
+  FaGraduationCap,
+  FaInstagram,
+  FaLinkedinIn,
+} from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { MdEmail, MdPhone } from 'react-icons/md';
+import { MdDateRange } from 'react-icons/md';
 
 import Notifications from '~/app/notifications';
 import { Button } from '~/components/buttons';
@@ -16,6 +21,7 @@ import {
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 import { type events, type notifications } from '~/server/db';
 
 import Events from './events';
@@ -145,6 +151,51 @@ export default async function Home({
             href: `/director-message`,
           }}
         />
+      </section>
+
+      <section className="container mb-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: text.quickLinks.results,
+              href: 'https://nitkkr.ac.in/result-notification/',
+              icon: FaGraduationCap,
+            },
+            {
+              label: text.quickLinks.academicCalendar,
+              href: 'https://nitkkr.ac.in/academic-calender/',
+              icon: BsCalendar3,
+            },
+            {
+              label: text.quickLinks.examDateSheet,
+              href: 'https://nitkkr.ac.in/exam-date-sheet/',
+              icon: MdDateRange,
+            },
+            {
+              label: text.quickLinks.timeTable,
+              href: 'https://nitkkr.ac.in/institute-time-table/',
+              icon: BsClockFill,
+            },
+          ].map(({ label, href, icon: Icon }, index) => (
+            <Button
+              key={index}
+              asChild
+              className={cn(
+                'flex flex-col',
+                'gap-2 md:gap-3 lg:gap-4',
+                'h-40 md:h-48'
+              )}
+              variant="secondary"
+            >
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                <Icon className="size-12" />
+                <p className="font-serif font-semibold sm:text-lg md:text-xl">
+                  {label}
+                </p>
+              </a>
+            </Button>
+          ))}
+        </div>
       </section>
     </>
   );
