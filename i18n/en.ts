@@ -178,6 +178,13 @@ const text: Translations = {
           'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
       },
     ],
+    quickLinks: {
+      title: 'Quick Links',
+      results: 'Results',
+      academicCalendar: 'Academic Calendar',
+      examDateSheet: 'Exam Date Sheet',
+      timeTable: 'Time Table',
+    },
   },
   Academics: {
     notifications: 'Notifications',
