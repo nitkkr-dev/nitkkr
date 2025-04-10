@@ -347,6 +347,7 @@ const text: Translations = {
     academics: 'Academics',
     faculty: 'Faculty & Staff',
     placement: 'Training & Placement',
+    research: 'Research',
     alumni: 'Alumni',
     activities: 'Student Activities',
     logo: 'Logo',

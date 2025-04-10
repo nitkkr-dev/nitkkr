@@ -113,6 +113,15 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.placement, href: 'training-and-placement' },
     // { label: text.alumni, href: 'alumni' },
     { label: text.activities, href: 'student-activities' },
+    {
+      label: text.alumni,
+      href: 'https://nitkkraa.org',
+      isExternal: true,
+    },
+    {
+      label: text.research,
+      href: 'research',
+    },
   ];
 
   return (
@@ -137,11 +146,12 @@ export default async function Header({ locale }: { locale: string }) {
           <NavigationMenuList
             className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}
           >
-            {items.map(({ label, href, listItems }, index) => (
+            {items.map(({ label, href, isExternal, listItems }, index) => (
               <NavigationMenuCustomListItem
                 key={index}
                 triggerName={label}
                 locale={locale}
+                isExternal={isExternal}
                 listItems={listItems}
                 href={href}
                 imageDetails={{
@@ -262,26 +272,32 @@ export default async function Header({ locale }: { locale: string }) {
                     </SwitchNavButton>
                   </header>
                   <ul className="nav-column-default space-y-4 text-base font-semibold">
-                    {items.map(({ label, href, listItems }, index) => (
-                      <li key={index} className="w-fit">
-                        {listItems ? (
-                          <SwitchNavButton
-                            className="text-left text-shade-dark"
-                            column={href}
-                            text={label + '>'}
-                            variant="link"
-                          />
-                        ) : (
-                          <NavButton
-                            asChild
-                            className="text-left text-shade-dark"
-                            variant="link"
-                          >
-                            <Link href={`/${locale}/${href}`}>{label}</Link>
-                          </NavButton>
-                        )}
-                      </li>
-                    ))}
+                    {items.map(
+                      ({ isExternal, label, href, listItems }, index) => (
+                        <li key={index} className="w-fit">
+                          {listItems ? (
+                            <SwitchNavButton
+                              className="text-left text-shade-dark"
+                              column={href}
+                              text={label + '>'}
+                              variant="link"
+                            />
+                          ) : (
+                            <NavButton
+                              asChild
+                              className="text-left text-shade-dark"
+                              variant="link"
+                            >
+                              <Link
+                                href={isExternal ? href : `/${locale}/${href}`}
+                              >
+                                {label}
+                              </Link>
+                            </NavButton>
+                          )}
+                        </li>
+                      )
+                    )}
                   </ul>
                   <MobileSubNavMenu locale={locale} {...items[0]} />
                   <MobileSubNavMenu locale={locale} {...items[1]} />

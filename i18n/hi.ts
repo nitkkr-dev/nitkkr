@@ -357,6 +357,7 @@ const text: Translations = {
     academics: 'शैक्षिक',
     faculty: 'संकाय और कर्मचारी',
     placement: 'प्रशिक्षण एवं नियुक्ति',
+    research: 'अनुसंधान',
     activities: 'छात्र गतिविधियाँ',
     alumni: 'भूतपूर्व छात्र',
     logo: 'प्रतीक चिन्ह',
