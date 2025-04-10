@@ -62,6 +62,13 @@ export interface Translations {
       secondary: string;
     };
     slideshow: { image: string; title: string; subtitle: string }[];
+    quickLinks: {
+      title: string;
+      results: string;
+      academicCalendar: string;
+      examDateSheet: string;
+      timeTable: string;
+    };
   };
   Academics: {
     notifications: string;
