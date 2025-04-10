@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { BsLinkedin } from 'react-icons/bs';
+import { FaFacebook, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
 import Notifications from '~/app/notifications';
@@ -92,14 +94,24 @@ export default async function Home({
         <section className="container absolute inset-x-0 bottom-0 hidden h-0 justify-end lg:flex">
           <section className="absolute bottom-0 flex flex-col space-y-4 pb-8">
             {[
-              { href: 'mailto:director@nitkkr.ac.in', icon: MdEmail },
-              { href: 'tel:+911742238570', icon: MdPhone },
+              {
+                href: 'https://www.facebook.com/nitkurukshetraofficialpage',
+                icon: FaFacebook,
+              },
+              {
+                href: 'https://www.instagram.com/nitkurukshetra',
+                icon: FaInstagram,
+              },
+              {
+                href: 'https://twitter.com/NITKURUKSHETRA',
+                icon: FaXTwitter,
+              },
               {
                 href: 'https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana',
-                icon: BsLinkedin,
+                icon: FaLinkedinIn,
               },
             ].map(({ href, icon: Icon }, index) => (
-              <a href={href} key={index}>
+              <a href={href} key={index} target="_blank">
                 <Button
                   className="size-16 rounded-full border border-shade-light text-neutral-900 backdrop-blur-md hover:bg-shade-light/20"
                   variant="icon"
