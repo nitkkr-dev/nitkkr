@@ -112,6 +112,156 @@ export default async function FacultySection({
       },
     ],
   };
+
+  const vikramsinghProfile = {
+    qualifications: [
+      {
+        name: 'B.Tech (CSE)',
+        value: '',
+        caption: '',
+        year: '',
+      },
+      {
+        name: 'M.Tech (CSE)',
+        value: '',
+        caption: '',
+        year: '',
+      },
+      {
+        name: 'Ph.D. (Software Engineering)',
+        value: '',
+        caption: '',
+        year: '',
+      },
+    ],
+    publications: [
+      {
+        name: 'Improving Hamming-Distance Computation for Adaptive Similarity Search Approach',
+        value: 'Chandradeep Kumar, Vikram Singh',
+        caption: 'Int. J. of Intelligent Information Technologies (IJIIT)',
+        year: 'Dec 2021',
+        tag: 'Journal',
+      },
+      {
+        name: 'Progressive Intent Model for Similarity Search',
+        value: 'Vikram Singh',
+        caption: 'IEEE Transactions on Information Theory',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'AQtpUIR: Adaptive query term proximity based user Information Retrieval',
+        value: 'Tirthankar Barik, Vikram Singh',
+        caption: 'Journal of Information and Optimization Sciences',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'Progressive Intent Modeling for Exploratory Search',
+        value: 'Vikram Singh',
+        caption: 'ACM Transactions on Information Systems (TOIS), 38(4)',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'Correlating “Pre-search” and “In-search” Context to Predict Search Intent for Exploratory Search',
+        value: 'Vikram Singh',
+        caption: 'Journal of Business Intelligence & Data Mining, 18(04)',
+        year: '2020',
+        tag: 'Journal',
+      },
+    ],
+    experience: [
+      {
+        name: 'Industry Experience',
+        value: '3 years',
+        caption: 'Industry roles',
+        year: '2009 - 2012',
+      },
+      {
+        name: 'Academic Experience',
+        value: '10+ years',
+        caption: 'Professor, Computer Engineering, NIT Kurukshetra',
+        year: '2012 - Present',
+      },
+    ],
+    projects: [
+      // Default Project
+      {
+        name: 'Development of biodegradable bioplastic films from mango seed starch.',
+        value: 'Nanostructured Biomaterials',
+        caption: 'Indian institute of Technology Madras',
+        year: '2010',
+      },
+    ],
+    educationCurrent: [
+      // Default course
+      {
+        name: 'Short Term Course On Fluidized Bed Technology For Waste Management : Design, Modeling and Simulation',
+        value: 'Chemical Engineering Short Term Course',
+        caption: 'Coordinator',
+        year: 'Feb, 2024 - Feb, 2024',
+      },
+    ],
+    scholars: [
+      {
+        name: 'Ph.D. Supervision',
+        value: '1 ongoing',
+        caption:
+          'Mohd. Ilyas: Intent Modeling for Information Search and Recommendation',
+        year: '2022-23',
+      },
+      {
+        name: 'M.Tech Dissertations Supervised',
+        value: '19 completed',
+        caption: 'Dissertations at NIT Kurukshetra',
+        year: '',
+      },
+    ],
+    awards: [
+      {
+        name: 'Best Paper Award',
+        value: 'Evaluating Models for Better Life Expectancy Prediction',
+        caption: 'ICCIDA, Hyderabad, India',
+        year: '2022',
+      },
+      {
+        name: 'Best Student Paper',
+        value:
+          'Query Morphing: A Proximity-Based Approach for Data Exploration and Query Reformulation',
+        caption: 'MIKE’2017, IDBRT, Hyderabad, India',
+        year: '2017',
+      },
+      {
+        name: 'Innovative Design for Computing',
+        value:
+          'Multi-objective Parametric Query Optimization for Distributed Database Systems',
+        caption: 'SocProS’2015, IIT Roorkee (Saharanpur Campus)',
+        year: '2015',
+      },
+      {
+        name: 'Best Student Paper',
+        value: 'Best-effort Query Answering in DataSpaces on Unstructured Data',
+        caption: 'ICCCA’2016, India',
+        year: '2016',
+      },
+      {
+        name: 'Best Paper Award',
+        value:
+          'Generating Optimal Query Plans for Distributed Query Processing using Teacher-Learner Based Optimization',
+        caption: 'ICDMW at IMCIP’2015, Bangalore, India',
+        year: '2015',
+      },
+      {
+        name: 'Best Student Paper',
+        value:
+          'Efficient Algorithm for Web Search Query Reformulation Using Genetic Algorithm',
+        caption: 'ICCIDM’2015, RIT Berhampur, India',
+        year: '2015',
+      },
+    ],
+  };
+
   const defaultProfileTabs = {
     qualifications: [
       {
@@ -214,12 +364,17 @@ export default async function FacultySection({
     ],
   };
   const profileTabs =
-    params?.employee_id === '114' ? jkchabbraProfile : defaultProfileTabs;
+    params?.employee_id === '114'
+      ? jkchabbraProfile
+      : params?.employee_id === '1083'
+        ? vikramsinghProfile
+        : defaultProfileTabs;
 
   if (!profileTabs[faculty_section]) {
     return notFound();
   }
 
+  // TODO: (fix): If any section of proile is empty, the frontend is breaking
   const hasTag = 'tag' in profileTabs[faculty_section][0];
 
   const dataToDisplay = hasTag
