@@ -46,28 +46,7 @@ export default async function Home({
 
       <AutoplayCarousel autoplayOptions={{ delay: 7000 }}>
         <CarouselContent>
-          {[
-            {
-              image: 'slideshow/image01.jpg',
-              title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
-              subtitle:
-                'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
-            },
-            {
-              image: 'slideshow/image02.jpg',
-              title:
-                'National Institute Ranked Among Top 10 Engineering Colleges',
-              subtitle:
-                'NIT Kurukshetra has secured a spot in the top 10 engineering colleges in India, showcasing excellence in education and research...',
-            },
-            {
-              image: 'slideshow/image03.jpg',
-              title:
-                'State-of-the-Art Research Facilities Now Open for Students',
-              subtitle:
-                'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
-            },
-          ].map(({ image, title, subtitle }, index) => (
+          {text.slideshow.map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
               <figure className="relative h-full">
                 {/* Gradient Overlay */}
