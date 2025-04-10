@@ -414,7 +414,6 @@ export default async function FacultySection({
     return notFound();
   }
 
-  // TODO: (fix): If any section of proile is empty, the frontend is breaking
   const hasTag =
     profileTabs[faculty_section][0] !== undefined &&
     'tag' in profileTabs[faculty_section][0];
