@@ -117,24 +117,25 @@ export default async function FacultySection({
     qualifications: [
       {
         name: 'B.Tech (CSE)',
-        value: '',
-        caption: '',
+        value: 'Computer Science & Engineering',
+        caption: 'UIT, RGPV (Bhopal)',
         year: '',
       },
       {
         name: 'M.Tech (CSE)',
-        value: '',
-        caption: '',
+        value: 'Computer Science & Engineering',
+        caption: 'JNU, New Delhi',
         year: '',
       },
       {
         name: 'Ph.D. (Software Engineering)',
-        value: '',
-        caption: '',
+        value: 'Software Engineering',
+        caption: 'NIT Kurukshetra',
         year: '',
       },
     ],
     publications: [
+      // Journals
       {
         name: 'Improving Hamming-Distance Computation for Adaptive Similarity Search Approach',
         value: 'Chandradeep Kumar, Vikram Singh',
@@ -170,51 +171,90 @@ export default async function FacultySection({
         year: '2020',
         tag: 'Journal',
       },
+
+      // Conferences / Workshops
+      {
+        name: 'Empirical Analysis of Multi-label Classification on GitterCom using BERT',
+        value:
+          'Bathini Sai Akash, Lov Kumar, Vikram Singh, Anoop Kumar Patel, Aneesh Krishna',
+        caption: '30th ICONIP 2023 (Accepted)',
+        year: '2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'An Empirical Framework for Software Aging-Related Bug Prediction using Weighted Extreme Learning Machine',
+        value:
+          'Lov Kumar, Vikram Singh, Lalita Bhanu Murthy, Sanjay Misra, Aneesh Krishna',
+        caption: '18th FedCSIS 2023 (Accepted)',
+        year: '2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'A Progressive Query Materialization for Interactive Data Exploration',
+        value: 'Vikram Singh',
+        caption: 'SoDAM’2016 co‑located at VLDB’2016, pp. 1–10',
+        year: '2016',
+        tag: 'Conference',
+      },
+      {
+        name: 'Best-Effort Query Answering in Dataspaces on Unstructured Data',
+        value: 'Vishal Sheokhand, Vikram Singh',
+        caption: 'ACM COMAD 2016, pp. 155–159',
+        year: '2016',
+        tag: 'Conference',
+      },
+      {
+        name: 'Improving Result Diversity Using Query Term Proximity in Exploratory Search',
+        value: 'Vikram Singh, Mayank Dave',
+        caption: 'BDA 2019, pp. 67–87',
+        year: '2019',
+        tag: 'Conference',
+      },
+      {
+        name: 'Query Morphing: A Proximity-Based Approach for Data Exploration and Query Reformulation',
+        value: 'Jay Patel, Vikram Singh',
+        caption: 'MIKE’2017, pp. 261–273',
+        year: '2017',
+        tag: 'Conference',
+      },
+      {
+        name: 'Extracting Emotion Quotient of Information Virality over Twitter Data',
+        value: 'Pawan K., Reuben A., Vikram Singh',
+        caption: 'ICDCIT 2022, Springer Nature',
+        year: 'Jan 2022',
+        tag: 'Conference',
+      },
     ],
     experience: [
       {
         name: 'Industry Experience',
         value: '3 years',
-        caption: 'Industry roles',
+        caption:
+          'Worked in software development and engineering roles in the industry.',
         year: '2009 - 2012',
       },
       {
         name: 'Academic Experience',
         value: '10+ years',
-        caption: 'Professor, Computer Engineering, NIT Kurukshetra',
+        caption:
+          'Professor at NIT Kurukshetra’s Computer Engineering Department. Expertise in Database Systems, Data Mining, and Human-Computer Interaction.',
         year: '2012 - Present',
       },
     ],
-    projects: [
-      // Default Project
-      {
-        name: 'Development of biodegradable bioplastic films from mango seed starch.',
-        value: 'Nanostructured Biomaterials',
-        caption: 'Indian institute of Technology Madras',
-        year: '2010',
-      },
-    ],
-    educationCurrent: [
-      // Default course
-      {
-        name: 'Short Term Course On Fluidized Bed Technology For Waste Management : Design, Modeling and Simulation',
-        value: 'Chemical Engineering Short Term Course',
-        caption: 'Coordinator',
-        year: 'Feb, 2024 - Feb, 2024',
-      },
-    ],
+    projects: [],
+    educationCurrent: [],
     scholars: [
       {
         name: 'Ph.D. Supervision',
-        value: '1 ongoing',
-        caption:
-          'Mohd. Ilyas: Intent Modeling for Information Search and Recommendation',
+        value:
+          '1 ongoing: Mohd. Ilyas – Intent Modeling for Information Search and Recommendation',
+        caption: 'Ph.D. scholar under guidance at NIT Kurukshetra',
         year: '2022-23',
       },
       {
         name: 'M.Tech Dissertations Supervised',
         value: '19 completed',
-        caption: 'Dissertations at NIT Kurukshetra',
+        caption: 'Postgraduate dissertations at NIT Kurukshetra',
         year: '',
       },
     ],
@@ -375,7 +415,9 @@ export default async function FacultySection({
   }
 
   // TODO: (fix): If any section of proile is empty, the frontend is breaking
-  const hasTag = 'tag' in profileTabs[faculty_section][0];
+  const hasTag =
+    profileTabs[faculty_section][0] !== undefined &&
+    'tag' in profileTabs[faculty_section][0];
 
   const dataToDisplay = hasTag
     ? // @ts-expect-error - Ignore type checking for 'tag' key
