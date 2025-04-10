@@ -130,7 +130,7 @@ export default async function Home({
           quoteBelow={text.director.quote[1]}
           readMore={{
             text: text.director.more,
-            href: `/${locale}/institute/director#message`,
+            href: `/director-message`,
           }}
         />
       </section>
