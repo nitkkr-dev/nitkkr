@@ -23,17 +23,26 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
+async function getSenateMembers() {
+  try {
+    const senateMembers = await db.query.committeeMembers.findMany({
+      where: (member, { eq }) => eq(member.committeeType, 'senate'),
+      orderBy: (member, { asc }) => [asc(member.serial)],
+    });
+    return senateMembers;
+  } catch (error) {
+    console.error('Failed to fetch senate members:', error);
+    return [];
+  }
+}
+
 export default async function Administration({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).Administration;
-
-  const senateMembers = await db.query.committeeMembers.findMany({
-    where: (member, { eq }) => eq(member.committeeType, 'senate'),
-    orderBy: (member, { asc }) => [asc(member.serial)],
-  });
+  const members = await getSenateMembers();
 
   const actPointsLinks = [
     'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
@@ -65,7 +74,7 @@ export default async function Administration({
         ]}
       />
 
-      <main className="container mt-20">
+      <section className="container mt-20">
         <p className="mx-8 font-sans text-xl max-md:text-lg">
           {text.description}
         </p>
@@ -80,17 +89,17 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.constitutionOfBoG,
-              href: `/${locale}/institute/administration/constitution-of-bog`,
+              href: `/${locale}/institute/administration/board-of-governors#members`,
               icon: TbContract,
             },
             {
               label: text.bogAgenda,
-              href: `/${locale}/institute/administration/bog-agenda`,
+              href: `/${locale}/institute/administration/board-of-governors#agenda`,
               icon: TbNotebook,
             },
             {
               label: text.bogMinutes,
-              href: `/${locale}/institute/administration/bog-minutes`,
+              href: `/${locale}/institute/administration/board-of-governors#meetings`,
               icon: MdOutlineChecklist,
             },
           ]}
@@ -117,13 +126,15 @@ export default async function Administration({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {senateMembers.map((member) => (
-                  <TableRow key={member.id}>
-                    <TableCell>{member.serial}</TableCell>
-                    <TableCell>{member.name}</TableCell>
-                    <TableCell>{member.servingAs}</TableCell>
-                  </TableRow>
-                ))}
+                {members &&
+                  members.length > 0 &&
+                  members.map((member) => (
+                    <TableRow key={member.id}>
+                      <TableCell>{member.serial}</TableCell>
+                      <TableCell>{member.name}</TableCell>
+                      <TableCell>{member.servingAs}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </Suspense>
@@ -132,17 +143,17 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.senateMeetingAgenda,
-              href: `/${locale}/institute/administration/senate-meeting-agenda`,
+              href: `/${locale}/institute/administration/senate#meeting-agenda`,
               icon: TbNotebook,
             },
             {
               label: text.senateMeetingMinutes,
-              href: `/${locale}/institute/administration/senate-meeting-minutes`,
+              href: `/${locale}/institute/administration/senate#meetings`,
               icon: MdOutlineChecklist,
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institute/administration/scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/senate#scsa-meeting-minutes`,
               icon: MdOutlineChecklist,
             },
           ]}
@@ -168,7 +179,7 @@ export default async function Administration({
             },
             {
               label: text.otherOfficers,
-              href: `/${locale}/institute/administration/`,
+              href: `/${locale}/institute/administration/other-officers`,
               icon: TbBuildings,
             },
           ]}
@@ -249,7 +260,7 @@ export default async function Administration({
             ))}
           </article>
         </footer>
-      </main>
+      </section>
     </>
   );
 }
