@@ -92,7 +92,6 @@ export default async function Library({
           { label: text.heading.gallery, href: '#gallery' },
         ]}
         src="institute/sections/central-library/header.jpg"
-        className="bg-neutral-700 bg-blend-overlay"
       />
 
       <Heading

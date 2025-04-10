@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { BsLinkedin } from 'react-icons/bs';
+import { FaFacebook, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
 import Notifications from '~/app/notifications';
@@ -46,36 +48,15 @@ export default async function Home({
 
       <AutoplayCarousel autoplayOptions={{ delay: 7000 }}>
         <CarouselContent>
-          {[
-            {
-              image: 'slideshow/image01.jpg',
-              title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
-              subtitle:
-                'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
-            },
-            {
-              image: 'slideshow/image02.jpg',
-              title:
-                'National Institute Ranked Among Top 10 Engineering Colleges',
-              subtitle:
-                'NIT Kurukshetra has secured a spot in the top 10 engineering colleges in India, showcasing excellence in education and research...',
-            },
-            {
-              image: 'slideshow/image03.jpg',
-              title:
-                'State-of-the-Art Research Facilities Now Open for Students',
-              subtitle:
-                'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
-            },
-          ].map(({ image, title, subtitle }, index) => (
+          {text.slideshow.map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
               <figure className="relative h-full">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-800/80"></div>
                 <article className="absolute inset-x-0 top-[35%] mx-auto text-center drop-shadow-md">
-                  <h4 className="text-shade-light">एनआईटी कुरूक्षेत्</h4>
+                  <h4 className="text-shade-light">{text.title.secondary}</h4>
                   <h1 className="text-lg text-shade-light md:text-4xl lg:text-6xl">
-                    NIT KURUKSHETRA
+                    {text.title.primary}
                   </h1>
                 </article>
 
@@ -89,8 +70,8 @@ export default async function Home({
                 />
 
                 {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 justify-start pb-8 lg:block">
-                    <article className="max-w-[90%]">
+                  <figcaption className="absolute inset-x-0 bottom-0 justify-start bg-gradient-to-b from-transparent to-neutral-800/80 pb-8 lg:block">
+                    <article className="container max-w-[90%]">
                       <h4 className="pl-2 text-sm text-neutral-100 md:text-2xl">
                         {title}
                       </h4>
@@ -113,14 +94,24 @@ export default async function Home({
         <section className="container absolute inset-x-0 bottom-0 hidden h-0 justify-end lg:flex">
           <section className="absolute bottom-0 flex flex-col space-y-4 pb-8">
             {[
-              { href: 'mailto:director@nitkkr.ac.in', icon: MdEmail },
-              { href: 'tel:+911742238570', icon: MdPhone },
+              {
+                href: 'https://www.facebook.com/nitkurukshetraofficialpage',
+                icon: FaFacebook,
+              },
+              {
+                href: 'https://www.instagram.com/nitkurukshetra',
+                icon: FaInstagram,
+              },
+              {
+                href: 'https://twitter.com/NITKURUKSHETRA',
+                icon: FaXTwitter,
+              },
               {
                 href: 'https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana',
-                icon: BsLinkedin,
+                icon: FaLinkedinIn,
               },
             ].map(({ href, icon: Icon }, index) => (
-              <a href={href} key={index}>
+              <a href={href} key={index} target="_blank">
                 <Button
                   className="size-16 rounded-full border border-shade-light text-neutral-900 backdrop-blur-md hover:bg-shade-light/20"
                   variant="icon"
@@ -151,7 +142,7 @@ export default async function Home({
           quoteBelow={text.director.quote[1]}
           readMore={{
             text: text.director.more,
-            href: `/${locale}/institute/director#message`,
+            href: `/director-message`,
           }}
         />
       </section>

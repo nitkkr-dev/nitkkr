@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 
-import { env } from '~/lib/env';
+import { env } from '~/lib/env/server';
 
 import * as schema from './schema';
 
