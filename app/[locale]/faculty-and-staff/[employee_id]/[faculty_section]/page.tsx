@@ -374,7 +374,7 @@ export default async function FacultySection({
     return notFound();
   }
 
-  // TODO: (fix): If any section of proile is empty, the frontend is breaking
+  // TODO: (fix): If any section of profile is empty, the frontend is breaking
   const hasTag = 'tag' in profileTabs[faculty_section][0];
 
   const dataToDisplay = hasTag
