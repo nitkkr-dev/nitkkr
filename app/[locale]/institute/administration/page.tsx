@@ -30,11 +30,6 @@ export default async function Administration({
 }) {
   const text = (await getTranslations(locale)).Administration;
 
-  const senateMembers = await db.query.committeeMembers.findMany({
-    where: (member, { eq }) => eq(member.committeeType, 'senate'),
-    orderBy: (member, { asc }) => [asc(member.serial)],
-  });
-
   const actPointsLinks = [
     'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2007.pdf',
     'https://nitkkr.ac.in/wp-content/uploads/2021/12/NIT_Act_2012.pdf',
@@ -65,7 +60,7 @@ export default async function Administration({
         ]}
       />
 
-      <main className="container mt-20">
+      <section className="container mt-20">
         <p className="mx-8 font-sans text-xl max-md:text-lg">
           {text.description}
         </p>
@@ -80,17 +75,17 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.constitutionOfBoG,
-              href: `/${locale}/institute/administration/constitution-of-bog`,
+              href: `/${locale}/institute/administration/board-of-governors#members`,
               icon: TbContract,
             },
             {
               label: text.bogAgenda,
-              href: `/${locale}/institute/administration/bog-agenda`,
+              href: `/${locale}/institute/administration/board-of-governors#agenda`,
               icon: TbNotebook,
             },
             {
               label: text.bogMinutes,
-              href: `/${locale}/institute/administration/bog-minutes`,
+              href: `/${locale}/institute/administration/board-of-governors#meetings`,
               icon: MdOutlineChecklist,
             },
           ]}
@@ -104,11 +99,14 @@ export default async function Administration({
           href="#senate"
         />
         <section className="container">
-          <CardTitle className="text-2xl text-primary-300">
-            {text.composition}
-          </CardTitle>
           <Suspense fallback={<Loading />}>
-            <Table className="w-full">
+            <CardTitle className="text-2xl text-primary-300">
+              {text.composition}
+            </CardTitle>
+            <Table
+              className="w-full"
+              scrollAreaClassName="md:max-h-96 sm:max-h-72 max-h-60"
+            >
               <TableHeader>
                 <TableRow>
                   <TableHead>{text.sNo}</TableHead>
@@ -117,13 +115,7 @@ export default async function Administration({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {senateMembers.map((member) => (
-                  <TableRow key={member.id}>
-                    <TableCell>{member.serial}</TableCell>
-                    <TableCell>{member.name}</TableCell>
-                    <TableCell>{member.servingAs}</TableCell>
-                  </TableRow>
-                ))}
+                <SenateMembers />
               </TableBody>
             </Table>
           </Suspense>
@@ -132,17 +124,17 @@ export default async function Administration({
           buttonArray={[
             {
               label: text.senateMeetingAgenda,
-              href: `/${locale}/institute/administration/senate-meeting-agenda`,
+              href: `/${locale}/institute/administration/senate#meeting-agenda`,
               icon: TbNotebook,
             },
             {
               label: text.senateMeetingMinutes,
-              href: `/${locale}/institute/administration/senate-meeting-minutes`,
+              href: `/${locale}/institute/administration/senate#meetings`,
               icon: MdOutlineChecklist,
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institute/administration/scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/senate#scsa-meeting-minutes`,
               icon: MdOutlineChecklist,
             },
           ]}
@@ -168,7 +160,7 @@ export default async function Administration({
             },
             {
               label: text.otherOfficers,
-              href: `/${locale}/institute/administration/`,
+              href: `/${locale}/institute/administration/other-officers`,
               icon: TbBuildings,
             },
           ]}
@@ -249,7 +241,22 @@ export default async function Administration({
             ))}
           </article>
         </footer>
-      </main>
+      </section>
     </>
   );
 }
+
+const SenateMembers = async () => {
+  const members = await db.query.committeeMembers.findMany({
+    where: (member, { eq }) => eq(member.committeeType, 'senate'),
+    orderBy: (member, { asc }) => [asc(member.serial)],
+  });
+
+  return members.map(({ serial, name, servingAs }, index) => (
+    <TableRow key={index}>
+      <TableCell>{serial}</TableCell>
+      <TableCell>{name}</TableCell>
+      <TableCell>{servingAs}</TableCell>
+    </TableRow>
+  ));
+};
