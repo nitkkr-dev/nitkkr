@@ -7,9 +7,8 @@ import {
   FaLinkedinIn,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { MdFax, MdMail, MdPhone } from 'react-icons/md';
+import { MdMail, MdPhone } from 'react-icons/md';
 
-import CopyToClipboard from '~/components/copy-to-clipboard';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -17,34 +16,47 @@ export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
 
   const quickLinks = [
-    { name: 'Telephone Directory', href: '#' },
-    { name: 'Books and e-Library', href: '#' },
-    { name: 'Important Links', href: '#' },
-    { name: 'Downloads', href: '#' },
-    { name: 'RTI', href: '#' },
-    { name: 'NIT KKR IT Infrastructure Usage Policy', href: '#' },
-    { name: 'NIT KKR @NDL', href: '#' },
-    { name: 'Telephone Directory', href: '#' },
+    { name: 'Campus Infrastructure', href: '/institute/campus-infra' },
+    { name: 'Hostels', href: '/institute/hostels' },
+    { name: 'Administration', href: '/institute/administration' },
+    { name: 'Estate Section', href: '/institute/sections/estate' },
+    { name: 'Accounts Section', href: '/institute/sections/accounts' },
+    {
+      name: 'Library Resources',
+      href: '/institute/sections/library/collection-and-resources',
+    },
+    { name: 'Medical Facilities', href: '/institute/health-centre' },
   ];
 
-  const aboutUs = [
-    { name: 'Council of NITs', href: '#' },
-    { name: 'NAD Digilocker', href: '#' },
-    { name: 'NIRF (Data & Certificate)', href: '#' },
-    { name: 'NBA Accreditation Status', href: '#' },
-    { name: 'ARIIA', href: '#' },
-    { name: 'Skill Hub (PMKVY 4.0)', href: '#' },
-    { name: 'Jobs @ NIT KKR', href: '#' },
+  const academicLinks = [
+    { name: 'Academic Notifications', href: '/academics/notifications' },
+    { name: 'Scholarships', href: '/academics/scholarships' },
+    { name: 'Awards', href: '/academics/awards' },
+    { name: 'Curricula', href: '/academics/curricula' },
+    {
+      name: 'Department Achievements',
+      href: '/academics/departments/computer-engineering/achievements',
+    },
+    {
+      name: 'Laboratory Facilities',
+      href: '/academics/departments/computer-engineering/labs',
+    },
+    { name: 'Research Publications', href: '/research/publications' },
   ];
 
-  const departments = [
-    { name: 'Vigilance Corner', href: '#' },
-    { name: 'PRO', href: '#' },
-    { name: 'OBC & PWD Cell', href: '#' },
-    { name: 'SC/ST Cell', href: '#' },
-    { name: 'Join Alumni Association', href: '#' },
-    { name: 'User Login', href: '#' },
-    { name: 'Contact Us', href: '#' },
+  const resourceLinks = [
+    { name: 'Faculty & Staff', href: '/faculty-and-staff' },
+    { name: 'Training & Placement', href: '/training-and-placement' },
+    { name: 'Student Activities', href: '/student-activities' },
+    {
+      name: 'Library Committee',
+      href: '/institute/sections/library/library-committee',
+    },
+    {
+      name: 'Membership Privileges',
+      href: '/institute/sections/library/membership-and-privileges',
+    },
+    { name: 'Research Scholars', href: '/faculty-and-staff?tab=scholars' },
   ];
 
   return (
@@ -68,15 +80,12 @@ export default async function Footer({ locale }: { locale: string }) {
             </figcaption>
 
             <address className="mx-auto flex gap-4">
-              <Link href="tel:01744233208">
+              <Link href="tel:+911744233208" target="_blank">
                 <MdPhone className="text-shade-light" size={24} />
               </Link>
-              <Link href="mailto:registrar@nitkkr.ac.in">
+              <Link href="mailto:registrar@nitkkr.ac.in" target="_blank">
                 <MdMail className="text-shade-light" size={24} />
               </Link>
-              <CopyToClipboard text="238350">
-                <MdFax className="text-shade-light" size={24} />
-              </CopyToClipboard>
             </address>
           </figure>
 
@@ -95,11 +104,14 @@ export default async function Footer({ locale }: { locale: string }) {
 
           <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
             <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
-              <h5 className="mb-3 text-shade-light">Quick Links</h5>
+              <h5 className="mb-3 text-shade-light">Quick Access</h5>
               <ul className="flex flex-col gap-3">
                 {quickLinks.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href={item.href}>
+                    <Link
+                      className="text-neutral-500"
+                      href={`/${locale}${item.href}`}
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -107,18 +119,15 @@ export default async function Footer({ locale }: { locale: string }) {
               </ul>
             </nav>
 
-            <nav
-              className={cn(
-                'col-start-1 row-start-2 w-fit',
-                'sm:col-span-2 sm:col-start-5 sm:row-start-1 sm:justify-self-end',
-                'md:col-start-3 md:row-start-1 md:justify-self-center'
-              )}
-            >
-              <h5 className="mb-3 text-shade-light">About Us</h5>
+            <nav className="col-start-1 row-start-2 w-fit sm:col-span-2 sm:col-start-3 sm:row-start-1">
+              <h5 className="mb-3 text-shade-light">Academic Resources</h5>
               <ul className="flex flex-col gap-3">
-                {aboutUs.map((item, index) => (
+                {academicLinks.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href={item.href}>
+                    <Link
+                      className="text-neutral-500"
+                      href={`/${locale}${item.href}`}
+                    >
                       {item.name}
                     </Link>
                   </li>
@@ -126,18 +135,15 @@ export default async function Footer({ locale }: { locale: string }) {
               </ul>
             </nav>
 
-            <nav
-              className={cn(
-                'col-start-1 row-start-3 w-fit',
-                'sm:col-span-2 sm:col-start-3 sm:row-start-2 sm:justify-self-center',
-                'md:col-start-5 md:row-start-1 md:justify-self-end'
-              )}
-            >
-              <h5 className="mb-3 text-shade-light">Departments</h5>
+            <nav className="col-start-1 row-start-3 w-fit sm:col-span-2 sm:col-start-5 sm:row-start-1">
+              <h5 className="mb-3 text-shade-light">Important Links</h5>
               <ul className="flex flex-col gap-3">
-                {departments.map((item, index) => (
+                {resourceLinks.map((item, index) => (
                   <li key={index}>
-                    <Link className="text-neutral-500" href={item.href}>
+                    <Link
+                      className="text-neutral-500"
+                      href={`/${locale}${item.href}`}
+                    >
                       {item.name}
                     </Link>
                   </li>
