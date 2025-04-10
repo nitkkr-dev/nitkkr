@@ -222,6 +222,7 @@ export interface Translations {
     academics: string;
     faculty: string;
     placement: string;
+    research: string;
     alumni: string;
     activities: string;
     logo: string;
