@@ -55,6 +55,12 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Discover the state-of-the-art facilities and infrastructure on campus.',
         },
+        {
+          title: 'Hostels',
+          href: '/institute/hostels',
+          description:
+            'Information about on-campus accommodation and hostel facilities.',
+        },
       ],
     },
     {

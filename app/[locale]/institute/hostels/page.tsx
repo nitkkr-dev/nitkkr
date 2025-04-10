@@ -1,20 +1,20 @@
 'use server';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import Image from 'next/image';
 import { MdBadge } from 'react-icons/md';
 
-import { cn, groupBy } from '~/lib/utils';
-import { getS3Url } from '~/server/s3';
+import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import { getTranslations } from '~/i18n/translations';
-import { Card, ScrollArea } from '~/components/ui';
-import { db } from '~/server/db';
-import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
+import { Card, ScrollArea } from '~/components/ui';
+import { getTranslations } from '~/i18n/translations';
+import { cn, groupBy } from '~/lib/utils';
+import { db } from '~/server/db';
+import { getS3Url } from '~/server/s3';
 
-import { NotificationsList } from '../notifications';
+import { NotificationsList } from '../../notifications';
 
 export default async function Hostels({
   params: { locale },
