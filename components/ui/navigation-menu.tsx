@@ -122,88 +122,98 @@ const NavigationMenuCustomListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item> & {
     locale: string;
     triggerName: string;
-    listItems?: {
-      title: string;
-      description: string;
-      href: string;
-    }[];
-    imageDetails?: {
-      src: string;
-      alt: string;
-      href: string;
-    };
+    isExternal?: boolean;
     href?: string;
+    listItems?: { title: string; description: string; href: string }[];
+    imageDetails?: { src: string; alt: string; href: string };
   }
->(({ imageDetails, listItems, triggerName, href, locale, ...props }, ref) => {
-  if (!listItems) {
+>(
+  (
+    {
+      imageDetails,
+      listItems,
+      triggerName,
+      href,
+      isExternal,
+      locale,
+      ...props
+    },
+    ref
+  ) => {
+    if (!listItems) {
+      return (
+        <NavigationMenuItem {...props} ref={ref}>
+          <Link
+            href={isExternal ? href! : `/${locale}/${href}`}
+            legacyBehavior
+            passHref
+          >
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              {triggerName}
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      );
+    }
+    const imageHeight = listItems.length > 4 ? 4 : listItems.length;
     return (
       <NavigationMenuItem {...props} ref={ref}>
-        <Link href={`/${locale}/${href}`} legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            {triggerName}
-          </NavigationMenuLink>
-        </Link>
+        <NavigationMenuTrigger>{triggerName}</NavigationMenuTrigger>
+        <NavigationMenuContent className="flex max-h-[calc(100vh-82px)] gap-4 p-6 xl:gap-6 2xl:gap-8">
+          {imageDetails && (
+            <Link href={`/${locale}/${href}`} passHref legacyBehavior>
+              <NavigationMenuLink
+                className="group relative flex select-none flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
+                style={{ minWidth: `${70 * imageHeight}px` }}
+              >
+                <Image
+                  className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
+                  alt=""
+                  src={imageDetails.src}
+                  width={0}
+                  height={0}
+                />
+                <section className="relative z-30 flex h-full w-full flex-col justify-end rounded-xl bg-gradient-to-b from-primary-500/0 to-primary-500 p-2 focus:shadow-md">
+                  <h5 className="!mb-0 origin-bottom-left text-shade-light transition-transform duration-500 ease-in-out group-hover:scale-150">
+                    {imageDetails.alt + '→'}
+                  </h5>
+                </section>
+              </NavigationMenuLink>
+            </Link>
+          )}
+          <ul
+            className={cn(
+              'grid grid-flow-col auto-rows-max gap-4 xl:gap-6 2xl:gap-8'
+            )}
+            style={{
+              gridTemplateRows: `repeat(${imageHeight}, minmax(0, 1fr))`,
+            }}
+          >
+            {listItems.map(({ title, description, href }, index) => (
+              <li key={index}>
+                <NavigationMenuLink asChild>
+                  <Link
+                    className={cn(
+                      'group block w-56 select-none space-y-1 rounded-xl p-3 leading-none no-underline outline-none transition-colors transition-transform duration-500 ease-in-out hover:scale-110 hover:bg-neutral-50 focus:bg-neutral-50'
+                    )}
+                    href={`/${locale}/${href}`}
+                  >
+                    <h6 className="font-sans font-semibold leading-none text-shade-dark group-hover:text-primary-500 group-focus:text-primary-500">
+                      {title}
+                    </h6>
+                    <p className="line-clamp-2 overflow-ellipsis text-sm leading-snug text-neutral-700 group-hover:text-primary-500 group-focus:text-primary-500">
+                      {description}
+                    </p>
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+            ))}
+          </ul>
+        </NavigationMenuContent>
       </NavigationMenuItem>
     );
   }
-  const imageHeight = listItems.length > 4 ? 4 : listItems.length;
-  return (
-    <NavigationMenuItem {...props} ref={ref}>
-      <NavigationMenuTrigger>{triggerName}</NavigationMenuTrigger>
-      <NavigationMenuContent className="flex max-h-[calc(100vh-82px)] gap-4 p-6 xl:gap-6 2xl:gap-8">
-        {imageDetails && (
-          <Link href={`/${locale}/${href}`} passHref legacyBehavior>
-            <NavigationMenuLink
-              className="group relative flex select-none flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
-              style={{ minWidth: `${70 * imageHeight}px` }}
-            >
-              <Image
-                className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
-                alt=""
-                src={imageDetails.src}
-                width={0}
-                height={0}
-              />
-              <section className="relative z-30 flex h-full w-full flex-col justify-end rounded-xl bg-gradient-to-b from-primary-500/0 to-primary-500 p-2 focus:shadow-md">
-                <h5 className="!mb-0 origin-bottom-left text-shade-light transition-transform duration-500 ease-in-out group-hover:scale-150">
-                  {imageDetails.alt + '→'}
-                </h5>
-              </section>
-            </NavigationMenuLink>
-          </Link>
-        )}
-        <ul
-          className={cn(
-            'grid grid-flow-col auto-rows-max gap-4 xl:gap-6 2xl:gap-8'
-          )}
-          style={{
-            gridTemplateRows: `repeat(${imageHeight}, minmax(0, 1fr))`,
-          }}
-        >
-          {listItems.map(({ title, description, href }, index) => (
-            <li key={index}>
-              <NavigationMenuLink asChild>
-                <Link
-                  className={cn(
-                    'group block w-56 select-none space-y-1 rounded-xl p-3 leading-none no-underline outline-none transition-colors transition-transform duration-500 ease-in-out hover:scale-110 hover:bg-neutral-50 focus:bg-neutral-50'
-                  )}
-                  href={`/${locale}/${href}`}
-                >
-                  <h6 className="font-sans font-semibold leading-none text-shade-dark group-hover:text-primary-500 group-focus:text-primary-500">
-                    {title}
-                  </h6>
-                  <p className="line-clamp-2 overflow-ellipsis text-sm leading-snug text-neutral-700 group-hover:text-primary-500 group-focus:text-primary-500">
-                    {description}
-                  </p>
-                </Link>
-              </NavigationMenuLink>
-            </li>
-          ))}
-        </ul>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-  );
-});
+);
 NavigationMenuCustomListItem.displayName = 'NavigationMenuCustomListItem';
 
 export {
