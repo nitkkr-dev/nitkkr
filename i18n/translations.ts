@@ -15,6 +15,7 @@ export interface Translations {
       primary: string;
       secondary: string;
     };
+    slideshow: { image: string; title: string; subtitle: string }[];
   };
 
   Clubs: { title: string };
