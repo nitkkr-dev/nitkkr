@@ -14,7 +14,7 @@ import {
   departments,
   doctorates,
   persons,
-  sections,
+  sectionHeads,
   sponsoredResearchProjects,
 } from '.';
 
@@ -129,7 +129,7 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
     references: [departments.id],
   }),
   doctorates: many(doctorates),
-  sections: many(sections),
+  sectionHead: many(sectionHeads),
   sponsoredResearchProjects: many(sponsoredResearchProjects),
   person: one(persons, {
     fields: [faculty.id],

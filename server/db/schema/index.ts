@@ -19,6 +19,7 @@ export * from './notifications.schema';
 export * from './persons.schema';
 export * from './roles.schema';
 export * from './sections.schema';
+export * from './section-heads.schema';
 export * from './sponsored-research-projects.schema';
 export * from './staff.schema';
 export * from './student-academic-details.schema';
