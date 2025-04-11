@@ -88,18 +88,19 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
                 alt={alias ?? name}
                 className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
                 height={0}
-                src={`clubs/${urlName}/nitlogo.png`}
                 width={0}
+                src={`assets/nitlogo.png`}
               />
               {alias ?? name}
             </CardTitle>
-            <CardDescription className="grow">
+
+            <CardDescription className="flex grow items-center justify-center overflow-hidden rounded-md">
               <Image
                 alt={alias ?? name}
-                className="size-full rounded-md object-cover"
+                className="h-full w-full object-contain"
                 height={0}
-                src={`clubs/${urlName}/thumbnail.png`}
                 width={0}
+                src={`student-activities/clubs/${urlName}/logo.jpg`}
               />
             </CardDescription>
           </Card>
