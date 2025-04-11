@@ -112,6 +112,196 @@ export default async function FacultySection({
       },
     ],
   };
+
+  const vikramsinghProfile = {
+    qualifications: [
+      {
+        name: 'B.Tech (CSE)',
+        value: 'Computer Science & Engineering',
+        caption: 'UIT, RGPV (Bhopal)',
+        year: '',
+      },
+      {
+        name: 'M.Tech (CSE)',
+        value: 'Computer Science & Engineering',
+        caption: 'JNU, New Delhi',
+        year: '',
+      },
+      {
+        name: 'Ph.D. (Software Engineering)',
+        value: 'Software Engineering',
+        caption: 'NIT Kurukshetra',
+        year: '',
+      },
+    ],
+    publications: [
+      // Journals
+      {
+        name: 'Improving Hamming-Distance Computation for Adaptive Similarity Search Approach',
+        value: 'Chandradeep Kumar, Vikram Singh',
+        caption: 'Int. J. of Intelligent Information Technologies (IJIIT)',
+        year: 'Dec 2021',
+        tag: 'Journal',
+      },
+      {
+        name: 'Progressive Intent Model for Similarity Search',
+        value: 'Vikram Singh',
+        caption: 'IEEE Transactions on Information Theory',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'AQtpUIR: Adaptive query term proximity based user Information Retrieval',
+        value: 'Tirthankar Barik, Vikram Singh',
+        caption: 'Journal of Information and Optimization Sciences',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'Progressive Intent Modeling for Exploratory Search',
+        value: 'Vikram Singh',
+        caption: 'ACM Transactions on Information Systems (TOIS), 38(4)',
+        year: '2020',
+        tag: 'Journal',
+      },
+      {
+        name: 'Correlating “Pre-search” and “In-search” Context to Predict Search Intent for Exploratory Search',
+        value: 'Vikram Singh',
+        caption: 'Journal of Business Intelligence & Data Mining, 18(04)',
+        year: '2020',
+        tag: 'Journal',
+      },
+
+      // Conferences / Workshops
+      {
+        name: 'Empirical Analysis of Multi-label Classification on GitterCom using BERT',
+        value:
+          'Bathini Sai Akash, Lov Kumar, Vikram Singh, Anoop Kumar Patel, Aneesh Krishna',
+        caption: '30th ICONIP 2023 (Accepted)',
+        year: '2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'An Empirical Framework for Software Aging-Related Bug Prediction using Weighted Extreme Learning Machine',
+        value:
+          'Lov Kumar, Vikram Singh, Lalita Bhanu Murthy, Sanjay Misra, Aneesh Krishna',
+        caption: '18th FedCSIS 2023 (Accepted)',
+        year: '2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'A Progressive Query Materialization for Interactive Data Exploration',
+        value: 'Vikram Singh',
+        caption: 'SoDAM’2016 co‑located at VLDB’2016, pp. 1–10',
+        year: '2016',
+        tag: 'Conference',
+      },
+      {
+        name: 'Best-Effort Query Answering in Dataspaces on Unstructured Data',
+        value: 'Vishal Sheokhand, Vikram Singh',
+        caption: 'ACM COMAD 2016, pp. 155–159',
+        year: '2016',
+        tag: 'Conference',
+      },
+      {
+        name: 'Improving Result Diversity Using Query Term Proximity in Exploratory Search',
+        value: 'Vikram Singh, Mayank Dave',
+        caption: 'BDA 2019, pp. 67–87',
+        year: '2019',
+        tag: 'Conference',
+      },
+      {
+        name: 'Query Morphing: A Proximity-Based Approach for Data Exploration and Query Reformulation',
+        value: 'Jay Patel, Vikram Singh',
+        caption: 'MIKE’2017, pp. 261–273',
+        year: '2017',
+        tag: 'Conference',
+      },
+      {
+        name: 'Extracting Emotion Quotient of Information Virality over Twitter Data',
+        value: 'Pawan K., Reuben A., Vikram Singh',
+        caption: 'ICDCIT 2022, Springer Nature',
+        year: 'Jan 2022',
+        tag: 'Conference',
+      },
+    ],
+    experience: [
+      {
+        name: 'Industry Experience',
+        value: '3 years',
+        caption:
+          'Worked in software development and engineering roles in the industry.',
+        year: '2009 - 2012',
+      },
+      {
+        name: 'Academic Experience',
+        value: '10+ years',
+        caption:
+          'Professor at NIT Kurukshetra’s Computer Engineering Department. Expertise in Database Systems, Data Mining, and Human-Computer Interaction.',
+        year: '2012 - Present',
+      },
+    ],
+    projects: [],
+    educationCurrent: [],
+    scholars: [
+      {
+        name: 'Ph.D. Supervision',
+        value:
+          '1 ongoing: Mohd. Ilyas – Intent Modeling for Information Search and Recommendation',
+        caption: 'Ph.D. scholar under guidance at NIT Kurukshetra',
+        year: '2022-23',
+      },
+      {
+        name: 'M.Tech Dissertations Supervised',
+        value: '19 completed',
+        caption: 'Postgraduate dissertations at NIT Kurukshetra',
+        year: '',
+      },
+    ],
+    awards: [
+      {
+        name: 'Best Paper Award',
+        value: 'Evaluating Models for Better Life Expectancy Prediction',
+        caption: 'ICCIDA, Hyderabad, India',
+        year: '2022',
+      },
+      {
+        name: 'Best Student Paper',
+        value:
+          'Query Morphing: A Proximity-Based Approach for Data Exploration and Query Reformulation',
+        caption: 'MIKE’2017, IDBRT, Hyderabad, India',
+        year: '2017',
+      },
+      {
+        name: 'Innovative Design for Computing',
+        value:
+          'Multi-objective Parametric Query Optimization for Distributed Database Systems',
+        caption: 'SocProS’2015, IIT Roorkee (Saharanpur Campus)',
+        year: '2015',
+      },
+      {
+        name: 'Best Student Paper',
+        value: 'Best-effort Query Answering in DataSpaces on Unstructured Data',
+        caption: 'ICCCA’2016, India',
+        year: '2016',
+      },
+      {
+        name: 'Best Paper Award',
+        value:
+          'Generating Optimal Query Plans for Distributed Query Processing using Teacher-Learner Based Optimization',
+        caption: 'ICDMW at IMCIP’2015, Bangalore, India',
+        year: '2015',
+      },
+      {
+        name: 'Best Student Paper',
+        value:
+          'Efficient Algorithm for Web Search Query Reformulation Using Genetic Algorithm',
+        caption: 'ICCIDM’2015, RIT Berhampur, India',
+        year: '2015',
+      },
+    ],
+  };
+
   const defaultProfileTabs = {
     qualifications: [
       {
@@ -214,13 +404,19 @@ export default async function FacultySection({
     ],
   };
   const profileTabs =
-    params?.employee_id === '114' ? jkchabbraProfile : defaultProfileTabs;
+    params?.employee_id === '114'
+      ? jkchabbraProfile
+      : params?.employee_id === '1083'
+        ? vikramsinghProfile
+        : defaultProfileTabs;
 
   if (!profileTabs[faculty_section]) {
     return notFound();
   }
 
-  const hasTag = 'tag' in profileTabs[faculty_section][0];
+  const hasTag =
+    profileTabs[faculty_section][0] !== undefined &&
+    'tag' in profileTabs[faculty_section][0];
 
   const dataToDisplay = hasTag
     ? // @ts-expect-error - Ignore type checking for 'tag' key
