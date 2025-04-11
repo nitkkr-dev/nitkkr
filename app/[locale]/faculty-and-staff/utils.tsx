@@ -53,6 +53,7 @@ export async function FacultyOrStaffComponent({
       !employeeId ? eq(faculty.id, id!) : eq(faculty.employeeId, employeeId),
     columns: {
       id: true,
+      employeeId: true,
       officeAddress: true,
       designation: true,
       googleScholarId: true,
@@ -136,7 +137,11 @@ export async function FacultyOrStaffComponent({
             width={200}
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
-            src={`fallback/user-image.jpg`}
+            src={
+              faculty.employeeId === '114' || faculty.employeeId === '1083'
+                ? `faculty-and-staff/${faculty.employeeId}/0.jpg`
+                : `fallback/user-image.jpg`
+            }
           />
         </section>
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
@@ -173,18 +178,30 @@ export async function FacultyOrStaffComponent({
               <Link
                 key={key}
                 className="flex aspect-square flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[23%] lg:w-[20%]"
-                // @ts-expect-error - Ignore type checking for key
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                href={faculty[value] ?? ''}
+                href={
+                  key == 'Orcid'
+                    ? faculty.employeeId === '114'
+                      ? 'https://in.linkedin.com/in/jitender-kumar-chhabra-372b871'
+                      : faculty.employeeId === '1083'
+                        ? 'https://in.linkedin.com/in/vikram-singh-802827166'
+                        : ''
+                    : (faculty[value as keyof typeof faculty] as string) ?? ''
+                }
               >
                 <Image
                   alt={key}
-                  src={`faculty-and-staff/${key}.svg`}
+                  src={`faculty-and-staff/${(faculty.employeeId === '114' || faculty.employeeId === '1083') && key == 'Orcid' ? 'LinkedIn' : key}.svg`}
                   height={0}
                   width={0}
                   className="mx-auto h-[50%] w-[50%]"
                 />
-                <h5 className="mx-auto">{key}</h5>
+                <h5 className="mx-auto">
+                  {(faculty.employeeId === '114' ||
+                    faculty.employeeId === '1083') &&
+                  key == 'Orcid'
+                    ? 'LinkedIn'
+                    : key}
+                </h5>
               </Link>
             );
           }
