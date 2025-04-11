@@ -72,7 +72,6 @@ export default function ImageHeader({
           </ol>
           <hr className="invisible hidden sm:block" />
         </>
-     
       }
     </>
   );

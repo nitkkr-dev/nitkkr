@@ -7,6 +7,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail, MdMailOutline, MdOutlineLocalPhone } from 'react-icons/md';
 import { LuFacebook } from 'react-icons/lu';
 
+import { getS3Url } from '~/server/s3';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -23,7 +24,7 @@ import {
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
-import { clubs, db, studentAcademicDetails } from '~/server/db';
+import { clubs, db } from '~/server/db';
 import { countChildren } from '~/server/s3';
 
 export async function generateStaticParams() {
@@ -38,51 +39,121 @@ interface ClubEvent {
   description: string;
 }
 
+// interface for dummy data
+interface DetailedClubMember {
+  id: number;
+  studentId: string;
+  clubId: number;
+  position: string;
+  academicDetails?: {
+    batch: string;
+    major: {
+      degree: string;
+      name: string;
+    };
+    student: {
+      rollNumber: string;
+      person: {
+        name: string;
+      };
+    };
+  };
+}
+// Previous dummy data
+// const events = [
+//   {
+//     id: 0,
+//     title: 'Event 1',
+//     date: '2021-10-10',
+//     image: [
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+//     ],
+//     description: 'This is the description of the event',
+//   },
+//   {
+//     id: 1,
+//     title: 'Event 2',
+//     date: '2021-10-10',
+//     image: [
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+//     ],
+//     description: 'This is the description of the event',
+//   },
+//   {
+//     id: 2,
+//     title: 'Event 3',
+//     date: '2021-10-10',
+//     image: [
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+//     ],
+//     description: 'This is the description of the event',
+//   },
+//   {
+//     id: 3,
+//     title: 'Event 4',
+//     date: '2021-10-10',
+//     image: [
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+//     ],
+//     description: 'This is the description of the event',
+//   },
+//   {
+//     id: 4,
+//     title: 'Event 5',
+//     date: '2021-10-10',
+//     image: [
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+//     ],
+//     description: 'This is the description of the event',
+//   },
+// ] as ClubEvent[];
+
+// Data for SPICMACAY
 const events = [
   {
     id: 0,
-    title: 'Event 1',
+    title: 'Saarang',
     date: '2021-10-10',
     image: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      'student-activities/clubs/spicmacay/6.jpg',
     ],
-    description: 'This is the description of the event',
+    description: 'Saarang is one of SPICMACAY NIT Kurukshetra’s flagship cultural events, showcasing the vibrant diversity of Indian classical music and dance. It brings together student performers and promotes traditional art forms through themed performances, often held during Confluence, the annual cultural fest.',
   },
   {
     id: 1,
-    title: 'Event 2',
+    title: 'Virasat',
     date: '2021-10-10',
     image: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      'student-activities/clubs/spicmacay/10.jpg',
     ],
-    description: 'This is the description of the event',
+    description: 'Virasat is a prestigious series under SPICMACAY that invites renowned classical artists to the campus, offering students a direct experience of India’s rich cultural heritage. The event features live performances, interactive sessions, and workshops, celebrating the timeless traditions of music, dance, and art.',
   },
   {
     id: 2,
-    title: 'Event 3',
+    title: 'JAM Project',
     date: '2021-10-10',
     image: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      'student-activities/clubs/spicmacay/3.jpg',
     ],
-    description: 'This is the description of the event',
+    description: 'The JAM Project is a grand performance event organized by SPICMACAY, where club members—especially juniors—showcase their talents through classical and fusion performances. It serves as a platform to celebrate and appreciate new talent, featuring vibrant acts that blend tradition with creativity, and marks a key highlight in the club’s yearly calendar.',
   },
   {
     id: 3,
-    title: 'Event 4',
+    title: 'Workshops',
     date: '2021-10-10',
     image: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      'student-activities/clubs/spicmacay/1.jpg',
     ],
-    description: 'This is the description of the event',
+    description: 'SPICMACAY regularly conducts instrumental and vocal workshops to help students explore classical music practically. These sessions are guided by skilled artists or senior members and focus on instruments like harmonium, tabla, and vocals, creating an inclusive space for learning and collaboration.',
   },
   {
     id: 4,
-    title: 'Event 5',
+    title: 'Battle Street',
     date: '2021-10-10',
     image: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+      'student-activities/clubs/spicmacay/2.jpg',
     ],
-    description: 'This is the description of the event',
+    description: 'Battle Street is an electrifying face-to-face dance battle event where dancers compete in intense 1v1 showdowns. Organized as part of the cultural fest, it features a high-energy environment with freestyle, hip-hop, and street dance styles. Participants go head-to-head in knockout rounds, judged live on the spot, showcasing their skills, rhythm, and stage presence in front of an enthusiastic crowd.',
   },
 ] as ClubEvent[];
 
@@ -103,26 +174,62 @@ export default async function Club({
     },
   });
 
-  const detailed_members = await Promise.all(
-    club?.clubMembers.map(async (member) => {
-      const academicDetails = await db.query.studentAcademicDetails.findFirst({
-        where: eq(studentAcademicDetails.id, member.studentId),
-        with: {
-          major: true,
-          student: {
-            with: {
-              person: {
-                columns: {
-                  name: true,
-                },
-              },
-            },
-          },
+  // Hard coding for now
+  // const detailed_members = await Promise.all(
+  //   club?.clubMembers.map(async (member) => {
+  //     const academicDetails = await db.query.studentAcademicDetails.findFirst({
+  //       where: eq(studentAcademicDetails.id, member.studentId),
+  //       with: {
+  //         major: true,
+  //         student: {
+  //           with: {
+  //             person: {
+  //               columns: {
+  //                 name: true,
+  //               },
+  //             },
+  //           },
+  //         },
+  //       },
+  //     });
+  //     return { ...member, academicDetails };
+  //   }) ?? []
+  // );
+
+  // dummy data
+  const detailed_members : DetailedClubMember[] = [
+    {
+      id: 1,
+      studentId: 'S1001',
+      clubId: 1,
+      position: 'Secretary',
+      academicDetails: {
+
+        batch: '2021',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '19UCS001',
+          person: { name: 'Sahitya Gupta' },
         },
-      });
-      return { ...member, academicDetails };
-    }) ?? []
-  );
+      },
+    },
+    {
+      id: 2,
+      studentId: 'S1002',
+      clubId: 1,
+      position: 'Secretary',
+      academicDetails: {
+        batch: '2021',
+        major: { degree: 'B.Tech', name: 'Information Technology' },
+        student: {
+          rollNumber: '19UEE002',
+          person: { name: 'Khyati Sharma' },
+        },
+      },
+    },
+  ];
+
+
 
   const text = await getTranslations(locale);
   const imageCount = await countChildren(`clubs/${display_name}/images`);
@@ -144,18 +251,18 @@ export default async function Club({
   const facultyInchage = [
     {
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      name: 'Awdesh Kumar',
-      title: 'HOD Computer Engineering',
-      email: 'awdesh@gmail.com',
+        'fallback/user-image.jpg',
+      name: 'Anshu Parashar',
+      title: 'Computer Application',
+      email: 'anshuparashar@nitkkr.ac.in',
       phone: '1234567890',
     },
     {
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-      name: 'Awdesh Kumar',
-      title: 'HOD Computer Engineering',
-      email: 'awdesh@gmail.com',
+        'fallback/user-image.jpg',
+      name: 'Anshu Parashar',
+      title: 'Computer Application',
+      email: 'anshuparashar@nitkkr.ac.in',
       phone: '1234567890',
     },
   ];
@@ -193,17 +300,21 @@ export default async function Club({
   return (
     <>
       <ImageHeader
-        src={`clubs/${display_name}/banner.png`}
+        src={`student-activities/clubs/${display_name}/banner.jpg`}
         className="relative"
       >
         <header className="m-auto flex items-center justify-center max-w-[46rem] container ">
+        <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
           <Image
             alt={display_name}
-            src="https://s3-alpha-sig.figma.com/img/7402/b5d8/0d0e5a22248e48c7ff86855c04d25708?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RkSGzZZvYJnbKdrcupFwI~YfhQ5wVMa2XUPrrIHwmmFufne3DexsEjfO2Gkaa~S8WkO0I4vP3Gus-6rpjTawVhc5RMQbnQJBymaC8l4ibeWKQq-SqcDXPBZhv5T2~fBspLZuTvv3-uql22JGdkccqHN03RJq~cetCxZoM04TIsWLwVJDhJbF5ulcdEcyyxDPVkv86-tTcaJyFHwBF3Y8ZfJrP-2TlxoeI431PYQC97YOgiBRQkh~0mYYenZ6GAqtzc75sUqTjz7DwWmqT86exVOE28jy8jsaYwwv33U4X-2LHlQLv~GN5w-UNHy668EpqDeABZUaYHieb9zn3odufw__"
-            className="h-32 w-32 rounded-full bg-primary-100"
-            width={32}
-            height={32}
+            src="student-activities/clubs/spicmacay/logo.jpg"
+            fill
+            className="rounded-full bg-primary-100 object-cover"
+            sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
           />
+        </div>
+
+
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">{display_name.toUpperCase()}</h1>
         </header>
       </ImageHeader>
@@ -271,7 +382,7 @@ export default async function Club({
           heading="h2"
           text={text.club.event.toUpperCase()}
         />
-        <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 ">
           {events.map((event, i) => (
             <li key={i} className="w-auto">
               <Link
@@ -283,8 +394,8 @@ export default async function Club({
               >
                 <Card className="flex h-64 w-full flex-col justify-between border-none">
                   <CardContent
-                    className="relative flex h-full w-full justify-center rounded-lg bg-cover p-4"
-                    style={{ backgroundImage: `url(${event.image[0]})` }}
+                    className="relative flex h-full w-full justify-center rounded-lg p-4 bg-neutral-700 bg-cover bg-center bg-blend-overlay"
+                    style={{ backgroundImage: `url(${getS3Url()}/${event.image[0]})` }}
                   >
                     <h1 className="my-auto text-4xl font-bold text-background">
                       {event.title}
@@ -350,7 +461,7 @@ export default async function Club({
                 <CardContent className="p-4">
                   <Image
                     alt={member.academicDetails?.student.person.name ?? ''}
-                    src="https://s3-alpha-sig.figma.com/img/11bb/5a75/71de47cf6351c8dd4b4affd3dfb2b03e?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CKqjkyEl1-p-FCFeqtIWWdQ47HhtB2aX3vxSFXqp8oqGtCCBrn8S1~Wai0XYh0VeEzSdpqNPgfSYbhd3UoXHb8RtHjY~DWuzpuTtkDAtwjON7vE1gaOqFYNhj03uJTq-B-bZ5XoKjL8umvdMsuPegvcHjqiNTuqcyIE0XdPeuRKK6FD~1Epmzhm6ZX7-DVHO4gpxY9ZoCyfOaZOpMwjO8nrKpvkJUw6e1LiN5r-QCY8vNYbpCfozStexx9ojQ~GyTlQqyZNvAyhkcXHq3Fui7ikDWrXZ~1Nw0wm3ZEeBQnEV3kR7K64n6SFTWdr5X1SDKmAtd3iDM8Yw5k6Qe27JEg__"
+                    src="fallback/user-image.jpg"
                     width={0}
                     height={0}
                     className="h-48 w-full rounded-lg object-cover"

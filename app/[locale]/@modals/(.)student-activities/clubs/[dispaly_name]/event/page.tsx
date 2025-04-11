@@ -20,48 +20,48 @@ export default function EventPage({
   const events = [
     {
       id: 0,
-      title: 'Event 1',
+      title: 'Saarang',
       date: '2021-10-10',
       image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+        'student-activities/clubs/spicmacay/6.jpg',
       ],
-      description: 'This is the description of the event',
+      description: 'Saarang is one of SPICMACAY NIT Kurukshetra’s flagship cultural events, showcasing the vibrant diversity of Indian classical music and dance. It brings together student performers and promotes traditional art forms through themed performances, often held during Confluence, the annual cultural fest.',
     },
     {
       id: 1,
-      title: 'Event 2',
+      title: 'Virasat',
       date: '2021-10-10',
       image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+        'student-activities/clubs/spicmacay/10.jpg',
       ],
-      description: 'This is the description of the event',
+      description: 'Virasat is a prestigious series under SPICMACAY that invites renowned classical artists to the campus, offering students a direct experience of India’s rich cultural heritage. The event features live performances, interactive sessions, and workshops, celebrating the timeless traditions of music, dance, and art.',
     },
     {
       id: 2,
-      title: 'Event 3',
+      title: 'JAM Project',
       date: '2021-10-10',
       image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+        'student-activities/clubs/spicmacay/3.jpg',
       ],
-      description: 'This is the description of the event',
+      description: 'The JAM Project is a grand performance event organized by SPICMACAY, where club members—especially juniors—showcase their talents through classical and fusion performances. It serves as a platform to celebrate and appreciate new talent, featuring vibrant acts that blend tradition with creativity, and marks a key highlight in the club’s yearly calendar.',
     },
     {
       id: 3,
-      title: 'Event 4',
+      title: 'Workshops',
       date: '2021-10-10',
       image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+        'student-activities/clubs/spicmacay/1.jpg',
       ],
-      description: 'This is the description of the event',
+      description: 'SPICMACAY regularly conducts instrumental and vocal workshops to help students explore classical music practically. These sessions are guided by skilled artists or senior members and focus on instruments like harmonium, tabla, and vocals, creating an inclusive space for learning and collaboration.',
     },
     {
       id: 4,
-      title: 'Event 5',
+      title: 'Battle Street',
       date: '2021-10-10',
       image: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
+        'student-activities/clubs/spicmacay/2.jpg',
       ],
-      description: 'This is the description of the event',
+      description: 'Battle Street is an electrifying face-to-face dance battle event where dancers compete in intense 1v1 showdowns. Organized as part of the cultural fest, it features a high-energy environment with freestyle, hip-hop, and street dance styles. Participants go head-to-head in knockout rounds, judged live on the spot, showcasing their skills, rhythm, and stage presence in front of an enthusiastic crowd.',
     },
   ] as ClubEvent[];
 
@@ -91,15 +91,7 @@ export default function EventPage({
       </GalleryCarousel>
 
       <p className="text-gray-700 text-base leading-relaxed">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quis
-        optio adipisci, voluptates nobis eos nisi tempora eius assumenda
-        maxime et velit reiciendis reprehenderit libero aut rem, vero, dolorum
-        animi! Voluptatum assumenda rerum, non consequatur labore vitae
-        repudiandae maxime beatae in doloribus itaque, quaerat dolorem
-        nesciunt modi quas provident officia, necessitatibus ut amet qui
-        voluptatibus facere. Aut aliquid veritatis cum, nihil, minima
-        laudantium perferendis assumenda doloribus quam aspernatur nulla
-        porro!
+      SPICMACAY regularly conducts instrumental and vocal workshops to help students explore classical music practically. These sessions are guided by skilled artists or senior members and focus on instruments like harmonium, tabla, and vocals, creating an inclusive space for learning and collaboration.
       </p>
     </Dialog>
 
