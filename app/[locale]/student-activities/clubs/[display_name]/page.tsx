@@ -221,6 +221,104 @@ export default async function Club({
         },
       },
     },
+    {
+      id: 3,
+      studentId: 'S1003',
+      clubId: 1,
+      position: 'Secretary',
+      academicDetails: {
+        batch: '2021',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12132001',
+          person: { name: 'Aditya Karna' },
+        },
+      },
+    },
+    {
+      id: 4,
+      studentId: 'S1004',
+      clubId: 1,
+      position: 'Secretary',
+      academicDetails: {
+        batch: '2021',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12112239',
+          person: { name: 'Aryan Srivastava' },
+        },
+      },
+    },
+    {
+      id: 5,
+      studentId: 'S1005',
+      clubId: 1,
+      position: 'Member',
+      academicDetails: {
+        batch: '2022',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12212239',
+          person: { name: 'Aryawart Kathpal' },
+        },
+      },
+    },
+    {
+      id: 6,
+      studentId: 'S1006',
+      clubId: 1,
+      position: 'Member',
+      academicDetails: {
+        batch: '2022',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12212240',
+          person: { name: 'Digvijay Surag' },
+        },
+      },
+    },
+    {
+      id: 7,
+      studentId: 'S1007',
+      clubId: 1,
+      position: 'Member',
+      academicDetails: {
+        batch: '2022',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12212241',
+          person: { name: 'Divyansh Pankholi' },
+        },
+      },
+    },
+    {
+      id: 8,
+      studentId: 'S1008',
+      clubId: 1,
+      position: 'Member',
+      academicDetails: {
+        batch: '2022',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12212242',
+          person: { name: 'Harish Kumar' },
+        },
+      },
+    },
+    {
+      id: 9,
+      studentId: 'S1009',
+      clubId: 1,
+      position: 'Member',
+      academicDetails: {
+        batch: '2022',
+        major: { degree: 'B.Tech', name: 'Computer Science' },
+        student: {
+          rollNumber: '12212243',
+          person: { name: 'Aburba Haldar' },
+        },
+      },
+    },
   ];
 
   const text = await getTranslations(locale);
@@ -445,10 +543,12 @@ export default async function Club({
           heading="h2"
           text={text.club.postHolders.toUpperCase()}
         />
-        <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
-          {detailed_members.map((member, i) => (
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
+          {detailed_members
+            .filter((member) => member.position === 'Secretary')
+            .map((member, i) => (
             <li key={i}>
-              <Card className="bg-white flex h-[350px] w-[300px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
+              <Card className="bg-white flex h-[350px] w-[280px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
                 <CardContent className="p-4">
                   <Image
                     alt={member.academicDetails?.student.person.name ?? ''}
