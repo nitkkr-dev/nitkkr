@@ -1,12 +1,13 @@
 import Image from 'next/image';
 
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 
 const errorImages = {
   NoResult: 'assets/error-2.png',
   Unauthorised: 'assets/error-3.png',
   WorkInProgress: 'assets/error-1.png',
-  NotAcceptable: 'assets/error-4.png.png',
+  NotAcceptable: 'assets/error-4.png',
 };
 
 export default async function Status({
@@ -19,22 +20,32 @@ export default async function Status({
   type: 'NoResult' | 'Unauthorised' | 'WorkInProgress' | 'NotAcceptable';
 }) {
   return (
-    <article className="flex h-screen items-center justify-center text-error">
-      <div className="flex flex-col items-center space-y-8 md:flex-row md:space-x-20 md:space-y-0">
-        <div className="text-center md:text-left">
+    <article className="container flex h-screen items-center justify-center">
+      <div
+        className={cn(
+          'flex flex-col items-center md:flex-row',
+          'space-y-8 md:space-x-10 md:space-y-0'
+        )}
+      >
+        <div className="md:w-1/2">
           <h1
-            className="font-fingerpaint text-[80px] leading-none sm:text-[120px] md:text-[150px] lg:text-[190px]"
-            style={{
-              background: 'linear-gradient(to top, #E7695F, #E13F32)',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
-            }}
+            className={cn(
+              'text-center font-fingerpaint',
+              'text-[80px] sm:text-[120px] md:text-[150px] lg:text-[190px]',
+              'leading-none',
+              'bg-gradient-to-t from-primary-100 to-primary-500 bg-clip-text text-transparent'
+            )}
           >
             {title}
           </h1>
           <p
-            className="font-poppins text-center text-[24px] leading-[32px] text-[#D27D78] sm:text-[32px] sm:leading-[40px] md:text-[40px] md:leading-[48px]"
-            style={{ fontWeight: 500, maxWidth: '361px', margin: '0 auto' }}
+            className={cn(
+              'mx-auto max-w-[361px] text-center',
+              'font-poppins font-bold',
+              'text-[24px] sm:text-[32px] md:text-[40px]',
+              'leading-[32px] sm:leading-[40px] md:leading-[48px]',
+              'text-primary-300'
+            )}
           >
             {description}
           </p>
@@ -45,7 +56,11 @@ export default async function Status({
             alt={type}
             width={661}
             height={513}
-            className="ml-4 h-auto w-[300px] -scale-x-100 opacity-50 sm:ml-8 sm:w-[400px] md:ml-12 md:w-[500px] lg:w-[661px]"
+            className={cn(
+              'h-auto -scale-x-100 opacity-50',
+              'w-[300px] sm:w-[400px] md:w-[500px] lg:w-[661px]',
+              'ml-4 sm:ml-8 md:ml-12'
+            )}
           />
         </div>
       </div>

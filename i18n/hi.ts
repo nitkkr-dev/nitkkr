@@ -150,9 +150,9 @@ const text: Translations = {
     viewAll: 'सारा देखें',
   },
   NotFound: {
-    title: 'नहीं मिला',
-    description: 'अनुरोधित संसाधन नहीं मिल सका',
-    backHome: 'घर लौटें',
+    title: '404',
+    description: 'लगता है आप भटक गए  हैं,',
+    backHome: 'चलिए, आपको होम पेज पर ले चलें।',
   },
   Profile: {
     tabs: {
@@ -395,11 +395,11 @@ const text: Translations = {
     },
     Unauthorised: {
       title: '403',
-      description: 'आप इस पृष्ठ को देखने के लिए अधिकृत नहीं हैं।',
+      description: 'अनुमति नहीं है।',
     },
     WorkInProgress: {
       title: '501',
-      description: 'इस पेज पर अभी काम चल रहा है। कृपया दूसरी बार आएं',
+      description: 'कार्य प्रगति पर है।',
     },
     NotAcceptable: {
       title: '406',
