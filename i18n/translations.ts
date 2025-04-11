@@ -329,7 +329,10 @@ export interface Translations {
     Estate: {};
     GeneralAdministration: {};
     HealthCentre: {};
-    Security: {};
+    Security: {
+      heading: string;
+      about: string[];
+    };
     Sports: {};
     Store: {};
   };
