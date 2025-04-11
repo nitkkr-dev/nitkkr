@@ -68,7 +68,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
   const clubs = await db.query.clubs.findMany({
     columns: { alias: true, name: true, urlName: true },
   });
-  
+
   return (
     <GalleryCarousel>
       {clubs.map(({ alias, name, urlName }, index) => (
@@ -94,7 +94,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
               {alias ?? name}
             </CardTitle>
 
-            <CardDescription className="grow flex items-center justify-center overflow-hidden rounded-md">
+            <CardDescription className="flex grow items-center justify-center overflow-hidden rounded-md">
               <Image
                 alt={alias ?? name}
                 className="h-full w-full object-contain"
@@ -106,7 +106,6 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
           </Card>
         </Link>
       ))}
-  </GalleryCarousel>
-
+    </GalleryCarousel>
   );
 };

@@ -47,7 +47,7 @@ export default function ImageHeader({
         {children}
       </section>
 
-      {headings && 
+      {headings && (
         <>
           <ol
             className={cn(
@@ -72,7 +72,7 @@ export default function ImageHeader({
           </ol>
           <hr className="invisible hidden sm:block" />
         </>
-      }
+      )}
     </>
   );
 }
