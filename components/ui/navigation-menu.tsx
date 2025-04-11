@@ -1,9 +1,9 @@
-import * as React from 'react';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
-import { RxChevronDown } from 'react-icons/rx';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import * as React from 'react';
+import { RxChevronDown } from 'react-icons/rx';
 
 import { cn } from '~/lib/utils';
 
@@ -164,7 +164,7 @@ const NavigationMenuCustomListItem = React.forwardRef<
             <Link href={`/${locale}/${href}`} passHref legacyBehavior>
               <NavigationMenuLink
                 className="group relative flex select-none flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
-                style={{ minWidth: `${70 * imageHeight}px` }}
+                style={{ width: `${70 * imageHeight}px`, maxWidth: '50vh' }}
               >
                 <Image
                   className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
@@ -217,14 +217,14 @@ const NavigationMenuCustomListItem = React.forwardRef<
 NavigationMenuCustomListItem.displayName = 'NavigationMenuCustomListItem';
 
 export {
-  navigationMenuTriggerStyle,
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuCustomListItem,
   NavigationMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
+  NavigationMenuCustomListItem,
   NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
   NavigationMenuViewport,
 };
