@@ -114,46 +114,41 @@ const events = [
     id: 0,
     title: 'Saarang',
     date: '2021-10-10',
-    image: [
-      'student-activities/clubs/spicmacay/6.jpg',
-    ],
-    description: 'Saarang is one of SPICMACAY NIT Kurukshetra’s flagship cultural events, showcasing the vibrant diversity of Indian classical music and dance. It brings together student performers and promotes traditional art forms through themed performances, often held during Confluence, the annual cultural fest.',
+    image: ['student-activities/clubs/spicmacay/6.jpg'],
+    description:
+      'Saarang is one of SPICMACAY NIT Kurukshetra’s flagship cultural events, showcasing the vibrant diversity of Indian classical music and dance. It brings together student performers and promotes traditional art forms through themed performances, often held during Confluence, the annual cultural fest.',
   },
   {
     id: 1,
     title: 'Virasat',
     date: '2021-10-10',
-    image: [
-      'student-activities/clubs/spicmacay/10.jpg',
-    ],
-    description: 'Virasat is a prestigious series under SPICMACAY that invites renowned classical artists to the campus, offering students a direct experience of India’s rich cultural heritage. The event features live performances, interactive sessions, and workshops, celebrating the timeless traditions of music, dance, and art.',
+    image: ['student-activities/clubs/spicmacay/10.jpg'],
+    description:
+      'Virasat is a prestigious series under SPICMACAY that invites renowned classical artists to the campus, offering students a direct experience of India’s rich cultural heritage. The event features live performances, interactive sessions, and workshops, celebrating the timeless traditions of music, dance, and art.',
   },
   {
     id: 2,
     title: 'JAM Project',
     date: '2021-10-10',
-    image: [
-      'student-activities/clubs/spicmacay/3.jpg',
-    ],
-    description: 'The JAM Project is a grand performance event organized by SPICMACAY, where club members—especially juniors—showcase their talents through classical and fusion performances. It serves as a platform to celebrate and appreciate new talent, featuring vibrant acts that blend tradition with creativity, and marks a key highlight in the club’s yearly calendar.',
+    image: ['student-activities/clubs/spicmacay/3.jpg'],
+    description:
+      'The JAM Project is a grand performance event organized by SPICMACAY, where club members—especially juniors—showcase their talents through classical and fusion performances. It serves as a platform to celebrate and appreciate new talent, featuring vibrant acts that blend tradition with creativity, and marks a key highlight in the club’s yearly calendar.',
   },
   {
     id: 3,
     title: 'Workshops',
     date: '2021-10-10',
-    image: [
-      'student-activities/clubs/spicmacay/1.jpg',
-    ],
-    description: 'SPICMACAY regularly conducts instrumental and vocal workshops to help students explore classical music practically. These sessions are guided by skilled artists or senior members and focus on instruments like harmonium, tabla, and vocals, creating an inclusive space for learning and collaboration.',
+    image: ['student-activities/clubs/spicmacay/1.jpg'],
+    description:
+      'SPICMACAY regularly conducts instrumental and vocal workshops to help students explore classical music practically. These sessions are guided by skilled artists or senior members and focus on instruments like harmonium, tabla, and vocals, creating an inclusive space for learning and collaboration.',
   },
   {
     id: 4,
     title: 'Battle Street',
     date: '2021-10-10',
-    image: [
-      'student-activities/clubs/spicmacay/2.jpg',
-    ],
-    description: 'Battle Street is an electrifying face-to-face dance battle event where dancers compete in intense 1v1 showdowns. Organized as part of the cultural fest, it features a high-energy environment with freestyle, hip-hop, and street dance styles. Participants go head-to-head in knockout rounds, judged live on the spot, showcasing their skills, rhythm, and stage presence in front of an enthusiastic crowd.',
+    image: ['student-activities/clubs/spicmacay/2.jpg'],
+    description:
+      'Battle Street is an electrifying face-to-face dance battle event where dancers compete in intense 1v1 showdowns. Organized as part of the cultural fest, it features a high-energy environment with freestyle, hip-hop, and street dance styles. Participants go head-to-head in knockout rounds, judged live on the spot, showcasing their skills, rhythm, and stage presence in front of an enthusiastic crowd.',
   },
 ] as ClubEvent[];
 
@@ -197,14 +192,13 @@ export default async function Club({
   // );
 
   // dummy data
-  const detailed_members : DetailedClubMember[] = [
+  const detailed_members: DetailedClubMember[] = [
     {
       id: 1,
       studentId: 'S1001',
       clubId: 1,
       position: 'Secretary',
       academicDetails: {
-
         batch: '2021',
         major: { degree: 'B.Tech', name: 'Computer Science' },
         student: {
@@ -229,8 +223,6 @@ export default async function Club({
     },
   ];
 
-
-
   const text = await getTranslations(locale);
   const imageCount = await countChildren(`clubs/${display_name}/images`);
   type SocialPlatform =
@@ -250,16 +242,14 @@ export default async function Club({
 
   const facultyInchage = [
     {
-      image:
-        'fallback/user-image.jpg',
+      image: 'fallback/user-image.jpg',
       name: 'Anshu Parashar',
       title: 'Computer Application',
       email: 'anshuparashar@nitkkr.ac.in',
       phone: '1234567890',
     },
     {
-      image:
-        'fallback/user-image.jpg',
+      image: 'fallback/user-image.jpg',
       name: 'Anshu Parashar',
       title: 'Computer Application',
       email: 'anshuparashar@nitkkr.ac.in',
@@ -303,50 +293,49 @@ export default async function Club({
         src={`student-activities/clubs/${display_name}/banner.jpg`}
         className="relative"
       >
-        <header className="m-auto flex items-center justify-center max-w-[46rem] container ">
-        <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
-          <Image
-            alt={display_name}
-            src="student-activities/clubs/spicmacay/logo.jpg"
-            fill
-            className="rounded-full bg-primary-100 object-cover"
-            sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
-          />
-        </div>
+        <header className="container m-auto flex max-w-[46rem] items-center justify-center ">
+          <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
+            <Image
+              alt={display_name}
+              src="student-activities/clubs/spicmacay/logo.jpg"
+              fill
+              className="rounded-full bg-primary-100 object-cover"
+              sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
+            />
+          </div>
 
-
-          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">{display_name.toUpperCase()}</h1>
+          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+            {display_name.toUpperCase()}
+          </h1>
         </header>
       </ImageHeader>
-      
+
       <main className="container mt-12">
         <article className="drop-shadow">
-          <p
-            className={cn(
-              'max-md:rounded-t md:w-full md:rounded-r'
-            )}
-          >
+          <p className={cn('max-md:rounded-t md:w-full md:rounded-r')}>
             {club?.aboutUs}
           </p>
         </article>
         {/* why and how to join */}
         <article
-          className={cn('md:flex md:gap-2 mt-16')}
+          className={cn('mt-16 md:flex md:gap-2')}
           id="why and how to join"
         >
           <article className="flex flex-col justify-center ">
             <section className="flex flex-col lg:flex-row">
-              <h3 className='lg:w-1/3 text-xl md:text-2xl lg:text-3xl'>{text.club.whyToJoinUs.toUpperCase()}</h3>
-              <p className='lg:w-2/3 '>{dummyClubData?.whyToJoinUs}</p>
+              <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
+                {text.club.whyToJoinUs.toUpperCase()}
+              </h3>
+              <p className="lg:w-2/3 ">{dummyClubData?.whyToJoinUs}</p>
             </section>
 
-            <section className='flex flex-col lg:flex-row pt-12'>
-              <h3 className='lg:w-1/3 text-xl md:text-2xl lg:text-3xl'>{text.club.howToJoinUs.toUpperCase()}</h3>
-              <p className='lg:w-2/3'>{dummyClubData?.howToJoinUs}</p>
+            <section className="flex flex-col pt-12 lg:flex-row">
+              <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
+                {text.club.howToJoinUs.toUpperCase()}
+              </h3>
+              <p className="lg:w-2/3">{dummyClubData?.howToJoinUs}</p>
             </section>
-
           </article>
-
         </article>
 
         {/* notifications */}
@@ -394,8 +383,10 @@ export default async function Club({
               >
                 <Card className="flex h-64 w-full flex-col justify-between border-none">
                   <CardContent
-                    className="relative flex h-full w-full justify-center rounded-lg p-4 bg-neutral-700 bg-cover bg-center bg-blend-overlay"
-                    style={{ backgroundImage: `url(${getS3Url()}/${event.image[0]})` }}
+                    className="relative flex h-full w-full justify-center rounded-lg bg-neutral-700 bg-cover bg-center p-4 bg-blend-overlay"
+                    style={{
+                      backgroundImage: `url(${getS3Url()}/${event.image[0]})`,
+                    }}
                   >
                     <h1 className="my-auto text-4xl font-bold text-background">
                       {event.title}
