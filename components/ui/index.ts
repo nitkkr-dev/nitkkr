@@ -3,6 +3,7 @@ export * from './badge';
 export * from './card';
 export * from './command';
 export * from './dialog';
+export * from './form';
 export * from './label';
 export * from './radio-group';
 export * from './scroll-area';
