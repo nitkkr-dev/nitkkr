@@ -177,7 +177,7 @@ const HostelList = ({
       >
         {hostels ? (
           hostels.map(({ name, urlName }, index) => (
-            <Link href={`/${locale}/hostels/${urlName}`} key={index}>
+            <Link href={`/${locale}/institute/hostels/${urlName}`} key={index}>
               <Card
                 className={cn(
                   'flex flex-col items-center',
