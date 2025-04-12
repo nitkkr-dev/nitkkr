@@ -128,7 +128,7 @@ export const Tabs = ({
             <Link
               href={`/${locale}/${basePath}/${href}`}
               prefetch
-              scroll={false}
+              scroll={defaultPath === 'personal'} // scroll to top on student profile
             >
               <Icon className="lg:size-5" />
               {label.toUpperCase()}
