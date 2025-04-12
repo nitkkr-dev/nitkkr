@@ -101,6 +101,26 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
+    externalLinks: {
+      googleScholarId: 'Google Scholar',
+      linkedInId: 'LinkedIn',
+      researchGateId: 'Research Gate',
+      scopusId: 'Scopus',
+    },
+    intellectualContributions: {
+      patents: 'PATENTS',
+      publications: 'PUBLICATIONS',
+      books: 'BOOKS',
+    },
+    tabs: {
+      qualifications: 'Education Qualifications',
+      experience: 'Experience',
+      projects: 'Projects',
+      educationCurrent: 'Continuing Education',
+      publications: 'Publications',
+      scholars: 'Research Scholars',
+      awards: 'Awards and Honors',
+    },
   },
   FAQ: { title: 'Frequently Asked Questions' },
   Footer: {
