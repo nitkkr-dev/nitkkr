@@ -320,6 +320,17 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
+    externalLinks: {
+      googleScholarId: 'Google Scholar',
+      linkedInId: 'LinkedIn',
+      researchGateId: 'Research Gate',
+      scopusId: 'Scopus',
+    },
+    intellectualContributions: {
+      patents: 'PATENTS',
+      publications: 'PUBLICATIONS',
+      books: 'BOOKS',
+    },
     tabs: {
       qualifications: 'Education Qualifications',
       experience: 'Experience',

@@ -1,4 +1,4 @@
-import FacultySection from '~/app/faculty-and-staff/[employee_id]/[faculty_section]/page';
+import { FacultySectionComponent } from '~/app/faculty-and-staff/utils';
 import { Translations } from '~/i18n/translations';
 import { getServerAuthSession } from '~/server/auth';
 
@@ -14,5 +14,11 @@ export default async function FacultyProfileSection({
     person: { id },
   } = (await getServerAuthSession())!;
 
-  return <FacultySection asProfile={{ locale, faculty_section, id }} />;
+  return (
+    <FacultySectionComponent
+      locale={locale}
+      facultySection={faculty_section}
+      id={id}
+    />
+  );
 }

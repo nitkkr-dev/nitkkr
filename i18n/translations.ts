@@ -190,6 +190,17 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    externalLinks: {
+      googleScholarId: string;
+      linkedInId: string;
+      researchGateId: string;
+      scopusId: string;
+    };
+    intellectualContributions: {
+      patents: string;
+      publications: string;
+      books: string;
+    };
     tabs: {
       qualifications: string;
       experience: string;

@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { type ReactNode } from 'react';
-import { MdCall, MdLocationOn, MdMail } from 'react-icons/md';
+import { notFound } from 'next/navigation';
+import { Fragment, type ReactNode } from 'react';
+import { MdCall, MdLocationOn, MdMail, MdOutlineEdit } from 'react-icons/md';
 
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
-import { getTranslations } from '~/i18n/translations';
+import { ScrollArea } from '~/components/ui';
+import { getTranslations, Translations } from '~/i18n/translations';
+import { groupBy } from '~/lib/utils';
 import { db } from '~/server/db';
 
-export async function FacultyOrStaffComponent({
+async function FacultyOrStaffComponent({
   children,
   employeeId,
   id,
@@ -146,33 +149,28 @@ export async function FacultyOrStaffComponent({
         </section>
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
           <ul className="grid h-full grid-cols-3 gap-5 xl:ml-16">
-            {['PUBLICATIONS', 'PATENTS', 'BOOKS'].map((item) => (
-              <li
-                key={item}
-                className="flex h-full flex-col justify-around rounded-2xl bg-primary-700 p-3 max-xl:aspect-square"
-              >
-                <h4 className="my-auto text-center text-shade-light">
-                  {
-                    faculty[
-                      item.toLowerCase() as 'publications' | 'patents' | 'books'
-                    ].length
-                  }
-                </h4>
-                <p className="mb-auto text-center font-light text-shade-light">
-                  {item}
-                </p>
-              </li>
-            ))}
+            {Object.entries(text.intellectualContributions).map(
+              ([key, value]) => (
+                <li
+                  key={key}
+                  className="flex h-full flex-col justify-around rounded-2xl bg-primary-700 p-3 max-xl:aspect-square"
+                >
+                  <h4 className="my-auto text-center text-shade-light">
+                    {faculty[
+                      key.toLowerCase() as keyof typeof text.intellectualContributions
+                    ]?.length || 0}
+                  </h4>
+                  <p className="mb-auto text-center font-light text-shade-light">
+                    {value}
+                  </p>
+                </li>
+              )
+            )}
           </ul>
         </article>
       </section>
       <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
-        {Object.entries({
-          'Google Scholar': 'googleScholarId',
-          Orcid: 'orcidId',
-          'Research Gate': 'researchGateId',
-          Scopus: 'scopusId',
-        }).map(([key, value]) => {
+        {Object.entries(text.externalLinks).map(([key, value]) => {
           if (value in faculty) {
             return (
               <Link
@@ -237,3 +235,247 @@ export async function FacultyOrStaffComponent({
     </>
   );
 }
+
+async function FacultySectionComponent({
+  locale,
+  facultySection,
+  id,
+  employeeId,
+}: {
+  locale: string;
+  facultySection: keyof Translations['FacultyAndStaff']['tabs'];
+} & ({ id: number; employeeId?: never } | { id?: never; employeeId: string })) {
+  const title = (await getTranslations(locale)).FacultyAndStaff.tabs[
+    facultySection
+  ];
+
+  const jkchabbraProfile = {
+    qualifications: [
+      {
+        name: 'B.Tech (CSE)',
+        value: '2nd Topper',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+      {
+        name: 'M.Tech (CSE)',
+        value: 'Gold Medalist',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+      {
+        name: 'Ph.D. (S/w Engg)',
+        value: '',
+        caption: 'National Institute of Technology, Kurukshetra',
+        year: '',
+      },
+    ],
+    publications: [
+      {
+        name: 'Programming with C (4th Edition)',
+        value: 'McGraw Hill',
+        caption: 'Byron Gottfried, USA & Jitender Kumar Chhabra',
+        year: '',
+        tag: 'Book',
+      },
+      {
+        name: 'Conceptual Programming Tips for Interviews and Competitive Exams',
+        value: 'McGraw Hill',
+        caption: 'Jitender Kumar Chhabra',
+        year: '',
+        tag: 'Book',
+      },
+    ],
+    experience: [
+      {
+        name: 'Teaching & Research Experience',
+        value: '30 years',
+        caption: 'Professor, Computer Engineering, NIT Kurukshetra',
+        year: '1995 - Present',
+      },
+    ],
+    projects: [
+      {
+        name: 'Novel Approach for Secure Storage on External Media',
+        value: 'DRDO, Govt of India',
+        caption:
+          'Design and development of a non-cryptographic secure storage and lossless retrieval system',
+        year: 'Completed',
+      },
+    ],
+    educationCurrent: [
+      {
+        name: 'Online Lecture Series on Data Structures & Algorithms',
+        value: 'YouTube',
+        caption: 'Channel: @JitenderKrChhabraProfCseNITKKR',
+        year: 'Ongoing',
+      },
+    ],
+    scholars: [
+      {
+        name: 'Ph.D. Supervision',
+        value: '6 Completed, 1 Ongoing',
+        caption: 'Ph.D. scholars under guidance at NIT Kurukshetra',
+        year: '',
+      },
+    ],
+    awards: [
+      {
+        name: 'Best Teacher Award',
+        value: 'NIT Kurukshetra',
+        caption: 'Awarded for excellence in teaching and research',
+        year: '',
+      },
+    ],
+  };
+  const defaultProfileTabs = {
+    qualifications: [
+      {
+        name: 'Ph.D.',
+        value: 'Nanostructured Biomaterials',
+        caption: 'Indian institute of Technology Madras',
+        year: '2010',
+      },
+    ],
+    publications: [
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Conference',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Journal',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Journal',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Book/Chapter',
+      },
+      {
+        name: 'Sustainable finishes in textiles, Conference Proceedings',
+        value:
+          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
+        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
+        year: 'August 2023',
+        tag: 'Book/Chapter',
+      },
+    ],
+    experience: [
+      {
+        name: 'Teaching Experience',
+        value: 'Biomechanics Biotransport',
+        caption: 'Indian institute of Technology Madras',
+        year: 'Feb. 2024 - Feb. 2024',
+      },
+    ],
+    projects: [
+      {
+        name: 'Development of biodegradable bioplastic films from mango seed starch.',
+        value: 'Nanostructured Biomaterials',
+        caption: 'Indian institute of Technology Madras',
+        year: '2010',
+      },
+    ],
+    educationCurrent: [
+      {
+        name: 'Short Term Course On Fluidized Bed Technology For Waste Management : Design, Modeling and Simulation',
+        value: 'Chemical Engineering Short Term Course',
+        caption: 'Coordinator',
+        year: 'Feb, 2024 - Feb, 2024',
+      },
+    ],
+    scholars: [
+      {
+        name: 'MULTIFUNCTIONAL FINISHING OF COTTON USING β-CYCLODEXTRIN ASSISTED ESSENTIAL OILS.',
+        value: 'Ph. D Scholar',
+        caption: 'Deepika Jha',
+        year: 'Enrolled: July 2023, Continuing',
+      },
+    ],
+    awards: [
+      {
+        name: 'MRS-S Funding Support award.',
+        value: 'Department Of Biotechnology',
+        caption:
+          'International Conference on Materials for Advanced Technologies, Singapore',
+        year: '2017',
+      },
+    ],
+  };
+  const profileTabs =
+    employeeId === '114' ? jkchabbraProfile : defaultProfileTabs;
+
+  if (!profileTabs[facultySection]) {
+    return notFound();
+  }
+
+  const hasTag = 'tag' in profileTabs[facultySection][0];
+
+  const dataToDisplay = hasTag
+    ? // @ts-expect-error - Ignore type checking for 'tag' key
+      groupBy(profileTabs[facultySection], 'tag')
+    : new Map([['key', profileTabs[facultySection]]]);
+
+  return (
+    <>
+      <h4 className="max-md:hidden">{title}</h4>
+      <ScrollArea className="rounded-2xl">
+        {Array.from(dataToDisplay.entries()).map(([key, items]) => (
+          <Fragment key={key}>
+            {hasTag && <h5 className="mb-3 px-1 font-black">{key}</h5>}
+            <ul className="mb-3 space-y-6 px-1">
+              {items.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex flex-col gap-3 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]" //shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]
+                >
+                  <span className="flex justify-between gap-4">
+                    <h5 className="font-bold">{item.name}</h5>
+                    {0 ? (
+                      <MdOutlineEdit
+                        size={28}
+                        className="cursor-pointer text-primary-700"
+                      />
+                    ) : null}
+                  </span>
+                  <p>{item.value}</p>
+                  <p className="text-neutral-600">{item.caption}</p>
+                  <p className="text-neutral-400">{item.year}</p>
+                </li>
+              ))}
+            </ul>
+          </Fragment>
+        ))}
+      </ScrollArea>
+    </>
+  );
+}
+
+export { FacultyOrStaffComponent, FacultySectionComponent };

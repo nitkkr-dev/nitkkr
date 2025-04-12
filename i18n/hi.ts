@@ -326,10 +326,20 @@ const text: Translations = {
     },
     viewAll: 'सभी देखें',
   },
-
   FacultyAndStaff: {
     placeholder: 'नाम या ईमेल से खोजें',
     departmentHead: 'विभागाध्यक्ष',
+    externalLinks: {
+      googleScholarId: 'गूगल स्कॉलर',
+      linkedInId: 'लिंक्डइन',
+      researchGateId: 'रिसर्च गेट',
+      scopusId: 'स्कोपस',
+    },
+    intellectualContributions: {
+      patents: 'पेटेंट',
+      publications: 'प्रकाशन',
+      books: 'पुस्तकें',
+    },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',
       experience: 'अनुभव',
