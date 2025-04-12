@@ -100,6 +100,26 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    externalLinks: {
+      googleScholarId: string;
+      linkedInId: string;
+      researchGateId: string;
+      scopusId: string;
+    };
+    intellectualContributions: {
+      patents: string;
+      publications: string;
+      books: string;
+    };
+    tabs: {
+      qualifications: string;
+      experience: string;
+      projects: string;
+      educationCurrent: string;
+      publications: string;
+      scholars: string;
+      awards: string;
+    };
   };
   FAQ: { title: string };
   Footer: {

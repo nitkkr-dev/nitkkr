@@ -151,10 +151,29 @@ const text: Translations = {
     },
     viewAll: 'सभी देखें',
   },
-
   FacultyAndStaff: {
     placeholder: 'नाम या ईमेल से खोजें',
     departmentHead: 'विभागाध्यक्ष',
+    externalLinks: {
+      googleScholarId: 'गूगल स्कॉलर',
+      linkedInId: 'लिंक्डइन',
+      researchGateId: 'रिसर्च गेट',
+      scopusId: 'स्कोपस',
+    },
+    intellectualContributions: {
+      patents: 'पेटेंट',
+      publications: 'प्रकाशन',
+      books: 'पुस्तकें',
+    },
+    tabs: {
+      qualifications: 'शैक्षिक योग्यता',
+      experience: 'अनुभव',
+      projects: 'प्रोजेक्ट्स',
+      educationCurrent: 'निरंतर शिक्षा',
+      publications: 'प्रकाशन',
+      scholars: 'अनुसंधान विद्वान',
+      awards: 'पुरस्कार और सम्मान',
+    },
   },
   FAQ: { title: 'अक्सर पूछे जाने वाले प्रश्न' },
   Footer: {
