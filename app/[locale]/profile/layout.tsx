@@ -25,6 +25,37 @@ export default async function ProfileLayout({
     where: (student, { eq }) => eq(student.id, session.person.id),
   }))!;
 
+  const tabs = [
+    {
+      label: text.tabs.personal.title,
+      href: 'personal',
+    },
+    {
+      label: text.tabs.notifications.title,
+      href: 'notifications',
+    },
+    {
+      label: text.tabs.courses.title,
+      href: 'courses',
+    },
+    {
+      label: text.tabs.clubs.title,
+      href: 'clubs',
+    },
+    {
+      label: text.tabs.results.title,
+      href: 'results',
+    },
+    {
+      label: text.tabs.bookmarks.title,
+      href: 'bookmarks',
+    },
+    {
+      label: text.tabs.quickSend.title,
+      href: 'quick-send',
+    },
+  ];
+
   return (
     <section
       className={cn(
@@ -66,15 +97,9 @@ export default async function ProfileLayout({
         <ol className="space-y-4 max-md:hidden">
           <Tabs
             locale={locale}
-            text={{
-              bookmarks: text.tabs.bookmarks.title,
-              clubs: text.tabs.clubs.title,
-              courses: text.tabs.courses.title,
-              notifications: text.tabs.notifications.title,
-              personal: text.tabs.personal.title,
-              quickSend: text.tabs.quickSend.title,
-              results: text.tabs.results.title,
-            }}
+            tabs={tabs}
+            defaultPath="personal"
+            basePath="profile"
           />
         </ol>
 
@@ -84,19 +109,15 @@ export default async function ProfileLayout({
       <Tabs
         locale={locale}
         select
-        text={{
-          bookmarks: text.tabs.bookmarks.title,
-          clubs: text.tabs.clubs.title,
-          courses: text.tabs.courses.title,
-          notifications: text.tabs.notifications.title,
-          personal: text.tabs.personal.title,
-          quickSend: text.tabs.quickSend.title,
-          results: text.tabs.results.title,
-        }}
+        tabs={tabs}
+        defaultPath="personal"
+        basePath="profile"
       />
 
-      <main className="w-full">
-        <PathnameAwareSuspense>{children}</PathnameAwareSuspense>
+      <main className="flex-1">
+        <PathnameAwareSuspense defaultPathname="personal">
+          {children}
+        </PathnameAwareSuspense>
       </main>
     </section>
   );
