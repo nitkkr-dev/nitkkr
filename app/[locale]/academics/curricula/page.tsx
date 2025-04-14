@@ -27,9 +27,12 @@ export default async function Curricula({
 }) {
   const text = (await getTranslations(locale)).Curricula;
 
-  const page = isNaN(Number(searchParams.page ?? '1'))
-    ? 1
-    : Math.max(Number(searchParams.page ?? '1'), 1);
+  const page = Number(searchParams.page?? '1')
+  // console.log(page);
+  
+  const pagesCount = await db.select({count:count()}).from(courses);
+  const totalPages = Math.ceil(pagesCount[0].count/10);
+  // console.log(totalPages);
 
   return (
     <>
@@ -64,7 +67,7 @@ export default async function Curricula({
         </Suspense>
         <PaginationWithLogic
           currentPage={page}
-          query={db.select({ count: count() }).from(courses)}
+          totalPages={totalPages} 
         />
       </main>
     </>
@@ -72,21 +75,43 @@ export default async function Curricula({
 }
 
 const Courses = async ({ page }: { page: number }) => {
-  const courses = await db.query.courses.findMany({
-    columns: { code: true, title: true },
-    with: {
-      coursesToMajors: {
-        columns: {
-          lectureCredits: true,
-          practicalCredits: true,
-          tutorialCredits: true,
-        },
-        with: { major: { columns: { name: true } } },
-      },
-    },
-    limit: 10,
-    offset: (page - 1) * 10,
-  });
+  // fetch call for original db
+  // const courses = await db.query.courses.findMany({
+  //   columns: { code: true, title: true },
+  //   with: {
+  //     coursesToMajors: {
+  //       columns: {
+  //         lectureCredits: true,
+  //         practicalCredits: true,
+  //         tutorialCredits: true,
+  //       },
+  //       with: { major: { columns: { name: true } } },
+  //     },
+  //   },
+  //   limit: 10,
+  //   offset: (page - 1) * 10,
+  // });
+
+  // just for my setup db -- To be reversed later
+  interface Course {
+    code: string;
+    title: string;
+    coursesToMajors: {
+      lectureCredits: number;
+      practicalCredits: number;
+      tutorialCredits: number;
+      major: {
+        name: string;
+      };
+    }[];
+  }
+
+  // call for my setup db
+  const courses: Course[] = await db.query.courses.findMany({
+    limit:10,
+    offset:(page-1)*10,
+  })
+
 
   return courses.map(({ code, coursesToMajors, title }) =>
     coursesToMajors.map(

@@ -34,6 +34,9 @@ export default async function Committee({
     ? 1
     : Math.max(Number(searchParams.meetingPage ?? '1'), 1);
 
+  const pagesCount = await db.select({count:count()}).from(committeeMeetings).where(sql`committee_type = ${type}`);  
+  const totalPages = Math.ceil(pagesCount[0].count/10);
+
   return (
     <section className="container">
       {type !== 'senate' && (
@@ -83,10 +86,7 @@ export default async function Committee({
       </Suspense>
       <PaginationWithLogic
         currentPage={meetingPage}
-        query={db
-          .select({ count: count() })
-          .from(committeeMeetings)
-          .where(sql`${committeeMeetings.committeeType} = ${type}`)}
+        totalPages={totalPages}
       />
     </section>
   );
