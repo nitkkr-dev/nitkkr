@@ -33,7 +33,7 @@ export default async function Curricula({
   const pagesCount = await db.select({count:count()}).from(courses);
   const totalPages = Math.ceil(pagesCount[0].count/10);
   // console.log(totalPages);
-  
+
   return (
     <>
       <Heading
@@ -92,8 +92,22 @@ const Courses = async ({ page }: { page: number }) => {
   //   offset: (page - 1) * 10,
   // });
 
+  // just for my setup db -- To be reversed later
+  interface Course {
+    code: string;
+    title: string;
+    coursesToMajors: {
+      lectureCredits: number;
+      practicalCredits: number;
+      tutorialCredits: number;
+      major: {
+        name: string;
+      };
+    }[];
+  }
+
   // call for my setup db
-  const courses = await db.query.courses.findMany({
+  const courses: Course[] = await db.query.courses.findMany({
     limit:10,
     offset:(page-1)*10,
   })
