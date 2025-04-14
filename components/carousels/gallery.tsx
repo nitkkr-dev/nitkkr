@@ -12,7 +12,7 @@ const GalleryCarousel = ({
   carouselProps,
   children,
   className,
-  itemClassName = 'sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
+  itemClassName,
 }: {
   carouselProps?: CarouselProps;
   children: React.ReactNode[];
@@ -31,7 +31,13 @@ const GalleryCarousel = ({
       >
         <CarouselContent className="flex justify-center">
           {children.map((child, index) => (
-            <CarouselItem key={index} className={itemClassName}>
+            <CarouselItem
+              key={index}
+              className={cn(
+                'sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
+                itemClassName
+              )}
+            >
               {child}
             </CarouselItem>
           ))}
