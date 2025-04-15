@@ -91,10 +91,10 @@ export const Tabs = ({
     qualifications: MdSchool,
     experience: MdWork,
     projects: FaFlask,
-    educationCurrent: FaBook,
+    continuingEducation: FaBook,
     publications: MdApproval,
-    scholars: MdGroups,
-    awards: MdEmojiEvents,
+    researchScholars: MdGroups,
+    awardsAndHonors: MdEmojiEvents,
   };
 
   return select ? (
