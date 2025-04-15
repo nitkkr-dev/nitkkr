@@ -1,14 +1,32 @@
+'use server';
+
+import { eq, sql } from 'drizzle-orm';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Fragment, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { MdCall, MdLocationOn, MdMail, MdOutlineEdit } from 'react-icons/md';
+import 'server-only';
 
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
 import { ScrollArea } from '~/components/ui';
-import { getTranslations, Translations } from '~/i18n/translations';
-import { groupBy } from '~/lib/utils';
-import { db } from '~/server/db';
+import { getTranslations, type Translations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
+import {
+  awardsAndHonors,
+  continuingEducation,
+  db,
+  doctorates,
+  experience,
+  faculty,
+  majors,
+  persons,
+  publications,
+  qualifications,
+  researchProjects,
+  studentAcademicDetails,
+  students,
+} from '~/server/db';
 
 async function FacultyOrStaffComponent({
   children,
@@ -35,23 +53,23 @@ async function FacultyOrStaffComponent({
       href: 'projects',
     },
     {
-      label: text.tabs.educationCurrent,
-      href: 'educationCurrent',
+      label: text.tabs.continuingEducation,
+      href: 'continuingEducation',
     },
     {
       label: text.tabs.publications,
       href: 'publications',
     },
     {
-      label: text.tabs.scholars,
-      href: 'scholars',
+      label: text.tabs.researchScholars,
+      href: 'researchScholars',
     },
     {
-      label: text.tabs.awards,
-      href: 'awards',
+      label: text.tabs.awardsAndHonors,
+      href: 'awardsAndHonors',
     },
   ];
-  const faculty = await db.query.faculty.findFirst({
+  const facultyDescriptionTmp = await db.query.faculty.findFirst({
     where: (faculty, { eq }) =>
       !employeeId ? eq(faculty.id, id!) : eq(faculty.employeeId, employeeId),
     columns: {
@@ -60,12 +78,9 @@ async function FacultyOrStaffComponent({
       officeAddress: true,
       designation: true,
       googleScholarId: true,
-      orcidId: true,
+      linkedInId: true,
       researchGateId: true,
       scopusId: true,
-      publications: true,
-      patents: true,
-      books: true,
     },
     with: {
       person: {
@@ -79,20 +94,35 @@ async function FacultyOrStaffComponent({
         },
       },
     },
+    extras: {
+      publications: db
+        .$count(
+          publications,
+          sql`publications.faculty_id = faculty.employee_id` // drzzle orm bug https://github.com/drizzle-team/drizzle-orm/issues/3546
+        )
+        .as('publications'),
+      continuingEducation: db
+        .$count(
+          continuingEducation,
+          sql`continuing_education.faculty_id = faculty.employee_id`
+        )
+        .as('continuingEducation'),
+    },
   });
 
-  if (!faculty) {
-    return <div>Faculty not found</div>;
+  if (!facultyDescriptionTmp) {
+    return notFound();
   }
 
+  const facultyDescription = { doctoralStudents: 0, ...facultyDescriptionTmp }; // Placeholder for doctoral students count
   return (
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
         <article className="flex flex-grow flex-col rounded-2xl bg-shade-light p-5 drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
           <h2 className="mb-0 mr-[7rem] text-primary-700 max-xl:mr-[8rem]">
-            {faculty.person.name}
+            {facultyDescription.person.name}
           </h2>
-          <h5 className="text-neutral-900">{faculty.designation}</h5>
+          <h5 className="text-neutral-900">{facultyDescription.designation}</h5>
           <Image
             alt="0"
             width={200}
@@ -107,7 +137,7 @@ async function FacultyOrStaffComponent({
                   size={28}
                   className="mr-[12px] inline text-primary-700"
                 />
-                {faculty.person.email}
+                {facultyDescription.person.email}
               </p>
             </li>
             <li>
@@ -116,9 +146,9 @@ async function FacultyOrStaffComponent({
                   size={28}
                   className="mr-[12px] inline text-primary-700"
                 />
-                {`+${faculty.person.countryCode} ${faculty.person.telephone} (off-Direct no) `}
-                {faculty.person.alternateTelephone &&
-                  `+${faculty.person.alternateCountryCode} ${faculty.person.alternateTelephone} (Mob)`}
+                {`+${facultyDescription.person.countryCode} ${facultyDescription.person.telephone} (off-Direct no) `}
+                {facultyDescription.person.alternateTelephone &&
+                  `+${facultyDescription.person.alternateCountryCode} ${facultyDescription.person.alternateTelephone} (Mob)`}
               </p>
             </li>
             <li>
@@ -127,9 +157,9 @@ async function FacultyOrStaffComponent({
                   size={28}
                   className="mr-[12px] inline text-primary-700"
                 />
-                {faculty.officeAddress === ''
+                {facultyDescription.officeAddress === ''
                   ? 'Not Available'
-                  : faculty.officeAddress}
+                  : facultyDescription.officeAddress}
               </p>
             </li>
           </ul>
@@ -141,8 +171,9 @@ async function FacultyOrStaffComponent({
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
             src={
-              faculty.employeeId === '114' || faculty.employeeId === '1083'
-                ? `faculty-and-staff/${faculty.employeeId}/0.jpg`
+              facultyDescription.employeeId === '114' ||
+              facultyDescription.employeeId === '1083'
+                ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
                 : `fallback/user-image.jpg`
             }
           />
@@ -156,9 +187,9 @@ async function FacultyOrStaffComponent({
                   className="flex h-full flex-col justify-around rounded-2xl bg-primary-700 p-3 max-xl:aspect-square"
                 >
                   <h4 className="my-auto text-center text-shade-light">
-                    {faculty[
-                      key.toLowerCase() as keyof typeof text.intellectualContributions
-                    ]?.length || 0}
+                    {facultyDescription[
+                      key as keyof typeof text.intellectualContributions
+                    ] ?? 0}
                   </h4>
                   <p className="mb-auto text-center font-light text-shade-light">
                     {value}
@@ -170,36 +201,27 @@ async function FacultyOrStaffComponent({
         </article>
       </section>
       <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
-        {Object.entries(text.externalLinks).map(([key, value]) => {
-          if (value in faculty) {
+        {(
+          Object.entries(text.externalLinks) as [
+            keyof typeof text.externalLinks,
+            string,
+          ][]
+        ).map(([key, value]) => {
+          if (key in facultyDescription) {
             return (
               <Link
                 key={key}
                 className="flex aspect-square flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[23%] lg:w-[20%]"
-                href={
-                  key == 'Orcid'
-                    ? faculty.employeeId === '114'
-                      ? 'https://in.linkedin.com/in/jitender-kumar-chhabra-372b871'
-                      : faculty.employeeId === '1083'
-                        ? 'https://in.linkedin.com/in/vikram-singh-802827166'
-                        : ''
-                    : (faculty[value as keyof typeof faculty] as string) ?? ''
-                }
+                href={facultyDescription[key] ?? ''}
               >
                 <Image
                   alt={key}
-                  src={`faculty-and-staff/${(faculty.employeeId === '114' || faculty.employeeId === '1083') && key == 'Orcid' ? 'LinkedIn' : key}.svg`}
+                  src={`faculty-and-staff/${key}.svg`}
                   height={0}
                   width={0}
                   className="mx-auto h-[50%] w-[50%]"
                 />
-                <h5 className="mx-auto">
-                  {(faculty.employeeId === '114' ||
-                    faculty.employeeId === '1083') &&
-                  key == 'Orcid'
-                    ? 'LinkedIn'
-                    : key}
-                </h5>
+                <h5 className="mx-auto">{value}</h5>
               </Link>
             );
           }
@@ -226,7 +248,10 @@ async function FacultyOrStaffComponent({
             pathLength={!employeeId ? 3 : 4}
           />
         </ol>
-        <article className="flex w-full flex-col rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6">
+        <article
+          className=" grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
+          style={{ gridTemplateRows: 'auto 1fr' }}
+        >
           <PathnameAwareSuspense defaultPathname="qualifications">
             {children}
           </PathnameAwareSuspense>
@@ -235,6 +260,14 @@ async function FacultyOrStaffComponent({
     </>
   );
 }
+const facultyTables = {
+  qualifications: qualifications,
+  experience: experience,
+  projects: researchProjects,
+  publications: publications,
+  continuingEducation: continuingEducation,
+  awardsAndHonors: awardsAndHonors,
+} as const;
 
 async function FacultySectionComponent({
   locale,
@@ -245,237 +278,264 @@ async function FacultySectionComponent({
   locale: string;
   facultySection: keyof Translations['FacultyAndStaff']['tabs'];
 } & ({ id: number; employeeId?: never } | { id?: never; employeeId: string })) {
-  const title = (await getTranslations(locale)).FacultyAndStaff.tabs[
-    facultySection
-  ];
+  const text = (await getTranslations(locale)).FacultyAndStaff;
+  // Get the appropriate table for the faculty section
+  const table =
+    facultySection in facultyTables
+      ? facultyTables[facultySection as keyof typeof facultyTables]
+      : undefined;
 
-  const jkchabbraProfile = {
-    qualifications: [
-      {
-        name: 'B.Tech (CSE)',
-        value: '2nd Topper',
-        caption: 'National Institute of Technology, Kurukshetra',
-        year: '',
-      },
-      {
-        name: 'M.Tech (CSE)',
-        value: 'Gold Medalist',
-        caption: 'National Institute of Technology, Kurukshetra',
-        year: '',
-      },
-      {
-        name: 'Ph.D. (S/w Engg)',
-        value: '',
-        caption: 'National Institute of Technology, Kurukshetra',
-        year: '',
-      },
-    ],
-    publications: [
-      {
-        name: 'Programming with C (4th Edition)',
-        value: 'McGraw Hill',
-        caption: 'Byron Gottfried, USA & Jitender Kumar Chhabra',
-        year: '',
-        tag: 'Book',
-      },
-      {
-        name: 'Conceptual Programming Tips for Interviews and Competitive Exams',
-        value: 'McGraw Hill',
-        caption: 'Jitender Kumar Chhabra',
-        year: '',
-        tag: 'Book',
-      },
-    ],
-    experience: [
-      {
-        name: 'Teaching & Research Experience',
-        value: '30 years',
-        caption: 'Professor, Computer Engineering, NIT Kurukshetra',
-        year: '1995 - Present',
-      },
-    ],
-    projects: [
-      {
-        name: 'Novel Approach for Secure Storage on External Media',
-        value: 'DRDO, Govt of India',
-        caption:
-          'Design and development of a non-cryptographic secure storage and lossless retrieval system',
-        year: 'Completed',
-      },
-    ],
-    educationCurrent: [
-      {
-        name: 'Online Lecture Series on Data Structures & Algorithms',
-        value: 'YouTube',
-        caption: 'Channel: @JitenderKrChhabraProfCseNITKKR',
-        year: 'Ongoing',
-      },
-    ],
-    scholars: [
-      {
-        name: 'Ph.D. Supervision',
-        value: '6 Completed, 1 Ongoing',
-        caption: 'Ph.D. scholars under guidance at NIT Kurukshetra',
-        year: '',
-      },
-    ],
-    awards: [
-      {
-        name: 'Best Teacher Award',
-        value: 'NIT Kurukshetra',
-        caption: 'Awarded for excellence in teaching and research',
-        year: '',
-      },
-    ],
-  };
-  const defaultProfileTabs = {
-    qualifications: [
-      {
-        name: 'Ph.D.',
-        value: 'Nanostructured Biomaterials',
-        caption: 'Indian institute of Technology Madras',
-        year: '2010',
-      },
-    ],
-    publications: [
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Conference',
-      },
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Conference',
-      },
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Journal',
-      },
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Journal',
-      },
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Book/Chapter',
-      },
-      {
-        name: 'Sustainable finishes in textiles, Conference Proceedings',
-        value:
-          'International E-Conference on Sustainable Growth in Textiles (SGT-2021), Uttar Pradesh Textile Technology Institute, Kanpur',
-        caption: 'RK Chhabra, Aakanksha Singh and J N Chakraborty',
-        year: 'August 2023',
-        tag: 'Book/Chapter',
-      },
-    ],
-    experience: [
-      {
-        name: 'Teaching Experience',
-        value: 'Biomechanics Biotransport',
-        caption: 'Indian institute of Technology Madras',
-        year: 'Feb. 2024 - Feb. 2024',
-      },
-    ],
-    projects: [
-      {
-        name: 'Development of biodegradable bioplastic films from mango seed starch.',
-        value: 'Nanostructured Biomaterials',
-        caption: 'Indian institute of Technology Madras',
-        year: '2010',
-      },
-    ],
-    educationCurrent: [
-      {
-        name: 'Short Term Course On Fluidized Bed Technology For Waste Management : Design, Modeling and Simulation',
-        value: 'Chemical Engineering Short Term Course',
-        caption: 'Coordinator',
-        year: 'Feb, 2024 - Feb, 2024',
-      },
-    ],
-    scholars: [
-      {
-        name: 'MULTIFUNCTIONAL FINISHING OF COTTON USING β-CYCLODEXTRIN ASSISTED ESSENTIAL OILS.',
-        value: 'Ph. D Scholar',
-        caption: 'Deepika Jha',
-        year: 'Enrolled: July 2023, Continuing',
-      },
-    ],
-    awards: [
-      {
-        name: 'MRS-S Funding Support award.',
-        value: 'Department Of Biotechnology',
-        caption:
-          'International Conference on Materials for Advanced Technologies, Singapore',
-        year: '2017',
-      },
-    ],
-  };
-  const profileTabs =
-    employeeId === '114' ? jkchabbraProfile : defaultProfileTabs;
-
-  if (!profileTabs[facultySection]) {
-    return notFound();
+  const result = (await (async () => {
+    if (facultySection === 'researchScholars') {
+      return await fetchResearchScholars(id, employeeId);
+    } else if (id) {
+      return await fetchSectionByFacultyId(
+        id,
+        facultySection === 'projects' ? 'researchProjects' : facultySection,
+        !table
+      );
+    }
+    // Using employee ID
+    else if (employeeId) {
+      // Standard faculty tables
+      if (table !== undefined) {
+        return await db
+          .select()
+          .from(table)
+          .where(eq(table.facultyId, employeeId));
+      } else {
+        return (
+          await db.query.customTopics.findFirst({
+            where: (customTopics, { eq, and }) =>
+              and(
+                eq(customTopics.facultyId, employeeId),
+                eq(customTopics.name, facultySection)
+              ),
+            columns: {},
+            with: {
+              customInformation: true,
+            },
+          })
+        )?.customInformation;
+      }
+    }
+    return [];
+  })()) as {
+    title: string;
+    details?: string;
+    field?: string;
+    type?: string;
+    people?: string;
+    location?: string;
+    role?: string;
+    date?: string;
+    startDate?: string;
+    createdOn?: string;
+    endedOn?: string;
+    status?: string;
+    fundingAgency?: string;
+    endDate?: string;
+    tag?: string;
+    caption?: string;
+    id: number;
+    degree?: string;
+    description?: string;
+  }[]; //typescript cannot infer the type of result, so we have to specify it explicitly
+  if (!result || result.length === 0) {
+    return (
+      <div className="p-4 text-center text-neutral-500">
+        No data available for this section
+      </div>
+    );
   }
 
-  const hasTag = 'tag' in profileTabs[facultySection][0];
+  const uniqueTags = Array.from(
+    new Set(result.filter((item) => item.tag).map((item) => item.tag))
+  ) as string[];
 
-  const dataToDisplay = hasTag
-    ? // @ts-expect-error - Ignore type checking for 'tag' key
-      groupBy(profileTabs[facultySection], 'tag')
-    : new Map([['key', profileTabs[facultySection]]]);
+  const tagStyle =
+    `
+            .tag-filter:has(#filter-all:checked) ~ .rounded-2xl ul li {
+              display: flex;
+            }
 
+            .tag-filter:has(.filter-input:checked:not(#filter-all))
+              ~ .rounded-2xl
+              ul
+              li {
+              display: none;
+            }
+
+          ` +
+    uniqueTags
+      .map(
+        (tag) => `
+      .tag-filter:has(#filter-${tag}:checked) ~ .rounded-2xl ul li[data-tag=${tag}] {
+        display: flex;
+      }`
+      )
+      .join('\n');
   return (
     <>
-      <h4 className="max-md:hidden">{title}</h4>
-      <ScrollArea className="rounded-2xl">
-        {Array.from(dataToDisplay.entries()).map(([key, items]) => (
-          <Fragment key={key}>
-            {hasTag && <h5 className="mb-3 px-1 font-black">{key}</h5>}
-            <ul className="mb-3 space-y-6 px-1">
-              {items.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex flex-col gap-3 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]" //shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]
+      <h4 className="w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
+      {uniqueTags.length > 0 && (
+        <>
+          <style>{tagStyle}</style>
+          <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2 md:ml-auto">
+            {['all', ...uniqueTags].map((tag) => (
+              <fieldset key={tag} className="flex items-center">
+                <input
+                  type="radio"
+                  id={`filter-${tag}`}
+                  name="tag"
+                  value={tag}
+                  defaultChecked={tag === 'all'}
+                  className="filter-input peer hidden"
+                />
+                <label
+                  htmlFor={`filter-${tag}`}
+                  className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
                 >
-                  <span className="flex justify-between gap-4">
-                    <h5 className="font-bold">{item.name}</h5>
-                    {0 ? (
-                      <MdOutlineEdit
-                        size={28}
-                        className="cursor-pointer text-primary-700"
-                      />
-                    ) : null}
+                  {tag in text.tags
+                    ? text.tags[tag as keyof typeof text.tags]
+                    : tag}
+                </label>
+              </fieldset>
+            ))}
+          </form>
+        </>
+      )}
+      <ScrollArea className="col-span-2 rounded-2xl">
+        <ul className="mb-3 grid gap-y-6 px-1">
+          {result.map((item, index) => (
+            <li
+              key={index}
+              className="flex flex-col gap-2 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
+              data-tag={item.tag}
+            >
+              <span className="flex justify-between gap-4">
+                <h5 className="font-bold">{item.title}</h5>
+                {id ? (
+                  <Link
+                    href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
+                  >
+                    <MdOutlineEdit
+                      size={28}
+                      className="cursor-pointer text-primary-700"
+                    />
+                  </Link>
+                ) : null}
+              </span>
+              <p>
+                {item.details ??
+                  item.field ??
+                  item.type ??
+                  item.description ??
+                  item.degree}
+              </p>
+              <p className="text-neutral-600">
+                {item.people ?? item.location ?? item.role ?? item.caption}
+              </p>
+              <p className="text-neutral-400 lg:text-base">
+                {item.date ?? item.startDate}
+                {item.startDate && item.endDate && ' - '}
+                {item.endDate ?? item.endedOn ?? item.status}
+                {item.tag && (
+                  <span
+                    className={cn(
+                      'mx-2 rounded-sm px-1 text-neutral-900',
+                      facultySection === 'projects'
+                        ? 'bg-success/20 text-success'
+                        : facultySection === 'publications'
+                          ? 'bg-warning/20 text-warning'
+                          : 'bg-error/20 text-error'
+                    )}
+                  >
+                    {item.tag}
                   </span>
-                  <p>{item.value}</p>
-                  <p className="text-neutral-600">{item.caption}</p>
-                  <p className="text-neutral-400">{item.year}</p>
-                </li>
-              ))}
-            </ul>
-          </Fragment>
-        ))}
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
       </ScrollArea>
     </>
   );
+}
+
+async function fetchResearchScholars(id?: number, employeeId?: string) {
+  const baseQuery = () =>
+    db.select({
+      title: doctorates.title,
+      details: doctorates.type,
+      createdOn: doctorates.createdOn,
+      endedOn: doctorates.endedOn,
+      degree: majors.degree,
+      people: persons.name,
+    });
+  const query = (
+    employeeId
+      ? baseQuery().from(doctorates)
+      : baseQuery()
+          .from(faculty)
+          .innerJoin(
+            doctorates,
+            eq(doctorates.supervisorId, faculty.employeeId)
+          )
+  )
+    .innerJoin(students, eq(students.id, doctorates.studentId))
+    .innerJoin(persons, eq(persons.id, students.id))
+    .innerJoin(
+      studentAcademicDetails,
+      eq(studentAcademicDetails.id, students.id)
+    )
+    .innerJoin(majors, eq(majors.id, studentAcademicDetails.majorId));
+
+  return employeeId
+    ? await query.where(eq(doctorates.supervisorId, employeeId))
+    : await query.where(eq(faculty.id, id!));
+}
+
+type SectionKey = keyof typeof facultyTables | 'researchProjects';
+
+async function fetchSectionByFacultyId(
+  id: number,
+  section: SectionKey,
+  customColumn: boolean
+) {
+  const facultyData = await db.query.faculty.findFirst({
+    where: (faculty, { eq }) => eq(faculty.id, id),
+    columns: {},
+    with: {
+      ...(customColumn
+        ? {
+            customTopics: {
+              where: (customTopics, { eq }) => eq(customTopics.name, section),
+              columns: {},
+              with: { customInformation: true },
+            },
+          }
+        : {
+            [section]: true,
+          }),
+    },
+  });
+
+  return customColumn // @ts-expect-error - broken type inference
+    ? (facultyData?.customTopics[0]?.customInformation as {
+        id: number;
+        description: string | null;
+        title: string;
+        startDate: string | null;
+        endDate: string | null;
+        topicId: number;
+        caption: string | null;
+      }[])
+    : (
+        facultyData as unknown as {
+          [K in SectionKey]?: { title: string }[];
+        }
+      )?.[section];
 }
 
 export { FacultyOrStaffComponent, FacultySectionComponent };

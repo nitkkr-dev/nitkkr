@@ -15,8 +15,8 @@ export const doctorates = pgTable('doctorates', (t) => ({
     .references(() => students.id)
     .notNull(),
   supervisorId: t
-    .integer()
-    .references(() => faculty.id)
+    .varchar()
+    .references(() => faculty.employeeId)
     .notNull(),
   type: t.varchar({ enum: ['part-time', 'full-time'] }).notNull(),
   title: t.varchar({ length: 256 }).notNull(),
@@ -35,6 +35,6 @@ export const doctoratesRelations = relations(doctorates, ({ one }) => ({
   }),
   supervisor: one(faculty, {
     fields: [doctorates.supervisorId],
-    references: [faculty.id],
+    references: [faculty.employeeId],
   }),
 }));
