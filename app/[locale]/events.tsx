@@ -39,6 +39,7 @@ export default async function Events({
     orderBy: (event) => [desc(event.startDate)],
     limit: 6,
   });
+  // console.log(events);
 
   return (
     <article
@@ -122,7 +123,7 @@ export default async function Events({
             text={text.viewAll}
           />
           <ol className="grid grid-cols-1 grid-rows-6 gap-6 lg:grid-cols-5 lg:grid-rows-3">
-            {events.map(({ title, content, startDate }, index) => (
+            {events.map(({ title, description, startDate }, index) => (
               <li
                 key={index}
                 className={cn(
@@ -158,7 +159,7 @@ export default async function Events({
                     </time>
                     <CardTitle className="mr-20 lg:text-2xl">{title}</CardTitle>
                     <CardDescription className="line-clamp-3">
-                      {content}
+                      {description}
                     </CardDescription>
                   </CardContent>
                 </Card>
