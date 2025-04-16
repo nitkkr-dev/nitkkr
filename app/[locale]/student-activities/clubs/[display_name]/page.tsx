@@ -59,55 +59,6 @@ interface DetailedClubMember {
     };
   };
 }
-// Previous dummy data
-// const events = [
-//   {
-//     id: 0,
-//     title: 'Event 1',
-//     date: '2021-10-10',
-//     image: [
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-//     ],
-//     description: 'This is the description of the event',
-//   },
-//   {
-//     id: 1,
-//     title: 'Event 2',
-//     date: '2021-10-10',
-//     image: [
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-//     ],
-//     description: 'This is the description of the event',
-//   },
-//   {
-//     id: 2,
-//     title: 'Event 3',
-//     date: '2021-10-10',
-//     image: [
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-//     ],
-//     description: 'This is the description of the event',
-//   },
-//   {
-//     id: 3,
-//     title: 'Event 4',
-//     date: '2021-10-10',
-//     image: [
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-//     ],
-//     description: 'This is the description of the event',
-//   },
-//   {
-//     id: 4,
-//     title: 'Event 5',
-//     date: '2021-10-10',
-//     image: [
-//       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png',
-//     ],
-//     description: 'This is the description of the event',
-//   },
-// ] as ClubEvent[];
-
 // Data for SPICMACAY
 const events = [
   {
@@ -163,9 +114,6 @@ export default async function Club({
       clubMembers: true,
       clubSocials: true,
       // clubNotifications: true,
-      facultyIncharge1: true,
-      facultyIncharge2: true,
-      // facultyIncharge3: true,
     },
   });
 
@@ -395,7 +343,7 @@ export default async function Club({
           <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
             <Image
               alt={display_name}
-              src="student-activities/clubs/spicmacay/logo.jpg"
+              src={`student-activities/clubs/${display_name}/logo.jpg`}
               fill
               className="rounded-full bg-primary-100 object-cover"
               sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
@@ -543,35 +491,35 @@ export default async function Club({
           heading="h2"
           text={text.club.postHolders.toUpperCase()}
         />
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
+        <ul className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {detailed_members
             .filter((member) => member.position === 'Secretary')
             .map((member, i) => (
-            <li key={i}>
-              <Card className="bg-white flex h-[350px] w-[280px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
-                <CardContent className="p-4">
-                  <Image
-                    alt={member.academicDetails?.student.person.name ?? ''}
-                    src="fallback/user-image.jpg"
-                    width={0}
-                    height={0}
-                    className="h-48 w-full rounded-lg object-cover"
-                  />
-                </CardContent>
-                <CardFooter className="flex flex-col">
-                  <h3 className="text-gray-800 m-0 p-0 text-xl font-semibold text-primary-700">
-                    {member.academicDetails?.student.person.name}
-                  </h3>
-                  <h5 className="text-md text-gray-600 m-0 p-0 font-medium text-primary-700">
-                    {member.position}
-                  </h5>
-                  <p className="text-gray-500 m-0 p-0 text-sm text-primary-700">
-                    {member.academicDetails?.batch}
-                  </p>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
+              <li key={i}>
+                <Card className="bg-white flex h-[350px] w-[280px] flex-col justify-between overflow-hidden rounded-lg border border-primary-700 shadow-lg">
+                  <CardContent className="p-4">
+                    <Image
+                      alt={member.academicDetails?.student.person.name ?? ''}
+                      src="fallback/user-image.jpg"
+                      width={0}
+                      height={0}
+                      className="h-48 w-full rounded-lg object-cover"
+                    />
+                  </CardContent>
+                  <CardFooter className="flex flex-col">
+                    <h3 className="text-gray-800 m-0 p-0 text-xl font-semibold text-primary-700">
+                      {member.academicDetails?.student.person.name}
+                    </h3>
+                    <h5 className="text-md text-gray-600 m-0 p-0 font-medium text-primary-700">
+                      {member.position}
+                    </h5>
+                    <p className="text-gray-500 m-0 p-0 text-sm text-primary-700">
+                      {member.academicDetails?.batch}
+                    </p>
+                  </CardFooter>
+                </Card>
+              </li>
+            ))}
         </ul>
 
         {/* members */}

@@ -10,7 +10,6 @@ import {
   clubSocials,
   departments,
   events,
-  faculty,
   notifications,
   persons,
 } from '.';
@@ -29,14 +28,6 @@ export const clubs = pgTable('clubs', (t) => ({
     .varchar({ enum: ['committee', 'cultural', 'crew', 'technical'] })
     .notNull(),
   departmentId: t.smallint().references(() => departments.id),
-  facultyInchargeId1: t
-    .integer()
-    .references(() => faculty.id)
-    .notNull(),
-  facultyInchargeId2: t.integer().references(() => faculty.id),
-  facultyInchargeId3: integer('faculty_incharge_id3').references(
-    () => faculty.id
-  ),
   isActive: t.boolean().default(true).notNull(),
   createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
   updatedAt: t
@@ -57,20 +48,5 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     fields: [clubs.departmentId],
     references: [departments.id],
   }),
-  facultyIncharge1: one(faculty, {
-    relationName: 'facultyIncharge1',
-    fields: [clubs.facultyInchargeId1],
-    references: [faculty.id],
-  }),
-  facultyIncharge2: one(faculty, {
-    relationName: 'facultyIncharge2',
-    fields: [clubs.facultyInchargeId2],
-    references: [faculty.id],
-  }),
-  // facultyIncharge3: one(faculty, {
-  //   relationName: 'facultyIncharge3',
-  //   fields: [clubs.facultyInchargeId3],
-  //   references: [faculty.id],
-  // }),
-  // clubNotifications: many(notifications),
+  clubNotifications: many(notifications),
 }));
