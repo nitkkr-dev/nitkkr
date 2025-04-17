@@ -1,6 +1,7 @@
 import os
 import io
 import boto3
+import mimetypes
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
@@ -95,8 +96,18 @@ def upload_to_s3(local_folder, bucket_name, s3_upload_path, aws_access_key_id, a
             relative_path = os.path.relpath(local_path, local_folder)  # Relative path inside the folder
             s3_key = os.path.join(s3_upload_path, relative_path)  # S3 path to upload to
 
-            print(f"Uploading {local_path} to s3://{bucket_name}/{s3_key}...")
-            s3_client.upload_file(local_path, bucket_name, s3_key)
+            # Guess the MIME type of the file
+            content_type, _ = mimetypes.guess_type(local_path)
+            if not content_type:  # Default to binary/octet-stream if MIME type cannot be determined
+                content_type = "binary/octet-stream"
+
+            print(f"Uploading {local_path} to s3://{bucket_name}/{s3_key} with ContentType={content_type}...")
+            s3_client.upload_file(
+                local_path,
+                bucket_name,
+                s3_key,
+                ExtraArgs={"ContentType": content_type},  # Set the ContentType
+            )
 
     print("All files uploaded successfully!")
 
