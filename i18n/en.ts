@@ -1,3 +1,5 @@
+import { Description } from '@radix-ui/react-dialog';
+
 import type { Translations } from './translations';
 
 const text: Translations = {
@@ -246,6 +248,89 @@ const text: Translations = {
       },
     },
   },
+  CopyrightsAndDesigns: {
+    title: 'COPYRIGHTS & DESIGNS',
+    description: [
+      'The copyrights obtained by faculty/ staff/ students of NIT Kurukshetra are listed below:',
+      'Designs registered  to faculty/ staff/ students of NIT Kurukshetra are listed below:',
+    ],
+    table1: {
+      col: [
+        ['Sr. No.', 'Grant Year', 'Copyright Number', 'Title', 'Creator'],
+        [
+          '1',
+          '2019',
+          'SW-12631/2019',
+          'Software for Extracting Reusable Software Components from Object-Oeriented Source Code using Search-Based PSO Approach',
+          'Jitender Kumar Chhabra',
+        ],
+        [
+          '2',
+          '2019',
+          'SW-12631/2019',
+          'Structural Analysis Tool (SAT)',
+          'Jitender Kumar Chhabra',
+        ],
+        [
+          '3',
+          '2019',
+          'SW-12631/2019',
+          'Structural Analysis Tool (SAT)',
+          'Jitender Kumar Chhabra',
+        ],
+        [
+          '4',
+          '2021',
+          'SW-12631/2019',
+          'Software Tool For Extracting Semantic Features In Java Software',
+          'Jitender Kumar Chhabra',
+        ],
+        [
+          '5',
+          '2021',
+          'SW-12631/2019',
+          'Software Tool For Extracting Semantic Features In Java Software',
+          'Jitender Kumar Chhabra',
+        ],
+        [
+          '6',
+          '2021',
+          'SW-12631/2019',
+          'Software Tool For Extracting Semantic Features In Java Software',
+          'Jitender Kumar Chhabra',
+        ],
+      ],
+    },
+    table2: {
+      col: [
+        [
+          'Sr. No.',
+          'Year of Acceptance',
+          'Application Number',
+          'Title',
+          'Creator',
+        ],
+        ['1', '2019', 'SW-12631/2019', 'Wheel Chair', 'Punit'],
+        [
+          '2',
+          '2019',
+          'SW-12631/2019',
+          'Structural Analysis Tool (SAT)',
+          'Punit',
+        ],
+        [
+          '3',
+          '2019',
+          'SW-12631/2019',
+          'Structural Analysis Tool (SAT)',
+          'Punit',
+        ],
+        ['4', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+        ['5', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+        ['6', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+      ],
+    },
+  },
   Section: {
     about: 'ABOUT',
     gallery: 'GALLERY',
@@ -409,6 +494,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       description: 'Not Acceptable Please try again',
     },
   },
+
   StudentActivities: {
     title: 'STUDENT ACTIVITIES',
     headings: {

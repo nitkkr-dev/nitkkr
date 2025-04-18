@@ -179,6 +179,12 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  CopyrightsAndDesigns: {
+    title: string;
+    description: string[];
+    table1: { col: string[][] };
+    table2: { col: string[][] };
+  };
   Search: {
     placeholder: string;
     categories: {
