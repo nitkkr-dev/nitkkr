@@ -13,6 +13,7 @@ import {
   notifications,
   persons,
 } from '.';
+import { clubHeads } from './club-heads.schema';
 
 export const clubs = pgTable('clubs', (t) => ({
   id: t.smallserial().primaryKey(),
@@ -49,4 +50,5 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     references: [departments.id],
   }),
   clubNotifications: many(notifications),
+  clubHeads: many(clubHeads),
 }));

@@ -10,6 +10,7 @@ import {
   researchProjects,
   sectionHeads,
 } from '.';
+import { clubHeads } from './club-heads.schema';
 
 export const faculty = pgTable(
   'faculty',
@@ -171,6 +172,7 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
     fields: [faculty.id],
     references: [persons.id],
   }),
+  clubHeads: many(clubHeads),
   qualifications: many(qualifications),
   experience: many(experience),
   continuingEducation: many(continuingEducation),
