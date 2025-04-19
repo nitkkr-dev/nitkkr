@@ -1,4 +1,5 @@
 import {
+  check,
   integer,
   pgTable,
   serial,
@@ -7,7 +8,7 @@ import {
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from '.';
 
@@ -32,11 +33,16 @@ export const notifications = pgTable(
         notifications.title
       ),
       // Add check constraint
-      clubIdRequiredForStudentActivity: sql`
-        CHECK (
-          category != 'student-activity' OR club_id IS NOT NULL
-        )
-      `,
+      clubrequiredforStudentActivity: check(
+        'clubIdRequiredForStudentActivity',
+        sql`${notifications.category} != 'student-activity' OR ${notifications.clubId} IS NOT NULL`),
     };
   }
 );
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  club: one(clubs, {
+    fields: [notifications.clubId],
+    references: [clubs.id],
+  }),
+}));
