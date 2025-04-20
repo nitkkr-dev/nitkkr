@@ -1,3 +1,5 @@
+import { int } from "drizzle-orm/mysql-core";
+
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
@@ -338,6 +340,26 @@ export interface Translations {
     Unauthorised: { title: string; description: string };
     WorkInProgress: { title: string; description: string };
     NotAcceptable: { title: string; description: string };
+  };
+  patentsandtechnology: {
+    title:string;
+    no: string;
+      appno: string;
+      patno: string;
+      techTitle: string;
+      inventor: string;
+      patents: 
+        {
+          id: string,
+          application_number: string,
+          patent_number: string,
+          title: string,
+          inventors : {
+              facultyId: string,
+              name: string,
+            }[],
+        }[]
+        
   };
   StudentActivities: {
     title: string;

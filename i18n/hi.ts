@@ -406,6 +406,92 @@ const text: Translations = {
       description: 'अस्वीकार्य दुबारा प्रयास करें।',
     },
   },
+  patentsandtechnology:{
+    title: 'पेटेंट और प्रौद्योगिकी',
+    
+      no: "संख्या",                           
+      appno: "आवेदन संख्या",             
+      patno: "पेटेंट संख्या",
+      techTitle: "प्रौद्योगिकी / आविष्कार शीर्षक", 
+      inventor: "आविष्कारक",                
+    
+      patents: [
+        {
+          id: "1",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "बुद्धिमान इंडक्शन हार्डनिंग डिवाइस और उसकी विधि",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_1",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        },
+        {
+          id: "2",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "कंक्रीट के परिरक्षण प्रभाव से इनडोर वातावरण में रेडियोधर्मी गैस के प्रसार को रोकने की विधि",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_2",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        },
+        {
+          id: "3",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "वायुमंडलीय वायु से जल निकालने की प्रणाली",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_3",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        },
+        {
+          id: "4",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "वायुमंडलीय वायु से जल निकालने की प्रणाली",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_4",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        },
+        {
+          id: "5",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "वायुमंडलीय वायु से जल निकालने की प्रणाली",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_5",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        },
+        {
+          id: "6",
+          application_number: "2269/DEL/2012",
+          patent_number: "320045",
+          title: "वायुमंडलीय वायु से जल निकालने की प्रणाली",
+          inventors: [
+            {
+              facultyId: "jitender_kumar_chhabra_6",
+              name: "जितेन्द्र कुमार छाबड़ा"
+            }
+          ]
+        }
+      ]
+      
+    
+  },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
     headings: {
