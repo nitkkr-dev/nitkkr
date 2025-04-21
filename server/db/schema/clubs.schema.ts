@@ -1,6 +1,5 @@
 import { relations } from 'drizzle-orm';
 import {
-  integer,
   pgTable,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -13,7 +12,7 @@ import {
   notifications,
   persons,
 } from '.';
-import { clubHeads } from './club-heads.schema';
+import { clubFacultyHeads } from './club-faculty-heads.schema';
 
 export const clubs = pgTable('clubs', (t) => ({
   id: t.smallserial().primaryKey(),
@@ -23,8 +22,8 @@ export const clubs = pgTable('clubs', (t) => ({
   tagline: t.varchar({ length: 256 }).notNull(),
   email: t.varchar({ length: 256 }).notNull(),
   aboutUs: t.varchar().notNull(),
-  howToJoinUs: varchar('how_to_join_us').notNull(),
-  whyToJoinUs: varchar('why_to_join_us').notNull(),
+  howToJoinUs: varchar('how_to_join_us').notNull().default(''),
+  whyToJoinUs: varchar('why_to_join_us').notNull().default(''),
   category: t
     .varchar({ enum: ['committee', 'cultural', 'crew', 'technical'] })
     .notNull(),
@@ -50,5 +49,5 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     references: [departments.id],
   }),
   clubNotifications: many(notifications),
-  clubHeads: many(clubHeads),
+  clubFacultyHeads: many(clubFacultyHeads),
 }));
