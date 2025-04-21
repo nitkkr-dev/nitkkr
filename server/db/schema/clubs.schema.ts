@@ -18,7 +18,7 @@ import {
   notifications,
   persons,
 } from '.';
-import { clubHeads } from './club-heads.schema';
+import { clubFacultyHeads } from './club-faculty-heads.schema';
 
 export const clubs = pgTable('clubs', {
   id: smallserial('id').primaryKey(),
@@ -28,8 +28,8 @@ export const clubs = pgTable('clubs', {
   tagline: varchar('tagline', { length: 256 }).notNull(),
   email: varchar('email', { length: 256 }).notNull(),
   aboutUs: varchar('about_us').notNull(),
-  howToJoinUs: varchar('how_to_join_us').notNull(),
-  whyToJoinUs: varchar('why_to_join_us').notNull(),
+  howToJoinUs: varchar('how_to_join_us').notNull().default(''),
+  whyToJoinUs: varchar('why_to_join_us').notNull().default(''),
   category: varchar('category', {
     enum: ['committee', 'cultural', 'crew', 'technical'],
   }).notNull(),
@@ -53,5 +53,5 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     references: [departments.id],
   }),
   clubNotifications: many(notifications),
-  clubHeads: many(clubHeads),
+  clubFacultyHeads: many(clubFacultyHeads),
 }));

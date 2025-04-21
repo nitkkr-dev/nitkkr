@@ -4,7 +4,7 @@ import { integer, pgTable, serial } from 'drizzle-orm/pg-core';
 import { clubs } from '.';
 import { faculty } from '.';
 
-export const clubHeads = pgTable('club_heads', {
+export const clubFacultyHeads = pgTable('club_faculty_heads', {
   id: serial('id').primaryKey(),
   clubId: integer('club_id')
     .references(() => clubs.id)
@@ -14,13 +14,13 @@ export const clubHeads = pgTable('club_heads', {
     .notNull(),
 });
 
-export const clubHeadsRelations = relations(clubHeads, ({ one }) => ({
-  club: one(clubs, {
-    fields: [clubHeads.clubId],
-    references: [clubs.id],
-  }),
-  faculty: one(faculty, {
-    fields: [clubHeads.facultyId],
-    references: [faculty.id],
-  }),
+export const clubFacultyHeadsRelations = relations(clubFacultyHeads, ({ one }) => ({
+    club: one(clubs, {
+      fields: [clubFacultyHeads.clubId],
+      references: [clubs.id],
+    }),
+    faculty: one(faculty, {
+      fields: [clubFacultyHeads.facultyId],
+      references: [faculty.id],
+    }),
 }));
