@@ -2,6 +2,14 @@ import Image from 'next/image';
 import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
 import Heading from '~/components/heading';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
@@ -31,6 +39,81 @@ export default async function IPR({
     },
   ];
 
+  const advisoryCommittee = [
+    {
+      srNo: 1,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 2,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Assistant Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 3,
+      name: 'Pratyush Prasoon Mishra',
+      designation: 'Student',
+      department: 'Computer Science',
+    },
+    {
+      srNo: 4,
+      name: 'Dr. Avijit Kumar Paul',
+      designation: 'Assistant Professor',
+      department: 'Chemistry',
+    },
+    {
+      srNo: 5,
+      name: 'Dr. Avijit Kumar Paul',
+      designation: 'Assistant Professor',
+      department: 'Chemistry',
+    },
+    {
+      srNo: 6,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 7,
+      name: 'Dr. Anjali Mehta',
+      designation: 'Professor',
+      department: 'Biotechnology',
+    },
+    {
+      srNo: 8,
+      name: 'Dr. Sumit Kapoor',
+      designation: 'Assistant Professor',
+      department: 'Mathematics',
+    },
+    {
+      srNo: 9,
+      name: 'Ishaan Arora',
+      designation: 'Student',
+      department: 'Electronics',
+    },
+    {
+      srNo: 10,
+      name: 'Dr. Nidhi Sharma',
+      designation: 'Associate Professor',
+      department: 'Mechanical',
+    },
+    {
+      srNo: 11,
+      name: 'Ananya Gupta',
+      designation: 'Student',
+      department: 'Information Technology',
+    },
+    {
+      srNo: 12,
+      name: 'Dr. Karan Sethi',
+      designation: 'Assistant Professor',
+      department: 'Civil',
+    },
+  ];
+
   return (
     <>
       <article
@@ -53,6 +136,7 @@ export default async function IPR({
       </article>
 
       <main className="container mt-12">
+        {/* description */}
         <article className="drop-shadow">
           <p className="d:w-full max-md:rounded-t md:rounded-r">
             {description}
@@ -101,6 +185,73 @@ export default async function IPR({
               </li>
             ))}
           </ul>
+        </div>
+        {/* Advisory Commitee */}
+        <div>
+          <Heading
+            glyphDirection="ltr"
+            heading="h2"
+            id="advisory-committee"
+            text="ADVISORY COMMITTEE"
+          />
+          <section className="w-full">
+            <div>
+              <Table scrollAreaClassName="h-96">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Sr. No.</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Designation</TableHead>
+                    <TableHead>Department/School</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {advisoryCommittee.map((member) => (
+                    <TableRow key={member.srNo}>
+                      <TableCell>{member.srNo}</TableCell>
+                      <TableCell>{member.name}</TableCell>
+                      <TableCell>{member.designation}</TableCell>
+                      <TableCell>{member.department}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </section>
+        </div>
+        {/* IP Policy */}
+        <div>
+          <Heading glyphDirection="rtl" heading="h2" text="IPR Policy" />
+          {/* /academics/2.jpg */}
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            {/* Left: Image with caption */}
+            <div className="relative overflow-hidden rounded-lg shadow-md">
+              {/* Adjust this image */}
+              <Image
+                src={`academics/2.jpg`}
+                alt="Revised IP Policy"
+                width={500}
+                height={200}
+                className="h-auto w-full object-cover"
+              />
+              <div className="bg-black-50 text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold">
+                REVISED IP POLICY (2017) &rarr;
+              </div>
+            </div>
+
+            {/* Right: Description */}
+            <p className="text-gray-800 text-justify leading-relaxed">
+              The first Intellectual Property (IP) policy for the Institute was
+              formulated in 2008. In the last few years, a number of new
+              initiatives and issues have happened, with the enhanced growth in
+              research and development. In view of the experience obtained
+              during this period, in commercialisation, incubation,
+              international collaboration, distance education courses and
+              student related issues, it was decided to review the current
+              policy and suggest changes as appropriate. This document is the
+              revised IP Policy for the Institute.
+            </p>
+          </div>
         </div>
       </main>
     </>
