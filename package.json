@@ -52,6 +52,7 @@
     "tailwind-merge": "^2.2.1",
     "typesense": "^1.8.2",
     "usehooks-ts": "^3.0.1",
+    "yarn": "^1.22.22",
     "zod": "^3.23.8"
   },
   "devDependencies": {

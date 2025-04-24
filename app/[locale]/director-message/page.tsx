@@ -132,7 +132,7 @@ export default async function DirectorCorner({
           heading="h3"
           glyphDirection="rtl"
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {directorOffice.cards.map((card, index) => (
             <Card
               key={index}
@@ -235,16 +235,15 @@ const Card: React.FC<CardProps> = ({
   contactDetails,
 }) => {
   return (
-    <div className="container flex h-full w-full items-center justify-center">
+    <div className="container flex h-full w-full items-center justify-center max-sm:p-0">
       <div className="h-fit w-fit rounded border border-primary-700 bg-neutral-50 hover:drop-shadow-md">
         <div className="flex h-full items-center justify-center gap-4 p-2 sm:p-3 md:p-4">
           <Image
             alt={imageAlt}
-            className={`rounded ${
-              imageAlt === "Director's Image"
-                ? 'size-40 lg:size-44 xl:size-48 2xl:size-52'
+            className={`rounded ${imageAlt === "Director's Image"
+                ? 'size-32 md:size-40 lg:size-44 xl:size-48 2xl:size-52'
                 : 'size-32 lg:size-36 xl:size-40 2xl:size-44'
-            }`}
+              }`}
             height={0}
             src={imageSrc}
             width={0}
