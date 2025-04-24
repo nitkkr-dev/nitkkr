@@ -1,6 +1,14 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { FaFlask, FaIndianRupeeSign } from 'react-icons/fa6';
+import { FaRegIdCard } from 'react-icons/fa';
+import { PiShieldStarBold } from 'react-icons/pi';
+import { BsTools } from 'react-icons/bs';
+import { type IconType } from 'react-icons/lib';
 
+import { cn } from '~/lib/utils';
+import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import {
   Table,
@@ -12,6 +20,7 @@ import {
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
+import { GalleryCarousel } from '~/components/carousels';
 
 export default async function IPR({
   params: { locale },
@@ -22,7 +31,26 @@ export default async function IPR({
   const description =
     'In consonance with the National IPR Policy of Govt. of India 2016. In order to facilitate faculty, staff and students of Institute in a proactive manner in the generation, protection and transaction of Intellectual Property which offers potential scope for shared benefits to both institute and inventors, an IPR Cell has been established in NIT Kurukshetra. The IPR Cell at NIT Kurukshetra is a cornerstone of our commitment to advancing research and innovation. It provides comprehensive support to faculty, staff, and students by offering expert guidance on securing patents, copyrights, and design registrations. Through it’s working, the IPR Cell equips our academic community with the tools and knowledge necessary to protect and commercialise their intellectual assets. We invite you to explore our initiatives and join us in fostering an environment where academic excellence and pioneering research seamlessly converge.';
 
-  const facultyInchage = [
+  interface Card {
+    label: string;
+    href: string;
+    icon: IconType;
+  }
+
+  const availableTechnologies: Card[] = [
+    {
+      label: 'technologies available for licensing/sales',
+      href: '#',
+      icon: FaIndianRupeeSign,
+    },
+    {
+      label: 'Purchasing form',
+      href: '#',
+      icon: BsTools,
+    },
+  ];
+
+  const facultyIncharge = [
     {
       image: 'fallback/user-image.jpg',
       name: 'Anshu Parashar',
@@ -114,10 +142,29 @@ export default async function IPR({
     },
   ];
 
+  const innovations: Card[] = [
+    {
+      label: 'patents granted',
+      href: '#',
+      icon: FaRegIdCard,
+    },
+    {
+      label: 'copyrights obtained',
+      href: '#',
+      icon: FaFlask,
+    },
+    {
+      label: 'patents granted',
+      href: '#',
+      icon: PiShieldStarBold,
+    },
+  ];
+
   return (
     <>
+      {/* Header */}
       <article
-        className="sm:h-76 md:h-84 lg:h-94 relative flex h-56 w-full bg-cover bg-center max-sm:static xl:h-[448px] 2xl:h-[540px]"
+        className="sm:h-76 md:h-84 lg:h-94 relative flex h-56 w-full bg-cover bg-center xl:h-[448px] 2xl:h-[540px]"
         style={{
           backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.2) 0%, rgba(249, 245, 235, 0.5) 50%,rgba(249, 245, 235, 0.75) 75%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/student-activities/clubs/technobyte/1.jpg')`,
         }}
@@ -150,10 +197,10 @@ export default async function IPR({
             text={text.club.faculty.toUpperCase()}
           />
           <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
-            {facultyInchage.map((faculty, idx) => (
+            {facultyIncharge.map((faculty, idx) => (
               <li
                 key={idx}
-                className="flex w-[80%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
+                className="flex w-[60%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
               >
                 <Image
                   src={faculty.image}
@@ -232,11 +279,16 @@ export default async function IPR({
                 alt="Revised IP Policy"
                 width={500}
                 height={200}
-                className="h-auto w-full object-cover"
+                className="h-auto max-h-80 w-full object-cover"
               />
-              <div className="bg-black-50 text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold">
+              <Link
+                href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
+                className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold"
+                style={{ color: 'white' }}
+                target="_blank"
+              >
                 REVISED IP POLICY (2017) &rarr;
-              </div>
+              </Link>
             </div>
 
             {/* Right: Description */}
@@ -253,6 +305,82 @@ export default async function IPR({
             </p>
           </div>
         </div>
+        {/* Available Technologies */}
+        <div>
+          <Heading
+            glyphDirection="ltr"
+            heading="h2"
+            text="Available Technologies"
+          />
+
+          <h2 className="text-sm text-primary-300 sm:text-base md:text-lg lg:text-lg">
+            Parties interested in getting license of purchasing the technologies
+            can express their interest by filling the purchasing form or
+            emailing ipr@nittkr.ac.in
+          </h2>
+
+          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
+            {availableTechnologies.map(({ label, href, icon: Icon }, index) => (
+              <Button
+                asChild
+                className={cn(
+                  'xl:gap-5',
+                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
+                )}
+                key={index}
+                variant="secondary"
+              >
+                <Link href={href} className="rounded-s-md">
+                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
+                    <Icon
+                      className={cn(
+                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
+                      )}
+                    />
+                  </div>
+                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                    {label}
+                  </p>
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+        {/* NITKKR innovations and IP */}
+        <div>
+          <Heading
+            glyphDirection="rtl"
+            heading="h2"
+            text="NITKKR Innovations and IP"
+          />
+          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {innovations.map(({ label, href, icon: Icon }, index) => (
+              <Button
+                asChild
+                className={cn(
+                  'xl:gap-5',
+                  'group mx-auto flex h-40 w-64 flex-col gap-2 sm:h-48 sm:w-72 sm:gap-3 md:h-52 md:w-[19rem] md:gap-4'
+                )}
+                key={index}
+                variant="secondary"
+              >
+                <Link href={href} className="rounded-s-md">
+                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
+                    <Icon
+                      className={cn(
+                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
+                      )}
+                    />
+                  </div>
+                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                    {label}
+                  </p>
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+        {/* Gallery  */}
       </main>
     </>
   );
