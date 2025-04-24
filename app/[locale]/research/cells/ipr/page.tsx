@@ -20,7 +20,6 @@ import {
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
-import { GalleryCarousel } from '~/components/carousels';
 
 export default async function IPR({
   params: { locale },
