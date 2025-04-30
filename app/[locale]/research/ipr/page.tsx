@@ -169,14 +169,11 @@ export default async function IPR({
         }}
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1
-            className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl"
-            style={{ color: 'black' }}
-          >
+          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
             Intellectual Property Rights
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span style={{ color: 'black' }}>(IPR) Cell</span>
+            <span className="text-neutral-900">(IPR) Cell</span>
           </h1>
         </div>
       </article>
@@ -206,25 +203,29 @@ export default async function IPR({
                   alt={faculty.name}
                   width={200}
                   height={200}
-                  className="h-52  w-52 rounded-lg "
+                  className="h-52 w-52 rounded-lg "
                 />
-                <section className="ml-6 mt-4 space-y-8 text-center md:mt-0 lg:text-left">
-                  <>
-                    <h2 className="text-gray-800 m-0 text-start text-2xl">
+                <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
+                  <div>
+                    <h2 className="m-0 text-start text-lg md:text-xl">
                       {faculty.name}
+                      <span className="block text-lg text-neutral-900">
+                        {faculty.title}
+                      </span>
                     </h2>
-                    <span className="text-gray-600 text-lg">
-                      {faculty.title}
-                    </span>
-                  </>
+                  </div>
                   <section>
                     <span className="flex items-center space-x-2">
                       <MdEmail className="text-primary-700" />
-                      <span className="text-gray-600">{faculty.email}</span>
+                      <span className="text-gray-600 break-all">
+                        {faculty.email}
+                      </span>
                     </span>
                     <span className="mt-2 flex items-center space-x-2">
                       <MdOutlineLocalPhone className="text-primary-700" />
-                      <span className="text-gray-600">{faculty.phone}</span>
+                      <span className="text-gray-600 break-all">
+                        {faculty.phone}
+                      </span>
                     </span>
                   </section>
                 </section>
@@ -238,32 +239,34 @@ export default async function IPR({
             glyphDirection="ltr"
             heading="h2"
             id="advisory-committee"
-            text="ADVISORY COMMITTEE"
+            text={text.Research.advisoryCommittee.title.toUpperCase()}
           />
-          <section className="w-full">
-            <div>
-              <Table scrollAreaClassName="h-96">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sr. No.</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Designation</TableHead>
-                    <TableHead>Department/School</TableHead>
+          <div className="mt-12 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{text.Research.advisoryCommittee.srNo}</TableHead>
+                  <TableHead>{text.Research.advisoryCommittee.name}</TableHead>
+                  <TableHead>
+                    {text.Research.advisoryCommittee.designation}
+                  </TableHead>
+                  <TableHead>
+                    {text.Research.advisoryCommittee.department}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {advisoryCommittee.map((member) => (
+                  <TableRow key={member.srNo}>
+                    <TableCell>{member.srNo}</TableCell>
+                    <TableCell>{member.name}</TableCell>
+                    <TableCell>{member.designation}</TableCell>
+                    <TableCell>{member.department}</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {advisoryCommittee.map((member) => (
-                    <TableRow key={member.srNo}>
-                      <TableCell>{member.srNo}</TableCell>
-                      <TableCell>{member.name}</TableCell>
-                      <TableCell>{member.designation}</TableCell>
-                      <TableCell>{member.department}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
         {/* IP Policy */}
         <div>
@@ -282,8 +285,7 @@ export default async function IPR({
               />
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
-                className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold"
-                style={{ color: 'white' }}
+                className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold text-neutral-50"
                 target="_blank"
               >
                 REVISED IP POLICY (2017) &rarr;

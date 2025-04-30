@@ -108,14 +108,11 @@ export default async function IICPage({
         }}
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1
-            className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl"
-            style={{ color: 'black' }}
-          >
+          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
             Institute&apos;s Innovation Council
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span style={{ color: 'black' }}>(IIC) Cell</span>
+            <span className="text-neutral-900">(IIC) Cell</span>
           </h1>
         </div>
       </article>
@@ -138,28 +135,26 @@ export default async function IICPage({
             className="mt-12"
             text="Office Order"
           />
-          <section className="w-full">
-            <div>
-              <Table scrollAreaClassName="h-96">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sr. No.</TableHead>
-                    <TableHead>Responsibility</TableHead>
-                    <TableHead>Name of Faculty</TableHead>
+          <div className="mt-12 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Sr. No.</TableHead>
+                  <TableHead>Responsibility</TableHead>
+                  <TableHead>Name of Faculty</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {officeOrder.map((order) => (
+                  <TableRow key={order.sr_no}>
+                    <TableCell>{order.sr_no}</TableCell>
+                    <TableCell>{order.name_of_faculty}</TableCell>
+                    <TableCell>{order.responsibility}</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {officeOrder.map((order) => (
-                    <TableRow key={order.sr_no}>
-                      <TableCell>{order.sr_no}</TableCell>
-                      <TableCell>{order.name_of_faculty}</TableCell>
-                      <TableCell>{order.responsibility}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
         {/* Activities */}
         <div>
@@ -170,47 +165,43 @@ export default async function IICPage({
             text="Activities"
           />
           {/* Past Activities */}
-          <section className="w-full">
-            <div>
-              <Table scrollAreaClassName="h-[19rem]">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sr. No.</TableHead>
-                    <TableHead>Past activities</TableHead>
+          <div className="mt-12 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Sr. No.</TableHead>
+                  <TableHead>Past activities</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {activities.map((act) => (
+                  <TableRow key={act.sr_no}>
+                    <TableCell>{act.sr_no}</TableCell>
+                    <TableCell>{act.past_activity}</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {activities.map((act) => (
-                    <TableRow key={act.sr_no}>
-                      <TableCell>{act.sr_no}</TableCell>
-                      <TableCell>{act.past_activity}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
           {/* Upcoming Activities */}
-          <section className="mt-12 w-full">
-            <div>
-              <Table scrollAreaClassName="h-[19rem]">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sr. No.</TableHead>
-                    <TableHead>Upcoming activities</TableHead>
+          <div className="mt-12 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Sr. No.</TableHead>
+                  <TableHead>Upcoming activities</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {activities.map((act) => (
+                  <TableRow key={act.sr_no}>
+                    <TableCell>{act.sr_no}</TableCell>
+                    <TableCell>{act.past_activity}</TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {activities.map((act) => (
-                    <TableRow key={act.sr_no}>
-                      <TableCell>{act.sr_no}</TableCell>
-                      <TableCell>{act.past_activity}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </main>
     </>

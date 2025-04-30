@@ -202,6 +202,15 @@ const text: Translations = {
     },
     logout: 'प्रस्थान करें',
   },
+  Research: {
+    advisoryCommittee: {
+      title: 'सलाहकार समिति',
+      srNo: 'क्रम संख्या',
+      name: 'नाम',
+      designation: 'पद',
+      department: 'विभाग',
+    },
+  },
   Search: {
     placeholder: 'त्वरित खोज...',
     categories: {

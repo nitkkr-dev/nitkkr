@@ -48,14 +48,11 @@ export default async function IKS({
         }}
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1
-            className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl"
-            style={{ color: 'black' }}
-          >
+          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
             Indian Knowledge Systems
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span style={{ color: 'black' }}>(IKS) Cell</span>
+            <span className="text-neutral-900">(IKS) Cell</span>
           </h1>
         </div>
       </article>

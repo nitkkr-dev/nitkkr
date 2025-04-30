@@ -189,6 +189,15 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Research: {
+    advisoryCommittee: {
+      title: string;
+      srNo: string;
+      name: string;
+      designation: string;
+      department: string;
+    };
+  };
   Search: {
     placeholder: string;
     categories: {
