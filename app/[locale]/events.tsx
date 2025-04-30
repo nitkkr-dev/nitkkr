@@ -56,7 +56,13 @@ export default async function Events({
         href="#events"
         text={text.title}
       />
-
+      <Image
+        alt="arjuna"
+        src="assets/arjuna-1.png"
+        width={0}
+        height={0}
+        className="absolute bottom-0 left-0 opacity-80 lg:size-[28rem]"
+      />
       <article className="container relative lg:flex lg:gap-16">
         <ol
           className={cn(
@@ -168,14 +174,6 @@ export default async function Events({
           </ol>
         </section>
       </article>
-      {/* fixme: button overlap issue */}
-      {/* <Image
-        alt="arjuna"
-        src="assets/arjuna-1.png"
-        width={0}
-        height={0}
-        className="absolute bottom-0 left-0 lg:size-[28rem]"
-      /> */}
     </article>
   );
 }

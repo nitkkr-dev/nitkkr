@@ -19,6 +19,30 @@ const text: Translations = {
       ],
       more: 'Read more',
     },
+    title: {
+      primary: 'NIT KURUKSHETRA',
+      secondary: 'एनआईटी कुरुक्षेत्र',
+    },
+    slideshow: [
+      {
+        image: 'slideshow/image01.jpg',
+        title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
+        subtitle:
+          'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
+      },
+      {
+        image: 'slideshow/image02.jpg',
+        title: 'National Institute Ranked Among Top 10 Engineering Colleges',
+        subtitle:
+          'NIT Kurukshetra has secured a spot in the top 10 engineering colleges in India, showcasing excellence in education and research...',
+      },
+      {
+        image: 'slideshow/image03.jpg',
+        title: 'State-of-the-Art Research Facilities Now Open for Students',
+        subtitle:
+          'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
+      },
+    ],
   },
   club: {
     about: 'About',
@@ -144,9 +168,9 @@ const text: Translations = {
     viewAll: 'View All',
   },
   NotFound: {
-    title: 'Not Found',
-    description: 'Could not find requested resource',
-    backHome: 'Return Home',
+    title: '404',
+    description: 'Not found ',
+    backHome: 'Looks like you’re lost let’s get you back home',
   },
   Profile: {
     tabs: {
@@ -393,17 +417,20 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
   },
   Status: {
     NoResult: {
-      title: 'No results found',
-      description: 'No result matched your given query.',
+      title: '404',
+      description: 'Not found Looks like you’re lost, let’s get you back home',
     },
     Unauthorised: {
-      title: 'Unauthorised',
-      description: 'You are not authorised to view this page.',
+      title: '403',
+      description: 'Unauthorized',
     },
     WorkInProgress: {
-      title: 'Work In Progress',
-      description:
-        'This page is currently being worked on. Please visit another time',
+      title: '501',
+      description: 'Work In Progress',
+    },
+    NotAcceptable: {
+      title: '406',
+      description: 'Not Acceptable Please try again',
     },
   },
   StudentActivities: {
@@ -417,6 +444,24 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       ncc: 'NCC',
     },
     sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
+  },
+  DirectorMessage: {
+    title: `Director's Message`,
+    message: [
+      `India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
+      `The land of Kurukshetra also referred to as Dharma Kshetra has taught us to be righteous in our demeanour, uphold values, make one self-strong to desist any attacks on self or subjects who are vulnerable. The celestial song of Bhagavat Gita teaches us to achieve a 3600   development of Holistic personality and seeks to dispel all our doubts, predicaments, and guides us to search and explore self and the material world outside.`,
+      `It was proved without doubt over centuries that no nation has ever risen to the stature of a world leader or a happy nation without educating its subjects. The role of Universities and Centres of Excellence was never in question. Creativity, innovation and hands on experience were given importance and nature was the experimental laboratory to unravel the secrets of the universe. The Universities in the form of Nalanda and Takshashila rose to stature of international level learning centres of nurturing young minds to explore themselves and unravel the secrets of nature in a variety of trades known as 64 art forms. They explored skills through recitation, hands on experience and experiential learning. The famous Guru Shishya Parampara was passed on through ages and generations.`,
+      `Takshashila University was famous not because of it’s never ending collection of scripts.  It was famous because of knowledge that it had to offer.  Knowledge on how best a human being can function in this world.  Knowledge of using the intelligence that our race possesses.`,
+      `What could be the right setting for a great nation like India and NIT Kurukshetra to tap the potentialities of young minds who are drawn from across the nation through a rigorous process of selection through national level testing. These young boys and girls toil really hard to reach these portals of learning. It is our endeavour to provide the right environment of teaching, learning and allow them to explore their self and progress not only advancing technologies but also promoting their innate skills of creativity and innovative traits to be  the guiding forces in solving many a societal problems and set an example that universities and centre of excellence are not isolated spaces for exploration of knowledge alone but contribute to the growth of the nation, through setting up of incubation centres, promote start up culture and entrepreneurial mindset. In this direction, NIT KKR would end the motions of rote learning and changing the setting for critical thinking, enquiry, debate and discussions while promoting experiential learning by connecting these young minds through NIT KKR – Local community link. No education is complete if the scholar is unable to move from levels of learning to achieve knowledge leading to wisdom.`,
+      `Last two years, during the pandemic times, the whole world lost many a life, lost livelihood, nations suffered due to lack of growth and the challenges of such testing times led many to depression, anxiety, suicidal tendencies, loss of beloved etc., We are still grappling to come to terms with the pandemic and have taken the lead to bring a semblance of order albeit on virtual platforms. Some hard lessons have been learnt and education sector is one among the most affected area, where young minds were locked physically, mentally, emotionally and spiritually. The time is ripe to explore these innate qualities in achieving human excellence.`,
+      `Having taken over the charge of Director of one of the oldest REC, now transformed as NIT with the status of Institution of National Importance on 05th February, 2022 (Basant Panchami), I along with my teaching, non-teaching faculty and support staff welcome you and are eagerly waiting for all our dear students to come to the campus, leaving no stone unturned in preparing ourselves to welcome you, albeit after two long years of isolation through online teaching learning etc. As the leader I assure you that you will be pampered by creating an atmosphere of comfort of a home, spaces much bigger than a home to explore oneself, provide facilities to explore oneself and material progress, allowing you to dream big. I personally wish each one of you become passionate about life and serve the society at large in the form of technocrats, business men, world leaders etc.  I assure that implementation of National Education Policy 2020 (NEP 2020) shall be top most priority.`,
+      `The logo of NIT KKR, has a Motto which reads as follows`,
+      `"Shramaye Anavarat chesta cha"`,
+      `which means hard work and consistent efforts leads to excellence.`,
+      `I congratulate all student aspirants to have made it to enter portals of NIT KKR and Wish all family members of NIT Kurukshetra all success in all their endeavours.`,
+      `JAI HIND……….`,
+      `Prof. B. V. Ramana Reddy`,
+    ],
   },
 };
 
