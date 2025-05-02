@@ -1,44 +1,40 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  integer,
-  pgTable,
-  smallserial,
-  text,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { faculty } from '.';
 
-export const deans = pgTable('deans', {
-  id: smallserial('id').primaryKey(),
-  domain: varchar('domain', {
-    enum: [
-      'academic',
-      'estate-and-construction',
-      'faculty-welfare',
-      'industry-and-international-relations',
-      'planning-and-development',
-      'research-and-consultancy',
-      'student-welfare',
-    ],
-  })
+export const deans = pgTable('deans', (t) => ({
+  id: t.smallserial().primaryKey(),
+  domain: t
+    .varchar({
+      enum: [
+        'academic',
+        'estate-and-construction',
+        'faculty-welfare',
+        'industry-and-international-relations',
+        'planning-and-development',
+        'research-and-consultancy',
+        'student-welfare',
+      ],
+    })
     .unique()
     .notNull(),
-  facultyId: integer('faculty_id')
+  facultyId: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  associateFacultyId: integer('associate_faculty_id').references(
-    () => faculty.id
-  ),
-  staffIds: integer('staff_ids')
+  associateFacultyId: t.integer().references(() => faculty.id),
+  staffIds: t
+    .integer()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  activityLogs: text('activity_logs')
+  activityLogs: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-});
+}));
 
 export const deansRelations = relations(deans, ({ one }) => ({
   faculty: one(faculty, {

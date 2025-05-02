@@ -1,16 +1,17 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, smallint, text, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { clubs } from '.';
 
-export const clubSocials = pgTable('club_socials', {
-  id: serial('id').primaryKey(),
-  clubId: smallint('club_id')
+export const clubSocials = pgTable('club_socials', (t) => ({
+  id: t.serial().primaryKey(),
+  clubId: t
+    .smallint()
     .references(() => clubs.id)
     .notNull(),
-  platform: varchar('platform', { length: 32 }).notNull(),
-  link: text('link').notNull(),
-});
+  platform: t.varchar({ length: 32 }).notNull(),
+  link: t.text().notNull(),
+}));
 
 export const clubSocialsRelations = relations(clubSocials, ({ one }) => ({
   club: one(clubs, {

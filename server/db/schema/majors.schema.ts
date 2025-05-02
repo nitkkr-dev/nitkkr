@@ -1,11 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  pgTable,
-  smallint,
-  smallserial,
-  text,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import {
   courseLogs,
@@ -14,24 +8,29 @@ import {
   studentAcademicDetails,
 } from '.';
 
-export const majors = pgTable('majors', {
-  id: smallserial('id').primaryKey(),
-  name: varchar('name', { length: 64 }).notNull(),
-  degree: varchar('degree', {
-    enum: ['B. Tech.', 'M. Tech.', 'MCA', 'MBA', 'M. Sc.', 'Ph. D.'],
-  }).notNull(),
-  departmentId: smallint('department_id')
+export const majors = pgTable('majors', (t) => ({
+  id: t.smallserial().primaryKey(),
+  name: t.varchar({ length: 64 }).notNull(),
+  degree: t
+    .varchar({
+      enum: ['B. Tech.', 'M. Tech.', 'MCA', 'MBA', 'M. Sc.', 'Ph. D.'],
+    })
+    .notNull(),
+  departmentId: t
+    .smallint()
     .references(() => departments.id)
     .notNull(),
-  objectives: text('objectives')
+  objectives: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  educationalObjectives: text('educational_objectives')
+  educationalObjectives: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-});
+}));
 
 export const majorsRelations = relations(majors, ({ many, one }) => ({
   courseLogs: many(courseLogs),

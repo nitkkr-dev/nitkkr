@@ -1,21 +1,21 @@
 import { relations } from 'drizzle-orm';
-import { char, pgTable, smallserial, text, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { clubs, courses, doctorates, faculty, majors, staff } from '.';
 
-export const departments = pgTable('departments', {
-  id: smallserial('id').primaryKey(),
-  name: varchar('name', { length: 64 }).notNull(),
-  urlName: varchar('url_name', { length: 64 }).notNull(),
-  alias: char('alias', { length: 2 }).notNull(),
-  type: varchar('type', {
-    enum: ['engineering', 'science', 'school', 'miscellaneous'],
-  }).notNull(),
-  about: text('about').notNull(),
-  vision: text('vision').notNull(),
-  mission: text('mission').notNull(),
-  laboratories: text('laboratories'),
-});
+export const departments = pgTable('departments', (t) => ({
+  id: t.smallserial().primaryKey(),
+  name: t.varchar({ length: 64 }).notNull(),
+  urlName: t.varchar({ length: 64 }).notNull(),
+  alias: t.char({ length: 2 }).notNull(),
+  type: t
+    .varchar({ enum: ['engineering', 'science', 'school', 'miscellaneous'] })
+    .notNull(),
+  about: t.text().notNull(),
+  vision: t.text().notNull(),
+  mission: t.text().notNull(),
+  laboratories: t.text(),
+}));
 
 export const departmentsRelations = relations(departments, ({ many }) => ({
   clubs: many(clubs),

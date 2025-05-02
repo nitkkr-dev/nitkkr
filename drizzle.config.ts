@@ -8,6 +8,7 @@ export default defineConfig({
   dbCredentials: {
     url: env.POSTGRES_URL,
   },
+  casing: 'snake_case',
   verbose: true,
   strict: true,
 });

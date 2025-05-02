@@ -1,30 +1,27 @@
 import { relations } from 'drizzle-orm';
-import {
-  integer,
-  pgTable,
-  serial,
-  smallint,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { courses, faculty, majors } from '.';
 
-export const courseLogs = pgTable('course_logs', {
-  id: serial('id').primaryKey(),
-  session: varchar('session').notNull(),
-  courseId: smallint('course_id')
+export const courseLogs = pgTable('course_logs', (t) => ({
+  id: t.serial().primaryKey(),
+  session: t.varchar().notNull(),
+  courseId: t
+    .smallint()
     .references(() => courses.id)
     .notNull(),
-  facultyId: integer('faculty_id')
+  facultyId: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  majorId: smallint('major_id')
+  majorId: t
+    .smallint()
     .references(() => majors.id)
     .notNull(),
-  semester: smallint('semester').notNull(),
-  section: varchar('section').notNull(),
-  subSection: smallint('sub_section').notNull(),
-});
+  semester: t.smallint().notNull(),
+  section: t.varchar().notNull(),
+  subSection: t.smallint().notNull(),
+}));
 
 export const courseLogsRelations = relations(courseLogs, ({ one }) => ({
   course: one(courses, {

@@ -1,29 +1,26 @@
 import { relations } from 'drizzle-orm';
-import {
-  integer,
-  pgTable,
-  smallint,
-  uniqueIndex,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 
 import { departments, persons, sections } from '.';
 
 export const staff = pgTable(
   'staff',
-  {
-    id: integer('id')
+  (t) => ({
+    id: t
+      .integer()
       .primaryKey()
       .references(() => persons.id),
-    employeeId: varchar('employee_id', { length: 8 }).notNull(),
-    workingSectionId: smallint('working_section_id')
+    employeeId: t.varchar({ length: 8 }).notNull(),
+    workingSectionId: t
+      .smallint()
       .references(() => sections.id)
       .notNull(),
-    designation: varchar('designation').notNull(),
-    workingDepartmentId: smallint('working_department_id')
+    designation: t.varchar().notNull(),
+    workingDepartmentId: t
+      .smallint()
       .references(() => departments.id)
       .notNull(),
-  },
+  }),
   (table) => [uniqueIndex('staff_employee_id_idx').on(table.employeeId)]
 );
 

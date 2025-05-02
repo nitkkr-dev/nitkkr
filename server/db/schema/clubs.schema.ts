@@ -1,44 +1,36 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  smallint,
-  smallserial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { clubMembers, clubSocials, departments, faculty, persons } from '.';
 
-export const clubs = pgTable('clubs', {
-  id: smallserial('id').primaryKey(),
-  name: varchar('name', { length: 128 }).notNull(),
-  urlName: varchar('url_name', { length: 128 }).notNull(),
-  alias: varchar('alias', { length: 16 }),
-  tagline: varchar('tagline', { length: 256 }).notNull(),
-  email: varchar('email', { length: 256 }).notNull(),
-  aboutUs: varchar('about_us').notNull(),
-  category: varchar('category', {
-    enum: ['committee', 'cultural', 'crew', 'technical'],
-  }).notNull(),
-  departmentId: smallint('department_id').references(() => departments.id),
-  facultyInchargeId1: integer('faculty_incharge_id1')
+export const clubs = pgTable('clubs', (t) => ({
+  id: t.smallserial().primaryKey(),
+  name: t.varchar({ length: 128 }).notNull(),
+  urlName: t.varchar({ length: 128 }).notNull(),
+  alias: t.varchar({ length: 16 }),
+  tagline: t.varchar({ length: 256 }).notNull(),
+  email: t.varchar({ length: 256 }).notNull(),
+  aboutUs: t.varchar().notNull(),
+  category: t
+    .varchar({ enum: ['committee', 'cultural', 'crew', 'technical'] })
+    .notNull(),
+  departmentId: t.smallint().references(() => departments.id),
+  facultyInchargeId1: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  facultyInchargeId2: integer('faculty_incharge_id2').references(
-    () => faculty.id
-  ),
-  isActive: boolean('is_active').default(true).notNull(),
-  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at')
+  facultyInchargeId2: t.integer().references(() => faculty.id),
+  isActive: t.boolean().default(true).notNull(),
+  createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
+  updatedAt: t
+    .timestamp()
     .$onUpdate(() => new Date())
     .notNull(),
-  updatedBy: integer('updated_by')
+  updatedBy: t
+    .integer()
     .references(() => persons.id)
     .notNull(),
-});
+}));
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
   clubMembers: many(clubMembers),

@@ -1,34 +1,28 @@
 import { relations } from 'drizzle-orm';
-import {
-  date,
-  integer,
-  pgTable,
-  smallint,
-  smallserial,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { departments, faculty, students } from '.';
 
-export const doctorates = pgTable('doctorates', {
-  id: smallserial('id').primaryKey(),
-  registrationNumber: varchar('registration_number', { length: 16 })
-    .unique()
-    .notNull(),
-  departmentId: smallint('department_id')
+export const doctorates = pgTable('doctorates', (t) => ({
+  id: t.smallserial().primaryKey(),
+  registrationNumber: t.varchar({ length: 16 }).unique().notNull(),
+  departmentId: t
+    .smallint()
     .references(() => departments.id)
     .notNull(),
-  studentId: integer('student_id')
+  studentId: t
+    .integer()
     .references(() => students.id)
     .notNull(),
-  supervisorId: integer('supervisor_id')
+  supervisorId: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  type: varchar('type', { enum: ['part-time', 'full-time'] }).notNull(),
-  title: varchar('title', { length: 256 }).notNull(),
-  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
-  endedOn: date('ended_on', { mode: 'date' }),
-});
+  type: t.varchar({ enum: ['part-time', 'full-time'] }).notNull(),
+  title: t.varchar({ length: 256 }).notNull(),
+  createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
+  endedOn: t.date({ mode: 'date' }),
+}));
 
 export const doctoratesRelations = relations(doctorates, ({ one }) => ({
   department: one(departments, {
