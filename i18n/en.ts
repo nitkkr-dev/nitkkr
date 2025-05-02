@@ -101,6 +101,32 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
+    externalLinks: {
+      googleScholarId: 'Google Scholar',
+      linkedInId: 'LinkedIn',
+      researchGateId: 'Research Gate',
+      scopusId: 'Scopus',
+    },
+    intellectualContributions: {
+      publications: 'PUBLICATIONS',
+      continuingEducation: 'CONTINUING EDUCATION',
+      doctoralStudents: 'DOCTORAL STUDENTS',
+    },
+    tags: {
+      book: 'Book',
+      chapter: 'Chapter',
+      journal: 'Journal',
+      conference: 'Conference',
+    },
+    tabs: {
+      qualifications: 'Education Qualifications',
+      experience: 'Experience',
+      projects: 'Projects',
+      continuingEducation: 'Continuing Education',
+      publications: 'Publications',
+      researchScholars: 'Research Scholars',
+      awardsAndHonors: 'Awards and Honors',
+    },
   },
   FAQ: { title: 'Frequently Asked Questions' },
   Footer: {
