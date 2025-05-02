@@ -6,9 +6,8 @@ import { faculty } from './faculty.schema';
 export const libraryCommittee = pgTable('library_committee', (t) => ({
   facultyId: t
     .integer()
-    .references(() => faculty.id)
-    .notNull()
-    .primaryKey(),
+    .primaryKey()
+    .references(() => faculty.id),
   libraryCommitteeDesignation: t
     .varchar({ enum: ['member', 'chairman'] })
     .notNull(),
