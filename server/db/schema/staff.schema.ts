@@ -24,13 +24,7 @@ export const staff = pgTable(
       .references(() => departments.id)
       .notNull(),
   },
-  (staff) => {
-    return {
-      staffEmployeeIdIndex: uniqueIndex('staff_employee_id_idx').on(
-        staff.employeeId
-      ),
-    };
-  }
+  (table) => [uniqueIndex('staff_employee_id_idx').on(table.employeeId)]
 );
 
 export const staffRelations = relations(staff, ({ one }) => ({

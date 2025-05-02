@@ -33,11 +33,7 @@ export const persons = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (persons) => {
-    return {
-      personsEmailIndex: uniqueIndex('persons_email_idx').on(persons.email),
-    };
-  }
+  (table) => [uniqueIndex('persons_email_idx').on(table.email)]
 );
 
 export const personsRelations = relations(persons, ({ one }) => ({

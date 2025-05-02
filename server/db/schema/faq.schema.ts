@@ -20,9 +20,5 @@ export const faqs = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (faqs) => {
-    return {
-      faqsCategoryIndex: uniqueIndex('faqs_category_idx').on(faqs.category),
-    };
-  }
+  (table) => [uniqueIndex('faqs_category_idx').on(table.category)]
 );
