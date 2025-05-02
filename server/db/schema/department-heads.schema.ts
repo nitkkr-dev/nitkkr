@@ -1,28 +1,22 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  smallint,
-  smallserial,
-  text,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { departments, faculty } from '.';
 
-export const departmentHeads = pgTable('department_heads', {
-  id: smallserial('id').primaryKey(),
-  facultyId: integer('faculty_id')
+export const departmentHeads = pgTable('department_heads', (t) => ({
+  id: t.smallserial().primaryKey(),
+  facultyId: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  departmentId: smallint('department_id')
+  departmentId: t
+    .smallint()
     .references(() => departments.id)
     .notNull(),
-  message: text('message').notNull(),
-  isActive: boolean('is_active').default(true).notNull(),
-  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
-});
+  message: t.text().notNull(),
+  isActive: t.boolean().default(true).notNull(),
+  createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
+}));
 
 export const departmentHeadsRelations = relations(
   departmentHeads,

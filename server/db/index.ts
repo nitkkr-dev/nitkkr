@@ -5,7 +5,8 @@ import { env } from '~/lib/env/server';
 
 import * as schema from './schema';
 
-const createDrizzleConnection = () => drizzle(sql, { schema });
+const createDrizzleConnection = () =>
+  drizzle({ casing: 'snake_case', client: sql, schema });
 
 const globalForDrizzle = globalThis as unknown as {
   drizzle: ReturnType<typeof createDrizzleConnection> | undefined;

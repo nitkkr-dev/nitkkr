@@ -1,76 +1,75 @@
 import { sql } from 'drizzle-orm';
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  serial,
-  smallint,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
-export const forms = pgTable('forms', {
-  id: serial('id').primaryKey(),
-  title: varchar('title').notNull(),
-  description: varchar('description').notNull(),
-  visibleTo: smallint('visible_to')
+export const forms = pgTable('forms', (t) => ({
+  id: t.serial().primaryKey(),
+  title: t.varchar().notNull(),
+  description: t.varchar().notNull(),
+  visibleTo: t
+    .smallint()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  questions: integer('questions')
+  questions: t
+    .integer()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  onSubmitMessage: varchar('on_submit_message')
+  onSubmitMessage: t
+    .varchar()
     .default('Your response has been recorded.')
     .notNull(),
-  isEditingAllowed: boolean('is_editing_allowed').notNull(),
-  isSingleResponse: boolean('is_single_response').default(true).notNull(),
-  isViewAnalyticsAllowed: boolean('is_view_analytics_allowed')
-    .default(false)
-    .notNull(),
-  isShuffled: boolean('is_shuffled').default(false).notNull(),
-  isCopySent: boolean('is_copy_sent').default(false).notNull(),
-  isQuiz: boolean('is_quiz').default(false).notNull(),
-  expiryDate: date('expiry_date', { mode: 'date' }),
-  isActive: boolean('is_active').default(true).notNull(),
-  persistentUrl: varchar('persistent_url'),
-  oldPersistentUrls: varchar('old_persistent_urls')
+  isEditingAllowed: t.boolean().notNull(),
+  isSingleResponse: t.boolean().default(true).notNull(),
+  isViewAnalyticsAllowed: t.boolean().default(false).notNull(),
+  isShuffled: t.boolean().default(false).notNull(),
+  isCopySent: t.boolean().default(false).notNull(),
+  isQuiz: t.boolean().default(false).notNull(),
+  expiryDate: t.date({ mode: 'date' }),
+  isActive: t.boolean().default(true).notNull(),
+  persistentUrl: t.varchar(),
+  oldPersistentUrls: t
+    .varchar()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  isPublished: boolean('is_published').notNull(),
-});
+  isPublished: t.boolean().notNull(),
+}));
 
-export const formQuestions = pgTable('form_questions', {
-  id: serial('id').primaryKey(),
-  formId: integer('form_id')
+export const formQuestions = pgTable('form_questions', (t) => ({
+  id: t.serial().primaryKey(),
+  formId: t
+    .integer()
     .references(() => forms.id)
     .notNull(),
-  question: varchar('question').notNull(),
-  description: varchar('description').notNull(),
-  isRequired: boolean('is_required').default(true).notNull(),
-  inputType: varchar('input_type').notNull(),
-  choices: varchar('choices')
+  question: t.varchar().notNull(),
+  description: t.varchar().notNull(),
+  isRequired: t.boolean().default(true).notNull(),
+  inputType: t.varchar().notNull(),
+  choices: t
+    .varchar()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  mimeTypes: varchar('mime_types')
+  mimeTypes: t
+    .varchar()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  range: varchar('range')
+  range: t
+    .varchar()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  pageNumber: smallint('page_number').default(0).notNull(),
-  marks: smallint('marks').default(0).notNull(),
-});
+  pageNumber: t.smallint().default(0).notNull(),
+  marks: t.smallint().default(0).notNull(),
+}));
 
-export const formSubmissions = pgTable('form_submissions', {
-  id: serial('id').primaryKey(),
-  formId: integer('form_id')
+export const formSubmissions = pgTable('form_submissions', (t) => ({
+  id: t.serial().primaryKey(),
+  formId: t
+    .integer()
     .references(() => forms.id)
     .notNull(),
-  email: varchar('email', { length: 256 }).notNull(),
-});
+  email: t.varchar({ length: 256 }).notNull(),
+}));

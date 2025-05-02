@@ -1,42 +1,43 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { faculty, staff } from '.';
 
-export const hostels = pgTable('hostels', {
-  id: serial('id').primaryKey(),
-  address: text('address').notNull(),
-  name: varchar('name', { length: 256 }).notNull(),
-  urlName: varchar('url_name', { length: 128 }).notNull(),
-  email: varchar('email', { length: 256 }).notNull(),
-  telephone: varchar('telephone', { length: 13 }).notNull(),
-  alternateTelephone: varchar('alternate_telephone', { length: 13 }),
-  type: varchar('type', {
-    enum: ['boys', 'girls'],
-  }).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at')
+export const hostels = pgTable('hostels', (t) => ({
+  id: t.serial().primaryKey(),
+  address: t.text().notNull(),
+  name: t.varchar({ length: 256 }).notNull(),
+  urlName: t.varchar({ length: 128 }).notNull(),
+  email: t.varchar({ length: 256 }).notNull(),
+  telephone: t.varchar({ length: 13 }).notNull(),
+  alternateTelephone: t.varchar({ length: 13 }),
+  type: t.varchar({ enum: ['boys', 'girls'] }).notNull(),
+  createdAt: t.timestamp().defaultNow().notNull(),
+  updatedAt: t
+    .timestamp()
     .$onUpdate(() => new Date())
     .notNull(),
-  overview: text('overview').array().notNull(),
-  staffOverview: text('staff_overview').array().notNull(),
-  facilities: text('facilities').array().notNull(),
-});
+  overview: t.text().array().notNull(),
+  staffOverview: t.text().array().notNull(),
+  facilities: t.text().array().notNull(),
+}));
 
 export const hostelsRelations = relations(hostels, ({ many }) => ({
   hostelStaff: many(hostelStaff),
   hostelFaculty: many(hostelFaculty),
 }));
 
-export const hostelStaff = pgTable('hostel_staff', {
-  hostelId: serial('hostel_id')
+export const hostelStaff = pgTable('hostel_staff', (t) => ({
+  hostelId: t
+    .serial()
     .references(() => hostels.id)
     .notNull(),
-  staffId: serial('staff_id')
+  staffId: t
+    .serial()
     .references(() => staff.id)
     .notNull(),
-  post: varchar('post', { enum: ['supervisor'] }).notNull(),
-});
+  post: t.varchar({ enum: ['supervisor'] }).notNull(),
+}));
 
 export const hostelStaffRelations = relations(hostelStaff, ({ one }) => ({
   hostel: one(hostels, {
@@ -49,15 +50,17 @@ export const hostelStaffRelations = relations(hostelStaff, ({ one }) => ({
   }),
 }));
 
-export const hostelFaculty = pgTable('hostel_faculty', {
-  hostelId: serial('hostel_id')
+export const hostelFaculty = pgTable('hostel_faculty', (t) => ({
+  hostelId: t
+    .serial()
     .references(() => hostels.id)
     .notNull(),
-  facultyId: serial('faculty_id')
+  facultyId: t
+    .serial()
     .references(() => faculty.id)
     .notNull(),
-  post: varchar('post', { enum: ['warden', 'deputy_warden'] }).notNull(),
-});
+  post: t.varchar({ enum: ['warden', 'deputy_warden'] }).notNull(),
+}));
 
 export const hostelFacultyRelations = relations(hostelFaculty, ({ one }) => ({
   hostel: one(hostels, {

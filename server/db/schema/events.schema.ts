@@ -1,30 +1,20 @@
-import {
-  boolean,
-  date,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  uniqueIndex,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 
 export const events = pgTable(
   'events',
-  {
-    id: serial('id').primaryKey(),
-    title: varchar('title', { length: 256 }).unique().notNull(),
-    content: text('content'),
-    category: varchar('category', {
-      enum: ['student', 'faculty'],
-    }).notNull(),
-    isFeatured: boolean('is_featured').default(false).notNull(),
-    startDate: date('start_date').notNull(),
-    endDate: date('end_date').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
+  (t) => ({
+    id: t.serial().primaryKey(),
+    title: t.varchar({ length: 256 }).unique().notNull(),
+    content: t.text(),
+    category: t.varchar({ enum: ['student', 'faculty'] }).notNull(),
+    isFeatured: t.boolean().default(false).notNull(),
+    startDate: t.date().notNull(),
+    endDate: t.date().notNull(),
+    createdAt: t.timestamp().defaultNow().notNull(),
+    updatedAt: t
+      .timestamp()
       .$onUpdate(() => new Date())
       .notNull(),
-  },
+  }),
   (table) => [uniqueIndex('events_title_idx').on(table.title)]
 );

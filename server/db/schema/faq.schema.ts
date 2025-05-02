@@ -1,24 +1,17 @@
-import {
-  date,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  uniqueIndex,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 
 export const faqs = pgTable(
   'faqs',
-  {
-    id: serial('id').primaryKey(),
-    title: varchar('title', { length: 256 }).notNull(),
-    description: text('description').notNull(),
-    category: varchar('category', { length: 128 }).notNull(),
-    createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
+  (t) => ({
+    id: t.serial().primaryKey(),
+    title: t.varchar({ length: 256 }).notNull(),
+    description: t.text().notNull(),
+    category: t.varchar({ length: 128 }).notNull(),
+    createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
+    updatedAt: t
+      .timestamp()
       .$onUpdate(() => new Date())
       .notNull(),
-  },
+  }),
   (table) => [uniqueIndex('faqs_category_idx').on(table.category)]
 );

@@ -1,12 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  integer,
-  pgTable,
-  smallint,
-  text,
-  uniqueIndex,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 
 import {
   courseLogs,
@@ -20,98 +13,118 @@ import {
 
 export const faculty = pgTable(
   'faculty',
-  {
-    id: integer('id')
+  (t) => ({
+    id: t
+      .integer()
       .primaryKey()
       .references(() => persons.id),
-    employeeId: varchar('employee_id', { length: 8 }).notNull(),
-    officeAddress: varchar('college_address', { length: 16 }).notNull(),
+    employeeId: t.varchar({ length: 8 }).notNull(),
+    officeAddress: t.varchar({ length: 16 }).notNull(),
 
     // Meta
-    designation: varchar('designation', {
-      enum: [
-        'Assistant Professor Grade-I',
-        'Assistant Professor Grade-II',
-        'Associate Professor',
-        'Professor',
-      ],
-    }).notNull(),
-    departmentId: smallint('department_id')
+    designation: t
+      .varchar({
+        enum: [
+          'Assistant Professor Grade-I',
+          'Assistant Professor Grade-II',
+          'Associate Professor',
+          'Professor',
+        ],
+      })
+      .notNull(),
+    departmentId: t
+      .smallint()
       .references(() => departments.id)
       .notNull(),
 
     // Socials
-    googleScholarId: text('google_scholar_id'),
-    orcidId: text('orcid_id'),
-    researchGateId: text('research_gate_id'),
-    scopusId: text('scopus_id'),
+    googleScholarId: t.text(),
+    orcidId: t.text(),
+    researchGateId: t.text(),
+    scopusId: t.text(),
 
     // Miscellaneous
-    qualifications: text('qualifications')
+    qualifications: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    areasOfInterest: text('areas_of_interest')
+    areasOfInterest: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    teachingInterests: text('teaching_interests')
+    teachingInterests: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    researchInterests: text('research_interests')
+    researchInterests: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    patents: text('patents')
+    patents: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    copyrights: text('copyrights')
+    copyrights: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    publications: text('publications')
+    publications: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    journals: text('journals')
+    journals: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    conferences: text('conferences')
+    conferences: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    books: text('books')
+    books: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    workshops: text('workshops')
+    workshops: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    expertLectures: text('expert_lectures')
+    expertLectures: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    awards: text('awards')
+    awards: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    outreach: text('outreach')
+    outreach: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    eContent: text('e_content')
+    eContent: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-    researchProjects: text('research_projects')
+    researchProjects: t
+      .text()
       .array()
       .default(sql`'{}'`)
       .notNull(),
-  },
+  }),
   (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
 );
 

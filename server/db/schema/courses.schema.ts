@@ -1,53 +1,53 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  char,
-  integer,
-  pgTable,
-  smallint,
-  smallserial,
-  text,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { courseLogs, coursesToMajors, departments, faculty } from '.';
 
-export const courses = pgTable('courses', {
-  id: smallserial('id').primaryKey(),
-  code: varchar('code', { length: 7 }).unique().notNull(),
-  title: varchar('title', { length: 128 }).notNull(),
-  coordinatorId: integer('coordinator_id')
+export const courses = pgTable('courses', (t) => ({
+  id: t.smallserial().primaryKey(),
+  code: t.varchar({ length: 7 }).unique().notNull(),
+  title: t.varchar({ length: 128 }).notNull(),
+  coordinatorId: t
+    .integer()
     .references(() => faculty.id)
     .notNull(),
-  departmentId: smallint('department_id')
+  departmentId: t
+    .smallint()
     .references(() => departments.id)
     .notNull(),
-  prerequisites: varchar('prerequisites', { length: 7 })
+  prerequisites: t
+    .varchar({ length: 7 })
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  nature: char('nature', { length: 3 }).notNull(),
-  objectives: text('objectives')
+  nature: t.char({ length: 3 }).notNull(),
+  objectives: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  content: text('content').notNull(),
-  outcomes: text('outcomes')
+  content: t.text().notNull(),
+  outcomes: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  essentialReading: text('essential_reading')
+  essentialReading: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  supplementaryReading: text('supplementary_reading')
+  supplementaryReading: t
+    .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  similarCourses: varchar('similar_courses', { length: 7 })
+  similarCourses: t
+    .varchar({ length: 7 })
     .array()
     .default(sql`'{}'`)
     .notNull(),
-});
+}));
 
 export const coursesRelations = relations(courses, ({ many, one }) => ({
   coordinator: one(faculty, {

@@ -1,49 +1,42 @@
 import { relations } from 'drizzle-orm';
-import { boolean, char, integer, pgTable, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import { clubMembers, doctorates, persons } from '.';
 
-export const students = pgTable('students', {
-  id: integer('id')
+export const students = pgTable('students', (t) => ({
+  id: t
+    .integer()
     .primaryKey()
     .references(() => persons.id),
-  rollNumber: varchar('roll_number', { length: 9 }).notNull(),
-  personalEmail: varchar('personal_email', { length: 256 }),
+  rollNumber: t.varchar({ length: 9 }).notNull(),
+  personalEmail: t.varchar({ length: 256 }),
 
   // Guardian Info
-  fathersName: varchar('fathers_name', { length: 100 }).notNull(),
-  fathersTelephoneCountryCode: varchar('fathers_telephone_country_code', {
-    length: 3,
-  }).notNull(),
-  fathersTelephone: varchar('fathers_telephone', { length: 13 }).notNull(),
-  fathersEmail: varchar('fathers_email', { length: 256 }),
-  mothersName: varchar('mothers_name', { length: 100 }),
-  mothersTelephoneCountryCode: varchar('mothers_telephone_country_code', {
-    length: 3,
-  }),
-  mothersTelephone: varchar('mothers_telephone'),
-  localGuardiansName: varchar('local_guardians_name', { length: 100 }),
-  localGuardiansTelephone: varchar('local_guardians_telephone', {
-    length: 100,
-  }),
+  fathersName: t.varchar({ length: 100 }).notNull(),
+  fathersTelephoneCountryCode: t.varchar({ length: 3 }).notNull(),
+  fathersTelephone: t.varchar({ length: 13 }).notNull(),
+  fathersEmail: t.varchar({ length: 256 }),
+  mothersName: t.varchar({ length: 100 }),
+  mothersTelephoneCountryCode: t.varchar({ length: 3 }),
+  mothersTelephone: t.varchar(),
+  localGuardiansName: t.varchar({ length: 100 }),
+  localGuardiansTelephone: t.varchar({ length: 100 }),
 
   // Address
-  permanentAddress: varchar('permanent_address'),
-  pincode: char('pincode', { length: 6 }),
+  permanentAddress: t.varchar(),
+  pincode: t.char({ length: 6 }),
 
   // Admission
-  applicationNumber: varchar('application_number'),
-  candidateCategory: varchar('candidate_category', {
-    enum: ['GEN-EWS', 'OBC-NCL', 'OPEN', 'SC', 'ST'],
-  }).notNull(),
-  isPwd: boolean('is_pwd').default(false).notNull(),
-  admissionCategory: varchar('admission_category', {
-    enum: ['DASA', 'MEA', 'OPEN', 'SII'],
-  }).notNull(),
-  admissionSubcategory: varchar('admission_subcategory', {
-    enum: ['CIWG', 'CSAB', 'SAARC'],
-  }),
-});
+  applicationNumber: t.varchar(),
+  candidateCategory: t
+    .varchar({ enum: ['GEN-EWS', 'OBC-NCL', 'OPEN', 'SC', 'ST'] })
+    .notNull(),
+  isPwd: t.boolean().default(false).notNull(),
+  admissionCategory: t
+    .varchar({ enum: ['DASA', 'MEA', 'OPEN', 'SII'] })
+    .notNull(),
+  admissionSubcategory: t.varchar({ enum: ['CIWG', 'CSAB', 'SAARC'] }),
+}));
 
 export const studentsRelations = relations(students, ({ many, one }) => ({
   // TODO: Explore possibility to make a transitive relation to clubs
