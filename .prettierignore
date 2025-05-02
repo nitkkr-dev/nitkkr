@@ -4,5 +4,3 @@ node_modules
 yarn.lock
 package-lock.json
 public
-flake.lock
-flake.nix
