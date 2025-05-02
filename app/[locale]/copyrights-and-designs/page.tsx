@@ -26,7 +26,7 @@ export default async function CopyrightsAndDesigns({
         src="institute/campus-infrastructure/header.jpg"
       />
 
-      <div className="mx-auto max-w-screen-lg space-y-6 px-4 py-8">
+      <div className="max-w-screen-md:whitespace-nowrap mx-16 space-y-4 px-4 py-8">
         <h4 className="text-primary-300">{text.description[0]}</h4>
 
         <Suspense fallback={<Loading />}>
@@ -57,39 +57,45 @@ const TableSection = async ({
   const body = data.slice(1);
 
   return (
-    <Table scrollAreaClassName="p-4 bg-white rounded-md shadow-md border border-primary-500">
-      <TableHeader>
-        <TableRow>
-          {header.map((head, index) => (
-            <TableHead
-              key={index}
-              className={index === header.length - 1 ? 'w-[300px]' : ''}
-            >
-              {head}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
+    <div className="max-h-[400px] overflow-auto rounded-md border border-primary-500">
+      <div className="min-w-[800px]">
+        <Table className="table-auto">
+          <TableHeader>
+            <TableRow>
+              {header.map((head, index) => (
+                <TableHead
+                  key={index}
+                  className={`${
+                    index === header.length - 1 ? 'w-[300px]' : ''
+                  } whitespace-nowrap`}
+                >
+                  {head}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
 
-      <TableBody>
-        {body.map((row, rowIndex) => (
-          <TableRow
-            key={rowIndex}
-            className="text-sm text-neutral-700 hover:bg-neutral-50"
-          >
-            {row.map((cell, cellIndex) => (
-              <TableCell
-                key={cellIndex}
-                className={`px-[10px] py-[16px] ${
-                  cellIndex === header.length - 1 ? 'w-[300px]' : ''
-                }`}
+          <TableBody>
+            {body.map((row, rowIndex) => (
+              <TableRow
+                key={rowIndex}
+                className="text-sm text-neutral-700 hover:bg-neutral-50"
               >
-                {cell}
-              </TableCell>
+                {row.map((cell, cellIndex) => (
+                  <TableCell
+                    key={cellIndex}
+                    className={`px-[10px] py-[16px] ${
+                      cellIndex === header.length - 1 ? 'w-[300px]' : ''
+                    }`}
+                  >
+                    {cell}
+                  </TableCell>
+                ))}
+              </TableRow>
             ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 };
