@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
+import { ScrollArea } from '~/components/ui/scroll-area';
 
 export default async function CopyrightsAndDesigns({
   params: { locale },
@@ -112,9 +113,9 @@ const TableSection = async ({
   const body = staticRows[type];
 
   return (
-    <div className="max-h-[400px] overflow-auto rounded-md border border-primary-500">
-      <div className="min-w-[800px]">
-        <Table className="table-auto">
+    <ScrollArea className="max-h-[400px] overflow-auto rounded-md border border-primary-500">
+      <div className="w-full overflow-auto">
+        <Table className="min-w-[800px] table-auto">
           <TableHeader>
             <TableRow>
               {header.map((head, index) => (
@@ -151,6 +152,6 @@ const TableSection = async ({
           </TableBody>
         </Table>
       </div>
-    </div>
+    </ScrollArea>
   );
 };
