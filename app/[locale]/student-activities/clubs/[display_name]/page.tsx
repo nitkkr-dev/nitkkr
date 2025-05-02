@@ -338,23 +338,9 @@ export default async function Club({
       <ImageHeader
         src={`student-activities/clubs/${display_name}/banner.jpg`}
         className="relative"
-      >
-        <header className="container m-auto flex max-w-[46rem] items-center justify-center ">
-          <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
-            <Image
-              alt={display_name}
-              src={`student-activities/clubs/${display_name}/logo.jpg`}
-              fill
-              className="rounded-full bg-primary-100 object-cover"
-              sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
-            />
-          </div>
-
-          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            {display_name.toUpperCase()}
-          </h1>
-        </header>
-      </ImageHeader>
+        display_name={display_name}
+        logoUrl={`student-activities/clubs/${display_name}/logo.jpg`}
+      />
 
       <main className="container mt-12">
         <article className="drop-shadow">
