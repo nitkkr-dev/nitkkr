@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '~/components/buttons';
@@ -9,13 +10,15 @@ export default function ImageHeader({
   title,
   headings,
   src,
-  children,
+  display_name,
+  logoUrl,
 }: {
   className?: string;
   title?: string;
   headings?: { label: string; href: string }[];
   src: string;
-  children?: React.ReactNode;
+  display_name?: string;
+  logoUrl?: string;
 }) {
   return (
     <>
@@ -44,7 +47,25 @@ export default function ImageHeader({
             {title}
           </h1>
         )}
-        {children}
+        {/* In case and image or logo is required on top of it */}
+        {display_name && logoUrl && (
+          <header className="container m-auto flex max-w-[46rem] items-center justify-center ">
+            <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
+              <Image
+                alt={display_name}
+                // src={`student-activities/clubs/${display_name}/logo.jpg`}
+                src={logoUrl}
+                fill
+                className="rounded-full bg-primary-100 object-cover"
+                sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
+              />
+            </div>
+
+            <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+              {display_name.toUpperCase()}
+            </h1>
+          </header>
+        )}
       </section>
 
       {headings && (
