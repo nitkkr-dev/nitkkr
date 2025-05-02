@@ -26,9 +26,5 @@ export const events = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (events) => {
-    return {
-      eventsTitleIndex: uniqueIndex('events_title_idx').on(events.title),
-    };
-  }
+  (table) => [uniqueIndex('events_title_idx').on(table.title)]
 );

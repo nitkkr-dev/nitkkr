@@ -112,13 +112,7 @@ export const faculty = pgTable(
       .default(sql`'{}'`)
       .notNull(),
   },
-  (faculty) => {
-    return {
-      facultyEmployeeIdIndex: uniqueIndex('faculty_employee_id_idx').on(
-        faculty.employeeId
-      ),
-    };
-  }
+  (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
 );
 
 export const facultyRelations = relations(faculty, ({ many, one }) => ({

@@ -21,11 +21,5 @@ export const notifications = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (notifications) => {
-    return {
-      notificationsTitleIndex: uniqueIndex('notifications_title_idx').on(
-        notifications.title
-      ),
-    };
-  }
+  (table) => [uniqueIndex('notifications_title_idx').on(table.title)]
 );
