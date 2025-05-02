@@ -46,36 +46,15 @@ export default async function Home({
 
       <AutoplayCarousel autoplayOptions={{ delay: 7000 }}>
         <CarouselContent>
-          {[
-            {
-              image: 'slideshow/image01.jpg',
-              title: 'NIT KKR deemed the First Ever NIT With All Green Campus!',
-              subtitle:
-                'Over 900 Acres of green foliage planted alongside the campus walls, the campus of the esteemed...',
-            },
-            {
-              image: 'slideshow/image02.jpg',
-              title:
-                'National Institute Ranked Among Top 10 Engineering Colleges',
-              subtitle:
-                'NIT Kurukshetra has secured a spot in the top 10 engineering colleges in India, showcasing excellence in education and research...',
-            },
-            {
-              image: 'slideshow/image03.jpg',
-              title:
-                'State-of-the-Art Research Facilities Now Open for Students',
-              subtitle:
-                'The newly inaugurated research labs and centers at NIT KKR offer cutting-edge technology and resources for students and faculty alike...',
-            },
-          ].map(({ image, title, subtitle }, index) => (
+          {text.slideshow.map(({ image, title, subtitle }, index) => (
             <CarouselItem key={index} className="relative max-h-screen">
               <figure className="relative h-full">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-800/80"></div>
                 <article className="absolute inset-x-0 top-[35%] mx-auto text-center drop-shadow-md">
-                  <h4 className="text-shade-light">एनआईटी कुरूक्षेत्</h4>
+                  <h4 className="text-shade-light">{text.title.secondary}</h4>
                   <h1 className="text-lg text-shade-light md:text-4xl lg:text-6xl">
-                    NIT KURUKSHETRA
+                    {text.title.primary}
                   </h1>
                 </article>
 
@@ -151,7 +130,7 @@ export default async function Home({
           quoteBelow={text.director.quote[1]}
           readMore={{
             text: text.director.more,
-            href: `/${locale}/institute/director#message`,
+            href: `/director-message`,
           }}
         />
       </section>

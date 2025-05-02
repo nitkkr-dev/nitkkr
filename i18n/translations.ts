@@ -11,6 +11,11 @@ export interface Translations {
       quote: [string, string];
       more: string;
     };
+    title: {
+      primary: string;
+      secondary: string;
+    };
+    slideshow: { image: string; title: string; subtitle: string }[];
   };
   club: {
     about: string;
@@ -189,6 +194,15 @@ export interface Translations {
       quickSend: { title: string };
     };
   };
+  Research: {
+    advisoryCommittee: {
+      title: string;
+      srNo: string;
+      name: string;
+      designation: string;
+      department: string;
+    };
+  };
   Search: {
     placeholder: string;
     categories: {
@@ -347,6 +361,7 @@ export interface Translations {
     NoResult: { title: string; description: string };
     Unauthorised: { title: string; description: string };
     WorkInProgress: { title: string; description: string };
+    NotAcceptable: { title: string; description: string };
   };
   StudentActivities: {
     title: string;
@@ -361,5 +376,9 @@ export interface Translations {
     sections: {
       clubs: { title: string; more: string };
     };
+  };
+  DirectorMessage: {
+    title: String;
+    message: String[];
   };
 }

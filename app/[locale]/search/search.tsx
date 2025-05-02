@@ -148,7 +148,12 @@ const DefaultView = async ({ locale }: { locale: string }) => {
       { title: 'Departments', href: 'departments', category: 'department' },
       {
         title: 'Dr. Vikram Singh',
-        href: 'faculty/0',
+        href: 'faculty-and-staff/1083',
+        category: 'person',
+      },
+      {
+        title: 'Dr. Jitender Kumar Chhabra',
+        href: 'faculty-and-staff/114',
         category: 'person',
       },
     ],
