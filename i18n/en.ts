@@ -255,7 +255,16 @@ const text: Translations = {
       'Designs registered  to faculty/ staff/ students of NIT Kurukshetra are listed below:',
     ],
     table1: {
-      col: [['Sr. No.', 'Grant Year', 'Copyright Number', 'Title', 'Creator']],
+      col: [
+        ['Sr. No.', 'Grant Year', 'Copyright Number', 'Title', 'Creator'],
+        [
+          '1',
+          '2019',
+          'SW-12631/2019',
+          'Software for Extracting Reusable Software Components from Object-Oeriented Source Code using Search-Based PSO Approach',
+          'Jitender Kumar Chhabra',
+        ],
+      ],
     },
     table2: {
       col: [

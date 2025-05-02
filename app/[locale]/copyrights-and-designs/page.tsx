@@ -26,7 +26,7 @@ export default async function CopyrightsAndDesigns({
         src="institute/campus-infrastructure/header.jpg"
       />
 
-      <div className="max-w-screen-md:whitespace-nowrap mx-16 space-y-4 px-4 py-8">
+      <div className="max-w-screen-md:whitespace-nowrap mx-10 space-y-4 px-2 py-8">
         <h4 className="text-primary-300">{text.description[0]}</h4>
 
         <Suspense fallback={<Loading />}>
@@ -51,10 +51,65 @@ const TableSection = async ({
   type: 'table1' | 'table2';
 }) => {
   const text = (await getTranslations(locale)).CopyrightsAndDesigns;
-  const data = text[type].col;
 
-  const header = data[0];
-  const body = data.slice(1);
+  const header = text[type].col[0];
+
+  const staticRows: Record<string, string[][]> = {
+    table1: [
+      [
+        '1',
+        '2019',
+        'SW-12631/2019',
+        'Software for Extracting Reusable Software Components from Object-Oeriented Source Code using Search-Based PSO Approach',
+        'Jitender Kumar Chhabra',
+      ],
+      [
+        '2',
+        '2019',
+        'SW-12631/2019',
+        'Structural Analysis Tool (SAT)',
+        'Jitender Kumar Chhabra',
+      ],
+      [
+        '3',
+        '2019',
+        'SW-12631/2019',
+        'Structural Analysis Tool (SAT)',
+        'Jitender Kumar Chhabra',
+      ],
+      [
+        '4',
+        '2021',
+        'SW-12631/2019',
+        'Software Tool For Extracting Semantic Features In Java Software',
+        'Jitender Kumar Chhabra',
+      ],
+      [
+        '5',
+        '2021',
+        'SW-12631/2019',
+        'Software Tool For Extracting Semantic Features In Java Software',
+        'Jitender Kumar Chhabra',
+      ],
+      [
+        '6',
+        '2021',
+        'SW-12631/2019',
+        'Software Tool For Extracting Semantic Features In Java Software',
+        'Jitender Kumar Chhabra',
+      ],
+    ],
+    table2: [
+      ['1', '2019', 'SW-12631/2019', 'Wheel Chair', 'Punit'],
+      ['2', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
+      ['3', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
+      ['4', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+      ['5', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+      ['6', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
+    ],
+  };
+
+  const body = staticRows[type];
 
   return (
     <div className="max-h-[400px] overflow-auto rounded-md border border-primary-500">
