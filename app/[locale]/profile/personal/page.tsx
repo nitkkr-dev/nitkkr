@@ -21,7 +21,7 @@ export default async function Personal({
       sex: true,
       telephone: true,
     },
-    where: (person, { eq }) => eq(person.id, session.person.id),
+    where: (person, { eq }) => eq(person.id, session.user.personId),
   }))!;
   const student = (await db.query.students.findFirst({
     where: (student, { eq }) => eq(student.id, person.id),
