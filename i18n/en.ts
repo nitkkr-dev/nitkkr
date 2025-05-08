@@ -437,6 +437,9 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     Sports: {},
     Store: {},
   },
+  Sections: {
+    title: 'Sections',
+  },
   Status: {
     NoResult: {
       title: '404',

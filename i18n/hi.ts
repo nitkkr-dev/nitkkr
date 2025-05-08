@@ -435,6 +435,9 @@ const text: Translations = {
     Sports: {},
     Store: {},
   },
+  Sections: {
+    title: 'प्रशासनिक और अवसंरचना सेवाएँ',
+  },
   Status: {
     NoResult: {
       title: '404',
