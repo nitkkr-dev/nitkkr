@@ -72,140 +72,145 @@ export default async function DirectorCorner({
   return (
     <>
       {/* For DIRECTOR CARD */}
-      <section
-        className="container"
-        // CHANGE THE BACKGROUND IMAGE HERE
+      <div
+        className="w-full bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 1) 0%, rgba(249, 245, 235, 0.85) 85%, rgba(249, 245, 235, 1) 100%), url('')`,
+          backgroundImage: `url('${getS3Url()}/assets/director-bg.jpeg')`, // Use a dedicated director section bg
         }}
       >
-        <Heading
-          text={directorCard.title.toUpperCase()}
-          heading="h2"
-          glyphDirection="dual"
-        />
-        {/* DIRECTOR CARD */}
-        <article className="flex h-fit w-full items-center justify-center">
-          <Card
-            imageAlt={directorCard.alt}
-            imageSrc={directorCard.image}
-            name={directorCard.name}
-            designation={`${directorCard.position}, ${directorCard.institute}`}
-            contactDetails={[
-              {
-                label: Array.isArray(directorCard.contact.phone)
-                  ? directorCard.contact.phone.join(' ')
-                  : directorCard.contact.phone,
-                icon: 'Phone No.',
-              },
-              {
-                label: Array.isArray(directorCard.contact.fax)
-                  ? directorCard.contact.fax.join(' ')
-                  : directorCard.contact.fax,
-                icon: 'Fax No.',
-              },
-              {
-                label: Array.isArray(directorCard.contact.mobile)
-                  ? directorCard.contact.mobile.join(' ')
-                  : directorCard.contact.mobile,
-                icon: 'Mobile',
-              },
-              {
-                label: Array.isArray(directorCard.contact.email)
-                  ? directorCard.contact.email.join(' ')
-                  : directorCard.contact.email,
-                icon: 'Email-ID',
-              },
-            ]}
+        <section className="container mx-auto">
+          <Heading
+            text={directorCard.title.toUpperCase()}
+            heading="h2"
+            glyphDirection="dual"
           />
-        </article>
-      </section>
-      {/* For DIRECTOR OFFICE CARDS */}
-      <section
-        className="container"
-        style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 1) 0%, rgba(249, 245, 235, 0.85) 85%, rgba(249, 245, 235, 1) 100%)`,
-        }}
-      >
-        <Heading
-          text={directorOffice.title.toUpperCase()}
-          heading="h3"
-          glyphDirection="rtl"
-        />
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {directorOffice.cards.map((card, index) => (
+          {/* DIRECTOR CARD */}
+          <article className="flex h-fit w-full items-center justify-center">
             <Card
-              key={index}
-              imageAlt={card.alt}
-              imageSrc={card.image}
-              name={card.name}
-              designation={card.position}
+              imageAlt={directorCard.alt}
+              imageSrc={directorCard.image}
+              name={directorCard.name}
+              designation={`${directorCard.position}, ${directorCard.institute}`}
               contactDetails={[
                 {
-                  label: Array.isArray(card.phone)
-                    ? card.phone.join(' ')
-                    : card.phone,
+                  label: Array.isArray(directorCard.contact.phone)
+                    ? directorCard.contact.phone.join(' ')
+                    : directorCard.contact.phone,
                   icon: 'Phone No.',
                 },
                 {
-                  label: card.email,
+                  label: Array.isArray(directorCard.contact.fax)
+                    ? directorCard.contact.fax.join(' ')
+                    : directorCard.contact.fax,
+                  icon: 'Fax No.',
+                },
+                {
+                  label: Array.isArray(directorCard.contact.mobile)
+                    ? directorCard.contact.mobile.join(' ')
+                    : directorCard.contact.mobile,
+                  icon: 'Mobile',
+                },
+                {
+                  label: Array.isArray(directorCard.contact.email)
+                    ? directorCard.contact.email.join(' ')
+                    : directorCard.contact.email,
                   icon: 'Email-ID',
                 },
               ]}
             />
-          ))}
-        </div>
-      </section>
-      {/* For DIRECTOR's MESSAGE */}
-      <section
-        className="container"
+          </article>
+        </section>
+      </div>
+      {/* For DIRECTOR OFFICE CARDS */}
+      <div
+        className="w-full bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 1) 0%, rgba(249, 245, 235, 0.85) 85%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/assets/temple-1.jpeg')`,
+          backgroundImage: `url('${getS3Url()}/assets/office-bg.jpeg')`, // Use a dedicated office section bg
         }}
       >
-        <Heading
-          text={text.title.toUpperCase()}
-          heading="h3"
-          glyphDirection="dual"
-        />
-        <article className="w-full">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r ">
-            {text.message.slice(0, 7).map((message, index) => (
-              <span key={index} className="mb-5 block">
-                {message}
-              </span>
+        <section className="container mx-auto py-8">
+          <Heading
+            text={directorOffice.title.toUpperCase()}
+            heading="h3"
+            glyphDirection="rtl"
+          />
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {directorOffice.cards.map((card, index) => (
+              <Card
+                key={index}
+                imageAlt={card.alt}
+                imageSrc={card.image}
+                name={card.name}
+                designation={card.position}
+                contactDetails={[
+                  {
+                    label: Array.isArray(card.phone)
+                      ? card.phone.join(' ')
+                      : card.phone,
+                    icon: 'Phone No.',
+                  },
+                  {
+                    label: card.email,
+                    icon: 'Email-ID',
+                  },
+                ]}
+              />
             ))}
-          </p>
-        </article>
-        <article className="mx-auto flex items-center justify-center max-md:flex-col">
-          <p className="w-fit max-w-4xl text-center text-lg max-md:rounded-t md:rounded-r">
-            {text.message.slice(7, 9).map((message, index) => (
-              <span key={index} className="mb-5 block">
-                {message}
-              </span>
-            ))}
-          </p>
-        </article>
-        <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r ">
-            {text.message.slice(9, 11).map((message, index) => (
-              <span key={index} className="mb-3 block">
-                {message}
-              </span>
-            ))}
-          </p>
-        </article>
-        <article className="mx-auto flex items-center justify-center max-md:flex-col">
-          <p className="w-fit max-w-4xl text-justify text-lg max-md:rounded-t md:rounded-r">
-            <span className="bold mb-5 block">{text.message[11]}</span>
-          </p>
-        </article>
-        <article className="flex-end flex justify-end">
-          <p className="w-fit max-w-4xl text-justify text-lg font-bold max-md:rounded-t md:rounded-r">
-            <span className="bold mb-5 block">{text.message[12]}</span>
-          </p>
-        </article>
-      </section>
+          </div>
+        </section>
+      </div>
+      {/* For DIRECTOR's MESSAGE */}
+      <div
+        className="w-full bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.95) 0%, rgba(249, 245, 235, 0.85) 85%, rgba(249, 245, 235, 0.95) 100%), url('${getS3Url()}/assets/temple-1.jpeg')`,
+        }}
+      >
+        <section className="container mx-auto">
+          <Heading
+            text={text.title.toUpperCase()}
+            heading="h3"
+            glyphDirection="dual"
+          />
+          <article className="w-full">
+            <p className="text-lg max-md:rounded-t md:w-full md:rounded-r ">
+              {text.message.slice(0, 7).map((message, index) => (
+                <span key={index} className="mb-5 block">
+                  {message}
+                </span>
+              ))}
+            </p>
+          </article>
+          <article className="mx-auto flex items-center justify-center max-md:flex-col">
+            <p className="w-fit max-w-4xl text-center text-lg max-md:rounded-t md:rounded-r">
+              {text.message.slice(7, 9).map((message, index) => (
+                <span key={index} className="mb-5 block">
+                  {message}
+                </span>
+              ))}
+            </p>
+          </article>
+          <article className="flex max-md:flex-col">
+            <p className="text-lg max-md:rounded-t md:w-full md:rounded-r ">
+              {text.message.slice(9, 11).map((message, index) => (
+                <span key={index} className="mb-3 block">
+                  {message}
+                </span>
+              ))}
+            </p>
+          </article>
+          <article className="mx-auto flex items-center justify-center max-md:flex-col">
+            <p className="w-fit max-w-4xl text-justify text-lg max-md:rounded-t md:rounded-r">
+              <span className="bold mb-5 block">{text.message[11]}</span>
+            </p>
+          </article>
+          <article className="flex-end flex justify-end">
+            <p className="w-fit max-w-4xl text-justify text-lg font-bold max-md:rounded-t md:rounded-r">
+              <span className="bold mb-5 block">{text.message[12]}</span>
+            </p>
+          </article>
+        </section>
+      </div>
     </>
   );
 }
@@ -240,10 +245,11 @@ const Card: React.FC<CardProps> = ({
         <div className="flex h-full items-center justify-center gap-4 p-2 sm:p-3 md:p-4">
           <Image
             alt={imageAlt}
-            className={`rounded ${imageAlt === "Director's Image"
+            className={`rounded ${
+              imageAlt === "Director's Image"
                 ? 'size-32 md:size-40 lg:size-44 xl:size-48 2xl:size-52'
                 : 'size-32 lg:size-36 xl:size-40 2xl:size-44'
-              }`}
+            }`}
             height={0}
             src={imageSrc}
             width={0}
