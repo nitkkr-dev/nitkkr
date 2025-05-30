@@ -1,13 +1,9 @@
 import Image from 'next/image';
-import { FaPhone } from 'react-icons/fa6';
-import { MdEmail } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
-// CONSTANTS FOR DIRECTOR MESSAGE PAGE
-// DIRECTOR's CARDS
 const directorCard = {
   image: `${getS3Url()}/assets/director.jpeg`,
   alt: "Director's Image",
@@ -23,7 +19,7 @@ const directorCard = {
   },
 };
 
-// DIRECTOR's OFFICE
+// Placeholder data for office cards. Replace with real data as needed.
 const directorOfficeCards = [
   {
     image: `${getS3Url()}/assets/office.jpeg`,
@@ -75,7 +71,7 @@ export default async function DirectorCorner({
       <div
         className="w-full bg-cover bg-center"
         style={{
-          backgroundImage: `url('${getS3Url()}/assets/director-bg.jpeg')`, // Use a dedicated director section bg
+          backgroundImage: `url('${getS3Url()}/assets/director-bg.jpeg')`,
         }}
       >
         <section className="container mx-auto">
@@ -84,7 +80,6 @@ export default async function DirectorCorner({
             heading="h2"
             glyphDirection="dual"
           />
-          {/* DIRECTOR CARD */}
           <article className="flex h-fit w-full items-center justify-center">
             <Card
               imageAlt={directorCard.alt}
@@ -93,27 +88,19 @@ export default async function DirectorCorner({
               designation={`${directorCard.position}, ${directorCard.institute}`}
               contactDetails={[
                 {
-                  label: Array.isArray(directorCard.contact.phone)
-                    ? directorCard.contact.phone.join(' ')
-                    : directorCard.contact.phone,
+                  label: directorCard.contact.phone.join(' '),
                   icon: 'Phone No.',
                 },
                 {
-                  label: Array.isArray(directorCard.contact.fax)
-                    ? directorCard.contact.fax.join(' ')
-                    : directorCard.contact.fax,
+                  label: directorCard.contact.fax,
                   icon: 'Fax No.',
                 },
                 {
-                  label: Array.isArray(directorCard.contact.mobile)
-                    ? directorCard.contact.mobile.join(' ')
-                    : directorCard.contact.mobile,
+                  label: directorCard.contact.mobile,
                   icon: 'Mobile',
                 },
                 {
-                  label: Array.isArray(directorCard.contact.email)
-                    ? directorCard.contact.email.join(' ')
-                    : directorCard.contact.email,
+                  label: directorCard.contact.email,
                   icon: 'Email-ID',
                 },
               ]}
@@ -125,7 +112,7 @@ export default async function DirectorCorner({
       <div
         className="w-full bg-cover bg-center"
         style={{
-          backgroundImage: `url('${getS3Url()}/assets/office-bg.jpeg')`, // Use a dedicated office section bg
+          backgroundImage: `url('${getS3Url()}/assets/office-bg.jpeg')`,
         }}
       >
         <section className="container mx-auto py-8">
@@ -144,9 +131,7 @@ export default async function DirectorCorner({
                 designation={card.position}
                 contactDetails={[
                   {
-                    label: Array.isArray(card.phone)
-                      ? card.phone.join(' ')
-                      : card.phone,
+                    label: card.phone.join(' '),
                     icon: 'Phone No.',
                   },
                   {
@@ -173,41 +158,24 @@ export default async function DirectorCorner({
             glyphDirection="dual"
           />
           <article className="w-full">
-            <p className="text-lg max-md:rounded-t md:w-full md:rounded-r ">
-              {text.message.slice(0, 7).map((message, index) => (
-                <span key={index} className="mb-5 block">
-                  {message}
+            <div className="flex flex-col gap-5 text-lg max-md:rounded-t md:w-full md:rounded-r">
+              {(text.message as unknown as string[]).map((message, index) => (
+                <span
+                  key={index}
+                  className={
+                    index === 11
+                      ? 'bold mb-5 block'
+                      : index === 12
+                        ? 'bold mb-5 block text-right font-bold'
+                        : index >= 9 && index <= 10
+                          ? 'mb-3 block'
+                          : 'mb-5 block'
+                  }
+                >
+                  {message.toString()}
                 </span>
               ))}
-            </p>
-          </article>
-          <article className="mx-auto flex items-center justify-center max-md:flex-col">
-            <p className="w-fit max-w-4xl text-center text-lg max-md:rounded-t md:rounded-r">
-              {text.message.slice(7, 9).map((message, index) => (
-                <span key={index} className="mb-5 block">
-                  {message}
-                </span>
-              ))}
-            </p>
-          </article>
-          <article className="flex max-md:flex-col">
-            <p className="text-lg max-md:rounded-t md:w-full md:rounded-r ">
-              {text.message.slice(9, 11).map((message, index) => (
-                <span key={index} className="mb-3 block">
-                  {message}
-                </span>
-              ))}
-            </p>
-          </article>
-          <article className="mx-auto flex items-center justify-center max-md:flex-col">
-            <p className="w-fit max-w-4xl text-justify text-lg max-md:rounded-t md:rounded-r">
-              <span className="bold mb-5 block">{text.message[11]}</span>
-            </p>
-          </article>
-          <article className="flex-end flex justify-end">
-            <p className="w-fit max-w-4xl text-justify text-lg font-bold max-md:rounded-t md:rounded-r">
-              <span className="bold mb-5 block">{text.message[12]}</span>
-            </p>
+            </div>
           </article>
         </section>
       </div>
@@ -215,22 +183,7 @@ export default async function DirectorCorner({
   );
 }
 
-interface ContactDetail {
-  label: string;
-  icon?: React.ReactNode | string;
-}
-
-interface CardProps {
-  imageAlt: string;
-  imageSrc: string;
-  name: string;
-  designation: string;
-  isDepartmentHead?: boolean;
-  departmentHeadText?: string;
-  contactDetails: ContactDetail[];
-}
-
-const Card: React.FC<CardProps> = ({
+const Card = ({
   imageAlt,
   imageSrc,
   name,
@@ -238,6 +191,14 @@ const Card: React.FC<CardProps> = ({
   isDepartmentHead = false,
   departmentHeadText = '',
   contactDetails,
+}: {
+  imageAlt: string;
+  imageSrc: string;
+  name: string;
+  designation: string;
+  isDepartmentHead?: boolean;
+  departmentHeadText?: string;
+  contactDetails: { label: string; icon?: React.ReactNode | string }[];
 }) => {
   return (
     <div className="container flex h-full w-full items-center justify-center max-sm:p-0">
@@ -250,15 +211,20 @@ const Card: React.FC<CardProps> = ({
                 ? 'size-32 md:size-40 lg:size-44 xl:size-48 2xl:size-52'
                 : 'size-32 lg:size-36 xl:size-40 2xl:size-44'
             }`}
-            height={0}
             src={imageSrc}
-            width={0}
+            width={160}
+            height={160}
+            // You can adjust width/height as needed for your design
           />
           <main className="flex w-fit flex-col p-4">
             <header className="mb-1 sm:mb-2 md:mb-3 lg:mb-4">
               <h4 className="mb-0">{name}</h4>
               <p
-                className={`${designation.toLowerCase().includes('director') ? 'font-semibold' : ''}`}
+                className={
+                  designation.toLowerCase().includes('director')
+                    ? 'font-semibold'
+                    : ''
+                }
               >
                 {designation}
                 {isDepartmentHead && ` (${departmentHeadText})`}
