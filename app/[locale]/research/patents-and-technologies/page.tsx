@@ -1,5 +1,6 @@
-import Heading from '~/components/heading';
-import { getTranslations } from '~/i18n/translations';
+import { Suspense } from 'react';
+
+import Loading from '~/components/loading';
 import ImageHeader from '~/components/image-header';
 import {
   Table,
@@ -9,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
-import { Suspense } from 'react';
 import { PaginationWithLogic } from '~/components/pagination/pagination';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function patentsandtechnology({
   params: { locale },
@@ -45,41 +46,45 @@ export default async function patentsandtechnology({
 
   return (
     <>
-      <ImageHeader title={text.title} src="institute/sports/header.jpg" />
+      <ImageHeader title={text.title} src="institute/patent/header.jpg" />
       <section className="container space-y-4">
         <div className="p-8">
-          <Table scrollAreaClassName="p-4 bg-white rounded-md shadow-sm">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="px-2 py-1 ">{text.no}</TableHead>
-                <TableHead className="px-2 py-1 ">{text.appno}</TableHead>
-                <TableHead className="px-2 py-1 ">{text.patno}</TableHead>
-                <TableHead className="px-2 py-1 ">{text.techTitle}</TableHead>
-                <TableHead className="px-2 py-1 ">{text.inventor}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Suspense
-                fallback={
-                  <TableRow>
-                    <TableCell colSpan={5} className="text-center">
-                      Loading patent data...
-                    </TableCell>
+          <div className="w-full overflow-x-auto">
+            <div className="min-w-max">
+              <Table className="bg-white rounded-md p-4 shadow-sm">
+                <TableHeader>
+                  <TableRow className="px-2 py-1">
+                    <TableHead>{text.techTitle}</TableHead>
+                    <TableHead>{text.techTitle}</TableHead>
+                    <TableHead>{text.techTitle}</TableHead>
+                    <TableHead>{text.techTitle}</TableHead>
+                    <TableHead>{text.inventor}</TableHead>
                   </TableRow>
-                }
-              >
-                <DelayedPatentTable
-                  tableData={text.patents.map((patent, index) => ({
-                    application_number: patent.application_number,
-                    patent_number: patent.patent_number,
-                    title: patent.title,
-                    inventors: patent.inventors,
-                  }))}
-                  currentPage={currentPage}
-                />
-              </Suspense>
-            </TableBody>
-          </Table>
+                </TableHeader>
+                <TableBody>
+                  <Suspense
+                    fallback={
+                      <TableRow>
+                        <TableCell colSpan={5} className="text-center">
+                          <Loading />
+                        </TableCell>
+                      </TableRow>
+                    }
+                  >
+                    <PatentTable
+                      tableData={text.patents.map((patent, index) => ({
+                        application_number: patent.application_number,
+                        patent_number: patent.patent_number,
+                        title: patent.title,
+                        inventors: patent.inventors,
+                      }))}
+                      currentPage={currentPage}
+                    />
+                  </Suspense>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
 
           {/* Pagination Component Below Table */}
           <div className="mt-6">
@@ -94,7 +99,7 @@ export default async function patentsandtechnology({
   );
 }
 
-const DelayedPatentTable = async ({
+const PatentTable = async ({
   tableData,
   currentPage,
 }: {
