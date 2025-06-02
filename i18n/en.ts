@@ -1,5 +1,3 @@
-import { Description } from '@radix-ui/react-dialog';
-
 import type { Translations } from './translations';
 
 const text: Translations = {
@@ -254,28 +252,25 @@ const text: Translations = {
       'The copyrights obtained by faculty/ staff/ students of NIT Kurukshetra are listed below:',
       'Designs registered  to faculty/ staff/ students of NIT Kurukshetra are listed below:',
     ],
-    table1: {
-      col: [
-        ['Sr. No.', 'Grant Year', 'Copyright Number', 'Title', 'Creator'],
-        [
-          '1',
-          '2019',
-          'SW-12631/2019',
-          'Software for Extracting Reusable Software Components from Object-Oeriented Source Code using Search-Based PSO Approach',
-          'Jitender Kumar Chhabra',
-        ],
-      ],
+    copyrights: {
+      headers: {
+        serialNo: 'Sr. No.',
+        grantYear: 'Grant Year',
+        regNo: 'Registration Number',
+        title: 'Title',
+        author: 'Author',
+      },
+      rows: [],
     },
-    table2: {
-      col: [
-        [
-          'Sr. No.',
-          'Year of Acceptance',
-          'Application Number',
-          'Title',
-          'Creator',
-        ],
-      ],
+    designs: {
+      headers: {
+        serialNo: 'Sr. No.',
+        yearOfAcceptance: 'Year of Acceptance',
+        applicationNo: 'Application Number',
+        title: 'Title',
+        creator: 'Creator',
+      },
+      rows: [[]],
     },
   },
   Section: {

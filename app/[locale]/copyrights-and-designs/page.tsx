@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
-import { ScrollArea } from '~/components/ui/scroll-area';
 
 export default async function CopyrightsAndDesigns({
   params: { locale },
@@ -27,17 +26,17 @@ export default async function CopyrightsAndDesigns({
         src="institute/campus-infrastructure/header.jpg"
       />
 
-      <div className="max-w-screen-md:whitespace-nowrap mx-10 space-y-4 px-2 py-8">
+      <div className="mx-10 space-y-10 px-4 py-8">
         <h4 className="text-primary-300">{text.description[0]}</h4>
 
         <Suspense fallback={<Loading />}>
-          <TableSection type="table1" locale={locale} />
+          <TableSection type="copyrights" locale={locale} />
         </Suspense>
 
         <h4 className="text-primary-300">{text.description[1]}</h4>
 
         <Suspense fallback={<Loading />}>
-          <TableSection type="table2" locale={locale} />
+          <TableSection type="designs" locale={locale} />
         </Suspense>
       </div>
     </>
@@ -49,19 +48,20 @@ const TableSection = async ({
   type,
 }: {
   locale: string;
-  type: 'table1' | 'table2';
+  type: 'copyrights' | 'designs';
 }) => {
   const text = (await getTranslations(locale)).CopyrightsAndDesigns;
+  const { headers } = text[type];
 
-  const header = text[type].col[0];
+  const headerEntries = Object.values(headers);
 
-  const staticRows: Record<string, string[][]> = {
-    table1: [
+  const staticRows: Record<'copyrights' | 'designs', string[][]> = {
+    copyrights: [
       [
         '1',
         '2019',
         'SW-12631/2019',
-        'Software for Extracting Reusable Software Components from Object-Oeriented Source Code using Search-Based PSO Approach',
+        'Software for Extracting Reusable Software Components from Object-Oriented Source Code using Search-Based PSO Approach',
         'Jitender Kumar Chhabra',
       ],
       [
@@ -100,7 +100,7 @@ const TableSection = async ({
         'Jitender Kumar Chhabra',
       ],
     ],
-    table2: [
+    designs: [
       ['1', '2019', 'SW-12631/2019', 'Wheel Chair', 'Punit'],
       ['2', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
       ['3', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
@@ -110,29 +110,29 @@ const TableSection = async ({
     ],
   };
 
-  const body = staticRows[type];
+  const rows = staticRows[type];
 
   return (
-    <ScrollArea className="max-h-[400px] overflow-auto rounded-md border border-primary-500">
-      <div className="w-full overflow-auto">
-        <Table className="min-w-[800px] table-auto">
+    <div className="w-full overflow-x-auto">
+      <div className="min-w-[800px]">
+        <Table scrollAreaClassName="max-h-96 overflow-auto">
           <TableHeader>
             <TableRow>
-              {header.map((head, index) => (
+              {headerEntries.map((label, index) => (
                 <TableHead
                   key={index}
-                  className={`${
-                    index === header.length - 1 ? 'w-[300px]' : ''
-                  } whitespace-nowrap`}
+                  className={`whitespace-normal break-words px-4 py-2 ${
+                    index === headerEntries.length - 1 ? 'w-[300px]' : ''
+                  }`}
                 >
-                  {head}
+                  {label}
                 </TableHead>
               ))}
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {body.map((row, rowIndex) => (
+            {rows.map((row, rowIndex) => (
               <TableRow
                 key={rowIndex}
                 className="text-sm text-neutral-700 hover:bg-neutral-50"
@@ -140,8 +140,8 @@ const TableSection = async ({
                 {row.map((cell, cellIndex) => (
                   <TableCell
                     key={cellIndex}
-                    className={`px-[10px] py-[16px] ${
-                      cellIndex === header.length - 1 ? 'w-[300px]' : ''
+                    className={`whitespace-normal break-words px-[10px] py-[16px] ${
+                      cellIndex === headerEntries.length - 1 ? 'w-[300px]' : ''
                     }`}
                   >
                     {cell}
@@ -152,6 +152,6 @@ const TableSection = async ({
           </TableBody>
         </Table>
       </div>
-    </ScrollArea>
+    </div>
   );
 };
