@@ -411,87 +411,13 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
   },
   patentsandtechnology: {
     title: 'PATENTS & TECHNOLOGY',
-    no: 'Sr.no.',
-    appno: 'Application no.',
-    patno: 'Patent no.',
+    number: 'Sr.no.',
+    applicationNumber: 'Application no.',
+    patentNumber: 'Patent no.',
     techTitle: 'Technology / Invention Title',
     inventor: 'Inventor',
 
-    patents: [
-      {
-        id: '1',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title: 'Intelligent induction hardening device and method thereof',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_1',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-      {
-        id: '2',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title:
-          'Method of preventing radioactive gas to diffuse indoor environment by forming concrete with shielding effect',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_2',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-      {
-        id: '3',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title: 'System for extracting water from atmospheric air',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_3',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-      {
-        id: '4',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title: 'System for extracting water from atmospheric air',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_4',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-      {
-        id: '5',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title: 'System for extracting water from atmospheric air',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_5',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-      {
-        id: '6',
-        application_number: '2269/DEL/2012',
-        patent_number: '320045',
-        title: 'System for extracting water from atmospheric air',
-        inventors: [
-          {
-            facultyId: 'jitender_kumar_chhabra_6',
-            name: 'Jitender Kumar Chhabra',
-          },
-        ],
-      },
-    ],
+    
   },
 
   StudentActivities: {
