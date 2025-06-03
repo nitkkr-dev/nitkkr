@@ -96,9 +96,9 @@ export default async function PatentsAndTechnology({
   ];
 
   // Get the total count for pagination
-   const getPatentCount = async () => {
+  const getPatentCount = async () => {
     const count = staticPatents.length; // Replace with your actual DB call
-    return  [{count}] ;
+    return [{ count }];
   };
 
   return (
@@ -108,14 +108,16 @@ export default async function PatentsAndTechnology({
         <div className="p-8">
           <div className="w-full overflow-x-auto">
             <div className="min-w-max">
-              <Table className="bg-white rounded-md p-4 shadow-sm">
+              <Table className="bg-white" style={{ border: '2px solid #DC2626', borderRadius: '8px', overflow: 'hidden' }}>
                 <TableHeader>
-                  <TableRow className="px-2 py-1">
-                    <TableHead>{text.number}.</TableHead>
-                    <TableHead>{text.applicationNumber}</TableHead>
-                    <TableHead>{text.patentNumber}</TableHead>
-                    <TableHead>{text.techTitle}</TableHead>
-                    <TableHead>{text.inventor}</TableHead>
+                  <TableRow className="bg-white">
+                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.number}</TableHead>
+                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.applicationNumber}</TableHead>
+                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>
+                      {text.patentNumber}
+                    </TableHead>
+                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.techTitle}</TableHead>
+                    <TableHead className="font-bold text-base px-6 py-4" style={{ color: '#DC2626' }}>{text.inventor}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -138,13 +140,10 @@ export default async function PatentsAndTechnology({
               </Table>
             </div>
           </div>
-
-          {/* Pagination Component Below Table */}
           <div className="mt-6">
             <PaginationWithLogic
-            currentPage={currentPage}
+              currentPage={currentPage}
               query={getPatentCount()}
-              
             />
           </div>
         </div>
@@ -156,7 +155,7 @@ export default async function PatentsAndTechnology({
 const PatentTable = ({
   tableData,
   currentPage,
-  itemsPerPage=4,
+  itemsPerPage = 4,
 }: {
   tableData: {
     applicationNumber: string;
@@ -176,12 +175,16 @@ const PatentTable = ({
   return (
     <>
       {visibleData.map((item, index) => (
-        <TableRow key={`${item.applicationNumber}-${startIndex + index}`} className="text-xs px-2 py-1">
-          <TableCell>{startIndex + index + 1}</TableCell>
-          <TableCell>{item.applicationNumber}</TableCell>
-          <TableCell>{item.patentNumber}</TableCell>
-          <TableCell>{item.title}</TableCell>
-          <TableCell>
+        <TableRow
+          key={`${item.applicationNumber}-${startIndex + index}`}
+          className={`hover:bg-gray-50 ${(startIndex + index) % 2 === 1 ? 'bg-gray-50' : 'bg-white'}`}
+          style={{ borderBottom: '1px solid #D1D5DB' }}
+        >
+          <TableCell className="px-6 py-4 text-sm font-medium text-black border-r border-gray-300">{startIndex + index + 1}</TableCell>
+          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300 " style={{ color: '#000000' }}>{item.applicationNumber}</TableCell>
+          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300" style={{ color: '#000000' }}>{item.patentNumber}</TableCell>
+          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300" style={{ color: '#000000' }}>{item.title}</TableCell>
+          <TableCell className="px-6 py-4 text-sm text-black" style={{ color: '#000000' }}>
             {item.inventors.map((inventor) => inventor.name).join(', ')}
           </TableCell>
         </TableRow>

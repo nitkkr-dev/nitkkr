@@ -416,8 +416,6 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     patentNumber: 'Patent no.',
     techTitle: 'Technology / Invention Title',
     inventor: 'Inventor',
-
-    
   },
 
   StudentActivities: {
