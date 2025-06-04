@@ -14,6 +14,7 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
 import { countChildren } from '~/server/s3';
+import { getS3Url } from '~/server/s3';
 
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
@@ -71,66 +72,83 @@ export default async function Department({
         src={`departments/${department.alias}/banner.png`}
       />
 
-      <Heading
-        className="container"
-        glyphDirection="rtl"
-        heading="h3"
-        id="about"
-        text={text.headings.about.toUpperCase()}
-      />
-
-      <article className="container flex drop-shadow max-md:flex-col">
-        <p
-          className={cn(
-            'p-2 sm:p-3 md:p-4',
-            'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
-          )}
-        >
-          {department.about}
-        </p>
-        <Image
-          alt={text.headings.about}
-          className="w-full max-md:rounded-b md:order-first md:rounded-l"
-          height={0}
-          src={`departments/${department.alias}/about.png`}
-          width={0}
+      <div className="relative">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.03]"
+          style={{
+            backgroundImage: `url('${getS3Url()}/assets/target.svg')`,
+            backgroundSize: '700px',
+            backgroundPosition: '300px 0px',
+          }}
         />
-      </article>
 
-      <article
-        className={cn(
-          'container md:flex md:gap-2',
-          'md:my-12 lg:my-16 xl:my-20'
-        )}
-        id="vision-mission"
-      >
-        <section className="md:w-1/2">
+        <div className="relative z-10">
           <Heading
-            className="!mb-0"
-            glyphDirection="ltr"
+            className="container"
+            glyphDirection="rtl"
             heading="h3"
-            text={text.headings.vision.toUpperCase()}
+            id="about"
+            text={text.headings.about.toUpperCase()}
           />
-          <p>{department.vision}</p>
 
-          <Heading
-            className="!mb-0"
-            glyphDirection="ltr"
-            heading="h3"
-            text={text.headings.mission.toUpperCase()}
-          />
-          <p>{department.mission}</p>
-        </section>
+          <article className="container flex drop-shadow max-md:flex-col">
+            <p
+              className={cn(
+                'p-2 sm:p-3 md:p-4',
+                'bg-neutral-50 bg-opacity-80 max-md:rounded-t md:w-full md:rounded-r'
+              )}
+            >
+              {department.about}
+            </p>
+            <Image
+              alt={text.headings.about}
+              className="w-full max-md:rounded-b md:order-first md:rounded-l"
+              height={0}
+              src={`departments/${department.alias}/about.png`}
+              width={0}
+            />
+          </article>
 
-        <Image
-          alt={text.headings.vision}
-          className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
-          height={0}
-          src={`departments/${department.alias}/vision-mission.png`}
-          width={0}
-        />
-      </article>
+          {/* Vision + Mission Section */}
+          <article
+            className={cn(
+              'container md:flex md:gap-2',
+              'md:my-12 lg:my-16 xl:my-20'
+            )}
+            id="vision-mission"
+          >
+            <section className="md:w-1/2">
+              <Heading
+                className="!mb-0"
+                glyphDirection="ltr"
+                heading="h3"
+                text={text.headings.vision.toUpperCase()}
+              />
+              <p className="bg-neutral-50 bg-opacity-80 p-2">
+                {department.vision}
+              </p>
 
+              <Heading
+                className="!mb-0"
+                glyphDirection="ltr"
+                heading="h3"
+                text={text.headings.mission.toUpperCase()}
+              />
+              <p className="bg-neutral-50 bg-opacity-80 p-2">
+                {department.mission}
+              </p>
+            </section>
+
+            <Image
+              alt={text.headings.vision}
+              className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
+              height={0}
+              src={`departments/${department.alias}/vision-mission.png`}
+              width={0}
+            />
+          </article>
+        </div>
+      </div>
       {departmentHead && (
         <>
           <Heading
