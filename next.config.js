@@ -13,6 +13,7 @@ const config = {
       { protocol: 'https', hostname: env.AWS_PUBLIC_S3_NAME },
       { protocol: 'https', hostname: env.AWS_PRIVATE_S3_NAME },
     ],
+    domains: ['images.unsplash.com'],
   },
 };
 
