@@ -368,6 +368,14 @@ export interface Translations {
     WorkInProgress: { title: string; description: string };
     NotAcceptable: { title: string; description: string };
   };
+  patentsandtechnology: {
+    title: string;
+    number: string;
+    applicationNumber: string;
+    patentNumber: string;
+    techTitle: string;
+    inventor: string;
+  };
   StudentActivities: {
     title: string;
     headings: {
