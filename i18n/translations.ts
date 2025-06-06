@@ -182,27 +182,24 @@ export interface Translations {
   CopyrightsAndDesigns: {
     title: string;
     description: string[];
-    copyrights: {
-      headers: {
+    headers: {
+      copyrights: {
         serialNo: string;
         grantYear: string;
         regNo: string;
         title: string;
         author: string;
       };
-      rows: string[][];
-    };
-    designs: {
-      headers: {
+      designs: {
         serialNo: string;
         yearOfAcceptance: string;
         applicationNo: string;
         title: string;
         creator: string;
       };
-      rows: string[][];
     };
   };
+
   Search: {
     placeholder: string;
     categories: {

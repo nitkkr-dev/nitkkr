@@ -250,29 +250,26 @@ const text: Translations = {
     title: 'COPYRIGHTS & DESIGNS',
     description: [
       'The copyrights obtained by faculty/ staff/ students of NIT Kurukshetra are listed below:',
-      'Designs registered  to faculty/ staff/ students of NIT Kurukshetra are listed below:',
+      'Designs registered to faculty/ staff/ students of NIT Kurukshetra are listed below:',
     ],
-    copyrights: {
-      headers: {
+    headers: {
+      copyrights: {
         serialNo: 'Sr. No.',
         grantYear: 'Grant Year',
         regNo: 'Registration Number',
         title: 'Title',
         author: 'Author',
       },
-      rows: [],
-    },
-    designs: {
-      headers: {
+      designs: {
         serialNo: 'Sr. No.',
         yearOfAcceptance: 'Year of Acceptance',
         applicationNo: 'Application Number',
         title: 'Title',
         creator: 'Creator',
       },
-      rows: [[]],
     },
   },
+
   Section: {
     about: 'ABOUT',
     gallery: 'GALLERY',

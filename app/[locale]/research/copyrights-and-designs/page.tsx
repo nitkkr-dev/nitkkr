@@ -19,42 +19,6 @@ export default async function CopyrightsAndDesigns({
 }) {
   const text = (await getTranslations(locale)).CopyrightsAndDesigns;
 
-  return (
-    <>
-      <ImageHeader
-        title={text.title}
-        src="institute/campus-infrastructure/header.jpg"
-      />
-
-      <div className="mx-10 space-y-10 px-4 py-8">
-        <h4 className="text-primary-300">{text.description[0]}</h4>
-
-        <Suspense fallback={<Loading />}>
-          <TableSection type="copyrights" locale={locale} />
-        </Suspense>
-
-        <h4 className="text-primary-300">{text.description[1]}</h4>
-
-        <Suspense fallback={<Loading />}>
-          <TableSection type="designs" locale={locale} />
-        </Suspense>
-      </div>
-    </>
-  );
-}
-
-const TableSection = async ({
-  locale,
-  type,
-}: {
-  locale: string;
-  type: 'copyrights' | 'designs';
-}) => {
-  const text = (await getTranslations(locale)).CopyrightsAndDesigns;
-  const { headers } = text[type];
-
-  const headerEntries = Object.values(headers);
-
   const staticRows: Record<'copyrights' | 'designs', string[][]> = {
     copyrights: [
       [
@@ -110,48 +74,81 @@ const TableSection = async ({
     ],
   };
 
-  const rows = staticRows[type];
+  return (
+    <>
+      <ImageHeader
+        title={text.title}
+        src="institute/campus-infrastructure/header.jpg"
+      />
+
+      <div className="mx-10 space-y-10 px-4 py-8">
+        <h4 className="text-primary-300">{text.description[0]}</h4>
+
+        <Suspense fallback={<Loading />}>
+          <TableSection
+            headers={text.headers.copyrights}
+            rows={staticRows.copyrights}
+          />
+        </Suspense>
+
+        <h4 className="text-primary-300">{text.description[1]}</h4>
+
+        <Suspense fallback={<Loading />}>
+          <TableSection
+            headers={text.headers.designs}
+            rows={staticRows.designs}
+          />
+        </Suspense>
+      </div>
+    </>
+  );
+}
+
+const TableSection = ({
+  headers,
+  rows,
+}: {
+  headers: Record<string, string>;
+  rows: string[][];
+}) => {
+  const headerEntries = Object.values(headers);
 
   return (
     <div className="w-full overflow-x-auto">
-      <div className="min-w-[800px]">
-        <Table scrollAreaClassName="max-h-96 overflow-auto">
-          <TableHeader>
-            <TableRow>
-              {headerEntries.map((label, index) => (
-                <TableHead
-                  key={index}
-                  className={`whitespace-normal break-words px-4 py-2 ${
-                    index === headerEntries.length - 1 ? 'w-[300px]' : ''
-                  }`}
+      <Table scrollAreaClassName="min-w-[800px] max-h-96 overflow-auto">
+        <TableHeader>
+          <TableRow>
+            {headerEntries.map((label, index) => (
+              <TableHead
+                key={index}
+                className={`whitespace-normal break-words px-4 py-2 ${
+                  index === headerEntries.length - 1 ? 'w-[300px]' : ''
+                }`}
+              >
+                {label}
+              </TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          {rows.map((row, rowIndex) => (
+            <TableRow
+              key={rowIndex}
+              className="text-sm text-neutral-700 hover:bg-neutral-50"
+            >
+              {row.map((cell, cellIndex) => (
+                <TableCell
+                  key={cellIndex}
+                  className="whitespace-normal break-words px-3 py-4"
                 >
-                  {label}
-                </TableHead>
+                  {cell}
+                </TableCell>
               ))}
             </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {rows.map((row, rowIndex) => (
-              <TableRow
-                key={rowIndex}
-                className="text-sm text-neutral-700 hover:bg-neutral-50"
-              >
-                {row.map((cell, cellIndex) => (
-                  <TableCell
-                    key={cellIndex}
-                    className={`whitespace-normal break-words px-[10px] py-[16px] ${
-                      cellIndex === headerEntries.length - 1 ? 'w-[300px]' : ''
-                    }`}
-                  >
-                    {cell}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

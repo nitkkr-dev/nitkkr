@@ -217,25 +217,21 @@ const text: Translations = {
       'एनआईटी कुरुक्षेत्र के संकाय सदस्यों / कर्मचारियों / छात्रों द्वारा प्राप्त कॉपीराइट्स नीचे सूचीबद्ध हैं:',
       'एनआईटी कुरुक्षेत्र के संकाय सदस्यों / कर्मचारियों / छात्रों के नाम दर्ज डिज़ाइनों की सूची नीचे दी गई है:',
     ],
-    copyrights: {
-      headers: {
+    headers: {
+      copyrights: {
         serialNo: 'क्रम संख्या',
         grantYear: 'अनुदान वर्ष',
         regNo: 'पंजीकरण संख्या',
         title: 'शीर्षक',
         author: 'लेखक',
       },
-      rows: [[]],
-    },
-    designs: {
-      headers: {
+      designs: {
         serialNo: 'क्रम संख्या',
         yearOfAcceptance: 'स्वीकृति वर्ष',
         applicationNo: 'आवेदन संख्या',
         title: 'शीर्षक',
         creator: 'निर्माता',
       },
-      rows: [[]],
     },
   },
   Search: {
