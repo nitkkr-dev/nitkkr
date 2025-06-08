@@ -292,6 +292,30 @@ const text: Translations = {
       },
     },
   },
+  CopyrightsAndDesigns: {
+    title: 'COPYRIGHTS & DESIGNS',
+    description: [
+      'The copyrights obtained by faculty/ staff/ students of NIT Kurukshetra are listed below:',
+      'Designs registered to faculty/ staff/ students of NIT Kurukshetra are listed below:',
+    ],
+    headers: {
+      copyrights: {
+        serialNo: 'Sr. No.',
+        grantYear: 'Grant Year',
+        regNo: 'Registration Number',
+        title: 'Title',
+        author: 'Author',
+      },
+      designs: {
+        serialNo: 'Sr. No.',
+        yearOfAcceptance: 'Year of Acceptance',
+        applicationNo: 'Application Number',
+        title: 'Title',
+        creator: 'Creator',
+      },
+    },
+  },
+
   Section: {
     about: 'ABOUT',
     gallery: 'GALLERY',
@@ -455,6 +479,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       description: 'Not Acceptable Please try again',
     },
   },
+
   StudentActivities: {
     title: 'STUDENT ACTIVITIES',
     headings: {
