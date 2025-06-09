@@ -48,13 +48,13 @@ export const faculty = pgTable(
 
 // Qualifications Table
 export const qualifications = pgTable('qualifications', (t) => ({
-  id: t.integer().primaryKey(),
+  id: t.serial().primaryKey(),
   facultyId: t
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
   title: t.text().notNull(),
-  about: t.text().notNull(),
+  field: t.text().notNull(),
   location: t.text().notNull(),
   startDate: t.date().notNull(),
   endDate: t.date(),
@@ -68,29 +68,10 @@ export const experience = pgTable('experience', (t) => ({
     .references(() => faculty.employeeId)
     .notNull(),
   title: t.text().notNull(),
-  description: t.text().notNull(),
-  place: t.text().notNull(),
-  startDate: t.date().notNull(),
-  endDate: t.date().notNull(),
-}));
-
-// Projects Table
-export const projects = pgTable('projects', (t) => ({
-  id: t.serial().primaryKey(),
-  facultyId: t
-    .varchar()
-    .references(() => faculty.employeeId)
-    .notNull(),
-  title: t.text().notNull(),
   field: t.text().notNull(),
-  role: t.text().notNull(),
+  location: t.text().notNull(),
   startDate: t.date().notNull(),
   endDate: t.date().notNull(),
-  tag: t
-    .varchar({
-      enum: ['sponsored', 'unsponsored'],
-    })
-    .notNull(),
 }));
 
 // Continuing Education Table
@@ -101,7 +82,7 @@ export const continuingEducation = pgTable('continuing_education', (t) => ({
     .references(() => faculty.employeeId)
     .notNull(),
   title: t.text().notNull(),
-  field: t.text().notNull(),
+  type: t.text().notNull(),
   role: t.text().notNull(),
   startDate: t.date().notNull(),
   endDate: t.date().notNull(),
@@ -109,13 +90,13 @@ export const continuingEducation = pgTable('continuing_education', (t) => ({
 
 // Publications Table
 export const publications = pgTable('publications', (t) => ({
-  id: t.integer().primaryKey(),
+  id: t.serial().primaryKey(),
   facultyId: t
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
   title: t.text().notNull(),
-  field: t.text().notNull(),
+  details: t.text().notNull(),
   people: t.text().notNull(),
   date: t.date().notNull(),
   tag: t
@@ -127,7 +108,7 @@ export const publications = pgTable('publications', (t) => ({
 
 // // Research Scholars Table
 // export const researchScholars = pgTable('research_scholars', (t) => ({
-//   id: t.integer().primaryKey(),
+//   id: t.serial().primaryKey(),
 //  facultyId: t
 //    .varchar()
 //    .references(() => faculty.employeeId)
@@ -141,7 +122,7 @@ export const publications = pgTable('publications', (t) => ({
 
 // Awards and Honors Table
 export const awardsAndHonors = pgTable('awards_and_honors', (t) => ({
-  id: t.integer().primaryKey(),
+  id: t.serial().primaryKey(),
   facultyId: t
     .varchar()
     .references(() => faculty.employeeId)
@@ -149,7 +130,7 @@ export const awardsAndHonors = pgTable('awards_and_honors', (t) => ({
   title: t.text().notNull(),
   field: t.text().notNull(),
   date: t.date().notNull(),
-  place: t.text().notNull(),
+  location: t.text().notNull(),
 }));
 
 // Custom Topics Table

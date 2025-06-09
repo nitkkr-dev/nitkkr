@@ -1,5 +1,5 @@
 import { FacultySectionComponent } from '~/app/faculty-and-staff/utils';
-import { Translations } from '~/i18n/translations';
+import { type Translations } from '~/i18n/translations';
 import { getServerAuthSession } from '~/server/auth';
 
 export default async function FacultyProfileSection({

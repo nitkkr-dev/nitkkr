@@ -5,10 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { type ReactNode } from 'react';
-import { MdCall, MdLocationOn, MdMail, MdOutlineEdit } from 'react-icons/md';
+import {
+  MdCall,
+  MdLocationOn,
+  MdMail,
+  MdOutlineAdd,
+  MdOutlineDelete,
+  MdOutlineEdit,
+} from 'react-icons/md';
 import 'server-only';
 
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
+import { Button } from '~/components/buttons';
+import { WorkInProgressStatus } from '~/components/status';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations, type Translations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
@@ -119,10 +128,38 @@ async function FacultyOrStaffComponent({
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
         <article className="flex flex-grow flex-col rounded-2xl bg-shade-light p-5 drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
-          <h2 className="mb-0 mr-[7rem] text-primary-700 max-xl:mr-[8rem]">
+          <h2 className="mb-0 text-primary-700 max-xl:mr-[8rem]">
             {facultyDescription.person.name}
           </h2>
-          <h5 className="text-neutral-900">{facultyDescription.designation}</h5>
+          <span className="flex items-center justify-between">
+            <h5 className="text-neutral-900">
+              {facultyDescription.designation}
+            </h5>
+            {id && (
+              <Button
+                variant="primary"
+                className="mr-5 !rounded-sm pr-1 max-xl:hidden"
+                asChild
+              >
+                <Link href={`/${locale}/profile/edit?personal=true`}>
+                  <MdOutlineEdit size={24} className="cursor-pointer" />
+                  Edit Profile
+                </Link>
+              </Button>
+            )}
+          </span>
+          {id && (
+            <Button
+              variant="primary"
+              className="absolute left-0 top-0 z-10 mt-4 w-[calc(100%-9rem)] translate-y-[-200%] sm:w-[calc(100%-12rem)] lg:w-[calc(100%-15rem)] xl:hidden"
+              asChild
+            >
+              <Link href={`/${locale}/profile/edit?personal=true`}>
+                <MdOutlineEdit size={24} className="cursor-pointer" />
+                Edit Profile
+              </Link>
+            </Button>
+          )}
           <Image
             alt="0"
             width={200}
@@ -146,9 +183,9 @@ async function FacultyOrStaffComponent({
                   size={28}
                   className="mr-[12px] inline text-primary-700"
                 />
-                {`+${facultyDescription.person.countryCode} ${facultyDescription.person.telephone} (off-Direct no) `}
+                {`+${facultyDescription.person.countryCode ?? 91} ${facultyDescription.person.telephone} (off-Direct no) `}
                 {facultyDescription.person.alternateTelephone &&
-                  `+${facultyDescription.person.alternateCountryCode} ${facultyDescription.person.alternateTelephone} (Mob)`}
+                  `+${facultyDescription.person.alternateCountryCode ?? 91} ${facultyDescription.person.alternateTelephone} (Mob)`}
               </p>
             </li>
             <li>
@@ -250,7 +287,10 @@ async function FacultyOrStaffComponent({
         </ol>
         <article
           className=" grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
-          style={{ gridTemplateRows: 'auto 1fr' }}
+          style={{
+            gridTemplateRows: 'auto 1fr',
+            gridTemplateColumns: 'auto 1fr',
+          }}
         >
           <PathnameAwareSuspense defaultPathname="qualifications">
             {children}
@@ -331,7 +371,7 @@ async function FacultySectionComponent({
     date?: string;
     startDate?: string;
     createdOn?: string;
-    endedOn?: string;
+    endedOn?: Date;
     status?: string;
     fundingAgency?: string;
     endDate?: string;
@@ -341,10 +381,10 @@ async function FacultySectionComponent({
     degree?: string;
     description?: string;
   }[]; //typescript cannot infer the type of result, so we have to specify it explicitly
-  if (!result || result.length === 0) {
+  if (!result || facultySection === 'researchScholars') {
     return (
-      <div className="p-4 text-center text-neutral-500">
-        No data available for this section
+      <div className="[&>*]:!h-full">
+        <WorkInProgressStatus locale={locale} />
       </div>
     );
   }
@@ -378,33 +418,43 @@ async function FacultySectionComponent({
   return (
     <>
       <h4 className="w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
-      {uniqueTags.length > 0 && (
-        <>
-          <style>{tagStyle}</style>
-          <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2 md:ml-auto">
-            {['all', ...uniqueTags].map((tag) => (
-              <fieldset key={tag} className="flex items-center">
-                <input
-                  type="radio"
-                  id={`filter-${tag}`}
-                  name="tag"
-                  value={tag}
-                  defaultChecked={tag === 'all'}
-                  className="filter-input peer hidden"
-                />
-                <label
-                  htmlFor={`filter-${tag}`}
-                  className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
-                >
-                  {tag in text.tags
-                    ? text.tags[tag as keyof typeof text.tags]
-                    : tag}
-                </label>
-              </fieldset>
-            ))}
-          </form>
-        </>
-      )}
+      <span className="flex items-center justify-between px-4">
+        {uniqueTags.length > 0 && (
+          <>
+            <style>{tagStyle}</style>
+            <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
+              {['all', ...uniqueTags].map((tag) => (
+                <fieldset key={tag} className="flex items-center">
+                  <input
+                    type="radio"
+                    id={`filter-${tag}`}
+                    name="tag"
+                    value={tag}
+                    defaultChecked={tag === 'all'}
+                    className="filter-input peer hidden"
+                  />
+                  <label
+                    htmlFor={`filter-${tag}`}
+                    className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
+                  >
+                    {tag in text.tags
+                      ? text.tags[tag as keyof typeof text.tags]
+                      : tag}
+                  </label>
+                </fieldset>
+              ))}
+            </form>
+          </>
+        )}
+        {id && (
+          <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
+            <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
+              <MdOutlineAdd size={28} className="cursor-pointer" />
+              Add{' '}
+            </Link>
+          </Button>
+        )}
+      </span>
       <ScrollArea className="col-span-2 rounded-2xl">
         <ul className="mb-3 grid gap-y-6 px-1">
           {result.map((item, index) => (
@@ -413,17 +463,29 @@ async function FacultySectionComponent({
               className="flex flex-col gap-2 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
               data-tag={item.tag}
             >
-              <span className="flex justify-between gap-4">
+              <span className="flex w-full items-center justify-between">
                 <h5 className="font-bold">{item.title}</h5>
+
                 {id ? (
-                  <Link
-                    href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
-                  >
-                    <MdOutlineEdit
-                      size={28}
-                      className="cursor-pointer text-primary-700"
-                    />
-                  </Link>
+                  <>
+                    <Link
+                      href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
+                      className="ml-auto"
+                    >
+                      <MdOutlineEdit
+                        size={28}
+                        className="cursor-pointer text-primary-700"
+                      />
+                    </Link>
+                    <Link
+                      href={`/${locale}/profile/delete?topic=${facultySection}&id=${item.id}`}
+                    >
+                      <MdOutlineDelete
+                        size={28}
+                        className="cursor-pointer text-primary-700"
+                      />
+                    </Link>
+                  </>
                 ) : null}
               </span>
               <p>
@@ -439,16 +501,17 @@ async function FacultySectionComponent({
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}
                 {item.startDate && item.endDate && ' - '}
-                {item.endDate ?? item.endedOn ?? item.status}
+                {item.endDate ??
+                  (item.endedOn ? item.endedOn.toDateString() : item.status)}
                 {item.tag && (
                   <span
                     className={cn(
                       'mx-2 rounded-sm px-1 text-neutral-900',
-                      facultySection === 'projects'
-                        ? 'bg-success/20 text-success'
-                        : facultySection === 'publications'
-                          ? 'bg-warning/20 text-warning'
-                          : 'bg-error/20 text-error'
+                      // facultySection === 'projects'
+                      //  ? 'bg-success/20 text-success':
+                      facultySection === 'publications'
+                        ? 'bg-warning/20 text-warning'
+                        : 'bg-error/20 text-error'
                     )}
                   >
                     {item.tag}
