@@ -20,7 +20,7 @@ export const courses = pgTable('courses', (t) => ({
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  nature: t.char({ length: 3 }).notNull(),
+  nature: t.char({ length: 20 }).notNull(),
   objectives: t
     .text()
     .array()
