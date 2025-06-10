@@ -339,7 +339,7 @@ export interface Translations {
     WorkInProgress: { title: string; description: string };
     NotAcceptable: { title: string; description: string };
   };
-  patentsandtechnology: {
+  PatentsAndTechnologies: {
     title: string;
     number: string;
     applicationNumber: string;

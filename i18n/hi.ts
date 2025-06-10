@@ -406,7 +406,7 @@ const text: Translations = {
       description: 'अस्वीकार्य दुबारा प्रयास करें।',
     },
   },
-  patentsandtechnology: {
+  PatentsAndTechnologies: {
     title: 'पेटेंट और प्रौद्योगिकी',
     number: 'संख्या',
     applicationNumber: 'आवेदन संख्या',

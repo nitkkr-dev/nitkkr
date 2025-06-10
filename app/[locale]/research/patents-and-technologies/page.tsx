@@ -22,7 +22,7 @@ export default async function PatentsAndTechnology({
 }) {
   const currentPage = Number(searchParams?.page ?? 1);
 
-  const text = (await getTranslations(locale)).patentsandtechnology;
+  const text = (await getTranslations(locale)).PatentsAndTechnologies;
 
   // Static patent data
   const staticPatents = [
@@ -104,48 +104,53 @@ export default async function PatentsAndTechnology({
   return (
     <>
       <ImageHeader title={text.title} src="institute/patent/header.jpg" />
-      <section className="container space-y-4">
-        <div className="p-8">
-          <div className="w-full overflow-x-auto">
-            <div className="min-w-max">
-              <Table className="bg-white" style={{ border: '2px solid #DC2626', borderRadius: '8px', overflow: 'hidden' }}>
-                <TableHeader>
-                  <TableRow className="bg-white">
-                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.number}</TableHead>
-                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.applicationNumber}</TableHead>
-                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>
-                      {text.patentNumber}
+      <section className="container p-8">
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[800px]">
+            <Table className="bg-white">
+              <TableHeader>
+                <TableRow className="bg-white">
+                  {[
+                    text.number,
+                    text.applicationNumber,
+                    text.patentNumber,
+                    text.techTitle,
+                    text.inventor,
+                  ].map((headerText, index, array) => (
+                    <TableHead
+                      key={index}
+                      className={`!text-red-600 px-6 py-4 text-base font-bold ${index < array.length - 1 ? 'border-gray-300 border-r' : ''}`}
+                    >
+                      {headerText}
                     </TableHead>
-                    <TableHead className="font-bold text-base px-6 py-4 border-r border-gray-300" style={{ color: '#DC2626' }}>{text.techTitle}</TableHead>
-                    <TableHead className="font-bold text-base px-6 py-4" style={{ color: '#DC2626' }}>{text.inventor}</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <Suspense
-                    fallback={
-                      <TableRow>
-                        <TableCell colSpan={5} className="text-center">
-                          <Loading />
-                        </TableCell>
-                      </TableRow>
-                    }
-                  >
-                    <PatentTable
-                      tableData={staticPatents}
-                      currentPage={currentPage}
-                      itemsPerPage={4}
-                    />
-                  </Suspense>
-                </TableBody>
-              </Table>
-            </div>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <Suspense
+                  fallback={
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center">
+                        <Loading />
+                      </TableCell>
+                    </TableRow>
+                  }
+                >
+                  <PatentTable
+                    tableData={staticPatents}
+                    currentPage={currentPage}
+                    itemsPerPage={4}
+                  />
+                </Suspense>
+              </TableBody>
+            </Table>
           </div>
-          <div className="mt-6">
-            <PaginationWithLogic
-              currentPage={currentPage}
-              query={getPatentCount()}
-            />
-          </div>
+        </div>
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            query={getPatentCount()}
+          />
         </div>
       </section>
     </>
@@ -174,21 +179,28 @@ const PatentTable = ({
 
   return (
     <>
-      {visibleData.map((item, index) => (
-        <TableRow
-          key={`${item.applicationNumber}-${startIndex + index}`}
-          className={`hover:bg-gray-50 ${(startIndex + index) % 2 === 1 ? 'bg-gray-50' : 'bg-white'}`}
-          style={{ borderBottom: '1px solid #D1D5DB' }}
-        >
-          <TableCell className="px-6 py-4 text-sm font-medium text-black border-r border-gray-300">{startIndex + index + 1}</TableCell>
-          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300 " style={{ color: '#000000' }}>{item.applicationNumber}</TableCell>
-          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300" style={{ color: '#000000' }}>{item.patentNumber}</TableCell>
-          <TableCell className="px-6 py-4 text-sm text-black border-r border-gray-300" style={{ color: '#000000' }}>{item.title}</TableCell>
-          <TableCell className="px-6 py-4 text-sm text-black" style={{ color: '#000000' }}>
-            {item.inventors.map((inventor) => inventor.name).join(', ')}
-          </TableCell>
-        </TableRow>
-      ))}
+      {visibleData.map((item, index) => {
+        const cellData = [
+          startIndex + index + 1,
+          item.applicationNumber,
+          item.patentNumber,
+          item.title,
+          item.inventors.map((inventor) => inventor.name).join(', '),
+        ];
+
+        return (
+          <TableRow key={index} className="text-sm hover:bg-neutral-50">
+            {cellData.map((cellContent, cellIndex, array) => (
+              <TableCell
+                key={cellIndex}
+                className={`px-6 py-4 text-neutral-700 ${cellIndex === 0 ? 'font-medium' : ''} ${cellIndex < array.length - 1 ? 'border-gray-300 border-r' : ''}`}
+              >
+                {cellContent}
+              </TableCell>
+            ))}
+          </TableRow>
+        );
+      })}
     </>
   );
 };
