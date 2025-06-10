@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { UnauthorisedStatus } from '~/components/status';
-import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -121,11 +120,11 @@ export default async function ProfileLayout({
         basePath="profile"
       />
 
-      <ScrollArea className="max-h-40 w-full">
+      <main className="flex-1">
         <PathnameAwareSuspense defaultPathname="personal">
           {children}
         </PathnameAwareSuspense>
-      </ScrollArea>
+      </main>
     </section>
   );
 }

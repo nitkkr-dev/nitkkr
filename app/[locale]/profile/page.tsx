@@ -1,6 +1,6 @@
 import { getServerAuthSession } from '~/server/auth';
 
-import FacultySection from '../faculty-and-staff/[employee_id]/[faculty_section]/page';
+import { FacultySectionComponent } from '../faculty-and-staff/utils';
 import { Personal } from './personal/utils';
 
 export default async function Profile({
@@ -11,12 +11,10 @@ export default async function Profile({
   const session = (await getServerAuthSession())!;
   if (session.person.type == 'faculty')
     return (
-      <FacultySection
-        asProfile={{
-          faculty_section: 'qualifications',
-          id: session.person.id,
-          locale,
-        }}
+      <FacultySectionComponent
+        facultySection="qualifications"
+        id={session.person.id}
+        locale={locale}
       />
     );
 

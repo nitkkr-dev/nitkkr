@@ -190,14 +190,31 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    externalLinks: {
+      googleScholarId: string;
+      linkedInId: string;
+      researchGateId: string;
+      scopusId: string;
+    };
+    intellectualContributions: {
+      publications: string;
+      continuingEducation: string;
+      doctoralStudents: string;
+    };
+    tags: {
+      book: string;
+      chapter: string;
+      journal: string;
+      conference: string;
+    };
     tabs: {
       qualifications: string;
       experience: string;
       projects: string;
-      educationCurrent: string;
+      continuingEducation: string;
       publications: string;
-      scholars: string;
-      awards: string;
+      researchScholars: string;
+      awardsAndHonors: string;
     };
   };
   FAQ: { title: string };

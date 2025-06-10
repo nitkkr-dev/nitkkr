@@ -91,10 +91,10 @@ export const Tabs = ({
     qualifications: MdSchool,
     experience: MdWork,
     projects: FaFlask,
-    educationCurrent: FaBook,
+    continuingEducation: FaBook,
     publications: MdApproval,
-    scholars: MdGroups,
-    awards: MdEmojiEvents,
+    researchScholars: MdGroups,
+    awardsAndHonors: MdEmojiEvents,
   };
 
   return select ? (
@@ -128,7 +128,7 @@ export const Tabs = ({
             <Link
               href={`/${locale}/${basePath}/${href}`}
               prefetch
-              scroll={false}
+              scroll={defaultPath === 'personal'} // scroll to top on student profile
             >
               <Icon className="lg:size-5" />
               {label.toUpperCase()}
