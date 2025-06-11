@@ -1,6 +1,13 @@
 import Image from 'next/image';
-import { BsLinkedin } from 'react-icons/bs';
-import { MdEmail, MdPhone } from 'react-icons/md';
+import { BsCalendar3, BsClockFill } from 'react-icons/bs';
+import {
+  FaFacebook,
+  FaGraduationCap,
+  FaInstagram,
+  FaLinkedinIn,
+} from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { MdDateRange } from 'react-icons/md';
 
 import Notifications from '~/app/notifications';
 import { Button } from '~/components/buttons';
@@ -14,6 +21,7 @@ import {
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
+import { cn } from '~/lib/utils';
 import { type events, type notifications } from '~/server/db';
 
 import Events from './events';
@@ -68,8 +76,8 @@ export default async function Home({
                 />
 
                 {title && (
-                  <figcaption className="container absolute inset-x-0 bottom-0 justify-start pb-8 lg:block">
-                    <article className="max-w-[90%]">
+                  <figcaption className="absolute inset-x-0 bottom-0 justify-start bg-gradient-to-b from-transparent to-neutral-800/80 pb-8 lg:block">
+                    <article className="container max-w-[90%]">
                       <h4 className="pl-2 text-sm text-neutral-100 md:text-2xl">
                         {title}
                       </h4>
@@ -92,14 +100,24 @@ export default async function Home({
         <section className="container absolute inset-x-0 bottom-0 hidden h-0 justify-end lg:flex">
           <section className="absolute bottom-0 flex flex-col space-y-4 pb-8">
             {[
-              { href: 'mailto:director@nitkkr.ac.in', icon: MdEmail },
-              { href: 'tel:+911742238570', icon: MdPhone },
+              {
+                href: 'https://www.facebook.com/nitkurukshetraofficialpage',
+                icon: FaFacebook,
+              },
+              {
+                href: 'https://www.instagram.com/nitkurukshetra',
+                icon: FaInstagram,
+              },
+              {
+                href: 'https://twitter.com/NITKURUKSHETRA',
+                icon: FaXTwitter,
+              },
               {
                 href: 'https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana',
-                icon: BsLinkedin,
+                icon: FaLinkedinIn,
               },
             ].map(({ href, icon: Icon }, index) => (
-              <a href={href} key={index}>
+              <a href={href} key={index} target="_blank">
                 <Button
                   className="size-16 rounded-full border border-shade-light text-neutral-900 backdrop-blur-md hover:bg-shade-light/20"
                   variant="icon"
@@ -133,6 +151,51 @@ export default async function Home({
             href: `/director-message`,
           }}
         />
+      </section>
+
+      <section className="container mb-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: text.quickLinks.results,
+              href: 'https://nitkkr.ac.in/result-notification/',
+              icon: FaGraduationCap,
+            },
+            {
+              label: text.quickLinks.academicCalendar,
+              href: 'https://nitkkr.ac.in/academic-calender/',
+              icon: BsCalendar3,
+            },
+            {
+              label: text.quickLinks.examDateSheet,
+              href: 'https://nitkkr.ac.in/exam-date-sheet/',
+              icon: MdDateRange,
+            },
+            {
+              label: text.quickLinks.timeTable,
+              href: 'https://nitkkr.ac.in/institute-time-table/',
+              icon: BsClockFill,
+            },
+          ].map(({ label, href, icon: Icon }, index) => (
+            <Button
+              key={index}
+              asChild
+              className={cn(
+                'flex flex-col',
+                'gap-2 md:gap-3 lg:gap-4',
+                'h-40 md:h-48'
+              )}
+              variant="secondary"
+            >
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                <Icon className="size-12" />
+                <p className="font-serif font-semibold sm:text-lg md:text-xl">
+                  {label}
+                </p>
+              </a>
+            </Button>
+          ))}
+        </div>
       </section>
     </>
   );

@@ -5,7 +5,7 @@ import { courseLogs, coursesToMajors, departments, faculty } from '.';
 
 export const courses = pgTable('courses', (t) => ({
   id: t.smallserial().primaryKey(),
-  code: t.varchar({ length: 7 }).unique().notNull(),
+  code: t.varchar({ length: 20 }).unique().notNull(),
   title: t.varchar({ length: 128 }).notNull(),
   coordinatorId: t
     .integer()
@@ -20,13 +20,16 @@ export const courses = pgTable('courses', (t) => ({
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  nature: t.char({ length: 3 }).notNull(),
+  nature: t.char({ length: 20 }).notNull(),
   objectives: t
     .text()
     .array()
     .default(sql`'{}'`)
     .notNull(),
-  content: t.text().notNull(),
+  content: t
+    .json('content')
+    .$type<{ title: string; topics: string[] }[]>()
+    .notNull(),
   outcomes: t
     .text()
     .array()
