@@ -105,47 +105,41 @@ export default async function PatentsAndTechnology({
     <>
       <ImageHeader title={text.title} src="institute/patent/header.jpg" />
       <section className="container p-8">
-        <div className="w-full overflow-x-auto">
-          <div className="min-w-[800px]">
-            <Table className="bg-white">
-              <TableHeader>
-                <TableRow className="bg-white">
-                  {[
-                    text.number,
-                    text.applicationNumber,
-                    text.patentNumber,
-                    text.techTitle,
-                    text.inventor,
-                  ].map((headerText, index, array) => (
-                    <TableHead
-                      key={index}
-                      className={`!text-red-600 px-6 py-4 text-base font-bold ${index < array.length - 1 ? 'border-gray-300 border-r' : ''}`}
-                    >
-                      {headerText}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <Suspense
-                  fallback={
-                    <TableRow>
-                      <TableCell colSpan={5} className="text-center">
-                        <Loading />
-                      </TableCell>
-                    </TableRow>
-                  }
-                >
-                  <PatentTable
-                    tableData={staticPatents}
-                    currentPage={currentPage}
-                    itemsPerPage={4}
-                  />
-                </Suspense>
-              </TableBody>
-            </Table>
-          </div>
+        <div className="max-h-96 w-full overflow-x-auto overflow-y-auto">
+          <Table scrollAreaClassName="min-w-[800px">
+            <TableHeader className="bg-white sticky top-0 z-10">
+              <TableRow>
+                {[
+                  text.number,
+                  text.applicationNumber,
+                  text.patentNumber,
+                  text.techTitle,
+                  text.inventor,
+                ].map((headerText, index, array) => (
+                  <TableHead key={index}>{headerText}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <Suspense
+                fallback={
+                  <TableRow>
+                    <TableCell colSpan={5}>
+                      <Loading />
+                    </TableCell>
+                  </TableRow>
+                }
+              >
+                <PatentTable
+                  tableData={staticPatents}
+                  currentPage={currentPage}
+                  itemsPerPage={10}
+                />
+              </Suspense>
+            </TableBody>
+          </Table>
         </div>
+
         <div className="mt-6">
           <PaginationWithLogic
             currentPage={currentPage}
@@ -160,7 +154,7 @@ export default async function PatentsAndTechnology({
 const PatentTable = ({
   tableData,
   currentPage,
-  itemsPerPage = 4,
+  itemsPerPage = 10,
 }: {
   tableData: {
     applicationNumber: string;
@@ -189,14 +183,12 @@ const PatentTable = ({
         ];
 
         return (
-          <TableRow key={index} className="text-sm hover:bg-neutral-50">
+          <TableRow
+            key={index}
+            className="text-neutral-700 hover:bg-neutral-50"
+          >
             {cellData.map((cellContent, cellIndex, array) => (
-              <TableCell
-                key={cellIndex}
-                className={`px-6 py-4 text-neutral-700 ${cellIndex === 0 ? 'font-medium' : ''} ${cellIndex < array.length - 1 ? 'border-gray-300 border-r' : ''}`}
-              >
-                {cellContent}
-              </TableCell>
+              <TableCell key={cellIndex}>{cellContent}</TableCell>
             ))}
           </TableRow>
         );
