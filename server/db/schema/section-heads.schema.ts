@@ -13,6 +13,7 @@ export const sectionHeads = pgTable('section_head_faculty', (t) => ({
     .integer()
     .references(() => faculty.id)
     .notNull(),
+  category: t.varchar().notNull(),
 }));
 
 export const sectionHeadFacultyRelations = relations(
