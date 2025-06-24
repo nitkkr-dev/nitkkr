@@ -11,15 +11,10 @@ export const staff = pgTable(
       .primaryKey()
       .references(() => persons.id),
     employeeId: t.varchar({ length: 8 }).notNull(),
-    workingSectionId: t
-      .smallint()
-      .references(() => sections.id)
-      .notNull(),
-    designation: t.varchar().notNull(),
-    workingDepartmentId: t
-      .smallint()
-      .references(() => departments.id)
-      .notNull(),
+    personalEmail: t.varchar({ length: 256 }),
+    workingSectionId: t.smallint().references(() => sections.id),
+    designation: t.varchar({ length: 64 }).notNull(),
+    workingDepartmentId: t.smallint().references(() => departments.id),
   }),
   (table) => [uniqueIndex('staff_employee_id_idx').on(table.employeeId)]
 );
