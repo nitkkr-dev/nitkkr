@@ -1,7 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
-import { faculty } from '.';
+import { faculty, staff } from '.';
 
 export const deans = pgTable('deans', (t) => ({
   id: t.smallserial().primaryKey(),
@@ -24,11 +24,6 @@ export const deans = pgTable('deans', (t) => ({
     .references(() => faculty.id)
     .notNull(),
   associateFacultyId: t.integer().references(() => faculty.id),
-  staffIds: t
-    .integer()
-    .array()
-    .default(sql`'{}'`)
-    .notNull(),
   activityLogs: t
     .text()
     .array()
@@ -36,7 +31,7 @@ export const deans = pgTable('deans', (t) => ({
     .notNull(),
 }));
 
-export const deansRelations = relations(deans, ({ one }) => ({
+export const deansRelations = relations(deans, ({ one, many }) => ({
   faculty: one(faculty, {
     fields: [deans.facultyId],
     references: [faculty.id],
@@ -45,4 +40,5 @@ export const deansRelations = relations(deans, ({ one }) => ({
     fields: [deans.associateFacultyId],
     references: [faculty.id],
   }),
+  staff: many(staff),
 }));
