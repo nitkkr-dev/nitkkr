@@ -226,6 +226,7 @@ const text: Translations = {
     rollNumber: 'रोल नंबर',
     whyToJoinUs: 'हमारे साथ क्यों जुड़ें',
   },
+
   Clubs: { title: 'संघठनें' },
   Committee: {
     building: 'निर्माण एवं कार्य समिति',
