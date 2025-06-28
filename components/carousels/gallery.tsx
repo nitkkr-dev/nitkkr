@@ -29,19 +29,13 @@ const GalleryCarousel = ({
         }}
         {...carouselProps}
       >
-        <CarouselContent className="flex justify-center">
+        <CarouselContent className="flex w-full justify-center">
           {children.map((child, index) => (
-            <CarouselItem
-              key={index}
-              className={cn(
-                'sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
-                itemClassName
-              )}
-            >
+            <CarouselItem key={index} className={cn('w-full', itemClassName)}>
               {child}
             </CarouselItem>
           ))}
-        </CarouselContent>
+        </CarouselContent>  
         <CarouselPrevious className="left-0 text-primary-500" />
         <CarouselNext className="right-0 text-primary-500 " />
       </Carousel>

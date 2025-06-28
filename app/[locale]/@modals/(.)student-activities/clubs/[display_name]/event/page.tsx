@@ -72,7 +72,7 @@ export default function EventPage({
 
       <GalleryCarousel
         className="mb-6 w-full overflow-hidden rounded-lg"
-        itemClassName=""
+        itemClassName="w-full"
       >
         {[...Array<number>(imageCount)].map((_, index) => (
           <Image
@@ -81,7 +81,7 @@ export default function EventPage({
             key={index}
             src={clubEvent.image[index]}
             width={1000}
-            className="h-40 w-full rounded-lg object-cover sm:h-60 md:h-80 lg:h-[400px]"
+            className="h-auto max-h-[500px] w-full rounded-lg object-contain"
           />
         ))}
       </GalleryCarousel>
