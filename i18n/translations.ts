@@ -86,7 +86,8 @@ export interface Translations {
     departmentsDetails: string;
     programmesDetails: string;
     coursesDetails: string;
-  };  club: {
+  };
+  Club: {
     about: string;
     batch: string;
     degree: string;

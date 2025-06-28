@@ -356,14 +356,14 @@ export default async function Club({
           <article className="flex flex-col justify-center ">
             <section className="flex flex-col lg:flex-row">
               <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
-                {text.club.whyToJoinUs.toUpperCase()}
+                {text.Club.whyToJoinUs.toUpperCase()}
               </h3>
               <p className="lg:w-2/3 ">{dummyClubData?.whyToJoinUs}</p>
             </section>
 
             <section className="flex flex-col pt-12 lg:flex-row">
               <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
-                {text.club.howToJoinUs.toUpperCase()}
+                {text.Club.howToJoinUs.toUpperCase()}
               </h3>
               <p className="lg:w-2/3">{dummyClubData?.howToJoinUs}</p>
             </section>
@@ -375,7 +375,7 @@ export default async function Club({
           glyphDirection="rtl"
           heading="h2"
           id="notifications"
-          text={text.club.notification.toUpperCase()}
+          text={text.Club.notification.toUpperCase()}
         />
         <section className="w-full">
           <Table>
@@ -401,7 +401,7 @@ export default async function Club({
         <Heading
           glyphDirection="ltr"
           heading="h2"
-          text={text.club.event.toUpperCase()}
+          text={text.Club.event.toUpperCase()}
         />
         <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 ">
           {events.map((event, i) => (
@@ -434,7 +434,7 @@ export default async function Club({
         <Heading
           glyphDirection="rtl"
           heading="h2"
-          text={text.club.faculty.toUpperCase()}
+          text={text.Club.faculty.toUpperCase()}
         />
         <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
           {facultyInchage.map((faculty, idx) => (
@@ -475,7 +475,7 @@ export default async function Club({
         <Heading
           glyphDirection="ltr"
           heading="h2"
-          text={text.club.postHolders.toUpperCase()}
+          text={text.Club.postHolders.toUpperCase()}
         />
         <ul className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {detailed_members
@@ -512,16 +512,16 @@ export default async function Club({
         <Heading
           glyphDirection="rtl"
           heading="h2"
-          text={text.club.ourMembers.toUpperCase()}
+          text={text.Club.ourMembers.toUpperCase()}
         />
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{text.club.rollNumber}</TableHead>
-              <TableHead>{text.club.name}</TableHead>
-              <TableHead>{text.club.batch}</TableHead>
-              <TableHead>{text.club.degree}</TableHead>
-              <TableHead>{text.club.major}</TableHead>
+              <TableHead>{text.Club.rollNumber}</TableHead>
+              <TableHead>{text.Club.name}</TableHead>
+              <TableHead>{text.Club.batch}</TableHead>
+              <TableHead>{text.Club.degree}</TableHead>
+              <TableHead>{text.Club.major}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -547,7 +547,7 @@ export default async function Club({
             <Heading
               glyphDirection="rtl"
               heading="h2"
-              text={text.club.gallery.toUpperCase()}
+              text={text.Club.gallery.toUpperCase()}
             />
             <GalleryCarousel className="my-5 w-full">
               {[...Array<number>(imageCount)].map((_, index) => (
