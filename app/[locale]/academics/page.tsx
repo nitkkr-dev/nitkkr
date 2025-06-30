@@ -14,7 +14,7 @@ import { cn, groupBy } from '~/lib/utils';
 import { db, type notifications as notificationsSchema } from '~/server/db';
 import { getS3Url } from '~/server/s3';
 
-export default function Academics({
+export default async function Academics({
   params: { locale },
   searchParams,
 }: {

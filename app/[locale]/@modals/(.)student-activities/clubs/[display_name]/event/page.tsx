@@ -65,7 +65,7 @@ export default function EventPage({
   const imageCount = clubEvent.image.length;
 
   return (
-    <Dialog className="mx-4 mx-auto flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
+    <Dialog className="mx-4 flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
       <h2 className="text-primary-800 mb-4 self-start text-3xl font-bold">
         {clubEvent.title}
       </h2>

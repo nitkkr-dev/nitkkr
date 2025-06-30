@@ -1,40 +1,34 @@
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  uniqueIndex,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from '.';
 
 export const events = pgTable(
   'events',
-  {
-    id: serial('id').primaryKey(),
-    title: varchar('title', { length: 256 }).unique().notNull(),
-    description: text('description'),
-    category: varchar('category', {
-      enum: ['student', 'faculty'],
-    }).notNull(),
-    isFeatured: boolean('is_featured').default(false).notNull(),
-    startDate: date('start_date').notNull(),
-    endDate: date('end_date').notNull(),
-    clubId: integer('club_id').references(() => clubs.id),
-    images: text('images')
+  (t) => ({
+    id: t.serial('id').primaryKey(),
+    title: t.varchar('title', { length: 256 }).unique().notNull(),
+    description: t.text('description'),
+    category: t
+      .varchar('category', {
+        enum: ['student', 'faculty'],
+      })
+      .notNull(),
+    isFeatured: t.boolean('is_featured').default(false).notNull(),
+    startDate: t.date('start_date').notNull(),
+    endDate: t.date('end_date').notNull(),
+    clubId: t.integer('club_id').references(() => clubs.id),
+    images: t
+      .text('images')
       .array()
       .notNull()
       .default(sql`'{}'::text[]`),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
+    createdAt: t.timestamp('created_at').defaultNow().notNull(),
+    updatedAt: t
+      .timestamp('updated_at')
       .$onUpdate(() => new Date())
       .notNull(),
-  },
+  }),
   (events) => {
     return {
       eventsTitleIndex: uniqueIndex('events_title_idx').on(events.title),
