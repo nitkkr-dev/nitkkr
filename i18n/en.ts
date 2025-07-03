@@ -723,6 +723,15 @@ const text: Translations = {
     about: 'About',
     objectives: 'Objectives',
   },
+  Research: {
+    advisoryCommittee: {
+      title: 'Advisory Committee',
+      srNo: 'Sr. No.',
+      name: 'Name',
+      designation: 'Designation',
+      department: 'Department/School',
+    },
+  },
   Search: {
     placeholder: 'Quick Search...',
     categories: {

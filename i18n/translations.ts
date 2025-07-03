@@ -327,6 +327,15 @@ export interface Translations {
       };
     };
   };
+  Research: {
+    advisoryCommittee: {
+      title: string;
+      srNo: string;
+      name: string;
+      designation: string;
+      department: string;
+    };
+  };
   Login: {
     title: string;
     enterEmail: string;

@@ -716,6 +716,15 @@ const text: Translations = {
     about: 'परिचय',
     objectives: 'लक्ष्य',
   },
+  Research: {
+    advisoryCommittee: {
+      title: 'सलाहकार समिति',
+      srNo: 'क्रम संख्या',
+      name: 'नाम',
+      designation: 'पद',
+      department: 'विभाग',
+    },
+  },
   Search: {
     placeholder: 'त्वरित खोज...',
     categories: {
