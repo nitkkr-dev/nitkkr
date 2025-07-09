@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { GalleryCarousel } from '~/components/carousels';
 import { Dialog } from '~/components/dialog';
+import { DialogContent } from '~/components/ui';
 
 interface ClubEvent {
   id: number;
@@ -65,7 +66,7 @@ export default function EventPage({
   const imageCount = clubEvent.image.length;
 
   return (
-    <Dialog className="mx-4 flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
+    <DialogContent className="mx-4 flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
       <h2 className="text-primary-800 mb-4 self-start text-3xl font-bold">
         {clubEvent.title}
       </h2>
@@ -93,6 +94,6 @@ export default function EventPage({
         harmonium, tabla, and vocals, creating an inclusive space for learning
         and collaboration.
       </p>
-    </Dialog>
+    </DialogContent>
   );
 }
