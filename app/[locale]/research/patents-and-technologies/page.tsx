@@ -103,11 +103,14 @@ export default async function PatentsAndTechnology({
 
   return (
     <>
-      <ImageHeader title={text.title} src="institute/patent/header.jpg" />
+      <ImageHeader
+        title={text.title}
+        src="research/patents-and-technologies/banner.jpg"
+      />
       <section className="container p-8">
-        <div className="max-h-96 w-full overflow-x-auto overflow-y-auto">
-          <Table scrollAreaClassName="min-w-[800px">
-            <TableHeader className="bg-white sticky top-0 z-10">
+        <div className="max-h-96 w-full overflow-x-auto">
+          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+            <TableHeader>
               <TableRow>
                 {[
                   text.number,
@@ -115,7 +118,7 @@ export default async function PatentsAndTechnology({
                   text.patentNumber,
                   text.techTitle,
                   text.inventor,
-                ].map((headerText, index, array) => (
+                ].map((headerText, index) => (
                   <TableHead key={index}>{headerText}</TableHead>
                 ))}
               </TableRow>
@@ -187,7 +190,7 @@ const PatentTable = ({
             key={index}
             className="text-neutral-700 hover:bg-neutral-50"
           >
-            {cellData.map((cellContent, cellIndex, array) => (
+            {cellData.map((cellContent, cellIndex) => (
               <TableCell key={cellIndex}>{cellContent}</TableCell>
             ))}
           </TableRow>

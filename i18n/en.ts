@@ -410,7 +410,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     },
   },
   PatentsAndTechnologies: {
-    title: 'PATENTS & TECHNOLOGY',
+    title: 'PATENTS & TECHNOLOGIES',
     number: 'Serial No.',
     applicationNumber: 'Application No.',
     patentNumber: 'Patent No.',
