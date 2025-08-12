@@ -1349,6 +1349,14 @@ const text: Translations = {
       description: 'अस्वीकार्य दुबारा प्रयास करें।',
     },
   },
+  PatentsAndTechnologies: {
+    title: 'पेटेंट और प्रौद्योगिकी',
+    number: 'संख्या',
+    applicationNumber: 'आवेदन संख्या',
+    patentNumber: 'पेटेंट संख्या',
+    techTitle: 'प्रौद्योगिकी / आविष्कार शीर्षक',
+    inventor: 'आविष्कारक',
+  },
   StudentActivities: {
     title: 'छात्र गतिविधियाँ',
     headings: {
