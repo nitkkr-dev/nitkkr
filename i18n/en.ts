@@ -1368,6 +1368,15 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       description: 'Not Acceptable Please try again',
     },
   },
+  PatentsAndTechnologies: {
+    title: 'PATENTS & TECHNOLOGIES',
+    number: 'Serial No.',
+    applicationNumber: 'Application No.',
+    patentNumber: 'Patent No.',
+    techTitle: 'Technology / Invention Title',
+    inventor: 'Inventor',
+  },
+
   StudentActivities: {
     title: 'STUDENT ACTIVITIES',
     headings: {
