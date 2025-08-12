@@ -28,13 +28,13 @@ export const PaginationWithLogic = async ({
         <PaginationItem>
           <PaginationPrevious
             disabled={currentPage <= 1}
-            href={{ query: { meetingPage: currentPage - 1 } }}
+            href={{ query: { page: currentPage - 1 } }}
           />
         </PaginationItem>
 
         <PaginationItem>
           <PaginationLink
-            href={{ query: { meetingPage: 1 } }}
+            href={{ query: { page: 1 } }}
             isActive={currentPage == 1}
           >
             1
@@ -43,7 +43,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 1 && (currentPage < 4 || noOfPages < 6) && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { meetingPage: 2 } }}
+              href={{ query: { page: 2 } }}
               isActive={currentPage == 2}
             >
               2
@@ -53,7 +53,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 2 && (currentPage < 4 || noOfPages < 6) && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { meetingPage: 3 } }}
+              href={{ query: { page: 3 } }}
               isActive={currentPage == 3}
             >
               3
@@ -66,7 +66,7 @@ export const PaginationWithLogic = async ({
           <>
             <PaginationItem>
               <PaginationLink
-                href={{ query: { meetingPage: currentPage } }}
+                href={{ query: { page: currentPage } }}
                 isActive={currentPage == currentPage}
               >
                 {currentPage}
@@ -79,7 +79,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 5 && currentPage > noOfPages - 3 && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { meetingPage: noOfPages - 2 } }}
+              href={{ query: { page: noOfPages - 2 } }}
               isActive={currentPage == noOfPages - 2}
             >
               {noOfPages - 2}
@@ -89,7 +89,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 4 && (currentPage > noOfPages - 3 || noOfPages < 6) && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { meetingPage: noOfPages - 1 } }}
+              href={{ query: { page: noOfPages - 1 } }}
               isActive={currentPage == noOfPages - 1}
             >
               {noOfPages - 1}
@@ -99,7 +99,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 3 && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { meetingPage: noOfPages } }}
+              href={{ query: { page: noOfPages } }}
               isActive={currentPage == noOfPages}
             >
               {noOfPages}
@@ -110,7 +110,7 @@ export const PaginationWithLogic = async ({
         <PaginationItem>
           <PaginationNext
             disabled={currentPage >= noOfPages}
-            href={{ query: { meetingPage: currentPage + 1 } }}
+            href={{ query: { page: currentPage + 1 } }}
           />
         </PaginationItem>
       </PaginationContent>
