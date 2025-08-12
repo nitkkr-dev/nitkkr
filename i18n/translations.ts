@@ -458,6 +458,26 @@ export interface Translations {
     about: string;
     objectives: string;
   };
+  CopyrightsAndDesigns: {
+    title: string;
+    description: string[];
+    headers: {
+      copyrights: {
+        serialNo: string;
+        grantYear: string;
+        regNo: string;
+        title: string;
+        author: string;
+      };
+      designs: {
+        serialNo: string;
+        yearOfAcceptance: string;
+        applicationNo: string;
+        title: string;
+        creator: string;
+      };
+    };
+  };
   Search: {
     placeholder: string;
     categories: {

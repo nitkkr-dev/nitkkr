@@ -707,6 +707,29 @@ const text: Translations = {
     about: 'About',
     objectives: 'Objectives',
   },
+  CopyrightsAndDesigns: {
+    title: 'COPYRIGHTS & DESIGNS',
+    description: [
+      'The copyrights obtained by faculty/ staff/ students of NIT Kurukshetra are listed below:',
+      'Designs registered to faculty/ staff/ students of NIT Kurukshetra are listed below:',
+    ],
+    headers: {
+      copyrights: {
+        serialNo: 'Sr. No.',
+        grantYear: 'Grant Year',
+        regNo: 'Registration Number',
+        title: 'Title',
+        author: 'Author',
+      },
+      designs: {
+        serialNo: 'Sr. No.',
+        yearOfAcceptance: 'Year of Acceptance',
+        applicationNo: 'Application Number',
+        title: 'Title',
+        creator: 'Creator',
+      },
+    },
+  },
   Search: {
     placeholder: 'Quick Search...',
     categories: {
