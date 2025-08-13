@@ -196,7 +196,7 @@ export default async function IPR({
             {facultyIncharge.map((faculty, idx) => (
               <li
                 key={idx}
-                className="flex w-[60%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
+                className="flex w-[70%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
               >
                 <Image
                   src={faculty.image}
