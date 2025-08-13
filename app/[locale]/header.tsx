@@ -61,6 +61,19 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Information about on-campus accommodation and hostel facilities.',
         },
+        // For now IKS and IIC are added as temp units, will change this once a "CELL" design is ready
+        {
+          title: 'IKS Cell',
+          href: '/institute/cells/iks',
+          description:
+            'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
+        },
+        {
+          title: 'IIC Cell',
+          href: '/institute/cells/iks',
+          description:
+            'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
+        },
       ],
     },
     {
