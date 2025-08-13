@@ -559,6 +559,40 @@ const text: Translations = {
       ],
     },
   },
+  Research: {
+    ipr: {
+      title: 'Intellectual Property Rights',
+      facultyIncharge: 'Faculty Incharge',
+      description:
+        'In consonance with the National IPR Policy of Govt. of India 2016. In order to facilitate faculty, staff and students of Institute in a proactive manner in the generation, protection and transaction of Intellectual Property which offers potential scope for shared benefits to both institute and inventors, an IPR Cell has been established in NIT Kurukshetra. The IPR Cell at NIT Kurukshetra is a cornerstone of our commitment to advancing research and innovation. It provides comprehensive support to faculty, staff, and students by offering expert guidance on securing patents, copyrights, and design registrations. Through it’s working, the IPR Cell equips our academic community with the tools and knowledge necessary to protect and commercialise their intellectual assets. We invite you to explore our initiatives and join us in fostering an environment where academic excellence and pioneering research seamlessly converge.',
+      iprPolicy: {
+        title: 'IPR Policy',
+        description:
+          'The first Intellectual Property (IP) policy for the Institute was formulated in 2008. In the last few years, a number of new initiatives and issues have happened, with the enhanced growth in research and development. In view of the experience obtained during this period, in commercialisation, incubation, international collaboration, distance education courses and student related issues, it was decided to review the current policy and suggest changes as appropriate. This document is the revised IP Policy for the Institute.',
+      },
+      availableTechnologies: {
+        title: 'Available Technologies',
+        description:
+          'Parties interested in getting license of purchasing the technologies can express their interest by filling the purchasing form or emailing ipr@nittkr.ac.in',
+        technologiesAvailable: 'Technologies Available For Licensing/Sales',
+        purchasingForm: 'Purchasing Form',
+      },
+      advisoryCommittee: {
+        title: 'Advisory Committee',
+        srNo: 'Sr. No.',
+        name: 'Name',
+        designation: 'Designation',
+        department: 'Department',
+      },
+      nitkkrInnovationsAndIp: {
+        title: 'NITKKR Innovations and IP',
+        patentsGranted: 'Patents Granted',
+        copyrightsObtained: 'Copyrights Obtained',
+        designsRegistered: 'Designs Registered',
+      },
+    },
+  },
+
   NotFound: {
     title: '404',
     description: 'Not found ',
