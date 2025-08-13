@@ -25,14 +25,14 @@ export default async function Committee({
   type,
 }: {
   locale: string;
-  searchParams: { meetingPage?: string };
+  searchParams: { page?: string };
   type: (typeof committeeMembers.committeeType.enumValues)[number];
 }) {
   const text = (await getTranslations(locale)).Committee;
 
-  const meetingPage = isNaN(Number(searchParams.meetingPage ?? '1'))
+  const meetingPage = isNaN(Number(searchParams.page ?? '1'))
     ? 1
-    : Math.max(Number(searchParams.meetingPage ?? '1'), 1);
+    : Math.max(Number(searchParams.page ?? '1'), 1);
 
   return (
     <section className="container">

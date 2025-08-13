@@ -5,7 +5,7 @@ export default function FinancialCommittee({
   searchParams,
 }: {
   params: { locale: string };
-  searchParams: { meetingPage?: string };
+  searchParams: { page?: string };
 }) {
   return (
     <Committee locale={locale} searchParams={searchParams} type="financial" />

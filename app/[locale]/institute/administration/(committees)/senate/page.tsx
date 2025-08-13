@@ -7,7 +7,7 @@ export default async function Senate({
   searchParams,
 }: {
   params: { locale: string };
-  searchParams: { meetingPage?: string };
+  searchParams: { page?: string };
 }) {
   return (
     <>
