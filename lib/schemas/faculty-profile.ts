@@ -82,19 +82,31 @@ export const facultyProfileSchemas = {
 export const facultyPersonalDetailsSchema = z.object({
   scopusId: z
     .string()
-    .regex(/^\d+-\d+$/, 'Invalid Scopus ID format')
+    .regex(
+      /^(https?:\/\/)?(www.)?scopus.com\/authid\/detail.uri\?authorId=\d+-\d+$/,
+      'Invalid Scopus URL format'
+    )
     .optional(),
   linkedInId: z
     .string()
-    .regex(/^[a-zA-Z0-9-]+$/, 'Invalid LinkedIn ID format')
+    .regex(
+      /(https?:\/\/)?(www.)?linkedin.com\/in\/[a-zA-Z0-9-]+$/,
+      'Invalid LinkedIn URL format'
+    )
     .optional(),
   googleScholarId: z
     .string()
-    .regex(/^[a-zA-Z0-9_-]+$/, 'Invalid Google Scholar ID format')
+    .regex(
+      /^(https?:\/\/)?scholar.google.co.in\/citations\?user=[a-zA-Z0-9_-]+$/,
+      'Invalid Google Scholar URL format'
+    )
     .optional(),
   researchGateId: z
     .string()
-    .regex(/^[a-zA-Z0-9_-]+$/, 'Invalid ResearchGate ID format')
+    .regex(
+      /^(https?:\/\/)?(www.)?researchgate.net\/profile\/[a-zA-Z0-9_-]+$/,
+      'Invalid ResearchGate URL format'
+    )
     .optional(),
   countryCode: z
     .string()
