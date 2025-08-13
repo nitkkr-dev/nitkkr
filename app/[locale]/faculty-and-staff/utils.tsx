@@ -361,9 +361,14 @@ async function FacultySectionComponent({
     }
     return [];
   })()) as {
-    title: string;
+    title?: string;
+    universityName?: string;
+    specialization?: string;
+    organizationName?: string;
+    designation?: string;
     details?: string;
     field?: string;
+    awardingAgency?: string;
     type?: string;
     people?: string;
     location?: string;
@@ -464,7 +469,13 @@ async function FacultySectionComponent({
               data-tag={item.tag}
             >
               <span className="flex w-full items-center justify-between">
-                <h5 className="font-bold">{item.title}</h5>
+                <h5 className="font-bold">
+                  {facultySection === 'qualifications'
+                    ? item.degree
+                    : facultySection === 'experience'
+                      ? item.designation
+                      : item.title}
+                </h5>
 
                 {id ? (
                   <>
@@ -491,12 +502,19 @@ async function FacultySectionComponent({
               <p>
                 {item.details ??
                   item.field ??
+                  item.specialization ??
+                  item.awardingAgency ??
                   item.type ??
                   item.description ??
                   item.degree}
               </p>
               <p className="text-neutral-600">
-                {item.people ?? item.location ?? item.role ?? item.caption}
+                {item.people ??
+                  item.location ??
+                  item.universityName ??
+                  item.organizationName ??
+                  item.role ??
+                  item.caption}
               </p>
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}

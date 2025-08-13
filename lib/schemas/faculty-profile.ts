@@ -15,17 +15,17 @@ const optionalDateInput = () =>
 // Shared schemas for faculty profile sections that work in both frontend and backend
 export const facultyProfileSchemas = {
   qualifications: z.object({
-    title: z.string().min(1, 'Title is required'),
-    field: z.string().min(1, 'Field is required'),
-    location: z.string().min(1, 'Location is required'),
-    startDate: dateInput(),
+    degree: z.string().min(1, 'Degree name is required'),
+    specialization: z.string().min(1, 'Specialization is required'),
+    universityName: z.string().min(1, 'University name is required'),
+    startDate: optionalDateInput(),
     endDate: optionalDateInput(),
   }),
 
   experience: z.object({
-    title: z.string().min(1, 'Title is required'),
-    field: z.string().min(1, 'Field is required'),
-    location: z.string().min(1, 'Location is required'),
+    designation: z.string().min(1, 'Designation is required'),
+    specialization: z.string().min(1, 'Specialization is required'),
+    organizationName: z.string().min(1, 'Organization name is required'),
     startDate: dateInput(),
     endDate: dateInput(),
   }),
@@ -62,7 +62,7 @@ export const facultyProfileSchemas = {
 
   awardsAndHonors: z.object({
     title: z.string().min(1, 'Title is required'),
-    field: z.string().min(1, 'Field is required'),
+    awardingAgency: z.string().min(1, 'Awarding agency is required'),
     location: z.string().min(1, 'Location is required'),
     date: dateInput(),
   }),

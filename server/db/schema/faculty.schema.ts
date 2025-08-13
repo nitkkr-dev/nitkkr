@@ -53,10 +53,10 @@ export const qualifications = pgTable('qualifications', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
-  field: t.text().notNull(),
-  location: t.text().notNull(),
-  startDate: t.date().notNull(),
+  degree: t.text().notNull(),
+  specialization: t.text().notNull(),
+  universityName: t.text().notNull(),
+  startDate: t.date(),
   endDate: t.date(),
 }));
 
@@ -67,9 +67,9 @@ export const experience = pgTable('experience', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
-  field: t.text().notNull(),
-  location: t.text().notNull(),
+  designation: t.text().notNull(),
+  specialization: t.text().notNull(),
+  organizationName: t.text().notNull(),
   startDate: t.date().notNull(),
   endDate: t.date().notNull(),
 }));
@@ -128,7 +128,7 @@ export const awardsAndHonors = pgTable('awards_and_honors', (t) => ({
     .references(() => faculty.employeeId)
     .notNull(),
   title: t.text().notNull(),
-  field: t.text().notNull(),
+  awardingAgency: t.text().notNull(),
   date: t.date().notNull(),
   location: t.text().notNull(),
 }));

@@ -85,6 +85,8 @@ export async function upsertFacultySection(
 
     await db.insert(config.table).values(insertData).onConflictDoUpdate({
       target: config.table.id,
+      // TODO: @Antri - Can you please fix this?
+      // @ts-ignore
       set: validated,
     });
 
