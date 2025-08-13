@@ -171,7 +171,9 @@ export default async function IPR({
             {text.Research.ipr.title}
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">(IPR) Cell</span>
+            <span className="text-neutral-900">
+              (IPR) {text.Institute.cells.cell}
+            </span>
           </h1>
         </div>
       </article>
@@ -294,7 +296,10 @@ export default async function IPR({
                 className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold text-neutral-50"
                 target="_blank"
               >
-                REVISED IP POLICY (2017) &rarr;
+                <span className="uppercase">
+                  {text.Research.ipr.iprPolicy.revisedIpPolicy}
+                </span>{' '}
+                (2017) &rarr;
               </Link>
             </div>
 

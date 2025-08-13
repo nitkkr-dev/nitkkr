@@ -16,8 +16,6 @@ export default async function IICPage({
   params: { locale: string };
 }) {
   const text = await getTranslations(locale);
-  const description =
-    'NIT Kurukshetra convenes the members of the Institute’s Innovation Council (IIC), which is aligned with the Ministry of Education’s Innovation Cell (MIC). The IIC will be an umbrella entity offering a range of development programs, workshops, etc.';
 
   const officeOrder = [
     {
@@ -109,10 +107,12 @@ export default async function IICPage({
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
           <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
-            Institute&apos;s Innovation Council
+            {text.Institute.cells.iic.title}
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">(IIC) Cell</span>
+            <span className="text-neutral-900">
+              (IIC) {text.Institute.cells.cell}
+            </span>
           </h1>
         </div>
       </article>
@@ -122,9 +122,9 @@ export default async function IICPage({
         <article className="drop-shadow">
           <p className="d:w-full max-md:rounded-t md:rounded-r">
             <span className="font-bold capitalize text-primary-700">
-              preamble:{' '}
+              {text.Institute.cells.iic.preamble}:{' '}
             </span>
-            {description}
+            {text.Institute.cells.iic.description}
           </p>
         </article>
         {/* Office Order */}
@@ -133,15 +133,21 @@ export default async function IICPage({
             glyphDirection="dual"
             heading="h2"
             className="mt-12"
-            text="Office Order"
+            text={text.Institute.cells.iic.officeOrder.title}
           />
           <div className="mt-12 w-full overflow-x-auto">
             <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Sr. No.</TableHead>
-                  <TableHead>Responsibility</TableHead>
-                  <TableHead>Name of Faculty</TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.officeOrder.srNo}
+                  </TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.officeOrder.responsibility}
+                  </TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.officeOrder.nameOfFaculty}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -162,15 +168,19 @@ export default async function IICPage({
             glyphDirection="dual"
             heading="h2"
             className="mt-12"
-            text="Activities"
+            text={text.Institute.cells.iic.activities.title}
           />
           {/* Past Activities */}
           <div className="mt-12 w-full overflow-x-auto">
             <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Sr. No.</TableHead>
-                  <TableHead>Past activities</TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.activities.srNo}
+                  </TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.activities.pastActivities}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -188,8 +198,12 @@ export default async function IICPage({
             <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Sr. No.</TableHead>
-                  <TableHead>Upcoming activities</TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.activities.srNo}
+                  </TableHead>
+                  <TableHead>
+                    {text.Institute.cells.iic.activities.upcomingActivities}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
