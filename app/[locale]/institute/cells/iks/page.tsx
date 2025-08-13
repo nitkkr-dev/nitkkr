@@ -1,10 +1,13 @@
 import { getS3Url } from '~/server/s3';
+import { getTranslations } from '~/i18n/translations';
 
 export default async function IKS({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const text = await getTranslations(locale);
+
   const description =
     'IKS Cell is an innovative cell which is established in 2022 in the Institute. It is established to promote interdisciplinary research on all aspects of IKS, preserve and disseminate IKS for further research and societal applications. It will actively engage in spreading the rich heritage of our country and traditional knowledge in the field of Psychology, Basic Sciences, Engineering & Technology, Arts and literature, Agriculture, Architecture etc.';
   const activities = [
@@ -49,10 +52,12 @@ export default async function IKS({
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
           <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
-            Indian Knowledge Systems
+            {text.Institute.cells.iks.title}
           </h1>
           <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">(IKS) Cell</span>
+            <span className="text-neutral-900">
+              (IKS) {text.Institute.cells.cell}
+            </span>
           </h1>
         </div>
       </article>
@@ -60,15 +65,17 @@ export default async function IKS({
       <main className="container mt-12">
         {/* description */}
         <article className="drop-shadow">
-          <h3 className="text-primary-300">Indian Knowledge Systems (IKS)</h3>
+          <h3 className="text-primary-300">{text.Institute.cells.iks.title}</h3>
           <p className="d:w-full max-md:rounded-t md:rounded-r">
-            {description}
+            {text.Institute.cells.iks.description}
           </p>
         </article>
 
         {/* IKS Team */}
         <div className="mt-8 rounded-md border border-primary-500 bg-neutral-50 p-4 shadow-sm">
-          <h3 className="mb-2 font-bold text-primary-300">IKS Team</h3>
+          <h3 className="mb-2 font-bold text-primary-300">
+            {text.Institute.cells.iks.iksTeam}
+          </h3>
           <ul className="list-disc space-y-1 pl-5">
             {members.map((member) => (
               <li key={member.name}>

@@ -1,3 +1,4 @@
+import { string } from 'zod';
 import { number } from 'zod';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -286,6 +287,32 @@ export interface Translations {
       sports: { heading: string; text: string[] };
       address: string[];
     };
+    cells: {
+      title: string;
+      cell: string;
+      iic: {
+        title: string;
+        preamble: string;
+        description: string;
+        officeOrder: {
+          title: string;
+          srNo: string;
+          responsibility: string;
+          nameOfFaculty: string;
+        };
+        activities: {
+          title: string;
+          srNo: string;
+          pastActivities: string;
+          upcomingActivities: string;
+        };
+      };
+      iks: {
+        title: string;
+        description: string;
+        iksTeam: string;
+      };
+    };
   };
   Hostels: {
     title: string;
@@ -322,6 +349,7 @@ export interface Translations {
       iprPolicy: {
         title: string;
         description: string;
+        revisedIpPolicy: string;
       };
       availableTechnologies: {
         title: string;
