@@ -311,6 +311,36 @@ export interface Translations {
       };
     };
   };
+  Research: {
+    ipr: {
+      title: string;
+      description: string;
+      facultyIncharge: string;
+      iprPolicy: {
+        title: string;
+        description: string;
+      };
+      availableTechnologies: {
+        title: string;
+        description: string;
+        technologiesAvailable: string;
+        purchasingForm: string;
+      };
+      advisoryCommittee: {
+        title: string;
+        srNo: string;
+        name: string;
+        designation: string;
+        department: string;
+      };
+      nitkkrInnovationsAndIp: {
+        title: string;
+        patentsGranted: string;
+        copyrightsObtained: string;
+        designsRegistered: string;
+      };
+    };
+  };
   Login: {
     title: string;
     enterEmail: string;
