@@ -70,7 +70,7 @@ export default async function Header({ locale }: { locale: string }) {
         },
         {
           title: 'IIC Cell',
-          href: '/institute/cells/iks',
+          href: '/institute/cells/iic',
           description:
             'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
         },
