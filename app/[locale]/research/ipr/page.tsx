@@ -284,16 +284,16 @@ export default async function IPR({
                 height={200}
                 className="h-auto max-h-80 w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-shade-light"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-shade-light/90"></div>
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
-                className="absolute bottom-0 left-0 w-full p-6 text-xl font-medium text-neutral-900 hover:underline md:text-2xl lg:text-3xl xl:text-4xl"
+                className="absolute bottom-4 left-4 text-2xl font-semibold text-neutral-900 hover:underline"
                 target="_blank"
               >
                 <span className="uppercase">
                   {text.Research.ipr.iprPolicy.revisedIpPolicy}
                 </span>{' '}
-                (2017) &rarr;
+                (2017) →
               </Link>
             </div>
 
