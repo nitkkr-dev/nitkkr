@@ -10,6 +10,7 @@ import { type IconType } from 'react-icons/lib';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import {
   Table,
   TableBody,
@@ -159,24 +160,29 @@ export default async function IPR({
 
   return (
     <>
-      {/* Header */}
-      <article
-        className="sm:h-76 md:h-84 lg:h-94 relative flex h-56 w-full bg-cover bg-center xl:h-[448px] 2xl:h-[540px]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.2) 0%, rgba(249, 245, 235, 0.5) 50%,rgba(249, 245, 235, 0.75) 75%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/student-activities/clubs/technobyte/1.jpg')`,
-        }}
-      >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
-            {text.Research.ipr.title}
-          </h1>
-          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">
-              (IPR) {text.Institute.cells.cell}
-            </span>
-          </h1>
-        </div>
-      </article>
+      <ImageHeader
+        title={`${text.Research.ipr.title} (IPR) ${text.Institute.cells.cell}`}
+        headings={[
+          {
+            label: text.Research.ipr.facultyIncharge,
+            href: '#faculty-incharge',
+          },
+          {
+            label: text.Research.ipr.advisoryCommittee.title,
+            href: '#advisory-committee',
+          },
+          { label: text.Research.ipr.iprPolicy.title, href: '#ipr-policy' },
+          {
+            label: text.Research.ipr.availableTechnologies.title,
+            href: '#available-technologies',
+          },
+          {
+            label: text.Research.ipr.nitkkrInnovationsAndIp.title,
+            href: '#nitkkr-innovations',
+          },
+        ]}
+        src="student-activities/clubs/technobyte/1.jpg"
+      />
 
       <main className="container mt-12">
         {/* description */}
@@ -186,7 +192,7 @@ export default async function IPR({
           </p>
         </article>
         {/*  Faculty incharge */}
-        <div>
+        <div id="faculty-incharge">
           <Heading
             glyphDirection="rtl"
             heading="h2"
@@ -234,11 +240,10 @@ export default async function IPR({
           </ul>
         </div>
         {/* Advisory Commitee */}
-        <div>
+        <div id="advisory-committee">
           <Heading
             glyphDirection="ltr"
             heading="h2"
-            id="advisory-committee"
             text={text.Research.ipr.advisoryCommittee.title.toUpperCase()}
           />
           <div className="mt-12 w-full overflow-x-auto">
@@ -273,7 +278,7 @@ export default async function IPR({
           </div>
         </div>
         {/* IP Policy */}
-        <div>
+        <div id="ipr-policy">
           <Heading
             glyphDirection="rtl"
             heading="h2"
@@ -310,7 +315,7 @@ export default async function IPR({
           </div>
         </div>
         {/* Available Technologies */}
-        <div>
+        <div id="available-technologies">
           <Heading
             glyphDirection="ltr"
             heading="h2"
@@ -349,7 +354,7 @@ export default async function IPR({
           </div>
         </div>
         {/* NITKKR innovations and IP */}
-        <div>
+        <div id="nitkkr-innovations">
           <Heading
             glyphDirection="rtl"
             heading="h2"
