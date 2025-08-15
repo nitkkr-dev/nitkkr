@@ -1,314 +1,383 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { FaPhone, FaTrophy } from 'react-icons/fa6';
-import { HiMiniBeaker } from 'react-icons/hi2';
-import { MdBadge, MdEmail } from 'react-icons/md';
+import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { FaFlask, FaIndianRupeeSign } from 'react-icons/fa6';
+import { FaRegIdCard } from 'react-icons/fa';
+import { PiShieldStarBold } from 'react-icons/pi';
+import { BsTools } from 'react-icons/bs';
+import { type IconType } from 'react-icons/lib';
 
+import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
-import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
-import { db, departments } from '~/server/db';
-import { countChildren } from '~/server/s3';
+import { getS3Url } from '~/server/s3';
 
-const hodProfile = {
-  name: 'Jitender Kumar Chhabra',
-  designation: 'Professor & Head of Department',
-  email: 'jk.chhabra@nitkkr.ac.in',
-  phone: '+91-1744-233-488',
-  message: [
-    'Welcome to the Department of Computer Engineering at NIT Kurukshetra. Our department has been at the forefront of computer science education and research since its inception, consistently producing industry-ready professionals and innovative researchers.',
-    'We are committed to excellence in teaching, research, and innovation. Our state-of-the-art laboratories, experienced faculty, and strong industry connections provide students with the perfect environment for learning and growth.',
-  ],
-};
-
-export async function generateStaticParams() {
-  return await db.select({ name: departments.urlName }).from(departments);
-}
-
-export default async function Department({
-  params: { locale, name },
+export default async function IPR({
+  params: { locale },
 }: {
-  params: { locale: string; name: string };
+  params: { locale: string };
 }) {
-  const text = (await getTranslations(locale)).Department;
+  const text = await getTranslations(locale);
 
-  const department = await db.query.departments.findFirst({
-    where: (departments, { eq }) => eq(departments.urlName, name),
-    with: { majors: { columns: { degree: true, name: true } } },
-  });
-  if (!department) notFound(); // FIXME: Remove this once dynamicParams works
+  interface Card {
+    label: string;
+    href: string;
+    icon: IconType;
+  }
 
-  const imageCount = await countChildren(`departments/${name}/images`);
-
-  const departmentHead = await db.query.departmentHeads.findFirst({
-    where: (departmentHead, { eq }) =>
-      eq(departmentHead.departmentId, department.id) &&
-      eq(departmentHead.isActive, true),
-    with: {
-      faculty: {
-        columns: { employeeId: true, officeAddress: true },
-        with: {
-          person: {
-            columns: { email: true, id: true, name: true, telephone: true },
-          },
-        },
-      },
+  const availableTechnologies: Card[] = [
+    {
+      label: text.Research.ipr.availableTechnologies.technologiesAvailable,
+      href: 'https://nitkkr.ac.in/wp-content/uploads/2022/10/Technologies-for-Licensing-27092022.pdf',
+      icon: FaIndianRupeeSign,
     },
-  });
+    {
+      label: text.Research.ipr.availableTechnologies.purchasingForm,
+      href: 'https://nitkkr.ac.in/wp-content/uploads/2022/10/Technologies-for-Licensing-27092022.pdf',
+      icon: BsTools,
+    },
+  ];
+
+  const facultyIncharge = [
+    {
+      image: 'fallback/user-image.jpg',
+      name: 'Anshu Parashar',
+      title: 'Computer Application',
+      email: 'anshuparashar@nitkkr.ac.in',
+      phone: '1234567890',
+    },
+    {
+      image: 'fallback/user-image.jpg',
+      name: 'Anshu Parashar',
+      title: 'Computer Application',
+      email: 'anshuparashar@nitkkr.ac.in',
+      phone: '1234567890',
+    },
+  ];
+
+  const advisoryCommittee = [
+    {
+      srNo: 1,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 2,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Assistant Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 3,
+      name: 'Pratyush Prasoon Mishra',
+      designation: 'Student',
+      department: 'Computer Science',
+    },
+    {
+      srNo: 4,
+      name: 'Dr. Avijit Kumar Paul',
+      designation: 'Assistant Professor',
+      department: 'Chemistry',
+    },
+    {
+      srNo: 5,
+      name: 'Dr. Avijit Kumar Paul',
+      designation: 'Assistant Professor',
+      department: 'Chemistry',
+    },
+    {
+      srNo: 6,
+      name: 'Dr. R. P. Chauhan',
+      designation: 'Professor',
+      department: 'Physics',
+    },
+    {
+      srNo: 7,
+      name: 'Dr. Anjali Mehta',
+      designation: 'Professor',
+      department: 'Biotechnology',
+    },
+    {
+      srNo: 8,
+      name: 'Dr. Sumit Kapoor',
+      designation: 'Assistant Professor',
+      department: 'Mathematics',
+    },
+    {
+      srNo: 9,
+      name: 'Ishaan Arora',
+      designation: 'Student',
+      department: 'Electronics',
+    },
+    {
+      srNo: 10,
+      name: 'Dr. Nidhi Sharma',
+      designation: 'Associate Professor',
+      department: 'Mechanical',
+    },
+    {
+      srNo: 11,
+      name: 'Ananya Gupta',
+      designation: 'Student',
+      department: 'Information Technology',
+    },
+    {
+      srNo: 12,
+      name: 'Dr. Karan Sethi',
+      designation: 'Assistant Professor',
+      department: 'Civil',
+    },
+  ];
+
+  const innovations: Card[] = [
+    {
+      label: text.Research.ipr.nitkkrInnovationsAndIp.patentsGranted,
+      href: 'patents-and-technologies',
+      icon: FaRegIdCard,
+    },
+    {
+      label: text.Research.ipr.nitkkrInnovationsAndIp.copyrightsObtained,
+      href: 'copyrights-and-designs',
+      icon: FaFlask,
+    },
+    {
+      label: text.Research.ipr.nitkkrInnovationsAndIp.designsRegistered,
+      href: 'copyrights-and-designs',
+      icon: PiShieldStarBold,
+    },
+  ];
 
   return (
     <>
       <ImageHeader
-        title={department.name}
+        title={`${text.Research.ipr.title} (IPR) ${text.Institute.cells.cell}`}
         headings={[
-          { label: text.headings.about, href: '#about' },
-          {
-            label: [
-              text.headings.vision,
-              text.headings.and,
-              text.headings.mission,
-            ].join(' '),
-            href: '#vision-mission',
-          },
-          { label: text.headings.hod.title, href: '#hod-message' },
-          { label: text.headings.programmes.title, href: '#programmes' },
-          { label: text.headings.gallery, href: '#gallery' },
+          { label: text.Research.ipr.facultyIncharge, href: '#faculty-incharge' },
+          { label: text.Research.ipr.advisoryCommittee.title, href: '#advisory-committee' },
+          { label: text.Research.ipr.iprPolicy.title, href: '#ipr-policy' },
+          { label: text.Research.ipr.availableTechnologies.title, href: '#available-technologies' },
+          { label: text.Research.ipr.nitkkrInnovationsAndIp.title, href: '#nitkkr-innovations' },
         ]}
-        src={`departments/${department.alias}/banner.png`}
+        src="student-activities/clubs/technobyte/1.jpg"
       />
 
-      <Heading
-        className="container"
-        glyphDirection="rtl"
-        heading="h3"
-        id="about"
-        text={text.headings.about.toUpperCase()}
-      />
-
-      <article className="container flex drop-shadow max-md:flex-col">
-        <p
-          className={cn(
-            'p-2 sm:p-3 md:p-4',
-            'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
-          )}
-        >
-          {department.about}
-        </p>
-        <Image
-          alt={text.headings.about}
-          className="w-full max-md:rounded-b md:order-first md:rounded-l"
-          height={0}
-          src={`departments/${department.alias}/about.png`}
-          width={0}
-        />
-      </article>
-
-      <article
-        className={cn(
-          'container md:flex md:gap-2',
-          'md:my-12 lg:my-16 xl:my-20'
-        )}
-        id="vision-mission"
-      >
-        <section className="md:w-1/2">
-          <Heading
-            className="!mb-0"
-            glyphDirection="ltr"
-            heading="h3"
-            text={text.headings.vision.toUpperCase()}
-          />
-          <p>{department.vision}</p>
-
-          <Heading
-            className="!mb-0"
-            glyphDirection="ltr"
-            heading="h3"
-            text={text.headings.mission.toUpperCase()}
-          />
-          <p>{department.mission}</p>
-        </section>
-
-        <Image
-          alt={text.headings.vision}
-          className="hidden rounded object-cover drop-shadow md:inline-block md:w-1/2"
-          height={0}
-          src={`departments/${department.alias}/vision-mission.png`}
-          width={0}
-        />
-      </article>
-
-      <section className="container" id="hod-message">
-        <Heading
-          glyphDirection="rtl"
-          heading="h3"
-          href="#hod-message"
-          text="HOD's Message"
-        />
-        <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
-          <Image
-            alt={hodProfile.name}
-            className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
-            height={256}
-            width={256}
-            src="/placeholder-person.jpg"
-          />
-          <div className="flex flex-col justify-between">
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-xl font-medium text-primary-500">
-                  {hodProfile.name}
-                </h4>
-                <p className="text-lg font-medium">{hodProfile.designation}</p>
-              </div>
-              <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
-                {hodProfile.message.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </blockquote>
-            </div>
-            <div className="mt-4 flex items-center gap-4">
-              <a
-                className="text-primary-500 hover:underline"
-                href={`mailto:${hodProfile.email}`}
-              >
-                <MdEmail className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.email}
-              </a>
-              <span className="text-primary-500">
-                <FaPhone className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.phone}
-              </span>
-            </div>
-          </div>
+      <main className="container mt-12">
+        {/* description */}
+        <article className="drop-shadow">
+          <p className="d:w-full max-md:rounded-t md:rounded-r">
+            {text.Research.ipr.description}
+          </p>
         </article>
-      </section>
-
-      <Heading
-        className="container"
-        glyphDirection="ltr"
-        heading="h3"
-        id="programmes"
-        text={text.headings.programmes.title.toUpperCase()}
-      />
-      <section className="container grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-4">
-        {[
-          text.headings.programmes.undergrad,
-          text.headings.programmes.postgrad,
-          text.headings.programmes.doctorate,
-        ].map((category, index) => (
-          <nav className="text-center" key={index}>
-            <h4
-              className={cn(
-                'rounded p-2 text-shade-light sm:p-3 md:p-4',
-                index === 0 && 'bg-primary-300',
-                index === 1 && 'bg-primary-500',
-                index === 2 && 'bg-primary-700'
-              )}
-            >
-              {category}
-            </h4>
-            <ol>
-              {department.majors
-                .filter(
-                  ({ degree }) =>
-                    (index === 0 && degree === 'B. Tech.') ||
-                    (index === 1 && degree === 'M. Tech.') ||
-                    (index === 2 && degree === 'Ph. D.')
-                )
-                .map(({ name }, index) => (
-                  <li
-                    className={cn(
-                      'rounded bg-neutral-50 p-2',
-                      index === 0 && 'text-primary-300',
-                      index === 1 && 'text-primary-500',
-                      index === 2 && 'text-primary-700'
-                    )}
-                    key={index}
-                  >
-                    <Button asChild variant="link">
-                      <Link href={`/${locale}/academics/curricula`}>
-                        {name}
-                      </Link>
-                    </Button>
-                  </li>
-                ))}
-            </ol>
-          </nav>
-        ))}
-      </section>
-
-      <nav
-        className={cn(
-          'container',
-          'my-10 md:my-12 lg:my-16 xl:my-20',
-          'flex flex-col gap-5 lg:flex-row lg:justify-around'
-        )}
-      >
-        {[
-          {
-            label: text.facultyAndStaff,
-            href: {
-              pathname: `/${locale}/faculty-and-staff`,
-              query: { department: department.urlName },
-            },
-            icon: MdBadge,
-          },
-          {
-            label: text.laboratories,
-            href: `/${locale}/academics/departments/${name}/labs`,
-            icon: HiMiniBeaker,
-          },
-          {
-            label: text.achievements,
-            href: `/${locale}/academics/departments/${name}/achievements`,
-            icon: FaTrophy,
-          },
-        ].map(({ label, href, icon: Icon }, index) => (
-          <Button
-            asChild
-            className={cn(
-              'flex flex-col',
-              'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-            )}
-            key={index}
-            variant="secondary"
-          >
-            <Link href={href}>
-              <Icon className="size-12" />
-              <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                {label}
-              </p>
-            </Link>
-          </Button>
-        ))}
-      </nav>
-
-      {imageCount !== 0 && (
-        <article className="container" id="gallery">
+        {/*  Faculty incharge */}
+        <div id="faculty-incharge">
           <Heading
             glyphDirection="rtl"
-            heading="h3"
-            text={text.headings.gallery.toUpperCase()}
+            heading="h2"
+            text={text.Research.ipr.facultyIncharge}
           />
-          <GalleryCarousel className="my-5 w-full">
-            {[...Array<number>(imageCount)].map((_, index) => (
-              <Image
-                alt={String(index)}
-                className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
-                height={0}
-                key={index}
-                src={`departments/${name}/images/${index + 1}.png`}
-                width={0}
-              />
+          <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
+            {facultyIncharge.map((faculty, idx) => (
+              <li
+                key={idx}
+                className="flex w-[70%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
+              >
+                <Image
+                  src={faculty.image}
+                  alt={faculty.name}
+                  width={200}
+                  height={200}
+                  className="h-52 w-52 rounded-lg "
+                />
+                <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
+                  <div>
+                    <h2 className="m-0 text-start text-lg md:text-xl">
+                      {faculty.name}
+                      <span className="block text-lg text-neutral-900">
+                        {faculty.title}
+                      </span>
+                    </h2>
+                  </div>
+                  <section>
+                    <span className="flex items-center space-x-2">
+                      <MdEmail className="text-primary-700" />
+                      <span className="text-gray-600 break-all">
+                        {faculty.email}
+                      </span>
+                    </span>
+                    <span className="mt-2 flex items-center space-x-2">
+                      <MdOutlineLocalPhone className="text-primary-700" />
+                      <span className="text-gray-600 break-all">
+                        {faculty.phone}
+                      </span>
+                    </span>
+                  </section>
+                </section>
+              </li>
             ))}
-          </GalleryCarousel>
-        </article>
-      )}
+          </ul>
+        </div>
+        {/* Advisory Commitee */}
+        <div id="advisory-committee">
+          <Heading
+            glyphDirection="ltr"
+            heading="h2"
+            text={text.Research.ipr.advisoryCommittee.title.toUpperCase()}
+          />
+          <div className="mt-12 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>
+                    {text.Research.ipr.advisoryCommittee.srNo}
+                  </TableHead>
+                  <TableHead>
+                    {text.Research.ipr.advisoryCommittee.name}
+                  </TableHead>
+                  <TableHead>
+                    {text.Research.ipr.advisoryCommittee.designation}
+                  </TableHead>
+                  <TableHead>
+                    {text.Research.ipr.advisoryCommittee.department}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {advisoryCommittee.map((member) => (
+                  <TableRow key={member.srNo}>
+                    <TableCell>{member.srNo}</TableCell>
+                    <TableCell>{member.name}</TableCell>
+                    <TableCell>{member.designation}</TableCell>
+                    <TableCell>{member.department}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+        {/* IP Policy */}
+        <div id="ipr-policy">
+          <Heading
+            glyphDirection="rtl"
+            heading="h2"
+            text={text.Research.ipr.iprPolicy.title}
+          />
+          {/* /academics/2.jpg */}
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            {/* Left: Image with caption */}
+            <div className="relative overflow-hidden rounded-lg shadow-md">
+              {/* Adjust this image */}
+              <Image
+                src={`academics/2.jpg`}
+                alt="Revised IP Policy"
+                width={500}
+                height={200}
+                className="h-auto max-h-80 w-full object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-neutral-600/90 to-transparent"></div>
+              <Link
+                href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
+                className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
+                target="_blank"
+              >
+                <span className="uppercase">
+                  {text.Research.ipr.iprPolicy.revisedIpPolicy}
+                </span>{' '}
+                (2017) →
+              </Link>
+            </div>
+
+            {/* Right: Description */}
+            <p className="text-gray-800 text-justify leading-relaxed">
+              {text.Research.ipr.iprPolicy.description}
+            </p>
+          </div>
+        </div>
+        {/* Available Technologies */}
+        <div id="available-technologies">
+          <Heading
+            glyphDirection="ltr"
+            heading="h2"
+            text={text.Research.ipr.availableTechnologies.title}
+          />
+
+          <h2 className="text-sm text-primary-300 sm:text-base md:text-lg lg:text-lg">
+            {text.Research.ipr.availableTechnologies.description}
+          </h2>
+
+          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
+            {availableTechnologies.map(({ label, href, icon: Icon }, index) => (
+              <Button
+                asChild
+                className={cn(
+                  'xl:gap-5',
+                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
+                )}
+                key={index}
+                variant="secondary"
+              >
+                <Link href={href} className="rounded-s-md">
+                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
+                    <Icon
+                      className={cn(
+                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
+                      )}
+                    />
+                  </div>
+                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                    {label}
+                  </p>
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+        {/* NITKKR innovations and IP */}
+        <div id="nitkkr-innovations">
+          <Heading
+            glyphDirection="rtl"
+            heading="h2"
+            text={text.Research.ipr.nitkkrInnovationsAndIp.title}
+          />
+          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {innovations.map(({ label, href, icon: Icon }, index) => (
+              <Button
+                asChild
+                className={cn(
+                  'xl:gap-5',
+                  'group mx-auto flex h-40 w-64 flex-col gap-2 sm:h-48 sm:w-72 sm:gap-3 md:h-52 md:w-[19rem] md:gap-4'
+                )}
+                key={index}
+                variant="secondary"
+              >
+                <Link href={href} className="rounded-s-md">
+                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
+                    <Icon
+                      className={cn(
+                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
+                      )}
+                    />
+                  </div>
+                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                    {label}
+                  </p>
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+        {/* Gallery  */}
+      </main>
     </>
   );
 }
