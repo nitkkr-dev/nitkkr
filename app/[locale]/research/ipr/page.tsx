@@ -163,23 +163,11 @@ export default async function IPR({
       <ImageHeader
         title={`${text.Research.ipr.title} (IPR) ${text.Institute.cells.cell}`}
         headings={[
-          {
-            label: text.Research.ipr.facultyIncharge,
-            href: '#faculty-incharge',
-          },
-          {
-            label: text.Research.ipr.advisoryCommittee.title,
-            href: '#advisory-committee',
-          },
+          { label: text.Research.ipr.facultyIncharge, href: '#faculty-incharge' },
+          { label: text.Research.ipr.advisoryCommittee.title, href: '#advisory-committee' },
           { label: text.Research.ipr.iprPolicy.title, href: '#ipr-policy' },
-          {
-            label: text.Research.ipr.availableTechnologies.title,
-            href: '#available-technologies',
-          },
-          {
-            label: text.Research.ipr.nitkkrInnovationsAndIp.title,
-            href: '#nitkkr-innovations',
-          },
+          { label: text.Research.ipr.availableTechnologies.title, href: '#available-technologies' },
+          { label: text.Research.ipr.nitkkrInnovationsAndIp.title, href: '#nitkkr-innovations' },
         ]}
         src="student-activities/clubs/technobyte/1.jpg"
       />
@@ -296,9 +284,10 @@ export default async function IPR({
                 height={200}
                 className="h-auto max-h-80 w-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-shade-light"></div>
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
-                className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold text-neutral-50"
+                className="absolute bottom-0 left-0 w-full p-6 text-xl font-medium text-neutral-900 hover:underline md:text-2xl lg:text-3xl xl:text-4xl"
                 target="_blank"
               >
                 <span className="uppercase">
