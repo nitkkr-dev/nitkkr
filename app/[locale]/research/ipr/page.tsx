@@ -287,7 +287,7 @@ export default async function IPR({
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-shade-light/90"></div>
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
-                className="absolute bottom-4 left-4 text-2xl font-semibold text-neutral-900 hover:underline"
+                className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
                 target="_blank"
               >
                 <span className="uppercase">
