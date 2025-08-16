@@ -1430,6 +1430,99 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       `Prof. B. V. Ramana Reddy`,
     ],
   },
+   Research: {
+    title: "RESEARCH",
+    introduction:
+      "Aryawart is the excellence in Research & discovery with strong global and local impact. NITKKR strives for excellence in research and development across a variety of fields, from advanced technologies to social sciences, making a real difference in society.",
+    headings: {
+      patentsAndTechnologies: "PATENTS & TECHNOLOGIES",
+      research: "RESEARCH & CONSULTANCY",
+      copyright: "COPYRIGHTS & DESIGN",
+      memorandum: "MEMORANDUM OF UNDERSTANDING",
+      importres: "IMPORT RESOURCES",
+      sponsoredproj: "SPONSORED PROJECTS",
+      iprcell: "IPR CELL",
+    },
+    sections: {
+      patentsAndTechnologies: { title: "Patents published and granted" },
+      research: { title: "Details of research & consultancy projects" },
+      copyright: {
+        title: "Copyrights and Designs",
+        copyright: "The copyrights obtained by faculty staff and students of NIT Kurukshetra are listed below:",
+        
+        design: "Designs registered by faculty staff and students of NIT Kurukshetra are listed below:",
+      },
+      memorandum: {
+        title: "List of MoUs signed with organizations",
+        more: "View all MoUs",
+      },
+      importres: {
+        title: "Important resources",
+        more: "View all resources",
+      },
+      sponsoredproj: {
+        title: "Sponsored projects by faculty staff and students of NIT Kurukshetra",
+      },
+      iprcell: {
+        title: "About IPR Cell",
+        more: "yayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayappyayapp",
+      },
+    },
+    research: {
+      number: "S. No.",
+      faculty: "Faculty Name",
+      department: "Department",
+      facultyCode: "Faculty Code",
+      totalJobs: "Total Consultancy Jobs",
+      total: "Total Amount (in Rs.)",
+    },
+    patentsAndTechnologies: {
+      number: "S. No.",
+      applicationNumber: "Application Number",
+      patentNumber: "Patent Number",
+      techTitle: "Technology / Title",
+      inventor: "Inventor",
+    },
+    copyright: {
+      number: "S. No.",
+      grantYear: "Grant Year",
+      copyrightNo: "Copyright No.",
+      title: "Title",
+      creator: "Creator",
+    },
+    design: {
+      number: "S. No.",
+      yearOfAcceptance: "Year of Acceptance",
+      applicationNo: "Application No.",
+      title: "Title",
+      creator: "Creator",
+    },
+    memorandum: {
+      number: "S. No.",
+      organization: "Organization",
+      signingDate: "Signing Date",
+    },
+    projects: {
+      number: "S. No.",
+      year: "Year",
+      department: "Department",
+      facultyName: "Faculty Name",
+      title: "Title",
+      agency: "Agency",
+      amount: "Amount Sanctioned (in Rs.)",
+    },
+    archive: {
+    title: "Archive",
+    rulesConsultancy: "Rules & Regulations for Consultancy Services w.e.f from FY 2018–19",
+    rulesSponsored: "Rules & Regulation for Sponsored Research Project w.e.f FY 2018–19",
+    guidelinesPhD: "Guidelines for utilization of the contingency grant for full time Ph.D. scholars",
+    sponsoringAgencies: "Prospective Sponsoring agencies for R&D Projects",
+    sponsoredResearch: "Sponsored Research Project",
+    financialAssistance: "Financial Assistance to Students",
+    projectProposal: "Format-Project Proposal to Funding Agencies",
+  },
+  },
+
   TrainingAndPlacement: {
     title: 'Training and Placement',
     headings: {
@@ -1557,5 +1650,6 @@ rolls down to 60% of the eligible students for second round of placement session
     },
   },
 };
+
 
 export default text;
