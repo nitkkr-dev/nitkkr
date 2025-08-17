@@ -1,3 +1,4 @@
+import { string } from 'zod';
 import { number } from 'zod';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -285,6 +286,32 @@ export interface Translations {
       senate: { heading: string; text: string[] };
       sports: { heading: string; text: string[] };
       address: string[];
+    };
+    cells: {
+      title: string;
+      cell: string;
+      iic: {
+        title: string;
+        preamble: string;
+        description: string;
+        officeOrder: {
+          title: string;
+          srNo: string;
+          responsibility: string;
+          nameOfFaculty: string;
+        };
+        activities: {
+          title: string;
+          srNo: string;
+          pastActivities: string;
+          upcomingActivities: string;
+        };
+      };
+      iks: {
+        title: string;
+        description: string;
+        iksTeam: string;
+      };
     };
   };
   Hostels: {
@@ -913,6 +940,34 @@ export interface Translations {
       sponsoredResearch: string;
       financialAssistance: string;
       projectProposal: string;
+    };
+    ipr: {
+      title: string;
+      description: string;
+      facultyIncharge: string;
+      iprPolicy: {
+        title: string;
+        description: string;
+        revisedIpPolicy: string;
+      };
+      availableTechnologies: {
+        title: string;
+        description: string;
+        technologiesAvailable: string;
+        purchasingForm: string;
+      };
+      advisoryCommittee: {
+        title: string;
+        srNo: string;
+        name: string;
+        designation: string;
+        department: string;
+      };
+      nitkkrInnovationsAndIp: {
+        title: string;
+        patentsGranted: string;
+        copyrightsAndDesigns: string;
+      };
     };
   };
   TrainingAndPlacement: {
