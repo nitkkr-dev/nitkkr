@@ -565,8 +565,7 @@ const text: Translations = {
       nitkkrInnovationsAndIp: {
         title: 'एनआईटीकेकेआर नवाचार एवं बौद्धिक संपदा',
         patentsGranted: 'स्वीकृत पेटेंट',
-        copyrightsObtained: 'प्राप्त कॉपीराइट',
-        designsRegistered: 'पंजीकृत डिज़ाइन',
+        copyrightsAndDesigns: 'कॉपीराइट्स एवं डिज़ाइन',
       },
     },
   },

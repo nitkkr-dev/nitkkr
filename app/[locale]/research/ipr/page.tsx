@@ -142,18 +142,13 @@ export default async function IPR({
   const innovations: Card[] = [
     {
       label: text.Research.ipr.nitkkrInnovationsAndIp.patentsGranted,
-      href: 'patents-and-technologies',
+      href: '/research#patents', // TODO:make this not static
       icon: FaRegIdCard,
     },
     {
-      label: text.Research.ipr.nitkkrInnovationsAndIp.copyrightsObtained,
-      href: 'copyrights-and-designs',
-      icon: FaFlask,
-    },
-    {
-      label: text.Research.ipr.nitkkrInnovationsAndIp.designsRegistered,
-      href: 'copyrights-and-designs',
-      icon: PiShieldStarBold,
+      label: text.Research.ipr.nitkkrInnovationsAndIp.copyrightsAndDesigns,
+      href: '/research#copyright', // TODO:make this not static
+      icon: FaFlask, // You can choose which icon to use, or combine
     },
   ];
 
@@ -355,13 +350,13 @@ export default async function IPR({
             heading="h2"
             text={text.Research.ipr.nitkkrInnovationsAndIp.title}
           />
-          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
             {innovations.map(({ label, href, icon: Icon }, index) => (
               <Button
                 asChild
                 className={cn(
                   'xl:gap-5',
-                  'group mx-auto flex h-40 w-64 flex-col gap-2 sm:h-48 sm:w-72 sm:gap-3 md:h-52 md:w-[19rem] md:gap-4'
+                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
                 )}
                 key={index}
                 variant="secondary"
