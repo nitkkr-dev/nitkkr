@@ -29,7 +29,7 @@ export default function ImageHeader({
 
       <section
         className={cn(
-          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-sm:static',
+          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-xl:static',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]',
           className
         )}
@@ -49,7 +49,7 @@ export default function ImageHeader({
           <ol
             className={cn(
               'p-1 xl:p-2',
-              'invisible xl:visible xl:flex xl:gap-1 2xl:gap-2',
+              'hidden xl:flex xl:gap-1 2xl:gap-2',
               'sticky top-6 z-tabs mx-auto w-fit rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
               // 'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' TODO: This needs to be fixed for small screens// DEPENDS-ON: header.tsx
