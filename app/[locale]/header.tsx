@@ -356,8 +356,7 @@ export default async function Header({ locale }: { locale: string }) {
                       )
                     )}
                   </ul>
-                  {/* <MobileSubNavMenu locale={locale} {...items[0]} />
-                  <MobileSubNavMenu locale={locale} {...items[1]} /> */}
+                  {/* Mobile Navigation Menu -> only for those having listItems*/}
                   {items.map((item, idx) =>
                     item.listItems ? (
                       <MobileSubNavMenu key={idx} locale={locale} {...item} />

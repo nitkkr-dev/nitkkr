@@ -418,7 +418,7 @@ export default async function PatentsAndTechnology({
               className="absolute bottom-0 left-0 z-20 w-full p-3 text-lg font-semibold text-neutral-50"
             >
               <span className="uppercase">{text.sections.iprCell.view}</span>{' '}
-              (2017) &rarr;
+              &rarr;
             </Link>
           </div>
           <p className="text-gray-800 text-justify leading-relaxed">
