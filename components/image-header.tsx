@@ -49,17 +49,18 @@ export default function ImageHeader({
           <ol
             className={cn(
               'p-1 xl:p-2',
-              'hidden sm:flex sm:gap-1 md:gap-2',
+              'hidden xl:flex xl:gap-1 2xl:gap-2',
               'sticky top-6 z-tabs mx-auto w-fit rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
-              'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
+              // 'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' TODO: This needs to be fixed for small screens// DEPENDS-ON: header.tsx
+              'xl:mb-[38px] xl:mt-72 2xl:mt-[352px]'
             )}
           >
             {headings.map(({ label, href }, index) => (
               <li key={index}>
                 <Button
                   asChild
-                  className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
+                  className="rounded-full px-4 py-2 text-[clamp(theme(fontSize.xs),1.5vw,theme(fontSize.base))] text-shade-dark transition-colors duration-300"
                   variant="ghost"
                 >
                   <Link href={href}>{label}</Link>
