@@ -332,11 +332,9 @@ export default async function PatentsAndTechnology({
 
       {/* INTRODUCTION */}
       <section className="container mt-8 lg:mt-12">
-        <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
-            <span className="mb-1 block">{text.introduction}</span>
-          </p>
-        </article>
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+          <span className="mb-1 block">{text.introduction}</span>
+        </p>
       </section>
 
       {/* RESEARCH AND CONSULTANCY */}
