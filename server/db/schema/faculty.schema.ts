@@ -95,13 +95,13 @@ export const publications = pgTable('publications', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
+  // title: t.text().notNull(),
   details: t.text().notNull(),
-  people: t.text().notNull(),
-  date: t.date().notNull(),
+  // people: t.text().notNull(),
+  // date: t.date().notNull(),
   tag: t
     .varchar({
-      enum: ['book', 'journal', 'conference'],
+      enum: ['book', 'journal', 'conference', 'book chapter'],
     })
     .notNull(),
 }));

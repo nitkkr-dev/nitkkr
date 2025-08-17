@@ -31,11 +31,11 @@ export const facultyProfileSchemas = {
   }),
 
   publications: z.object({
-    title: z.string().min(1, 'Title is required'),
+    // title: z.string().min(1, 'Title is required'),
     details: z.string().min(1, 'Details are required'),
-    people: z.string().min(1, 'People are required'),
-    date: dateInput(),
-    tag: z.enum(['book', 'journal', 'conference']),
+    // people: z.string().min(1, 'People are required'),
+    // date: dateInput(),
+    tag: z.enum(['book', 'journal', 'conference', 'book chapter']),
   }),
 
   continuingEducation: z.object({

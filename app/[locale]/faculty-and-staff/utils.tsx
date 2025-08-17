@@ -499,7 +499,7 @@ async function FacultySectionComponent({
                   </>
                 ) : null}
               </span>
-              <p>
+              <p className="whitespace-pre-wrap">
                 {item.details ??
                   item.field ??
                   item.specialization ??

@@ -5,7 +5,7 @@ import type z from 'zod';
 import { ZodFirstPartyTypeKind, type ZodSchema } from 'zod';
 
 import { Button } from '~/components/buttons';
-import { Input } from '~/components/inputs';
+import { Input, Textarea } from '~/components/inputs';
 import {
   Select,
   SelectContent,
@@ -77,7 +77,7 @@ export function FacultyForm({
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <CardContent className="grid gap-4 p-6 md:grid-cols-2">
-          {renderFields(form.control, schema.shape)}
+          {renderFields(form.control, schema.shape, topic)}
         </CardContent>
         <CardFooter className="flex justify-end border-t pt-4 ">
           <Button
@@ -101,7 +101,8 @@ export function FacultyForm({
 const renderFields = <T extends Record<string, any>>(
   formControl: Control<T>,
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  schemaShape: Record<string, ZodSchema<unknown> | never>
+  schemaShape: Record<string, ZodSchema<unknown> | never>,
+  topic = ''
 ) => {
   const renderField = (fieldName: string) => {
     const fieldSchema = schemaShape[fieldName] as
@@ -161,6 +162,34 @@ const renderFields = <T extends Record<string, any>>(
       );
     }
 
+    // Check if topic is 'publications'
+    // then has only one field -> 'details' (enum is already handled above)
+    // details should be a textbox field spanning full width
+    if (topic === 'publications') {
+      return (
+        <FormField
+          key={fieldName}
+          control={formControl}
+          name={fieldName as unknown as FieldPath<T>}
+          render={({ field }) => (
+            <FormItem className="md:col-span-2">
+              <FormLabel>{label}</FormLabel>
+              <FormControl>
+                <Textarea
+                  id={fieldName}
+                  // label={label}
+                  className="w-full"
+                  required={!isOptional}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      );
+    }
+
     const isDateField =
       fieldSchema._def.typeName === ZodFirstPartyTypeKind.ZodDate ||
       (fieldSchema._def.typeName === ZodFirstPartyTypeKind.ZodUnion &&
@@ -209,11 +238,28 @@ const renderFields = <T extends Record<string, any>>(
     );
   };
 
-  return Object.keys(schemaShape).map((fieldName) => {
+  // Get the field names in the correct order
+  let fieldNames = Object.keys(schemaShape);
+
+  // Special case for publications: display tag before details
+  if (topic === 'publications') {
+    // Reorder fields for publications: tag first, then details
+    fieldNames = fieldNames.sort((a, b) => {
+      if (a === 'tag') return -1;
+      if (b === 'tag') return 1;
+      return 0;
+    });
+  }
+
+  return fieldNames.map((fieldName) => {
     // Make certain fields span full width
-    const isFullWidth = ['description', 'about', 'title', 'people'].includes(
-      fieldName.toLowerCase()
-    );
+    const isFullWidth = [
+      'description',
+      'about',
+      'title',
+      'people',
+      'details',
+    ].includes(fieldName.toLowerCase());
 
     return (
       <div key={fieldName} className={isFullWidth ? 'md:col-span-2' : ''}>
@@ -253,7 +299,11 @@ export function FacultyPersonalDetailsForm({
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <CardContent className="grid gap-4 p-6 md:grid-cols-2">
-          {renderFields(form.control, facultyPersonalDetailsSchema.shape)}
+          {renderFields(
+            form.control,
+            facultyPersonalDetailsSchema.shape,
+            'personalDetails'
+          )}
         </CardContent>
         <CardFooter className="flex justify-end border-t pt-4 ">
           <Button
