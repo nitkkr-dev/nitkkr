@@ -130,7 +130,7 @@ export default async function Header({ locale }: { locale: string }) {
         },
         {
           title: 'IPR Cell',
-          href: 'research/ipr',
+          href: 'research#ipr',
           description:
             'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
         },
