@@ -341,36 +341,6 @@ export interface Translations {
       };
     };
   };
-  Research: {
-    ipr: {
-      title: string;
-      description: string;
-      facultyIncharge: string;
-      iprPolicy: {
-        title: string;
-        description: string;
-        revisedIpPolicy: string;
-      };
-      availableTechnologies: {
-        title: string;
-        description: string;
-        technologiesAvailable: string;
-        purchasingForm: string;
-      };
-      advisoryCommittee: {
-        title: string;
-        srNo: string;
-        name: string;
-        designation: string;
-        department: string;
-      };
-      nitkkrInnovationsAndIp: {
-        title: string;
-        patentsGranted: string;
-        copyrightsAndDesigns: string;
-      };
-    };
-  };
   Login: {
     title: string;
     enterEmail: string;
@@ -970,6 +940,34 @@ export interface Translations {
       sponsoredResearch: string;
       financialAssistance: string;
       projectProposal: string;
+    };
+    ipr: {
+      title: string;
+      description: string;
+      facultyIncharge: string;
+      iprPolicy: {
+        title: string;
+        description: string;
+        revisedIpPolicy: string;
+      };
+      availableTechnologies: {
+        title: string;
+        description: string;
+        technologiesAvailable: string;
+        purchasingForm: string;
+      };
+      advisoryCommittee: {
+        title: string;
+        srNo: string;
+        name: string;
+        designation: string;
+        department: string;
+      };
+      nitkkrInnovationsAndIp: {
+        title: string;
+        patentsGranted: string;
+        copyrightsAndDesigns: string;
+      };
     };
   };
   TrainingAndPlacement: {
