@@ -10,6 +10,7 @@ import {
   awardsAndHonors,
   continuingEducation,
   db,
+  developmentProgramsOrganised,
   experience,
   faculty,
   publications,
@@ -26,6 +27,7 @@ const facultyTables = {
   researchProjects,
   continuingEducation,
   awardsAndHonors,
+  developmentProgramsOrganised,
 } as const;
 
 export default async function Page({

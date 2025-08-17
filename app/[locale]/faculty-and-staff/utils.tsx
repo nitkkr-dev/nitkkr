@@ -25,6 +25,7 @@ import {
   awardsAndHonors,
   continuingEducation,
   db,
+  developmentProgramsOrganised,
   doctorates,
   experience,
   faculty,
@@ -58,16 +59,12 @@ async function FacultyOrStaffComponent({
       href: 'experience',
     },
     {
-      label: text.tabs.projects,
-      href: 'projects',
-    },
-    {
-      label: text.tabs.continuingEducation,
-      href: 'continuingEducation',
-    },
-    {
       label: text.tabs.publications,
       href: 'publications',
+    },
+    {
+      label: text.tabs.projects,
+      href: 'projects',
     },
     {
       label: text.tabs.researchScholars,
@@ -76,6 +73,14 @@ async function FacultyOrStaffComponent({
     {
       label: text.tabs.awardsAndHonors,
       href: 'awardsAndHonors',
+    },
+    {
+      label: text.tabs.developmentProgramsOrganised,
+      href: 'developmentProgramsOrganised',
+    },
+    {
+      label: text.tabs.continuingEducation,
+      href: 'continuingEducation',
     },
   ];
   const facultyDescriptionTmp = await db.query.faculty.findFirst({
@@ -307,6 +312,7 @@ const facultyTables = {
   publications: publications,
   continuingEducation: continuingEducation,
   awardsAndHonors: awardsAndHonors,
+  developmentProgramsOrganised: developmentProgramsOrganised,
 } as const;
 
 async function FacultySectionComponent({
@@ -329,11 +335,12 @@ async function FacultySectionComponent({
     if (facultySection === 'researchScholars') {
       return await fetchResearchScholars(id, employeeId);
     } else if (id) {
-      return await fetchSectionByFacultyId(
+      const data = await fetchSectionByFacultyId(
         id,
         facultySection === 'projects' ? 'researchProjects' : facultySection,
         !table
       );
+      return data;
     }
     // Using employee ID
     else if (employeeId) {
@@ -386,6 +393,7 @@ async function FacultySectionComponent({
     degree?: string;
     description?: string;
   }[]; //typescript cannot infer the type of result, so we have to specify it explicitly
+
   if (!result || facultySection === 'researchScholars') {
     return (
       <div className="[&>*]:!h-full">
@@ -470,7 +478,8 @@ async function FacultySectionComponent({
             >
               <span className="flex w-full items-center justify-between">
                 <h5 className="font-bold">
-                  {facultySection === 'qualifications'
+                  {facultySection === 'qualifications' ||
+                  facultySection === 'developmentProgramsOrganised'
                     ? item.degree
                     : facultySection === 'experience'
                       ? item.designation

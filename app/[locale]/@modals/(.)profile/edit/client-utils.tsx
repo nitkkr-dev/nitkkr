@@ -165,7 +165,7 @@ const renderFields = <T extends Record<string, any>>(
     // Check if topic is 'publications'
     // then has only one field -> 'details' (enum is already handled above)
     // details should be a textbox field spanning full width
-    if (topic === 'publications') {
+    if (topic === 'publications' || topic === 'developmentProgramsOrganised') {
       return (
         <FormField
           key={fieldName}

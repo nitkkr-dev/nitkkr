@@ -10,6 +10,7 @@ import {
   researchProjects,
   sectionHeads,
 } from '.';
+import { date } from 'drizzle-orm/mysql-core';
 
 export const faculty = pgTable(
   'faculty',
@@ -44,6 +45,27 @@ export const faculty = pgTable(
     scopusId: t.text(),
   }),
   (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
+);
+
+// DevelopmentProgrmsOrganised Table
+export const developmentProgramsOrganised = pgTable(
+  'development_programs_organised',
+  (t) => ({
+    id: t.serial().primaryKey(),
+    facultyId: t
+      .varchar()
+      .references(() => faculty.employeeId)
+      .notNull(),
+    // title: t.text().notNull(),
+    // date: t.date().notNull(),
+    // venue: t.text().notNull(),
+    details: t.text().notNull(),
+    // tag: t
+    //   .varchar({
+    //     enum: ['workshop', 'conference', 'seminar', 'talk delivered', 'lecture', 'symposium'],
+    //   })
+    //   .notNull(),
+  })
 );
 
 // Qualifications Table
@@ -177,7 +199,18 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   publications: many(publications),
   awardsAndHonors: many(awardsAndHonors),
   customTopics: many(customTopics),
+  developmentProgramsOrganised: many(developmentProgramsOrganised),
 }));
+
+export const developmentProgramsOrganisedRelations = relations(
+  developmentProgramsOrganised,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [developmentProgramsOrganised.facultyId],
+      references: [faculty.employeeId],
+    }),
+  })
+);
 
 export const qualificationsRelations = relations(qualifications, ({ one }) => ({
   faculty: one(faculty, {

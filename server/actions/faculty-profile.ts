@@ -12,6 +12,7 @@ import { db } from '~/server/db';
 import {
   awardsAndHonors,
   continuingEducation,
+  developmentProgramsOrganised,
   experience,
   faculty,
   persons,
@@ -45,6 +46,10 @@ const sectionConfig = {
   awardsAndHonors: {
     table: awardsAndHonors,
     schema: facultyProfileSchemas.awardsAndHonors,
+  },
+  developmentProgramsOrganised: {
+    table: developmentProgramsOrganised, // Assuming this is the correct table
+    schema: facultyProfileSchemas.developmentProgramsOrganised,
   },
 } as const;
 

@@ -38,6 +38,23 @@ export const facultyProfileSchemas = {
     tag: z.enum(['book', 'journal', 'conference', 'book chapter']),
   }),
 
+  developmentProgramsOrganised: z.object({
+    // title: z.string().min(1, 'Title is required'),
+    // venue: z.string().min(1, 'Venue is required'),
+    // startDate: dateInput(),
+    details: z.string().min(1, 'Details are required'),
+    // tag: z.enum([
+    //   'workshop',
+    //   'seminar',
+    //   'conference',
+    //   'webinar',
+    //   'training',
+    //   'talk delivered',
+    //   'lecture',
+    //   'symposium',
+    // ]),
+  }),
+
   continuingEducation: z.object({
     title: z.string().min(1, 'Title is required'),
     type: z.string().min(1, 'Type is required'),

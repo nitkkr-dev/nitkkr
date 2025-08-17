@@ -95,6 +95,7 @@ export const Tabs = ({
     publications: MdApproval,
     researchScholars: MdGroups,
     awardsAndHonors: MdEmojiEvents,
+    developmentProgramsOrganised: MdGroups,
   };
 
   return select ? (
