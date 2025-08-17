@@ -1,4 +1,7 @@
 import { Suspense } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
 import ImageHeader from '~/components/image-header';
@@ -13,7 +16,6 @@ import {
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
 import { faculty } from '~/server/db';
-import Link from 'next/link';
 // If you use the 'cn' utility from 'classnames' or a custom file, import it here:
 import { cn } from '~/lib/utils'; // Adjust the path if needed
 
@@ -100,46 +102,42 @@ export default async function PatentsAndTechnology({
   ];
   const staticResearch = [
     {
-      facultyName:"Dr. S.K. Patidar",
-      department:"Civil Engineering",
-      facultyCode:"skp",
-      totalJobs:"23",
-      totalAmount:"501500",
-
+      facultyName: 'Dr. S.K. Patidar',
+      department: 'Civil Engineering',
+      facultyCode: 'skp',
+      totalJobs: '23',
+      totalAmount: '501500',
     },
     {
-      facultyName:"Dr. S.K. Patidar",
-      department:"Civil Engineering",
-      facultyCode:"skp",
-      totalJobs:"23",
-      totalAmount:"501500",
-
+      facultyName: 'Dr. S.K. Patidar',
+      department: 'Civil Engineering',
+      facultyCode: 'skp',
+      totalJobs: '23',
+      totalAmount: '501500',
     },
     {
-      facultyName:"Dr. S.K. Patidar",
-      department:"Civil Engineering",
-      facultyCode:"skp",
-      totalJobs:"23",
-      totalAmount:"501500",
-
+      facultyName: 'Dr. S.K. Patidar',
+      department: 'Civil Engineering',
+      facultyCode: 'skp',
+      totalJobs: '23',
+      totalAmount: '501500',
     },
     {
-      facultyName:"Dr. S.K. Patidar",
-      department:"Civil Engineering",
-      facultyCode:"skp",
-      totalJobs:"23",
-      totalAmount:"501500",
-
+      facultyName: 'Dr. S.K. Patidar',
+      department: 'Civil Engineering',
+      facultyCode: 'skp',
+      totalJobs: '23',
+      totalAmount: '501500',
     },
     {
-      facultyName:"Dr. S.K. Patidar",
-      department:"Civil Engineering",
-      facultyCode:"skp",
-      totalJobs:"23",
-      totalAmount:"501500",
-
-    }, ];
-    const staticRows: Record<'copyrights' | 'designs', string[][]> = {
+      facultyName: 'Dr. S.K. Patidar',
+      department: 'Civil Engineering',
+      facultyCode: 'skp',
+      totalJobs: '23',
+      totalAmount: '501500',
+    },
+  ];
+  const staticRows: Record<'copyrights' | 'designs', string[][]> = {
     copyrights: [
       [
         '1',
@@ -193,113 +191,117 @@ export default async function PatentsAndTechnology({
       ['6', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
     ],
   };
-  const staticMemorandum= [
+  const staticMemorandum = [
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
     {
-      organization:"CSIR-Central Road Research Institute, New Delhi",
-      date:"10-10-2023",
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
-    
   ];
-  const staticProjects=[
+  const staticProjects = [
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
     {
-      year:"2014-17",
-      department:"chemistry",
-      facultyName:"Dr. Amilan Jose D",
-      title:"Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay",
-      agency:"hihi",
-      amount:"69",
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
     },
-    
   ];
-
-
 
   // Get the total count for pagination
-   const getResearchCount = async () => {
+  const getResearchCount = async () => {
     const count = staticResearch.length; // Replace with your actual DB call
     return [{ count }];
   };
-   const getProjectCount = async () => {
+  const getProjectCount = async () => {
     const count = staticProjects.length; // Replace with your actual DB call
     return [{ count }];
   };
@@ -310,134 +312,133 @@ export default async function PatentsAndTechnology({
   const getMemorandumCount = async () => {
     const count = staticMemorandum.length; // Replace with your actual DB call
     return [{ count }];
-  }
+  };
 
   return (
     <>
-    
       <ImageHeader
-              title={text.title}
-              headings={[
-                { label: text.headings.research, href: '#research' },
-                { label: text.headings.iprcell, href: '#ipr' },
-                { label: text.headings.patentsAndTechnologies, href: '#patents' },
-                { label: text.headings.copyright, href: '#copyright' },
-                { label: text.headings.memorandum, href: '#memorandum' },
-                { label: text.headings.importres, href: '#resources' },
-                 { label: text.headings.sponsoredproj, href: '#projects' },
-                  
-              ]}
-              src="research/header.jpg"
-            />
-            <div>
-      <section className="container" id="about">
-              
-      <article className="flex max-md:flex-col">
+        title={text.title}
+        headings={[
+          { label: text.headings.research, href: '#research' },
+          { label: text.headings.iprCell, href: '#ipr' },
+          { label: text.headings.patentsAndTechnologies, href: '#patents' },
+          { label: text.headings.copyright, href: '#copyright' },
+          { label: text.headings.memorandum, href: '#memorandum' },
+          { label: text.headings.importantRes, href: '#resources' },
+          { label: text.headings.sponsoredProj, href: '#projects' },
+        ]}
+        src="research/header.jpg"
+      />
+
+      {/* INTRODUCTION */}
+      <section className="container mt-8 lg:mt-12">
+        <article className="flex max-md:flex-col">
           <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
             <span className="mb-1 block">{text.introduction}</span>
-            
           </p>
         </article>
+      </section>
+
+      {/* RESEARCH AND CONSULTANCY */}
+      <section className="container" id="about">
         <Heading
-                glyphDirection="dual"
-                heading="h3"
-                href="#research"
-                text={text.headings.research}
-              />
+          glyphDirection="dual"
+          heading="h3"
+          href="#research"
+          text={text.headings.research}
+        />
+      </section>
+      <section className="container">
+        <div className="max-h-96 w-full overflow-x-auto">
+          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+            <TableHeader>
+              <TableRow>
+                {[
+                  text.research.number,
+                  text.research.faculty,
+                  text.research.department,
+                  text.research.facultyCode,
+                  text.research.totalJobs,
+                  text.research.total,
+                ].map((headerText, index) => (
+                  <TableHead key={index}>{headerText}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <Suspense
+                fallback={
+                  <TableRow>
+                    <TableCell colSpan={6}>
+                      <Loading />
+                    </TableCell>
+                  </TableRow>
+                }
+              >
+                <ResearchTable
+                  tableData={staticResearch}
+                  currentPage={currentPage}
+                  itemsPerPage={10}
+                />
+              </Suspense>
+            </TableBody>
+          </Table>
+        </div>
 
-</section></div>
-               <section className="container p-8">
-  <div className="max-h-96 w-full overflow-x-auto">
-    <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-      <TableHeader>
-        <TableRow>
-          {[
-            text.research.number,
-            text.research.faculty,
-            text.research.department,
-            text.research.facultyCode,
-            text.research.totalJobs,
-            text.research.total,
-          ].map((headerText, index) => (
-            <TableHead key={index}>{headerText}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <Suspense
-          fallback={
-            <TableRow>
-              <TableCell colSpan={6}>
-                <Loading />
-              </TableCell>
-            </TableRow>
-          }
-        >
-          <ResearchTable
-            tableData={staticResearch}
+        <div className="mt-6">
+          <PaginationWithLogic
             currentPage={currentPage}
-            itemsPerPage={10}
+            query={getResearchCount()}
           />
-        </Suspense>
-      </TableBody>
-    </Table>
-  </div>
+        </div>
+      </section>
+      {/* IPR CELL */}
+      <section className="container" id="ipr">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href="#ipr"
+          text={text.headings.iprCell}
+        />
+      </section>
+      <section className="container">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          <div
+            className="relative h-80 w-full overflow-hidden rounded-lg shadow-md
+                 after:absolute after:inset-0 after:z-10
+                 after:bg-gradient-to-t after:from-primary-700/80 after:via-primary-700/40 after:to-background/40
+                 after:content-['']"
+          >
+            <Image
+              src="academics/2.jpg"
+              alt="IPR Cell"
+              fill
+              className="object-cover"
+            />
+            <Link
+              href="research/ipr"
+              className="absolute bottom-0 left-0 z-20 w-full p-3 text-lg font-semibold text-neutral-50"
+            >
+              <span className="uppercase">{text.sections.iprCell.view}</span>{' '}
+              (2017) &rarr;
+            </Link>
+          </div>
+          <p className="text-gray-800 text-justify leading-relaxed">
+            {text.sections.iprCell.more}
+          </p>
+        </div>
+      </section>
 
-  <div className="mt-6">
-    <PaginationWithLogic
-      currentPage={currentPage}
-      query={getResearchCount()}
-    />
-  </div>
-</section>
-<section className="container" id="ipr">
-      <Heading
-                glyphDirection="rtl"
-                heading="h3"
-                href="#ipr"
-                text={text.headings.iprcell}
-              />
-
-              </section>
-              <section className="container" id="about">
-<article className="container flex drop-shadow max-md:flex-col">
-  <Link
-    href="/academics/departments"
-    className="group relative w-full max-md:h-64 md:order-first md:rounded-lg"
-    style={{
-      backgroundImage: `url('/academics/image01.jpg')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
-  >
-    <div className="absolute inset-0 bg-gradient-to-t from-neutral-800/90 to-transparent md:rounded-lg"></div>
-    <h4 className="absolute bottom-5 left-5 text-background transition-colors duration-300 ease-in-out group-hover:text-primary-500">
-      {text.sections.iprcell.title}
-    </h4>
-  </Link>
-
-  <p
-    className={cn(
-      'p-2 sm:p-3 md:p-4',
-      'max-md:rounded-t md:w-full md:rounded-r',
-      'text-left break-words'
-    )}
-  >
-    {text.sections.iprcell.more}
-  </p>
-</article>
-
-</section>
-<section className="container" id="patents">
-      <Heading
-                glyphDirection="rtl"
-                heading="h3"
-                href="#patents"
-                text={text.headings.patentsAndTechnologies}
-              />
-
-              </section>
-      <section className="container p-8">
+      {/* PATENTS AND TECHNOLOGIES */}
+      <section className="container" id="patents">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href="#patents"
+          text={text.headings.patentsAndTechnologies}
+        />
+      </section>
+      <section className="container">
         <div className="max-h-96 w-full overflow-x-auto">
           <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
             <TableHeader>
@@ -480,163 +481,164 @@ export default async function PatentsAndTechnology({
           />
         </div>
       </section>
+      {/* COPYRIGHTS AND DESIGNS */}
       <section className="container" id="copyright">
-      <Heading
-                glyphDirection="dual"
-                heading="h3"
-                href="#copyright"
-                text={text.headings.copyright}
-              />
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          href="#copyright"
+          text={text.headings.copyright}
+        />
+      </section>
+      <div className="container space-y-10">
+        <h4 className="text-primary-300">
+          {text.sections.copyright.copyright}
+        </h4>
 
-              </section>
-      <div className="container space-y-10 py-8">
-              <h4 className="text-primary-300">{text.sections.copyright.copyright}</h4>
-      
-              <Suspense fallback={<Loading />}>
-                <TableSection
-                  headers={text.copyright}
-                  rows={staticRows.copyrights}
-                />
-              </Suspense>
-      
-              <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
-      
-              <Suspense fallback={<Loading />}>
-                <TableSection
-                  headers={text.design}
-                  rows={staticRows.designs}
-                />
-              </Suspense>
-            </div>
-      <section className="container" id="memorandum">
-      <Heading
-                glyphDirection="dual"
-                heading="h3"
-                href="#memorandum"
-                text={text.headings.memorandum}
-              />
-              </section>
-      <section className="container p-8">
-  <div className="max-h-96 w-full overflow-x-auto">
-    <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-      <TableHeader>
-        <TableRow>
-          {[
-            text.memorandum.number,
-            text.memorandum.organization,
-            text.memorandum.signingDate,
-          ].map((headerText, index) => (
-            <TableHead key={index}>{headerText}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <Suspense
-          fallback={
-            <TableRow>
-              <TableCell colSpan={3}>
-                <Loading />
-              </TableCell>
-            </TableRow>
-          }
-        >
-          <MemorandumTable
-            tableData={staticMemorandum}
-            currentPage={currentPage}
-            itemsPerPage={10}
-          />
+        <Suspense fallback={<Loading />}>
+          <TableSection headers={text.copyright} rows={staticRows.copyrights} />
         </Suspense>
-      </TableBody>
-    </Table>
-  </div>
 
-  <div className="mt-6">
-    <PaginationWithLogic currentPage={currentPage} query={getMemorandumCount()} />
-  </div>
-</section>
-<section className="container" id="projects">
-      <Heading
-                glyphDirection="ltr"
-                heading="h3"
-                href="#projects"
-                text={text.headings.sponsoredproj}
-              />
-              </section>
+        <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
 
-    <section className="container p-8">
-  <div className="max-h-96 w-full overflow-x-auto">
-    <Table scrollAreaClassName="h-[23rem] min-w-[800px]">
-      <TableHeader>
-        <TableRow>
-          {[
-            text.projects.number,
-            text.projects.year,
-            text.projects.department,
-            text.projects.facultyName,
-            text.projects.title,
-            text.projects.agency,
-            text.projects.amount,
-          ].map((headerText, index) => (
-            <TableHead key={index}>{headerText}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <Suspense
-          fallback={
-            <TableRow>
-              <TableCell colSpan={7}>
-                <Loading />
-              </TableCell>
-            </TableRow>
-          }
-        >
-          <ProjectsTable
-            tableData={staticProjects}
-            currentPage={currentPage}
-            itemsPerPage={10}
-          />
+        <Suspense fallback={<Loading />}>
+          <TableSection headers={text.design} rows={staticRows.designs} />
         </Suspense>
-      </TableBody>
-    </Table>
-  </div>
-
-  <div className="mt-6">
-    <PaginationWithLogic
-      currentPage={currentPage}
-      query={getProjectCount()}
-    />
-  </div>
-</section>
-<section className="container" id="resources">
-      <Heading
-                glyphDirection="rtl"
-                heading="h3"
-                href="#resources"
-                text={text.headings.importres}
-              />
-
-      <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
-  <div className="flex flex-col justify-between">
-    <div className="space-y-4">
-      <div>
-        <p className="text-lg font-medium">{text.archive.title}</p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>{text.archive.rulesConsultancy}</li>
-          <li>{text.archive.rulesSponsored}</li>
-          <li>{text.archive.guidelinesPhD}</li>
-          <li>{text.archive.sponsoringAgencies}</li>
-          <li>{text.archive.sponsoredResearch}</li>
-          <li>{text.archive.financialAssistance}</li>
-          <li>{text.archive.projectProposal}</li>
-        </ul>
       </div>
-    </div>
-  </div>
-</article>
+      {/* MOU */}
+      <section className="container" id="memorandum">
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          href="#memorandum"
+          text={text.headings.memorandum}
+        />
+      </section>
+      <section className="container">
+        <div className="max-h-96 w-full overflow-x-auto">
+          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+            <TableHeader>
+              <TableRow>
+                {[
+                  text.memorandum.number,
+                  text.memorandum.organization,
+                  text.memorandum.signingDate,
+                ].map((headerText, index) => (
+                  <TableHead key={index}>{headerText}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <Suspense
+                fallback={
+                  <TableRow>
+                    <TableCell colSpan={3}>
+                      <Loading />
+                    </TableCell>
+                  </TableRow>
+                }
+              >
+                <MemorandumTable
+                  tableData={staticMemorandum}
+                  currentPage={currentPage}
+                  itemsPerPage={10}
+                />
+              </Suspense>
+            </TableBody>
+          </Table>
+        </div>
 
-              </section>
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            query={getMemorandumCount()}
+          />
+        </div>
+      </section>
+      {/* SPONSORED PROJECTS */}
+      <section className="container" id="projects">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#projects"
+          text={text.headings.sponsoredProj}
+        />
+      </section>
+      <section className="container">
+        <div className="max-h-96 w-full overflow-x-auto">
+          <Table scrollAreaClassName="h-[23rem] min-w-[800px]">
+            <TableHeader>
+              <TableRow>
+                {[
+                  text.projects.number,
+                  text.projects.year,
+                  text.projects.department,
+                  text.projects.facultyName,
+                  text.projects.title,
+                  text.projects.agency,
+                  text.projects.amount,
+                ].map((headerText, index) => (
+                  <TableHead key={index}>{headerText}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <Suspense
+                fallback={
+                  <TableRow>
+                    <TableCell colSpan={7}>
+                      <Loading />
+                    </TableCell>
+                  </TableRow>
+                }
+              >
+                <ProjectsTable
+                  tableData={staticProjects}
+                  currentPage={currentPage}
+                  itemsPerPage={10}
+                />
+              </Suspense>
+            </TableBody>
+          </Table>
+        </div>
 
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            query={getProjectCount()}
+          />
+        </div>
+      </section>
+      {/* IMPORTANT RESOURCES */}
+      <section className="container" id="resources">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href="#resources"
+          text={text.headings.importantRes}
+        />
+
+        <article className="rounded-lg border border-primary-500 bg-shade-light p-2 md:p-4">
+          <p className="text-lg font-medium text-primary-300 lg:text-xl">
+            {text.archive.title}
+          </p>
+          <div className="mt-4 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div>
+                <ul className="list-disc space-y-2 pl-4">
+                  <li>{text.archive.rulesConsultancy}</li>
+                  <li>{text.archive.rulesSponsored}</li>
+                  <li>{text.archive.guidelinesPhD}</li>
+                  <li>{text.archive.sponsoringAgencies}</li>
+                  <li>{text.archive.sponsoredResearch}</li>
+                  <li>{text.archive.financialAssistance}</li>
+                  <li>{text.archive.projectProposal}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
   );
 }
@@ -734,7 +736,6 @@ const TableSection = ({
     </div>
   );
 };
-
 
 const ResearchTable = ({
   tableData,

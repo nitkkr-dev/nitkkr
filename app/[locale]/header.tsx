@@ -134,6 +134,50 @@ export default async function Header({ locale }: { locale: string }) {
     {
       label: text.research,
       href: 'research',
+      listItems: [
+        {
+          title: 'Research and Consultancy',
+          href: 'research#research',
+          description:
+            'Research and development across diverse fields, from advanced technologies to social sciences, driving innovation and societal impact.',
+        },
+        {
+          title: 'IPR Cell',
+          href: 'research/ipr',
+          description:
+            'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
+        },
+        {
+          title: 'Patents & Technologies',
+          href: 'research#patents',
+          description:
+            'Patents and developed technologies that showcase the institute’s innovation and contribution to industry and academia.',
+        },
+        {
+          title: 'Copyrights & Designs',
+          href: 'research#copyright',
+          description:
+            'Registered copyrights and industrial designs reflecting creative and original contributions across various domains.',
+        },
+        {
+          title: 'Memorandum of Understanding',
+          href: 'research#memorandum',
+          description:
+            'Collaborations and partnerships through signed MoUs with leading institutions, industries, and organizations worldwide.',
+        },
+        {
+          title: 'Important Resources',
+          href: 'research#resources',
+          description:
+            'Key resources, guidelines, and documents supporting research, consultancy, and intellectual property activities.',
+        },
+        {
+          title: 'Sponsored Projects',
+          href: 'research#projects',
+          description:
+            'Externally funded sponsored research projects addressing real-world challenges and advancing knowledge.',
+        },
+      ],
     },
   ];
 
