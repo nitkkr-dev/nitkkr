@@ -367,8 +367,7 @@ export interface Translations {
       nitkkrInnovationsAndIp: {
         title: string;
         patentsGranted: string;
-        copyrightsObtained: string;
-        designsRegistered: string;
+        copyrightsAndDesigns: string;
       };
     };
   };

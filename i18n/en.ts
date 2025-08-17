@@ -616,8 +616,7 @@ const text: Translations = {
       nitkkrInnovationsAndIp: {
         title: 'NITKKR Innovations and IP',
         patentsGranted: 'Patents Granted',
-        copyrightsObtained: 'Copyrights Obtained',
-        designsRegistered: 'Designs Registered',
+        copyrightsAndDesigns: 'Copyrights & Designs',
       },
     },
   },
