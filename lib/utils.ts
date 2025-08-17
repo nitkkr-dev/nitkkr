@@ -29,3 +29,23 @@ export function groupBy<T extends object>(
 
   return objectArrayByField;
 }
+
+/**
+ * Converts a camelCase string to Title Case with spaces
+ * @example formatCamelCase("awardsAndHonors") => "Awards And Honors"
+ */
+export function formatCamelCase(str: string): string {
+  // First, handle special case if the string is empty
+  if (!str) return '';
+
+  // Insert a space before each capital letter, then capitalize first letter
+  return (
+    str
+      // Add a space before each capital letter
+      .replace(/([A-Z])/g, ' $1')
+      // Capitalize first letter of the entire string
+      .replace(/^./, (firstChar) => firstChar.toUpperCase())
+      // Remove any extra spaces
+      .trim()
+  );
+}

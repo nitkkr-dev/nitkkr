@@ -345,6 +345,7 @@ const text: Translations = {
       publications: 'Publications',
       researchScholars: 'Research Scholars',
       awardsAndHonors: 'Awards and Honors',
+      developmentProgramsOrganised: 'Development Programs Organised',
     },
   },
   FAQ: { title: 'Frequently Asked Questions' },

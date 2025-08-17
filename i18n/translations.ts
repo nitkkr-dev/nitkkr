@@ -215,6 +215,7 @@ export interface Translations {
       publications: string;
       researchScholars: string;
       awardsAndHonors: string;
+      developmentProgramsOrganised: string;
     };
   };
   FAQ: { title: string };

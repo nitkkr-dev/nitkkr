@@ -354,6 +354,7 @@ const text: Translations = {
       publications: 'प्रकाशन',
       researchScholars: 'अनुसंधान विद्वान',
       awardsAndHonors: 'पुरस्कार और सम्मान',
+      developmentProgramsOrganised: 'विकास कार्यक्रम आयोजित',
     },
   },
   FAQ: { title: 'अक्सर पूछे जाने वाले प्रश्न' },
