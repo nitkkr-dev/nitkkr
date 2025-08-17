@@ -343,8 +343,13 @@ export default async function Header({ locale }: { locale: string }) {
                       )
                     )}
                   </ul>
-                  <MobileSubNavMenu locale={locale} {...items[0]} />
-                  <MobileSubNavMenu locale={locale} {...items[1]} />
+                  {/* <MobileSubNavMenu locale={locale} {...items[0]} />
+                  <MobileSubNavMenu locale={locale} {...items[1]} /> */}
+                  {items.map((item, idx) =>
+                    item.listItems ? (
+                      <MobileSubNavMenu key={idx} locale={locale} {...item} />
+                    ) : null
+                  )}
                   <footer className="mt-auto flex flex-col gap-y-4 py-4">
                     <hr className="opacity-50" />
                     <Suspense>
