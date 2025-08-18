@@ -1,5 +1,3 @@
-import { string } from 'zod';
-import { number } from 'zod';
 
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
