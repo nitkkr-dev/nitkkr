@@ -291,7 +291,7 @@ export default async function IPR({
                 className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold text-neutral-50"
                 target="_blank"
               >
-                <span className="uppercase">
+                <span className="capitalize">
                   {text.Research.ipr.iprPolicy.revisedIpPolicy}
                 </span>{' '}
                 (2017) &rarr;
@@ -327,7 +327,12 @@ export default async function IPR({
                 key={index}
                 variant="secondary"
               >
-                <Link href={href} className="rounded-s-md">
+                <Link
+                  href={href}
+                  className="rounded-s-md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
                     <Icon
                       className={cn(
