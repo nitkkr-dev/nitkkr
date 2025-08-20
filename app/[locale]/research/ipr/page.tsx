@@ -142,12 +142,12 @@ export default async function IPR({
   const innovations: Card[] = [
     {
       label: text.Research.ipr.nitkkrInnovationsAndIp.patentsGranted,
-      href: '/research#patents', // TODO:make this not static
+      href: `/${locale}/research#patents`, // TODO:make this not static
       icon: FaRegIdCard,
     },
     {
       label: text.Research.ipr.nitkkrInnovationsAndIp.copyrightsAndDesigns,
-      href: '/research#copyright', // TODO:make this not static
+      href: `/${locale}/research#copyright`, // TODO:make this not static
       icon: FaFlask, // You can choose which icon to use, or combine
     },
   ];
