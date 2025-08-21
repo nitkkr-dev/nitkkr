@@ -61,6 +61,12 @@ export const facultyProfileSchemas = {
     // tag: z.enum(['patent', 'copyright', 'trademark', 'design']),
   }),
 
+  outreachActivities: z.object({
+    details: z.string().min(1, 'Details are required'),
+    // title: z.string().min(1, 'Title is required'),
+    // date: dateInput(),
+  }),
+
   continuingEducation: z.object({
     title: z.string().min(1, 'Title is required'),
     type: z.string().min(1, 'Type is required'),

@@ -356,6 +356,7 @@ const text: Translations = {
       awardsAndRecognitions: 'पुरस्कार और मान्यता',
       developmentProgramsOrganised: 'विकास कार्यक्रम आयोजित',
       ipr: 'बौद्धिक संपदा अधिकार',
+      outreachActivities: 'संपर्क प्रसार गतिविधियाँ',
     },
   },
   FAQ: { title: 'अक्सर पूछे जाने वाले प्रश्न' },

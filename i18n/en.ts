@@ -347,6 +347,7 @@ const text: Translations = {
       awardsAndRecognitions: 'Awards and Recognitions',
       developmentProgramsOrganised: 'Development Programs Organised',
       ipr: 'Intellectual Property Rights',
+      outreachActivities: 'Outreach Activities',
     },
   },
   FAQ: { title: 'Frequently Asked Questions' },

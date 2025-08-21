@@ -217,6 +217,7 @@ export interface Translations {
       awardsAndRecognitions: string;
       developmentProgramsOrganised: string;
       ipr: string;
+      outreachActivities: string;
     };
   };
   FAQ: { title: string };

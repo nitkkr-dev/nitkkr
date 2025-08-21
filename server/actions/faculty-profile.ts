@@ -18,6 +18,7 @@ import {
   persons,
   publications,
   qualifications,
+  outreachActivities,
   researchProjects,
   ipr,
 } from '~/server/db/schema';
@@ -49,12 +50,16 @@ const sectionConfig = {
     schema: facultyProfileSchemas.awardsAndRecognitions,
   },
   developmentProgramsOrganised: {
-    table: developmentProgramsOrganised, // Assuming this is the correct table
+    table: developmentProgramsOrganised,
     schema: facultyProfileSchemas.developmentProgramsOrganised,
   },
   ipr: {
     table: ipr,
     schema: facultyProfileSchemas.ipr,
+  },
+  outreachActivities: {
+    table: outreachActivities,
+    schema: facultyProfileSchemas.outreachActivities,
   },
 } as const;
 

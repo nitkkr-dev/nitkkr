@@ -14,6 +14,7 @@ import {
   experience,
   faculty,
   ipr,
+  outreachActivities,
   publications,
   qualifications,
   researchProjects,
@@ -30,6 +31,7 @@ const facultyTables = {
   awardsAndRecognitions,
   developmentProgramsOrganised,
   ipr,
+  outreachActivities,
 } as const;
 
 export default async function Page({

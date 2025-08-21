@@ -31,6 +31,7 @@ import {
   faculty,
   ipr,
   majors,
+  outreachActivities,
   persons,
   publications,
   qualifications,
@@ -82,6 +83,10 @@ async function FacultyOrStaffComponent({
     {
       label: text.tabs.ipr,
       href: 'ipr',
+    },
+    {
+      label: text.tabs.outreachActivities,
+      href: 'outreachActivities',
     },
     {
       label: text.tabs.continuingEducation,
@@ -319,6 +324,7 @@ const facultyTables = {
   awardsAndRecognitions: awardsAndRecognitions,
   developmentProgramsOrganised: developmentProgramsOrganised,
   ipr: ipr,
+  outreachActivities: outreachActivities,
 } as const;
 
 async function FacultySectionComponent({

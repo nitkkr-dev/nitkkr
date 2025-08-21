@@ -63,7 +63,19 @@ export const ipr = pgTable('ipr', (t) => ({
   //   .notNull(),
 }));
 
-// DevelopmentProgrmsOrganised Table
+// Outreach Activities
+export const outreachActivities = pgTable('outreach_activities', (t) => ({
+  id: t.serial().primaryKey(),
+  facultyId: t
+    .varchar()
+    .references(() => faculty.employeeId)
+    .notNull(),
+  details: t.text().notNull(),
+  // title: t.text().notNull(),
+  // date: t.date().notNull(),
+}));
+
+// DevelopmentProgramsOrganised Table
 export const developmentProgramsOrganised = pgTable(
   'development_programs_organised',
   (t) => ({
@@ -220,6 +232,7 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   customTopics: many(customTopics),
   developmentProgramsOrganised: many(developmentProgramsOrganised),
   ipr: many(ipr),
+  outreachActivities: many(outreachActivities),
 }));
 
 export const developmentProgramsOrganisedRelations = relations(
@@ -238,6 +251,16 @@ export const iprRelations = relations(ipr, ({ one }) => ({
     references: [faculty.employeeId],
   }),
 }));
+
+export const outreachActivitiesRelations = relations(
+  outreachActivities,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [outreachActivities.facultyId],
+      references: [faculty.employeeId],
+    }),
+  })
+);
 
 export const qualificationsRelations = relations(qualifications, ({ one }) => ({
   faculty: one(faculty, {

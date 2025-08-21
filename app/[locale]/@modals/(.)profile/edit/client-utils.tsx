@@ -168,7 +168,8 @@ const renderFields = <T extends Record<string, any>>(
     if (
       topic === 'publications' ||
       topic === 'developmentProgramsOrganised' ||
-      topic === 'ipr'
+      topic === 'ipr' ||
+      topic === 'outreachActivities'
     ) {
       return (
         <FormField
