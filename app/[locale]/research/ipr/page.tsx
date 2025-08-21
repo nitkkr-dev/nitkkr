@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 import { FaFlask, FaIndianRupeeSign } from 'react-icons/fa6';
 import { FaRegIdCard } from 'react-icons/fa';
-import { PiShieldStarBold } from 'react-icons/pi';
 import { BsTools } from 'react-icons/bs';
 import { type IconType } from 'react-icons/lib';
 
