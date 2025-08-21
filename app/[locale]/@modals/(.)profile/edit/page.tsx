@@ -7,7 +7,7 @@ import { facultyProfileSchemas } from '~/lib/schemas/faculty-profile';
 import { cn, formatCamelCase } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import {
-  awardsAndHonors,
+  awardsAndRecognitions,
   continuingEducation,
   db,
   developmentProgramsOrganised,
@@ -26,7 +26,7 @@ const facultyTables = {
   publications,
   researchProjects,
   continuingEducation,
-  awardsAndHonors,
+  awardsAndRecognitions,
   developmentProgramsOrganised,
 } as const;
 
@@ -121,7 +121,7 @@ export default async function Page({
           .then((results) => results[0] || null)
       : null;
 
-  // Format topic | eg. awardsAndHonors -> Awards And Honors
+  // Format topic | eg. awardsAndRecognitions -> Awards And Recognitions
   const formattedTopic = formatCamelCase(topic);
 
   return (

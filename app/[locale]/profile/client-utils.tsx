@@ -94,7 +94,7 @@ export const Tabs = ({
     continuingEducation: FaBook,
     publications: MdApproval,
     researchScholars: MdGroups,
-    awardsAndHonors: MdEmojiEvents,
+    awardsAndRecognitions: MdEmojiEvents,
     developmentProgramsOrganised: MdGroups,
   };
 

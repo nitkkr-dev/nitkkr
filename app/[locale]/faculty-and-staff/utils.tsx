@@ -22,7 +22,7 @@ import { ScrollArea } from '~/components/ui';
 import { getTranslations, type Translations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import {
-  awardsAndHonors,
+  awardsAndRecognitions,
   continuingEducation,
   db,
   developmentProgramsOrganised,
@@ -71,8 +71,8 @@ async function FacultyOrStaffComponent({
       href: 'researchScholars',
     },
     {
-      label: text.tabs.awardsAndHonors,
-      href: 'awardsAndHonors',
+      label: text.tabs.awardsAndRecognitions,
+      href: 'awardsAndRecognitions',
     },
     {
       label: text.tabs.developmentProgramsOrganised,
@@ -311,7 +311,7 @@ const facultyTables = {
   projects: researchProjects,
   publications: publications,
   continuingEducation: continuingEducation,
-  awardsAndHonors: awardsAndHonors,
+  awardsAndRecognitions: awardsAndRecognitions,
   developmentProgramsOrganised: developmentProgramsOrganised,
 } as const;
 

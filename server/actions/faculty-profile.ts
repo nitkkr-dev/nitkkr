@@ -10,7 +10,7 @@ import {
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 import {
-  awardsAndHonors,
+  awardsAndRecognitions,
   continuingEducation,
   developmentProgramsOrganised,
   experience,
@@ -43,9 +43,9 @@ const sectionConfig = {
     table: continuingEducation,
     schema: facultyProfileSchemas.continuingEducation,
   },
-  awardsAndHonors: {
-    table: awardsAndHonors,
-    schema: facultyProfileSchemas.awardsAndHonors,
+  awardsAndRecognitions: {
+    table: awardsAndRecognitions,
+    schema: facultyProfileSchemas.awardsAndRecognitions,
   },
   developmentProgramsOrganised: {
     table: developmentProgramsOrganised, // Assuming this is the correct table

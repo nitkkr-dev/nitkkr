@@ -142,18 +142,21 @@ export const publications = pgTable('publications', (t) => ({
 //   tag: t.text(),
 // }));
 
-// Awards and Honors Table
-export const awardsAndHonors = pgTable('awards_and_honors', (t) => ({
-  id: t.serial().primaryKey(),
-  facultyId: t
-    .varchar()
-    .references(() => faculty.employeeId)
-    .notNull(),
-  title: t.text().notNull(),
-  awardingAgency: t.text().notNull(),
-  date: t.date().notNull(),
-  location: t.text().notNull(),
-}));
+// Awards and Recognitions Table
+export const awardsAndRecognitions = pgTable(
+  'awards_and_recognitions',
+  (t) => ({
+    id: t.serial().primaryKey(),
+    facultyId: t
+      .varchar()
+      .references(() => faculty.employeeId)
+      .notNull(),
+    title: t.text().notNull(),
+    awardingAgency: t.text().notNull(),
+    date: t.date().notNull(),
+    location: t.text().notNull(),
+  })
+);
 
 // Custom Topics Table
 export const customTopics = pgTable('custom_topics', (t) => ({
@@ -197,7 +200,7 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   experience: many(experience),
   continuingEducation: many(continuingEducation),
   publications: many(publications),
-  awardsAndHonors: many(awardsAndHonors),
+  awardsAndRecognitions: many(awardsAndRecognitions),
   customTopics: many(customTopics),
   developmentProgramsOrganised: many(developmentProgramsOrganised),
 }));
@@ -243,11 +246,11 @@ export const publicationsRelations = relations(publications, ({ one }) => ({
   }),
 }));
 
-export const awardsAndHonorsRelations = relations(
-  awardsAndHonors,
+export const awardsAndRecognitionsRelations = relations(
+  awardsAndRecognitions,
   ({ one }) => ({
     faculty: one(faculty, {
-      fields: [awardsAndHonors.facultyId],
+      fields: [awardsAndRecognitions.facultyId],
       references: [faculty.employeeId],
     }),
   })

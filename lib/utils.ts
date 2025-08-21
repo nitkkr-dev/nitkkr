@@ -32,7 +32,7 @@ export function groupBy<T extends object>(
 
 /**
  * Converts a camelCase string to Title Case with spaces
- * @example formatCamelCase("awardsAndHonors") => "Awards And Honors"
+ * @example formatCamelCase("awardsAndRecognitions") => "Awards And Recognitions"
  */
 export function formatCamelCase(str: string): string {
   // First, handle special case if the string is empty

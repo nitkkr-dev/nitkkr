@@ -344,7 +344,7 @@ const text: Translations = {
       continuingEducation: 'Continuing Education',
       publications: 'Publications',
       researchScholars: 'Research Scholars',
-      awardsAndHonors: 'Awards and Honors',
+      awardsAndRecognitions: 'Awards and Recognitions',
       developmentProgramsOrganised: 'Development Programs Organised',
     },
   },

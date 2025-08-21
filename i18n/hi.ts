@@ -353,7 +353,7 @@ const text: Translations = {
       continuingEducation: 'निरंतर शिक्षा',
       publications: 'प्रकाशन',
       researchScholars: 'अनुसंधान विद्वान',
-      awardsAndHonors: 'पुरस्कार और सम्मान',
+      awardsAndRecognitions: 'पुरस्कार और मान्यता',
       developmentProgramsOrganised: 'विकास कार्यक्रम आयोजित',
     },
   },

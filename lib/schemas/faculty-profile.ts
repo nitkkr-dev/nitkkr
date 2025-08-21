@@ -77,7 +77,7 @@ export const facultyProfileSchemas = {
     endedOn: optionalDateInput(),
   }),
 
-  awardsAndHonors: z.object({
+  awardsAndRecognitions: z.object({
     title: z.string().min(1, 'Title is required'),
     awardingAgency: z.string().min(1, 'Awarding agency is required'),
     location: z.string().min(1, 'Location is required'),

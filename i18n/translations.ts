@@ -214,7 +214,7 @@ export interface Translations {
       continuingEducation: string;
       publications: string;
       researchScholars: string;
-      awardsAndHonors: string;
+      awardsAndRecognitions: string;
       developmentProgramsOrganised: string;
     };
   };
