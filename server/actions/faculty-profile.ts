@@ -19,6 +19,7 @@ import {
   publications,
   qualifications,
   researchProjects,
+  ipr,
 } from '~/server/db/schema';
 
 // Configuration for each section type
@@ -50,6 +51,10 @@ const sectionConfig = {
   developmentProgramsOrganised: {
     table: developmentProgramsOrganised, // Assuming this is the correct table
     schema: facultyProfileSchemas.developmentProgramsOrganised,
+  },
+  ipr: {
+    table: ipr,
+    schema: facultyProfileSchemas.ipr,
   },
 } as const;
 

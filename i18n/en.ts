@@ -346,6 +346,7 @@ const text: Translations = {
       researchScholars: 'Research Scholars',
       awardsAndRecognitions: 'Awards and Recognitions',
       developmentProgramsOrganised: 'Development Programs Organised',
+      ipr: 'Intellectual Property Rights',
     },
   },
   FAQ: { title: 'Frequently Asked Questions' },

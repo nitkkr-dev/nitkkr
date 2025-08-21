@@ -165,7 +165,11 @@ const renderFields = <T extends Record<string, any>>(
     // Check if topic is 'publications'
     // then has only one field -> 'details' (enum is already handled above)
     // details should be a textbox field spanning full width
-    if (topic === 'publications' || topic === 'developmentProgramsOrganised') {
+    if (
+      topic === 'publications' ||
+      topic === 'developmentProgramsOrganised' ||
+      topic === 'ipr'
+    ) {
       return (
         <FormField
           key={fieldName}
@@ -242,7 +246,11 @@ const renderFields = <T extends Record<string, any>>(
   let fieldNames = Object.keys(schemaShape);
 
   // Special case for publications: display tag before details
-  if (topic === 'publications') {
+  if (
+    topic === 'publications' ||
+    topic === 'developmentProgramsOrganised' ||
+    topic === 'ipr'
+  ) {
     // Reorder fields for publications: tag first, then details
     fieldNames = fieldNames.sort((a, b) => {
       if (a === 'tag') return -1;

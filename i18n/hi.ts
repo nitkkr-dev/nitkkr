@@ -355,6 +355,7 @@ const text: Translations = {
       researchScholars: 'अनुसंधान विद्वान',
       awardsAndRecognitions: 'पुरस्कार और मान्यता',
       developmentProgramsOrganised: 'विकास कार्यक्रम आयोजित',
+      ipr: 'बौद्धिक संपदा अधिकार',
     },
   },
   FAQ: { title: 'अक्सर पूछे जाने वाले प्रश्न' },

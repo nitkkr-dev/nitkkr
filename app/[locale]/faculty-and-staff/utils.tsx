@@ -29,6 +29,7 @@ import {
   doctorates,
   experience,
   faculty,
+  ipr,
   majors,
   persons,
   publications,
@@ -77,6 +78,10 @@ async function FacultyOrStaffComponent({
     {
       label: text.tabs.developmentProgramsOrganised,
       href: 'developmentProgramsOrganised',
+    },
+    {
+      label: text.tabs.ipr,
+      href: 'ipr',
     },
     {
       label: text.tabs.continuingEducation,
@@ -313,6 +318,7 @@ const facultyTables = {
   continuingEducation: continuingEducation,
   awardsAndRecognitions: awardsAndRecognitions,
   developmentProgramsOrganised: developmentProgramsOrganised,
+  ipr: ipr,
 } as const;
 
 async function FacultySectionComponent({

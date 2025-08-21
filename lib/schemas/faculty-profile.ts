@@ -55,6 +55,12 @@ export const facultyProfileSchemas = {
     // ]),
   }),
 
+  ipr: z.object({
+    details: z.string().min(1, 'Details are required'),
+    // date: dateInput(),
+    // tag: z.enum(['patent', 'copyright', 'trademark', 'design']),
+  }),
+
   continuingEducation: z.object({
     title: z.string().min(1, 'Title is required'),
     type: z.string().min(1, 'Type is required'),

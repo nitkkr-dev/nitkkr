@@ -13,6 +13,7 @@ import {
   developmentProgramsOrganised,
   experience,
   faculty,
+  ipr,
   publications,
   qualifications,
   researchProjects,
@@ -28,6 +29,7 @@ const facultyTables = {
   continuingEducation,
   awardsAndRecognitions,
   developmentProgramsOrganised,
+  ipr,
 } as const;
 
 export default async function Page({
