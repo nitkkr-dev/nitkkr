@@ -519,8 +519,6 @@ async function FacultySectionComponent({
             </form>
           </>
         )}
-      <span className="flex items-center justify-between px-4">
-        
         {id && (
           <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
             <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
