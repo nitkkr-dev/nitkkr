@@ -434,43 +434,50 @@ async function FacultySectionComponent({
           ` +
     uniqueTags
       .map(
-        (tag) => `
-      .tag-filter:has(#filter-${tag}:checked) ~ .rounded-2xl ul li[data-tag=${tag}] {
-        display: flex;
-      }`
-      )
-      .join('\n');
+    (tag) => {
+      const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+      return `
+        .tag-filter:has(#${safeTagId}:checked) ~ .rounded-2xl ul li[data-tag="${tag}"] {
+          display: flex;
+        }`;
+    }
+  )
+  .join('\n');
   return (
     <>
       <h4 className="w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
-      <span className="flex items-center justify-between px-4">
-        {uniqueTags.length > 0 && (
+      {uniqueTags.length > 0 && (
           <>
             <style>{tagStyle}</style>
             <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
-              {['all', ...uniqueTags].map((tag) => (
-                <fieldset key={tag} className="flex items-center">
-                  <input
-                    type="radio"
-                    id={`filter-${tag}`}
-                    name="tag"
-                    value={tag}
-                    defaultChecked={tag === 'all'}
-                    className="filter-input peer hidden"
-                  />
-                  <label
-                    htmlFor={`filter-${tag}`}
-                    className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
-                  >
-                    {tag in text.tags
-                      ? text.tags[tag as keyof typeof text.tags]
-                      : tag}
-                  </label>
-                </fieldset>
-              ))}
+              {['all', ...uniqueTags].map((tag) => {
+                const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+                return (
+                  <fieldset key={tag} className="flex items-center">
+                    <input
+                      type="radio"
+                      id={safeTagId}
+                      name="tag"
+                      value={tag}
+                      defaultChecked={tag === 'all'}
+                      className="filter-input peer hidden"
+                    />
+                    <label
+                      htmlFor={safeTagId}
+                      className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
+                    >
+                      {tag in text.tags
+                        ? text.tags[tag as keyof typeof text.tags]
+                        : tag}
+                    </label>
+                  </fieldset>
+                );
+              })}
             </form>
           </>
         )}
+      <span className="flex items-center justify-between px-4">
+        
         {id && (
           <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
             <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
