@@ -14,6 +14,7 @@ import {
   MdOutlineEdit,
 } from 'react-icons/md';
 import 'server-only';
+import { string } from 'zod';
 
 import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
 import { Button } from '~/components/buttons';
@@ -134,11 +135,53 @@ async function FacultyOrStaffComponent({
     },
   });
 
+  /**
+   * Count publications based on text content analysis
+   * @param employeeId Faculty's employee ID
+   * @returns Number of individual publications
+   */
+  async function countPublicationsByText(employeeId: string): Promise<number> {
+    // Get all publication records for this faculty member
+    const publicationRecords = await db
+      .select({ details: publications.details })
+      .from(publications)
+      .where(eq(publications.facultyId, employeeId));
+
+    // Initialize counter
+    let totalPublications = 0;
+
+    // Process each publication record
+    for (const record of publicationRecords) {
+      if (!record.details) continue;
+
+      // Split by newline characters
+      const lines = record.details
+        .split('\n')
+        // Remove empty lines
+        .filter((line) => line.trim().length > 0);
+
+      // Each non-empty line is considered a separate publication
+      totalPublications += lines.length;
+    }
+
+    return totalPublications;
+  }
+
   if (!facultyDescriptionTmp) {
     return notFound();
   }
 
-  const facultyDescription = { doctoralStudents: 0, ...facultyDescriptionTmp }; // Placeholder for doctoral students count
+  // Get publication count by analyzing text content
+  const realPublicationsCount = await countPublicationsByText(
+    facultyDescriptionTmp.employeeId
+  );
+
+  const facultyDescription = {
+    doctoralStudents: 0, // Doctoral Student count not implemented
+    ...facultyDescriptionTmp, // Original faculty details
+    publications: realPublicationsCount, // Use the new count method
+  };
+
   return (
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
