@@ -340,7 +340,7 @@ const text: Translations = {
     tabs: {
       qualifications: 'Education Qualifications',
       experience: 'Experience',
-      projects: 'Projects',
+      projects: 'Projects and Consultancy',
       continuingEducation: 'Continuing Education',
       publications: 'Publications',
       researchScholars: 'Research Scholars',

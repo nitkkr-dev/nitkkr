@@ -349,7 +349,7 @@ const text: Translations = {
     tabs: {
       qualifications: 'शैक्षिक योग्यता',
       experience: 'अनुभव',
-      projects: 'प्रोजेक्ट्स',
+      projects: 'प्रोजेक्ट्स और कंसल्टेंसी',
       continuingEducation: 'निरंतर शिक्षा',
       publications: 'प्रकाशन',
       researchScholars: 'अनुसंधान विद्वान',
