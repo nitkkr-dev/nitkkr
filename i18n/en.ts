@@ -337,7 +337,11 @@ const text: Translations = {
       journal: 'Journal',
       conference: 'Conference',
       award: 'Award',
-      recognition:'Recognition'
+      recognition:'Recognition',
+      patent:'Patent',
+      design:'Design',
+      copyright:'Copyright',
+      trademark:'Trademark'
     },
     tabs: {
       qualifications: 'Education Qualifications',

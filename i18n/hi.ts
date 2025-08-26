@@ -346,7 +346,11 @@ const text: Translations = {
       chapter: 'अध्याय',
       conference: 'सम्मेलन',
       award: 'पुरस्कार',
-      recognition: 'मान्यता'
+      recognition: 'मान्यता',
+      patent: 'पेटेंट',
+      design: 'डिज़ाइन',
+      trademark: 'ट्रेडमार्क',
+      copyright: 'कॉपीराइट'
     },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',

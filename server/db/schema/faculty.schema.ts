@@ -56,11 +56,11 @@ export const ipr = pgTable('ipr', (t) => ({
   // title: t.text().notNull(),
   details: t.text().notNull(),
   // date: t.date().notNull(),
-  // tag: t
-  //   .varchar({
-  //     enum: ['patent', 'copyright', 'trademark', 'design'],
-  //   })
-  //   .notNull(),
+  tag: t
+    .varchar({
+      enum: ['patent', 'copyright', 'trademark', 'design'],
+    })
+    .notNull(),
 }));
 
 // Outreach Activities
