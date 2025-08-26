@@ -345,6 +345,8 @@ const text: Translations = {
       journal: 'जर्नल',
       chapter: 'अध्याय',
       conference: 'सम्मेलन',
+      award: 'पुरस्कार',
+      recognition: 'मान्यता'
     },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',
