@@ -341,7 +341,9 @@ const text: Translations = {
       patent:'Patent',
       design:'Design',
       copyright:'Copyright',
-      trademark:'Trademark'
+      trademark:'Trademark',
+      project:'Project',
+      consultancy:'Consultancy'
     },
     tabs: {
       qualifications: 'Education Qualifications',

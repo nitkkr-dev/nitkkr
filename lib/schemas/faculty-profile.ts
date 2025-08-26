@@ -87,6 +87,7 @@ export const facultyProfileSchemas = {
     durationPeriod: z.string().min(1, 'Duration period is required'),
     durationPeriodType: z.string().min(1, 'Duration period type is required'),
     endedOn: optionalDateInput(),
+    tag: z.enum(['project', 'consultancy']),
   }),
 
   awardsAndRecognitions: z.object({

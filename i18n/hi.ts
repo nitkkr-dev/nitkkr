@@ -350,7 +350,9 @@ const text: Translations = {
       patent: 'पेटेंट',
       design: 'डिज़ाइन',
       trademark: 'ट्रेडमार्क',
-      copyright: 'कॉपीराइट'
+      copyright: 'कॉपीराइट',
+      project: 'प्रोजेक्ट्स',
+      consultancy: 'परामर्श'
     },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',
