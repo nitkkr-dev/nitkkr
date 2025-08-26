@@ -185,7 +185,7 @@ export const awardsAndRecognitions = pgTable(
     location: t.text().notNull(),
     tag: t
     .varchar({
-      enum: ['award','recognition'],
+      enum: ['award', 'recognition'],
     })
     .notNull(),
   })
