@@ -94,7 +94,7 @@ export const facultyProfileSchemas = {
     awardingAgency: z.string().min(1, 'Awarding agency is required'),
     location: z.string().min(1, 'Location is required'),
     date: dateInput(),
-    tag: z.enum(['award','recognition']),
+    tag: z.enum(['award', 'recognition']),
   }),
 
   customTopics: z.object({
