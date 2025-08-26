@@ -336,6 +336,8 @@ const text: Translations = {
       chapter: 'Chapter',
       journal: 'Journal',
       conference: 'Conference',
+      award: 'Award',
+      recognition:'Recognition'
     },
     tabs: {
       qualifications: 'Education Qualifications',

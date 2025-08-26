@@ -206,6 +206,8 @@ export interface Translations {
       chapter: string;
       journal: string;
       conference: string;
+      award: string;
+      recognition : string;
     };
     tabs: {
       qualifications: string;
