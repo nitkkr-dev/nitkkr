@@ -208,6 +208,10 @@ export interface Translations {
       conference: string;
       award: string;
       recognition : string;
+      patent: string;
+      design: string;
+      trademark: string;
+      copyright: string;
     };
     tabs: {
       qualifications: string;
