@@ -184,10 +184,10 @@ export const awardsAndRecognitions = pgTable(
     date: t.date().notNull(),
     location: t.text().notNull(),
     tag: t
-    .varchar({
-      enum: ['award', 'recognition'],
-    })
-    .notNull(),
+      .varchar({
+        enum: ['award', 'recognition'],
+      })
+      .notNull(),
   })
 );
 

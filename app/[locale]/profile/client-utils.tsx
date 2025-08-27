@@ -124,7 +124,8 @@ export const Tabs = ({
             className={cn(
               'flex justify-start gap-2 xl:gap-3',
               'font-bold',
-              'w-full px-4 py-3 drop-shadow'
+              'w-full px-4 py-3 drop-shadow',
+              'overflow-hidden'
             )}
             variant="secondary"
           >
@@ -132,9 +133,10 @@ export const Tabs = ({
               href={`/${locale}/${basePath}/${href}`}
               prefetch
               scroll={defaultPath === 'personal'} // scroll to top on student profile
+              className="items-centre flex overflow-hidden"
             >
               <Icon className="lg:size-5" />
-              {label.toUpperCase()}
+              <span className="truncate">{label.toUpperCase()}</span>
             </Link>
           </Button>
         </li>

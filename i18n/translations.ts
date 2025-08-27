@@ -207,7 +207,7 @@ export interface Translations {
       journal: string;
       conference: string;
       award: string;
-      recognition : string;
+      recognition: string;
       patent: string;
       design: string;
       trademark: string;

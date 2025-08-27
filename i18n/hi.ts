@@ -352,7 +352,7 @@ const text: Translations = {
       trademark: 'ट्रेडमार्क',
       copyright: 'कॉपीराइट',
       project: 'प्रोजेक्ट्स',
-      consultancy: 'परामर्श'
+      consultancy: 'परामर्श',
     },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',

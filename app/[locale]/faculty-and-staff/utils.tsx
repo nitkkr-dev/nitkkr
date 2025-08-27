@@ -324,27 +324,31 @@ async function FacultyOrStaffComponent({
       </section>
 
       <section className="container flex gap-y-4 max-md:flex-col md:h-[28rem] md:gap-x-4 lg:gap-x-8">
-        <Tabs
-          locale={locale}
-          tabs={tabs}
-          select
-          defaultPath="qualifications"
-          basePath={!employeeId ? 'profile' : `faculty-and-staff/${employeeId}`}
-          pathLength={!employeeId ? 3 : 4}
-        />
-        <ol className="flex flex-col justify-between max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+        <ScrollArea className="max-h-[28rem] md:min-w-72 lg:min-w-80 xl:min-w-96">
           <Tabs
             locale={locale}
             tabs={tabs}
+            select
             defaultPath="qualifications"
             basePath={
               !employeeId ? 'profile' : `faculty-and-staff/${employeeId}`
             }
             pathLength={!employeeId ? 3 : 4}
           />
-        </ol>
+          <ol className="flex flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+            <Tabs
+              locale={locale}
+              tabs={tabs}
+              defaultPath="qualifications"
+              basePath={
+                !employeeId ? 'profile' : `faculty-and-staff/${employeeId}`
+              }
+              pathLength={!employeeId ? 3 : 4}
+            />
+          </ol>
+        </ScrollArea>
         <article
-          className=" grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
+          className=" relative grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
           style={{
             gridTemplateRows: 'auto 1fr',
             gridTemplateColumns: 'auto 1fr',
@@ -506,7 +510,9 @@ async function FacultySectionComponent({
 
   return (
     <>
-      <h4 className="w-fit max-md:hidden mr-4">{text.tabs[facultySection]}</h4>
+      <h4 className="mr-4 w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
+      {/* NOTE: Filtering using CSS is not working when its wrapped by a div and without div (+Add) button moves to next line when there are tags*/}
+      {/* <div className='flex items-center'> */}
       {uniqueTags.length > 0 && (
         <>
           <style>{tagStyle}</style>
@@ -537,19 +543,22 @@ async function FacultySectionComponent({
           </form>
         </>
       )}
-      { /* TODO: kuch to kar rahe the hogya*/ }
+
       {id && (
-        <span className='flex items-center justify-between px-4'>
-          {id && (
-            <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
-              <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
-                <MdOutlineAdd size={28} className="cursor-pointer" />
-                Add{' '}
-              </Link>
-            </Button>
-          )}
-        </span>
+        <Button
+          variant="primary"
+          // Used Absolute positioning for above xl breakpoint to keep it in same line as tags
+          className="right-6 top-6 p-1 xl:absolute xl:mb-4 xl:ml-auto"
+          asChild
+        >
+          <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
+            <MdOutlineAdd size={28} className="cursor-pointer" />
+            Add{' '}
+          </Link>
+        </Button>
       )}
+
+      {/* </div> */}
       <ScrollArea className="col-span-2 rounded-2xl">
         <ul className="mb-3 grid gap-y-6 px-1">
           {result.map((item, index) => (
