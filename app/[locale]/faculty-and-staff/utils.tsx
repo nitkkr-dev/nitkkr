@@ -537,16 +537,19 @@ async function FacultySectionComponent({
           </form>
         </>
       )}
-      <span className='flex items-center justify-between px-4'>
-        {id && (
-          <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
-            <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
-              <MdOutlineAdd size={28} className="cursor-pointer" />
-              Add{' '}
-            </Link>
-          </Button>
-        )}
-      </span>
+      { /* TODO: kuch to kar rahe the hogya*/ }
+      {id && (
+        <span className='flex items-center justify-between px-4'>
+          {id && (
+            <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
+              <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
+                <MdOutlineAdd size={28} className="cursor-pointer" />
+                Add{' '}
+              </Link>
+            </Button>
+          )}
+        </span>
+      )}
       <ScrollArea className="col-span-2 rounded-2xl">
         <ul className="mb-3 grid gap-y-6 px-1">
           {result.map((item, index) => (
