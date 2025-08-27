@@ -358,6 +358,7 @@ async function FacultyOrStaffComponent({
     </>
   );
 }
+
 const facultyTables = {
   qualifications: qualifications,
   experience: experience,
@@ -447,7 +448,7 @@ async function FacultySectionComponent({
     id: number;
     degree?: string;
     description?: string;
-  }[]; //typescript cannot infer the type of result, so we have to specify it explicitly
+  }[];
 
   if (!result || facultySection === 'researchScholars') {
     return (
@@ -474,52 +475,69 @@ async function FacultySectionComponent({
               display: none;
             }
 
+            /* Hide tags when any specific filter is selected */
+            .tag-filter:has(.filter-input:checked:not(#filter-all))
+              ~ .rounded-2xl
+              ul
+              li
+              .tag-badge {
+              display: none !important;
+            }
+
+            /* Show tags only when 'all' is selected */
+            .tag-filter:has(#filter-all:checked)
+              ~ .rounded-2xl
+              ul
+              li
+              .tag-badge {
+              display: inline !important;
+            }
+
           ` +
     uniqueTags
-      .map(
-    (tag) => {
-      const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
-      return `
+      .map((tag) => {
+        const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+        return `
         .tag-filter:has(#${safeTagId}:checked) ~ .rounded-2xl ul li[data-tag="${tag}"] {
           display: flex;
         }`;
-    }
-  )
-  .join('\n');
+      })
+      .join('\n');
+
   return (
     <>
-      <h4 className="w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
+      <h4 className="w-fit max-md:hidden mr-4">{text.tabs[facultySection]}</h4>
       {uniqueTags.length > 0 && (
-          <>
-            <style>{tagStyle}</style>
-            <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
-              {['all', ...uniqueTags].map((tag) => {
-                const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
-                return (
-                  <fieldset key={tag} className="flex items-center">
-                    <input
-                      type="radio"
-                      id={safeTagId}
-                      name="tag"
-                      value={tag}
-                      defaultChecked={tag === 'all'}
-                      className="filter-input peer hidden"
-                    />
-                    <label
-                      htmlFor={safeTagId}
-                      className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
-                    >
-                      {tag in text.tags
-                        ? text.tags[tag as keyof typeof text.tags]
-                        : tag}
-                    </label>
-                  </fieldset>
-                );
-              })}
-            </form>
-          </>
-        )}
-        <span className='flex items-center justify-between px-4'>
+        <>
+          <style>{tagStyle}</style>
+          <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
+            {['all', ...uniqueTags].map((tag) => {
+              const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+              return (
+                <fieldset key={tag} className="flex items-center">
+                  <input
+                    type="radio"
+                    id={safeTagId}
+                    name="tag"
+                    value={tag}
+                    defaultChecked={tag === 'all'}
+                    className="filter-input peer hidden"
+                  />
+                  <label
+                    htmlFor={safeTagId}
+                    className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
+                  >
+                    {tag in text.tags
+                      ? text.tags[tag as keyof typeof text.tags]
+                      : tag}
+                  </label>
+                </fieldset>
+              );
+            })}
+          </form>
+        </>
+      )}
+      <span className='flex items-center justify-between px-4'>
         {id && (
           <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
             <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
@@ -594,9 +612,7 @@ async function FacultySectionComponent({
                 {item.tag && (
                   <span
                     className={cn(
-                      'mx-2 rounded-sm px-1 text-neutral-900',
-                      // facultySection === 'projects'
-                      //  ? 'bg-success/20 text-success':
+                      'tag-badge mx-2 rounded-sm px-1 text-neutral-900',
                       facultySection === 'publications'
                         ? 'bg-warning/20 text-warning'
                         : 'bg-error/20 text-error'
