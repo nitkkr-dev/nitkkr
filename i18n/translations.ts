@@ -206,6 +206,14 @@ export interface Translations {
       chapter: string;
       journal: string;
       conference: string;
+      award: string;
+      recognition : string;
+      patent: string;
+      design: string;
+      trademark: string;
+      copyright: string;
+      project: string;
+      consultancy: string;
     };
     tabs: {
       qualifications: string;

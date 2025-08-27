@@ -58,7 +58,7 @@ export const facultyProfileSchemas = {
   ipr: z.object({
     details: z.string().min(1, 'Details are required'),
     // date: dateInput(),
-    // tag: z.enum(['patent', 'copyright', 'trademark', 'design']),
+    tag: z.enum(['patent', 'copyright', 'trademark', 'design']),
   }),
 
   outreachActivities: z.object({
@@ -87,6 +87,7 @@ export const facultyProfileSchemas = {
     durationPeriod: z.string().min(1, 'Duration period is required'),
     durationPeriodType: z.string().min(1, 'Duration period type is required'),
     endedOn: optionalDateInput(),
+    tag: z.enum(['project', 'consultancy']),
   }),
 
   awardsAndRecognitions: z.object({
@@ -94,6 +95,7 @@ export const facultyProfileSchemas = {
     awardingAgency: z.string().min(1, 'Awarding agency is required'),
     location: z.string().min(1, 'Location is required'),
     date: dateInput(),
+    tag: z.enum(['award', 'recognition']),
   }),
 
   customTopics: z.object({
