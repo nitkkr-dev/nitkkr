@@ -19,6 +19,11 @@ export const researchProjects = pgTable('research_projects', (t) => ({
   durationPeriodType: t.varchar().notNull(),
   createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
   endedOn: t.date({ mode: 'date' }),
+  tag: t
+    .varchar({
+      enum: ['project', 'consultancy'],
+    })
+    .notNull(),
 }));
 
 export const researchProjectsRelations = relations(

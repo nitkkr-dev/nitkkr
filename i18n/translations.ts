@@ -212,6 +212,8 @@ export interface Translations {
       design: string;
       trademark: string;
       copyright: string;
+      project: string;
+      consultancy: string;
     };
     tabs: {
       qualifications: string;
