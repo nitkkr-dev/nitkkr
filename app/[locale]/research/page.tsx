@@ -320,7 +320,6 @@ export default async function PatentsAndTechnology({
         title={text.title}
         headings={[
           { label: text.headings.research, href: '#research' },
-          { label: text.headings.iprCell, href: '#ipr' },
           { label: text.headings.patentsAndTechnologies, href: '#patents' },
           { label: text.headings.copyright, href: '#copyright' },
           { label: text.headings.memorandum, href: '#memorandum' },
@@ -390,43 +389,6 @@ export default async function PatentsAndTechnology({
           />
         </div>
       </section>
-      {/* IPR CELL */}
-      <section className="container" id="ipr">
-        <Heading
-          glyphDirection="rtl"
-          heading="h3"
-          href="#ipr"
-          text={text.headings.iprCell}
-        />
-      </section>
-      <section className="container">
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-          <div
-            className="relative h-80 w-full overflow-hidden rounded-lg shadow-md
-                 after:absolute after:inset-0 after:z-10
-                 after:bg-gradient-to-t after:from-primary-700/80 after:via-primary-700/40 after:to-background/40
-                 after:content-['']"
-          >
-            <Image
-              src="academics/2.jpg"
-              alt="IPR Cell"
-              fill
-              className="object-cover"
-            />
-            <Link
-              href="research/ipr"
-              className="absolute bottom-0 left-0 z-20 w-full p-3 text-lg font-semibold text-neutral-50"
-            >
-              <span className="uppercase">{text.sections.iprCell.view}</span>{' '}
-              &rarr;
-            </Link>
-          </div>
-          <p className="text-gray-800 text-justify leading-relaxed">
-            {text.sections.iprCell.more}
-          </p>
-        </div>
-      </section>
-
       {/* PATENTS AND TECHNOLOGIES */}
       <section className="container" id="patents">
         <Heading

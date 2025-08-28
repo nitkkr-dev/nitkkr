@@ -74,6 +74,12 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
         },
+        {
+          title: 'IPR Cell',
+          href: '/institute/cells/ipr',
+          description:
+            'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
+        },
       ],
     },
     {
@@ -135,6 +141,13 @@ export default async function Header({ locale }: { locale: string }) {
       label: text.research,
       href: 'research',
       listItems: [
+        // First column
+        {
+          title: 'Sponsored Projects',
+          href: 'research#projects',
+          description:
+            'Externally funded sponsored research projects addressing real-world challenges and advancing knowledge.',
+        },
         {
           title: 'Research and Consultancy',
           href: 'research#research',
@@ -142,16 +155,17 @@ export default async function Header({ locale }: { locale: string }) {
             'Research and development across diverse fields, from advanced technologies to social sciences, driving innovation and societal impact.',
         },
         {
-          title: 'IPR Cell',
-          href: 'research#ipr',
+          title: 'Memorandum of Understanding',
+          href: 'research#memorandum',
           description:
-            'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
+            'Collaborations and partnerships through signed MoUs with leading institutions, industries, and organizations worldwide.',
         },
+        // Second column
         {
           title: 'Patents & Technologies',
           href: 'research#patents',
           description:
-            'Patents and developed technologies that showcase the institute’s innovation and contribution to industry and academia.',
+            "Patents and developed technologies that showcase the institute's innovation and contribution to industry and academia.",
         },
         {
           title: 'Copyrights & Designs',
@@ -160,22 +174,10 @@ export default async function Header({ locale }: { locale: string }) {
             'Registered copyrights and industrial designs reflecting creative and original contributions across various domains.',
         },
         {
-          title: 'Memorandum of Understanding',
-          href: 'research#memorandum',
-          description:
-            'Collaborations and partnerships through signed MoUs with leading institutions, industries, and organizations worldwide.',
-        },
-        {
           title: 'Important Resources',
           href: 'research#resources',
           description:
             'Key resources, guidelines, and documents supporting research, consultancy, and intellectual property activities.',
-        },
-        {
-          title: 'Sponsored Projects',
-          href: 'research#projects',
-          description:
-            'Externally funded sponsored research projects addressing real-world challenges and advancing knowledge.',
         },
       ],
     },
@@ -321,7 +323,7 @@ export default async function Header({ locale }: { locale: string }) {
                 <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
                   <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
                     <SwitchNavButton
-                      className="nav-column-academics nav-column-institute invisible my-auto aspect-square !h-full text-xl font-bold"
+                      className="nav-column-academics nav-column-institute nav-column-research invisible my-auto aspect-square !h-full text-xl font-bold"
                       column="default"
                       variant="link"
                     >
