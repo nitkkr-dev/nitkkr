@@ -92,24 +92,74 @@ export async function upsertFacultySection(
   try {
     const validated = config.schema.parse(formData);
 
-    const insertData = {
-      ...validated,
-      facultyId: faculty.employeeId,
-      ...(id && { id }),
+    // TODO: Not sure about this logic, needs review
+    const reqSegregation: string[] = [
+      'publications',
+      'awardsAndRecognitions',
+      'developmentProgramsOrganised',
+      'ipr',
+      'outreachActivities',
+    ];
+    // Special handling for publications - bulk insert each line as separate publication
+    if (
+      (topic === 'publications' ||
+        topic === 'ipr' ||
+        topic === 'outreachActivities' ||
+        topic === 'developmentProgramsOrganised') &&
+      !id &&
+      'details' in validated
+    ) {
+      const details = validated.details as string;
+      const publicationLines = details
+        .split('\n')
+        .filter((line) => line.trim().length > 0);
+
+      // Insert each non-empty line as a separate publication
+      const insertPromises = publicationLines.map((line) => {
+        const singlePublication = {
+          ...validated,
+          details: line.trim(),
+          facultyId: faculty.employeeId,
+        };
+
+        return db.insert(config.table).values(singlePublication);
+      });
+
+      await Promise.all(insertPromises);
+      return {
+        success: true,
+        message: `Successfully added ${publicationLines.length} publications`,
+      };
+    } else {
+      // Normal case - single insert or update
+      const insertData = {
+        ...validated,
+        facultyId: faculty.employeeId,
+        ...(id && { id }),
+      };
+
+      await db
+        .insert(config.table)
+        .values(insertData)
+        .onConflictDoUpdate({
+          target: config.table.id,
+          set: {
+            ...validated,
+            facultyId: faculty.employeeId,
+          },
+        });
+    }
+
+    return {
+      success: true,
+      message: `${topic} ${id ? 'updated' : 'added'} successfully`,
     };
-
-    await db.insert(config.table).values(insertData).onConflictDoUpdate({
-      target: config.table.id,
-      // TODO: @Antri - Can you please fix this?
-      // @ts-ignore
-      set: validated,
-    });
-
-    revalidatePath('/profile/' + topic);
-    return { success: true, message: 'Updated successfully' };
   } catch (error) {
-    console.error('Error updating faculty section:', error);
-    return { success: false, message: 'Failed to update' };
+    console.error(`Error updating faculty section:`, error);
+    return {
+      success: false,
+      message: `Error updating faculty section: ${error}`,
+    };
   }
 }
 
