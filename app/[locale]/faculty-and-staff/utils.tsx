@@ -494,7 +494,7 @@ async function FacultySectionComponent({
               ul
               li
               .tag-badge {
-              display: inline !important;
+              display: inline-block !important;
             }
 
           ` +
@@ -567,8 +567,9 @@ async function FacultySectionComponent({
               className="flex flex-col gap-2 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
               data-tag={item.tag}
             >
-              <span className="flex w-full items-center justify-between">
-                <h5 className="font-bold">
+              {/* Title row with tag on the right */}
+              <div className="flex items-start justify-between gap-2">
+                <h5 className="font-bold flex-1">
                   {facultySection === 'qualifications' ||
                   facultySection === 'developmentProgramsOrganised'
                     ? item.degree
@@ -577,28 +578,43 @@ async function FacultySectionComponent({
                       : item.title}
                 </h5>
 
-                {id ? (
-                  <>
-                    <Link
-                      href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
-                      className="ml-auto"
+                <div className="flex items-center gap-2">
+                  {item.tag && (
+                    <span
+                      className={cn(
+                        'tag-badge rounded-sm px-2 py-1 text-xs font-medium shrink-0',
+                        facultySection === 'publications'
+                          ? 'bg-warning/20 text-warning'
+                          : 'bg-error/20 text-error'
+                      )}
                     >
-                      <MdOutlineEdit
-                        size={28}
-                        className="cursor-pointer text-primary-700"
-                      />
-                    </Link>
-                    <Link
-                      href={`/${locale}/profile/delete?topic=${facultySection}&id=${item.id}`}
-                    >
-                      <MdOutlineDelete
-                        size={28}
-                        className="cursor-pointer text-primary-700"
-                      />
-                    </Link>
-                  </>
-                ) : null}
-              </span>
+                      {item.tag}
+                    </span>
+                  )}
+
+                  {id && (
+                    <>
+                      <Link
+                        href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
+                      >
+                        <MdOutlineEdit
+                          size={28}
+                          className="cursor-pointer text-primary-700"
+                        />
+                      </Link>
+                      <Link
+                        href={`/${locale}/profile/delete?topic=${facultySection}&id=${item.id}`}
+                      >
+                        <MdOutlineDelete
+                          size={28}
+                          className="cursor-pointer text-primary-700"
+                        />
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+
               <p className="whitespace-pre-wrap">
                 {item.details ??
                   item.field ??
@@ -608,6 +624,7 @@ async function FacultySectionComponent({
                   item.description ??
                   item.degree}
               </p>
+              
               <p className="text-neutral-600">
                 {item.people ??
                   item.location ??
@@ -616,23 +633,12 @@ async function FacultySectionComponent({
                   item.role ??
                   item.caption}
               </p>
+              
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}
                 {item.startDate && item.endDate && ' - '}
                 {item.endDate ??
                   (item.endedOn ? item.endedOn.toDateString() : item.status)}
-                {item.tag && (
-                  <span
-                    className={cn(
-                      'tag-badge mx-2 rounded-sm px-1 text-neutral-900',
-                      facultySection === 'publications'
-                        ? 'bg-warning/20 text-warning'
-                        : 'bg-error/20 text-error'
-                    )}
-                  >
-                    {item.tag}
-                  </span>
-                )}
               </p>
             </li>
           ))}
