@@ -214,6 +214,7 @@ export interface Translations {
       copyright: string;
       project: string;
       consultancy: string;
+      'book chapter': string;
     };
     tabs: {
       qualifications: string;

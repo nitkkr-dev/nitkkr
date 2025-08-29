@@ -466,6 +466,19 @@ async function FacultySectionComponent({
     new Set(result.filter((item) => item.tag).map((item) => item.tag))
   ) as string[];
 
+  // Custom order for tags
+const tagOrder = ['journal', 'conference', 'book', 'book-chapter', 'project', 'consultancy'];
+
+// Sort uniqueTags by custom order, others go last
+uniqueTags.sort((a, b) => {
+  const indexA = tagOrder.indexOf(a);
+  const indexB = tagOrder.indexOf(b);
+  if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+  if (indexA === -1) return 1;
+  if (indexB === -1) return -1;
+  return indexA - indexB;
+});
+
   const tagStyle =
     `
             .tag-filter:has(#filter-all:checked) ~ .rounded-2xl ul li {
