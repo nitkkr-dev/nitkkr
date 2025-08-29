@@ -467,17 +467,24 @@ async function FacultySectionComponent({
   ) as string[];
 
   // Custom order for tags
-const tagOrder = ['journal', 'conference', 'book', 'book-chapter', 'project', 'consultancy'];
+  const tagOrder = [
+    'journal',
+    'conference',
+    'book',
+    'book-chapter',
+    'project',
+    'consultancy',
+  ];
 
-// Sort uniqueTags by custom order, others go last
-uniqueTags.sort((a, b) => {
-  const indexA = tagOrder.indexOf(a);
-  const indexB = tagOrder.indexOf(b);
-  if (indexA === -1 && indexB === -1) return a.localeCompare(b);
-  if (indexA === -1) return 1;
-  if (indexB === -1) return -1;
-  return indexA - indexB;
-});
+  // Sort uniqueTags by custom order, others go last
+  uniqueTags.sort((a, b) => {
+    const indexA = tagOrder.indexOf(a);
+    const indexB = tagOrder.indexOf(b);
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
 
   const tagStyle =
     `
@@ -530,7 +537,7 @@ uniqueTags.sort((a, b) => {
         <>
           <style>{tagStyle}</style>
           <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
-            {['all', ...uniqueTags].map((tag) => {
+            {['All', ...uniqueTags].map((tag) => {
               const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
               return (
                 <fieldset key={tag} className="flex items-center">
@@ -539,7 +546,7 @@ uniqueTags.sort((a, b) => {
                     id={safeTagId}
                     name="tag"
                     value={tag}
-                    defaultChecked={tag === 'all'}
+                    defaultChecked={tag === 'All'}
                     className="filter-input peer hidden"
                   />
                   <label
@@ -582,7 +589,7 @@ uniqueTags.sort((a, b) => {
             >
               {/* Title row with tag on the right */}
               <div className="flex items-start justify-between gap-2">
-                <h5 className="font-bold flex-1">
+                <h5 className="flex-1 font-bold">
                   {facultySection === 'qualifications' ||
                   facultySection === 'developmentProgramsOrganised'
                     ? item.degree
@@ -595,7 +602,7 @@ uniqueTags.sort((a, b) => {
                   {item.tag && (
                     <span
                       className={cn(
-                        'tag-badge rounded-sm px-2 py-1 text-xs font-medium shrink-0',
+                        'tag-badge shrink-0 rounded-sm px-2 py-1 text-xs font-medium',
                         facultySection === 'publications'
                           ? 'bg-warning/20 text-warning'
                           : 'bg-error/20 text-error'
@@ -637,7 +644,7 @@ uniqueTags.sort((a, b) => {
                   item.description ??
                   item.degree}
               </p>
-              
+
               <p className="text-neutral-600">
                 {item.people ??
                   item.location ??
@@ -646,7 +653,7 @@ uniqueTags.sort((a, b) => {
                   item.role ??
                   item.caption}
               </p>
-              
+
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}
                 {item.startDate && item.endDate && ' - '}
