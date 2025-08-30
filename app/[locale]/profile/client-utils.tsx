@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Suspense } from 'react';
@@ -144,3 +145,82 @@ export const Tabs = ({
     })
   );
 };
+
+export function ResponsiveTagFilter({
+  tags,
+  textLabels,
+}: {
+  tags: string[];
+  textLabels: Record<string, string>;
+}) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint (1024px)
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+
+  // Function to handle tag selection from the dropdown
+  const handleTagSelect = (value: string) => {
+    // Find the corresponding radio input and click it to activate the tag filter
+    const safeTagId = `filter-${value.replace(/\s+/g, '-')}`;
+    const radioInput = document.getElementById(safeTagId) as HTMLInputElement;
+    if (radioInput) {
+      radioInput.checked = true;
+      // Create and dispatch a change event to trigger any listeners
+      const event = new Event('change', { bubbles: true });
+      radioInput.dispatchEvent(event);
+    }
+  };
+
+  // Get the currently selected tag
+  const getCurrentSelection = () => {
+    if (typeof document === 'undefined') return 'All';
+
+    for (const tag of ['All', ...tags]) {
+      const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+      const radioInput = document.getElementById(safeTagId) as HTMLInputElement;
+      if (radioInput?.checked) {
+        return tag;
+      }
+    }
+    return 'All';
+  };
+
+  const formattedTag = (tag: string) =>
+    tag in textLabels ? textLabels[tag] : tag;
+
+  // Render dropdown for mobile, regular form for desktop
+  if (isMobile) {
+    return (
+      <Select
+        defaultValue={getCurrentSelection()}
+        onValueChange={handleTagSelect}
+      >
+        <SelectTrigger className="w-[180px] px-4 py-2 text-sm font-medium">
+          <SelectValue />
+          {/* <MdKeyboardArrowDown size={20} />  Will not look good */}
+        </SelectTrigger>
+        <SelectContent>
+          {['All', ...tags].map((tag) => (
+            <SelectItem key={tag} value={tag}>
+              {formattedTag(tag)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    );
+  }
+
+  // Regular form for desktop - using the existing implementation
+  return null; // We'll handle the desktop version in the utils.tsx file
+}

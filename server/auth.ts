@@ -37,9 +37,6 @@ export const authOptions: NextAuthOptions = {
         where: ({ email }, { eq }) => eq(email, session.user.email),
         with: { role: { columns: { permissions: true } } },
       }))!;
-      // This is a auth bypass for development purposes.
-      session.person.id = 58777;
-      session.person.type = 'faculty';
       return session;
     },
     async signIn({ user: { email } }) {

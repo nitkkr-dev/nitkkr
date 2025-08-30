@@ -16,7 +16,11 @@ import {
 import 'server-only';
 import { string } from 'zod';
 
-import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
+import {
+  PathnameAwareSuspense,
+  ResponsiveTagFilter,
+  Tabs,
+} from '~/app/profile/client-utils';
 import { Button } from '~/components/buttons';
 import { WorkInProgressStatus } from '~/components/status';
 import { ScrollArea } from '~/components/ui';
@@ -41,6 +45,7 @@ import {
   students,
 } from '~/server/db';
 
+// Contains the content of full Faculty Profile
 async function FacultyOrStaffComponent({
   children,
   employeeId,
@@ -182,6 +187,7 @@ async function FacultyOrStaffComponent({
     publications: realPublicationsCount, // Use the new count method
   };
 
+  // Profile Personal Details
   return (
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
@@ -259,6 +265,7 @@ async function FacultyOrStaffComponent({
             </li>
           </ul>
         </article>
+        {/* Faculty Image */}
         <section className="w-0 max-xl:hidden">
           <Image
             alt="0"
@@ -273,6 +280,7 @@ async function FacultyOrStaffComponent({
             }
           />
         </section>
+        {/* Faculty Intellectual Contribution counts */}
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
           <ul className="grid h-full grid-cols-3 gap-5 xl:ml-16">
             {Object.entries(text.intellectualContributions).map(
@@ -295,6 +303,7 @@ async function FacultyOrStaffComponent({
           </ul>
         </article>
       </section>
+      {/* Faculty links to external profiles */}
       <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
         {(
           Object.entries(text.externalLinks) as [
@@ -323,7 +332,9 @@ async function FacultyOrStaffComponent({
         })}
       </section>
 
+      {/* Faculty Professional Details */}
       <section className="container flex gap-y-4 max-md:flex-col md:h-[28rem] md:gap-x-4 lg:gap-x-8">
+        {/* Left Side Tabs */}
         <ScrollArea className="max-h-[28rem] md:min-w-72 lg:min-w-80 xl:min-w-96">
           <Tabs
             locale={locale}
@@ -347,6 +358,8 @@ async function FacultyOrStaffComponent({
             />
           </ol>
         </ScrollArea>
+        {/* Right Side Content */}
+        {/* Heading of the Right Side Content */}
         <article
           className=" relative grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
           style={{
@@ -354,6 +367,7 @@ async function FacultyOrStaffComponent({
             gridTemplateColumns: 'auto 1fr',
           }}
         >
+          {/* List under that heading */}
           <PathnameAwareSuspense defaultPathname="qualifications">
             {children}
           </PathnameAwareSuspense>
@@ -536,7 +550,14 @@ async function FacultySectionComponent({
       {uniqueTags.length > 0 && (
         <>
           <style>{tagStyle}</style>
-          <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
+          {/* <div className="flex"> */}
+          {/* Mobile dropdown (hidden on lg+ screens) */}
+          <div className="mb-4 mr-2 lg:hidden">
+            <ResponsiveTagFilter tags={uniqueTags} textLabels={text.tags} />
+          </div>
+
+          {/* Desktop filter buttons (hidden on smaller screens) */}
+          <form className="tag-filter mb-4 mr-2 hidden h-fit w-fit gap-2 lg:flex">
             {['All', ...uniqueTags].map((tag) => {
               const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
               return (
@@ -561,6 +582,7 @@ async function FacultySectionComponent({
               );
             })}
           </form>
+          {/* </div> */}
         </>
       )}
 
