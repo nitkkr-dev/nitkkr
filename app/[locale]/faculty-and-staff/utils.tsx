@@ -488,11 +488,11 @@ async function FacultySectionComponent({
 
   const tagStyle =
     `
-            .tag-filter:has(#filter-all:checked) ~ .rounded-2xl ul li {
+            .tag-filter:has(#filter-All:checked) ~ .rounded-2xl ul li {
               display: flex;
             }
 
-            .tag-filter:has(.filter-input:checked:not(#filter-all))
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
               ~ .rounded-2xl
               ul
               li {
@@ -500,7 +500,7 @@ async function FacultySectionComponent({
             }
 
             /* Hide tags when any specific filter is selected */
-            .tag-filter:has(.filter-input:checked:not(#filter-all))
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
               ~ .rounded-2xl
               ul
               li
@@ -508,8 +508,8 @@ async function FacultySectionComponent({
               display: none !important;
             }
 
-            /* Show tags only when 'all' is selected */
-            .tag-filter:has(#filter-all:checked)
+            /* Show tags only when 'All' is selected */
+            .tag-filter:has(#filter-All:checked)
               ~ .rounded-2xl
               ul
               li
