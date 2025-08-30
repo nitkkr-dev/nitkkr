@@ -155,7 +155,11 @@ const NavigationMenuCustomListItem = React.forwardRef<
         </NavigationMenuItem>
       );
     }
-    const imageHeight = listItems.length > 4 ? 4 : listItems.length;
+    // const imageHeight = listItems.length > 4 ? 4 : listItems.length;
+
+    // equal distribution of items in both columns
+    const imageHeight = Math.ceil(listItems.length / 2);
+
     return (
       <NavigationMenuItem {...props} ref={ref}>
         <NavigationMenuTrigger>{triggerName}</NavigationMenuTrigger>

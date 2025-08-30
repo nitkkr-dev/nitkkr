@@ -287,6 +287,7 @@ export interface Translations {
     };
     cells: {
       title: string;
+      headingTitle: string;
       cell: string;
       iic: {
         title: string;
@@ -304,6 +305,9 @@ export interface Translations {
           pastActivities: string;
           upcomingActivities: string;
         };
+      };
+      ipr:{
+        title:string;
       };
       iks: {
         title: string;
