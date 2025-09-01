@@ -208,6 +208,15 @@ export interface Translations {
       chapter: string;
       journal: string;
       conference: string;
+      award: string;
+      recognition: string;
+      patent: string;
+      design: string;
+      trademark: string;
+      copyright: string;
+      project: string;
+      consultancy: string;
+      'book chapter': string;
     };
     tabs: {
       qualifications: string;
@@ -216,7 +225,10 @@ export interface Translations {
       continuingEducation: string;
       publications: string;
       researchScholars: string;
-      awardsAndHonors: string;
+      awardsAndRecognitions: string;
+      developmentProgramsOrganised: string;
+      ipr: string;
+      outreachActivities: string;
     };
   };
   FAQ: { title: string };

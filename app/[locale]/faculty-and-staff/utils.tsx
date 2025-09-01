@@ -14,21 +14,29 @@ import {
   MdOutlineEdit,
 } from 'react-icons/md';
 import 'server-only';
+import { string } from 'zod';
 
-import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
+import {
+  PathnameAwareSuspense,
+  ResponsiveTagFilter,
+  Tabs,
+} from '~/app/profile/client-utils';
 import { Button } from '~/components/buttons';
 import { WorkInProgressStatus } from '~/components/status';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations, type Translations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import {
-  awardsAndHonors,
+  awardsAndRecognitions,
   continuingEducation,
   db,
+  developmentProgramsOrganised,
   doctorates,
   experience,
   faculty,
+  ipr,
   majors,
+  outreachActivities,
   persons,
   publications,
   qualifications,
@@ -37,6 +45,7 @@ import {
   students,
 } from '~/server/db';
 
+// Contains the content of full Faculty Profile
 async function FacultyOrStaffComponent({
   children,
   employeeId,
@@ -58,24 +67,36 @@ async function FacultyOrStaffComponent({
       href: 'experience',
     },
     {
-      label: text.tabs.projects,
-      href: 'projects',
-    },
-    {
-      label: text.tabs.continuingEducation,
-      href: 'continuingEducation',
-    },
-    {
       label: text.tabs.publications,
       href: 'publications',
+    },
+    {
+      label: text.tabs.projects,
+      href: 'projects',
     },
     {
       label: text.tabs.researchScholars,
       href: 'researchScholars',
     },
     {
-      label: text.tabs.awardsAndHonors,
-      href: 'awardsAndHonors',
+      label: text.tabs.awardsAndRecognitions,
+      href: 'awardsAndRecognitions',
+    },
+    {
+      label: text.tabs.developmentProgramsOrganised,
+      href: 'developmentProgramsOrganised',
+    },
+    {
+      label: text.tabs.ipr,
+      href: 'ipr',
+    },
+    {
+      label: text.tabs.outreachActivities,
+      href: 'outreachActivities',
+    },
+    {
+      label: text.tabs.continuingEducation,
+      href: 'continuingEducation',
     },
   ];
   const facultyDescriptionTmp = await db.query.faculty.findFirst({
@@ -119,11 +140,54 @@ async function FacultyOrStaffComponent({
     },
   });
 
+  /**
+   * Count publications based on text content analysis
+   * @param employeeId Faculty's employee ID
+   * @returns Number of individual publications
+   */
+  async function countPublicationsByText(employeeId: string): Promise<number> {
+    // Get all publication records for this faculty member
+    const publicationRecords = await db
+      .select({ details: publications.details })
+      .from(publications)
+      .where(eq(publications.facultyId, employeeId));
+
+    // Initialize counter
+    let totalPublications = 0;
+
+    // Process each publication record
+    for (const record of publicationRecords) {
+      if (!record.details) continue;
+
+      // Split by newline characters
+      const lines = record.details
+        .split('\n')
+        // Remove empty lines
+        .filter((line) => line.trim().length > 0);
+
+      // Each non-empty line is considered a separate publication
+      totalPublications += lines.length;
+    }
+
+    return totalPublications;
+  }
+
   if (!facultyDescriptionTmp) {
     return notFound();
   }
 
-  const facultyDescription = { doctoralStudents: 0, ...facultyDescriptionTmp }; // Placeholder for doctoral students count
+  // Get publication count by analyzing text content
+  const realPublicationsCount = await countPublicationsByText(
+    facultyDescriptionTmp.employeeId
+  );
+
+  const facultyDescription = {
+    doctoralStudents: 0, // Doctoral Student count not implemented
+    ...facultyDescriptionTmp, // Original faculty details
+    publications: realPublicationsCount, // Use the new count method
+  };
+
+  // Profile Personal Details
   return (
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
@@ -201,6 +265,7 @@ async function FacultyOrStaffComponent({
             </li>
           </ul>
         </article>
+        {/* Faculty Image */}
         <section className="w-0 max-xl:hidden">
           <Image
             alt="0"
@@ -215,6 +280,7 @@ async function FacultyOrStaffComponent({
             }
           />
         </section>
+        {/* Faculty Intellectual Contribution counts */}
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
           <ul className="grid h-full grid-cols-3 gap-5 xl:ml-16">
             {Object.entries(text.intellectualContributions).map(
@@ -237,6 +303,7 @@ async function FacultyOrStaffComponent({
           </ul>
         </article>
       </section>
+      {/* Faculty links to external profiles */}
       <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
         {(
           Object.entries(text.externalLinks) as [
@@ -265,33 +332,42 @@ async function FacultyOrStaffComponent({
         })}
       </section>
 
+      {/* Faculty Professional Details */}
       <section className="container flex gap-y-4 max-md:flex-col md:h-[28rem] md:gap-x-4 lg:gap-x-8">
-        <Tabs
-          locale={locale}
-          tabs={tabs}
-          select
-          defaultPath="qualifications"
-          basePath={!employeeId ? 'profile' : `faculty-and-staff/${employeeId}`}
-          pathLength={!employeeId ? 3 : 4}
-        />
-        <ol className="flex flex-col justify-between max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+        {/* Left Side Tabs */}
+        <ScrollArea className="max-h-[28rem] md:min-w-72 lg:min-w-80 xl:min-w-96">
           <Tabs
             locale={locale}
             tabs={tabs}
+            select
             defaultPath="qualifications"
             basePath={
               !employeeId ? 'profile' : `faculty-and-staff/${employeeId}`
             }
             pathLength={!employeeId ? 3 : 4}
           />
-        </ol>
+          <ol className="flex flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+            <Tabs
+              locale={locale}
+              tabs={tabs}
+              defaultPath="qualifications"
+              basePath={
+                !employeeId ? 'profile' : `faculty-and-staff/${employeeId}`
+              }
+              pathLength={!employeeId ? 3 : 4}
+            />
+          </ol>
+        </ScrollArea>
+        {/* Right Side Content */}
+        {/* Heading of the Right Side Content */}
         <article
-          className=" grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
+          className=" relative grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
           style={{
             gridTemplateRows: 'auto 1fr',
             gridTemplateColumns: 'auto 1fr',
           }}
         >
+          {/* List under that heading */}
           <PathnameAwareSuspense defaultPathname="qualifications">
             {children}
           </PathnameAwareSuspense>
@@ -300,13 +376,17 @@ async function FacultyOrStaffComponent({
     </>
   );
 }
+
 const facultyTables = {
   qualifications: qualifications,
   experience: experience,
   projects: researchProjects,
   publications: publications,
   continuingEducation: continuingEducation,
-  awardsAndHonors: awardsAndHonors,
+  awardsAndRecognitions: awardsAndRecognitions,
+  developmentProgramsOrganised: developmentProgramsOrganised,
+  ipr: ipr,
+  outreachActivities: outreachActivities,
 } as const;
 
 async function FacultySectionComponent({
@@ -329,11 +409,12 @@ async function FacultySectionComponent({
     if (facultySection === 'researchScholars') {
       return await fetchResearchScholars(id, employeeId);
     } else if (id) {
-      return await fetchSectionByFacultyId(
+      const data = await fetchSectionByFacultyId(
         id,
         facultySection === 'projects' ? 'researchProjects' : facultySection,
         !table
       );
+      return data;
     }
     // Using employee ID
     else if (employeeId) {
@@ -361,9 +442,14 @@ async function FacultySectionComponent({
     }
     return [];
   })()) as {
-    title: string;
+    title?: string;
+    universityName?: string;
+    specialization?: string;
+    organizationName?: string;
+    designation?: string;
     details?: string;
     field?: string;
+    awardingAgency?: string;
     type?: string;
     people?: string;
     location?: string;
@@ -380,7 +466,8 @@ async function FacultySectionComponent({
     id: number;
     degree?: string;
     description?: string;
-  }[]; //typescript cannot infer the type of result, so we have to specify it explicitly
+  }[];
+
   if (!result || facultySection === 'researchScholars') {
     return (
       <div className="[&>*]:!h-full">
@@ -393,48 +480,98 @@ async function FacultySectionComponent({
     new Set(result.filter((item) => item.tag).map((item) => item.tag))
   ) as string[];
 
+  // Custom order for tags
+  const tagOrder = [
+    'journal',
+    'conference',
+    'book',
+    'book-chapter',
+    'project',
+    'consultancy',
+  ];
+
+  // Sort uniqueTags by custom order, others go last
+  uniqueTags.sort((a, b) => {
+    const indexA = tagOrder.indexOf(a);
+    const indexB = tagOrder.indexOf(b);
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+
   const tagStyle =
     `
-            .tag-filter:has(#filter-all:checked) ~ .rounded-2xl ul li {
+            .tag-filter:has(#filter-All:checked) ~ .rounded-2xl ul li {
               display: flex;
             }
 
-            .tag-filter:has(.filter-input:checked:not(#filter-all))
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
               ~ .rounded-2xl
               ul
               li {
               display: none;
             }
 
+            /* Hide tags when any specific filter is selected */
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
+              ~ .rounded-2xl
+              ul
+              li
+              .tag-badge {
+              display: none !important;
+            }
+
+            /* Show tags only when 'All' is selected */
+            .tag-filter:has(#filter-All:checked)
+              ~ .rounded-2xl
+              ul
+              li
+              .tag-badge {
+              display: inline-block !important;
+            }
+
           ` +
     uniqueTags
-      .map(
-        (tag) => `
-      .tag-filter:has(#filter-${tag}:checked) ~ .rounded-2xl ul li[data-tag=${tag}] {
-        display: flex;
-      }`
-      )
+      .map((tag) => {
+        const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+        return `
+        .tag-filter:has(#${safeTagId}:checked) ~ .rounded-2xl ul li[data-tag="${tag}"] {
+          display: flex;
+        }`;
+      })
       .join('\n');
+
   return (
     <>
-      <h4 className="w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
-      <span className="flex items-center justify-between px-4">
-        {uniqueTags.length > 0 && (
-          <>
-            <style>{tagStyle}</style>
-            <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
-              {['all', ...uniqueTags].map((tag) => (
+      <h4 className="mr-4 w-fit max-md:hidden">{text.tabs[facultySection]}</h4>
+      {/* NOTE: Filtering using CSS is not working when its wrapped by a div and without div (+Add) button moves to next line when there are tags*/}
+      {/* <div className='flex items-center'> */}
+      {uniqueTags.length > 0 && (
+        <>
+          <style>{tagStyle}</style>
+          {/* <div className="flex"> */}
+          {/* Mobile dropdown (hidden on lg+ screens) */}
+          <div className="mb-4 mr-2 lg:hidden">
+            <ResponsiveTagFilter tags={uniqueTags} textLabels={text.tags} />
+          </div>
+
+          {/* Desktop filter buttons (hidden on smaller screens) */}
+          <form className="tag-filter mb-4 mr-2 hidden h-fit w-fit gap-2 lg:flex">
+            {['All', ...uniqueTags].map((tag) => {
+              const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
+              return (
                 <fieldset key={tag} className="flex items-center">
                   <input
                     type="radio"
-                    id={`filter-${tag}`}
+                    id={safeTagId}
                     name="tag"
                     value={tag}
-                    defaultChecked={tag === 'all'}
+                    defaultChecked={tag === 'All'}
                     className="filter-input peer hidden"
                   />
                   <label
-                    htmlFor={`filter-${tag}`}
+                    htmlFor={safeTagId}
                     className="cursor-pointer rounded-lg border bg-shade-light px-3 py-1.5 font-serif text-sm font-medium text-primary-700 transition-colors hover:border-primary-700 peer-checked:bg-primary-700 peer-checked:text-shade-light"
                   >
                     {tag in text.tags
@@ -442,19 +579,28 @@ async function FacultySectionComponent({
                       : tag}
                   </label>
                 </fieldset>
-              ))}
-            </form>
-          </>
-        )}
-        {id && (
-          <Button variant="primary" className="mb-4 ml-auto p-1" asChild>
-            <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
-              <MdOutlineAdd size={28} className="cursor-pointer" />
-              Add{' '}
-            </Link>
-          </Button>
-        )}
-      </span>
+              );
+            })}
+          </form>
+          {/* </div> */}
+        </>
+      )}
+
+      {id && (
+        <Button
+          variant="primary"
+          // Used Absolute positioning for above xl breakpoint to keep it in same line as tags
+          className="right-6 top-6 p-1 xl:absolute xl:mb-4 xl:ml-auto"
+          asChild
+        >
+          <Link href={`/${locale}/profile/edit?topic=${facultySection}`}>
+            <MdOutlineAdd size={28} className="cursor-pointer" />
+            Add{' '}
+          </Link>
+        </Button>
+      )}
+
+      {/* </div> */}
       <ScrollArea className="col-span-2 rounded-2xl">
         <ul className="mb-3 grid gap-y-6 px-1">
           {result.map((item, index) => (
@@ -463,60 +609,78 @@ async function FacultySectionComponent({
               className="flex flex-col gap-2 rounded-xl bg-shade-light p-5 shadow-[0px_4px_12px_0px_rgba(0,15,31,0.1)]"
               data-tag={item.tag}
             >
-              <span className="flex w-full items-center justify-between">
-                <h5 className="font-bold">{item.title}</h5>
+              {/* Title row with tag on the right */}
+              <div className="flex items-start justify-between gap-2">
+                <h5 className="flex-1 font-bold">
+                  {facultySection === 'qualifications' ||
+                  facultySection === 'developmentProgramsOrganised'
+                    ? item.degree
+                    : facultySection === 'experience'
+                      ? item.designation
+                      : item.title}
+                </h5>
 
-                {id ? (
-                  <>
-                    <Link
-                      href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
-                      className="ml-auto"
+                <div className="flex items-center gap-2">
+                  {item.tag && (
+                    <span
+                      className={cn(
+                        'tag-badge shrink-0 rounded-sm px-2 py-1 text-xs font-medium',
+                        facultySection === 'publications'
+                          ? 'bg-warning/20 text-warning'
+                          : 'bg-error/20 text-error'
+                      )}
                     >
-                      <MdOutlineEdit
-                        size={28}
-                        className="cursor-pointer text-primary-700"
-                      />
-                    </Link>
-                    <Link
-                      href={`/${locale}/profile/delete?topic=${facultySection}&id=${item.id}`}
-                    >
-                      <MdOutlineDelete
-                        size={28}
-                        className="cursor-pointer text-primary-700"
-                      />
-                    </Link>
-                  </>
-                ) : null}
-              </span>
-              <p>
+                      {item.tag}
+                    </span>
+                  )}
+
+                  {id && (
+                    <>
+                      <Link
+                        href={`/${locale}/profile/edit?topic=${facultySection}&id=${item.id}`}
+                      >
+                        <MdOutlineEdit
+                          size={28}
+                          className="cursor-pointer text-primary-700"
+                        />
+                      </Link>
+                      <Link
+                        href={`/${locale}/profile/delete?topic=${facultySection}&id=${item.id}`}
+                      >
+                        <MdOutlineDelete
+                          size={28}
+                          className="cursor-pointer text-primary-700"
+                        />
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <p className="whitespace-pre-wrap">
                 {item.details ??
                   item.field ??
+                  item.specialization ??
+                  item.awardingAgency ??
                   item.type ??
                   item.description ??
                   item.degree}
               </p>
+
               <p className="text-neutral-600">
-                {item.people ?? item.location ?? item.role ?? item.caption}
+                {item.people ??
+                  item.location ??
+                  item.universityName ??
+                  item.organizationName ??
+                  item.role ??
+                  item.caption}
               </p>
+
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}
                 {item.startDate && item.endDate && ' - '}
                 {item.endDate ??
                   (item.endedOn ? item.endedOn.toDateString() : item.status)}
-                {item.tag && (
-                  <span
-                    className={cn(
-                      'mx-2 rounded-sm px-1 text-neutral-900',
-                      // facultySection === 'projects'
-                      //  ? 'bg-success/20 text-success':
-                      facultySection === 'publications'
-                        ? 'bg-warning/20 text-warning'
-                        : 'bg-error/20 text-error'
-                    )}
-                  >
-                    {item.tag}
-                  </span>
-                )}
               </p>
             </li>
           ))}

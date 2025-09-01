@@ -46,6 +46,56 @@ export const faculty = pgTable(
   (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
 );
 
+// IPR
+export const ipr = pgTable('ipr', (t) => ({
+  id: t.serial().primaryKey(),
+  facultyId: t
+    .varchar()
+    .references(() => faculty.employeeId)
+    .notNull(),
+  // title: t.text().notNull(),
+  details: t.text().notNull(),
+  // date: t.date().notNull(),
+  tag: t
+    .varchar({
+      enum: ['patent', 'copyright', 'trademark', 'design'],
+    })
+    .notNull(),
+}));
+
+// Outreach Activities
+export const outreachActivities = pgTable('outreach_activities', (t) => ({
+  id: t.serial().primaryKey(),
+  facultyId: t
+    .varchar()
+    .references(() => faculty.employeeId)
+    .notNull(),
+  details: t.text().notNull(),
+  // title: t.text().notNull(),
+  // date: t.date().notNull(),
+}));
+
+// DevelopmentProgramsOrganised Table
+export const developmentProgramsOrganised = pgTable(
+  'development_programs_organised',
+  (t) => ({
+    id: t.serial().primaryKey(),
+    facultyId: t
+      .varchar()
+      .references(() => faculty.employeeId)
+      .notNull(),
+    // title: t.text().notNull(),
+    // date: t.date().notNull(),
+    // venue: t.text().notNull(),
+    details: t.text().notNull(),
+    // tag: t
+    //   .varchar({
+    //     enum: ['workshop', 'conference', 'seminar', 'talk delivered', 'lecture', 'symposium'],
+    //   })
+    //   .notNull(),
+  })
+);
+
 // Qualifications Table
 export const qualifications = pgTable('qualifications', (t) => ({
   id: t.serial().primaryKey(),
@@ -53,10 +103,10 @@ export const qualifications = pgTable('qualifications', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
-  field: t.text().notNull(),
-  location: t.text().notNull(),
-  startDate: t.date().notNull(),
+  degree: t.text().notNull(),
+  specialization: t.text().notNull(),
+  universityName: t.text().notNull(),
+  startDate: t.date(),
   endDate: t.date(),
 }));
 
@@ -67,9 +117,9 @@ export const experience = pgTable('experience', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
-  field: t.text().notNull(),
-  location: t.text().notNull(),
+  designation: t.text().notNull(),
+  specialization: t.text().notNull(),
+  organizationName: t.text().notNull(),
   startDate: t.date().notNull(),
   endDate: t.date().notNull(),
 }));
@@ -95,13 +145,13 @@ export const publications = pgTable('publications', (t) => ({
     .varchar()
     .references(() => faculty.employeeId)
     .notNull(),
-  title: t.text().notNull(),
+  // title: t.text().notNull(),
   details: t.text().notNull(),
-  people: t.text().notNull(),
-  date: t.date().notNull(),
+  // people: t.text().notNull(),
+  // date: t.date().notNull(),
   tag: t
     .varchar({
-      enum: ['book', 'journal', 'conference'],
+      enum: ['book', 'journal', 'conference', 'book chapter'],
     })
     .notNull(),
 }));
@@ -120,18 +170,26 @@ export const publications = pgTable('publications', (t) => ({
 //   tag: t.text(),
 // }));
 
-// Awards and Honors Table
-export const awardsAndHonors = pgTable('awards_and_honors', (t) => ({
-  id: t.serial().primaryKey(),
-  facultyId: t
-    .varchar()
-    .references(() => faculty.employeeId)
-    .notNull(),
-  title: t.text().notNull(),
-  field: t.text().notNull(),
-  date: t.date().notNull(),
-  location: t.text().notNull(),
-}));
+// Awards and Recognitions Table
+export const awardsAndRecognitions = pgTable(
+  'awards_and_recognitions',
+  (t) => ({
+    id: t.serial().primaryKey(),
+    facultyId: t
+      .varchar()
+      .references(() => faculty.employeeId)
+      .notNull(),
+    title: t.text().notNull(),
+    awardingAgency: t.text().notNull(),
+    date: t.date().notNull(),
+    location: t.text().notNull(),
+    tag: t
+      .varchar({
+        enum: ['award', 'recognition'],
+      })
+      .notNull(),
+  })
+);
 
 // Custom Topics Table
 export const customTopics = pgTable('custom_topics', (t) => ({
@@ -175,9 +233,39 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   experience: many(experience),
   continuingEducation: many(continuingEducation),
   publications: many(publications),
-  awardsAndHonors: many(awardsAndHonors),
+  awardsAndRecognitions: many(awardsAndRecognitions),
   customTopics: many(customTopics),
+  developmentProgramsOrganised: many(developmentProgramsOrganised),
+  ipr: many(ipr),
+  outreachActivities: many(outreachActivities),
 }));
+
+export const developmentProgramsOrganisedRelations = relations(
+  developmentProgramsOrganised,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [developmentProgramsOrganised.facultyId],
+      references: [faculty.employeeId],
+    }),
+  })
+);
+
+export const iprRelations = relations(ipr, ({ one }) => ({
+  faculty: one(faculty, {
+    fields: [ipr.facultyId],
+    references: [faculty.employeeId],
+  }),
+}));
+
+export const outreachActivitiesRelations = relations(
+  outreachActivities,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [outreachActivities.facultyId],
+      references: [faculty.employeeId],
+    }),
+  })
+);
 
 export const qualificationsRelations = relations(qualifications, ({ one }) => ({
   faculty: one(faculty, {
@@ -210,11 +298,11 @@ export const publicationsRelations = relations(publications, ({ one }) => ({
   }),
 }));
 
-export const awardsAndHonorsRelations = relations(
-  awardsAndHonors,
+export const awardsAndRecognitionsRelations = relations(
+  awardsAndRecognitions,
   ({ one }) => ({
     faculty: one(faculty, {
-      fields: [awardsAndHonors.facultyId],
+      fields: [awardsAndRecognitions.facultyId],
       references: [faculty.employeeId],
     }),
   })

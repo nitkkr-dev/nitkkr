@@ -4,14 +4,17 @@ import { notFound } from 'next/navigation';
 import { Dialog } from '~/components/dialog';
 import { Card, CardHeader } from '~/components/ui';
 import { facultyProfileSchemas } from '~/lib/schemas/faculty-profile';
-import { cn } from '~/lib/utils';
+import { cn, formatCamelCase } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import {
-  awardsAndHonors,
+  awardsAndRecognitions,
   continuingEducation,
   db,
+  developmentProgramsOrganised,
   experience,
   faculty,
+  ipr,
+  outreachActivities,
   publications,
   qualifications,
   researchProjects,
@@ -25,7 +28,10 @@ const facultyTables = {
   publications,
   researchProjects,
   continuingEducation,
-  awardsAndHonors,
+  awardsAndRecognitions,
+  developmentProgramsOrganised,
+  ipr,
+  outreachActivities,
 } as const;
 
 export default async function Page({
@@ -119,6 +125,9 @@ export default async function Page({
           .then((results) => results[0] || null)
       : null;
 
+  // Format topic | eg. awardsAndRecognitions -> Awards And Recognitions
+  const formattedTopic = formatCamelCase(topic);
+
   return (
     <Dialog
       className={cn(
@@ -129,8 +138,7 @@ export default async function Page({
       <Card className="rounded-lg border bg-background shadow-sm">
         <CardHeader className="border-b px-6 py-4">
           <h2 className="mb-0 text-2xl font-bold">
-            {id ? 'Edit' : 'Add'}{' '}
-            {topic.charAt(0).toUpperCase() + topic.slice(1)}
+            {id ? 'Edit' : 'Add'} {formattedTopic}
           </h2>
           <p className="mt-1 text-sm">
             {id ? 'Update the existing record' : 'Create a new record'}
