@@ -156,19 +156,25 @@ export const publications = pgTable('publications', (t) => ({
     .notNull(),
 }));
 
-// // Research Scholars Table
-// export const researchScholars = pgTable('research_scholars', (t) => ({
-//   id: t.serial().primaryKey(),
-//  facultyId: t
-//    .varchar()
-//    .references(() => faculty.employeeId)
-//    .notNull(),
-//   title: t.text().notNull(),
-//   role: t.text().notNull(),
-//   person: t.text().notNull(),
-//   date: t.date().notNull(),
-//   tag: t.text(),
-// }));
+// Research Scholars Table
+export const researchScholars = pgTable('research_scholars', (t) => ({
+  id: t.serial().primaryKey(),
+  facultyId: t
+    .varchar()
+    .references(() => faculty.employeeId)
+    .notNull(),
+  title: t.text().notNull(), // possibly can be linked depending upon the requirements
+  //these details will be linked to actual people in the future, migrate data to doctorates
+  rollNumber: t.varchar({ length: 9 }).notNull(), // for easier future linking
+  name: t.text().notNull(),
+  startDate: t.date().notNull(),
+  endDate: t.date(),
+  tag: t
+    .varchar({
+      enum: ['mtech', 'phd'],
+    })
+    .notNull(),
+}));
 
 // Awards and Recognitions Table
 export const awardsAndRecognitions = pgTable(
@@ -225,6 +231,7 @@ export const facultyRelations = relations(faculty, ({ many, one }) => ({
   doctorates: many(doctorates),
   sectionHead: many(sectionHeads),
   researchProjects: many(researchProjects),
+  researchScholars: many(researchScholars),
   person: one(persons, {
     fields: [faculty.id],
     references: [persons.id],
@@ -297,6 +304,16 @@ export const publicationsRelations = relations(publications, ({ one }) => ({
     references: [faculty.employeeId],
   }),
 }));
+
+export const researchScholarsRelations = relations(
+  researchScholars,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [researchScholars.facultyId],
+      references: [faculty.employeeId],
+    }),
+  })
+);
 
 export const awardsAndRecognitionsRelations = relations(
   awardsAndRecognitions,

@@ -18,6 +18,7 @@ import {
   publications,
   qualifications,
   researchProjects,
+  researchScholars,
 } from '~/server/db';
 
 import { FacultyForm, FacultyPersonalDetailsForm } from './client-utils';
@@ -32,6 +33,7 @@ const facultyTables = {
   developmentProgramsOrganised,
   ipr,
   outreachActivities,
+  researchScholars,
 } as const;
 
 export default async function Page({

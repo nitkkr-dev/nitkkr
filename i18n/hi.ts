@@ -354,6 +354,8 @@ const text: Translations = {
       project: 'प्रोजेक्ट्स',
       consultancy: 'परामर्श',
       'book chapter': 'पुस्तक अध्याय',
+      mtech: 'एम.टेक',
+      phd: 'पीएचडी',
     },
     tabs: {
       qualifications: 'शैक्षिक योग्यता',
