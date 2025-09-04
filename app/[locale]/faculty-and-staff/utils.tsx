@@ -16,7 +16,11 @@ import {
 import 'server-only';
 import { string } from 'zod';
 
-import { PathnameAwareSuspense, Tabs } from '~/app/profile/client-utils';
+import {
+  PathnameAwareSuspense,
+  ResponsiveTagFilter,
+  Tabs,
+} from '~/app/profile/client-utils';
 import { Button } from '~/components/buttons';
 import { WorkInProgressStatus } from '~/components/status';
 import { ScrollArea } from '~/components/ui';
@@ -37,10 +41,12 @@ import {
   publications,
   qualifications,
   researchProjects,
+  researchScholars,
   studentAcademicDetails,
   students,
 } from '~/server/db';
 
+// Contains the content of full Faculty Profile
 async function FacultyOrStaffComponent({
   children,
   employeeId,
@@ -182,6 +188,7 @@ async function FacultyOrStaffComponent({
     publications: realPublicationsCount, // Use the new count method
   };
 
+  // Profile Personal Details
   return (
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
@@ -259,6 +266,7 @@ async function FacultyOrStaffComponent({
             </li>
           </ul>
         </article>
+        {/* Faculty Image */}
         <section className="w-0 max-xl:hidden">
           <Image
             alt="0"
@@ -266,13 +274,16 @@ async function FacultyOrStaffComponent({
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
             src={
-              facultyDescription.employeeId === '114' ||
-              facultyDescription.employeeId === '1083'
-                ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
-                : `fallback/user-image.jpg`
+                                                              /* TODO : FIX THIS PATH */
+              // facultyDescription.employeeId === '114' ||
+              // facultyDescription.employeeId === '1083'
+              //   ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
+              //   : `fallback/user-image.jpg`
+              'fallback/user-image.jpg'
             }
           />
         </section>
+        {/* Faculty Intellectual Contribution counts */}
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
           <ul className="grid h-full grid-cols-3 gap-5 xl:ml-16">
             {Object.entries(text.intellectualContributions).map(
@@ -295,6 +306,7 @@ async function FacultyOrStaffComponent({
           </ul>
         </article>
       </section>
+      {/* Faculty links to external profiles */}
       <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
         {(
           Object.entries(text.externalLinks) as [
@@ -323,7 +335,9 @@ async function FacultyOrStaffComponent({
         })}
       </section>
 
+      {/* Faculty Professional Details */}
       <section className="container flex gap-y-4 max-md:flex-col md:h-[28rem] md:gap-x-4 lg:gap-x-8">
+        {/* Left Side Tabs */}
         <ScrollArea className="max-h-[28rem] md:min-w-72 lg:min-w-80 xl:min-w-96">
           <Tabs
             locale={locale}
@@ -347,6 +361,8 @@ async function FacultyOrStaffComponent({
             />
           </ol>
         </ScrollArea>
+        {/* Right Side Content */}
+        {/* Heading of the Right Side Content */}
         <article
           className=" relative grid w-full grid-cols-2 rounded-2xl max-md:h-[28rem] md:bg-shade-light md:px-5 md:py-6"
           style={{
@@ -354,6 +370,7 @@ async function FacultyOrStaffComponent({
             gridTemplateColumns: 'auto 1fr',
           }}
         >
+          {/* List under that heading */}
           <PathnameAwareSuspense defaultPathname="qualifications">
             {children}
           </PathnameAwareSuspense>
@@ -368,6 +385,7 @@ const facultyTables = {
   experience: experience,
   projects: researchProjects,
   publications: publications,
+  researchScholars: researchScholars,
   continuingEducation: continuingEducation,
   awardsAndRecognitions: awardsAndRecognitions,
   developmentProgramsOrganised: developmentProgramsOrganised,
@@ -392,9 +410,10 @@ async function FacultySectionComponent({
       : undefined;
 
   const result = (await (async () => {
-    if (facultySection === 'researchScholars') {
-      return await fetchResearchScholars(id, employeeId);
-    } else if (id) {
+    // if (facultySection === 'researchScholars') {
+    //   return await fetchResearchScholars(id, employeeId);
+    // } else
+    if (id) {
       const data = await fetchSectionByFacultyId(
         id,
         facultySection === 'projects' ? 'researchProjects' : facultySection,
@@ -437,6 +456,7 @@ async function FacultySectionComponent({
     field?: string;
     awardingAgency?: string;
     type?: string;
+    name?: string;
     people?: string;
     location?: string;
     role?: string;
@@ -454,7 +474,7 @@ async function FacultySectionComponent({
     description?: string;
   }[];
 
-  if (!result || facultySection === 'researchScholars') {
+  if (!result) {
     return (
       <div className="[&>*]:!h-full">
         <WorkInProgressStatus locale={locale} />
@@ -466,13 +486,33 @@ async function FacultySectionComponent({
     new Set(result.filter((item) => item.tag).map((item) => item.tag))
   ) as string[];
 
+  // Custom order for tags
+  const tagOrder = [
+    'journal',
+    'conference',
+    'book',
+    'book-chapter',
+    'project',
+    'consultancy',
+  ];
+
+  // Sort uniqueTags by custom order, others go last
+  uniqueTags.sort((a, b) => {
+    const indexA = tagOrder.indexOf(a);
+    const indexB = tagOrder.indexOf(b);
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+
   const tagStyle =
     `
-            .tag-filter:has(#filter-all:checked) ~ .rounded-2xl ul li {
+            .tag-filter:has(#filter-All:checked) ~ .rounded-2xl ul li {
               display: flex;
             }
 
-            .tag-filter:has(.filter-input:checked:not(#filter-all))
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
               ~ .rounded-2xl
               ul
               li {
@@ -480,7 +520,7 @@ async function FacultySectionComponent({
             }
 
             /* Hide tags when any specific filter is selected */
-            .tag-filter:has(.filter-input:checked:not(#filter-all))
+            .tag-filter:has(.filter-input:checked:not(#filter-All))
               ~ .rounded-2xl
               ul
               li
@@ -488,8 +528,8 @@ async function FacultySectionComponent({
               display: none !important;
             }
 
-            /* Show tags only when 'all' is selected */
-            .tag-filter:has(#filter-all:checked)
+            /* Show tags only when 'All' is selected */
+            .tag-filter:has(#filter-All:checked)
               ~ .rounded-2xl
               ul
               li
@@ -516,8 +556,15 @@ async function FacultySectionComponent({
       {uniqueTags.length > 0 && (
         <>
           <style>{tagStyle}</style>
-          <form className="tag-filter mb-4 mr-2 flex h-fit w-fit gap-2">
-            {['all', ...uniqueTags].map((tag) => {
+          {/* <div className="flex"> */}
+          {/* Mobile dropdown (hidden on lg+ screens) */}
+          <div className="mb-4 mr-2 lg:hidden">
+            <ResponsiveTagFilter tags={uniqueTags} textLabels={text.tags} />
+          </div>
+
+          {/* Desktop filter buttons (hidden on smaller screens) */}
+          <form className="tag-filter mb-4 mr-2 hidden h-fit w-fit gap-2 lg:flex">
+            {['All', ...uniqueTags].map((tag) => {
               const safeTagId = `filter-${tag.replace(/\s+/g, '-')}`;
               return (
                 <fieldset key={tag} className="flex items-center">
@@ -526,7 +573,7 @@ async function FacultySectionComponent({
                     id={safeTagId}
                     name="tag"
                     value={tag}
-                    defaultChecked={tag === 'all'}
+                    defaultChecked={tag === 'All'}
                     className="filter-input peer hidden"
                   />
                   <label
@@ -541,6 +588,7 @@ async function FacultySectionComponent({
               );
             })}
           </form>
+          {/* </div> */}
         </>
       )}
 
@@ -569,7 +617,7 @@ async function FacultySectionComponent({
             >
               {/* Title row with tag on the right */}
               <div className="flex items-start justify-between gap-2">
-                <h5 className="font-bold flex-1">
+                <h5 className="flex-1 font-bold">
                   {facultySection === 'qualifications' ||
                   facultySection === 'developmentProgramsOrganised'
                     ? item.degree
@@ -582,13 +630,13 @@ async function FacultySectionComponent({
                   {item.tag && (
                     <span
                       className={cn(
-                        'tag-badge rounded-sm px-2 py-1 text-xs font-medium shrink-0',
+                        'tag-badge shrink-0 rounded-sm px-2 py-1 text-xs font-medium',
                         facultySection === 'publications'
                           ? 'bg-warning/20 text-warning'
                           : 'bg-error/20 text-error'
                       )}
                     >
-                      {item.tag}
+                      {text.tags[item.tag as keyof typeof text.tags]}
                     </span>
                   )}
 
@@ -624,16 +672,17 @@ async function FacultySectionComponent({
                   item.description ??
                   item.degree}
               </p>
-              
+
               <p className="text-neutral-600">
                 {item.people ??
                   item.location ??
                   item.universityName ??
                   item.organizationName ??
                   item.role ??
-                  item.caption}
+                  item.caption ??
+                  item.name}
               </p>
-              
+
               <p className="text-neutral-400 lg:text-base">
                 {item.date ?? item.startDate}
                 {item.startDate && item.endDate && ' - '}

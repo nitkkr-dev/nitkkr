@@ -344,6 +344,9 @@ const text: Translations = {
       trademark: 'Trademark',
       project: 'Project',
       consultancy: 'Consultancy',
+      'book chapter': 'Book Chapter',
+      mtech: 'M. Tech.',
+      phd: 'Ph. D.',
     },
     tabs: {
       qualifications: 'Education Qualifications',

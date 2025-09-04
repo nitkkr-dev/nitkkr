@@ -142,6 +142,7 @@ const renderFields = <T extends Record<string, any>>(
                   value={field.value}
                   onValueChange={field.onChange}
                   variant="form"
+                  required={!isOptional}
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder={`Select ${label}`} />
@@ -267,6 +268,7 @@ const renderFields = <T extends Record<string, any>>(
       'about',
       'title',
       'people',
+      'name',
       'details',
     ].includes(fieldName.toLowerCase());
 
