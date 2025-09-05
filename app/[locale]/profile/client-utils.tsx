@@ -134,7 +134,7 @@ export const Tabs = ({
               href={`/${locale}/${basePath}/${href}`}
               prefetch
               scroll={defaultPath === 'personal'} // scroll to top on student profile
-              className="items-centre flex overflow-hidden"
+              className="flex items-center overflow-hidden"
             >
               <Icon className="lg:size-5" />
               <span className="truncate">{label.toUpperCase()}</span>
