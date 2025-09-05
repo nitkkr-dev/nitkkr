@@ -571,6 +571,38 @@ const text: Translations = {
         `FAX : +91-1744-238050`,
       ],
     },
+    cells: {
+      title: 'Cells',
+      headingTitle : 'Institute Cells',
+      cell: 'cell',
+      iic: {
+        title: 'Institution’s Innovation Council',
+        preamble: 'Preamble',
+        description:
+          'NIT Kurukshetra convenes the members of the Institute’s Innovation Council (IIC), which is aligned with the Ministry of Education’s Innovation Cell (MIC). The IIC will be an umbrella entity offering a range of development programs, workshops, etc.',
+        officeOrder: {
+          title: 'Office Order',
+          srNo: 'Sr. No.',
+          responsibility: 'Responsibility',
+          nameOfFaculty: 'Name of Faculty',
+        },
+        activities: {
+          title: 'Activities',
+          srNo: 'Sr. No.',
+          pastActivities: 'Past Activities',
+          upcomingActivities: 'Upcoming Activities',
+        },
+      },
+      iks: {
+        title: 'Indian Knowledge Systems',
+        description:
+          'IKS Cell is an innovative cell established in 2022 in the Institute. It aims to promote interdisciplinary research on all aspects of Indian Knowledge Systems, preserve and disseminate IKS for further research and societal applications. The cell will actively engage in spreading the rich heritage of our country and traditional knowledge in fields such as Psychology, Basic Sciences, Engineering & Technology, Arts and Literature, Agriculture, Architecture, and more.',
+        iksTeam: 'IKS Team',
+      },
+      ipr:{
+        title: 'Intellectual Property Rights',
+      }
+    },
   },
   NotFound: {
     title: '404',
@@ -1444,6 +1476,137 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       `Prof. B. V. Ramana Reddy`,
     ],
   },
+  Research: {
+    title: 'RESEARCH',
+    introduction:
+      'NITKKR is the excellence in Research & discovery with strong global and local impact. NITKKR strives for excellence in research and development across a variety of fields, from advanced technologies to social sciences, making a real difference in society.',
+    headings: {
+      patentsAndTechnologies: 'Patents & Technologies',
+      research: 'Research & Consultancy',
+      copyright: 'Copyrights & Designs',
+      memorandum: 'MOU',
+      importantRes: 'Important Resources',
+      sponsoredProj: 'Sponsored Projects',
+      iprCell: 'IPR Cell',
+    },
+    sections: {
+      patentsAndTechnologies: { title: 'Patents published and granted' },
+      research: { title: 'Details of research & consultancy projects' },
+      copyright: {
+        title: 'Copyrights and Designs',
+        copyright:
+          'The copyrights obtained by faculty staff and students of NIT Kurukshetra are listed below:',
+
+        design:
+          'Designs registered by faculty staff and students of NIT Kurukshetra are listed below:',
+      },
+      memorandum: {
+        title: 'List of MoUs signed with organizations',
+        more: 'View all MoUs',
+      },
+      importantRes: {
+        title: 'Important resources',
+        more: 'View all resources',
+      },
+      sponsoredProj: {
+        title:
+          'Sponsored projects by faculty staff and students of NIT Kurukshetra',
+      },
+      iprCell: {
+        title: 'About IPR Cell',
+        more: 'In order to facilitate faculty, staff and students of Institute in a proactive manner in the generation, protection and transaction of Intellectual Property which offers potential scope for shared benefits to both institute and inventors, an IPR Cell has been established in NIT Kurukshetra. The IPR Cell at NIT Kurukshetra is a cornerstone of our commitment to advancing research and innovation. It provides comprehensive support to faculty, staff, and students by offering expert guidance on securing patents, copyrights, and design registrations.',
+        view: 'view ipr cell',
+      },
+    },
+    research: {
+      number: 'Sr. No.',
+      faculty: 'Faculty Name',
+      department: 'Department',
+      facultyCode: 'Faculty Code',
+      totalJobs: 'Total Consultancy Jobs',
+      total: 'Total Amount (in Rs.)',
+    },
+    patentsAndTechnologies: {
+      number: 'Sr. No.',
+      applicationNumber: 'Application Number',
+      patentNumber: 'Patent Number',
+      techTitle: 'Technology / Title',
+      inventor: 'Inventor',
+    },
+    copyright: {
+      number: 'Sr. No.',
+      grantYear: 'Grant Year',
+      copyrightNo: 'Copyright No.',
+      title: 'Title',
+      creator: 'Creator',
+    },
+    design: {
+      number: 'Sr. No.',
+      yearOfAcceptance: 'Year of Acceptance',
+      applicationNo: 'Application No.',
+      title: 'Title',
+      creator: 'Creator',
+    },
+    memorandum: {
+      number: 'Sr. No.',
+      organization: 'Organization',
+      signingDate: 'Signing Date',
+    },
+    projects: {
+      number: 'Sr. No.',
+      year: 'Year',
+      department: 'Department',
+      facultyName: 'Faculty Name',
+      title: 'Title',
+      agency: 'Agency',
+      amount: 'Amount Sanctioned (in Rs.)',
+    },
+    archive: {
+      title: 'Archive',
+      rulesConsultancy:
+        'Rules & Regulations for Consultancy Services w.e.f from FY 2018–19',
+      rulesSponsored:
+        'Rules & Regulation for Sponsored Research Project w.e.f FY 2018–19',
+      guidelinesPhD:
+        'Guidelines for utilization of the contingency grant for full time Ph.D. scholars',
+      sponsoringAgencies: 'Prospective Sponsoring agencies for R&D Projects',
+      sponsoredResearch: 'Sponsored Research Project',
+      financialAssistance: 'Financial Assistance to Students',
+      projectProposal: 'Format-Project Proposal to Funding Agencies',
+    },
+    ipr: {
+      title: 'Intellectual Property Rights',
+      facultyIncharge: 'Faculty Incharge',
+      description:
+        'In consonance with the National IPR Policy of Govt. of India 2016. In order to facilitate faculty, staff and students of Institute in a proactive manner in the generation, protection and transaction of Intellectual Property which offers potential scope for shared benefits to both institute and inventors, an IPR Cell has been established in NIT Kurukshetra. The IPR Cell at NIT Kurukshetra is a cornerstone of our commitment to advancing research and innovation. It provides comprehensive support to faculty, staff, and students by offering expert guidance on securing patents, copyrights, and design registrations. Through it’s working, the IPR Cell equips our academic community with the tools and knowledge necessary to protect and commercialise their intellectual assets. We invite you to explore our initiatives and join us in fostering an environment where academic excellence and pioneering research seamlessly converge.',
+      iprPolicy: {
+        title: 'IPR Policy',
+        description:
+          'The first Intellectual Property (IP) policy for the Institute was formulated in 2008. In the last few years, a number of new initiatives and issues have happened, with the enhanced growth in research and development. In view of the experience obtained during this period, in commercialisation, incubation, international collaboration, distance education courses and student related issues, it was decided to review the current policy and suggest changes as appropriate. This document is the revised IP Policy for the Institute.',
+        revisedIpPolicy: 'Revised IP Policy',
+      },
+      availableTechnologies: {
+        title: 'Available Technologies',
+        description:
+          'Parties interested in getting license of purchasing the technologies can express their interest by filling the purchasing form or emailing ipr@nittkr.ac.in',
+        technologiesAvailable: 'Technologies Available For Licensing/Sales',
+        purchasingForm: 'Purchasing Form',
+      },
+      advisoryCommittee: {
+        title: 'Advisory Committee',
+        srNo: 'Sr. No.',
+        name: 'Name',
+        designation: 'Designation',
+        department: 'Department',
+      },
+      nitkkrInnovationsAndIp: {
+        title: 'NITKKR Innovations and IP',
+        patentsGranted: 'Patents Granted',
+        copyrightsAndDesigns: 'Copyrights & Designs',
+      },
+    },
+  },
+
   TrainingAndPlacement: {
     title: 'Training and Placement',
     headings: {
