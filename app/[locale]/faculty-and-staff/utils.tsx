@@ -41,6 +41,7 @@ import {
   publications,
   qualifications,
   researchProjects,
+  researchScholars,
   studentAcademicDetails,
   students,
 } from '~/server/db';
@@ -382,6 +383,7 @@ const facultyTables = {
   experience: experience,
   projects: researchProjects,
   publications: publications,
+  researchScholars: researchScholars,
   continuingEducation: continuingEducation,
   awardsAndRecognitions: awardsAndRecognitions,
   developmentProgramsOrganised: developmentProgramsOrganised,
@@ -406,9 +408,10 @@ async function FacultySectionComponent({
       : undefined;
 
   const result = (await (async () => {
-    if (facultySection === 'researchScholars') {
-      return await fetchResearchScholars(id, employeeId);
-    } else if (id) {
+    // if (facultySection === 'researchScholars') {
+    //   return await fetchResearchScholars(id, employeeId);
+    // } else
+    if (id) {
       const data = await fetchSectionByFacultyId(
         id,
         facultySection === 'projects' ? 'researchProjects' : facultySection,
@@ -451,6 +454,7 @@ async function FacultySectionComponent({
     field?: string;
     awardingAgency?: string;
     type?: string;
+    name?: string;
     people?: string;
     location?: string;
     role?: string;
@@ -468,7 +472,7 @@ async function FacultySectionComponent({
     description?: string;
   }[];
 
-  if (!result || facultySection === 'researchScholars') {
+  if (!result) {
     return (
       <div className="[&>*]:!h-full">
         <WorkInProgressStatus locale={locale} />
@@ -630,7 +634,7 @@ async function FacultySectionComponent({
                           : 'bg-error/20 text-error'
                       )}
                     >
-                      {item.tag}
+                      {text.tags[item.tag as keyof typeof text.tags]}
                     </span>
                   )}
 
@@ -673,7 +677,8 @@ async function FacultySectionComponent({
                   item.universityName ??
                   item.organizationName ??
                   item.role ??
-                  item.caption}
+                  item.caption ??
+                  item.name}
               </p>
 
               <p className="text-neutral-400 lg:text-base">

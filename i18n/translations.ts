@@ -217,6 +217,8 @@ export interface Translations {
       project: string;
       consultancy: string;
       'book chapter': string;
+      mtech: string;
+      phd: string;
     };
     tabs: {
       qualifications: string;

@@ -98,6 +98,19 @@ export const facultyProfileSchemas = {
     tag: z.enum(['award', 'recognition']),
   }),
 
+  researchScholars: z.object({
+    title: z.string().min(1, 'Title is required'),
+    name: z.string().min(1, 'Name is required'),
+    startDate: dateInput(),
+    endDate: optionalDateInput(),
+    rollNumber: z
+      .string()
+      .min(6, 'Roll number must be at least 6 characters')
+      .max(9, 'Roll number can be at most 9 characters')
+      .regex(/^\d+$/, 'Roll number must contain only numeric characters'),
+    tag: z.enum(['mtech', 'phd']),
+  }),
+
   customTopics: z.object({
     name: z.string().min(1, 'Name is required'),
   }),

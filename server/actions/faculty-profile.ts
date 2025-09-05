@@ -20,6 +20,7 @@ import {
   qualifications,
   outreachActivities,
   researchProjects,
+  researchScholars,
   ipr,
 } from '~/server/db/schema';
 
@@ -60,6 +61,10 @@ const sectionConfig = {
   outreachActivities: {
     table: outreachActivities,
     schema: facultyProfileSchemas.outreachActivities,
+  },
+  researchScholars: {
+    table: researchScholars,
+    schema: facultyProfileSchemas.researchScholars,
   },
 } as const;
 
