@@ -274,10 +274,12 @@ async function FacultyOrStaffComponent({
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
             src={
-              facultyDescription.employeeId === '114' ||
-              facultyDescription.employeeId === '1083'
-                ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
-                : `fallback/user-image.jpg`
+                                                              /* TODO : FIX THIS PATH */
+              // facultyDescription.employeeId === '114' ||
+              // facultyDescription.employeeId === '1083'
+              //   ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
+              //   : `fallback/user-image.jpg`
+              'fallback/user-image.jpg'
             }
           />
         </section>
@@ -347,7 +349,7 @@ async function FacultyOrStaffComponent({
             }
             pathLength={!employeeId ? 3 : 4}
           />
-          <ol className="flex flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+          <ol className="flex w-1/4 flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96 ">
             <Tabs
               locale={locale}
               tabs={tabs}
