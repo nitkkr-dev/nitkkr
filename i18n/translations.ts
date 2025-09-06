@@ -1,3 +1,5 @@
+import { number } from 'zod';
+
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
@@ -296,6 +298,36 @@ export interface Translations {
       senate: { heading: string; text: string[] };
       sports: { heading: string; text: string[] };
       address: string[];
+    };
+    cells: {
+      title: string;
+      headingTitle: string;
+      cell: string;
+      iic: {
+        title: string;
+        preamble: string;
+        description: string;
+        officeOrder: {
+          title: string;
+          srNo: string;
+          responsibility: string;
+          nameOfFaculty: string;
+        };
+        activities: {
+          title: string;
+          srNo: string;
+          pastActivities: string;
+          upcomingActivities: string;
+        };
+      };
+      ipr:{
+        title:string;
+      };
+      iks: {
+        title: string;
+        description: string;
+        iksTeam: string;
+      };
     };
   };
   Hostels: {
@@ -849,6 +881,109 @@ export interface Translations {
     };
     sections: {
       clubs: { title: string; more: string };
+    };
+  };
+  Research: {
+    title: string;
+    introduction: string;
+    headings: {
+      patentsAndTechnologies: string;
+      research: string;
+      copyright: string;
+      memorandum: string;
+      importantRes: string;
+      sponsoredProj: string;
+      iprCell: string;
+    };
+    sections: {
+      patentsAndTechnologies: { title: string };
+      research: { title: string };
+      copyright: { title: string; copyright: string; design: string };
+      memorandum: { title: string; more: string };
+      importantRes: { title: string; more: string };
+      sponsoredProj: { title: string };
+      iprCell: { title: string; more: string; view: string };
+    };
+    research: {
+      number: string;
+      faculty: string;
+      department: string;
+      facultyCode: string;
+      totalJobs: string;
+      total: string;
+    };
+    patentsAndTechnologies: {
+      number: string;
+      applicationNumber: string;
+      patentNumber: string;
+      techTitle: string;
+      inventor: string;
+    };
+    copyright: {
+      number: string;
+      grantYear: string;
+      copyrightNo: string;
+      title: string;
+      creator: string;
+    };
+    design: {
+      number: string;
+      yearOfAcceptance: string;
+      applicationNo: string;
+      title: string;
+      creator: string;
+    };
+    memorandum: {
+      number: string;
+      organization: string;
+      signingDate: string;
+    };
+    projects: {
+      number: string;
+      year: string;
+      department: string;
+      facultyName: string;
+      title: string;
+      agency: string;
+      amount: string;
+    };
+    archive: {
+      title: string;
+      rulesConsultancy: string;
+      rulesSponsored: string;
+      guidelinesPhD: string;
+      sponsoringAgencies: string;
+      sponsoredResearch: string;
+      financialAssistance: string;
+      projectProposal: string;
+    };
+    ipr: {
+      title: string;
+      description: string;
+      facultyIncharge: string;
+      iprPolicy: {
+        title: string;
+        description: string;
+        revisedIpPolicy: string;
+      };
+      availableTechnologies: {
+        title: string;
+        description: string;
+        technologiesAvailable: string;
+        purchasingForm: string;
+      };
+      advisoryCommittee: {
+        title: string;
+        srNo: string;
+        name: string;
+        designation: string;
+        department: string;
+      };
+      nitkkrInnovationsAndIp: {
+        title: string;
+        patentsGranted: string;
+        copyrightsAndDesigns: string;
+      };
     };
   };
   TrainingAndPlacement: {

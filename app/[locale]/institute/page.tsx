@@ -116,11 +116,13 @@ export default async function Institute({
           { label: text.nirf.title, href: '#nirf' },
           { label: text.funds.title, href: '#funds' },
           { label: text.collaboration.title, href: '#collaboration' },
+          { label: text.cells.headingTitle, href: '#cells' },
           { label: text.quickLinks.title, href: '#quick-links' },
         ]}
         src="slideshow/image01.jpg"
       />
 
+      {/* PROFILE */}
       <section className="container">
         <Heading
           glyphDirection="dual"
@@ -171,6 +173,7 @@ export default async function Institute({
         </p>
       </section>
 
+      {/* ADMISSION */}
       <section className="container">
         <Heading
           glyphDirection="ltr"
@@ -197,6 +200,7 @@ export default async function Institute({
         </section>
       </section>
 
+      {/* NIRF */}
       <section className="container">
         <Heading
           glyphDirection="rtl"
@@ -251,6 +255,7 @@ export default async function Institute({
         </Table>
       </section>
 
+      {/* FUNDS */}
       <section className="container">
         <Heading
           glyphDirection="ltr"
@@ -262,6 +267,7 @@ export default async function Institute({
         <p>{text.funds.content}</p>
       </section>
 
+      {/* COLLABORATION */}
       <section className="container">
         <Heading
           glyphDirection="rtl"
@@ -277,6 +283,64 @@ export default async function Institute({
         ))}
       </section>
 
+      {/* INSTITUTE CELLS */}
+
+      <section className="container">
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          href="#cells"
+          id="cells"
+          text={text.cells.headingTitle.toUpperCase()}
+        />
+        <nav
+          className={cn(
+            'm-auto',
+            'grid grid-cols-2 gap-6 md:grid-cols-3 lg:gap-6 xl:gap-8'
+          )}
+        >
+          {[
+            {
+              label: text.cells.iks.title,
+              href: `/${locale}/institute/cells/iks`,
+              icon: FaUsers,
+              annotation: '(IKS)',
+            },
+            {
+              label: text.cells.ipr.title,
+              href: `/${locale}/institute/cells/ipr`,
+              icon: BsBuilding,
+              annotation: '(IPR)',
+            },
+            {
+              label: text.cells.iic.title,
+              href: `/${locale}/institute/cells/iic`,
+              icon: MdPhotoLibrary,
+              annotation: '(IIC)',
+            },
+          ].map(({ label, href, icon: Icon, annotation }, index) => (
+            <Button
+              asChild
+              className={cn(
+                'flex flex-col text-wrap',
+                'gap-2 sm:gap-3 lg:gap-4 xl:gap-5',
+                'mx-auto h-40 w-40 sm:h-48 sm:w-64 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
+              )}
+              key={index}
+              variant="secondary"
+            >
+              <Link href={href}>
+                <Icon className={cn('size-12')} />
+                <p className="text-center font-serif font-semibold sm:text-lg md:text-xl">
+                  {label} {annotation}
+                </p>
+              </Link>
+            </Button>
+          ))}
+        </nav>
+      </section>
+
+      {/* QUICK LINKS */}
       <section className="container">
         <Heading
           glyphDirection="dual"
