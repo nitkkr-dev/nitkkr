@@ -349,7 +349,7 @@ async function FacultyOrStaffComponent({
             }
             pathLength={!employeeId ? 3 : 4}
           />
-          <ol className="flex flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96">
+          <ol className="flex w-1/4 flex-col justify-between gap-3 pr-2 max-md:hidden md:min-w-72 lg:min-w-80 xl:min-w-96 ">
             <Tabs
               locale={locale}
               tabs={tabs}
