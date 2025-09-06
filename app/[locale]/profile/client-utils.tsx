@@ -137,7 +137,7 @@ export const Tabs = ({
               className="items-centre flex overflow-hidden"
             >
               <Icon className="lg:size-5" />
-              <span className="truncate">{label.toUpperCase()}</span>
+              <span className="truncate whitespace-normal">{label.toUpperCase()}</span>
             </Link>
           </Button>
         </li>
