@@ -14,8 +14,11 @@ import {
   FaLightbulb,
   FaMicrochip,
   FaPencilRuler,
+  FaRobot,
   FaWaveSquare,
 } from 'react-icons/fa';
+import { MdArchitecture } from 'react-icons/md';
+import { GrSystem } from 'react-icons/gr';
 import {
   GiArtificialIntelligence,
   GiBrain,
@@ -41,6 +44,11 @@ const departmentIcons: Record<string, IconType> = {
   IT: FaDesktop, // Information Technology
   ME: FaCog, // Mechanical Engineering
   PI: FaIndustry, // Production & Industrial Engineering
+  DS: GiArtificialIntelligence, // Data Science and Artificial Intelligence
+  RA: FaRobot, // Robotics and Industrial Engineering
+  AP: MdArchitecture, // Architecture and Planning
+  ES: FaBook, // Energy Science & Engineering
+  VL: GrSystem, // VLSI Design and Embedded Systems
 
   // Science Departments
   BT: GiMolecule, // Biotechnology
@@ -49,13 +57,11 @@ const departmentIcons: Record<string, IconType> = {
   PH: FaAtom, // Physics
 
   // Schools
-  AI: GiArtificialIntelligence, // School of AI & Data Science
-  BM: GiBrain, // School of Business Management
-  CA: FaCalculator, // School of Computer Applications
-  LS: GiMicroscope, // School of Life Sciences
-  RE: FaBook, // School of Renewable Energy & Efficiency
 
   // Miscellaneous
+  BA: GiBrain, // School of Business Management
+  CA: FaCalculator, // School of Computer Applications
+  LS: GiMicroscope, // School of Life Sciences
   HU: FaGraduationCap, // Humanities
 };
 
@@ -68,6 +74,11 @@ export default async function Departments({
   const departments = await db.query.departments.findMany();
   const departmentTypes = departmentsSchema.type.enumValues;
 
+  // Headings of only those departments will be shown which have some data (for ex. currently nothing in type 'school')
+  const filteredDepartmentTypes = departmentTypes.filter((type) =>
+    departments.some((department) => department.type === type)
+  );
+
   return (
     <>
       <Heading
@@ -77,7 +88,7 @@ export default async function Departments({
         text={text.title}
       />
 
-      {departmentTypes.map((type, index) => (
+      {filteredDepartmentTypes.map((type, index) => (
         <Fragment key={index}>
           <h3 className="container">{capitalise(type)}</h3>
           <ul

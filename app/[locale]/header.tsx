@@ -61,6 +61,25 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Information about on-campus accommodation and hostel facilities.',
         },
+        // For now IKS and IIC are added as temp units, will change this once a "CELL" design is ready
+        {
+          title: 'IKS Cell',
+          href: '/institute/cells/iks',
+          description:
+            'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
+        },
+        {
+          title: 'IIC Cell',
+          href: '/institute/cells/iic',
+          description:
+            'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
+        },
+        {
+          title: 'IPR Cell',
+          href: '/institute/cells/ipr',
+          description:
+            'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
+        },
       ],
     },
     {
@@ -121,6 +140,46 @@ export default async function Header({ locale }: { locale: string }) {
     {
       label: text.research,
       href: 'research',
+      listItems: [
+        // First column
+        {
+          title: 'Sponsored Projects',
+          href: 'research#projects',
+          description:
+            'Externally funded sponsored research projects addressing real-world challenges and advancing knowledge.',
+        },
+        {
+          title: 'Research and Consultancy',
+          href: 'research#research',
+          description:
+            'Research and development across diverse fields, from advanced technologies to social sciences, driving innovation and societal impact.',
+        },
+        {
+          title: 'Memorandum of Understanding',
+          href: 'research#memorandum',
+          description:
+            'Collaborations and partnerships through signed MoUs with leading institutions, industries, and organizations worldwide.',
+        },
+        // Second column
+        {
+          title: 'Patents & Technologies',
+          href: 'research#patents',
+          description:
+            "Patents and developed technologies that showcase the institute's innovation and contribution to industry and academia.",
+        },
+        {
+          title: 'Copyrights & Designs',
+          href: 'research#copyright',
+          description:
+            'Registered copyrights and industrial designs reflecting creative and original contributions across various domains.',
+        },
+        {
+          title: 'Important Resources',
+          href: 'research#resources',
+          description:
+            'Key resources, guidelines, and documents supporting research, consultancy, and intellectual property activities.',
+        },
+      ],
     },
   ];
 
@@ -264,7 +323,7 @@ export default async function Header({ locale }: { locale: string }) {
                 <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
                   <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
                     <SwitchNavButton
-                      className="nav-column-academics nav-column-institute invisible my-auto aspect-square !h-full text-xl font-bold"
+                      className="nav-column-academics nav-column-institute nav-column-research invisible my-auto aspect-square !h-full text-xl font-bold"
                       column="default"
                       variant="link"
                     >
@@ -299,8 +358,12 @@ export default async function Header({ locale }: { locale: string }) {
                       )
                     )}
                   </ul>
-                  <MobileSubNavMenu locale={locale} {...items[0]} />
-                  <MobileSubNavMenu locale={locale} {...items[1]} />
+                  {/* Mobile Navigation Menu -> only for those having listItems*/}
+                  {items.map((item, idx) =>
+                    item.listItems ? (
+                      <MobileSubNavMenu key={idx} locale={locale} {...item} />
+                    ) : null
+                  )}
                   <footer className="mt-auto flex flex-col gap-y-4 py-4">
                     <hr className="opacity-50" />
                     <Suspense>

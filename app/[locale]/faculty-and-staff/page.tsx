@@ -37,36 +37,36 @@ export default async function FacultyAndStaff({
           // 'border border-primary-700 bg-neutral-50'
         )}
       >
-
-        <div className="flex items-center justify-between mb-4">
+        <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
           <button
-            className="border border-primary-700 text-primary-700 rounded px-3 py-1 text-sm hover:bg-primary-50"
-          // onClick={handleClearFilters}
+            className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
+            // onClick={handleClearFilters}
           >
             Clear All Filters
           </button>
         </div>
 
         {/* Designation Filter Box */}
-        <div className="mb-6 rounded bg-neutral-50 border border-primary-100 p-4">
-          <h3 className="mb-2 font-bold text-primary-700 text-lg">Designation</h3>
+        <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
+          <h3 className="mb-2 text-lg font-bold text-primary-700">
+            Designation
+          </h3>
           <Suspense fallback={<Loading className="max-xl:hidden" />}>
             <Designations designation={designation} />
           </Suspense>
         </div>
 
         {/* Department Filter Box */}
-        <div className="mb-6 rounded bg-neutral-50 border border-primary-100 p-4">
-          <h3 className="mb-2 font-bold text-primary-700 text-lg">Department</h3>
+        <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
+          <h3 className="mb-2 text-lg font-bold text-primary-700">
+            Department
+          </h3>
           <Suspense fallback={<Loading className="max-xl:hidden" />}>
-
             <Departments department={departmentName} />
           </Suspense>
         </div>
-
       </search>
-
 
       <section className="grow space-y-6">
         <search className="flex gap-4 max-sm:flex-col">
@@ -227,10 +227,10 @@ const FacultyList = async ({
   );
 
   const facultyDesignations = [
-    "Assistant Professor Grade-I",
-    "Assistant Professor Grade-II",
-    "Associate Professor",
-    "Professor",
+    'Assistant Professor Grade-I',
+    'Assistant Professor Grade-II',
+    'Associate Professor',
+    'Professor',
   ];
 
   const faculty = await db.query.faculty.findMany({
@@ -244,10 +244,19 @@ const FacultyList = async ({
     //   : undefined,
     where: (faculty, { eq, and }) =>
       and(
-        currentDepartment ? eq(faculty.departmentId, currentDepartment.id) : undefined,
+        currentDepartment
+          ? eq(faculty.departmentId, currentDepartment.id)
+          : undefined,
         // Only filter if designation is a real faculty designation
-        facultyDesignations.includes(designation ?? "")
-          ? eq(faculty.designation, designation as "Assistant Professor Grade-I" | "Assistant Professor Grade-II" | "Associate Professor" | "Professor")
+        facultyDesignations.includes(designation ?? '')
+          ? eq(
+              faculty.designation,
+              designation as
+                | 'Assistant Professor Grade-I'
+                | 'Assistant Professor Grade-II'
+                | 'Associate Professor'
+                | 'Professor'
+            )
           : undefined
       ),
     with: { person: { columns: { email: true, name: true, telephone: true } } },
@@ -336,16 +345,19 @@ const StaffList = async ({
     },
     where: (staff, { eq, and }) =>
       and(
-        currentDepartment ? eq(staff.workingDepartmentId, currentDepartment.id) : undefined,
+        currentDepartment
+          ? eq(staff.workingDepartmentId, currentDepartment.id)
+          : undefined,
         designation ? eq(staff.designation, designation) : undefined
       ),
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
 
   // Filter staff by name (and email) query
-  const filteredStaff = staff.filter(({ person }) =>
-    person.name.toLowerCase().includes((query ?? '').toLowerCase()) ||
-    person.email.toLowerCase().includes((query ?? '').toLowerCase())
+  const filteredStaff = staff.filter(
+    ({ person }) =>
+      person.name.toLowerCase().includes((query ?? '').toLowerCase()) ||
+      person.email.toLowerCase().includes((query ?? '').toLowerCase())
   );
 
   return filteredStaff.length === 0 ? (
