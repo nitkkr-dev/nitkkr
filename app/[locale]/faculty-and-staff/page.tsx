@@ -19,12 +19,18 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 
+import { ClearFiltersButton } from './client-components';
+
 export default async function FacultyAndStaff({
   params: { locale },
   searchParams: { department: departmentName, query, designation },
 }: {
   params: { locale: string };
-  searchParams: { department?: string; query?: string; designation?: string };
+  searchParams: {
+    department?: string | string[];
+    query?: string;
+    designation?: string | string[];
+  };
 }) {
   const text = (await getTranslations(locale)).FacultyAndStaff;
 
@@ -39,12 +45,7 @@ export default async function FacultyAndStaff({
       >
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
-          <button
-            className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
-            // onClick={handleClearFilters}
-          >
-            Clear All Filters
-          </button>
+          <ClearFiltersButton />
         </div>
 
         {/* Designation Filter Box */}
@@ -79,27 +80,35 @@ export default async function FacultyAndStaff({
             placeholder={text.placeholder}
           />
 
+          {/* Mobile Designation Filter */}
+          <Suspense fallback={<Loading className="xl:hidden" />}>
+            <Designations designation={designation} select />
+          </Suspense>
+
+          {/* Mobile Department Filter */}
           <Suspense fallback={<Loading className="xl:hidden" />}>
             <Departments department={departmentName} select />
           </Suspense>
         </search>
 
         <ol className="space-y-4">
-          <Suspense fallback={<Loading />} key={`${query}-${departmentName}`}>
-            {designation === 'staff' ? (
+          <Suspense
+            fallback={<Loading />}
+            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}`}
+          >
+            {designation?.includes('staff') && (
               <StaffList
                 department={departmentName}
                 locale={locale}
                 query={query}
-                designation={designation}
               />
-            ) : (
+            )}
+            {designation?.includes('faculty') && (
               <FacultyList
                 department={departmentName}
                 deptartmentHeadText={text.departmentHead}
                 locale={locale}
                 query={query}
-                designation={designation}
               />
             )}
           </Suspense>
@@ -113,42 +122,74 @@ const Designations = ({
   designation,
   select = false,
 }: {
-  designation?: string;
+  designation?: string | string[];
   select?: boolean;
 }) => {
   const options = ['faculty', 'staff'];
-  const currentDesignation = designation;
+  // Multi-select array
+  const selectedDesignations = Array.isArray(designation)
+    ? designation
+    : designation
+      ? [designation]
+      : [];
 
   return select ? (
-    <Select
-      defaultValue={currentDesignation && `?designation=${currentDesignation}`}
-      navigate
-    >
+    <Select navigate>
       <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
         <SelectValue placeholder="Choose a designation" />
       </SelectTrigger>
       <SelectContent>
-        {options.map((designation, index) => (
-          <SelectItem key={index} value={`?designation=${designation}`}>
-            {designation.charAt(0).toUpperCase() + designation.slice(1)}
-          </SelectItem>
+        {options.map((option, index) => (
+          <div key={index} className="flex items-center px-2 py-1">
+            <input
+              type="checkbox"
+              id={`mobile-designation-${option}`}
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={selectedDesignations.includes(option)}
+              readOnly
+            />
+            <Link
+              href={{
+                query: {
+                  designation: selectedDesignations.includes(option)
+                    ? selectedDesignations.filter((d) => d !== option)
+                    : [...selectedDesignations, option],
+                },
+              }}
+              className="ml-2 w-full py-1"
+              replace
+            >
+              {option.charAt(0).toUpperCase() + option.slice(1)}
+            </Link>
+          </div>
         ))}
       </SelectContent>
     </Select>
   ) : (
     <ol className="w-full space-y-4">
-      {options.map((designation, index) => (
-        <li key={index}>
-          <Button
-            active={designation === currentDesignation}
-            asChild
-            className="font-semibold text-shade-dark"
-            variant="link"
-          >
-            <Link href={{ query: { designation } }}>
-              {designation.charAt(0).toUpperCase() + designation.slice(1)}
+      {options.map((option, index) => (
+        <li key={index} className="flex items-center gap-2">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id={`designation-${option}`}
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={selectedDesignations.includes(option)}
+              readOnly
+            />
+            <Link
+              href={{
+                query: {
+                  designation: selectedDesignations.includes(option)
+                    ? selectedDesignations.filter((d) => d !== option)
+                    : [...selectedDesignations, option],
+                },
+              }}
+              className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
+            >
+              {option.charAt(0).toUpperCase() + option.slice(1)}
             </Link>
-          </Button>
+          </div>
         </li>
       ))}
     </ol>
@@ -159,44 +200,76 @@ const Departments = async ({
   department,
   select = false,
 }: {
-  department?: string;
+  department?: string | string[];
   select?: boolean;
 }) => {
   const departments = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
   });
-  const currentDepartment = departments.find(
-    ({ urlName }) => urlName === department
-  );
+
+  const selectedDepartments = Array.isArray(department)
+    ? department
+    : department
+      ? [department]
+      : [];
 
   return select ? (
-    <Select
-      defaultValue={currentDepartment && `?department=${department}`}
-      navigate
-    >
+    <Select navigate>
       <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
         <SelectValue placeholder="Choose a department" />
       </SelectTrigger>
       <SelectContent>
         {departments.map(({ name, urlName }, index) => (
-          <SelectItem key={index} value={`?department=${urlName}`}>
-            {name}
-          </SelectItem>
+          <div key={index} className="flex items-center px-2 py-1">
+            <input
+              type="checkbox"
+              id={`mobile-department-${urlName}`}
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={selectedDepartments.includes(urlName)}
+              readOnly
+            />
+            <Link
+              href={{
+                query: {
+                  department: selectedDepartments.includes(urlName)
+                    ? selectedDepartments.filter((d) => d !== urlName)
+                    : [...selectedDepartments, urlName],
+                },
+              }}
+              className="ml-2 w-full py-1"
+              replace
+            >
+              {name}
+            </Link>
+          </div>
         ))}
       </SelectContent>
     </Select>
   ) : (
     <ol className="w-full space-y-4">
       {departments.map(({ name, urlName }, index) => (
-        <li key={index}>
-          <Button
-            active={urlName === currentDepartment?.urlName}
-            asChild
-            className="font-semibold text-shade-dark"
-            variant="link"
-          >
-            <Link href={{ query: { department: urlName } }}>{name}</Link>
-          </Button>
+        <li key={index} className="flex items-center gap-2">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id={`department-${urlName}`}
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={selectedDepartments.includes(urlName)}
+              readOnly
+            />
+            <Link
+              href={{
+                query: {
+                  department: selectedDepartments.includes(urlName)
+                    ? selectedDepartments.filter((d) => d !== urlName)
+                    : [...selectedDepartments, urlName],
+                },
+              }}
+              className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
+            >
+              {name}
+            </Link>
+          </div>
         </li>
       ))}
     </ol>
@@ -208,13 +281,11 @@ const FacultyList = async ({
   deptartmentHeadText,
   locale,
   query,
-  designation,
 }: {
-  department?: string;
+  department?: string | string[];
   deptartmentHeadText: string;
   locale: string;
   query?: string;
-  designation?: string;
 }) => {
   const departments = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
@@ -222,16 +293,19 @@ const FacultyList = async ({
   const departmentHeads = await db.query.departmentHeads.findMany({
     where: (departmentHead, { eq }) => eq(departmentHead.isActive, true),
   });
-  const currentDepartment = departments.find(
-    ({ urlName }) => urlName === department
-  );
+  // Convert department parameter to array
+  const departmentList = Array.isArray(department)
+    ? department
+    : department
+      ? [department]
+      : [];
 
-  const facultyDesignations = [
-    'Assistant Professor Grade-I',
-    'Assistant Professor Grade-II',
-    'Associate Professor',
-    'Professor',
-  ];
+  // Get department IDs for selected departments
+  const selectedDepartmentIds = departmentList.length
+    ? departments
+        .filter((dept) => departmentList.includes(dept.urlName))
+        .map((dept) => dept.id)
+    : [];
 
   const faculty = await db.query.faculty.findMany({
     columns: {
@@ -239,26 +313,10 @@ const FacultyList = async ({
       employeeId: true,
       id: true,
     },
-    // where: currentDepartment
-    //   ? (faculty, { eq }) => eq(faculty.departmentId, currentDepartment.id)
-    //   : undefined,
-    where: (faculty, { eq, and }) =>
-      and(
-        currentDepartment
-          ? eq(faculty.departmentId, currentDepartment.id)
-          : undefined,
-        // Only filter if designation is a real faculty designation
-        facultyDesignations.includes(designation ?? '')
-          ? eq(
-              faculty.designation,
-              designation as
-                | 'Assistant Professor Grade-I'
-                | 'Assistant Professor Grade-II'
-                | 'Associate Professor'
-                | 'Professor'
-            )
-          : undefined
-      ),
+    where: selectedDepartmentIds.length
+      ? (faculty, { inArray }) =>
+          inArray(faculty.departmentId, selectedDepartmentIds)
+      : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
 
@@ -321,20 +379,28 @@ const StaffList = async ({
   department,
   locale,
   query,
-  designation,
 }: {
-  department?: string;
+  department?: string | string[];
   locale: string;
   query?: string;
-  designation?: string;
 }) => {
   // Fetch departments
   const departments = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
   });
-  const currentDepartment = departments.find(
-    ({ urlName }) => urlName === department
-  );
+  // Convert parameters to arrays
+  const departmentList = Array.isArray(department)
+    ? department
+    : department
+      ? [department]
+      : [];
+
+  // Get department IDs for selected departments
+  const selectedDepartmentIds = departmentList.length
+    ? departments
+        .filter((dept) => departmentList.includes(dept.urlName))
+        .map((dept) => dept.id)
+    : [];
 
   // Fetch staff with department and designation filters
   const staff = await db.query.staff.findMany({
@@ -343,13 +409,10 @@ const StaffList = async ({
       employeeId: true,
       id: true,
     },
-    where: (staff, { eq, and }) =>
-      and(
-        currentDepartment
-          ? eq(staff.workingDepartmentId, currentDepartment.id)
-          : undefined,
-        designation ? eq(staff.designation, designation) : undefined
-      ),
+    where: selectedDepartmentIds.length
+      ? (staff, { inArray }) =>
+          inArray(staff.workingDepartmentId, selectedDepartmentIds)
+      : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
 
