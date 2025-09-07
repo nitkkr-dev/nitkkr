@@ -17,8 +17,8 @@ import {
   FaRobot,
   FaWaveSquare,
 } from 'react-icons/fa';
-import { MdArchitecture } from "react-icons/md";
-import { GrSystem } from "react-icons/gr";
+import { MdArchitecture } from 'react-icons/md';
+import { GrSystem } from 'react-icons/gr';
 import {
   GiArtificialIntelligence,
   GiBrain,

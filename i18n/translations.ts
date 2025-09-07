@@ -320,8 +320,8 @@ export interface Translations {
           upcomingActivities: string;
         };
       };
-      ipr:{
-        title:string;
+      ipr: {
+        title: string;
       };
       iks: {
         title: string;

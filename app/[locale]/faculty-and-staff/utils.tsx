@@ -274,7 +274,7 @@ async function FacultyOrStaffComponent({
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
             src={
-                                                              /* TODO : FIX THIS PATH */
+              /* TODO : FIX THIS PATH */
               // facultyDescription.employeeId === '114' ||
               // facultyDescription.employeeId === '1083'
               //   ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
