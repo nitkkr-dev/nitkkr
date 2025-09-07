@@ -12,7 +12,7 @@ export function ClearFiltersButton() {
 
   return (
     <button
-      className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
+      className="hover:bg-primary-50 mb-auto mt-1 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
       onClick={handleClearFilters}
     >
       Clear All Filters
