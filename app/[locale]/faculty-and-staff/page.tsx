@@ -19,7 +19,7 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 
-import { ClearFiltersButton } from './client-components';
+import { ClearFiltersButton, PreserveParamsLink } from './client-components';
 
 export default async function FacultyAndStaff({
   params: { locale },
@@ -94,16 +94,16 @@ export default async function FacultyAndStaff({
         <ol className="space-y-4">
           <Suspense
             fallback={<Loading />}
-            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}`}
+            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}-${Array.isArray(designation) ? designation.join(',') : designation ?? ''}`}
           >
-            {designation?.includes('staff') && (
+            {(!designation || designation?.includes('staff')) && (
               <StaffList
                 department={departmentName}
                 locale={locale}
                 query={query}
               />
             )}
-            {designation?.includes('faculty') && (
+            {(!designation || designation?.includes('faculty')) && (
               <FacultyList
                 department={departmentName}
                 deptartmentHeadText={text.departmentHead}
@@ -133,10 +133,23 @@ const Designations = ({
       ? [designation]
       : [];
 
+  // Define the updated designation value based on selection
+  const getUpdatedDesignations = (option: string) => {
+    return selectedDesignations.includes(option)
+      ? selectedDesignations.filter((d) => d !== option)
+      : [...selectedDesignations, option];
+  };
+
   return select ? (
     <Select navigate>
       <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue placeholder="Choose a designation" />
+        <SelectValue
+          placeholder={
+            selectedDesignations.length
+              ? `${selectedDesignations.length} selected`
+              : 'Choose a designation'
+          }
+        />
       </SelectTrigger>
       <SelectContent>
         {options.map((option, index) => (
@@ -148,19 +161,13 @@ const Designations = ({
               checked={selectedDesignations.includes(option)}
               readOnly
             />
-            <Link
-              href={{
-                query: {
-                  designation: selectedDesignations.includes(option)
-                    ? selectedDesignations.filter((d) => d !== option)
-                    : [...selectedDesignations, option],
-                },
-              }}
+            <PreserveParamsLink
+              paramToUpdate="designation"
+              value={getUpdatedDesignations(option)}
               className="ml-2 w-full py-1"
-              replace
             >
               {option.charAt(0).toUpperCase() + option.slice(1)}
-            </Link>
+            </PreserveParamsLink>
           </div>
         ))}
       </SelectContent>
@@ -177,18 +184,13 @@ const Designations = ({
               checked={selectedDesignations.includes(option)}
               readOnly
             />
-            <Link
-              href={{
-                query: {
-                  designation: selectedDesignations.includes(option)
-                    ? selectedDesignations.filter((d) => d !== option)
-                    : [...selectedDesignations, option],
-                },
-              }}
+            <PreserveParamsLink
+              paramToUpdate="designation"
+              value={getUpdatedDesignations(option)}
               className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
             >
               {option.charAt(0).toUpperCase() + option.slice(1)}
-            </Link>
+            </PreserveParamsLink>
           </div>
         </li>
       ))}
@@ -213,10 +215,23 @@ const Departments = async ({
       ? [department]
       : [];
 
+  // Define the updated department value based on selection
+  const getUpdatedDepartments = (urlName: string) => {
+    return selectedDepartments.includes(urlName)
+      ? selectedDepartments.filter((d) => d !== urlName)
+      : [...selectedDepartments, urlName];
+  };
+
   return select ? (
     <Select navigate>
       <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue placeholder="Choose a department" />
+        <SelectValue
+          placeholder={
+            selectedDepartments.length
+              ? `${selectedDepartments.length} selected`
+              : 'Choose a department'
+          }
+        />
       </SelectTrigger>
       <SelectContent>
         {departments.map(({ name, urlName }, index) => (
@@ -228,19 +243,13 @@ const Departments = async ({
               checked={selectedDepartments.includes(urlName)}
               readOnly
             />
-            <Link
-              href={{
-                query: {
-                  department: selectedDepartments.includes(urlName)
-                    ? selectedDepartments.filter((d) => d !== urlName)
-                    : [...selectedDepartments, urlName],
-                },
-              }}
+            <PreserveParamsLink
+              paramToUpdate="department"
+              value={getUpdatedDepartments(urlName)}
               className="ml-2 w-full py-1"
-              replace
             >
               {name}
-            </Link>
+            </PreserveParamsLink>
           </div>
         ))}
       </SelectContent>
@@ -257,18 +266,13 @@ const Departments = async ({
               checked={selectedDepartments.includes(urlName)}
               readOnly
             />
-            <Link
-              href={{
-                query: {
-                  department: selectedDepartments.includes(urlName)
-                    ? selectedDepartments.filter((d) => d !== urlName)
-                    : [...selectedDepartments, urlName],
-                },
-              }}
+            <PreserveParamsLink
+              paramToUpdate="department"
+              value={getUpdatedDepartments(urlName)}
               className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
             >
               {name}
-            </Link>
+            </PreserveParamsLink>
           </div>
         </li>
       ))}
@@ -424,7 +428,7 @@ const StaffList = async ({
   );
 
   return filteredStaff.length === 0 ? (
-    <NoResultStatus locale={locale} />
+    <></>
   ) : (
     filteredStaff.map((staff, index) => (
       <li
