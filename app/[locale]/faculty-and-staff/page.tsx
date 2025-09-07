@@ -38,12 +38,12 @@ export default async function FacultyAndStaff({
     <section className="container my-6 flex gap-8">
       <search
         className={cn(
-          'hidden h-fit w-[30%] rounded p-4 xl:inline',
+          'hidden h-fit w-[30%] rounded p-4 pt-0 xl:inline',
           'sticky top-[88px]' // DEPENDS-ON: header.tsx
           // 'border border-primary-700 bg-neutral-50'
         )}
       >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
           <ClearFiltersButton />
         </div>
