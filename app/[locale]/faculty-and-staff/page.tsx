@@ -175,23 +175,32 @@ const Designations = ({
   ) : (
     <ol className="w-full space-y-4">
       {options.map((option, index) => (
-        <li key={index} className="flex items-center gap-2">
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id={`designation-${option}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selectedDesignations.includes(option)}
-              readOnly
-            />
-            <PreserveParamsLink
-              paramToUpdate="designation"
-              value={getUpdatedDesignations(option)}
-              className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
-            >
-              {option.charAt(0).toUpperCase() + option.slice(1)}
-            </PreserveParamsLink>
-          </div>
+        <li key={index}>
+          <PreserveParamsLink
+            paramToUpdate="designation"
+            value={getUpdatedDesignations(option)}
+            className={cn(
+              'flex w-full items-center rounded border p-3',
+              selectedDesignations.includes(option)
+                ? 'bg-primary-50 border-primary-700'
+                : 'border-neutral-300'
+            )}
+          >
+            <div className="flex w-full items-center">
+              <div className="mr-2">
+                <input
+                  type="checkbox"
+                  id={`designation-${option}`}
+                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                  checked={selectedDesignations.includes(option)}
+                  readOnly
+                />
+              </div>
+              <span className="font-semibold text-shade-dark">
+                {option.charAt(0).toUpperCase() + option.slice(1)}
+              </span>
+            </div>
+          </PreserveParamsLink>
         </li>
       ))}
     </ol>
@@ -257,23 +266,30 @@ const Departments = async ({
   ) : (
     <ol className="w-full space-y-4">
       {departments.map(({ name, urlName }, index) => (
-        <li key={index} className="flex items-center gap-2">
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id={`department-${urlName}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selectedDepartments.includes(urlName)}
-              readOnly
-            />
-            <PreserveParamsLink
-              paramToUpdate="department"
-              value={getUpdatedDepartments(urlName)}
-              className="ml-2 font-semibold text-shade-dark hover:text-primary-700"
-            >
-              {name}
-            </PreserveParamsLink>
-          </div>
+        <li key={index}>
+          <PreserveParamsLink
+            paramToUpdate="department"
+            value={getUpdatedDepartments(urlName)}
+            className={cn(
+              'flex w-full items-center rounded border p-3',
+              selectedDepartments.includes(urlName)
+                ? 'bg-primary-50 border-primary-700'
+                : 'border-neutral-300'
+            )}
+          >
+            <div className="flex w-full items-center">
+              <div className="mr-2">
+                <input
+                  type="checkbox"
+                  id={`department-${urlName}`}
+                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                  checked={selectedDepartments.includes(urlName)}
+                  readOnly
+                />
+              </div>
+              <span className="font-semibold text-shade-dark">{name}</span>
+            </div>
+          </PreserveParamsLink>
         </li>
       ))}
     </ol>
