@@ -18,6 +18,7 @@ import { NoResultStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
+import { ScrollArea } from '~/components/ui/scroll-area';
 
 import { ClearFiltersButton, PreserveParamsLink } from './client-components';
 
@@ -48,25 +49,27 @@ export default async function FacultyAndStaff({
           <ClearFiltersButton />
         </div>
 
-        {/* Designation Filter Box */}
-        <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-          <h3 className="mb-2 text-lg font-bold text-primary-700">
-            Designation
-          </h3>
-          <Suspense fallback={<Loading className="max-xl:hidden" />}>
-            <Designations designation={designation} />
-          </Suspense>
-        </div>
+        <ScrollArea className="h-[calc(100vh-200px)]">
+          {/* Designation Filter Box */}
+          <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
+            <h3 className="mb-2 text-lg font-bold text-primary-700">
+              Designation
+            </h3>
+            <Suspense fallback={<Loading className="max-xl:hidden" />}>
+              <Designations designation={designation} />
+            </Suspense>
+          </div>
 
-        {/* Department Filter Box */}
-        <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-          <h3 className="mb-2 text-lg font-bold text-primary-700">
-            Department
-          </h3>
-          <Suspense fallback={<Loading className="max-xl:hidden" />}>
-            <Departments department={departmentName} />
-          </Suspense>
-        </div>
+          {/* Department Filter Box */}
+          <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
+            <h3 className="mb-2 text-lg font-bold text-primary-700">
+              Department
+            </h3>
+            <Suspense fallback={<Loading className="max-xl:hidden" />}>
+              <Departments department={departmentName} />
+            </Suspense>
+          </div>
+        </ScrollArea>
       </search>
 
       <section className="grow space-y-6">
