@@ -932,6 +932,7 @@ export interface Translations {
       applicationNo: string;
       title: string;
       creator: string;
+      class: string;
     };
     memorandum: {
       number: string;

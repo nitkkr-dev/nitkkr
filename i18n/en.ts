@@ -573,7 +573,7 @@ const text: Translations = {
     },
     cells: {
       title: 'Cells',
-      headingTitle : 'Institute Cells',
+      headingTitle: 'Institute Cells',
       cell: 'cell',
       iic: {
         title: 'Institution’s Innovation Council',
@@ -599,9 +599,9 @@ const text: Translations = {
           'IKS Cell is an innovative cell established in 2022 in the Institute. It aims to promote interdisciplinary research on all aspects of Indian Knowledge Systems, preserve and disseminate IKS for further research and societal applications. The cell will actively engage in spreading the rich heritage of our country and traditional knowledge in fields such as Psychology, Basic Sciences, Engineering & Technology, Arts and Literature, Agriculture, Architecture, and more.',
         iksTeam: 'IKS Team',
       },
-      ipr:{
+      ipr: {
         title: 'Intellectual Property Rights',
-      }
+      },
     },
   },
   NotFound: {
@@ -1546,6 +1546,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       applicationNo: 'Application No.',
       title: 'Title',
       creator: 'Creator',
+      class: 'Class',
     },
     memorandum: {
       number: 'Sr. No.',

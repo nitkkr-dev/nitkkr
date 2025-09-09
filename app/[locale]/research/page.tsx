@@ -15,9 +15,10 @@ import {
 } from '~/components/ui';
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
-import { faculty } from '~/server/db';
+import { faculty, patents } from '~/server/db';
 // If you use the 'cn' utility from 'classnames' or a custom file, import it here:
 import { cn } from '~/lib/utils'; // Adjust the path if needed
+import { db } from '~/server/db';
 
 export default async function PatentsAndTechnology({
   params: { locale },
@@ -100,6 +101,50 @@ export default async function PatentsAndTechnology({
       ],
     },
   ];
+  const patents = (await db.query.patents.findMany()) as {
+    sNo: number;
+    applicationNumber: string;
+    patentNumber: string;
+    title: string;
+    inventors: string;
+    filingDate: string;
+    publishDate: string;
+    grantDate: string;
+  }[];
+  const copyrights = (await db.query.copyrights.findMany()) as {
+    sNo: number;
+    grantYear: string;
+    copyrightNo: string;
+    title: string;
+    creator: string;
+  }[];
+
+  const copyrightRows = copyrights.map((item) => [
+    item.sNo.toString(),
+    item.grantYear,
+    item.copyrightNo,
+    item.title,
+    item.creator,
+  ]);
+
+  const designs = (await db.query.designs.findMany()) as {
+    sNo: number;
+    dateOfRegistration: string;
+    designNumber: string;
+    title: string;
+    creator: string;
+    class: string;
+  }[];
+
+  const designRows = designs.map((item) => [
+    item.sNo.toString(),
+    item.dateOfRegistration,
+    item.designNumber,
+    item.title,
+    item.creator,
+    item.class,
+  ]);
+
   const staticResearch = [
     {
       facultyName: 'Dr. S.K. Patidar',
@@ -137,60 +182,6 @@ export default async function PatentsAndTechnology({
       totalAmount: '501500',
     },
   ];
-  const staticRows: Record<'copyrights' | 'designs', string[][]> = {
-    copyrights: [
-      [
-        '1',
-        '2019',
-        'SW-12631/2019',
-        'Software for Extracting Reusable Software Components from Object-Oriented Source Code using Search-Based PSO Approach',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '2',
-        '2019',
-        'SW-12631/2019',
-        'Structural Analysis Tool (SAT)',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '3',
-        '2019',
-        'SW-12631/2019',
-        'Structural Analysis Tool (SAT)',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '4',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '5',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '6',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-    ],
-    designs: [
-      ['1', '2019', 'SW-12631/2019', 'Wheel Chair', 'Punit'],
-      ['2', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
-      ['3', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
-      ['4', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-      ['5', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-      ['6', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-    ],
-  };
   const staticMemorandum = [
     {
       organization: 'CSIR-Central Road Research Institute, New Delhi',
@@ -306,11 +297,21 @@ export default async function PatentsAndTechnology({
     return [{ count }];
   };
   const getPatentCount = async () => {
-    const count = staticPatents.length; // Replace with your actual DB call
+    const count = patents.length; // Replace with your actual DB call
     return [{ count }];
   };
   const getMemorandumCount = async () => {
     const count = staticMemorandum.length; // Replace with your actual DB call
+    return [{ count }];
+  };
+
+  const getCopyrightsCount = async () => {
+    const count = copyrights.length; // Replace with your actual DB call
+    return [{ count }];
+  };
+
+  const getDesignsCount = async () => {
+    const count = designs.length;
     return [{ count }];
   };
 
@@ -425,7 +426,7 @@ export default async function PatentsAndTechnology({
                 }
               >
                 <PatentTable
-                  tableData={staticPatents}
+                  tableData={patents}
                   currentPage={currentPage}
                   itemsPerPage={10}
                 />
@@ -455,15 +456,28 @@ export default async function PatentsAndTechnology({
           {text.sections.copyright.copyright}
         </h4>
 
+        {/* COPYRIGHTS TABLE */}
         <Suspense fallback={<Loading />}>
-          <TableSection headers={text.copyright} rows={staticRows.copyrights} />
+          <TableSection headers={text.copyright} rows={copyrightRows} />
         </Suspense>
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            query={getCopyrightsCount()}
+          />
+        </div>
 
         <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
-
+        {/* DESIGNS TABLE */}
         <Suspense fallback={<Loading />}>
-          <TableSection headers={text.design} rows={staticRows.designs} />
+          <TableSection headers={text.design} rows={designRows} />
         </Suspense>
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            query={getDesignsCount()}
+          />
+        </div>
       </div>
       {/* MOU */}
       <section className="container" id="memorandum">
@@ -609,13 +623,14 @@ const PatentTable = ({
   itemsPerPage = 10,
 }: {
   tableData: {
+    sNo: number;
     applicationNumber: string;
     patentNumber: string;
     title: string;
-    inventors: {
-      facultyId: string;
-      name: string;
-    }[];
+    inventors: string;
+    filingDate: string;
+    publishDate: string;
+    grantDate: string;
   }[];
   currentPage: number;
   itemsPerPage?: number;
@@ -631,7 +646,7 @@ const PatentTable = ({
           item.applicationNumber,
           item.patentNumber,
           item.title,
-          item.inventors.map((inventor) => inventor.name).join(', '),
+          item.inventors, // This is a string from DB
         ];
 
         return (

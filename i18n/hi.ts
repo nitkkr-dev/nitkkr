@@ -1525,6 +1525,7 @@ const text: Translations = {
       applicationNo: 'आवेदन संख्या',
       title: 'शीर्षक',
       creator: 'निर्माता',
+      class: 'वर्ग',
     },
     memorandum: {
       number: 'क्रम संख्या',

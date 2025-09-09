@@ -1,0 +1,17 @@
+[
+  {
+    "category": "patents",
+    "url": "https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vSE4LeCv4PVOwEtkjuzs9C88in4LdCy2F-JK2keWebxz7WYgA1Nnffd_z-yunaFGPYvHqJdBMtbhBoC/pub?gid=0&single=true&output=csv",
+    "skipRows": 8
+  },
+  {
+    "category": "copyrights",
+    "url": "https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vSE4LeCv4PVOwEtkjuzs9C88in4LdCy2F-JK2keWebxz7WYgA1Nnffd_z-yunaFGPYvHqJdBMtbhBoC/pub?gid=85455152&single=true&output=csv",
+    "skipRows": 0
+  },
+  {
+    "category": "designs",
+    "url": "https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vSE4LeCv4PVOwEtkjuzs9C88in4LdCy2F-JK2keWebxz7WYgA1Nnffd_z-yunaFGPYvHqJdBMtbhBoC/pub?gid=1645374591&single=true&output=csv",
+    "skipRows": 1
+  }
+]
