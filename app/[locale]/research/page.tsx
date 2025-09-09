@@ -30,7 +30,37 @@ export default async function PatentsAndTechnology({
 
   const text = (await getTranslations(locale)).Research;
 
-  // Static patent data
+  const archiveLinks = [
+    {
+      label: text.archive.rulesConsultancy,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Rules-Regulations-for-Consultancy-Services-w.e.f-from-FY-2018-19-_compressed-2.pdf',
+    },
+    {
+      label: text.archive.rulesSponsored,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Rules-Regulation-SRP-w.e.f-FY-2018-19.pdf',
+    },
+    {
+      label: text.archive.guidelinesPhD,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Guidelines-for-utilization-of-the-contingency-grant.pdf',
+    },
+    {
+      label: text.archive.sponsoringAgencies,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Prospective-Sponsoring-agencies-for-RD-Projects.pdf',
+    },
+    {
+      label: text.archive.sponsoredResearch,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Sponsored-Research-Project-.pdf',
+    },
+    {
+      label: text.archive.financialAssistance,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Financial-Assistance-to-Students-form.pdf',
+    },
+    {
+      label: text.archive.projectProposal,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Financial-Assistance-to-Students-form.pdf',
+    },
+  ];
+
   const staticPatents = [
     {
       applicationNumber: '2269/DEL/2012',
@@ -586,13 +616,11 @@ export default async function PatentsAndTechnology({
             <div className="space-y-4">
               <div>
                 <ul className="list-disc space-y-2 pl-4">
-                  <li>{text.archive.rulesConsultancy}</li>
-                  <li>{text.archive.rulesSponsored}</li>
-                  <li>{text.archive.guidelinesPhD}</li>
-                  <li>{text.archive.sponsoringAgencies}</li>
-                  <li>{text.archive.sponsoredResearch}</li>
-                  <li>{text.archive.financialAssistance}</li>
-                  <li>{text.archive.projectProposal}</li>
+                  {archiveLinks.map((item, index) => (
+                    <li key={index}>
+                      <Link href={item.link}>{item.label}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
