@@ -1,6 +1,4 @@
 import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
@@ -15,9 +13,11 @@ import {
 } from '~/components/ui';
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
-import { faculty } from '~/server/db';
-// If you use the 'cn' utility from 'classnames' or a custom file, import it here:
-import { cn } from '~/lib/utils'; // Adjust the path if needed
+import { db } from '~/server/db';
+import type { copyrights, designs, patents } from '~/server/db/schema';
+type PatentsTable = typeof patents.$inferSelect;
+type CopyrightsTable = typeof copyrights.$inferSelect;
+type DesignsTable = typeof designs.$inferSelect;
 
 export default async function PatentsAndTechnology({
   params: { locale },
@@ -30,76 +30,10 @@ export default async function PatentsAndTechnology({
 
   const text = (await getTranslations(locale)).Research;
 
-  // Static patent data
-  const staticPatents = [
-    {
-      applicationNumber: '2269/DEL/2012',
-      patentNumber: '320045',
-      title: 'Intelligent induction hardening device and method thereof',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_1',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-    {
-      applicationNumber: '2269/DEL/2012',
-      patentNumber: '320045',
-      title:
-        'Method of preventing radioactive gas to diffuse indoor environment by forming concrete with shielding effect',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_2',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-    {
-      applicationNumber: '2269/DEL/2012',
-      patentNumber: '320045',
-      title: 'System for extracting water from atmospheric air',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_3',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-    {
-      applicationNumber: '2269/DEL/2012',
-      patentNumber: '320045',
-      title: 'System for extracting water from atmospheric air',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_4',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-    {
-      applicationNumber: '3001/DEL/2013',
-      patentNumber: '320046',
-      title: 'Advanced solar energy harvesting system',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_5',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-    {
-      applicationNumber: '3002/DEL/2013',
-      patentNumber: '320047',
-      title: 'Automated waste management and recycling apparatus',
-      inventors: [
-        {
-          facultyId: 'jitender_kumar_chhabra_6',
-          name: 'Jitender Kumar Chhabra',
-        },
-      ],
-    },
-  ];
+  const patents = await db.query.patents.findMany();
+  const copyrights = await db.query.copyrights.findMany();
+  const designs = await db.query.designs.findMany();
+
   const staticResearch = [
     {
       facultyName: 'Dr. S.K. Patidar',
@@ -137,60 +71,6 @@ export default async function PatentsAndTechnology({
       totalAmount: '501500',
     },
   ];
-  const staticRows: Record<'copyrights' | 'designs', string[][]> = {
-    copyrights: [
-      [
-        '1',
-        '2019',
-        'SW-12631/2019',
-        'Software for Extracting Reusable Software Components from Object-Oriented Source Code using Search-Based PSO Approach',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '2',
-        '2019',
-        'SW-12631/2019',
-        'Structural Analysis Tool (SAT)',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '3',
-        '2019',
-        'SW-12631/2019',
-        'Structural Analysis Tool (SAT)',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '4',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '5',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-      [
-        '6',
-        '2021',
-        'SW-12631/2019',
-        'Software Tool For Extracting Semantic Features In Java Software',
-        'Jitender Kumar Chhabra',
-      ],
-    ],
-    designs: [
-      ['1', '2019', 'SW-12631/2019', 'Wheel Chair', 'Punit'],
-      ['2', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
-      ['3', '2019', 'SW-12631/2019', 'Structural Analysis Tool (SAT)', 'Punit'],
-      ['4', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-      ['5', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-      ['6', '2019', 'SW-12631/2019', 'Software Tool', 'Punit'],
-    ],
-  };
   const staticMemorandum = [
     {
       organization: 'CSIR-Central Road Research Institute, New Delhi',
@@ -306,11 +186,21 @@ export default async function PatentsAndTechnology({
     return [{ count }];
   };
   const getPatentCount = async () => {
-    const count = staticPatents.length; // Replace with your actual DB call
+    const count = patents.length; // Replace with your actual DB call
     return [{ count }];
   };
   const getMemorandumCount = async () => {
     const count = staticMemorandum.length; // Replace with your actual DB call
+    return [{ count }];
+  };
+
+  const getCopyrightsCount = async () => {
+    const count = copyrights.length; // Replace with your actual DB call
+    return [{ count }];
+  };
+
+  const getDesignsCount = async () => {
+    const count = designs.length;
     return [{ count }];
   };
 
@@ -425,7 +315,7 @@ export default async function PatentsAndTechnology({
                 }
               >
                 <PatentTable
-                  tableData={staticPatents}
+                  tableData={patents}
                   currentPage={currentPage}
                   itemsPerPage={10}
                 />
@@ -455,15 +345,79 @@ export default async function PatentsAndTechnology({
           {text.sections.copyright.copyright}
         </h4>
 
-        <Suspense fallback={<Loading />}>
-          <TableSection headers={text.copyright} rows={staticRows.copyrights} />
-        </Suspense>
+        {/* COPYRIGHTS TABLE */}
+        <section className="container">
+          <div className="max-h-96 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  {[
+                    text.copyright.sNo,
+                    text.copyright.grantYear,
+                    text.copyright.copyrightNo,
+                    text.copyright.title,
+                    text.copyright.creator,
+                  ].map((headerText, index) => (
+                    <TableHead key={index}>{headerText}</TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <Suspense fallback={<Loading />}>
+                  <CopyrightTable
+                    tableData={copyrights}
+                    currentPage={currentPage}
+                    itemsPerPage={10}
+                  />
+                </Suspense>
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-6">
+            <PaginationWithLogic
+              currentPage={currentPage}
+              query={getCopyrightsCount()}
+            />
+          </div>
+        </section>
 
         <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
-
-        <Suspense fallback={<Loading />}>
-          <TableSection headers={text.design} rows={staticRows.designs} />
-        </Suspense>
+        {/* DESIGNS TABLE */}
+        <section className="container">
+          <div className="max-h-96 w-full overflow-x-auto">
+            <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+              <TableHeader>
+                <TableRow>
+                  {[
+                    text.design.sNo,
+                    text.design.dateOfRegistration,
+                    text.design.designNumber,
+                    text.design.title,
+                    text.design.creator,
+                    text.design.class,
+                  ].map((headerText, index) => (
+                    <TableHead key={index}>{headerText}</TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <Suspense fallback={<Loading />}>
+                  <DesignTable
+                    tableData={designs}
+                    currentPage={currentPage}
+                    itemsPerPage={10}
+                  />
+                </Suspense>
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-6">
+            <PaginationWithLogic
+              currentPage={currentPage}
+              query={getDesignsCount()}
+            />
+          </div>
+        </section>
       </div>
       {/* MOU */}
       <section className="container" id="memorandum">
@@ -608,15 +562,7 @@ const PatentTable = ({
   currentPage,
   itemsPerPage = 10,
 }: {
-  tableData: {
-    applicationNumber: string;
-    patentNumber: string;
-    title: string;
-    inventors: {
-      facultyId: string;
-      name: string;
-    }[];
-  }[];
+  tableData: PatentsTable[];
   currentPage: number;
   itemsPerPage?: number;
 }) => {
@@ -631,7 +577,7 @@ const PatentTable = ({
           item.applicationNumber,
           item.patentNumber,
           item.title,
-          item.inventors.map((inventor) => inventor.name).join(', '),
+          item.inventors, // This is a string from DB
         ];
 
         return (
@@ -648,52 +594,81 @@ const PatentTable = ({
     </>
   );
 };
-const TableSection = ({
-  headers,
-  rows,
+
+const CopyrightTable = ({
+  tableData,
+  currentPage,
+  itemsPerPage = 10,
 }: {
-  headers: Record<string, string>;
-  rows: string[][];
+  tableData: CopyrightsTable[];
+  currentPage: number;
+  itemsPerPage?: number;
 }) => {
-  const headerEntries = Object.values(headers);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="max-h-96 w-full overflow-x-auto">
-      <Table scrollAreaClassName="h-[24rem] min-w-[700px]">
-        <TableHeader>
-          <TableRow>
-            {headerEntries.map((label, index) => (
-              <TableHead
-                key={index}
-                className={`whitespace-normal break-words px-4 py-2 ${
-                  index === headerEntries.length - 1 ? 'w-[300px]' : ''
-                }`}
-              >
-                {label}
-              </TableHead>
+    <>
+      {visibleData.map((item, index) => {
+        const cellData = [
+          startIndex + index + 1, // S. No.
+          item.grantYear,
+          item.copyrightNo,
+          item.title,
+          item.creator,
+        ];
+
+        return (
+          <TableRow
+            key={index}
+            className="text-neutral-700 hover:bg-neutral-50"
+          >
+            {cellData.map((cellContent, cellIndex) => (
+              <TableCell key={cellIndex}>{cellContent}</TableCell>
             ))}
           </TableRow>
-        </TableHeader>
+        );
+      })}
+    </>
+  );
+};
 
-        <TableBody>
-          {rows.map((row, rowIndex) => (
-            <TableRow
-              key={rowIndex}
-              className="text-sm text-neutral-700 hover:bg-neutral-50"
-            >
-              {row.map((cell, cellIndex) => (
-                <TableCell
-                  key={cellIndex}
-                  className="whitespace-normal break-words px-3 py-4"
-                >
-                  {cell}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+const DesignTable = ({
+  tableData,
+  currentPage,
+  itemsPerPage = 10,
+}: {
+  tableData: DesignsTable[];
+  currentPage: number;
+  itemsPerPage?: number;
+}) => {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
+
+  return (
+    <>
+      {visibleData.map((item, index) => {
+        const cellData = [
+          startIndex + index + 1, // S. No.
+          item.dateOfRegistration,
+          item.designNumber,
+          item.title,
+          item.creator,
+          item.class,
+        ];
+
+        return (
+          <TableRow
+            key={index}
+            className="text-neutral-700 hover:bg-neutral-50"
+          >
+            {cellData.map((cellContent, cellIndex) => (
+              <TableCell key={cellIndex}>{cellContent}</TableCell>
+            ))}
+          </TableRow>
+        );
+      })}
+    </>
   );
 };
 
