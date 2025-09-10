@@ -1,5 +1,6 @@
 // fetchers.ts
 import { Readable } from 'stream';
+
 import csvParser from 'csv-parser';
 
 interface SourceConfig {
@@ -23,7 +24,7 @@ export async function fetchAndParse(
   const buffer = Buffer.from(arrayBuffer);
 
   const contentType = (
-    response.headers.get('content-type') || ''
+    response.headers.get('content-type') ?? ''
   ).toLowerCase();
   const urlLower = source.url.toLowerCase();
 
@@ -40,7 +41,7 @@ export async function fetchAndParse(
   const lines = text.split(/\r\n|\n/);
 
   // Remove initial skipRows (default 0)
-  const skip = Math.max(0, source.skipRows || 0);
+  const skip = Math.max(0, source.skipRows ?? 0);
   const remainingLines = lines.slice(skip);
 
   // Remove leading/trailing blank lines that could confuse csv-parser
