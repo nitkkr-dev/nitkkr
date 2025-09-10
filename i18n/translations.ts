@@ -920,16 +920,16 @@ export interface Translations {
       inventor: string;
     };
     copyright: {
-      number: string;
+      sNo: string;
       grantYear: string;
       copyrightNo: string;
       title: string;
       creator: string;
     };
     design: {
-      number: string;
-      yearOfAcceptance: string;
-      applicationNo: string;
+      sNo: string;
+      dateOfRegistration: string;
+      designNumber: string;
       title: string;
       creator: string;
       class: string;
