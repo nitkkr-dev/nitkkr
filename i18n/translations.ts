@@ -169,7 +169,7 @@ export interface Translations {
     researchAndConsultancy: string;
     studentWelfare: string;
   };
-  Departments: { title: string };
+  Departments: { title: string; description1: string; description2: string };
   Department: {
     headings: {
       about: string;
@@ -320,8 +320,8 @@ export interface Translations {
           upcomingActivities: string;
         };
       };
-      ipr:{
-        title:string;
+      ipr: {
+        title: string;
       };
       iks: {
         title: string;
