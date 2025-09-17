@@ -294,7 +294,11 @@ const text: Translations = {
     researchAndConsultancy: 'Research and Consultancy',
     studentWelfare: 'Student Welfare',
   },
-  Departments: { title: 'DEPARTMENTS' },
+  Departments: {
+    title: 'DEPARTMENTS',
+    description1: `Our Departments offer various programs. They have shown exponential growth in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members. `,
+    description2: `The faculty members have made a mark in the area of innovative hardware design, modelling & analysis as well as in the development of new techniques and algorithms, in fields such as data communication systems and wireless networks, signal processing and VLSI design. `,
+  },
   Department: {
     headings: {
       about: 'About',
