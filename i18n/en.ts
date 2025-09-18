@@ -548,7 +548,7 @@ const text: Translations = {
       library: {
         heading: `Library`,
         text: [
-          `The library is housed in a separate building with a covered area of 3600 sq.m. With its ample resources, space and services, the library caters to the needs of faculty, research scholars and students very effectively and efficiently. To keep them abreast of the latest development in research, it now subscribes to electronic resources through INDEST consortium set up by the MHRD. The library contains 100000 books, 6028 back volumes and 3659 e-books. The library subscribes to 158 prints and approximately 2800 online journals in the fields of science, management and technology. The library remains accessible to its users 24 x 7.`,
+          `The library is housed in a separate building with a covered area of 3600 sq. m. With its ample resources, space and services, the library caters to the needs of faculty, research scholars and students very effectively and efficiently. To keep them abreast of the latest developments in research, it now subscribes to electronic resources through the ONOS consortium set up by the MHRD. As on 31.03.2025 (end of last Financial Year), the central library contains 177366 books, 7097 back volumes and 12272 e-books. The library subscribes to 45 print journals and approximately 13000+ online journals in the fields of science, management and technology. The library remains accessible to its users 24 x 7.`,
         ],
       },
       computing: {
