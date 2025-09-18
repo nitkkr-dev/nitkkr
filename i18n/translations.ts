@@ -646,6 +646,8 @@ export interface Translations {
           currentJournalsDescription: string;
           eShodhSindhuHeading: string;
           eShodhSindhuDescription: string;
+          onosHeading: string;
+          onosDescription: string;
         };
         eResourcesTable: {
           heading: {

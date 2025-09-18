@@ -860,7 +860,7 @@ Stack and Circulation:
 All Working Days: 08.30 am to 05:30 pm
 Saturdays & Holidays: 09.00 am to 05.00 pm`,
         aboutText:
-          'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researchers, scholars, and students.',
+          'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researcher scholars, and students.',
       },
       facilities: {
         bookBankFacilities: 'Book Bank Facilities',
@@ -872,7 +872,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         remoteAccess: 'Remote Access Service: KNIMBUS',
         antiPlagiarism: 'Anti-Plagiarism Software (Turnitin)',
         bookBankFacilitiesText:
-          'The Library Book Bank is one of the richest Book Banks in the country. All B. Tech, M.Tech, MBA and MCA students are given 6-8 books for the full semester from Book Bank.',
+          'The Library Book Bank is one of the richest Book Banks in the country. All B.Tech, M.Tech, MBA, MCA & M.Sc students are given 6-8 books for full semester from Book Bank.',
         libraryAutomationText:
           'The library is providing automated services in all sections of the library using KOHA software. All the books are bar-coded, and members are also given Bar-Coded membership cards for smooth circulation of documents in the library. The database of the library is updated regularly, and readers can search the documents using Web-OPAC (Online Public Access Catalogue) at:',
         audioVideoCenterText:
@@ -926,10 +926,13 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
           title: 'E-Resources',
           currentJournalsHeading: 'Current Journals',
           currentJournalsDescription:
-            'The library subscribes to 45 print and approximately 4200+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals is displayed in the Periodical Section of the Library and may be via Library Intranet site : http://172.16.0.52',
+            'The Library subscribes to 45 Print and Approx. 13000+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals, is displayed in Periodical Section of the Library and also available on the Library Intranet site',
           eShodhSindhuHeading: 'e-Shodh Sindhu (eSS)',
           eShodhSindhuDescription:
-            'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: http://172.16.0.52',
+            'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: ',
+          onosHeading: 'ONOS Consortium',
+          onosDescription:
+            'The NITK Library is a core member of ONOS Consortium set up by MHRD. Approximately 13000+ e-resources are subscribed/provided through the Consortium. To access online resources in the Institute premises, the library is providing services through internally maintained web server. All these resources/e-journals can be accessed through library Intranet site: ',
         },
         eResourcesTable: {
           heading: {

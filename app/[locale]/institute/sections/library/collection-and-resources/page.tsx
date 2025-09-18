@@ -115,11 +115,30 @@ export default async function CollectionAndResources({
         <ul className="container mt-4 flex flex-col gap-12">
           <li className="bg-neutral-50 p-3">
             <h5>{text.eresources.currentJournalsHeading}</h5>
-            <p>{text.eresources.currentJournalsDescription}</p>
+            <p>
+              {text.eresources.currentJournalsDescription}
+              <Button asChild variant="link">
+                <Link href="http://172.16.0.52">http://172.16.0.52.</Link>
+              </Button>
+            </p>
           </li>
           <li className="bg-neutral-50 p-3">
             <h5>{text.eresources.eShodhSindhuHeading}</h5>
-            <p>{text.eresources.eShodhSindhuDescription}</p>
+            <p>
+              {text.eresources.eShodhSindhuDescription}
+              <Button asChild variant="link">
+                <Link href="http://172.16.0.52">http://172.16.0.52.</Link>
+              </Button>
+            </p>
+          </li>
+          <li className="bg-neutral-50 p-3">
+            <h5>{text.eresources.onosHeading}</h5>
+            <p>
+              {text.eresources.onosDescription}
+              <Button asChild variant="link">
+                <Link href="http://172.16.0.52">http://172.16.0.52.</Link>
+              </Button>
+            </p>
           </li>
         </ul>
       </section>
