@@ -60,10 +60,21 @@ export default function ImageHeader({
               <li key={index}>
                 <Button
                   asChild
-                  className="rounded-full px-4 py-2 text-[clamp(theme(fontSize.xs),1.5vw,theme(fontSize.base))] text-shade-dark transition-colors duration-300"
+                  className="group rounded-full px-4 py-2 text-[clamp(theme(fontSize.xs),1.5vw,theme(fontSize.base))] text-shade-dark transition-colors duration-300"
                   variant="ghost"
                 >
-                  <Link href={href}>{label}</Link>
+                  <Link href={href}>
+                    {/*adjust width here*/}
+                    <span
+                      className="
+                         block max-w-[10rem] truncate transition-all duration-300 ease-in-out 
+                         group-hover:max-w-[20rem] 
+                        "
+                      style={{ minWidth: '0' }}
+                    >
+                      {label}
+                    </span>
+                  </Link>
                 </Button>
               </li>
             ))}
