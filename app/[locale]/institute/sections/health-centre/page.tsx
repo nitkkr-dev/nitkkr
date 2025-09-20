@@ -26,231 +26,299 @@ export default async function HealthCentre({
     where: (section, { eq }) => eq(section.urlName, 'health-centre'),
   }))!;
 
-  const hospitalData = [
-    {
-      srNo: '1',
-      name: 'Aggarwal Nursing Home',
-      field: 'Multispecialty',
-      phone: '9896050546',
-    },
-    {
-      srNo: '2',
-      name: 'Cygnus Hospital',
-      field: 'Multispecialty',
-      phone: '8396961222',
-    },
-    {
-      srNo: '3',
-      name: 'Apna Hospital',
-      field: 'Multispecialty',
-      phone: '9354522220',
-    },
-    {
-      srNo: '4',
-      name: 'Saraswti Mission Hospital',
-      field: 'Multispecialty',
-      phone: '9468009020',
-    },
-    {
-      srNo: '5',
-      name: 'RadhaKrishan Children Hospital',
-      field: 'Multispecialty',
-      phone: '7206029576',
-    },
-    {
-      srNo: '6',
-      name: 'Shri BalajiAarogyam Hospital',
-      field: 'Multispecialty',
-      phone: '9466063671',
-    },
-    {
-      srNo: '7',
-      name: 'Anand Orthopaedic Centre',
-      field: 'Orthopaedic',
-      phone: '9896038320',
-    },
-    {
-      srNo: '8',
-      name: 'J.P. Bharal Hospital',
-      field: 'Orthopaedic',
-      phone: '9992377525',
-    },
-    {
-      srNo: '9',
-      name: 'Gandhi Nursing Home',
-      field: 'Orthopaedic + Dental',
-      phone: '9896101599',
-    },
-    {
-      srNo: '10',
-      name: 'Kurukshetra Nursing Home',
-      field: 'Physician, Cardiology',
-      phone: '9416039397',
-    },
-    {
-      srNo: '11',
-      name: 'B.S. Heart Care Hospital',
-      field: 'Cardiology',
-      phone: '9991118281',
-    },
-    {
-      srNo: '12',
-      name: 'Kedar Children Hospital',
-      field: 'Child Specialist',
-      phone: '9812273737',
-    },
-    {
-      srNo: '13',
-      name: 'Pawan Surgical Hospital',
-      field: 'Surgeon',
-      phone: '9812031635',
-    },
-    {
-      srNo: '14',
-      name: 'Surender Mehta Surgical and Maternity Hospital',
-      field: 'Surgeon',
-      phone: '9812283184',
-    },
-    {
-      srNo: '15',
-      name: 'Dua Dental Clinic',
-      field: 'Dentist',
-      phone: '9416035422',
-    },
-    {
-      srNo: '16',
-      name: 'Aggarwal Dental Clinic',
-      field: 'Dentist',
-      phone: '9896001916',
-    },
-    {
-      srNo: '17',
-      name: 'Virk Nursing Home',
-      field: 'ENT',
-      phone: '9416035036',
-    },
-    {
-      srNo: '18',
-      name: 'Lalit ENT Hospital',
-      field: 'ENT',
-      phone: '9466468841',
-    },
-    {
-      srNo: '19',
-      name: 'Saini Eye Care Centre',
-      field: 'Eye',
-      phone: '01744-227050',
-    },
-    {
-      srNo: '20',
-      name: 'Ankur Nursing Home',
-      field: 'Eye/O & G',
-      phone: '9896248149',
-    },
-    {
-      srNo: '21',
-      name: 'Sobti Nursing Home',
-      field: 'Eye & Dental',
-      phone: '9896362621',
-    },
-    {
-      srNo: '22',
+const hospitalData = [
+  {
+    srNo: '1',
+    name:'Lok Nayak JAY Parkash (LNJP) Hospital (Government)',
+  },
+  {
+    srNo: '2',
+    name:'Shri Krishna Govt. Ayurvedic Medical Hospital (Government)'
+  },
+  {
+    srNo: '3',
+    name: 'Aggarwal Nursing Home',
+    field: 'ENT and Multispecialty',
+    phone: '9812434411, 9812334543',
+  },
+  {
+    srNo: '4',
+    name: 'Cygnus Hospital',
+    field: 'Multispecialty',
+    phone: '8396961243',
+  },
+  {
+    srNo: '5',
+    name: 'Kurukshetra Nursing Home',
+    field: 'Multispecialty',
+    phone: '9416039397',
+  },
+  {
+    srNo: '6',
+    name: 'Saraswti Mission Hospital',
+    field: 'Multispecialty',
+    phone: '9467275057',
+  },
+  {
+    srNo: '7',
+    name: 'RadhaKrishan Children Hospital',
+    field: 'Multispecialty',
+    phone: '9996833010',
+  },
+  {
+    srNo: '8',
+    name: 'B.S. Heart Care Hospital',
+    field: 'Multispecialty',
+    phone: '9991118281',
+  },
+  {
+    srNo: '9',
+    name: 'Shri Balaji Aarogyam Hospital',
+    field: 'Multispecialty',
+    phone: '9992630762',
+  },
+  {
+    srNo: '10',
+    name: 'Anand Orthopaedic Centre',
+    field: 'Orthopaedic',
+    phone: '9354459901',
+  },
+  {
+    srNo: '11',
+    name: 'J.P. Bharal Hospital',
+    field: 'Orthopaedic',
+    phone: '8708784505, 9992377525',
+  },
+  {
+    srNo: '12',
+    name: 'Gandhi Nursing Home',
+    field: 'Orthopaedic + Dental',
+    phone: '9896101599',
+  },
+  {
+    srNo: '13',
+    name: 'Apna Hospital',
+    field: 'Orthopaedic',
+    phone: '9896055533',
+  },
+  {
+    srNo: '14',
+    name: 'Ashirwad Nursing Home',
+    field: 'Ortho + O & G',
+    phone: '9896217722',
+  },
+  {
+    srNo: '15',
+    name: 'Kilkari childcare',
+    field: 'Paediatrician',
+    phone: '9896708434',
+  },
+  {
+    srNo: '16',
+    name: 'Harsh Hospital',
+    field: 'Paediatrician + O & G',
+    phone: '9215060708',
+  },
+  {
+    srNo: '17',
+    name: 'Kedar Children Hospital',
+    field: 'Paediatrician',
+    phone: '9812273737',
+  },
+  {
+    srNo: '18',
+    name: 'Pawan Surgical Hospital',
+    field: 'Surgeon',
+    phone: '9812031635',
+  },
+  {
+    srNo: '19',
+    name: 'Surender Mehta Surgical and Maternity Hospital',
+    field: 'Surgeon',
+    phone: '9812283184',
+  },
+  {
+    srNo: '20',
+    name: 'Dua Dental Clinic',
+    field: 'Dentist',
+    phone: '9416035422',
+  },
+  {
+    srNo: '21',
+    name: 'Divyanshi Dental Clinic',
+    field: 'Dentist',
+    phone: '7206572092, 7015101676',
+  },
+  {
+    srNo: '22',
+    name: 'Aggarwal Dental Clinic',
+    field: 'Dentist',
+    phone: '9896001916',
+  },
+  {
+    srNo: '23',
+    name: 'Jhamb Chest and Dental Clinic',
+    field: 'Chest, Dental, Asthma, Allergy & T.B. Specialist',
+    phone: '9466522936',
+  },
+  {
+    srNo: '24',
+    name: 'Sobti Nursing Home',
+    field: 'Eye & Dental',
+    phone: '9896362621',
+  },
+  {
+    srNo: '25',
+    name: 'Saini Eye Care Centre',
+    field: 'Eye',
+    phone: '9416035050',
+  },
+  {
+    srNo: '26',
+    name: 'Ankur Nursing Home',
+    field: 'Eye/O & G',
+    phone: '9896248149',
+  },
+  {
+    srNo: '27',
+    name: 'Virk Nursing Home',
+    field: 'ENT',
+    phone: '9416035036',
+  },
+  {
+    srNo: '28',
+    name: 'Lalit ENT Hospital',
+    field: 'ENT',
+    phone: '9466468841',
+  },
+  {
+    srNo: '29',
+    name: 'Health Care Physiotherapy Clinic',
+    field: 'Physiotherapist',
+    phone: '9896083506, 9896083506',
+  },
+  {
+      srNo: '30',
       name: 'Life Line Physiotherapy Clinic',
       field: 'Physiotherapist',
       phone: '',
-    },
-    {
-      srNo: '23',
-      name: 'Health Care Physiotherapy Clinic',
-      field: 'Physiotherapist',
-      phone: '9354168115',
-    },
-    {
-      srNo: '24',
-      name: 'Bansal Skin Care Clinic',
-      field: 'Skin',
-      phone: '01744270972',
-    },
-    {
-      srNo: '25',
-      name: 'Dermawave Skin Lazer',
-      field: 'Skin',
-      phone: '7206536065',
-    },
-    {
-      srNo: '26',
-      name: 'Neuropsychiatry Clinic',
-      field: 'Psychiatry',
-      phone: '01744-220646',
-    },
-    {
-      srNo: '27',
-      name: 'Jhamb Chest and Dental Clinic',
-      field: 'Chest, Dental, Asthma, Allergy & T.B. Specialist',
-      phone: '',
-    },
-    {
-      srNo: '28',
-      name: 'Harsh Hospital',
-      field: 'Paediatrician',
-      phone: '8950708799',
-    },
-    {
-      srNo: '29',
-      name: 'Archna MRI Centre',
-      field: 'MRI',
-      phone: '9466720131',
-    },
-    {
-      srNo: '30',
-      name: 'Shri Swami Anant Prakashanand Memorial Dharmarth',
-      field: 'Eye & Physiotherapy',
-      phone: '',
-    },
-    { srNo: '31', name: 'A.B.C. Centre', field: '', phone: '' },
-    {
-      srNo: '32',
-      name: 'P.D. Memorial Chauhan Eye & Maternity Hospital',
-      field: 'Eye & Maternity',
-      phone: '',
-    },
-    {
-      srNo: '33',
-      name: 'Shree Guru Kirpa Endocrine Clinic',
-      field: 'Endocrine Clinic',
-      phone: '',
-    },
-    {
-      srNo: '34',
-      name: 'Goyal Gastro & Liver Clinic',
-      field: 'Gastro & Liver',
-      phone: '',
-    },
-  ];
+  },
+  {
+    srNo: '31',
+    name: 'Bansal Skin Care Clinic',
+    field: 'Skin',
+    phone: '9812012036',
+  },
+  {
+    srNo: '32',
+    name: 'Dermawave Skin Lazer',
+    field: 'Skin',
+    phone: '7206536065',
+  },
+  {
+    srNo: '33',
+    name: 'Jindal Skin Clinic',
+    field: 'Skin',
+    phone: '8398010700',
+  },
+  {
+    srNo: '34',
+    name: 'Dr. Rakshal Sharma',
+    field: 'Psychiatry',
+    phone: '9812434648',
+  },
+  {
+    srNo: '35',
+    name: 'Neuropsychiatry Clinic',
+    field: 'Psychiatry',
+    phone: '9812434648',
+  },
+  {
+    srNo: '36',
+    name: 'Pruthi Neuro Psychiatry clinic',
+    field: 'Psychiatry',
+    phone: '9896154949',
+  },
+  {
+    srNo: '37',
+    name: 'Maharaja Agarsen Hospital',
+    field: 'Physician',
+    phone: '9416226190',
+  },
+  {
+    srNo: '38',
+    name: 'Goyal Gastro and Liver Clinic',
+    field: 'Gastro',
+    phone: '7015402604',
+  },
+  {
+    srNo: '39',
+    name: 'Dr. Jain Neurocare and Multispecialty Hospital',
+    field: 'Neuro + O & G',
+    phone: '8901398566',
+  },
+  {
+    srNo: '40',
+    name: 'Archna MRI Centre',
+    field: 'MRI',
+    phone: '9466720131',
+  },
+  {
+    srNo: '41',
+    name: 'Shri Swami Anant Prakashanand Memorial Dharmarth',
+    field: 'Eye & Physiotherapy',
+    phone: '',
+  },
+  {
+    srNo: '42',
+    name: 'A.B.C. Centre',
+    field: 'Rheumatology and Breast Cancer',
+    phone: '9416723830',
+  },
+  {
+    srNo: '43',
+    name: 'Shree Guru Kirpa Endocrine Clinic',
+    field: 'Endocrinology',
+    phone: '8454992063',
+  },
+  {
+    srNo: '44',
+    name: 'Shri Narayan Heart & Multispecialty Hospital',
+    field: 'Heart & Multispecialty Hospital',
+    phone: '8222880090',
+  },
+  {
+    srNo: '45',
+    name: 'P.D. Memorial Chauhan Eye & Maternity Hospital',
+    field: 'Eye & Maternity',
+    phone: '',
+  },
+];
 
-  const timings = {
-    days: [
-      {
-        day: 'Monday to Friday',
-        timings: [
-          { from: '9:00 am', to: '1:00 pm' },
-          { from: '3:00 pm', to: '5:30 pm' },
-        ],
-      },
-      {
-        day: 'Saturday',
-        timings: [{ from: '9:00 am', to: '1:00 pm' }],
-      },
-      {
-        day: 'Sunday',
-        timings: [{ from: '9:00 am', to: '1:00 pm' }],
-      },
-      {
-        day: 'Gazetted Holiday',
-        timings: [{ from: '9:00 am', to: '3:00 pm' }],
-      },
-    ],
-  };
+const timings = {
+  days: [
+    {
+      day: 'Monday to Friday',
+      timings: [
+        { from: '9:00 am', to: '1:00 pm', label: ' (OPD)' },
+        { from: '2:00 pm', to: '12:00 am', label: ' (OPD)' },
+        { from: '12:00 am', to: '5:00 am', label: ' (Only Paramedical Staff)' },
+      ],
+    },
+    {
+      day: 'Saturday',
+      timings: [{ from: '9:00 am', to: '7:00 pm', label: ' (OPD)' }],
+    },
+    {
+      day: 'Sunday',
+      timings: [{ from: '9:00 am', to: '2:00 pm', label: ' (OPD)' }],
+    },
+    {
+      day: 'Gazetted Holiday',
+      timings: [{ from: '9:00 am', to: '9:00 pm', label: ' (Only Paramedical Staff)' }],
+    },
+  ],
+};
 
   const medicalOfficersData = [
     {
@@ -263,17 +331,17 @@ export default async function HealthCentre({
       srNo: '2',
       role: 'Medical Officer',
       name: 'Dr. Sumit Kumar Guin',
-      tel: '+91-01744-233318 (O)',
+      tel: '+91-01744-233330 (O)',
     },
     {
       srNo: '3',
       role: 'Medical Officer',
       name: 'Dr. Rishu Saxena',
-      tel: '+91-01744-233318 (O)',
+      tel: '+91-01744-233317 (O)',
     },
     {
       srNo: '4',
-      role: 'Dental Surgeon',
+      role: 'Dental Surgeon (Part time Contractual)',
       name: 'Dr. Richa Passi',
       tel: '+91-01744-233319 (O)',
     },
@@ -283,14 +351,14 @@ export default async function HealthCentre({
     {
       srNo: '1',
       name: 'Sh. Dinsesh Dhingra',
-      designation: 'Pharmacist SG-II',
-      phone: '01744-233321',
+      designation: 'Pharmacist SG-I',
+      phone: '01744-233321, 9416334848 (M)',
     },
     {
       srNo: '2',
       name: 'Smt. Sushma',
-      designation: 'Staff Nurse',
-      phone: '01744-233251',
+      designation: 'Tech. Assistant SG-I',
+      phone: '01744-233251, 9467130245 (M)',
     },
     {
       srNo: '3',
@@ -301,8 +369,8 @@ export default async function HealthCentre({
     {
       srNo: '4',
       name: 'Smt. Sonika',
-      designation: 'Pharmacist',
-      phone: '01744-233316',
+      designation: 'Sr. Pharmacist',
+      phone: '01744-233316, 8053685131 (M)',
     },
     {
       srNo: '5',
@@ -419,7 +487,7 @@ export default async function HealthCentre({
                   <TableCell>{entry.day}</TableCell>
                   <TableCell>
                     {entry.timings.map((timing, idx) => (
-                      <div key={idx}>{`${timing.from} - ${timing.to}`}</div>
+                      <div key={idx}>{`${timing.from} - ${timing.to}`}{timing.label ? `${timing.label} ` : ''}</div>
                     ))}
                   </TableCell>
                 </TableRow>
@@ -610,6 +678,21 @@ export default async function HealthCentre({
             </p>
           </div>
         </article>
+        <article className="mt-12 flex max-md:flex-col md:flex-row-reverse">
+          <section className="md:h-auto md:w-1/2">
+            <Image
+              alt={text.facilities.daycare}
+              className="aspect-video w-full max-md:rounded-b md:order-first md:rounded-l"
+              height={25}
+              src="institute/sections/health-centre/daycare.png"
+              width={25}
+            />
+          </section>
+          <div className="my-auto p-2 font-sans text-lg max-md:rounded-t sm:p-3 md:w-full md:rounded-r md:p-8">
+            <h4>{text.headings.daycare.toUpperCase()}</h4>
+            <p>{text.facilities.daycare}</p>
+          </div>
+        </article>
       </section>
       <section className="container">
         <Suspense fallback={<Loading />}>
@@ -664,6 +747,40 @@ export default async function HealthCentre({
             </span>
             <span className="mb-1 block">{text.insurance.text2}</span>
           </p>
+        </article>
+      </section>
+      <section className="container">
+        <Heading
+          className="container"
+          glyphDirection="ltr"
+          heading="h4"
+          text={text.headings.reimbursement.toUpperCase()}
+        />
+        <article className="border border-error bg-neutral-50 p-2 font-sans text-lg max-md:rounded-t sm:p-3 md:w-full md:rounded-r md:p-8">
+          <p>{text.reimbursement.text}</p>
+
+          <p>
+            <span className="mb-1 block">
+              <a
+                href="https://nitkkr.ac.in/wp-content/uploads/2021/12/Medical-reimbursement-form.pdf"
+                target="_blank"
+                className="underline"
+              >
+                {text.reimbursement.link}
+              </a>
+            </span>
+          </p>
+        </article>
+      </section>
+       <section className="container">
+        <Heading
+          className="container"
+          glyphDirection="ltr"
+          heading="h4"
+          text={text.headings.counsellor.toUpperCase()}
+        />
+        <article className="border border-error bg-neutral-50 p-2 font-sans text-lg max-md:rounded-t sm:p-3 md:w-full md:rounded-r md:p-8">
+          <p>{text.counsellor.text}</p>
         </article>
       </section>
       <section className="container">
