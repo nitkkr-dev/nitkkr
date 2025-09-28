@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import type { IconType } from 'react-icons';
@@ -14,8 +15,11 @@ import {
   FaLightbulb,
   FaMicrochip,
   FaPencilRuler,
+  FaRobot,
   FaWaveSquare,
 } from 'react-icons/fa';
+import { MdArchitecture } from 'react-icons/md';
+import { GrSystem } from 'react-icons/gr';
 import {
   GiArtificialIntelligence,
   GiBrain,
@@ -26,6 +30,7 @@ import {
 import { TbMathSymbols } from 'react-icons/tb';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 import { capitalise, cn } from '~/lib/utils';
 import { db, departments as departmentsSchema } from '~/server/db';
@@ -41,6 +46,11 @@ const departmentIcons: Record<string, IconType> = {
   IT: FaDesktop, // Information Technology
   ME: FaCog, // Mechanical Engineering
   PI: FaIndustry, // Production & Industrial Engineering
+  DS: GiArtificialIntelligence, // Data Science and Artificial Intelligence
+  RA: FaRobot, // Robotics and Industrial Engineering
+  AP: MdArchitecture, // Architecture and Planning
+  ES: FaBook, // Energy Science & Engineering
+  VL: GrSystem, // VLSI Design and Embedded Systems
 
   // Science Departments
   BT: GiMolecule, // Biotechnology
@@ -49,13 +59,11 @@ const departmentIcons: Record<string, IconType> = {
   PH: FaAtom, // Physics
 
   // Schools
-  AI: GiArtificialIntelligence, // School of AI & Data Science
-  BM: GiBrain, // School of Business Management
-  CA: FaCalculator, // School of Computer Applications
-  LS: GiMicroscope, // School of Life Sciences
-  RE: FaBook, // School of Renewable Energy & Efficiency
 
   // Miscellaneous
+  BA: GiBrain, // School of Business Management
+  CA: FaCalculator, // School of Computer Applications
+  LS: GiMicroscope, // School of Life Sciences
   HU: FaGraduationCap, // Humanities
 };
 
@@ -68,8 +76,23 @@ export default async function Departments({
   const departments = await db.query.departments.findMany();
   const departmentTypes = departmentsSchema.type.enumValues;
 
+  // Headings of only those departments will be shown which have some data (for ex. currently nothing in type 'school')
+  const filteredDepartmentTypes = departmentTypes.filter((type) =>
+    departments.some((department) => department.type === type)
+  );
+
   return (
     <>
+      <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+      <section className="container mt-8 lg:mt-12">
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+          <span className="mb-1 block">{text.description1}</span>
+        </p>
+        <br />
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+          <span className="mb-1 block">{text.description2}</span>
+        </p>
+      </section>
       <Heading
         className="container"
         glyphDirection="dual"
@@ -77,7 +100,7 @@ export default async function Departments({
         text={text.title}
       />
 
-      {departmentTypes.map((type, index) => (
+      {filteredDepartmentTypes.map((type, index) => (
         <Fragment key={index}>
           <h3 className="container">{capitalise(type)}</h3>
           <ul
