@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-interface Img {
+export interface Img {
   src: string;
   alt: string;
 }
@@ -12,34 +12,16 @@ interface GalleryProps {
   base: string;
 }
 
-// pattern
-function* patternGenerator() {
-  const pattern: ('h' | 'v')[] = [
-    'h',
-    'v',
-    'h',
-    'v',
-    'h',
-    'h',
-    'h',
-    'v',
-    'h',
-    'v',
-    'h',
-    'h',
-    'h',
-    'h',
-  ];
-  let i = 0;
-  while (true) {
-    yield pattern[i];
-    i = (i + 1) % pattern.length;
-  }
-}
+// Row patterns
+const rowPatterns: ('h' | 'v')[][] = [
+  ['h', 'v', 'h', 'v'],
+  ['h', 'h', 'h'],
+  ['v', 'h', 'v', 'h'],
+  ['h', 'h', 'h'],
+];
 
 export default function Gallery({ base }: GalleryProps) {
   // static images with base from server + random vertical images for better testing
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const images: Img[] = [
     { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
     { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
@@ -137,18 +119,13 @@ export default function Gallery({ base }: GalleryProps) {
     },
   ];
 
-  const [horizontal, setHorizontal] = useState<Img[]>([]);
-  const [vertical, setVertical] = useState<Img[]>([]);
-  const [selected, setSelected] = useState<number | null>(null);
+  const [horizontal, setHorizontal] = useState<(Img & { type: 'h' | 'v' })[]>(
+    []
+  );
+  const [vertical, setVertical] = useState<(Img & { type: 'h' | 'v' })[]>([]);
 
-  // classify images into horizontal/vertical
+  // Classify images as horizontal or vertical
   useEffect(() => {
-    if (!images?.length) {
-      setHorizontal([]);
-      setVertical([]);
-      return;
-    }
-
     void Promise.all(
       images.map(
         (img) =>
@@ -160,7 +137,7 @@ export default function Gallery({ base }: GalleryProps) {
                 ...img,
                 type: temp.naturalWidth > temp.naturalHeight ? 'h' : 'v',
               });
-            temp.onerror = () => resolve({ ...img, type: 'v' }); // fallback
+            temp.onerror = () => resolve({ ...img, type: 'v' });
           })
       )
     ).then((classified) => {
@@ -169,71 +146,77 @@ export default function Gallery({ base }: GalleryProps) {
     });
   }, [images]);
 
-  // merge following the pattern
-  const merged = useMemo(() => {
-    const out: { src: string; alt: string; type: 'h' | 'v' }[] = [];
-    let h = 0,
-      v = 0;
-    const gen = patternGenerator();
+  // Merge images according to row patterns
+  const rows = useMemo(() => {
+    const mergedRows: (Img & { type: 'h' | 'v' })[][] = [];
+    let hIndex = 0,
+      vIndex = 0;
+    let patternIndex = 0;
 
-    while (h < horizontal.length || v < vertical.length) {
-      const curr = gen.next().value;
-      if (curr === 'h' && h < horizontal.length) {
-        out.push({ ...horizontal[h], type: 'h' });
-        h++;
-      } else if (curr === 'v' && v < vertical.length) {
-        out.push({ ...vertical[v], type: 'v' });
-        v++;
+    while (hIndex < horizontal.length || vIndex < vertical.length) {
+      const pattern = rowPatterns[patternIndex % rowPatterns.length];
+      const row: (Img & { type: 'h' | 'v' })[] = [];
+
+      for (const type of pattern) {
+        if (type === 'h' && hIndex < horizontal.length) {
+          row.push(horizontal[hIndex]);
+          hIndex++;
+        } else if (type === 'v' && vIndex < vertical.length) {
+          row.push(vertical[vIndex]);
+          vIndex++;
+        }
       }
+
+      if (row.length > 0) mergedRows.push(row);
+      patternIndex++;
     }
-    return out;
+
+    return mergedRows;
   }, [horizontal, vertical]);
 
-  // batching logic-11
-  const batchSize = 11;
-  const [visibleCount, setVisibleCount] = useState(batchSize);
+  // Show 3 rows at a time
+  const [visibleRowCount, setVisibleRowCount] = useState(3);
 
   const handleViewMore = useCallback(() => {
-    setVisibleCount((prev) => Math.min(prev + batchSize, merged.length));
-  }, [merged.length]);
+    setVisibleRowCount((prev) => prev + 3);
+  }, []);
 
-  const handleCloseModal = useCallback(() => setSelected(null), []);
+  // Get visible rows and flatten them
+  const visibleRows = rows.slice(0, visibleRowCount);
+  const visibleImages = visibleRows.flat();
+  const hasMoreRows = visibleRowCount < rows.length;
 
-  const visibleImages = merged.slice(0, visibleCount);
+  // Calculate which image should show the View More button
+  // It should appear at the last visible image if we have more content
+  const viewMorePosition = hasMoreRows ? visibleImages.length - 1 : -1;
 
   return (
     <div className="w-full">
       <div className="mx-auto max-w-7xl space-y-6">
         <div className="flex flex-wrap justify-center gap-4">
           {visibleImages.map((img, idx) => {
-            const isBatchEnd =
-              idx === visibleImages.length - 1 && visibleCount < merged.length;
+            // Show "View More" button on the last visible image if there are more rows
+            const isViewMorePosition = idx === viewMorePosition;
 
             return (
               <div
                 key={`${img.src}-${idx}`}
-                className={`relative cursor-pointer overflow-hidden rounded 
-                  ${isBatchEnd ? '' : 'border-2 border-primary-300'}`}
+                className={`relative overflow-hidden rounded ${isViewMorePosition ? '' : 'border-2 border-primary-300'}`}
                 style={
                   img.type === 'h'
                     ? { width: 400, height: 300 }
                     : { width: 192, height: 300 }
                 }
-                onClick={() => {
-                  if (!isBatchEnd) setSelected(idx);
-                }}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={img.type === 'h' ? 400 : 192}
                   height={300}
-                  className={`h-full w-full object-cover transition-all ${
-                    isBatchEnd ? 'opacity-30' : 'opacity-100'
-                  }`}
+                  className={`h-full w-full object-cover transition-all ${isViewMorePosition ? 'opacity-30' : 'opacity-100'}`}
                 />
 
-                {isBatchEnd && (
+                {isViewMorePosition && (
                   <button
                     type="button"
                     onClick={(e) => {
@@ -250,30 +233,6 @@ export default function Gallery({ base }: GalleryProps) {
           })}
         </div>
       </div>
-
-      {/* Modal */}
-      {selected !== null && (
-        <div
-          className="bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-80"
-          onClick={handleCloseModal}
-        >
-          <div className="relative max-h-[90vh] max-w-4xl p-4">
-            <Image
-              src={visibleImages[selected].src}
-              alt={visibleImages[selected].alt}
-              width={1000}
-              height={600}
-              className="h-auto max-h-[80vh] w-auto rounded-xl object-contain"
-            />
-            <button
-              onClick={handleCloseModal}
-              className="text-white absolute right-2 top-2 text-2xl font-bold"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
