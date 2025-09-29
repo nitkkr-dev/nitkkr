@@ -15,9 +15,7 @@ import {
 } from '~/components/ui';
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
-import { faculty } from '~/server/db';
-// If you use the 'cn' utility from 'classnames' or a custom file, import it here:
-import { cn } from '~/lib/utils'; // Adjust the path if needed
+import { getS3Url } from '~/server/s3';
 
 export default async function PatentsAndTechnology({
   params: { locale },
@@ -325,7 +323,7 @@ export default async function PatentsAndTechnology({
       amount: '69',
     },
   ];
-
+  const base = getS3Url();
   // Get the total count for pagination
   const getResearchCount = async () => {
     const count = staticResearch.length; // Replace with your actual DB call
@@ -422,7 +420,7 @@ export default async function PatentsAndTechnology({
       {/* PATENTS AND TECHNOLOGIES */}
       <section className="container" id="patents">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading="h3"
           href="#patents"
           text={text.headings.patentsAndTechnologies}
@@ -548,7 +546,7 @@ export default async function PatentsAndTechnology({
       {/* SPONSORED PROJECTS */}
       <section className="container" id="projects">
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading="h3"
           href="#projects"
           text={text.headings.sponsoredProj}
@@ -602,7 +600,7 @@ export default async function PatentsAndTechnology({
       {/* IMPORTANT RESOURCES */}
       <section className="container" id="resources">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading="h3"
           href="#resources"
           text={text.headings.importantRes}
@@ -615,10 +613,20 @@ export default async function PatentsAndTechnology({
           <div className="mt-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div>
-                <ul className="list-disc space-y-2 pl-4">
+                <ul className="space-y-2 pl-2">
+                  {' '}
                   {archiveLinks.map((item, index) => (
-                    <li key={index}>
-                      <Link href={item.link}>{item.label}</Link>
+                    <li key={index} className="flex items-center gap-2">
+                      <Image
+                        src={`${base}/research/feather_bullet.png`}
+                        alt="bullet"
+                        width={16}
+                        height={16}
+                        className="rotate-90"
+                      />
+                      <Link href={item.link} className="hover:underline">
+                        {item.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
