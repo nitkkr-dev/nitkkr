@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import type { IconType } from 'react-icons';
@@ -29,6 +30,7 @@ import {
 import { TbMathSymbols } from 'react-icons/tb';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 import { capitalise, cn } from '~/lib/utils';
 import { db, departments as departmentsSchema } from '~/server/db';
@@ -81,6 +83,16 @@ export default async function Departments({
 
   return (
     <>
+      <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+      <section className="container mt-8 lg:mt-12">
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+          <span className="mb-1 block">{text.description1}</span>
+        </p>
+        <br />
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+          <span className="mb-1 block">{text.description2}</span>
+        </p>
+      </section>
       <Heading
         className="container"
         glyphDirection="dual"

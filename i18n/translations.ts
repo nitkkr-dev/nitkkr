@@ -169,7 +169,7 @@ export interface Translations {
     researchAndConsultancy: string;
     studentWelfare: string;
   };
-  Departments: { title: string };
+  Departments: { title: string; description1: string; description2: string };
   Department: {
     headings: {
       about: string;
@@ -646,6 +646,8 @@ export interface Translations {
           currentJournalsDescription: string;
           eShodhSindhuHeading: string;
           eShodhSindhuDescription: string;
+          onosHeading: string;
+          onosDescription: string;
         };
         eResourcesTable: {
           heading: {
@@ -793,12 +795,15 @@ export interface Translations {
         dental: string;
         lab: string;
         pharmacy: string;
+        daycare: string;
         radiology: string;
         ecg: string;
         aboutText: string;
         staffText: string;
         insurance: string;
+        reimbursement: string;
         immunization: string;
+        counsellor: string;
       };
       facilities: {
         counsellor: string;
@@ -806,11 +811,12 @@ export interface Translations {
         hospitals: string;
         insurance: string;
         ambulance: string[];
-
+        reimbursement: string;
         opd: string;
         dental: string;
         lab: string;
         pharmacy: string;
+        daycare: string;
         radiology: string;
         ecg: string;
         casualty: string[];
@@ -839,6 +845,13 @@ export interface Translations {
         text: string;
         link: string;
         text2: string;
+      };
+      reimbursement: {
+        text: string;
+        link: string;
+      };
+      counsellor: {
+        text: string;
       };
       immunization: {
         text1: string;
@@ -920,18 +933,19 @@ export interface Translations {
       inventor: string;
     };
     copyright: {
-      number: string;
+      sNo: string;
       grantYear: string;
       copyrightNo: string;
       title: string;
       creator: string;
     };
     design: {
-      number: string;
-      yearOfAcceptance: string;
-      applicationNo: string;
+      sNo: string;
+      dateOfRegistration: string;
+      designNumber: string;
       title: string;
       creator: string;
+      class: string;
     };
     memorandum: {
       number: string;

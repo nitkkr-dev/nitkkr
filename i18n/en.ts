@@ -294,7 +294,11 @@ const text: Translations = {
     researchAndConsultancy: 'Research and Consultancy',
     studentWelfare: 'Student Welfare',
   },
-  Departments: { title: 'DEPARTMENTS' },
+  Departments: {
+    title: 'DEPARTMENTS',
+    description1: `Our Departments offer various programs. They have shown exponential growth in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members. `,
+    description2: `The faculty members have made a mark in the area of innovative hardware design, modelling & analysis as well as in the development of new techniques and algorithms, in fields such as data communication systems and wireless networks, signal processing and VLSI design. `,
+  },
   Department: {
     headings: {
       about: 'About',
@@ -544,7 +548,7 @@ const text: Translations = {
       library: {
         heading: `Library`,
         text: [
-          `The library is housed in a separate building with a covered area of 3600 sq.m. With its ample resources, space and services, the library caters to the needs of faculty, research scholars and students very effectively and efficiently. To keep them abreast of the latest development in research, it now subscribes to electronic resources through INDEST consortium set up by the MHRD. The library contains 100000 books, 6028 back volumes and 3659 e-books. The library subscribes to 158 prints and approximately 2800 online journals in the fields of science, management and technology. The library remains accessible to its users 24 x 7.`,
+          `The library is housed in a separate building with a covered area of 3600 sq. m. With its ample resources, space and services, the library caters to the needs of faculty, research scholars and students very effectively and efficiently. To keep them abreast of the latest developments in research, it now subscribes to electronic resources through the ONOS consortium set up by the MHRD. As on 31.03.2025 (end of last Financial Year), the central library contains 177366 books, 7097 back volumes and 12272 e-books. The library subscribes to 45 print journals and approximately 13000+ online journals in the fields of science, management and technology. The library remains accessible to its users 24 x 7.`,
         ],
       },
       computing: {
@@ -856,7 +860,7 @@ Stack and Circulation:
 All Working Days: 08.30 am to 05:30 pm
 Saturdays & Holidays: 09.00 am to 05.00 pm`,
         aboutText:
-          'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researchers, scholars, and students.',
+          'The library, initially set up in 1965, has grown in size collection, and services. Presently, NIT Kurukshetra has a very spacious library with a good collection of documents, which includes text and reference books, CD-ROMs, and a large number of print and online journals and e-books. With its growing resources, space, and services, the library caters to the needs of faculty, researcher scholars, and students.',
       },
       facilities: {
         bookBankFacilities: 'Book Bank Facilities',
@@ -868,7 +872,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         remoteAccess: 'Remote Access Service: KNIMBUS',
         antiPlagiarism: 'Anti-Plagiarism Software (Turnitin)',
         bookBankFacilitiesText:
-          'The Library Book Bank is one of the richest Book Banks in the country. All B. Tech, M.Tech, MBA and MCA students are given 6-8 books for the full semester from Book Bank.',
+          'The Library Book Bank is one of the richest Book Banks in the country. All B.Tech, M.Tech, MBA, MCA & M.Sc students are given 6-8 books for full semester from Book Bank.',
         libraryAutomationText:
           'The library is providing automated services in all sections of the library using KOHA software. All the books are bar-coded, and members are also given Bar-Coded membership cards for smooth circulation of documents in the library. The database of the library is updated regularly, and readers can search the documents using Web-OPAC (Online Public Access Catalogue) at:',
         audioVideoCenterText:
@@ -922,10 +926,13 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
           title: 'E-Resources',
           currentJournalsHeading: 'Current Journals',
           currentJournalsDescription:
-            'The library subscribes to 45 print and approximately 4200+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals is displayed in the Periodical Section of the Library and may be via Library Intranet site : http://172.16.0.52',
+            'The Library subscribes to 45 Print and Approx. 13000+ Online Journals in the field of Science and Technology. A number of complimentary copies are also received in the library. The list of these Journals, is displayed in Periodical Section of the Library and also available on the Library Intranet site',
           eShodhSindhuHeading: 'e-Shodh Sindhu (eSS)',
           eShodhSindhuDescription:
-            'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: http://172.16.0.52',
+            'The NITK Library is a core member of e-Shodh Sindhu Consortium set up by MHRD. Approximately 4200+ e-resources are subscribed/provided through the Consortium. To access online resources on the Institute premises, the library is providing services through an internally maintained web server. All these resources/e-journals can be accessed through Library Intranet site: ',
+          onosHeading: 'ONOS Consortium',
+          onosDescription:
+            'The NITK Library is a core member of ONOS Consortium set up by MHRD. Approximately 13000+ e-resources are subscribed/provided through the Consortium. To access online resources in the Institute premises, the library is providing services through internally maintained web server. All these resources/e-journals can be accessed through library Intranet site: ',
         },
         eResourcesTable: {
           heading: {
@@ -1337,9 +1344,11 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         timings: 'Timings',
         facilities: 'Facilities',
         aboutText:
-          'The multifarious medical needs of the campus population consisting of Students, Staff members and members of their families are met by the Institute Health Centre. The Health Centre is headed by the Head (Hospital Services) with a team of Medical Officers and Para Medical staff. The Director has also constituted a Hospital Advisory Committee with a Chairman nominated by him and members drawn from hospital and other recognized bodies of the institute, with the Head (Hospital Services) as the Member Secretary of the Committee.',
+          'The multifarious medical needs of the campus population consisting of Students, Staff members and members of their families are met by the Institute Health Centre. The Institute Health Centre is headed by the Head (Hospital Services) with a team of Medical Officers and Para Medical staff. The Director has also constituted a Hospital Advisory Committee with a Chairman nominated by him and members drawn from hospital and other recognized bodies of the institute, with the Head (Hospital Services) as the Member Convener of the Committee.',
         staffText: 'staff members',
         insurance: 'Medical Insurance',
+        reimbursement: 'Medical Reimbursement',
+        counsellor: 'Counsellor Facilities',
         immunization: 'Immunization',
 
         ambulance: 'Ambulance',
@@ -1348,28 +1357,37 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         opd: 'OPD',
         lab: 'Laboratory Services',
         pharmacy: 'Pharmacy',
+        daycare: 'Day Care',
         radiology: 'Radiology/X-Ray facility',
         casualty: 'casualty',
       },
       facilities: {
-        counsellor: 'Counsellor Services',
+        counsellor: 'Counsellor Facilities',
         immunization: 'Immunization',
         hospitals: 'Empanelled Hospitals & Labs',
         insurance: 'Medical Insurance',
+        reimbursement: 'Medical Reimbursement',
         ambulance: [
           `Ambulance Facility:`,
           `   The Health Centre has round the clock support of the well-equipped Ambulance vehicle for the transport of patients from Institute Health Centre to local Govt. Hospital/empaneled Hospital/Govt. Medical Institute for specialized management under the following conditions:`,
           `- The ambulance services are provided free of cost to such students, staff and their dependents whenever they are referred for treatment to the Government/ Empaneled Hospitals by SMO/MO of Institute Health Centre. The ambulance is allowed in the emergent cases only. Further, the ambulance is not allowed for the follow up.`,
 
-          '- The ambulance services are provided free of cost for the delivery purpose of the female employees and wives of the employees of the Institute for Government/Empaneled Hospitals. The ambulance services is provided free of cost for carrying dead body from Hospital to the Campus of the Institute. In the absence of SMO/MO the requisition of ambulance will be allowed by Prof. I/c (Health Centre)',
+          '- In the absence of SMO/MO the requisition of ambulance will be allowed by Prof. I/C (Institute Health Centre)',
           `Ambulance Tel: +91-9467844800`,
         ],
         opd: `OPD: In OPD, clinical consultation is provided to patients and in required cases lab tests are advised. The Institute has empanelled doctors of various specialities working in the city whose CONSULTATION FEE is paid by the Institute only on referral slip issued by doctors of NIT Health Centre.`,
         dental: `Dental Facility: An experienced Dental Surgeon provides procedures like Dental Extraction, RCT, Scaling/Cleaning, Fillings etc.`,
         lab: `Laboratory Services: Routine investigations are carried out at the Institute Health Centre. One pathological Lab is empanelled to carry out specialized tests. Microbiology tests are referred outside.`,
-        pharmacy: ` Pharmacy: Routine medicines are available for faculty, non-faculty staff members, their dependents and students. Medicines are dispensed on the prescription of SMO/MO, Health Centre.`,
+        pharmacy: ` Pharmacy: Routine medicines are available for all & those medicines which are not available are reimbursed for the staff & their dependants. Medicines are dispensed on the prescription of SMO/MO, Health Centre.`,
+        daycare:`Day Care: A well-equipped day-care centre with 08 beds (04 beds in Female ward
+& 04 beds in Male ward) is available for emergency cases. Treatments of various diseases
+such as typhoid, acute gastroenteritis, COPD, bronchial asthma malaria, dysmenorrhea,
+acute colic etc. are given.
+Observation and management is done according to seriousness of cases as decided by the
+treating doctors as per facilities available. Serious cases are referred to higher
+Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
         radiology: `Radiology/X-Ray facility: Digital X-Ray's are done on the prescription of SMO/MO, Health Centre during OPD hours. (9:00am to 1:00pm) and (3:00pm to 5:30pm).`,
-        ecg: `ECG Services: Computerized ECG services are available at the Health Centre during OPD hours.(9:00am to 1:00pm) and (3:00pm to 5:30pm).`,
+        ecg: `ECG Services: Computerized ECG services are available at the Health Centre during OPD hours.`,
         casualty: [
           `Casualty/Triage: A well-equipped casualty with 08 beds (04 bed in Female ward & 04 bed in Male ward) is available for emergency cases. Treatment of various diseases such as typhoid, acute gastroenteritis, COPD, bronchial asthma malaria, dysmenorrhea, acute colic etc. are given.`,
           `Casualty/Triage: A well-equipped casualty with 08 beds (04 bed in Female ward & 04 bed in Male ward) is available for emergency cases. Treatment of various diseases such as typhoid, acute gastroenteritis, COPD, bronchial asthma malaria, dysmenorrhea, acute colic etc. are given.`,
@@ -1401,14 +1419,21 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         text2:
           '(Username: NITK<Employee ID or Student Roll No>, Password: NITK<Employee ID or Student Roll No>)',
       },
+      reimbursement: {
+        text: 'Essential Certificate (Medical Reimbursement)',
+        link: 'Click here to access the Certificate:',
+      },
+      counsellor: {
+        text: 'One Female Counsellor is available at “Thought Lab” (Above Siemens Centre)',
+      },
       immunization: {
         text1:
-          'Immunization is provided by District Hospital Staff as per WHO immunization schedule on every 1st Thursday of the month in NIT Health Centre.',
+          'Immunization is provided by District Hospital Staff as per WHO immunization schedule on every 1st Friday of the month in Institute Health Centre.',
         timings: 'Timing : 10:00 am to 02:00pm.',
         text2:
           'Pulse Polio Programme: Pulse Polio Programme is conducted at Institute Health Centre by the State Government from time to time.',
         text3:
-          '*Note: NIT Health Centre has no direct control on external immunization staff or their  schedule, which is subjected to change as per direction of CMO of District Hospital.',
+          '*Note: Institute Health Centre has no direct control on external immunization staff or their  schedule, which is subjected to change as per direction of CMO of District Hospital.',
         schedule: 'Immunization Schedule for children',
       },
     },
@@ -1484,7 +1509,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       patentsAndTechnologies: 'Patents & Technologies',
       research: 'Research & Consultancy',
       copyright: 'Copyrights & Designs',
-      memorandum: 'MOU',
+      memorandum: 'Memorandum of Understanding',
       importantRes: 'Important Resources',
       sponsoredProj: 'Sponsored Projects',
       iprCell: 'IPR Cell',
@@ -1534,18 +1559,19 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       inventor: 'Inventor',
     },
     copyright: {
-      number: 'Sr. No.',
+      sNo: 'Sr. No.',
       grantYear: 'Grant Year',
       copyrightNo: 'Copyright No.',
       title: 'Title',
       creator: 'Creator',
     },
     design: {
-      number: 'Sr. No.',
-      yearOfAcceptance: 'Year of Acceptance',
-      applicationNo: 'Application No.',
+      sNo: 'Sr. No.',
+      dateOfRegistration: 'Date of Registration',
+      designNumber: 'Design Number',
       title: 'Title',
       creator: 'Creator',
+      class: 'Class',
     },
     memorandum: {
       number: 'Sr. No.',
