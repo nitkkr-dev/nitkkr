@@ -1,4 +1,6 @@
 import { Suspense } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
