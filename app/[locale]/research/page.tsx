@@ -613,18 +613,23 @@ export default async function PatentsAndTechnology({
           <div className="mt-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div>
-                <ul className="space-y-2 pl-2">
+                <ul className="pl-2">
                   {' '}
                   {archiveLinks.map((item, index) => (
                     <li key={index} className="flex items-center gap-2">
                       <Image
                         src={`${base}/research/feather_bullet.png`}
                         alt="bullet"
-                        width={16}
-                        height={16}
-                        className="rotate-90"
+                        width={20}
+                        height={20}
+                        className="size-4 rotate-90 sm:size-5 md:size-6 lg:size-7 xl:size-9"
                       />
-                      <Link href={item.link} className="hover:underline">
+                      <Link
+                        href={item.link}
+                        className={`text-sm hover:underline lg:text-base xl:text-[18px] ${
+                          index < 2 ? 'font-bold' : ''
+                        }`}
+                      >
                         {item.label}
                       </Link>
                     </li>
