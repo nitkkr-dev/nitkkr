@@ -1,4 +1,6 @@
 import { Suspense } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
@@ -13,6 +15,7 @@ import {
 } from '~/components/ui';
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
+import { getS3Url } from '~/server/s3';
 import { db } from '~/server/db';
 import type { copyrights, designs, patents } from '~/server/db/schema';
 type PatentsTable = typeof patents.$inferSelect;
@@ -29,6 +32,37 @@ export default async function PatentsAndTechnology({
   const currentPage = Number(searchParams?.page ?? 1);
 
   const text = (await getTranslations(locale)).Research;
+
+  const archiveLinks = [
+    {
+      label: text.archive.rulesConsultancy,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Rules-Regulations-for-Consultancy-Services-w.e.f-from-FY-2018-19-_compressed-2.pdf',
+    },
+    {
+      label: text.archive.rulesSponsored,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Rules-Regulation-SRP-w.e.f-FY-2018-19.pdf',
+    },
+    {
+      label: text.archive.guidelinesPhD,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Guidelines-for-utilization-of-the-contingency-grant.pdf',
+    },
+    {
+      label: text.archive.sponsoringAgencies,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Prospective-Sponsoring-agencies-for-RD-Projects.pdf',
+    },
+    {
+      label: text.archive.sponsoredResearch,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Sponsored-Research-Project-.pdf',
+    },
+    {
+      label: text.archive.financialAssistance,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Financial-Assistance-to-Students-form.pdf',
+    },
+    {
+      label: text.archive.projectProposal,
+      link: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/Financial-Assistance-to-Students-form.pdf',
+    },
+  ];
 
   const patents = await db.query.patents.findMany();
   const copyrights = await db.query.copyrights.findMany();
@@ -175,7 +209,7 @@ export default async function PatentsAndTechnology({
       amount: '69',
     },
   ];
-
+  const base = getS3Url();
   // Get the total count for pagination
   const getResearchCount = async () => {
     const count = staticResearch.length; // Replace with your actual DB call
@@ -282,7 +316,7 @@ export default async function PatentsAndTechnology({
       {/* PATENTS AND TECHNOLOGIES */}
       <section className="container" id="patents">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading="h3"
           href="#patents"
           text={text.headings.patentsAndTechnologies}
@@ -472,7 +506,7 @@ export default async function PatentsAndTechnology({
       {/* SPONSORED PROJECTS */}
       <section className="container" id="projects">
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading="h3"
           href="#projects"
           text={text.headings.sponsoredProj}
@@ -526,7 +560,7 @@ export default async function PatentsAndTechnology({
       {/* IMPORTANT RESOURCES */}
       <section className="container" id="resources">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading="h3"
           href="#resources"
           text={text.headings.importantRes}
@@ -539,14 +573,27 @@ export default async function PatentsAndTechnology({
           <div className="mt-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div>
-                <ul className="list-disc space-y-2 pl-4">
-                  <li>{text.archive.rulesConsultancy}</li>
-                  <li>{text.archive.rulesSponsored}</li>
-                  <li>{text.archive.guidelinesPhD}</li>
-                  <li>{text.archive.sponsoringAgencies}</li>
-                  <li>{text.archive.sponsoredResearch}</li>
-                  <li>{text.archive.financialAssistance}</li>
-                  <li>{text.archive.projectProposal}</li>
+                <ul className="pl-2">
+                  {' '}
+                  {archiveLinks.map((item, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <Image
+                        src={`${base}/research/feather_bullet.png`}
+                        alt="bullet"
+                        width={20}
+                        height={20}
+                        className="size-4 rotate-90 sm:size-5 md:size-6 lg:size-7 xl:size-9"
+                      />
+                      <Link
+                        href={item.link}
+                        className={`text-sm hover:underline lg:text-base xl:text-[18px] ${
+                          index < 2 ? 'font-bold' : ''
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
