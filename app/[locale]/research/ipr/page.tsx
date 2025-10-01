@@ -284,7 +284,8 @@ export default async function IPR({
                 height={200}
                 className="h-auto max-h-80 w-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-neutral-900/45 via-neutral-900/25 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
+              
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
                 className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"

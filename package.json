@@ -57,9 +57,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "^20.19.19",
+    "@types/react": "^18.3.25",
+    "@types/react-dom": "^18.3.7",
     "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "autoprefixer": "^10.0.1",
