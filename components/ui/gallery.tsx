@@ -184,11 +184,8 @@ export default function Gallery({ base }: GalleryProps) {
   // Calculate which image should show the View More button
   const viewMorePosition = hasMoreRows ? visibleImages.length - 1 : -1;
 
-  return (
-    <div
-      className="mx-auto space-y-6"
-      style={{ width: '1232px', maxWidth: '100%' }}
-    >
+ return (
+    <div className="mx-auto space-y-6" style={{ width: '1232px', maxWidth: '100%' }}>
       {visibleRows.map((row, rowIdx) => (
         <div key={rowIdx} className="flex gap-4">
           {row.map((img, idx) => {
@@ -201,21 +198,21 @@ export default function Gallery({ base }: GalleryProps) {
             return (
               <div
                 key={`${img.src}-${idx}`}
-                className={`relative overflow-hidden rounded ${isViewMorePosition ? '' : 'border-2 border-primary-300'}`}
-                style={
-                  img.type === 'h'
-                    ? { width: 400, height: 300 }
-                    : { width: 192, height: 300 }
-                }
+                className={`relative overflow-hidden rounded ${
+                  isViewMorePosition ? '' : 'border-2 border-primary-300'
+                }`}
+                style={img.type === 'h' ? { width: 400, height: 300 } : { width: 192, height: 300 }}
               >
-                {' '}
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={img.type === 'h' ? 400 : 192}
                   height={300}
-                  className={`h-full w-full object-cover transition-all ${isViewMorePosition ? 'opacity-30' : 'opacity-100'}`}
-                />{' '}
+                  className={`h-full w-full object-cover transition-all ${
+                    isViewMorePosition ? 'opacity-30' : 'opacity-100'
+                  }`}
+                />
+
                 {isViewMorePosition && (
                   <button
                     type="button"
@@ -225,10 +222,9 @@ export default function Gallery({ base }: GalleryProps) {
                     }}
                     className="bg-black/50 text-white absolute inset-0 flex items-center justify-center text-lg font-semibold"
                   >
-                    {' '}
-                    View More{' '}
+                    View More
                   </button>
-                )}{' '}
+                )}
               </div>
             );
           })}
