@@ -110,10 +110,6 @@ export default function Gallery({ base }: GalleryProps) {
         src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
         alt: 'Main Institute Building',
       },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
     ],
     [base]
   );
