@@ -22,102 +22,105 @@ const rowPatterns: ('h' | 'v')[][] = [
 
 export default function Gallery({ base }: GalleryProps) {
   // static images with base from server + random vertical images for better testing
-  const images: Img[] = [
-    { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
-    { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
-    { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
-    { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
-    { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
-    { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
-    { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
-    { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
-    { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
-    { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
-    { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
-    { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
-    { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
-    { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
-    { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
-    { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
-    { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
-    { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
-    { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
-    { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
-    { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
-    { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
-    { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
-    { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
-    { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
-    { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
-    { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
-    { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
-    { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
-    { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
-    { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
-    { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
-    { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
-    { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-    {
-      src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-      alt: 'Main Institute Building',
-    },
-  ];
+  const images: Img[] = useMemo(
+    () => [
+      { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
+      { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
+      { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
+      { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
+      { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
+      { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
+      { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
+      { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
+      { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
+      { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
+      { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
+      { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
+      { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
+      { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
+      { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
+      { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
+      { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
+      { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
+      { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
+      { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
+      { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
+      { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
+      { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
+      { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
+      { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
+      { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
+      { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
+      { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
+      { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
+      { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
+      { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
+      { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
+      { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
+      { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+      {
+        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
+        alt: 'Main Institute Building',
+      },
+    ],
+    [base]
+  );
 
   const [horizontal, setHorizontal] = useState<(Img & { type: 'h' | 'v' })[]>(
     []
@@ -187,16 +190,21 @@ export default function Gallery({ base }: GalleryProps) {
   const hasMoreRows = visibleRowCount < rows.length;
 
   // Calculate which image should show the View More button
-  // It should appear at the last visible image if we have more content
   const viewMorePosition = hasMoreRows ? visibleImages.length - 1 : -1;
 
   return (
-    <div className="w-full">
-      <div className="mx-auto max-w-7xl space-y-6">
-        <div className="flex flex-wrap justify-center gap-4">
-          {visibleImages.map((img, idx) => {
-            // Show "View More" button on the last visible image if there are more rows
-            const isViewMorePosition = idx === viewMorePosition;
+    <div
+      className="mx-auto space-y-6"
+      style={{ width: '1232px', maxWidth: '100%' }}
+    >
+      {visibleRows.map((row, rowIdx) => (
+        <div key={rowIdx} className="flex gap-4">
+          {row.map((img, idx) => {
+            const globalIndex =
+              row.slice(0, idx + 1).length +
+              rows.slice(0, rowIdx).flat().length -
+              1;
+            const isViewMorePosition = globalIndex === viewMorePosition;
 
             return (
               <div
@@ -208,14 +216,14 @@ export default function Gallery({ base }: GalleryProps) {
                     : { width: 192, height: 300 }
                 }
               >
+                {' '}
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={img.type === 'h' ? 400 : 192}
                   height={300}
                   className={`h-full w-full object-cover transition-all ${isViewMorePosition ? 'opacity-30' : 'opacity-100'}`}
-                />
-
+                />{' '}
                 {isViewMorePosition && (
                   <button
                     type="button"
@@ -225,14 +233,15 @@ export default function Gallery({ base }: GalleryProps) {
                     }}
                     className="bg-black/50 text-white absolute inset-0 flex items-center justify-center text-lg font-semibold"
                   >
-                    View More
+                    {' '}
+                    View More{' '}
                   </button>
-                )}
+                )}{' '}
               </div>
             );
           })}
         </div>
-      </div>
+      ))}
     </div>
   );
 }
