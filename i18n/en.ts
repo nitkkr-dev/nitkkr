@@ -48,23 +48,65 @@ const text: Translations = {
     ],
   },
   Main: {
-    director: {
-      alt: 'Prof. B. V. Ramana Reddy',
-      title: 'DIRECTOR’S CORNER',
-      name: 'Prof. B. V. Ramana Reddy',
-      quote: [
-        `India, the land of seekers, is at the cusp of becoming Vishwa Guru all
-      over again after 1100 years of subjugation, wars, annexures and
-      humiliation. It is again a free country due to the sacrifices made by our
-      leaders, freedom fighters and has learnt the art of standing tall in the
-      midst of many a challenge of building the nation with its rich diversity,
-      cultures, languages all over again since the last 75 years. Unity in
-      Diversity is our mantra while making our nation stronger in every
-      sphere.`,
-        'I heartily welcome everyone who visits the website of this institution.',
-      ],
-      more: 'Read more',
-    },
+
+    Director:{
+      name: "Professor B.V. Ramana Reddy",
+    position: "Director, National Iinstitute of Technology Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",
+    title: [
+      'DIRECTOR’S PROFILE',
+      'BRIEF CV OF DIRECTOR',
+      'DIRECTOR’S MESSAGE',
+      'DIRECTOR’S OFFICE',
+      'PREVIOUS DIRECTORS',
+    ],
+     cv: [
+" He took over as Director, National Institute of  Technology Kurukshetra on 05th February, 2022 (Basant Panchmi). He is an alumnus of Andhra University, IIT Roorkee and NIT Kurukshetra. In his  long career spanning over 35 years, he served in various capacities as  teaching faculty at national institutes of repute at NIT Kurukshetra  (during 1991- 95), NIT Hamirpur (1995-1999) known earlier as REC. He  also served as Assoc. Prof. & as Professor at University School of  Information & Communication Technoloy (USICT), GGSIP University New Delhi for the last 22 years (2000-2022).",
+      "His current research interests include Wireless communications which include mobile, Adhoc and sensor based networks, computer communication networks, Semiconductor and VLSI circuits and microwave & optical communications. He has more than 100 publications in International, National journals and International Conferences to his credit. He produced Thirteen (13) Ph.D.s, and currently supervising Eight (8) PhD scholars.",
+      "Besides, he is a Fellow of IETE, IE, ISTE and a member of other professional bodies such as IEEE, CSI and SEMCEI. He is an active member in various committees constituted by AICTE, UGC, NAAC, TEQIP and NIC. He visited foreign Universities situated in Singapore and China.",
+      "He is currently actively participating in educational reforms and value based education, in tune with National Skill Qualification Framework (NSQF) and contributed to vocational education in the country. He strongly believes in holistic development and growth of the next generation children, and dreams of a society where each and every species living on Earth lives harmoniously (VASUDEVA KUTUMBAKAM). Further, he strongly believes in to see glitter in the eyes of his subjects as an award, reward or recognition.",
+      "His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.",
+    ],
+     DirectorMessage:  [
+  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.",
+  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere."
+],
+employes:[
+  
+    {name: "Arun Goel",
+    position: "Head of Department, CSE",
+    phone: "+91-1744-233208",
+    email: "director@nitkkr.ac.in",},
+    {name: "Arun Goel",
+    position: "Head of Department, CSE",
+    phone: "+91-1744-233208",
+    email: "director@nitkkr.ac.in",}
+],
+preDirectors:[
+  {name: "Professor B.V. Ramana Reddy",
+    position: "Director, NIT Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",},
+    {name: "Professor B.V. Ramana Reddy",
+    position: "Director, NIT Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",},
+    {name: "Professor B.V. Ramana Reddy",
+    position: "Director, NIT Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",}
+],
+  
+},
     title: {
       primary: 'NIT KURUKSHETRA',
       secondary: 'एनआईटी कुरुक्षेत्र',
@@ -467,24 +509,8 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     },
     sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
   },
-  DirectorMessage: {
-    title: `Director's Message`,
-    message: [
-      `India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
-      `The land of Kurukshetra also referred to as Dharma Kshetra has taught us to be righteous in our demeanour, uphold values, make one self-strong to desist any attacks on self or subjects who are vulnerable. The celestial song of Bhagavat Gita teaches us to achieve a 3600   development of Holistic personality and seeks to dispel all our doubts, predicaments, and guides us to search and explore self and the material world outside.`,
-      `It was proved without doubt over centuries that no nation has ever risen to the stature of a world leader or a happy nation without educating its subjects. The role of Universities and Centres of Excellence was never in question. Creativity, innovation and hands on experience were given importance and nature was the experimental laboratory to unravel the secrets of the universe. The Universities in the form of Nalanda and Takshashila rose to stature of international level learning centres of nurturing young minds to explore themselves and unravel the secrets of nature in a variety of trades known as 64 art forms. They explored skills through recitation, hands on experience and experiential learning. The famous Guru Shishya Parampara was passed on through ages and generations.`,
-      `Takshashila University was famous not because of it’s never ending collection of scripts.  It was famous because of knowledge that it had to offer.  Knowledge on how best a human being can function in this world.  Knowledge of using the intelligence that our race possesses.`,
-      `What could be the right setting for a great nation like India and NIT Kurukshetra to tap the potentialities of young minds who are drawn from across the nation through a rigorous process of selection through national level testing. These young boys and girls toil really hard to reach these portals of learning. It is our endeavour to provide the right environment of teaching, learning and allow them to explore their self and progress not only advancing technologies but also promoting their innate skills of creativity and innovative traits to be  the guiding forces in solving many a societal problems and set an example that universities and centre of excellence are not isolated spaces for exploration of knowledge alone but contribute to the growth of the nation, through setting up of incubation centres, promote start up culture and entrepreneurial mindset. In this direction, NIT KKR would end the motions of rote learning and changing the setting for critical thinking, enquiry, debate and discussions while promoting experiential learning by connecting these young minds through NIT KKR – Local community link. No education is complete if the scholar is unable to move from levels of learning to achieve knowledge leading to wisdom.`,
-      `Last two years, during the pandemic times, the whole world lost many a life, lost livelihood, nations suffered due to lack of growth and the challenges of such testing times led many to depression, anxiety, suicidal tendencies, loss of beloved etc., We are still grappling to come to terms with the pandemic and have taken the lead to bring a semblance of order albeit on virtual platforms. Some hard lessons have been learnt and education sector is one among the most affected area, where young minds were locked physically, mentally, emotionally and spiritually. The time is ripe to explore these innate qualities in achieving human excellence.`,
-      `Having taken over the charge of Director of one of the oldest REC, now transformed as NIT with the status of Institution of National Importance on 05th February, 2022 (Basant Panchami), I along with my teaching, non-teaching faculty and support staff welcome you and are eagerly waiting for all our dear students to come to the campus, leaving no stone unturned in preparing ourselves to welcome you, albeit after two long years of isolation through online teaching learning etc. As the leader I assure you that you will be pampered by creating an atmosphere of comfort of a home, spaces much bigger than a home to explore oneself, provide facilities to explore oneself and material progress, allowing you to dream big. I personally wish each one of you become passionate about life and serve the society at large in the form of technocrats, business men, world leaders etc.  I assure that implementation of National Education Policy 2020 (NEP 2020) shall be top most priority.`,
-      `The logo of NIT KKR, has a Motto which reads as follows`,
-      `"Shramaye Anavarat chesta cha"`,
-      `which means hard work and consistent efforts leads to excellence.`,
-      `I congratulate all student aspirants to have made it to enter portals of NIT KKR and Wish all family members of NIT Kurukshetra all success in all their endeavours.`,
-      `JAI HIND……….`,
-      `Prof. B. V. Ramana Reddy`,
-    ],
-  },
+  
+ 
 };
 
 export default text;

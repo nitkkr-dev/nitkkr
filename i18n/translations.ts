@@ -33,13 +33,32 @@ export interface Translations {
     pointsOfApproval: string[];
   };
   Main: {
-    director: {
-      alt: string;
-      title: string;
-      name: string;
-      quote: [string, string];
-      more: string;
-    };
+    Director: {
+    name: string;
+    position: string;
+    
+    phone: string;
+    fax: string;
+    mobile: string;
+    email: string;
+    cv: string[];
+    title: string[];
+    DirectorMessage:string[];
+    employes:{
+    name: string;
+    position: string;
+    phone: string;
+    email: string;}[];
+    preDirectors:{
+    name: string;
+    position: string;
+    
+    phone: string;
+    fax: string;
+    mobile: string;
+    email: string;}[];
+  
+  };
     title: {
       primary: string;
       secondary: string;
@@ -382,8 +401,6 @@ export interface Translations {
       clubs: { title: string; more: string };
     };
   };
-  DirectorMessage: {
-    title: String;
-    message: String[];
-  };
+  
+ 
 }
