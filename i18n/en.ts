@@ -1379,7 +1379,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
         dental: `Dental Facility: An experienced Dental Surgeon provides procedures like Dental Extraction, RCT, Scaling/Cleaning, Fillings etc.`,
         lab: `Laboratory Services: Routine investigations are carried out at the Institute Health Centre. One pathological Lab is empanelled to carry out specialized tests. Microbiology tests are referred outside.`,
         pharmacy: ` Pharmacy: Routine medicines are available for all & those medicines which are not available are reimbursed for the staff & their dependants. Medicines are dispensed on the prescription of SMO/MO, Health Centre.`,
-        daycare:`Day Care: A well-equipped day-care centre with 08 beds (04 beds in Female ward
+        daycare: `Day Care: A well-equipped day-care centre with 08 beds (04 beds in Female ward
 & 04 beds in Male ward) is available for emergency cases. Treatments of various diseases
 such as typhoid, acute gastroenteritis, COPD, bronchial asthma malaria, dysmenorrhea,
 acute colic etc. are given.
