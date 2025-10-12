@@ -316,6 +316,8 @@ const FacultyList = async ({
   const departmentHeads = await db.query.departmentHeads.findMany({
     where: (departmentHead, { eq }) => eq(departmentHead.isActive, true),
   });
+
+  const text = (await getTranslations(locale)).FacultyAndStaff;
   // Convert department parameter to array
   const departmentList = Array.isArray(department)
     ? department
@@ -334,6 +336,11 @@ const FacultyList = async ({
     columns: {
       designation: true,
       employeeId: true,
+      areasOfInterest: true,
+      googleScholarId: true,
+      linkedInId: true,
+      researchGateId: true,
+      scopusId: true,
       id: true,
     },
     where: selectedDepartmentIds.length
@@ -355,6 +362,13 @@ const FacultyList = async ({
         ({ facultyId }) => facultyId === faculty.id
       );
 
+      const profileExternalLinks = {
+        googleScholarId: faculty.googleScholarId,
+        linkedInId: faculty.linkedInId,
+        researchGateId: faculty.researchGateId,
+        scopusId: faculty.scopusId,
+      };
+
       return (
         <li
           className="rounded border border-primary-700 bg-neutral-50 hover:drop-shadow-md"
@@ -366,20 +380,20 @@ const FacultyList = async ({
           >
             <Image
               alt={faculty.person.name}
-              className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
+              className="my-auto size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
               height={0}
               src={`fallback/user-image.jpg`}
               width={0}
             />
             <main>
-              <header className="mb-1 sm:mb-2 md:mb-3 lg:mb-4">
+              <header className="mb-1 sm:mb-1 md:mb-2 lg:mb-3">
                 <h4 className="mb-0">{faculty.person.name}</h4>
                 <p>
                   {faculty.designation}
                   {isDepartmentHead && ` (${deptartmentHeadText})`}
                 </p>
               </header>
-
+              {/* Contact Information */}
               <ul>
                 <li className="flex items-center gap-2">
                   <MdEmail className="fill-primary-700" />
@@ -390,8 +404,88 @@ const FacultyList = async ({
                   {faculty.person.telephone}
                 </li>
               </ul>
+              {/* Areas of Interest */}
+              {faculty.areasOfInterest &&
+                faculty.areasOfInterest.length > 0 && (
+                  <div className="mt-2">
+                    <ul className="list-none pl-5">
+                      {faculty.areasOfInterest
+                        .slice(0, 1)
+                        .map((area, index) => (
+                          <li key={index}>{area}</li>
+                        ))}
+                      {faculty.areasOfInterest.length > 1 && (
+                        <li>
+                          {faculty.areasOfInterest[1]}{' '}
+                          {faculty.areasOfInterest.length > 2 && (
+                            <span className="text-primary-700">
+                              + {faculty.areasOfInterest.length - 2} more
+                            </span>
+                          )}
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                )}
             </main>
+            {/* Links */}
+            {/* On large screen */}
+            <div className="my-auto ml-auto flex hidden w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
+              {(
+                Object.entries(profileExternalLinks) as [
+                  keyof typeof profileExternalLinks,
+                  string,
+                ][]
+              ).map(([key, value]) => {
+                if (key in profileExternalLinks) {
+                  return (
+                    <Link
+                      key={key}
+                      className="flex w-fit items-center justify-evenly gap-2 rounded-2xl"
+                      href={profileExternalLinks[key] ?? ''}
+                    >
+                      <Image
+                        alt={key}
+                        src={`faculty-and-staff/${key}.svg`}
+                        height={0}
+                        width={0}
+                        className="mx-auto h-8 w-8"
+                      />
+                      <span>{text.externalLinks[key]}</span>
+                    </Link>
+                  );
+                }
+              })}
+            </div>
+            {/* On small and medium screens */}
           </Link>
+          <div className="mx-2 mt-2 flex flex-wrap justify-evenly gap-2 border-t-[1px] border-primary-700 pb-2 pt-3 sm:mx-3 sm:pb-3 sm:pt-4 md:hidden">
+            {(
+              Object.entries(profileExternalLinks) as [
+                keyof typeof profileExternalLinks,
+                string,
+              ][]
+            ).map(([key, value]) => {
+              if (key in profileExternalLinks) {
+                return (
+                  <Link
+                    key={key}
+                    className="flex w-fit flex-col items-center gap-2 rounded-2xl"
+                    href={profileExternalLinks[key] ?? ''}
+                  >
+                    <Image
+                      alt={key}
+                      src={`faculty-and-staff/${key}.svg`}
+                      height={0}
+                      width={0}
+                      className="mx-auto h-12 w-12"
+                    />
+                    <span>{text.externalLinks[key]}</span>
+                  </Link>
+                );
+              }
+            })}
+          </div>
         </li>
       );
     })
