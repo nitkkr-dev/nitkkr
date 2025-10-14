@@ -62,12 +62,20 @@ export async function populate() {
     map[dept.name] = dept.id;
   }
 
-  const Csv = fs.readFileSync('sections.tsv', 'utf-8').split('\n');
+  const Csv = fs
+    .readFileSync('research_and_consultancy.tsv', 'utf-8')
+    .split('\n');
   const Headers = Csv[0].split('\t');
 
   await db.transaction(async (tx) => {
     for (let i = 1; i < Csv.length; i++) {
       const Data = convertToData(Csv[i], Headers);
+      await tx.insert(schemas.researchAndConsultancy).values({
+        facultyId: Data.facultyId,
+        totalNoOfJobs: parseInt(Data.totalNoOfJobs, 10),
+        totalAmount: Data.totalAmount,
+        year: Data.year,
+      });
     }
   });
 }

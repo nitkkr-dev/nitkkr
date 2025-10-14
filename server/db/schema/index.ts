@@ -18,6 +18,7 @@ export * from './majors.schema';
 export * from './notifications.schema';
 export * from './persons.schema';
 export * from './roles.schema';
+export * from './research-and-consultancy.schema';
 export * from './sections.schema';
 export * from './sponsored-research-projects.schema';
 export * from './staff.schema';
