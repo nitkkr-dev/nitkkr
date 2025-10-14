@@ -52,16 +52,6 @@ function extractPhoneNumber(
 }
 
 export async function populate() {
-  const map: Record<string, number> = {};
-
-  const department = await db
-    .select({ id: schemas.departments.id, name: schemas.departments.name })
-    .from(schemas.departments);
-
-  for (const dept of department) {
-    map[dept.name] = dept.id;
-  }
-
   const Csv = fs
     .readFileSync('research_and_consultancy.tsv', 'utf-8')
     .split('\n');
@@ -71,7 +61,7 @@ export async function populate() {
     for (let i = 1; i < Csv.length; i++) {
       const Data = convertToData(Csv[i], Headers);
       await tx.insert(schemas.researchAndConsultancy).values({
-        facultyId: Data.facultyId,
+        employeeId: Data.employeeId,
         totalNoOfJobs: parseInt(Data.totalNoOfJobs, 10),
         totalAmount: Data.totalAmount,
         year: Data.year,
