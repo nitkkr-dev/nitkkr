@@ -57,11 +57,14 @@ export async function populate() {
     .split('\n');
   const Headers = Csv[0].split('\t');
 
+  console.log('Headers:', Headers);
+
   await db.transaction(async (tx) => {
     for (let i = 1; i < Csv.length; i++) {
       const Data = convertToData(Csv[i], Headers);
+      console.log(Data);
       await tx.insert(schemas.researchAndConsultancy).values({
-        employeeId: Data.employeeId,
+        facultyId: Data.facultyId,
         totalNoOfJobs: parseInt(Data.totalNoOfJobs, 10),
         totalAmount: Data.totalAmount,
         year: Data.year,
