@@ -9,7 +9,7 @@ export const researchAndConsultancy = pgTable(
   'research_and_consultancy',
   (t) => ({
     id: t.serial().primaryKey(),
-    facultyId: t
+    employeeId: t
       .varchar()
       .references(() => faculty.employeeId)
       .notNull(),
@@ -27,7 +27,7 @@ export const researchAndConsultancyRelations = relations(
   researchAndConsultancy,
   ({ one }) => ({
     faculty: one(faculty, {
-      fields: [researchAndConsultancy.facultyId],
+      fields: [researchAndConsultancy.employeeId],
       references: [faculty.employeeId],
     }),
   })
