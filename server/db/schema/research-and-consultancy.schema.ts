@@ -1,5 +1,5 @@
 // SrNo FacultyName Department TotalNoOfJobs totalAmount
-
+import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
@@ -20,5 +20,15 @@ export const researchAndConsultancy = pgTable(
   (t) => ({
     // pattern check for the academic year format
     validYearFormat: sql`CHECK (${t.year} ~ '^[0-9]{4}-[0-9]{2}$')`,
+  })
+);
+
+export const researchAndConsultancyRelations = relations(
+  researchAndConsultancy,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [researchAndConsultancy.facultyId],
+      references: [faculty.employeeId],
+    }),
   })
 );
