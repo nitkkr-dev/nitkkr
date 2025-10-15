@@ -11,15 +11,8 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import ButtonGroup from '~/components/button-group';
 import Loading from '~/components/loading';
-import {
-  CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import { CardTitle } from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
@@ -103,21 +96,20 @@ export default async function Administration({
             <CardTitle className="text-2xl text-primary-300">
               {text.composition}
             </CardTitle>
-            <Table
-              className="w-full"
-              scrollAreaClassName="md:max-h-96 sm:max-h-72 max-h-60"
-            >
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.sNo}</TableHead>
-                  <TableHead>{text.name}</TableHead>
-                  <TableHead>{text.servedAs}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <SenateMembers />
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                { key: 'serial', label: text.sNo },
+                { key: 'name', label: text.name },
+                { key: 'servingAs', label: text.servedAs },
+              ]}
+              tableData={await db.query.committeeMembers.findMany({
+                where: (member, { eq }) => eq(member.committeeType, 'senate'),
+                orderBy: (member, { asc }) => [asc(member.serial)],
+              })}
+              currentPage={1}
+              itemsPerPage={100}
+              getCount={Promise.resolve([{ count: 100 }])}
+            />
           </Suspense>
         </section>
         <ButtonGroup
@@ -245,18 +237,3 @@ export default async function Administration({
     </>
   );
 }
-
-const SenateMembers = async () => {
-  const members = await db.query.committeeMembers.findMany({
-    where: (member, { eq }) => eq(member.committeeType, 'senate'),
-    orderBy: (member, { asc }) => [asc(member.serial)],
-  });
-
-  return members.map(({ serial, name, servingAs }, index) => (
-    <TableRow key={index}>
-      <TableCell>{serial}</TableCell>
-      <TableCell>{name}</TableCell>
-      <TableCell>{servingAs}</TableCell>
-    </TableRow>
-  ));
-};
