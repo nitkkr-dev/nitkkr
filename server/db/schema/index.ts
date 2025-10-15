@@ -22,6 +22,7 @@ export * from './patents.schema';
 export * from './persons.schema';
 export * from './research-projects.schema';
 export * from './roles.schema';
+export * from './research-and-consultancy.schema';
 export * from './section-heads.schema';
 export * from './sections.schema';
 export * from './staff.schema';

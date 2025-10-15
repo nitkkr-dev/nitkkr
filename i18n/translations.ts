@@ -921,9 +921,9 @@ export interface Translations {
       number: string;
       faculty: string;
       department: string;
-      facultyCode: string;
       totalJobs: string;
       total: string;
+      year: string;
     };
     patentsAndTechnologies: {
       number: string;
