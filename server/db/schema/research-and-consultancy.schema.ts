@@ -9,9 +9,9 @@ export const researchAndConsultancy = pgTable(
   'research_and_consultancy',
   (t) => ({
     id: t.serial().primaryKey(),
-    employeeId: t
-      .varchar('employee_id') // 👈 maps to existing DB column
-      .references(() => faculty.employeeId)
+    facultyId: t
+      .varchar('faculty_id') // 👈 maps to existing DB column
+      .references(() => faculty.id)
       .notNull(),
     totalNoOfJobs: t.integer('total_no_of_jobs').notNull(),
     totalAmount: t.varchar('total_amount', { length: 50 }).notNull(),
@@ -26,8 +26,8 @@ export const researchAndConsultancyRelations = relations(
   researchAndConsultancy,
   ({ one }) => ({
     faculty: one(faculty, {
-      fields: [researchAndConsultancy.employeeId],
-      references: [faculty.employeeId],
+      fields: [researchAndConsultancy.facultyId],
+      references: [faculty.id],
     }),
   })
 );
