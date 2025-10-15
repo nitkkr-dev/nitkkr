@@ -1,5 +1,5 @@
 // SrNo FacultyName Department TotalNoOfJobs totalAmount
-
+import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
@@ -10,15 +10,24 @@ export const researchAndConsultancy = pgTable(
   (t) => ({
     id: t.serial().primaryKey(),
     facultyId: t
-      .varchar()
-      .references(() => faculty.employeeId)
+      .varchar('faculty_id') // 👈 maps to existing DB column
+      .references(() => faculty.id)
       .notNull(),
-    totalNoOfJobs: t.integer().notNull(),
-    totalAmount: t.varchar({ length: 50 }).notNull(),
-    year: t.varchar({ length: 9 }).notNull(), // store the "2023-24"
+    totalNoOfJobs: t.integer('total_no_of_jobs').notNull(),
+    totalAmount: t.varchar('total_amount', { length: 50 }).notNull(),
+    year: t.varchar('year', { length: 9 }).notNull(),
   }),
   (t) => ({
-    // pattern check for the academic year format
     validYearFormat: sql`CHECK (${t.year} ~ '^[0-9]{4}-[0-9]{2}$')`,
+  })
+);
+
+export const researchAndConsultancyRelations = relations(
+  researchAndConsultancy,
+  ({ one }) => ({
+    faculty: one(faculty, {
+      fields: [researchAndConsultancy.facultyId],
+      references: [faculty.id],
+    }),
   })
 );
