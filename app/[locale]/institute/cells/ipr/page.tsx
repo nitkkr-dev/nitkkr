@@ -267,7 +267,7 @@ export default async function IPR({
           </div>
         </div>
         {/* IP Policy */}
-        <div>
+        <div id="ipr-policy">
           <Heading
             glyphDirection="rtl"
             heading="h2"
@@ -285,15 +285,17 @@ export default async function IPR({
                 height={200}
                 className="h-auto max-h-80 w-full object-cover"
               />
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
+
               <Link
                 href="https://nitkkr.ac.in/wp-content/uploads/2022/10/About_IPR_Cell-27092022.pdf"
-                className="text-white absolute bottom-0 left-0 w-full p-3 text-lg font-semibold text-neutral-50"
+                className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
                 target="_blank"
               >
-                <span className="capitalize">
+                <span className="uppercase">
                   {text.Research.ipr.iprPolicy.revisedIpPolicy}
                 </span>{' '}
-                (2017) &rarr;
+                (2017) →
               </Link>
             </div>
 
