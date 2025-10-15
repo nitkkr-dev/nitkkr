@@ -27,7 +27,7 @@ export const researchAndConsultancyRelations = relations(
   ({ one }) => ({
     faculty: one(faculty, {
       fields: [researchAndConsultancy.facultyId],
-      references: [faculty.employeeId],
+      references: [faculty.id],
     }),
   })
 );
