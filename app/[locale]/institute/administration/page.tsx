@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
+import Image from 'next/image';
 import { MdOutlineChecklist } from 'react-icons/md';
 import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
 import { LuShipWheel } from 'react-icons/lu';
 import { VscMortarBoard } from 'react-icons/vsc';
 import { HiCurrencyRupee } from 'react-icons/hi';
 import { BsTools } from 'react-icons/bs';
+import { MdEmail } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -50,6 +52,7 @@ export default async function Administration({
           { label: text.administrationHeads, href: '#administration-heads' },
           { label: text.committees, href: '#committees' },
           { label: text.actsAndStatutes, href: '#acts-and-statutes' },
+          { label: text.deans, href: '#deans' },
         ]}
       />
 
@@ -233,6 +236,19 @@ export default async function Administration({
             ))}
           </article>
         </footer>
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          text={text.deans.toUpperCase()}
+          id="deans"
+          href="#deans"
+        />
+
+        <section className="container my-10">
+          <Suspense fallback={<Loading />}>
+            <Deans />
+          </Suspense>
+        </section>
       </section>
     </>
   );

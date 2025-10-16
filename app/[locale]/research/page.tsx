@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { sql } from 'drizzle-orm';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
@@ -60,44 +61,20 @@ export default async function PatentsAndTechnology({
   const patents = await db.query.patents.findMany();
   const copyrights = await db.query.copyrights.findMany();
   const designs = await db.query.designs.findMany();
+  const researchAndConsultancy = await db.query.researchAndConsultancy.findMany(
+    {
+      with: {
+        faculty: {
+          with: {
+            person: true,
+            department: true,
+          },
+        },
+      },
+      orderBy: (rc) => sql`SUBSTRING(${rc.year}, 1, 4)::integer DESC`, // sorting by year to latest
+    }
+  );
 
-  const staticResearch = [
-    {
-      facultyName: 'Dr. S.K. Patidar',
-      department: 'Civil Engineering',
-      facultyCode: 'skp',
-      totalJobs: '23',
-      totalAmount: '501500',
-    },
-    {
-      facultyName: 'Dr. S.K. Patidar',
-      department: 'Civil Engineering',
-      facultyCode: 'skp',
-      totalJobs: '23',
-      totalAmount: '501500',
-    },
-    {
-      facultyName: 'Dr. S.K. Patidar',
-      department: 'Civil Engineering',
-      facultyCode: 'skp',
-      totalJobs: '23',
-      totalAmount: '501500',
-    },
-    {
-      facultyName: 'Dr. S.K. Patidar',
-      department: 'Civil Engineering',
-      facultyCode: 'skp',
-      totalJobs: '23',
-      totalAmount: '501500',
-    },
-    {
-      facultyName: 'Dr. S.K. Patidar',
-      department: 'Civil Engineering',
-      facultyCode: 'skp',
-      totalJobs: '23',
-      totalAmount: '501500',
-    },
-  ];
   const staticMemorandum = [
     {
       organization: 'CSIR-Central Road Research Institute, New Delhi',
@@ -205,7 +182,7 @@ export default async function PatentsAndTechnology({
   const base = getS3Url();
   // Get the total count for pagination
   const getResearchCount = async () => {
-    const count = staticResearch.length; // Replace with your actual DB call
+    const count = researchAndConsultancy.length; // Replace with your actual DB call
     return [{ count }];
   };
   const getProjectCount = async () => {

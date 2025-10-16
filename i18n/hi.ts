@@ -1523,9 +1523,9 @@ const text: Translations = {
       number: 'क्रम संख्या',
       faculty: 'संकाय का नाम',
       department: 'विभाग',
-      facultyCode: 'संकाय कोड',
       totalJobs: 'कुल परामर्श कार्य',
       total: 'कुल राशि (रु. में)',
+      year: 'वर्ष',
     },
     patentsAndTechnologies: {
       number: 'क्रम संख्या',

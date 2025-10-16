@@ -1,5 +1,6 @@
 import { getS3Url } from '~/server/s3';
 import { getTranslations } from '~/i18n/translations';
+import Gallery from '~/components/ui/gallery';
 
 export default async function IKS({
   params: { locale },
@@ -97,6 +98,10 @@ export default async function IKS({
           </ol>
         </article>
         {/* Gallery */}
+        <article className="mt-4 p-4">
+          <h3 className="mb-3 font-bold text-primary-300">Gallery</h3>
+          <Gallery base={getS3Url()} />
+        </article>
       </main>
     </>
   );
