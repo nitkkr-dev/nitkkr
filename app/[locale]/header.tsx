@@ -80,6 +80,12 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
         },
+        {
+          title: 'SC & ST Cell',
+          href: '/institute/cells/scst',
+          description:
+            'The SC & ST Cell is dedicated to promoting the welfare and interests of students from Scheduled Castes and Scheduled Tribes, ensuring equal opportunities and support.',
+        }
       ],
     },
     {
