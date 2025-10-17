@@ -51,7 +51,7 @@ export default async function SCST({
           <Heading
             glyphDirection="rtl"
             heading="h2"
-            text="CELL FUNCTIONS"
+            text={text.Institute.cells.scst.cellFunctionsHeading}
             className="mt-12"
           />
           <section>
@@ -73,7 +73,7 @@ export default async function SCST({
           <Heading
             glyphDirection="ltr"
             heading="h2"
-            text="LIAISON OFFICER"
+            text={text.Institute.cells.scst.liaisonOfficerHeading}
             className="mt-12"
           />
           <ul className="flex w-full flex-col items-center">
@@ -148,7 +148,7 @@ export default async function SCST({
           <Heading
             glyphDirection="rtl"
             heading="h2"
-            text="IMPORTANT LINKS"
+            text={text.Institute.cells.scst.importantLinksHeading}
             className="mt-12"
           />
           

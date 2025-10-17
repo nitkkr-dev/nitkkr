@@ -331,8 +331,10 @@ export interface Translations {
       scst: {
         title: string;
         description:string[];
+        cellFunctionsHeading:string;
         cellFunctions: string[];
         complaint:string;
+        liaisonOfficerHeading:string;
         liaisonOfficer:{
           image:string;
           name:string;
@@ -340,6 +342,7 @@ export interface Translations {
           email:string;
           phone:string;
         };
+        importantLinksHeading:string;
         importantLinks: {title:string,link:string}[];
       }
     };

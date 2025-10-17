@@ -614,6 +614,7 @@ const text: Translations = {
           'The Institute has appointed a Liaison Officer for SC & ST cell who can be contacted in the event of any incident of caste-based discrimination.',
           'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.'
           ],
+        cellFunctionsHeading:'CELL FUNCTIONS',
         cellFunctions:
         [
           'Grievances redress the grievances of SC/ST students and employees and render them necessary help in solving their academic as well as administrative problems.',
@@ -623,6 +624,7 @@ const text: Translations = {
           'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.'
         ],
         complaint: 'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
+        liaisonOfficerHeading: 'LIAISON OFFICER',
         liaisonOfficer : {
           image: 'fallback/user-image.jpg',
           name: 'Arun Goel',
@@ -630,6 +632,7 @@ const text: Translations = {
           email: 'drarun_goel@yahoo.co.in',
           phone: '01744-233349, 01744-233300'
         },
+        importantLinksHeading: 'IMPORTANT LINKS',
         importantLinks:
         [
           {
