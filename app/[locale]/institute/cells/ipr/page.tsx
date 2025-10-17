@@ -211,9 +211,12 @@ export default async function IPR({
                   <section>
                     <span className="flex items-center space-x-2">
                       <MdEmail className="text-primary-700" />
-                      <span className="text-gray-600 break-all">
+                      <Link
+                        href={`mailto:${faculty.email}`}
+                        className="text-gray-600 break-all hover:text-primary-700 hover:underline"
+                      >
                         {faculty.email}
-                      </span>
+                      </Link>
                     </span>
                     <span className="mt-2 flex items-center space-x-2">
                       <MdOutlineLocalPhone className="text-primary-700" />

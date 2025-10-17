@@ -328,6 +328,23 @@ export interface Translations {
         description: string;
         iksTeam: string;
       };
+      scst: {
+        title: string;
+        description:string[];
+        cellFunctionsHeading:string;
+        cellFunctions: string[];
+        complaint:string;
+        liaisonOfficerHeading:string;
+        liaisonOfficer:{
+          image:string;
+          name:string;
+          title:string;
+          email:string;
+          phone:string;
+        };
+        importantLinksHeading:string;
+        importantLinks: {title:string,link:string}[];
+      }
     };
   };
   Hostels: {
