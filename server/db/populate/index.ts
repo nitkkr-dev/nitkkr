@@ -3,7 +3,8 @@ import fs from 'fs';
 import { and, eq } from 'drizzle-orm';
 
 import { db } from '~/server/db';
-import * as schemas from '~/server/db/schema';
+// import * as schemas from '~/server/db/schema';
+import { clubs } from '~/server/db/schema/clubs.schema';
 
 interface RowData extends Record<string, string> {
   key: string;
@@ -52,9 +53,7 @@ function extractPhoneNumber(
 }
 
 export async function populate() {
-  const Csv = fs
-    .readFileSync('research_and_consultancy.tsv', 'utf-8')
-    .split('\n');
+  const Csv = fs.readFileSync('clubs.tsv', 'utf-8').split('\n');
   const Headers = Csv[0].split('\t');
 
   console.log('Headers:', Headers);
@@ -62,6 +61,26 @@ export async function populate() {
   await db.transaction(async (tx) => {
     for (let i = 1; i < Csv.length; i++) {
       const Data = convertToData(Csv[i], Headers);
+      await tx.insert(clubs).values({
+        name: Data.name,
+        urlName: Data.urlName,
+        alias: Data.alias,
+        tagline: Data.tagline,
+        email: Data.email,
+        aboutUs: Data.aboutUs,
+        howToJoinUs: Data.howToJoinUs || 'Interested students...',
+        whyToJoinUs: Data.whyToJoinUs || 'Join us to explore...',
+        category: Data.category as
+          | 'committee'
+          | 'cultural'
+          | 'crew'
+          | 'technical',
+        departmentId: Data.departmentId ? parseInt(Data.departmentId) : null,
+        isActive: Data.isActive === 'true',
+        createdOn: Data.createdOn ? new Date(Data.createdOn) : new Date(),
+        updatedAt: new Date(), // Add this missing required field
+        updatedBy: parseInt(Data.updatedBy || '0'),
+      });
     }
   });
 }
