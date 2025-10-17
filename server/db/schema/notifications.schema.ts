@@ -1,4 +1,7 @@
-import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { check, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { relations, sql } from 'drizzle-orm';
+
+import { clubs } from './clubs.schema';
 
 export const notifications = pgTable(
   'notifications',
@@ -8,7 +11,14 @@ export const notifications = pgTable(
     content: t.text(),
     category: t
       .varchar({
-        enum: ['academic', 'tender', 'workshop', 'recruitment', 'hostel'],
+        enum: [
+          'academic',
+          'tender',
+          'workshop',
+          'recruitment',
+          'student-activity',
+          'hostel',
+        ],
       })
       .notNull(),
     createdAt: t.timestamp().defaultNow().notNull(),
@@ -16,6 +26,25 @@ export const notifications = pgTable(
       .timestamp()
       .$onUpdate(() => new Date())
       .notNull(),
+    clubId: t.integer().references(() => clubs.id),
   }),
-  (table) => [uniqueIndex('notifications_title_idx').on(table.title)]
+  (notifications) => {
+    return {
+      notificationsTitleIndex: uniqueIndex('notifications_title_idx').on(
+        notifications.title
+      ),
+      // Add check constraint
+      clubrequiredforStudentActivity: check(
+        'clubIdRequiredForStudentActivity',
+        sql`${notifications.category} != 'student-activity' OR ${notifications.clubId} IS NOT NULL`
+      ),
+    };
+  }
 );
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  club: one(clubs, {
+    fields: [notifications.clubId],
+    references: [clubs.id],
+  }),
+}));
