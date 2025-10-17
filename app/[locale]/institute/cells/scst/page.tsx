@@ -30,8 +30,8 @@ export default async function SCST({
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('${getS3Url()}/training-and-placement/header.jpg')`,
         }}
       >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="mx-2 my-auto text-3xl text-[#FFFFFF] md:text-2xl lg:text-3xl xl:text-4xl font-serif font-normal whitespace-nowrap">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-[90%] max-w-5xl">
+          <h1 className="mx-2 my-auto text-3xl text-[#FFFFFF]  lg:text-3xl xl:text-4xl font-serif font-normal ">
             {text.Institute.cells.scst.title}
           </h1>
         </div>
