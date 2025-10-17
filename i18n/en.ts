@@ -654,7 +654,7 @@ const text: Translations = {
           },
           {
             title: 'SC & ST Cell AICTE',
-            link: 'https://www.aicte-india.org'
+            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
           }
         ],
       }

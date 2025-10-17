@@ -31,7 +31,7 @@ export default async function SCST({
         }}
       >
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="mx-2 my-auto text-xl text-[#FFFFFF] md:text-2xl lg:text-3xl xl:text-4xl font-serif font-normal">
+          <h1 className="mx-2 my-auto text-3xl text-[#FFFFFF] md:text-2xl lg:text-3xl xl:text-4xl font-serif font-normal whitespace-nowrap">
             {text.Institute.cells.scst.title}
           </h1>
         </div>
@@ -52,13 +52,14 @@ export default async function SCST({
             glyphDirection="rtl"
             heading="h2"
             text="CELL FUNCTIONS"
-            className='mt-12' 
+            className="mt-12"
           />
           <section>
-            <ul className="mt-8 list-inside list-disc space-y-4 bg-[#FFFFFF] p-4 rounded-lg border border-primary-500 drop-shadow font-sans font-normal text-lg">
+            <ul className="mt-8 space-y-4 bg-[#FFFFFF] p-4 rounded-lg border border-primary-500 drop-shadow font-sans font-normal text-lg">
             {cellFunctions.map((functionItem, index) => (
-              <li key={index} className="text-justify leading-tight ">
-                {functionItem}
+              <li key={index} className="text-justify leading-tight flex">
+                <span className="mr-1.5">•</span>
+                <span>{functionItem}</span>
               </li>
             ))}
             </ul>
@@ -79,41 +80,63 @@ export default async function SCST({
             {facultyIncharge.map((faculty, idx) => (
               <li
                 key={idx}
-                className="flex w-[90%] max-w-3xl flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:flex-row"
+                className="flex w-[90%] max-w-3xl  rounded-lg border border-primary-500 bg-neutral-50 p-1 "
               >
-                <Image
-                  src={faculty.image}
-                  alt={faculty.name}
-                  width={200}
-                  height={200}
-                  className="h-52 w-52 rounded-lg"
-                />
-                <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
-                  <div>
-                    <h2 className="m-0 text-start text-lg md:text-xl">
-                      {faculty.name}
-                      <span className="block text-lg text-neutral-900">
-                        {faculty.title}
-                      </span>
-                    </h2>
+                {/* Image - smaller on mobile */}
+                <div className="flex-shrink-0 flex items-center justify-center">
+                  <Image
+                    src={faculty.image}
+                    alt={faculty.name}
+                    width={300}
+                    height={340}
+                    className="h-full w-24 xs:h-24 xs:w-24 sm:h-36 sm:w-36 md:h-52 md:w-52 rounded-md object-cover" 
+                  />
+                </div>
+                
+                {/* Content section - adjusted for mobile row layout */}
+                <section className="ml-2 xs:ml-3 sm:ml-6 md:ml-8 flex flex-col justify-center">
+                  {/* Name in red - reduced margin bottom */}
+                  <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-medium text-red-600 mb-0">
+                    {faculty.name}
+                  </h2>
+                  
+                  {/* Title and position - reduced spacing */}
+                  <div className="mb-0.5 xs:mb-1 sm:mb-2"> {/* Reduced margin from mb-1/mb-2/mb-4 */}
+                    <p className="text-sm xs:text-base sm:text-xl md:text-xl font-normal text-gray-700 leading-tight"> {/* Added leading-tight */}
+                      {faculty.title}
+                    </p>
+                    {!faculty.title.includes("Head") && (
+                      <p className="text-sm xs:text-base sm:text-xl md:text-2xl font-normal text-gray-700 leading-tight mt-0"> {/* Added leading-tight and mt-0 */}
+                        (Head of the Department)
+                      </p>
+                    )}
                   </div>
-                  <section>
-                    <span className="flex items-center space-x-2">
-                      <MdEmail className="text-primary-700" />
-                      <Link 
+                  
+                  {/* Contact info */}
+                  <div className="space-y-0.5 xs:space-y-1 sm:space-y-2">
+                    {/* Email with icon */}
+                    <span className="flex items-center">
+                      <span className="inline-flex h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 items-center justify-center text-red-600">
+                        <MdEmail className="text-primary-700 text-base xs:text-lg sm:text-xl" />
+                      </span>
+                      <a 
                         href={`mailto:${faculty.email}`}
-                        className="text-gray-600 break-all hover:text-primary-700 hover:underline"
+                        className="hover:text-primary-700 hover:underline break-all ml-1 xs:ml-1.5 sm:ml-2 text-xs xs:text-sm sm:text-base md:text-lg text-gray-700 "
                       >
                         {faculty.email}
-                      </Link>
+                      </a>
                     </span>
-                    <span className="mt-2 flex items-center space-x-2">
-                      <MdOutlineLocalPhone className="text-primary-700" />
-                      <span className="text-gray-600 break-all">
+                    
+                    {/* Phone with icon */}
+                    <span className="flex items-center">
+                      <span className="inline-flex h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 items-center justify-center text-red-600">
+                        <MdOutlineLocalPhone className="text-primary-700 text-base xs:text-lg sm:text-xl" />
+                      </span>
+                      <span className="ml-1 xs:ml-1.5 sm:ml-2 text-xs xs:text-sm sm:text-base md:text-lg text-gray-700">
                         {faculty.phone}
                       </span>
                     </span>
-                  </section>
+                  </div>
                 </section>
               </li>
             ))}
@@ -155,7 +178,7 @@ export default async function SCST({
                   rel="noopener noreferrer"
                   className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-10 font-sans"
                 >
-                  <p className="whitespace-normal text-center font-serif font-semibold text-md sm:text-xl ">
+                  <p className="whitespace-normal text-center font-serif font-semibold text-lg sm:text-xl ">
                     {link.title}
                   </p>
                 </a>

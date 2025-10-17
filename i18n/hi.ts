@@ -604,7 +604,7 @@ const text: Translations = {
           },
           {
             title: 'अनुसूचित जाति और अनुसूचित जनजाति प्रकोष्ठ एआईसीटीई',
-            link: 'https://www.aicte-india.org'
+            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
           }
         ],
       }
