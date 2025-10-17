@@ -1,7 +1,15 @@
 import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
-import { clubMembers, clubSocials, departments, faculty, persons } from '.';
+import {
+  clubMembers,
+  clubSocials,
+  departments,
+  events,
+  notifications,
+  persons,
+} from '.';
+import { clubFacultyHeads } from './club-faculty-heads.schema';
 
 export const clubs = pgTable('clubs', (t) => ({
   id: t.smallserial().primaryKey(),
@@ -11,15 +19,12 @@ export const clubs = pgTable('clubs', (t) => ({
   tagline: t.varchar({ length: 256 }).notNull(),
   email: t.varchar({ length: 256 }).notNull(),
   aboutUs: t.varchar().notNull(),
+  howToJoinUs: t.varchar().notNull(),
+  whyToJoinUs: t.varchar().notNull(),
   category: t
     .varchar({ enum: ['committee', 'cultural', 'crew', 'technical'] })
     .notNull(),
-  departmentId: t.smallint().references(() => departments.id),
-  facultyInchargeId1: t
-    .integer()
-    .references(() => faculty.id)
-    .notNull(),
-  facultyInchargeId2: t.integer().references(() => faculty.id),
+  departmentId: t.smallint().references(() => departments.id), // not necessary that club/society is related with a department
   isActive: t.boolean().default(true).notNull(),
   createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
   updatedAt: t
@@ -33,20 +38,13 @@ export const clubs = pgTable('clubs', (t) => ({
 }));
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
+  clubEvents: many(events),
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
   }),
-  facultyIncharge1: one(faculty, {
-    relationName: 'facultyIncharge1',
-    fields: [clubs.facultyInchargeId1],
-    references: [faculty.id],
-  }),
-  facultyIncharge2: one(faculty, {
-    relationName: 'facultyIncharge2',
-    fields: [clubs.facultyInchargeId2],
-    references: [faculty.id],
-  }),
+  clubNotifications: many(notifications),
+  clubFacultyHeads: many(clubFacultyHeads),
 }));

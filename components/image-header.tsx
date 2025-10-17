@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '~/components/buttons';
@@ -9,11 +10,15 @@ export default function ImageHeader({
   title,
   headings,
   src,
+  display_name,
+  logoUrl,
 }: {
   className?: string;
   title?: string;
   headings?: { label: string; href: string }[];
   src: string;
+  display_name?: string;
+  logoUrl?: string;
 }) {
   return (
     <>
@@ -29,7 +34,7 @@ export default function ImageHeader({
 
       <section
         className={cn(
-          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-xl:static',
+          'absolute flex w-full bg-neutral-700 bg-cover bg-center bg-blend-overlay max-sm:static',
           'h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]',
           className
         )}
@@ -42,52 +47,52 @@ export default function ImageHeader({
             {title}
           </h1>
         )}
+        {/* In case and image or logo is required on top of it */}
+        {display_name && logoUrl && (
+          <header className="container m-auto flex max-w-[46rem] items-center justify-center ">
+            <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
+              <Image
+                alt={display_name}
+                // src={`student-activities/clubs/${display_name}/logo.jpg`}
+                src={logoUrl}
+                fill
+                className="rounded-full bg-primary-100 object-cover"
+                sizes="(max-width: 640px) 4rem, (max-width: 768px) 6rem, (max-width: 920px) 8rem"
+              />
+            </div>
+
+            <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+              {display_name.toUpperCase()}
+            </h1>
+          </header>
+        )}
       </section>
 
-      {headings ? (
+      {headings && (
         <>
           <ol
             className={cn(
               'p-1 xl:p-2',
-              'hidden xl:flex xl:gap-1 2xl:gap-2',
+              'hidden sm:flex sm:gap-1 md:gap-2',
               'sticky top-6 z-tabs mx-auto w-fit rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
-              // 'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' TODO: This needs to be fixed for small screens// DEPENDS-ON: header.tsx
-              'xl:mb-[38px] xl:mt-72 2xl:mt-[352px]'
+              'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
             )}
           >
             {headings.map(({ label, href }, index) => (
               <li key={index}>
                 <Button
                   asChild
-                  className="group rounded-full px-4 py-2 text-[clamp(theme(fontSize.xs),1.5vw,theme(fontSize.base))] text-shade-dark transition-colors duration-300"
+                  className="rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
                   variant="ghost"
                 >
-                  <Link href={href}>
-                    {/*adjust width here*/}
-                    <span
-                      className="
-                         block max-w-[10rem] truncate transition-all duration-300 ease-in-out 
-                         group-hover:max-w-[20rem] 
-                        "
-                      style={{ minWidth: '0' }}
-                    >
-                      {label}
-                    </span>
-                  </Link>
+                  <Link href={href}>{label}</Link>
                 </Button>
               </li>
             ))}
           </ol>
           <hr className="invisible hidden sm:block" />
         </>
-      ) : (
-        <hr
-          className={cn(
-            'invisible hidden sm:block',
-            'mt-56 sm:mt-64 md:mt-72 lg:mt-80 xl:mt-96 2xl:mt-[448px]'
-          )}
-        />
       )}
     </>
   );
