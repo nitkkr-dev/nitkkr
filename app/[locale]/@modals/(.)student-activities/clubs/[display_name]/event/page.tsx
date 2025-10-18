@@ -23,7 +23,11 @@ export default function EventPage({
       id: 0,
       title: 'Saarang',
       date: '2021-10-10',
-      image: ['student-activities/clubs/spicmacay/6.jpg'],
+      image: [
+        'student-activities/clubs/spicmacay/6.jpg',
+        'student-activities/clubs/spicmacay/10.jpg',
+        'student-activities/clubs/spicmacay/3.jpg',
+      ],
       description:
         'Saarang is one of SPICMACAY NIT Kurukshetra’s flagship cultural events, showcasing the vibrant diversity of Indian classical music and dance. It brings together student performers and promotes traditional art forms through themed performances, often held during Confluence, the annual cultural fest.',
     },
@@ -66,14 +70,14 @@ export default function EventPage({
   const imageCount = clubEvent.image.length;
 
   return (
-    <DialogContent className="mx-4 flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
-      <h2 className="text-primary-800 mb-4 self-start text-3xl font-bold">
+    <Dialog className="mx-4 mx-auto flex max-w-5xl flex-col items-center rounded-xl border border-primary-500 bg-background p-8 shadow-xl">
+      <h2 className="text-primary-800 mb-4 self-center text-3xl font-bold">
         {clubEvent.title}
       </h2>
 
       <GalleryCarousel
         className="mb-6 w-full overflow-hidden rounded-lg"
-        itemClassName="w-full"
+        itemClassName=""
       >
         {[...Array<number>(imageCount)].map((_, index) => (
           <Image
@@ -82,18 +86,21 @@ export default function EventPage({
             key={index}
             src={clubEvent.image[index]}
             width={1000}
-            className="h-auto max-h-[500px] w-full rounded-lg object-contain"
+            className="h-40 w-full rounded-lg object-cover sm:h-60 md:h-80 lg:h-[400px]"
           />
         ))}
       </GalleryCarousel>
 
       <p className="text-gray-700 text-base leading-relaxed">
-        SPICMACAY regularly conducts instrumental and vocal workshops to help
-        students explore classical music practically. These sessions are guided
-        by skilled artists or senior members and focus on instruments like
-        harmonium, tabla, and vocals, creating an inclusive space for learning
-        and collaboration.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quis
+        optio adipisci, voluptates nobis eos nisi tempora eius assumenda maxime
+        et velit reiciendis reprehenderit libero aut rem, vero, dolorum animi!
+        Voluptatum assumenda rerum, non consequatur labore vitae repudiandae
+        maxime beatae in doloribus itaque, quaerat dolorem nesciunt modi quas
+        provident officia, necessitatibus ut amet qui voluptatibus facere. Aut
+        aliquid veritatis cum, nihil, minima laudantium perferendis assumenda
+        doloribus quam aspernatur nulla porro!
       </p>
-    </DialogContent>
+    </Dialog>
   );
 }

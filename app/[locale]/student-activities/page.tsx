@@ -69,7 +69,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
     columns: { alias: true, name: true, urlName: true },
   });
 
-  console.log(clubs);
+  // console.log(clubs);
 
   return (
     <GalleryCarousel>
