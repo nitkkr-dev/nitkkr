@@ -48,65 +48,24 @@ const text: Translations = {
     ],
   },
   Main: {
-
-    Director:{
-      name: "Professor B.V. Ramana Reddy",
-    position: "Director, National Iinstitute of Technology Kurukshetra",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",
-    title: [
-      'DIRECTOR’S PROFILE',
-      'BRIEF CV OF DIRECTOR',
-      'DIRECTOR’S MESSAGE',
-      'DIRECTOR’S OFFICE',
-      'PREVIOUS DIRECTORS',
-    ],
-     cv: [
-" He took over as Director, National Institute of  Technology Kurukshetra on 05th February, 2022 (Basant Panchmi). He is an alumnus of Andhra University, IIT Roorkee and NIT Kurukshetra. In his  long career spanning over 35 years, he served in various capacities as  teaching faculty at national institutes of repute at NIT Kurukshetra  (during 1991- 95), NIT Hamirpur (1995-1999) known earlier as REC. He  also served as Assoc. Prof. & as Professor at University School of  Information & Communication Technoloy (USICT), GGSIP University New Delhi for the last 22 years (2000-2022).",
-      "His current research interests include Wireless communications which include mobile, Adhoc and sensor based networks, computer communication networks, Semiconductor and VLSI circuits and microwave & optical communications. He has more than 100 publications in International, National journals and International Conferences to his credit. He produced Thirteen (13) Ph.D.s, and currently supervising Eight (8) PhD scholars.",
-      "Besides, he is a Fellow of IETE, IE, ISTE and a member of other professional bodies such as IEEE, CSI and SEMCEI. He is an active member in various committees constituted by AICTE, UGC, NAAC, TEQIP and NIC. He visited foreign Universities situated in Singapore and China.",
-      "He is currently actively participating in educational reforms and value based education, in tune with National Skill Qualification Framework (NSQF) and contributed to vocational education in the country. He strongly believes in holistic development and growth of the next generation children, and dreams of a society where each and every species living on Earth lives harmoniously (VASUDEVA KUTUMBAKAM). Further, he strongly believes in to see glitter in the eyes of his subjects as an award, reward or recognition.",
-      "His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.",
-    ],
-     DirectorMessage:  [
-  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.",
-  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere."
-],
-employes:[
-  
-    {name: "Arun Goel",
-    position: "Head of Department, CSE",
-    phone: "+91-1744-233208",
-    email: "director@nitkkr.ac.in",},
-    {name: "Arun Goel",
-    position: "Head of Department, CSE",
-    phone: "+91-1744-233208",
-    email: "director@nitkkr.ac.in",}
-],
-preDirectors:[
-  {name: "Professor B.V. Ramana Reddy",
-    position: "Director, NIT Kurukshetra",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",},
-    {name: "Professor B.V. Ramana Reddy",
-    position: "Director, NIT Kurukshetra",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",},
-    {name: "Professor B.V. Ramana Reddy",
-    position: "Director, NIT Kurukshetra",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",}
-],
-  
-},
+    director: {
+      alt: 'Prof. B. V. Ramana Reddy',
+      title: 'DIRECTOR’S CORNER',
+      name: 'Prof. B. V. Ramana Reddy',
+      quote: [
+        `India, the land of seekers, is at the cusp of becoming Vishwa Guru all
+      over again after 1100 years of subjugation, wars, annexures and
+      humiliation. It is again a free country due to the sacrifices made by our
+      leaders, freedom fighters and has learnt the art of standing tall in the
+      midst of many a challenge of building the nation with its rich diversity,
+      cultures, languages all over again since the last 75 years. Unity in
+      Diversity is our mantra while making our nation stronger in every
+      sphere.`,
+        'I heartily welcome everyone who visits the website of this institution.',
+      ],
+      more: 'Read more',
+    },
+    
     title: {
       primary: 'NIT KURUKSHETRA',
       secondary: 'एनआईटी कुरुक्षेत्र',
@@ -509,6 +468,80 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     },
     sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
   },
+   DirectorPage:{
+    pageTitle: "DIRECTOR",
+    sections: [
+  "Director’s Profile",
+  "Brief CV Of Director",
+  "Director’s Message",
+  "Director’s Office",
+  "Previous Directors"
+],
+     Director:{
+      name: "Professor B.V. Ramana Reddy",
+     
+    position: "Director, National Iinstitute of Technology Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",
+     },
+    title: [
+      'DIRECTOR’S PROFILE',
+      'BRIEF CV OF DIRECTOR',
+      'DIRECTOR’S MESSAGE',
+      'DIRECTOR’S OFFICE',
+      'PREVIOUS DIRECTORS',
+    ],
+     cv: [
+" He took over as Director, National Institute of  Technology Kurukshetra on 05th February, 2022 (Basant Panchmi). He is an alumnus of Andhra University, IIT Roorkee and NIT Kurukshetra. In his  long career spanning over 35 years, he served in various capacities as  teaching faculty at national institutes of repute at NIT Kurukshetra  (during 1991- 95), NIT Hamirpur (1995-1999) known earlier as REC. He  also served as Assoc. Prof. & as Professor at University School of  Information & Communication Technoloy (USICT), GGSIP University New Delhi for the last 22 years (2000-2022).",
+      "His current research interests include Wireless communications which include mobile, Adhoc and sensor based networks, computer communication networks, Semiconductor and VLSI circuits and microwave & optical communications. He has more than 100 publications in International, National journals and International Conferences to his credit. He produced Thirteen (13) Ph.D.s, and currently supervising Eight (8) PhD scholars.",
+      "Besides, he is a Fellow of IETE, IE, ISTE and a member of other professional bodies such as IEEE, CSI and SEMCEI. He is an active member in various committees constituted by AICTE, UGC, NAAC, TEQIP and NIC. He visited foreign Universities situated in Singapore and China.",
+      "He is currently actively participating in educational reforms and value based education, in tune with National Skill Qualification Framework (NSQF) and contributed to vocational education in the country. He strongly believes in holistic development and growth of the next generation children, and dreams of a society where each and every species living on Earth lives harmoniously (VASUDEVA KUTUMBAKAM). Further, he strongly believes in to see glitter in the eyes of his subjects as an award, reward or recognition.",
+      "His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.",
+    ],
+     DirectorMessage:  [
+  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.",
+  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere."
+],
+employes:[
+  
+    {name: "Arun Goel",
+    image: "assets/Arun.jpg",
+    position: "Head of Department, CSE",
+    phone: "+91-1744-233208",
+    email: "director@nitkkr.ac.in",},
+    {name: "Arun Goel",
+    image: "assets/Arun.jpg",
+    position: "Head of Department, CSE",
+    phone: "+91-1744-233208",
+    email: "director@nitkkr.ac.in",}
+],
+preDirectors:[
+  {name: "Professor B.V. Ramana Reddy",
+    image: "assets/director.jpeg",
+    position: "Former Director, NIT Kurukshetra -2022-2025",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",},
+    {name: "Professor B.V. Ramana Reddy",
+      image: "assets/director.jpeg",
+    position: "Director, NIT Kurukshetra",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",},
+    {name: "Professor B.V. Ramana Reddy",
+      image: "assets/director.jpeg",
+    position: "Former Director, NIT Kurukshetra -2022-2025",
+    phone: "+91-1744-233208",
+    fax: "+91-1744-238050",
+    mobile: "+91-9876543210",
+    email: "director@nitkkr.ac.in",}
+],
+  
+},
   
  
 };

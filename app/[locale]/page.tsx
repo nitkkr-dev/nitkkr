@@ -17,7 +17,6 @@ import { getTranslations } from '~/i18n/translations';
 import { type events, type notifications } from '~/server/db';
 
 import Events from './events';
-import EmployeCard from '~/components/employe-card';
 
 export default async function Home({
   params: { locale },
@@ -75,7 +74,7 @@ export default async function Home({
                         {title}
                       </h4>
                       <p className="line-clamp-1 pl-2 text-xs text-neutral-100 md:text-lg">
-                        {title}
+                        {subtitle}
                       </p>
                     </article>
                   </figcaption>
@@ -93,7 +92,7 @@ export default async function Home({
         <section className="container absolute inset-x-0 bottom-0 hidden h-0 justify-end lg:flex">
           <section className="absolute bottom-0 flex flex-col space-y-4 pb-8">
             {[
-              { href: 'mailto:Director@nitkkr.ac.in', icon: MdEmail },
+              { href: 'mailto:director@nitkkr.ac.in', icon: MdEmail },
               { href: 'tel:+911742238570', icon: MdPhone },
               {
                 href: 'https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana',
@@ -115,93 +114,26 @@ export default async function Home({
 
       <Notifications category={notificationCategory} locale={locale} />
       <Events category={eventsCategory} locale={locale} />
-
-      <section className="container mb-32 mt-10" id="Directors-corner">
+        <section className="container mb-32 mt-10" id="directors-corner">
         <Heading
-          glyphDirection="dual"
-          heading="h2"
-          href="#Directors-corner"
-          text={text.Director.title[0]}
-        />
-  <MessageCard
-    image="assets/director.jpeg"
-    name={text.Director.name}
-    position={text.Director.position}
-    phone={text.Director.phone}
-    fax={text.Director.fax}
-    mobile={text.Director.mobile}
-    email={text.Director.email}
-  />
-        
-       
-      </section>
-
-      <Heading
-          glyphDirection="dual"
-          heading="h2"
-          href="#Directors-corner"
-          text={text.Director.title[1]}
-        />
-
-
-       <p>{text.Director.cv[0]}</p>
-      <br/>
-      <p>{text.Director.cv[1]}</p>
-      <br/>
-      <p>{text.Director.cv[2]}</p>
-      <br/>
-      <p>{text.Director.cv[3]}</p>
-      <Heading
-          glyphDirection="dual"
-          heading="h2"
-          href="#Directors-corner"
-          text={text.Director.title[2]}
-        />
-      <p>{text.Director.DirectorMessage[0]}</p>
-      <br/>
-      <p>{text.Director.DirectorMessage[1]}</p>
-      <br/>
-   
-      <Heading
           glyphDirection="rtl"
           heading="h2"
-          href="#Directors-corner"
-          text={text.Director.title[3]}
+          href="#directors-corner"
+          text={text.director.title}
         />
-<div className="grid grid-cols-2 gap-6">
-  {text.Director.employes.map((employe, index) => (
-    <EmployeCard
-      key={index}
-      name={employe.name}
-      position={employe.position}
-      phone={employe.phone}
-      email={employe.email}
-      image="assets/director.jpeg"
-    />
-  ))}
-</div>
-
-        <Heading
-          glyphDirection="dual"
-          heading="h2"
-          href="#Directors-corner"
-          text={text.Director.title[4]}
+        <MessageCard
+          image="assets/director.jpeg"
+          locale={locale}
+          name={text.director.name}
+          quote={text.director.quote[0]}
+          quoteBelow={text.director.quote[1]}
+          readMore={{
+            text: text.director.more,
+            href: `/director-message`,
+          }}
         />
-      
-  {text.Director.preDirectors.map((director, index) => (
-  <><MessageCard
-      key={index}
-      name={director.name}
-      position={director.position}
-      phone={director.phone}
-      fax={director.fax}
-      mobile={director.mobile}
-      email={director.email}
-      image="assets/director.jpeg" /><br /></>
-))}
-
-
-    
+      </section>
+     
     </>
   );
 }

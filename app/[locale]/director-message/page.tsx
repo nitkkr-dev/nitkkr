@@ -1,63 +1,117 @@
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
-import { getS3Url } from '~/server/s3';
+import DirectorCard from '~/components/director-card';
+import EmployeCard from '~/components/employe-card';
+import ImageHeader from '~/components/image-header';
 
 export default async function DirectorCorner({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const text = (await getTranslations(locale)).DirectorMessage;
+  const text = (await getTranslations(locale)).DirectorPage;
+
   return (
     <>
-      <section
-        className="container"
-        style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 1) 0%, rgba(249, 245, 235, 0.85) 85%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/assets/temple-1.jpeg')`,
-        }}
-      >
+      {/* ---------- HEADER ---------- */}
+      <ImageHeader
+        title={text.pageTitle}
+        headings={[
+          { label: text.sections[0], href: '#director-profile' },
+          { label: text.sections[1], href: '#brief-cv-of-director' },
+          { label: text.sections[2], href: '#director-message' },
+          { label: text.sections[3],href: '#director-office' },
+          { label: text.sections[4], href: '#previous-directors' }
+        ]}
+        src="student-activities/header.jpg"
+      />
+
+      {/* ---------- DIRECTOR’S PROFILE ---------- */}
+      <section className="container mb-32 mt-10" id="director-profile">
         <Heading
-          text={text.title.toUpperCase()}
-          heading="h3"
           glyphDirection="dual"
+          heading="h2"
+          href="#director-profile"
+          text={text.title[0]}
         />
-        <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r ">
-            {text.message.slice(0, 7).map((message, index) => (
-              <span key={index} className="mb-5 block">
-                {message}
-              </span>
-            ))}
-          </p>
-        </article>
-        <article className="mx-auto flex items-center justify-center max-md:flex-col">
-          <p className="w-fit max-w-4xl text-center text-lg max-md:rounded-t md:rounded-r">
-            {text.message.slice(7, 9).map((message, index) => (
-              <span key={index} className="mb-5 block">
-                {message}
-              </span>
-            ))}
-          </p>
-        </article>
-        <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r ">
-            {text.message.slice(9, 11).map((message, index) => (
-              <span key={index} className="mb-3 block">
-                {message}
-              </span>
-            ))}
-          </p>
-        </article>
-        <article className="mx-auto flex items-center justify-center max-md:flex-col">
-          <p className="w-fit max-w-4xl text-justify text-lg max-md:rounded-t md:rounded-r">
-            <span className="bold mb-5 block">{text.message[11]}</span>
-          </p>
-        </article>
-        <article className="flex-end flex justify-end">
-          <p className="w-fit max-w-4xl text-justify text-lg font-bold max-md:rounded-t md:rounded-r">
-            <span className="bold mb-5 block">{text.message[12]}</span>
-          </p>
-        </article>
+        <DirectorCard
+          image= "assets/director.jpeg"
+          name={text.Director.name}
+          position={text.Director.position}
+          phone={text.Director.phone}
+          fax={text.Director.fax}
+          mobile={text.Director.mobile}
+          email={text.Director.email}
+        />
+      </section>
+
+      {/* ---------- BRIEF CV OF DIRECTOR ---------- */}
+      <section className="px-6 sm:px-10" id="brief-cv-of-director">
+        <Heading
+          glyphDirection="dual"
+          heading="h2"
+          href="#brief-cv-of-director"
+          text={text.title[1]}
+        />
+        {text.cv.map((item, index) => (
+          <p key={index}>{item}</p>
+        ))}
+      </section>
+
+      {/* ---------- DIRECTOR’S MESSAGE ---------- */}
+      <section className="px-6 sm:px-10" id="director-message">
+        <Heading
+          glyphDirection="dual"
+          heading="h2"
+          href="#director-message"
+          text={text.title[2]}
+        />
+        {text.DirectorMessage.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+      </section>
+
+      {/* ---------- DIRECTOR’S OFFICE / EMPLOYEES ---------- */}
+      <section className="flex flex-wrap justify-center gap-6 sm:gap-8" id="director-office">
+        <Heading
+          glyphDirection="rtl"
+          heading="h2"
+          href="#director-office"
+          text={text.title[3]}
+        />
+        {text.employes.map((employe, index) => (
+          <EmployeCard
+            key={index}
+            name={employe.name}
+            position={employe.position}
+            phone={employe.phone}
+            email={employe.email}
+             image={employe.image}
+          />
+        ))}
+      </section>
+
+      {/* ---------- PREVIOUS DIRECTORS ---------- */}
+      <section id="previous-directors">
+        <Heading
+          glyphDirection="dual"
+          heading="h2"
+          href="#previous-directors"
+          text={text.title[4]}
+        />
+        {text.preDirectors.map((director, index) => (
+          <div key={index} className="mb-6">
+            <DirectorCard
+              name={director.name}
+              position={director.position}
+              phone={director.phone}
+              fax={director.fax}
+              mobile={director.mobile}
+              email={director.email}
+              image={director.image}
+            />
+          </div>
+        ))}
       </section>
     </>
   );

@@ -1,76 +1,96 @@
 import Image from 'next/image';
-import { FaPhone } from 'react-icons/fa6';
-import { MdEmail, MdFax } from 'react-icons/md';
+import { FaCalendar, FaPhone } from 'react-icons/fa6';
+import { MdEmail } from 'react-icons/md';
+
+import { BouncyArrowButton } from '~/components/buttons';
 import { cn } from '~/lib/utils';
 
-export default function DirectorCard({
+export default function MessageCard({
   className,
+  details,
   image,
+  locale,
   name,
-  position,
-  phone,
-  fax,
-  mobile,
-  email,
+  quote,
+  quoteBelow,
+  readMore,
 }: {
   className?: string;
+  details?: {
+    email: string;
+    phone: string;
+    session: string;
+  };
   image: string;
+  locale: string;
+  more?: string;
   name: string;
-  position: string;
-  phone: string;
-  fax: string;
-  mobile: string;
-  email: string;
+  quote: string;
+  quoteBelow?: string;
+  readMore?: { text: string; href: string };
 }) {
   return (
     <article
-  className={cn(
-    'flex flex-col items-center gap-6 rounded-xl border border-gray-300 p-6 shadow-md md:flex-row md:items-start md:p-8 mx-auto',
-    className
-  )}
-  style={{
-    width: '75vw',              
-    backgroundColor: 'rgb(250, 250, 250)' 
-  }}
->
-  {/* Director Image */}
-  <div className="flex-shrink-0 overflow-hidden rounded-lg shadow-sm">
-    <Image
-      alt={name}
-      className="h-auto w-[180px] rounded-lg object-cover md:w-[220px]"
-      height={220}
-      width={180}
-      src={image}
-    />
-  </div>
-
-  {/* Director Info */}
-  <div className="flex-1 space-y-2">
-    <h3 className="text-xl font-bold text-red-700 md:text-2xl">{name}</h3>
-<p className="text-2xl md:text-3xl text-gray-800">{position}</p>
-
-    <ul className="mt-3 space-y-1 text-sm md:text-base">
-      <li>
-        <strong>Phone No.:</strong>{' '}
-        <span className="text-gray-700 hover:underline">{phone}</span>
-      </li>
-      <li>
-        <strong>Fax No.:</strong>{' '}
-        <span className="text-gray-700">{fax}</span>
-      </li>
-      <li>
-        <strong>Mobile No.:</strong>{' '}
-        <span className="text-gray-700 hover:underline">{mobile}</span>
-      </li>
-      <li>
-        <strong>Email-ID:</strong>{' '}
-        <a href={`mailto:${email}`} className="text-blue-700 hover:underline">
-          {email}
-        </a>
-      </li>
-    </ul>
-  </div>
-</article>
-
+      className={cn(
+        'grid gap-x-5 space-y-3 sm:space-y-4 md:space-y-5',
+        'grid-cols-[5rem,auto] md:grid-cols-[5rem,auto] lg:grid-cols-[min(30%,24rem),auto] lg:grid-rows-[3rem,auto]',
+        'p-4 md:p-6 xl:p-8',
+        'rounded-xl border border-primary-700 bg-neutral-50',
+        className
+      )}
+    >
+      <Image
+        alt={name}
+        className="aspect-[6/7] rounded-xl object-cover max-lg:w-24 lg:row-span-2"
+        height={500}
+        src={image}
+        width={500}
+      />
+      <h3 className="!my-0 h-fit self-center lg:text-4xl">{name}</h3>
+      <p
+        className={cn(
+          'max-lg:col-span-2 lg:text-xl',
+          details && 'lg:row-span-3'
+        )}
+      >
+        {quote}
+        &nbsp;
+        {readMore && (
+          <BouncyArrowButton
+            buttonProps={{
+              className: 'inline-flex items-center gap-1',
+              variant: 'link',
+            }}
+            linkProps={{ href: `/${locale}${readMore.href}` }}
+            text={readMore.text}
+          />
+        )}
+        {quoteBelow && (
+          <>
+            <br />
+            <br />
+            {quoteBelow}
+          </>
+        )}
+      </p>
+      {details && (
+        <footer className="max-lg:col-span-2">
+          <ul>
+            <li className="flex items-center gap-2">
+              <MdEmail className="size-4 fill-primary-700 md:size-5" />
+              {details.email}
+            </li>
+            <li className="flex items-center gap-2">
+              <FaPhone className="size-4 fill-primary-700 md:size-5" />
+              {details.phone}
+            </li>
+            <li className="flex items-center gap-2">
+              <FaCalendar className="size-4 fill-primary-700 md:size-5" />
+              {details.session}
+            </li>
+          </ul>
+        </footer>
+      )}
+    </article>
   );
 }
