@@ -411,56 +411,29 @@ export default async function Club({
           heading="h2"
           text={text.Club.event.toUpperCase()}
         />
-        <ul className="w-fulls relative grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 ">
           {events.map((event, i) => (
             <li key={i} className="w-auto">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Card className="group flex h-64 w-full flex-col justify-between overflow-hidden border-none">
-                    <CardContent
-                      className="relative flex h-full w-full justify-center rounded-lg bg-neutral-700 bg-cover bg-center p-4 bg-blend-overlay transition-transform duration-300 ease-in-out group-hover:scale-105"
-                      style={{
-                        backgroundImage: `url(${getS3Url()}/${event.image[0]})`,
-                      }}
-                    >
-                      <h1 className="my-auto text-4xl font-bold text-background">
-                        {event.title}
-                      </h1>
-                    </CardContent>
-                  </Card>
-                </DialogTrigger>
-                {/* <ScrollArea className="max-h-[80vh]"> */}
-                <DialogContent className="fixed left-1/2 top-[55%] z-50 mx-4 flex max-h-[80vh] w-[80vw] max-w-5xl -translate-x-1/2 -translate-y-1/2 transform flex-col items-center overflow-y-auto rounded-xl border border-primary-500 bg-background p-8 shadow-xl lg:w-[70vw]">
-                  <h2 className="text-primary-800 mb-4 self-start text-3xl font-bold">
-                    {event.title}
-                  </h2>
-                  <GalleryCarousel
-                    className="mb-6 w-full rounded-lg"
-                    itemClassName="w-full"
+              <Link
+                scroll={false}
+                href={{
+                  pathname: `/${locale}/student-activities/clubs/${display_name}/event`,
+                  query: { club_event: event.id },
+                }}
+              >
+                <Card className="flex h-64 w-full flex-col justify-between border-none">
+                  <CardContent
+                    className="relative flex h-full w-full justify-center rounded-lg bg-neutral-700 bg-cover bg-center p-4 bg-blend-overlay"
+                    style={{
+                      backgroundImage: `url(${getS3Url()}/${event.image[0]})`,
+                    }}
                   >
-                    {event.image.map((img, index) => (
-                      <Image
-                        key={index}
-                        src={`${img}`}
-                        alt={`Image ${index}`}
-                        width={1000}
-                        height={400}
-                        className="h-auto max-h-[400px] w-full rounded-lg object-contain"
-                      />
-                    ))}
-                  </GalleryCarousel>
-
-                  <p className="text-gray-700 px-[10px] text-base leading-relaxed md:px-[17px] lg:px-[25px]">
-                    SPICMACAY regularly conducts instrumental and vocal
-                    workshops to help students explore classical music
-                    practically. These sessions are guided by skilled artists or
-                    senior members and focus on instruments like harmonium,
-                    tabla, and vocals, creating an inclusive space for learning
-                    and collaboration.
-                  </p>
-                </DialogContent>
-                {/* </ScrollArea> */}
-              </Dialog>
+                    <h1 className="my-auto text-4xl font-bold text-background">
+                      {event.title}
+                    </h1>
+                  </CardContent>
+                </Card>
+              </Link>
             </li>
           ))}
         </ul>
