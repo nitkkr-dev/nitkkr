@@ -114,8 +114,7 @@ export default async function Home({
 
       <Notifications category={notificationCategory} locale={locale} />
       <Events category={eventsCategory} locale={locale} />
-
-      <section className="container mb-32 mt-10" id="directors-corner">
+        <section className="container mb-32 mt-10" id="directors-corner">
         <Heading
           glyphDirection="rtl"
           heading="h2"
@@ -134,6 +133,7 @@ export default async function Home({
           }}
         />
       </section>
+     
     </>
   );
 }
