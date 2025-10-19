@@ -319,7 +319,13 @@ async function FacultyOrStaffComponent({
               <Link
                 key={key}
                 className="flex aspect-square flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[23%] lg:w-[20%]"
-                href={facultyDescription[key] ?? ''}
+                href={
+                  !facultyDescription[key]
+                    ? ''
+                    : facultyDescription[key]!.startsWith('https')
+                      ? facultyDescription[key]!
+                      : `https://${facultyDescription[key]!}`
+                }
               >
                 <Image
                   alt={key}
