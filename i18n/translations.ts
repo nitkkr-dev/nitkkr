@@ -1,5 +1,3 @@
-import { number } from 'zod';
-
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then((module) => module.default);
 }
@@ -346,21 +344,21 @@ export interface Translations {
       };
       scst: {
         title: string;
-        description:string[];
-        cellFunctionsHeading:string;
+        description: string[];
+        cellFunctionsHeading: string;
         cellFunctions: string[];
-        complaint:string;
-        liaisonOfficerHeading:string;
-        liaisonOfficer:{
-          image:string;
-          name:string;
-          title:string;
-          email:string;
-          phone:string;
+        complaint: string;
+        liaisonOfficerHeading: string;
+        liaisonOfficer: {
+          image: string;
+          name: string;
+          title: string;
+          email: string;
+          phone: string;
         };
-        importantLinksHeading:string;
-        importantLinks: {title:string,link:string}[];
-      }
+        importantLinksHeading: string;
+        importantLinks: { title: string; link: string }[];
+      };
     };
   };
   Hostels: {

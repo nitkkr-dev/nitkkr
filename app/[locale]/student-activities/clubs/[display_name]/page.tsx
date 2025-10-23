@@ -31,9 +31,11 @@ import { cn } from '~/lib/utils';
 import { clubs, db } from '~/server/db';
 import { countChildren } from '~/server/s3';
 
-export async function generateStaticParams() {
-  return await db.select({ display_name: clubs.urlName }).from(clubs);
-}
+import EventsSection from './event-section';
+
+// export async function generateStaticParams() {
+//   return await db.select({ display_name: clubs.urlName }).from(clubs);
+// }
 
 interface ClubEvent {
   id: number;
@@ -124,6 +126,7 @@ export default async function Club({
       // clubNotifications: true,
     },
   });
+  const s3BaseUrl = getS3Url();
 
   // Hard coding for now
   // const detailed_members = await Promise.all(
@@ -411,32 +414,12 @@ export default async function Club({
           heading="h2"
           text={text.Club.event.toUpperCase()}
         />
-        <ul className="w-fulls grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 ">
-          {events.map((event, i) => (
-            <li key={i} className="w-auto">
-              <Link
-                scroll={false}
-                href={{
-                  pathname: `/${locale}/student-activities/clubs/${display_name}/event`,
-                  query: { club_event: event.id },
-                }}
-              >
-                <Card className="flex h-64 w-full flex-col justify-between border-none">
-                  <CardContent
-                    className="relative flex h-full w-full justify-center rounded-lg bg-neutral-700 bg-cover bg-center p-4 bg-blend-overlay"
-                    style={{
-                      backgroundImage: `url(${getS3Url()}/${event.image[0]})`,
-                    }}
-                  >
-                    <h1 className="my-auto text-4xl font-bold text-background">
-                      {event.title}
-                    </h1>
-                  </CardContent>
-                </Card>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <EventsSection
+          events={events}
+          locale={locale}
+          display_name={display_name}
+          s3BaseUrl={s3BaseUrl}
+        />
 
         {/* Faculty incharge */}
         <Heading

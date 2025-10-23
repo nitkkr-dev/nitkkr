@@ -1,8 +1,8 @@
+'use client';
 import Image from 'next/image';
 
 import { GalleryCarousel } from '~/components/carousels';
 import { Dialog } from '~/components/dialog';
-import { DialogContent } from '~/components/ui';
 
 interface ClubEvent {
   id: number;
@@ -13,9 +13,10 @@ interface ClubEvent {
 }
 
 export default function EventPage({
+  params: { locale, display_name },
   searchParams,
 }: {
-  params: { locale: string };
+  params: { locale: string; display_name: string };
   searchParams: { club_event: string };
 }) {
   const events = [
@@ -65,8 +66,19 @@ export default function EventPage({
     },
   ] as ClubEvent[];
 
-  const id = parseInt(searchParams.club_event);
-  const clubEvent = events[id];
+  const id = Number(searchParams.club_event);
+  const clubEvent = events.find((e) => e.id === id);
+
+  console.log('Locale:', locale, 'Club:', display_name, 'Event ID:', id);
+
+  if (!clubEvent) {
+    return (
+      <Dialog className="border-red-500 mx-4 mx-auto flex max-w-5xl flex-col items-center rounded-xl border bg-background p-8 shadow-xl">
+        <h2 className="text-red-600 text-2xl font-bold">Event not found</h2>
+      </Dialog>
+    );
+  }
+
   const imageCount = clubEvent.image.length;
 
   return (
@@ -92,14 +104,7 @@ export default function EventPage({
       </GalleryCarousel>
 
       <p className="text-gray-700 text-base leading-relaxed">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quis
-        optio adipisci, voluptates nobis eos nisi tempora eius assumenda maxime
-        et velit reiciendis reprehenderit libero aut rem, vero, dolorum animi!
-        Voluptatum assumenda rerum, non consequatur labore vitae repudiandae
-        maxime beatae in doloribus itaque, quaerat dolorem nesciunt modi quas
-        provident officia, necessitatibus ut amet qui voluptatibus facere. Aut
-        aliquid veritatis cum, nihil, minima laudantium perferendis assumenda
-        doloribus quam aspernatur nulla porro!
+        {clubEvent.description}
       </p>
     </Dialog>
   );

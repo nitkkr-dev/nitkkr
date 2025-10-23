@@ -1,0 +1,10 @@
+import { redirect } from 'next/navigation';
+
+export default function Event({
+  params: { locale, display_name },
+}: {
+  params: { locale: string; display_name: string };
+}) {
+  console.log('In event page');
+  return redirect(`/${locale}/student-activities/clubs/${display_name}`);
+}
