@@ -33,9 +33,9 @@ import { countChildren } from '~/server/s3';
 
 import EventsSection from './event-section';
 
-// export async function generateStaticParams() {
-//   return await db.select({ display_name: clubs.urlName }).from(clubs);
-// }
+export async function generateStaticParams() {
+  return await db.select({ display_name: clubs.urlName }).from(clubs);
+}
 
 interface ClubEvent {
   id: number;
