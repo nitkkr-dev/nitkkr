@@ -56,6 +56,7 @@ export default async function Page({
           linkedInId: true,
           googleScholarId: true,
           researchGateId: true,
+          areasOfInterest: true,
         },
         with: {
           person: {
@@ -80,6 +81,7 @@ export default async function Page({
           telephone: result.person.telephone,
           alternateCountryCode: result.person.alternateCountryCode ?? undefined,
           alternateTelephone: result.person.alternateTelephone ?? undefined,
+          areasOfInterest: result.areasOfInterest ?? [],
         };
       });
     if (!personalDetails) {

@@ -209,14 +209,14 @@ async function FacultyOrStaffComponent({
             {id && (
               <Button
                 variant="primary"
-                className="mr-10 flex gap-2 !rounded-sm p-2 max-xl:hidden"
+                className="mr-10 flex gap-2 !rounded-sm px-2 py-1 max-xl:hidden"
                 asChild
               >
                 <Link
                   href={`/${locale}/profile/edit?personal=true`}
                   className="text-lg"
                 >
-                  <MdOutlineEdit size={24} className="cursor-pointer" />
+                  <MdOutlineEdit size={22} className="cursor-pointer" />
                   Edit
                 </Link>
               </Button>

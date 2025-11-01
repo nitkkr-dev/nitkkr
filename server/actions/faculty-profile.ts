@@ -220,6 +220,7 @@ export async function editFacultyProfilePersonalDetails(
           linkedInId: validated.linkedInId,
           googleScholarId: validated.googleScholarId,
           researchGateId: validated.researchGateId,
+          areasOfInterest: validated.areasOfInterest,
         })
         .where(eq(faculty.id, session.person.id));
 
