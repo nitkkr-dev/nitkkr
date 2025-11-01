@@ -112,6 +112,7 @@ async function FacultyOrStaffComponent({
       linkedInId: true,
       researchGateId: true,
       scopusId: true,
+      areasOfInterest: true,
     },
     with: {
       person: {
@@ -122,6 +123,11 @@ async function FacultyOrStaffComponent({
           countryCode: true,
           alternateTelephone: true,
           alternateCountryCode: true,
+        },
+      },
+      department: {
+        columns: {
+          name: true,
         },
       },
     },
@@ -193,7 +199,7 @@ async function FacultyOrStaffComponent({
     <>
       <section className="container mb-6 mt-24 grid gap-3 xl:grid-cols-[calc(50%-0.75rem),0%,calc(50%-0.75rem)]">
         <article className="flex flex-grow flex-col rounded-2xl bg-shade-light p-5 drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]">
-          <h2 className="mb-0 text-primary-700 max-xl:mr-[8rem]">
+          <h2 className="mb-2 text-primary-700 max-xl:mr-[8rem]">
             {facultyDescription.person.name}
           </h2>
           <span className="flex items-center justify-between">
@@ -203,16 +209,22 @@ async function FacultyOrStaffComponent({
             {id && (
               <Button
                 variant="primary"
-                className="mr-5 !rounded-sm pr-1 max-xl:hidden"
+                className="mr-10 flex gap-2 !rounded-sm px-2 py-1 max-xl:hidden"
                 asChild
               >
-                <Link href={`/${locale}/profile/edit?personal=true`}>
-                  <MdOutlineEdit size={24} className="cursor-pointer" />
-                  Edit Profile
+                <Link
+                  href={`/${locale}/profile/edit?personal=true`}
+                  className="text-lg"
+                >
+                  <MdOutlineEdit size={22} className="cursor-pointer" />
+                  Edit
                 </Link>
               </Button>
             )}
           </span>
+          <h5 className="mb-4 text-neutral-900">
+            {facultyDescription.department?.name ?? ''}
+          </h5>
           {id && (
             <Button
               variant="primary"
@@ -285,25 +297,24 @@ async function FacultyOrStaffComponent({
         </section>
         {/* Faculty Intellectual Contribution counts */}
         <article className="rounded-2xl drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] max-xl:pt-3 xl:bg-shade-light xl:p-5">
-          <ul className="grid h-full grid-cols-3 gap-5 xl:ml-16">
-            {Object.entries(text.intellectualContributions).map(
-              ([key, value]) => (
-                <li
-                  key={key}
-                  className="flex h-full flex-col justify-around rounded-2xl bg-primary-700 p-3 max-xl:aspect-square"
-                >
-                  <h4 className="my-auto text-center text-shade-light">
-                    {facultyDescription[
-                      key as keyof typeof text.intellectualContributions
-                    ] ?? 0}
-                  </h4>
-                  <p className="mb-auto text-center font-light text-shade-light">
-                    {value}
-                  </p>
-                </li>
-              )
-            )}
-          </ul>
+          <div className="ml-16">
+            <h4>Research Areas and Specialization</h4>
+            {facultyDescription.areasOfInterest &&
+              facultyDescription.areasOfInterest.length > 0 && (
+                <ScrollArea className="h-44 w-full">
+                  <ul className="list-inside space-y-2 text-lg marker:text-primary-700">
+                    {facultyDescription.areasOfInterest.map((area, index) => (
+                      <li key={index}>
+                        <span className="font-bold text-primary-700">
+                          &gt;{' '}
+                        </span>{' '}
+                        {area}
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollArea>
+              )}
+          </div>
         </article>
       </section>
       {/* Faculty links to external profiles */}
@@ -318,21 +329,50 @@ async function FacultyOrStaffComponent({
             return (
               <Link
                 key={key}
-                className="flex aspect-square flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[23%] lg:w-[20%]"
-                href={facultyDescription[key] ?? ''}
+                className="flex flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[25%] lg:w-[22%]"
+                href={
+                  !facultyDescription[key]
+                    ? ''
+                    : facultyDescription[key]!.startsWith('https')
+                      ? facultyDescription[key]!
+                      : `https://${facultyDescription[key]!}`
+                }
               >
                 <Image
                   alt={key}
                   src={`faculty-and-staff/${key}.svg`}
                   height={0}
                   width={0}
-                  className="mx-auto h-[50%] w-[50%]"
+                  className="mx-auto aspect-square h-[50%] w-[50%] object-contain"
                 />
                 <h5 className="mx-auto">{value}</h5>
               </Link>
             );
           }
         })}
+      </section>
+
+      {/* Faculty Intlectual Contribution counts */}
+      <section className="container mb-6 justify-between max-md:gap-6">
+        <ul className="grid h-full grid-cols-3 gap-5">
+          {Object.entries(text.intellectualContributions).map(
+            ([key, value]) => (
+              <li
+                key={key}
+                className="flex h-full flex-col justify-around rounded-2xl bg-primary-700 p-3 py-6"
+              >
+                <h4 className="my-auto text-center text-shade-light">
+                  {facultyDescription[
+                    key as keyof typeof text.intellectualContributions
+                  ] ?? 0}
+                </h4>
+                <p className="mb-auto text-center font-light text-shade-light">
+                  {value}
+                </p>
+              </li>
+            )
+          )}
+        </ul>
       </section>
 
       {/* Faculty Professional Details */}

@@ -330,6 +330,7 @@ const text: Translations = {
       researchGateId: 'Research Gate',
       scopusId: 'Scopus',
     },
+    areasOfInterest: 'Areas of Interest',
     intellectualContributions: {
       publications: 'PUBLICATIONS',
       continuingEducation: 'CONTINUING EDUCATION',

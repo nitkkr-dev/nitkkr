@@ -166,6 +166,16 @@ export const facultyPersonalDetailsSchema = z.object({
     .regex(/^\d{5,15}$/, 'Enter a valid phone number')
     .optional(),
   officeAddress: z.string().max(200),
+  areasOfInterest: z.preprocess(
+    (val) =>
+      typeof val === 'string'
+        ? val
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : val,
+    z.array(z.string()).default([])
+  ),
 });
 
 export type FacultyProfileTopic = keyof typeof facultyProfileSchemas;

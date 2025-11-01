@@ -339,6 +339,7 @@ const text: Translations = {
       researchGateId: 'रिसर्च गेट',
       scopusId: 'स्कोपस',
     },
+    areasOfInterest: 'रुचि के क्षेत्र',
     intellectualContributions: {
       publications: 'प्रकाशन',
       continuingEducation: 'निरंतर शिक्षा',

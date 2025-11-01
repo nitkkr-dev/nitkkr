@@ -16,6 +16,7 @@ import {
 import { CardContent, CardFooter } from '~/components/ui';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -125,6 +126,43 @@ const renderFields = <T extends Record<string, any>>(
       .replace(/([A-Z])/g, ' $1')
       .replace(/^./, (str: string) => str.toUpperCase())
       .trim();
+
+    // Handle areasOfInterest array field
+    if (fieldName === 'areasOfInterest') {
+      return (
+        <FormField
+          key={fieldName}
+          control={formControl}
+          name={fieldName as unknown as FieldPath<T>}
+          render={({ field }) => (
+            <FormItem className="md:col-span-2">
+              <FormLabel>{label}</FormLabel>
+              <FormControl>
+                <Textarea
+                  id={fieldName}
+                  className="w-full"
+                  placeholder="Enter areas of interest separated by commas"
+                  required={!isOptional}
+                  value={
+                    Array.isArray(field.value)
+                      ? (field.value as string[]).join(', ')
+                      : (field.value as string) ?? ''
+                  }
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
+                  }}
+                  onBlur={field.onBlur}
+                />
+              </FormControl>
+              <FormMessage />
+              <FormDescription>
+                Enter multiple areas of interest separated by commas
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+      );
+    }
 
     // Check if it's an enum field
     if (fieldSchema._def.typeName === ZodFirstPartyTypeKind.ZodEnum) {

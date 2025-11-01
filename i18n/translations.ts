@@ -198,6 +198,7 @@ export interface Translations {
       researchGateId: string;
       scopusId: string;
     };
+    areasOfInterest: string;
     intellectualContributions: {
       publications: string;
       continuingEducation: string;
