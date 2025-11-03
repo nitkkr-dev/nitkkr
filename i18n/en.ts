@@ -213,6 +213,22 @@ const text: Translations = {
     programmesDetails:
       'The departments have all shown exponential growth, in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members.The faculty members have made a mark in the area of innovative hardware design, modeling & analysis and developing new techniques and algorithms, in the fields of data communication systems and wireless networks, signal processing and VLSI design.',
   },
+  Club: {
+    about: 'About',
+    batch: 'Batch',
+    degree: 'Degree',
+    event: 'Events',
+    faculty: 'Faculty Incharge',
+    gallery: 'Gallery',
+    howToJoinUs: 'How to Join Us?',
+    major: 'Major',
+    name: 'Name',
+    notification: 'Notifications',
+    ourMembers: 'Our Members',
+    postHolders: 'Post Holders',
+    rollNumber: 'Roll Number',
+    whyToJoinUs: 'Why Join Us?',
+  },
   Clubs: { title: 'CLUBS' },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',

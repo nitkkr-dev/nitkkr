@@ -1,52 +1,50 @@
 import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
-import { clubMembers, clubSocials, departments, faculty, persons } from '.';
+import { clubMembers } from './club-members.schema';
+import { clubSocials } from './club-socials.schema';
+import { departments } from './departments.schema';
+import { events } from './events.schema';
+import { notifications } from './notifications.schema';
+import { persons } from './persons.schema';
+import { clubFacultyHeads } from './club-faculty-heads.schema';
 
 export const clubs = pgTable('clubs', (t) => ({
-  id: t.smallserial().primaryKey(),
-  name: t.varchar({ length: 128 }).notNull(),
-  urlName: t.varchar({ length: 128 }).notNull(),
-  alias: t.varchar({ length: 16 }),
-  tagline: t.varchar({ length: 256 }).notNull(),
-  email: t.varchar({ length: 256 }).notNull(),
-  aboutUs: t.varchar().notNull(),
+  id: t.smallserial('id').primaryKey(),
+  name: t.varchar('name', { length: 128 }).notNull(),
+  urlName: t.varchar('url_name', { length: 128 }).notNull(),
+  alias: t.varchar('alias', { length: 16 }),
+  tagline: t.varchar('tagline', { length: 256 }).notNull(),
+  email: t.varchar('email', { length: 256 }).notNull(),
+  aboutUs: t.varchar('about_us').notNull(),
+  howToJoinUs: t.varchar('how_to_join_us').notNull(),
+  whyToJoinUs: t.varchar('why_to_join_us').notNull(),
   category: t
-    .varchar({ enum: ['committee', 'cultural', 'crew', 'technical'] })
+    .varchar('category', {
+      enum: ['committee', 'cultural', 'crew', 'technical'],
+    })
     .notNull(),
-  departmentId: t.smallint().references(() => departments.id),
-  facultyInchargeId1: t
-    .integer()
-    .references(() => faculty.id)
-    .notNull(),
-  facultyInchargeId2: t.integer().references(() => faculty.id),
-  isActive: t.boolean().default(true).notNull(),
-  createdOn: t.date({ mode: 'date' }).defaultNow().notNull(),
+  departmentId: t.smallint('department_id').references(() => departments.id),
+  isActive: t.boolean('is_active').default(true).notNull(),
+  createdOn: t.date('created_on', { mode: 'date' }).defaultNow().notNull(),
   updatedAt: t
-    .timestamp()
+    .timestamp('updated_at')
     .$onUpdate(() => new Date())
     .notNull(),
   updatedBy: t
-    .integer()
+    .integer('updated_by')
     .references(() => persons.id)
     .notNull(),
 }));
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
+  clubEvents: many(events),
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
   }),
-  facultyIncharge1: one(faculty, {
-    relationName: 'facultyIncharge1',
-    fields: [clubs.facultyInchargeId1],
-    references: [faculty.id],
-  }),
-  facultyIncharge2: one(faculty, {
-    relationName: 'facultyIncharge2',
-    fields: [clubs.facultyInchargeId2],
-    references: [faculty.id],
-  }),
+  clubNotifications: many(notifications),
+  clubFacultyHeads: many(clubFacultyHeads),
 }));

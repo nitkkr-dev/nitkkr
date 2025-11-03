@@ -10,7 +10,7 @@ export const researchAndConsultancy = pgTable(
   (t) => ({
     id: t.serial().primaryKey(),
     facultyId: t
-      .varchar('faculty_id') // 👈 maps to existing DB column
+      .integer('faculty_id') // 👈 maps to existing DB column
       .references(() => faculty.id)
       .notNull(),
     totalNoOfJobs: t.integer('total_no_of_jobs').notNull(),
