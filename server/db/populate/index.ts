@@ -52,9 +52,7 @@ function extractPhoneNumber(
 }
 
 export async function populate() {
-  const Csv = fs
-    .readFileSync('research_and_consultancy.tsv', 'utf-8')
-    .split('\n');
+  const Csv = fs.readFileSync('clubs.tsv', 'utf-8').split('\n');
   const Headers = Csv[0].split('\t');
 
   console.log('Headers:', Headers);

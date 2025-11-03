@@ -1,60 +1,50 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  date,
-  integer,
-  pgTable,
-  smallint,
-  smallserial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
-import { clubMembers, clubSocials, departments, faculty, persons } from '.';
+import { clubMembers } from './club-members.schema';
+import { clubSocials } from './club-socials.schema';
+import { departments } from './departments.schema';
+import { events } from './events.schema';
+import { notifications } from './notifications.schema';
+import { persons } from './persons.schema';
+import { clubFacultyHeads } from './club-faculty-heads.schema';
 
-export const clubs = pgTable('clubs', {
-  id: smallserial('id').primaryKey(),
-  name: varchar('name', { length: 128 }).notNull(),
-  urlName: varchar('url_name', { length: 128 }).notNull(),
-  alias: varchar('alias', { length: 16 }),
-  tagline: varchar('tagline', { length: 256 }).notNull(),
-  email: varchar('email', { length: 256 }).notNull(),
-  aboutUs: varchar('about_us').notNull(),
-  category: varchar('category', {
-    enum: ['committee', 'cultural', 'crew', 'technical'],
-  }).notNull(),
-  departmentId: smallint('department_id').references(() => departments.id),
-  facultyInchargeId1: integer('faculty_incharge_id1')
-    .references(() => faculty.id)
+export const clubs = pgTable('clubs', (t) => ({
+  id: t.smallserial('id').primaryKey(),
+  name: t.varchar('name', { length: 128 }).notNull(),
+  urlName: t.varchar('url_name', { length: 128 }).notNull(),
+  alias: t.varchar('alias', { length: 16 }),
+  tagline: t.varchar('tagline', { length: 256 }).notNull(),
+  email: t.varchar('email', { length: 256 }).notNull(),
+  aboutUs: t.varchar('about_us').notNull(),
+  howToJoinUs: t.varchar('how_to_join_us').notNull(),
+  whyToJoinUs: t.varchar('why_to_join_us').notNull(),
+  category: t
+    .varchar('category', {
+      enum: ['committee', 'cultural', 'crew', 'technical'],
+    })
     .notNull(),
-  facultyInchargeId2: integer('faculty_incharge_id2').references(
-    () => faculty.id
-  ),
-  isActive: boolean('is_active').default(true).notNull(),
-  createdOn: date('created_on', { mode: 'date' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at')
+  departmentId: t.smallint('department_id').references(() => departments.id),
+  isActive: t.boolean('is_active').default(true).notNull(),
+  createdOn: t.date('created_on', { mode: 'date' }).defaultNow().notNull(),
+  updatedAt: t
+    .timestamp('updated_at')
     .$onUpdate(() => new Date())
     .notNull(),
-  updatedBy: integer('updated_by')
+  updatedBy: t
+    .integer('updated_by')
     .references(() => persons.id)
     .notNull(),
-});
+}));
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
+  clubEvents: many(events),
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
   department: one(departments, {
     fields: [clubs.departmentId],
     references: [departments.id],
   }),
-  facultyIncharge1: one(faculty, {
-    relationName: 'facultyIncharge1',
-    fields: [clubs.facultyInchargeId1],
-    references: [faculty.id],
-  }),
-  facultyIncharge2: one(faculty, {
-    relationName: 'facultyIncharge2',
-    fields: [clubs.facultyInchargeId2],
-    references: [faculty.id],
-  }),
+  clubNotifications: many(notifications),
+  clubFacultyHeads: many(clubFacultyHeads),
 }));
