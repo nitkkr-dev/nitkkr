@@ -1076,4 +1076,35 @@ export interface Translations {
     title: String;
     message: String[];
   };
+    DirectorPage:{
+      pageTitle: string;
+    sections:string[],
+   Director:{
+    name: string;
+    position: string;
+    phone: string;
+    fax: string;
+    mobile: string;
+    email: string;
+   }
+    cv: string[];
+    title: string[];
+    DirectorMessage:string[];
+    employes:{
+    name: string;
+    position: string;
+    image: string;
+    phone: string;
+    email: string;}[];
+
+    preDirectors:{
+    name: string;
+    position: string;
+    image: string;
+    phone: string;
+    fax: string;
+    mobile: string;
+    email: string;}[];
+  
+  };
 }
