@@ -677,13 +677,35 @@ const text: Translations = {
             link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
           }
         ],
+      },
+      obcpwd: {
+        title: 'OBC & PWD Cell',
+        description: [
+          'NIT Kurukshetra is committed to maintaining a work environment where students, faculty, and staff members from different communities can work together harmoniously. It is the institute\'s endeavor to ensure that no discrimination takes place in the workplace. The Institute has appointed a Liaison Officer for the OBC Cell, who can be contacted in the event of any caste-based discrimination.'
+        ],
+        cellFunctionsHeading: 'CELL FUNCTIONS',
+        cellFunctions: [
+          'To ensure proper implementation of various schemes of MHRD, GoI, and the State Government concerning scholarships, stipends, etc., for the welfare of reserved categories.',
+          'Grievance Redressal: for any grievance(s) regarding academic, administrative, or social issues. The cell takes necessary action and provides advice/help to resolve the matter.',
+          'To take follow-up measures to achieve the objectives and targets laid down by MHRD, Government of India.'
+        ],
+        complaint:
+          'In case you want to register a formal complaint, please fill out the form in the complaint book, available in the OBC Cell, Administrative Building, NIT Kurukshetra. The committee will review discrimination complaints received from OBC students, faculty, and staff members and resolve them accordingly.',
+        liaisonOfficerHeading: 'LIAISON OFFICER',
+        liaisonOfficer: {
+          image: 'fallback/user-image.jpg',
+          name: 'Arun Goel',
+          title: 'Professor & Head of Department',
+          email: 'drarun_goel@yahoo.co.in',
+          phone: '01744-233349, 01744-233300'
+        }
       }
     },
   },
   NotFound: {
     title: '404',
     description: 'Not found ',
-    backHome: 'Looks like you’re lost let’s get you back home',
+    backHome: 'Looks like you\'re lost let\'s get you back home',
   },
   Profile: {
     tabs: {

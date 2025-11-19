@@ -360,6 +360,21 @@ export interface Translations {
         importantLinksHeading: string;
         importantLinks: { title: string; link: string }[];
       };
+      obcpwd: {
+        title: string;
+        description: string[];
+        cellFunctionsHeading: string;
+        cellFunctions: string[];
+        complaint: string;
+        liaisonOfficerHeading: string;
+        liaisonOfficer: {
+          image: string;
+          name: string;
+          title: string;
+          email: string;
+          phone: string;
+        };
+      };
     };
   };
   Hostels: {
