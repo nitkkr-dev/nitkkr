@@ -1,7 +1,7 @@
 import { pgTable } from 'drizzle-orm/pg-core';
 
 export const mous = pgTable('mous', (t) => ({
-  srNo: t.serial().primaryKey(),
-  organization: t.varchar({ length: 255 }).notNull(),
-  signingDate: t.date().notNull(),
+  id: t.serial('id').primaryKey(),
+  organization: t.varchar('organization').notNull(),
+  signingDate: t.date('signingDate').notNull(),
 }));
