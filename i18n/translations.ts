@@ -419,13 +419,22 @@ export interface Translations {
   };
   Notifications: {
     title: string;
+    searchPlaceholder: string;
+    clearAll: string;
+    saveSelection: string;
+    viewAll: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      department: string;
+    };
     categories: {
       academic: string;
       tender: string;
       workshop: string;
       recruitment: string;
     };
-    viewAll: string;
   };
   Events: {
     title: string;

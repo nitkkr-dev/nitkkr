@@ -693,13 +693,22 @@ const text: Translations = {
   },
   Notifications: {
     title: 'सूचनाएँ',
+    searchPlaceholder: 'सूचनाएँ खोजें...',
+    clearAll: 'सभी साफ करें',
+    saveSelection: 'चयन सहेजें',
+    viewAll: 'सभी देखें',
+    filter: {
+      title: 'फ़िल्टर',
+      date: 'तारीख़',
+      category: 'श्रेणी',
+      department: 'विभाग',
+    },
     categories: {
       academic: 'शैक्षणिक',
-      tender: 'निविदाएँ',
-      workshop: 'कार्यशालाएं',
-      recruitment: 'नियुक्ति',
+      tender: 'निविदा',
+      workshop: 'कार्यशाला',
+      recruitment: 'भर्ती',
     },
-    viewAll: 'सारा देखें',
   },
   NotFound: {
     title: '404',

@@ -442,14 +442,23 @@ const text: Translations = {
     signInWithGoogle: 'Sign in with Google',
   },
   Notifications: {
-    title: 'NOTIFICATIONS',
+    title: 'Notifications',
+    searchPlaceholder: 'Search notifications...',
+    clearAll: 'Clear all',
+    saveSelection: 'Save selection',
+    viewAll: 'View All',
+    filter: {
+      title: 'Filters',
+      date: 'Date',
+      category: 'Category',
+      department: 'Department',
+    },
     categories: {
       academic: 'Academic',
-      tender: 'Tenders',
-      workshop: 'Workshops',
+      tender: 'Tender',
+      workshop: 'Workshop',
       recruitment: 'Recruitment',
     },
-    viewAll: 'View All',
   },
   Events: {
     title: 'EVENTS & NEWS',

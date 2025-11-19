@@ -2,6 +2,7 @@ import { check, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from './clubs.schema';
+import { departments } from './departments.schema';
 
 export const notifications = pgTable(
   'notifications',
@@ -27,6 +28,7 @@ export const notifications = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
     clubId: t.integer().references(() => clubs.id),
+    departmentId: t.integer().references(() => departments.id),
   }),
   (notifications) => {
     return {
