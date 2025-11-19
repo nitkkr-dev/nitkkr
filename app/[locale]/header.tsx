@@ -85,7 +85,7 @@ export default async function Header({ locale }: { locale: string }) {
           href: '/institute/cells/scst',
           description:
             'The SC & ST Cell is dedicated to promoting the welfare and interests of students from Scheduled Castes and Scheduled Tribes, ensuring equal opportunities and support.',
-        }
+        },
       ],
     },
     {
