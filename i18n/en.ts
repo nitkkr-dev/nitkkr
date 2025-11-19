@@ -624,59 +624,57 @@ const text: Translations = {
       },
       scst: {
         title: 'SC & ST Cell',
-        description:
-          [
-          'NIT Kurukshetra is committed to maintaining a work environment wherein students, faculty, and staff members from different community can work in a coherent environment. It is the institute\'s endeavor to ensure that no discrimination takes place at workplace.',
+        description: [
+          "NIT Kurukshetra is committed to maintaining a work environment wherein students, faculty, and staff members from different community can work in a coherent environment. It is the institute's endeavor to ensure that no discrimination takes place at workplace.",
           'The Institute has appointed a Liaison Officer for SC & ST cell who can be contacted in the event of any incident of caste-based discrimination.',
-          'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.'
-          ],
-        cellFunctionsHeading:'CELL FUNCTIONS',
-        cellFunctions:
-        [
+          'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.',
+        ],
+        cellFunctionsHeading: 'CELL FUNCTIONS',
+        cellFunctions: [
           'Grievances redress the grievances of SC/ST students and employees and render them necessary help in solving their academic as well as administrative problems.',
           'Monitors and evaluates the reservation policies and other programs intended for SC/STs by the Government of India for their effective implementation at National Institute of Technology Kurukshetra.',
           'Suggests the follow-up measures to the administration of the institute to achieve the objectives and targets laid down by MHRD for the empowerment of SC/STs.',
           'To register the complaints of SC/ST students/employees of the Institute for their representation to the administration for taking further necessary action.',
-          'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.'
+          'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.',
         ],
-        complaint: 'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
+        complaint:
+          'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
         liaisonOfficerHeading: 'LIAISON OFFICER',
-        liaisonOfficer : {
+        liaisonOfficer: {
           image: 'fallback/user-image.jpg',
           name: 'Arun Goel',
           title: 'Professor (Head of the Department)',
           email: 'drarun_goel@yahoo.co.in',
-          phone: '01744-233349, 01744-233300'
+          phone: '01744-233349, 01744-233300',
         },
         importantLinksHeading: 'IMPORTANT LINKS',
-        importantLinks:
-        [
+        importantLinks: [
           {
             title: 'Ministry of Social Justice and Empowerment',
-            link: 'https://socialjustice.gov.in'
+            link: 'https://socialjustice.gov.in',
           },
           {
             title: 'List of Scheduled Castes',
-            link: 'https://socialjustice.gov.in/common/76750'
+            link: 'https://socialjustice.gov.in/common/76750',
           },
           {
             title: 'List of Scheduled Tribes',
-            link: 'https://cdnbbsr.s3waas.gov.in/s301894d6f048493d2cacde3c579c315a3/uploads/2022/03/2022030426.pdf'
+            link: 'https://cdnbbsr.s3waas.gov.in/s301894d6f048493d2cacde3c579c315a3/uploads/2022/03/2022030426.pdf',
           },
           {
             title: 'National Commission for Scheduled Cast, GoI',
-            link: 'https://ncsc.nic.in'
+            link: 'https://ncsc.nic.in',
           },
           {
             title: 'National Commission for Scheduled Tribes, GoI',
-            link: 'https://ncstgrams.gov.in'
+            link: 'https://ncstgrams.gov.in',
           },
           {
             title: 'SC & ST Cell AICTE',
-            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
-          }
+            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell',
+          },
         ],
-      }
+      },
     },
   },
   NotFound: {
@@ -1830,24 +1828,24 @@ rolls down to 60% of the eligible students for second round of placement session
       ],
     },
   },
-     DirectorPage:{
-    pageTitle: "DIRECTOR",
+  DirectorPage: {
+    pageTitle: 'DIRECTOR',
     sections: [
-  "Director’s Profile",
-  "Brief CV Of Director",
-  "Director’s Message",
-  "Director’s Office",
-  "Previous Directors"
-],
-     Director:{
-      name: "Professor B.V. Ramana Reddy",
-     
-    position: "Director, National Institute of Technology Kurukshetra",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",
-     },
+      'Director’s Profile',
+      'Brief CV Of Director',
+      'Director’s Message',
+      'Director’s Office',
+      'Previous Directors',
+    ],
+    Director: {
+      name: 'Professor B.V. Ramana Reddy',
+
+      position: 'Director, National Institute of Technology Kurukshetra',
+      phone: '+91-1744-233208',
+      fax: '+91-1744-238050',
+      mobile: '+91-9876543210',
+      email: 'director@nitkkr.ac.in',
+    },
     title: [
       'DIRECTOR’S PROFILE',
       'BRIEF CV OF DIRECTOR',
@@ -1855,55 +1853,63 @@ rolls down to 60% of the eligible students for second round of placement session
       'DIRECTOR’S OFFICE',
       'PREVIOUS DIRECTORS',
     ],
-     cv: [
-" He took over as Director, National Institute of  Technology Kurukshetra on 05th February, 2022 (Basant Panchmi). He is an alumnus of Andhra University, IIT Roorkee and NIT Kurukshetra. In his  long career spanning over 35 years, he served in various capacities as  teaching faculty at national institutes of repute at NIT Kurukshetra  (during 1991- 95), NIT Hamirpur (1995-1999) known earlier as REC. He  also served as Assoc. Prof. & as Professor at University School of  Information & Communication Technoloy (USICT), GGSIP University New Delhi for the last 22 years (2000-2022).",
-      "His current research interests include Wireless communications which include mobile, Adhoc and sensor based networks, computer communication networks, Semiconductor and VLSI circuits and microwave & optical communications. He has more than 100 publications in International, National journals and International Conferences to his credit. He produced Thirteen (13) Ph.D.s, and currently supervising Eight (8) PhD scholars.",
-      "Besides, he is a Fellow of IETE, IE, ISTE and a member of other professional bodies such as IEEE, CSI and SEMCEI. He is an active member in various committees constituted by AICTE, UGC, NAAC, TEQIP and NIC. He visited foreign Universities situated in Singapore and China.",
-      "He is currently actively participating in educational reforms and value based education, in tune with National Skill Qualification Framework (NSQF) and contributed to vocational education in the country. He strongly believes in holistic development and growth of the next generation children, and dreams of a society where each and every species living on Earth lives harmoniously (VASUDEVA KUTUMBAKAM). Further, he strongly believes in to see glitter in the eyes of his subjects as an award, reward or recognition.",
-      "His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.",
+    cv: [
+      ' He took over as Director, National Institute of  Technology Kurukshetra on 05th February, 2022 (Basant Panchmi). He is an alumnus of Andhra University, IIT Roorkee and NIT Kurukshetra. In his  long career spanning over 35 years, he served in various capacities as  teaching faculty at national institutes of repute at NIT Kurukshetra  (during 1991- 95), NIT Hamirpur (1995-1999) known earlier as REC. He  also served as Assoc. Prof. & as Professor at University School of  Information & Communication Technoloy (USICT), GGSIP University New Delhi for the last 22 years (2000-2022).',
+      'His current research interests include Wireless communications which include mobile, Adhoc and sensor based networks, computer communication networks, Semiconductor and VLSI circuits and microwave & optical communications. He has more than 100 publications in International, National journals and International Conferences to his credit. He produced Thirteen (13) Ph.D.s, and currently supervising Eight (8) PhD scholars.',
+      'Besides, he is a Fellow of IETE, IE, ISTE and a member of other professional bodies such as IEEE, CSI and SEMCEI. He is an active member in various committees constituted by AICTE, UGC, NAAC, TEQIP and NIC. He visited foreign Universities situated in Singapore and China.',
+      'He is currently actively participating in educational reforms and value based education, in tune with National Skill Qualification Framework (NSQF) and contributed to vocational education in the country. He strongly believes in holistic development and growth of the next generation children, and dreams of a society where each and every species living on Earth lives harmoniously (VASUDEVA KUTUMBAKAM). Further, he strongly believes in to see glitter in the eyes of his subjects as an award, reward or recognition.',
+      'His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.',
     ],
-     DirectorMessage:  [
-  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.",
-  "India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere."
-],
-employes:[
-  
-    {name: "Arun Goel",
-    image: "assets/Arun.jpg",
-    position: "Head of Department, CSE",
-    phone: "+91-1744-233208",
-    email: "director@nitkkr.ac.in",},
-    {name: "Arun Goel",
-    image: "assets/Arun.jpg",
-    position: "Head of Department, CSE",
-    phone: "+91-1744-233208",
-    email: "director@nitkkr.ac.in",}
-],
-preDirectors:[
-  {name: "Professor B.V. Ramana Reddy",
-    image: "assets/director.jpeg",
-    position: "Former Director, NIT Kurukshetra -2022-2025",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",},
-    {name: "Professor B.V. Ramana Reddy",
-      image: "assets/director.jpeg",
-    position: "Former Director, NIT Kurukshetra -2022-2025",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",},
-    {name: "Professor B.V. Ramana Reddy",
-      image: "assets/director.jpeg",
-    position: "Former Director, NIT Kurukshetra -2022-2025",
-    phone: "+91-1744-233208",
-    fax: "+91-1744-238050",
-    mobile: "+91-9876543210",
-    email: "director@nitkkr.ac.in",}
-],
-  
-},
+    DirectorMessage: [
+      'India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.',
+      'India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.',
+    ],
+    employes: [
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+    ],
+    preDirectors: [
+      {
+        name: 'Professor B.V. Ramana Reddy',
+        image: 'assets/director.jpeg',
+        position: 'Former Director, NIT Kurukshetra -2022-2025',
+        phone: '+91-1744-233208',
+        fax: '+91-1744-238050',
+        mobile: '+91-9876543210',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Professor B.V. Ramana Reddy',
+        image: 'assets/director.jpeg',
+        position: 'Former Director, NIT Kurukshetra -2022-2025',
+        phone: '+91-1744-233208',
+        fax: '+91-1744-238050',
+        mobile: '+91-9876543210',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Professor B.V. Ramana Reddy',
+        image: 'assets/director.jpeg',
+        position: 'Former Director, NIT Kurukshetra -2022-2025',
+        phone: '+91-1744-233208',
+        fax: '+91-1744-238050',
+        mobile: '+91-9876543210',
+        email: 'director@nitkkr.ac.in',
+      },
+    ],
+  },
 };
 
 export default text;

@@ -1,5 +1,6 @@
 export async function getTranslations(locale: string): Promise<Translations> {
-  return import(`./${locale}.ts`).then((module) => module.default);
+  const mod = (await import(`./${locale}.ts`)) as { default: Translations };
+  return mod.default;
 }
 
 export interface Translations {
@@ -1075,35 +1076,36 @@ export interface Translations {
     title: String;
     message: String[];
   };
-    DirectorPage:{
-      pageTitle: string;
-    sections:string[],
-   Director:{
-    name: string;
-    position: string;
-    phone: string;
-    fax: string;
-    mobile: string;
-    email: string;
-   }
+  DirectorPage: {
+    pageTitle: string;
+    sections: string[];
+    Director: {
+      name: string;
+      position: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    };
     cv: string[];
     title: string[];
-    DirectorMessage:string[];
-    employes:{
-    name: string;
-    position: string;
-    image: string;
-    phone: string;
-    email: string;}[];
+    DirectorMessage: string[];
+    employes: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      email: string;
+    }[];
 
-    preDirectors:{
-    name: string;
-    position: string;
-    image: string;
-    phone: string;
-    fax: string;
-    mobile: string;
-    email: string;}[];
-  
+    preDirectors: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    }[];
   };
 }

@@ -13,11 +13,10 @@ import {
 } from '~/components/carousels';
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
-import Events from '~/app/events';
 import { getTranslations } from '~/i18n/translations';
 import { type events, type notifications } from '~/server/db';
 
-
+import Events from './events';
 
 export default async function Home({
   params: { locale },
@@ -115,7 +114,8 @@ export default async function Home({
 
       <Notifications category={notificationCategory} locale={locale} />
       <Events category={eventsCategory} locale={locale} />
-        <section className="container mb-32 mt-10" id="directors-corner">
+
+      <section className="container mb-32 mt-10" id="directors-corner">
         <Heading
           glyphDirection="rtl"
           heading="h2"
@@ -130,11 +130,10 @@ export default async function Home({
           quoteBelow={text.director.quote[1]}
           readMore={{
             text: text.director.more,
-            href: `/director-message`,
+            href: `/institute/administration/director`,
           }}
         />
       </section>
-     
     </>
   );
 }
