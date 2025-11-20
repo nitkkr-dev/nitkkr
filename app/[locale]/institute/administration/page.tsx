@@ -13,15 +13,8 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import ButtonGroup from '~/components/button-group';
 import Loading from '~/components/loading';
-import {
-  CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import { CardTitle } from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
@@ -106,21 +99,20 @@ export default async function Administration({
             <CardTitle className="text-2xl text-primary-300">
               {text.composition}
             </CardTitle>
-            <Table
-              className="w-full"
-              scrollAreaClassName="md:max-h-96 sm:max-h-72 max-h-60"
-            >
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.sNo}</TableHead>
-                  <TableHead>{text.name}</TableHead>
-                  <TableHead>{text.servedAs}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <SenateMembers />
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                { key: 'serial', label: text.sNo },
+                { key: 'name', label: text.name },
+                { key: 'servingAs', label: text.servedAs },
+              ]}
+              tableData={await db.query.committeeMembers.findMany({
+                where: (member, { eq }) => eq(member.committeeType, 'senate'),
+                orderBy: (member, { asc }) => [asc(member.serial)],
+              })}
+              currentPage={1}
+              itemsPerPage={100}
+              getCount={Promise.resolve([{ count: 100 }])}
+            />
           </Suspense>
         </section>
         <ButtonGroup
@@ -261,104 +253,3 @@ export default async function Administration({
     </>
   );
 }
-
-const SenateMembers = async () => {
-  const members = await db.query.committeeMembers.findMany({
-    where: (member, { eq }) => eq(member.committeeType, 'senate'),
-    orderBy: (member, { asc }) => [asc(member.serial)],
-  });
-
-  return members.map(({ serial, name, servingAs }, index) => (
-    <TableRow key={index}>
-      <TableCell>{serial}</TableCell>
-      <TableCell>{name}</TableCell>
-      <TableCell>{servingAs}</TableCell>
-    </TableRow>
-  ));
-};
-const Deans = () => {
-  const deans = [
-    {
-      id: 1,
-      name: 'Professor Pratibha Aggarwal',
-      designation: 'Dean of Student Welfare',
-      email: 'jitenderchhabra@nitkkr.ac.in',
-      image: '/images/dean1.jpg', // replace with your actual dean image path
-      description: `India, the land of seekers, is at the cusp of becoming Vishwa Guru all 
-      over again after 1100 years of subjugation, wars, annexures and humiliation. 
-      It is again a free country due to the sacrifices made by our leaders, freedom fighters 
-      and has learnt the art of standing tall in the midst of many a challenge of building 
-      the nation with its rich diversity, cultures, languages all over again since the last 
-      75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
-    },
-    {
-      id: 2,
-      name: 'Professor Pratibha Aggarwal',
-      designation: 'Dean of Student Welfare',
-      email: 'jitenderchhabra@nitkkr.ac.in',
-      image: '/images/dean1.jpg', // replace with your actual dean image path
-      description: `India, the land of seekers, is at the cusp of becoming Vishwa Guru all 
-      over again after 1100 years of subjugation, wars, annexures and humiliation. 
-      It is again a free country due to the sacrifices made by our leaders, freedom fighters 
-      and has learnt the art of standing tall in the midst of many a challenge of building 
-      the nation with its rich diversity, cultures, languages all over again since the last 
-      75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
-    },
-  ];
-
-  return (
-    <section className="space-y-8">
-      {deans.map((dean) => (
-        <article
-          key={dean.id}
-          className="bg-white flex flex-col items-start gap-6 rounded-xl border border-neutral-200 p-6 shadow-md md:flex-row"
-        >
-          {/* Image + Email (left column) */}
-          <div className="flex flex-col items-start">
-            <Image
-              alt={dean.name}
-              className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-              height={0}
-              src={`persons/${dean.id}/image.png`}
-              width={0}
-            />
-            <div className="mt-3 flex items-center gap-2 text-sm text-neutral-800">
-              <MdEmail className="text-[#C5291D]" />
-              <a
-                href={`mailto:${dean.email}`}
-                className="text-[#C5291D] hover:underline"
-              >
-                {dean.email}
-              </a>
-            </div>
-          </div>
-
-          {/* Content (right column) */}
-          <div className="flex-1">
-            <header className="mb-3">
-              <h3
-                className="text-xl font-bold"
-                style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
-              >
-                {dean.name}
-              </h3>
-              <p
-                className="text-lg"
-                style={{ color: '#E13F32', fontFamily: 'DM Serif Display' }}
-              >
-                {dean.designation}
-              </p>
-            </header>
-
-            <p
-              className="text-sm leading-relaxed text-neutral-700"
-              style={{ color: '#000000', fontFamily: 'DM Sans' }}
-            >
-              {dean.description}
-            </p>
-          </div>
-        </article>
-      ))}
-    </section>
-  );
-};

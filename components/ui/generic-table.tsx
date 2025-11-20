@@ -26,7 +26,7 @@ interface GenericTableProps<T extends Record<string, unknown>> {
   getCount: Promise<{ count: number }[]>; // changed type
 }
 
-export function GenericTable<T extends Record<string, unknown>>({
+export default function GenericTable<T extends Record<string, unknown>>({
   headers,
   tableData,
   currentPage,

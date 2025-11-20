@@ -9,16 +9,9 @@ import { type IconType } from 'react-icons/lib';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
+import GenericTable from '~/components/ui/generic-table';
 
 export default async function IPR({
   params: { locale },
@@ -239,34 +232,30 @@ export default async function IPR({
             text={text.Research.ipr.advisoryCommittee.title.toUpperCase()}
           />
           <div className="mt-12 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.srNo}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.name}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.designation}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.department}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {advisoryCommittee.map((member) => (
-                  <TableRow key={member.srNo}>
-                    <TableCell>{member.srNo}</TableCell>
-                    <TableCell>{member.name}</TableCell>
-                    <TableCell>{member.designation}</TableCell>
-                    <TableCell>{member.department}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                {
+                  key: 'srNo',
+                  label: text.Research.ipr.advisoryCommittee.srNo,
+                },
+                {
+                  key: 'name',
+                  label: text.Research.ipr.advisoryCommittee.name,
+                },
+                {
+                  key: 'designation',
+                  label: text.Research.ipr.advisoryCommittee.designation,
+                },
+                {
+                  key: 'department',
+                  label: text.Research.ipr.advisoryCommittee.department,
+                },
+              ]}
+              tableData={advisoryCommittee}
+              currentPage={1}
+              itemsPerPage={12}
+              getCount={Promise.resolve([{ count: advisoryCommittee.length }])}
+            />
           </div>
         </div>
         {/* IP Policy */}
