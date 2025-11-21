@@ -1,3 +1,94 @@
-title	fundingAgency	facultyEmployeeId	amount	status	durationPeriod	durationPeriodType	createdOn	endedOn
-Machine Learning	Open Source	1	100000	on-going	1	year		
-Database Management System	Open Source	2	100000	on-going	1	year		
+year	department_id	titleOfProject	agency	amountInLakh	sanctionedFileOrderNO	sanctionedDate	Status
+2014-17	1555	Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay	SERB-DST	26.00	No. SB/FT/CS- 195/2013	2013-07-30	completed
+2014-17	1555	Development of polyoxometalate based light induced water oxidation catalyysts	SERB-DST	25.00	No. SB/FT/CS- 193/2013	2014-09-12	completed
+2014-19	1555	New Magnetic Materials Applicable as Colored Pigments and Catalysts	DST-INSPIRE	35.00	No. 4081	2014-07-23	completed
+2014-17	1555	Design, Synthesis and Optoelectronic Properties of Thiophene Based Functional Organic Materials	SERB-DST	22.80	No. SB-FT/CS- 101/2014	2015-07-24	completed
+2014-17	1555	Quantum Chemical design, synthesis and energetic properties study on tetrazole based high energy	SERB-DST	26.29	No. SB/FT/CS- 110/2014	2015-05-29	completed
+2014-17	1555	Neutral and Cationic Ruthenium Complexesfor Amidation and Related Reactions in Aqueous and Biphasic Medium	SERB-DST	26.00	No. SB/FT/CS- 092/2014	2015-07-18	completed
+2014-17	1557	Study of Ion Beam Induced Modifications in Semiconducting Nanostructures	IUAC	10.00	No.  IUAC/XII.7/UFR- 56303	2014-08-22	completed
+2014-17	1557	Silver nano-particle embeded bio-glases: Electrical polarization and asesment of their biocompatibility	SERB-DST	23.75	No. SB/FTP/PS- 139/2013	2014-05-05	completed
+2014-17	1557	Synthesis of Novel Random Laser Materials for Advance Photonic Applications	SERB-DST	26.23	No. SB/FTP/PS- 093/2013	2016-03-20	completed
+2014-17	1562	Impact Assessment of RIce Varieties Developed by ICAR and SAUs in India	NCAER	1.50		2014-12-31	completed
+2015-18	1555	Multifunctional Metal Organic Framework Construction by O/-N Donor Ligands	SERB-DST	29.16	No. SB/FT/CS- 098/2014	2015-07-18	completed
+2016-19	1555	Nano-Scale Vesicles Modified Metal Complexes For Therapeutic Carbon Monoxide (CO) Delivery	CSIR-EMR	15.50	No.  01(2855)/16/EMR- II	2016-05-12	completed
+2016-18	1560	Intelligent Real Time Situation Awareness and Decision Support System for Indian Defense.	DR&IPR-DRDO	40.52	ERIP/ER/1506048/ M/01/1611	2016-05-13	completed
+2016-19	1555	their Catelytic activities in Aqueous and Biphasic Medium	Women Scientific Scheme	23.20	A/CS1035/2015 G	2016-06-01	completed
+2016-19	1557	Investigations on Hexaferrites to search strong magnetolectric compounds at room temperature	CSIR	18.90	No.  03/(1370)16/EMR- II	2016-11-25	completed
+2016-19	1551	Defending Distributed Denial of Service (DDoS) Attacks using Dynamic Resource Ownership and	SERB-DST	23.06	No. SB/FTP/ETA- 113/2014	2016-01-22	completed
+2017-19	1555	Detailed investigations on crystal and magnetic structures of frustrated double perovskites CaBRuo-( B=Ga, In, Y, Sc) and their Lanthanum 2 6 composites	UGC-DAE-CSR	10.35	No.  UDCSR/MUM/AO /CRS-M- 262/2017/1157	2017-03-14	completed
+2017-20	1550	airborne hyperspectral data for crop cover mapping/urban mapping	SAC (ISRO)	20.02	No.  EPSA/4.20/2017	2017-12-19	completed
+2017-20	1557	Dielectric Relaxation Investigation in Swift Heavy Ion Irradiated Ferroelectric Ceramic/Polymer Nanocomposites	IUAC	5.79	No. IUAC/XIII.3A	2017-01-12	completed
+2017-18	1561	Values and Professional Ethics As Compulsory Course In Engineering Education An Exploratory Study	ICPR	1.00	NO.F.4-2/17- 18/P&R/ICPR	2017-06-16	completed
+2017-20	1554	Design and development of solar assisted solid desiccant air conditioning system for India	SERB-DST	21.65	No.  EMR/2016/006912	2017-06-15	completed
+2017-20	1550	Fusion of Optical and Multi - frequency Multi - polarimetric SAR data for Enhanced Crop/Vegetation and Urban Mapping	SAC (ISRO)	17.44	No.  EPSA/3.1.1/2017	2017-11-16	completed
+2017-20	1554	Development of Ultrasonic Assisted Electrochemical Mechanical Finishing (UAECMF)	SERB-DST	16.50	No.	2017-04-03	completed
+2017-19	1552	Modelling and Simulation of Explosive Driven Helical Flux Compression Generator	TBRL-DRDO	9.80	No.  TBRL/PCD/CARS/ 80/2017	2017-07-25	completed
+2017-19	1553	Data Fusion Algorithms for Vehicle Detection and	TBRL-DRDO	21.39	No.  TBRL/PCD/CARS/	2017-09-29	completed
+2017-20	1555	Computational Design, Synthesis and Optoelectronic Properties of Functionalized 1,3,5- Triazine compounds and their Metal Complexes	DST under Women Scientific Scheme	16.80	No. SR/WOS-A/CS- 46/2017	2017-12-05	completed
+2017-19	1553	Physics Based Accurate Analytical Modeling of	DRDO	9.27	No. 115/CARS-	2017-11-16	completed
+2017-20	1557	Development of Novel Electrode Material for Supercapacitor Applications	SERB-DST	41.32	No.  EEQ/2017/000038	2017-11-29	completed
+2017-20	1554	Design and Development of a Hybrid Powered Liquid Desiccant System for Air Conditioning and Fresh Water Production	SERB-DST	20.00	No.  EEQ/2017/000227	2017-11-29	completed
+2017-20	1551	Partition Recovery of Wireless Sensor Networks with the integration of Unmanned Aerial Vehicles (UAVs)	SERB-DST	13.68	No.EEQ/2017/0000 37	2017-11-29	completed
+2017-20	1554	Performance Enhancement of Vapor Compression Refrigeration System Using Ejector as an Expansion Device	SERB-DST	14.32	No.  DST/TDT/DDP- 07/2017 (C)	2017-10-26	completed
+2017-18	1551	Secure Storage on External Media and Lossless Retrieval	JCB-DRDO	6.20	JCB/11934/CARS/ 2017/003	2018-02-15	completed
+2017-19	1551	Implementation of Security Features in Smart Cards	JCB-DRDO	9.37	No.  JCB/11934/CARS/ 2017/003	2018-09-12	completed
+2017-21	1557	Modifications in the Properties of II-VI	IUAC-UGC	10.11	No.  IUAC/XIII.7/UFR-	2018-02-21	completed
+2017-21	1555	Photoinduced release of therapeutic Nitric Oxide (NO) from functionalized sefl-assembled nanovesicles.	DBT	44.44	No.  102/IFD/SAN/5162 /2017-18                   dt. 23.3.18	2018-03-23	completed
+2018-19	1557	Feasibility of Development of Spectrally Selective	DRDO	9.13	No.	2018-04-04	completed
+2018-21	1557	Nanomaterials for stable and high efficiency inorganic-organic perovskite- tandem solar cells	CSIR	20.00	No. 22  (0778)/18/EMR-II	2018-05-02	completed
+2018-21	1555	Squaraine and Croconine based Functional Organic Materials	CSIR	23.96	02(0339)/18/EMR- II	2018-06-06	completed
+2018-21	1557	Localized Surface Plasmon Resonance effect of metal nanoparticles (Au,Ag etc.) on the optical properties of nanophosphors for Plasmon Enhanced Fluorescence sensors	CSIR	19.90	No.  03(1440)/18/EMR- II	2018-04-24	completed
+2018-21	1555	Fluorescent Moisture Sensors, Based on Small Molecules, Chemically Modified Paper and Electrospun Nanofibrous Materials	SERB-DST	31.86	No.  EMR/2017/004085	2018-06-14	completed
+2018-21	1554	Multilayer Functionaly Graded Armor Materials with Improved Balistic Performance	(ARMREB)	34.51	ARMREB/CDSW/ 2018/201	2018-07-23	completed
+2018-19	1550	Research Project for Soil Strength Mapping & Stabilization	Engineer-in- Chief, Haryana PWD B&R,	3.00	No. 146221/NH	2018-09-07	completed
+2018-19	1554	Development of Low Cost Schefler Solar Concentrator for Domestic Indor Coking and	Chandigarh ONGC Energy	7.29	IN- DL6505002686609	2018-08-21	completed
+2018-21	1554	Desiccant Solar Still	IMPRINT-II SERB-DST	60.02	MEE1819424MIM PMPRA		completed
+2018-21	1553	Performance and Improvement Study of Bi- Frequency MILO	DST under Women Scientific Scheme A (WOS- A)	26.80	SR/WOS/A/ET- 26/2018	2018-10-17	completed
+2018-21	1552	Design, Fabrication & Testing Of Active Magnetic Bearing For Centrifugal Pumps With VFD	Indian Navy	29.97	EG/6201/INTB	2018-12-03	completed
+2018-21	1557	Development of spinel-type metal oxide/reduced, graphene oxide novel nanocomposites for NO- gas x sensing application	UGC-DAE CSR	8.00	No. CSR-KN/CSR- 119/2018-19/1057	2018-12-26	completed
+2018-21	1555	Development of Insensitive High Energy Materials Containing Heterocyclic Backbone Substituted with Amino, Azido and Nitro Explosophores	DRDO (ARMREB)	36.36	ARMREB/CDSW/ 2019/211	2019-01-14	completed
+2018-21	1556	Study of Degree of Approximation and Absolute Summability Factors of Infinite Series	SERB-DST	17.71	EEO/2018/000393	2019-02-15	completed
+2018-21	1557	material for energy storage devices	SERB-DST	41.49	CRG/2018/001694	2019-03-11	completed
+2019-22	1561	Correlation between Psychological and Physiological Parameters of Stress Among Staff and Students-AN Empirical Study	LSRB (DRDO)	36.64	No. O/o DG (TM/81/48222/LSR B-350/PEE  &BS/2019	2019-11-26	completed
+2019-22	1550	Removal of organic and inorganic toxins from electronic waste using isolated bacterial species and competent phytoremediators	DST under Women Scientific Scheme A (WOS- A)	28.57	No.SR/WOS-A/LS 479/2018 (G)	2019-09-17	completed
+2019-22	1557	conductors for advanced lithium ion battery applications	Humboldt Foundation, Germany	42.00	D-53173 Bonn	2019-05-23	completed
+2019-22	1550	Performance Assessment of Roads Constructed Using Waste Plastics	NRIDA	20.50	DO No. NRRDA- PO10 (15)/2018- Dir (P-II)/2541	2019-09-09	completed
+2019-22	1557	CFD Simulations and Validation through measurement	BRNS	33.58	No. 51/14/14/2019- BRNS/36244	2019-12-03	completed
+2021-22	1554	Design and Analysis of Jet Deflector and its Support Structure	SPIC (DRDO)	9.84	SP-9000/06/002	2021-06-07	completed
+2021-22	1554	Design of a light weight container for transportation and storage of a store	SPIC (DRDO	12.90	SP-9000/07/052	2021-09-13	completed
+2021-24	1552	Waste Management in North Indian Vilages by Developing Reliability based Microgrid with Solar and Biomas Energy	WOS-B Scheme Under DST	23.90	DST/WOS- B/ER/2021 (G)	2021-09-29	completed
+2021-24	1557	Development of synergetic dielectric and magnetic loss materials composite for high performance microwave absorption applications	DRDO	31.21	ERIP/ER/2022002/M/01/1794	2022-03-23	ongoing
+2022-25	1555	the detection to toxic Heavy Metals and Pesticides in water bodies of Haryana	DST Haryana	18.14	2/2948	2022-11-29	ongoing
+2022-25	1555	New Perovskite Oxides for Application in Energy Generation and Storage Purpose	UGC-DAE-CSR	1.35	CRS/2021- 22/03/564	2022-06-24	ongoing
+2022-25	1555	Boosting of Energy Generation and Storage Properties by the Composite Materials of Multinary Metal Oxides and Carbon Allotropes Synthesized	SERB-DST	29.63	CRG/2022/002797	2022-12-08	ongoing
+2022-25	1555	Supramolecular organic-inorganic hybrid gels for the light-activated theapeutic carbon monoxide (CO) delivery	SERB-DST	34.96	CRG/2022/004990	2022-12-08	ongoing
+2022-25	1555	Ruthenium Catalysed Dehydrogenation Reaction as a Platform for Hydrogen Storage Materials	SERB-DST	27.10	CRG/2022/006324	2022-12-12	ongoing
+2022-25	1553	IoT-based Multifunctional Scalable Real Time Farm Monitoring System for Smart Agriculture	IIIT Ropar Hub (AWaDH)	16.93	SplNe/IITRPR/202 2/P10003	2022-07-28	ongoing
+2022-25	1554	Design Development and Performance Analysis of Hybrid Abrasive Assisted Micro Electrochemical Machining (HAAMECM) Process	SERB-DST	7.38	EEQ/2021/000031	2022-02-21	ongoing
+2022-25	1557	luminescent ink for safety signage	DST Haryana	7.75	2-23/4507	2023-03-31	ongoing
+2022-24	1553	Development of deep learning enabled algorithm for automatic modulation recognition in blind RF environment	ISRO	19.38	RAC-S/2022/05	2022-10-21	ongoing
+2022-25	1551	Key management for secure multicast applications	ISRO	22.43	RAC-S/2022/04	2022-10-21	ongoing
+2023-24	1560	Quantum Computing-inspired Vehicular Route Optimization for Industrial Applications	Ministry of Electronics & Information Technology (MeitY)	8.00		2023-04-25	ongoing
+2023-26	1555	system composed of organolanthanide complexes for the sensing and biomaging of gaseous signaling molecule hydrogen sulfide (H2 S)	CSIR	23.39	01/3127/23/EMR-II	2023-07-08	ongoing
+2023-28	1552	Development in Unmanned Aircraft System (Drone and related Technology)	Technology (MeitY) Through IITDM Kurnool or CDAC Hyderabad	200.00	14011/29/2021- HRD	2023-08-01	ongoing
+2023-24	1551	using Dep Neural Network under Capacity Building for Human Resource Development in Unmaned Aircraft System (Drone and related Technology)	Information Technology (MeitY) Through IITDM Kurnool or CDAC Hyderabad	2.50	IIITDMK/PMU/PO C/2023/018	2023-08-06	ongoing
+2023-24	1562	- Impact Assessment of PM Kisan Samman Nidhi Scheme	ICSSR	14.00	F No. 25/CRP- 2023- 1091/PMKSN/SCD	2023-10-03	completed
+2023-25	1557	Soft-collinear effective theory approach to precision angularity event shapes at high energy scattering experiments	SERB-SRG	17.00	F No.  SRG/2023/001093	2023-09-04	ongoing
+2023-26	1553	Development of Layered Mxene Heterostructure for Hydrogen Storage: High Capacity Sustainable Material	SERB-DST	32.96	EEQ/2023/000312	2023-12-01	ongoing
+2023-24	1562	Macroeconomics Forecasting Framework for Vision Policy Document	NITI Aayog	2.00	O-15012/13/23	2024-01-01	completed
+2023-24	1555	Sustainable Removal of Organic Dyes, Heavy Metals and Hazardous Anions from Industrial Wastewater	DST Haryana	20.34	HSCSIT/R&D/2024/509	2024-02-16	ongoing
+2023-24	1551	Crop Health Monitoring and Yield Prediction using	Ministry of Electronics & Information Technology	22.50	IIITDMK/PMU/PO	2024-04-08	ongoing
+2023-24	1554	Development of Computational Model for High- Velocity Oxygen-Fuel (HVOF) Thermal Spray Syystem	SERB	28.27	CRG/2023/000783	2024-03-18	ongoing
+2024-25	1551	Information Security Education and Awareness (ISEA) Project Phase-III	Ministry of Electronics & Information Technology (MeitY)	201.06	L-14017/1/2022- HRD	2023-10-16	ongoing
+2024-25	1554	Technological gap analysis for steel tape used in	Bureau of Indian	6.15	SCMD/R&D Guidelines/202405	2024-05-31	completed
+2024-25	1552	Study of Safety and Performance Parameters of Electrical timer relays for Industrial purposes- Pneumatic, Motorized and Electronic	Bureau of Indian Standards (BIS)	4.25	SCMD/R&D Guidelines/202309 09	2024-05-28	completed
+2024-25	1557	Development of Infrared Band Absorbing Materials	DRDO	39.09	DLJ/PP&C/1025/N ITK/CARS/88/I	2024-06-19	ongoing
+2024-25	1553	Design and Development of optical frequency comb source for DWDM application	ISRO	46.16	DS-2B- 13012(2)/62/2019- Sec.2	2024-06-19	ongoing
+2024-25	1557	Development of UV resistant long phosphorescent nanofibers	ISRO	0.72	DS-2B- 13012(2)/62/2019-	2024-07-19	ongoing
+2024-25	1550	Self-healing Flexible Pavement using Waste Oil Capsules as Rejuvenators	ISRO	1.73	DS-2B- 13012(2)/62/2019- Sec.-2	2024-06-19	ongoing
+2024-25	1551	Development of an Efficient Smishing Detection	ISRO	1.84	DS-2B- 13012(2)/62/2019-	2024-06-19	completed
+2024-25	1553	Security enhancement in non-terrestrial networks using machine learning	ISRO	1.60	RAC- S/NITKKR/2024/5 1	2024-07-19	ongoing
+2024-25	1551	crucial data in mobile phone in an in-visible form	ISRO	2.87	S/NITKKR/2024/2 (s.1)	2024-07-12	ongoing
+2024-25	1551	Software for storing a file in between Dummy files at Sector level in an External Storage Drive	ISRO	1.23			completed
+2024-25	1562	Impact Asesment of Pradhan Mantri Stret Vendor's AtamNirbhar Nidhi Yojna (PM SVANidhi) on Stret Vendors in Urban Haryana	ICSSR	10.00	78/2024- 25/ICSSR/RP/MN/ EN	2025-03-19	ongoing
+2024-25	1554	Design of Advanced h-BN/MOFs (Metal-organic Frame works) based nanocomposites for hydrogen storage	SERB-DST	10.50	CRG/2022/007163	2024-05-03	ongoing
