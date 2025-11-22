@@ -1,13 +1,20 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { redirect } from 'next/navigation';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 import { getS3Url } from '~/server/s3';
 import { cn, groupBy } from '~/lib/utils';
 import { Dialog, DialogContent, ScrollArea } from '~/components/ui';
-import { Input } from '~/components/inputs';
+import {
+  Input,
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/inputs';
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
 import { notifications as notificationsSchema } from '~/server/db';
@@ -87,64 +94,19 @@ export default async function NotificationsPage({
   const showPopup = 'popup' in searchParams && searchParams.popup === 'filters';
 
   return (
-    <article
-      style={{
-        backgroundImage: `linear-gradient(rgba(249,245,235,0.75) 0%, rgba(249,245,235,0.92) 70%, rgba(249,245,235,1) 100%), url('${getS3Url()}/assets/notifications-bg.jpg')`,
-      }}
-      className="bg-cover bg-no-repeat pb-16 pt-[72px]"
-    >
-      <header className="container mb-8">
-        <h1 className="text-center font-serif text-4xl text-primary-700">
-          {text.title}
-        </h1>
-      </header>
-
-      <div className="container flex gap-8">
-        {/* Desktop / large filter column */}
-        <aside
-          className={cn(
-            'hidden w-[290px] shrink-0 flex-col gap-6 xl:flex',
-            'sticky top-[88px] h-fit'
-          )}
-        >
-          <FilterSection locale={locale} label={text.filter.date}>
-            <DateRangeForm start={searchParams.start} end={searchParams.end} />
-          </FilterSection>
-
-          <FilterSection locale={locale} label={text.filter.category}>
-            <MultiCheckbox
-              param="category"
-              options={notificationsSchema.category.enumValues}
-              selected={categories}
-              locale={locale}
-              textMap={text.categories}
-            />
-          </FilterSection>
-
-          <FilterSection
-            locale={locale}
-            label={text.filter.department}
-            viewAllHref={
-              departments.length
-                ? buildHref(locale, { department: [] })
-                : undefined
-            }
-          >
-            <MultiCheckbox
-              param="department"
-              options={departmentRows.map((d) => d.urlName)}
-              selected={departments}
-              locale={locale}
-              textMap={Object.fromEntries(
-                departmentRows.map((d) => [d.urlName, d.name])
-              )}
-            />
-          </FilterSection>
-          <Button
-            asChild
-            variant="ghost"
-            className="mt-2 text-sm font-semibold text-primary-700"
-          >
+    <section className="container my-6 flex gap-8">
+      {/* Desktop Sidebar - hidden on mobile */}
+      <aside
+        className={cn(
+          'hidden w-[290px] shrink-0 flex-col gap-6 xl:flex',
+          'sticky top-[88px] h-fit'
+        )}
+      >
+        <div className="flex items-center justify-between">
+          <h2 className="font-serif text-2xl font-bold text-primary-700">
+            Filter By
+          </h2>
+          <Button asChild variant="ghost" className="text-xs text-primary-700">
             <Link
               href={buildHref(locale, {
                 q: undefined,
@@ -154,119 +116,87 @@ export default async function NotificationsPage({
                 end: undefined,
               })}
             >
-              {text.clearAll}
+              Clear All Filters
             </Link>
           </Button>
-        </aside>
+        </div>
 
-        {/* List area */}
-        <main className="grow">
-          {/* Search + mobile filter */}
-          <div className="mb-4 flex gap-3 max-xl:flex-col xl:items-center">
-            <Input
-              id="notifications-search"
-              className="xl:max-w-sm"
-              debounceEvery={150}
-              debounceTo="q"
-              defaultValue={searchParams.q}
-              placeholder={text.searchPlaceholder}
-            />
-            <div className="flex gap-2 xl:hidden">
-              <Button asChild variant="secondary" className="px-4">
-                <Link
-                  href={buildHref(locale, { popup: 'filters' })}
-                  scroll={false}
-                >
-                  {text.filter.title}
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" className="px-4 text-primary-700">
-                <Link
-                  href={buildHref(locale, {
-                    q: undefined,
-                    category: [],
-                    department: [],
-                    start: undefined,
-                    end: undefined,
-                  })}
-                >
-                  {text.clearAll}
-                </Link>
-              </Button>
-            </div>
-          </div>
+        <FilterSection locale={locale} label={text.filter.date}>
+          <DateRangeForm
+            locale={locale}
+            categories={categories}
+            departments={departments}
+            query={query}
+            start={searchParams.start}
+            end={searchParams.end}
+          />
+        </FilterSection>
 
-          <ScrollArea className="h-[70vh] rounded-xl bg-background/70 p-4 shadow-[0_8px_24px_rgba(0,43,91,0.15)]">
-            <Suspense fallback={<Loading />}>
-              <NotificationsListRenderable locale={locale} items={list} />
-            </Suspense>
-          </ScrollArea>
-        </main>
-      </div>
+        <FilterSection locale={locale} label={text.filter.category}>
+          <MultiCheckbox
+            param="category"
+            options={notificationsSchema.category.enumValues}
+            selected={categories}
+            locale={locale}
+            textMap={text.categories}
+          />
+        </FilterSection>
 
-      {/* Mobile filter popup */}
-      {showPopup && (
-        <Dialog open>
-          <DialogContent className="border-primary-200 max-h-[90vh] w-[92vw] max-w-[420px] overflow-y-auto rounded-xl border bg-background p-6 shadow-2xl">
-            <h3 className="mb-4 font-serif text-xl font-semibold text-primary-700">
-              {text.filter.title}
-            </h3>
+        <FilterSection locale={locale} label={text.filter.department}>
+          <MultiCheckbox
+            param="department"
+            options={departmentRows.map((d) => d.urlName)}
+            selected={departments}
+            locale={locale}
+            textMap={Object.fromEntries(
+              departmentRows.map((d) => [d.urlName, d.name])
+            )}
+          />
+        </FilterSection>
+      </aside>
 
-            <FilterSection locale={locale} label={text.filter.category}>
-              <MultiCheckbox
-                param="category"
-                options={notificationsSchema.category.enumValues}
-                selected={categories}
-                locale={locale}
-                textMap={text.categories}
-              />
-            </FilterSection>
+      {/* Main Content */}
+      <section className="grow space-y-6">
+        {/* Search + Mobile Filters */}
+        <search className="flex gap-4 max-sm:flex-col">
+          <Input
+            id="notification-search"
+            className="sm:grow"
+            debounceTo="q"
+            debounceEvery={300}
+            defaultValue={query}
+            placeholder={text.searchPlaceholder}
+          />
 
-            <FilterSection locale={locale} label={text.filter.department}>
-              <MultiCheckbox
-                param="department"
-                options={departmentRows.map((d) => d.urlName)}
-                selected={departments}
-                locale={locale}
-                textMap={Object.fromEntries(
-                  departmentRows.map((d) => [d.urlName, d.name])
-                )}
-              />
-            </FilterSection>
+          {/* Mobile Category Filter - shows on < xl */}
+          <MultiCheckbox
+            param="category"
+            options={notificationsSchema.category.enumValues}
+            selected={categories}
+            locale={locale}
+            textMap={text.categories}
+            select
+          />
 
-            <FilterSection locale={locale} label={text.filter.date}>
-              <DateRangeForm
-                start={searchParams.start}
-                end={searchParams.end}
-                compact
-              />
-            </FilterSection>
+          {/* Mobile Department Filter - shows on < xl */}
+          <MultiCheckbox
+            param="department"
+            options={departmentRows.map((d) => d.urlName)}
+            selected={departments}
+            locale={locale}
+            textMap={Object.fromEntries(
+              departmentRows.map((d) => [d.urlName, d.name])
+            )}
+            select
+          />
+        </search>
 
-            <div className="mt-4 flex justify-between">
-              <Button asChild variant="primary" className="px-4">
-                <Link href={buildHref(locale, { popup: undefined })}>
-                  {text.saveSelection}
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" className="px-4 text-primary-700">
-                <Link
-                  href={buildHref(locale, {
-                    q: undefined,
-                    category: [],
-                    department: [],
-                    start: undefined,
-                    end: undefined,
-                    popup: undefined,
-                  })}
-                >
-                  {text.clearAll}
-                </Link>
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      )}
-    </article>
+        {/* Notifications List */}
+        <Suspense fallback={<Loading />}>
+          <NotificationsListRenderable items={list} locale={locale} />
+        </Suspense>
+      </section>
+    </section>
   );
 }
 
@@ -328,8 +258,8 @@ function FilterSection({
 }) {
   return (
     <section className="rounded border border-primary-100 bg-neutral-50 p-4">
-      <div className="mb-3 flex items-start justify-between">
-        <h3 className="text-sm font-bold text-primary-700">{label}</h3>
+      <div className="flex items-start justify-between">
+        <h3 className="text-xl font-bold text-primary-300">{label}</h3>
         {viewAllHref && (
           <Link
             href={viewAllHref}
@@ -350,83 +280,239 @@ function MultiCheckbox({
   selected,
   locale,
   textMap,
+  select = false,
 }: {
   param: string;
-  options: string[];
+  options: readonly string[];
   selected: string[];
   locale: string;
-  textMap?: Record<string, string>;
+  textMap: Record<string, string>;
+  select?: boolean;
 }) {
-  return (
-    <ul className="space-y-2">
-      {options.map((opt) => {
-        const isSelected = selected.includes(opt);
-        const next = toggleMulti(selected, opt);
-        return (
-          <li key={opt}>
+  const getUpdatedValues = (option: string) => {
+    return selected.includes(option)
+      ? selected.filter((s) => s !== option)
+      : [...selected, option];
+  };
+
+  return select ? (
+    // Mobile Select Dropdown
+    <Select navigate>
+      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
+        <SelectValue
+          placeholder={
+            selected.length ? `${selected.length} selected` : `Choose ${param}`
+          }
+        />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((opt) => (
+          <div key={opt} className="flex items-center px-2 py-1">
+            <input
+              type="checkbox"
+              id={`mobile-${param}-${opt}`}
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={selected.includes(opt)}
+              readOnly
+            />
             <Link
-              href={buildHref(locale, { [param]: next })}
-              className={cn(
-                'flex items-center rounded border px-3 py-2 text-sm font-medium transition-colors',
-                isSelected
-                  ? 'bg-primary-50 border-primary-700'
-                  : 'border-neutral-300 hover:bg-neutral-100'
-              )}
+              href={buildHref(locale, {
+                [param]: getUpdatedValues(opt),
+              })}
+              className="ml-2 w-full py-1"
             >
-              <input
-                type="checkbox"
-                className="mr-2 h-4 w-4 rounded border-neutral-300 text-primary-700"
-                readOnly
-                checked={isSelected}
-              />
-              {textMap?.[opt] ?? opt}
+              {textMap[opt] ?? opt}
             </Link>
-          </li>
-        );
-      })}
-    </ul>
+          </div>
+        ))}
+      </SelectContent>
+    </Select>
+  ) : (
+    // Desktop Checkbox List
+    <ScrollArea className="h-[200px]">
+      <ol className="w-full space-y-2 pr-4">
+        {options.map((opt) => {
+          const isChecked = selected.includes(opt);
+          return (
+            <li key={opt}>
+              <Link
+                href={buildHref(locale, {
+                  [param]: getUpdatedValues(opt),
+                })}
+                className={cn(
+                  'flex w-full items-center rounded border p-2',
+                  isChecked
+                    ? 'bg-primary-50 border-primary-700'
+                    : 'border-neutral-300'
+                )}
+              >
+                <div className="flex w-full items-center">
+                  <div className="mr-2">
+                    <input
+                      type="checkbox"
+                      id={`${param}-${opt}`}
+                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                      checked={isChecked}
+                      readOnly
+                    />
+                  </div>
+                  <span className="font-semibold text-shade-dark">
+                    {textMap[opt] ?? opt}
+                  </span>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ol>
+    </ScrollArea>
   );
 }
 
 function DateRangeForm({
+  locale,
+  categories,
+  departments,
+  query,
   start,
   end,
   compact = false,
 }: {
+  locale: string;
+  categories?: string[];
+  departments?: string[];
+  query?: string;
   start?: string;
   end?: string;
   compact?: boolean;
 }) {
-  const baseCls =
-    'w-full rounded border border-neutral-300 bg-white px-2 py-1 text-sm';
+  const startDate = start ? new Date(start) : undefined;
+  const endDate = end ? new Date(end) : undefined;
+
   return (
-    <form action="" className={cn('flex flex-col gap-2', compact && 'text-xs')}>
-      <label className="flex flex-col">
-        <span className="mb-1 text-xs font-semibold text-neutral-600">
-          Start
-        </span>
-        <input
-          name="start"
-          type="date"
-          defaultValue={start ?? ''}
-          className={baseCls}
-        />
-      </label>
-      <label className="flex flex-col">
-        <span className="mb-1 text-xs font-semibold text-neutral-600">End</span>
-        <input
-          name="end"
-          type="date"
-          defaultValue={end ?? ''}
-          className={baseCls}
-        />
-      </label>
+    <form className={cn('flex flex-col gap-4', compact && 'text-xs')}>
+      {/* Year Range Slider */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-sm font-semibold text-primary-700">
+          <span>{startDate?.getFullYear() ?? 2000}</span>
+          <span>{endDate?.getFullYear() ?? 2025}</span>
+        </div>
+        <div className="relative h-1 rounded-full bg-neutral-200">
+          <div
+            className="absolute h-full rounded-full bg-primary-700"
+            style={{ left: '0%', right: '0%' }}
+          />
+          <div
+            className="bg-white absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary-700"
+            style={{ left: '0%' }}
+          />
+          <div
+            className="bg-white absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary-700"
+            style={{ left: '100%' }}
+          />
+        </div>
+      </div>
+
+      {/* Start Date */}
+      <div className="space-y-2">
+        <label className="text-sm font-semibold text-primary-700">
+          Start date
+        </label>
+        <div className="grid grid-cols-3 gap-2">
+          <input
+            name="start-day"
+            type="number"
+            min="1"
+            max="31"
+            placeholder="Day"
+            defaultValue={startDate?.getDate()}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+          <input
+            name="start-month"
+            type="number"
+            min="1"
+            max="12"
+            placeholder="Month"
+            defaultValue={startDate ? startDate.getMonth() + 1 : undefined}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+          <input
+            name="start-year"
+            type="number"
+            min="2000"
+            max="2100"
+            placeholder="Year"
+            defaultValue={startDate?.getFullYear()}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+        </div>
+      </div>
+
+      {/* End Date */}
+      <div className="space-y-2">
+        <label className="text-sm font-semibold text-primary-700">End</label>
+        <div className="grid grid-cols-3 gap-2">
+          <input
+            name="end-day"
+            type="number"
+            min="1"
+            max="31"
+            placeholder="Day"
+            defaultValue={endDate?.getDate()}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+          <input
+            name="end-month"
+            type="number"
+            min="1"
+            max="12"
+            placeholder="Month"
+            defaultValue={endDate ? endDate.getMonth() + 1 : undefined}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+          <input
+            name="end-year"
+            type="number"
+            min="2000"
+            max="2100"
+            placeholder="Year"
+            defaultValue={endDate?.getFullYear()}
+            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+          />
+        </div>
+      </div>
+
       <Button
         variant="primary"
-        className="mt-1"
-        formAction={(formData) => {
+        className="mt-2 w-full"
+        formAction={async (formData) => {
           'use server';
-          // Redirect with updated query
+          const startDay = formData.get('start-day')?.toString();
+          const startMonth = formData.get('start-month')?.toString();
+          const startYear = formData.get('start-year')?.toString();
+          const endDay = formData.get('end-day')?.toString();
+          const endMonth = formData.get('end-month')?.toString();
+          const endYear = formData.get('end-year')?.toString();
+
+          const startVal =
+            startYear && startMonth && startDay
+              ? `${startYear}-${startMonth.padStart(2, '0')}-${startDay.padStart(2, '0')}`
+              : undefined;
+          const endVal =
+            endYear && endMonth && endDay
+              ? `${endYear}-${endMonth.padStart(2, '0')}-${endDay.padStart(2, '0')}`
+              : undefined;
+
+          redirect(
+            buildHref(locale, {
+              start: startVal,
+              end: endVal,
+              category: categories,
+              department: departments,
+              q: query,
+            })
+          );
         }}
       >
         Apply

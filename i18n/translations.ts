@@ -428,12 +428,30 @@ export interface Translations {
       date: string;
       category: string;
       department: string;
+      educationType: string;
     };
     categories: {
       academic: string;
       tender: string;
       workshop: string;
+      administration: string;
       recruitment: string;
+      admission: string;
+      'student-activities': string;
+      faculty: string;
+      research: string;
+      alumni: string;
+      examination: string;
+      result: string;
+      hostel: string;
+      miscellaneous: string;
+      archived: string;
+    };
+    educationType: {
+      ug: string;
+      pg: string;
+      phd: string;
+      all: string;
     };
   };
   Events: {
