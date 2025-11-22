@@ -1,6 +1,7 @@
 import { pgTable } from "drizzle-orm/pg-core";
 import { departments } from "./departments.schema";
 import { sql } from "drizzle-orm";
+import {relations} from "drizzle-orm";
 
 export const sponsoredResearchProjects = pgTable('sponsored_research_projects', (t)=>({
     id: t.serial('id').primaryKey(),
@@ -16,4 +17,14 @@ export const sponsoredResearchProjects = pgTable('sponsored_research_projects', 
 (t) => ({
     validYearFormat: sql`CHECK (${t.year} ~ '^[0-9]{4}-[0-9]{2}$')`,
 })
+);
+
+export const sponsoredResearchProjectsRelations = relations(
+  sponsoredResearchProjects,
+  ({ one }) => ({
+    department: one(departments, {
+      fields: [sponsoredResearchProjects.departmentId],
+      references: [departments.id],
+    }),
+  })
 );
