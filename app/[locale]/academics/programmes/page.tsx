@@ -2,14 +2,7 @@ import { Fragment } from 'react';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 
 export default async function Programmes({
@@ -151,22 +144,16 @@ export default async function Programmes({
           <strong>{text.courseOfStudy}</strong> {text.btechAbout}
         </p>
         <br />
-        <Table className="mt-4">
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.discipline}</TableHead>
-              <TableHead>{text.noOfSeats}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {btech.map((programme, i) => (
-              <TableRow key={i}>
-                <TableCell>{programme.name}</TableCell>
-                <TableCell>{programme.seats}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <GenericTable
+          headers={[
+            { key: 'name', label: text.discipline },
+            { key: 'seats', label: text.noOfSeats },
+          ]}
+          tableData={btech}
+          currentPage={1}
+          itemsPerPage={btech.length}
+          getCount={Promise.resolve([{ count: btech.length }])}
+        />
       </article>
 
       <article className="container mb-8">
@@ -182,28 +169,19 @@ export default async function Programmes({
         <h4 className="mt-4 text-2xl font-semibold">
           {text.secialization.toUpperCase()}
         </h4>
-        <Table className="mt-2">
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.discipline}</TableHead>
-              <TableHead>{text.secialization}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {mtech.map((programme, i) => (
-              <TableRow key={i}>
-                <TableCell>{programme.name}</TableCell>
-                <TableCell>
-                  <ul className="list-inside list-disc">
-                    {programme.specializations.map((val, idx) => (
-                      <li key={idx}>{val}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <GenericTable
+          headers={[
+            { key: 'name', label: text.discipline },
+            { key: 'specializations', label: text.secialization },
+          ]}
+          tableData={mtech.map((programme) => ({
+            name: programme.name,
+            specializations: programme.specializations.join(', '),
+          }))}
+          currentPage={1}
+          itemsPerPage={mtech.length}
+          getCount={Promise.resolve([{ count: mtech.length }])}
+        />
       </article>
 
       <article className="container mb-8">
@@ -212,32 +190,33 @@ export default async function Programmes({
           heading="h2"
           text={text.seatDistribution.toUpperCase()}
         />
-        <Table className="mt-2">
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.departmentAndSchools}</TableHead>
-              <TableHead>{text.secialization}</TableHead>
-              <TableHead>{text.noOfSeats}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {seatsMtech.map((programme, i) => (
-              <Fragment key={i}>
-                {programme.specialization.map((spec, index) => (
-                  <TableRow key={index}>
-                    {index === 0 && (
-                      <TableCell rowSpan={programme.specialization.length}>
-                        {programme.department}
-                      </TableCell>
-                    )}
-                    <TableCell>{spec.name}</TableCell>
-                    <TableCell>{spec.seats}</TableCell>
-                  </TableRow>
-                ))}
-              </Fragment>
-            ))}
-          </TableBody>
-        </Table>
+        <GenericTable
+          headers={[
+            { key: 'department', label: text.departmentAndSchools },
+            { key: 'name', label: text.secialization },
+            { key: 'seats', label: text.noOfSeats },
+          ]}
+          tableData={seatsMtech.flatMap((programme) =>
+            programme.specialization.map((spec, index) => ({
+              department: index === 0 ? programme.department : '',
+              name: spec.name,
+              seats: spec.seats,
+            }))
+          )}
+          currentPage={1}
+          itemsPerPage={seatsMtech.reduce(
+            (acc, p) => acc + p.specialization.length,
+            0
+          )}
+          getCount={Promise.resolve([
+            {
+              count: seatsMtech.reduce(
+                (acc, p) => acc + p.specialization.length,
+                0
+              ),
+            },
+          ])}
+        />
       </article>
     </>
   );

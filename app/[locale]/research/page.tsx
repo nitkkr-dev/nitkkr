@@ -6,28 +6,15 @@ import { sql } from 'drizzle-orm';
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
-import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 import { db } from '~/server/db';
-import type {
-  copyrights,
-  designs,
-  patents,
-  researchAndConsultancy,
-} from '~/server/db/schema';
-type PatentsTable = typeof patents.$inferSelect;
-type CopyrightsTable = typeof copyrights.$inferSelect;
-type DesignsTable = typeof designs.$inferSelect;
-type ResearchAndConsultancyTable = typeof researchAndConsultancy.$inferSelect;
+// import type { copyrights, designs, patents } from '~/server/db/schema';
+import GenericTable from '~/components/ui/generic-table';
+
+// type PatentsTable = typeof patents.$inferSelect;
+// type CopyrightsTable = typeof copyrights.$inferSelect;
+// type DesignsTable = typeof designs.$inferSelect;
 
 export default async function PatentsAndTechnology({
   params: { locale },
@@ -253,48 +240,21 @@ export default async function PatentsAndTechnology({
         />
       </section>
       <section className="container">
-        <div className="max-h-96 w-full overflow-x-auto">
-          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-            <TableHeader>
-              <TableRow>
-                {[
-                  text.research.number,
-                  text.research.faculty,
-                  text.research.department,
-                  text.research.totalJobs,
-                  text.research.total,
-                  text.research.year,
-                ].map((headerText, index) => (
-                  <TableHead key={index}>{headerText}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Suspense
-                fallback={
-                  <TableRow>
-                    <TableCell colSpan={6}>
-                      <Loading />
-                    </TableCell>
-                  </TableRow>
-                }
-              >
-                <ResearchTable
-                  tableData={researchAndConsultancy}
-                  currentPage={currentPage}
-                  itemsPerPage={10}
-                />
-              </Suspense>
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className="mt-6">
-          <PaginationWithLogic
+        <Suspense fallback={<Loading />}>
+          <GenericTable
+            headers={[
+              { key: 'facultyName', label: text.research.faculty },
+              { key: 'department', label: text.research.department },
+              { key: 'facultyCode', label: text.research.facultyCode },
+              { key: 'totalJobs', label: text.research.totalJobs },
+              { key: 'totalAmount', label: text.research.total },
+            ]}
+            tableData={staticResearch}
             currentPage={currentPage}
-            query={getResearchCount()}
+            itemsPerPage={10}
+            getCount={getResearchCount()}
           />
-        </div>
+        </Suspense>
       </section>
       {/* PATENTS AND TECHNOLOGIES */}
       <section className="container" id="patents">
@@ -305,48 +265,28 @@ export default async function PatentsAndTechnology({
           text={text.headings.patentsAndTechnologies}
         />
       </section>
-      <section className="container">
-        <div className="max-h-96 w-full overflow-x-auto">
-          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-            <TableHeader>
-              <TableRow>
-                {[
-                  text.patentsAndTechnologies.number,
-                  text.patentsAndTechnologies.applicationNumber,
-                  text.patentsAndTechnologies.patentNumber,
-                  text.patentsAndTechnologies.techTitle,
-                  text.patentsAndTechnologies.inventor,
-                ].map((headerText, index) => (
-                  <TableHead key={index}>{headerText}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Suspense
-                fallback={
-                  <TableRow>
-                    <TableCell colSpan={5}>
-                      <Loading />
-                    </TableCell>
-                  </TableRow>
-                }
-              >
-                <PatentTable
-                  tableData={patents}
-                  currentPage={currentPage}
-                  itemsPerPage={10}
-                />
-              </Suspense>
-            </TableBody>
-          </Table>
-        </div>
 
-        <div className="mt-6">
-          <PaginationWithLogic
+      <section className="container">
+        <Suspense fallback={<Loading />}>
+          <GenericTable
+            headers={[
+              {
+                key: 'applicationNumber',
+                label: text.patentsAndTechnologies.applicationNumber,
+              },
+              {
+                key: 'patentNumber',
+                label: text.patentsAndTechnologies.patentNumber,
+              },
+              { key: 'title', label: text.patentsAndTechnologies.techTitle },
+              { key: 'inventors', label: text.patentsAndTechnologies.inventor },
+            ]}
+            tableData={patents}
             currentPage={currentPage}
-            query={getPatentCount()}
+            itemsPerPage={10}
+            getCount={getPatentCount()}
           />
-        </div>
+        </Suspense>
       </section>
       {/* COPYRIGHTS AND DESIGNS */}
       <section className="container" id="copyright">
@@ -364,76 +304,43 @@ export default async function PatentsAndTechnology({
 
         {/* COPYRIGHTS TABLE */}
         <section className="container">
-          <div className="max-h-96 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  {[
-                    text.copyright.sNo,
-                    text.copyright.grantYear,
-                    text.copyright.copyrightNo,
-                    text.copyright.title,
-                    text.copyright.creator,
-                  ].map((headerText, index) => (
-                    <TableHead key={index}>{headerText}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <Suspense fallback={<Loading />}>
-                  <CopyrightTable
-                    tableData={copyrights}
-                    currentPage={currentPage}
-                    itemsPerPage={10}
-                  />
-                </Suspense>
-              </TableBody>
-            </Table>
-          </div>
-          <div className="mt-6">
-            <PaginationWithLogic
+          <Suspense fallback={<Loading />}>
+            <GenericTable
+              headers={[
+                { key: 'grantYear', label: text.copyright.grantYear },
+                { key: 'copyrightNo', label: text.copyright.copyrightNo },
+                { key: 'title', label: text.copyright.title },
+                { key: 'creator', label: text.copyright.creator },
+              ]}
+              tableData={copyrights}
               currentPage={currentPage}
-              query={getCopyrightsCount()}
+              itemsPerPage={10}
+              getCount={getCopyrightsCount()}
             />
-          </div>
+          </Suspense>
         </section>
 
         <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
         {/* DESIGNS TABLE */}
         <section className="container">
-          <div className="max-h-96 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  {[
-                    text.design.sNo,
-                    text.design.dateOfRegistration,
-                    text.design.designNumber,
-                    text.design.title,
-                    text.design.creator,
-                    text.design.class,
-                  ].map((headerText, index) => (
-                    <TableHead key={index}>{headerText}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <Suspense fallback={<Loading />}>
-                  <DesignTable
-                    tableData={designs}
-                    currentPage={currentPage}
-                    itemsPerPage={10}
-                  />
-                </Suspense>
-              </TableBody>
-            </Table>
-          </div>
-          <div className="mt-6">
-            <PaginationWithLogic
+          <Suspense fallback={<Loading />}>
+            <GenericTable
+              headers={[
+                {
+                  key: 'dateOfRegistration',
+                  label: text.design.dateOfRegistration,
+                },
+                { key: 'designNumber', label: text.design.designNumber },
+                { key: 'title', label: text.design.title },
+                { key: 'creator', label: text.design.creator },
+                { key: 'class', label: text.design.class },
+              ]}
+              tableData={designs}
               currentPage={currentPage}
-              query={getDesignsCount()}
+              itemsPerPage={10}
+              getCount={getDesignsCount()}
             />
-          </div>
+          </Suspense>
         </section>
       </div>
       {/* MOU */}
@@ -446,45 +353,18 @@ export default async function PatentsAndTechnology({
         />
       </section>
       <section className="container">
-        <div className="max-h-96 w-full overflow-x-auto">
-          <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-            <TableHeader>
-              <TableRow>
-                {[
-                  text.memorandum.number,
-                  text.memorandum.organization,
-                  text.memorandum.signingDate,
-                ].map((headerText, index) => (
-                  <TableHead key={index}>{headerText}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Suspense
-                fallback={
-                  <TableRow>
-                    <TableCell colSpan={3}>
-                      <Loading />
-                    </TableCell>
-                  </TableRow>
-                }
-              >
-                <MemorandumTable
-                  tableData={staticMemorandum}
-                  currentPage={currentPage}
-                  itemsPerPage={10}
-                />
-              </Suspense>
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className="mt-6">
-          <PaginationWithLogic
+        <Suspense fallback={<Loading />}>
+          <GenericTable
+            headers={[
+              { key: 'organization', label: text.memorandum.organization },
+              { key: 'date', label: text.memorandum.signingDate },
+            ]}
+            tableData={staticMemorandum}
             currentPage={currentPage}
-            query={getMemorandumCount()}
+            itemsPerPage={10}
+            getCount={getMemorandumCount()}
           />
-        </div>
+        </Suspense>
       </section>
       {/* SPONSORED PROJECTS */}
       <section className="container" id="projects">
@@ -496,49 +376,22 @@ export default async function PatentsAndTechnology({
         />
       </section>
       <section className="container">
-        <div className="max-h-96 w-full overflow-x-auto">
-          <Table scrollAreaClassName="h-[23rem] min-w-[800px]">
-            <TableHeader>
-              <TableRow>
-                {[
-                  text.projects.number,
-                  text.projects.year,
-                  text.projects.department,
-                  text.projects.facultyName,
-                  text.projects.title,
-                  text.projects.agency,
-                  text.projects.amount,
-                ].map((headerText, index) => (
-                  <TableHead key={index}>{headerText}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Suspense
-                fallback={
-                  <TableRow>
-                    <TableCell colSpan={7}>
-                      <Loading />
-                    </TableCell>
-                  </TableRow>
-                }
-              >
-                <ProjectsTable
-                  tableData={staticProjects}
-                  currentPage={currentPage}
-                  itemsPerPage={10}
-                />
-              </Suspense>
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className="mt-6">
-          <PaginationWithLogic
+        <Suspense fallback={<Loading />}>
+          <GenericTable
+            headers={[
+              { key: 'year', label: text.projects.year },
+              { key: 'department', label: text.projects.department },
+              { key: 'facultyName', label: text.projects.facultyName },
+              { key: 'title', label: text.projects.title },
+              { key: 'agency', label: text.projects.agency },
+              { key: 'amount', label: text.projects.amount },
+            ]}
+            tableData={staticProjects}
             currentPage={currentPage}
-            query={getProjectCount()}
+            itemsPerPage={10}
+            getCount={getProjectCount()}
           />
-        </div>
+        </Suspense>
       </section>
       {/* IMPORTANT RESOURCES */}
       <section className="container" id="resources">
@@ -586,247 +439,3 @@ export default async function PatentsAndTechnology({
     </>
   );
 }
-
-const PatentTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: PatentsTable[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1,
-          item.applicationNumber,
-          item.patentNumber,
-          item.title,
-          item.inventors, // This is a string from DB
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
-
-const CopyrightTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: CopyrightsTable[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1, // S. No.
-          item.grantYear,
-          item.copyrightNo,
-          item.title,
-          item.creator,
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
-
-const DesignTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: DesignsTable[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1, // S. No.
-          item.dateOfRegistration,
-          item.designNumber,
-          item.title,
-          item.creator,
-          item.class,
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
-
-const ResearchTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: (ResearchAndConsultancyTable & {
-    faculty: {
-      person: { name: string };
-      department: { name: string };
-    };
-  })[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1,
-          item.faculty?.person?.name || 'N/A',
-          item.faculty?.department?.name || 'N/A',
-          item.totalNoOfJobs,
-          item.totalAmount,
-          item.year,
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
-
-const MemorandumTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: {
-    organization: string;
-    date: string;
-  }[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1, // serial no.
-          item.organization,
-          item.date,
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
-const ProjectsTable = ({
-  tableData,
-  currentPage,
-  itemsPerPage = 10,
-}: {
-  tableData: {
-    year: string;
-    department: string;
-    facultyName: string;
-    title: string;
-    agency: string;
-    amount: string;
-  }[];
-  currentPage: number;
-  itemsPerPage?: number;
-}) => {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
-
-  return (
-    <>
-      {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1, // S. No.
-          item.year,
-          item.department,
-          item.facultyName,
-          item.title,
-          item.agency,
-          item.amount,
-        ];
-
-        return (
-          <TableRow
-            key={index}
-            className="text-neutral-700 hover:bg-neutral-50"
-          >
-            {cellData.map((cellContent, cellIndex) => (
-              <TableCell key={cellIndex}>{cellContent}</TableCell>
-            ))}
-          </TableRow>
-        );
-      })}
-    </>
-  );
-};
