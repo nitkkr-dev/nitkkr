@@ -1,13 +1,11 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import { redirect } from 'next/navigation';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
-import { getS3Url } from '~/server/s3';
 import { cn, groupBy } from '~/lib/utils';
-import { Dialog, DialogContent, ScrollArea } from '~/components/ui';
+import { ScrollArea } from '~/components/ui';
 import {
   Input,
   Select,
@@ -18,6 +16,8 @@ import {
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
 import { notifications as notificationsSchema } from '~/server/db';
+
+import { DateRangeForm } from './DateRangeForm';
 
 type Cat = (typeof notificationsSchema.category.enumValues)[number];
 
@@ -366,158 +366,6 @@ function MultiCheckbox({
         })}
       </ol>
     </ScrollArea>
-  );
-}
-
-function DateRangeForm({
-  locale,
-  categories,
-  departments,
-  query,
-  start,
-  end,
-  compact = false,
-}: {
-  locale: string;
-  categories?: string[];
-  departments?: string[];
-  query?: string;
-  start?: string;
-  end?: string;
-  compact?: boolean;
-}) {
-  const startDate = start ? new Date(start) : undefined;
-  const endDate = end ? new Date(end) : undefined;
-
-  return (
-    <form className={cn('flex flex-col gap-4', compact && 'text-xs')}>
-      {/* Year Range Slider */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-sm font-semibold text-primary-700">
-          <span>{startDate?.getFullYear() ?? 2000}</span>
-          <span>{endDate?.getFullYear() ?? 2025}</span>
-        </div>
-        <div className="relative h-1 rounded-full bg-neutral-200">
-          <div
-            className="absolute h-full rounded-full bg-primary-700"
-            style={{ left: '0%', right: '0%' }}
-          />
-          <div
-            className="bg-white absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary-700"
-            style={{ left: '0%' }}
-          />
-          <div
-            className="bg-white absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary-700"
-            style={{ left: '100%' }}
-          />
-        </div>
-      </div>
-
-      {/* Start Date */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-primary-700">
-          Start date
-        </label>
-        <div className="grid grid-cols-3 gap-2">
-          <input
-            name="start-day"
-            type="number"
-            min="1"
-            max="31"
-            placeholder="Day"
-            defaultValue={startDate?.getDate()}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-          <input
-            name="start-month"
-            type="number"
-            min="1"
-            max="12"
-            placeholder="Month"
-            defaultValue={startDate ? startDate.getMonth() + 1 : undefined}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-          <input
-            name="start-year"
-            type="number"
-            min="2000"
-            max="2100"
-            placeholder="Year"
-            defaultValue={startDate?.getFullYear()}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-        </div>
-      </div>
-
-      {/* End Date */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-primary-700">End</label>
-        <div className="grid grid-cols-3 gap-2">
-          <input
-            name="end-day"
-            type="number"
-            min="1"
-            max="31"
-            placeholder="Day"
-            defaultValue={endDate?.getDate()}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-          <input
-            name="end-month"
-            type="number"
-            min="1"
-            max="12"
-            placeholder="Month"
-            defaultValue={endDate ? endDate.getMonth() + 1 : undefined}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-          <input
-            name="end-year"
-            type="number"
-            min="2000"
-            max="2100"
-            placeholder="Year"
-            defaultValue={endDate?.getFullYear()}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
-          />
-        </div>
-      </div>
-
-      <Button
-        variant="primary"
-        className="mt-2 w-full"
-        formAction={async (formData) => {
-          'use server';
-          const startDay = formData.get('start-day')?.toString();
-          const startMonth = formData.get('start-month')?.toString();
-          const startYear = formData.get('start-year')?.toString();
-          const endDay = formData.get('end-day')?.toString();
-          const endMonth = formData.get('end-month')?.toString();
-          const endYear = formData.get('end-year')?.toString();
-
-          const startVal =
-            startYear && startMonth && startDay
-              ? `${startYear}-${startMonth.padStart(2, '0')}-${startDay.padStart(2, '0')}`
-              : undefined;
-          const endVal =
-            endYear && endMonth && endDay
-              ? `${endYear}-${endMonth.padStart(2, '0')}-${endDay.padStart(2, '0')}`
-              : undefined;
-
-          redirect(
-            buildHref(locale, {
-              start: startVal,
-              end: endVal,
-              category: categories,
-              department: departments,
-              q: query,
-            })
-          );
-        }}
-      >
-        Apply
-      </Button>
-    </form>
   );
 }
 
