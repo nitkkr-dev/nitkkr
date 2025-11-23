@@ -7,6 +7,7 @@ export * from './label';
 export * from './navigation-menu';
 export * from './radio-group';
 export * from './scroll-area';
+export * from './slider';
 export * from './table';
 export * from './toast';
 export * from './toaster';
