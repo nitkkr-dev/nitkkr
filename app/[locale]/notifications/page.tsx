@@ -1,23 +1,18 @@
 import Link from 'next/link';
 import React, { Suspense } from 'react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowRight, MdSearch } from 'react-icons/md';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 import { cn, groupBy } from '~/lib/utils';
-import { ScrollArea } from '~/components/ui';
-import {
-  Input,
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/inputs';
+import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
 import { notifications as notificationsSchema } from '~/server/db';
 
 import { DateRangeForm } from './DateRangeForm';
+import { MultiCheckbox } from './MultiCheckbox';
+import { SearchInput } from './SearchInput';
 
 type Cat = (typeof notificationsSchema.category.enumValues)[number];
 
@@ -90,113 +85,112 @@ export default async function NotificationsPage({
       }),
     }));
 
-  // Mobile popup trigger condition (handled on client via ?popup=filters)
-  const showPopup = 'popup' in searchParams && searchParams.popup === 'filters';
-
   return (
-    <section className="container my-6 flex gap-8">
-      {/* Desktop Sidebar - hidden on mobile */}
-      <aside
-        className={cn(
-          'hidden w-[290px] shrink-0 flex-col gap-6 xl:flex',
-          'sticky top-[88px] h-fit'
-        )}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="font-serif text-2xl font-bold text-primary-700">
-            Filter By
-          </h2>
-          <Button asChild variant="ghost" className="text-xs text-primary-700">
-            <Link
-              href={buildHref(locale, {
-                q: undefined,
-                category: [],
-                department: [],
-                start: undefined,
-                end: undefined,
-              })}
+    <>
+      <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+      <section className="container my-6 flex gap-8">
+        {/* Desktop Sidebar - hidden on mobile */}
+        <aside
+          className={cn(
+            'hidden w-[290px] shrink-0 flex-col gap-2 xl:flex',
+            'sticky top-[88px] h-fit'
+          )}
+        >
+          <div className="flex items-baseline justify-between">
+            <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
+              Filter By
+            </h2>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
             >
-              Clear All Filters
-            </Link>
-          </Button>
-        </div>
+              <Link
+                href={buildHref(locale, {
+                  q: undefined,
+                  category: [],
+                  department: [],
+                  start: undefined,
+                  end: undefined,
+                })}
+              >
+                Clear All Filters
+              </Link>
+            </Button>
+          </div>
 
-        <FilterSection locale={locale} label={text.filter.date}>
-          <DateRangeForm
-            locale={locale}
-            categories={categories}
-            departments={departments}
-            query={query}
-            start={searchParams.start}
-            end={searchParams.end}
-          />
-        </FilterSection>
+          <FilterSection locale={locale} label={text.filter.date}>
+            <DateRangeForm
+              locale={locale}
+              categories={categories}
+              departments={departments}
+              query={query}
+              start={searchParams.start}
+              end={searchParams.end}
+            />
+          </FilterSection>
 
-        <FilterSection locale={locale} label={text.filter.category}>
-          <MultiCheckbox
-            param="category"
-            options={notificationsSchema.category.enumValues}
-            selected={categories}
-            locale={locale}
-            textMap={text.categories}
-          />
-        </FilterSection>
+          <FilterSection locale={locale} label={text.filter.category}>
+            <MultiCheckbox
+              param="category"
+              options={notificationsSchema.category.enumValues}
+              selected={categories}
+              locale={locale}
+              textMap={text.categories}
+            />
+          </FilterSection>
 
-        <FilterSection locale={locale} label={text.filter.department}>
-          <MultiCheckbox
-            param="department"
-            options={departmentRows.map((d) => d.urlName)}
-            selected={departments}
-            locale={locale}
-            textMap={Object.fromEntries(
-              departmentRows.map((d) => [d.urlName, d.name])
-            )}
-          />
-        </FilterSection>
-      </aside>
+          <FilterSection locale={locale} label={text.filter.department}>
+            <MultiCheckbox
+              param="department"
+              options={departmentRows.map((d) => d.urlName)}
+              selected={departments}
+              locale={locale}
+              textMap={Object.fromEntries(
+                departmentRows.map((d) => [d.urlName, d.name])
+              )}
+            />
+          </FilterSection>
+        </aside>
 
-      {/* Main Content */}
-      <section className="grow space-y-6">
-        {/* Search + Mobile Filters */}
-        <search className="flex gap-4 max-sm:flex-col">
-          <Input
-            id="notification-search"
-            className="sm:grow"
-            debounceTo="q"
-            debounceEvery={300}
-            defaultValue={query}
-            placeholder={text.searchPlaceholder}
-          />
+        {/* Main Content */}
+        <section className="grow space-y-6">
+          {/* Search + Mobile Filters */}
+          <search className="flex gap-4 max-sm:flex-col">
+            <SearchInput
+              defaultValue={query}
+              placeholder="Search by Notification/Date"
+            />
 
-          {/* Mobile Category Filter - shows on < xl */}
-          <MultiCheckbox
-            param="category"
-            options={notificationsSchema.category.enumValues}
-            selected={categories}
-            locale={locale}
-            textMap={text.categories}
-            select
-          />
+            {/* Mobile Category Filter - shows on < xl */}
+            <MultiCheckbox
+              param="category"
+              options={notificationsSchema.category.enumValues}
+              selected={categories}
+              locale={locale}
+              textMap={text.categories}
+              select
+            />
+            {/* Mobile Department Filter - shows on < xl */}
+            <MultiCheckbox
+              param="department"
+              options={departmentRows.map((d) => d.urlName)}
+              selected={departments}
+              locale={locale}
+              textMap={Object.fromEntries(
+                departmentRows.map((d) => [d.urlName, d.name])
+              )}
+              select
+            />
+          </search>
 
-          {/* Mobile Department Filter - shows on < xl */}
-          <MultiCheckbox
-            param="department"
-            options={departmentRows.map((d) => d.urlName)}
-            selected={departments}
-            locale={locale}
-            textMap={Object.fromEntries(
-              departmentRows.map((d) => [d.urlName, d.name])
-            )}
-            select
-          />
-        </search>
-
-        {/* Notifications List */}
-        <Suspense fallback={<Loading />}>
-          <NotificationsListRenderable items={list} locale={locale} />
-        </Suspense>
+          {/* Notifications List */}
+          <Suspense fallback={<Loading />}>
+            <NotificationsListRenderable items={list} locale={locale} />
+          </Suspense>
+        </section>
       </section>
-    </section>
+    </>
   );
 }
 
@@ -257,7 +251,7 @@ function FilterSection({
   locale?: string;
 }) {
   return (
-    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
+    <section className="rounded border border-primary-100 bg-neutral-50 p-2">
       <div className="flex items-start justify-between">
         <h3 className="text-xl font-bold text-primary-300">{label}</h3>
         {viewAllHref && (
@@ -273,128 +267,34 @@ function FilterSection({
     </section>
   );
 }
-
-function MultiCheckbox({
-  param,
-  options,
-  selected,
-  locale,
-  textMap,
-  select = false,
-}: {
-  param: string;
-  options: readonly string[];
-  selected: string[];
-  locale: string;
-  textMap: Record<string, string>;
-  select?: boolean;
-}) {
-  const getUpdatedValues = (option: string) => {
-    return selected.includes(option)
-      ? selected.filter((s) => s !== option)
-      : [...selected, option];
-  };
-
-  return select ? (
-    // Mobile Select Dropdown
-    <Select navigate>
-      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue
-          placeholder={
-            selected.length ? `${selected.length} selected` : `Choose ${param}`
-          }
-        />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((opt) => (
-          <div key={opt} className="flex items-center px-2 py-1">
-            <input
-              type="checkbox"
-              id={`mobile-${param}-${opt}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selected.includes(opt)}
-              readOnly
-            />
-            <Link
-              href={buildHref(locale, {
-                [param]: getUpdatedValues(opt),
-              })}
-              className="ml-2 w-full py-1"
-            >
-              {textMap[opt] ?? opt}
-            </Link>
-          </div>
-        ))}
-      </SelectContent>
-    </Select>
-  ) : (
-    // Desktop Checkbox List
-    <ScrollArea className="h-[200px]">
-      <ol className="w-full space-y-2 pr-4">
-        {options.map((opt) => {
-          const isChecked = selected.includes(opt);
-          return (
-            <li key={opt}>
-              <Link
-                href={buildHref(locale, {
-                  [param]: getUpdatedValues(opt),
-                })}
-                className={cn(
-                  'flex w-full items-center rounded border p-2',
-                  isChecked
-                    ? 'bg-primary-50 border-primary-700'
-                    : 'border-neutral-300'
-                )}
-              >
-                <div className="flex w-full items-center">
-                  <div className="mr-2">
-                    <input
-                      type="checkbox"
-                      id={`${param}-${opt}`}
-                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={isChecked}
-                      readOnly
-                    />
-                  </div>
-                  <span className="font-semibold text-shade-dark">
-                    {textMap[opt] ?? opt}
-                  </span>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
-    </ScrollArea>
-  );
-}
-
 /* ---------------------- Helpers ---------------------- */
 function toArray(v: string | string[] | undefined): string[] {
   return Array.isArray(v) ? v : v ? [v] : [];
 }
-function toggleMulti(current: string[], value: string) {
-  return current.includes(value)
-    ? current.filter((c) => c !== value)
-    : [...current, value];
-}
+
 function parseDate(d?: string) {
   if (!d) return undefined;
   const date = new Date(d);
   return isNaN(date.getTime()) ? undefined : date;
 }
+
 function buildHref(locale: string, updates: Record<string, unknown>): string {
   const params = new URLSearchParams();
+
   Object.entries(updates).forEach(([k, v]) => {
-    if (v === undefined) return;
+    if (v === undefined || (Array.isArray(v) && v.length === 0)) {
+      return;
+    }
+
     if (Array.isArray(v)) {
       v.forEach((item) => {
         if (item) params.append(k, String(item));
       });
-    } else if (v) {
+    } else {
       params.set(k, String(v));
     }
   });
+
   const qs = params.toString();
   return `/${locale}/notifications${qs ? `?${qs}` : ''}`;
 }

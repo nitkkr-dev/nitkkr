@@ -57,6 +57,7 @@ export function DateRangeForm({
         ? `${yearRange[1]}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
         : undefined;
 
+    // Update date params while preserving others
     if (startVal) {
       params.set('start', startVal);
     } else {
@@ -71,10 +72,19 @@ export function DateRangeForm({
 
     const newUrl = `${pathname}?${params.toString()}`;
     router.push(newUrl, { scroll: false });
-  }, [yearRange, startDay, startMonth, endDay, endMonth]);
+  }, [
+    yearRange,
+    startDay,
+    startMonth,
+    endDay,
+    endMonth,
+    searchParams,
+    pathname,
+    router,
+  ]);
 
   return (
-    <div className={cn('flex flex-col gap-4 pt-4', compact && 'text-xs')}>
+    <div className={cn('flex flex-col gap-2 pt-4', compact && 'text-xs')}>
       {/* Year Range Slider */}
       <div className="space-y-3">
         <div className="relative">
@@ -108,7 +118,7 @@ export function DateRangeForm({
             placeholder="Day"
             value={startDay}
             onChange={(e) => setStartDay(+e.target.value)}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
             type="number"
@@ -117,7 +127,7 @@ export function DateRangeForm({
             placeholder="Month"
             value={startMonth}
             onChange={(e) => setStartMonth(+e.target.value)}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
             type="number"
@@ -126,7 +136,7 @@ export function DateRangeForm({
             placeholder="Year"
             value={yearRange[0]}
             onChange={(e) => setYearRange([+e.target.value, yearRange[1]])}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
         </div>
       </div>
@@ -144,7 +154,7 @@ export function DateRangeForm({
             placeholder="Day"
             value={endDay}
             onChange={(e) => setEndDay(+e.target.value)}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
             type="number"
@@ -153,7 +163,7 @@ export function DateRangeForm({
             placeholder="Month"
             value={endMonth}
             onChange={(e) => setEndMonth(+e.target.value)}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
             type="number"
@@ -162,7 +172,7 @@ export function DateRangeForm({
             placeholder="Year"
             value={yearRange[1]}
             onChange={(e) => setYearRange([yearRange[0], +e.target.value])}
-            className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
+            className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
         </div>
       </div>
