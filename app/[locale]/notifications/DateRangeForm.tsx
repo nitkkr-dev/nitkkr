@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { cn } from '~/lib/utils';
 import { Slider } from '~/components/ui';
-import { Button } from '~/components/buttons';
-import { applyDateFilter } from '~/server/actions';
 
 export function DateRangeForm({
   locale,
@@ -24,6 +23,10 @@ export function DateRangeForm({
   end?: string;
   compact?: boolean;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [yearRange, setYearRange] = React.useState<number[]>([
     start ? new Date(start).getFullYear() : 2000,
     end ? new Date(end).getFullYear() : 2025,
@@ -32,18 +35,46 @@ export function DateRangeForm({
   const startDate = start ? new Date(start) : undefined;
   const endDate = end ? new Date(end) : undefined;
 
-  return (
-    <form className={cn('flex flex-col gap-4', compact && 'text-xs')}>
-      {/* Hidden fields to preserve state */}
-      <input type="hidden" name="locale" value={locale} />
-      {query && <input type="hidden" name="q" value={query} />}
-      {categories?.map((c) => (
-        <input key={c} type="hidden" name="category" value={c} />
-      ))}
-      {departments?.map((d) => (
-        <input key={d} type="hidden" name="department" value={d} />
-      ))}
+  const [startDay, setStartDay] = React.useState(startDate?.getDate() ?? 1);
+  const [startMonth, setStartMonth] = React.useState(
+    startDate ? startDate.getMonth() + 1 : 1
+  );
+  const [endDay, setEndDay] = React.useState(endDate?.getDate() ?? 1);
+  const [endMonth, setEndMonth] = React.useState(
+    endDate ? endDate.getMonth() + 1 : 1
+  );
 
+  // Auto-apply when date values change
+  React.useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    const startVal =
+      yearRange[0] && startMonth && startDay
+        ? `${yearRange[0]}-${String(startMonth).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`
+        : undefined;
+    const endVal =
+      yearRange[1] && endMonth && endDay
+        ? `${yearRange[1]}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
+        : undefined;
+
+    if (startVal) {
+      params.set('start', startVal);
+    } else {
+      params.delete('start');
+    }
+
+    if (endVal) {
+      params.set('end', endVal);
+    } else {
+      params.delete('end');
+    }
+
+    const newUrl = `${pathname}?${params.toString()}`;
+    router.push(newUrl, { scroll: false });
+  }, [yearRange, startDay, startMonth, endDay, endMonth]);
+
+  return (
+    <div className={cn('flex flex-col gap-4 pt-4', compact && 'text-xs')}>
       {/* Year Range Slider */}
       <div className="space-y-3">
         <div className="relative">
@@ -65,31 +96,30 @@ export function DateRangeForm({
       </div>
 
       {/* Start Date */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-primary-700">
-          Start date
+      <div className="space-y-1">
+        <label className="text-sm font-semibold text-primary-300">
+          Start Date
         </label>
         <div className="grid grid-cols-3 gap-2">
           <input
-            name="start-day"
             type="number"
             min="1"
             max="31"
             placeholder="Day"
-            defaultValue={startDate?.getDate() ?? 1}
+            value={startDay}
+            onChange={(e) => setStartDay(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
-            name="start-month"
             type="number"
             min="1"
             max="12"
             placeholder="Month"
-            defaultValue={startDate ? startDate.getMonth() + 1 : 1}
+            value={startMonth}
+            onChange={(e) => setStartMonth(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
-            name="start-year"
             type="number"
             min="2000"
             max="2100"
@@ -102,29 +132,30 @@ export function DateRangeForm({
       </div>
 
       {/* End Date */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-primary-700">End</label>
+      <div className="space-y-1">
+        <label className="text-sm font-semibold text-primary-300">
+          End Date
+        </label>
         <div className="grid grid-cols-3 gap-2">
           <input
-            name="end-day"
             type="number"
             min="1"
             max="31"
             placeholder="Day"
-            defaultValue={endDate?.getDate() ?? 1}
+            value={endDay}
+            onChange={(e) => setEndDay(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
-            name="end-month"
             type="number"
             min="1"
             max="12"
             placeholder="Month"
-            defaultValue={endDate ? endDate.getMonth() + 1 : 1}
+            value={endMonth}
+            onChange={(e) => setEndMonth(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-3 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
-            name="end-year"
             type="number"
             min="2000"
             max="2100"
@@ -135,14 +166,6 @@ export function DateRangeForm({
           />
         </div>
       </div>
-
-      <Button
-        variant="primary"
-        className="mt-2 w-full"
-        formAction={applyDateFilter}
-      >
-        Apply
-      </Button>
-    </form>
+    </div>
   );
 }
