@@ -24,6 +24,7 @@ import {
   ClearFiltersButton,
   DepartmentsClient,
   PreserveParamsLink,
+  MobileFilters
 } from './client-components';
 
 export default async function FacultyAndStaff({
@@ -38,6 +39,10 @@ export default async function FacultyAndStaff({
   };
 }) {
   const text = (await getTranslations(locale)).FacultyAndStaff;
+
+  const mobileDepartments = await db.query.departments.findMany({
+    columns: { id: true, name: true, urlName: true },
+  });
 
   return (
     <section className="container my-6 flex gap-8">
@@ -77,9 +82,9 @@ export default async function FacultyAndStaff({
       </search>
 
       <section className="grow space-y-6">
-        <search className="flex gap-4 max-sm:flex-col">
+        <search className="flex gap-4 items-center w-full">
           <Input
-            className="sm:grow"
+            className="flex-1 min-w-0"
             debounceTo="query"
             debounceEvery={100}
             defaultValue={query}
@@ -87,15 +92,13 @@ export default async function FacultyAndStaff({
             placeholder={text.placeholder}
           />
 
-          {/* Mobile Designation Filter */}
-          <Suspense fallback={<Loading className="xl:hidden" />}>
-            <Designations designation={designation} select />
-          </Suspense>
+          <div className="flex-shrink-0">
+            <MobileFilters
+              departments={mobileDepartments}
+              department={departmentName}
+            />
+          </div>
 
-          {/* Mobile Department Filter */}
-          <Suspense fallback={<Loading className="xl:hidden" />}>
-            <Departments department={departmentName} select />
-          </Suspense>
         </search>
 
         <ol className="space-y-4">
@@ -339,8 +342,8 @@ const FacultyList = async ({
   // Get department IDs for selected departments
   const selectedDepartmentIds = departmentList.length
     ? departments
-        .filter((dept) => departmentList.includes(dept.urlName))
-        .map((dept) => dept.id)
+      .filter((dept) => departmentList.includes(dept.urlName))
+      .map((dept) => dept.id)
     : [];
 
   const faculty = await db.query.faculty.findMany({
@@ -356,7 +359,7 @@ const FacultyList = async ({
     },
     where: selectedDepartmentIds.length
       ? (faculty, { inArray }) =>
-          inArray(faculty.departmentId, selectedDepartmentIds)
+        inArray(faculty.departmentId, selectedDepartmentIds)
       : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
@@ -526,8 +529,8 @@ const StaffList = async ({
   // Get department IDs for selected departments
   const selectedDepartmentIds = departmentList.length
     ? departments
-        .filter((dept) => departmentList.includes(dept.urlName))
-        .map((dept) => dept.id)
+      .filter((dept) => departmentList.includes(dept.urlName))
+      .map((dept) => dept.id)
     : [];
 
   // Fetch staff with department and designation filters
@@ -539,7 +542,7 @@ const StaffList = async ({
     },
     where: selectedDepartmentIds.length
       ? (staff, { inArray }) =>
-          inArray(staff.workingDepartmentId, selectedDepartmentIds)
+        inArray(staff.workingDepartmentId, selectedDepartmentIds)
       : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
