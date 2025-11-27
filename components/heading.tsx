@@ -12,7 +12,17 @@ function Elephants({ direction }: { direction: 'rtl' | 'ltr' }) {
       dir={direction}
       className="flex h-12 overflow-x-hidden sm:h-16 md:h-20"
     >
-      {[...Array<number>(9)].map((_, index) => (
+      <Image
+        alt="Elephant Lead"
+        className={cn(
+          'w-16 scale-y-75 sm:w-20 sm:-translate-y-1 md:w-24',
+          direction === 'ltr' ? '-mr-4 -scale-x-100' : '-ml-4'
+        )}
+        height={1268}
+        width={2186}
+        src="assets/bhagadutta-1.png"
+      />
+      {[...Array<number>(8)].map((_, index) => (
         <Image
           alt="Elephant"
           className={cn(

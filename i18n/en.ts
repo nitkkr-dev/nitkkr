@@ -213,6 +213,22 @@ const text: Translations = {
     programmesDetails:
       'The departments have all shown exponential growth, in terms of modernisation of the existing laboratories and establishment of new laboratories equipped with state-of-the-art facilities, curriculum development in consonance with the industrial needs, placement of the students, and research papers publication of the faculty members.The faculty members have made a mark in the area of innovative hardware design, modeling & analysis and developing new techniques and algorithms, in the fields of data communication systems and wireless networks, signal processing and VLSI design.',
   },
+  Club: {
+    about: 'About',
+    batch: 'Batch',
+    degree: 'Degree',
+    event: 'Events',
+    faculty: 'Faculty Incharge',
+    gallery: 'Gallery',
+    howToJoinUs: 'How to Join Us?',
+    major: 'Major',
+    name: 'Name',
+    notification: 'Notifications',
+    ourMembers: 'Our Members',
+    postHolders: 'Post Holders',
+    rollNumber: 'Roll Number',
+    whyToJoinUs: 'Why Join Us?',
+  },
   Clubs: { title: 'CLUBS' },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
@@ -607,12 +623,89 @@ const text: Translations = {
       ipr: {
         title: 'Intellectual Property Rights',
       },
+      scst: {
+        title: 'SC & ST Cell',
+        description:
+          [
+          'NIT Kurukshetra is committed to maintaining a work environment wherein students, faculty, and staff members from different community can work in a coherent environment. It is the institute\'s endeavor to ensure that no discrimination takes place at workplace.',
+          'The Institute has appointed a Liaison Officer for SC & ST cell who can be contacted in the event of any incident of caste-based discrimination.',
+          'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.'
+          ],
+        cellFunctionsHeading:'CELL FUNCTIONS',
+        cellFunctions:
+        [
+          'Grievances redress the grievances of SC/ST students and employees and render them necessary help in solving their academic as well as administrative problems.',
+          'Monitors and evaluates the reservation policies and other programs intended for SC/STs by the Government of India for their effective implementation at National Institute of Technology Kurukshetra.',
+          'Suggests the follow-up measures to the administration of the institute to achieve the objectives and targets laid down by MHRD for the empowerment of SC/STs.',
+          'To register the complaints of SC/ST students/employees of the Institute for their representation to the administration for taking further necessary action.',
+          'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.'
+        ],
+        complaint: 'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
+        liaisonOfficerHeading: 'LIAISON OFFICER',
+        liaisonOfficer : {
+          image: 'fallback/user-image.jpg',
+          name: 'Arun Goel',
+          title: 'Professor (Head of the Department)',
+          email: 'drarun_goel@yahoo.co.in',
+          phone: '01744-233349, 01744-233300'
+        },
+        importantLinksHeading: 'IMPORTANT LINKS',
+        importantLinks:
+        [
+          {
+            title: 'Ministry of Social Justice and Empowerment',
+            link: 'https://socialjustice.gov.in'
+          },
+          {
+            title: 'List of Scheduled Castes',
+            link: 'https://socialjustice.gov.in/common/76750'
+          },
+          {
+            title: 'List of Scheduled Tribes',
+            link: 'https://cdnbbsr.s3waas.gov.in/s301894d6f048493d2cacde3c579c315a3/uploads/2022/03/2022030426.pdf'
+          },
+          {
+            title: 'National Commission for Scheduled Cast, GoI',
+            link: 'https://ncsc.nic.in'
+          },
+          {
+            title: 'National Commission for Scheduled Tribes, GoI',
+            link: 'https://ncstgrams.gov.in'
+          },
+          {
+            title: 'SC & ST Cell AICTE',
+            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
+          }
+        ],
+      },
+      obcpwd: {
+        title: 'OBC & PWD Cell',
+        description: [
+          'NIT Kurukshetra is committed to maintaining a work environment where students, faculty, and staff members from different communities can work together harmoniously. It is the institute\'s endeavor to ensure that no discrimination takes place in the workplace. The Institute has appointed a Liaison Officer for the OBC Cell, who can be contacted in the event of any caste-based discrimination.'
+        ],
+        cellFunctionsHeading: 'CELL FUNCTIONS',
+        cellFunctions: [
+          'To ensure proper implementation of various schemes of MHRD, GoI, and the State Government concerning scholarships, stipends, etc., for the welfare of reserved categories.',
+          'Grievance Redressal: for any grievance(s) regarding academic, administrative, or social issues. The cell takes necessary action and provides advice/help to resolve the matter.',
+          'To take follow-up measures to achieve the objectives and targets laid down by MHRD, Government of India.'
+        ],
+        complaint:
+          'In case you want to register a formal complaint, please fill out the form in the complaint book, available in the OBC Cell, Administrative Building, NIT Kurukshetra. The committee will review discrimination complaints received from OBC students, faculty, and staff members and resolve them accordingly.',
+        liaisonOfficerHeading: 'LIAISON OFFICER',
+        liaisonOfficer: {
+          image: 'fallback/user-image.jpg',
+          name: 'Arun Goel',
+          title: 'Professor & Head of Department',
+          email: 'drarun_goel@yahoo.co.in',
+          phone: '01744-233349, 01744-233300'
+        }
+      }
     },
   },
   NotFound: {
     title: '404',
     description: 'Not found ',
-    backHome: 'Looks like you’re lost let’s get you back home',
+    backHome: 'Looks like you\'re lost let\'s get you back home',
   },
   Profile: {
     tabs: {
@@ -1548,9 +1641,9 @@ Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
       number: 'Sr. No.',
       faculty: 'Faculty Name',
       department: 'Department',
-      facultyCode: 'Faculty Code',
       totalJobs: 'Total Consultancy Jobs',
       total: 'Total Amount (in Rs.)',
+      year: 'Year',
     },
     patentsAndTechnologies: {
       number: 'Sr. No.',

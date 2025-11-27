@@ -318,6 +318,18 @@ export default async function Institute({
               icon: MdPhotoLibrary,
               annotation: '(IIC)',
             },
+            {
+              label: text.cells.scst.title,
+              href: `/${locale}/institute/cells/scst`,
+              icon: MdPhotoLibrary,
+              annotation: '(SC & ST)',
+            },
+            {
+              label: text.cells.obcpwd.title,
+              href: `/${locale}/institute/cells/obcpwd`,
+              icon: MdPhotoLibrary,
+              annotation: '(OBC & PWD)',
+            },
           ].map(({ label, href, icon: Icon, annotation }, index) => (
             <Button
               asChild

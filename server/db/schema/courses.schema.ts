@@ -16,7 +16,7 @@ export const courses = pgTable('courses', (t) => ({
     .references(() => departments.id)
     .notNull(),
   prerequisites: t
-    .varchar({ length: 7 })
+    .varchar({ length: 8 })
     .array()
     .default(sql`'{}'`)
     .notNull(),
@@ -46,7 +46,7 @@ export const courses = pgTable('courses', (t) => ({
     .default(sql`'{}'`)
     .notNull(),
   similarCourses: t
-    .varchar({ length: 7 })
+    .varchar({ length: 8 })
     .array()
     .default(sql`'{}'`)
     .notNull(),
