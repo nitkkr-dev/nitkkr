@@ -8,6 +8,7 @@ import { cn, groupBy } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
+import { ScrollArea } from '~/components/ui';
 import { notifications as notificationsSchema } from '~/server/db';
 
 import { DateRangeForm } from './DateRangeForm';
@@ -88,15 +89,15 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
-      <section className="container my-12 flex gap-8">
+      <section className="container mt-12 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
             'hidden w-[290px] shrink-0 flex-col gap-2 xl:flex',
-            'sticky top-[88px] h-fit'
+            'sticky top-[88px]'
           )}
         >
-          <div className="flex items-baseline justify-between">
+          <div className="flex items-baseline justify-between pb-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               Filter By
             </h2>
@@ -120,44 +121,47 @@ export default async function NotificationsPage({
             </Button>
           </div>
 
-          <FilterSection locale={locale} label={text.filter.date}>
-            <DateRangeForm
-              locale={locale}
-              categories={categories}
-              departments={departments}
-              query={query}
-              start={searchParams.start}
-              end={searchParams.end}
-            />
-          </FilterSection>
+          <ScrollArea className="max-h-[calc(100vh-180px)]">
+            <div className="flex flex-col gap-2 pr-4">
+              <FilterSection locale={locale} label={text.filter.date}>
+                <DateRangeForm
+                  locale={locale}
+                  categories={categories}
+                  departments={departments}
+                  query={query}
+                  start={searchParams.start}
+                  end={searchParams.end}
+                />
+              </FilterSection>
 
-          <FilterSection locale={locale} label={text.filter.category}>
-            <MultiCheckbox
-              param="category"
-              options={notificationsSchema.category.enumValues}
-              selected={categories}
-              locale={locale}
-              textMap={text.categories}
-            />
-          </FilterSection>
+              <FilterSection locale={locale} label={text.filter.category}>
+                <MultiCheckbox
+                  param="category"
+                  options={notificationsSchema.category.enumValues}
+                  selected={categories}
+                  locale={locale}
+                  textMap={text.categories}
+                />
+              </FilterSection>
 
-          <FilterSection locale={locale} label={text.filter.department}>
-            <MultiCheckbox
-              param="department"
-              options={departmentRows.map((d) => d.urlName)}
-              selected={departments}
-              locale={locale}
-              textMap={Object.fromEntries(
-                departmentRows.map((d) => [d.urlName, d.name])
-              )}
-            />
-          </FilterSection>
+              <FilterSection locale={locale} label={text.filter.department}>
+                <MultiCheckbox
+                  param="department"
+                  options={departmentRows.map((d) => d.urlName)}
+                  selected={departments}
+                  locale={locale}
+                  textMap={Object.fromEntries(
+                    departmentRows.map((d) => [d.urlName, d.name])
+                  )}
+                />
+              </FilterSection>
+            </div>
+          </ScrollArea>
         </aside>
-
-        {/* Main Content */}
-        <section className="grow space-y-6">
+        {/* Main Content - matches sidebar height */}
+        <section className="flex min-h-[600px] grow flex-col space-y-6 xl:max-h-[calc(100vh-180px)]">
           {/* Search + Mobile Filters */}
-          <search className="flex gap-4 max-sm:flex-col">
+          <search className="flex shrink-0 gap-4 max-sm:flex-col">
             <SearchInput
               defaultValue={query}
               placeholder="Search by Notification/Date"
@@ -185,10 +189,12 @@ export default async function NotificationsPage({
             />
           </search>
 
-          {/* Notifications List */}
-          <Suspense fallback={<Loading />}>
-            <NotificationsListRenderable items={list} locale={locale} />
-          </Suspense>
+          {/* Notifications List - scrollable, fills remaining height */}
+          <ScrollArea className="flex-1">
+            <Suspense fallback={<Loading />}>
+              <NotificationsListRenderable items={list} locale={locale} />
+            </Suspense>
+          </ScrollArea>
         </section>
       </section>
     </>
