@@ -29,6 +29,17 @@ export function MultiCheckbox({
 }) {
   const searchParams = useSearchParams();
 
+  const isAllSelected = selected.length === 0;
+
+  // Sort options: selected ones first, then unselected
+  const sortedOptions = [...options].sort((a, b) => {
+    const aSelected = selected.includes(a);
+    const bSelected = selected.includes(b);
+    if (aSelected && !bSelected) return -1;
+    if (!aSelected && bSelected) return 1;
+    return 0;
+  });
+
   const getUpdatedValues = (option: string) => {
     return selected.includes(option)
       ? selected.filter((s) => s !== option)
@@ -63,12 +74,34 @@ export function MultiCheckbox({
       <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
         <SelectValue
           placeholder={
-            selected.length ? `${selected.length} selected` : `Choose ${param}`
+            selected.length
+              ? `${selected.length} selected`
+              : `All ${param === 'category' ? 'Categories' : 'Departments'}`
           }
         />
       </SelectTrigger>
       <SelectContent>
-        {options.map((opt) => (
+        {/* All Option */}
+        <div className="flex items-center px-2 py-1">
+          <input
+            type="checkbox"
+            id={`mobile-${param}-all`}
+            className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+            checked={isAllSelected}
+            readOnly
+          />
+          <Link
+            scroll={false}
+            href={buildLocalHref({
+              [param]: [],
+            })}
+            className="ml-2 w-full py-1 font-semibold"
+          >
+            All
+          </Link>
+        </div>
+        <hr className="my-1 border-neutral-200" />
+        {sortedOptions.map((opt) => (
           <div key={opt} className="flex items-center px-2 py-1">
             <input
               type="checkbox"
@@ -78,6 +111,7 @@ export function MultiCheckbox({
               readOnly
             />
             <Link
+              scroll={false}
               href={buildLocalHref({
                 [param]: getUpdatedValues(opt),
               })}
@@ -90,13 +124,42 @@ export function MultiCheckbox({
       </SelectContent>
     </Select>
   ) : (
-    <ScrollArea className="h-[200px]">
+    <ScrollArea className="h-[150px]">
       <ol className="w-full space-y-2 pr-4">
-        {options.map((opt) => {
+        {/* All Option */}
+        <li>
+          <Link
+            scroll={false}
+            href={buildLocalHref({
+              [param]: [],
+            })}
+            className={cn(
+              'flex w-full items-center rounded border p-2',
+              isAllSelected
+                ? 'bg-primary-50 border-primary-700'
+                : 'border-neutral-300'
+            )}
+          >
+            <div className="flex w-full items-center">
+              <div className="mr-2">
+                <input
+                  type="checkbox"
+                  id={`${param}-all`}
+                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                  checked={isAllSelected}
+                  readOnly
+                />
+              </div>
+              <span className="font-semibold text-shade-dark">All</span>
+            </div>
+          </Link>
+        </li>
+        {sortedOptions.map((opt) => {
           const isChecked = selected.includes(opt);
           return (
             <li key={opt}>
               <Link
+                scroll={false}
                 href={buildLocalHref({
                   [param]: getUpdatedValues(opt),
                 })}

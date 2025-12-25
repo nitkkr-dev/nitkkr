@@ -88,7 +88,7 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
-      <section className="container my-6 flex gap-8">
+      <section className="container my-12 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
@@ -106,6 +106,7 @@ export default async function NotificationsPage({
               className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
             >
               <Link
+                scroll={false}
                 href={buildHref(locale, {
                   q: undefined,
                   category: [],
@@ -251,7 +252,7 @@ function FilterSection({
   locale?: string;
 }) {
   return (
-    <section className="rounded border border-primary-100 bg-neutral-50 p-2">
+    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
       <div className="flex items-start justify-between">
         <h3 className="text-xl font-bold text-primary-300">{label}</h3>
         {viewAllHref && (

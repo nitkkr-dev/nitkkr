@@ -53,7 +53,6 @@ export default function ImageHeader({
             <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
               <Image
                 alt={display_name}
-                // src={`student-activities/clubs/${display_name}/logo.jpg`}
                 src={logoUrl}
                 fill
                 className="rounded-full bg-primary-100 object-cover"
@@ -67,6 +66,11 @@ export default function ImageHeader({
           </header>
         )}
       </section>
+
+      {/* Spacer div when no headings - pushes content below the absolute header */}
+      {!headings && (
+        <div className="h-56 max-sm:hidden sm:h-64 md:h-72 lg:h-80 xl:h-96 2xl:h-[448px]" />
+      )}
 
       {headings && (
         <>
