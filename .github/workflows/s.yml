@@ -2,7 +2,9 @@ name: Sync Google Drive to S3
 
 on:
   push:
-    branches: feat/drive-to-s3
+    branches: 
+    - feat/drive-to-s3
+    - master
 
   workflow_dispatch:
   schedule:
@@ -16,6 +18,15 @@ jobs:
       # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      # Cache Drive Index for persistence across runs
+      - name: Cache Drive Index
+        uses: actions/cache@v3
+        with:
+          path: drive_index.json
+          key: drive-index-${{ github.sha }}
+          restore-keys: |
+            drive-index-
 
       # Set up Python
       - name: Set up Python
