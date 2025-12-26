@@ -22,38 +22,152 @@ INDEX_FILE = "drive_index.json"  # Index file to track synced files
 def authenticate_google_drive(credentials_json):
     if os.path.isfile(credentials_json):
         credentials = service_account.Credentials.from_service_account_file(
-            credentials_json, scopes=["https://www.googleapis.com/auth/drive.readonly"]
+            credentials_json, scopes=["https://www.googleapis.com/auth/drive"]
         )
     else:
-        credentials = service_account.Credentials.from_service_account_info(
-            eval(credentials_json), scopes=["https://www.googleapis.com/auth/drive.readonly"]
-        )
+        try:
+            credentials_dict = json.loads(credentials_json)
+            credentials = service_account.Credentials.from_service_account_info(
+                credentials_dict, scopes=["https://www.googleapis.com/auth/drive"]
+            )
+        except json.JSONDecodeError:
+            raise ValueError("Invalid JSON in GOOGLE_CREDENTIALS_JSON")
     return build("drive", "v3", credentials=credentials)
 
 # Index Management Functions
+def save_index_to_drive(service, index_data, folder_id, index_filename="drive_index.json"):
+    """Save the index file to Google Drive for persistence across runs."""
+    try:
+        # Convert index to JSON string
+        index_json = json.dumps(index_data, indent=2, sort_keys=True)
+        
+        # Check if index file already exists in the folder
+        existing_file_id = None
+        results = service.files().list(
+            q=f"name='{index_filename}' and '{folder_id}' in parents and trashed=false",
+            fields="files(id, name)"
+        ).execute()
+        
+        files = results.get('files', [])
+        if files:
+            existing_file_id = files[0]['id']
+            print(f"Found existing index file in Drive: {index_filename}")
+        
+        # Prepare media content
+        media_body = io.BytesIO(index_json.encode('utf-8'))
+        
+        if existing_file_id:
+            # Update existing file
+            print(f"Updating existing index file in Drive...")
+            from googleapiclient.http import MediaIoBaseUpload
+            media = MediaIoBaseUpload(media_body, mimetype='application/json')
+            updated_file = service.files().update(
+                fileId=existing_file_id,
+                media_body=media
+            ).execute()
+            print(f"Index file updated in Drive: {updated_file.get('id')}")
+        else:
+            # Create new file
+            print(f"Creating new index file in Drive...")
+            file_metadata = {
+                'name': index_filename,
+                'parents': [folder_id],
+                'mimeType': 'application/json'
+            }
+            from googleapiclient.http import MediaIoBaseUpload
+            media = MediaIoBaseUpload(media_body, mimetype='application/json')
+            created_file = service.files().create(
+                body=file_metadata,
+                media_body=media,
+                fields='id'
+            ).execute()
+            print(f"Index file created in Drive: {created_file.get('id')}")
+            
+        return True
+        
+    except Exception as e:
+        print(f"Error saving index to Drive: {e}")
+        return False
+
+def load_index_from_drive(service, folder_id, index_filename="drive_index.json"):
+    """Load the index file from Google Drive."""
+    try:
+        # Search for the index file in the specified folder
+        results = service.files().list(
+            q=f"name='{index_filename}' and '{folder_id}' in parents and trashed=false",
+            fields="files(id, name, modifiedTime)"
+        ).execute()
+        
+        files = results.get('files', [])
+        
+        if not files:
+            print("No index file found in Drive. Creating new index.")
+            return {}
+        
+        # Get the first (and should be only) index file
+        index_file = files[0]
+        file_id = index_file['id']
+        
+        print(f"Found index file in Drive: {index_filename} (ID: {file_id})")
+        print(f"Index file last modified: {index_file.get('modifiedTime')}")
+        
+        # Download the index file content
+        request = service.files().get_media(fileId=file_id)
+        file_content = io.BytesIO()
+        downloader = MediaIoBaseDownload(file_content, request)
+        
+        done = False
+        while not done:
+            status, done = downloader.next_chunk()
+        
+        # Parse JSON content
+        file_content.seek(0)
+        index_data = json.loads(file_content.read().decode('utf-8'))
+        
+        print(f"Loaded index from Drive with {len(index_data)} files")
+        return index_data
+        
+    except Exception as e:
+        print(f"Error loading index from Drive: {e}")
+        print("Creating new index.")
+        return {}
+
 def load_index():
-    """Load the index file or create a new one if it doesn't exist."""
+    """Load index from Drive, fallback to local file if Drive fails."""
+    # First try to load from Drive (primary storage)
+    if 'drive_service' in globals():
+        drive_index = load_index_from_drive(drive_service, GDRIVE_FOLDER_ID)
+        if drive_index is not None:
+            return drive_index
+    
+    # Fallback to local file (for development/testing)
     if os.path.exists(INDEX_FILE):
         try:
             with open(INDEX_FILE, 'r') as f:
                 index_data = json.load(f)
-                print(f"Loaded existing index with {len(index_data)} files")
+                print(f"Loaded local index with {len(index_data)} files")
                 return index_data
         except (json.JSONDecodeError, IOError) as e:
-            print(f"Error loading index file: {e}. Creating new index.")
-            return {}
-    else:
-        print("No existing index file found. Creating new index.")
-        return {}
+            print(f"Error loading local index file: {e}")
+    
+    print("No existing index found. Creating new index.")
+    return {}
 
 def save_index(index_data):
-    """Save the index file with current data."""
+    """Save index to both Drive (primary) and local file (backup)."""
+    # Primary storage: Save to Drive
+    if 'drive_service' in globals():
+        success = save_index_to_drive(drive_service, index_data, GDRIVE_FOLDER_ID)
+        if success:
+            print(f"Index saved to Drive with {len(index_data)} files")
+    
+    # Backup storage: Save locally as well
     try:
         with open(INDEX_FILE, 'w') as f:
             json.dump(index_data, f, indent=2, sort_keys=True)
-        print(f"Index saved with {len(index_data)} files")
+        print(f"Index also saved locally with {len(index_data)} files")
     except IOError as e:
-        print(f"Error saving index file: {e}")
+        print(f"Error saving local index file: {e}")
 
 def get_file_checksum(file_path):
     """Generate MD5 checksum for a local file."""
@@ -262,19 +376,22 @@ if __name__ == "__main__":
     DOWNLOAD_FOLDER = "downloads"
     
     try:
-        # Load existing index or create new one
+        # Authenticate and make drive service global for index functions
+        drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
+        globals()['drive_service'] = drive_service  # Make it available to index functions
+        
+        # Load existing index from Drive or create new one
+        print("Loading index from Google Drive...")
         index = load_index()
         downloaded_files = []
         
-        # Authenticate and download files from Google Drive
-        drive_service = authenticate_google_drive(GOOGLE_CREDENTIALS_JSON)
-        
-        print("Starting Drive to S3 sync with indexing...")
+        print("Starting Drive to S3 sync with Drive-based indexing...")
         files_downloaded, files_skipped = download_files_from_drive(
             drive_service, GDRIVE_FOLDER_ID, DOWNLOAD_FOLDER, index, downloaded_files
         )
         
-        # Save updated index after download phase
+        # Save updated index back to Drive after download phase
+        print("Saving updated index to Google Drive...")
         save_index(index)
         
         print(f"\nSync Summary:")
@@ -293,18 +410,11 @@ if __name__ == "__main__":
             upload_to_s3_selective(DOWNLOAD_FOLDER, S3_BUCKET_NAME, S3_UPLOAD_PATH, 
                                  AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, downloaded_files)
             
-            print("\nSync completed successfully!")
+            # Save final index state to Drive
+            print("Saving final index state to Google Drive...")
+            save_index(index)
             
-            # Clean up downloaded files to save space (optional)
-            # for root, dirs, files in os.walk(DOWNLOAD_FOLDER, topdown=False):
-            #     for name in files:
-            #         if name in downloaded_files:
-            #             os.remove(os.path.join(root, name))
-            #     for name in dirs:
-            #         try:
-            #             os.rmdir(os.path.join(root, name))
-            #         except OSError:
-            #             pass  # Directory not empty
+            print("\nSync completed successfully!")
             
         else:
             print("\nNo changes detected. Sync skipped.")
@@ -313,8 +423,8 @@ if __name__ == "__main__":
         print(f"An error occurred: {e}")
         # Save index even if there was an error
         try:
-            if 'index' in locals():
+            if 'index' in locals() and 'drive_service' in globals():
                 save_index(index)
-                print("Index saved despite error for debugging.")
+                print("Index saved to Drive despite error for debugging.")
         except:
             pass
