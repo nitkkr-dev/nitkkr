@@ -1,21 +1,20 @@
 'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { ScrollArea } from '~/components/ui/scroll-area';
 
-import React, { useRef, useMemo, useState, useEffect, Suspense } from 'react';
-import { FaFilter, FaSlidersH, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { FaTimes } from 'react-icons/fa';
+import { MdFilterList } from 'react-icons/md';
+
+import Loading from '~/components/loading';
+import { ScrollArea } from '~/components/ui/scroll-area';
 import {
   Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs';
 import { cn } from '~/lib/utils';
-import { MdFilterList } from "react-icons/md";
-
-import Loading from '~/components/loading';
 
 interface Dept {
   id: number;
@@ -65,12 +64,12 @@ export function MobileFilters({
         aria-controls="mobile-filters-panel"
         onClick={() => setOpen((s) => !s)}
         className={cn(
-          'flex items-center gap-2 px-3 py-2 rounded border border-primary-100 bg-neutral-50 ',
+          'flex items-center gap-2 rounded border border-primary-100 bg-neutral-50 px-3 py-2 ',
           className
         )}
       >
-        <MdFilterList className="text-primary-700 text-xl"/>
-        <span className='text-primary-700'>Filters</span>
+        <MdFilterList className="text-xl text-primary-700" />
+        <span className="text-primary-700">Filters</span>
       </button>
 
       {/* Backdrop */}
@@ -82,7 +81,7 @@ export function MobileFilters({
         )}
         onClick={() => setOpen(false)}
       >
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="bg-black/40 absolute inset-0" />
       </div>
 
       {/* Panel: full screen, slides from left */}
@@ -93,25 +92,26 @@ export function MobileFilters({
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          'fixed top-0 left-0 z-[70] h-screen w-screen transition-transform',
+          'fixed left-0 top-0 z-[70] h-screen w-screen transition-transform',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-
         {/* Inner content area */}
-        <div className="bg-[#f7efe6] min-h-screen h-screen p-4 lg:p-8 md:pt-8">
-          <div >
+        <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
+          <div>
             <div className=" bg-white p-5">
-              <ScrollArea className="h-[calc(100vh-200px)]">
+              <ScrollArea className="h-[calc(100svh-80px)]">
                 <div className="rounded-lg ">
-                  <div className='mt-10 flex flex-row justify-between'>
-                    <h3 className="text-2xl font-bold text-primary-700">Filter By</h3>
+                  <div className="mt-10 flex flex-row justify-between">
+                    <h3 className="text-2xl font-bold text-primary-700">
+                      Filter By
+                    </h3>
                     <button
                       onClick={() => setOpen(false)}
                       aria-label="Close filters"
                       className=" hover:bg-black/5"
                     >
-                      <FaTimes className="text-primary-700 size-7" />
+                      <FaTimes className="size-7 text-primary-700" />
                     </button>
                   </div>
                   <div className="mb-6 rounded  bg-neutral-50 p-4">
@@ -127,9 +127,15 @@ export function MobileFilters({
 
                   <Suspense fallback={<Loading className="max-xl:hidden" />}>
                     {departments ? (
-                      <DepartmentsClient departments={departments} department={department} select={false} />
+                      <DepartmentsClient
+                        departments={departments}
+                        department={department}
+                        select={false}
+                      />
                     ) : (
-                      <p className="text-sm text-neutral-500">Loading departments...</p>
+                      <p className="text-sm text-neutral-500">
+                        Loading departments...
+                      </p>
                     )}
                   </Suspense>
                 </div>
@@ -141,8 +147,6 @@ export function MobileFilters({
     </div>
   );
 }
-
-
 
 export function ClearFiltersButton() {
   const router = useRouter();
@@ -274,7 +278,7 @@ export function DepartmentsClient({
         <div
           className={cn(
             'overflow-y-auto',
-            showAll ? 'max-h-[calc(100vh-200px)]' : 'max-h-[280px]'
+            showAll ? 'max-h-[calc(100svh-80px)]' : 'max-h-[320px]'
           )}
         >
           {visible.map(({ name, urlName }, index) => (
@@ -324,7 +328,6 @@ export function DepartmentsClient({
   );
 }
 
-
 /**
  * Small client-side Designations UI for mobile carousel.
  */
@@ -334,14 +337,19 @@ function DesignationsClient() {
   const options = ['faculty', 'staff'];
 
   const getUpdatedDesignations = (option: string) =>
-    selected.includes(option) ? selected.filter((d) => d !== option) : [...selected, option];
+    selected.includes(option)
+      ? selected.filter((d) => d !== option)
+      : [...selected, option];
 
   return (
     <div className="p-4">
       <h3 className="mb-2 text-lg font-bold text-primary-700">Designation</h3>
       <div className="space-y-3">
         {options.map((option) => (
-          <div key={option} className="flex items-center gap-3 rounded border p-3">
+          <div
+            key={option}
+            className="flex items-center gap-3 rounded border p-3"
+          >
             <input
               type="checkbox"
               checked={selected.includes(option)}

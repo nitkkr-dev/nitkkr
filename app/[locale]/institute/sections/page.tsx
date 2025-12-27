@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { IconType } from 'react-icons';
+import { type IconType } from 'react-icons';
 import { BsHddNetworkFill } from 'react-icons/bs';
 import {
   MdLibraryBooks,

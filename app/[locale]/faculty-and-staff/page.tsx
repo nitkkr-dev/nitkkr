@@ -1,30 +1,28 @@
+import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
 import {
   Input,
   Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs';
 import Loading from '~/components/loading';
 import { NoResultStatus } from '~/components/status';
+import { ScrollArea } from '~/components/ui/scroll-area';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
-import { ScrollArea } from '~/components/ui/scroll-area';
 
 import {
   ClearFiltersButton,
   DepartmentsClient,
+  MobileFilters,
   PreserveParamsLink,
-  MobileFilters
 } from './client-components';
 
 export default async function FacultyAndStaff({
@@ -82,9 +80,9 @@ export default async function FacultyAndStaff({
       </search>
 
       <section className="grow space-y-6">
-        <search className="flex gap-4 items-center w-full">
+        <search className="flex w-full items-center gap-4">
           <Input
-            className="flex-1 min-w-0"
+            className="min-w-0 flex-1"
             debounceTo="query"
             debounceEvery={100}
             defaultValue={query}
@@ -98,7 +96,6 @@ export default async function FacultyAndStaff({
               department={departmentName}
             />
           </div>
-
         </search>
 
         <ol className="space-y-4">
@@ -342,8 +339,8 @@ const FacultyList = async ({
   // Get department IDs for selected departments
   const selectedDepartmentIds = departmentList.length
     ? departments
-      .filter((dept) => departmentList.includes(dept.urlName))
-      .map((dept) => dept.id)
+        .filter((dept) => departmentList.includes(dept.urlName))
+        .map((dept) => dept.id)
     : [];
 
   const faculty = await db.query.faculty.findMany({
@@ -359,7 +356,7 @@ const FacultyList = async ({
     },
     where: selectedDepartmentIds.length
       ? (faculty, { inArray }) =>
-        inArray(faculty.departmentId, selectedDepartmentIds)
+          inArray(faculty.departmentId, selectedDepartmentIds)
       : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
@@ -529,8 +526,8 @@ const StaffList = async ({
   // Get department IDs for selected departments
   const selectedDepartmentIds = departmentList.length
     ? departments
-      .filter((dept) => departmentList.includes(dept.urlName))
-      .map((dept) => dept.id)
+        .filter((dept) => departmentList.includes(dept.urlName))
+        .map((dept) => dept.id)
     : [];
 
   // Fetch staff with department and designation filters
@@ -542,7 +539,7 @@ const StaffList = async ({
     },
     where: selectedDepartmentIds.length
       ? (staff, { inArray }) =>
-        inArray(staff.workingDepartmentId, selectedDepartmentIds)
+          inArray(staff.workingDepartmentId, selectedDepartmentIds)
       : undefined,
     with: { person: { columns: { email: true, name: true, telephone: true } } },
   });
