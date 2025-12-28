@@ -20,7 +20,12 @@ import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 import { ScrollArea } from '~/components/ui/scroll-area';
 
-import { ClearFiltersButton, PreserveParamsLink } from './client-components';
+import {
+  ClearFiltersButton,
+  DepartmentsClient,
+  MobileFilters,
+  PreserveParamsLink,
+} from './client-components';
 
 export default async function FacultyAndStaff({
   params: { locale },
@@ -35,6 +40,10 @@ export default async function FacultyAndStaff({
 }) {
   const text = (await getTranslations(locale)).FacultyAndStaff;
 
+  const mobileDepartments = await db.query.departments.findMany({
+    columns: { id: true, name: true, urlName: true },
+  });
+
   return (
     <section className="container my-6 flex gap-8">
       <search
@@ -48,7 +57,6 @@ export default async function FacultyAndStaff({
           <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
           <ClearFiltersButton />
         </div>
-
         <ScrollArea className="h-[calc(100vh-200px)]">
           {/* Designation Filter Box */}
           <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
@@ -65,6 +73,7 @@ export default async function FacultyAndStaff({
             <h3 className="mb-2 text-lg font-bold text-primary-700">
               Department
             </h3>
+
             <Suspense fallback={<Loading className="max-xl:hidden" />}>
               <Departments department={departmentName} />
             </Suspense>
@@ -73,9 +82,9 @@ export default async function FacultyAndStaff({
       </search>
 
       <section className="grow space-y-6">
-        <search className="flex gap-4 max-sm:flex-col">
+        <search className="flex w-full items-center gap-4">
           <Input
-            className="sm:grow"
+            className="min-w-0 flex-1"
             debounceTo="query"
             debounceEvery={100}
             defaultValue={query}
@@ -83,15 +92,12 @@ export default async function FacultyAndStaff({
             placeholder={text.placeholder}
           />
 
-          {/* Mobile Designation Filter */}
-          <Suspense fallback={<Loading className="xl:hidden" />}>
-            <Designations designation={designation} select />
-          </Suspense>
-
-          {/* Mobile Department Filter */}
-          <Suspense fallback={<Loading className="xl:hidden" />}>
-            <Departments department={departmentName} select />
-          </Suspense>
+          <div className="flex-shrink-0">
+            <MobileFilters
+              departments={mobileDepartments}
+              department={departmentName}
+            />
+          </div>
         </search>
 
         <ol className="space-y-4">
@@ -221,81 +227,88 @@ const Departments = async ({
     columns: { id: true, name: true, urlName: true },
   });
 
-  const selectedDepartments = Array.isArray(department)
-    ? department
-    : department
-      ? [department]
-      : [];
+  // const selectedDepartments = Array.isArray(department)
+  //   ? department
+  //   : department
+  //     ? [department]
+  //     : [];
 
-  // Define the updated department value based on selection
-  const getUpdatedDepartments = (urlName: string) => {
-    return selectedDepartments.includes(urlName)
-      ? selectedDepartments.filter((d) => d !== urlName)
-      : [...selectedDepartments, urlName];
-  };
+  // // Define the updated department value based on selection
+  // const getUpdatedDepartments = (urlName: string) => {
+  //   return selectedDepartments.includes(urlName)
+  //     ? selectedDepartments.filter((d) => d !== urlName)
+  //     : [...selectedDepartments, urlName];
+  // };
 
-  return select ? (
-    <Select navigate>
-      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue
-          placeholder={
-            selectedDepartments.length
-              ? `${selectedDepartments.length} selected`
-              : 'Choose a department'
-          }
-        />
-      </SelectTrigger>
-      <SelectContent>
-        {departments.map(({ name, urlName }, index) => (
-          <div key={index} className="flex items-center px-2 py-1">
-            <input
-              type="checkbox"
-              id={`mobile-department-${urlName}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selectedDepartments.includes(urlName)}
-              readOnly
-            />
-            <PreserveParamsLink
-              paramToUpdate="department"
-              value={getUpdatedDepartments(urlName)}
-              className="ml-2 w-full py-1"
-            >
-              {name}
-            </PreserveParamsLink>
-          </div>
-        ))}
-      </SelectContent>
-    </Select>
-  ) : (
-    <ol className="w-full space-y-4">
-      {departments.map(({ name, urlName }, index) => (
-        <li key={index}>
-          <PreserveParamsLink
-            paramToUpdate="department"
-            value={getUpdatedDepartments(urlName)}
-            className={cn(
-              'flex w-full items-center rounded border p-3',
-              selectedDepartments.includes(urlName)
-                ? 'bg-primary-50 border-primary-700'
-                : 'border-neutral-300'
-            )}
-          >
-            <div className="flex w-full items-center">
-              <div className="mr-2">
-                <input
-                  type="checkbox"
-                  id={`department-${urlName}`}
-                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                  checked={selectedDepartments.includes(urlName)}
-                  readOnly
-                />
-              </div>
-              <span className="font-semibold text-shade-dark">{name}</span>
-            </div>
-          </PreserveParamsLink>
-        </li>
-      ))}
-    </ol>
+  // return select ? (
+  //   <Select navigate>
+  //     <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
+  //       <SelectValue
+  //         placeholder={
+  //           selectedDepartments.length
+  //             ? `${selectedDepartments.length} selected`
+  //             : 'Choose a department'
+  //         }
+  //       />
+  //     </SelectTrigger>
+  //     <SelectContent>
+  //       {departments.map(({ name, urlName }, index) => (
+  //         <div key={index} className="flex items-center px-2 py-1">
+  //           <input
+  //             type="checkbox"
+  //             id={`mobile-department-${urlName}`}
+  //             className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+  //             checked={selectedDepartments.includes(urlName)}
+  //             readOnly
+  //           />
+  //           <PreserveParamsLink
+  //             paramToUpdate="department"
+  //             value={getUpdatedDepartments(urlName)}
+  //             className="ml-2 w-full py-1"
+  //           >
+  //             {name}
+  //           </PreserveParamsLink>
+  //         </div>
+  //       ))}
+  //     </SelectContent>
+  //   </Select>
+  // ) : (
+  //   <ol className="w-full space-y-4">
+  //     {departments.map(({ name, urlName }, index) => (
+  //       <li key={index}>
+  //         <PreserveParamsLink
+  //           paramToUpdate="department"
+  //           value={getUpdatedDepartments(urlName)}
+  //           className={cn(
+  //             'flex w-full items-center rounded border p-3',
+  //             selectedDepartments.includes(urlName)
+  //               ? 'bg-primary-50 border-primary-700'
+  //               : 'border-neutral-300'
+  //           )}
+  //         >
+  //           <div className="flex w-full items-center">
+  //             <div className="mr-2">
+  //               <input
+  //                 type="checkbox"
+  //                 id={`department-${urlName}`}
+  //                 className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+  //                 checked={selectedDepartments.includes(urlName)}
+  //                 readOnly
+  //               />
+  //             </div>
+  //             <span className="font-semibold text-shade-dark">{name}</span>
+  //           </div>
+  //         </PreserveParamsLink>
+  //       </li>
+  //     ))}
+  //   </ol>
+  // );
+  return (
+    <DepartmentsClient
+      departments={departments}
+      department={department}
+      select={select}
+    />
   );
 };
 
@@ -430,7 +443,7 @@ const FacultyList = async ({
             </main>
             {/* Links */}
             {/* On large screen */}
-            <div className="my-auto ml-auto flex hidden w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
+            <div className="my-auto ml-auto flex w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
               {(
                 Object.entries(profileExternalLinks) as [
                   keyof typeof profileExternalLinks,

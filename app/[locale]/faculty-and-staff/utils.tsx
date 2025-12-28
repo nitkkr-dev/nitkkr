@@ -46,8 +46,9 @@ import {
   students,
 } from '~/server/db';
 
+
 // Contains the content of full Faculty Profile
-async function FacultyOrStaffComponent({
+export async function FacultyOrStaffComponent({
   children,
   employeeId,
   id,
@@ -433,7 +434,7 @@ const facultyTables = {
   outreachActivities: outreachActivities,
 } as const;
 
-async function FacultySectionComponent({
+export async function FacultySectionComponent({
   locale,
   facultySection,
   id,
@@ -812,4 +813,3 @@ async function fetchSectionByFacultyId(
       )?.[section];
 }
 
-export { FacultyOrStaffComponent, FacultySectionComponent };
