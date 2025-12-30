@@ -10,14 +10,12 @@ export default function ImageHeader({
   title,
   headings,
   src,
-  display_name,
   logoUrl,
 }: {
   className?: string;
   title?: string;
   headings?: { label: string; href: string }[];
   src: string;
-  display_name?: string;
   logoUrl?: string;
 }) {
   return (
@@ -42,17 +40,17 @@ export default function ImageHeader({
           backgroundImage: `url('${getS3Url()}/${src ? src : 'assets/landingpagebg-1.png'}')`, // FIXME: remove this hack once we have good images
         }}
       >
-        {title && (
+        {title && !logoUrl && (
           <h1 className="container my-auto text-center text-shade-light">
             {title}
           </h1>
         )}
-        {/* In case and image or logo is required on top of it */}
-        {display_name && logoUrl && (
-          <header className="container m-auto flex max-w-[46rem] items-center justify-center ">
+        {/* Title with logo - displayed side by side */}
+        {title && logoUrl && (
+          <header className="container m-auto flex max-w-[46rem] items-center justify-center">
             <div className="relative h-16 w-16 sm:h-24 sm:w-24 md:h-32 md:w-32">
               <Image
-                alt={display_name}
+                alt={title}
                 src={logoUrl}
                 fill
                 className="rounded-full bg-primary-100 object-cover"
@@ -61,7 +59,7 @@ export default function ImageHeader({
             </div>
 
             <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-              {display_name.toUpperCase()}
+              {title.toUpperCase()}
             </h1>
           </header>
         )}
