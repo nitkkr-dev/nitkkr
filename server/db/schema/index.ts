@@ -27,3 +27,4 @@ export * from './student-academic-details.schema';
 export * from './students.schema';
 export * from './sponsored-research-projects-faculties.schema';
 export * from './sponsored-research-projects.schema';
+export * from './memorandum.schema';
