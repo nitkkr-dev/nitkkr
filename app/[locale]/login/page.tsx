@@ -2,6 +2,10 @@ import { cn } from '~/lib/utils';
 
 import Login from './login';
 
+// Never cache login page
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
+
 export default function LoginPage({
   params: { locale },
 }: {

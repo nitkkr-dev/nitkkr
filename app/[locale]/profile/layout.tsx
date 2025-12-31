@@ -1,6 +1,9 @@
 import Image from 'next/image';
 
 import { UnauthorisedStatus } from '~/components/status';
+// Never cache user-specific profile pages
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';

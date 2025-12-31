@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
 import Footer from '~/app/footer';
+// Default revalidation for all pages (1 minute)
+export const revalidate = 60;
 import Header from '~/app/header';
 import Loading from '~/components/loading';
 import { Toaster } from '~/components/ui';

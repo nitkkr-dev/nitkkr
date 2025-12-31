@@ -7,7 +7,7 @@ const locales = ['en', 'hi'];
 // In-memory rate limiting (resets on cold start)
 const rateLimit = new Map<string, { count: number; timestamp: number }>();
 const WINDOW_MS = 60 * 1000;
-const MAX_REQUESTS = 100;
+const MAX_REQUESTS = 60;
 
 function getClientIp(request: NextRequest): string {
   return (

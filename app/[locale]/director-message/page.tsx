@@ -2,6 +2,9 @@ import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
+// Static content - revalidate every hour
+export const revalidate = 3600;
+
 export default async function DirectorCorner({
   params: { locale },
 }: {

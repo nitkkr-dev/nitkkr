@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { cn } from '~/lib/utils';
 import Heading from '~/components/heading';
 
+// Historical convocation data - rarely changes
+export const revalidate = 3600;
+
 export default async function Convocation({
   params: { locale },
 }: {
