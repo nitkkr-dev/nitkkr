@@ -616,10 +616,20 @@ const text: Translations = {
       },
       iks: {
         title: 'Indian Knowledge Systems',
-        description:
-          'IKS Cell is an innovative cell established in 2022 in the Institute. It aims to promote interdisciplinary research on all aspects of Indian Knowledge Systems, preserve and disseminate IKS for further research and societal applications. The cell will actively engage in spreading the rich heritage of our country and traditional knowledge in fields such as Psychology, Basic Sciences, Engineering & Technology, Arts and Literature, Agriculture, Architecture, and more.',
-        iksTeam: 'IKS Team',
+        description: [
+          `The Indian Knowledge Systems (IKS) Cell is an innovative initiative established in 2022 at the Institute, under the aegis of the Ministry of Education, Government of India. It was launched with the vision of promoting and integrating India’s rich intellectual traditions into modern academic and research frameworks. Rooted in the diverse cultural and philosophical heritage of our nation, the IKS Cell is committed to fostering interdisciplinary research that draws upon indigenous knowledge systems and practices.`,
+          `The Cell’s primary objective is to explore, preserve, and disseminate traditional Indian knowledge across a wide array of disciplines, including Basic Sciences, Engineering and Technology, Psychology, Arts and Literature, Agriculture, and Architecture. It aims to bridge the gap between ancient wisdom and contemporary scientific inquiry, ensuring that India’s time-honoured approaches are not only preserved but also adapted to address current societal challenges.`,
+        ],
+
+        iksTeam: 'Team IKS Cell, NIT Kurukshetra',
+
+        coordinators: 'Student Coordinators, IKS Cell, NIT Kurukshetra',
+
+        activities: 'Activities Performed by IKS Cell, NIT Kurukshetra',
+
+        book: 'Book Release IKS Cell, NIT Kurukshetra',
       },
+
       ipr: {
         title: 'Intellectual Property Rights',
       },
