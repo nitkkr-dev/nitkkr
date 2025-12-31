@@ -52,7 +52,7 @@ function extractPhoneNumber(
 }
 
 export async function populate() {
-  const Csv = fs.readFileSync('sponsored-research-projects.tsv', 'utf-8').split('\n');
+  const Csv = fs.readFileSync('clubs.tsv', 'utf-8').split('\n');
   const Headers = Csv[0].split('\t');
 
   console.log('Headers:', Headers);
@@ -60,17 +60,6 @@ export async function populate() {
   await db.transaction(async (tx) => {
     for (let i = 1; i < Csv.length; i++) {
       const Data = convertToData(Csv[i], Headers);
-      console.log(Data);
-      await tx.insert(schemas.sponsoredResearchProjects).values({
-      year: Data.year,
-    departmentId: parseInt(Data.department_id),
-    titleOfProject: Data.titleOfProject,
-    agency: Data.agency,
-    amountInLakh: Data.amountInLakh,
-    sanctionedFileOrderNO: Data.sanctionedFileOrderNO || null,
-    sanctionedDate: Data.sanctionedDate || null,
-    status: (Data.status as 'ongoing' | 'completed') || 'ongoing',
-    });
     }
   });
 }
