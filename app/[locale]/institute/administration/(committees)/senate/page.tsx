@@ -1,3 +1,6 @@
+// Revalidate every hour (has DB calls via Committee, rarely changes)
+export const revalidate = 3600;
+
 import ImageHeader from '~/components/image-header';
 
 import Committee from '../committee';

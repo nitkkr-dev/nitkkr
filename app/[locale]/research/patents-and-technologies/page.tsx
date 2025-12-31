@@ -13,6 +13,9 @@ import {
 import { PaginationWithLogic } from '~/components/pagination/pagination';
 import { getTranslations } from '~/i18n/translations';
 
+// Fetches patents from DB - cache for 5 minutes
+export const revalidate = 300;
+
 export default async function PatentsAndTechnology({
   params: { locale },
   searchParams,

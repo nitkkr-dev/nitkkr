@@ -21,9 +21,6 @@ import { cn } from '~/lib/utils';
 
 import clients from './recruiters';
 
-// Placement data - updates occasionally
-export const revalidate = 300;
-
 export default async function TrainingAndPlacement({
   params: { locale },
 }: {

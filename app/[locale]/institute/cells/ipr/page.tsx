@@ -20,6 +20,9 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
+// Fetches IPR data from DB - cache for 5 minutes
+export const revalidate = 300;
+
 export default async function IPR({
   params: { locale },
 }: {

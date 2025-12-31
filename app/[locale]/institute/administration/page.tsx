@@ -23,6 +23,8 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+// Fetches committee data from DB - cache for 1 hour
+export const revalidate = 3600;
 import { db } from '~/server/db';
 
 export default async function Administration({

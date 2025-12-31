@@ -15,7 +15,8 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { db, hostels } from '~/server/db';
 
-export const dynamic = 'force-dynamic';
+// Fetches hostel data from DB - cache for 1 hour
+export const revalidate = 3600;
 
 export default async function Hostel({
   params: { locale, url_name },
