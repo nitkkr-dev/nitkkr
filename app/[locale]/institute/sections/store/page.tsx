@@ -1,3 +1,6 @@
+// Revalidate every hour (has DB calls, rarely changes)
+export const revalidate = 3600;
+
 import { WorkInProgressStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';

@@ -1,3 +1,6 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaTrophy } from 'react-icons/fa6';

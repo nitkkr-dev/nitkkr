@@ -16,6 +16,9 @@ import { getS3Url } from '~/server/s3';
 
 import { NotificationsList } from '../../notifications';
 
+// Fetches hostel data from DB - cache for 1 hour
+export const revalidate = 3600;
+
 export default async function Hostels({
   params: { locale },
 }: {
