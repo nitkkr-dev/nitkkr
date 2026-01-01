@@ -1,5 +1,5 @@
 'use client';
-
+import { createPortal } from 'react-dom';
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -44,16 +44,14 @@ export function MobileFilters({
 
   // Close on outside click
   useEffect(() => {
-    function onDoc(e: MouseEvent) {
-      if (!open) return;
-      const target = e.target as Node | null;
-      if (panelRef.current && target && !panelRef.current.contains(target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
+    if (!open) return;
+
+    document.body.classList.add('overflow-hidden');
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
   }, [open]);
+
 
   return (
     <div className="z-50 font-semibold xl:hidden">
@@ -75,74 +73,76 @@ export function MobileFilters({
       <div
         aria-hidden={!open}
         className={cn(
-          'fixed inset-0 z-[60] transition-opacity',
-          open ? 'visible opacity-100' : 'invisible opacity-0'
+          'fixed inset-0 z-[60] transition-opacity pointer-events-none',
+          open ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0'
         )}
         onClick={() => setOpen(false)}
       >
+
         <div className="bg-black/40 absolute inset-0" />
       </div>
-
-      {/* Panel: full screen, slides from left */}
-      <aside
-        id="mobile-filters-panel"
-        role="dialog"
-        aria-modal="true"
-        ref={panelRef}
-        onClick={(e) => e.stopPropagation()}
-        className={cn(
-          'fixed left-0 top-0 z-[70] h-screen w-screen transition-transform',
-          open ? 'translate-x-0' : '-translate-x-full'
-        )}
-      >
-        {/* Inner content area */}
-        <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
-          <div>
-            <div className=" bg-white p-5">
-              <ScrollArea className="h-[calc(100svh-80px)]">
-                <div className="rounded-lg ">
-                  <div className="mt-10 flex flex-row justify-between">
-                    <h3 className="text-2xl font-bold text-primary-700">
-                      Filter By
-                    </h3>
-                    <button
-                      onClick={() => setOpen(false)}
-                      aria-label="Close filters"
-                      className=" hover:bg-black/5"
-                    >
-                      <FaTimes className="size-7 text-primary-700" />
-                    </button>
+      {open && createPortal(
+        <aside
+          id="mobile-filters-panel"
+          role="dialog"
+          aria-modal="true"
+          ref={panelRef}
+          onClick={(e) => e.stopPropagation()}
+          className={cn(
+            'fixed left-0 top-0 z-[70] h-[100svh] w-full transition-transform',
+            open ? 'translate-x-0' : '-translate-x-full'
+          )}
+        >
+          {/* Inner content area */}
+          <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
+            <div>
+              <div className=" bg-white p-5">
+                <ScrollArea className="h-[calc(100svh-80px)]">
+                  <div className="rounded-lg ">
+                    <div className="mt-10 flex flex-row justify-between">
+                      <h3 className="text-2xl font-bold text-primary-700">
+                        Filter By
+                      </h3>
+                      <button
+                        onClick={() => setOpen(false)}
+                        aria-label="Close filters"
+                        className=" hover:bg-black/5"
+                      >
+                        <FaTimes className="size-7 text-primary-700" />
+                      </button>
+                    </div>
+                    <div className="mb-6 rounded  bg-neutral-50 p-4">
+                      <DesignationsClient />
+                    </div>
                   </div>
+
+                  {/* Department box */}
                   <div className="mb-6 rounded  bg-neutral-50 p-4">
-                    <DesignationsClient />
+                    <h3 className="mb-2 text-lg font-bold text-primary-700">
+                      Department
+                    </h3>
+
+                    <Suspense fallback={<Loading className="max-xl:hidden" />}>
+                      {departments ? (
+                        <DepartmentsClient
+                          departments={departments}
+                          department={department}
+                          select={false}
+                        />
+                      ) : (
+                        <p className="text-sm text-neutral-500">
+                          Loading departments...
+                        </p>
+                      )}
+                    </Suspense>
                   </div>
-                </div>
-
-                {/* Department box */}
-                <div className="mb-6 rounded  bg-neutral-50 p-4">
-                  <h3 className="mb-2 text-lg font-bold text-primary-700">
-                    Department
-                  </h3>
-
-                  <Suspense fallback={<Loading className="max-xl:hidden" />}>
-                    {departments ? (
-                      <DepartmentsClient
-                        departments={departments}
-                        department={department}
-                        select={false}
-                      />
-                    ) : (
-                      <p className="text-sm text-neutral-500">
-                        Loading departments...
-                      </p>
-                    )}
-                  </Suspense>
-                </div>
-              </ScrollArea>
+                </ScrollArea>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>,
+        document.body
+      )}
     </div>
   );
 }

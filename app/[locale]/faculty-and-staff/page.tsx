@@ -443,7 +443,7 @@ const FacultyList = async ({
             </main>
             {/* Links */}
             {/* On large screen */}
-            <div className="my-auto ml-auto flex w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
+            <div className="my-auto ml-auto flex hidden w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
               {(
                 Object.entries(profileExternalLinks) as [
                   keyof typeof profileExternalLinks,
