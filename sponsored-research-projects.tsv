@@ -1,3 +1,11 @@
-title	fundingAgency	facultyEmployeeId	amount	status	durationPeriod	durationPeriodType	createdOn	endedOn
-Machine Learning	Open Source	1	100000	on-going	1	year		
-Database Management System	Open Source	2	100000	on-going	1	year		
+year	department_id	titleOfProject	agency	amountInLakh	sanctionedFileOrderNO	sanctionedDate	Status
+2014-17	1555	Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay	SERB-DST	26.00	No. SB/FT/CS- 195/2013	2013-07-30	completed
+2014-17	1555	Development of polyoxometalate based light induced water oxidation catalyysts	SERB-DST	25.00	No. SB/FT/CS- 193/2013	2014-09-12	completed
+2014-19	1555	New Magnetic Materials Applicable as Colored Pigments and Catalysts	DST-INSPIRE	35.00	No. 4081	2014-07-23	completed
+2014-17	1555	Design, Synthesis and Optoelectronic Properties of Thiophene Based Functional Organic Materials	SERB-DST	22.80	No. SB-FT/CS- 101/2014	2015-07-24	completed
+2014-17	1555	Quantum Chemical design, synthesis and energetic properties study on tetrazole based high energy	SERB-DST	26.29	No. SB/FT/CS- 110/2014	2015-05-29	completed
+2014-17	1555	Neutral and Cationic Ruthenium Complexesfor Amidation and Related Reactions in Aqueous and Biphasic Medium	SERB-DST	26.00	No. SB/FT/CS- 092/2014	2015-07-18	completed
+2014-17	1557	Study of Ion Beam Induced Modifications in Semiconducting Nanostructures	IUAC	10.00	No.  IUAC/XII.7/UFR- 56303	2014-08-22	completed
+2014-17	1557	Silver nano-particle embeded bio-glases: Electrical polarization and asesment of their biocompatibility	SERB-DST	23.75	No. SB/FTP/PS- 139/2013	2014-05-05	completed
+2014-17	1557	Synthesis of Novel Random Laser Materials for Advance Photonic Applications	SERB-DST	26.23	No. SB/FTP/PS- 093/2013	2016-03-20	completed
+2014-17	1562	Impact Assessment of RIce Varieties Developed by ICAR and SAUs in India	NCAER	1.50		2014-12-31	completed
