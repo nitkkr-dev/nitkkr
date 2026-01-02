@@ -1,5 +1,7 @@
 export async function getTranslations(locale: string): Promise<Translations> {
-  return import(`./${locale}.ts`).then((module) => module.default);
+  return import(`./${locale}.ts`).then(
+    (module: { default: Translations }) => module.default
+  );
 }
 
 export interface Translations {
@@ -340,8 +342,11 @@ export interface Translations {
       };
       iks: {
         title: string;
-        description: string;
+        description: string[];
         iksTeam: string;
+        coordinators: string;
+        activities: string;
+        book: string;
       };
       scst: {
         title: string;
@@ -1088,7 +1093,7 @@ export interface Translations {
     };
   };
   DirectorMessage: {
-    title: String;
-    message: String[];
+    title: string;
+    message: string[];
   };
 }

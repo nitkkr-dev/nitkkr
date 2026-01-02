@@ -9,39 +9,126 @@ export default async function IKS({
 }) {
   const text = await getTranslations(locale);
 
-  const description =
-    'IKS Cell is an innovative cell which is established in 2022 in the Institute. It is established to promote interdisciplinary research on all aspects of IKS, preserve and disseminate IKS for further research and societal applications. It will actively engage in spreading the rich heritage of our country and traditional knowledge in the field of Psychology, Basic Sciences, Engineering & Technology, Arts and literature, Agriculture, Architecture etc.';
   const activities = [
     {
       id: 1,
       description:
-        'Expert talk on “Quality Life Management and Professional Excellence” by Prof Navneet Arora, IIT Roorkee on 15.01.2024 at 9:30 AM (1 hour duration) in the Seminar Hall of the Computer Engineering Department.',
+        'IKS Cell, National Institute of Technology, Kurukshetra (Haryana) India organized a 5-Day Workshop on “Stress Management & Professional Excellence” from 24-28 November 2023.',
     },
     {
       id: 2,
       description:
-        'IKS Cell Celebrated Pran Pratishtha Ceremony of Lord Rama at Ayodhya on January 22, 2024. Bhagirathi Bhawan at 11 AM.',
+        'IKS Cell, National Institute of Technology, Kurukshetra (Haryana) India organized a One Day National Conference on Psychology, Science & Technology (PST-IKS 2023) as Conference Secretary on 23 December 2023.',
     },
     {
       id: 3,
       description:
-        'IKS Cell organized a Five Days Workshop on “Stress Management and Professional Excellence” during November 24–28, 2023.',
+        'Expert talk on “Quality Life Management and Professional Excellence” by Prof. Navneet Arora, IIT Roorkee on 15.01.2024 at 9:30 AM (1 hour duration) in the Seminar Hall of the Computer Engineering Department, NIT Kurukshetra.',
+    },
+    {
+      id: 4,
+      description:
+        'IKS Cell celebrated the Pran Pratishtha Ceremony of Lord Rama at Ayodhya on 22.01.2024 at Bhagirathi Bhawan, 11 AM.',
+    },
+    {
+      id: 5,
+      description:
+        'IKS Cell performed Hawan on 11.10.2024 at Kalpna Chawla Bhawan, Girls Hostel, 11 AM.',
+    },
+    {
+      id: 6,
+      description:
+        'Performed Hawan at Institute Health Centre on 15.10.2023, NIT Kurukshetra.',
+    },
+    {
+      id: 7,
+      description:
+        'Lecture Series for Rural School Students by Shri Acharya Shivanand Ji from Varanasi, held on 04.12.2024 and 06.12.2024.',
+    },
+    {
+      id: 8,
+      description:
+        'Expert talk on “Mental Harmony & Meditation” by Mr. Rudransh Aggarwal, IIT Roorkee on 23.05.2025 at 10:00 AM (1 hour duration) in the Seminar Hall, Computer Engineering Department, NIT Kurukshetra.',
     },
   ];
-  const members = [
+  const team = [
     {
-      name: 'Prof RK Aggarwal',
-      designation: 'Prof-In-Charge, IKS Cell',
+      name: 'Prof. R.K. Aggarwal',
+      designation: 'Professor-In-Charge, IKS Cell, NIT Kurukshetra',
     },
     {
       name: 'Dr. Shabnam',
-      designation: 'Faculty-In-Charge, IKS Cell',
+      designation: 'Faculty-In-Charge, IKS Cell, NIT Kurukshetra',
+    },
+    {
+      name: 'Dr. Sachin Maheshwari',
+      designation: 'Vice Chancellor, GJU Moradabad, UP',
+    },
+    {
+      name: 'Dr. Rajesh Raj',
+      designation: 'Director, Ritanveshi Yogayan Foundation',
+    },
+    {
+      name: 'Dr. Jagan Nath',
+      designation:
+        'Sr. Tech. Officer, Ramchandra Mission (Heartfulness), NIT Kurukshetra',
     },
     {
       name: 'Dr. Kuldeep Kumar',
-      designation: 'Faculty-In-Charge, IKS Cell',
+      designation: 'Assistant Professor, NIT Kurukshetra',
+    },
+    { name: 'Dr. Manasa Reddy', designation: 'Psychologist, NIT Kurukshetra' },
+    {
+      name: 'Dr. Navneet Arora',
+      designation: 'Professor, IIT Roorkee, Dev Samaj',
+    },
+    { name: 'Dr. Navneet', designation: 'Dean, Gurukul Kangri, Haridwar' },
+    {
+      name: 'Dr. Sanjay Sharma',
+      designation: 'Professor, Gautam Buddha University, UP',
+    },
+    { name: 'Dr. Sandeep Arya', designation: 'Dean Faculty, GJU Hisar' },
+    { name: 'Shri Nakul Vashishtha', designation: 'Entrepreneur' },
+    { name: 'Dr. Amita Mittal', designation: 'Assistant Professor, KUK' },
+    { name: 'Mr. Rudransh Aggarwal', designation: 'B.Tech, IIT Roorkee' },
+    { name: 'Dr. Sonam Nagar', designation: 'Brahmkumaris, Gurugram' },
+    {
+      name: 'Shri Mithlesh Kumar Singh',
+      designation: 'Deputy Director, Electrical Safety UP',
+    },
+    { name: 'Shri Ram Kumar Sharma', designation: 'Vidya Vistaar Yojana' },
+    {
+      name: 'Dr. Diksha Arya',
+      designation: 'Assistant Professor, University of Tokyo, Japan',
+    },
+    {
+      name: 'Dr. Kapil Bhatt',
+      designation: 'Assistant Professor, HP University, Shimla',
     },
   ];
+  const coordinators = [
+    { name: 'Mr Chandan', education: 'M.Tech' },
+    { name: 'Mr Sanjay', education: 'B.Tech' },
+    { name: 'Ms Priya Kumari', education: 'M.Tech' },
+    { name: 'Mr. Ashfaq KP Jafar', education: 'PhD.' },
+  ];
+
+  const book = [
+    {
+      author: 'Aggarwal RK',
+      title: '(2025). Divine Science of KundaliniKriya Yoga.IndicaInfomedia.',
+    },
+    { author: 'Aggarwal RK', title: 'Yogi Charitamrit' },
+    {
+      author: 'Aggarwal RK',
+      title: 'A Manual For Healthy Life And Healthy India (Vol. I & II)',
+    },
+  ];
+
+  const galleryImages = Array.from({ length: 23 }, (_, i) => ({
+    src: `institute/cells/iks/${i + 1}.jpg`,
+  }));
+
   return (
     <>
       {/* heading */}
@@ -68,22 +155,38 @@ export default async function IKS({
         <article className="drop-shadow">
           <h3 className="text-primary-300">{text.Institute.cells.iks.title}</h3>
           <p className="d:w-full max-md:rounded-t md:rounded-r">
-            {text.Institute.cells.iks.description}
+            {text.Institute.cells.iks.description[0]}
+          </p>
+        </article>
+        <article className="drop-shadow">
+          <p className="d:w-full max-md:rounded-t md:rounded-r">
+            {text.Institute.cells.iks.description[1]}
           </p>
         </article>
 
-        {/* IKS Team */}
+        {/* IKS Team and Student Coordinators */}
         <div className="mt-8 rounded-md border border-primary-500 bg-neutral-50 p-4 shadow-sm">
           <h3 className="mb-2 font-bold text-primary-300">
             {text.Institute.cells.iks.iksTeam}
           </h3>
-          <ul className="list-disc space-y-1 pl-5">
-            {members.map((member) => (
-              <li key={member.name}>
-                {member.name}, {member.designation}
+          <ol className="list-decimal space-y-1 pl-5">
+            {team.map((team) => (
+              <li key={team.name}>
+                {team.name}, {team.designation}
               </li>
             ))}
-          </ul>
+          </ol>
+
+          <h3 className="mb-2 p-2 font-bold text-primary-300">
+            {text.Institute.cells.iks.coordinators}
+          </h3>
+          <ol className="list-decimal space-y-1 pl-5">
+            {coordinators.map((coordinators) => (
+              <li key={coordinators.name}>
+                {coordinators.name}, {coordinators.education}
+              </li>
+            ))}
+          </ol>
         </div>
 
         {/* Activities Performed in Year 2023-2024 */}
@@ -91,16 +194,31 @@ export default async function IKS({
           <h3 className="mb-3 font-bold text-primary-300">
             Activities Performed in Year 2023-2024
           </h3>
-          <ol className="list-decimal space-y-2 pl-5">
+          <ul className="list-disc space-y-2 pl-5">
             {activities.map((act) => (
               <li key={act.id}>{act.description}</li>
             ))}
-          </ol>
+          </ul>
         </article>
+
+        {/* Book Release */}
+        <div className="mt-8 rounded-md border border-primary-500 bg-neutral-50 p-4 shadow-sm">
+          <h3 className="mb-2 font-bold text-primary-300">
+            {text.Institute.cells.iks.book}
+          </h3>
+          <ul className="list-disc space-y-2 pl-5">
+            {book.map((book) => (
+              <li key={book.author}>
+                {book.author}, {book.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Gallery */}
         <article className="mt-4 p-4">
           <h3 className="mb-3 font-bold text-primary-300">Gallery</h3>
-          <Gallery base={getS3Url()} />
+          <Gallery base={getS3Url()} images={galleryImages} />
         </article>
       </main>
     </>
