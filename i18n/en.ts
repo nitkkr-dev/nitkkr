@@ -185,6 +185,7 @@ const text: Translations = {
       examDateSheet: 'Exam Date Sheet',
       timeTable: 'Time Table',
     },
+    viewMore: 'View More',
   },
   Academics: {
     notifications: 'Notifications',
@@ -616,78 +617,83 @@ const text: Translations = {
       },
       iks: {
         title: 'Indian Knowledge Systems',
-        description:
-          'IKS Cell is an innovative cell established in 2022 in the Institute. It aims to promote interdisciplinary research on all aspects of Indian Knowledge Systems, preserve and disseminate IKS for further research and societal applications. The cell will actively engage in spreading the rich heritage of our country and traditional knowledge in fields such as Psychology, Basic Sciences, Engineering & Technology, Arts and Literature, Agriculture, Architecture, and more.',
-        iksTeam: 'IKS Team',
+        description: [
+          `The Indian Knowledge Systems (IKS) Cell is an innovative initiative established in 2022 at the Institute, under the aegis of the Ministry of Education, Government of India. It was launched with the vision of promoting and integrating India’s rich intellectual traditions into modern academic and research frameworks. Rooted in the diverse cultural and philosophical heritage of our nation, the IKS Cell is committed to fostering interdisciplinary research that draws upon indigenous knowledge systems and practices.`,
+          `The Cell’s primary objective is to explore, preserve, and disseminate traditional Indian knowledge across a wide array of disciplines, including Basic Sciences, Engineering and Technology, Psychology, Arts and Literature, Agriculture, and Architecture. It aims to bridge the gap between ancient wisdom and contemporary scientific inquiry, ensuring that India’s time-honoured approaches are not only preserved but also adapted to address current societal challenges.`,
+        ],
+        iksTeam: 'Team IKS Cell, NIT Kurukshetra',
+        coordinators: 'Student Coordinators, IKS Cell, NIT Kurukshetra',
+        activitiesPerformed: 'Activities Performed in Year 2023-2024',
+        book: 'Book Release IKS Cell, NIT Kurukshetra',
+        imageGallery: 'Image Gallery',
       },
+
       ipr: {
         title: 'Intellectual Property Rights',
       },
       scst: {
         title: 'SC & ST Cell',
-        description:
-          [
-          'NIT Kurukshetra is committed to maintaining a work environment wherein students, faculty, and staff members from different community can work in a coherent environment. It is the institute\'s endeavor to ensure that no discrimination takes place at workplace.',
+        description: [
+          "NIT Kurukshetra is committed to maintaining a work environment wherein students, faculty, and staff members from different community can work in a coherent environment. It is the institute's endeavor to ensure that no discrimination takes place at workplace.",
           'The Institute has appointed a Liaison Officer for SC & ST cell who can be contacted in the event of any incident of caste-based discrimination.',
-          'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.'
-          ],
-        cellFunctionsHeading:'CELL FUNCTIONS',
-        cellFunctions:
-        [
+          'SC & ST cell has been constituted in NIT-Kurukshetra (An Institution of National Importance) w.e.f. 24th August, 2017 as per the instructions of the Government of India, Ministry of Personal, Public Grievances and Pension (Department of Personal and Training) vide office memorandum No. 43011/153/2010-Estt.(Res) dated 4th January 2013.',
+        ],
+        cellFunctionsHeading: 'CELL FUNCTIONS',
+        cellFunctions: [
           'Grievances redress the grievances of SC/ST students and employees and render them necessary help in solving their academic as well as administrative problems.',
           'Monitors and evaluates the reservation policies and other programs intended for SC/STs by the Government of India for their effective implementation at National Institute of Technology Kurukshetra.',
           'Suggests the follow-up measures to the administration of the institute to achieve the objectives and targets laid down by MHRD for the empowerment of SC/STs.',
           'To register the complaints of SC/ST students/employees of the Institute for their representation to the administration for taking further necessary action.',
-          'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.'
+          'Ensuring due compliance by the subordinate appointing authorities with the orders and instructions pertaining to the reservation of vacancies in favour of Scheduled Castes, Scheduled Tribes and Other Backward Classes and other benefits admissible to them.',
         ],
-        complaint: 'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
+        complaint:
+          'In case you want to register a formal complaint, please fill out the form in the complaint book, which is available in SC & ST Cell, Administrative Building, NIT Kurukshetra. The committee will look into the discrimination complaints received from SC & ST Students, faculty, and staff members and resolve such complaints.',
         liaisonOfficerHeading: 'LIAISON OFFICER',
-        liaisonOfficer : {
+        liaisonOfficer: {
           image: 'fallback/user-image.jpg',
           name: 'Arun Goel',
           title: 'Professor (Head of the Department)',
           email: 'drarun_goel@yahoo.co.in',
-          phone: '01744-233349, 01744-233300'
+          phone: '01744-233349, 01744-233300',
         },
         importantLinksHeading: 'IMPORTANT LINKS',
-        importantLinks:
-        [
+        importantLinks: [
           {
             title: 'Ministry of Social Justice and Empowerment',
-            link: 'https://socialjustice.gov.in'
+            link: 'https://socialjustice.gov.in',
           },
           {
             title: 'List of Scheduled Castes',
-            link: 'https://socialjustice.gov.in/common/76750'
+            link: 'https://socialjustice.gov.in/common/76750',
           },
           {
             title: 'List of Scheduled Tribes',
-            link: 'https://cdnbbsr.s3waas.gov.in/s301894d6f048493d2cacde3c579c315a3/uploads/2022/03/2022030426.pdf'
+            link: 'https://cdnbbsr.s3waas.gov.in/s301894d6f048493d2cacde3c579c315a3/uploads/2022/03/2022030426.pdf',
           },
           {
             title: 'National Commission for Scheduled Cast, GoI',
-            link: 'https://ncsc.nic.in'
+            link: 'https://ncsc.nic.in',
           },
           {
             title: 'National Commission for Scheduled Tribes, GoI',
-            link: 'https://ncstgrams.gov.in'
+            link: 'https://ncstgrams.gov.in',
           },
           {
             title: 'SC & ST Cell AICTE',
-            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell'
-          }
+            link: 'https://www.aicte.gov.in/bureaus/administration/scst-cell',
+          },
         ],
       },
       obcpwd: {
         title: 'OBC & PWD Cell',
         description: [
-          'NIT Kurukshetra is committed to maintaining a work environment where students, faculty, and staff members from different communities can work together harmoniously. It is the institute\'s endeavor to ensure that no discrimination takes place in the workplace. The Institute has appointed a Liaison Officer for the OBC Cell, who can be contacted in the event of any caste-based discrimination.'
+          "NIT Kurukshetra is committed to maintaining a work environment where students, faculty, and staff members from different communities can work together harmoniously. It is the institute's endeavor to ensure that no discrimination takes place in the workplace. The Institute has appointed a Liaison Officer for the OBC Cell, who can be contacted in the event of any caste-based discrimination.",
         ],
         cellFunctionsHeading: 'CELL FUNCTIONS',
         cellFunctions: [
           'To ensure proper implementation of various schemes of MHRD, GoI, and the State Government concerning scholarships, stipends, etc., for the welfare of reserved categories.',
           'Grievance Redressal: for any grievance(s) regarding academic, administrative, or social issues. The cell takes necessary action and provides advice/help to resolve the matter.',
-          'To take follow-up measures to achieve the objectives and targets laid down by MHRD, Government of India.'
+          'To take follow-up measures to achieve the objectives and targets laid down by MHRD, Government of India.',
         ],
         complaint:
           'In case you want to register a formal complaint, please fill out the form in the complaint book, available in the OBC Cell, Administrative Building, NIT Kurukshetra. The committee will review discrimination complaints received from OBC students, faculty, and staff members and resolve them accordingly.',
@@ -697,15 +703,15 @@ const text: Translations = {
           name: 'Arun Goel',
           title: 'Professor & Head of Department',
           email: 'drarun_goel@yahoo.co.in',
-          phone: '01744-233349, 01744-233300'
-        }
-      }
+          phone: '01744-233349, 01744-233300',
+        },
+      },
     },
   },
   NotFound: {
     title: '404',
     description: 'Not found ',
-    backHome: 'Looks like you\'re lost let\'s get you back home',
+    backHome: "Looks like you're lost let's get you back home",
   },
   Profile: {
     tabs: {
