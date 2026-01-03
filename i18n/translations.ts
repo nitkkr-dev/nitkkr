@@ -419,13 +419,40 @@ export interface Translations {
   };
   Notifications: {
     title: string;
+    searchPlaceholder: string;
+    clearAll: string;
+    saveSelection: string;
+    viewAll: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      department: string;
+      educationType: string;
+    };
     categories: {
       academic: string;
       tender: string;
       workshop: string;
+      administration: string;
       recruitment: string;
+      admission: string;
+      'student-activities': string;
+      faculty: string;
+      research: string;
+      alumni: string;
+      examination: string;
+      result: string;
+      hostel: string;
+      miscellaneous: string;
+      archived: string;
     };
-    viewAll: string;
+    educationType: {
+      ug: string;
+      pg: string;
+      phd: string;
+      all: string;
+    };
   };
   Events: {
     title: string;
