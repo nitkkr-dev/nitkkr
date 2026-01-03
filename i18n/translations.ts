@@ -65,6 +65,7 @@ export interface Translations {
       examDateSheet: string;
       timeTable: string;
     };
+    viewMore: string;
   };
   Academics: {
     notifications: string;
@@ -345,8 +346,9 @@ export interface Translations {
         description: string[];
         iksTeam: string;
         coordinators: string;
-        activities: string;
+        activitiesPerformed: string;
         book: string;
+        imageGallery: string;
       };
       scst: {
         title: string;

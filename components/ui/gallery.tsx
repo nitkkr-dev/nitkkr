@@ -10,16 +10,16 @@ export interface Img {
 interface GalleryProps {
   base: string;
   images: Img[];
+  viewMoreText: string;
 }
 
 type ClassifiedImg = Img & { type: 'h' | 'v' };
 
-export default function Gallery({ base, images }: GalleryProps) {
+export default function Gallery({ base, images, viewMoreText }: GalleryProps) {
   const [horizontal, setHorizontal] = useState<ClassifiedImg[]>([]);
   const [vertical, setVertical] = useState<ClassifiedImg[]>([]);
 
   // Classify Images
-
   useEffect(() => {
     if (!base) return;
 
@@ -151,7 +151,7 @@ export default function Gallery({ base, images }: GalleryProps) {
                     }}
                     className="bg-black/50 text-white absolute inset-0 flex items-center justify-center text-sm font-semibold sm:text-base lg:text-lg"
                   >
-                    View More
+                    {viewMoreText}
                   </button>
                 )}
               </div>

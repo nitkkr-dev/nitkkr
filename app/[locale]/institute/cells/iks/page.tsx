@@ -192,7 +192,7 @@ export default async function IKS({
         {/* Activities Performed in Year 2023-2024 */}
         <article className="mt-4 p-4">
           <h3 className="mb-3 font-bold text-primary-300">
-            Activities Performed in Year 2023-2024
+            {text.Institute.cells.iks.activitiesPerformed}
           </h3>
           <ul className="list-disc space-y-2 pl-5">
             {activities.map((act) => (
@@ -217,8 +217,14 @@ export default async function IKS({
 
         {/* Gallery */}
         <article className="mt-4 p-4">
-          <h3 className="mb-3 font-bold text-primary-300">Gallery</h3>
-          <Gallery base={getS3Url()} images={galleryImages} />
+          <h3 className="mb-3 font-bold text-primary-300">
+            {text.Institute.cells.iks.imageGallery}
+          </h3>
+          <Gallery
+            base={getS3Url()}
+            images={galleryImages}
+            viewMoreText={text.Main.viewMore}
+          />
         </article>
       </main>
     </>
