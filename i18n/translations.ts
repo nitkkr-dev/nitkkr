@@ -1098,4 +1098,42 @@ export interface Translations {
     title: string;
     message: string[];
   };
+  DirectorPage: {
+    pageTitle: string;
+    sections: string[];
+    labels: {
+      phoneNo: string;
+      faxNo: string;
+      mobileNo: string;
+      emailId: string;
+    };
+    Director: {
+      name: string;
+      position: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    };
+    cv: string[];
+    title: string[];
+    DirectorMessage: string[];
+    employes: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      email: string;
+    }[];
+
+    preDirectors: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    }[];
+  };
 }
