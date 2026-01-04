@@ -11,6 +11,7 @@ export default function DirectorCard({
   fax,
   mobile,
   email,
+  labels,
 }: {
   className?: string;
   image: string;
@@ -20,23 +21,25 @@ export default function DirectorCard({
   fax: string;
   mobile: string;
   email: string;
+  labels: {
+    phoneNo: string;
+    faxNo: string;
+    mobileNo: string;
+    emailId: string;
+  };
 }) {
   return (
     <article
       className={cn(
-        'border-gray-300 mx-auto flex flex-col items-center gap-6 rounded-xl border p-6 shadow-md md:flex-row md:items-start md:p-8',
+        'mx-auto flex w-[95vw] flex-row items-start gap-3 rounded-xl border border-neutral-300 bg-neutral-50 p-2 shadow-md sm:w-[85vw] sm:gap-4 sm:p-3 md:w-[75vw] md:gap-6 md:p-4 lg:w-[60vw]',
         className
       )}
-      style={{
-        width: '75vw',
-        backgroundColor: 'rgb(250, 250, 250)',
-      }}
     >
       {/* Director Image */}
       <div className="flex-shrink-0 overflow-hidden rounded-lg shadow-sm">
         <Image
           alt={name}
-          className="h-auto w-[180px] rounded-lg object-cover md:w-[220px]"
+          className="h-auto w-20 rounded-lg object-cover sm:w-28 md:w-36 lg:w-44"
           height={220}
           width={180}
           src={image}
@@ -44,28 +47,32 @@ export default function DirectorCard({
       </div>
 
       {/* Director Info */}
-      <div className="flex-1 space-y-2">
-        <h3 className="text-red-700 text-xl font-bold md:text-2xl">{name}</h3>
-        <p className="text-gray-800 text-2xl md:text-3xl">{position}</p>
+      <div className="min-w-0 flex-1">
+        <h3 className="text-base font-bold text-primary-500 sm:text-lg md:text-xl lg:text-2xl">
+          {name}
+        </h3>
+        <p className="text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
+          {position}
+        </p>
 
-        <ul className="mt-3 space-y-1 text-sm md:text-base">
+        <ul className="mt-2 space-y-0.5 text-xs sm:mt-3 sm:space-y-1 sm:text-sm md:mt-4 md:text-base lg:mt-6 lg:text-lg">
           <li>
-            <strong>Phone No.:</strong>{' '}
-            <span className="text-gray-700 hover:underline">{phone}</span>
+            <strong>{labels.phoneNo}</strong>{' '}
+            <span className="text-neutral-900 underline">{phone}</span>
           </li>
           <li>
-            <strong>Fax No.:</strong>{' '}
-            <span className="text-gray-700">{fax}</span>
+            <strong>{labels.faxNo}</strong>{' '}
+            <span className="text-neutral-900">{fax}</span>
           </li>
           <li>
-            <strong>Mobile No.:</strong>{' '}
-            <span className="text-gray-700 hover:underline">{mobile}</span>
+            <strong>{labels.mobileNo}</strong>{' '}
+            <span className="text-neutral-900 underline">{mobile}</span>
           </li>
           <li>
-            <strong>Email-ID:</strong>{' '}
+            <strong>{labels.emailId}</strong>{' '}
             <a
               href={`mailto:${email}`}
-              className="text-blue-700 hover:underline"
+              className="text-blue-700 break-all underline"
             >
               {email}
             </a>

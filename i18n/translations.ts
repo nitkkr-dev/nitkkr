@@ -1101,6 +1101,12 @@ export interface Translations {
   DirectorPage: {
     pageTitle: string;
     sections: string[];
+    labels: {
+      phoneNo: string;
+      faxNo: string;
+      mobileNo: string;
+      emailId: string;
+    };
     Director: {
       name: string;
       position: string;

@@ -1868,10 +1868,15 @@ rolls down to 60% of the eligible students for second round of placement session
       'Director’s Office',
       'Previous Directors',
     ],
+    labels: {
+      phoneNo: 'Phone No.:',
+      faxNo: 'Fax No.:',
+      mobileNo: 'Mobile No.:',
+      emailId: 'Email-ID:',
+    },
     Director: {
       name: 'Professor B.V. Ramana Reddy',
-
-      position: 'Director, National Institute of Technology Kurukshetra',
+      position: 'Director, National Institute of Technology, Kurukshetra',
       phone: '+91-1744-233208',
       fax: '+91-1744-238050',
       mobile: '+91-9876543210',
