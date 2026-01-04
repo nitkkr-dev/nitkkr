@@ -91,11 +91,7 @@ export default function Heading({
 
   return (
     <header
-      className={cn(
-        'my-4 sm:my-6 md:my-8 lg:my-10 xl:my-12',
-        !href && styles,
-        className
-      )}
+      className={cn('my-2 md:my-4 xl:my-6', !href && styles, className)}
       {...props}
     >
       <MaybeLink className={cn(href && styles)} href={href}>
