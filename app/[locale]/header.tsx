@@ -63,29 +63,11 @@ export default async function Header({ locale }: { locale: string }) {
         },
         // For now IKS and IIC are added as temp units, will change this once a "CELL" design is ready
         {
-          title: 'IKS Cell',
-          href: '/institute/cells/iks',
+          title: 'Institute Cells',
+          href: '/institute#cells',
           description:
             'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
         },
-        {
-          title: 'IIC Cell',
-          href: '/institute/cells/iic',
-          description:
-            'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
-        },
-        {
-          title: 'IPR Cell',
-          href: '/institute/cells/ipr',
-          description:
-            'The Intellectual Property Rights Cell promotes awareness and assists in protecting innovations, ideas, and creative works.',
-        },
-        {
-          title: 'SC & ST Cell',
-          href: '/institute/cells/scst',
-          description:
-            'The SC & ST Cell is dedicated to promoting the welfare and interests of students from Scheduled Castes and Scheduled Tribes, ensuring equal opportunities and support.',
-        }
       ],
     },
     {

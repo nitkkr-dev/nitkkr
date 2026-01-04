@@ -1,3 +1,6 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import { count } from 'drizzle-orm';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -90,8 +93,16 @@ const Courses = async ({ page }: { page: number }) => {
 
   console.log(courses);
 
-  return courses.map(({ code, coursesToMajors, title }) =>
-    coursesToMajors.map(
+  return courses.map(({ code, coursesToMajors, title }) => {
+    if (coursesToMajors.length === 0) {
+      return (
+        <TableRow key={code}>
+          <TableCell>{code}</TableCell>
+          <TableCell>{title}</TableCell>
+        </TableRow>
+      );
+    }
+    return coursesToMajors.map(
       ({ lectureCredits, practicalCredits, tutorialCredits, major }, index) => (
         <TableRow key={index}>
           <TableCell>{code}</TableCell>
@@ -113,5 +124,5 @@ const Courses = async ({ page }: { page: number }) => {
         </TableRow>
       )
     )
-  );
+});
 };

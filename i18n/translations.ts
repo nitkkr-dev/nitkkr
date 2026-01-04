@@ -1,6 +1,7 @@
 export async function getTranslations(locale: string): Promise<Translations> {
-  const mod = (await import(`./${locale}.ts`)) as { default: Translations };
-  return mod.default;
+  return import(`./${locale}.ts`).then(
+    (module: { default: Translations }) => module.default
+  );
 }
 
 export interface Translations {
@@ -64,6 +65,7 @@ export interface Translations {
       examDateSheet: string;
       timeTable: string;
     };
+    viewMore: string;
   };
   Academics: {
     notifications: string;
@@ -213,6 +215,7 @@ export interface Translations {
       researchGateId: string;
       scopusId: string;
     };
+    areasOfInterest: string;
     intellectualContributions: {
       publications: string;
       continuingEducation: string;
@@ -340,8 +343,12 @@ export interface Translations {
       };
       iks: {
         title: string;
-        description: string;
+        description: string[];
         iksTeam: string;
+        coordinators: string;
+        activitiesPerformed: string;
+        book: string;
+        imageGallery: string;
       };
       scst: {
         title: string;
@@ -359,6 +366,21 @@ export interface Translations {
         };
         importantLinksHeading: string;
         importantLinks: { title: string; link: string }[];
+      };
+      obcpwd: {
+        title: string;
+        description: string[];
+        cellFunctionsHeading: string;
+        cellFunctions: string[];
+        complaint: string;
+        liaisonOfficerHeading: string;
+        liaisonOfficer: {
+          image: string;
+          name: string;
+          title: string;
+          email: string;
+          phone: string;
+        };
       };
     };
   };
@@ -1073,8 +1095,8 @@ export interface Translations {
     };
   };
   DirectorMessage: {
-    title: String;
-    message: String[];
+    title: string;
+    message: string[];
   };
   DirectorPage: {
     pageTitle: string;

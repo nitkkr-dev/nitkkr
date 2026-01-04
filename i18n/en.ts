@@ -185,6 +185,7 @@ const text: Translations = {
       examDateSheet: 'Exam Date Sheet',
       timeTable: 'Time Table',
     },
+    viewMore: 'View More',
   },
   Academics: {
     notifications: 'Notifications',
@@ -346,6 +347,7 @@ const text: Translations = {
       researchGateId: 'Research Gate',
       scopusId: 'Scopus',
     },
+    areasOfInterest: 'Areas of Interest',
     intellectualContributions: {
       publications: 'PUBLICATIONS',
       continuingEducation: 'CONTINUING EDUCATION',
@@ -615,10 +617,17 @@ const text: Translations = {
       },
       iks: {
         title: 'Indian Knowledge Systems',
-        description:
-          'IKS Cell is an innovative cell established in 2022 in the Institute. It aims to promote interdisciplinary research on all aspects of Indian Knowledge Systems, preserve and disseminate IKS for further research and societal applications. The cell will actively engage in spreading the rich heritage of our country and traditional knowledge in fields such as Psychology, Basic Sciences, Engineering & Technology, Arts and Literature, Agriculture, Architecture, and more.',
-        iksTeam: 'IKS Team',
+        description: [
+          `The Indian Knowledge Systems (IKS) Cell is an innovative initiative established in 2022 at the Institute, under the aegis of the Ministry of Education, Government of India. It was launched with the vision of promoting and integrating India’s rich intellectual traditions into modern academic and research frameworks. Rooted in the diverse cultural and philosophical heritage of our nation, the IKS Cell is committed to fostering interdisciplinary research that draws upon indigenous knowledge systems and practices.`,
+          `The Cell’s primary objective is to explore, preserve, and disseminate traditional Indian knowledge across a wide array of disciplines, including Basic Sciences, Engineering and Technology, Psychology, Arts and Literature, Agriculture, and Architecture. It aims to bridge the gap between ancient wisdom and contemporary scientific inquiry, ensuring that India’s time-honoured approaches are not only preserved but also adapted to address current societal challenges.`,
+        ],
+        iksTeam: 'Team IKS Cell, NIT Kurukshetra',
+        coordinators: 'Student Coordinators, IKS Cell, NIT Kurukshetra',
+        activitiesPerformed: 'Activities Performed in Year 2023-2024',
+        book: 'Book Release IKS Cell, NIT Kurukshetra',
+        imageGallery: 'Image Gallery',
       },
+
       ipr: {
         title: 'Intellectual Property Rights',
       },
@@ -675,12 +684,34 @@ const text: Translations = {
           },
         ],
       },
+      obcpwd: {
+        title: 'OBC & PWD Cell',
+        description: [
+          "NIT Kurukshetra is committed to maintaining a work environment where students, faculty, and staff members from different communities can work together harmoniously. It is the institute's endeavor to ensure that no discrimination takes place in the workplace. The Institute has appointed a Liaison Officer for the OBC Cell, who can be contacted in the event of any caste-based discrimination.",
+        ],
+        cellFunctionsHeading: 'CELL FUNCTIONS',
+        cellFunctions: [
+          'To ensure proper implementation of various schemes of MHRD, GoI, and the State Government concerning scholarships, stipends, etc., for the welfare of reserved categories.',
+          'Grievance Redressal: for any grievance(s) regarding academic, administrative, or social issues. The cell takes necessary action and provides advice/help to resolve the matter.',
+          'To take follow-up measures to achieve the objectives and targets laid down by MHRD, Government of India.',
+        ],
+        complaint:
+          'In case you want to register a formal complaint, please fill out the form in the complaint book, available in the OBC Cell, Administrative Building, NIT Kurukshetra. The committee will review discrimination complaints received from OBC students, faculty, and staff members and resolve them accordingly.',
+        liaisonOfficerHeading: 'LIAISON OFFICER',
+        liaisonOfficer: {
+          image: 'fallback/user-image.jpg',
+          name: 'Arun Goel',
+          title: 'Professor & Head of Department',
+          email: 'drarun_goel@yahoo.co.in',
+          phone: '01744-233349, 01744-233300',
+        },
+      },
     },
   },
   NotFound: {
     title: '404',
     description: 'Not found ',
-    backHome: 'Looks like you’re lost let’s get you back home',
+    backHome: "Looks like you're lost let's get you back home",
   },
   Profile: {
     tabs: {

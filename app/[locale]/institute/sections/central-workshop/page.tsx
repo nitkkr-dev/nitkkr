@@ -1,3 +1,6 @@
+// Revalidate every hour (has DB calls, rarely changes)
+export const revalidate = 3600;
+
 import { Fragment, Suspense } from 'react';
 
 import ImageHeader from '~/components/image-header';

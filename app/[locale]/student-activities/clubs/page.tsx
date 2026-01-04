@@ -1,3 +1,6 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -68,7 +71,7 @@ export default async function Clubs({
                       <Image
                         alt={alias ?? name}
                         className="size-full scale-50 rounded-full object-cover"
-                        src={`clubs/${urlName}/nitlogo.png`}
+                        src={`student-activities/clubs/${urlName}/logo.jpg`}
                         width={0}
                         height={0}
                       />

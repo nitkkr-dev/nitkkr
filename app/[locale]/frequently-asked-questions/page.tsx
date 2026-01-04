@@ -8,6 +8,9 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
+// Static content - revalidate every hour
+export const revalidate = 3600;
+
 export default async function FrequentlyAskedQuestions({
   params: { locale },
 }: {
