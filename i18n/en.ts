@@ -443,8 +443,12 @@ const text: Translations = {
   },
   Notifications: {
     title: 'Notifications',
-    searchPlaceholder: 'Search notifications...',
+    searchPlaceholder: 'Search by Title/Content',
     clearAll: 'Clear all',
+    clearAllFilters: 'Clear All Filters',
+    filterBy: 'Filter By',
+    noNotificationsFound: 'No notifications found.',
+    noMoreNotifications: 'No more notifications',
     saveSelection: 'Save selection',
     viewAll: 'View All',
     filter: {

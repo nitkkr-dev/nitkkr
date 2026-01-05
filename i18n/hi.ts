@@ -693,8 +693,12 @@ const text: Translations = {
   },
   Notifications: {
     title: 'सूचनाएँ',
-    searchPlaceholder: 'सूचनाएँ खोजें...',
+    searchPlaceholder: 'शीर्षक/विषय-वस्तु द्वारा खोजें',
     clearAll: 'सभी साफ करें',
+    clearAllFilters: 'सभी फ़िल्टर साफ करें',
+    filterBy: 'फ़िल्टर करें',
+    noNotificationsFound: 'कोई सूचना नहीं मिली।',
+    noMoreNotifications: 'कोई और सूचनाएँ नहीं',
     saveSelection: 'चयन सहेजें',
     viewAll: 'सभी देखें',
     filter: {

@@ -1,21 +1,24 @@
 import Link from 'next/link';
-import React, { Suspense } from 'react';
-import { MdOutlineKeyboardArrowRight, MdSearch } from 'react-icons/md';
+import React from 'react';
+import { desc } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
-import { cn, groupBy } from '~/lib/utils';
+import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
-import Loading from '~/components/loading';
 import { ScrollArea } from '~/components/ui';
 import { notifications as notificationsSchema } from '~/server/db';
+import { type NotificationItem } from '~/server/actions/notifications';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MultiCheckbox } from './MultiCheckbox';
+import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
 
 type Cat = (typeof notificationsSchema.category.enumValues)[number];
+
+const INITIAL_BATCH_SIZE = 20;
 
 interface PageSearchParams {
   q?: string;
@@ -46,13 +49,22 @@ export default async function NotificationsPage({
     columns: { id: true, name: true, urlName: true },
   });
 
-  // Build base query (server-side filtering except textual search & multi-cat)
+  // Get department IDs for filtering
+  const deptIds = departments.length
+    ? departmentRows
+        .filter((d) => departments.includes(d.urlName))
+        .map((d) => d.id)
+    : [];
+
+  // Build base query - fetch only initial batch
   let raw = await db.query.notifications.findMany({
     where: (n, { and, gte, lte }) =>
       and(
         startDate ? gte(n.createdAt, startDate) : undefined,
         endDate ? lte(n.createdAt, endDate) : undefined
       ),
+    orderBy: (n) => [desc(n.createdAt)],
+    limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
 
   // Category filter (multi)
@@ -61,45 +73,57 @@ export default async function NotificationsPage({
   }
 
   // Department filter (multi via foreign key, if departmentId present)
-  if (departments.length) {
-    const deptIds = departmentRows
-      .filter((d) => departments.includes(d.urlName))
-      .map((d) => d.id);
+  if (deptIds.length) {
     raw = raw.filter((n) => n.departmentId && deptIds.includes(n.departmentId));
   }
 
-  // Text search (title)
+  // Text search (title and content)
   if (query) {
-    raw = raw.filter((n) =>
-      n.title.toLowerCase().includes(query.toLowerCase())
+    raw = raw.filter(
+      (n) =>
+        n.title.toLowerCase().includes(query.toLowerCase()) ||
+        n.content?.toLowerCase().includes(query.toLowerCase())
     );
   }
 
-  // Format dates for grouping
-  const list = raw
-    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-    .map((n) => ({
-      ...n,
-      createdAtStr: n.createdAt.toLocaleDateString(locale, {
-        dateStyle: 'long',
-        numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-      }),
-    }));
+  // Check if there are more items
+  const hasMore = raw.length > INITIAL_BATCH_SIZE;
+  const initialItems = hasMore ? raw.slice(0, INITIAL_BATCH_SIZE) : raw;
+  const initialCursor = hasMore
+    ? initialItems[initialItems.length - 1]?.createdAt.toISOString() ?? null
+    : null;
+
+  // Serialize for client component
+  const serializedItems: NotificationItem[] = initialItems.map((n) => ({
+    id: n.id,
+    title: n.title,
+    category: n.category,
+    createdAt: n.createdAt.toISOString(),
+  }));
+
+  // Build filter params for the client component
+  const filterParams = {
+    categories: categories.length ? categories : undefined,
+    departmentIds: deptIds.length ? deptIds : undefined,
+    start: searchParams.start,
+    end: searchParams.end,
+    query: query || undefined,
+  };
 
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
-      <section className="container mt-12 flex gap-8">
+      <section className="container mb-0 mt-12 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
             'hidden w-[290px] shrink-0 flex-col gap-2 xl:flex',
-            'sticky top-[88px]'
+            'sticky top-[88px] self-start'
           )}
         >
           <div className="flex items-baseline justify-between pb-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
-              Filter By
+              {text.filterBy}
             </h2>
             <Button
               asChild
@@ -116,12 +140,12 @@ export default async function NotificationsPage({
                   end: undefined,
                 })}
               >
-                Clear All Filters
+                {text.clearAllFilters}
               </Link>
             </Button>
           </div>
 
-          <ScrollArea className="max-h-[calc(100vh-180px)]">
+          <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2 pr-4">
               <FilterSection locale={locale} label={text.filter.date}>
                 <DateRangeForm
@@ -158,13 +182,13 @@ export default async function NotificationsPage({
             </div>
           </ScrollArea>
         </aside>
-        {/* Main Content - matches sidebar height */}
-        <section className="flex min-h-[600px] grow flex-col space-y-6 xl:max-h-[calc(100vh-180px)]">
+        {/* Main Content */}
+        <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
           <search className="flex shrink-0 gap-4 max-sm:flex-col">
             <SearchInput
               defaultValue={query}
-              placeholder="Search by Notification/Date"
+              placeholder={text.searchPlaceholder}
             />
 
             {/* Mobile Category Filter - shows on < xl */}
@@ -189,59 +213,23 @@ export default async function NotificationsPage({
             />
           </search>
 
-          {/* Notifications List - scrollable, fills remaining height */}
-          <ScrollArea className="flex-1">
-            <Suspense fallback={<Loading />}>
-              <NotificationsListRenderable items={list} locale={locale} />
-            </Suspense>
-          </ScrollArea>
+          {/* Notifications List */}
+          <div className="flex-1 rounded-md">
+            <NotificationsList
+              initialItems={serializedItems}
+              initialCursor={initialCursor}
+              initialHasMore={hasMore}
+              locale={locale}
+              filterParams={filterParams}
+              text={{
+                noNotificationsFound: text.noNotificationsFound,
+                noMoreNotifications: text.noMoreNotifications,
+              }}
+            />
+          </div>
         </section>
       </section>
     </>
-  );
-}
-
-/* ---------------------- Render Notifications List ---------------------- */
-function NotificationsListRenderable({
-  items,
-  locale,
-}: {
-  items: {
-    id: number;
-    title: string;
-    category: Cat;
-    createdAtStr: string;
-  }[];
-  locale: string;
-}) {
-  if (!items.length) {
-    return (
-      <p className="p-6 text-center text-neutral-500">
-        No notifications found.
-      </p>
-    );
-  }
-
-  return Array.from(groupBy(items, 'createdAtStr')).map(
-    ([createdAtStr, group], idx) => (
-      <div key={idx} className="mb-6">
-        <h5 className="mb-2 font-semibold text-primary-700">{createdAtStr}</h5>
-        <ul className="space-y-2">
-          {group.map((n) => (
-            <li key={n.id}>
-              <Link
-                href={`/${locale}/noticeboard/${n.id}`}
-                className="hover:bg-primary-50 group flex items-start gap-2 rounded px-2 py-1"
-              >
-                <MdOutlineKeyboardArrowRight className="text-primary-600 mt-1 size-4 transition-transform group-hover:translate-x-1" />
-                <p className="truncate">{n.title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <hr className="mt-4 opacity-20" />
-      </div>
-    )
   );
 }
 

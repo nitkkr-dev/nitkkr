@@ -421,6 +421,10 @@ export interface Translations {
     title: string;
     searchPlaceholder: string;
     clearAll: string;
+    clearAllFilters: string;
+    filterBy: string;
+    noNotificationsFound: string;
+    noMoreNotifications: string;
     saveSelection: string;
     viewAll: string;
     filter: {
