@@ -17,10 +17,11 @@ const Slider = React.forwardRef<
     )}
     {...props}
   >
-    <SliderPrimitive.Track className="bg-gray-100 dark:bg-gray-800 relative h-2 w-full grow overflow-hidden rounded-full">
-      <SliderPrimitive.Range className="bg-gray-900 dark:bg-gray-50 absolute h-full" />
+    <SliderPrimitive.Track className="relative h-[2px] w-full grow overflow-hidden rounded-full bg-neutral-300">
+      <SliderPrimitive.Range className="absolute h-full bg-neutral-900" />
     </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb className="border-gray-900 bg-white ring-offset-white focus-visible:ring-gray-950 dark:border-gray-50 dark:bg-gray-950 dark:ring-offset-gray-950 dark:focus-visible:ring-gray-300 block h-5 w-5 rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
+    <SliderPrimitive.Thumb className="bg-white ring-offset-white block h-5 w-5 rounded-full border-[3px] border-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-700 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
+    <SliderPrimitive.Thumb className="bg-white ring-offset-white block h-5 w-5 rounded-full border-[3px] border-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-700 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
   </SliderPrimitive.Root>
 ));
 Slider.displayName = SliderPrimitive.Root.displayName;
