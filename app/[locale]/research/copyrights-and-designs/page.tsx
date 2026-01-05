@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 import Loading from '~/components/loading';
+// Fetches copyrights/designs data - cache for 5 minutes
+export const revalidate = 300;
 import {
   Table,
   TableBody,

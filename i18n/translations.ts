@@ -1,5 +1,7 @@
 export async function getTranslations(locale: string): Promise<Translations> {
-  return import(`./${locale}.ts`).then((module) => module.default);
+  return import(`./${locale}.ts`).then(
+    (module: { default: Translations }) => module.default
+  );
 }
 
 export interface Translations {
@@ -63,6 +65,7 @@ export interface Translations {
       examDateSheet: string;
       timeTable: string;
     };
+    viewMore: string;
   };
   Academics: {
     notifications: string;
@@ -340,8 +343,12 @@ export interface Translations {
       };
       iks: {
         title: string;
-        description: string;
+        description: string[];
         iksTeam: string;
+        coordinators: string;
+        activitiesPerformed: string;
+        book: string;
+        imageGallery: string;
       };
       scst: {
         title: string;
@@ -359,6 +366,21 @@ export interface Translations {
         };
         importantLinksHeading: string;
         importantLinks: { title: string; link: string }[];
+      };
+      obcpwd: {
+        title: string;
+        description: string[];
+        cellFunctionsHeading: string;
+        cellFunctions: string[];
+        complaint: string;
+        liaisonOfficerHeading: string;
+        liaisonOfficer: {
+          image: string;
+          name: string;
+          title: string;
+          email: string;
+          phone: string;
+        };
       };
     };
   };
@@ -1076,7 +1098,45 @@ export interface Translations {
     };
   };
   DirectorMessage: {
-    title: String;
-    message: String[];
+    title: string;
+    message: string[];
+  };
+  DirectorPage: {
+    pageTitle: string;
+    sections: string[];
+    labels: {
+      phoneNo: string;
+      faxNo: string;
+      mobileNo: string;
+      emailId: string;
+    };
+    Director: {
+      name: string;
+      position: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    };
+    cv: string[];
+    title: string[];
+    DirectorMessage: string[];
+    employes: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      email: string;
+    }[];
+
+    preDirectors: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    }[];
   };
 }

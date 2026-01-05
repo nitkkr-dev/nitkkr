@@ -5,190 +5,119 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface Img {
   src: string;
-  alt: string;
 }
 
 interface GalleryProps {
   base: string;
+  images: Img[];
+  viewMoreText: string;
 }
 
-// Row patterns
-const rowPatterns: ('h' | 'v')[][] = [
-  ['h', 'v', 'h', 'v'],
-  ['h', 'h', 'h'],
-  ['v', 'h', 'v', 'h'],
-  ['h', 'h', 'h'],
-];
+type ClassifiedImg = Img & { type: 'h' | 'v' };
 
-export default function Gallery({ base }: GalleryProps) {
-  // static images with base from server + random vertical images for better testing
-  const images: Img[] = useMemo(
-    () => [
-      { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
-      { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
-      { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
-      { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
-      { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
-      { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
-      { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
-      { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
-      { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
-      { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
-      { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
-      { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
-      { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
-      { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
-      { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
-      { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
-      { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
-      { src: `${base}/assets/mahabharat.jpeg`, alt: 'Mahabharat Illustration' },
-      { src: `${base}/academics/0.jpg`, alt: 'Academic Building View 1' },
-      { src: `${base}/academics/1.jpg`, alt: 'Academic Building View 2' },
-      { src: `${base}/academics/2.jpg`, alt: 'Academic Building View 3' },
-      { src: `${base}/events/image3.jpg`, alt: 'Campus Event Celebration' },
-      { src: `${base}/hostels/gh1.webp`, alt: 'Girls Hostel Exterior View 1' },
-      { src: `${base}/hostels/gh2.webp`, alt: 'Girls Hostel Exterior View 2' },
-      { src: `${base}/hostels/gh3.webp`, alt: 'Girls Hostel Exterior View 3' },
-      { src: `${base}/hostels/h1.webp`, alt: 'Boys Hostel Exterior View 1' },
-      { src: `${base}/hostels/h2.webp`, alt: 'Boys Hostel Exterior View 2' },
-      { src: `${base}/hostels/h3.webp`, alt: 'Boys Hostel Exterior View 3' },
-      { src: `${base}/hostels/h4.webp`, alt: 'Boys Hostel Exterior View 4' },
-      { src: `${base}/hostels/h5.webp`, alt: 'Boys Hostel Exterior View 5' },
-      { src: `${base}/hostels/h6.webp`, alt: 'Boys Hostel Exterior View 6' },
-      { src: `${base}/hostels/h7.webp`, alt: 'Boys Hostel Exterior View 7' },
-      { src: `${base}/hostels/h8.webp`, alt: 'Boys Hostel Exterior View 8' },
-      { src: `${base}/institute/image01.jpg`, alt: 'Main Institute Building' },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-      {
-        src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8qwnKumpD9IrCm6nx2f0ndrQ9p-vNxee2VQ&s`,
-        alt: 'Main Institute Building',
-      },
-    ],
-    [base]
-  );
+export default function Gallery({ base, images, viewMoreText }: GalleryProps) {
+  const [horizontal, setHorizontal] = useState<ClassifiedImg[]>([]);
+  const [vertical, setVertical] = useState<ClassifiedImg[]>([]);
 
-  const [horizontal, setHorizontal] = useState<(Img & { type: 'h' | 'v' })[]>(
-    []
-  );
-  const [vertical, setVertical] = useState<(Img & { type: 'h' | 'v' })[]>([]);
-
-  // Classify images as horizontal or vertical
+  // Classify Images
   useEffect(() => {
+    if (!base) return;
+
     void Promise.all(
       images.map(
         (img) =>
-          new Promise<Img & { type: 'h' | 'v' }>((resolve) => {
+          new Promise<ClassifiedImg>((resolve) => {
+            const fullSrc = `${base}/${img.src}`;
             const temp = new window.Image();
-            temp.src = img.src;
+            temp.src = fullSrc;
+
             temp.onload = () =>
               resolve({
-                ...img,
+                src: fullSrc,
                 type: temp.naturalWidth > temp.naturalHeight ? 'h' : 'v',
               });
-            temp.onerror = () => resolve({ ...img, type: 'v' });
+
+            temp.onerror = () => resolve({ src: fullSrc, type: 'v' });
           })
       )
     ).then((classified) => {
       setHorizontal(classified.filter((i) => i.type === 'h'));
       setVertical(classified.filter((i) => i.type === 'v'));
     });
-  }, [images]);
+  }, [base, images]);
 
-  // Merge images according to row patterns
+  // Build rows using patterns
   const rows = useMemo(() => {
-    const mergedRows: (Img & { type: 'h' | 'v' })[][] = [];
-    let hIndex = 0,
-      vIndex = 0;
-    let patternIndex = 0;
+    const mergedRows: ClassifiedImg[][] = [];
+    let hIndex = 0;
+    let vIndex = 0;
+    let n = 0;
+    const hArr = horizontal;
+    const vArr = vertical;
 
-    while (hIndex < horizontal.length || vIndex < vertical.length) {
-      const pattern = rowPatterns[patternIndex % rowPatterns.length];
-      const row: (Img & { type: 'h' | 'v' })[] = [];
+    while (hIndex < hArr.length || vIndex < vArr.length) {
+      const remainingH = hArr.length - hIndex;
+      const remainingV = vArr.length - vIndex;
+      const totalRemaining = remainingH + remainingV;
+      let pattern: ('h' | 'v')[] = [];
 
+      if (totalRemaining > 0 && totalRemaining <= 3) {
+        for (let i = 0; i < remainingH; i++) pattern.push('h');
+        for (let i = 0; i < remainingV; i++) pattern.push('v');
+      } else {
+        const mod4 = n % 4;
+        if (mod4 === 0 && remainingH >= 2 && remainingV >= 2)
+          pattern = ['h', 'v', 'h', 'v'];
+        else if ((mod4 === 1 || mod4 === 3) && remainingH >= 3)
+          pattern = ['h', 'h', 'h'];
+        else if (mod4 === 2 && remainingH >= 2 && remainingV >= 2)
+          pattern = ['v', 'h', 'v', 'h'];
+        else if (remainingH >= 2 && remainingV >= 1) pattern = ['h', 'v', 'h'];
+        else if (remainingH >= 1 && remainingV >= 2) pattern = ['v', 'h', 'v'];
+        else if (remainingH > 0)
+          pattern = Array(Math.min(remainingH, 3)).fill('h') as ('h' | 'v')[];
+        else if (remainingV > 0)
+          pattern = Array(Math.min(remainingV, 4)).fill('v') as ('h' | 'v')[];
+      }
+
+      const row: ClassifiedImg[] = [];
       for (const type of pattern) {
-        if (type === 'h' && hIndex < horizontal.length) {
-          row.push(horizontal[hIndex]);
+        if (type === 'h' && hIndex < hArr.length) {
+          row.push(hArr[hIndex]);
           hIndex++;
-        } else if (type === 'v' && vIndex < vertical.length) {
-          row.push(vertical[vIndex]);
+        } else if (type === 'v' && vIndex < vArr.length) {
+          row.push(vArr[vIndex]);
           vIndex++;
         }
       }
 
       if (row.length > 0) mergedRows.push(row);
-      patternIndex++;
+      n++;
     }
 
     return mergedRows;
   }, [horizontal, vertical]);
 
-  // Show 3 rows at a time
   const [visibleRowCount, setVisibleRowCount] = useState(3);
-
-  const handleViewMore = useCallback(() => {
-    setVisibleRowCount((prev) => prev + 3);
-  }, []);
-
-  // Get visible rows and flatten them
+  const handleViewMore = useCallback(
+    () => setVisibleRowCount((prev) => prev + 3),
+    []
+  );
   const visibleRows = rows.slice(0, visibleRowCount);
   const visibleImages = visibleRows.flat();
   const hasMoreRows = visibleRowCount < rows.length;
-
-  // Calculate which image should show the View More button
   const viewMorePosition = hasMoreRows ? visibleImages.length - 1 : -1;
 
- return (
-    <div className="mx-auto space-y-6" style={{ width: '1232px', maxWidth: '100%' }}>
+  return (
+    <div className="mx-auto w-full max-w-[1232px] space-y-6 px-4">
       {visibleRows.map((row, rowIdx) => (
-        <div key={rowIdx} className="flex gap-4">
+        <div
+          key={rowIdx}
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6"
+        >
           {row.map((img, idx) => {
+            console.log('RENDERING IMAGE SRC →', img.src);
+
             const globalIndex =
               row.slice(0, idx + 1).length +
               rows.slice(0, rowIdx).flat().length -
@@ -200,19 +129,19 @@ export default function Gallery({ base }: GalleryProps) {
                 key={`${img.src}-${idx}`}
                 className={`relative overflow-hidden rounded ${
                   isViewMorePosition ? '' : 'border-2 border-primary-300'
+                } ${
+                  img.type === 'h'
+                    ? 'aspect-[4/3] w-full flex-[2] sm:w-[48%] lg:max-w-[400px]'
+                    : 'aspect-[2/3] w-full flex-[1] sm:w-[30%] lg:max-w-[192px]'
                 }`}
-                style={img.type === 'h' ? { width: 400, height: 300 } : { width: 192, height: 300 }}
               >
                 <Image
                   src={img.src}
-                  alt={img.alt}
-                  width={img.type === 'h' ? 400 : 192}
-                  height={300}
-                  className={`h-full w-full object-cover transition-all ${
-                    isViewMorePosition ? 'opacity-30' : 'opacity-100'
-                  }`}
+                  alt=""
+                  fill
+                  unoptimized
+                  className={`object-cover transition-all ${isViewMorePosition ? 'opacity-30' : 'opacity-100'}`}
                 />
-
                 {isViewMorePosition && (
                   <button
                     type="button"
@@ -220,9 +149,9 @@ export default function Gallery({ base }: GalleryProps) {
                       e.stopPropagation();
                       handleViewMore();
                     }}
-                    className="bg-black/50 text-white absolute inset-0 flex items-center justify-center text-lg font-semibold"
+                    className="bg-black/50 text-white absolute inset-0 flex items-center justify-center text-sm font-semibold sm:text-base lg:text-lg"
                   >
-                    View More
+                    {viewMoreText}
                   </button>
                 )}
               </div>

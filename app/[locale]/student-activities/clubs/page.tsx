@@ -1,3 +1,6 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import Image from 'next/image';
 import Link from 'next/link';
 

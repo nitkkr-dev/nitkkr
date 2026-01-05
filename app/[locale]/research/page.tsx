@@ -1,3 +1,6 @@
+// Revalidate every hour (has DB calls, rarely changes)
+export const revalidate = 3600;
+
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';

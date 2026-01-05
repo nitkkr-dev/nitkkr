@@ -1,3 +1,6 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import { union } from 'drizzle-orm/pg-core';
 import { type ReactNode } from 'react';
 
