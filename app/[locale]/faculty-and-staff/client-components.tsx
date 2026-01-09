@@ -112,6 +112,7 @@ export function MobileFilters({
                       </button>
                     </div>
                     <div className="mb-6 rounded  bg-neutral-50 p-4">
+                      <h3 className="mb-2 text-lg font-bold text-primary-700">Designation</h3>
                       <DesignationsClient />
                     </div>
                   </div>
@@ -136,6 +137,16 @@ export function MobileFilters({
                       )}
                     </Suspense>
                   </div>
+                  <div className="flex items-center justify-between">
+                            <button
+                        onClick={() => setOpen(false)}
+                        aria-label="Close filters"
+                        className="text-sm font-semibold text-primary-700"
+                      >
+                        Save Selection
+                      </button>
+                            <ClearFiltersButton />
+                          </div>
                 </ScrollArea>
               </div>
             </div>
@@ -319,7 +330,7 @@ export function DepartmentsClient({
           >
             {showAll
               ? 'View less'
-              : `View more (${departments.length - optionsToShow} more)`}
+              : 'View more'}
           </button>
         </div>
       )}
@@ -341,30 +352,35 @@ function DesignationsClient() {
       : [...selected, option];
 
   return (
-    <div className="p-4">
-      <h3 className="mb-2 text-lg font-bold text-primary-700">Designation</h3>
-      <div className="space-y-3">
-        {options.map((option) => (
-          <div
-            key={option}
-            className="flex items-center gap-3 rounded border p-3"
-          >
-            <input
-              type="checkbox"
-              checked={selected.includes(option)}
-              readOnly
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700"
-            />
-            <PreserveParamsLink
-              paramToUpdate="designation"
-              value={getUpdatedDesignations(option)}
-              className="w-full"
-            >
-              {option.charAt(0).toUpperCase() + option.slice(1)}
-            </PreserveParamsLink>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+    <ol className="w-full space-y-4">
+          {options.map((option, index) => (
+            <li key={index}>
+              <PreserveParamsLink
+                paramToUpdate="designation"
+                value={getUpdatedDesignations(option)}
+                className={cn(
+                  'flex w-full items-center rounded border p-3',
+                  selected.includes(option)
+                    ? 'bg-primary-50 border-primary-700'
+                    : 'border-neutral-300'
+                )}
+              >
+                <div className="flex w-full items-center">
+                  <div className="mr-2">
+                    <input
+                      type="checkbox"
+                      id={`designation-${option}`}
+                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                      checked={selected.includes(option)}
+                      readOnly
+                    />
+                  </div>
+                  <span className="font-semibold text-shade-dark">
+                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                  </span>
+                </div>
+              </PreserveParamsLink>
+            </li>
+          ))}
+        </ol>
+      )}
