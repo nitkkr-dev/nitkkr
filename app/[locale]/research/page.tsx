@@ -24,13 +24,21 @@ import { db } from '~/server/db';
 import type {
   copyrights,
   designs,
+  mous,
   patents,
   researchAndConsultancy,
+  sponsoredResearchProjects,
+  sponsoredResearchProjectsFaculties,
 } from '~/server/db/schema';
+
 type PatentsTable = typeof patents.$inferSelect;
 type CopyrightsTable = typeof copyrights.$inferSelect;
 type DesignsTable = typeof designs.$inferSelect;
 type ResearchAndConsultancyTable = typeof researchAndConsultancy.$inferSelect;
+type Moustable = typeof mous.$inferSelect;
+// type SponsoredProjectsTable = typeof sponsoredResearchProjects.$inferSelect;
+// type SponsoredProjectsFacultiesTable = typeof sponsoredResearchProjectsFaculties.$inferSelect;
+  
 
 export default async function PatentsAndTechnology({
   params: { locale },
@@ -90,111 +98,41 @@ export default async function PatentsAndTechnology({
       orderBy: (rc) => sql`SUBSTRING(${rc.year}, 1, 4)::integer DESC`, // sorting by year to latest
     }
   );
+  const mous = await db.query.mous.findMany();
+  const staticMemorandum: Moustable[] = mous;
+  const formattedMemorandum = staticMemorandum.map((item) => {
+    return {
+      organization: item.organization,
+      date: item.signingDate,
+    };
+  });
 
-  const staticMemorandum = [
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
+ const projects= await db.query.sponsoredResearchProjects.findMany({
+    with: {
+      faculties: true,
+      department: true, // Make sure to also include department relation
     },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-    {
-      organization: 'CSIR-Central Road Research Institute, New Delhi',
-      date: '10-10-2023',
-    },
-  ];
-  const staticProjects = [
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-    {
-      year: '2014-17',
-      department: 'chemistry',
-      facultyName: 'Dr. Amilan Jose D',
-      title:
-        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
-      agency: 'hihi',
-      amount: '69',
-    },
-  ];
+  });
+  
+ 
+  // Transform projects data into the format needed for the table
+  const staticProjects = projects.map((project) => {
+    const facultyNames = project.faculties && project.faculties.length > 0
+      ? project.faculties.map((faculty) => faculty.facultyName).join(', ')
+      : 'N/A';
+
+    return {
+      year: project.year,
+      department: project.department?.name ?? 'N/A',
+      facultyName: facultyNames,
+      title: project.titleOfProject,
+      agency: project.agency,
+      amount: project.amountInLakh,
+      sanctionedFileOrderNo: project.sanctionedFileOrderNO ?? 'N/A',
+      sanctionedDate: project.sanctionedDate ?? 'N/A',
+      status: project.status ?? 'N/A',
+    };
+  });
   const base = getS3Url();
   // Get the total count for pagination
   const getResearchCount = async () => {
@@ -210,7 +148,7 @@ export default async function PatentsAndTechnology({
     return [{ count }];
   };
   const getMemorandumCount = async () => {
-    const count = staticMemorandum.length; // Replace with your actual DB call
+    const count = formattedMemorandum.length; // Replace with your actual DB call
     return [{ count }];
   };
 
@@ -473,7 +411,7 @@ export default async function PatentsAndTechnology({
                 }
               >
                 <MemorandumTable
-                  tableData={staticMemorandum}
+                  tableData={formattedMemorandum}
                   currentPage={currentPage}
                   itemsPerPage={10}
                 />
@@ -511,8 +449,11 @@ export default async function PatentsAndTechnology({
                   text.projects.title,
                   text.projects.agency,
                   text.projects.amount,
+                  text.projects.sanctionedFileOrderNo,
+                  text.projects.sanctionedDate,
+                  text.projects.status,
                 ].map((headerText, index) => (
-                  <TableHead key={index}>{headerText}</TableHead>
+                  <TableHead key={index} className={index === 1 ? 'w-24' : ''}>{headerText}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
@@ -799,6 +740,9 @@ const ProjectsTable = ({
     title: string;
     agency: string;
     amount: string;
+    sanctionedFileOrderNo: string;
+    sanctionedDate: string;
+    status: string;
   }[];
   currentPage: number;
   itemsPerPage?: number;
@@ -817,6 +761,9 @@ const ProjectsTable = ({
           item.title,
           item.agency,
           item.amount,
+          item.sanctionedFileOrderNo,
+          item.sanctionedDate,
+          item.status,
         ];
 
         return (

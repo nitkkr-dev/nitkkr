@@ -1014,6 +1014,9 @@ export interface Translations {
       title: string;
       agency: string;
       amount: string;
+      sanctionedFileOrderNo: string;
+      sanctionedDate: string;
+      status: string;
     };
     archive: {
       title: string;
