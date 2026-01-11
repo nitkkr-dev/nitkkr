@@ -236,6 +236,15 @@ export function DepartmentsClient({
       Array.isArray(department) ? department : department ? [department] : [],
     [department]
   );
+   const sortedDepartments = useMemo(() => {
+    return [...departments].sort((a, b) => {
+      const aSelected = selectedDepartments.includes(a.urlName);
+      const bSelected = selectedDepartments.includes(b.urlName);
+      if (aSelected && !bSelected) return -1;
+      if (!aSelected && bSelected) return 1;
+      return 0;
+    });
+  }, [departments, selectedDepartments]);
 
   const getUpdatedDepartments = (urlName: string) =>
     selectedDepartments.includes(urlName)
@@ -255,7 +264,7 @@ export function DepartmentsClient({
           />
         </SelectTrigger>
         <SelectContent>
-          {departments.map(({ name, urlName }, index) => (
+          {sortedDepartments.map(({ name, urlName }, index) => (
             <div key={index} className="flex items-center px-2 py-1">
               <input
                 type="checkbox"
@@ -279,7 +288,7 @@ export function DepartmentsClient({
   }
 
   // Desktop/list mode: show limited items and "View more" button that toggles full list.
-  const visible = showAll ? departments : departments.slice(0, optionsToShow);
+  const visible = showAll ? sortedDepartments : sortedDepartments.slice(0, optionsToShow);
 
   return (
     <div>
@@ -321,7 +330,7 @@ export function DepartmentsClient({
         </div>
       </ol>
 
-      {departments.length > optionsToShow && (
+      {sortedDepartments.length > optionsToShow && (
         <div className="mt-2 flex justify-center">
           <button
             onClick={() => setShowAll((s) => !s)}
@@ -346,6 +355,17 @@ function DesignationsClient() {
   const selected = searchParams?.getAll('designation') ?? [];
   const options = ['faculty', 'staff'];
 
+  const sortedOptions = useMemo(() => {
+    return [...options].sort((a, b) => {
+      const aSelected = selected.includes(a);
+      const bSelected = selected.includes(b);
+      if (aSelected && !bSelected) return -1;
+      if (!aSelected && bSelected) return 1;
+      return 0;
+    });
+  }, [selected]);
+
+
   const getUpdatedDesignations = (option: string) =>
     selected.includes(option)
       ? selected.filter((d) => d !== option)
@@ -353,7 +373,7 @@ function DesignationsClient() {
 
   return (
     <ol className="w-full space-y-4">
-          {options.map((option, index) => (
+          {sortedOptions.map((option, index) => (
             <li key={index}>
               <PreserveParamsLink
                 paramToUpdate="designation"

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense ,useMemo} from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
@@ -142,6 +142,16 @@ const Designations = ({
       ? [designation]
       : [];
 
+      const sortedOptions = useMemo(() => {
+          return [...options].sort((a, b) => {
+            const aSelected = selectedDesignations.includes(a);
+            const bSelected = selectedDesignations.includes(b);
+            if (aSelected && !bSelected) return -1;
+            if (!aSelected && bSelected) return 1;
+            return 0;
+          });
+        }, [selectedDesignations]);
+
   // Define the updated designation value based on selection
   const getUpdatedDesignations = (option: string) => {
     return selectedDesignations.includes(option)
@@ -161,7 +171,7 @@ const Designations = ({
         />
       </SelectTrigger>
       <SelectContent>
-        {options.map((option, index) => (
+        {sortedOptions.map((option, index) => (
           <div key={index} className="flex items-center px-2 py-1">
             <input
               type="checkbox"
@@ -183,7 +193,7 @@ const Designations = ({
     </Select>
   ) : (
     <ol className="w-full space-y-4">
-      {options.map((option, index) => (
+      {sortedOptions.map((option, index) => (
         <li key={index}>
           <PreserveParamsLink
             paramToUpdate="designation"
