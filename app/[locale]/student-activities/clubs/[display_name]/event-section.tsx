@@ -4,13 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { GalleryCarousel } from '~/components/carousels';
-import {
-  Card,
-  CardContent,
-  Dialog,
-  DialogClose,
-  DialogContent,
-} from '~/components/ui';
+import { Card, CardContent, Dialog, DialogContent } from '~/components/ui';
 
 interface ClubEvent {
   id: number;
@@ -22,14 +16,12 @@ interface ClubEvent {
 
 export default function EventsSection({
   events,
-  locale,
-  display_name,
   s3BaseUrl,
 }: {
   events: ClubEvent[];
   locale: string;
   display_name: string;
-  s3BaseUrl: string; 
+  s3BaseUrl: string;
 }) {
   const [selectedEvent, setSelectedEvent] = useState<ClubEvent | null>(null);
 
@@ -46,7 +38,7 @@ export default function EventsSection({
                 <CardContent
                   className="relative flex h-full w-full justify-center rounded-lg bg-neutral-700 bg-cover bg-center p-4 bg-blend-overlay"
                   style={{
-                    backgroundImage: `url(${s3BaseUrl}/${event.image[0]})`, 
+                    backgroundImage: `url(${s3BaseUrl}/${event.image[0]})`,
                   }}
                 >
                   <h1 className="my-auto text-4xl font-bold text-background">
@@ -93,7 +85,6 @@ export default function EventsSection({
               <p className="text-gray-700 text-base leading-relaxed">
                 {selectedEvent.description}
               </p>
-
             </>
           )}
         </DialogContent>
