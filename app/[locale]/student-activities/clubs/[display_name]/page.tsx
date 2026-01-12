@@ -347,12 +347,11 @@ export default async function Club({
     <>
       <ImageHeader
         src={`student-activities/clubs/${display_name}/banner.jpg`}
-        className="relative"
-        display_name={display_name}
+        title={display_name}
         logoUrl={`student-activities/clubs/${display_name}/logo.jpg`}
       />
 
-      <main className="container mt-12">
+      <main className="container mt-6">
         <article className="drop-shadow">
           <p className={cn('max-md:rounded-t md:w-full md:rounded-r')}>
             {club?.aboutUs}
