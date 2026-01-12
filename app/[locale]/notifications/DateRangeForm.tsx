@@ -50,44 +50,38 @@ export function DateRangeForm({
     endDate ? endDate.getMonth() + 1 : 1
   );
 
-  // Auto-apply when date values change
-  React.useEffect(() => {
-    const params = new URLSearchParams(searchParams);
+  // Apply filters to URL - only called on explicit user actions
+  const applyFilters = React.useCallback(
+    (newYearRange?: number[]) => {
+      const params = new URLSearchParams(searchParams);
+      const years = newYearRange ?? yearRange;
 
-    const startVal =
-      yearRange[0] && startMonth && startDay
-        ? `${yearRange[0]}-${String(startMonth).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`
-        : undefined;
-    const endVal =
-      yearRange[1] && endMonth && endDay
-        ? `${yearRange[1]}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
-        : undefined;
+      const startVal =
+        years[0] && startMonth && startDay
+          ? `${years[0]}-${String(startMonth).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`
+          : undefined;
+      const endVal =
+        years[1] && endMonth && endDay
+          ? `${years[1]}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
+          : undefined;
 
-    // Update date params while preserving others
-    if (startVal) {
-      params.set('start', startVal);
-    } else {
-      params.delete('start');
-    }
+      if (startVal) {
+        params.set('start', startVal);
+      } else {
+        params.delete('start');
+      }
 
-    if (endVal) {
-      params.set('end', endVal);
-    } else {
-      params.delete('end');
-    }
+      if (endVal) {
+        params.set('end', endVal);
+      } else {
+        params.delete('end');
+      }
 
-    const newUrl = `${pathname}?${params.toString()}`;
-    router.push(newUrl, { scroll: false });
-  }, [
-    yearRange,
-    startDay,
-    startMonth,
-    endDay,
-    endMonth,
-    searchParams,
-    pathname,
-    router,
-  ]);
+      const newUrl = `${pathname}?${params.toString()}`;
+      router.push(newUrl, { scroll: false });
+    },
+    [yearRange, startDay, startMonth, endDay, endMonth, searchParams, pathname, router]
+  );
 
   return (
     <div className={cn('flex flex-col gap-2 pt-4', compact && 'text-xs')}>
@@ -107,6 +101,10 @@ export function DateRangeForm({
           step={1}
           value={yearRange}
           onValueChange={setYearRange}
+          onValueCommit={(value) => {
+            setYearRange(value);
+            applyFilters(value);
+          }}
           className="w-full"
         />
       </div>
@@ -124,6 +122,7 @@ export function DateRangeForm({
             placeholder={text?.day ?? 'Day'}
             value={startDay}
             onChange={(e) => setStartDay(+e.target.value)}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
@@ -133,6 +132,7 @@ export function DateRangeForm({
             placeholder={text?.month ?? 'Month'}
             value={startMonth}
             onChange={(e) => setStartMonth(+e.target.value)}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
@@ -142,6 +142,7 @@ export function DateRangeForm({
             placeholder={text?.year ?? 'Year'}
             value={yearRange[0]}
             onChange={(e) => setYearRange([+e.target.value, yearRange[1]])}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
         </div>
@@ -160,6 +161,7 @@ export function DateRangeForm({
             placeholder={text?.day ?? 'Day'}
             value={endDay}
             onChange={(e) => setEndDay(+e.target.value)}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
@@ -169,6 +171,7 @@ export function DateRangeForm({
             placeholder={text?.month ?? 'Month'}
             value={endMonth}
             onChange={(e) => setEndMonth(+e.target.value)}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
           <input
@@ -178,6 +181,7 @@ export function DateRangeForm({
             placeholder={text?.year ?? 'Year'}
             value={yearRange[1]}
             onChange={(e) => setYearRange([yearRange[0], +e.target.value])}
+            onBlur={() => applyFilters()}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
           />
         </div>
