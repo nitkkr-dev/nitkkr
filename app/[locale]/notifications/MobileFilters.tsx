@@ -140,28 +140,30 @@ export function MobileFilters({
               <div className="bg-white h-full p-5">
                 <ScrollArea className="h-[calc(100svh-80px)]">
                   <div className="rounded-lg">
-                    {/* Header with title, clear all, and close button */}
-                    <div className="mt-10 flex flex-row items-center justify-between gap-2">
+                    {/* Close button row - right aligned, above header */}
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => setOpen(false)}
+                        aria-label="Close filters"
+                        className="hover:bg-black/5 rounded p-1"
+                      >
+                        <FaTimes className="size-5 text-primary-700" />
+                      </button>
+                    </div>
+
+                    {/* Header row with title and clear all button */}
+                    <div className="mt-2 flex flex-row items-center justify-between gap-2">
                       <h3 className="text-xl font-bold text-primary-700">
                         {text.filterBy}
                       </h3>
-                      <div className="flex items-center gap-2">
-                        <Link
-                          scroll={false}
-                          href={`/${locale}/notifications`}
-                          onClick={() => setOpen(false)}
-                          className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
-                        >
-                          {text.clearAllFilters}
-                        </Link>
-                        <button
-                          onClick={() => setOpen(false)}
-                          aria-label="Close filters"
-                          className="hover:bg-black/5 rounded"
-                        >
-                          <FaTimes className="size-5 text-primary-700" />
-                        </button>
-                      </div>
+                      <Link
+                        scroll={false}
+                        href={`/${locale}/notifications`}
+                        onClick={() => setOpen(false)}
+                        className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
+                      >
+                        {text.clearAllFilters}
+                      </Link>
                     </div>
 
                     {/* Date Filter */}
