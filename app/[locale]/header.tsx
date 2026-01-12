@@ -122,7 +122,7 @@ export default async function Header({ locale }: { locale: string }) {
     { label: text.activities, href: 'student-activities' },
     {
       label: text.alumni,
-      href: 'https://nitkkraa.org',
+      href: 'https://alumni.nitkkr.ac.in/',
       isExternal: true,
     },
     {
