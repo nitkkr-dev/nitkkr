@@ -433,6 +433,11 @@ export interface Translations {
       category: string;
       department: string;
       educationType: string;
+      startDate: string;
+      endDate: string;
+      day: string;
+      month: string;
+      year: string;
     };
     categories: {
       academic: string;

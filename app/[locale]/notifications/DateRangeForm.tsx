@@ -6,14 +6,19 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '~/lib/utils';
 import { Slider } from '~/components/ui';
 
+interface DateRangeFormText {
+  startDate: string;
+  endDate: string;
+  day: string;
+  month: string;
+  year: string;
+}
+
 export function DateRangeForm({
-  locale,
-  categories,
-  departments,
-  query,
   start,
   end,
   compact = false,
+  text,
 }: {
   locale: string;
   categories?: string[];
@@ -22,6 +27,7 @@ export function DateRangeForm({
   start?: string;
   end?: string;
   compact?: boolean;
+  text?: DateRangeFormText;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -108,14 +114,14 @@ export function DateRangeForm({
       {/* Start Date */}
       <div className="space-y-1">
         <label className="text-sm font-semibold text-primary-300">
-          Start Date
+          {text?.startDate ?? 'Start Date'}
         </label>
         <div className="grid grid-cols-3 gap-2">
           <input
             type="number"
             min="1"
             max="31"
-            placeholder="Day"
+            placeholder={text?.day ?? 'Day'}
             value={startDay}
             onChange={(e) => setStartDay(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
@@ -124,7 +130,7 @@ export function DateRangeForm({
             type="number"
             min="1"
             max="12"
-            placeholder="Month"
+            placeholder={text?.month ?? 'Month'}
             value={startMonth}
             onChange={(e) => setStartMonth(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
@@ -133,7 +139,7 @@ export function DateRangeForm({
             type="number"
             min="2000"
             max="2100"
-            placeholder="Year"
+            placeholder={text?.year ?? 'Year'}
             value={yearRange[0]}
             onChange={(e) => setYearRange([+e.target.value, yearRange[1]])}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
@@ -144,14 +150,14 @@ export function DateRangeForm({
       {/* End Date */}
       <div className="space-y-1">
         <label className="text-sm font-semibold text-primary-300">
-          End Date
+          {text?.endDate ?? 'End Date'}
         </label>
         <div className="grid grid-cols-3 gap-2">
           <input
             type="number"
             min="1"
             max="31"
-            placeholder="Day"
+            placeholder={text?.day ?? 'Day'}
             value={endDay}
             onChange={(e) => setEndDay(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
@@ -160,7 +166,7 @@ export function DateRangeForm({
             type="number"
             min="1"
             max="12"
-            placeholder="Month"
+            placeholder={text?.month ?? 'Month'}
             value={endMonth}
             onChange={(e) => setEndMonth(+e.target.value)}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"
@@ -169,7 +175,7 @@ export function DateRangeForm({
             type="number"
             min="2000"
             max="2100"
-            placeholder="Year"
+            placeholder={text?.year ?? 'Year'}
             value={yearRange[1]}
             onChange={(e) => setYearRange([yearRange[0], +e.target.value])}
             className="bg-white rounded border border-neutral-300 px-2 py-2 text-sm placeholder:text-neutral-400"

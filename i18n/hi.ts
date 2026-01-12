@@ -707,6 +707,11 @@ const text: Translations = {
       category: 'श्रेणी',
       department: 'विभाग',
       educationType: 'कार्यक्रम स्तर',
+      startDate: 'आरंभ तिथि',
+      endDate: 'अंतिम तिथि',
+      day: 'दिन',
+      month: 'महीना',
+      year: 'वर्ष',
     },
     categories: {
       academic: 'शैक्षणिक',

@@ -12,6 +12,7 @@ import { notifications as notificationsSchema } from '~/server/db';
 import { type NotificationItem } from '~/server/actions/notifications';
 
 import { DateRangeForm } from './DateRangeForm';
+import { MobileFilters } from './MobileFilters';
 import { MultiCheckbox } from './MultiCheckbox';
 import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
@@ -155,6 +156,13 @@ export default async function NotificationsPage({
                   query={query}
                   start={searchParams.start}
                   end={searchParams.end}
+                  text={{
+                    startDate: text.filter.startDate,
+                    endDate: text.filter.endDate,
+                    day: text.filter.day,
+                    month: text.filter.month,
+                    year: text.filter.year,
+                  }}
                 />
               </FilterSection>
 
@@ -185,32 +193,32 @@ export default async function NotificationsPage({
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex shrink-0 gap-4 max-sm:flex-col">
+          <search className="flex w-full items-center gap-4">
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
             />
 
-            {/* Mobile Category Filter - shows on < xl */}
-            <MultiCheckbox
-              param="category"
-              options={notificationsSchema.category.enumValues}
-              selected={categories}
-              locale={locale}
-              textMap={text.categories}
-              select
-            />
-            {/* Mobile Department Filter - shows on < xl */}
-            <MultiCheckbox
-              param="department"
-              options={departmentRows.map((d) => d.urlName)}
-              selected={departments}
-              locale={locale}
-              textMap={Object.fromEntries(
-                departmentRows.map((d) => [d.urlName, d.name])
-              )}
-              select
-            />
+            {/* Mobile Filters Button - shows on < xl */}
+            <div className="flex-shrink-0">
+              <MobileFilters
+                locale={locale}
+                categories={categories}
+                departments={departments}
+                departmentRows={departmentRows}
+                categoryOptions={notificationsSchema.category.enumValues}
+                query={query}
+                start={searchParams.start}
+                end={searchParams.end}
+                text={{
+                  filters: text.filter.title,
+                  filterBy: text.filterBy,
+                  clearAllFilters: text.clearAllFilters,
+                  filter: text.filter,
+                  categories: text.categories,
+                }}
+              />
+            </div>
           </search>
 
           {/* Notifications List */}

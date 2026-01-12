@@ -457,6 +457,11 @@ const text: Translations = {
       category: 'Category',
       department: 'Department',
       educationType: 'Programme Level',
+      startDate: 'Start Date',
+      endDate: 'End Date',
+      day: 'Day',
+      month: 'Month',
+      year: 'Year',
     },
     categories: {
       academic: 'Academic',
