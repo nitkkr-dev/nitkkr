@@ -144,7 +144,7 @@ export default async function Academics({
         />
         <article className="container flex drop-shadow max-md:flex-col">
           <Link
-            href="/academics/departments"
+            href={`/${locale}/academics/departments`}
             className="group relative w-full max-md:h-64 md:order-first md:rounded-lg"
             style={{
               backgroundImage: `url('${getS3Url()}/academics/image01.jpg')`,
@@ -232,7 +232,7 @@ export default async function Academics({
             {text.coursesDetails}
           </p>
           <Link
-            href="/academics/curricula"
+            href={`/${locale}/academics/curricula`}
             className="group relative w-full max-md:h-64 md:order-first md:rounded-lg"
             style={{
               backgroundImage: `url('${getS3Url()}/academics/1.jpg')`,

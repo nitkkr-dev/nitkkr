@@ -91,7 +91,7 @@ const Courses = async ({ page }: { page: number }) => {
     offset: (page - 1) * 10,
   });
 
-  console.log(courses);
+  // console.log(courses);
 
   return courses.map(({ code, coursesToMajors, title }) => {
     if (coursesToMajors.length === 0) {
