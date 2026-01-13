@@ -24,30 +24,36 @@ import { db } from '~/server/db';
 import type {
   copyrights,
   designs,
-  mous,
   patents,
   researchAndConsultancy,
-  sponsoredResearchProjects,
-  sponsoredResearchProjectsFaculties,
 } from '~/server/db/schema';
 
 type PatentsTable = typeof patents.$inferSelect;
 type CopyrightsTable = typeof copyrights.$inferSelect;
 type DesignsTable = typeof designs.$inferSelect;
 type ResearchAndConsultancyTable = typeof researchAndConsultancy.$inferSelect;
-type Moustable = typeof mous.$inferSelect;
-// type SponsoredProjectsTable = typeof sponsoredResearchProjects.$inferSelect;
-// type SponsoredProjectsFacultiesTable = typeof sponsoredResearchProjectsFaculties.$inferSelect;
-  
 
 export default async function PatentsAndTechnology({
   params: { locale },
   searchParams,
 }: {
   params: { locale: string };
-  searchParams?: { page?: string };
+  searchParams?: {
+    researchPage?: string;
+    patentsPage?: string;
+    copyrightsPage?: string;
+    designsPage?: string;
+    memorandumPage?: string;
+    projectsPage?: string;
+  };
 }) {
-  const currentPage = Number(searchParams?.page ?? 1);
+  // Individual page states for each table
+  const researchPage = Number(searchParams?.researchPage ?? 1);
+  const patentsPage = Number(searchParams?.patentsPage ?? 1);
+  const copyrightsPage = Number(searchParams?.copyrightsPage ?? 1);
+  const designsPage = Number(searchParams?.designsPage ?? 1);
+  const memorandumPage = Number(searchParams?.memorandumPage ?? 1);
+  const projectsPage = Number(searchParams?.projectsPage ?? 1);
 
   const text = (await getTranslations(locale)).Research;
 
@@ -95,72 +101,117 @@ export default async function PatentsAndTechnology({
           },
         },
       },
-      orderBy: (rc) => sql`SUBSTRING(${rc.year}, 1, 4)::integer DESC`, // sorting by year to latest
+      orderBy: (rc) => sql`SUBSTRING(${rc.year}, 1, 4)::integer DESC`,
     }
   );
-  const mous = await db.query.mous.findMany();
-  const staticMemorandum: Moustable[] = mous;
-  const formattedMemorandum = staticMemorandum.map((item) => {
-    return {
-      organization: item.organization,
-      date: item.signingDate,
-    };
-  });
 
- const projects= await db.query.sponsoredResearchProjects.findMany({
-    with: {
-      faculties: true,
-      department: true, // Make sure to also include department relation
+  const staticMemorandum = [
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
     },
-  });
-  
- 
-  // Transform projects data into the format needed for the table
-  const staticProjects = projects.map((project) => {
-    const facultyNames = project.faculties && project.faculties.length > 0
-      ? project.faculties.map((faculty) => faculty.facultyName).join(', ')
-      : 'N/A';
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+    {
+      organization: 'CSIR-Central Road Research Institute, New Delhi',
+      date: '10-10-2023',
+    },
+  ];
 
-    return {
-      year: project.year,
-      department: project.department?.name ?? 'N/A',
-      facultyName: facultyNames,
-      title: project.titleOfProject,
-      agency: project.agency,
-      amount: project.amountInLakh,
-      sanctionedFileOrderNo: project.sanctionedFileOrderNO ?? 'N/A',
-      sanctionedDate: project.sanctionedDate ?? 'N/A',
-      status: project.status ?? 'N/A',
-    };
-  });
+  const staticProjects = [
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+    {
+      year: '2014-17',
+      department: 'chemistry',
+      facultyName: 'Dr. Amilan Jose D',
+      title:
+        'Supermolecular fluorescent probes for the selective detection of biological signaling molecule (H2S) and real time assay',
+      agency: 'hihi',
+      amount: '69',
+    },
+  ];
+
   const base = getS3Url();
-  // Get the total count for pagination
-  const getResearchCount = async () => {
-    const count = researchAndConsultancy.length; // Replace with your actual DB call
-    return [{ count }];
-  };
-  const getProjectCount = async () => {
-    const count = staticProjects.length; // Replace with your actual DB call
-    return [{ count }];
-  };
-  const getPatentCount = async () => {
-    const count = patents.length; // Replace with your actual DB call
-    return [{ count }];
-  };
-  const getMemorandumCount = async () => {
-    const count = formattedMemorandum.length; // Replace with your actual DB call
-    return [{ count }];
-  };
-
-  const getCopyrightsCount = async () => {
-    const count = copyrights.length; // Replace with your actual DB call
-    return [{ count }];
-  };
-
-  const getDesignsCount = async () => {
-    const count = designs.length;
-    return [{ count }];
-  };
 
   return (
     <>
@@ -222,7 +273,7 @@ export default async function PatentsAndTechnology({
               >
                 <ResearchTable
                   tableData={researchAndConsultancy}
-                  currentPage={currentPage}
+                  currentPage={researchPage}
                   itemsPerPage={10}
                 />
               </Suspense>
@@ -232,11 +283,13 @@ export default async function PatentsAndTechnology({
 
         <div className="mt-6">
           <PaginationWithLogic
-            currentPage={currentPage}
-            query={getResearchCount()}
+            currentPage={researchPage}
+            totalCount={researchAndConsultancy.length}
+            pageParamName="researchPage"
           />
         </div>
       </section>
+
       {/* PATENTS AND TECHNOLOGIES */}
       <section className="container" id="patents">
         <Heading
@@ -274,7 +327,7 @@ export default async function PatentsAndTechnology({
               >
                 <PatentTable
                   tableData={patents}
-                  currentPage={currentPage}
+                  currentPage={patentsPage}
                   itemsPerPage={10}
                 />
               </Suspense>
@@ -284,11 +337,13 @@ export default async function PatentsAndTechnology({
 
         <div className="mt-6">
           <PaginationWithLogic
-            currentPage={currentPage}
-            query={getPatentCount()}
+            currentPage={patentsPage}
+            totalCount={patents.length}
+            pageParamName="patentsPage"
           />
         </div>
       </section>
+
       {/* COPYRIGHTS AND DESIGNS */}
       <section className="container" id="copyright">
         <Heading
@@ -324,7 +379,7 @@ export default async function PatentsAndTechnology({
                 <Suspense fallback={<Loading />}>
                   <CopyrightTable
                     tableData={copyrights}
-                    currentPage={currentPage}
+                    currentPage={copyrightsPage}
                     itemsPerPage={10}
                   />
                 </Suspense>
@@ -333,13 +388,15 @@ export default async function PatentsAndTechnology({
           </div>
           <div className="mt-6">
             <PaginationWithLogic
-              currentPage={currentPage}
-              query={getCopyrightsCount()}
+              currentPage={copyrightsPage}
+              totalCount={copyrights.length}
+              pageParamName="copyrightsPage"
             />
           </div>
         </section>
 
         <h4 className="text-primary-300">{text.sections.copyright.design}</h4>
+
         {/* DESIGNS TABLE */}
         <section className="container">
           <div className="max-h-96 w-full overflow-x-auto">
@@ -362,7 +419,7 @@ export default async function PatentsAndTechnology({
                 <Suspense fallback={<Loading />}>
                   <DesignTable
                     tableData={designs}
-                    currentPage={currentPage}
+                    currentPage={designsPage}
                     itemsPerPage={10}
                   />
                 </Suspense>
@@ -371,12 +428,14 @@ export default async function PatentsAndTechnology({
           </div>
           <div className="mt-6">
             <PaginationWithLogic
-              currentPage={currentPage}
-              query={getDesignsCount()}
+              currentPage={designsPage}
+              totalCount={designs.length}
+              pageParamName="designsPage"
             />
           </div>
         </section>
       </div>
+
       {/* MOU */}
       <section className="container" id="memorandum">
         <Heading
@@ -411,8 +470,8 @@ export default async function PatentsAndTechnology({
                 }
               >
                 <MemorandumTable
-                  tableData={formattedMemorandum}
-                  currentPage={currentPage}
+                  tableData={staticMemorandum}
+                  currentPage={memorandumPage}
                   itemsPerPage={10}
                 />
               </Suspense>
@@ -422,11 +481,13 @@ export default async function PatentsAndTechnology({
 
         <div className="mt-6">
           <PaginationWithLogic
-            currentPage={currentPage}
-            query={getMemorandumCount()}
+            currentPage={memorandumPage}
+            totalCount={staticMemorandum.length}
+            pageParamName="memorandumPage"
           />
         </div>
       </section>
+
       {/* SPONSORED PROJECTS */}
       <section className="container" id="projects">
         <Heading
@@ -449,11 +510,8 @@ export default async function PatentsAndTechnology({
                   text.projects.title,
                   text.projects.agency,
                   text.projects.amount,
-                  text.projects.sanctionedFileOrderNo,
-                  text.projects.sanctionedDate,
-                  text.projects.status,
                 ].map((headerText, index) => (
-                  <TableHead key={index} className={index === 1 ? 'w-24' : ''}>{headerText}</TableHead>
+                  <TableHead key={index}>{headerText}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
@@ -469,7 +527,7 @@ export default async function PatentsAndTechnology({
               >
                 <ProjectsTable
                   tableData={staticProjects}
-                  currentPage={currentPage}
+                  currentPage={projectsPage}
                   itemsPerPage={10}
                 />
               </Suspense>
@@ -479,11 +537,13 @@ export default async function PatentsAndTechnology({
 
         <div className="mt-6">
           <PaginationWithLogic
-            currentPage={currentPage}
-            query={getProjectCount()}
+            currentPage={projectsPage}
+            totalCount={staticProjects.length}
+            pageParamName="projectsPage"
           />
         </div>
       </section>
+
       {/* IMPORTANT RESOURCES */}
       <section className="container" id="resources">
         <Heading
@@ -501,7 +561,6 @@ export default async function PatentsAndTechnology({
             <div className="space-y-4">
               <div>
                 <ul className="pl-2">
-                  {' '}
                   {archiveLinks.map((item, index) => (
                     <li key={index} className="flex items-center gap-2">
                       <Image
@@ -551,7 +610,7 @@ const PatentTable = ({
           item.applicationNumber,
           item.patentNumber,
           item.title,
-          item.inventors, // This is a string from DB
+          item.inventors,
         ];
 
         return (
@@ -585,7 +644,7 @@ const CopyrightTable = ({
     <>
       {visibleData.map((item, index) => {
         const cellData = [
-          startIndex + index + 1, // S. No.
+          startIndex + index + 1,
           item.grantYear,
           item.copyrightNo,
           item.title,
@@ -623,7 +682,7 @@ const DesignTable = ({
     <>
       {visibleData.map((item, index) => {
         const cellData = [
-          startIndex + index + 1, // S. No.
+          startIndex + index + 1,
           item.dateOfRegistration,
           item.designNumber,
           item.title,
@@ -708,11 +767,7 @@ const MemorandumTable = ({
   return (
     <>
       {visibleData.map((item, index) => {
-        const cellData = [
-          startIndex + index + 1, // serial no.
-          item.organization,
-          item.date,
-        ];
+        const cellData = [startIndex + index + 1, item.organization, item.date];
 
         return (
           <TableRow
@@ -728,6 +783,7 @@ const MemorandumTable = ({
     </>
   );
 };
+
 const ProjectsTable = ({
   tableData,
   currentPage,
@@ -740,9 +796,6 @@ const ProjectsTable = ({
     title: string;
     agency: string;
     amount: string;
-    sanctionedFileOrderNo: string;
-    sanctionedDate: string;
-    status: string;
   }[];
   currentPage: number;
   itemsPerPage?: number;
@@ -754,16 +807,13 @@ const ProjectsTable = ({
     <>
       {visibleData.map((item, index) => {
         const cellData = [
-          startIndex + index + 1, // S. No.
+          startIndex + index + 1,
           item.year,
           item.department,
           item.facultyName,
           item.title,
           item.agency,
           item.amount,
-          item.sanctionedFileOrderNo,
-          item.sanctionedDate,
-          item.status,
         ];
 
         return (
