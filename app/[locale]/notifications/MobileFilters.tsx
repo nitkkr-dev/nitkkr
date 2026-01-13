@@ -61,7 +61,21 @@ export function MobileFilters({
   className,
 }: MobileFiltersProps) {
   const [open, setOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // Handle close with animation
+  const handleClose = () => {
+    setIsAnimating(false);
+    setTimeout(() => setOpen(false), 300);
+  };
+
+  // Trigger animation after open
+  useEffect(() => {
+    if (open) {
+      requestAnimationFrame(() => setIsAnimating(true));
+    }
+  }, [open]);
 
   // Lock body scroll while open
   useEffect(() => {
@@ -112,12 +126,11 @@ export function MobileFilters({
       <div
         aria-hidden={!open}
         className={cn(
-          'pointer-events-none fixed inset-0 z-[60] transition-opacity',
-          open
-            ? 'pointer-events-auto visible opacity-100'
-            : 'invisible opacity-0'
+          'pointer-events-none fixed inset-0 z-[60] transition-opacity duration-300',
+          open ? 'pointer-events-auto visible' : 'invisible',
+          isAnimating ? 'opacity-100' : 'opacity-0'
         )}
-        onClick={() => setOpen(false)}
+        onClick={handleClose}
       >
         <div className="bg-black/40 absolute inset-0" />
       </div>
@@ -131,8 +144,8 @@ export function MobileFilters({
             ref={panelRef}
             onClick={(e) => e.stopPropagation()}
             className={cn(
-              'fixed left-0 top-0 z-[70] h-[100svh] w-full transition-transform',
-              open ? 'translate-x-0' : '-translate-x-full'
+              'fixed left-0 top-0 z-[70] h-[100svh] w-full transition-transform duration-300 ease-in-out',
+              isAnimating ? 'translate-x-0' : '-translate-x-full'
             )}
           >
             {/* Inner content area */}
@@ -144,11 +157,11 @@ export function MobileFilters({
                       {/* Close button row - right aligned, above header */}
                       <div className="flex justify-end">
                         <button
-                          onClick={() => setOpen(false)}
+                          onClick={handleClose}
                           aria-label="Close filters"
                           className="hover:bg-black/5 rounded"
                         >
-                          <FaTimes className="size-5 text-primary-700" />
+                          <FaTimes className="size-5 pr-1 text-primary-700" />
                         </button>
                       </div>
                       {/* Header row with title and clear all button */}
@@ -159,7 +172,7 @@ export function MobileFilters({
                         <Link
                           scroll={false}
                           href={`/${locale}/notifications`}
-                          onClick={() => setOpen(false)}
+                          onClick={handleClose}
                           className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
                         >
                           {text.clearAllFilters}

@@ -114,7 +114,7 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
-      <section className="container mb-0 mt-12 flex gap-8">
+      <section className="container mb-0 mt-8 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
