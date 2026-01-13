@@ -139,27 +139,27 @@ export function EventsList({
             key={event.id}
           >
             <Link
-              className="flex gap-4 p-4 sm:gap-6 sm:p-5"
+              className="flex items-stretch gap-3 p-3 sm:gap-6 sm:p-5"
               href={`/${locale}/events/${event.id}`}
             >
-              <main className="flex flex-1 flex-col">
-                <h4 className="mb-2 font-serif text-xl font-bold tracking-wide text-primary-700 sm:text-2xl">
+              <main className="flex min-w-0 flex-1 flex-col">
+                <h4 className="mb-1 font-serif text-base font-bold tracking-wide text-primary-700 sm:mb-2 sm:text-2xl">
                   {event.title}
                 </h4>
                 {event.description && (
-                  <p className="mb-3 line-clamp-3 text-justify text-sm text-neutral-900 sm:text-lg">
+                  <p className="mb-2 line-clamp-3 text-justify text-xs text-neutral-900 sm:mb-3 sm:text-lg">
                     {event.description}
                   </p>
                 )}
 
-                <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <span className="flex items-center gap-1.5 font-serif text-lg text-primary-300">
-                    <MdCalendarToday className="text-lg" />
+                <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
+                  <span className="flex items-center gap-1 font-serif text-xs text-primary-300 sm:gap-1.5 sm:text-lg">
+                    <MdCalendarToday className="text-sm sm:text-lg" />
                     {formatDate(event.startDate, event.endDate)}
                   </span>
                   {event.location && (
-                    <span className="flex items-center gap-1.5 font-serif text-lg text-primary-300">
-                      <MdLocationOn className="text-lg" />
+                    <span className="flex items-center gap-1 font-serif text-xs text-primary-300 sm:gap-1.5 sm:text-lg">
+                      <MdLocationOn className="text-sm sm:text-lg" />
                       {event.locationUrl ? (
                         <a
                           href={event.locationUrl}
@@ -179,13 +179,14 @@ export function EventsList({
               </main>
 
               {event.images.length > 0 && (
-                <Image
-                  alt={event.title}
-                  className="h-24 w-28 flex-shrink-0 rounded object-cover sm:h-40 sm:w-56"
-                  height={160}
-                  src={event.images[0]}
-                  width={224}
-                />
+                <div className="relative w-28 flex-shrink-0 sm:w-56">
+                  <Image
+                    alt={event.title}
+                    className="absolute inset-0 h-full w-full rounded object-cover"
+                    fill
+                    src={event.images[0]}
+                  />
+                </div>
               )}
             </Link>
           </li>
