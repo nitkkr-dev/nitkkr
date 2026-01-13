@@ -138,32 +138,33 @@ export function MobileFilters({
             {/* Inner content area */}
             <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
               <div className="bg-white h-full p-5">
-                <ScrollArea className="h-[calc(100svh-80px)]">
+                <ScrollArea className="mt-8 h-[calc(100svh-80px)]">
                   <div className="rounded-lg">
-                    {/* Close button row - right aligned, above header */}
-                    <div className="flex justify-center">
-                      <button
-                        onClick={() => setOpen(false)}
-                        aria-label="Close filters"
-                        className="hover:bg-black/5 rounded p-1"
-                      >
-                        <FaTimes className="size-5 text-primary-700" />
-                      </button>
-                    </div>
-
-                    {/* Header row with title and clear all button */}
-                    <div className="mt-2 flex flex-row items-center justify-between gap-2">
-                      <h3 className="text-xl font-bold text-primary-700">
-                        {text.filterBy}
-                      </h3>
-                      <Link
-                        scroll={false}
-                        href={`/${locale}/notifications`}
-                        onClick={() => setOpen(false)}
-                        className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
-                      >
-                        {text.clearAllFilters}
-                      </Link>
+                    <div>
+                      {/* Close button row - right aligned, above header */}
+                      <div className="flex justify-end">
+                        <button
+                          onClick={() => setOpen(false)}
+                          aria-label="Close filters"
+                          className="hover:bg-black/5 rounded"
+                        >
+                          <FaTimes className="size-5 text-primary-700" />
+                        </button>
+                      </div>
+                      {/* Header row with title and clear all button */}
+                      <div className="mt-2 flex flex-row items-center justify-between gap-2">
+                        <h3 className="text-xl font-bold text-primary-700">
+                          {text.filterBy}
+                        </h3>
+                        <Link
+                          scroll={false}
+                          href={`/${locale}/notifications`}
+                          onClick={() => setOpen(false)}
+                          className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
+                        >
+                          {text.clearAllFilters}
+                        </Link>
+                      </div>
                     </div>
 
                     {/* Date Filter */}
