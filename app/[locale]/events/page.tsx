@@ -1,229 +1,215 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
-import { MdCalendarToday, MdLocationOn } from 'react-icons/md';
-import { Input } from '~/components/inputs';
-import Loading from '~/components/loading';
-import { NoResultStatus } from '~/components/status';
+import React, { Suspense } from 'react';
+import { desc } from 'drizzle-orm';
+
 import { getTranslations } from '~/i18n/translations';
+import { db, eventCategoryEnum } from '~/server/db';
 import { cn } from '~/lib/utils';
-import { db } from '~/server/db';
-import { ScrollArea } from '~/components/ui/scroll-area';
 import ImageHeader from '~/components/image-header';
+import { Button } from '~/components/buttons';
+import { ScrollArea } from '~/components/ui';
+import Loading from '~/components/loading';
 
-import { ClearFiltersButton, PreserveParamsLink } from '../faculty-and-staff/client-components';
-import { EventsArchiveDropdown } from './client-components';
+import { DateRangeForm } from './DateRangeForm';
+import { MobileFilters } from './MobileFilters';
+import { MultiCheckbox } from './MultiCheckbox';
+import { type EventItem, EventsList } from './EventsList';
+import { SearchInput } from './SearchInput';
 
-export default async function Events({
+type Cat = (typeof eventCategoryEnum.enumValues)[number];
+const INITIAL_BATCH_SIZE = 20;
+
+interface PageSearchParams {
+  q?: string;
+  category?: string | string[];
+  start?: string;
+  end?: string;
+}
+
+export default async function EventsPage({
   params: { locale },
-  searchParams: { department: departmentName, query, year, month },
+  searchParams,
 }: {
   params: { locale: string };
-  searchParams: {
-    department?: string | string[];
-    query?: string;
-    year?: string;
-    month?: string;
-  };
+  searchParams: PageSearchParams;
 }) {
   const text = (await getTranslations(locale)).Events;
 
+  // Normalize multi-select params
+  const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
+  const startDate = parseDate(searchParams.start);
+  const endDate = parseDate(searchParams.end);
+  const query = (searchParams.q ?? '').trim().toLowerCase();
+
+  // Build base query - fetch only initial batch
+  let raw = await db.query.events.findMany({
+    where: (e, { and, gte, lte }) =>
+      and(
+        startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
+        endDate ? lte(e.startDate, endDate.toISOString()) : undefined
+      ),
+    orderBy: (e) => [desc(e.startDate)],
+    limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
+  });
+
+  // Category filter (multi)
+  if (categories.length) {
+    raw = raw.filter((e) => categories.includes(e.category as Cat));
+  }
+
+  // Text search (title, description, location, and category)
+  if (query) {
+    raw = raw.filter(
+      (e) =>
+        (e.title.toLowerCase().includes(query.toLowerCase()) ||
+          e.description?.toLowerCase().includes(query.toLowerCase())) ??
+        e.location?.toLowerCase().includes(query.toLowerCase()) ??
+        e.category.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  // Check if there are more items
+  const hasMore = raw.length > INITIAL_BATCH_SIZE;
+  const initialItems = hasMore ? raw.slice(0, INITIAL_BATCH_SIZE) : raw;
+  const initialCursor = hasMore
+    ? initialItems[initialItems.length - 1]?.startDate ?? null
+    : null;
+
+  // Serialize for client component
+  const serializedItems: EventItem[] = initialItems.map((e) => ({
+    id: e.id,
+    title: e.title,
+    description: e.description,
+    category: e.category,
+    startDate: e.startDate,
+    endDate: e.endDate,
+    location: e.location,
+    locationUrl: e.locationUrl,
+    images: e.images,
+  }));
+
+  // Build filter params for the client component
+  const filterParams = {
+    categories: categories.length ? categories : undefined,
+    start: searchParams.start,
+    end: searchParams.end,
+    query: query || undefined,
+  };
+
   return (
     <>
-      <ImageHeader title="EVENTS AND NEWS
-      " src="events/header.jpg" />
-      <section className="container my-6 flex gap-8">
-        <search
+      <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+      <section className="container mb-0 mt-8 flex gap-8">
+        {/* Desktop Sidebar - hidden on mobile */}
+        <aside
           className={cn(
-            'hidden h-fit w-[30%] rounded p-4 pt-0 xl:inline',
-            'sticky top-[88px]'
+            'hidden w-[290px] shrink-0 flex-col gap-2 xl:flex',
+            'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
-            <ClearFiltersButton />
+          <div className="flex items-baseline justify-between pb-2">
+            <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
+              {text.filterBy}
+            </h2>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
+            >
+              <Link
+                scroll={false}
+                href={buildHref(locale, {
+                  q: undefined,
+                  category: [],
+                  start: undefined,
+                  end: undefined,
+                })}
+              >
+                {text.clearAllFilters}
+              </Link>
+            </Button>
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            {/* Date Filter Box */}
-            <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-              <h3 className="mb-4 text-2xl font-bold text-[#E7695F] font-dm-sans">Date</h3>
-
-              {/* Range Slider */}
-              <div className="mb-6">
-                <input
-                  type="range"
-                  min="2000"
-                  max="2025"
-                  defaultValue="2000"
-                  className="w-full accent-primary-700"
+            <div className="flex flex-col gap-2 pr-4">
+              <FilterSection label={text.filter.date}>
+                <DateRangeForm
+                  locale={locale}
+                  categories={categories}
+                  query={query}
+                  start={searchParams.start}
+                  end={searchParams.end}
+                  text={{
+                    startDate: text.filter.startDate,
+                    endDate: text.filter.endDate,
+                    day: text.filter.day,
+                    month: text.filter.month,
+                    year: text.filter.year,
+                  }}
                 />
-                <div className="mt-2 flex justify-between text-xs text-neutral-600">
-                  <span>2000</span>
-                  <span>2025</span>
-                </div>
-              </div>
+              </FilterSection>
 
-              {/* Start Date */}
-              <div className="mb-4">
-                <label className="mb-2 block text-[20px] font-bold text-[#E7695F] font-dm-sans">
-                  Start date
-                </label>
-                <div className="flex gap-2">
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Day</option>
-                    {Array.from({ length: 31 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Month</option>
-                    {[
-                      'Jan',
-                      'Feb',
-                      'Mar',
-                      'Apr',
-                      'May',
-                      'Jun',
-                      'Jul',
-                      'Aug',
-                      'Sep',
-                      'Oct',
-                      'Nov',
-                      'Dec',
-                    ].map((month, i) => (
-                      <option key={i} value={i + 1}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Year</option>
-                    {Array.from({ length: 26 }, (_, i) => {
-                      const year = 2025 - i;
-                      return (
-                        <option key={year} value={year}>
-                          {year}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
-
-              {/* End Date */}
-              <div>
-                <label className="mb-2 block text-[20px] font-bold text-[#E7695F] font-dm-sans">
-                  End date
-                </label>
-                <div className="flex gap-2">
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Day</option>
-                    {Array.from({ length: 31 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Month</option>
-                    {[
-                      'Jan',
-                      'Feb',
-                      'Mar',
-                      'Apr',
-                      'May',
-                      'Jun',
-                      'Jul',
-                      'Aug',
-                      'Sep',
-                      'Oct',
-                      'Nov',
-                      'Dec',
-                    ].map((month, i) => (
-                      <option key={i} value={i + 1}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                  <select className="h-[36px] flex-1 rounded border border-[#E7695F] bg-white px-3 text-sm focus:border-[#E7695F] focus:outline-none focus:ring-1 focus:ring-[#E7695F]">
-                    <option>Year</option>
-                    {Array.from({ length: 26 }, (_, i) => {
-                      const year = 2025 - i;
-                      return (
-                        <option key={year} value={year}>
-                          {year}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Department Filter Box */}
-            <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-              <h3 className="mb-2 text-lg font-bold text-primary-700">
-                Department
-              </h3>
-              <Suspense fallback={<Loading className="max-xl:hidden" />}>
-                <Departments department={departmentName} />
-              </Suspense>
+              <FilterSection label={text.filter.category}>
+                <MultiCheckbox
+                  param="category"
+                  options={eventCategoryEnum.enumValues}
+                  selected={categories}
+                  locale={locale}
+                  textMap={text.categories}
+                />
+              </FilterSection>
             </div>
           </ScrollArea>
-        </search>
+        </aside>
 
-        <section className="grow space-y-6">
-          <search className="flex gap-4 max-sm:flex-col">
-            <Input
-              className="sm:grow"
-              debounceTo="query"
-              debounceEvery={100}
-              defaultValue={query}
-              id="event-search"
-              placeholder="Search by Name / Date"
-            />
-
-            {/* Mobile Events/News Archive Filter */}
-            <Suspense fallback={<Loading className="xl:hidden" />}>
-              <EventsArchiveDropdown year={year} month={month} />
-            </Suspense>
-          </search>
-
-          <ol className="space-y-4">
-            <Suspense
-              fallback={<Loading />}
-              key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}-${year ?? ''}-${month ?? ''}`}
-            >
-              <EventsList
-                department={departmentName}
-                locale={locale}
-                query={query}
-                year={year}
-                month={month}
+        {/* Main Content */}
+        <section className="flex grow flex-col space-y-6">
+          {/* Search + Mobile Filters */}
+          <search className="flex w-full items-center gap-4">
+            <Suspense fallback={<Loading />}>
+              <SearchInput
+                defaultValue={query}
+                placeholder={text.searchPlaceholder}
               />
             </Suspense>
-          </ol>
 
-          {/* Pagination */}
-          <div className="flex items-center justify-center gap-2">
-            <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-700 text-sm font-medium text-white">
-              1
-            </button>
-            <button className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-sm font-medium text-neutral-600 hover:border-primary-700 hover:text-primary-700">
-              2
-            </button>
-            <button className="flex h-8 w-8 items-center justify-center text-neutral-400">
-              ...
-            </button>
-            <button className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 text-sm font-medium text-neutral-600 hover:border-primary-700 hover:text-primary-700">
-              10
-            </button>
-            <button className="flex h-8 w-8 items-center justify-center text-neutral-600">
-              →
-            </button>
+            {/* Mobile Filters Button - shows on < xl */}
+            <div className="flex-shrink-0">
+              <Suspense fallback={<Loading />}>
+                <MobileFilters
+                  locale={locale}
+                  categories={categories}
+                  categoryOptions={eventCategoryEnum.enumValues}
+                  query={query}
+                  start={searchParams.start}
+                  end={searchParams.end}
+                  text={{
+                    filters: text.filter.title,
+                    filterBy: text.filterBy,
+                    clearAllFilters: text.clearAllFilters,
+                    filter: text.filter,
+                    categories: text.categories,
+                  }}
+                />
+              </Suspense>
+            </div>
+          </search>
+
+          {/* Events List */}
+          <div className="flex-1 rounded-md">
+            <Suspense fallback={<Loading />}>
+              <EventsList
+                initialItems={serializedItems}
+                initialCursor={initialCursor}
+                initialHasMore={hasMore}
+                locale={locale}
+                filterParams={filterParams}
+                text={{
+                  noEventsFound: text.noEventsFound,
+                  noMoreEvents: text.noMoreEvents,
+                }}
+              />
+            </Suspense>
           </div>
         </section>
       </section>
@@ -231,134 +217,52 @@ export default async function Events({
   );
 }
 
-const Departments = async ({
-  department,
+/* ---------------------- Filter Section Component ---------------------- */
+function FilterSection({
+  label,
+  children,
 }: {
-  department?: string | string[];
-}) => {
-  const departments = await db.query.departments.findMany({
-    columns: { id: true, name: true, urlName: true },
-  });
-
-  const selectedDepartments = Array.isArray(department)
-    ? department
-    : department
-      ? [department]
-      : [];
-
-  const getUpdatedDepartments = (urlName: string) => {
-    return selectedDepartments.includes(urlName)
-      ? selectedDepartments.filter((d) => d !== urlName)
-      : [...selectedDepartments, urlName];
-  };
-
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
-    <ol className="w-full space-y-4">
-      {departments.map(({ name, urlName }, index) => (
-        <li key={index}>
-          <PreserveParamsLink
-            paramToUpdate="department"
-            value={getUpdatedDepartments(urlName)}
-            className={cn(
-              'flex w-full items-center rounded border p-3',
-              selectedDepartments.includes(urlName)
-                ? 'bg-primary-50 border-primary-700'
-                : 'border-neutral-300'
-            )}
-          >
-            <div className="flex w-full items-center">
-              <div className="mr-2">
-                <input
-                  type="checkbox"
-                  id={`department-${urlName}`}
-                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                  checked={selectedDepartments.includes(urlName)}
-                  readOnly
-                />
-              </div>
-              <span className="font-semibold text-shade-dark">{name}</span>
-            </div>
-          </PreserveParamsLink>
-        </li>
-      ))}
-    </ol>
+    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
+      <div className="flex items-start justify-between">
+        <h3 className="text-xl font-bold text-primary-300">{label}</h3>
+      </div>
+      {children}
+    </section>
   );
-};
+}
 
-const EventsList = async ({
-  department,
-  locale,
-  query,
-  year,
-  month,
-}: {
-  department?: string | string[];
-  locale: string;
-  query?: string;
-  year?: string;
-  month?: string;
-}) => {
-  const events = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 1,
-    title: 'Inter-NIT Tournament Results Out!',
-    description:
-      'The 2023-24 Inter-NIT Tournaments in all sports have concluded recently, with the teams of the great NIT Kurukshetra...',
-    date: '9th September, 2024',
-    location: 'Sports Complex',
-    department: 'Sports',
-    thumbnail: 'events/thumbnail.jpg',
-  }));
+/* ---------------------- Helpers ---------------------- */
+function toArray(v: string | string[] | undefined): string[] {
+  return Array.isArray(v) ? v : v ? [v] : [];
+}
 
-  const filteredEvents = events.filter((event) => {
-    const matchesQuery =
-      !query ||
-      event.title.toLowerCase().includes(query.toLowerCase()) ||
-      event.description.toLowerCase().includes(query.toLowerCase());
+function parseDate(d?: string) {
+  if (!d) return undefined;
+  const date = new Date(d);
+  return isNaN(date.getTime()) ? undefined : date;
+}
 
-    return matchesQuery;
+function buildHref(locale: string, updates: Record<string, unknown>): string {
+  const params = new URLSearchParams();
+
+  Object.entries(updates).forEach(([k, v]) => {
+    if (v === undefined || (Array.isArray(v) && v.length === 0)) {
+      return;
+    }
+
+    if (Array.isArray(v)) {
+      v.forEach((item) => {
+        if (item) params.append(k, String(item));
+      });
+    } else {
+      params.set(k, String(v));
+    }
   });
 
-  return filteredEvents.length === 0 ? (
-    <NoResultStatus locale={locale} />
-  ) : (
-    filteredEvents.map((event, index) => (
-      <li
-        className="rounded border border-primary-700 bg-neutral-50 hover:drop-shadow-md"
-        key={index}
-      >
-        <Link
-          className="flex gap-4 p-2 sm:p-3 md:p-4"
-          href={`/${locale}/events/${event.id}`}
-        >
-          <main className="flex-1">
-            <header className="mb-1 sm:mb-2 md:mb-3">
-              <h4 className="mb-0 text-primary-700">{event.title}</h4>
-              <p className="line-clamp-2 text-sm text-neutral-700">
-                {event.description}
-              </p>
-            </header>
-
-            <ul className="space-y-1">
-              <li className="flex items-center gap-2 text-sm text-primary-700">
-                <MdCalendarToday className="fill-primary-700" />
-                {event.date}
-              </li>
-              <li className="flex items-center gap-2 text-sm text-primary-700">
-                <MdLocationOn className="fill-primary-700" />
-                {event.location}
-              </li>
-            </ul>
-          </main>
-
-          <Image
-            alt={event.title}
-            className="h-[90px] w-[140px] rounded object-cover"
-            height={90}
-            src={event.thumbnail}
-            width={140}
-          />
-        </Link>
-      </li>
-    ))
-  );
-};
+  const qs = params.toString();
+  return `/${locale}/events${qs ? `?${qs}` : ''}`;
+}
