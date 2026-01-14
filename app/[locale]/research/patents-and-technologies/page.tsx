@@ -98,11 +98,7 @@ export default async function PatentsAndTechnology({
     },
   ];
 
-  // Get the total count for pagination
-  const getPatentCount = async () => {
-    const count = staticPatents.length; // Replace with your actual DB call
-    return [{ count }];
-  };
+  const totalCount = staticPatents.length;
 
   return (
     <>
@@ -149,7 +145,7 @@ export default async function PatentsAndTechnology({
         <div className="mt-6">
           <PaginationWithLogic
             currentPage={currentPage}
-            query={getPatentCount()}
+            totalCount={totalCount}
           />
         </div>
       </section>
