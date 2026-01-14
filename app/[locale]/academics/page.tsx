@@ -73,7 +73,7 @@ export default async function Academics({
           <NotificationsPanel
             locale={locale}
             category="academic"
-            viewAllHref={`/${locale}/notifications/academics`}
+            viewAllHref={`/${locale}/notifications/?category=academic`}
             className="flex-1 lg:w-[65%]"
           />
         </article>
