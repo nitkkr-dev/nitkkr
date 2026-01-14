@@ -22,6 +22,7 @@ import {
 } from '~/server/db';
 
 import { FacultyForm, FacultyPersonalDetailsForm } from './client-utils';
+import { FacultyPhotoUpload } from './faculty-photo-upload';
 
 const facultyTables = {
   qualifications,
@@ -51,6 +52,8 @@ export default async function Page({
       .findFirst({
         where: (faculty, { eq }) => eq(faculty.id, userId),
         columns: {
+          id: true,
+          employeeId: true,
           officeAddress: true,
           scopusId: true,
           linkedInId: true,
@@ -61,6 +64,7 @@ export default async function Page({
         with: {
           person: {
             columns: {
+              name: true,
               countryCode: true,
               telephone: true,
               alternateCountryCode: true,
@@ -72,6 +76,9 @@ export default async function Page({
       .then((result) => {
         if (!result) return null;
         return {
+          id: result.id,
+          employeeId: result.employeeId,
+          name: result.person.name,
           officeAddress: result.officeAddress,
           scopusId: result.scopusId ?? undefined,
           linkedInId: result.linkedInId ?? undefined,
@@ -95,7 +102,19 @@ export default async function Page({
         )}
       >
         <Card className="rounded-lg border bg-background shadow-sm">
-          <CardHeader className="border-b px-6 py-4"></CardHeader>
+          <CardHeader className="border-b px-6 py-4">
+            <h2 className="text-lg font-semibold">Edit Personal Details</h2>
+          </CardHeader>
+
+          {/* Photo Upload Section */}
+          <div className="border-b px-6 py-6">
+            <FacultyPhotoUpload
+              facultyName={personalDetails.name}
+              employeeId={personalDetails.employeeId}
+              facultyId={personalDetails.id}
+            />
+          </div>
+
           <FacultyPersonalDetailsForm
             locale={locale}
             existingDetails={personalDetails}
