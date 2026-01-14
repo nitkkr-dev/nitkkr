@@ -1,3 +1,7 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+
 import { cn } from '~/lib/utils';
 
 import {
@@ -10,17 +14,25 @@ import {
   PaginationPrevious,
 } from '.';
 
-export const PaginationWithLogic = async ({
+export const PaginationWithLogic = ({
   className,
   currentPage,
-  query,
+  totalCount,
+  pageParamName = 'page',
   ...props
 }: React.ComponentProps<'nav'> & {
   currentPage: number;
-  query: Promise<{ count: number }[]>;
+  totalCount: number;
+  pageParamName?: string;
 }) => {
-  const rows = await query;
-  const noOfPages = Math.ceil(Number(rows[0].count) / 10);
+  const searchParams = useSearchParams();
+  const noOfPages = Math.ceil(totalCount / 10);
+
+  const createHref = (pageNumber: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(pageParamName, pageNumber.toString());
+    return `?${params.toString()}`;
+  };
 
   return (
     <Pagination className={cn('mt-4 md:mt-5 xl:mt-6', className)} {...props}>
@@ -28,34 +40,25 @@ export const PaginationWithLogic = async ({
         <PaginationItem>
           <PaginationPrevious
             disabled={currentPage <= 1}
-            href={{ query: { page: currentPage - 1 } }}
+            href={createHref(currentPage - 1)}
           />
         </PaginationItem>
 
         <PaginationItem>
-          <PaginationLink
-            href={{ query: { page: 1 } }}
-            isActive={currentPage == 1}
-          >
+          <PaginationLink href={createHref(1)} isActive={currentPage == 1}>
             1
           </PaginationLink>
         </PaginationItem>
         {noOfPages > 1 && (currentPage < 4 || noOfPages < 6) && (
           <PaginationItem>
-            <PaginationLink
-              href={{ query: { page: 2 } }}
-              isActive={currentPage == 2}
-            >
+            <PaginationLink href={createHref(2)} isActive={currentPage == 2}>
               2
             </PaginationLink>
           </PaginationItem>
         )}
         {noOfPages > 2 && (currentPage < 4 || noOfPages < 6) && (
           <PaginationItem>
-            <PaginationLink
-              href={{ query: { page: 3 } }}
-              isActive={currentPage == 3}
-            >
+            <PaginationLink href={createHref(3)} isActive={currentPage == 3}>
               3
             </PaginationLink>
           </PaginationItem>
@@ -66,7 +69,7 @@ export const PaginationWithLogic = async ({
           <>
             <PaginationItem>
               <PaginationLink
-                href={{ query: { page: currentPage } }}
+                href={createHref(currentPage)}
                 isActive={currentPage == currentPage}
               >
                 {currentPage}
@@ -79,7 +82,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 5 && currentPage > noOfPages - 3 && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { page: noOfPages - 2 } }}
+              href={createHref(noOfPages - 2)}
               isActive={currentPage == noOfPages - 2}
             >
               {noOfPages - 2}
@@ -89,7 +92,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 4 && (currentPage > noOfPages - 3 || noOfPages < 6) && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { page: noOfPages - 1 } }}
+              href={createHref(noOfPages - 1)}
               isActive={currentPage == noOfPages - 1}
             >
               {noOfPages - 1}
@@ -99,7 +102,7 @@ export const PaginationWithLogic = async ({
         {noOfPages > 3 && (
           <PaginationItem>
             <PaginationLink
-              href={{ query: { page: noOfPages } }}
+              href={createHref(noOfPages)}
               isActive={currentPage == noOfPages}
             >
               {noOfPages}
@@ -110,7 +113,7 @@ export const PaginationWithLogic = async ({
         <PaginationItem>
           <PaginationNext
             disabled={currentPage >= noOfPages}
-            href={{ query: { page: currentPage + 1 } }}
+            href={createHref(currentPage + 1)}
           />
         </PaginationItem>
       </PaginationContent>
