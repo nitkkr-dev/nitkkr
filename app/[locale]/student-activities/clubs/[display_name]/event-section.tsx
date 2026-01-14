@@ -62,7 +62,7 @@ lg:max-w-[1100px]"
         >
           {selectedEvent && (
             <>
-              <h2 className="text-primary-800 mb-4 w-full text-3xl font-bold">
+              <h2 className="text-primary-800 mb-4 w-full text-center text-3xl font-bold">
                 {selectedEvent.title}
               </h2>
 
