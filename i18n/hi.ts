@@ -349,6 +349,15 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'नाम या ईमेल से खोजें',
     departmentHead: 'विभागाध्यक्ष',
+    filterBy: 'फ़िल्टर करें',
+    clearAllFilters: 'सभी फ़िल्टर साफ करें',
+    saveSelection: 'चयन सहेजें',
+    designation: 'पदनाम',
+    department: 'विभाग',
+    selected: 'चयनित',
+    allDepartments: 'सभी विभाग',
+    viewMore: 'और देखें',
+    viewLess: 'कम देखें',
     externalLinks: {
       googleScholarId: 'गूगल स्कॉलर',
       linkedInId: 'लिंक्डइन',

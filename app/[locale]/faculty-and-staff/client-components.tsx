@@ -25,10 +25,26 @@ export function MobileFilters({
   departments,
   department,
   className,
+  translations = {
+    filters: 'Filters',
+    filterBy: 'Filter By',
+    designation: 'Designation',
+    department: 'Department',
+    saveSelection: 'Save Selection',
+    clearAllFilters: 'Clear All Filters',
+  },
 }: {
   departments?: Dept[];
   department?: string | string[];
   className?: string;
+  translations?: {
+    filters: string;
+    filterBy: string;
+    designation: string;
+    department: string;
+    saveSelection: string;
+    clearAllFilters: string;
+  };
 }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -66,7 +82,7 @@ export function MobileFilters({
         )}
       >
         <MdFilterList className="text-xl text-primary-700" />
-        <span className="text-primary-700">Filters</span>
+        <span className="text-primary-700">{translations.filters}</span>
       </button>
 
       {/* Backdrop */}
@@ -94,14 +110,14 @@ export function MobileFilters({
           )}
         >
           {/* Inner content area */}
-          <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
+          <div className="h-screen min-h-screen bg-neutral-50 p-4 md:pt-8 lg:p-8">
             <div>
               <div className=" bg-white p-5">
                 <ScrollArea className="h-[calc(100svh-80px)]">
                   <div className="rounded-lg ">
                     <div className="mt-10 flex flex-row justify-between">
                       <h3 className="text-2xl font-bold text-primary-700">
-                        Filter By
+                        {translations.filterBy}
                       </h3>
                       <button
                         onClick={() => setOpen(false)}
@@ -112,7 +128,7 @@ export function MobileFilters({
                       </button>
                     </div>
                     <div className="mb-6 rounded  bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">Designation</h3>
+                      <h3 className="mb-2 text-lg font-bold text-primary-700">{translations.designation}</h3>
                       <DesignationsClient />
                     </div>
                   </div>
@@ -120,7 +136,7 @@ export function MobileFilters({
                   {/* Department box */}
                   <div className="mb-6 rounded  bg-neutral-50 p-4">
                     <h3 className="mb-2 text-lg font-bold text-primary-700">
-                      Department
+                      {translations.department}
                     </h3>
 
                     <Suspense fallback={<Loading className="max-xl:hidden" />}>
@@ -143,9 +159,9 @@ export function MobileFilters({
                         aria-label="Close filters"
                         className="text-sm font-semibold text-primary-700"
                       >
-                        Save Selection
+                        {translations.saveSelection}
                       </button>
-                            <ClearFiltersButton />
+                            <ClearFiltersButton text={translations.clearAllFilters} />
                           </div>
                 </ScrollArea>
               </div>
@@ -158,7 +174,7 @@ export function MobileFilters({
   );
 }
 
-export function ClearFiltersButton() {
+export function ClearFiltersButton({ text = 'Clear All Filters' }: { text?: string }) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -171,7 +187,7 @@ export function ClearFiltersButton() {
       className="hover:bg-primary-50 mb-auto mt-1 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
       onClick={handleClearFilters}
     >
-      Clear All Filters
+      {text}
     </button>
   );
 }
@@ -223,10 +239,12 @@ export function DepartmentsClient({
   departments,
   department,
   select = false,
+  translations = { allDepartments: 'All Departments', selected: 'selected', viewMore: 'View more', viewLess: 'View less' },
 }: {
   departments: Dept[];
   department?: string | string[];
   select?: boolean;
+  translations?: { allDepartments: string; selected: string; viewMore: string; viewLess: string };
 }) {
   const [showAll, setShowAll] = useState(false);
   const optionsToShow = 4;
@@ -236,6 +254,15 @@ export function DepartmentsClient({
       Array.isArray(department) ? department : department ? [department] : [],
     [department]
   );
+
+    const isAllSelected =
+    selectedDepartments.length === 0 ||
+    departments.every((dept) => selectedDepartments.includes(dept.urlName));
+
+    const getAllValue = (): string[] => {
+    return [];
+  };
+
    const sortedDepartments = useMemo(() => {
     return [...departments].sort((a, b) => {
       const aSelected = selectedDepartments.includes(a.urlName);
@@ -251,26 +278,44 @@ export function DepartmentsClient({
       ? selectedDepartments.filter((d) => d !== urlName)
       : [...selectedDepartments, urlName];
 
-  if (select) {
+ if (select) {
     return (
       <Select navigate>
         <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
           <SelectValue
             placeholder={
-              selectedDepartments.length
-                ? `${selectedDepartments.length} selected`
-                : 'Choose a department'
+              isAllSelected
+                ? translations.allDepartments
+                : `${selectedDepartments.length} ${translations.selected}`
             }
           />
         </SelectTrigger>
         <SelectContent>
+          {/* All Option */}
+          <div className="flex items-center px-2 py-1">
+            <input
+              type="checkbox"
+              id="mobile-department-all"
+              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+              checked={isAllSelected}
+              readOnly
+            />
+            <PreserveParamsLink
+              paramToUpdate="department"
+              value={getAllValue()}
+              className="ml-2 w-full py-1 font-semibold"
+            >
+              All
+            </PreserveParamsLink>
+          </div>
+          <div className="my-1 border-t border-neutral-200" />
           {sortedDepartments.map(({ name, urlName }, index) => (
             <div key={index} className="flex items-center px-2 py-1">
               <input
                 type="checkbox"
                 id={`mobile-department-${urlName}`}
                 className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                checked={selectedDepartments.includes(urlName)}
+                checked={selectedDepartments.includes(urlName) && !isAllSelected}
                 readOnly
               />
               <PreserveParamsLink
@@ -300,6 +345,32 @@ export function DepartmentsClient({
             showAll ? 'max-h-[calc(100svh-80px)]' : 'max-h-[320px]'
           )}
         >
+          {/* All Option */}
+          <li>
+            <PreserveParamsLink
+              paramToUpdate="department"
+              value={getAllValue()}
+              className={cn(
+                'flex w-full items-center rounded border p-3',
+                isAllSelected
+                  ? 'bg-primary-50 border-primary-700'
+                  : 'border-neutral-300'
+              )}
+            >
+              <div className="flex w-full items-center">
+                <div className="mr-2">
+                  <input
+                    type="checkbox"
+                    id="department-all"
+                    className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                    checked={isAllSelected}
+                    readOnly
+                  />
+                </div>
+                <span className="font-semibold text-shade-dark">All</span>
+              </div>
+            </PreserveParamsLink>
+          </li>
           {visible.map(({ name, urlName }, index) => (
             <li key={index}>
               <PreserveParamsLink
@@ -307,7 +378,7 @@ export function DepartmentsClient({
                 value={getUpdatedDepartments(urlName)}
                 className={cn(
                   'flex w-full items-center rounded border p-3',
-                  selectedDepartments.includes(urlName)
+                  selectedDepartments.includes(urlName) && !isAllSelected
                     ? 'bg-primary-50 border-primary-700'
                     : 'border-neutral-300'
                 )}
@@ -318,7 +389,7 @@ export function DepartmentsClient({
                       type="checkbox"
                       id={`department-${urlName}`}
                       className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={selectedDepartments.includes(urlName)}
+                      checked={selectedDepartments.includes(urlName) && !isAllSelected}
                       readOnly
                     />
                   </div>
@@ -337,9 +408,7 @@ export function DepartmentsClient({
             className="text-primary-700 underline"
             aria-expanded={showAll}
           >
-            {showAll
-              ? 'View less'
-              : 'View more'}
+            {showAll ? translations.viewLess : translations.viewMore}
           </button>
         </div>
       )}
@@ -371,36 +440,70 @@ function DesignationsClient() {
       ? selected.filter((d) => d !== option)
       : [...selected, option];
 
+       const isAllSelected =
+    selected.length === 0 || options.every((opt) => selected.includes(opt));
+
+    const getAllValue = (): string[] => {
+    return [];
+  };
+
   return (
     <ol className="w-full space-y-4">
-          {sortedOptions.map((option, index) => (
-            <li key={index}>
-              <PreserveParamsLink
-                paramToUpdate="designation"
-                value={getUpdatedDesignations(option)}
-                className={cn(
-                  'flex w-full items-center rounded border p-3',
-                  selected.includes(option)
-                    ? 'bg-primary-50 border-primary-700'
-                    : 'border-neutral-300'
-                )}
-              >
-                <div className="flex w-full items-center">
-                  <div className="mr-2">
-                    <input
-                      type="checkbox"
-                      id={`designation-${option}`}
-                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={selected.includes(option)}
-                      readOnly
-                    />
-                  </div>
-                  <span className="font-semibold text-shade-dark">
-                    {option.charAt(0).toUpperCase() + option.slice(1)}
-                  </span>
-                </div>
-              </PreserveParamsLink>
-            </li>
-          ))}
-        </ol>
-      )}
+      {/* All Option */}
+      <li>
+        <PreserveParamsLink
+          paramToUpdate="designation"
+          value={getAllValue()}
+          className={cn(
+            'flex w-full items-center rounded border p-3',
+            isAllSelected
+              ? 'bg-primary-50 border-primary-700'
+              : 'border-neutral-300'
+          )}
+        >
+          <div className="flex w-full items-center">
+            <div className="mr-2">
+              <input
+                type="checkbox"
+                id="mobile-designation-all"
+                className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                checked={isAllSelected}
+                readOnly
+              />
+            </div>
+            <span className="font-semibold text-shade-dark">All</span>
+          </div>
+        </PreserveParamsLink>
+      </li>
+      {sortedOptions.map((option, index) => (
+        <li key={index}>
+          <PreserveParamsLink
+            paramToUpdate="designation"
+            value={getUpdatedDesignations(option)}
+            className={cn(
+              'flex w-full items-center rounded border p-3',
+              selected.includes(option) && !isAllSelected
+                ? 'bg-primary-50 border-primary-700'
+                : 'border-neutral-300'
+            )}
+          >
+            <div className="flex w-full items-center">
+              <div className="mr-2">
+                <input
+                  type="checkbox"
+                  id={`designation-${option}`}
+                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                  checked={selected.includes(option) && !isAllSelected}
+                  readOnly
+                />
+              </div>
+              <span className="font-semibold text-shade-dark">
+                {option.charAt(0).toUpperCase() + option.slice(1)}
+              </span>
+            </div>
+          </PreserveParamsLink>
+        </li>
+      ))}
+    </ol>
+  );
+}

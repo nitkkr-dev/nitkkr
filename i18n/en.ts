@@ -341,6 +341,15 @@ const text: Translations = {
   FacultyAndStaff: {
     placeholder: 'Search by name or email',
     departmentHead: 'Head of Department',
+    filterBy: 'Filter By',
+    clearAllFilters: 'Clear All Filters',
+    saveSelection: 'Save Selection',
+    designation: 'Designation',
+    department: 'Department',
+    selected: 'selected',
+    allDepartments: 'All Departments',
+    viewMore: 'View more',
+    viewLess: 'View less',
     externalLinks: {
       googleScholarId: 'Google Scholar',
       linkedInId: 'LinkedIn',

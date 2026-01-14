@@ -209,6 +209,15 @@ export interface Translations {
   FacultyAndStaff: {
     placeholder: string;
     departmentHead: string;
+    filterBy: string;
+    clearAllFilters: string;
+    saveSelection: string;
+    designation: string;
+    department: string;
+    selected: string;
+    allDepartments: string;
+    viewMore: string;
+    viewLess: string;
     externalLinks: {
       googleScholarId: string;
       linkedInId: string;

@@ -3,19 +3,12 @@ export const revalidate = 300;
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense ,useMemo} from 'react';
+import React, { Suspense } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
-import {
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/inputs';
+import { Input } from '~/components/inputs';
 import Loading from '~/components/loading';
 import { NoResultStatus } from '~/components/status';
 import { getTranslations } from '~/i18n/translations';
@@ -23,12 +16,38 @@ import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 import { ScrollArea } from '~/components/ui/scroll-area';
 
-import {
-  ClearFiltersButton,
-  DepartmentsClient,
-  MobileFilters,
-  PreserveParamsLink,
-} from './client-components';
+import { MobileFilters } from './MobileFilters';
+import { MultiCheckbox } from './MultiCheckbox';
+
+// Helper to convert to array
+function toArray(v: string | string[] | undefined): string[] {
+  return Array.isArray(v) ? v : v ? [v] : [];
+}
+
+// Build href for clear all
+function buildHref(locale: string, updates: Record<string, unknown>): string {
+  const params = new URLSearchParams();
+
+  Object.entries(updates).forEach(([k, v]) => {
+    if (v === undefined || (Array.isArray(v) && v.length === 0)) {
+      return;
+    }
+
+    if (Array.isArray(v)) {
+      v.forEach((item) => {
+        if (item) params.append(k, String(item));
+      });
+    } else {
+      params.set(k, String(v));
+    }
+  });
+
+  const qs = params.toString();
+  return `/${locale}/faculty-and-staff${qs ? `?${qs}` : ''}`;
+}
+
+// Designation options
+const DESIGNATION_OPTIONS = ['faculty', 'staff'] as const;
 
 export default async function FacultyAndStaff({
   params: { locale },
@@ -43,48 +62,83 @@ export default async function FacultyAndStaff({
 }) {
   const text = (await getTranslations(locale)).FacultyAndStaff;
 
-  const mobileDepartments = await db.query.departments.findMany({
+  // Normalize multi-select params
+  const designations = toArray(designation).filter(Boolean);
+  const departments = toArray(departmentName).filter(Boolean);
+
+  // Fetch departments for filter list
+  const departmentRows = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
   });
 
+  // Create text map for designations
+  const designationTextMap: Record<string, string> = {
+    faculty: 'Faculty',
+    staff: 'Staff',
+  };
+
   return (
-    <section className="container my-6 flex gap-8">
-      <search
+    <section className="container mb-0 mt-8 flex gap-8">
+      {/* Desktop Sidebar - hidden on mobile */}
+      <aside
         className={cn(
-          'hidden h-fit w-[30%] rounded p-4 pt-0 xl:inline',
-          'sticky top-[88px]' // DEPENDS-ON: header.tsx
-          // 'border border-primary-700 bg-neutral-50'
+          'hidden w-[290px] shrink-0 flex-col gap-2 xl:flex',
+          'sticky top-[88px] self-start'
         )}
       >
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-primary-700">Filter By</h2>
-          <ClearFiltersButton />
+        <div className="flex items-baseline justify-between pb-2">
+          <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
+            {text.filterBy}
+          </h2>
+          <Button
+            asChild
+            variant="outline"
+            className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
+          >
+            <Link
+              href={buildHref(locale, {
+                query: undefined,
+                designation: [],
+                department: [],
+              })}
+            >
+              {text.clearAllFilters}
+            </Link>
+          </Button>
         </div>
+
         <ScrollArea className="h-[calc(100vh-200px)]">
-          {/* Designation Filter Box */}
-          <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-            <h3 className="mb-2 text-lg font-bold text-primary-700">
-              Designation
-            </h3>
-            <Suspense fallback={<Loading className="max-xl:hidden" />}>
-              <Designations designation={designation} />
-            </Suspense>
-          </div>
+          <div className="flex flex-col gap-2 pr-4">
+            {/* Designation Filter */}
+            <FilterSection label={text.designation}>
+              <MultiCheckbox
+                param="designation"
+                options={DESIGNATION_OPTIONS}
+                selected={designations}
+                locale={locale}
+                textMap={designationTextMap}
+              />
+            </FilterSection>
 
-          {/* Department Filter Box */}
-          <div className="mb-6 rounded border border-primary-100 bg-neutral-50 p-4">
-            <h3 className="mb-2 text-lg font-bold text-primary-700">
-              Department
-            </h3>
-
-            <Suspense fallback={<Loading className="max-xl:hidden" />}>
-              <Departments department={departmentName} />
-            </Suspense>
+            {/* Department Filter */}
+            <FilterSection label={text.department}>
+              <MultiCheckbox
+                param="department"
+                options={departmentRows.map((d) => d.urlName)}
+                selected={departments}
+                locale={locale}
+                textMap={Object.fromEntries(
+                  departmentRows.map((d) => [d.urlName, d.name])
+                )}
+              />
+            </FilterSection>
           </div>
         </ScrollArea>
-      </search>
+      </aside>
 
-      <section className="grow space-y-6">
+      {/* Main Content */}
+      <section className="flex grow flex-col space-y-6">
+        {/* Search + Mobile Filters */}
         <search className="flex w-full items-center gap-4">
           <Input
             className="min-w-0 flex-1"
@@ -95,27 +149,40 @@ export default async function FacultyAndStaff({
             placeholder={text.placeholder}
           />
 
+          {/* Mobile Filters Button - shows on < xl */}
           <div className="flex-shrink-0">
             <MobileFilters
-              departments={mobileDepartments}
-              department={departmentName}
+              locale={locale}
+              designations={designations}
+              departments={departments}
+              departmentRows={departmentRows}
+              designationOptions={DESIGNATION_OPTIONS}
+              designationTextMap={designationTextMap}
+              text={{
+                filters: text.filterBy,
+                filterBy: text.filterBy,
+                clearAllFilters: text.clearAllFilters,
+                designation: text.designation,
+                department: text.department,
+              }}
             />
           </div>
         </search>
 
+        {/* Faculty and Staff List */}
         <ol className="space-y-4">
           <Suspense
             fallback={<Loading />}
-            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}-${Array.isArray(designation) ? designation.join(',') : designation ?? ''}`}
+            key={`${query ?? ''}-${departments.join(',')}-${designations.join(',')}`}
           >
-            {(!designation || designation?.includes('staff')) && (
+            {(designations.length === 0 || designations.includes('staff')) && (
               <StaffList
                 department={departmentName}
                 locale={locale}
                 query={query}
               />
             )}
-            {(!designation || designation?.includes('faculty')) && (
+            {(designations.length === 0 || designations.includes('faculty')) && (
               <FacultyList
                 department={departmentName}
                 deptartmentHeadText={text.departmentHead}
@@ -130,200 +197,23 @@ export default async function FacultyAndStaff({
   );
 }
 
-const Designations = ({
-  designation,
-  select = false,
+/* ---------------------- Filter Section Component ---------------------- */
+function FilterSection({
+  label,
+  children,
 }: {
-  designation?: string | string[];
-  select?: boolean;
-}) => {
-  const options = ['faculty', 'staff'];
-  // Multi-select array
-  const selectedDesignations = Array.isArray(designation)
-    ? designation
-    : designation
-      ? [designation]
-      : [];
-
-      const sortedOptions = useMemo(() => {
-          return [...options].sort((a, b) => {
-            const aSelected = selectedDesignations.includes(a);
-            const bSelected = selectedDesignations.includes(b);
-            if (aSelected && !bSelected) return -1;
-            if (!aSelected && bSelected) return 1;
-            return 0;
-          });
-        }, [selectedDesignations]);
-
-  // Define the updated designation value based on selection
-  const getUpdatedDesignations = (option: string) => {
-    return selectedDesignations.includes(option)
-      ? selectedDesignations.filter((d) => d !== option)
-      : [...selectedDesignations, option];
-  };
-
-  return select ? (
-    <Select navigate>
-      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue
-          placeholder={
-            selectedDesignations.length
-              ? `${selectedDesignations.length} selected`
-              : 'Choose a designation'
-          }
-        />
-      </SelectTrigger>
-      <SelectContent>
-        {sortedOptions.map((option, index) => (
-          <div key={index} className="flex items-center px-2 py-1">
-            <input
-              type="checkbox"
-              id={`mobile-designation-${option}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selectedDesignations.includes(option)}
-              readOnly
-            />
-            <PreserveParamsLink
-              paramToUpdate="designation"
-              value={getUpdatedDesignations(option)}
-              className="ml-2 w-full py-1"
-            >
-              {option.charAt(0).toUpperCase() + option.slice(1)}
-            </PreserveParamsLink>
-          </div>
-        ))}
-      </SelectContent>
-    </Select>
-  ) : (
-    <ol className="w-full space-y-4">
-      {sortedOptions.map((option, index) => (
-        <li key={index}>
-          <PreserveParamsLink
-            paramToUpdate="designation"
-            value={getUpdatedDesignations(option)}
-            className={cn(
-              'flex w-full items-center rounded border p-3',
-              selectedDesignations.includes(option)
-                ? 'bg-primary-50 border-primary-700'
-                : 'border-neutral-300'
-            )}
-          >
-            <div className="flex w-full items-center">
-              <div className="mr-2">
-                <input
-                  type="checkbox"
-                  id={`designation-${option}`}
-                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                  checked={selectedDesignations.includes(option)}
-                  readOnly
-                />
-              </div>
-              <span className="font-semibold text-shade-dark">
-                {option.charAt(0).toUpperCase() + option.slice(1)}
-              </span>
-            </div>
-          </PreserveParamsLink>
-        </li>
-      ))}
-    </ol>
-  );
-};
-
-const Departments = async ({
-  department,
-  select = false,
-}: {
-  department?: string | string[];
-  select?: boolean;
-}) => {
-  const departments = await db.query.departments.findMany({
-    columns: { id: true, name: true, urlName: true },
-  });
-
-  // const selectedDepartments = Array.isArray(department)
-  //   ? department
-  //   : department
-  //     ? [department]
-  //     : [];
-
-  // // Define the updated department value based on selection
-  // const getUpdatedDepartments = (urlName: string) => {
-  //   return selectedDepartments.includes(urlName)
-  //     ? selectedDepartments.filter((d) => d !== urlName)
-  //     : [...selectedDepartments, urlName];
-  // };
-
-  // return select ? (
-  //   <Select navigate>
-  //     <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-  //       <SelectValue
-  //         placeholder={
-  //           selectedDepartments.length
-  //             ? `${selectedDepartments.length} selected`
-  //             : 'Choose a department'
-  //         }
-  //       />
-  //     </SelectTrigger>
-  //     <SelectContent>
-  //       {departments.map(({ name, urlName }, index) => (
-  //         <div key={index} className="flex items-center px-2 py-1">
-  //           <input
-  //             type="checkbox"
-  //             id={`mobile-department-${urlName}`}
-  //             className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-  //             checked={selectedDepartments.includes(urlName)}
-  //             readOnly
-  //           />
-  //           <PreserveParamsLink
-  //             paramToUpdate="department"
-  //             value={getUpdatedDepartments(urlName)}
-  //             className="ml-2 w-full py-1"
-  //           >
-  //             {name}
-  //           </PreserveParamsLink>
-  //         </div>
-  //       ))}
-  //     </SelectContent>
-  //   </Select>
-  // ) : (
-  //   <ol className="w-full space-y-4">
-  //     {departments.map(({ name, urlName }, index) => (
-  //       <li key={index}>
-  //         <PreserveParamsLink
-  //           paramToUpdate="department"
-  //           value={getUpdatedDepartments(urlName)}
-  //           className={cn(
-  //             'flex w-full items-center rounded border p-3',
-  //             selectedDepartments.includes(urlName)
-  //               ? 'bg-primary-50 border-primary-700'
-  //               : 'border-neutral-300'
-  //           )}
-  //         >
-  //           <div className="flex w-full items-center">
-  //             <div className="mr-2">
-  //               <input
-  //                 type="checkbox"
-  //                 id={`department-${urlName}`}
-  //                 className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-  //                 checked={selectedDepartments.includes(urlName)}
-  //                 readOnly
-  //               />
-  //             </div>
-  //             <span className="font-semibold text-shade-dark">{name}</span>
-  //           </div>
-  //         </PreserveParamsLink>
-  //       </li>
-  //     ))}
-  //   </ol>
-  // );
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
-    <DepartmentsClient
-      departments={departments}
-      department={department}
-      select={select}
-    />
+    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
+      <div className="flex items-start justify-between">
+        <h3 className="text-xl font-bold text-primary-300">{label}</h3>
+      </div>
+      {children}
+    </section>
   );
-};
+}
 
 const FacultyList = async ({
   department,
