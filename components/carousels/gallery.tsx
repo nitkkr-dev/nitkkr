@@ -12,7 +12,7 @@ const GalleryCarousel = ({
   carouselProps,
   children,
   className,
-  itemClassName = 'sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
+  itemClassName = 'shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5',
 }: {
   carouselProps?: CarouselProps;
   children: React.ReactNode[];
@@ -21,23 +21,16 @@ const GalleryCarousel = ({
 }) => {
   return (
     <article className={cn('container relative px-10 lg:px-14', className)}>
-      <Carousel
-        className="static"
-        opts={{
-          align: 'start',
-          loop: true,
-        }}
-        {...carouselProps}
-      >
-        <CarouselContent className="flex justify-center">
+      <Carousel opts={{ align: 'start', loop: true }} {...carouselProps}>
+        <CarouselContent className="flex gap-4">
           {children.map((child, index) => (
             <CarouselItem key={index} className={itemClassName}>
               {child}
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-0 text-primary-500" />
-        <CarouselNext className="right-0 text-primary-500 " />
+        <CarouselPrevious className="-left-6 text-primary-500 md:-left-10" />
+        <CarouselNext className="-right-6 text-primary-500 md:-right-10" />
       </Carousel>
     </article>
   );
