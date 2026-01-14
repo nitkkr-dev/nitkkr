@@ -83,10 +83,14 @@ export default async function Committee({
       </Suspense>
       <PaginationWithLogic
         currentPage={meetingPage}
-        totalCount={(await db
-          .select({ count: count() })
-          .from(committeeMeetings)
-          .where(sql`${committeeMeetings.committeeType} = ${type}`))[0].count}
+        totalCount={
+          (
+            await db
+              .select({ count: count() })
+              .from(committeeMeetings)
+              .where(sql`${committeeMeetings.committeeType} = ${type}`)
+          )[0].count
+        }
       />
     </section>
   );
