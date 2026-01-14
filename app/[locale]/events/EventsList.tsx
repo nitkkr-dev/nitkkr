@@ -1,11 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdCalendarToday, MdLocationOn } from 'react-icons/md';
 
 import { NoResultStatus } from '~/components/status';
+
+import { EventModal } from './EventModal';
 
 export interface EventItem {
   id: number;
@@ -56,6 +57,7 @@ export function EventsList({
   const [cursor, setCursor] = useState<string | null>(initialCursor);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
 
   // Reset when filter params change
@@ -135,13 +137,11 @@ export function EventsList({
       <ol className="space-y-4">
         {items.map((event) => (
           <li
-            className="overflow-hidden rounded-lg border-[1px] border-primary-500 bg-neutral-50"
+            className="cursor-pointer overflow-hidden rounded-lg border-[1px] border-primary-500 bg-neutral-50 transition-shadow hover:shadow-md"
             key={event.id}
+            onClick={() => setSelectedEvent(event)}
           >
-            <Link
-              className="flex items-stretch gap-3 p-3 sm:gap-6 sm:p-5"
-              href={`/${locale}/events/${event.id}`}
-            >
+            <div className="flex items-stretch gap-3 p-3 sm:gap-6 sm:p-5">
               <main className="flex min-w-0 flex-1 flex-col">
                 <h4 className="mb-1 font-serif text-base font-bold tracking-wide text-primary-700 sm:mb-2 sm:text-2xl">
                   {event.title}
@@ -188,7 +188,7 @@ export function EventsList({
                   />
                 </div>
               )}
-            </Link>
+            </div>
           </li>
         ))}
       </ol>
@@ -204,6 +204,13 @@ export function EventsList({
           <p className="text-sm text-neutral-500">{text.noMoreEvents}</p>
         )}
       </div>
+
+      {/* Event Modal */}
+      <EventModal
+        event={selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        locale={locale}
+      />
     </>
   );
 }

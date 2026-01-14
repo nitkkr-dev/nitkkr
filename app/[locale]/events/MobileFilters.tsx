@@ -143,7 +143,7 @@ export function MobileFilters({
                   <div className="rounded-lg">
                     <div>
                       {/* Close button row - right aligned, above header */}
-                      <div className="flex justify-end">
+                      <div className="flex justify-end sm:mt-4">
                         <button
                           onClick={handleClose}
                           aria-label="Close filters"
