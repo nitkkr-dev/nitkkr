@@ -82,9 +82,10 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
           href={`/${locale}/student-activities/clubs/${urlName}`}
           key={index}
         >
-          <Card className="mx-auto flex aspect-square size-48 flex-col p-3 sm:size-56 md:size-64">
+          <Card className="mx-auto flex aspect-square size-48 flex-col p-2 sm:size-56 md:size-64">
             <CardTitle
               className={cn(
+                'm-0 leading-none',
                 'flex items-center justify-center gap-2 text-neutral-900',
                 'text-lg sm:text-xl md:text-2xl'
               )}
@@ -92,20 +93,29 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
               <Image
                 alt={alias ?? name}
                 className="aspect-square size-6 rounded-md sm:size-7 md:size-8"
-                height={0}
-                width={0}
-                src={`assets/nitlogo.png`}
+                src={`student-activities/clubs/${urlName}/logo.jpg`}
+                width={28}
+                height={28}
               />
               {alias ?? name}
             </CardTitle>
 
-            <CardDescription className="flex grow items-center justify-center overflow-hidden rounded-md">
+            <CardDescription
+              className="
+      mt-0.5
+      flex grow
+      items-center justify-center
+      overflow-hidden rounded-xl
+      p-0
+      leading-none
+    "
+            >
               <Image
                 alt={alias ?? name}
-                className="h-full w-full object-contain"
+                className="h-full w-full rounded-xl object-cover"
+                src={`student-activities/clubs/${urlName}/logo.jpg`}
                 height={0}
                 width={0}
-                src={`student-activities/clubs/${urlName}/logo.jpg`}
               />
             </CardDescription>
           </Card>
