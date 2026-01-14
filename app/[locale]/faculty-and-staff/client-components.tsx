@@ -52,7 +52,6 @@ export function MobileFilters({
     };
   }, [open]);
 
-
   return (
     <div className="z-50 font-semibold xl:hidden">
       {/* Filter button */}
@@ -73,87 +72,93 @@ export function MobileFilters({
       <div
         aria-hidden={!open}
         className={cn(
-          'fixed inset-0 z-[60] transition-opacity pointer-events-none',
-          open ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0'
+          'pointer-events-none fixed inset-0 z-[60] transition-opacity',
+          open
+            ? 'pointer-events-auto visible opacity-100'
+            : 'invisible opacity-0'
         )}
         onClick={() => setOpen(false)}
       >
-
         <div className="bg-black/40 absolute inset-0" />
       </div>
-      {open && createPortal(
-        <aside
-          id="mobile-filters-panel"
-          role="dialog"
-          aria-modal="true"
-          ref={panelRef}
-          onClick={(e) => e.stopPropagation()}
-          className={cn(
-            'fixed left-0 top-0 z-[70] h-[100svh] w-full transition-transform',
-            open ? 'translate-x-0' : '-translate-x-full'
-          )}
-        >
-          {/* Inner content area */}
-          <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
-            <div>
-              <div className=" bg-white p-5">
-                <ScrollArea className="h-[calc(100svh-80px)]">
-                  <div className="rounded-lg ">
-                    <div className="mt-10 flex flex-row justify-between">
-                      <h3 className="text-2xl font-bold text-primary-700">
-                        Filter By
-                      </h3>
-                      <button
-                        onClick={() => setOpen(false)}
-                        aria-label="Close filters"
-                        className=" hover:bg-black/5"
-                      >
-                        <FaTimes className="size-7 text-primary-700" />
-                      </button>
+      {open &&
+        createPortal(
+          <aside
+            id="mobile-filters-panel"
+            role="dialog"
+            aria-modal="true"
+            ref={panelRef}
+            onClick={(e) => e.stopPropagation()}
+            className={cn(
+              'fixed left-0 top-0 z-[70] h-[100svh] w-full transition-transform',
+              open ? 'translate-x-0' : '-translate-x-full'
+            )}
+          >
+            {/* Inner content area */}
+            <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
+              <div>
+                <div className=" bg-white p-5">
+                  <ScrollArea className="h-[calc(100svh-80px)]">
+                    <div className="rounded-lg ">
+                      <div className="mt-10 flex flex-row justify-between">
+                        <h3 className="text-2xl font-bold text-primary-700">
+                          Filter By
+                        </h3>
+                        <button
+                          onClick={() => setOpen(false)}
+                          aria-label="Close filters"
+                          className=" hover:bg-black/5"
+                        >
+                          <FaTimes className="size-7 text-primary-700" />
+                        </button>
+                      </div>
+                      <div className="mb-6 rounded  bg-neutral-50 p-4">
+                        <h3 className="mb-2 text-lg font-bold text-primary-700">
+                          Designation
+                        </h3>
+                        <DesignationsClient />
+                      </div>
                     </div>
+
+                    {/* Department box */}
                     <div className="mb-6 rounded  bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">Designation</h3>
-                      <DesignationsClient />
+                      <h3 className="mb-2 text-lg font-bold text-primary-700">
+                        Department
+                      </h3>
+
+                      <Suspense
+                        fallback={<Loading className="max-xl:hidden" />}
+                      >
+                        {departments ? (
+                          <DepartmentsClient
+                            departments={departments}
+                            department={department}
+                            select={false}
+                          />
+                        ) : (
+                          <p className="text-sm text-neutral-500">
+                            Loading departments...
+                          </p>
+                        )}
+                      </Suspense>
                     </div>
-                  </div>
-
-                  {/* Department box */}
-                  <div className="mb-6 rounded  bg-neutral-50 p-4">
-                    <h3 className="mb-2 text-lg font-bold text-primary-700">
-                      Department
-                    </h3>
-
-                    <Suspense fallback={<Loading className="max-xl:hidden" />}>
-                      {departments ? (
-                        <DepartmentsClient
-                          departments={departments}
-                          department={department}
-                          select={false}
-                        />
-                      ) : (
-                        <p className="text-sm text-neutral-500">
-                          Loading departments...
-                        </p>
-                      )}
-                    </Suspense>
-                  </div>
-                  <div className="flex items-center justify-between">
-                            <button
+                    <div className="flex items-center justify-between">
+                      <button
                         onClick={() => setOpen(false)}
                         aria-label="Close filters"
                         className="text-sm font-semibold text-primary-700"
                       >
                         Save Selection
                       </button>
-                            <ClearFiltersButton />
-                          </div>
-                </ScrollArea>
+                      <ClearFiltersButton />
+                    </div>
+                  </ScrollArea>
+                </div>
               </div>
             </div>
-          </div>
-        </aside>,
-        document.body
-      )}
+          </aside>,
+          document.body
+        )}
     </div>
   );
 }
@@ -236,7 +241,7 @@ export function DepartmentsClient({
       Array.isArray(department) ? department : department ? [department] : [],
     [department]
   );
-   const sortedDepartments = useMemo(() => {
+  const sortedDepartments = useMemo(() => {
     return [...departments].sort((a, b) => {
       const aSelected = selectedDepartments.includes(a.urlName);
       const bSelected = selectedDepartments.includes(b.urlName);
@@ -288,7 +293,9 @@ export function DepartmentsClient({
   }
 
   // Desktop/list mode: show limited items and "View more" button that toggles full list.
-  const visible = showAll ? sortedDepartments : sortedDepartments.slice(0, optionsToShow);
+  const visible = showAll
+    ? sortedDepartments
+    : sortedDepartments.slice(0, optionsToShow);
 
   return (
     <div>
@@ -337,9 +344,7 @@ export function DepartmentsClient({
             className="text-primary-700 underline"
             aria-expanded={showAll}
           >
-            {showAll
-              ? 'View less'
-              : 'View more'}
+            {showAll ? 'View less' : 'View more'}
           </button>
         </div>
       )}
@@ -365,7 +370,6 @@ function DesignationsClient() {
     });
   }, [selected]);
 
-
   const getUpdatedDesignations = (option: string) =>
     selected.includes(option)
       ? selected.filter((d) => d !== option)
@@ -373,34 +377,35 @@ function DesignationsClient() {
 
   return (
     <ol className="w-full space-y-4">
-          {sortedOptions.map((option, index) => (
-            <li key={index}>
-              <PreserveParamsLink
-                paramToUpdate="designation"
-                value={getUpdatedDesignations(option)}
-                className={cn(
-                  'flex w-full items-center rounded border p-3',
-                  selected.includes(option)
-                    ? 'bg-primary-50 border-primary-700'
-                    : 'border-neutral-300'
-                )}
-              >
-                <div className="flex w-full items-center">
-                  <div className="mr-2">
-                    <input
-                      type="checkbox"
-                      id={`designation-${option}`}
-                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={selected.includes(option)}
-                      readOnly
-                    />
-                  </div>
-                  <span className="font-semibold text-shade-dark">
-                    {option.charAt(0).toUpperCase() + option.slice(1)}
-                  </span>
-                </div>
-              </PreserveParamsLink>
-            </li>
-          ))}
-        </ol>
-      )}
+      {sortedOptions.map((option, index) => (
+        <li key={index}>
+          <PreserveParamsLink
+            paramToUpdate="designation"
+            value={getUpdatedDesignations(option)}
+            className={cn(
+              'flex w-full items-center rounded border p-3',
+              selected.includes(option)
+                ? 'bg-primary-50 border-primary-700'
+                : 'border-neutral-300'
+            )}
+          >
+            <div className="flex w-full items-center">
+              <div className="mr-2">
+                <input
+                  type="checkbox"
+                  id={`designation-${option}`}
+                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                  checked={selected.includes(option)}
+                  readOnly
+                />
+              </div>
+              <span className="font-semibold text-shade-dark">
+                {option.charAt(0).toUpperCase() + option.slice(1)}
+              </span>
+            </div>
+          </PreserveParamsLink>
+        </li>
+      ))}
+    </ol>
+  );
+}

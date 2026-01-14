@@ -3,7 +3,7 @@ export const revalidate = 300;
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense ,useMemo} from 'react';
+import { Suspense, useMemo } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
@@ -145,15 +145,15 @@ const Designations = ({
       ? [designation]
       : [];
 
-      const sortedOptions = useMemo(() => {
-          return [...options].sort((a, b) => {
-            const aSelected = selectedDesignations.includes(a);
-            const bSelected = selectedDesignations.includes(b);
-            if (aSelected && !bSelected) return -1;
-            if (!aSelected && bSelected) return 1;
-            return 0;
-          });
-        }, [selectedDesignations]);
+  const sortedOptions = useMemo(() => {
+    return [...options].sort((a, b) => {
+      const aSelected = selectedDesignations.includes(a);
+      const bSelected = selectedDesignations.includes(b);
+      if (aSelected && !bSelected) return -1;
+      if (!aSelected && bSelected) return 1;
+      return 0;
+    });
+  }, [selectedDesignations]);
 
   // Define the updated designation value based on selection
   const getUpdatedDesignations = (option: string) => {

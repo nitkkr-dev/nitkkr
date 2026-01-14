@@ -4,16 +4,9 @@ export const revalidate = 3600;
 import { Fragment, Suspense } from 'react';
 
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
+import GenericTable from '~/components/ui/generic-table';
 
 export default async function CentralWorkshop({
   params: { locale },
@@ -57,81 +50,66 @@ export default async function CentralWorkshop({
           <Fragment key={index}>
             <h4>{text[category].title}</h4>
             {category === 'facilities' && <h5>{text[category].sub}</h5>}
-            <Table scrollAreaClassName={index === 0 ? 'mb-10' : 'mb-7'}>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.tableTitle.sno}</TableHead>
-                  <TableHead>{text.tableTitle.name}</TableHead>
-                  <TableHead className="text-center">
-                    {text.tableTitle.quantity}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {text[category].data.map(({ name, quantity }, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{name}</TableCell>
-                    <TableCell className="text-center">{quantity}</TableCell>
-                  </TableRow>
-                ))}
-                {'miscDetails' in text[category] && (
-                  <>
-                    <TableRow>
-                      <TableHead colSpan={3}>{text.miscTitle}</TableHead>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={3}>
-                        {/* @ts-expect-error: current ts version doesnt properly narrow type */}
-                        {text[category].miscDetails as string}
-                      </TableCell>
-                    </TableRow>
-                  </>
-                )}
-              </TableBody>
-            </Table>
-            {index == 0 && (
+            <GenericTable
+              headers={[
+                { key: 'sno', label: text.tableTitle.sno },
+                { key: 'name', label: text.tableTitle.name },
+                { key: 'quantity', label: text.tableTitle.quantity },
+              ]}
+              tableData={text[category].data.map(({ name, quantity }, i) => ({
+                sno: i + 1,
+                name,
+                quantity,
+              }))}
+              currentPage={1}
+              getCount={Promise.resolve([])}
+            />
+            {'miscDetails' in text[category] && (
+              <div className="mb-7 mt-2">
+                <h5>{text.miscTitle}</h5>
+                <div>{text[category].miscDetails as string}</div>
+              </div>
+            )}
+            {index === 0 && (
               <h4 className="text-shade-dark">{text.equipmentDetails}</h4>
             )}
           </Fragment>
         ))}
         <h4>{text.staffTitle}</h4>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.staffTableTitle.name}</TableHead>
-              <TableHead>{text.staffTableTitle.designation}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <Suspense
-              fallback={
-                <TableRow>
-                  <TableCell colSpan={2} rowSpan={2}>
-                    Loading...
-                  </TableCell>
-                </TableRow>
-              }
-            >
-              <DelayedStaff id={section.id} />
-            </Suspense>
-          </TableBody>
-        </Table>
+        <Suspense fallback={<div>Loading...</div>}>
+          {/* Staff Table */}
+          <StaffTable sectionId={section.id} text={text} />
+        </Suspense>
       </section>
     </>
   );
 }
 
-const DelayedStaff = async ({ id }: { id: number }) => {
+// Add a new StaffTable component for async data
+const StaffTable = async ({
+  sectionId,
+  text,
+}: {
+  sectionId: number;
+  text: any;
+}) => {
   const staff = await db.query.staff.findMany({
     columns: { id: true, designation: true },
-    where: (staff, { eq }) => eq(staff.workingSectionId, id),
+    where: (staff, { eq }) => eq(staff.workingSectionId, sectionId),
     with: { person: { columns: { name: true, email: true, telephone: true } } },
   });
-  return staff.map(({ designation, person: { name } }, index) => (
-    <TableRow key={index}>
-      <TableCell>{name}</TableCell>
-      <TableCell>{designation}</TableCell>
-    </TableRow>
-  ));
+  return (
+    <GenericTable
+      headers={[
+        { key: 'name', label: text.staffTableTitle.name },
+        { key: 'designation', label: text.staffTableTitle.designation },
+      ]}
+      tableData={staff.map(({ designation, person: { name } }) => ({
+        name,
+        designation,
+      }))}
+      currentPage={1}
+      getCount={Promise.resolve([])}
+    />
+  );
 };
