@@ -80,7 +80,10 @@ export function GenericTable<T extends Record<string, unknown>>({
       </div>
 
       <div className="mt-6">
-        <PaginationWithLogic currentPage={currentPage} totalCount={totalCount} />
+        <PaginationWithLogic
+          currentPage={currentPage}
+          totalCount={totalCount}
+        />
       </div>
     </section>
   );

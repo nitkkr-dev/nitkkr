@@ -15,9 +15,7 @@ export default async function OBCPWD({
 }) {
   const text = await getTranslations(locale);
 
-  const facultyIncharge = [
-    {...text.Institute.cells.obcpwd.liaisonOfficer},
-  ];
+  const facultyIncharge = [{ ...text.Institute.cells.obcpwd.liaisonOfficer }];
   const cellFunctions = text.Institute.cells.obcpwd.cellFunctions;
 
   return (
@@ -29,8 +27,8 @@ export default async function OBCPWD({
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('${getS3Url()}/training-and-placement/header.jpg')`,
         }}
       >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-[90%] max-w-5xl">
-          <h1 className="mx-2 my-auto text-3xl text-[#FFFFFF]  lg:text-3xl xl:text-4xl font-serif font-normal ">
+        <div className="absolute left-1/2 top-1/2 w-[90%] max-w-5xl -translate-x-1/2 -translate-y-1/2 text-center">
+          <h1 className="mx-2 my-auto font-serif text-3xl  font-normal text-[#FFFFFF] lg:text-3xl xl:text-4xl ">
             {text.Institute.cells.obcpwd.title}
           </h1>
         </div>
@@ -38,7 +36,7 @@ export default async function OBCPWD({
 
       <main className="container mt-12">
         {/* description */}
-        <article className="space-y-6 rounded-lg p-6 drop-shadow font-sans font-normal text-lg">
+        <article className="space-y-6 rounded-lg p-6 font-sans text-lg font-normal drop-shadow">
           {text.Institute.cells.obcpwd.description.map((paragraph, index) => (
             <p key={index} className="text-justify leading-relaxed">
               {paragraph}
@@ -54,18 +52,18 @@ export default async function OBCPWD({
             className="mt-12"
           />
           <section>
-            <ul className="mt-8 space-y-4 bg-[#FFFFFF] p-4 rounded-lg border border-primary-500 drop-shadow font-sans font-normal text-lg">
-            {cellFunctions.map((functionItem, index) => (
-              <li key={index} className="text-justify leading-tight flex">
-                <span className="mr-1.5">•</span>
-                <span>{functionItem}</span>
-              </li>
-            ))}
+            <ul className="mt-8 space-y-4 rounded-lg border border-primary-500 bg-[#FFFFFF] p-4 font-sans text-lg font-normal drop-shadow">
+              {cellFunctions.map((functionItem, index) => (
+                <li key={index} className="flex text-justify leading-tight">
+                  <span className="mr-1.5">•</span>
+                  <span>{functionItem}</span>
+                </li>
+              ))}
             </ul>
           </section>
-          <section className="mt-8 bg-[#FFFFFF] p-4 rounded-lg border border-primary-500 drop-shadow font-sans font-normal text-lg">
+          <section className="mt-8 rounded-lg border border-primary-500 bg-[#FFFFFF] p-4 font-sans text-lg font-normal drop-shadow">
             {text.Institute.cells.obcpwd.complaint}
-          </section> 
+          </section>
         </div>
         {/*  LIAISON OFFICER */}
         <div>
@@ -82,56 +80,62 @@ export default async function OBCPWD({
                 className="flex w-[90%] max-w-3xl  rounded-lg border border-primary-500 bg-neutral-50 p-1 "
               >
                 {/* Image - smaller on mobile */}
-                <div className="flex-shrink-0 flex items-center justify-center">
+                <div className="flex flex-shrink-0 items-center justify-center">
                   <Image
                     src={faculty.image}
                     alt={faculty.name}
                     width={300}
                     height={340}
-                    className="h-full w-24 xs:h-24 xs:w-24 sm:h-36 sm:w-36 md:h-52 md:w-52 rounded-md object-cover" 
+                    className="xs:h-24 xs:w-24 h-full w-24 rounded-md object-cover sm:h-36 sm:w-36 md:h-52 md:w-52"
                   />
                 </div>
-                
+
                 {/* Content section - adjusted for mobile row layout */}
-                <section className="ml-2 xs:ml-3 sm:ml-6 md:ml-8 flex flex-col justify-center">
+                <section className="xs:ml-3 ml-2 flex flex-col justify-center sm:ml-6 md:ml-8">
                   {/* Name in red - reduced margin bottom */}
-                  <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-medium text-red-600 mb-0">
+                  <h2 className="xs:text-xl text-red-600 mb-0 text-lg font-medium sm:text-2xl md:text-3xl">
                     {faculty.name}
                   </h2>
-                  
+
                   {/* Title and position - reduced spacing */}
-                  <div className="mb-0.5 xs:mb-1 sm:mb-2"> {/* Reduced margin from mb-1/mb-2/mb-4 */}
-                    <p className="text-sm xs:text-base sm:text-xl md:text-xl font-normal text-gray-700 leading-tight"> {/* Added leading-tight */}
+                  <div className="xs:mb-1 mb-0.5 sm:mb-2">
+                    {' '}
+                    {/* Reduced margin from mb-1/mb-2/mb-4 */}
+                    <p className="xs:text-base text-gray-700 text-sm font-normal leading-tight sm:text-xl md:text-xl">
+                      {' '}
+                      {/* Added leading-tight */}
                       {faculty.title}
                     </p>
-                    {!faculty.title.includes("Head") && (
-                      <p className="text-sm xs:text-base sm:text-xl md:text-2xl font-normal text-gray-700 leading-tight mt-0"> {/* Added leading-tight and mt-0 */}
+                    {!faculty.title.includes('Head') && (
+                      <p className="xs:text-base text-gray-700 mt-0 text-sm font-normal leading-tight sm:text-xl md:text-2xl">
+                        {' '}
+                        {/* Added leading-tight and mt-0 */}
                         (Head of the Department)
                       </p>
                     )}
                   </div>
-                  
+
                   {/* Contact info */}
-                  <div className="space-y-0.5 xs:space-y-1 sm:space-y-2">
+                  <div className="xs:space-y-1 space-y-0.5 sm:space-y-2">
                     {/* Email with icon */}
                     <span className="flex items-center">
-                      <span className="inline-flex h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 items-center justify-center text-red-600">
-                        <MdEmail className="text-primary-700 text-base xs:text-lg sm:text-xl" />
+                      <span className="xs:h-6 xs:w-6 text-red-600 inline-flex h-5 w-5 items-center justify-center sm:h-7 sm:w-7">
+                        <MdEmail className="xs:text-lg text-base text-primary-700 sm:text-xl" />
                       </span>
-                      <a 
+                      <a
                         href={`mailto:${faculty.email}`}
-                        className="hover:text-primary-700 hover:underline break-all ml-1 xs:ml-1.5 sm:ml-2 text-xs xs:text-sm sm:text-base md:text-lg text-gray-700 "
+                        className="xs:ml-1.5 xs:text-sm text-gray-700 ml-1 break-all text-xs hover:text-primary-700 hover:underline sm:ml-2 sm:text-base md:text-lg "
                       >
                         {faculty.email}
                       </a>
                     </span>
-                    
+
                     {/* Phone with icon */}
                     <span className="flex items-center">
-                      <span className="inline-flex h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 items-center justify-center text-red-600">
-                        <MdOutlineLocalPhone className="text-primary-700 text-base xs:text-lg sm:text-xl" />
+                      <span className="xs:h-6 xs:w-6 text-red-600 inline-flex h-5 w-5 items-center justify-center sm:h-7 sm:w-7">
+                        <MdOutlineLocalPhone className="xs:text-lg text-base text-primary-700 sm:text-xl" />
                       </span>
-                      <span className="ml-1 xs:ml-1.5 sm:ml-2 text-xs xs:text-sm sm:text-base md:text-lg text-gray-700">
+                      <span className="xs:ml-1.5 xs:text-sm text-gray-700 ml-1 text-xs sm:ml-2 sm:text-base md:text-lg">
                         {faculty.phone}
                       </span>
                     </span>
@@ -141,9 +145,8 @@ export default async function OBCPWD({
             ))}
           </ul>
         </div>
-        
+
         {/*  TODO: MAKE IT EXACTLY LIKE THE DESIGN , ADD RELEVENT BACKGROUND */}
-        
       </main>
     </>
   );
