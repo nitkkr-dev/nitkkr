@@ -46,7 +46,6 @@ import {
   students,
 } from '~/server/db';
 
-
 // Contains the content of full Faculty Profile
 export async function FacultyOrStaffComponent({
   children,
@@ -812,4 +811,3 @@ async function fetchSectionByFacultyId(
         }
       )?.[section];
 }
-

@@ -447,10 +447,7 @@ export default async function PatentsAndTechnology({
                   text.projects.sanctionedDate,
                   text.projects.status,
                 ].map((headerText, index) => (
-                  <TableHead
-                    key={index}
-                    className={index === 1 ? 'w-24' : ''}
-                  >
+                  <TableHead key={index} className={index === 1 ? 'w-24' : ''}>
                     {headerText}
                   </TableHead>
                 ))}

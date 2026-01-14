@@ -67,7 +67,10 @@ export default async function Curricula({
         </Suspense>
         <PaginationWithLogic
           currentPage={page}
-          totalCount={(await db.select({ count: count().as('count') }).from(courses))[0]?.count ?? 0}
+          totalCount={
+            (await db.select({ count: count().as('count') }).from(courses))[0]
+              ?.count ?? 0
+          }
         />
       </main>
     </>
@@ -123,6 +126,6 @@ const Courses = async ({ page }: { page: number }) => {
           </TableCell>
         </TableRow>
       )
-    )
-});
+    );
+  });
 };
