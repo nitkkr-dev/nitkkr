@@ -2,31 +2,24 @@
 export const revalidate = 300;
 
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { FaTrophy } from 'react-icons/fa6';
 import { HiMiniBeaker } from 'react-icons/hi2';
-import { MdBadge, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdBadge } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import Loading from '~/components/loading';
-import { ScrollArea } from '~/components/ui';
+import NotificationsPanel from '~/components/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
-import { cn, groupBy } from '~/lib/utils';
-import { db, type notifications as notificationsSchema } from '~/server/db';
+import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
 
 export default async function Academics({
   params: { locale },
-  searchParams,
 }: {
   params: { locale: string };
-  searchParams: Record<string, string | string[] | undefined>;
 }) {
   const text = (await getTranslations(locale)).Academics;
-  const currentCategory =
-    (searchParams.notificationCategory as string | undefined) ?? 'academics';
 
   return (
     <>
@@ -45,7 +38,7 @@ export default async function Academics({
       <main className="container">
         <p className="mt-10 text-lg">{text.aboutDetail}</p>
         <article
-          className="mt-20 hidden h-[384px] items-start justify-between rounded-xl md:h-[512px] xl:flex"
+          className="mt-20 flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
           id="notification"
         >
           {/* <ul className="flex max-w-lg flex-col gap-2 rounded-md border border-neutral-300 bg-neutral-50 p-4">
@@ -77,37 +70,12 @@ export default async function Academics({
               </Link>
             ))}
           </ul> */}
-          <section
-            className={cn(
-              `h-full flex-1 rounded-b-xl bg-background/[0.6]`,
-              'lg:w-[65%] lg:rounded-t-xl lg:shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] lg:drop-shadow-2xl',
-              'lg:px-6 lg:pt-8 xl:px-8'
-            )}
-          >
-            <ScrollArea
-              type="always"
-              className={cn(
-                'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
-                'px-3 pt-3 md:px-5 md:pt-5 lg:pl-0 lg:pr-4 lg:pt-0 xl:pr-6'
-              )}
-            >
-              <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-                <Suspense fallback={<Loading />} key={currentCategory}>
-                  <NotificationsList category={'academic'} locale={locale} />
-                </Suspense>
-              </ol>
-            </ScrollArea>
-
-            <footer className="mt-auto inline-flex h-[10%] w-full justify-center">
-              <Button
-                asChild
-                className="p-2 font-bold text-primary-700 lg:p-3 lg:text-lg xl:p-4"
-                variant="ghost"
-              >
-                <Link href={`/${locale}/noticeboard`}>{text.viewAll}</Link>
-              </Button>
-            </footer>
-          </section>
+          <NotificationsPanel
+            locale={locale}
+            category="academic"
+            viewAllHref={`/${locale}/notifications/academics`}
+            className="flex-1 lg:w-[65%]"
+          />
         </article>
         <section className="bg-gray-100 py-10" id="stats">
           <hr className="mt-10 border-t-2 border-primary-500" />
@@ -295,45 +263,3 @@ export default async function Academics({
     </>
   );
 }
-
-const NotificationsList = async ({
-  category,
-  locale,
-}: {
-  category: (typeof notificationsSchema.category.enumValues)[number];
-  locale: string;
-}) => {
-  const notifications = (
-    await db.query.notifications.findMany({
-      where: (notification, { eq }) => eq(notification.category, category),
-    })
-  ).map((notification) => ({
-    ...notification,
-    createdAt: notification.createdAt.toLocaleString(locale, {
-      dateStyle: 'long',
-      numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-    }),
-  }));
-
-  return Array.from(groupBy(notifications, 'createdAt')).map(
-    ([createdAt, notifications], index) => (
-      <li key={index}>
-        <h5>{createdAt as string}</h5>
-        <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
-          {notifications.map(({ id, title }, index) => (
-            <li key={index}>
-              <Link
-                className={cn('inline-flex max-w-full')}
-                href={`/${locale}/noticeboard/${id}`}
-              >
-                <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                <p className="truncate">{title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <hr className="opacity-20" />
-      </li>
-    )
-  );
-};

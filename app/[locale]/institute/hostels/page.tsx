@@ -13,7 +13,7 @@ import { cn, groupBy } from '~/lib/utils';
 import { db } from '~/server/db';
 import { getS3Url } from '~/server/s3';
 
-import { NotificationsList } from '../../notifications';
+import NotificationsList from '../../notifications';
 
 // Fetches hostel data from DB - cache for 1 hour
 export const revalidate = 3600;
