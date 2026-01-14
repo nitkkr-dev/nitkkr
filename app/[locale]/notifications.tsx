@@ -3,15 +3,17 @@ import Link from 'next/link';
 import Heading from '~/components/heading';
 import NotificationsPanel from '~/components/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys } from '~/lib/utils';
-import type { notifications as notificationsSchema } from '~/server/db';
+import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
+
+const notificationCategories = ['academic', 'tender', 'workshop', 'recruitment'] as const;
+export type NotificationCategory = (typeof notificationCategories)[number];
 
 export default async function Notifications({
   category: currentCategory,
   locale,
 }: {
-  category: (typeof notificationsSchema.category.enumValues)[number];
+  category: NotificationCategory;
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
@@ -39,7 +41,7 @@ export default async function Notifications({
             'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
           )}
         >
-          {getKeys(text.categories).map((category, index) => (
+          {notificationCategories.map((category, index) => (
             <li className="flex-auto lg:flex-initial" key={index}>
               <Link
                 className="flex"
