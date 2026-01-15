@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs';
+import type { Translations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
 interface Dept {
@@ -25,26 +26,12 @@ export function MobileFilters({
   departments,
   department,
   className,
-  translations = {
-    filters: 'Filters',
-    filterBy: 'Filter By',
-    designation: 'Designation',
-    department: 'Department',
-    saveSelection: 'Save Selection',
-    clearAllFilters: 'Clear All Filters',
-  },
+  translations,
 }: {
   departments?: Dept[];
   department?: string | string[];
   className?: string;
-  translations?: {
-    filters: string;
-    filterBy: string;
-    designation: string;
-    department: string;
-    saveSelection: string;
-    clearAllFilters: string;
-  };
+  translations: Pick<Translations['FacultyAndStaff'], 'filterBy' | 'designation' | 'department' | 'saveSelection' | 'clearAllFilters' | 'allDepartments' | 'selected' | 'viewMore' | 'viewLess'>;
 }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -82,7 +69,7 @@ export function MobileFilters({
         )}
       >
         <MdFilterList className="text-xl text-primary-700" />
-        <span className="text-primary-700">{translations.filters}</span>
+        <span className="text-primary-700">{translations.filterBy}</span>
       </button>
 
       {/* Backdrop */}
@@ -145,6 +132,7 @@ export function MobileFilters({
                           departments={departments}
                           department={department}
                           select={false}
+                          translations={translations}
                         />
                       ) : (
                         <p className="text-sm text-neutral-500">
@@ -239,12 +227,12 @@ export function DepartmentsClient({
   departments,
   department,
   select = false,
-  translations = { allDepartments: 'All Departments', selected: 'selected', viewMore: 'View more', viewLess: 'View less' },
+  translations,
 }: {
   departments: Dept[];
   department?: string | string[];
   select?: boolean;
-  translations?: { allDepartments: string; selected: string; viewMore: string; viewLess: string };
+  translations: Pick<Translations['FacultyAndStaff'], 'allDepartments' | 'selected' | 'viewMore' | 'viewLess'>;
 }) {
   const [showAll, setShowAll] = useState(false);
   const optionsToShow = 4;
