@@ -1,9 +1,12 @@
+// Revalidate every 5 minutes (has DB calls)
+export const revalidate = 300;
+
 import { count } from 'drizzle-orm';
 import { Suspense } from 'react';
 
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
-import GenericTable from '~/components/ui/generic-table'; // Adjust path as needed
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { courses, db } from '~/server/db';
 
@@ -35,20 +38,14 @@ export default async function Curricula({
 
       <main className="container">
         <Suspense fallback={<Loading />}>
-          <CoursesTable page={page} locale={locale} />
+          <Courses page={page} locale={locale} />
         </Suspense>
       </main>
     </>
   );
 }
 
-const CoursesTable = async ({
-  page,
-  locale,
-}: {
-  page: number;
-  locale: string;
-}) => {
+const Courses = async ({ page, locale }: { page: number; locale: string }) => {
   const text = (await getTranslations(locale)).Curricula;
 
   const coursesData = await db.query.courses.findMany({
@@ -69,17 +66,21 @@ const CoursesTable = async ({
 
   // Transform data to flat structure for table
   const tableData = coursesData.flatMap(({ code, coursesToMajors, title }) =>
-    coursesToMajors.map(
-      ({ lectureCredits, practicalCredits, tutorialCredits, major }) => ({
-        code,
-        title,
-        major: major.name,
-        credits: `${lectureCredits}-${tutorialCredits}-${practicalCredits}`,
-        totalCredits:
-          lectureCredits + practicalCredits + Math.floor(tutorialCredits / 2),
-        syllabus: `/en/academics/curricula/${code}`, // URL for the syllabus link
-      })
-    )
+    coursesToMajors.length === 0
+      ? [{ code, title, major: '', credits: '', totalCredits: 0, syllabus: '' }]
+      : coursesToMajors.map(
+          ({ lectureCredits, practicalCredits, tutorialCredits, major }) => ({
+            code,
+            title,
+            major: major.name,
+            credits: `${lectureCredits}-${tutorialCredits}-${practicalCredits}`,
+            totalCredits:
+              lectureCredits +
+              practicalCredits +
+              Math.floor(tutorialCredits / 2),
+            syllabus: `/en/academics/curricula/${code}`,
+          })
+        )
   );
 
   const headers = [
