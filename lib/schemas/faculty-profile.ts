@@ -127,7 +127,7 @@ export const facultyPersonalDetailsSchema = z.object({
   scopusId: z
     .string()
     .regex(
-      /^(https?:\/\/)?(www.)?scopus.com\/authid\/detail.uri\?authorId=\d+-\d+$/,
+      /^(https?:\/\/)?(www.)?scopus.com\/authid\/detail.uri\?authorId=\d+-?\d+$/,
       'Invalid Scopus URL format'
     )
     .optional(),
