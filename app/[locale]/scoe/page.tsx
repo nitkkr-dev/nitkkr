@@ -13,10 +13,10 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-type Column<T> = {
+interface Column<T> {
   header: React.ReactNode;
   cell: (row: T, index: number) => React.ReactNode;
-};
+}
 
 export default async function SCoE({
   params: { locale },
