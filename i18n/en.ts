@@ -408,6 +408,78 @@ const text: Translations = {
     login: 'Login',
     profile: { alt: 'Profile image', view: 'View Profile' },
   },
+
+RACS: {
+  title: 'Regional Academic Centre for Space (RAC-S)',
+  intro: 'Having recognized the imperative need to pursue advanced research in the areas of relevance to the future technological and programmatic needs of the Indian Space Programme, a Regional Academic Centre for Space (RAC-S) has been established at the Institute as a joint collaborative initiative of Indian Space Research Organization (ISRO) and NIT Kurukshetra. The Centre aims to act as a facilitator for the promotion of Space Technology related activities in the northern region of the country and to become an ambassador for the capacity building, awareness creation and R & D activities of ISRO.',
+  notificationsCategory: 'Notifications',
+  
+  // Tabs/Navigation
+  tabs: {
+    notifications: 'Notifications',
+    regionalCoordinator: 'Regional Coordinator',
+    researchProposalForms: 'Research Proposal Forms',
+    partnerInstitutes: 'Partner Institutes',
+    researchAreas: 'Research Areas',
+    queries: 'For Queries',
+  },
+  
+  // Regional Coordinator Section
+  coordinator: {
+    heading: 'Regional Coordinator',
+    name: 'Prof. Arun Goel',
+    position: 'Professor (Head of the Department)',
+    email: 'drarun_goel@yahoo.co.in',
+    phone: '+91-1744-233XXX',
+    image: 'fallback/user-image.jpg',
+  },
+  
+  // Research Proposal Forms Section
+  researchProposalForms: {
+    heading: 'Research Proposal Forms',
+    table: {
+      srNo: 'Sr. No.',
+      form: 'Form Name',
+    },
+    forms: [
+      {
+        name: 'Space Research Proposal Form',
+        link: '#',
+      },
+      {
+        name: 'Collaborative Research Application',
+        link: '#',
+      },
+      {
+        name: 'Student Research Project Form',
+        link: '#',
+      },
+    ],
+  },
+  
+  // Partner Institutes Section
+  partnerInstitutes: {
+    heading: 'Partner Institutes',
+    table: {
+      srNo: 'Sr. No.',
+      institute: 'Institute Name',
+    },
+  },
+  
+  // Research Areas Section
+  researchAreas: {
+    heading: 'Research Areas',
+    description: 'Indian Space Research Organisation (ISRO) plays a vital role in advancing space research and technology for national development. Established in 1969, ISRO has achieved global recognition through cost-effective and innovative missions such as satellite launches for communication, navigation, and Earth observation. Landmark achievements like the Mars Orbiter Mission and Chandrayaan lunar missions highlight ISRO’s growing expertise, scientific capability, and contribution to space exploration while supporting education, disaster management, and socio-economic growth in India. disaster management, and socio-economic growth in India.',
+    readMore: 'RESEARCH AREAS IN 2025',
+    link: '#',
+  },
+  
+  // For Queries Section
+  forQueries: {
+    heading: 'For Queries',
+    email: 'racs@nitkkr.ac.in',
+  },
+},
   Hostels: {
     title: 'Hostels',
     notificationsTitle: 'Hostel Notifications',

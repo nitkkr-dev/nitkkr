@@ -1,3 +1,5 @@
+import RACS from "~/app/RACS/page";
+
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then(
     (module: { default: Translations }) => module.default
@@ -384,6 +386,69 @@ export interface Translations {
       };
     };
   };
+
+RACS: {
+  title: string;
+  intro: string;
+  notificationsCategory: string;
+  
+  // Tabs/Navigation
+  tabs: {
+    notifications: string;
+    regionalCoordinator: string;
+    researchProposalForms: string;
+    partnerInstitutes: string;
+    researchAreas: string;
+    queries: string;
+  };
+  
+  // Regional Coordinator Section
+  coordinator: {
+    heading: string;
+    name: string;
+    position: string;
+    email: string;
+    phone: string;
+    image: string;
+  };
+  
+  // Research Proposal Forms Section
+  researchProposalForms: {
+    heading: string;
+    table: {
+      srNo: string;
+      form: string;
+    };
+    forms: {
+      name: string;
+      link: string;
+    }[];
+  };
+  
+  // Partner Institutes Section
+  partnerInstitutes: {
+    heading: string;
+    table: {
+      srNo: string;
+      institute: string;
+    };
+  };
+  
+  // Research Areas Section
+  researchAreas: {
+    heading: string;
+    description: string;
+    readMore: string;
+    link: string;
+  };
+  
+  // For Queries Section
+  forQueries: {
+    heading: string;
+    email: string;
+  };
+};
+
   Hostels: {
     title: string;
     boysHostels: string;

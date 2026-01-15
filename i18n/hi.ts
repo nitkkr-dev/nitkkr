@@ -658,6 +658,79 @@ const text: Translations = {
       },
     },
   },
+
+RACS: {
+  title: 'अंतरिक्ष के लिए क्षेत्रीय शैक्षणिक केंद्र (RAC-S)',
+  intro: 'एनआईटी कुरुक्षेत्र में अंतरिक्ष के लिए क्षेत्रीय शैक्षणिक केंद्र (RAC-S) अंतरिक्ष अनुसंधान और नवाचार के लिए एक केंद्र के रूप में कार्य करता है, जो शिक्षा और अंतरिक्ष क्षेत्र के बीच सहयोग को बढ़ावा देता है।',
+  notificationsCategory: 'RACS सूचनाएं',
+  
+  // Tabs/Navigation
+  tabs: {
+    notifications: 'सूचनाएं',
+    regionalCoordinator: 'क्षेत्रीय समन्वयक',
+    researchProposalForms: 'अनुसंधान प्रस्ताव फॉर्म',
+    partnerInstitutes: 'साझेदार संस्थान',
+    researchAreas: 'अनुसंधान क्षेत्र',
+    queries: 'प्रश्नों के लिए',
+  },
+  
+  // Regional Coordinator Section
+  coordinator: {
+    heading: 'क्षेत्रीय समन्वयक',
+    name: 'प्रो. [नाम]',
+    position: 'क्षेत्रीय समन्वयक, RAC-S',
+    email: 'racs@nitkkr.ac.in',
+    phone: '+91-1744-233XXX',
+    image: 'fallback/user-image.jpg',
+  },
+  
+  // Research Proposal Forms Section
+  researchProposalForms: {
+    heading: 'अनुसंधान प्रस्ताव फॉर्म',
+    table: {
+      srNo: 'क्र. सं.',
+      form: 'फॉर्म का नाम',
+    },
+    forms: [
+      {
+        name: 'अंतरिक्ष अनुसंधान प्रस्ताव फॉर्म',
+        link: '#',
+      },
+      {
+        name: 'सहयोगी अनुसंधान आवेदन',
+        link: '#',
+      },
+      {
+        name: 'छात्र अनुसंधान परियोजना फॉर्म',
+        link: '#',
+      },
+    ],
+  },
+  
+  // Partner Institutes Section
+  partnerInstitutes: {
+    heading: 'साझेदार संस्थान',
+    table: {
+      srNo: 'क्र. सं.',
+      institute: 'संस्थान का नाम',
+    },
+  },
+  
+  // Research Areas Section
+  researchAreas: {
+    heading: 'अनुसंधान क्षेत्र',
+    description: 'RAC-S उपग्रह प्रणाली, रिमोट सेंसिंग, अंतरिक्ष संचार, ग्रह विज्ञान और एयरोस्पेस इंजीनियरिंग सहित अंतरिक्ष प्रौद्योगिकी के विभिन्न डोमेन पर केंद्रित है। हमारी अनुसंधान पहल का उद्देश्य भारत के अंतरिक्ष मिशनों और तकनीकी उन्नति में योगदान देना है।',
+    readMore: 'और पढ़ें',
+    link: '#',
+  },
+  
+  // For Queries Section
+  forQueries: {
+    heading: 'प्रश्नों के लिए',
+    email: 'racs@nitkkr.ac.in',
+  },
+},
+
   Hostels: {
     title: 'छात्रावास',
     notificationsTitle: 'छात्रावास सूचनाएँ',
