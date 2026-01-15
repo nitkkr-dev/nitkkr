@@ -94,6 +94,35 @@ export async function loadMoreNotifications(
   };
 }
 
+// Full notification details for modal
+export interface NotificationDetails {
+  id: number;
+  title: string;
+  content: string | null;
+  category: string;
+  documents: string[];
+  createdAt: string;
+}
+
+export async function getNotificationById(
+  id: number
+): Promise<NotificationDetails | null> {
+  const notification = await db.query.notifications.findFirst({
+    where: (n, { eq }) => eq(n.id, id),
+  });
+
+  if (!notification) return null;
+
+  return {
+    id: notification.id,
+    title: notification.title,
+    content: notification.content,
+    category: notification.category,
+    documents: notification.documents,
+    createdAt: notification.createdAt.toISOString(),
+  };
+}
+
 export async function applyDateFilter(formData: FormData) {
   const locale = formData.get('locale')?.toString() ?? 'en';
   const startDay = formData.get('start-day')?.toString();

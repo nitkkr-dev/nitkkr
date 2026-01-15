@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
@@ -11,6 +10,8 @@ import {
   type LoadMoreParams,
   type NotificationItem,
 } from '~/server/actions/notifications';
+
+import { NotificationModal } from './NotificationModal';
 
 interface NotificationsListProps {
   initialItems: NotificationItem[];
@@ -36,6 +37,7 @@ export function NotificationsList({
   const [cursor, setCursor] = useState(initialCursor);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -116,13 +118,13 @@ export function NotificationsList({
           <ul className="space-y-2">
             {group.map((n) => (
               <li key={n.id}>
-                <Link
-                  href={`/${locale}/noticeboard/${n.id}`}
-                  className="hover:bg-primary-50 group flex items-start gap-2 rounded px-2 py-1"
+                <button
+                  onClick={() => setSelectedId(n.id)}
+                  className="hover:bg-primary-50 group flex w-full items-start gap-2 rounded px-2 py-1 text-left"
                 >
                   <MdOutlineKeyboardArrowRight className="text-primary-600 mt-1 size-4 transition-transform group-hover:translate-x-1" />
                   <p className="truncate">{n.title}</p>
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
@@ -139,6 +141,13 @@ export function NotificationsList({
           </p>
         )}
       </div>
+
+      {/* Notification Modal */}
+      <NotificationModal
+        notificationId={selectedId}
+        onClose={() => setSelectedId(null)}
+        locale={locale}
+      />
     </>
   );
 }
