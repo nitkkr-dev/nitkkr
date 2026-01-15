@@ -150,38 +150,43 @@ export function MobileFilters({
           >
             {/* Inner content area */}
             <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
-              <div className="bg-white h-full p-5">
-                <ScrollArea className="mt-8 h-[calc(100svh-80px)]">
-                  <div className="rounded-lg">
-                    <div>
-                      {/* Close button row - right aligned, above header */}
-                      <div className="flex justify-end">
-                        <button
-                          onClick={handleClose}
-                          aria-label="Close filters"
-                          className="hover:bg-black/5 rounded"
-                        >
-                          <FaTimes className="size-5 pr-1 text-primary-700" />
-                        </button>
-                      </div>
-                      {/* Header row with title and clear all button */}
-                      <div className="mt-2 flex flex-row items-center justify-between gap-2">
-                        <h3 className="text-xl font-bold text-primary-700">
-                          {text.filterBy}
-                        </h3>
-                        <Link
-                          scroll={false}
-                          href={`/${locale}/notifications`}
-                          onClick={handleClose}
-                          className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
-                        >
-                          {text.clearAllFilters}
-                        </Link>
-                      </div>
-                    </div>
+              <div className="bg-white flex h-full flex-col overflow-hidden p-5">
+                {' '}
+                {/* Added flex flex-col and overflow-hidden */}
+                {/* 1. FIXED HEADER (Outside ScrollArea) */}
+                <div className="mb-4 flex flex-col">
+                  {/* Close button row */}
+                  <div className="flex justify-end">
+                    <button
+                      onClick={handleClose}
+                      aria-label="Close filters"
+                      className="hover:bg-black/5 mt-8 rounded p-1 sm:mt-12"
+                    >
+                      <FaTimes className="size-5 text-primary-700" />
+                    </button>
+                  </div>
 
+                  {/* Header row with title and clear all button */}
+                  <div className="mt-2 flex flex-row items-center justify-between gap-2">
+                    <h3 className="text-xl font-bold text-primary-700">
+                      {text.filterBy}
+                    </h3>
+                    <Link
+                      scroll={false}
+                      href={`/${locale}/notifications`}
+                      onClick={handleClose}
+                      className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
+                    >
+                      {text.clearAllFilters}
+                    </Link>
+                  </div>
+                </div>
+                {/* 2. SCROLLABLE FILTERS AREA */}
+                {/* Removed hardcoded mt-8 and calc height, replaced with flex-1 */}
+                <ScrollArea className="flex-1 pr-4">
+                  <div className="flex flex-col gap-6 pb-4">
                     {/* Date Filter */}
-                    <div className="mb-6 mt-4 rounded bg-neutral-50 p-4">
+                    <div className="rounded bg-neutral-50 p-4">
                       <h3 className="mb-2 text-lg font-bold text-primary-700">
                         {text.filter.date}
                       </h3>
@@ -204,7 +209,7 @@ export function MobileFilters({
                     </div>
 
                     {/* Category Filter */}
-                    <div className="mb-6 rounded bg-neutral-50 p-4">
+                    <div className="rounded bg-neutral-50 p-4">
                       <h3 className="mb-2 text-lg font-bold text-primary-700">
                         {text.filter.category}
                       </h3>
@@ -218,7 +223,7 @@ export function MobileFilters({
                     </div>
 
                     {/* Department Filter */}
-                    <div className="mb-6 rounded bg-neutral-50 p-4">
+                    <div className="rounded bg-neutral-50 p-4">
                       <h3 className="mb-2 text-lg font-bold text-primary-700">
                         {text.filter.department}
                       </h3>
