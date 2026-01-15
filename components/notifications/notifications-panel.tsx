@@ -12,12 +12,20 @@ import { db, type notifications as notificationsTable } from '~/server/db';
 type NotificationCategory =
   (typeof notificationsTable.category.enumValues)[number];
 
+type EducationType = 'ug' | 'pg' | 'phd';
+
 export interface NotificationsPanelProps {
   locale: string;
   /** Filter by notification category */
   category?: NotificationCategory;
   /** Filter by club ID */
   clubId?: number;
+  /** Filter by department ID */
+  departmentId?: number;
+  /** Filter by hostel ID */
+  hostelId?: number;
+  /** Filter by education type (ug, pg, phd) */
+  educationType?: EducationType;
   /** Filter notifications created on or after this date */
   startDate?: Date;
   /** Filter notifications created on or before this date */
@@ -36,6 +44,9 @@ export default async function NotificationsPanel({
   locale,
   category,
   clubId,
+  departmentId,
+  hostelId,
+  educationType,
   startDate,
   endDate,
   className,
@@ -44,7 +55,7 @@ export default async function NotificationsPanel({
   viewAllText,
 }: NotificationsPanelProps) {
   const text = (await getTranslations(locale)).Notifications;
-  const filterKey = `${category}-${clubId}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
+  const filterKey = `${category}-${clubId}-${departmentId}-${hostelId}-${educationType}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
 
   return (
     <section
@@ -63,8 +74,12 @@ export default async function NotificationsPanel({
               locale={locale}
               category={category}
               clubId={clubId}
+              departmentId={departmentId}
+              hostelId={hostelId}
+              educationType={educationType}
               startDate={startDate}
               endDate={endDate}
+              noNotificationsText={text.noNotificationsFound}
             />
           </Suspense>
         </ol>
@@ -91,16 +106,24 @@ interface NotificationsListProps {
   locale: string;
   category?: NotificationCategory;
   clubId?: number;
+  departmentId?: number;
+  hostelId?: number;
+  educationType?: EducationType;
   startDate?: Date;
   endDate?: Date;
+  noNotificationsText: string;
 }
 
 const NotificationsList = async ({
   locale,
   category,
   clubId,
+  departmentId,
+  hostelId,
+  educationType,
   startDate,
   endDate,
+  noNotificationsText,
 }: NotificationsListProps) => {
   const notifications = (
     await db.query.notifications.findMany({
@@ -112,6 +135,15 @@ const NotificationsList = async ({
         }
         if (clubId !== undefined) {
           conditions.push(eq(notification.clubId, clubId));
+        }
+        if (departmentId !== undefined) {
+          conditions.push(eq(notification.departmentId, departmentId));
+        }
+        if (hostelId !== undefined) {
+          conditions.push(eq(notification.hostelId, hostelId));
+        }
+        if (educationType) {
+          conditions.push(eq(notification.educationType, educationType));
         }
         if (startDate) {
           conditions.push(gte(notification.createdAt, startDate));
@@ -134,8 +166,8 @@ const NotificationsList = async ({
 
   if (notifications.length === 0) {
     return (
-      <li className="py-8 text-center text-neutral-500">
-        No notifications found
+      <li className="py-8 text-center text-neutral-900">
+        {noNotificationsText}
       </li>
     );
   }
