@@ -69,7 +69,7 @@ export default async function Notifications({
         <NotificationsPanel
           locale={locale}
           category={currentCategory}
-          viewAllHref={`/${locale}/notifications/?category=${currentCategory}`}
+          viewAllHref={`/${locale}/notifications`}
           className="rounded-none lg:w-[65%] lg:rounded-xl"
         />
       </article>
