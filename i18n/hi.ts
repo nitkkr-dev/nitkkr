@@ -2017,7 +2017,6 @@ const text: Translations = {
       srNo: 'क्रम संख्या',
       courseName: 'पाठ्यक्रम का नाम',
     },
-
   },
 };
 

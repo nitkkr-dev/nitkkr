@@ -13,6 +13,10 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+type Column<T> = {
+  header: React.ReactNode;
+  cell: (row: T, index: number) => React.ReactNode;
+};
 
 export default async function SCoE({
   params: { locale },
@@ -37,6 +41,28 @@ export default async function SCoE({
     { LaboratoriesName: 'CAD Lab' },
     { LaboratoriesName: 'Mechatronics Lab' },
     { LaboratoriesName: 'Embedded Systems Lab' },
+  ];
+
+  const laboratoryColumns: Column<{ LaboratoriesName: string }>[] = [
+    {
+      header: text.Laboratories.srNo,
+      cell: (_, index) => index + 1,
+    },
+    {
+      header: text.Laboratories.LaboratoriesName,
+      cell: (row) => row.LaboratoriesName,
+    },
+  ];
+
+  const courseColumns: Column<{ courseName: string }>[] = [
+    {
+      header: text.Courses.srNo,
+      cell: (_, index) => index + 1,
+    },
+    {
+      header: text.Courses.courseName,
+      cell: (row) => row.courseName,
+    },
   ];
 
   return (
@@ -72,7 +98,7 @@ export default async function SCoE({
           {/* LEFT: Vision & Mission */}
           <div className="w-full space-y-10 lg:w-1/2">
             {/* Vision */}
-            <section>
+            <section id="vision">
               <h3 className="text-red-700  mb-4 text-3xl">
                 {text.Vision.title.toUpperCase()}
               </h3>
@@ -80,7 +106,7 @@ export default async function SCoE({
             </section>
 
             {/* Mission */}
-            <section>
+            <section id="mission">
               <h3 className="text-red-700 mb-4 font-serif text-3xl">
                 {text.Mission.title.toUpperCase()}
               </h3>
@@ -177,7 +203,7 @@ export default async function SCoE({
         />
         {/* Box */}
         <div className="border-red-300 bg-white rounded-xl border px-10 py-5">
-          <ul className="text-black list-disc space-y-3 text-lg">
+          <ul className="text-black list-disc">
             {text.Features.items.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
@@ -197,16 +223,20 @@ export default async function SCoE({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{text.Laboratories.srNo}</TableHead>
-              <TableHead>{text.Laboratories.LaboratoriesName}</TableHead>
+              {laboratoryColumns.map((col, idx) => (
+                <TableHead key={idx}>{col.header}</TableHead>
+              ))}
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {LaboratoriesData.map(({ LaboratoriesName }, index) => (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{LaboratoriesName}</TableCell>
+            {LaboratoriesData.map((row, rowIndex) => (
+              <TableRow key={rowIndex}>
+                {laboratoryColumns.map((col, colIndex) => (
+                  <TableCell key={colIndex}>
+                    {col.cell(row, rowIndex)}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
@@ -222,20 +252,25 @@ export default async function SCoE({
           id="courses"
           text={text.Courses.title.toUpperCase()}
         />
-
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{text.Courses.srNo}</TableHead>
-              <TableHead>{text.Courses.courseName}</TableHead>
+              {courseColumns.map((col, idx) => (
+                <TableHead key={idx}>{col.header}</TableHead>
+              ))}
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {CoursesData.map(({ courseName }, index) => (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{courseName}</TableCell>
+            {CoursesData.map((row, rowIndex) => (
+              <TableRow key={rowIndex}>
+                {courseColumns.map((col, colIndex) => (
+                  <TableCell key={colIndex}>
+                    <span className="text-neutral-800">
+                      {col.cell(row, rowIndex)}
+                    </span>
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
@@ -252,7 +287,7 @@ export default async function SCoE({
           text={text.How_to_Apply.title.toUpperCase()}
         />
         <div className="border-red-300 bg-white rounded-xl border px-10 py-5">
-          <ol className="text-black list-disc space-y-3 text-lg">
+          <ol className="text-black list-inside list-decimal text-lg">
             {text.How_to_Apply.registrationSteps.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
