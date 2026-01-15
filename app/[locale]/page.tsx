@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { BsLinkedin } from 'react-icons/bs';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
-import Notifications from '~/app/notifications';
+import Notifications, { type NotificationCategory } from '~/app/notifications';
 import { Button } from '~/components/buttons';
 import {
   AutoplayCarousel,
@@ -14,7 +14,7 @@ import {
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
-import { type events, type notifications } from '~/server/db';
+import { type events } from '~/server/db';
 
 import Events from './events';
 
@@ -27,7 +27,7 @@ export default async function Home({
 }: {
   params: { locale: string };
   searchParams: {
-    notificationCategory?: (typeof notifications.category.enumValues)[number];
+    notificationCategory?: NotificationCategory;
     eventsCategory?:
       | (typeof events.category.enumValues)[number]
       | 'recents'
