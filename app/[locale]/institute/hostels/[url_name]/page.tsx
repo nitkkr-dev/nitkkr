@@ -4,14 +4,7 @@ import { notFound } from 'next/navigation';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db, hostels } from '~/server/db';
 
@@ -146,32 +139,41 @@ export default async function Hostel({
             <h4 className="mt-10">
               {index === 0 ? text.faculty : `${text.general} ${text.staff}`}
             </h4>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.hostelsStaffTable.name}</TableHead>
-                  <TableHead>{text.hostelsStaffTable.designation}</TableHead>
-                  <TableHead>{text.hostelsStaffTable.hostelPost}</TableHead>
-                  <TableHead>{text.contact}</TableHead>
-                  <TableHead>{text.email}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {hostel.hostelStaff.map(({ post, staff }) => (
-                  <TableRow key={staff.person.email}>
-                    <TableCell>{staff.person.name}</TableCell>
-                    <TableCell>{staff.designation}</TableCell>
-                    <TableCell>{post}</TableCell>
-                    <TableCell>{staff.person.telephone}</TableCell>
-                    <TableCell>
-                      <Link href={`mailto:${staff.person.email}`}>
-                        {staff.person.email}
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                { key: 'name', label: text.hostelsStaffTable.name },
+                {
+                  key: 'designation',
+                  label: text.hostelsStaffTable.designation,
+                },
+                { key: 'post', label: text.hostelsStaffTable.hostelPost },
+                { key: 'telephone', label: text.contact },
+                { key: 'email', label: text.email },
+              ]}
+              tableData={staff.map((item) => {
+                const person =
+                  'faculty' in item
+                    ? item.faculty?.person
+                    : 'staff' in item
+                      ? item.staff?.person
+                      : undefined;
+                const designation =
+                  'faculty' in item
+                    ? item.faculty?.designation
+                    : 'staff' in item
+                      ? item.staff?.designation
+                      : undefined;
+                return {
+                  name: person?.name,
+                  designation,
+                  post: item.post,
+                  telephone: person?.telephone,
+                  email: person?.email,
+                };
+              })}
+              currentPage={1}
+              getCount={Promise.resolve([])}
+            />
           </Fragment>
         ))}
       </section>

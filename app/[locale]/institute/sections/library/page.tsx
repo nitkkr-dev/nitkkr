@@ -8,14 +8,7 @@ import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -270,27 +263,17 @@ export default async function Library({
           id="contact-us"
         />
         <Suspense fallback={<Loading />}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.contactUs.name}</TableHead>
-                <TableHead>{text.contactUs.designation}</TableHead>
-                <TableHead>{text.contactUs.phoneNumber}</TableHead>
-                <TableHead>{text.contactUs.email}</TableHead>
-              </TableRow>
-            </TableHeader>
-
-            <TableBody>
-              {contactUsData.map((entry, index) => (
-                <TableRow key={index}>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.designation}</TableCell>
-                  <TableCell>{entry.phoneNumber}</TableCell>
-                  <TableCell>{entry.email}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'name', label: text.contactUs.name },
+              { key: 'designation', label: text.contactUs.designation },
+              { key: 'phoneNumber', label: text.contactUs.phoneNumber },
+              { key: 'email', label: text.contactUs.email },
+            ]}
+            tableData={contactUsData}
+            currentPage={1}
+            getCount={Promise.resolve([])}
+          />
         </Suspense>
       </section>
     </>

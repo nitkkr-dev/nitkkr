@@ -8,14 +8,7 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import Loading from '~/components/loading';
 
 export default async function HealthCentre({
@@ -487,29 +480,23 @@ export default async function HealthCentre({
           text={text.headings.timings.toUpperCase()}
         />
         <Suspense fallback={<Loading />}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.timings.day}</TableHead>
-                <TableHead>Timings</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {timings.days.map((entry, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{entry.day}</TableCell>
-                  <TableCell>
-                    {entry.timings.map((timing, idx) => (
-                      <div key={idx}>
-                        {`${timing.from} - ${timing.to}`}
-                        {timing.label ? `${timing.label} ` : ''}
-                      </div>
-                    ))}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'day', label: text.timings.day },
+              { key: 'timings', label: 'Timings' },
+            ]}
+            tableData={timings.days.map((entry) => ({
+              day: entry.day,
+              timings: entry.timings
+                .map(
+                  (timing) =>
+                    `${timing.from} - ${timing.to}${timing.label ? ` ${timing.label}` : ''}`
+                )
+                .join(', '),
+            }))}
+            currentPage={1}
+            getCount={Promise.resolve([])}
+          />
         </Suspense>
       </section>
       <section className="container">
@@ -522,49 +509,37 @@ export default async function HealthCentre({
         />
         <Suspense fallback={<Loading />}>
           <h3 className="my-10">{text.staff.officers}</h3>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.staff.sr}</TableHead>
-                <TableHead>{text.staff.name}</TableHead>
-                <TableHead>{text.staff.designation}</TableHead>
-                <TableHead>{text.staff.phone}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {medicalOfficersData.map((entry, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{entry.srNo}</TableCell>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.role}</TableCell>
-                  <TableCell>{entry.tel}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'name', label: text.staff.name },
+              { key: 'role', label: text.staff.designation },
+              { key: 'tel', label: text.staff.phone },
+            ]}
+            tableData={medicalOfficersData.map(({ name, role, tel }) => ({
+              name,
+              role,
+              tel,
+            }))}
+            currentPage={1}
+            getCount={Promise.resolve([])}
+          />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <h3 className="my-10">{text.staff.other}</h3>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.staff.sr}</TableHead>
-                <TableHead>{text.staff.name}</TableHead>
-                <TableHead>{text.staff.designation}</TableHead>
-                <TableHead>{text.staff.phone}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {medicalStaffData.map((entry, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{entry.srNo}</TableCell>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.designation}</TableCell>
-                  <TableCell>{entry.phone}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'name', label: text.staff.name },
+              { key: 'designation', label: text.staff.designation },
+              { key: 'phone', label: text.staff.phone },
+            ]}
+            tableData={medicalStaffData.map(({ name, designation, phone }) => ({
+              name,
+              designation,
+              phone,
+            }))}
+            currentPage={1}
+            getCount={Promise.resolve([])}
+          />
         </Suspense>
       </section>
       <section className="container">
@@ -718,27 +693,20 @@ export default async function HealthCentre({
             heading="h4"
             text={text.facilities.hospitals.toUpperCase()}
           />
-
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.hospitals.sr}</TableHead>
-                <TableHead>{text.hospitals.name}</TableHead>
-                <TableHead>{text.hospitals.field}</TableHead>
-                <TableHead>{text.hospitals.contact}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {hospitalData.map((entry, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{entry.srNo}</TableCell>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.field}</TableCell>
-                  <TableCell>{entry.phone}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'name', label: text.hospitals.name },
+              { key: 'field', label: text.hospitals.field },
+              { key: 'phone', label: text.hospitals.contact },
+            ]}
+            tableData={hospitalData.map(({ name, field, phone }) => ({
+              name,
+              field,
+              phone,
+            }))}
+            currentPage={1}
+            getCount={Promise.resolve([])}
+          />
         </Suspense>
       </section>
       <section className="container">
