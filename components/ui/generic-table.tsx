@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
+import { FiExternalLink } from 'react-icons/fi';
 
 import {
   Table,
@@ -93,7 +93,7 @@ export default function GenericTable<T extends Record<string, unknown>>({
                             href={String(cellValue)}
                             className="bg-blue-600 text-white hover:bg-blue-700 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
                           >
-                            <ExternalLink className="h-4 w-4" />
+                            <FiExternalLink className="h-4 w-4" />
                           </Link>
                         ) : (
                           String(cellValue)
