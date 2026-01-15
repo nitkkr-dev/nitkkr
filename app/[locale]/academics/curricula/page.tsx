@@ -60,8 +60,6 @@ const Courses = async ({ page, locale }: { page: number; locale: string }) => {
         with: { major: { columns: { name: true } } },
       },
     },
-    limit: 10,
-    offset: (page - 1) * 10,
   });
 
   // Transform data to flat structure for table
