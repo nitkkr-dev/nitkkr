@@ -1949,6 +1949,97 @@ rolls down to 60% of the eligible students for second round of placement session
       },
     ],
   },
+  SCoE: {
+    welcome: 'Siemens Centre of Excellence (SCoE)',
+    admission: {
+      title: 'Admission Process & Education System',
+      process: {
+        title: 'Admission Procedure',
+        content: [
+          'Siemens Centre of Excellence (SCOE) is a premier arm of National Institute of Technology, Kurukshetra (Institution of National Importance) which aims to build capacity in Design and Manufacturing with the latest and highly robust technology-driven solutions.',
+          'The facility is dedicated to performing these solutions-driven engagements for both Industry and academia.',
+          'The infrastructure available at the Centre can take up real-time projects in the field of design and manufacturing for industrial, service and other sectors.',
+          'Also, there is opportunity of consulting and research operations which is benefited by latest hardware and software deployed at the Centre. The center team not only includes experienced professionals with practical exposure of dealing with industrial processes and troubleshoot but also is supported by highly experienced academia fraternity of NIT Kurukshetra for adding value to the  deliverable. SCOE is dedicated to the growth of technology driven society with focus on uplifting both regional and national perspectives.',
+        ],
+      },
+      education: {
+        title: 'Education System',
+        content: [
+          'The Education System of the Institute is divided into academic sessions comprising of two semesters – Even and Odd semester. The Institute offers courses of study leading to B.Tech and M.Tech. degree and research facilities leading to the degree of Doctor of Philosophy. The small of instructions and examination is English. The Institute has assumed the status of a Deemed University w.e.f. 26.6.2002. The Institute is now independent in every respect relating to academic work such as Examinations, evaluation of the answer sheets, declaration of results and other allied matters. The Institute has switched over from the conventional examination and evaluation system to the Credit Based Examination System.',
+          'The courses include study at the Institute, visits to work sites and practical training in the Institute Workshops and in approved Engineering works. There is a semester examination at the end of each semester.',
+        ],
+      },
+    },
+    Notifications: {
+      title: 'Notifications',
+    },
+    Vision: {
+      title: 'Vision',
+      description:
+        'To be a globally recognized and leading Centre for skill development, training, and translational research for empowering indigenous manufacturing.',
+    },
+    VisionMissionImage: {
+      src: 'fallback/user-image.jpg',
+      alt: 'Vision and Mission Image',
+    },
+
+    Mission: {
+      title: 'Mission',
+      points: [
+        'To empower Indian youth with industry-relevant skills in manufacturing technologies through education and training, enabling rewarding employment opportunities.',
+        'To develop capabilities and build capacity for indigenous manufacturing in collaboration with industry, academia, and government agencies.',
+        'To provide access to state-of-the-art machinery and software tools for innovative design and development of new manufacturing technologies.',
+      ],
+    },
+    Head: {
+      title: 'HEAD OF SCoE',
+      facultyIncharge: [
+        {
+          name: 'Dr. Anil Kumar',
+          title: 'Professor & Head, Siemens Centre of Excellence',
+          image: 'fallback/user-image.jpg',
+          email: 'anil.kumar@nitkkr.ac.in',
+          phone: '+91-XXXXXXXXXX',
+        },
+      ],
+    },
+
+    Features: {
+      title: 'Features',
+      items: [
+        'Research Experience',
+        'Services & Solutions',
+        'Skills, Talent & Ability',
+        'Technology Driven Learning',
+        'Unlock Innovation',
+      ],
+    },
+    Laboratories: {
+      title: 'Laboratories',
+      srNo: 'S. No.',
+      LaboratoriesName: 'Laboratory',
+    },
+
+    How_to_Apply: {
+      title: 'How to Apply',
+      registrationSteps: [
+        'Submit the “Student Registration Form” (click on the SCoE dropdown menu to access this form).',
+        'The SCoE team will contact you to share details of the registered course.',
+        'Payment link/details will be sent to your registered email ID from scoe@nitkkr.ac.in.',
+        'Share the payment receipt/confirmation to scoe@nitkkr.ac.in with the subject line: [Re: Payment receipt for enrolment in SCoE program “Program Name”].',
+        'A confirmation email will be sent containing your UID details and training schedule.',
+        'Join the induction program as per the communicated schedule.',
+      ],
+    },
+    For_Queries: {
+      title: 'For Queries',
+    },
+    Courses: {
+      title: 'Courses',
+      srNo: 'S. No.',
+      courseName: 'Course Name',
+    },
+  },
 };
 
 export default text;
