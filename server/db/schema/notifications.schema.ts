@@ -1,9 +1,27 @@
-import { check, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { check, pgEnum, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from './clubs.schema';
 import { departments } from './departments.schema';
 import { hostels } from './hostels.schema';
+
+export const notificationCategoryEnum = pgEnum('notification_category', [
+  'academic',
+  'tender',
+  'workshop',
+  'administration',
+  'recruitment',
+  'admission',
+  'student-activities',
+  'faculty',
+  'research',
+  'alumni',
+  'examination',
+  'result',
+  'hostel',
+  'miscellaneous',
+  'archived',
+]);
 
 export const notifications = pgTable(
   'notifications',
@@ -11,30 +29,17 @@ export const notifications = pgTable(
     id: t.serial('id').primaryKey(),
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     content: t.text('content'),
-    category: t
-      .varchar('category', {
-        enum: [
-          'academic',
-          'tender',
-          'workshop',
-          'administration',
-          'recruitment',
-          'admission',
-          'student-activities',
-          'faculty',
-          'research',
-          'alumni',
-          'examination',
-          'result',
-          'hostel',
-          'miscellaneous',
-          'archived',
-        ],
-      })
-      .notNull(),
+
+    category: notificationCategoryEnum('category').notNull(),
+
     educationType: t.varchar('education_type', {
       enum: ['ug', 'pg', 'phd'],
     }),
+    documents: t
+      .text('documents')
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
     createdAt: t.timestamp('created_at').defaultNow().notNull(),
     updatedAt: t
       .timestamp('updated_at')
@@ -46,7 +51,6 @@ export const notifications = pgTable(
   }),
   (n) => ({
     notificationsTitleIndex: uniqueIndex('notifications_title_idx').on(n.title),
-    // Club ONLY for student activities
     clubRequiredForStudent: check(
       'club_required_for_student',
       sql`(
