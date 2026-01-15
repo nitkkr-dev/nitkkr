@@ -94,7 +94,7 @@ export function NotificationModal({
             </div>
 
             {/* Title */}
-            <h2 className="px-4 text-center font-serif text-lg font-bold leading-snug text-primary-700 sm:px-6 sm:text-xl lg:text-2xl">
+            <h2 className="mt-2 px-4 text-center font-serif text-lg font-bold leading-snug text-primary-700 sm:px-6 sm:text-xl lg:text-2xl">
               {notification.title}
             </h2>
 

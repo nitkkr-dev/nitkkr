@@ -1,16 +1,13 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
+import { NotificationItemWithModal } from '~/components/notifications/notification-item-with-modal';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
-import {
-  db,
-  type notifications as notificationsTable,
-} from '~/server/db';
+import { db, type notifications as notificationsTable } from '~/server/db';
 
 type NotificationCategory =
   (typeof notificationsTable.category.enumValues)[number];
@@ -59,10 +56,7 @@ export default async function NotificationsPanel({
         className
       )}
     >
-      <ScrollArea
-        type="always"
-        className="flex-1 pr-2 sm:pr-3 md:pr-4"
-      >
+      <ScrollArea type="always" className="flex-1 pr-2 sm:pr-3 md:pr-4">
         <ol className="space-y-2 sm:space-y-4 md:space-y-6">
           <Suspense fallback={<Loading />} key={filterKey}>
             <NotificationsList
@@ -155,15 +149,11 @@ const NotificationsList = async ({
         <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
           {notifications.map(({ id, title }, index) => (
             <li key={index}>
-              <Link
-                className="inline-flex max-w-full items-start gap-1"
-                href={`/${locale}/noticeboard/${id}`}
-              >
-                <MdOutlineKeyboardArrowRight className="mt-0.5 size-4 shrink-0 text-primary-700 sm:mt-1 md:size-5 lg:size-6" />
-                <p className="line-clamp-2 text-sm sm:line-clamp-1 sm:text-base md:text-lg">
-                  {title}
-                </p>
-              </Link>
+              <NotificationItemWithModal
+                id={id}
+                title={title}
+                locale={locale}
+              />
             </li>
           ))}
         </ul>
