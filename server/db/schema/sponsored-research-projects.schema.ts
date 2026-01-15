@@ -1,28 +1,28 @@
-import { sql } from "drizzle-orm";
-import { pgTable } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
-import { departments } from "./departments.schema";
-import { sponsoredResearchProjectsFaculties } from "./sponsored-research-projects-faculties.schema";
+import { sql } from 'drizzle-orm';
+import { pgTable } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { departments } from './departments.schema';
+import { sponsoredResearchProjectsFaculties } from './sponsored-research-projects-faculties.schema';
 
 export const sponsoredResearchProjects = pgTable(
-  "sponsored_research_projects",
+  'sponsored_research_projects',
   (t) => ({
-    id: t.serial("id").primaryKey(),
-    year: t.varchar("year").notNull(),
+    id: t.serial('id').primaryKey(),
+    year: t.varchar('year').notNull(),
     departmentId: t
-      .smallserial("department_id")
+      .smallserial('department_id')
       .references(() => departments.id)
       .notNull(),
-    titleOfProject: t.varchar("title_of_project").notNull(),
-    agency: t.varchar("agency").notNull(),
+    titleOfProject: t.varchar('title_of_project').notNull(),
+    agency: t.varchar('agency').notNull(),
     amountInLakh: t
-      .numeric("amount_in_lakh", { precision: 10, scale: 2 })
+      .numeric('amount_in_lakh', { precision: 10, scale: 2 })
       .notNull(),
-    sanctionedFileOrderNO: t.varchar("sanctioned_file_order_no"),
-    sanctionedDate: t.date("sanctioned_date"),
+    sanctionedFileOrderNO: t.varchar('sanctioned_file_order_no'),
+    sanctionedDate: t.date('sanctioned_date'),
     status: t
-      .varchar("status", { enum: ["ongoing", "completed"] })
-      .default("ongoing")
+      .varchar('status', { enum: ['ongoing', 'completed'] })
+      .default('ongoing')
       .notNull(),
   }),
   (t) => ({

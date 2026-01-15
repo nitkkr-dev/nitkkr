@@ -3,7 +3,7 @@ export const revalidate = 300;
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense ,useMemo} from 'react';
+import { Suspense, useMemo } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
@@ -29,6 +29,7 @@ import {
   MobileFilters,
   PreserveParamsLink,
 } from './client-components';
+import { FacultyImage } from './faculty-image';
 
 export default async function FacultyAndStaff({
   params: { locale },
@@ -145,15 +146,15 @@ const Designations = ({
       ? [designation]
       : [];
 
-      const sortedOptions = useMemo(() => {
-          return [...options].sort((a, b) => {
-            const aSelected = selectedDesignations.includes(a);
-            const bSelected = selectedDesignations.includes(b);
-            if (aSelected && !bSelected) return -1;
-            if (!aSelected && bSelected) return 1;
-            return 0;
-          });
-        }, [selectedDesignations]);
+  const sortedOptions = useMemo(() => {
+    return [...options].sort((a, b) => {
+      const aSelected = selectedDesignations.includes(a);
+      const bSelected = selectedDesignations.includes(b);
+      if (aSelected && !bSelected) return -1;
+      if (!aSelected && bSelected) return 1;
+      return 0;
+    });
+  }, [selectedDesignations]);
 
   // Define the updated designation value based on selection
   const getUpdatedDesignations = (option: string) => {
@@ -404,12 +405,13 @@ const FacultyList = async ({
             className="flex gap-4 p-2 sm:p-3 md:p-4"
             href={`/${locale}/faculty-and-staff/${faculty.employeeId}`}
           >
-            <Image
+            <FacultyImage
+              employeeId={faculty.employeeId}
+              facultyId={faculty.id}
               alt={faculty.person.name}
+              width={176}
+              height={176}
               className="my-auto size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-              height={0}
-              src={`fallback/user-image.jpg`}
-              width={0}
             />
             <main>
               <header className="mb-1 sm:mb-1 md:mb-2 lg:mb-3">
@@ -468,7 +470,13 @@ const FacultyList = async ({
                     <Link
                       key={key}
                       className="flex w-fit items-center justify-evenly gap-2 rounded-2xl"
-                      href={profileExternalLinks[key] ?? ''}
+                      href={
+                        !profileExternalLinks[key]
+                          ? ''
+                          : profileExternalLinks[key]!.startsWith('https')
+                            ? profileExternalLinks[key]!
+                            : `https://${profileExternalLinks[key]!}`
+                      }
                     >
                       <Image
                         alt={key}
@@ -578,12 +586,13 @@ const StaffList = async ({
           className="flex gap-4 p-2 sm:p-3 md:p-4"
           href={`/${locale}/faculty-and-staff/${staff.employeeId}`}
         >
-          <Image
+          <FacultyImage
+            employeeId={staff.employeeId}
+            facultyId={staff.id}
             alt={staff.person.name}
+            width={176}
+            height={176}
             className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-            height={0}
-            src={`fallback/user-image.jpg`}
-            width={0}
           />
           <main>
             <header className="mb-1 sm:mb-2 md:mb-3 lg:mb-4">

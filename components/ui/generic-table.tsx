@@ -35,6 +35,7 @@ export function GenericTable<T extends Record<string, unknown>>({
 }: GenericTableProps<T>) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
+  const totalCount = tableData.length;
 
   return (
     <section className="container">
@@ -79,7 +80,10 @@ export function GenericTable<T extends Record<string, unknown>>({
       </div>
 
       <div className="mt-6">
-        <PaginationWithLogic currentPage={currentPage} query={getCount} />
+        <PaginationWithLogic
+          currentPage={currentPage}
+          totalCount={totalCount}
+        />
       </div>
     </section>
   );

@@ -46,6 +46,7 @@ import {
   students,
 } from '~/server/db';
 
+import { FacultyImage } from './faculty-image';
 
 // Contains the content of full Faculty Profile
 export async function FacultyOrStaffComponent({
@@ -238,12 +239,13 @@ export async function FacultyOrStaffComponent({
               </Link>
             </Button>
           )}
-          <Image
-            alt="0"
+          <FacultyImage
+            employeeId={facultyDescription.employeeId}
+            facultyId={facultyDescription.id}
+            alt={facultyDescription.person.name}
             width={200}
             height={200}
-            className="absolute right-0 top-0 z-10 mr-3 size-32 translate-y-[-50%] rounded-full border-[1rem] border-background object-cover sm:mr-6 sm:size-40 lg:mr-8 lg:size-48 xl:hidden"
-            src={`fallback/user-image.jpg`}
+            className="absolute right-0 top-0 z-10 mr-3 size-32 translate-y-[-50%] rounded-full border-[1rem] border-background sm:mr-6 sm:size-40 lg:mr-8 lg:size-48 xl:hidden"
           />
           <ul className="flex h-full flex-col justify-center font-medium">
             <li>
@@ -281,19 +283,13 @@ export async function FacultyOrStaffComponent({
         </article>
         {/* Faculty Image */}
         <section className="w-0 max-xl:hidden">
-          <Image
-            alt="0"
+          <FacultyImage
+            employeeId={facultyDescription.employeeId}
+            facultyId={facultyDescription.id}
+            alt={facultyDescription.person.name}
             width={200}
             height={200}
-            className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background object-cover"
-            src={
-              /* TODO : FIX THIS PATH */
-              // facultyDescription.employeeId === '114' ||
-              // facultyDescription.employeeId === '1083'
-              //   ? `faculty-and-staff/${facultyDescription.employeeId}/0.jpg`
-              //   : `fallback/user-image.jpg`
-              'fallback/user-image.jpg'
-            }
+            className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background"
           />
         </section>
         {/* Faculty Intellectual Contribution counts */}
@@ -812,4 +808,3 @@ async function fetchSectionByFacultyId(
         }
       )?.[section];
 }
-

@@ -67,7 +67,10 @@ export default async function Curricula({
         </Suspense>
         <PaginationWithLogic
           currentPage={page}
-          query={db.select({ count: count() }).from(courses)}
+          totalCount={
+            (await db.select({ count: count().as('count') }).from(courses))[0]
+              ?.count ?? 0
+          }
         />
       </main>
     </>
@@ -91,7 +94,7 @@ const Courses = async ({ page }: { page: number }) => {
     offset: (page - 1) * 10,
   });
 
-  console.log(courses);
+  // console.log(courses);
 
   return courses.map(({ code, coursesToMajors, title }) => {
     if (coursesToMajors.length === 0) {
@@ -123,6 +126,6 @@ const Courses = async ({ page }: { page: number }) => {
           </TableCell>
         </TableRow>
       )
-    )
-});
+    );
+  });
 };

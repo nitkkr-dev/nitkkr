@@ -4,13 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { GalleryCarousel } from '~/components/carousels';
-import {
-  Card,
-  CardContent,
-  Dialog,
-  DialogClose,
-  DialogContent,
-} from '~/components/ui';
+import { Card, CardContent, Dialog, DialogContent } from '~/components/ui';
 
 interface ClubEvent {
   id: number;
@@ -22,8 +16,6 @@ interface ClubEvent {
 
 export default function EventsSection({
   events,
-  locale,
-  display_name,
   s3BaseUrl,
 }: {
   events: ClubEvent[];
@@ -64,19 +56,19 @@ export default function EventsSection({
         onOpenChange={(open) => !open && setSelectedEvent(null)}
       >
         <DialogContent
-          className="F z-[100] mx-4 mx-auto flex max-w-[90vw] flex-col items-center rounded-xl border border-primary-500 
-  bg-background p-8 shadow-xl md:max-w-[80vw]
-  lg:max-w-[1100px]"
+          className="z-[100] mx-4 mx-auto flex max-w-[90vw] flex-col items-center rounded-xl border border-primary-500 
+bg-background p-8 shadow-xl md:max-w-[80vw]
+lg:max-w-[1100px]"
         >
           {selectedEvent && (
             <>
-              <h2 className="text-primary-800 mb-4 self-center text-3xl font-bold">
+              <h2 className="text-primary-800 mb-4 w-full text-center text-3xl font-bold">
                 {selectedEvent.title}
               </h2>
 
               <GalleryCarousel
-                className="mb-6 w-full overflow-hidden rounded-lg"
-                itemClassName=""
+                className="mb-6 w-full overflow-visible rounded-lg px-0"
+                itemClassName="basis-full"
               >
                 {selectedEvent.image.map((img, index) => (
                   <Image
@@ -90,7 +82,7 @@ export default function EventsSection({
                 ))}
               </GalleryCarousel>
 
-              <p className="text-gray-700 text-base leading-relaxed">
+              <p className="text-gray-700 w-full text-base leading-relaxed">
                 {selectedEvent.description}
               </p>
             </>
