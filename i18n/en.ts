@@ -599,32 +599,85 @@ const text: Translations = {
       cell: 'cell',
       iic: {
         title: 'Institution’s Innovation Council',
-        preamble: 'Preamble',
-        description:
+         description:
+        
           'NIT Kurukshetra convenes the members of the Institute’s Innovation Council (IIC), which is aligned with the Ministry of Education’s Innovation Cell (MIC). The IIC will be an umbrella entity offering a range of development programs, workshops, etc.',
-        officeOrder: {
-          title: 'Office Order',
+        
+        vision: {
+        title: 'Vision',
+        content: [
+  'The aroma of burnt pizza mingled with the faint scent of soldering fumes hung heavy in the air of the computer science department. Posters depicting binary code sunsets and algorithms crafted from pipe cleaners adorned the peeling walls. '    
+   ],
+   
+      },
+
+
+       mission: {
+        title: 'Mission',
+         content: [
+  'The aroma of burnt pizza mingled with the faint scent of soldering fumes hung heavy in the air of the computer science department. Posters depicting binary code sunsets and algorithms crafted from pipe cleaners adorned the peeling walls. '    
+   ],
+   
+      },
+      employes: [
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+      {
+        name: 'Arun Goel',
+        image: 'fallback/user-image.jpg',
+        position: 'Head of Department, CSE',
+        phone: '+91-1744-233208',
+        email: 'director@nitkkr.ac.in',
+      },
+    ],
+     
+        
+       
+          officeOrder: {
+          title: 'OFFICE ORDER',
           srNo: 'Sr. No.',
           responsibility: 'Responsibility',
           nameOfFaculty: 'Name of Faculty',
         },
         activities: {
-          title: 'Activities',
+          title: 'ACTIVITIES',
           srNo: 'Sr. No.',
           pastActivities: 'Past Activities',
           upcomingActivities: 'Upcoming Activities',
         },
+        pillarsOfLeadership: 'PILLARS OF LEADERSHIP',
+        imageGallery: 'IMAGE GALLERY',
       },
       iks: {
         title: 'Indian Knowledge Systems',
         description: [
-          `The Indian Knowledge Systems (IKS) Cell is an innovative initiative established in 2022 at the Institute, under the aegis of the Ministry of Education, Government of India. It was launched with the vision of promoting and integrating India’s rich intellectual traditions into modern academic and research frameworks. Rooted in the diverse cultural and philosophical heritage of our nation, the IKS Cell is committed to fostering interdisciplinary research that draws upon indigenous knowledge systems and practices.`,
+          `The Indian Knowledge Systems (IKS) Cell is an innovative initiative established in 2022 at the Institute, under the aegis of the Ministry of Education, Government of India. It was launched with the vision of promoting and integrating India’s rich intellectual traditions into modern academic and research frameworks. Rooted in the diverse cultural and philosophical heritage of our nation, the IKS Cell is committed to fostering interdisciplinary research that draws upon indigenous knowledge systems and practices`,
           `The Cell’s primary objective is to explore, preserve, and disseminate traditional Indian knowledge across a wide array of disciplines, including Basic Sciences, Engineering and Technology, Psychology, Arts and Literature, Agriculture, and Architecture. It aims to bridge the gap between ancient wisdom and contemporary scientific inquiry, ensuring that India’s time-honoured approaches are not only preserved but also adapted to address current societal challenges.`,
         ],
         iksTeam: 'Team IKS Cell, NIT Kurukshetra',
         coordinators: 'Student Coordinators, IKS Cell, NIT Kurukshetra',
         activitiesPerformed: 'Activities Performed in Year 2023-2024',
         book: 'Book Release IKS Cell, NIT Kurukshetra',
+       
         imageGallery: 'Image Gallery',
       },
 
