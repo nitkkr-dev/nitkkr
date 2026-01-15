@@ -21,6 +21,7 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
   'hostel',
   'miscellaneous',
   'archived',
+  'placements',
 ]);
 
 export const notifications = pgTable(
