@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdCall,MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { MdCall, MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -13,8 +14,10 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
+
 import Events from '../events';
 import Notifications from '../notifications';
+import NotificationsPanel from '~/components/notifications-panel';
 
 export default async function RACS({
   params: { locale },
@@ -65,7 +68,17 @@ const ResearchProposalFormsData = [
     </p>
 
     {/* NOTIFICATIONS */}
-    
+    <section><Heading
+    glyphDirection="rtl"
+    heading="h2"
+    text={text.notifications.title}
+  />
+    <NotificationsPanel
+            locale={locale}
+            category="academic"
+            viewAllHref={`/${locale}/notifications/?category=academic`}
+            className="flex-1 lg:w-[100%]"
+          /></section>
 
     {/* REGIONAL COORDINATOR */}
 <section id="regionalCoordinator" className="mt-20">
@@ -123,7 +136,7 @@ const ResearchProposalFormsData = [
     {/* RESEARCH PROPOSAL FORMS */}
     <section id="researchProposalForms" className="mt-24">
   <Heading
-    glyphDirection="ltr"
+    glyphDirection="rtl"
     heading="h2"
     text={text.researchProposalForms.heading}
   />
@@ -152,7 +165,7 @@ const ResearchProposalFormsData = [
     {/* PARTNER INSTITUTES */}
     <section id="partnerInstitutes" className="mt-24">
   <Heading
-    glyphDirection="rtl"
+    glyphDirection="ltr"
     heading="h2"
     text={text.partnerInstitutes.heading}
   />
@@ -226,7 +239,7 @@ const ResearchProposalFormsData = [
   {/* FOR QUERIES */}
       <section className="container">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="ltr"
           heading="h3"
           href="#for-queries"
           id="for-queries"

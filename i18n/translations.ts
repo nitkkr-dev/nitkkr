@@ -401,7 +401,10 @@ RACS: {
     researchAreas: string;
     queries: string;
   };
-  
+  // Notifications Section
+  notifications: {
+    title: string;
+  };
   // Regional Coordinator Section
   coordinator: {
     heading: string;

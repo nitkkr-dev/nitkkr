@@ -423,10 +423,14 @@ RACS: {
     researchAreas: 'Research Areas',
     queries: 'For Queries',
   },
-  
+
+  notifications: {
+    title: 'NOTIFICATIONS',
+  },
+
   // Regional Coordinator Section
   coordinator: {
-    heading: 'Regional Coordinator',
+    heading: 'REGIONAL COORDINATOR',
     name: 'Prof. Arun Goel',
     position: 'Professor (Head of the Department)',
     email: 'drarun_goel@yahoo.co.in',
@@ -436,7 +440,7 @@ RACS: {
   
   // Research Proposal Forms Section
   researchProposalForms: {
-    heading: 'Research Proposal Forms',
+    heading: 'RESEARCH PROPOSAL FORMS',
     table: {
       srNo: 'Sr. No.',
       form: 'Form Name',
@@ -459,7 +463,7 @@ RACS: {
   
   // Partner Institutes Section
   partnerInstitutes: {
-    heading: 'Partner Institutes',
+    heading: 'PARTNER INSTITUTES',
     table: {
       srNo: 'Sr. No.',
       institute: 'Institute Name',
@@ -468,7 +472,7 @@ RACS: {
   
   // Research Areas Section
   researchAreas: {
-    heading: 'Research Areas',
+    heading: 'RESEARCH AREAS',
     description: 'Indian Space Research Organisation (ISRO) plays a vital role in advancing space research and technology for national development. Established in 1969, ISRO has achieved global recognition through cost-effective and innovative missions such as satellite launches for communication, navigation, and Earth observation. Landmark achievements like the Mars Orbiter Mission and Chandrayaan lunar missions highlight ISRO’s growing expertise, scientific capability, and contribution to space exploration while supporting education, disaster management, and socio-economic growth in India. disaster management, and socio-economic growth in India.',
     readMore: 'RESEARCH AREAS IN 2025',
     link: '#',
@@ -476,7 +480,7 @@ RACS: {
   
   // For Queries Section
   forQueries: {
-    heading: 'For Queries',
+    heading: 'FOR QUERIES',
     email: 'racs@nitkkr.ac.in',
   },
 },

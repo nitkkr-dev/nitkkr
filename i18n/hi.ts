@@ -674,6 +674,9 @@ RACS: {
     queries: 'प्रश्नों के लिए',
   },
   
+  notifications: {
+    title: 'सूचनाएं',
+  },
   // Regional Coordinator Section
   coordinator: {
     heading: 'क्षेत्रीय समन्वयक',
