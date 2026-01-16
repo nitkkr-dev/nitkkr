@@ -11,7 +11,7 @@ const BATCH_SIZE = 20;
 export interface NotificationItem {
   id: number;
   title: string;
-  category: string;
+  categories: string[];
   createdAt: string;
 }
 
@@ -55,7 +55,9 @@ export async function loadMoreNotifications(
 
   // Apply in-memory filters (category, department, text search)
   if (categories?.length) {
-    results = results.filter((n) => categories.includes(n.category));
+    results = results.filter((n) =>
+      n.categories.some((cat) => categories.includes(cat))
+    );
   }
 
   if (departmentIds?.length) {
@@ -83,7 +85,7 @@ export async function loadMoreNotifications(
   const serializedItems: NotificationItem[] = items.map((n) => ({
     id: n.id,
     title: n.title,
-    category: n.category,
+    categories: n.categories,
     createdAt: n.createdAt.toISOString(),
   }));
 
@@ -99,7 +101,7 @@ export interface NotificationDetails {
   id: number;
   title: string;
   content: string | null;
-  category: string;
+  categories: string[];
   documents: string[];
   createdAt: string;
 }
@@ -117,7 +119,7 @@ export async function getNotificationById(
     id: notification.id,
     title: notification.title,
     content: notification.content,
-    category: notification.category,
+    categories: notification.categories,
     documents: notification.documents,
     createdAt: notification.createdAt.toISOString(),
   };

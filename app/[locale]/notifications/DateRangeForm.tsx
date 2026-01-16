@@ -33,9 +33,12 @@ export function DateRangeForm({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const currentYear = new Date().getFullYear();
+  const today = new Date();
+
   const [yearRange, setYearRange] = React.useState<number[]>([
     start ? new Date(start).getFullYear() : 2000,
-    end ? new Date(end).getFullYear() : 2025,
+    end ? new Date(end).getFullYear() : currentYear,
   ]);
 
   const startDate = start ? new Date(start) : undefined;
@@ -45,9 +48,11 @@ export function DateRangeForm({
   const [startMonth, setStartMonth] = React.useState(
     startDate ? startDate.getMonth() + 1 : 1
   );
-  const [endDay, setEndDay] = React.useState(endDate?.getDate() ?? 1);
+  const [endDay, setEndDay] = React.useState(
+    endDate?.getDate() ?? today.getDate()
+  );
   const [endMonth, setEndMonth] = React.useState(
-    endDate ? endDate.getMonth() + 1 : 1
+    endDate ? endDate.getMonth() + 1 : today.getMonth() + 1
   );
 
   // Apply filters to URL - only called on explicit user actions
@@ -80,7 +85,16 @@ export function DateRangeForm({
       const newUrl = `${pathname}?${params.toString()}`;
       router.push(newUrl, { scroll: false });
     },
-    [yearRange, startDay, startMonth, endDay, endMonth, searchParams, pathname, router]
+    [
+      yearRange,
+      startDay,
+      startMonth,
+      endDay,
+      endMonth,
+      searchParams,
+      pathname,
+      router,
+    ]
   );
 
   return (
@@ -97,7 +111,7 @@ export function DateRangeForm({
         </div>
         <Slider
           min={2000}
-          max={2025}
+          max={currentYear}
           step={1}
           value={yearRange}
           onValueChange={setYearRange}

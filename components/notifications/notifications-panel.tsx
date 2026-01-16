@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { arrayOverlaps } from 'drizzle-orm';
 
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
@@ -7,16 +8,16 @@ import { NotificationItemWithModal } from '~/components/notifications/notificati
 import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
-import { db, type notifications as notificationsTable } from '~/server/db';
+import { db, notifications as notificationsTable } from '~/server/db';
 
 type NotificationCategory =
-  (typeof notificationsTable.category.enumValues)[number];
+  (typeof notificationsTable.categories.enumValues)[number];
 
 type EducationType = 'ug' | 'pg' | 'phd';
 
 export interface NotificationsPanelProps {
   locale: string;
-  /** Filter by notification category */
+  /** Filter by notification category (matches if notification has this category) */
   category?: NotificationCategory;
   /** Filter by club ID */
   clubId?: number;
@@ -131,7 +132,9 @@ const NotificationsList = async ({
         const conditions = [];
 
         if (category) {
-          conditions.push(eq(notification.category, category));
+          conditions.push(
+            arrayOverlaps(notification.categories, [category])
+          );
         }
         if (clubId !== undefined) {
           conditions.push(eq(notification.clubId, clubId));
