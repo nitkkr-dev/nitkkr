@@ -5,7 +5,7 @@ import { desc } from 'drizzle-orm';
 import { db, type eventCategoryEnum } from '~/server/db';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
-const BATCH_SIZE = 15;
+const BATCH_SIZE = 20;
 
 interface LoadMoreEventsParams {
   cursor: string; // ISO date string

@@ -17,7 +17,7 @@ import { type EventItem, EventsList } from './EventsList';
 import { SearchInput } from './SearchInput';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
-const INITIAL_BATCH_SIZE = 15;
+const INITIAL_BATCH_SIZE = 20;
 
 interface PageSearchParams {
   q?: string;
