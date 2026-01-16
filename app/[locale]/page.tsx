@@ -14,7 +14,7 @@ import {
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 import { getTranslations } from '~/i18n/translations';
-import { type events } from '~/server/db';
+import { type eventCategoryEnum } from '~/server/db';
 
 import Events from './events';
 
@@ -28,10 +28,7 @@ export default async function Home({
   params: { locale: string };
   searchParams: {
     notificationCategory?: NotificationCategory;
-    eventsCategory?:
-      | (typeof events.category.enumValues)[number]
-      | 'recents'
-      | 'featured';
+    eventsCategory?: (typeof eventCategoryEnum.enumValues)[number] | 'featured';
   };
 }) {
   const text = (await getTranslations(locale)).Main;
