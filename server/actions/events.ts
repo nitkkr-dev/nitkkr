@@ -34,20 +34,22 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
     limit: BATCH_SIZE + 1, // +1 to check if more exist
   });
 
-  // Apply category filter (multi-select)
+  // Apply category filter - check if event has ANY of the selected categories
   if (categories.length) {
-    raw = raw.filter((e) => categories.includes(e.category as Cat));
+    raw = raw.filter((e) =>
+      e.categories.some((cat) => categories.includes(cat as Cat))
+    );
   }
 
-  // Apply text search (title, description, location, category)
+  // Apply text search (title, description, location, categories)
   if (query) {
     const q = query.toLowerCase();
     raw = raw.filter(
       (e) =>
-        (e.title.toLowerCase().includes(q) ||
-          e.description?.toLowerCase().includes(q)) ??
-        e.location?.toLowerCase().includes(q) ??
-        e.category.toLowerCase().includes(q)
+        e.title.toLowerCase().includes(q) ||
+        (e.description?.toLowerCase().includes(q) ?? false) ||
+        (e.location?.toLowerCase().includes(q) ?? false) ||
+        e.categories.some((cat) => cat.toLowerCase().includes(q))
     );
   }
 
@@ -64,12 +66,13 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
       id: e.id,
       title: e.title,
       description: e.description,
-      category: e.category,
+      categories: e.categories,
       startDate: e.startDate,
       endDate: e.endDate,
       location: e.location,
       locationUrl: e.locationUrl,
       images: e.images,
+      documents: e.documents,
     })),
     cursor: nextCursor,
     hasMore,

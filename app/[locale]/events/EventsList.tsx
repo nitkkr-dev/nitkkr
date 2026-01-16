@@ -13,12 +13,13 @@ export interface EventItem {
   id: number;
   title: string;
   description: string | null;
-  category: string;
+  categories: string[];
   startDate: string;
   endDate: string | null;
   location: string | null;
   locationUrl: string | null;
   images: string[];
+  documents: string[];
 }
 
 interface FilterParams {

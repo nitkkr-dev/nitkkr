@@ -22,7 +22,10 @@ export const events = pgTable(
     id: t.serial('id').primaryKey(),
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     description: t.text('description'),
-    category: eventCategoryEnum('category').notNull(),
+    categories: eventCategoryEnum('categories')
+      .array()
+      .notNull()
+      .default(sql`'{}'::event_category[]`),
     isFeatured: t.boolean('is_featured').default(false).notNull(),
     startDate: t.date('start_date').notNull(),
     endDate: t.date('end_date'), // Optional - null means single-day event
@@ -31,6 +34,11 @@ export const events = pgTable(
     clubId: t.integer('club_id').references(() => clubs.id),
     images: t
       .text('images')
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    documents: t
+      .text('documents')
       .array()
       .notNull()
       .default(sql`'{}'::text[]`),

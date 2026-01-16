@@ -1,4 +1,4 @@
-import { desc, eq } from 'drizzle-orm';
+import { arrayOverlaps, desc, eq } from 'drizzle-orm';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,17 +11,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs';
-import { Card, CardContent, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys } from '~/lib/utils';
-import { db, type events as eventsSchema } from '~/server/db';
+import { cn } from '~/lib/utils';
+import { db, type eventCategoryEnum } from '~/server/db';
 import { getS3Url } from '~/server/s3';
+
+import { EventsGrid } from './EventsGrid';
+
+type Cat = (typeof eventCategoryEnum.enumValues)[number];
+
+// Categories to display on the landing page (featured is special - not a real category)
+const DISPLAY_CATEGORIES: (Cat | 'featured')[] = [
+  'featured',
+  'cultural',
+  'technical',
+  'campus-highlights',
+  'academic',
+];
 
 export default async function Events({
   category: currentCategory,
   locale,
 }: {
-  category: (typeof eventsSchema.category.enumValues)[number] | 'featured';
+  category: Cat | 'featured';
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Events;
@@ -31,7 +43,8 @@ export default async function Events({
       if (currentCategory === 'featured') {
         return eq(event.isFeatured, true);
       }
-      return eq(event.category, currentCategory);
+      // Check if the event's categories array contains the selected category
+      return arrayOverlaps(event.categories, [currentCategory]);
     },
     orderBy: (event) => [desc(event.startDate)],
     limit: 6,
@@ -68,7 +81,7 @@ export default async function Events({
             'h-fit min-w-72 space-y-4'
           )}
         >
-          {getKeys(text.categories).map((category, index) => (
+          {DISPLAY_CATEGORIES.map((category, index) => (
             <li key={index}>
               <Link
                 href={{ query: { eventsCategory: category } }}
@@ -97,7 +110,7 @@ export default async function Events({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {getKeys(text.categories).map((category, index) => (
+              {DISPLAY_CATEGORIES.map((category, index) => (
                 <SelectItem key={index} value={text.categories[category]}>
                   {text.categories[category]}
                 </SelectItem>
@@ -125,50 +138,22 @@ export default async function Events({
             linkProps={{ href: `/${locale}/events` }}
             text={text.viewAll}
           />
-          <ol className="z-elevated grid grid-cols-1 grid-rows-6 gap-6 lg:grid-cols-5 lg:grid-rows-3">
-            {events.map(({ title, description, startDate }, index) => (
-              <li
-                key={index}
-                className={cn(
-                  index % 3 === 0 || index === 4
-                    ? 'lg:col-span-3'
-                    : 'lg:col-span-2',
-                  'h-[448px] list-none'
-                )}
-              >
-                <Card
-                  className={cn('flex h-full flex-col border-0 bg-shade-light')}
-                >
-                  <Image
-                    alt={title}
-                    className="h-64 w-full rounded-t-md object-cover"
-                    height={0}
-                    src={`${getS3Url()}/events/${startDate.slice(0, 4)}/${startDate.slice(5, 7)}/${title}/image01.jpg`}
-                    width={0}
-                  />
-                  <CardContent className="relative pt-3">
-                    <time className="absolute -top-10 right-8 flex h-20 w-16 flex-col items-center justify-center bg-primary-500 bg-opacity-90 text-shade-light">
-                      <span className="font-serif text-2xl">
-                        {new Intl.DateTimeFormat('en-GB', {
-                          day: '2-digit',
-                        }).format(new Date(startDate))}
-                      </span>
-                      <span className="font-serif text-xl">
-                        {new Intl.DateTimeFormat('en-GB', { month: 'short' })
-                          .format(new Date(startDate))
-                          .substring(0, 3)
-                          .toUpperCase()}
-                      </span>
-                    </time>
-                    <CardTitle className="mr-20 lg:text-2xl">{title}</CardTitle>
-                    <CardDescription className="line-clamp-3">
-                      {description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </li>
-            ))}
-          </ol>
+          <EventsGrid
+            events={events.map((e) => ({
+              id: e.id,
+              title: e.title,
+              description: e.description,
+              categories: e.categories,
+              startDate: e.startDate,
+              endDate: e.endDate,
+              location: e.location,
+              locationUrl: e.locationUrl,
+              images: e.images,
+              documents: e.documents,
+            }))}
+            locale={locale}
+            s3Url={getS3Url()}
+          />
         </section>
       </article>
     </article>

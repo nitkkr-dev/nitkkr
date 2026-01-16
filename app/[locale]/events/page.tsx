@@ -52,19 +52,23 @@ export default async function EventsPage({
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
 
-  // Category filter (multi)
+  // Category filter (multi) - check if event has ANY of the selected categories
   if (categories.length) {
-    raw = raw.filter((e) => categories.includes(e.category as Cat));
+    raw = raw.filter((e) =>
+      e.categories.some((cat) => categories.includes(cat as Cat))
+    );
   }
 
-  // Text search (title, description, location, and category)
+  // Text search (title, description, location, and categories)
   if (query) {
     raw = raw.filter(
       (e) =>
-        (e.title.toLowerCase().includes(query.toLowerCase()) ||
-          e.description?.toLowerCase().includes(query.toLowerCase())) ??
-        e.location?.toLowerCase().includes(query.toLowerCase()) ??
-        e.category.toLowerCase().includes(query.toLowerCase())
+        e.title.toLowerCase().includes(query.toLowerCase()) ||
+        (e.description?.toLowerCase().includes(query.toLowerCase()) ?? false) ||
+        (e.location?.toLowerCase().includes(query.toLowerCase()) ?? false) ||
+        e.categories.some((cat) =>
+          cat.toLowerCase().includes(query.toLowerCase())
+        )
     );
   }
 
@@ -80,12 +84,13 @@ export default async function EventsPage({
     id: e.id,
     title: e.title,
     description: e.description,
-    category: e.category,
+    categories: e.categories,
     startDate: e.startDate,
     endDate: e.endDate,
     location: e.location,
     locationUrl: e.locationUrl,
     images: e.images,
+    documents: e.documents,
   }));
 
   // Build filter params for the client component
