@@ -7,7 +7,7 @@ import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
-import NotificationsPanel from '~/components/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { Card } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
