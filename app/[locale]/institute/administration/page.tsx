@@ -59,7 +59,7 @@ export default async function Administration({
       />
 
       <section className="container mt-20">
-        <p className="mx-8 font-sans text-xl max-md:text-lg">
+        <p className="mx-8 font-sans text-md md:text-lg">
           {text.description}
         </p>
         <Heading
@@ -290,18 +290,19 @@ const Deans = () => {
       {deans.map((dean) => (
         <article
           key={dean.id}
-          className="bg-white flex flex-col items-start gap-6 rounded-xl border border-neutral-200 p-6 shadow-md md:flex-row"
+          className="bg-white flex flex-col md:flex-row items-start md:items-stretch md:gap-6 rounded-xl border border-neutral-200 p-6 shadow-md"
         >
-          {/* Image + Email (left column) */}
-          <div className="flex flex-col items-start">
+          {/* Left: Image */}
+          <div className="flex flex-row">
+            <div className='flex flex-col justify-between items-stretch'>
             <Image
               alt={dean.name}
-              className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-              height={0}
-              src={`persons/${dean.id}/image.png`}
-              width={0}
+              src={dean.image}
+              width={160}
+              height={160}
+              className="w-32 h-32 md:w-40 md:h-40 object-cover"
             />
-            <div className="mt-3 flex items-center gap-2 text-sm text-neutral-800">
+            <div className="hidden md:flex items-center gap-2 text-sm text-neutral-800 mt-2 md:mt-1">
               <MdEmail className="text-[#C5291D]" />
               <a
                 href={`mailto:${dean.email}`}
@@ -310,11 +311,8 @@ const Deans = () => {
                 {dean.email}
               </a>
             </div>
-          </div>
-
-          {/* Content (right column) */}
-          <div className="flex-1">
-            <header className="mb-3">
+            </div>
+            <div className="md:hidden flex flex-col md:gap-1 items-start gap-2">
               <h3
                 className="text-xl font-bold"
                 style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
@@ -327,10 +325,27 @@ const Deans = () => {
               >
                 {dean.designation}
               </p>
-            </header>
+            </div>
+          </div>
 
+          {/* Right: Content */}
+          <div className="flex-1 flex flex-col justify-start">
+            <div className="hidden md:flex flex-col md:gap-1 items-start gap-2">
+              <h3
+                className="text-xl font-bold"
+                style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
+              >
+                {dean.name}
+              </h3>
+              <p
+                className="text-lg"
+                style={{ color: '#E13F32', fontFamily: 'DM Serif Display' }}
+              >
+                {dean.designation}
+              </p>
+            </div>
             <p
-              className="text-sm leading-relaxed text-neutral-700"
+              className="md:mt-4 text-sm leading-relaxed text-neutral-700"
               style={{ color: '#000000', fontFamily: 'DM Sans' }}
             >
               {dean.description}

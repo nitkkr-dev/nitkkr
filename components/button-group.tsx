@@ -24,22 +24,22 @@ export default function ButtonGroup({
       >
         {buttonArray.map(({ label, href, icon: Icon }, index) => (
           <Button
-            asChild
-            className={cn(
-              'flex flex-col',
-              'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'mx-auto h-44 w-full md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-            )}
-            key={index}
-            variant="secondary"
-          >
-            <Link href={href}>
-              <Icon className="size-12" />
-              <p className="whitespace-normal font-serif font-semibold">
-                {label}
-              </p>
-            </Link>
-          </Button>
+              asChild
+              className={cn(
+                'flex flex-col text-wrap',
+                'gap-2 sm:gap-3 lg:gap-4 xl:gap-5',
+                'mx-auto h-40 w-40 sm:h-48 sm:w-64 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
+              )}
+              key={index}
+              variant="secondary"
+            >
+              <Link href={href}>
+                <Icon className={cn('size-12')} />
+                <p className="text-center font-serif font-semibold sm:text-lg md:text-xl">
+                  {label}
+                </p>
+              </Link>
+            </Button>
         ))}
       </nav>
     </>
