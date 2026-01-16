@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MdCall, MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
-
 import Heading from '~/components/heading';
+
 import ImageHeader from '~/components/image-header';
 import {
   Table,
@@ -13,15 +13,16 @@ import {
   TableRow,
 } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-interface Column<T> {
-  header: React.ReactNode;
-  cell: (row: T, index: number) => React.ReactNode;
-}
-
+import { PaginationWithLogic } from '~/components/pagination/pagination';
 export default async function SCoE({
   params: { locale },
+  searchParams,
 }: {
   params: { locale: string };
+  searchParams?: {
+    labsPage?: string;
+    coursesPage?: string;
+  };
 }) {
   const text = (await getTranslations(locale)).SCoE;
 
@@ -43,27 +44,18 @@ export default async function SCoE({
     { LaboratoriesName: 'Embedded Systems Lab' },
   ];
 
-  const laboratoryColumns: Column<{ LaboratoriesName: string }>[] = [
-    {
-      header: text.Laboratories.srNo,
-      cell: (_, index) => index + 1,
-    },
-    {
-      header: text.Laboratories.LaboratoriesName,
-      cell: (row) => row.LaboratoriesName,
-    },
-  ];
+  const labsPage = Number(searchParams?.labsPage ?? 1);
+  const coursesPage = Number(searchParams?.coursesPage ?? 1);
+  const ITEMS_PER_PAGE = 10;
+  const visibleLabs = LaboratoriesData.slice(
+    (labsPage - 1) * ITEMS_PER_PAGE,
+    labsPage * ITEMS_PER_PAGE
+  );
 
-  const courseColumns: Column<{ courseName: string }>[] = [
-    {
-      header: text.Courses.srNo,
-      cell: (_, index) => index + 1,
-    },
-    {
-      header: text.Courses.courseName,
-      cell: (row) => row.courseName,
-    },
-  ];
+  const visibleCourses = CoursesData.slice(
+    (coursesPage - 1) * ITEMS_PER_PAGE,
+    coursesPage * ITEMS_PER_PAGE
+  );
 
   return (
     <>
@@ -202,7 +194,7 @@ export default async function SCoE({
           text={text.Features.title.toUpperCase()}
         />
         {/* Box */}
-        <div className="border-red-300 bg-white rounded-xl border px-10 py-5">
+        <div className="border-red-300 rounded-xl border bg-neutral-50 px-8 py-3 text-lg">
           <ul className="text-black list-disc">
             {text.Features.items.map((item, index) => (
               <li key={index}>{item}</li>
@@ -223,24 +215,31 @@ export default async function SCoE({
         <Table>
           <TableHeader>
             <TableRow>
-              {laboratoryColumns.map((col, idx) => (
-                <TableHead key={idx}>{col.header}</TableHead>
-              ))}
+              <TableHead>{text.Laboratories.srNo}</TableHead>
+              <TableHead>{text.Laboratories.LaboratoriesName}</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {LaboratoriesData.map((row, rowIndex) => (
+            {visibleLabs.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
-                {laboratoryColumns.map((col, colIndex) => (
-                  <TableCell key={colIndex}>
-                    {col.cell(row, rowIndex)}
-                  </TableCell>
-                ))}
+                <TableCell>
+                  {(labsPage - 1) * ITEMS_PER_PAGE + rowIndex + 1}
+                </TableCell>
+                <TableCell>{row.LaboratoriesName}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        {LaboratoriesData.length > ITEMS_PER_PAGE && (
+          <div className="mt-6">
+            <PaginationWithLogic
+              currentPage={labsPage}
+              totalCount={LaboratoriesData.length}
+              pageParamName="labsPage"
+            />
+          </div>
+        )}
       </section>
 
       {/* Courses */}
@@ -255,26 +254,31 @@ export default async function SCoE({
         <Table>
           <TableHeader>
             <TableRow>
-              {courseColumns.map((col, idx) => (
-                <TableHead key={idx}>{col.header}</TableHead>
-              ))}
+              <TableHead>{text.Courses.srNo}</TableHead>
+              <TableHead>{text.Courses.courseName}</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {CoursesData.map((row, rowIndex) => (
+            {visibleCourses.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
-                {courseColumns.map((col, colIndex) => (
-                  <TableCell key={colIndex}>
-                    <span className="text-neutral-800">
-                      {col.cell(row, rowIndex)}
-                    </span>
-                  </TableCell>
-                ))}
+                <TableCell>
+                  {(coursesPage - 1) * ITEMS_PER_PAGE + rowIndex + 1}
+                </TableCell>
+                <TableCell>{row.courseName}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        {CoursesData.length > ITEMS_PER_PAGE && (
+          <div className="mt-6">
+            <PaginationWithLogic
+              currentPage={coursesPage}
+              totalCount={CoursesData.length}
+              pageParamName="coursesPage"
+            />
+          </div>
+        )}
       </section>
 
       {/* how to apply */}
@@ -286,7 +290,7 @@ export default async function SCoE({
           id="how-to-apply"
           text={text.How_to_Apply.title.toUpperCase()}
         />
-        <div className="border-red-300 bg-white rounded-xl border px-10 py-5">
+        <div className="border-red-300 rounded-xl border bg-neutral-50 px-10 py-5">
           <ol className="text-black list-inside list-decimal text-lg">
             {text.How_to_Apply.registrationSteps.map((item, index) => (
               <li key={index}>{item}</li>
