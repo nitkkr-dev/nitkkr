@@ -1,12 +1,17 @@
 import Link from 'next/link';
 
 import Heading from '~/components/heading';
-import NotificationsPanel from '~/components/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
 
-const notificationCategories = ['academic', 'tender', 'workshop', 'recruitment'] as const;
+const notificationCategories = [
+  'academic',
+  'tender',
+  'workshop',
+  'recruitment',
+] as const;
 export type NotificationCategory = (typeof notificationCategories)[number];
 
 export default async function Notifications({
