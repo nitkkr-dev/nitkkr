@@ -14,7 +14,7 @@ import { getS3Url } from '~/server/s3';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import NotificationsPanel from '~/components/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import {
   Card,
   CardContent,
@@ -368,7 +368,7 @@ export default async function Club({
           locale={locale}
           clubId={club?.id}
           className="h-[400px]"
-          viewAllHref={`/${locale}/student-activities/clubs/${display_name}/notifications`}
+          viewAllHref={`/${locale}/notifications?category=student-activities`}
           showViewAll={true}
         />
 
