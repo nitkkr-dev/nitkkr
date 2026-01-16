@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdCalendarToday, MdLocationOn } from 'react-icons/md';
 
 import { NoResultStatus } from '~/components/status';
+import { loadMoreEvents } from '~/server/actions';
 
 import { EventModal } from './EventModal';
 
@@ -25,12 +26,6 @@ interface FilterParams {
   start?: string;
   end?: string;
   query?: string;
-}
-
-interface EventsApiResponse {
-  items: EventItem[];
-  cursor: string | null;
-  hasMore: boolean;
 }
 
 interface EventsListProps {
@@ -72,17 +67,13 @@ export function EventsList({
 
     setIsLoading(true);
     try {
-      const params = new URLSearchParams();
-      params.set('cursor', cursor);
-      if (filterParams.query) params.set('q', filterParams.query);
-      if (filterParams.start) params.set('start', filterParams.start);
-      if (filterParams.end) params.set('end', filterParams.end);
-      if (filterParams.categories?.length) {
-        filterParams.categories.forEach((c) => params.append('category', c));
-      }
-
-      const res = await fetch(`/${locale}/events/api?${params.toString()}`);
-      const data = (await res.json()) as EventsApiResponse;
+      const data = await loadMoreEvents({
+        cursor,
+        categories: filterParams.categories,
+        start: filterParams.start,
+        end: filterParams.end,
+        query: filterParams.query,
+      });
 
       setItems((prev) => [...prev, ...data.items]);
       setCursor(data.cursor);
@@ -92,7 +83,7 @@ export function EventsList({
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, hasMore, cursor, filterParams, locale]);
+  }, [isLoading, hasMore, cursor, filterParams]);
 
   // Infinite scroll observer
   useEffect(() => {
@@ -197,11 +188,13 @@ export function EventsList({
       <div ref={loaderRef} className="py-4 text-center">
         {isLoading && (
           <div className="flex justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-700 border-t-transparent"></div>
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary-700 border-t-transparent"></div>
           </div>
         )}
         {!hasMore && items.length > 0 && (
-          <p className="text-sm text-neutral-500">{text.noMoreEvents}</p>
+          <p className="text-sm text-neutral-900 sm:text-base">
+            {text.noMoreEvents}
+          </p>
         )}
       </div>
 
