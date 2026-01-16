@@ -21,19 +21,16 @@ export default async function Events({
   category: currentCategory,
   locale,
 }: {
-  category:
-    | (typeof eventsSchema.category.enumValues)[number]
-    | 'recents'
-    | 'featured';
+  category: (typeof eventsSchema.category.enumValues)[number] | 'featured';
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Events;
 
   const events = await db.query.events.findMany({
     where: (event) => {
-      if (currentCategory === 'recents') return undefined;
-      else if (currentCategory === 'featured')
+      if (currentCategory === 'featured') {
         return eq(event.isFeatured, true);
+      }
       return eq(event.category, currentCategory);
     },
     orderBy: (event) => [desc(event.startDate)],

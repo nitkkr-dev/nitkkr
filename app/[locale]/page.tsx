@@ -28,10 +28,7 @@ export default async function Home({
   params: { locale: string };
   searchParams: {
     notificationCategory?: NotificationCategory;
-    eventsCategory?:
-      | (typeof events.category.enumValues)[number]
-      | 'recents'
-      | 'featured';
+    eventsCategory?: (typeof events.category.enumValues)[number] | 'featured';
   };
 }) {
   const text = (await getTranslations(locale)).Main;
