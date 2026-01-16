@@ -29,6 +29,7 @@ export const events = pgTable(
     isFeatured: t.boolean('is_featured').default(false).notNull(),
     startDate: t.date('start_date').notNull(),
     endDate: t.date('end_date'), // Optional - null means single-day event
+    time: t.varchar('time', { length: 32 }), // Optional - e.g. "4:30 PM"
     location: t.varchar('location', { length: 256 }),
     locationUrl: t.varchar('location_url', { length: 512 }),
     clubId: t.integer('club_id').references(() => clubs.id),

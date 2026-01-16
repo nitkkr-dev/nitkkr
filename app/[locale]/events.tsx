@@ -146,6 +146,7 @@ export default async function Events({
               categories: e.categories,
               startDate: e.startDate,
               endDate: e.endDate,
+              time: e.time,
               location: e.location,
               locationUrl: e.locationUrl,
               images: e.images,

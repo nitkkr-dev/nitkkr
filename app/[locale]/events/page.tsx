@@ -50,7 +50,10 @@ export default async function EventsPage({
       ),
     orderBy: (e) => [desc(e.startDate)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
-  });
+  });  
+
+  console.log(raw);
+  
 
   // Category filter (multi) - check if event has ANY of the selected categories
   if (categories.length) {
@@ -87,6 +90,7 @@ export default async function EventsPage({
     categories: e.categories,
     startDate: e.startDate,
     endDate: e.endDate,
+    time: e.time,
     location: e.location,
     locationUrl: e.locationUrl,
     images: e.images,

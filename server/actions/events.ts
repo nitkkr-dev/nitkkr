@@ -69,6 +69,7 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
       categories: e.categories,
       startDate: e.startDate,
       endDate: e.endDate,
+      time: e.time,
       location: e.location,
       locationUrl: e.locationUrl,
       images: e.images,

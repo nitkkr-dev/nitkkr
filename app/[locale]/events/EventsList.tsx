@@ -16,6 +16,7 @@ export interface EventItem {
   categories: string[];
   startDate: string;
   endDate: string | null;
+  time: string | null;
   location: string | null;
   locationUrl: string | null;
   images: string[];
