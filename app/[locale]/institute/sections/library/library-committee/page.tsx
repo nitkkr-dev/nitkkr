@@ -55,7 +55,6 @@ export default async function libraryCommittee({
             generalDesignation: entry.faculty.designation,
             libraryCommitteeDesignation: entry.libraryCommitteeDesignation,
           }))}
-          currentPage={1}
           getCount={Promise.resolve([])}
         />
       </Suspense>

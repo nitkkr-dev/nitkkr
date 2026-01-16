@@ -494,7 +494,6 @@ export default async function HealthCentre({
                 )
                 .join(', '),
             }))}
-            currentPage={1}
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -520,7 +519,6 @@ export default async function HealthCentre({
               role,
               tel,
             }))}
-            currentPage={1}
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -537,7 +535,6 @@ export default async function HealthCentre({
               designation,
               phone,
             }))}
-            currentPage={1}
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -704,7 +701,6 @@ export default async function HealthCentre({
               field,
               phone,
             }))}
-            currentPage={1}
             getCount={Promise.resolve([])}
           />
         </Suspense>
