@@ -32,9 +32,12 @@ export function DateRangeForm({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
   const [yearRange, setYearRange] = React.useState<number[]>([
     start ? new Date(start).getFullYear() : 2000,
-    end ? new Date(end).getFullYear() : 2025,
+    end ? new Date(end).getFullYear() : currentYear,
   ]);
 
   const startDate = start ? new Date(start) : undefined;
@@ -44,9 +47,11 @@ export function DateRangeForm({
   const [startMonth, setStartMonth] = React.useState(
     startDate ? startDate.getMonth() + 1 : 1
   );
-  const [endDay, setEndDay] = React.useState(endDate?.getDate() ?? 1);
+  const [endDay, setEndDay] = React.useState(
+    endDate?.getDate() ?? currentDate.getDate()
+  );
   const [endMonth, setEndMonth] = React.useState(
-    endDate ? endDate.getMonth() + 1 : 1
+    endDate ? endDate.getMonth() + 1 : currentDate.getMonth() + 1
   );
 
   // Apply filters to URL - only called on explicit user actions
