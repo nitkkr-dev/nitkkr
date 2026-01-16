@@ -111,7 +111,7 @@ export function NotificationModal({
 
             {/* Documents */}
             {notification.documents.length > 0 && (
-              <div className="border-t border-primary-100 px-4 py-4 sm:px-6">
+              <div className="px-4 py-4 sm:px-6">
                 <div
                   className={`${
                     notification.documents.length > 2 ? 'h-32 sm:h-auto' : ''

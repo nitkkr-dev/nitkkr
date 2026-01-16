@@ -31,7 +31,11 @@ export const notifications = pgTable(
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     content: t.text('content'),
 
-    category: notificationCategoryEnum('category').notNull(),
+    // NEW - array of categories
+    categories: notificationCategoryEnum('categories')
+      .array()
+      .notNull()
+      .default(sql`'{}'::notification_category[]`),
 
     educationType: t.varchar('education_type', {
       enum: ['ug', 'pg', 'phd'],
@@ -55,31 +59,31 @@ export const notifications = pgTable(
     clubRequiredForStudent: check(
       'club_required_for_student',
       sql`(
-        (${n.category} = 'student-activities')
+        ('student-activities' = ANY(${n.categories}))
         OR
-        (${n.category} != 'student-activities' AND ${n.clubId} IS NULL)
+        (NOT ('student-activities' = ANY(${n.categories})) AND ${n.clubId} IS NULL)
       )`
     ),
     educationTypeRequiredForAcademicAdmission: check(
       'education_type_required_for_academic_admission',
       sql`(
-        (${n.category} IN ('academic','admission'))
+        ('academic' = ANY(${n.categories}) OR 'admission' = ANY(${n.categories}))
         OR
-        (${n.category} NOT IN ('academic','admission') AND ${n.educationType} IS NULL)
+        (NOT ('academic' = ANY(${n.categories})) AND NOT ('admission' = ANY(${n.categories})) AND ${n.educationType} IS NULL)
       )`
     ),
     hostelRequiredForHostel: check(
       'hostel_required_for_hostel',
       sql`(
-        (${n.category} = 'hostel')
+        ('hostel' = ANY(${n.categories}))
         OR
-        (${n.category} != 'hostel' AND ${n.hostelId} IS NULL)
+        (NOT ('hostel' = ANY(${n.categories})) AND ${n.hostelId} IS NULL)
       )`
     ),
     departmentAllowedOnlyWhenRelevant: check(
       'department_allowed_only_when_relevant',
       sql`(
-        (${n.category} IN ('academic','workshop','administration','recruitment','admission','faculty','research','examination','result'))
+        ('academic' = ANY(${n.categories}) OR 'workshop' = ANY(${n.categories}) OR 'administration' = ANY(${n.categories}) OR 'recruitment' = ANY(${n.categories}) OR 'admission' = ANY(${n.categories}) OR 'faculty' = ANY(${n.categories}) OR 'research' = ANY(${n.categories}) OR 'examination' = ANY(${n.categories}) OR 'result' = ANY(${n.categories}))
         OR
         (${n.departmentId} IS NULL)
       )`
