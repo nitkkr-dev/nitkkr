@@ -366,7 +366,7 @@ export default async function Club({
         />
         <NotificationsPanel
           locale={locale}
-          clubId={club?.id}
+          clubIds={club?.id ? [club.id] : undefined}
           className="h-[400px]"
           viewAllHref={`/${locale}/notifications?category=student-activities`}
           showViewAll={true}

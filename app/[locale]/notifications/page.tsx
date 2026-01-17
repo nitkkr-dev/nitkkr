@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { desc } from 'drizzle-orm';
+import { desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -8,8 +8,10 @@ import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
-import { notifications as notificationsSchema } from '~/server/db';
-import { notificationCategoryEnum } from '~/server/db/schema/notifications.schema';
+import {
+  notificationCategoryEnum,
+  notificationDepartments,
+} from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
 
 import { DateRangeForm } from './DateRangeForm';
@@ -58,12 +60,32 @@ export default async function NotificationsPage({
         .map((d) => d.id)
     : [];
 
+  // Get notification IDs that match department filter via junction table
+  let filteredNotificationIds: number[] | undefined;
+  if (deptIds.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        notificationId: notificationDepartments.notificationId,
+      })
+      .from(notificationDepartments)
+      .where(inArray(notificationDepartments.departmentId, deptIds));
+    filteredNotificationIds = deptMatches.map((m) => m.notificationId);
+
+    // If no notifications match the department filter, return empty
+    if (filteredNotificationIds.length === 0) {
+      filteredNotificationIds = [-1]; // Use impossible ID to return no results
+    }
+  }
+
   // Build base query - fetch only initial batch
   let raw = await db.query.notifications.findMany({
     where: (n, { and, gte, lte }) =>
       and(
         startDate ? gte(n.createdAt, startDate) : undefined,
-        endDate ? lte(n.createdAt, endDate) : undefined
+        endDate ? lte(n.createdAt, endDate) : undefined,
+        filteredNotificationIds
+          ? inArray(n.id, filteredNotificationIds)
+          : undefined
       ),
     orderBy: (n) => [desc(n.createdAt)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
@@ -74,11 +96,6 @@ export default async function NotificationsPage({
     raw = raw.filter((n) =>
       n.categories.some((cat) => categories.includes(cat as Cat))
     );
-  }
-
-  // Department filter (multi via foreign key, if departmentId present)
-  if (deptIds.length) {
-    raw = raw.filter((n) => n.departmentId && deptIds.includes(n.departmentId));
   }
 
   // Text search (title and content)
