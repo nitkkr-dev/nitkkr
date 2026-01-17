@@ -1,7 +1,7 @@
 import { pgTable } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
-export const bogMeetings = pgTable('bog_meetings', (t) => ({
+export const bogMeetings = pgTable('board_of_governors_meetings', (t) => ({
   id: t.serial('id').primaryKey(),
   meetingNo: t.varchar('meeting_no', { length: 16 }).notNull(),
   date: t.date('date').notNull(),

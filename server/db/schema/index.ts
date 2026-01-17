@@ -1,5 +1,5 @@
 export * from './board-of-governors.schema';
-export * from './bog-meetings.schema';
+export * from './board-of-governors-meetings.schema';
 export * from './club-members.schema';
 export * from './club-socials.schema';
 export * from './copyrights.schema';
