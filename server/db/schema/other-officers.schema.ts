@@ -26,7 +26,7 @@ export const officerCategoryEnum = pgEnum('officer_category', [
   'nodal-officer',
 ]);
 
-export const officers = pgTable('officers', (t) => ({
+export const otherOfficers = pgTable('OtherOfficers', (t) => ({
   id: t.serial('id').primaryKey(),
   designation: t.varchar('designation', { length: 256 }).notNull(),
   facultyId: t
@@ -41,9 +41,9 @@ export const officers = pgTable('officers', (t) => ({
     .notNull(),
 }));
 
-export const officersRelations = relations(officers, ({ one }) => ({
+export const officersRelations = relations(otherOfficers, ({ one }) => ({
   faculty: one(faculty, {
-    fields: [officers.facultyId],
+    fields: [otherOfficers.facultyId],
     references: [faculty.id],
   }),
 }));
