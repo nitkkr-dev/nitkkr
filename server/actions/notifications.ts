@@ -1,10 +1,15 @@
 'use server';
 
-import { and, desc, gte, lt, lte } from 'drizzle-orm';
+import { and, desc, gte, inArray, lt, lte } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 
 import { db } from '~/server/db';
-import { notifications } from '~/server/db/schema';
+import {
+  notificationClubs,
+  notificationDepartments,
+  notificationHostels,
+  notifications,
+} from '~/server/db/schema';
 
 const BATCH_SIZE = 20;
 
@@ -26,6 +31,8 @@ export interface LoadMoreParams {
   categories?: string[];
   departments?: string[];
   departmentIds?: number[];
+  clubIds?: number[];
+  hostelIds?: number[];
   start?: string;
   end?: string;
   query?: string;
@@ -34,17 +41,97 @@ export interface LoadMoreParams {
 export async function loadMoreNotifications(
   params: LoadMoreParams
 ): Promise<LoadMoreResult> {
-  const { cursor, categories, departmentIds, start, end, query } = params;
+  const {
+    cursor,
+    categories,
+    departmentIds,
+    clubIds,
+    hostelIds,
+    start,
+    end,
+    query,
+  } = params;
 
   const cursorDate = cursor ? new Date(cursor) : undefined;
   const startDate = start ? new Date(start) : undefined;
   const endDate = end ? new Date(end) : undefined;
 
-  // Build conditions
+  // Build base conditions
   const conditions = [];
   if (startDate) conditions.push(gte(notifications.createdAt, startDate));
   if (endDate) conditions.push(lte(notifications.createdAt, endDate));
   if (cursorDate) conditions.push(lt(notifications.createdAt, cursorDate));
+
+  // Get notification IDs that match department/club/hostel filters via junction tables
+  let filteredNotificationIds: number[] | undefined;
+
+  if (departmentIds?.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        notificationId: notificationDepartments.notificationId,
+      })
+      .from(notificationDepartments)
+      .where(inArray(notificationDepartments.departmentId, departmentIds));
+    const deptNotificationIds = deptMatches.map((m) => m.notificationId);
+
+    if (deptNotificationIds.length === 0) {
+      return { items: [], nextCursor: null, hasMore: false };
+    }
+    filteredNotificationIds = deptNotificationIds;
+  }
+
+  if (clubIds?.length) {
+    const clubMatches = await db
+      .selectDistinct({ notificationId: notificationClubs.notificationId })
+      .from(notificationClubs)
+      .where(inArray(notificationClubs.clubId, clubIds));
+    const clubNotificationIds = clubMatches.map((m) => m.notificationId);
+
+    if (clubNotificationIds.length === 0) {
+      return { items: [], nextCursor: null, hasMore: false };
+    }
+
+    // Intersect with existing filter
+    if (filteredNotificationIds) {
+      filteredNotificationIds = filteredNotificationIds.filter((id) =>
+        clubNotificationIds.includes(id)
+      );
+      if (filteredNotificationIds.length === 0) {
+        return { items: [], nextCursor: null, hasMore: false };
+      }
+    } else {
+      filteredNotificationIds = clubNotificationIds;
+    }
+  }
+
+  if (hostelIds?.length) {
+    const hostelMatches = await db
+      .selectDistinct({ notificationId: notificationHostels.notificationId })
+      .from(notificationHostels)
+      .where(inArray(notificationHostels.hostelId, hostelIds));
+    const hostelNotificationIds = hostelMatches.map((m) => m.notificationId);
+
+    if (hostelNotificationIds.length === 0) {
+      return { items: [], nextCursor: null, hasMore: false };
+    }
+
+    // Intersect with existing filter
+    if (filteredNotificationIds) {
+      filteredNotificationIds = filteredNotificationIds.filter((id) =>
+        hostelNotificationIds.includes(id)
+      );
+      if (filteredNotificationIds.length === 0) {
+        return { items: [], nextCursor: null, hasMore: false };
+      }
+    } else {
+      filteredNotificationIds = hostelNotificationIds;
+    }
+  }
+
+  // Add junction table filter to conditions
+  if (filteredNotificationIds) {
+    conditions.push(inArray(notifications.id, filteredNotificationIds));
+  }
 
   // Fetch batch + 1 to check if there are more
   let results = await db.query.notifications.findMany({
@@ -53,16 +140,10 @@ export async function loadMoreNotifications(
     limit: BATCH_SIZE + 1,
   });
 
-  // Apply in-memory filters (category, department, text search)
+  // Apply in-memory filters (category, text search)
   if (categories?.length) {
     results = results.filter((n) =>
       n.categories.some((cat) => categories.includes(cat))
-    );
-  }
-
-  if (departmentIds?.length) {
-    results = results.filter(
-      (n) => n.departmentId && departmentIds.includes(n.departmentId)
     );
   }
 
