@@ -6,7 +6,6 @@ import React from 'react';
 import { Suspense } from 'react';
 import { MdArticle } from 'react-icons/md';
 
-import { Table, TableBody, TableCell, TableRow } from '~/components/ui';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -706,7 +705,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={committeeMembers}
-            currentPage={1}
+            pageParamName="bwcPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -727,7 +726,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={estateAffairsCommittee}
-            currentPage={1}
+            pageParamName="eacPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -741,7 +740,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={InspectionCommitteeMembers}
-            currentPage={1}
+            pageParamName="icPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -756,7 +755,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={SpaceAllocationCommitteeMembers}
-            currentPage={1}
+            pageParamName="sacPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -770,7 +769,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={ProgressCommitteeMembers}
-            currentPage={1}
+            pageParamName="pcPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -784,7 +783,7 @@ export default async function Estate({
               { key: 'position', label: 'Position' },
             ]}
             tableData={LicensingCommitteeMembers}
-            currentPage={1}
+            pageParamName="lcPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -799,7 +798,7 @@ export default async function Estate({
               { key: 'role', label: 'Role' },
             ]}
             tableData={HouseAllotmentCommitteeMembers}
-            currentPage={1}
+            pageParamName="hacPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -814,7 +813,7 @@ export default async function Estate({
               { key: 'role', label: 'Role' },
             ]}
             tableData={HouseAllotmentCommitteeMembers2}
-            currentPage={1}
+            pageParamName="hac2Page"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -834,7 +833,7 @@ export default async function Estate({
               { key: 'value', label: 'Value' },
             ]}
             tableData={areaDetails}
-            currentPage={1}
+            pageParamName="adPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -848,7 +847,7 @@ export default async function Estate({
               { key: 'area', label: 'Area' },
             ]}
             tableData={infrastructureDetails}
-            currentPage={1}
+            pageParamName="idPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -865,7 +864,7 @@ export default async function Estate({
               details: item.details,
               area: item.area,
             }))}
-            currentPage={1}
+            pageParamName="aadPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -884,7 +883,7 @@ export default async function Estate({
               type: item.type,
               area: item.area,
             }))}
-            currentPage={1}
+            pageParamName="hadPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -905,7 +904,7 @@ export default async function Estate({
               capacity: item.capacity,
               quantity: item.quantity,
             }))}
-            currentPage={1}
+            pageParamName="hdPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -926,7 +925,7 @@ export default async function Estate({
               capacity: item.capacity,
               quantity: item.quantity,
             }))}
-            currentPage={1}
+            pageParamName="ghdPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -945,7 +944,7 @@ export default async function Estate({
               plinthArea: item.plinthArea,
               numberOfHouses: item.numberOfHouses,
             }))}
-            currentPage={1}
+            pageParamName="radPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -962,7 +961,7 @@ export default async function Estate({
               facility: item.facility,
               area: item.area,
             }))}
-            currentPage={1}
+            pageParamName="sfdPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -979,10 +978,10 @@ export default async function Estate({
         <Suspense>
           <GenericTable
             headers={[{ key: 'project', label: 'Completed Projects' }]}
-            tableData={text.project.completed.map((project, index) => ({
+            tableData={text.project.completed.map((project) => ({
               project,
             }))}
-            currentPage={1}
+            pageParamName="cpPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -993,10 +992,10 @@ export default async function Estate({
         <Suspense>
           <GenericTable
             headers={[{ key: 'project', label: 'Ongoing Projects' }]}
-            tableData={text.project.ongoing.map((project, index) => ({
+            tableData={text.project.ongoing.map((project) => ({
               project,
             }))}
-            currentPage={1}
+            pageParamName="opPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -1007,10 +1006,10 @@ export default async function Estate({
         <Suspense>
           <GenericTable
             headers={[{ key: 'project', label: 'Future Projects' }]}
-            tableData={text.project.future.map((project, index) => ({
+            tableData={text.project.future.map((project) => ({
               project,
             }))}
-            currentPage={1}
+            pageParamName="fpPage"
             getCount={Promise.resolve([])}
           />
         </Suspense>
@@ -1024,19 +1023,15 @@ export default async function Estate({
           id="seniority"
           text={text.headings[8].toUpperCase()}
         />
-        <Table className="w-full table-auto">
-          <TableBody>
-            {seniorityLinks.map((link, index) => (
-              <TableRow key={index}>
-                <TableCell className="mb-1 block">
-                  <a href={link.href} target="_blank" className="underline">
-                    {link.text}
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className="space-y-2">
+          {seniorityLinks.map((link, index) => (
+            <div key={index}>
+              <a href={link.href} target="_blank" className="underline">
+                {link.text}
+              </a>
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );
