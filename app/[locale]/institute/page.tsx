@@ -216,7 +216,6 @@ export default async function Institute({
               : row.nirfCertificate,
             dataFile: row.dataFileLink ? row.dataFileLink : row.dataFile,
           }))}
-          getCount={Promise.resolve([])}
         />
       </section>
 

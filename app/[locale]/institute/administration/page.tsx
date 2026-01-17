@@ -15,8 +15,6 @@ import ButtonGroup from '~/components/button-group';
 import { getTranslations } from '~/i18n/translations';
 // Fetches committee data from DB - cache for 1 hour
 export const revalidate = 3600;
-import { db } from '~/server/db';
-import GenericTable from '~/components/ui/generic-table';
 import Loading from '~/components/loading';
 import { CardTitle } from '~/components/ui';
 
@@ -101,19 +99,6 @@ export default async function Administration({
             <CardTitle className="text-2xl text-primary-300">
               {text.composition}
             </CardTitle>
-            <GenericTable
-              headers={[
-                { key: 'serial', label: text.sNo },
-                { key: 'name', label: text.name },
-                { key: 'servingAs', label: text.servedAs },
-              ]}
-              tableData={await db.query.committeeMembers.findMany({
-                where: (member, { eq }) => eq(member.committeeType, 'senate'),
-                orderBy: (member, { asc }) => [asc(member.serial)],
-              })}
-              currentPage={1}
-              getCount={Promise.resolve([])}
-            />
           </Suspense>
         </section>
         <ButtonGroup

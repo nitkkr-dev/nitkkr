@@ -136,8 +136,7 @@ export default async function CentralWorkshop({
                   name,
                   quantity,
                 }))}
-                currentPage={1}
-                getCount={Promise.resolve([])}
+                pageParamName={`${category}-page`}
               />
 
               {categoryText.miscDetails && (
@@ -202,8 +201,7 @@ const StaffTable = async ({
         name,
         designation,
       }))}
-      currentPage={1}
-      getCount={Promise.resolve([])}
+      pageParamName="staff-page"
     />
   );
 };

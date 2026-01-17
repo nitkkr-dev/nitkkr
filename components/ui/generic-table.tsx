@@ -26,7 +26,7 @@ interface GenericTableProps<T extends Record<string, unknown>> {
   tableData: T[];
   currentPage?: number;
   itemsPerPage?: number;
-  getCount: Promise<{ count: number }[]>;
+  getCount?: Promise<{ count: number }[]>;
   pageParamName?: string;
 }
 

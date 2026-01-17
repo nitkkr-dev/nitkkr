@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
-import { db } from '~/server/db';
 import GenericTable from '~/components/ui/generic-table';
 import Loading from '~/components/loading';
 
@@ -17,10 +16,6 @@ export default async function HealthCentre({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).Section.HealthCentre;
-
-  const section = (await db.query.sections.findFirst({
-    where: (section, { eq }) => eq(section.urlName, 'health-centre'),
-  }))!;
 
   const hospitalData = [
     {
@@ -494,7 +489,7 @@ export default async function HealthCentre({
                 )
                 .join(', '),
             }))}
-            getCount={Promise.resolve([])}
+            pageParamName="timings-page"
           />
         </Suspense>
       </section>
@@ -519,7 +514,7 @@ export default async function HealthCentre({
               role,
               tel,
             }))}
-            getCount={Promise.resolve([])}
+            pageParamName="officers-page"
           />
         </Suspense>
         <Suspense fallback={<Loading />}>
@@ -535,7 +530,7 @@ export default async function HealthCentre({
               designation,
               phone,
             }))}
-            getCount={Promise.resolve([])}
+            pageParamName="staff-page"
           />
         </Suspense>
       </section>
@@ -701,7 +696,7 @@ export default async function HealthCentre({
               field,
               phone,
             }))}
-            getCount={Promise.resolve([])}
+            pageParamName="hospitals-page"
           />
         </Suspense>
       </section>
