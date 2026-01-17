@@ -35,3 +35,4 @@ export * from './students.schema';
 export * from './sponsored-research-projects.schema';
 export * from './sponsored-research-projects-faculties.schema';
 export * from './memorandum.schema';
+export * from './other-officers.schema';
