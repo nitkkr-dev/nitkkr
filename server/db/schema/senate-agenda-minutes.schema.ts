@@ -10,12 +10,10 @@ export const senateAgendaMinutes = pgTable(
     agenda: t
       .text('agenda')
       .array()
-      .notNull()
       .default(sql`'{}'::text[]`),
     minutes: t
       .text('minutes')
       .array()
-      .notNull()
       .default(sql`'{}'::text[]`),
     createdAt: t.timestamp('created_at').defaultNow().notNull(),
     updatedAt: t
