@@ -1,26 +1,32 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { arrayOverlaps } from 'drizzle-orm';
 
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
+import { NotificationItemWithModal } from '~/components/notifications/notification-item-with-modal';
 import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
-import {
-  db,
-  type notifications as notificationsTable,
-} from '~/server/db';
+import { db, notifications as notificationsTable } from '~/server/db';
 
 type NotificationCategory =
-  (typeof notificationsTable.category.enumValues)[number];
+  (typeof notificationsTable.categories.enumValues)[number];
+
+type EducationType = 'ug' | 'pg' | 'phd';
 
 export interface NotificationsPanelProps {
   locale: string;
-  /** Filter by notification category */
+  /** Filter by notification category (matches if notification has this category) */
   category?: NotificationCategory;
   /** Filter by club ID */
   clubId?: number;
+  /** Filter by department ID */
+  departmentId?: number;
+  /** Filter by hostel ID */
+  hostelId?: number;
+  /** Filter by education type (ug, pg, phd) */
+  educationType?: EducationType;
   /** Filter notifications created on or after this date */
   startDate?: Date;
   /** Filter notifications created on or before this date */
@@ -39,6 +45,9 @@ export default async function NotificationsPanel({
   locale,
   category,
   clubId,
+  departmentId,
+  hostelId,
+  educationType,
   startDate,
   endDate,
   className,
@@ -47,7 +56,7 @@ export default async function NotificationsPanel({
   viewAllText,
 }: NotificationsPanelProps) {
   const text = (await getTranslations(locale)).Notifications;
-  const filterKey = `${category}-${clubId}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
+  const filterKey = `${category}-${clubId}-${departmentId}-${hostelId}-${educationType}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
 
   return (
     <section
@@ -59,18 +68,19 @@ export default async function NotificationsPanel({
         className
       )}
     >
-      <ScrollArea
-        type="always"
-        className="flex-1 pr-2 sm:pr-3 md:pr-4"
-      >
+      <ScrollArea type="always" className="flex-1 pr-2 sm:pr-3 md:pr-4">
         <ol className="space-y-2 sm:space-y-4 md:space-y-6">
           <Suspense fallback={<Loading />} key={filterKey}>
             <NotificationsList
               locale={locale}
               category={category}
               clubId={clubId}
+              departmentId={departmentId}
+              hostelId={hostelId}
+              educationType={educationType}
               startDate={startDate}
               endDate={endDate}
+              noNotificationsText={text.noNotificationsFound}
             />
           </Suspense>
         </ol>
@@ -97,16 +107,24 @@ interface NotificationsListProps {
   locale: string;
   category?: NotificationCategory;
   clubId?: number;
+  departmentId?: number;
+  hostelId?: number;
+  educationType?: EducationType;
   startDate?: Date;
   endDate?: Date;
+  noNotificationsText: string;
 }
 
 const NotificationsList = async ({
   locale,
   category,
   clubId,
+  departmentId,
+  hostelId,
+  educationType,
   startDate,
   endDate,
+  noNotificationsText,
 }: NotificationsListProps) => {
   const notifications = (
     await db.query.notifications.findMany({
@@ -114,10 +132,21 @@ const NotificationsList = async ({
         const conditions = [];
 
         if (category) {
-          conditions.push(eq(notification.category, category));
+          conditions.push(
+            arrayOverlaps(notification.categories, [category])
+          );
         }
         if (clubId !== undefined) {
           conditions.push(eq(notification.clubId, clubId));
+        }
+        if (departmentId !== undefined) {
+          conditions.push(eq(notification.departmentId, departmentId));
+        }
+        if (hostelId !== undefined) {
+          conditions.push(eq(notification.hostelId, hostelId));
+        }
+        if (educationType) {
+          conditions.push(eq(notification.educationType, educationType));
         }
         if (startDate) {
           conditions.push(gte(notification.createdAt, startDate));
@@ -140,8 +169,8 @@ const NotificationsList = async ({
 
   if (notifications.length === 0) {
     return (
-      <li className="py-8 text-center text-neutral-500">
-        No notifications found
+      <li className="py-8 text-center text-neutral-900">
+        {noNotificationsText}
       </li>
     );
   }
@@ -155,15 +184,11 @@ const NotificationsList = async ({
         <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
           {notifications.map(({ id, title }, index) => (
             <li key={index}>
-              <Link
-                className="inline-flex max-w-full items-start gap-1"
-                href={`/${locale}/noticeboard/${id}`}
-              >
-                <MdOutlineKeyboardArrowRight className="mt-0.5 size-4 shrink-0 text-primary-700 sm:mt-1 md:size-5 lg:size-6" />
-                <p className="line-clamp-2 text-sm sm:line-clamp-1 sm:text-base md:text-lg">
-                  {title}
-                </p>
-              </Link>
+              <NotificationItemWithModal
+                id={id}
+                title={title}
+                locale={locale}
+              />
             </li>
           ))}
         </ul>
