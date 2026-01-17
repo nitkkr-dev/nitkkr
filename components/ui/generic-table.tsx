@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
+import { useSearchParams } from 'next/navigation';
 
 import {
   Table,
@@ -23,9 +24,10 @@ interface HeaderConfig {
 interface GenericTableProps<T extends Record<string, unknown>> {
   headers: HeaderConfig[];
   tableData: T[];
-  currentPage: number;
+  currentPage?: number;
   itemsPerPage?: number;
-  getCount: Promise<{ count: number }[]>;
+  getCount?: Promise<{ count: number }[]>;
+  pageParamName?: string;
 }
 
 // Helper function to check if a value is a valid URL (absolute or relative)
@@ -45,12 +47,17 @@ const isValidUrl = (value: unknown): boolean => {
 export default function GenericTable<T extends Record<string, unknown>>({
   headers,
   tableData,
-  currentPage,
+  currentPage: propCurrentPage,
   itemsPerPage = 10,
+  pageParamName = 'page',
 }: GenericTableProps<T>) {
+  const searchParams = useSearchParams();
+  const currentPage =
+    propCurrentPage ?? (Number(searchParams.get(pageParamName)) || 1);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const visibleData = tableData.slice(startIndex, startIndex + itemsPerPage);
   const totalCount = tableData.length;
+  const noOfPages = Math.ceil(totalCount / itemsPerPage);
 
   return (
     <section className="container">
@@ -108,12 +115,15 @@ export default function GenericTable<T extends Record<string, unknown>>({
         </Table>
       </div>
 
-      <div className="mt-6">
-        <PaginationWithLogic
-          currentPage={currentPage}
-          totalCount={totalCount}
-        />
-      </div>
+      {noOfPages > 1 && (
+        <div className="mt-6">
+          <PaginationWithLogic
+            currentPage={currentPage}
+            totalCount={totalCount}
+            pageParamName={pageParamName}
+          />
+        </div>
+      )}
     </section>
   );
 }

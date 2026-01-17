@@ -180,9 +180,7 @@ export default async function Programmes({
         <GenericTable
           headers={btechHeaders}
           tableData={btechData}
-          currentPage={1}
-          itemsPerPage={btechData.length}
-          getCount={Promise.resolve([{ count: btechData.length }])}
+          pageParamName="btech-page"
         />
       </article>
 
@@ -202,9 +200,7 @@ export default async function Programmes({
         <GenericTable
           headers={mtechHeaders}
           tableData={mtechData}
-          currentPage={1}
-          itemsPerPage={mtechData.length}
-          getCount={Promise.resolve([{ count: mtechData.length }])}
+          pageParamName="mtech-page"
         />
       </article>
 
@@ -217,9 +213,7 @@ export default async function Programmes({
         <GenericTable
           headers={seatDistHeaders}
           tableData={seatDistData}
-          currentPage={1}
-          itemsPerPage={seatDistData.length}
-          getCount={Promise.resolve([{ count: seatDistData.length }])}
+          pageParamName="seats-page"
         />
       </article>
     </>
