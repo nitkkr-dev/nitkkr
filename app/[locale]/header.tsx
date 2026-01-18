@@ -107,7 +107,7 @@ export default async function Header({ locale }: { locale: string }) {
           href: '/academics/scholarships',
           description:
             'Learn about scholarships, eligibility, and application details.',
-        }
+        },
       ],
     },
     { label: text.faculty, href: 'faculty-and-staff' },

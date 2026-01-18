@@ -1,19 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MdCall, MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
-import Heading from '~/components/heading';
 
+import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
-import { PaginationWithLogic } from '~/components/pagination/pagination';
+import GenericTable from '~/components/ui/generic-table';
+import NotificationsPanelProps from '~/components/notifications/notifications-panel';
 export default async function SCoE({
   params: { locale },
   searchParams,
@@ -44,19 +37,6 @@ export default async function SCoE({
     { LaboratoriesName: 'Embedded Systems Lab' },
   ];
 
-  const labsPage = Number(searchParams?.labsPage ?? 1);
-  const coursesPage = Number(searchParams?.coursesPage ?? 1);
-  const ITEMS_PER_PAGE = 10;
-  const visibleLabs = LaboratoriesData.slice(
-    (labsPage - 1) * ITEMS_PER_PAGE,
-    labsPage * ITEMS_PER_PAGE
-  );
-
-  const visibleCourses = CoursesData.slice(
-    (coursesPage - 1) * ITEMS_PER_PAGE,
-    coursesPage * ITEMS_PER_PAGE
-  );
-
   return (
     <>
       <ImageHeader
@@ -74,7 +54,6 @@ export default async function SCoE({
         ]}
         src="slideshow/image01.jpg"
       />
-
       {/* ADMISSION */}
       <section className="container">
         <section className="mb-5 mt-10">
@@ -84,6 +63,22 @@ export default async function SCoE({
             </p>
           ))}
         </section>
+      </section>
+      {/* notifications */}
+      <section className="container" id="notifications">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href="#notifications"
+          id="notifications"
+          text={text.Notifications.title.toUpperCase()}
+        />
+        <NotificationsPanelProps
+          locale={locale}
+          category="academic"
+          showViewAll={true}
+          viewAllHref={`/${locale}/notifications?category=scoe`}
+        />
       </section>
       <section className="container my-16">
         <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-start">
@@ -122,7 +117,6 @@ export default async function SCoE({
           </div>
         </div>
       </section>
-
       <section className="container">
         <Heading
           glyphDirection="rtl"
@@ -183,7 +177,6 @@ export default async function SCoE({
           ))}
         </ul>
       </section>
-
       {/* features */}
       <section className="container">
         <Heading
@@ -202,8 +195,7 @@ export default async function SCoE({
           </ul>
         </div>
       </section>
-
-      {/* laboratories */}
+      \{/* laboratories */}
       <section className="container">
         <Heading
           glyphDirection="ltr"
@@ -212,38 +204,18 @@ export default async function SCoE({
           id="laboratories"
           text={text.Laboratories.title.toUpperCase()}
         />
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.Laboratories.srNo}</TableHead>
-              <TableHead>{text.Laboratories.LaboratoriesName}</TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {visibleLabs.map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
-                <TableCell>
-                  {(labsPage - 1) * ITEMS_PER_PAGE + rowIndex + 1}
-                </TableCell>
-                <TableCell>{row.LaboratoriesName}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        {LaboratoriesData.length > ITEMS_PER_PAGE && (
-          <div className="mt-6">
-            <PaginationWithLogic
-              currentPage={labsPage}
-              totalCount={LaboratoriesData.length}
-              pageParamName="labsPage"
-            />
-          </div>
-        )}
       </section>
-
+      <GenericTable
+        headers={[
+          {
+            key: 'LaboratoriesName',
+            label: text.Laboratories.LaboratoriesName,
+          },
+        ]}
+        tableData={LaboratoriesData}
+      />
       {/* Courses */}
-      <section className="container">
+      <section className="container  mt-10">
         <Heading
           glyphDirection="rtl"
           heading="h3"
@@ -251,36 +223,11 @@ export default async function SCoE({
           id="courses"
           text={text.Courses.title.toUpperCase()}
         />
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.Courses.srNo}</TableHead>
-              <TableHead>{text.Courses.courseName}</TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {visibleCourses.map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
-                <TableCell>
-                  {(coursesPage - 1) * ITEMS_PER_PAGE + rowIndex + 1}
-                </TableCell>
-                <TableCell>{row.courseName}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        {CoursesData.length > ITEMS_PER_PAGE && (
-          <div className="mt-6">
-            <PaginationWithLogic
-              currentPage={coursesPage}
-              totalCount={CoursesData.length}
-              pageParamName="coursesPage"
-            />
-          </div>
-        )}
       </section>
-
+      <GenericTable
+        headers={[{ key: 'courseName', label: text.Courses.courseName }]}
+        tableData={CoursesData}
+      />
       {/* how to apply */}
       <section className="container">
         <Heading
