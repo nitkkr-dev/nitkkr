@@ -1,77 +1,109 @@
 import Link from 'next/link';
-import React, { Suspense } from 'react';
-import { desc } from 'drizzle-orm';
+import React from 'react';
+import { desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
-import { db, eventCategoryEnum } from '~/server/db';
+import { db } from '~/server/db';
 import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
-import Loading from '~/components/loading';
+import {
+  notificationCategoryEnum,
+  notificationDepartments,
+} from '~/server/db/schema/notifications.schema';
+import { type NotificationItem } from '~/server/actions/notifications';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
 import { MultiCheckbox } from './MultiCheckbox';
-import { type EventItem, EventsList } from './EventsList';
+import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
 
-type Cat = (typeof eventCategoryEnum.enumValues)[number];
+type Cat = (typeof notificationCategoryEnum.enumValues)[number];
+
 const INITIAL_BATCH_SIZE = 20;
 
 interface PageSearchParams {
   q?: string;
   category?: string | string[];
+  department?: string | string[];
   start?: string;
   end?: string;
 }
 
-export default async function EventsPage({
+export default async function NotificationsPage({
   params: { locale },
   searchParams,
 }: {
   params: { locale: string };
   searchParams: PageSearchParams;
 }) {
-  const text = (await getTranslations(locale)).Events;
+  const text = (await getTranslations(locale)).Notifications;
 
   // Normalize multi-select params
   const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
+  const departments = toArray(searchParams.department).filter(Boolean);
   const startDate = parseDate(searchParams.start);
   const endDate = parseDate(searchParams.end);
   const query = (searchParams.q ?? '').trim().toLowerCase();
 
+  // Fetch departments (names + urlName) for filter list
+  const departmentRows = await db.query.departments.findMany({
+    columns: { id: true, name: true, urlName: true },
+  });
+
+  // Get department IDs for filtering
+  const deptIds = departments.length
+    ? departmentRows
+        .filter((d) => departments.includes(d.urlName))
+        .map((d) => d.id)
+    : [];
+
+  // Get notification IDs that match department filter via junction table
+  let filteredNotificationIds: number[] | undefined;
+  if (deptIds.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        notificationId: notificationDepartments.notificationId,
+      })
+      .from(notificationDepartments)
+      .where(inArray(notificationDepartments.departmentId, deptIds));
+    filteredNotificationIds = deptMatches.map((m) => m.notificationId);
+
+    // If no notifications match the department filter, return empty
+    if (filteredNotificationIds.length === 0) {
+      filteredNotificationIds = [-1]; // Use impossible ID to return no results
+    }
+  }
+
   // Build base query - fetch only initial batch
-  let raw = await db.query.events.findMany({
-    where: (e, { and, gte, lte }) =>
+  let raw = await db.query.notifications.findMany({
+    where: (n, { and, gte, lte }) =>
       and(
-        startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
-        endDate ? lte(e.startDate, endDate.toISOString()) : undefined
+        startDate ? gte(n.createdAt, startDate) : undefined,
+        endDate ? lte(n.createdAt, endDate) : undefined,
+        filteredNotificationIds
+          ? inArray(n.id, filteredNotificationIds)
+          : undefined
       ),
-    orderBy: (e) => [desc(e.startDate)],
+    orderBy: (n) => [desc(n.createdAt)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
-  });  
+  });
 
-  console.log(raw);
-  
-
-  // Category filter (multi) - check if event has ANY of the selected categories
+  // Category filter (multi) - check if any of notification's categories match selected
   if (categories.length) {
-    raw = raw.filter((e) =>
-      e.categories.some((cat) => categories.includes(cat as Cat))
+    raw = raw.filter((n) =>
+      n.categories.some((cat) => categories.includes(cat as Cat))
     );
   }
 
-  // Text search (title, description, location, and categories)
+  // Text search (title and content)
   if (query) {
     raw = raw.filter(
-      (e) =>
-        e.title.toLowerCase().includes(query.toLowerCase()) ||
-        (e.description?.toLowerCase().includes(query.toLowerCase()) ?? false) ||
-        (e.location?.toLowerCase().includes(query.toLowerCase()) ?? false) ||
-        e.categories.some((cat) =>
-          cat.toLowerCase().includes(query.toLowerCase())
-        )
+      (n) =>
+        n.title.toLowerCase().includes(query.toLowerCase()) ||
+        n.content?.toLowerCase().includes(query.toLowerCase())
     );
   }
 
@@ -79,27 +111,21 @@ export default async function EventsPage({
   const hasMore = raw.length > INITIAL_BATCH_SIZE;
   const initialItems = hasMore ? raw.slice(0, INITIAL_BATCH_SIZE) : raw;
   const initialCursor = hasMore
-    ? initialItems[initialItems.length - 1]?.startDate ?? null
+    ? initialItems[initialItems.length - 1]?.createdAt.toISOString() ?? null
     : null;
 
   // Serialize for client component
-  const serializedItems: EventItem[] = initialItems.map((e) => ({
-    id: e.id,
-    title: e.title,
-    description: e.description,
-    categories: e.categories,
-    startDate: e.startDate,
-    endDate: e.endDate,
-    time: e.time,
-    location: e.location,
-    locationUrl: e.locationUrl,
-    images: e.images,
-    documents: e.documents,
+  const serializedItems: NotificationItem[] = initialItems.map((n) => ({
+    id: n.id,
+    title: n.title,
+    categories: n.categories,
+    createdAt: n.createdAt.toISOString(),
   }));
 
   // Build filter params for the client component
   const filterParams = {
     categories: categories.length ? categories : undefined,
+    departmentIds: deptIds.length ? deptIds : undefined,
     start: searchParams.start,
     end: searchParams.end,
     query: query || undefined,
@@ -130,6 +156,7 @@ export default async function EventsPage({
                 href={buildHref(locale, {
                   q: undefined,
                   category: [],
+                  department: [],
                   start: undefined,
                   end: undefined,
                 })}
@@ -141,10 +168,11 @@ export default async function EventsPage({
 
           <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2 pr-4">
-              <FilterSection label={text.filter.date}>
+              <FilterSection locale={locale} label={text.filter.date}>
                 <DateRangeForm
                   locale={locale}
                   categories={categories}
+                  departments={departments}
                   query={query}
                   start={searchParams.start}
                   end={searchParams.end}
@@ -158,67 +186,74 @@ export default async function EventsPage({
                 />
               </FilterSection>
 
-              <FilterSection label={text.filter.category}>
+              <FilterSection locale={locale} label={text.filter.category}>
                 <MultiCheckbox
                   param="category"
-                  options={eventCategoryEnum.enumValues}
+                  options={notificationCategoryEnum.enumValues}
                   selected={categories}
                   locale={locale}
                   textMap={text.categories}
                 />
               </FilterSection>
+
+              <FilterSection locale={locale} label={text.filter.department}>
+                <MultiCheckbox
+                  param="department"
+                  options={departmentRows.map((d) => d.urlName)}
+                  selected={departments}
+                  locale={locale}
+                  textMap={Object.fromEntries(
+                    departmentRows.map((d) => [d.urlName, d.name])
+                  )}
+                />
+              </FilterSection>
             </div>
           </ScrollArea>
         </aside>
-
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
           <search className="flex w-full items-center gap-4">
-            <Suspense fallback={<Loading />}>
-              <SearchInput
-                defaultValue={query}
-                placeholder={text.searchPlaceholder}
-              />
-            </Suspense>
+            <SearchInput
+              defaultValue={query}
+              placeholder={text.searchPlaceholder}
+            />
 
             {/* Mobile Filters Button - shows on < xl */}
             <div className="flex-shrink-0">
-              <Suspense fallback={<Loading />}>
-                <MobileFilters
-                  locale={locale}
-                  categories={categories}
-                  categoryOptions={eventCategoryEnum.enumValues}
-                  query={query}
-                  start={searchParams.start}
-                  end={searchParams.end}
-                  text={{
-                    filters: text.filter.title,
-                    filterBy: text.filterBy,
-                    clearAllFilters: text.clearAllFilters,
-                    filter: text.filter,
-                    categories: text.categories,
-                  }}
-                />
-              </Suspense>
+              <MobileFilters
+                locale={locale}
+                categories={categories}
+                departments={departments}
+                departmentRows={departmentRows}
+                categoryOptions={notificationCategoryEnum.enumValues}
+                query={query}
+                start={searchParams.start}
+                end={searchParams.end}
+                text={{
+                  filters: text.filter.title,
+                  filterBy: text.filterBy,
+                  clearAllFilters: text.clearAllFilters,
+                  filter: text.filter,
+                  categories: text.categories,
+                }}
+              />
             </div>
           </search>
 
-          {/* Events List */}
+          {/* Notifications List */}
           <div className="flex-1 rounded-md">
-            <Suspense fallback={<Loading />}>
-              <EventsList
-                initialItems={serializedItems}
-                initialCursor={initialCursor}
-                initialHasMore={hasMore}
-                locale={locale}
-                filterParams={filterParams}
-                text={{
-                  noEventsFound: text.noEventsFound,
-                  noMoreEvents: text.noMoreEvents,
-                }}
-              />
-            </Suspense>
+            <NotificationsList
+              initialItems={serializedItems}
+              initialCursor={initialCursor}
+              initialHasMore={hasMore}
+              locale={locale}
+              filterParams={filterParams}
+              text={{
+                noNotificationsFound: text.noNotificationsFound,
+                noMoreNotifications: text.noMoreNotifications,
+              }}
+            />
           </div>
         </section>
       </section>
@@ -226,24 +261,35 @@ export default async function EventsPage({
   );
 }
 
-/* ---------------------- Filter Section Component ---------------------- */
+/* ---------------------- Filters Components ---------------------- */
+
 function FilterSection({
   label,
   children,
+  viewAllHref,
 }: {
   label: string;
   children: React.ReactNode;
+  viewAllHref?: string;
+  locale?: string;
 }) {
   return (
     <section className="rounded border border-primary-100 bg-neutral-50 p-4">
       <div className="flex items-start justify-between">
         <h3 className="text-xl font-bold text-primary-300">{label}</h3>
+        {viewAllHref && (
+          <Link
+            href={viewAllHref}
+            className="text-xs font-medium text-primary-700"
+          >
+            View All
+          </Link>
+        )}
       </div>
       {children}
     </section>
   );
 }
-
 /* ---------------------- Helpers ---------------------- */
 function toArray(v: string | string[] | undefined): string[] {
   return Array.isArray(v) ? v : v ? [v] : [];
@@ -273,5 +319,5 @@ function buildHref(locale: string, updates: Record<string, unknown>): string {
   });
 
   const qs = params.toString();
-  return `/${locale}/events${qs ? `?${qs}` : ''}`;
+  return `/${locale}/notifications${qs ? `?${qs}` : ''}`;
 }

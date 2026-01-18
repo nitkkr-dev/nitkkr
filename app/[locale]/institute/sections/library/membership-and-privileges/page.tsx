@@ -62,8 +62,6 @@ export default async function MembershipAndPrivileges({
               { key: 'periodOfLoan', label: 'Period of Loan' },
             ]}
             tableData={LoanTableData}
-            currentPage={1}
-            getCount={Promise.resolve([])}
           />
         </section>
       </section>

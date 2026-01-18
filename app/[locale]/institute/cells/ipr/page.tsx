@@ -239,8 +239,6 @@ export default async function IPR({
                 },
               ]}
               tableData={advisoryCommittee}
-              currentPage={1}
-              getCount={Promise.resolve([])}
             />
           </div>
         </div>

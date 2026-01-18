@@ -487,21 +487,80 @@ RACS: {
   };
   Notifications: {
     title: string;
+    searchPlaceholder: string;
+    clearAll: string;
+    clearAllFilters: string;
+    filterBy: string;
+    noNotificationsFound: string;
+    noMoreNotifications: string;
+    saveSelection: string;
+    viewAll: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      department: string;
+      educationType: string;
+      startDate: string;
+      endDate: string;
+      day: string;
+      month: string;
+      year: string;
+    };
     categories: {
       academic: string;
       tender: string;
       workshop: string;
+      administration: string;
       recruitment: string;
+      admission: string;
+      'student-activities': string;
+      faculty: string;
+      research: string;
+      alumni: string;
+      examination: string;
+      result: string;
+      hostel: string;
+      miscellaneous: string;
+      archived: string;
     };
-    viewAll: string;
+    educationType: {
+      ug: string;
+      pg: string;
+      phd: string;
+      all: string;
+    };
   };
   Events: {
     title: string;
+    filterBy: string;
+    clearAllFilters: string;
+    searchPlaceholder: string;
+    noEventsFound: string;
+    noMoreEvents: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      startDate: string;
+      endDate: string;
+      day: string;
+      month: string;
+      year: string;
+    };
     categories: {
       featured: string;
       recents: string;
-      student: string;
-      faculty: string;
+      academic: string;
+      technical: string;
+      cultural: string;
+      sports: string;
+      'clubs-societies': string;
+      achievements: string;
+      placements: string;
+      outreach: string;
+      miscellaneous: string;
+      'campus-highlights': string;
     };
     viewAll: string;
   };

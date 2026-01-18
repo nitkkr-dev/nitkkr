@@ -9,7 +9,7 @@ import { MdBadge } from 'react-icons/md';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import NotificationsPanel from '~/components/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
@@ -73,7 +73,7 @@ export default async function Academics({
           <NotificationsPanel
             locale={locale}
             category="academic"
-            viewAllHref={`/${locale}/notifications/?category=academic`}
+            viewAllHref={`/${locale}/notifications?category=academic`}
             className="flex-1 lg:w-[65%]"
           />
         </article>
