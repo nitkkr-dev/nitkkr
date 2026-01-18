@@ -143,12 +143,16 @@ async function fetchOfficersByCategory() {
   return grouped;
 }
 
-export default async function OfficersPage() {
+export default async function OfficersPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
   const officersData = await fetchOfficersByCategory();
-
+  const text = (await getTranslations(locale)).otherOfficersPage;
   return (
     <>
-      <ImageHeader title="other officers" src="student-activities/header.jpg" />
+      <ImageHeader title={text.title} src="student-activities/header.jpg" />
       {OFFICER_CATEGORIES.map((category) => {
         const categoryData = officersData[category.key] || [];
 

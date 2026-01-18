@@ -2078,7 +2078,7 @@ const text: Translations = {
     },
   },
   otherOfficersPage: {
-    title: "अन्य अधिकारी",
+    title: 'अन्य अधिकारी',
   },
 };
 

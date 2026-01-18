@@ -2100,7 +2100,7 @@ rolls down to 60% of the eligible students for second round of placement session
     },
   },
   otherOfficersPage: {
-    title: "Other Officers",
+    title: 'Other Officers',
   },
 };
 
