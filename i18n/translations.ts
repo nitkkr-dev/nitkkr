@@ -1271,5 +1271,8 @@ export interface Translations {
   };
   otherOfficersPage: {
     title: string;
+    facultyName: string;
+    designation: string;
+    categories: string[];
   };
 }

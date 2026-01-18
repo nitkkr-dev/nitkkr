@@ -2101,6 +2101,29 @@ rolls down to 60% of the eligible students for second round of placement session
   },
   otherOfficersPage: {
     title: 'Other Officers',
+    facultyName: 'Faculty Name',
+    designation: 'Designation',
+    categories: [
+      'head-of-department',
+      'chairman',
+      'professor-in-charge',
+      'faculty-in-charge',
+      'faculty-in-charge-student-club',
+      'members-library-committee',
+      'members-institute-handbook',
+      'members-sports-committee',
+      'members-admission-committee',
+      'members-grievance-cell',
+      'members-canteen-committee',
+      'members-clubs-committee',
+      'members-proctorial-board',
+      'members-examination-committee',
+      'members-disciplinary-committee',
+      'members-anti-ragging-committee',
+      'members-nirf-nba-naac',
+      'coordinator',
+      'co-coordinator'
+    ]
   },
 };
 

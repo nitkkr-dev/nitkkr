@@ -10,109 +10,6 @@ import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
-const OFFICER_CATEGORIES = [
-  {
-    key: 'head-of-department',
-    title: 'Head of Department',
-    id: 'head-of-department',
-  },
-  {
-    key: 'chairman',
-    title: 'Chairman',
-    id: 'chairman',
-  },
-  {
-    key: 'professor-in-charge',
-    title: 'Professor In-Charge',
-    id: 'professor-in-charge',
-  },
-  {
-    key: 'faculty-in-charge',
-    title: 'Faculty In-Charge',
-    id: 'faculty-in-charge',
-  },
-  {
-    key: 'faculty-in-charge-student-club',
-    title: 'Faculty In-Charge (Student Clubs)',
-    id: 'faculty-in-charge-student-club',
-  },
-  {
-    key: 'members-library-committee',
-    title: 'Library Committee Members',
-    id: 'members-library-committee',
-  },
-  {
-    key: 'members-institute-handbook',
-    title: 'Institute Handbook Committee Members',
-    id: 'members-institute-handbook',
-  },
-  {
-    key: 'members-sports-committee',
-    title: 'Sports Committee Members',
-    id: 'members-sports-committee',
-  },
-  {
-    key: 'members-admission-committee',
-    title: 'Admission Committee Members',
-    id: 'members-admission-committee',
-  },
-  {
-    key: 'members-grievance-cell',
-    title: 'Grievance Cell Members',
-    id: 'members-grievance-cell',
-  },
-  {
-    key: 'members-canteen-committee',
-    title: 'Canteen Committee Members',
-    id: 'members-canteen-committee',
-  },
-  {
-    key: 'members-clubs-committee',
-    title: 'Clubs Committee Members',
-    id: 'members-clubs-committee',
-  },
-  {
-    key: 'members-proctorial-board',
-    title: 'Proctorial Board Members',
-    id: 'members-proctorial-board',
-  },
-  {
-    key: 'members-examination-committee',
-    title: 'Examination Committee Members',
-    id: 'members-examination-committee',
-  },
-  {
-    key: 'members-disciplinary-committee',
-    title: 'Disciplinary Committee Members',
-    id: 'members-disciplinary-committee',
-  },
-  {
-    key: 'members-anti-ragging-committee',
-    title: 'Anti-Ragging Committee Members',
-    id: 'members-anti-ragging-committee',
-  },
-  {
-    key: 'members-nirf-nba-naac',
-    title: 'NIRF/NBA/NAAC Members',
-    id: 'members-nirf-nba-naac',
-  },
-  {
-    key: 'coordinator',
-    title: 'Coordinators',
-    id: 'coordinator',
-  },
-  {
-    key: 'co-coordinator',
-    title: 'Co-Coordinators',
-    id: 'co-coordinator',
-  },
-  {
-    key: 'nodal-officer',
-    title: 'Nodal Officers',
-    id: 'nodal-officer',
-  },
-] as const;
-
 async function fetchOfficersByCategory() {
   const allOfficers = await db.query.otherOfficers.findMany({
     with: {
@@ -150,6 +47,108 @@ export default async function OfficersPage({
 }) {
   const officersData = await fetchOfficersByCategory();
   const text = (await getTranslations(locale)).otherOfficersPage;
+  const OFFICER_CATEGORIES = [
+    {
+      key: 'head-of-department',
+      title: text.categories[0],
+      id: 'head-of-department',
+    },
+    {
+      key: 'chairman',
+      title: text.categories[1],
+      id: 'chairman',
+    },
+    {
+      key: 'professor-in-charge',
+      title: text.categories[2],
+      id: 'professor-in-charge',
+    },
+    {
+      key: 'faculty-in-charge',
+      title: text.categories[3],
+      id: 'faculty-in-charge',
+    },
+    {
+      key: 'faculty-in-charge-student-club',
+      title: text.categories[4],
+      id: 'faculty-in-charge-student-club',
+    },
+    {
+      key: 'members-library-committee',
+      title: text.categories[5],
+      id: 'members-library-committee',
+    },
+    {
+      key: 'members-institute-handbook',
+      title: text.categories[6],
+      id: 'members-institute-handbook',
+    },
+    {
+      key: 'members-sports-committee',
+      title: text.categories[7],
+      id: 'members-sports-committee',
+    },
+    {
+      key: 'members-admission-committee',
+      title: text.categories[8],
+      id: 'members-admission-committee',
+    },
+    {
+      key: 'members-grievance-cell',
+      title: text.categories[9],
+      id: 'members-grievance-cell',
+    },
+    {
+      key: 'members-canteen-committee',
+      title: text.categories[10],
+      id: 'members-canteen-committee',
+    },
+    {
+      key: 'members-clubs-committee',
+      title: text.categories[11],
+      id: 'members-clubs-committee',
+    },
+    {
+      key: 'members-proctorial-board',
+      title: text.categories[12],
+      id: 'members-proctorial-board',
+    },
+    {
+      key: 'members-examination-committee',
+      title: text.categories[13],
+      id: 'members-examination-committee',
+    },
+    {
+      key: 'members-disciplinary-committee',
+      title: text.categories[14],
+      id: 'members-disciplinary-committee',
+    },
+    {
+      key: 'members-anti-ragging-committee',
+      title: text.categories[15],
+      id: 'members-anti-ragging-committee',
+    },
+    {
+      key: 'members-nirf-nba-naac',
+      title: text.categories[16],
+      id: 'members-nirf-nba-naac',
+    },
+    {
+      key: 'coordinator',
+      title: text.categories[17],
+      id: 'coordinator',
+    },
+    {
+      key: 'co-coordinator',
+      title: text.categories[18],
+      id: 'co-coordinator',
+    },
+    {
+      key: 'nodal-officer',
+      title: text.categories[19],
+      id: 'nodal-officer',
+    },
+  ] as const;
   return (
     <>
       <ImageHeader title={text.title} src="student-activities/header.jpg" />
@@ -171,8 +170,8 @@ export default async function OfficersPage({
               <Suspense fallback={<Loading />}>
                 <GenericTable
                   headers={[
-                    { key: 'name', label: 'Faculty Name' },
-                    { key: 'designation', label: 'Designation' },
+                    { key: 'name', label: text.facultyName },
+                    { key: 'designation', label: text.designation },
                   ]}
                   tableData={categoryData.map((item) => ({
                     name: item.name,
