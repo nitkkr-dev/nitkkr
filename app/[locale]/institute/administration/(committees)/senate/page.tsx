@@ -32,6 +32,11 @@ export default async function SenatePage({
     orderBy: (meeting, { desc }) => [desc(meeting.date)], // Sorting by date descending for better UX
   });
 
+  // 3. Fetch SCSA Minutes
+  const scsaMinutes = await db.query.scsa_minutes.findMany({
+    orderBy: (minute, { desc }) => [desc(minute.id)],
+  });
+
   // Headers for the Composition Table
   const membersHeaders = [
     { key: 'name', label: text.members.name },
@@ -98,6 +103,28 @@ export default async function SenatePage({
       ),
   }));
 
+  // Headers for SCSA Minutes Table
+  const scsaHeaders = [
+    { key: 'meetingNo', label: text.meetings.serial },
+    { key: 'date', label: text.meetings.date },
+    { key: 'minutes', label: text.meetings.minutes },
+  ];
+
+  // Processing SCSA Minutes data
+  const scsaData = scsaMinutes.map((minute) => ({
+    meetingNo: minute.meetingNo,
+    date: minute.date
+      ? new Date(minute.date).toLocaleDateString(locale, {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })
+      : '-',
+    minutes: minute.minutes[0]
+      ? { url: minute.minutes[0], label: `Minutes of ${minute.meetingNo} Meeting` }
+      : '-',
+  }));
+
   return (
     <section className="container">
       {/* Page Title */}
@@ -119,6 +146,21 @@ export default async function SenatePage({
         tableData={meetingsData}
         currentPage={meetingPage}
         getCount={Promise.resolve([])}
+      />
+
+      {/* Table 3: SCSA Minutes */}
+      <Heading
+        glyphDirection="ltr"
+        heading="h2"
+        text="SCSA Meeting Minutes"
+        id="scsa-meeting-minutes"
+      />
+      <GenericTable
+        headers={scsaHeaders}
+        tableData={scsaData}
+        currentPage={1}
+        getCount={Promise.resolve([])}
+        showSerialNo={false}
       />
     </section>
   );

@@ -21,6 +21,23 @@ interface HeaderConfig {
   label: string;
 }
 
+// Helper to check if value is a labeled link object { url: string, label: string }
+interface LabeledLink {
+  url: string;
+  label: string;
+}
+
+const isLabeledLink = (value: unknown): value is LabeledLink => {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'url' in value &&
+    'label' in value &&
+    typeof (value as LabeledLink).url === 'string' &&
+    typeof (value as LabeledLink).label === 'string'
+  );
+};
+
 interface GenericTableProps<T extends Record<string, unknown>> {
   headers: HeaderConfig[];
   tableData: T[];
@@ -28,6 +45,7 @@ interface GenericTableProps<T extends Record<string, unknown>> {
   itemsPerPage?: number;
   getCount?: Promise<{ count: number }[]>;
   pageParamName?: string;
+  showSerialNo?: boolean;
 }
 
 // Helper function to check if a value is a valid URL (absolute or relative)
@@ -50,6 +68,7 @@ export default function GenericTable<T extends Record<string, unknown>>({
   currentPage: propCurrentPage,
   itemsPerPage = 10,
   pageParamName = 'page',
+  showSerialNo = true,
 }: GenericTableProps<T>) {
   const searchParams = useSearchParams();
   const currentPage =
@@ -65,7 +84,7 @@ export default function GenericTable<T extends Record<string, unknown>>({
         <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
           <TableHeader>
             <TableRow>
-              <TableHead>No.</TableHead>
+              {showSerialNo && <TableHead>No.</TableHead>}
               {headers.map((header, index) => (
                 <TableHead key={index}>{header.label}</TableHead>
               ))}
@@ -76,7 +95,7 @@ export default function GenericTable<T extends Record<string, unknown>>({
             <Suspense
               fallback={
                 <TableRow>
-                  <TableCell colSpan={headers.length + 1}>
+                  <TableCell colSpan={headers.length + (showSerialNo ? 1 : 0)}>
                     <Loading />
                   </TableCell>
                 </TableRow>
@@ -87,15 +106,27 @@ export default function GenericTable<T extends Record<string, unknown>>({
                   key={rowIndex}
                   className="text-neutral-700 hover:bg-neutral-50"
                 >
-                  <TableCell>{startIndex + rowIndex + 1}</TableCell>
+                  {showSerialNo && (
+                    <TableCell>{startIndex + rowIndex + 1}</TableCell>
+                  )}
 
                   {headers.map((header, colIndex) => {
                     const cellValue = item[header.key];
+                    const labeledLink = isLabeledLink(cellValue);
                     const isLink = isValidUrl(cellValue);
 
                     return (
                       <TableCell key={colIndex}>
-                        {isLink ? (
+                        {labeledLink ? (
+                          <Link
+                            href={cellValue.url}
+                            target="_blank"
+                            className="text-primary flex items-center gap-2 hover:underline"
+                          >
+                            {cellValue.label}{' '}
+                            <FiExternalLink className="h-4 w-4" />
+                          </Link>
+                        ) : isLink ? (
                           <Link
                             href={String(cellValue)}
                             className="bg-blue-600 text-white hover:bg-blue-700 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
