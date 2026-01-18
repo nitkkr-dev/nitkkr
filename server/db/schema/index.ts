@@ -2,6 +2,8 @@ import exp from 'constants';
 
 export * from './board-of-governors.schema';
 export * from './board-of-governors-meetings.schema';
+export * from './building-and-work-agenda-minutes.schema';
+export * from './building-and-work-composition.schema';
 export * from './financial-committee.schema';
 export * from './financial-committee-meetings.schema';
 export * from './club-members.schema';
