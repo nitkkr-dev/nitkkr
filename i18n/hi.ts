@@ -2077,6 +2077,9 @@ const text: Translations = {
       courseName: 'पाठ्यक्रम का नाम',
     },
   },
+  otherOfficersPage: {
+    title: "अन्य अधिकारी",
+  },
 };
 
 export default text;

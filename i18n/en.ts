@@ -2099,6 +2099,9 @@ rolls down to 60% of the eligible students for second round of placement session
       courseName: 'Course Name',
     },
   },
+  otherOfficersPage: {
+    title: "Other Officers",
+  },
 };
 
 export default text;

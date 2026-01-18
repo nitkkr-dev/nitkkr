@@ -1269,4 +1269,7 @@ export interface Translations {
       courseName: string;
     };
   };
+  otherOfficersPage: {
+    title: string;
+  };
 }
