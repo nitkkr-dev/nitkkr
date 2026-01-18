@@ -236,6 +236,7 @@ const text: Translations = {
     financial: 'FINANCIAL COMMITTEE',
     governor: 'BOARD OF GOVERNORS',
     senate: 'SENATE',
+    scsa: 'STANDING COMMITTEE FOR STUDENT AFFAIRS',
     members: {
       title: 'Constitution',
       serial: 'Sr. No.',
@@ -245,6 +246,7 @@ const text: Translations = {
     },
     meetings: {
       title: 'Meeting Agenda and Minutes',
+      minutesTitle: 'Meeting Minutes',
       serial: 'Meeting No.',
       date: 'Date',
       place: 'Place',

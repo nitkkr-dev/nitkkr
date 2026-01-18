@@ -112,6 +112,7 @@ export interface Translations {
     financial: string;
     governor: string;
     senate: string;
+    scsa: string;
     members: {
       title: string;
       serial: string;
@@ -121,6 +122,7 @@ export interface Translations {
     };
     meetings: {
       title: string;
+      minutesTitle: string;
       serial: string;
       date: string;
       place: string;

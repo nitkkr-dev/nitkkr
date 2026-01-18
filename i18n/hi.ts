@@ -233,6 +233,7 @@ const text: Translations = {
     financial: 'वित्तीय समिति',
     governor: 'राज्यपाल मंडल',
     senate: 'सीनेट',
+    scsa: 'छात्र मामलों की स्थायी समिति',
     members: {
       title: 'गठन',
       serial: 'क्रम संख्या',
@@ -242,6 +243,7 @@ const text: Translations = {
     },
     meetings: {
       title: 'बैठक की कार्यसूची एवं कार्यवाही',
+      minutesTitle: 'बैठक विवरण',
       serial: 'बैठक संख्या',
       date: 'दिनांक',
       place: 'स्थान',

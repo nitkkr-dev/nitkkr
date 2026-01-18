@@ -77,10 +77,7 @@ export default async function BuildingAndWorkPage({
 
   return (
     <>
-      <ImageHeader
-        src="slideshow/image01.jpg"
-        title={text.building}
-      />
+      <ImageHeader src="slideshow/image01.jpg" title={text.building} />
 
       {/* Table 1: Composition */}
       <section className="container">

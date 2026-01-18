@@ -96,7 +96,7 @@ export default async function FinancialCommittee({
     <>
       <ImageHeader title={text.financial} src="assets/landingpagebg-1.png" />
       <section className="container">
-        <Heading glyphDirection="dual" heading="h2" text={text.members.title} />
+        <Heading glyphDirection="dual" heading="h3" text={text.members.title} />
         <GenericTable
           headers={membersHeaders}
           tableData={membersData}
@@ -106,7 +106,7 @@ export default async function FinancialCommittee({
 
         <Heading
           glyphDirection="dual"
-          heading="h2"
+          heading="h3"
           text={text.meetings.title}
         />
         <GenericTable

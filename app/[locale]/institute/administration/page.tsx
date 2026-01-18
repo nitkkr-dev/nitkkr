@@ -115,7 +115,7 @@ export default async function Administration({
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/scsa`,
               icon: MdOutlineChecklist,
             },
           ]}

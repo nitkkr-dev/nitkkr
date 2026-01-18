@@ -10,37 +10,21 @@ import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
-export default async function BoardOfGovernors({
+export default async function SCSAPage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).Committee;
 
-  // Fetch members from boardOfGovernors table
-  const members = await db.query.boardOfGovernors.findMany({
-    orderBy: (member, { asc }) => [asc(member.id)],
-  });
-
-  // Fetch meetings from bogMeetings table
-  const meetings = await db.query.bogMeetings.findMany({
+  // Fetch meetings from scsa_minutes table
+  const meetings = await db.query.scsa_minutes.findMany({
     orderBy: (meeting, { desc }) => [desc(meeting.id)],
   });
-
-  const membersHeaders = [
-    { key: 'name', label: text.members.name },
-    { key: 'servedAs', label: text.members.servingAs },
-  ];
-
-  const membersData = members.map((member) => ({
-    name: member.name,
-    servedAs: member.servedAs,
-  }));
 
   const meetingsHeaders = [
     { key: 'meetingNo', label: text.meetings.serial },
     { key: 'date', label: text.meetings.date },
-    { key: 'agenda', label: text.meetings.agenda },
     { key: 'minutes', label: text.meetings.minutes },
   ];
 
@@ -64,7 +48,7 @@ export default async function BoardOfGovernors({
       );
     }
 
-    // Multiple parts: Agenda_52nd (Part 1, Part 2, Part 3)
+    // Multiple parts: Minutes_52nd (Part 1, Part 2, Part 3)
     return (
       <span>
         {label}_{meetingNo} (
@@ -88,49 +72,35 @@ export default async function BoardOfGovernors({
 
   const meetingsData = meetings.map((meeting) => ({
     meetingNo: meeting.meetingNo,
-    date: new Date(meeting.date).toLocaleDateString(locale, {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-    }),
-    agenda: formatDocumentLinks(meeting.agenda, 'Agenda', meeting.meetingNo),
+    date: meeting.date
+      ? new Date(meeting.date).toLocaleDateString(locale, {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })
+      : '-',
     minutes: formatDocumentLinks(meeting.minutes, 'Minutes', meeting.meetingNo),
     created_at: meeting.createdAt,
   }));
 
   return (
     <>
-      <ImageHeader title={text.governor} src="assets/landingpagebg-1.png" />
+      <ImageHeader title={text.scsa} src="assets/landingpagebg-1.png" />
       <section className="container">
-        <div id="members">
-          <Heading
-            glyphDirection="dual"
-            heading="h3"
-            text={text.members.title}
-          />
-          <GenericTable
-            headers={membersHeaders}
-            tableData={membersData}
-            pageParamName="memberPage"
-            serialNoLabel={text.members.serial}
-          />
-        </div>
-
-        <div id="meetings">
-          <span id="agenda" />
-          <Heading
-            glyphDirection="dual"
-            heading="h3"
-            text={text.meetings.title}
-          />
-          <GenericTable
-            headers={meetingsHeaders}
-            tableData={meetingsData}
-            pageParamName="meetingPage"
-            showSerialNo={false}
-            sortByDateField="created_at"
-          />
-        </div>
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          text={text.meetings.minutesTitle}
+          id="scsa-minutes"
+        />
+        <GenericTable
+          headers={meetingsHeaders}
+          tableData={meetingsData}
+          pageParamName="meetingPage"
+          showSerialNo={false}
+          sortByDateField="created_at"
+          serialNoLabel={text.members.serial}
+        />
       </section>
     </>
   );
