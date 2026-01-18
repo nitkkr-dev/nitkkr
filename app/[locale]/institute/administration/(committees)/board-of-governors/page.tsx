@@ -93,20 +93,25 @@ export default async function BoardOfGovernors({
     <section className="container">
       <Heading glyphDirection="dual" heading="h1" text={text.governor} />
 
-      <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
-      <GenericTable
-        headers={membersHeaders}
-        tableData={membersData}
-        pageParamName="memberPage"
-      />
+      <div id="members">
+        <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
+        <GenericTable
+          headers={membersHeaders}
+          tableData={membersData}
+          pageParamName="memberPage"
+        />
+      </div>
 
-      <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
-      <GenericTable
-        headers={meetingsHeaders}
-        tableData={meetingsData}
-        pageParamName="meetingPage"
-        showSerialNo={false}
-      />
+      <div id="meetings">
+        <span id="agenda" />
+        <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
+        <GenericTable
+          headers={meetingsHeaders}
+          tableData={meetingsData}
+          pageParamName="meetingPage"
+          showSerialNo={false}
+        />
+      </div>
     </section>
   );
 }

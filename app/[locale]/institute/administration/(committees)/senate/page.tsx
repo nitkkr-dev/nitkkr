@@ -158,7 +158,7 @@ export default async function SenatePage({
       <GenericTable
         headers={scsaHeaders}
         tableData={scsaData}
-        currentPage={1}
+        pageParamName="scsaPage"
         getCount={Promise.resolve([])}
         showSerialNo={false}
       />
