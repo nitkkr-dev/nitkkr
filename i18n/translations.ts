@@ -111,6 +111,7 @@ export interface Translations {
     building: string;
     financial: string;
     governor: string;
+    senate: string;
     members: {
       title: string;
       serial: string;
@@ -125,6 +126,9 @@ export interface Translations {
       place: string;
       agenda: string;
       minutes: string;
+      agendaOf: string;
+      minutesOf: string;
+      meeting: string;
     };
   };
   Convocation: {
@@ -1273,6 +1277,7 @@ export interface Translations {
     title: string;
     facultyName: string;
     designation: string;
+    serialNo: string;
     categories: string[];
   };
 }

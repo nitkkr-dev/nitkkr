@@ -38,7 +38,6 @@ export default async function SenatePage({
     name: member.name.join(','),
     servedAs: member.servedAs,
   }));
-  console.log(membersData);
 
   const meetingsHeaders = [
     { key: 'meetingNo', label: text.meetings.serial },
@@ -57,13 +56,13 @@ export default async function SenatePage({
     agenda: meeting.agenda?.[0]
       ? {
           url: meeting.agenda[0],
-          label: `Agenda of ${meeting.meetingNo} Meeting`,
+          label: `${text.meetings.agendaOf} ${meeting.meetingNo} ${text.meetings.meeting}`,
         }
       : '-',
     minutes: meeting.minutes?.[0]
       ? {
           url: meeting.minutes[0],
-          label: `Minutes of ${meeting.meetingNo} Meeting`,
+          label: `${text.meetings.minutesOf} ${meeting.meetingNo} ${text.meetings.meeting}`,
         }
       : '-',
     created_at: meeting.createdAt,
@@ -71,11 +70,16 @@ export default async function SenatePage({
 
   return (
     <>
-      <ImageHeader src="slideshow/image01.jpg" title="SENATE" />
+      <ImageHeader src="slideshow/image01.jpg" title={text.senate} />
 
       {/* Table 1: Composition */}
       <section className="container">
-        <Heading glyphDirection="dual" heading="h3" text="Composition" id="composition" />
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          text={text.members.title}
+          id="composition"
+        />
 
         <section className="container">
           <Suspense fallback={<Loading />}>
@@ -83,6 +87,7 @@ export default async function SenatePage({
               headers={membersHeaders}
               tableData={membersData}
               pageParamName="compositionPage"
+              serialNoLabel={text.members.serial}
             />
           </Suspense>
         </section>
@@ -93,7 +98,7 @@ export default async function SenatePage({
         <Heading
           glyphDirection="dual"
           heading="h3"
-          text="Meeting Agenda and Minutes"
+          text={text.meetings.title}
           id="meeting-agenda-and-minutes"
         />
 
@@ -103,6 +108,7 @@ export default async function SenatePage({
             tableData={meetingsData}
             pageParamName="agendaMinutesPage"
             showSerialNo={false}
+            sortByDateField="created_at"
           />
         </section>
       </section>

@@ -3,7 +3,7 @@
 import { isValidElement, Suspense, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
-import {  FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useSearchParams } from 'next/navigation';
 
 import {
@@ -49,6 +49,8 @@ interface GenericTableProps<T extends Record<string, unknown>> {
   getCount?: Promise<{ count: number }[]>;
   pageParamName?: string;
   showSerialNo?: boolean;
+  /** Label for the serial number column. Defaults to 'No.' */
+  serialNoLabel?: string;
   /** Enable sorting by a date field. Pass the key of the date field to sort by (e.g., 'created_at', 'date') */
   sortByDateField?: keyof T;
   /** Default sort order when sorting is enabled. Defaults to 'desc' */
@@ -76,6 +78,7 @@ export default function GenericTable<T extends Record<string, unknown>>({
   itemsPerPage = 10,
   pageParamName = 'page',
   showSerialNo = true,
+  serialNoLabel = 'No.',
   sortByDateField,
   defaultSortOrder = 'desc',
 }: GenericTableProps<T>) {
@@ -117,13 +120,13 @@ export default function GenericTable<T extends Record<string, unknown>>({
         <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
           <TableHeader>
             <TableRow>
-              {showSerialNo && <TableHead>No.</TableHead>}
+              {showSerialNo && <TableHead>{serialNoLabel}</TableHead>}
               {headers.map((header, index) => (
                 <TableHead key={index}>
                   {index === 0 && sortByDateField ? (
                     <button
                       onClick={toggleSortOrder}
-                      className="flex items-center gap-1 hover:text-primary-700 transition-colors"
+                      className="flex items-center gap-1 transition-colors hover:text-primary-700"
                       aria-label={`Sort by date ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
                     >
                       {header.label}

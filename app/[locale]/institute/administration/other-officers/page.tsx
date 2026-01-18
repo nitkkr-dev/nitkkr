@@ -165,6 +165,7 @@ export default async function OfficersPage({
               heading="h3"
               href={`#${category.id}`}
               text={category.title}
+              className="capitalize"
             />
             <section className="container">
               <Suspense fallback={<Loading />}>
@@ -179,6 +180,7 @@ export default async function OfficersPage({
                   }))}
                   pageParamName={`${category.key}Page`}
                   getCount={Promise.resolve([])}
+                  serialNoLabel={text.serialNo}
                 />
               </Suspense>
             </section>

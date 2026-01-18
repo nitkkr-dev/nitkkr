@@ -44,7 +44,11 @@ export default async function BoardOfGovernors({
     { key: 'minutes', label: text.meetings.minutes },
   ];
 
-  const formatDocumentLinks = (links: string[], label: string, meetingNo: string) => {
+  const formatDocumentLinks = (
+    links: string[],
+    label: string,
+    meetingNo: string
+  ) => {
     if (links.length === 0) return '-';
 
     if (links.length === 1) {
@@ -98,28 +102,36 @@ export default async function BoardOfGovernors({
     <>
       <ImageHeader title={text.governor} src="assets/landingpagebg-1.png" />
       <section className="container">
+        <div id="members">
+          <Heading
+            glyphDirection="dual"
+            heading="h2"
+            text={text.members.title}
+          />
+          <GenericTable
+            headers={membersHeaders}
+            tableData={membersData}
+            pageParamName="memberPage"
+            serialNoLabel={text.members.serial}
+          />
+        </div>
 
-      <div id="members">
-        <Heading glyphDirection="dual" heading="h2" text={text.members.title} />
-        <GenericTable
-          headers={membersHeaders}
-          tableData={membersData}
-          pageParamName="memberPage"
-        />
-      </div>
-
-      <div id="meetings">
-        <span id="agenda" />
-        <Heading glyphDirection="dual" heading="h2" text={text.meetings.title} />
-        <GenericTable
-          headers={meetingsHeaders}
-          tableData={meetingsData}
-          pageParamName="meetingPage"
-          showSerialNo={false}
-          sortByDateField="created_at"
-        />
-      </div>
-    </section>
+        <div id="meetings">
+          <span id="agenda" />
+          <Heading
+            glyphDirection="dual"
+            heading="h2"
+            text={text.meetings.title}
+          />
+          <GenericTable
+            headers={meetingsHeaders}
+            tableData={meetingsData}
+            pageParamName="meetingPage"
+            showSerialNo={false}
+            sortByDateField="created_at"
+          />
+        </div>
+      </section>
     </>
   );
 }

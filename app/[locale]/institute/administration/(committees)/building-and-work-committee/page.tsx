@@ -63,13 +63,13 @@ export default async function BuildingAndWorkPage({
     agenda: meeting.agenda?.[0]
       ? {
           url: meeting.agenda[0],
-          label: `Agenda of ${meeting.meetingNo} Meeting`,
+          label: `${text.meetings.agendaOf} ${meeting.meetingNo} ${text.meetings.meeting}`,
         }
       : '-',
     minutes: meeting.minutes?.[0]
       ? {
           url: meeting.minutes[0],
-          label: `Minutes of ${meeting.meetingNo} Meeting`,
+          label: `${text.meetings.minutesOf} ${meeting.meetingNo} ${text.meetings.meeting}`,
         }
       : '-',
     created_at: meeting.createdAt,
@@ -79,7 +79,7 @@ export default async function BuildingAndWorkPage({
     <>
       <ImageHeader
         src="slideshow/image01.jpg"
-        title="BUILDING AND WORK COMMITTEE"
+        title={text.building}
       />
 
       {/* Table 1: Composition */}
@@ -87,7 +87,7 @@ export default async function BuildingAndWorkPage({
         <Heading
           glyphDirection="dual"
           heading="h3"
-          text="Composition"
+          text={text.members.title}
           id="composition"
         />
 
@@ -97,6 +97,7 @@ export default async function BuildingAndWorkPage({
               headers={membersHeaders}
               tableData={membersData}
               pageParamName="compositionPage"
+              serialNoLabel={text.members.serial}
             />
           </Suspense>
         </section>
@@ -107,7 +108,7 @@ export default async function BuildingAndWorkPage({
         <Heading
           glyphDirection="dual"
           heading="h3"
-          text="Meeting Agenda and Minutes"
+          text={text.meetings.title}
           id="meeting-agenda-and-minutes"
         />
 
@@ -117,6 +118,7 @@ export default async function BuildingAndWorkPage({
             tableData={meetingsData}
             pageParamName="agendaMinutesPage"
             showSerialNo={false}
+            sortByDateField="created_at"
           />
         </section>
       </section>

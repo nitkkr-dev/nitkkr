@@ -43,7 +43,11 @@ export default async function FinancialCommittee({
     { key: 'minutes', label: text.meetings.minutes },
   ];
 
-  const formatDocumentLinks = (links: string[], label: string, meetingNo: string) => {
+  const formatDocumentLinks = (
+    links: string[],
+    label: string,
+    meetingNo: string
+  ) => {
     if (links.length === 0) return '-';
 
     if (links.length === 1) {
@@ -97,9 +101,14 @@ export default async function FinancialCommittee({
           headers={membersHeaders}
           tableData={membersData}
           pageParamName="memberPage"
+          serialNoLabel={text.members.serial}
         />
 
-        <Heading glyphDirection="dual" heading="h2" text={text.meetings.title} />
+        <Heading
+          glyphDirection="dual"
+          heading="h2"
+          text={text.meetings.title}
+        />
         <GenericTable
           headers={meetingsHeaders}
           tableData={meetingsData}
