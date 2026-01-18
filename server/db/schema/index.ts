@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 export * from './board-of-governors.schema';
 export * from './board-of-governors-meetings.schema';
 export * from './club-members.schema';
@@ -40,3 +42,4 @@ export * from './memorandum.schema';
 export * from './other-officers.schema';
 export * from './senate-composition.schema';
 export * from './senate-agenda-minutes.schema';
+export * from './scsa_minutes.schema';
