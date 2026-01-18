@@ -2,8 +2,10 @@
 export const revalidate = 3600;
 
 import Link from 'next/link';
+import { FiExternalLink } from 'react-icons/fi';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -50,9 +52,10 @@ export default async function BoardOfGovernors({
         <Link
           href={links[0]}
           target="_blank"
-          className=" hover:underline"
+          className="flex items-center gap-1 hover:underline"
         >
           {label}_{meetingNo}
+          <FiExternalLink className="h-4 w-4" />
         </Link>
       );
     }
@@ -66,9 +69,10 @@ export default async function BoardOfGovernors({
             <Link
               href={link}
               target="_blank"
-              className="text-primary-700 hover:underline"
+              className="inline-flex items-center gap-1 text-primary-700 hover:underline"
             >
               Part {index + 1}
+              <FiExternalLink className="h-3 w-3" />
             </Link>
             {index < links.length - 1 ? ', ' : ''}
           </span>
@@ -87,14 +91,16 @@ export default async function BoardOfGovernors({
     }),
     agenda: formatDocumentLinks(meeting.agenda, 'Agenda', meeting.meetingNo),
     minutes: formatDocumentLinks(meeting.minutes, 'Minutes', meeting.meetingNo),
+    created_at: meeting.createdAt,
   }));
 
   return (
-    <section className="container">
-      <Heading glyphDirection="dual" heading="h1" text={text.governor} />
+    <>
+      <ImageHeader title={text.governor} src="assets/landingpagebg-1.png" />
+      <section className="container">
 
       <div id="members">
-        <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
+        <Heading glyphDirection="dual" heading="h2" text={text.members.title} />
         <GenericTable
           headers={membersHeaders}
           tableData={membersData}
@@ -104,14 +110,16 @@ export default async function BoardOfGovernors({
 
       <div id="meetings">
         <span id="agenda" />
-        <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
+        <Heading glyphDirection="dual" heading="h2" text={text.meetings.title} />
         <GenericTable
           headers={meetingsHeaders}
           tableData={meetingsData}
           pageParamName="meetingPage"
           showSerialNo={false}
+          sortByDateField="created_at"
         />
       </div>
     </section>
+    </>
   );
 }

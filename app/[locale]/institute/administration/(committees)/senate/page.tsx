@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -101,6 +102,7 @@ export default async function SenatePage({
       ) : (
         '-'
       ),
+    created_at: meeting.createdAt,
   }));
 
   // Headers for SCSA Minutes Table
@@ -123,45 +125,49 @@ export default async function SenatePage({
     minutes: minute.minutes[0]
       ? { url: minute.minutes[0], label: `Minutes of ${minute.meetingNo} Meeting` }
       : '-',
+    created_at: minute.createdAt,
   }));
 
   return (
-    <section className="container">
-      {/* Page Title */}
-      <Heading glyphDirection="dual" heading="h1" text="Senate" />
+    <>
+      <ImageHeader title="Senate" src="assets/landingpagebg-1.png" />
+      <section className="container">
+        {/* Table 1: Senate Composition */}
+        <Heading glyphDirection="dual" heading="h2" text={text.members.title} />
+        <GenericTable
+          headers={membersHeaders}
+          tableData={membersData}
+          currentPage={1}
+          getCount={Promise.resolve([])}
+        />
 
-      {/* Table 1: Senate Composition */}
-      <Heading glyphDirection="ltr" heading="h2" text={text.members.title} />
-      <GenericTable
-        headers={membersHeaders}
-        tableData={membersData}
-        currentPage={1}
-        getCount={Promise.resolve([])}
-      />
+        {/* Table 2: Agenda & Minutes */}
+        <Heading glyphDirection="dual" heading="h2" text={text.meetings.title} />
+        <GenericTable
+          headers={meetingsHeaders}
+          tableData={meetingsData}
+          currentPage={meetingPage}
+          getCount={Promise.resolve([])}
+          showSerialNo={false}
+          sortByDateField="created_at"
+        />
 
-      {/* Table 2: Agenda & Minutes */}
-      <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
-      <GenericTable
-        headers={meetingsHeaders}
-        tableData={meetingsData}
-        currentPage={meetingPage}
-        getCount={Promise.resolve([])}
-      />
-
-      {/* Table 3: SCSA Minutes */}
-      <Heading
-        glyphDirection="ltr"
-        heading="h2"
-        text="SCSA Meeting Minutes"
-        id="scsa-meeting-minutes"
-      />
-      <GenericTable
-        headers={scsaHeaders}
-        tableData={scsaData}
-        pageParamName="scsaPage"
-        getCount={Promise.resolve([])}
-        showSerialNo={false}
-      />
-    </section>
+        {/* Table 3: SCSA Minutes */}
+        <Heading
+          glyphDirection="dual"
+          heading="h2"
+          text="SCSA Meeting Minutes"
+          id="scsa-meeting-minutes"
+        />
+        <GenericTable
+          headers={scsaHeaders}
+          tableData={scsaData}
+          pageParamName="scsaPage"
+          getCount={Promise.resolve([])}
+          showSerialNo={false}
+          sortByDateField="created_at"
+        />
+      </section>
+    </>
   );
 }
