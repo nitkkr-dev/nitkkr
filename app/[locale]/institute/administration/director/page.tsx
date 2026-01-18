@@ -34,7 +34,7 @@ export default async function DirectorCorner({
       <section className="container mb-10 mt-4" id="director-profile">
         <Heading
           glyphDirection="dual"
-          heading="h3"
+          heading="h2"
           href="#director-profile"
           text={text.title[0]}
         />
@@ -54,7 +54,7 @@ export default async function DirectorCorner({
       <section className="container px-6 sm:px-10" id="brief-cv-of-director">
         <Heading
           glyphDirection="dual"
-          heading="h3"
+          heading="h2"
           href="#brief-cv-of-director"
           text={text.title[1]}
         />
@@ -69,7 +69,7 @@ export default async function DirectorCorner({
       <section className="container px-6 sm:px-10" id="director-message">
         <Heading
           glyphDirection="dual"
-          heading="h3"
+          heading="h2"
           href="#director-message"
           text={text.title[2]}
         />
@@ -82,7 +82,7 @@ export default async function DirectorCorner({
       <section className="container" id="director-office">
         <Heading
           glyphDirection="rtl"
-          heading="h3"
+          heading="h2"
           href="#director-office"
           text={text.title[3]}
         />
@@ -101,9 +101,9 @@ export default async function DirectorCorner({
               />
               <section className="min-w-0 flex-1 space-y-1 break-words text-left sm:space-y-2 md:space-y-3 lg:space-y-4">
                 <div>
-                  <h3 className="m-0 text-sm font-semibold text-primary-700 sm:text-base md:text-lg lg:text-xl">
+                  <h2 className="m-0 text-sm font-semibold text-primary-700 sm:text-base md:text-lg lg:text-xl">
                     {employe.name}
-                  </h3>
+                  </h2>
                   <span className="block text-xs text-neutral-700 sm:text-sm md:text-base lg:text-lg">
                     {employe.position}
                   </span>
@@ -135,7 +135,7 @@ export default async function DirectorCorner({
       <section id="previous-directors" className="container">
         <Heading
           glyphDirection="dual"
-          heading="h3"
+          heading="h2"
           href="#previous-directors"
           text={text.title[4]}
         />
