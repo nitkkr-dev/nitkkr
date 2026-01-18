@@ -2122,8 +2122,8 @@ rolls down to 60% of the eligible students for second round of placement session
       'members-anti-ragging-committee',
       'members-nirf-nba-naac',
       'coordinator',
-      'co-coordinator'
-    ]
+      'co-coordinator',
+    ],
   },
 };
 
