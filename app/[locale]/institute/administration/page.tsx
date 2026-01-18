@@ -104,13 +104,13 @@ export default async function Administration({
         <ButtonGroup
           buttonArray={[
             {
-              label: text.senateMeetingAgenda,
-              href: `/${locale}/institute/administration/senate#meeting-agenda`,
+              label: text.senateComposition,
+              href: `/${locale}/institute/administration/senate#composition`,
               icon: TbNotebook,
             },
             {
-              label: text.senateMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#meetings`,
+              label: text.senateAgendaAndMinutes,
+              href: `/${locale}/institute/administration/senate#meeting-agenda-and-minutes`,
               icon: MdOutlineChecklist,
             },
             {

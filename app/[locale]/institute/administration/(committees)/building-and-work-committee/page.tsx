@@ -12,5 +12,5 @@ export default function BuildingAndWorkCommittee({
 }) {
   return (
     <Committee locale={locale} searchParams={searchParams} type="building" />
-  );
+  )
 }

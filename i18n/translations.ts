@@ -18,8 +18,8 @@ export interface Translations {
     sNo: string;
     name: string;
     servedAs: string;
-    senateMeetingAgenda: string;
-    senateMeetingMinutes: string;
+    senateComposition: string;
+    senateAgendaAndMinutes: string;
     scsaMeetingMinutes: string;
     administrationHeads: string;
     director: string;
