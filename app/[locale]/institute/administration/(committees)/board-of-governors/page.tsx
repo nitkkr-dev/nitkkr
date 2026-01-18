@@ -2,9 +2,7 @@
 export const revalidate = 3600;
 
 import Link from 'next/link';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
@@ -12,16 +10,10 @@ import { db } from '~/server/db';
 
 export default async function BoardOfGovernors({
   params: { locale },
-  searchParams,
 }: {
   params: { locale: string };
-  searchParams: { meetingPage?: string };
 }) {
   const text = (await getTranslations(locale)).Committee;
-
-  const meetingPage = isNaN(Number(searchParams.meetingPage ?? '1'))
-    ? 1
-    : Math.max(Number(searchParams.meetingPage ?? '1'), 1);
 
   // Fetch members from boardOfGovernors table
   const members = await db.query.boardOfGovernors.findMany({
@@ -30,7 +22,7 @@ export default async function BoardOfGovernors({
 
   // Fetch meetings from bogMeetings table
   const meetings = await db.query.bogMeetings.findMany({
-    orderBy: (meeting, { asc }) => [asc(meeting.id)],
+    orderBy: (meeting, { desc }) => [desc(meeting.id)],
   });
 
   const membersHeaders = [
@@ -50,6 +42,42 @@ export default async function BoardOfGovernors({
     { key: 'minutes', label: text.meetings.minutes },
   ];
 
+  const formatDocumentLinks = (links: string[], label: string, meetingNo: string) => {
+    if (links.length === 0) return '-';
+
+    if (links.length === 1) {
+      return (
+        <Link
+          href={links[0]}
+          target="_blank"
+          className=" hover:underline"
+        >
+          {label}_{meetingNo}
+        </Link>
+      );
+    }
+
+    // Multiple parts: Agenda_52nd (Part 1, Part 2, Part 3)
+    return (
+      <span>
+        {label}_{meetingNo} (
+        {links.map((link, index) => (
+          <span key={index}>
+            <Link
+              href={link}
+              target="_blank"
+              className="text-primary-700 hover:underline"
+            >
+              Part {index + 1}
+            </Link>
+            {index < links.length - 1 ? ', ' : ''}
+          </span>
+        ))}
+        )
+      </span>
+    );
+  };
+
   const meetingsData = meetings.map((meeting) => ({
     meetingNo: meeting.meetingNo,
     date: new Date(meeting.date).toLocaleDateString(locale, {
@@ -57,8 +85,8 @@ export default async function BoardOfGovernors({
       month: 'long',
       year: 'numeric',
     }),
-    agenda: meeting.agenda[0] ?? '-',
-    minutes: meeting.minutes[0] ?? '-',
+    agenda: formatDocumentLinks(meeting.agenda, 'Agenda', meeting.meetingNo),
+    minutes: formatDocumentLinks(meeting.minutes, 'Minutes', meeting.meetingNo),
   }));
 
   return (
@@ -69,16 +97,15 @@ export default async function BoardOfGovernors({
       <GenericTable
         headers={membersHeaders}
         tableData={membersData}
-        currentPage={1}
-        getCount={Promise.resolve([])}
+        pageParamName="memberPage"
       />
 
       <Heading glyphDirection="ltr" heading="h2" text={text.meetings.title} />
       <GenericTable
         headers={meetingsHeaders}
         tableData={meetingsData}
-        currentPage={meetingPage}
-        getCount={Promise.resolve([])}
+        pageParamName="meetingPage"
+        showSerialNo={false}
       />
     </section>
   );

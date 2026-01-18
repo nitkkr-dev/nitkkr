@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { isValidElement, Suspense } from 'react';
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import { useSearchParams } from 'next/navigation';
@@ -117,7 +117,9 @@ export default function GenericTable<T extends Record<string, unknown>>({
 
                     return (
                       <TableCell key={colIndex}>
-                        {labeledLink ? (
+                        {isValidElement(cellValue) ? (
+                          cellValue
+                        ) : labeledLink ? (
                           <Link
                             href={cellValue.url}
                             target="_blank"
