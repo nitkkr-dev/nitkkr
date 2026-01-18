@@ -271,8 +271,6 @@ export default async function Library({
               { key: 'email', label: text.contactUs.email },
             ]}
             tableData={contactUsData}
-            currentPage={1}
-            getCount={Promise.resolve([])}
           />
         </Suspense>
       </section>

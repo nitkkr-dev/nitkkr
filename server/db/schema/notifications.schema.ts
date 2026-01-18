@@ -1,4 +1,4 @@
-import { check, pgEnum, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgEnum, pgTable, primaryKey, uniqueIndex } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from './clubs.schema';
@@ -31,7 +31,10 @@ export const notifications = pgTable(
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     content: t.text('content'),
 
-    category: notificationCategoryEnum('category').notNull(),
+    categories: notificationCategoryEnum('categories')
+      .array()
+      .notNull()
+      .default(sql`'{}'::notification_category[]`),
 
     educationType: t.varchar('education_type', {
       enum: ['ug', 'pg', 'phd'],
@@ -46,58 +49,119 @@ export const notifications = pgTable(
       .timestamp('updated_at')
       .$onUpdate(() => new Date())
       .notNull(),
-    clubId: t.integer('club_id').references(() => clubs.id),
-    departmentId: t.integer('department_id').references(() => departments.id),
-    hostelId: t.integer('hostel_id').references(() => hostels.id),
+    // NOTE: clubId, departmentId, hostelId removed - now using junction tables
   }),
   (n) => ({
     notificationsTitleIndex: uniqueIndex('notifications_title_idx').on(n.title),
-    clubRequiredForStudent: check(
-      'club_required_for_student',
-      sql`(
-        (${n.category} = 'student-activities')
-        OR
-        (${n.category} != 'student-activities' AND ${n.clubId} IS NULL)
-      )`
-    ),
-    educationTypeRequiredForAcademicAdmission: check(
-      'education_type_required_for_academic_admission',
-      sql`(
-        (${n.category} IN ('academic','admission'))
-        OR
-        (${n.category} NOT IN ('academic','admission') AND ${n.educationType} IS NULL)
-      )`
-    ),
-    hostelRequiredForHostel: check(
-      'hostel_required_for_hostel',
-      sql`(
-        (${n.category} = 'hostel')
-        OR
-        (${n.category} != 'hostel' AND ${n.hostelId} IS NULL)
-      )`
-    ),
-    departmentAllowedOnlyWhenRelevant: check(
-      'department_allowed_only_when_relevant',
-      sql`(
-        (${n.category} IN ('academic','workshop','administration','recruitment','admission','faculty','research','examination','result'))
-        OR
-        (${n.departmentId} IS NULL)
-      )`
-    ),
+    // NOTE: Check constraints removed - enforced at application level since
+    // we now use junction tables for clubs, departments, and hostels
   })
 );
 
-export const notificationsRelations = relations(notifications, ({ one }) => ({
-  club: one(clubs, {
-    fields: [notifications.clubId],
-    references: [clubs.id],
+// ===================== JUNCTION TABLES =====================
+
+// Junction table: notifications <-> departments (many-to-many)
+export const notificationDepartments = pgTable(
+  'notification_departments',
+  (t) => ({
+    notificationId: t
+      .integer('notification_id')
+      .notNull()
+      .references(() => notifications.id, { onDelete: 'cascade' }),
+    departmentId: t
+      .integer('department_id')
+      .notNull()
+      .references(() => departments.id, { onDelete: 'cascade' }),
   }),
-  department: one(departments, {
-    fields: [notifications.departmentId],
-    references: [departments.id],
+  (table) => ({
+    pk: primaryKey({ columns: [table.notificationId, table.departmentId] }),
+  })
+);
+
+// Junction table: notifications <-> clubs (many-to-many)
+export const notificationClubs = pgTable(
+  'notification_clubs',
+  (t) => ({
+    notificationId: t
+      .integer('notification_id')
+      .notNull()
+      .references(() => notifications.id, { onDelete: 'cascade' }),
+    clubId: t
+      .integer('club_id')
+      .notNull()
+      .references(() => clubs.id, { onDelete: 'cascade' }),
   }),
-  hostel: one(hostels, {
-    fields: [notifications.hostelId],
-    references: [hostels.id],
+  (table) => ({
+    pk: primaryKey({ columns: [table.notificationId, table.clubId] }),
+  })
+);
+
+// Junction table: notifications <-> hostels (many-to-many)
+export const notificationHostels = pgTable(
+  'notification_hostels',
+  (t) => ({
+    notificationId: t
+      .integer('notification_id')
+      .notNull()
+      .references(() => notifications.id, { onDelete: 'cascade' }),
+    hostelId: t
+      .integer('hostel_id')
+      .notNull()
+      .references(() => hostels.id, { onDelete: 'cascade' }),
   }),
+  (table) => ({
+    pk: primaryKey({ columns: [table.notificationId, table.hostelId] }),
+  })
+);
+
+// ===================== RELATIONS =====================
+
+// Junction table relations
+export const notificationDepartmentsRelations = relations(
+  notificationDepartments,
+  ({ one }) => ({
+    notification: one(notifications, {
+      fields: [notificationDepartments.notificationId],
+      references: [notifications.id],
+    }),
+    department: one(departments, {
+      fields: [notificationDepartments.departmentId],
+      references: [departments.id],
+    }),
+  })
+);
+
+export const notificationClubsRelations = relations(
+  notificationClubs,
+  ({ one }) => ({
+    notification: one(notifications, {
+      fields: [notificationClubs.notificationId],
+      references: [notifications.id],
+    }),
+    club: one(clubs, {
+      fields: [notificationClubs.clubId],
+      references: [clubs.id],
+    }),
+  })
+);
+
+export const notificationHostelsRelations = relations(
+  notificationHostels,
+  ({ one }) => ({
+    notification: one(notifications, {
+      fields: [notificationHostels.notificationId],
+      references: [notifications.id],
+    }),
+    hostel: one(hostels, {
+      fields: [notificationHostels.hostelId],
+      references: [hostels.id],
+    }),
+  })
+);
+
+// Main notifications relations
+export const notificationsRelations = relations(notifications, ({ many }) => ({
+  notificationDepartments: many(notificationDepartments),
+  notificationClubs: many(notificationClubs),
+  notificationHostels: many(notificationHostels),
 }));

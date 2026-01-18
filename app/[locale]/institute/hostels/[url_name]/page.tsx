@@ -6,7 +6,7 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
-import { db, hostels } from '~/server/db';
+import { db } from '~/server/db';
 
 // Fetches hostel data from DB - cache for 1 hour
 export const revalidate = 3600;
@@ -171,8 +171,7 @@ export default async function Hostel({
                   email: person?.email,
                 };
               })}
-              currentPage={1}
-              getCount={Promise.resolve([])}
+              pageParamName={index === 0 ? 'faculty-page' : 'staff-page'}
             />
           </Fragment>
         ))}

@@ -45,7 +45,7 @@ export const faculty = pgTable(
     scopusId: t.text(),
     areasOfInterest: t.text().array().default([]),
   }),
-  (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
+  // (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
 );
 
 // IPR

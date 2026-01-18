@@ -533,11 +533,34 @@ RACS: {
   };
   Events: {
     title: string;
+    filterBy: string;
+    clearAllFilters: string;
+    searchPlaceholder: string;
+    noEventsFound: string;
+    noMoreEvents: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      startDate: string;
+      endDate: string;
+      day: string;
+      month: string;
+      year: string;
+    };
     categories: {
       featured: string;
       recents: string;
-      student: string;
-      faculty: string;
+      academic: string;
+      technical: string;
+      cultural: string;
+      sports: string;
+      'clubs-societies': string;
+      achievements: string;
+      placements: string;
+      outreach: string;
+      miscellaneous: string;
+      'campus-highlights': string;
     };
     viewAll: string;
   };
