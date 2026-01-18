@@ -1,18 +1,11 @@
-// Next.js
 import Image from 'next/image';
 import Link from 'next/link';
-
-// Icons
 import { MdCall, MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
-// Components
+import { getTranslations } from '~/i18n/translations';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import NotificationsPanelProps from '~/components/notifications/notifications-panel';
-import Events from '../events';
-import Notifications from '../notifications';
-
-// UI
 import {
   Table,
   TableBody,
@@ -21,9 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui';
-
-// i18n
-import { getTranslations } from '~/i18n/translations';
 
 export default async function RACS({
   params: { locale },
