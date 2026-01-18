@@ -9,14 +9,7 @@ import { PiTreeStructureFill } from 'react-icons/pi';
 import { BouncyArrowButton, Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
@@ -209,50 +202,21 @@ export default async function Institute({
           id="nirf"
           text={text.nirf.title.toUpperCase()}
         />
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{text.nirf.year}</TableHead>
-              <TableHead>{text.nirf.result}</TableHead>
-              <TableHead>{text.nirf.nirfCertificate}</TableHead>
-              <TableHead>{text.nirf.dataFile}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {nirfData.map(
-              (
-                {
-                  year,
-                  result,
-                  nirfCertificate,
-                  nirfCertificateLink,
-                  dataFile,
-                  dataFileLink,
-                },
-                index
-              ) => (
-                <TableRow key={index}>
-                  <TableCell>{year}</TableCell>
-                  <TableCell>{result}</TableCell>
-                  <TableCell>
-                    {nirfCertificateLink ? (
-                      <Link href={nirfCertificateLink}>{nirfCertificate}</Link>
-                    ) : (
-                      nirfCertificate
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {dataFileLink ? (
-                      <Link href={dataFileLink}>{dataFile}</Link>
-                    ) : (
-                      dataFile
-                    )}
-                  </TableCell>
-                </TableRow>
-              )
-            )}
-          </TableBody>
-        </Table>
+        <GenericTable
+          headers={[
+            { key: 'year', label: text.nirf.year },
+            { key: 'result', label: text.nirf.result },
+            { key: 'nirfCertificate', label: text.nirf.nirfCertificate },
+            { key: 'dataFile', label: text.nirf.dataFile },
+          ]}
+          tableData={nirfData.map((row) => ({
+            ...row,
+            nirfCertificate: row.nirfCertificateLink
+              ? row.nirfCertificateLink
+              : row.nirfCertificate,
+            dataFile: row.dataFileLink ? row.dataFileLink : row.dataFile,
+          }))}
+        />
       </section>
 
       {/* FUNDS */}

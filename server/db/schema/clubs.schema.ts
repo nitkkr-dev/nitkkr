@@ -5,7 +5,7 @@ import { clubMembers } from './club-members.schema';
 import { clubSocials } from './club-socials.schema';
 import { departments } from './departments.schema';
 import { events } from './events.schema';
-import { notifications } from './notifications.schema';
+import { notificationClubs } from './notifications.schema';
 import { persons } from './persons.schema';
 import { clubFacultyHeads } from './club-faculty-heads.schema';
 
@@ -45,6 +45,6 @@ export const clubsRelations = relations(clubs, ({ many, one }) => ({
     fields: [clubs.departmentId],
     references: [departments.id],
   }),
-  clubNotifications: many(notifications),
+  notificationClubs: many(notificationClubs),
   clubFacultyHeads: many(clubFacultyHeads),
 }));

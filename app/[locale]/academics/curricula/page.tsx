@@ -2,22 +2,11 @@
 export const revalidate = 300;
 
 import { count } from 'drizzle-orm';
-import Link from 'next/link';
 import { Suspense } from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
-import { PaginationWithLogic } from '~/components/pagination';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { courses, db } from '~/server/db';
 
@@ -49,36 +38,17 @@ export default async function Curricula({
 
       <main className="container">
         <Suspense fallback={<Loading />}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{text.code}</TableHead>
-                <TableHead>{text.title}</TableHead>
-                <TableHead>{text.major}</TableHead>
-                <TableHead>{text.credits}</TableHead>
-                <TableHead>{text.totalCredits}</TableHead>
-                <TableHead className="text-center">{text.syllabus}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <Courses page={page} />
-            </TableBody>
-          </Table>
+          <Courses page={page} locale={locale} />
         </Suspense>
-        <PaginationWithLogic
-          currentPage={page}
-          totalCount={
-            (await db.select({ count: count().as('count') }).from(courses))[0]
-              ?.count ?? 0
-          }
-        />
       </main>
     </>
   );
 }
 
-const Courses = async ({ page }: { page: number }) => {
-  const courses = await db.query.courses.findMany({
+const Courses = async ({ page, locale }: { page: number; locale: string }) => {
+  const text = (await getTranslations(locale)).Curricula;
+
+  const coursesData = await db.query.courses.findMany({
     columns: { code: true, title: true },
     with: {
       coursesToMajors: {
@@ -90,42 +60,43 @@ const Courses = async ({ page }: { page: number }) => {
         with: { major: { columns: { name: true } } },
       },
     },
-    limit: 10,
-    offset: (page - 1) * 10,
   });
 
-  // console.log(courses);
-
-  return courses.map(({ code, coursesToMajors, title }) => {
-    if (coursesToMajors.length === 0) {
-      return (
-        <TableRow key={code}>
-          <TableCell>{code}</TableCell>
-          <TableCell>{title}</TableCell>
-        </TableRow>
-      );
-    }
-    return coursesToMajors.map(
-      ({ lectureCredits, practicalCredits, tutorialCredits, major }, index) => (
-        <TableRow key={index}>
-          <TableCell>{code}</TableCell>
-          <TableCell>{title}</TableCell>
-          <TableCell>{major.name}</TableCell>
-          <TableCell>{`${lectureCredits}-${tutorialCredits}-${practicalCredits}`}</TableCell>
-          <TableCell>
-            {lectureCredits +
+  // Transform data to flat structure for table
+  const tableData = coursesData.flatMap(({ code, coursesToMajors, title }) =>
+    coursesToMajors.length === 0
+      ? [{ code, title, major: '', credits: '', totalCredits: 0, syllabus: '' }]
+      : coursesToMajors.map(
+          ({ lectureCredits, practicalCredits, tutorialCredits, major }) => ({
+            code,
+            title,
+            major: major.name,
+            credits: `${lectureCredits}-${tutorialCredits}-${practicalCredits}`,
+            totalCredits:
+              lectureCredits +
               practicalCredits +
-              Math.floor(tutorialCredits / 2)}
-          </TableCell>
-          <TableCell className="text-center">
-            <Button asChild variant="link">
-              <Link href={`curricula/${code}`}>
-                <FaExternalLinkAlt />
-              </Link>
-            </Button>
-          </TableCell>
-        </TableRow>
-      )
-    );
-  });
+              Math.floor(tutorialCredits / 2),
+            syllabus: `/en/academics/curricula/${code}`,
+          })
+        )
+  );
+
+  const headers = [
+    { key: 'code', label: text.code },
+    { key: 'title', label: text.title },
+    { key: 'major', label: text.major },
+    { key: 'credits', label: text.credits },
+    { key: 'totalCredits', label: text.totalCredits },
+    { key: 'syllabus', label: text.syllabus },
+  ];
+
+  return (
+    <GenericTable
+      headers={headers}
+      tableData={tableData}
+      currentPage={page}
+      itemsPerPage={10}
+      getCount={db.select({ count: count() }).from(courses)}
+    />
+  );
 };

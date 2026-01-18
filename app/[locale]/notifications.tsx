@@ -1,22 +1,24 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import Loading from '~/components/loading';
-import { ScrollArea } from '~/components/ui';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
-import { cn, getKeys, groupBy } from '~/lib/utils';
-import type { notifications as notificationsSchema } from '~/server/db';
-import { db } from '~/server/db';
+import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
+
+const notificationCategories = [
+  'academic',
+  'tender',
+  'workshop',
+  'recruitment',
+] as const;
+export type NotificationCategory = (typeof notificationCategories)[number];
 
 export default async function Notifications({
   category: currentCategory,
   locale,
 }: {
-  category: (typeof notificationsSchema.category.enumValues)[number];
+  category: NotificationCategory;
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
@@ -44,7 +46,7 @@ export default async function Notifications({
             'lg:w-[30%] lg:flex-col lg:justify-between lg:bg-transparent lg:p-0'
           )}
         >
-          {getKeys(text.categories).map((category, index) => (
+          {notificationCategories.map((category, index) => (
             <li className="flex-auto lg:flex-initial" key={index}>
               <Link
                 className="flex"
@@ -69,80 +71,13 @@ export default async function Notifications({
           ))}
         </ol>
 
-        <section
-          className={cn(
-            `h-full rounded-b-xl bg-background/[0.6]`,
-            'lg:w-[65%] lg:rounded-t-xl lg:shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] lg:drop-shadow-2xl',
-            'lg:px-6 lg:pt-8 xl:px-8'
-          )}
-        >
-          <ScrollArea
-            type="always"
-            className={cn(
-              'h-[90%] md:h-[91%] lg:h-[87%] xl:h-[85%]',
-              'px-3 pt-3 md:px-5 md:pt-5 lg:pl-0 lg:pr-4 lg:pt-0 xl:pr-6'
-            )}
-          >
-            <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-              <Suspense fallback={<Loading />} key={currentCategory}>
-                <NotificationsList category={currentCategory} locale={locale} />
-              </Suspense>
-            </ol>
-          </ScrollArea>
-
-          <footer className="mt-auto inline-flex h-[10%] w-full justify-center">
-            <Button
-              asChild
-              className="p-2 font-bold text-primary-700 lg:p-3 lg:text-lg xl:p-4"
-              variant="ghost"
-            >
-              <Link href={`/${locale}/noticeboard`}>{text.viewAll}</Link>
-            </Button>
-          </footer>
-        </section>
+        <NotificationsPanel
+          locale={locale}
+          category={currentCategory}
+          viewAllHref={`/${locale}/notifications`}
+          className="rounded-none lg:w-[65%] lg:rounded-xl"
+        />
       </article>
     </article>
   );
 }
-
-export const NotificationsList = async ({
-  category,
-  locale,
-}: {
-  category: (typeof notificationsSchema.category.enumValues)[number];
-  locale: string;
-}) => {
-  const notifications = (
-    await db.query.notifications.findMany({
-      where: (notification, { eq }) => eq(notification.category, category),
-    })
-  ).map((notification) => ({
-    ...notification,
-    createdAt: notification.createdAt.toLocaleString(locale, {
-      dateStyle: 'long',
-      numberingSystem: locale === 'hi' ? 'deva' : 'roman',
-    }),
-  }));
-
-  return Array.from(groupBy(notifications, 'createdAt')).map(
-    ([createdAt, notifications], index) => (
-      <li key={index}>
-        <h5>{createdAt as string}</h5>
-        <ul className="space-y-2 py-2 sm:space-y-4 sm:py-4 md:space-y-6 md:py-6">
-          {notifications.map(({ id, title }, index) => (
-            <li key={index}>
-              <Link
-                className={cn('inline-flex max-w-full')}
-                href={`/${locale}/noticeboard/${id}`}
-              >
-                <MdOutlineKeyboardArrowRight className="my-auto size-4 text-primary-700 lg:size-6" />
-                <p className="truncate">{title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <hr className="opacity-20" />
-      </li>
-    )
-  );
-};

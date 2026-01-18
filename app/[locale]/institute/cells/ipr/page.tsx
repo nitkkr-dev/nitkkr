@@ -9,14 +9,7 @@ import { type IconType } from 'react-icons/lib';
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
@@ -68,73 +61,61 @@ export default async function IPR({
 
   const advisoryCommittee = [
     {
-      srNo: 1,
       name: 'Dr. R. P. Chauhan',
       designation: 'Professor',
       department: 'Physics',
     },
     {
-      srNo: 2,
       name: 'Dr. R. P. Chauhan',
       designation: 'Assistant Professor',
       department: 'Physics',
     },
     {
-      srNo: 3,
       name: 'Pratyush Prasoon Mishra',
       designation: 'Student',
       department: 'Computer Science',
     },
     {
-      srNo: 4,
       name: 'Dr. Avijit Kumar Paul',
       designation: 'Assistant Professor',
       department: 'Chemistry',
     },
     {
-      srNo: 5,
       name: 'Dr. Avijit Kumar Paul',
       designation: 'Assistant Professor',
       department: 'Chemistry',
     },
     {
-      srNo: 6,
       name: 'Dr. R. P. Chauhan',
       designation: 'Professor',
       department: 'Physics',
     },
     {
-      srNo: 7,
       name: 'Dr. Anjali Mehta',
       designation: 'Professor',
       department: 'Biotechnology',
     },
     {
-      srNo: 8,
       name: 'Dr. Sumit Kapoor',
       designation: 'Assistant Professor',
       department: 'Mathematics',
     },
     {
-      srNo: 9,
       name: 'Ishaan Arora',
       designation: 'Student',
       department: 'Electronics',
     },
     {
-      srNo: 10,
       name: 'Dr. Nidhi Sharma',
       designation: 'Associate Professor',
       department: 'Mechanical',
     },
     {
-      srNo: 11,
       name: 'Ananya Gupta',
       designation: 'Student',
       department: 'Information Technology',
     },
     {
-      srNo: 12,
       name: 'Dr. Karan Sethi',
       designation: 'Assistant Professor',
       department: 'Civil',
@@ -242,34 +223,23 @@ export default async function IPR({
             text={text.Research.ipr.advisoryCommittee.title.toUpperCase()}
           />
           <div className="mt-12 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.srNo}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.name}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.designation}
-                  </TableHead>
-                  <TableHead>
-                    {text.Research.ipr.advisoryCommittee.department}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {advisoryCommittee.map((member) => (
-                  <TableRow key={member.srNo}>
-                    <TableCell>{member.srNo}</TableCell>
-                    <TableCell>{member.name}</TableCell>
-                    <TableCell>{member.designation}</TableCell>
-                    <TableCell>{member.department}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                {
+                  key: 'name',
+                  label: text.Research.ipr.advisoryCommittee.name,
+                },
+                {
+                  key: 'designation',
+                  label: text.Research.ipr.advisoryCommittee.designation,
+                },
+                {
+                  key: 'department',
+                  label: text.Research.ipr.advisoryCommittee.department,
+                },
+              ]}
+              tableData={advisoryCommittee}
+            />
           </div>
         </div>
         {/* IP Policy */}

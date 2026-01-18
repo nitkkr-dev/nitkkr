@@ -12,20 +12,11 @@ import { MdEmail } from 'react-icons/md';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import ButtonGroup from '~/components/button-group';
-import Loading from '~/components/loading';
-import {
-  CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 // Fetches committee data from DB - cache for 1 hour
 export const revalidate = 3600;
-import { db } from '~/server/db';
+import Loading from '~/components/loading';
+import { CardTitle } from '~/components/ui';
 
 export default async function Administration({
   params: { locale },
@@ -108,21 +99,6 @@ export default async function Administration({
             <CardTitle className="text-2xl text-primary-300">
               {text.composition}
             </CardTitle>
-            <Table
-              className="w-full"
-              scrollAreaClassName="md:max-h-96 sm:max-h-72 max-h-60"
-            >
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{text.sNo}</TableHead>
-                  <TableHead>{text.name}</TableHead>
-                  <TableHead>{text.servedAs}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <SenateMembers />
-              </TableBody>
-            </Table>
           </Suspense>
         </section>
         <ButtonGroup
@@ -264,20 +240,6 @@ export default async function Administration({
   );
 }
 
-const SenateMembers = async () => {
-  const members = await db.query.committeeMembers.findMany({
-    where: (member, { eq }) => eq(member.committeeType, 'senate'),
-    orderBy: (member, { asc }) => [asc(member.serial)],
-  });
-
-  return members.map(({ serial, name, servingAs }, index) => (
-    <TableRow key={index}>
-      <TableCell>{serial}</TableCell>
-      <TableCell>{name}</TableCell>
-      <TableCell>{servingAs}</TableCell>
-    </TableRow>
-  ));
-};
 const Deans = () => {
   const deans = [
     {
