@@ -4,14 +4,7 @@ import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import Gallery from '~/components/ui/gallery';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
@@ -178,30 +171,25 @@ export default async function IICPage({
             text={text.Institute.cells.iic.officeOrder.title}
           />
           <div className="mt-12 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>
-                    {text.Institute.cells.iic.officeOrder.srNo}
-                  </TableHead>
-                  <TableHead>
-                    {text.Institute.cells.iic.officeOrder.responsibility}
-                  </TableHead>
-                  <TableHead>
-                    {text.Institute.cells.iic.officeOrder.nameOfFaculty}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {officeOrder.map((order) => (
-                  <TableRow key={order.sr_no}>
-                    <TableCell>{order.sr_no}</TableCell>
-                    <TableCell>{order.name_of_faculty}</TableCell>
-                    <TableCell>{order.responsibility}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                {
+                  key: 'sr_no',
+                  label: text.Institute.cells.iic.officeOrder.srNo,
+                },
+                {
+                  key: 'name_of_faculty',
+                  label: text.Institute.cells.iic.officeOrder.nameOfFaculty,
+                },
+                {
+                  key: 'responsibility',
+                  label: text.Institute.cells.iic.officeOrder.responsibility,
+                },
+              ]}
+              tableData={officeOrder}
+              currentPage={1}
+              getCount={Promise.resolve([])}
+            />
           </div>
         </div>
         {/* Activities */}
@@ -214,49 +202,39 @@ export default async function IICPage({
           />
           {/* Past Activities */}
           <div className="mt-12 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>
-                    {text.Institute.cells.iic.activities.srNo}
-                  </TableHead>
-                  <TableHead>
-                    {text.Institute.cells.iic.activities.pastActivities}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {activities.map((act) => (
-                  <TableRow key={act.sr_no}>
-                    <TableCell>{act.sr_no}</TableCell>
-                    <TableCell>{act.past_activity}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                {
+                  key: 'sr_no',
+                  label: text.Institute.cells.iic.activities.srNo,
+                },
+                {
+                  key: 'past_activity',
+                  label: text.Institute.cells.iic.activities.pastActivities,
+                },
+              ]}
+              tableData={activities}
+              currentPage={1}
+              getCount={Promise.resolve([])}
+            />
           </div>
           {/* Upcoming Activities */}
           <div className="mt-12 w-full overflow-x-auto">
-            <Table scrollAreaClassName="h-[19rem] min-w-[500px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>
-                    {text.Institute.cells.iic.activities.srNo}
-                  </TableHead>
-                  <TableHead>
-                    {text.Institute.cells.iic.activities.upcomingActivities}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {activities.map((act) => (
-                  <TableRow key={act.sr_no}>
-                    <TableCell>{act.sr_no}</TableCell>
-                    <TableCell>{act.past_activity}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <GenericTable
+              headers={[
+                {
+                  key: 'sr_no',
+                  label: text.Institute.cells.iic.activities.srNo,
+                },
+                {
+                  key: 'past_activity',
+                  label: text.Institute.cells.iic.activities.upcomingActivities,
+                },
+              ]}
+              tableData={activities}
+              currentPage={1}
+              getCount={Promise.resolve([])}
+            />
           </div>
         </div>
         <Heading

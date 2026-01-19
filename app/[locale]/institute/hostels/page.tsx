@@ -7,13 +7,12 @@ import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
-import { Card, ScrollArea } from '~/components/ui';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
+import { Card } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
 import { db } from '~/server/db';
 import { getS3Url } from '~/server/s3';
-
-import { NotificationsList } from '../../notifications';
 
 // Fetches hostel data from DB - cache for 1 hour
 export const revalidate = 3600;
@@ -56,27 +55,13 @@ export default async function Hostels({
           href="#notification"
           glyphDirection={'rtl'}
         />
-        <section
-          className={cn(
-            `h-[384px] rounded-xl rounded-b-xl bg-background/[0.6] md:h-[512px]`,
-            'lg:rounded-t-xl lg:shadow-[0px_8px_0px_#e13f32_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)] lg:drop-shadow-2xl',
-            'lg:px-6 lg:py-8 xl:px-8'
-          )}
-        >
-          <ScrollArea
-            type="always"
-            className={cn(
-              'h-full',
-              'px-3 py-3 md:px-5 md:py-5 lg:py-5 lg:pl-0 lg:pr-4 xl:pr-6'
-            )}
-          >
-            <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-              <Suspense fallback={<Loading />} key={'hostel'}>
-                <NotificationsList category="hostel" locale={locale} />
-              </Suspense>
-            </ol>
-          </ScrollArea>
-        </section>
+        <div className="h-[384px] md:h-[512px]">
+          <NotificationsPanel
+            locale={locale}
+            category="hostel"
+            viewAllHref={`/${locale}/notifications/?category=hostel`}
+          />
+        </div>
       </section>
       <section id="rules-and-conducts" className="container">
         <Heading

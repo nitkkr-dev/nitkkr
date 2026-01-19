@@ -14,6 +14,7 @@ import { getS3Url } from '~/server/s3';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import {
   Card,
   CardContent,
@@ -313,29 +314,6 @@ export default async function Club({
     },
   ];
 
-  const dummyNotifications = [
-    {
-      content: 'Meeting scheduled for all club members at 5 PM.',
-      updatedAt: new Date('2024-09-01T14:30:00Z'),
-    },
-    {
-      content: 'New event: Coding Marathon on 12th September. Register now!',
-      updatedAt: new Date('2024-09-02T10:15:00Z'),
-    },
-    {
-      content: 'Reminder: Submit your project reports by Friday.',
-      updatedAt: new Date('2024-09-03T08:45:00Z'),
-    },
-    {
-      content: "Club membership renewals are open. Don't forget to renew!",
-      updatedAt: new Date('2024-09-04T11:00:00Z'),
-    },
-    {
-      content: 'Workshop on Android development scheduled for next week.',
-      updatedAt: new Date('2024-09-05T09:30:00Z'),
-    },
-  ];
-
   const dummyClubData = {
     howToJoinUs:
       'To join our club, simply fill out the membership form available on our website or attend our weekly meetings held every Friday at 5 PM in the main auditorium.',
@@ -386,25 +364,13 @@ export default async function Club({
           id="notifications"
           text={text.Club.notification.toUpperCase()}
         />
-        <section className="w-full">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Note</TableHead>
-                <TableHead>Date</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {/* {club?.clubNotifications.map((note, i) => ( */}
-              {dummyNotifications.map((note, i) => (
-                <TableRow key={i}>
-                  <TableCell>{note.content}</TableCell>
-                  <TableCell>{note.updatedAt.toDateString()}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </section>
+        <NotificationsPanel
+          locale={locale}
+          clubIds={club?.id ? [club.id] : undefined}
+          className="h-[400px]"
+          viewAllHref={`/${locale}/notifications?category=student-activities`}
+          showViewAll={true}
+        />
 
         {/* Events */}
         <Heading

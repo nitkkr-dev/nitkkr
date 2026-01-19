@@ -1,12 +1,5 @@
 import Heading from '~/components/heading';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 
 export default async function MembershipAndPrivileges({
@@ -62,25 +55,14 @@ export default async function MembershipAndPrivileges({
       <section className="container">
         <h5>{text.membershipPrivilegesText}</h5>
         <section className="my-10">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Category of Members</TableHead>
-                <TableHead>No. of Books Loan</TableHead>
-                <TableHead>Period of Loan</TableHead>
-              </TableRow>
-            </TableHeader>
-
-            <TableBody>
-              {LoanTableData.map((entry, index) => (
-                <TableRow key={index}>
-                  <TableCell>{entry.category}</TableCell>
-                  <TableCell>{entry.noOfBooksLoan}</TableCell>
-                  <TableCell>{entry.periodOfLoan}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <GenericTable
+            headers={[
+              { key: 'category', label: 'Category of Members' },
+              { key: 'noOfBooksLoan', label: 'No. of Books Loan' },
+              { key: 'periodOfLoan', label: 'Period of Loan' },
+            ]}
+            tableData={LoanTableData}
+          />
         </section>
       </section>
 
