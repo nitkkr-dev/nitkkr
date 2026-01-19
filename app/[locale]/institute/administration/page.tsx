@@ -57,11 +57,9 @@ export default async function Administration({
       />
 
       <section className="container mt-20">
-        <p className="mx-8 font-sans text-xl max-md:text-lg">
-          {text.description}
-        </p>
+        
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.boardOfGovernors.toUpperCase()}
           id="board-of-governors"
@@ -87,7 +85,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.senate.toUpperCase()}
           className="container"
@@ -96,9 +94,7 @@ export default async function Administration({
         />
         <section className="container">
           <Suspense fallback={<Loading />}>
-            <CardTitle className="text-2xl text-primary-300">
-              {text.composition}
-            </CardTitle>
+            
           </Suspense>
         </section>
         <ButtonGroup
@@ -121,7 +117,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.administrationHeads.toUpperCase()}
           id="administration-heads"
@@ -147,7 +143,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.committees.toUpperCase()}
           id="committees"
@@ -168,7 +164,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.actsAndStatutes.toUpperCase()}
           className="container"
@@ -223,7 +219,7 @@ export default async function Administration({
           </article>
         </footer>
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading="h3"
           text={text.deans.toUpperCase()}
           id="deans"
