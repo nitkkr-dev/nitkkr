@@ -115,7 +115,7 @@ export default async function BuildingAndWorkPage({
             tableData={meetingsData}
             pageParamName="agendaMinutesPage"
             showSerialNo={false}
-            sortByDateField="created_at"
+            sortByDateField="date"
           />
         </section>
       </section>

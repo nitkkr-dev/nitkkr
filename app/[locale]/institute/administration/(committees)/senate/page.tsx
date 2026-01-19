@@ -108,7 +108,7 @@ export default async function SenatePage({
             tableData={meetingsData}
             pageParamName="agendaMinutesPage"
             showSerialNo={false}
-            sortByDateField="created_at"
+            sortByDateField="date"
           />
         </section>
       </section>

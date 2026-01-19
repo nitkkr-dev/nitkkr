@@ -87,6 +87,7 @@ export default async function FinancialCommittee({
 
   const meetingsData = meetings.map((meeting) => ({
     meetingNo: meeting.meetingNo,
+    meetingNumber: parseInt(meeting.meetingNo.replace(/\D/g, ''), 10) || 0,
     agenda: formatDocumentLinks(meeting.agenda, 'Agenda', meeting.meetingNo),
     minutes: formatDocumentLinks(meeting.minutes, 'Minutes', meeting.meetingNo),
     created_at: meeting.createdAt,
@@ -114,7 +115,7 @@ export default async function FinancialCommittee({
           tableData={meetingsData}
           pageParamName="meetingPage"
           showSerialNo={false}
-          sortByDateField="created_at"
+          sortByDateField="meetingNumber"
         />
       </section>
     </>
