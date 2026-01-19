@@ -86,7 +86,7 @@ export default async function SCoE({
           <div className="w-full space-y-10 lg:w-1/2">
             {/* Vision */}
             <section id="vision">
-              <h3 className="text-red-700  mb-4 text-3xl">
+              <h3>
                 {text.Vision.title.toUpperCase()}
               </h3>
               <p className=" leading-relaxed ">{text.Vision.description}</p>
@@ -94,10 +94,10 @@ export default async function SCoE({
 
             {/* Mission */}
             <section id="mission">
-              <h3 className="text-red-700 mb-4 font-serif text-3xl">
+              <h3>
                 {text.Mission.title.toUpperCase()}
               </h3>
-              <ul className="text-black list-disc space-y-3 pl-6 text-lg">
+              <ul className="list-disc space-y-3 pl-6 lg:text-lg text-neutral-900">
                 {text.Mission.points.map((point, idx) => (
                   <li key={idx}>{point}</li>
                 ))}
@@ -112,7 +112,7 @@ export default async function SCoE({
               alt={text.VisionMissionImage.alt}
               width={500}
               height={300}
-              className="rounded-xl object-cover"
+              className="w-64 sm:w-80 md:w-96 lg:w-full max-w-md rounded-xl object-cover"
             />
           </div>
         </div>
@@ -148,9 +148,9 @@ export default async function SCoE({
               />
               <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
                 <div>
-                  <h2 className="m-0 text-start text-lg md:text-xl">
+                  <h2 className="m-0 text-start text-base sm:text-lg md:text-xl">
                     {faculty.name}
-                    <span className="block text-lg text-neutral-900">
+                    <span className="block text-sm sm:text-base md:text-lg text-neutral-900">
                       {faculty.title}
                     </span>
                   </h2>
@@ -160,14 +160,14 @@ export default async function SCoE({
                     <MdEmail className="text-primary-700" />
                     <Link
                       href={`mailto:${faculty.email}`}
-                      className="text-gray-600 break-all hover:text-primary-700 hover:underline"
+                      className="text-neutral-600 break-all hover:text-primary-700 hover:underline"
                     >
                       {faculty.email}
                     </Link>
                   </span>
                   <span className="mt-2 flex items-center space-x-2">
                     <MdOutlineLocalPhone className="text-primary-700" />
-                    <span className="text-gray-600 break-all">
+                    <span className="text-neutral-600 break-all">
                       {faculty.phone}
                     </span>
                   </span>
@@ -187,8 +187,8 @@ export default async function SCoE({
           text={text.Features.title.toUpperCase()}
         />
         {/* Box */}
-        <div className="border-red-300 rounded-xl border bg-neutral-50 px-8 py-3 text-lg">
-          <ul className="text-black list-disc">
+        <div className="rounded-xl border border-primary-300 bg-neutral-50 px-8 py-3 lg:text-lg">
+          <ul className="list-disc text-neutral-900">
             {text.Features.items.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
@@ -237,8 +237,8 @@ export default async function SCoE({
           id="how-to-apply"
           text={text.How_to_Apply.title.toUpperCase()}
         />
-        <div className="border-red-300 rounded-xl border bg-neutral-50 px-10 py-5">
-          <ol className="text-black list-inside list-decimal text-lg">
+        <div className="rounded-xl border border-primary-300 bg-neutral-50 px-10 py-5">
+          <ol className="list-inside list-decimal lg:text-lg text-neutral-900">
             {text.How_to_Apply.registrationSteps.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
@@ -256,23 +256,23 @@ export default async function SCoE({
         />
 
         <section className="container my-16">
-          <div className="flex justify-center gap-20">
+          <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
             {/* Email */}
             <a
               href="mailto:scoe@nitkkr.ac.in"
-              className="hover:bg-primary-50 flex h-40 w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition"
+              className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
               aria-label="Email SCoE"
             >
-              <MdEmail className="text-5xl" />
+              <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
             </a>
 
             {/* Phone */}
             <a
               href="tel:+911744233000"
-              className="hover:bg-primary-50 flex h-40 w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition"
+              className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
               aria-label="Call SCoE"
             >
-              <MdCall className="text-5xl" />
+              <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
             </a>
           </div>
         </section>
