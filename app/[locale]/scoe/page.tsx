@@ -112,7 +112,7 @@ export default async function SCoE({
               alt={text.VisionMissionImage.alt}
               width={500}
               height={300}
-              className="w-64 sm:w-80 md:w-96 lg:w-full max-w-md rounded-xl object-cover"
+              className="h-32 w-full sm:h-auto sm:w-80 md:w-96 lg:w-full max-w-md rounded-xl object-cover"
             />
           </div>
         </div>
@@ -213,6 +213,8 @@ export default async function SCoE({
           },
         ]}
         tableData={LaboratoriesData}
+        showSerialNo={true}
+        serialNoLabel="Sr. No."
       />
       {/* Courses */}
       <section className="container  mt-10">
@@ -227,6 +229,8 @@ export default async function SCoE({
       <GenericTable
         headers={[{ key: 'courseName', label: text.Courses.courseName }]}
         tableData={CoursesData}
+        showSerialNo={true}
+        serialNoLabel="Sr. No."
       />
       {/* how to apply */}
       <section className="container">
@@ -237,8 +241,8 @@ export default async function SCoE({
           id="how-to-apply"
           text={text.How_to_Apply.title.toUpperCase()}
         />
-        <div className="rounded-xl border border-primary-300 bg-neutral-50 px-10 py-5">
-          <ol className="list-inside list-decimal lg:text-lg text-neutral-900">
+        <div className="px-4">
+          <ol className="list-decimal pl-6 space-y-2 lg:text-lg text-neutral-900">
             {text.How_to_Apply.registrationSteps.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
@@ -255,25 +259,31 @@ export default async function SCoE({
           text={text.For_Queries.title.toUpperCase()}
         />
 
-        <section className="container my-16">
+        <section className="my-16">
           <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
             {/* Email */}
-            <a
-              href="mailto:scoe@nitkkr.ac.in"
-              className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
-              aria-label="Email SCoE"
-            >
-              <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
-            </a>
+            <div className="flex flex-col items-center">
+              <a
+                href="mailto:scoe@nitkkr.ac.in"
+                className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
+                aria-label="Email SCoE"
+              >
+                <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
+              </a>
+              <span className="mt-4 text-sm sm:text-base text-neutral-700">scoe@nitkkr.ac.in</span>
+            </div>
 
             {/* Phone */}
-            <a
-              href="tel:+911744233000"
-              className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
-              aria-label="Call SCoE"
-            >
-              <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
-            </a>
+            <div className="flex flex-col items-center">
+              <a
+                href="tel:+911744233300"
+                className="flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition hover:bg-primary-100"
+                aria-label="Call SCoE"
+              >
+                <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
+              </a>
+              <span className="mt-4 text-sm sm:text-base text-neutral-700">01744-233300</span>
+            </div>
           </div>
         </section>
       </section>
