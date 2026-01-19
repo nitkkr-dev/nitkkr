@@ -92,6 +92,11 @@ export default function GenericTable<T extends Record<string, unknown>>({
       const aValue = a[sortByDateField];
       const bValue = b[sortByDateField];
 
+      // Handle numeric values
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+      }
+
       // Handle Date objects, date strings, or timestamps
       const aDate = aValue instanceof Date ? aValue : new Date(String(aValue));
       const bDate = bValue instanceof Date ? bValue : new Date(String(bValue));

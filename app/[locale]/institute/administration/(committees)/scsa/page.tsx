@@ -98,7 +98,7 @@ export default async function SCSAPage({
           tableData={meetingsData}
           pageParamName="meetingPage"
           showSerialNo={false}
-          sortByDateField="created_at"
+          sortByDateField="date"
           serialNoLabel={text.members.serial}
         />
       </section>

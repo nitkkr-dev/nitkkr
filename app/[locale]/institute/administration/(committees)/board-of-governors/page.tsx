@@ -102,7 +102,7 @@ export default async function BoardOfGovernors({
     <>
       <ImageHeader title={text.governor} src="assets/landingpagebg-1.png" />
       <section className="container">
-        <div id="members">
+        <div>
           <Heading
             glyphDirection="dual"
             heading="h3"
@@ -117,10 +117,10 @@ export default async function BoardOfGovernors({
         </div>
 
         <div id="meetings">
-          <span id="agenda" />
           <Heading
             glyphDirection="dual"
             heading="h3"
+            id="agenda"
             text={text.meetings.title}
           />
           <GenericTable
@@ -128,7 +128,7 @@ export default async function BoardOfGovernors({
             tableData={meetingsData}
             pageParamName="meetingPage"
             showSerialNo={false}
-            sortByDateField="created_at"
+            sortByDateField="date"
           />
         </div>
       </section>
