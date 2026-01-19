@@ -66,7 +66,7 @@ export default async function NotificationsPanel({
   return (
     <section
       className={cn(
-        'flex h-full flex-col rounded-b-xl bg-background/[0.6]',
+        'flex h-[384px] flex-col rounded-b-xl bg-background/[0.6] md:h-[512px]',
         'shadow-[0px_4px_0px_#C5291D_inset] lg:shadow-[0px_8px_0px_#C5291D_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)]',
         'rounded-t-xl drop-shadow-2xl',
         'p-3 sm:p-4 md:p-5 lg:px-6 lg:pt-8 xl:px-8',

@@ -2085,15 +2085,7 @@ rolls down to 60% of the eligible students for second round of placement session
     },
     Head: {
       title: 'HEAD OF SCoE',
-      facultyIncharge: [
-        {
-          name: 'Dr. Anil Kumar',
-          title: 'Professor & Head, Siemens Centre of Excellence',
-          image: 'fallback/user-image.jpg',
-          email: 'anil.kumar@nitkkr.ac.in',
-          phone: '+91-XXXXXXXXXX',
-        },
-      ],
+      designation: 'Professor & Head, Siemens Centre of Excellence',
     },
 
     Features: {
@@ -2110,6 +2102,18 @@ rolls down to 60% of the eligible students for second round of placement session
       title: 'Laboratories',
       srNo: 'S. No.',
       LaboratoriesName: 'Laboratory',
+      list: [
+        'Design and Validation Lab',
+        'Automation Lab',
+        'Process Instrumentation Lab',
+        'Advanced Manufacturing Lab',
+        'Mechatronics Lab',
+        'Robotics Lab',
+        'CNC Machine & Controller Lab',
+        'Test and Optimization Lab',
+        'Electrical & Energy Saving Lab',
+        'Metrology Lab',
+      ],
     },
 
     How_to_Apply: {
@@ -2130,6 +2134,19 @@ rolls down to 60% of the eligible students for second round of placement session
       title: 'Courses',
       srNo: 'S. No.',
       courseName: 'Course Name',
+      list: [
+        'NX for Design - SKETCHER (16 Hrs)',
+        'NX for Design - Essential (40 Hrs)',
+        'Industrial Electrical Equipment - Beginner (16 hrs)',
+        'Industrial Automation - Beginner (16 hrs)',
+        'Fundamentals of Mechatronics (16 hrs)',
+        'Introduction to CAE & Simulation (16 hrs)',
+        'Basics of CNC Programming (16 hrs)',
+        'Advanced Manufacturing Concepts - Beginner (16 hrs)',
+        'Anatomy of Industrial Robots (16 hrs)',
+        'SCoE (Online) Internship Program (4 weeks)',
+        'SCoE Internship Program (4.5 months)',
+      ],
     },
   },
 };

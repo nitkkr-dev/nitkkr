@@ -1247,13 +1247,7 @@ export interface Translations {
 
     Head: {
       title: string;
-      facultyIncharge: {
-        name: string;
-        title: string;
-        image: string;
-        email: string;
-        phone: string;
-      }[];
+      designation: string;
     };
 
     Features: {
@@ -1265,6 +1259,7 @@ export interface Translations {
       title: string;
       srNo: string;
       LaboratoriesName: string;
+      list: string[];
     };
 
     How_to_Apply: {
@@ -1280,6 +1275,7 @@ export interface Translations {
       title: string;
       srNo: string;
       courseName: string;
+      list: string[];
     };
   };
 }
