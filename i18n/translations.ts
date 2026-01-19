@@ -18,8 +18,8 @@ export interface Translations {
     sNo: string;
     name: string;
     servedAs: string;
-    senateMeetingAgenda: string;
-    senateMeetingMinutes: string;
+    senateComposition: string;
+    senateAgendaAndMinutes: string;
     scsaMeetingMinutes: string;
     administrationHeads: string;
     director: string;
@@ -111,6 +111,8 @@ export interface Translations {
     building: string;
     financial: string;
     governor: string;
+    senate: string;
+    scsa: string;
     members: {
       title: string;
       serial: string;
@@ -120,11 +122,15 @@ export interface Translations {
     };
     meetings: {
       title: string;
+      minutesTitle: string;
       serial: string;
       date: string;
       place: string;
       agenda: string;
       minutes: string;
+      agendaOf: string;
+      minutesOf: string;
+      meeting: string;
     };
   };
   Convocation: {
@@ -1197,6 +1203,13 @@ export interface Translations {
       mobile: string;
       email: string;
     }[];
+  };
+  otherOfficersPage: {
+    title: string;
+    facultyName: string;
+    designation: string;
+    serialNo: string;
+    categories: string[];
   };
   SCoE: {
     welcome: string;
