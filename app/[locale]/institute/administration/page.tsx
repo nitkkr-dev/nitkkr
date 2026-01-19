@@ -57,7 +57,6 @@ export default async function Administration({
       />
 
       <section className="container mt-20">
-        
         <Heading
           glyphDirection={'dual'}
           heading={'h3'}
@@ -93,9 +92,7 @@ export default async function Administration({
           href="#senate"
         />
         <section className="container">
-          <Suspense fallback={<Loading />}>
-            
-          </Suspense>
+          <Suspense fallback={<Loading />}></Suspense>
         </section>
         <ButtonGroup
           buttonArray={[
@@ -163,6 +160,21 @@ export default async function Administration({
             },
           ]}
         />
+        {/* DEANS */}
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          text={text.deans.toUpperCase()}
+          id="deans"
+          href="#deans"
+        />
+
+        <section className="container my-10">
+          <Suspense fallback={<Loading />}>
+            <Deans />
+          </Suspense>
+        </section>
+
         <Heading
           glyphDirection={'dual'}
           heading={'h3'}
@@ -218,19 +230,6 @@ export default async function Administration({
             ))}
           </article>
         </footer>
-        <Heading
-          glyphDirection="dual"
-          heading="h3"
-          text={text.deans.toUpperCase()}
-          id="deans"
-          href="#deans"
-        />
-
-        <section className="container my-10">
-          <Suspense fallback={<Loading />}>
-            <Deans />
-          </Suspense>
-        </section>
       </section>
     </>
   );
