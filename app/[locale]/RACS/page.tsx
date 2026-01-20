@@ -25,19 +25,19 @@ export default async function RACS({
 
   const researchProposalForms = [
     {
-      href: 'https://nitkkr.ac.in/29012020/Application%20for%20Grant%20of%20Funds.pdf',
+      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Application-for-Grant-of-Funds.pdf',
     },
     {
-      href: 'https://nitkkr.ac.in/29012020/Form_C_terms_conditions.pdf',
+      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_A.pdf',
     },
     {
-      href: 'https://nitkkr.ac.in/29012020/Form%20A.pdf',
+      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_B.pdf',
     },
     {
-      href: 'https://nitkkr.ac.in/29012020/Form%20B.pdf',
+      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_C_terms_conditions.pdf',
     },
     {
-      href: 'https://nitkkr.ac.in/29012020/Research_Areas_of_SAC_March_2023.pdf',
+      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Research_Areas_of_SAC_March_2023.pdf',
     },
   ];
 
