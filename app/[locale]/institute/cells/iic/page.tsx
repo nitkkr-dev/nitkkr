@@ -1,3 +1,8 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+
+import Gallery from '~/components/ui/gallery';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
@@ -10,85 +15,94 @@ export default async function IICPage({
 }) {
   const text = await getTranslations(locale);
 
-  const officeOrder = [
-    {
-      sr_no: 1,
-      responsibility: 'Dr. A. K. Mehta',
-      name_of_faculty: 'Professor',
-    },
-    {
-      sr_no: 2,
-      responsibility: 'Dr. A. K. Mehta',
-      name_of_faculty: 'Assistant Professor',
-    },
-    {
-      sr_no: 3,
-      responsibility: 'Rohan Sharma',
-      name_of_faculty: 'Student',
-    },
-    {
-      sr_no: 4,
-      responsibility: 'Dr. Sneha Verma',
-      name_of_faculty: 'Assistant Professor',
-    },
-    {
-      sr_no: 5,
-      responsibility: 'Dr. Sneha Verma',
-      name_of_faculty: 'Assistant Professor',
-    },
-    {
-      sr_no: 6,
-      responsibility: 'Dr. A. K. Mehta',
-      name_of_faculty: 'Professor',
-    },
-    {
-      sr_no: 7,
-      responsibility: 'Ananya Gupta',
-      name_of_faculty: 'Student',
-    },
-    {
-      sr_no: 8,
-      responsibility: 'Dr. Ritesh Singh',
-      name_of_faculty: 'Associate Professor',
-    },
-    {
-      sr_no: 9,
-      responsibility: 'Dr. Neha Sharma',
-      name_of_faculty: 'Assistant Professor',
-    },
-    {
-      sr_no: 10,
-      responsibility: 'Dr. Neha Sharma',
-      name_of_faculty: 'Assistant Professor',
-    },
-  ];
-  const activities = [
-    {
-      sr_no: 1,
-      past_activity: "Workshop on 'Design Thinking for Innovation'",
-    },
-    {
-      sr_no: 2,
-      past_activity: "Talk on 'From Campus to Startup' by Alumni Entrepreneurs",
-    },
-    {
-      sr_no: 3,
-      past_activity: 'Idea Pitching Competition with Industry Mentors',
-    },
-    {
-      sr_no: 4,
-      past_activity: "Seminar on 'AI and the Future of Startups'",
-    },
-    {
-      sr_no: 5,
-      past_activity: 'Innovation Bootcamp: 3-Day Product Building Sprint',
-    },
-    {
-      sr_no: 6,
-      past_activity: 'Celebration of National Technology Day with Tech Demos',
-    },
-  ];
+const officeOrder = [
+  {
+    responsibility: 'President IIC',
+    name_of_faculty: 'Prof. R. K. Sharma',
+  },
+  
+  {
+    responsibility: 'Vice-President IIC',
+    name_of_faculty: 'Prof. Dinesh Khanduja',
+  },
+  {
+    responsibility: 'Convener IIC',
+    name_of_faculty: 'Dr. Rajeev Rathi',
+  },
+  {
+    responsibility: 'Innovation Cell Coordinator',
+    name_of_faculty: 'Dr. Gulshan Sachdeva',
+  },
+  {
+    responsibility: 'Start-up Cell Coordinator',
+    name_of_faculty: 'Dr. Pardeep Kumar',
+  },
+  {
+    responsibility: 'Social Media Coordinator',
+    name_of_faculty: 'Dr. Shelly Vadhera',
+  },
+  {
+    responsibility: 'Internship Coordinator',
+    name_of_faculty: 'Dr. M. P. R. Prashad',
+  },
+  {
+    responsibility: 'IPR Coordinator',
+    name_of_faculty: 'Prof. Lalit Mohan Saini',
+  },
+  {
+    responsibility: 'ARIIA Coordinator',
+    name_of_faculty: 'Dr. Neeraj Kaushik',
+  },
+  {
+    responsibility: 'NIRF Coordinator',
+    name_of_faculty: 'Dr. Sandeep Singhal',
+  },
+  {
+    responsibility: 'Member IIC',
+    name_of_faculty: 'Dr. Saurabh Chanana',
+  },
+  {
+    responsibility: 'Member IIC',
+    name_of_faculty: 'Dr. Gaurav Saini',
+  },
+  {
+    responsibility: 'Member IIC',
+    name_of_faculty: 'Dr. Trailokya Nath Sasamal',
+  },
+  {
+    responsibility: 'Member IIC',
+    name_of_faculty: 'Dr. Munish Bhatia',
+  },
+];
 
+const activities = [
+  {
+    past_activity: "Workshop on 'Design Thinking for Innovation'",
+  },
+  {
+    past_activity: "Talk on 'From Campus to Startup' by Alumni Entrepreneurs",
+  },
+  {
+    past_activity: 'Idea Pitching Competition with Industry Mentors',
+  },
+  {
+    past_activity: "Seminar on 'AI and the Future of Startups'",
+  },
+  {
+    past_activity: 'Innovation Bootcamp: 3-Day Product Building Sprint',
+  },
+  {
+    past_activity: 'Celebration of National Technology Day with Tech Demos',
+  },
+  {
+    past_activity: 'Celebration of National Technology Day with Tech Demos',
+  },
+];
+
+
+  const galleryImages = Array.from({ length: 23 }, (_, i) => ({
+    src: `institute/cells/iks/${i + 1}.jpg`,
+  }));
   return (
     <>
       {/* Header */}
@@ -112,89 +126,179 @@ export default async function IICPage({
 
       <main className="container mt-12">
         {/* Description */}
-        <article className="drop-shadow">
+        <article className="p-3 drop-shadow">
           <p className="d:w-full max-md:rounded-t md:rounded-r">
-            <span className="font-bold capitalize text-primary-700">
-              {text.Institute.cells.iic.preamble}:{' '}
-            </span>
+          
             {text.Institute.cells.iic.description}
           </p>
         </article>
+<section  className="mt-12 grid gap-8 lg:grid-cols-2 lg:items-center">
+  {/* Top/Left: Vision & Mission Text */}
+  <div className="space-y-6 p-6 lg:p-8 bg-white rounded-2xl ">
+    <div>
+      <h4 className="mb-4 text-2xl font-bold text-gray-900">
+        {text.Institute.cells.iic.vision.title}
+      </h4>
+      {text.Institute.cells.iic.vision.content.map((vision, index) => (
+        <p className="mb-3 text-gray-700 leading-relaxed text-lg" key={index}>
+          {vision}
+        </p>
+      ))}
+    </div>
+
+    <div>
+      <h4 className="mb-4 text-2xl font-bold text-gray-900">
+        {text.Institute.cells.iic.mission.title}
+      </h4>
+      {text.Institute.cells.iic.mission.content.map((mission, index) => (
+        <p className="mb-3 text-gray-700 leading-relaxed text-lg" key={index}>
+          {mission}
+        </p>
+      ))}
+    </div>
+  </div>
+
+  {/* Right/Bottom: Full coverage image */}
+  <div className="relative rounded-2xl  overflow-hidden">
+    <Image
+      src="/institute/cells/iic/location/cs_dept.jpg"
+      alt="Institute IIC pillars illustration"
+      fill
+      className="object-cover"
+      priority
+    />
+  </div>
+</section>
+
+
+
+        
         {/* Office Order */}
         <div>
           <Heading
-            glyphDirection="dual"
+            glyphDirection="ltr"
             heading="h2"
             className="mt-12"
             text={text.Institute.cells.iic.officeOrder.title}
           />
           <div className="mt-12 w-full overflow-x-auto">
             <GenericTable
-              headers={[
-                {
-                  key: 'sr_no',
-                  label: text.Institute.cells.iic.officeOrder.srNo,
-                },
-                {
-                  key: 'name_of_faculty',
-                  label: text.Institute.cells.iic.officeOrder.nameOfFaculty,
-                },
-                {
-                  key: 'responsibility',
-                  label: text.Institute.cells.iic.officeOrder.responsibility,
-                },
-              ]}
-              tableData={officeOrder}
-              currentPage={1}
-              getCount={Promise.resolve([])}
-            />
+  headers={[
+    {
+      key: 'name_of_faculty',
+      label: text.Institute.cells.iic.officeOrder.nameOfFaculty,
+    },
+    {
+      key: 'responsibility',
+      label: text.Institute.cells.iic.officeOrder.responsibility,
+    },
+  ]}
+  tableData={officeOrder}
+  currentPage={1}
+  getCount={Promise.resolve([])}
+/>
           </div>
         </div>
         {/* Activities */}
         <div>
           <Heading
-            glyphDirection="dual"
+            glyphDirection="rtl"
             heading="h2"
             className="mt-12"
             text={text.Institute.cells.iic.activities.title}
           />
           {/* Past Activities */}
           <div className="mt-12 w-full overflow-x-auto">
-            <GenericTable
-              headers={[
-                {
-                  key: 'sr_no',
-                  label: text.Institute.cells.iic.activities.srNo,
-                },
-                {
-                  key: 'past_activity',
-                  label: text.Institute.cells.iic.activities.pastActivities,
-                },
-              ]}
-              tableData={activities}
-              currentPage={1}
-              getCount={Promise.resolve([])}
-            />
+          <GenericTable
+  headers={[
+    {
+      key: 'past_activity',
+      label: text.Institute.cells.iic.activities.pastActivities,
+    },
+  ]}
+  tableData={activities}
+  currentPage={1}
+  getCount={Promise.resolve([])}
+/>
+
           </div>
           {/* Upcoming Activities */}
           <div className="mt-12 w-full overflow-x-auto">
-            <GenericTable
-              headers={[
-                {
-                  key: 'sr_no',
-                  label: text.Institute.cells.iic.activities.srNo,
-                },
-                {
-                  key: 'past_activity',
-                  label: text.Institute.cells.iic.activities.upcomingActivities,
-                },
-              ]}
-              tableData={activities}
-              currentPage={1}
-              getCount={Promise.resolve([])}
-            />
+           <GenericTable
+  headers={[
+    {
+      key: 'past_activity',
+      label: text.Institute.cells.iic.activities.pastActivities,
+    },
+  ]}
+  tableData={activities}
+  currentPage={1}
+  getCount={Promise.resolve([])}
+/>
+
           </div>
         </div>
+        <Heading
+            glyphDirection="ltr"
+            heading="h2"
+            className="mt-12"
+            text={text.Institute.cells.iic.pillarsOfLeadership}
+          />
+          <ul className="flex w-full flex-col flex-wrap items-center gap-4 sm:gap-5 md:flex-row md:justify-between md:gap-6">
+                    {text.Institute.cells.iic.employes.map((employe, index) => (
+                      <li
+                        key={index}
+                        className="flex w-[95%] flex-row items-center gap-2 rounded-lg border border-primary-500 bg-neutral-50 p-2 transition-shadow duration-300 hover:shadow-lg sm:w-[90%] sm:gap-3 sm:p-3 md:w-[48%] md:gap-4 md:p-4"
+                      >
+                        <Image
+                          src={employe.image}
+                          alt={employe.name}
+                          width={200}
+                          height={200}
+                          className="h-16 w-16 flex-shrink-0 rounded-lg object-cover sm:h-20 sm:w-20 md:h-28 md:w-28 lg:h-36 lg:w-36"
+                        />
+                        <section className="min-w-0 flex-1 space-y-1 break-words text-left sm:space-y-2 md:space-y-3 lg:space-y-4">
+                          <div>
+                            <h2 className="m-0 text-sm font-semibold text-primary-700 sm:text-base md:text-lg lg:text-xl">
+                              {employe.name}
+                            </h2>
+                            <span className="block text-xs text-neutral-700 sm:text-sm md:text-base lg:text-lg">
+                              {employe.position}
+                            </span>
+                          </div>
+                          <section className="space-y-0.5 sm:space-y-1">
+                            <span className="flex items-center gap-1 text-[10px] sm:gap-1.5 sm:text-xs md:text-sm lg:gap-2 lg:text-base">
+                              <MdEmail className="flex-shrink-0 text-primary-700" />
+                              <Link
+                                href={`mailto:${employe.email}`}
+                                className="break-all text-neutral-700 hover:text-primary-700 hover:underline"
+                              >
+                                {employe.email}
+                              </Link>
+                            </span>
+                            <span className="flex items-center gap-1 text-[10px] sm:gap-1.5 sm:text-xs md:text-sm lg:gap-2 lg:text-base">
+                              <MdOutlineLocalPhone className="flex-shrink-0 text-primary-700" />
+                              <span className="break-all text-neutral-700">
+                                {employe.phone}
+                              </span>
+                            </span>
+                          </section>
+                        </section>
+                      </li>
+                    ))}
+                  </ul>
+        
+          <Heading
+            glyphDirection="rtl"
+            heading="h2"
+            className="mt-12"
+            text={text.Institute.cells.iic.imageGallery}
+          />
+          <Gallery
+                      base={getS3Url()}
+                      images={galleryImages}
+                      viewMoreText={text.Main.viewMore}
+                    />
       </main>
     </>
   );

@@ -577,10 +577,23 @@ const text: Translations = {
       cell: 'सेल',
       iic: {
         title: 'संस्थान नवाचार परिषद',
-        preamble: 'प्रस्तावना',
-        description:
+         description:
           'एनआईटी कुरुक्षेत्र ने संस्थान नवाचार परिषद (IIC) के सदस्यों का गठन किया है, जो शिक्षा मंत्रालय की इनोवेशन सेल (MIC) से संबद्ध है। IIC एक छत्र इकाई के रूप में कार्य करेगी, जो विभिन्न विकास कार्यक्रमों, कार्यशालाओं आदि की पेशकश करेगी।',
-        officeOrder: {
+        
+        vision: {
+  title: 'दृष्टि',
+  content: [
+    'तकनीकी शिक्षा और अनुसंधान में एक आदर्श संस्थान बनना, जो वैश्विक चुनौतियों के प्रति संवेदनशील और उत्तरदायी हो।',
+  ],
+},
+mission: {
+  title: 'मिशन',
+  content: [
+    'उच्च गुणवत्ता वाली तकनीकी शिक्षा प्रदान करना, जिससे नवाचारी पेशेवरों और उद्यमियों का विकास हो।',
+  ],
+},
+       
+       officeOrder: {
           title: 'कार्यालय आदेश',
           srNo: 'क्रम संख्या',
           responsibility: 'जिम्मेदारी',
@@ -592,6 +605,31 @@ const text: Translations = {
           pastActivities: 'पूर्व गतिविधियाँ',
           upcomingActivities: 'आगामी गतिविधियाँ',
         },
+        employes: [
+      {
+        name: 'Prof. R.K. Sharma',
+        image: 'institute/cells/iic/Pillars/RK sharma.jpg',
+        position: 'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
+        phone: '+91-9896688346',
+        email: 'rksharma@nitkkr.ac.in',
+      },
+      {
+        name: 'Prof. Dinesh Khanduja',
+        image: 'institute/cells/iic/Pillars/Dinesh.jpg',
+        position: 'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
+        phone: '+91-9466960961',
+        email: 'dkhanduja@nitkkr.ac.in',
+      },
+      {
+        name: 'Dr. Rajeev Rathi',
+        image: 'institute/cells/iic/Pillars/Rathi.jpg',
+        position: 'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
+        phone: '+91-9996886672',
+        email: 'rajeevrathi@nitkkr.ac.in',
+      },
+    ],
+    pillarsOfLeadership: 'नेतृत्व के स्तंभ',
+        imageGallery: 'छवि गैलरी',
       },
       iks: {
         title: 'भारतीय ज्ञान प्रणाली',

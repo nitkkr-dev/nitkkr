@@ -664,21 +664,66 @@ const text: Translations = {
       cell: 'cell',
       iic: {
         title: 'Institution’s Innovation Council',
-        preamble: 'Preamble',
         description:
-          'NIT Kurukshetra convenes the members of the Institute’s Innovation Council (IIC), which is aligned with the Ministry of Education’s Innovation Cell (MIC). The IIC will be an umbrella entity offering a range of development programs, workshops, etc.',
-        officeOrder: {
-          title: 'Office Order',
+  'NIT Kurukshetra convenes the Institute Innovation Council (IIC) in alignment with the Ministry of Education’s Innovation Cell (MIC), Government of India. The IIC serves as a central umbrella body to foster innovation and entrepreneurship within the institute by engaging faculty, students, and staff through structured programs, workshops, and activities aimed at building a robust and sustainable innovation ecosystem.',
+
+vision: {
+  title: 'Vision',
+  content: [
+    'To create, streamline, and strengthen a vibrant innovation and entrepreneurship ecosystem within the institute, enabling higher educational institutions to become hubs of creative problem-solving, quality innovation, and entrepreneurial excellence.',
+  ],
+},
+
+mission: {
+  title: 'Mission',
+  content: [
+    'To actively engage faculty, students, and staff in innovation and entrepreneurship-related activities such as ideation, problem-solving, design thinking, intellectual property creation, and project management at pre-incubation and incubation stages.',
+  ],
+},
+
+   
+    
+      employes: [
+      {
+        name: 'Prof. R.K. Sharma',
+        image: 'institute/cells/iic/Pillars/RK sharma.jpg',
+        position: 'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
+        phone: '+91-9896688346',
+        email: 'rksharma@nitkkr.ac.in',
+      },
+      {
+        name: 'Prof. Dinesh Khanduja',
+        image: 'institute/cells/iic/Pillars/Dinesh.jpg',
+        position: 'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
+        phone: '+91-9466960961',
+        email: 'dkhanduja@nitkkr.ac.in',
+      },
+      {
+        name: 'Dr. Rajeev Rathi',
+        image: 'institute/cells/iic/Pillars/Rathi.jpg',
+        position: 'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
+        phone: '+91-9996886672',
+        email: 'rajeevrathi@nitkkr.ac.in',
+      },
+
+    ],
+     
+        
+       
+          officeOrder: {
+          title: 'OFFICE ORDER',
           srNo: 'Sr. No.',
           responsibility: 'Responsibility',
           nameOfFaculty: 'Name of Faculty',
         },
         activities: {
-          title: 'Activities',
+          title: 'ACTIVITIES',
           srNo: 'Sr. No.',
           pastActivities: 'Past Activities',
           upcomingActivities: 'Upcoming Activities',
         },
+        pillarsOfLeadership: 'PILLARS OF LEADERSHIP',
+        imageGallery: 'IMAGE GALLERY',
       },
       iks: {
         title: 'Indian Knowledge Systems',

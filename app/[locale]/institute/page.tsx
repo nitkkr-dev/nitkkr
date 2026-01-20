@@ -112,7 +112,7 @@ export default async function Institute({
           { label: text.cells.headingTitle, href: '#cells' },
           { label: text.quickLinks.title, href: '#quick-links' },
         ]}
-        src="slideshow/image01.jpg"
+        src="institute/cells/iic/Pillars/Rathi.jpg"
       />
 
       {/* PROFILE */}

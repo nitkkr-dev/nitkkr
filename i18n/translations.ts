@@ -329,8 +329,18 @@ export interface Translations {
       cell: string;
       iic: {
         title: string;
-        preamble: string;
         description: string;
+      vision: { title: string; content: string[] };
+      mission: { title: string; content: string[] };
+       employes: {
+      name: string;
+      position: string;
+      image: string;
+      phone: string;
+      email: string;
+    }[];
+  
+
         officeOrder: {
           title: string;
           srNo: string;
@@ -343,6 +353,9 @@ export interface Translations {
           pastActivities: string;
           upcomingActivities: string;
         };
+        pillarsOfLeadership: string;
+        imageGallery: string;
+
       };
       ipr: {
         title: string;
