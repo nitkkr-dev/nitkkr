@@ -23,8 +23,23 @@ export default async function RACS({
 }) {
   const text = (await getTranslations(locale)).RACS;
 
-
-
+  const researchProposalForms = [
+    {
+      href: 'https://nitkkr.ac.in/29012020/Application%20for%20Grant%20of%20Funds.pdf',
+    },
+    {
+      href: 'https://nitkkr.ac.in/29012020/Form_C_terms_conditions.pdf',
+    },
+    {
+      href: 'https://nitkkr.ac.in/29012020/Form%20A.pdf',
+    },
+    {
+      href: 'https://nitkkr.ac.in/29012020/Form%20B.pdf',
+    },
+    {
+      href: 'https://nitkkr.ac.in/29012020/Research_Areas_of_SAC_March_2023.pdf',
+    },
+  ];
 
   return (
     <>
@@ -46,23 +61,14 @@ export default async function RACS({
         ]}
         src="slideshow/image01.jpg"
       />
-       {/* INTRO – full width */}
-<section className="w-full bg-[#fdf7ed]">
-  <div className="mx-auto max-w-7xl px-6 py-6 sm:px-10">
-    <p className="text-base leading-relaxed sm:text-lg">
-      {text.intro}
-    </p>
-  </div>
-</section>
-
-{/* REST OF PAGE – constrained */}
-<main className="container px-6 sm:px-10">
-  ...
-</main>
-
+      {/* INTRO – full width */}
+      <section className="w-full bg-[#fdf7ed]">
+        <div className="mx-auto max-w-7xl px-6 py-6 sm:px-10">
+          <p className="text-base leading-relaxed sm:text-lg">{text.intro}</p>
+        </div>
+      </section>
 
       <main className="container px-6 sm:px-10">
-      
         {/* NOTIFICATIONS */}
         <section>
           <Heading
@@ -80,34 +86,26 @@ export default async function RACS({
             className="w-full"
           />
         </section>
-
         {/* REGIONAL COORDINATOR */}
         <section id="regionalCoordinator" className="mt-12 sm:mt-16">
-          <Heading
-            glyphDirection="ltr"
-            heading="h3"
-            text={text.coordinator.heading}
-          />
-
           <section className="container my-10">
-        <Heading
-          glyphDirection="dual"
-          heading="h3"
-          href="#head"
-          id="head"
-          text={text.coordinator.heading}
-        />
-        <FICGroup
-          facultyData={[
-            {
-              employeeId: '88',
-              designation: text.coordinator.position,
-            },
-          ]}
-        />
-      </section>
+            <Heading
+              glyphDirection="dual"
+              heading="h3"
+              href="#head"
+              id="head"
+              text={text.coordinator.heading}
+            />
+            <FICGroup
+              facultyData={[
+                {
+                  employeeId: '88',
+                  designation: text.coordinator.position,
+                },
+              ]}
+            />
+          </section>
         </section>
-
         {/* RESEARCH PROPOSAL FORMS */}
         <section id="researchProposalForms" className="mt-12 sm:mt-16">
           <Heading
@@ -120,31 +118,31 @@ export default async function RACS({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[120px]">{text.researchProposalForms.table.srno}</TableHead>
+                  <TableHead className="w-[120px]">
+                    {text.researchProposalForms.table.srno}
+                  </TableHead>
                   <TableHead>{text.researchProposalForms.table.form}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {text.researchProposalForms.forms.map((form, index) => (
+                {researchProposalForms.map((form, index) => (
                   <TableRow key={index}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
-      <Link
-    href={form.href}
-    target="_blank"
-    className="text-primary-700 hover:underline"
-  >
-    {form.name} →
-  </Link>
-</TableCell>
-
+                      <Link
+                        href={form.href}
+                        target="_blank"
+                        className="text-primary-700 hover:underline"
+                      >
+                        {text.researchProposalForms.formNames[index]} →
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
         </section>
-
         {/* PARTNER INSTITUTES */}
         <section id="partnerInstitutes" className="mt-12 sm:mt-16">
           <Heading
@@ -157,8 +155,12 @@ export default async function RACS({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[120px]">{text.partnerInstitutes.table.srNo}</TableHead>
-                  <TableHead>{text.partnerInstitutes.table.institute}</TableHead>
+                  <TableHead className="w-[120px]">
+                    {text.partnerInstitutes.table.srNo}
+                  </TableHead>
+                  <TableHead>
+                    {text.partnerInstitutes.table.institute}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -172,16 +174,15 @@ export default async function RACS({
             </Table>
           </div>
         </section>
-
         {/* RESEARCH AREAS */}
         <section id="researchAreas" className="mt-12 sm:mt-16">
           <Heading
-            glyphDirection="rtl"
+            glyphDirection="ltr"
             heading="h3"
             text={text.researchAreas.heading}
           />
 
-          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md-gap-10">
+          <div className="md-gap-10 grid grid-cols-1 items-center gap-6 md:grid-cols-2">
             {/* Left – Image card */}
             <div className="relative overflow-hidden rounded-lg shadow-md">
               <Image
@@ -198,7 +199,7 @@ export default async function RACS({
               {/* Read more overlay */}
               <Link
                 href={text.researchAreas.link}
-                className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
+                className="absolute bottom-4 left-4 font-serif text-base font-semibold text-shade-light hover:underline md:text-lg lg:text-xl"
               >
                 {text.researchAreas.readMore} →
               </Link>
@@ -222,15 +223,18 @@ export default async function RACS({
           text={text.forQueries.heading.toUpperCase()}
         />
 
-        <section className="container mt-4 sm:mt-6 mb-8">
-          <div className="flex justify-center gap-20">
+        <section className="mt-2">
+          <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
             {/* Email */}
-            <a
-              href="mailto:scoe@nitkkr.ac.in"
-              className="hover:bg-primary-50 flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition"
-              aria-label="Email RACS">
-              <TbMail className="text-5xl" />
-            </a>
+            <div className="flex flex-col items-center">
+              <a
+                href="mailto:scoe@nitkkr.ac.in"
+                className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-32 md:w-32"
+                aria-label="Email RACS"
+              >
+                <TbMail className="text-3xl sm:text-4xl md:text-5xl" />
+              </a>
+            </div>
           </div>
         </section>
       </section>

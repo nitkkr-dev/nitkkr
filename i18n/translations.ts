@@ -71,7 +71,7 @@ export interface Translations {
       racs: string;
       scoe: string;
       tenders: string;
-    }
+    };
   };
   Academics: {
     notifications: string;
@@ -397,99 +397,75 @@ export interface Translations {
     };
   };
 
-RACS: {
-  title: string;
-  intro: string;
-  notificationsCategory: string;
-  
-  // Tabs/Navigation
-  tabs: {
-    notifications: string;
-    regionalCoordinator: string;
-    researchProposalForms: string;
-    partnerInstitutes: string;
-    researchAreas: string;
-    queries: string;
-  };
-  // Notifications Section
-  notifications: {
+  RACS: {
     title: string;
-  };
-  // Regional Coordinator Section
-  coordinator: {
-    heading: string;
-    name: string;
-    position: string;
-    email: string;
-    phone: string;
-    image: string;
-  };
-  
-  // Research Proposal Forms Section
-  researchProposalForms: {
-  heading: string;
-  table:{
-      srno: string;
-      form: string;
-    },
+    intro: string;
+    notificationsCategory: string;
 
-  forms: [
-    
-    {
+    // Tabs/Navigation
+    tabs: {
+      notifications: string;
+      regionalCoordinator: string;
+      researchProposalForms: string;
+      partnerInstitutes: string;
+      researchAreas: string;
+      queries: string;
+    };
+    // Notifications Section
+    notifications: {
+      title: string;
+    };
+    // Regional Coordinator Section
+    coordinator: {
+      heading: string;
       name: string;
-      href: string;
-    },
-    {
-      name: string;
-      href: string;
-    },
-    {
-      name: string;
-      href: string;
-    },
-    {
-      name: string;
-      href: string;
-    },
-    {
-      name: string;
-      href: string;
-    },
-  ],
-},
-
-  
-  // Partner Institutes Section
-  partnerInstitutes: {
-    heading: string;
-    table: {
-      srNo: string;
-      institute: string;
+      position: string;
+      email: string;
+      phone: string;
+      image: string;
     };
 
-    institutes: [
-      {name: string;},
-      {name: string;},
-      {name: string;},
-      {name: string;},
-      {name: string;},
-    ]
+    // Research Proposal Forms Section
+    researchProposalForms: {
+      heading: string;
+      table: {
+        srno: string;
+        form: string;
+      };
+      formNames: string[];
+    };
+
+    // Partner Institutes Section
+    partnerInstitutes: {
+      heading: string;
+      table: {
+        srNo: string;
+        institute: string;
+      };
+
+      institutes: [
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+      ];
+    };
+
+    // Research Areas Section
+    researchAreas: {
+      heading: string;
+      description: string;
+      readMore: string;
+      link: string;
+    };
+
+    // For Queries Section
+    forQueries: {
+      heading: string;
+      email: string;
+    };
   };
-  
-  // Research Areas Section
-  researchAreas: {
-    heading: string;
-    description: string;
-    readMore: string;
-    link: string;
-  };
-  
-  // For Queries Section
-  forQueries: {
-    heading: string;
-    email: string;
-  };
-};
 
   Hostels: {
     title: string;

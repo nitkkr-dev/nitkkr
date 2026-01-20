@@ -25,8 +25,6 @@ import MessageCard from '~/components/message-card';
 
 import Events from './events';
 
-
-
 export default async function Home({
   params: { locale },
   searchParams: {
@@ -141,30 +139,30 @@ export default async function Home({
         />
       </section>
 
-        <ButtonGroup
-          buttonArray={[
-            {
-              label: text.buttons.hostels,
-              href: `/${locale}/institute/hostels`,
-              icon: TbBuildingSkyscraper,
-            },
-            {
-              label: text.buttons.racs,
-              href: `/${locale}/RACS`,
-              icon: TbRocket,
-            },
-            {
-              label: text.buttons.scoe,
-              href: `/${locale}/scoe`,
-              icon: TbSchool,
-            },
-            {
-              label: text.buttons.tenders,
-              href: `/${locale}/notifications/?category=tenders&category=tender`,
-              icon: TbContract,
-            },
-          ]}
-        />
+      <ButtonGroup
+        buttonArray={[
+          {
+            label: text.buttons.hostels,
+            href: `/${locale}/institute/hostels`,
+            icon: TbBuildingSkyscraper,
+          },
+          {
+            label: text.buttons.racs,
+            href: `/${locale}/RACS`,
+            icon: TbRocket,
+          },
+          {
+            label: text.buttons.scoe,
+            href: `/${locale}/scoe`,
+            icon: TbSchool,
+          },
+          {
+            label: text.buttons.tenders,
+            href: `/${locale}/notifications/?category=tender`,
+            icon: TbContract,
+          },
+        ]}
+      />
     </>
   );
 }

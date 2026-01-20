@@ -10,7 +10,6 @@ import FICGroup from '~/components/fic-group';
 import { getS3Url } from '~/server/s3';
 export default async function SCoE({
   params: { locale },
-  searchParams,
 }: {
   params: { locale: string };
   searchParams?: {
