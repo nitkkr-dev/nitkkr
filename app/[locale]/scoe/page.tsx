@@ -10,7 +10,6 @@ import FICGroup from '~/components/fic-group';
 import { getS3Url } from '~/server/s3';
 export default async function SCoE({
   params: { locale },
-  searchParams,
 }: {
   params: { locale: string };
   searchParams?: {
@@ -226,7 +225,7 @@ export default async function SCoE({
           text={text.For_Queries.title.toUpperCase()}
         />
 
-        <section className="my-2">
+        <section className="mt-2">
           <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
             {/* Email */}
             <div className="flex flex-col items-center">
@@ -237,9 +236,6 @@ export default async function SCoE({
               >
                 <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
-              <span className="mt-4 text-sm text-neutral-700 sm:text-base">
-                scoe@nitkkr.ac.in
-              </span>
             </div>
 
             {/* Phone */}
@@ -251,9 +247,6 @@ export default async function SCoE({
               >
                 <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
-              <span className="mt-4 text-sm text-neutral-700 sm:text-base">
-                01744-233300
-              </span>
             </div>
           </div>
         </section>
