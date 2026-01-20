@@ -53,7 +53,7 @@ export default async function Events({
 
   return (
     <article
-      className="relative bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
+      className="relative bg-cover bg-no-repeat pt-5 pb-20 md:pt-16 md:pb-24"
       id="events"
       style={{
         backgroundImage: `url('${getS3Url()}/assets/dottedarrows-1.png')`,
@@ -104,9 +104,9 @@ export default async function Events({
             </li>
           ))}
         </ol>
-        <section className="my-4 flex justify-between drop-shadow-2xl lg:hidden">
+        <section className="mt-4 mb-2 flex items-center gap-3 lg:hidden">
           <Select defaultValue={text.categories.featured}>
-            <SelectTrigger className="w-[70%] px-4 py-5 text-shade-light">
+            <SelectTrigger className="w-[65%] px-4 py-5 text-shade-light">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -128,11 +128,11 @@ export default async function Events({
           />
         </section>
 
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-2">
           <BouncyArrowButton
             buttonProps={{
               className:
-                'ml-auto text-lg lg:inline-flex items-center gap-1 hidden',
+                'ml-auto mb-2 text-lg lg:inline-flex items-center gap-1 hidden',
               variant: 'link',
             }}
             linkProps={{ href: `/${locale}/events` }}
