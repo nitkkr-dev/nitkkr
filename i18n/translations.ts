@@ -20,8 +20,8 @@ export interface Translations {
     sNo: string;
     name: string;
     servedAs: string;
-    senateMeetingAgenda: string;
-    senateMeetingMinutes: string;
+    senateComposition: string;
+    senateAgendaAndMinutes: string;
     scsaMeetingMinutes: string;
     administrationHeads: string;
     director: string;
@@ -113,6 +113,8 @@ export interface Translations {
     building: string;
     financial: string;
     governor: string;
+    senate: string;
+    scsa: string;
     members: {
       title: string;
       serial: string;
@@ -122,11 +124,15 @@ export interface Translations {
     };
     meetings: {
       title: string;
+      minutesTitle: string;
       serial: string;
       date: string;
       place: string;
       agenda: string;
       minutes: string;
+      agendaOf: string;
+      minutesOf: string;
+      meeting: string;
     };
   };
   Convocation: {
@@ -1265,5 +1271,79 @@ RACS: {
       mobile: string;
       email: string;
     }[];
+  };
+  otherOfficersPage: {
+    title: string;
+    facultyName: string;
+    designation: string;
+    serialNo: string;
+    categories: string[];
+  };
+  SCoE: {
+    welcome: string;
+
+    admission: {
+      title: string;
+      process: {
+        title: string;
+        content: string[];
+      };
+      education: {
+        title: string;
+        content: string[];
+      };
+    };
+
+    Notifications: {
+      title: string;
+    };
+
+    Vision: {
+      title: string;
+      description: string;
+    };
+
+    VisionMissionImage: {
+      src: string;
+      alt: string;
+    };
+
+    Mission: {
+      title: string;
+      points: string[];
+    };
+
+    Head: {
+      title: string;
+      designation: string;
+    };
+
+    Features: {
+      title: string;
+      items: string[];
+    };
+
+    Laboratories: {
+      title: string;
+      srNo: string;
+      LaboratoriesName: string;
+      list: string[];
+    };
+
+    How_to_Apply: {
+      title: string;
+      registrationSteps: string[];
+    };
+
+    For_Queries: {
+      title: string;
+    };
+
+    Courses: {
+      title: string;
+      srNo: string;
+      courseName: string;
+      list: string[];
+    };
   };
 }

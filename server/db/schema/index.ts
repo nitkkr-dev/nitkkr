@@ -1,3 +1,11 @@
+import exp from 'constants';
+
+export * from './board-of-governors.schema';
+export * from './board-of-governors-meetings.schema';
+export * from './building-and-work-agenda-minutes.schema';
+export * from './building-and-work-composition.schema';
+export * from './financial-committee.schema';
+export * from './financial-committee-meetings.schema';
 export * from './club-members.schema';
 export * from './club-socials.schema';
 export * from './copyrights.schema';
@@ -35,3 +43,7 @@ export * from './students.schema';
 export * from './sponsored-research-projects.schema';
 export * from './sponsored-research-projects-faculties.schema';
 export * from './memorandum.schema';
+export * from './other-officers.schema';
+export * from './senate-composition.schema';
+export * from './senate-agenda-minutes.schema';
+export * from './scsa_minutes.schema';

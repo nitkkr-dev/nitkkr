@@ -57,11 +57,8 @@ export default async function Administration({
       />
 
       <section className="container mt-20">
-        <p className="mx-8 font-sans text-xl max-md:text-lg">
-          {text.description}
-        </p>
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.boardOfGovernors.toUpperCase()}
           id="board-of-governors"
@@ -87,7 +84,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.senate.toUpperCase()}
           className="container"
@@ -95,33 +92,29 @@ export default async function Administration({
           href="#senate"
         />
         <section className="container">
-          <Suspense fallback={<Loading />}>
-            <CardTitle className="text-2xl text-primary-300">
-              {text.composition}
-            </CardTitle>
-          </Suspense>
+          <Suspense fallback={<Loading />}></Suspense>
         </section>
         <ButtonGroup
           buttonArray={[
             {
-              label: text.senateMeetingAgenda,
-              href: `/${locale}/institute/administration/senate#meeting-agenda`,
+              label: text.senateComposition,
+              href: `/${locale}/institute/administration/senate#composition`,
               icon: TbNotebook,
             },
             {
-              label: text.senateMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#meetings`,
+              label: text.senateAgendaAndMinutes,
+              href: `/${locale}/institute/administration/senate#meeting-agenda-and-minutes`,
               icon: MdOutlineChecklist,
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/scsa`,
               icon: MdOutlineChecklist,
             },
           ]}
         />
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.administrationHeads.toUpperCase()}
           id="administration-heads"
@@ -147,7 +140,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.committees.toUpperCase()}
           id="committees"
@@ -167,8 +160,23 @@ export default async function Administration({
             },
           ]}
         />
+        {/* DEANS */}
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection="dual"
+          heading="h3"
+          text={text.deans.toUpperCase()}
+          id="deans"
+          href="#deans"
+        />
+
+        <section className="container my-10">
+          <Suspense fallback={<Loading />}>
+            <Deans />
+          </Suspense>
+        </section>
+
+        <Heading
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.actsAndStatutes.toUpperCase()}
           className="container"
@@ -222,19 +230,6 @@ export default async function Administration({
             ))}
           </article>
         </footer>
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          text={text.deans.toUpperCase()}
-          id="deans"
-          href="#deans"
-        />
-
-        <section className="container my-10">
-          <Suspense fallback={<Loading />}>
-            <Deans />
-          </Suspense>
-        </section>
       </section>
     </>
   );
