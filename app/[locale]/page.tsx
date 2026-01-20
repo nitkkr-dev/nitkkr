@@ -1,9 +1,18 @@
 import Image from 'next/image';
 import { BsLinkedin } from 'react-icons/bs';
 import { MdEmail, MdPhone } from 'react-icons/md';
+import {
+  TbBuildingSkyscraper,
+  TbContract,
+  TbRocket,
+  TbSchool,
+} from 'react-icons/tb';
 
 import Notifications, { type NotificationCategory } from '~/app/notifications';
+import { getTranslations } from '~/i18n/translations';
+import { type eventCategoryEnum } from '~/server/db';
 import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import {
   AutoplayCarousel,
   CarouselContent,
@@ -13,10 +22,10 @@ import {
 } from '~/components/carousels';
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
-import { getTranslations } from '~/i18n/translations';
-import { type eventCategoryEnum } from '~/server/db';
 
 import Events from './events';
+
+
 
 export default async function Home({
   params: { locale },
@@ -132,45 +141,30 @@ export default async function Home({
         />
       </section>
 
-        <div className="mt-10 grid w-full grid-cols-4 gap-6">
-  {[
-    {
-      title: 'Hostels',
-      icon: 'apartment',
-      href: '/campus/hostels',
-    },
-    {
-      title: 'RAC-S (ISRO)',
-      icon: 'rocket_launch',
-      href: '/RACS',
-    },
-    {
-      title: 'CoE (Siemens)',
-      icon: 'school',
-      href: '/research/coe-siemens',
-    },
-    {
-      title: 'Tenders',
-      icon: 'contract',
-      href: '/tenders',
-    },
-  ].map((item, i) => (
-    <a
-      key={i}
-      href={item.href}
-      className="group flex aspect-square flex-col items-center justify-center rounded-xl border border-neutral-300 bg-[#FBF7ED] text-center transition hover:-translate-y-1 hover:border-primary hover:shadow-md"
-    >
-      <img
-        src={item.icon}
-        alt={item.title}
-        className="mb-4 h-12 w-12 object-contain"
-      />
-      <span className="text-sm font-semibold text-neutral-800">
-        {item.title}
-      </span>
-    </a>
-  ))}
-</div>
+        <ButtonGroup
+          buttonArray={[
+            {
+              label: text.buttons.hostels,
+              href: `/${locale}/institute/hostels`,
+              icon: TbBuildingSkyscraper,
+            },
+            {
+              label: text.buttons.racs,
+              href: `/${locale}/RACS`,
+              icon: TbRocket,
+            },
+            {
+              label: text.buttons.scoe,
+              href: `/${locale}/scoe`,
+              icon: TbSchool,
+            },
+            {
+              label: text.buttons.tenders,
+              href: `/${locale}/notifications/?category=tenders&category=tender`,
+              icon: TbContract,
+            },
+          ]}
+        />
     </>
   );
 }

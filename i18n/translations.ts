@@ -1,5 +1,3 @@
-import RACS from "~/app/RACS/page";
-
 export async function getTranslations(locale: string): Promise<Translations> {
   return import(`./${locale}.ts`).then(
     (module: { default: Translations }) => module.default
@@ -68,6 +66,12 @@ export interface Translations {
       timeTable: string;
     };
     viewMore: string;
+    buttons: {
+      hostels: string;
+      racs: string;
+      scoe: string;
+      tenders: string;
+    }
   };
   Academics: {
     notifications: string;
@@ -423,16 +427,37 @@ RACS: {
   
   // Research Proposal Forms Section
   researchProposalForms: {
-    heading: string;
-    table: {
-      srNo: string;
+  heading: string;
+  table:{
+      srno: string;
       form: string;
-    };
-    forms: {
+    },
+
+  forms: [
+    
+    {
       name: string;
-      link: string;
-    }[];
-  };
+      href: string;
+    },
+    {
+      name: string;
+      href: string;
+    },
+    {
+      name: string;
+      href: string;
+    },
+    {
+      name: string;
+      href: string;
+    },
+    {
+      name: string;
+      href: string;
+    },
+  ],
+},
+
   
   // Partner Institutes Section
   partnerInstitutes: {
@@ -441,6 +466,14 @@ RACS: {
       srNo: string;
       institute: string;
     };
+
+    institutes: [
+      {name: string;},
+      {name: string;},
+      {name: string;},
+      {name: string;},
+      {name: string;},
+    ]
   };
   
   // Research Areas Section

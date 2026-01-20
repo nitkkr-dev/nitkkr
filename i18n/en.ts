@@ -186,6 +186,12 @@ const text: Translations = {
       timeTable: 'Time Table',
     },
     viewMore: 'View More',
+    buttons: {
+      hostels: 'Hostels',
+      racs: 'RAC-S (ISRO)',
+      scoe: 'CoE (Siemens)',
+      tenders: 'Tenders',
+    },
   },
   Academics: {
     notifications: 'Notifications',
@@ -446,26 +452,37 @@ RACS: {
   
   // Research Proposal Forms Section
   researchProposalForms: {
-    heading: 'RESEARCH PROPOSAL FORMS',
-    table: {
-      srNo: 'Sr. No.',
-      form: 'Form Name',
-    },
-    forms: [
-      {
-        name: 'Space Research Proposal Form',
-        link: '#',
-      },
-      {
-        name: 'Collaborative Research Application',
-        link: '#',
-      },
-      {
-        name: 'Student Research Project Form',
-        link: '#',
-      },
-    ],
+  heading: "Research Proposal Forms",
+  
+  table: {
+    srno: "Sr. No.",
+    form: "Form Name",
   },
+  
+  forms: [
+    {
+      name: "Application for Grant of Funds",
+      href: "https://nitkkr.ac.in/29012020/Application%20for%20Grant%20of%20Funds.pdf",
+    },
+    {
+      name: "Terms and Conditions of ISRO Research Grants",
+      href: "https://nitkkr.ac.in/29012020/Form_C_terms_conditions.pdf",
+    },
+    {
+      name: "Bio-data of the Investigator(s)",
+      href: "https://nitkkr.ac.in/29012020/Form%20A.pdf",
+    },
+    {
+      name: "Research Proposal (Form B)",
+      href: "https://nitkkr.ac.in/29012020/Form%20B.pdf",
+    },
+    {
+      name: "Research Areas of SAC March 2023",
+      href: "https://nitkkr.ac.in/29012020/Research_Areas_of_SAC_March_2023.pdf",
+    },
+  ],
+},
+
   
   // Partner Institutes Section
   partnerInstitutes: {
@@ -474,6 +491,13 @@ RACS: {
       srNo: 'Sr. No.',
       institute: 'Institute Name',
     },
+    institutes: [
+      { name: ' NIT Delhi' },
+      { name: ' NIT Uttrakhand'},
+      { name: 'Dr. B.R Ambedkar National Institutes of Technology Jalandar'},
+      { name: 'NIT Srinagar (J&K)'},
+      { name: 'Kurukshetra University Kurukshetra'},
+    ],
   },
   
   // Research Areas Section
@@ -481,7 +505,7 @@ RACS: {
     heading: 'RESEARCH AREAS',
     description: 'Indian Space Research Organisation (ISRO) plays a vital role in advancing space research and technology for national development. Established in 1969, ISRO has achieved global recognition through cost-effective and innovative missions such as satellite launches for communication, navigation, and Earth observation. Landmark achievements like the Mars Orbiter Mission and Chandrayaan lunar missions highlight ISRO’s growing expertise, scientific capability, and contribution to space exploration while supporting education, disaster management, and socio-economic growth in India. disaster management, and socio-economic growth in India.',
     readMore: 'RESEARCH AREAS IN 2025',
-    link: '#',
+    link: 'https://nitkkr.ac.in/29012020/Research_Areas_in_Space_for_web2023.pdf',
   },
   
   // For Queries Section

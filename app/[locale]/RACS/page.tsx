@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { TbMail } from 'react-icons/tb';
 
 import { getTranslations } from '~/i18n/translations';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import NotificationsPanelProps from '~/components/notifications/notifications-panel';
+import FICGroup from '~/components/fic-group';
 import {
   Table,
   TableBody,
@@ -22,21 +23,8 @@ export default async function RACS({
 }) {
   const text = (await getTranslations(locale)).RACS;
 
-  const PartnerInstitutesData = [
-    { name: 'NIT Delhi' },
-    { name: 'NIT Uttarakhand' },
-    { name: 'Dr. B.R. Ambedkar National Institute of Technology Jalandhar' },
-    { name: 'NIT Srinagar (J&K)' },
-    { name: 'Kurukshetra University, Kurukshetra' },
-  ];
 
-  const ResearchProposalFormsData = [
-    { name: 'Application for Grant of Funds' },
-    { name: 'Terms and Conditions of ISRO Research Grants' },
-    { name: 'Bio-data of the Investigator(s)' },
-    { name: 'Research Proposal (Form B)' },
-    { name: 'Research Areas of SAC March 2023' },
-  ];
+
 
   return (
     <>
@@ -58,11 +46,23 @@ export default async function RACS({
         ]}
         src="slideshow/image01.jpg"
       />
+       {/* INTRO – full width */}
+<section className="w-full bg-[#fdf7ed]">
+  <div className="mx-auto max-w-7xl px-6 py-6 sm:px-10">
+    <p className="text-base leading-relaxed sm:text-lg">
+      {text.intro}
+    </p>
+  </div>
+</section>
 
-      <main className="container">
-        {/* INTRO */}
-        <p className="mt-10 text-lg leading-relaxed">{text.intro}</p>
+{/* REST OF PAGE – constrained */}
+<main className="container px-6 sm:px-10">
+  ...
+</main>
 
+
+      <main className="container px-6 sm:px-10">
+      
         {/* NOTIFICATIONS */}
         <section>
           <Heading
@@ -77,83 +77,67 @@ export default async function RACS({
             category="academic"
             showViewAll={true}
             viewAllHref={`/${locale}/notifications/?category=academic`}
-            className="flex-1 lg:w-[100%]"
+            className="w-full"
           />
         </section>
 
         {/* REGIONAL COORDINATOR */}
-        <section id="regionalCoordinator" className="mt-20">
+        <section id="regionalCoordinator" className="mt-12 sm:mt-16">
           <Heading
             glyphDirection="ltr"
             heading="h3"
             text={text.coordinator.heading}
           />
 
-          <ul className="flex w-full flex-col items-center">
-            <li className="flex w-[90%] max-w-3xl rounded-lg border border-primary-500 bg-neutral-50 p-1">
-              <div className="flex flex-shrink-0 items-center justify-center">
-                <Image
-                  src={text.coordinator.image}
-                  alt={text.coordinator.name}
-                  width={300}
-                  height={340}
-                  className="xs:h-24 xs:w-24 h-full w-24 rounded-md object-cover sm:h-36 sm:w-36 md:h-52 md:w-52"
-                />
-              </div>
-
-              <section className="xs:ml-3 ml-2 flex flex-col justify-center sm:ml-6 md:ml-8">
-                <h3 className="xs:text-xl text-red-600 mb-0 text-lg font-medium sm:text-2xl md:text-3xl">
-                  {text.coordinator.name}
-                </h3>
-
-                <p className="xs:text-base text-gray-700 text-sm sm:text-xl">
-                  {text.coordinator.position}
-                </p>
-
-                <div className="xs:space-y-1 mt-2 space-y-0.5 sm:space-y-2">
-                  <span className="flex items-center">
-                    <MdEmail className="text-primary-700" />
-                    <a
-                      href={`mailto:${text.coordinator.email}`}
-                      className="text-gray-700 ml-2 hover:text-primary-700 hover:underline"
-                    >
-                      {text.coordinator.email}
-                    </a>
-                  </span>
-
-                  <span className="flex items-center">
-                    <MdOutlineLocalPhone className="text-primary-700" />
-                    <span className="text-gray-700 ml-2">
-                      {text.coordinator.phone}
-                    </span>
-                  </span>
-                </div>
-              </section>
-            </li>
-          </ul>
+          <section className="container my-10">
+        <Heading
+          glyphDirection="dual"
+          heading="h3"
+          href="#head"
+          id="head"
+          text={text.coordinator.heading}
+        />
+        <FICGroup
+          facultyData={[
+            {
+              employeeId: '88',
+              designation: text.coordinator.position,
+            },
+          ]}
+        />
+      </section>
         </section>
 
         {/* RESEARCH PROPOSAL FORMS */}
-        <section id="researchProposalForms" className="mt-24">
+        <section id="researchProposalForms" className="mt-12 sm:mt-16">
           <Heading
             glyphDirection="rtl"
             heading="h3"
             text={text.researchProposalForms.heading}
           />
 
-          <div className="mt-8 rounded-xl border border-primary-500 bg-[#fdf7ed]">
+          <div className="mt-6 rounded-xl border border-primary-500 bg-[#fdf7ed]">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[120px]">Sr. No.</TableHead>
-                  <TableHead>Form</TableHead>
+                  <TableHead className="w-[120px]">{text.researchProposalForms.table.srno}</TableHead>
+                  <TableHead>{text.researchProposalForms.table.form}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {ResearchProposalFormsData.map((form, index) => (
+                {text.researchProposalForms.forms.map((form, index) => (
                   <TableRow key={index}>
                     <TableCell>{index + 1}</TableCell>
-                    <TableCell>{form.name}</TableCell>
+                    <TableCell>
+      <Link
+    href={form.href}
+    target="_blank"
+    className="text-primary-700 hover:underline"
+  >
+    {form.name} →
+  </Link>
+</TableCell>
+
                   </TableRow>
                 ))}
               </TableBody>
@@ -162,23 +146,23 @@ export default async function RACS({
         </section>
 
         {/* PARTNER INSTITUTES */}
-        <section id="partnerInstitutes" className="mt-24">
+        <section id="partnerInstitutes" className="mt-12 sm:mt-16">
           <Heading
             glyphDirection="ltr"
             heading="h3"
             text={text.partnerInstitutes.heading}
           />
 
-          <div className="mt-8 rounded-xl border border-primary-500 bg-[#fdf7ed]">
+          <div className="mt-6 rounded-xl border border-primary-500 bg-[#fdf7ed]">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[120px]">Sr. No.</TableHead>
-                  <TableHead>Institute</TableHead>
+                  <TableHead className="w-[120px]">{text.partnerInstitutes.table.srNo}</TableHead>
+                  <TableHead>{text.partnerInstitutes.table.institute}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {PartnerInstitutesData.map((inst, index) => (
+                {text.partnerInstitutes.institutes.map((inst, index) => (
                   <TableRow key={index}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{inst.name}</TableCell>
@@ -190,18 +174,18 @@ export default async function RACS({
         </section>
 
         {/* RESEARCH AREAS */}
-        <section id="researchAreas" className="mt-24">
+        <section id="researchAreas" className="mt-12 sm:mt-16">
           <Heading
             glyphDirection="rtl"
             heading="h3"
             text={text.researchAreas.heading}
           />
 
-          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md-gap-10">
             {/* Left – Image card */}
             <div className="relative overflow-hidden rounded-lg shadow-md">
               <Image
-                src="academics/2.jpg" // swap with your rocket image if needed
+                src="academics/2.jpg" // swap with your rocket image
                 alt={text.researchAreas.heading}
                 width={700}
                 height={400}
@@ -209,12 +193,12 @@ export default async function RACS({
               />
 
               {/* Dark fade like your design */}
-              <div className="from-black absolute bottom-0 left-0 right-0 z-10 h-2/3 bg-gradient-to-t to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
 
               {/* Read more overlay */}
               <Link
                 href={text.researchAreas.link}
-                className="!text-white absolute bottom-4 left-4 z-20 font-serif text-2xl font-semibold [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] hover:underline"
+                className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
               >
                 {text.researchAreas.readMore} →
               </Link>
@@ -238,15 +222,14 @@ export default async function RACS({
           text={text.forQueries.heading.toUpperCase()}
         />
 
-        <section className="container my-16">
+        <section className="container mt-4 sm:mt-6 mb-8">
           <div className="flex justify-center gap-20">
             {/* Email */}
             <a
               href="mailto:scoe@nitkkr.ac.in"
-              className="hover:bg-primary-50 flex h-40 w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition"
-              aria-label="Email SCoE"
-            >
-              <MdEmail className="text-5xl" />
+              className="hover:bg-primary-50 flex h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center rounded-full border border-primary-500 text-primary-700 transition"
+              aria-label="Email RACS">
+              <TbMail className="text-5xl" />
             </a>
           </div>
         </section>
