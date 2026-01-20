@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdCall, MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
 import { getTranslations } from '~/i18n/translations';
 import Heading from '~/components/heading';
@@ -67,7 +67,7 @@ export default async function RACS({
         <section>
           <Heading
             glyphDirection="rtl"
-            heading="h2"
+            heading="h3"
             href="#notifications"
             id="notifications"
             text={text.notifications.title}
@@ -85,7 +85,7 @@ export default async function RACS({
         <section id="regionalCoordinator" className="mt-20">
           <Heading
             glyphDirection="ltr"
-            heading="h2"
+            heading="h3"
             text={text.coordinator.heading}
           />
 
@@ -102,9 +102,9 @@ export default async function RACS({
               </div>
 
               <section className="xs:ml-3 ml-2 flex flex-col justify-center sm:ml-6 md:ml-8">
-                <h2 className="xs:text-xl text-red-600 mb-0 text-lg font-medium sm:text-2xl md:text-3xl">
+                <h3 className="xs:text-xl text-red-600 mb-0 text-lg font-medium sm:text-2xl md:text-3xl">
                   {text.coordinator.name}
-                </h2>
+                </h3>
 
                 <p className="xs:text-base text-gray-700 text-sm sm:text-xl">
                   {text.coordinator.position}
@@ -137,7 +137,7 @@ export default async function RACS({
         <section id="researchProposalForms" className="mt-24">
           <Heading
             glyphDirection="rtl"
-            heading="h2"
+            heading="h3"
             text={text.researchProposalForms.heading}
           />
 
@@ -165,7 +165,7 @@ export default async function RACS({
         <section id="partnerInstitutes" className="mt-24">
           <Heading
             glyphDirection="ltr"
-            heading="h2"
+            heading="h3"
             text={text.partnerInstitutes.heading}
           />
 
@@ -193,7 +193,7 @@ export default async function RACS({
         <section id="researchAreas" className="mt-24">
           <Heading
             glyphDirection="rtl"
-            heading="h2"
+            heading="h3"
             text={text.researchAreas.heading}
           />
 

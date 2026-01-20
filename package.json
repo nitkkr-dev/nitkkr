@@ -74,8 +74,8 @@
     "husky": "^9.0.6",
     "pg": "^8.11.3",
     "postcss": "^8",
-    "prettier": "^3.8.0",
-    "prettier-plugin-tailwindcss": "^0.5.11",
+    "prettier": "^3.2.4",
+    "prettier-plugin-talwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
