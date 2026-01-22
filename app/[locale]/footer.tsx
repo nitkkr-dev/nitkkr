@@ -12,6 +12,13 @@ import { MdMail, MdPhone } from 'react-icons/md';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 
+import {
+  AnimateFooterLinkColumn,
+  AnimateFooterLinksGrid,
+  AnimateSocialIcon,
+  AnimateSocialIcons,
+} from './(animations)';
+
 export default async function Footer({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Footer;
 
@@ -102,55 +109,28 @@ export default async function Footer({ locale }: { locale: string }) {
             src="assets/pillar.png"
           />
 
-          <section className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
-            <nav className="col-start-1 row-start-1 w-fit sm:col-span-2">
-              <h5 className="mb-3 text-shade-light">Quick Access</h5>
-              <ul className="flex flex-col gap-3">
-                {quickLinks.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      className="text-neutral-500"
-                      href={`/${locale}${item.href}`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <AnimateFooterLinksGrid className="grid grow auto-rows-max grid-cols-1 gap-8 sm:grid-cols-6">
+            <AnimateFooterLinkColumn
+              title="Quick Access"
+              links={quickLinks}
+              locale={locale}
+              className="col-start-1 row-start-1 w-fit sm:col-span-2"
+            />
 
-            <nav className="col-start-1 row-start-2 w-fit sm:col-span-2 sm:col-start-3 sm:row-start-1">
-              <h5 className="mb-3 text-shade-light">Academic Resources</h5>
-              <ul className="flex flex-col gap-3">
-                {academicLinks.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      className="text-neutral-500"
-                      href={`/${locale}${item.href}`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <AnimateFooterLinkColumn
+              title="Academic Resources"
+              links={academicLinks}
+              locale={locale}
+              className="col-start-1 row-start-2 w-fit sm:col-span-2 sm:col-start-3 sm:row-start-1"
+            />
 
-            <nav className="col-start-1 row-start-3 w-fit sm:col-span-2 sm:col-start-5 sm:row-start-1">
-              <h5 className="mb-3 text-shade-light">Important Links</h5>
-              <ul className="flex flex-col gap-3">
-                {resourceLinks.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      className="text-neutral-500"
-                      href={`/${locale}${item.href}`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </section>
+            <AnimateFooterLinkColumn
+              title="Important Links"
+              links={resourceLinks}
+              locale={locale}
+              className="col-start-1 row-start-3 w-fit sm:col-span-2 sm:col-start-5 sm:row-start-1"
+            />
+          </AnimateFooterLinksGrid>
         </article>
       </section>
 
@@ -160,42 +140,42 @@ export default async function Footer({ locale }: { locale: string }) {
             <li>{text.copyright}</li>
           </ol>
 
-          <ol className="flex gap-5">
-            <li>
+          <AnimateSocialIcons className="flex gap-5">
+            <AnimateSocialIcon>
               <Link
                 href="https://www.facebook.com/nitkurukshetraofficialpage"
                 target="_blank"
               >
                 <FaFacebook size={18} />
               </Link>
-            </li>
-            <li>
+            </AnimateSocialIcon>
+            <AnimateSocialIcon>
               <Link href="https://github.com/nitkkr-dev" target="_blank">
                 <FaGithub size={18} />
               </Link>
-            </li>
-            <li>
+            </AnimateSocialIcon>
+            <AnimateSocialIcon>
               <Link
                 href="https://www.instagram.com/nitkurukshetra"
                 target="_blank"
               >
                 <FaInstagram size={18} />
               </Link>
-            </li>
-            <li>
+            </AnimateSocialIcon>
+            <AnimateSocialIcon>
               <Link
                 href="https://www.linkedin.com/school/national-institute-of-technology-kurukshetra-haryana"
                 target="_blank"
               >
                 <FaLinkedinIn size={18} />
               </Link>
-            </li>
-            <li>
+            </AnimateSocialIcon>
+            <AnimateSocialIcon>
               <Link href="https://twitter.com/NITKURUKSHETRA" target="_blank">
                 <FaXTwitter size={18} />
               </Link>
-            </li>
-          </ol>
+            </AnimateSocialIcon>
+          </AnimateSocialIcons>
         </article>
       </section>
     </footer>

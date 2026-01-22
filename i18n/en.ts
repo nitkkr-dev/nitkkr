@@ -404,7 +404,7 @@ const text: Translations = {
     headings: ['Quick Links', 'Quick Links', 'Quick Links'],
     lorem: 'Lorem Ipsum',
     copyright:
-      '© 2025 National Institute of Technology Kurukshetra. All Rights Reserved.',
+      '© 2026 National Institute of Technology Kurukshetra. All Rights Reserved.',
   },
   Forms: { title: 'FORMS' },
   Header: {
