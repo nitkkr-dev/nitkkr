@@ -27,6 +27,8 @@ import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 
+import { AnimateHeader } from './(animations)';
+
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
 
@@ -166,7 +168,7 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="header-sticky-ness sticky top-0 z-nav min-w-full bg-background">
+    <AnimateHeader>
       <nav
         className={cn(
           'container flex justify-between',
@@ -366,7 +368,7 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
         </ol>
       </nav>
-    </header>
+    </AnimateHeader>
   );
 }
 
