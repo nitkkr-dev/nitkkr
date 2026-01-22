@@ -60,6 +60,7 @@ export default async function Administration({
         <p className="mx-8 font-sans text-md md:text-lg">
           {text.description}
         </p>
+
         <Heading
           glyphDirection={'dual'}
           heading={'h3'}
