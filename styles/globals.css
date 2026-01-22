@@ -86,3 +86,20 @@
     y: 45px;
   }
 }
+
+/* Animations */
+/* fade-in-down */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 1s ease-in-out;
+}
