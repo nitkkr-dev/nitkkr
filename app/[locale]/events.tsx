@@ -53,7 +53,7 @@ export default async function Events({
 
   return (
     <article
-      className="relative bg-cover bg-no-repeat pt-5 pb-20 md:pt-16 md:pb-24"
+      className="relative bg-cover bg-no-repeat pb-20 pt-5 md:pb-24 md:pt-16"
       id="events"
       style={{
         backgroundImage: `url('${getS3Url()}/assets/dottedarrows-1.png')`,
@@ -104,7 +104,7 @@ export default async function Events({
             </li>
           ))}
         </ol>
-        <section className="mt-4 mb-2 flex items-center gap-3 lg:hidden">
+        <section className="mb-2 mt-4 flex items-center gap-3 lg:hidden">
           <Select defaultValue={text.categories.featured}>
             <SelectTrigger className="w-[65%] px-4 py-5 text-shade-light">
               <SelectValue />

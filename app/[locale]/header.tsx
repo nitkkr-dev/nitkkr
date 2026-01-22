@@ -26,6 +26,7 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
+import '~/styles/globals.css';
 
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
@@ -166,7 +167,7 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="header-sticky-ness sticky top-0 z-nav min-w-full bg-background">
+    <header className="header-sticky-ness animate-fade-in-down sticky top-0 z-nav min-w-full bg-background">
       <nav
         className={cn(
           'container flex justify-between',
