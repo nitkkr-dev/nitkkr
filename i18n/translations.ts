@@ -18,8 +18,8 @@ export interface Translations {
     sNo: string;
     name: string;
     servedAs: string;
-    senateMeetingAgenda: string;
-    senateMeetingMinutes: string;
+    senateComposition: string;
+    senateAgendaAndMinutes: string;
     scsaMeetingMinutes: string;
     administrationHeads: string;
     director: string;
@@ -66,6 +66,12 @@ export interface Translations {
       timeTable: string;
     };
     viewMore: string;
+    buttons: {
+      hostels: string;
+      racs: string;
+      scoe: string;
+      tenders: string;
+    };
   };
   Academics: {
     notifications: string;
@@ -111,6 +117,8 @@ export interface Translations {
     building: string;
     financial: string;
     governor: string;
+    senate: string;
+    scsa: string;
     members: {
       title: string;
       serial: string;
@@ -120,11 +128,15 @@ export interface Translations {
     };
     meetings: {
       title: string;
+      minutesTitle: string;
       serial: string;
       date: string;
       place: string;
       agenda: string;
       minutes: string;
+      agendaOf: string;
+      minutesOf: string;
+      meeting: string;
     };
   };
   Convocation: {
@@ -384,6 +396,77 @@ export interface Translations {
       };
     };
   };
+
+  RACS: {
+    title: string;
+    intro: string;
+    notificationsCategory: string;
+
+    // Tabs/Navigation
+    tabs: {
+      notifications: string;
+      regionalCoordinator: string;
+      researchProposalForms: string;
+      partnerInstitutes: string;
+      researchAreas: string;
+      queries: string;
+    };
+    // Notifications Section
+    notifications: {
+      title: string;
+    };
+    // Regional Coordinator Section
+    coordinator: {
+      heading: string;
+      name: string;
+      position: string;
+      email: string;
+      phone: string;
+      image: string;
+    };
+
+    // Research Proposal Forms Section
+    researchProposalForms: {
+      heading: string;
+      table: {
+        srno: string;
+        form: string;
+      };
+      formNames: string[];
+    };
+
+    // Partner Institutes Section
+    partnerInstitutes: {
+      heading: string;
+      table: {
+        srNo: string;
+        institute: string;
+      };
+
+      institutes: [
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+      ];
+    };
+
+    // Research Areas Section
+    researchAreas: {
+      heading: string;
+      description: string;
+      readMore: string;
+      link: string;
+    };
+
+    // For Queries Section
+    forQueries: {
+      heading: string;
+      email: string;
+    };
+  };
+
   Hostels: {
     title: string;
     boysHostels: string;
@@ -465,11 +548,34 @@ export interface Translations {
   };
   Events: {
     title: string;
+    filterBy: string;
+    clearAllFilters: string;
+    searchPlaceholder: string;
+    noEventsFound: string;
+    noMoreEvents: string;
+    filter: {
+      title: string;
+      date: string;
+      category: string;
+      startDate: string;
+      endDate: string;
+      day: string;
+      month: string;
+      year: string;
+    };
     categories: {
       featured: string;
       recents: string;
-      student: string;
-      faculty: string;
+      academic: string;
+      technical: string;
+      cultural: string;
+      sports: string;
+      'clubs-societies': string;
+      achievements: string;
+      placements: string;
+      outreach: string;
+      miscellaneous: string;
+      'campus-highlights': string;
     };
     viewAll: string;
   };
@@ -1174,5 +1280,79 @@ export interface Translations {
       mobile: string;
       email: string;
     }[];
+  };
+  otherOfficersPage: {
+    title: string;
+    facultyName: string;
+    designation: string;
+    serialNo: string;
+    categories: string[];
+  };
+  SCoE: {
+    welcome: string;
+
+    admission: {
+      title: string;
+      process: {
+        title: string;
+        content: string[];
+      };
+      education: {
+        title: string;
+        content: string[];
+      };
+    };
+
+    Notifications: {
+      title: string;
+    };
+
+    Vision: {
+      title: string;
+      description: string;
+    };
+
+    VisionMissionImage: {
+      src: string;
+      alt: string;
+    };
+
+    Mission: {
+      title: string;
+      points: string[];
+    };
+
+    Head: {
+      title: string;
+      designation: string;
+    };
+
+    Features: {
+      title: string;
+      items: string[];
+    };
+
+    Laboratories: {
+      title: string;
+      srNo: string;
+      LaboratoriesName: string;
+      list: string[];
+    };
+
+    How_to_Apply: {
+      title: string;
+      registrationSteps: string[];
+    };
+
+    For_Queries: {
+      title: string;
+    };
+
+    Courses: {
+      title: string;
+      srNo: string;
+      courseName: string;
+      list: string[];
+    };
   };
 }

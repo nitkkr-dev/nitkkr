@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { arrayOverlaps, inArray } from 'drizzle-orm';
 
 import { Button } from '~/components/buttons';
 import Loading from '~/components/loading';
@@ -8,22 +9,27 @@ import { ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn, groupBy } from '~/lib/utils';
 import { db, type notifications as notificationsTable } from '~/server/db';
+import {
+  notificationClubs,
+  notificationDepartments,
+  notificationHostels,
+} from '~/server/db/schema';
 
 type NotificationCategory =
-  (typeof notificationsTable.category.enumValues)[number];
+  (typeof notificationsTable.categories.enumValues)[number];
 
 type EducationType = 'ug' | 'pg' | 'phd';
 
 export interface NotificationsPanelProps {
   locale: string;
-  /** Filter by notification category */
+  /** Filter by notification category (matches if notification has this category) */
   category?: NotificationCategory;
-  /** Filter by club ID */
-  clubId?: number;
-  /** Filter by department ID */
-  departmentId?: number;
-  /** Filter by hostel ID */
-  hostelId?: number;
+  /** Filter by club IDs (matches if notification belongs to any of these clubs) */
+  clubIds?: number[];
+  /** Filter by department IDs (matches if notification belongs to any of these departments) */
+  departmentIds?: number[];
+  /** Filter by hostel IDs (matches if notification belongs to any of these hostels) */
+  hostelIds?: number[];
   /** Filter by education type (ug, pg, phd) */
   educationType?: EducationType;
   /** Filter notifications created on or after this date */
@@ -43,9 +49,9 @@ export interface NotificationsPanelProps {
 export default async function NotificationsPanel({
   locale,
   category,
-  clubId,
-  departmentId,
-  hostelId,
+  clubIds,
+  departmentIds,
+  hostelIds,
   educationType,
   startDate,
   endDate,
@@ -55,12 +61,12 @@ export default async function NotificationsPanel({
   viewAllText,
 }: NotificationsPanelProps) {
   const text = (await getTranslations(locale)).Notifications;
-  const filterKey = `${category}-${clubId}-${departmentId}-${hostelId}-${educationType}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
+  const filterKey = `${category}-${clubIds?.join(',')}-${departmentIds?.join(',')}-${hostelIds?.join(',')}-${educationType}-${startDate?.toISOString()}-${endDate?.toISOString()}`;
 
   return (
     <section
       className={cn(
-        'flex h-full flex-col rounded-b-xl bg-background/[0.6]',
+        'flex h-[384px] flex-col rounded-b-xl bg-background/[0.6] md:h-[512px]',
         'shadow-[0px_4px_0px_#C5291D_inset] lg:shadow-[0px_8px_0px_#C5291D_inset,_-12px_22px_60px_rgba(0,_43,_91,_0.15)]',
         'rounded-t-xl drop-shadow-2xl',
         'p-3 sm:p-4 md:p-5 lg:px-6 lg:pt-8 xl:px-8',
@@ -73,9 +79,9 @@ export default async function NotificationsPanel({
             <NotificationsList
               locale={locale}
               category={category}
-              clubId={clubId}
-              departmentId={departmentId}
-              hostelId={hostelId}
+              clubIds={clubIds}
+              departmentIds={departmentIds}
+              hostelIds={hostelIds}
               educationType={educationType}
               startDate={startDate}
               endDate={endDate}
@@ -105,9 +111,9 @@ export default async function NotificationsPanel({
 interface NotificationsListProps {
   locale: string;
   category?: NotificationCategory;
-  clubId?: number;
-  departmentId?: number;
-  hostelId?: number;
+  clubIds?: number[];
+  departmentIds?: number[];
+  hostelIds?: number[];
   educationType?: EducationType;
   startDate?: Date;
   endDate?: Date;
@@ -117,30 +123,108 @@ interface NotificationsListProps {
 const NotificationsList = async ({
   locale,
   category,
-  clubId,
-  departmentId,
-  hostelId,
+  clubIds,
+  departmentIds,
+  hostelIds,
   educationType,
   startDate,
   endDate,
   noNotificationsText,
 }: NotificationsListProps) => {
+  // Get notification IDs that match junction table filters
+  let filteredNotificationIds: number[] | undefined;
+
+  if (departmentIds?.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        notificationId: notificationDepartments.notificationId,
+      })
+      .from(notificationDepartments)
+      .where(inArray(notificationDepartments.departmentId, departmentIds));
+    const deptNotificationIds = deptMatches.map((m) => m.notificationId);
+
+    if (deptNotificationIds.length === 0) {
+      return (
+        <li className="py-8 text-center text-neutral-900">
+          {noNotificationsText}
+        </li>
+      );
+    }
+    filteredNotificationIds = deptNotificationIds;
+  }
+
+  if (clubIds?.length) {
+    const clubMatches = await db
+      .selectDistinct({ notificationId: notificationClubs.notificationId })
+      .from(notificationClubs)
+      .where(inArray(notificationClubs.clubId, clubIds));
+    const clubNotificationIds = clubMatches.map((m) => m.notificationId);
+
+    if (clubNotificationIds.length === 0) {
+      return (
+        <li className="py-8 text-center text-neutral-900">
+          {noNotificationsText}
+        </li>
+      );
+    }
+
+    if (filteredNotificationIds) {
+      filteredNotificationIds = filteredNotificationIds.filter((id) =>
+        clubNotificationIds.includes(id)
+      );
+      if (filteredNotificationIds.length === 0) {
+        return (
+          <li className="py-8 text-center text-neutral-900">
+            {noNotificationsText}
+          </li>
+        );
+      }
+    } else {
+      filteredNotificationIds = clubNotificationIds;
+    }
+  }
+
+  if (hostelIds?.length) {
+    const hostelMatches = await db
+      .selectDistinct({ notificationId: notificationHostels.notificationId })
+      .from(notificationHostels)
+      .where(inArray(notificationHostels.hostelId, hostelIds));
+    const hostelNotificationIds = hostelMatches.map((m) => m.notificationId);
+
+    if (hostelNotificationIds.length === 0) {
+      return (
+        <li className="py-8 text-center text-neutral-900">
+          {noNotificationsText}
+        </li>
+      );
+    }
+
+    if (filteredNotificationIds) {
+      filteredNotificationIds = filteredNotificationIds.filter((id) =>
+        hostelNotificationIds.includes(id)
+      );
+      if (filteredNotificationIds.length === 0) {
+        return (
+          <li className="py-8 text-center text-neutral-900">
+            {noNotificationsText}
+          </li>
+        );
+      }
+    } else {
+      filteredNotificationIds = hostelNotificationIds;
+    }
+  }
+
   const notifications = (
     await db.query.notifications.findMany({
       where: (notification, { eq, and, gte, lte }) => {
         const conditions = [];
 
         if (category) {
-          conditions.push(eq(notification.category, category));
+          conditions.push(arrayOverlaps(notification.categories, [category]));
         }
-        if (clubId !== undefined) {
-          conditions.push(eq(notification.clubId, clubId));
-        }
-        if (departmentId !== undefined) {
-          conditions.push(eq(notification.departmentId, departmentId));
-        }
-        if (hostelId !== undefined) {
-          conditions.push(eq(notification.hostelId, hostelId));
+        if (filteredNotificationIds) {
+          conditions.push(inArray(notification.id, filteredNotificationIds));
         }
         if (educationType) {
           conditions.push(eq(notification.educationType, educationType));

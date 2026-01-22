@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import { NotificationModal } from '~/app/notifications/NotificationModal';
+import { NotificationModal } from '~/components/notifications/notification-modal';
 
 interface NotificationItemProps {
   id: number;

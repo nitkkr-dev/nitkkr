@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
 import { faculty, staff } from '.';
+import { notificationHostels } from './notifications.schema';
 
 export const hostels = pgTable('hostels', (t) => ({
   id: t.serial().primaryKey(),
@@ -25,6 +26,7 @@ export const hostels = pgTable('hostels', (t) => ({
 export const hostelsRelations = relations(hostels, ({ many }) => ({
   hostelStaff: many(hostelStaff),
   hostelFaculty: many(hostelFaculty),
+  notificationHostels: many(notificationHostels),
 }));
 
 export const hostelStaff = pgTable('hostel_staff', (t) => ({

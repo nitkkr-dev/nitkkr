@@ -1,9 +1,18 @@
 import Image from 'next/image';
 import { BsLinkedin } from 'react-icons/bs';
 import { MdEmail, MdPhone } from 'react-icons/md';
+import {
+  TbBuildingSkyscraper,
+  TbContract,
+  TbRocket,
+  TbSchool,
+} from 'react-icons/tb';
 
 import Notifications, { type NotificationCategory } from '~/app/notifications';
+import { getTranslations } from '~/i18n/translations';
+import { type eventCategoryEnum } from '~/server/db';
 import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import {
   AutoplayCarousel,
   CarouselContent,
@@ -13,8 +22,6 @@ import {
 } from '~/components/carousels';
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
-import { getTranslations } from '~/i18n/translations';
-import { type events } from '~/server/db';
 
 import Events from './events';
 
@@ -28,10 +35,7 @@ export default async function Home({
   params: { locale: string };
   searchParams: {
     notificationCategory?: NotificationCategory;
-    eventsCategory?:
-      | (typeof events.category.enumValues)[number]
-      | 'recents'
-      | 'featured';
+    eventsCategory?: (typeof eventCategoryEnum.enumValues)[number] | 'featured';
   };
 }) {
   const text = (await getTranslations(locale)).Main;
@@ -134,6 +138,31 @@ export default async function Home({
           }}
         />
       </section>
+
+      <ButtonGroup
+        buttonArray={[
+          {
+            label: text.buttons.hostels,
+            href: `/${locale}/institute/hostels`,
+            icon: TbBuildingSkyscraper,
+          },
+          {
+            label: text.buttons.racs,
+            href: `/${locale}/RACS`,
+            icon: TbRocket,
+          },
+          {
+            label: text.buttons.scoe,
+            href: `/${locale}/scoe`,
+            icon: TbSchool,
+          },
+          {
+            label: text.buttons.tenders,
+            href: `/${locale}/notifications/?category=tender`,
+            icon: TbContract,
+          },
+        ]}
+      />
     </>
   );
 }

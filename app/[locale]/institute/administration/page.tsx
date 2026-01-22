@@ -15,8 +15,6 @@ import ButtonGroup from '~/components/button-group';
 import { getTranslations } from '~/i18n/translations';
 // Fetches committee data from DB - cache for 1 hour
 export const revalidate = 3600;
-import { db } from '~/server/db';
-import GenericTable from '~/components/ui/generic-table';
 import Loading from '~/components/loading';
 import { CardTitle } from '~/components/ui';
 
@@ -63,7 +61,7 @@ export default async function Administration({
           {text.description}
         </p>
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.boardOfGovernors.toUpperCase()}
           id="board-of-governors"
@@ -89,7 +87,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.senate.toUpperCase()}
           className="container"
@@ -97,46 +95,29 @@ export default async function Administration({
           href="#senate"
         />
         <section className="container">
-          <Suspense fallback={<Loading />}>
-            <CardTitle className="text-2xl text-primary-300">
-              {text.composition}
-            </CardTitle>
-            <GenericTable
-              headers={[
-                { key: 'serial', label: text.sNo },
-                { key: 'name', label: text.name },
-                { key: 'servingAs', label: text.servedAs },
-              ]}
-              tableData={await db.query.committeeMembers.findMany({
-                where: (member, { eq }) => eq(member.committeeType, 'senate'),
-                orderBy: (member, { asc }) => [asc(member.serial)],
-              })}
-              currentPage={1}
-              getCount={Promise.resolve([])}
-            />
-          </Suspense>
+          <Suspense fallback={<Loading />}></Suspense>
         </section>
         <ButtonGroup
           buttonArray={[
             {
-              label: text.senateMeetingAgenda,
-              href: `/${locale}/institute/administration/senate#meeting-agenda`,
+              label: text.senateComposition,
+              href: `/${locale}/institute/administration/senate#composition`,
               icon: TbNotebook,
             },
             {
-              label: text.senateMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#meetings`,
+              label: text.senateAgendaAndMinutes,
+              href: `/${locale}/institute/administration/senate#meeting-agenda-and-minutes`,
               icon: MdOutlineChecklist,
             },
             {
               label: text.scsaMeetingMinutes,
-              href: `/${locale}/institute/administration/senate#scsa-meeting-minutes`,
+              href: `/${locale}/institute/administration/scsa`,
               icon: MdOutlineChecklist,
             },
           ]}
         />
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.administrationHeads.toUpperCase()}
           id="administration-heads"
@@ -162,7 +143,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="ltr"
+          glyphDirection="dual"
           heading={'h3'}
           text={text.committees.toUpperCase()}
           id="committees"
@@ -182,8 +163,23 @@ export default async function Administration({
             },
           ]}
         />
+        {/* DEANS */}
         <Heading
-          glyphDirection={'rtl'}
+          glyphDirection="dual"
+          heading="h3"
+          text={text.deans.toUpperCase()}
+          id="deans"
+          href="#deans"
+        />
+
+        <section className="container my-10">
+          <Suspense fallback={<Loading />}>
+            <Deans />
+          </Suspense>
+        </section>
+
+        <Heading
+          glyphDirection={'dual'}
           heading={'h3'}
           text={text.actsAndStatutes.toUpperCase()}
           className="container"
@@ -237,19 +233,6 @@ export default async function Administration({
             ))}
           </article>
         </footer>
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          text={text.deans.toUpperCase()}
-          id="deans"
-          href="#deans"
-        />
-
-        <section className="container my-10">
-          <Suspense fallback={<Loading />}>
-            <Deans />
-          </Suspense>
-        </section>
       </section>
     </>
   );
