@@ -105,6 +105,7 @@ export default function AnimateButtonGroup({
       {buttonArray.map(({ label, href, icon: Icon }, index) => (
         <motion.div
           key={index}
+          className={cn('mx-auto w-full lg:w-72 xl:w-80 2xl:w-96')}
           variants={buttonItemVariants}
           whileHover={{
             scale: 1.02,
@@ -119,7 +120,7 @@ export default function AnimateButtonGroup({
             className={cn(
               'flex flex-col',
               'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'mx-auto h-44 w-full md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96',
+              'h-44 w-full md:h-48 lg:h-60',
               'overflow-hidden'
             )}
             variant="secondary"
