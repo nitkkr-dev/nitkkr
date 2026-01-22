@@ -16,7 +16,7 @@ import { cn } from '~/lib/utils';
 import { db, type eventCategoryEnum } from '~/server/db';
 import { getS3Url } from '~/server/s3';
 
-import { EventsGrid } from './EventsGrid';
+import { AnimateEventsGrid } from './(animations)';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
 
@@ -138,7 +138,7 @@ export default async function Events({
             linkProps={{ href: `/${locale}/events` }}
             text={text.viewAll}
           />
-          <EventsGrid
+          <AnimateEventsGrid
             events={events.map((e) => ({
               id: e.id,
               title: e.title,
