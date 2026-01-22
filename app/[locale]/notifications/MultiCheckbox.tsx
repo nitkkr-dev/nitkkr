@@ -2,15 +2,10 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useRef, useState } from 'react';
+import { IoChevronDown } from 'react-icons/io5';
 
 import { cn } from '~/lib/utils';
-import { ScrollArea } from '~/components/ui';
-import {
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/inputs';
 
 export function MultiCheckbox({
   param,
@@ -18,18 +13,22 @@ export function MultiCheckbox({
   selected,
   locale,
   textMap,
-  select = false,
+  title,
+  basePath = '/notifications',
 }: {
   param: string;
   options: readonly string[];
   selected: string[];
   locale: string;
   textMap: Record<string, string>;
-  select?: boolean;
+  title: string;
+  basePath?: string;
 }) {
   const searchParams = useSearchParams();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const isAllSelected = selected.length === 0;
+  // Ref for the scrollable options container
+  const optionsRef = useRef<HTMLDivElement>(null);
 
   // Sort options: selected ones first, then unselected
   const sortedOptions = [...options].sort((a, b) => {
@@ -66,129 +65,105 @@ export function MultiCheckbox({
     });
 
     const qs = params.toString();
-    return `/${locale}/notifications${qs ? `?${qs}` : ''}`;
+    return `/${locale}${basePath}${qs ? `?${qs}` : ''}`;
   };
 
-  return select ? (
-    <Select navigate>
-      <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-        <SelectValue
-          placeholder={
-            selected.length
-              ? `${selected.length} selected`
-              : `All ${param === 'category' ? 'Categories' : 'Departments'}`
-          }
-        />
-      </SelectTrigger>
-      <SelectContent>
-        {/* All Option */}
-        <div className="flex items-center px-2 py-1">
-          <input
-            type="checkbox"
-            id={`mobile-${param}-all`}
-            className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-            checked={isAllSelected}
-            readOnly
-          />
-          <Link
-            scroll={false}
-            href={buildLocalHref({
-              [param]: [],
-            })}
-            className="ml-2 w-full py-1 font-semibold"
-          >
-            All
-          </Link>
-        </div>
-        <hr className="my-1 border-neutral-200" />
-        {sortedOptions.map((opt) => (
-          <div key={opt} className="flex items-center px-2 py-1">
-            <input
-              type="checkbox"
-              id={`mobile-${param}-${opt}`}
-              className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-              checked={selected.includes(opt)}
-              readOnly
-            />
-            <Link
-              scroll={false}
-              href={buildLocalHref({
-                [param]: getUpdatedValues(opt),
-              })}
-              className="ml-2 w-full py-1"
-            >
-              {textMap[opt] ?? opt}
-            </Link>
-          </div>
-        ))}
-      </SelectContent>
-    </Select>
-  ) : (
-    <ScrollArea className="h-[150px]">
-      <ol className="w-full space-y-2 pr-4">
-        {/* All Option */}
-        <li>
-          <Link
-            scroll={false}
-            href={buildLocalHref({
-              [param]: [],
-            })}
+  return (
+    <div className="relative w-full">
+      {/* Card Container */}
+      <div
+        className={cn(
+          'bg-neutral-50 overflow-hidden rounded-lg border shadow-sm transition-all duration-200 border-primary-500' 
+        )}
+      >
+        {/* Dropdown Trigger */}
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex w-full px-3 items-center justify-between text-left transition-colors"
+        >
+          <h3 className="text-lg mt-2 font-bold text-primary-300">{title}</h3>
+          <IoChevronDown
             className={cn(
-              'flex w-full items-center rounded border p-2',
-              isAllSelected
-                ? 'bg-primary-50 border-primary-700'
-                : 'border-neutral-300'
+              'h-5 w-5 text-primary-700 transition-transform duration-200',
+              isOpen && 'rotate-180'
             )}
-          >
-            <div className="flex w-full items-center">
-              <div className="mr-2">
-                <input
-                  type="checkbox"
-                  id={`${param}-all`}
-                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                  checked={isAllSelected}
-                  readOnly
-                />
-              </div>
-              <span className="font-semibold text-shade-dark">All</span>
+          />
+        </button>
+
+        {/* Dropdown Content with Animation */}
+        <div
+          className={cn(
+            'grid transition-all duration-200 ease-in-out',
+            isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className="max-h-[300px] overflow-y-auto px-2 pb-2 font-semibold text-shade-dark">
+              {sortedOptions.map((opt) => {
+                const isChecked = selected.includes(opt);
+                return (
+                  <Link
+                    key={opt}
+                    scroll={false}
+                    href={buildLocalHref({
+                      [param]: getUpdatedValues(opt),
+                    })}
+                    className={cn(
+                      'flex items-center gap-3 rounded-md border bg-white px-3 py-2.5 mb-1.5 transition-color',
+                      isChecked ? 'border-primary-700' : 'border-neutral-200'
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition-colors',
+                        isChecked
+                          ? 'border-primary-700 bg-primary-700'
+                          : 'border-primary-700 bg-white'
+                      )}
+                    >
+                      {isChecked && (
+                        <svg
+                          className="h-3 w-3 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                    <span className=" font-semibold text-shade-dark">
+                      {textMap[opt] ?? opt}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
-          </Link>
-        </li>
-        {sortedOptions.map((opt) => {
-          const isChecked = selected.includes(opt);
-          return (
-            <li key={opt}>
-              <Link
-                scroll={false}
-                href={buildLocalHref({
-                  [param]: getUpdatedValues(opt),
-                })}
-                className={cn(
-                  'flex w-full items-center rounded border p-2',
-                  isChecked
-                    ? 'bg-primary-50 border-primary-700'
-                    : 'border-neutral-300'
-                )}
-              >
-                <div className="flex w-full items-center">
-                  <div className="mr-2">
-                    <input
-                      type="checkbox"
-                      id={`${param}-${opt}`}
-                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={isChecked}
-                      readOnly
-                    />
-                  </div>
-                  <span className="font-semibold text-shade-dark">
-                    {textMap[opt] ?? opt}
-                  </span>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
-    </ScrollArea>
+
+            {/* Clear Filters Button */}
+            {selected.length > 0 && (
+              <div className="px-4 py-3 flex justify-center">
+                <Link
+                  scroll={false}
+                  href={buildLocalHref({ [param]: [] })}
+                  className="inline-flex items-center rounded-md border border-primary-700 bg-white px-4 py-2 text-center text-sm font-medium text-primary-700 transition-colors hover:bg-primary-700 hover:text-neutral-50"
+                  onClick={() => {
+                    if (optionsRef.current) {
+                      optionsRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Clear {title} Filters
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

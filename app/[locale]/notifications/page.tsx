@@ -186,27 +186,25 @@ export default async function NotificationsPage({
                 />
               </FilterSection>
 
-              <FilterSection locale={locale} label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={notificationCategoryEnum.enumValues}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={notificationCategoryEnum.enumValues}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                title={text.filter.category}
+              />
 
-              <FilterSection locale={locale} label={text.filter.department}>
-                <MultiCheckbox
-                  param="department"
-                  options={departmentRows.map((d) => d.urlName)}
-                  selected={departments}
-                  locale={locale}
-                  textMap={Object.fromEntries(
-                    departmentRows.map((d) => [d.urlName, d.name])
-                  )}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="department"
+                options={departmentRows.map((d) => d.urlName)}
+                selected={departments}
+                locale={locale}
+                textMap={Object.fromEntries(
+                  departmentRows.map((d) => [d.urlName, d.name])
+                )}
+                title={text.filter.department}
+              />
             </div>
           </ScrollArea>
         </aside>

@@ -209,24 +209,19 @@ export function MobileFilters({
                     </div>
 
                     {/* Category Filter */}
-                    <div className="rounded bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">
-                        {text.filter.category}
-                      </h3>
+                    <div className="rounded">
                       <MultiCheckbox
                         param="category"
                         options={categoryOptions}
                         selected={categories}
                         locale={locale}
                         textMap={text.categories}
+                        title={text.filter.category}
                       />
                     </div>
 
                     {/* Department Filter */}
-                    <div className="rounded bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">
-                        {text.filter.department}
-                      </h3>
+                    <div className="rounded">
                       <MultiCheckbox
                         param="department"
                         options={departmentRows.map((d) => d.urlName)}
@@ -235,6 +230,7 @@ export function MobileFilters({
                         textMap={Object.fromEntries(
                           departmentRows.map((d) => [d.urlName, d.name])
                         )}
+                        title={text.filter.department}
                       />
                     </div>
                   </div>
