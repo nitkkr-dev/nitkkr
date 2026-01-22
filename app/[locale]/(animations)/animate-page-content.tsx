@@ -12,7 +12,8 @@ import { type ReactNode } from 'react';
 import Heading from '~/components/heading';
 import MessageCard from '~/components/message-card';
 
-import { AnimateButtonGroup, AnimateSection } from '.';
+import { AnimateButtonGroup } from './animate-button-group';
+import { AnimateSection } from './animate-section';
 import { fadeUpVariants, viewportSettings } from './animation-variants';
 
 interface AnimatePageContentProps {
