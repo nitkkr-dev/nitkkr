@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
 
 import { cn } from '~/lib/utils';
+import { ScrollArea } from '~/components/ui';
 
 export function MultiCheckbox({
   param,
@@ -99,7 +100,7 @@ export function MultiCheckbox({
           )}
         >
           <div className="overflow-hidden">
-            <div className="max-h-[300px] overflow-y-auto px-2 pb-2 font-semibold text-shade-dark">
+            <ScrollArea ref={optionsRef} className="h-[300px] px-2 pb-2 font-semibold text-shade-dark">
               {sortedOptions.map((opt) => {
                 const isChecked = selected.includes(opt);
                 return (
@@ -142,7 +143,7 @@ export function MultiCheckbox({
                   </Link>
                 );
               })}
-            </div>
+            </ScrollArea>
 
             {/* Clear Filters Button */}
             {selected.length > 0 && (
