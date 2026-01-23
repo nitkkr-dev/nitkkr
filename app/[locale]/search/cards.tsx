@@ -215,7 +215,7 @@ const FacultyCard = ({
     <article className="rounded-lg bg-shade-light p-3 sm:grid-cols-8 md:grid md:px-4">
       <header className="col-span-3 flex items-center gap-2">
         <Image
-          src={`persons/${document.employeeId}/image.png`}
+          src={document.img ?? 'fallback/user-image.jpg'}
           alt={document.name}
           width={60}
           height={60}
@@ -293,7 +293,7 @@ const StaffCard = ({
     <article className="rounded-lg bg-shade-light p-3 sm:grid-cols-8 md:grid md:px-4">
       <header className="col-span-3 flex items-center gap-2">
         <Image
-          src={`persons/${document.employeeId}/image.png`}
+          src={document.img ?? 'fallback/user-image.jpg'}
           alt={document.name}
           width={60}
           height={60}
