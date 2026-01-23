@@ -8,6 +8,7 @@ export const staffSchema: CollectionCreateSchema = {
     { name: 'designation', type: 'string', index: false, optional: true },
     { name: 'email', type: 'string' },
     { name: 'employeeId', type: 'string', index: false, optional: true },
+    { name: 'img', type: 'string', index: false, optional: true },
     { name: 'name', type: 'string' },
     { name: 'telephone', type: 'string' },
   ],
@@ -18,13 +19,16 @@ export const populateStaff = async () => {
     await db.query.staff.findMany({
       columns: { designation: true, employeeId: true },
       with: {
-        person: { columns: { email: true, name: true, telephone: true } },
+        person: {
+          columns: { email: true, name: true, telephone: true, img: true },
+        },
       },
     })
   ).map(({ designation, employeeId, person }) => ({
     designation,
     email: person.email,
     employeeId,
+    img: person.img,
     name: person.name,
     telephone: person.telephone,
   }));
