@@ -125,6 +125,7 @@ export async function FacultyOrStaffComponent({
           countryCode: true,
           alternateTelephone: true,
           alternateCountryCode: true,
+          img: true,
         },
       },
       department: {
@@ -243,6 +244,7 @@ export async function FacultyOrStaffComponent({
             employeeId={facultyDescription.employeeId}
             facultyId={facultyDescription.id}
             alt={facultyDescription.person.name}
+            imageUrl={facultyDescription.person.img}
             width={200}
             height={200}
             className="absolute right-0 top-0 z-10 mr-3 size-32 translate-y-[-50%] rounded-full border-[1rem] border-background sm:mr-6 sm:size-40 lg:mr-8 lg:size-48 xl:hidden"
@@ -287,6 +289,7 @@ export async function FacultyOrStaffComponent({
             employeeId={facultyDescription.employeeId}
             facultyId={facultyDescription.id}
             alt={facultyDescription.person.name}
+            imageUrl={facultyDescription.person.img}
             width={200}
             height={200}
             className="absolute z-10 size-48 translate-x-[-50%] translate-y-[-50%] rounded-full border-[16px] border-background"

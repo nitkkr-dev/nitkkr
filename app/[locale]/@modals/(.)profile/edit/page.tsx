@@ -69,6 +69,7 @@ export default async function Page({
               telephone: true,
               alternateCountryCode: true,
               alternateTelephone: true,
+              img: true,
             },
           },
         },
@@ -79,6 +80,7 @@ export default async function Page({
           id: result.id,
           employeeId: result.employeeId,
           name: result.person.name,
+          img: result.person.img,
           officeAddress: result.officeAddress,
           scopusId: result.scopusId ?? undefined,
           linkedInId: result.linkedInId ?? undefined,
@@ -112,6 +114,7 @@ export default async function Page({
               facultyName={personalDetails.name}
               employeeId={personalDetails.employeeId}
               facultyId={personalDetails.id}
+              currentImageUrl={personalDetails.img}
             />
           </div>
 

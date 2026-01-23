@@ -374,7 +374,11 @@ const FacultyList = async ({
       ? (faculty, { inArray }) =>
           inArray(faculty.departmentId, selectedDepartmentIds)
       : undefined,
-    with: { person: { columns: { email: true, name: true, telephone: true } } },
+    with: {
+      person: {
+        columns: { email: true, name: true, telephone: true, img: true },
+      },
+    },
   });
 
   const filteredFaculty = faculty.filter(({ person }) =>
@@ -409,6 +413,7 @@ const FacultyList = async ({
               employeeId={faculty.employeeId}
               facultyId={faculty.id}
               alt={faculty.person.name}
+              imageUrl={faculty.person.img}
               width={176}
               height={176}
               className="my-auto size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
