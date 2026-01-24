@@ -683,31 +683,23 @@ mission: {
 
    
     
-      employes: [
+       employes: [
       {
-        name: 'Prof. R.K. Sharma',
-        image: 'institute/cells/iic/Pillars/RK sharma.jpg',
+        id : "87",
         position: 'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
-        phone: '+91-9896688346',
-        email: 'rksharma@nitkkr.ac.in',
+       
       },
       {
-        name: 'Prof. Dinesh Khanduja',
-        image: 'institute/cells/iic/Pillars/Dinesh.jpg',
+        id : "130",
         position: 'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
-        phone: '+91-9466960961',
-        email: 'dkhanduja@nitkkr.ac.in',
+        
       },
       {
-        name: 'Dr. Rajeev Rathi',
-        image: 'institute/cells/iic/Pillars/Rathi.jpg',
+        id : "1578",
         position: 'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
-        phone: '+91-9996886672',
-        email: 'rajeevrathi@nitkkr.ac.in',
       },
 
     ],
-     
         
        
           officeOrder: {

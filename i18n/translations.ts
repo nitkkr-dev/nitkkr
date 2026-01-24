@@ -333,14 +333,9 @@ export interface Translations {
       vision: { title: string; content: string[] };
       mission: { title: string; content: string[] };
        employes: {
-      name: string;
-      position: string;
-      image: string;
-      phone: string;
-      email: string;
+      id : string;
+     position: string;
     }[];
-  
-
         officeOrder: {
           title: string;
           srNo: string;
