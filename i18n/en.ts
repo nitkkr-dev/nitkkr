@@ -590,6 +590,7 @@ const text: Translations = {
       title: 'Filters',
       date: 'Date',
       category: 'Category',
+      department: 'Department',
       startDate: 'Start Date',
       endDate: 'End Date',
       day: 'Day',
