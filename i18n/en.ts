@@ -2271,6 +2271,85 @@ rolls down to 60% of the eligible students for second round of placement session
       ],
     },
   },
+  CHPD: {
+    welcome: 'Centre Of Excellence for Hollistic and Personality Developement (CHPD)',
+    admission: {
+      title: 'Admission Process & Education System',
+      process: {
+        title: 'Admission Procedure',
+        content: [
+          'The Centre of Excellence for Holistic Personality Development (CHPD) has been recently setup in the Institute which is first of its kind in the Country.',
+          'The Centre will work to achieve the Objectives of NEP 2020 by providing Value Based Education which will nurture all aspects of Holistic Personality Development which include Physical Quotient (PQ), Intelligence Quotient (IQ), Emotional Quotient (EQ), Social Quotient (SQ) and Spiritual Quotient (SQ).',
+          'The Centre will organize Faculty Development Programs/Workshops/STCs/Symposia/ Conferences in the fields of Personality Development, Value Based Education, Life Skills for Holistic Development, Nurturing Human Values in Youth, Mindfulness & Meditation, etc. The Centre plans to start Certificate Courses in Bhagavad Gita for Working Professionals, Cognitive Science, Universal Human Values etc.',
+          'The Centre also plans to strengthen Research activities in various fields such as Cognitive Science, Mental Health & Well-being and Indian Knowledge System.',
+        ],
+      },
+      education: {
+        title: 'Education System',
+        content: [
+          'The Education System of the Institute is divided into academic sessions comprising of two semesters – Even and Odd semester. The Institute offers courses of study leading to B.Tech and M.Tech. degree and research facilities leading to the degree of Doctor of Philosophy. The small of instructions and examination is English. The Institute has assumed the status of a Deemed University w.e.f. 26.6.2002. The Institute is now independent in every respect relating to academic work such as Examinations, evaluation of the answer sheets, declaration of results and other allied matters. The Institute has switched over from the conventional examination and evaluation system to the Credit Based Examination System.',
+          'The courses include study at the Institute, visits to work sites and practical training in the Institute Workshops and in approved Engineering works. There is a semester examination at the end of each semester.',
+        ],
+      },
+    },
+    Notifications: {
+      title: 'Notifications',
+    },
+    Vision: {
+      title: 'Vision',
+      description:
+        'To nurture Holistic Personalities of the students by taking a holistic approach to education focusing on their social, emotional, physical, mental and intellectual growth.',
+    },
+    VisionMissionImage: {
+      src: 'fallback/user-image.jpg',
+      alt: 'Vision and Mission Image',
+    },
+
+    Mission: {
+      title: 'Mission',
+      points: [
+        'To impart holistic, multidisciplinary and quality education that inculcates human values among engineers, develops innovative & competent engineers, socially responsive citizens and to undertake research that generates prime knowledge resources for the growth of industry & society and futuristic knowledge, focusing on the socio-economic needs, to transform the current education system from outcome based to value based.',
+      ],
+    },
+    Head: {
+      title: 'HEAD OF CHPD',
+      designation: 'Professor & Head of CHPD',
+    },
+
+    Features: {
+      title: 'Features',
+      items: [
+        'To move from Outcome Based Education to Value Based Education.',
+        'To contribute to the Holistic Personality Development of the Students.',
+        'To Provide Multidisciplinary and Holistic Education across all streams to ensure unity and integrity of the knowledge.',
+        'To identify, develop and disseminate techniques by which engineering students and practicing engineers can be motivated to imbibe human values and appreciate their impact on technology development, professional ethics and human welfare.',
+      ],
+    },
+
+    How_to_Apply: {
+      title: 'How to Apply',
+      registrationSteps: [
+        'Submit the “Student Registration Form” (click on the SCoE dropdown menu to access this form).',
+        'The SCoE team will contact you to share details of the registered course.',
+        'Payment link/details will be sent to your registered email ID from scoe@nitkkr.ac.in.',
+        'Share the payment receipt/confirmation to scoe@nitkkr.ac.in with the subject line: [Re: Payment receipt for enrolment in SCoE program “Program Name”].',
+        'A confirmation email will be sent containing your UID details and training schedule.',
+        'Join the induction program as per the communicated schedule.',
+      ],
+    },
+    For_Queries: {
+      title: 'For Queries',
+    },
+    Courses: {
+      title: 'Courses',
+      srNo: 'S. No.',
+      courseName: 'Course Name',
+      list: [
+        'Course on Soft Skills (Value Added Courses)',
+        'Diploma/Certificate Course in Bhagavad Gita (For Working Professionals)',
+      ],
+    },
+  },
 };
 
 export default text;

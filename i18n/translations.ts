@@ -1366,4 +1366,64 @@ export interface Translations {
       list: string[];
     };
   };
+  CHPD: {
+    welcome: string;
+
+    admission: {
+      title: string;
+      process: {
+        title: string;
+        content: string[];
+      };
+      education: {
+        title: string;
+        content: string[];
+      };
+    };
+
+    Notifications: {
+      title: string;
+    };
+
+    Vision: {
+      title: string;
+      description: string;
+    };
+
+    VisionMissionImage: {
+      src: string;
+      alt: string;
+    };
+
+    Mission: {
+      title: string;
+      points: string[];
+    };
+
+    Head: {
+      title: string;
+      designation: string;
+    };
+
+    Features: {
+      title: string;
+      items: string[];
+    };
+
+    How_to_Apply: {
+      title: string;
+      registrationSteps: string[];
+    };
+
+    For_Queries: {
+      title: string;
+    };
+
+    Courses: {
+      title: string;
+      srNo: string;
+      courseName: string;
+      list: string[];
+    };
+  };
 }
