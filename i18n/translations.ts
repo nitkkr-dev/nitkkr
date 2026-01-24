@@ -66,6 +66,12 @@ export interface Translations {
       timeTable: string;
     };
     viewMore: string;
+    buttons: {
+      hostels: string;
+      racs: string;
+      scoe: string;
+      tenders: string;
+    };
   };
   Academics: {
     notifications: string;
@@ -398,6 +404,77 @@ export interface Translations {
       };
     };
   };
+
+  RACS: {
+    title: string;
+    intro: string;
+    notificationsCategory: string;
+
+    // Tabs/Navigation
+    tabs: {
+      notifications: string;
+      regionalCoordinator: string;
+      researchProposalForms: string;
+      partnerInstitutes: string;
+      researchAreas: string;
+      queries: string;
+    };
+    // Notifications Section
+    notifications: {
+      title: string;
+    };
+    // Regional Coordinator Section
+    coordinator: {
+      heading: string;
+      name: string;
+      position: string;
+      email: string;
+      phone: string;
+      image: string;
+    };
+
+    // Research Proposal Forms Section
+    researchProposalForms: {
+      heading: string;
+      table: {
+        srno: string;
+        form: string;
+      };
+      formNames: string[];
+    };
+
+    // Partner Institutes Section
+    partnerInstitutes: {
+      heading: string;
+      table: {
+        srNo: string;
+        institute: string;
+      };
+
+      institutes: [
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+        { name: string },
+      ];
+    };
+
+    // Research Areas Section
+    researchAreas: {
+      heading: string;
+      description: string;
+      readMore: string;
+      link: string;
+    };
+
+    // For Queries Section
+    forQueries: {
+      heading: string;
+      email: string;
+    };
+  };
+
   Hostels: {
     title: string;
     boysHostels: string;
@@ -467,8 +544,12 @@ export interface Translations {
       examination: string;
       result: string;
       hostel: string;
+      scholarships: string;
+      placements: string;
       miscellaneous: string;
-      archived: string;
+      // Hidden categories
+      scoe: string;
+      racs: string;
     };
     educationType: {
       ug: string;
@@ -488,6 +569,7 @@ export interface Translations {
       title: string;
       date: string;
       category: string;
+      department: string;
       startDate: string;
       endDate: string;
       day: string;

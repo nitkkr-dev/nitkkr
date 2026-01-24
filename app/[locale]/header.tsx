@@ -27,6 +27,8 @@ import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 
+import { AnimateHeader } from './(animations)';
+
 export default async function Header({ locale }: { locale: string }) {
   const text = (await getTranslations(locale)).Header;
 
@@ -166,7 +168,7 @@ export default async function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="header-sticky-ness sticky top-0 z-nav min-w-full bg-background">
+    <AnimateHeader>
       <nav
         className={cn(
           'container flex justify-between',
@@ -366,7 +368,7 @@ export default async function Header({ locale }: { locale: string }) {
           </li>
         </ol>
       </nav>
-    </header>
+    </AnimateHeader>
   );
 }
 
@@ -384,23 +386,14 @@ const AuthAction = async ({
   const session = await getServerAuthSession();
 
   if (session) {
-    let id = '';
-    if (session.person.type === 'faculty') {
-      id = (await db.query.faculty.findFirst({
-        columns: { employeeId: true },
-        where: (faculty, { eq }) => eq(faculty.id, session.person.id),
-      }))!.employeeId;
-    } else if (session.person.type === 'staff') {
-      id = (await db.query.staff.findFirst({
-        columns: { employeeId: true },
-        where: (staff, { eq }) => eq(staff.id, session.person.id),
-      }))!.employeeId;
-    } else if (session.person.type === 'student') {
-      id = (await db.query.students.findFirst({
-        columns: { rollNumber: true },
-        where: (student, { eq }) => eq(student.id, session.person.id),
-      }))!.rollNumber;
-    }
+    // Fetch the person's image from the database
+    const person = await db.query.persons.findFirst({
+      columns: { img: true },
+      where: (persons, { eq }) => eq(persons.id, session.person.id),
+    });
+
+    const profileImage =
+      person?.img ?? session.user.image ?? 'fallback/user-image.jpg';
 
     return mobile ? (
       <Button
@@ -412,9 +405,7 @@ const AuthAction = async ({
           <ProfileImage
             alt={text.alt}
             className={className}
-            // FIXME: Remove session.user.image once
-            // everyone's image is fed to the bucket
-            src={session.user.image ?? `persons/${id}/image.png`}
+            src={profileImage}
           />
           {text.view}
         </Link>
@@ -423,10 +414,8 @@ const AuthAction = async ({
       <ProfileImage
         alt={text.alt}
         className={className}
-        // FIXME: Remove session.user.image once
-        // everyone's image is fed to the bucket
         href={`/${locale}/profile`}
-        src={session.user.image ?? `persons/${id}/image.png`}
+        src={profileImage}
       />
     );
   } else {

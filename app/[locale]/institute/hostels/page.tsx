@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { MdBadge } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
@@ -70,30 +70,15 @@ export default async function Hostels({
           href="#rules-and-conducts"
           glyphDirection={'ltr'}
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          <Button
-            asChild
-            className={cn(
-              'flex flex-col',
-              'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-            )}
-            variant="secondary"
-          >
-            <Link href={getS3Url() + '/hostels/rules.pdf'} target="_blank">
-              <MdBadge className="size-12" />
-              <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                {text.rulesTitle}
-              </p>
-            </Link>
-          </Button>
-        </nav>
+        <ButtonGroup
+          buttonArray={[
+            {
+              label: text.rulesTitle,
+              href: getS3Url() + '/hostels/rules.pdf',
+              icon: MdBadge,
+            },
+          ]}
+        />
       </section>
     </>
   );

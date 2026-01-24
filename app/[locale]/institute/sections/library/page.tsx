@@ -5,6 +5,7 @@ import { BsBook, BsTag } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa';
 
 import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
@@ -200,23 +201,17 @@ export default async function Library({
           </li>
         </ul>
       </section>
-      <section>
+      <section className="container">
         <Heading
-          className="container"
           glyphDirection="rtl"
           heading="h3"
           href="#quick-links"
           id="quick-links"
           text={text.heading.quickLinks}
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.quickLinks.collectionResources,
               href: `/${locale}/institute/sections/library/collection-and-resources`,
@@ -232,26 +227,8 @@ export default async function Library({
               href: `/${locale}/institute/sections/library/membership-and-privileges`,
               icon: BsTag,
             },
-          ].map(({ label, href, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link href={href}>
-                <Icon className="size-12" />
-                <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
 
       <section className="container">

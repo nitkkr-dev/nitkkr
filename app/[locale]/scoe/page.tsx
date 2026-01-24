@@ -10,7 +10,6 @@ import FICGroup from '~/components/fic-group';
 import { getS3Url } from '~/server/s3';
 export default async function SCoE({
   params: { locale },
-  searchParams,
 }: {
   params: { locale: string };
   searchParams?: {
@@ -67,9 +66,9 @@ export default async function SCoE({
         />
         <NotificationsPanel
           locale={locale}
-          category="academic"
+          category="scoe"
           showViewAll={true}
-          viewAllHref={`/${locale}/notifications?category=scoe`}
+          viewAllHref={`/${locale}/notifications?category=miscellaneous`}
         />
       </section>
       <section className="container my-16">
@@ -105,7 +104,8 @@ export default async function SCoE({
           </div>
         </div>
       </section>
-      <section className="container my-10">
+      {/* HEAD OF SCOE */}
+      <section className="container my-4">
         <Heading
           glyphDirection="dual"
           heading="h3"
@@ -156,8 +156,8 @@ export default async function SCoE({
           </div>
         </article>
       </section>
-      \{/* laboratories */}
-      <section className="container my-10">
+      {/* laboratories */}
+      <section className="container my-4">
         <Heading
           glyphDirection="ltr"
           heading="h3"
@@ -176,11 +176,12 @@ export default async function SCoE({
         tableData={LaboratoriesData}
         showSerialNo={true}
         serialNoLabel={text.Laboratories.srNo}
+        pageParamName="laboratoriesPage"
       />
       {/* Courses */}
       <section className="container mt-10">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="ltr"
           heading="h3"
           href="#courses"
           id="courses"
@@ -192,6 +193,7 @@ export default async function SCoE({
         tableData={CoursesData}
         showSerialNo={true}
         serialNoLabel={text.Courses.srNo}
+        pageParamName="coursesPage"
       />
       {/* how to apply */}
       <section className="container my-10">
@@ -226,7 +228,7 @@ export default async function SCoE({
           text={text.For_Queries.title.toUpperCase()}
         />
 
-        <section className="my-2">
+        <section className="mt-2">
           <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
             {/* Email */}
             <div className="flex flex-col items-center">
@@ -237,9 +239,6 @@ export default async function SCoE({
               >
                 <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
-              <span className="mt-4 text-sm text-neutral-700 sm:text-base">
-                scoe@nitkkr.ac.in
-              </span>
             </div>
 
             {/* Phone */}
@@ -251,9 +250,6 @@ export default async function SCoE({
               >
                 <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
-              <span className="mt-4 text-sm text-neutral-700 sm:text-base">
-                01744-233300
-              </span>
             </div>
           </div>
         </section>

@@ -25,6 +25,7 @@ export interface EventItem {
 
 interface FilterParams {
   categories?: string[];
+  departmentIds?: number[];
   start?: string;
   end?: string;
   query?: string;
@@ -72,6 +73,7 @@ export function EventsList({
       const data = await loadMoreEvents({
         cursor,
         categories: filterParams.categories,
+        departmentIds: filterParams.departmentIds,
         start: filterParams.start,
         end: filterParams.end,
         query: filterParams.query,

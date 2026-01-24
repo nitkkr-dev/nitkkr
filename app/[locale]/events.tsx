@@ -16,7 +16,7 @@ import { cn } from '~/lib/utils';
 import { db, type eventCategoryEnum } from '~/server/db';
 import { getS3Url } from '~/server/s3';
 
-import { EventsGrid } from './EventsGrid';
+import { AnimateEventsGrid } from './(animations)';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
 
@@ -53,7 +53,7 @@ export default async function Events({
 
   return (
     <article
-      className="relative bg-cover bg-no-repeat pb-32 pt-[72px] md:pb-40"
+      className="relative bg-cover bg-no-repeat pb-20 pt-5 md:pb-24 md:pt-16"
       id="events"
       style={{
         backgroundImage: `url('${getS3Url()}/assets/dottedarrows-1.png')`,
@@ -104,9 +104,9 @@ export default async function Events({
             </li>
           ))}
         </ol>
-        <section className="my-4 flex justify-between drop-shadow-2xl lg:hidden">
+        <section className="mb-2 mt-4 flex items-center gap-3 lg:hidden">
           <Select defaultValue={text.categories.featured}>
-            <SelectTrigger className="w-[70%] px-4 py-5 text-shade-light">
+            <SelectTrigger className="w-[65%] px-4 py-5 text-shade-light">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -128,17 +128,17 @@ export default async function Events({
           />
         </section>
 
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-2">
           <BouncyArrowButton
             buttonProps={{
               className:
-                'ml-auto text-lg lg:inline-flex items-center gap-1 hidden',
+                'ml-auto mb-2 text-lg lg:inline-flex items-center gap-1 hidden',
               variant: 'link',
             }}
             linkProps={{ href: `/${locale}/events` }}
             text={text.viewAll}
           />
-          <EventsGrid
+          <AnimateEventsGrid
             events={events.map((e) => ({
               id: e.id,
               title: e.title,
