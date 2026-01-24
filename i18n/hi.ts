@@ -584,23 +584,23 @@ const text: Translations = {
       cell: 'सेल',
       iic: {
         title: 'संस्थान नवाचार परिषद',
-         description:
+        description:
           'एनआईटी कुरुक्षेत्र ने संस्थान नवाचार परिषद (IIC) के सदस्यों का गठन किया है, जो शिक्षा मंत्रालय की इनोवेशन सेल (MIC) से संबद्ध है। IIC एक छत्र इकाई के रूप में कार्य करेगी, जो विभिन्न विकास कार्यक्रमों, कार्यशालाओं आदि की पेशकश करेगी।',
-        
+
         vision: {
-  title: 'दृष्टि',
-  content: [
-    'तकनीकी शिक्षा और अनुसंधान में एक आदर्श संस्थान बनना, जो वैश्विक चुनौतियों के प्रति संवेदनशील और उत्तरदायी हो।',
-  ],
-},
-mission: {
-  title: 'मिशन',
-  content: [
-    'उच्च गुणवत्ता वाली तकनीकी शिक्षा प्रदान करना, जिससे नवाचारी पेशेवरों और उद्यमियों का विकास हो।',
-  ],
-},
-       
-       officeOrder: {
+          title: 'दृष्टि',
+          content: [
+            'तकनीकी शिक्षा और अनुसंधान में एक आदर्श संस्थान बनना, जो वैश्विक चुनौतियों के प्रति संवेदनशील और उत्तरदायी हो।',
+          ],
+        },
+        mission: {
+          title: 'मिशन',
+          content: [
+            'उच्च गुणवत्ता वाली तकनीकी शिक्षा प्रदान करना, जिससे नवाचारी पेशेवरों और उद्यमियों का विकास हो।',
+          ],
+        },
+
+        officeOrder: {
           title: 'कार्यालय आदेश',
           srNo: 'क्रम संख्या',
           responsibility: 'जिम्मेदारी',
@@ -612,24 +612,21 @@ mission: {
           pastActivities: 'पूर्व गतिविधियाँ',
           upcomingActivities: 'आगामी गतिविधियाँ',
         },
-      employes: [
-      {
-        id : "87",
-        position: 'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
-       
-      },
-      {
-        id : "130",
-        position: 'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
-        
-      },
-      {
-        id : "1578",
-        position: 'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
-      },
-
-    ],
-    pillarsOfLeadership: 'नेतृत्व के स्तंभ',
+        employes: [
+          {
+            position:
+              'अध्यक्ष – IIC NIT KKR | डीन – अनुसंधान और परामर्श | प्रोफेसर, ECE विभाग',
+          },
+          {
+            position:
+              'उपाध्यक्ष – IIC NIT KKR | प्रोफेसर, यांत्रिक अभियांत्रिकी विभाग',
+          },
+          {
+            position:
+              'संयोजक – IIC NIT KKR | सहायक प्रोफेसर, यांत्रिक अभियांत्रिकी विभाग',
+          },
+        ],
+        pillarsOfLeadership: 'नेतृत्व के स्तंभ',
         imageGallery: 'छवि गैलरी',
       },
       iks: {

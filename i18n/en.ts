@@ -756,44 +756,38 @@ const text: Translations = {
       iic: {
         title: 'Institution’s Innovation Council',
         description:
-  'NIT Kurukshetra convenes the Institute Innovation Council (IIC) in alignment with the Ministry of Education’s Innovation Cell (MIC), Government of India. The IIC serves as a central umbrella body to foster innovation and entrepreneurship within the institute by engaging faculty, students, and staff through structured programs, workshops, and activities aimed at building a robust and sustainable innovation ecosystem.',
+          'NIT Kurukshetra convenes the Institute Innovation Council (IIC) in alignment with the Ministry of Education’s Innovation Cell (MIC), Government of India. The IIC serves as a central umbrella body to foster innovation and entrepreneurship within the institute by engaging faculty, students, and staff through structured programs, workshops, and activities aimed at building a robust and sustainable innovation ecosystem.',
 
-vision: {
-  title: 'Vision',
-  content: [
-    'To create, streamline, and strengthen a vibrant innovation and entrepreneurship ecosystem within the institute, enabling higher educational institutions to become hubs of creative problem-solving, quality innovation, and entrepreneurial excellence.',
-  ],
-},
+        vision: {
+          title: 'Vision',
+          content: [
+            'To create, streamline, and strengthen a vibrant innovation and entrepreneurship ecosystem within the institute, enabling higher educational institutions to become hubs of creative problem-solving, quality innovation, and entrepreneurial excellence.',
+          ],
+        },
 
-mission: {
-  title: 'Mission',
-  content: [
-    'To actively engage faculty, students, and staff in innovation and entrepreneurship-related activities such as ideation, problem-solving, design thinking, intellectual property creation, and project management at pre-incubation and incubation stages.',
-  ],
-},
+        mission: {
+          title: 'Mission',
+          content: [
+            'To actively engage faculty, students, and staff in innovation and entrepreneurship-related activities such as ideation, problem-solving, design thinking, intellectual property creation, and project management at pre-incubation and incubation stages.',
+          ],
+        },
 
-   
-    
-       employes: [
-      {
-        id : "87",
-        position: 'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
-       
-      },
-      {
-        id : "130",
-        position: 'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
-        
-      },
-      {
-        id : "1578",
-        position: 'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
-      },
+        employes: [
+          {
+            position:
+              'President – IIC NIT KKR | Dean – Research and Consultancy | Professor, ECE Department',
+          },
+          {
+            position:
+              'Vice President – IIC NIT KKR | Professor, Mechanical Engineering Department',
+          },
+          {
+            position:
+              'Convener – IIC NIT KKR | Assistant Professor, Mechanical Engineering Department',
+          },
+        ],
 
-    ],
-        
-       
-          officeOrder: {
+        officeOrder: {
           title: 'OFFICE ORDER',
           srNo: 'Sr. No.',
           responsibility: 'Responsibility',
