@@ -176,11 +176,12 @@ export default async function SCoE({
         tableData={LaboratoriesData}
         showSerialNo={true}
         serialNoLabel={text.Laboratories.srNo}
+        pageParamName="laboratoriesPage"
       />
       {/* Courses */}
       <section className="container mt-10">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="ltr"
           heading="h3"
           href="#courses"
           id="courses"
@@ -192,6 +193,7 @@ export default async function SCoE({
         tableData={CoursesData}
         showSerialNo={true}
         serialNoLabel={text.Courses.srNo}
+        pageParamName="coursesPage"
       />
       {/* how to apply */}
       <section className="container my-10">
