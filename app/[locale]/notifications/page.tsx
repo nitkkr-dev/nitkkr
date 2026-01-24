@@ -9,7 +9,7 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import {
-  notificationCategoryEnum,
+  type notificationCategoryEnum,
   notificationDepartments,
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
