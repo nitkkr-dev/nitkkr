@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { desc, inArray } from 'drizzle-orm';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -86,18 +86,13 @@ export default async function NotificationsPage({
         endDate ? lte(n.createdAt, endDate) : undefined,
         filteredNotificationIds
           ? inArray(n.id, filteredNotificationIds)
-          : undefined
+          : undefined,
+        // Category filter at DB level
+        categories.length ? arrayOverlaps(n.categories, categories) : undefined
       ),
     orderBy: (n) => [desc(n.createdAt)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  // Category filter (multi) - check if any of notification's categories match selected
-  if (categories.length) {
-    raw = raw.filter((n) =>
-      n.categories.some((cat) => categories.includes(cat as Cat))
-    );
-  }
 
   // Text search (title and content)
   if (query) {

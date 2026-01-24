@@ -66,9 +66,9 @@ export default async function SCoE({
         />
         <NotificationsPanel
           locale={locale}
-          category="academic"
+          category="scoe"
           showViewAll={true}
-          viewAllHref={`/${locale}/notifications?category=scoe`}
+          viewAllHref={`/${locale}/notifications?category=miscellaneous`}
         />
       </section>
       <section className="container my-16">
@@ -104,7 +104,8 @@ export default async function SCoE({
           </div>
         </div>
       </section>
-      <section className="container my-10">
+      {/* HEAD OF SCOE */}
+      <section className="container my-4">
         <Heading
           glyphDirection="dual"
           heading="h3"
@@ -155,8 +156,8 @@ export default async function SCoE({
           </div>
         </article>
       </section>
-      \{/* laboratories */}
-      <section className="container my-10">
+      {/* laboratories */}
+      <section className="container my-4">
         <Heading
           glyphDirection="ltr"
           heading="h3"

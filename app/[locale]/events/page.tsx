@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { Suspense } from 'react';
-import { desc, inArray } from 'drizzle-orm';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db, eventCategoryEnum } from '~/server/db';
@@ -79,18 +79,13 @@ export default async function EventsPage({
       and(
         startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
         endDate ? lte(e.startDate, endDate.toISOString()) : undefined,
-        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined
+        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined,
+        // Category filter at DB level
+        categories.length ? arrayOverlaps(e.categories, categories) : undefined
       ),
     orderBy: (e) => [desc(e.startDate)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  // Category filter (multi) - check if event has ANY of the selected categories
-  if (categories.length) {
-    raw = raw.filter((e) =>
-      e.categories.some((cat) => categories.includes(cat as Cat))
-    );
-  }
 
   // Text search (title, description, location, and categories)
   if (query) {

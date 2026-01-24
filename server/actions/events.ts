@@ -1,6 +1,6 @@
 'use server';
 
-import { desc, inArray } from 'drizzle-orm';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { db, type eventCategoryEnum } from '~/server/db';
 import { eventDepartments } from '~/server/db/schema/events.schema';
@@ -18,7 +18,14 @@ interface LoadMoreEventsParams {
 }
 
 export async function loadMoreEvents(params: LoadMoreEventsParams) {
-  const { cursor, categories = [], departmentIds = [], start, end, query } = params;
+  const {
+    cursor,
+    categories = [],
+    departmentIds = [],
+    start,
+    end,
+    query,
+  } = params;
 
   const startDate = start ? new Date(start) : undefined;
   const endDate = end ? new Date(end) : undefined;
@@ -48,18 +55,15 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
         lt(e.startDate, cursorDate.toISOString()), // Cursor-based pagination
         startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
         endDate ? lte(e.startDate, endDate.toISOString()) : undefined,
-        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined
+        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined,
+        // Category filter at DB level - cast to enum type
+        categories.length
+          ? arrayOverlaps(e.categories, categories as Cat[])
+          : undefined
       ),
     orderBy: (e) => [desc(e.startDate)],
     limit: BATCH_SIZE + 1, // +1 to check if more exist
   });
-
-  // Apply category filter - check if event has ANY of the selected categories
-  if (categories.length) {
-    raw = raw.filter((e) =>
-      e.categories.some((cat) => categories.includes(cat as Cat))
-    );
-  }
 
   // Apply text search (title, description, location, categories)
   if (query) {
