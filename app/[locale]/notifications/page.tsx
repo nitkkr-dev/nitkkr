@@ -11,6 +11,7 @@ import { ScrollArea } from '~/components/ui';
 import {
   notificationCategoryEnum,
   notificationDepartments,
+  VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
 
@@ -189,7 +190,7 @@ export default async function NotificationsPage({
               <FilterSection locale={locale} label={text.filter.category}>
                 <MultiCheckbox
                   param="category"
-                  options={notificationCategoryEnum.enumValues}
+                  options={VISIBLE_NOTIFICATION_CATEGORIES}
                   selected={categories}
                   locale={locale}
                   textMap={text.categories}
@@ -226,7 +227,7 @@ export default async function NotificationsPage({
                 categories={categories}
                 departments={departments}
                 departmentRows={departmentRows}
-                categoryOptions={notificationCategoryEnum.enumValues}
+                categoryOptions={VISIBLE_NOTIFICATION_CATEGORIES}
                 query={query}
                 start={searchParams.start}
                 end={searchParams.end}

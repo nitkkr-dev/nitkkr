@@ -843,8 +843,12 @@ const text: Translations = {
       examination: 'परीक्षाएँ',
       result: 'परिणाम',
       hostel: 'हॉस्टल',
+      scholarships: 'छात्रवृत्ति',
+      placements: 'प्लेसमेंट',
       miscellaneous: 'अन्य',
-      archived: 'अभिलेखित',
+      // Hidden categories (for specific pages)
+      scoe: 'SCOE',
+      racs: 'RACS',
     },
     educationType: {
       ug: 'स्नातक',
