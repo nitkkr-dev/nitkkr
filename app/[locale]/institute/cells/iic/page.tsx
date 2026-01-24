@@ -197,7 +197,7 @@ export default async function IICPage({
                 },
               ]}
               tableData={officeOrder}
-              currentPage={1}
+              pageParamName="officeOrderPage"
               getCount={Promise.resolve([])}
             />
           </div>
