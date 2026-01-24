@@ -1,9 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
-import { cn } from '~/lib/utils';
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';

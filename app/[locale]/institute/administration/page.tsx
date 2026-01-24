@@ -16,7 +16,6 @@ import { getTranslations } from '~/i18n/translations';
 // Fetches committee data from DB - cache for 1 hour
 export const revalidate = 3600;
 import Loading from '~/components/loading';
-import { CardTitle } from '~/components/ui';
 
 export default async function Administration({
   params: { locale },
