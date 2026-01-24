@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
 import Gallery from '~/components/ui/gallery';
 import Heading from '~/components/heading';
