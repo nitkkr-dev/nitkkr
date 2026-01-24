@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { eq, inArray } from 'drizzle-orm';
+import { inArray } from 'drizzle-orm';
 import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
 import { db } from '~/server/db';
@@ -29,7 +29,8 @@ export default async function FICGroup({ facultyData }: FICGroupProps) {
           name: true,
           email: true,
           telephone: true,
-          countryCode: true, // include imageUrl later when added.. currently keep fallback
+          countryCode: true,
+          img: true,
         },
       },
     },
@@ -60,7 +61,7 @@ export default async function FICGroup({ facultyData }: FICGroupProps) {
           className="flex w-[95%] flex-row items-center gap-2 rounded-lg border border-primary-500 bg-neutral-50 p-2 transition-shadow duration-300 hover:shadow-lg sm:w-[90%] sm:gap-3 sm:p-3 md:w-[48%] md:gap-4 md:p-4"
         >
           <Image
-            src={`fallback/user-image.jpg`} // # TODO: Change to member.person.imageUrl when available
+            src={member.person.img ?? `fallback/user-image.jpg`} // # TODO: Change to member.person.imageUrl when available
             alt={member.person.name}
             width={200}
             height={200}
