@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import React, { Suspense } from 'react';
-import { desc } from 'drizzle-orm';
+import { desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db, eventCategoryEnum } from '~/server/db';
+import { eventDepartments } from '~/server/db/schema/events.schema';
 import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
@@ -22,6 +23,7 @@ const INITIAL_BATCH_SIZE = 20;
 interface PageSearchParams {
   q?: string;
   category?: string | string[];
+  department?: string | string[];
   start?: string;
   end?: string;
 }
@@ -37,22 +39,51 @@ export default async function EventsPage({
 
   // Normalize multi-select params
   const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
+  const departments = toArray(searchParams.department).filter(Boolean);
   const startDate = parseDate(searchParams.start);
   const endDate = parseDate(searchParams.end);
   const query = (searchParams.q ?? '').trim().toLowerCase();
+
+  // Fetch departments (names + urlName) for filter list
+  const departmentRows = await db.query.departments.findMany({
+    columns: { id: true, name: true, urlName: true },
+  });
+
+  // Get department IDs for filtering
+  const deptIds = departments.length
+    ? departmentRows
+        .filter((d) => departments.includes(d.urlName))
+        .map((d) => d.id)
+    : [];
+
+  // Get event IDs that match department filter via junction table
+  let filteredEventIds: number[] | undefined;
+  if (deptIds.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        eventId: eventDepartments.eventId,
+      })
+      .from(eventDepartments)
+      .where(inArray(eventDepartments.departmentId, deptIds));
+    filteredEventIds = deptMatches.map((m) => m.eventId);
+
+    // If no events match the department filter, return empty
+    if (filteredEventIds.length === 0) {
+      filteredEventIds = [-1]; // Use impossible ID to return no results
+    }
+  }
 
   // Build base query - fetch only initial batch
   let raw = await db.query.events.findMany({
     where: (e, { and, gte, lte }) =>
       and(
         startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
-        endDate ? lte(e.startDate, endDate.toISOString()) : undefined
+        endDate ? lte(e.startDate, endDate.toISOString()) : undefined,
+        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined
       ),
     orderBy: (e) => [desc(e.startDate)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  console.log(raw);
 
   // Category filter (multi) - check if event has ANY of the selected categories
   if (categories.length) {
@@ -99,6 +130,7 @@ export default async function EventsPage({
   // Build filter params for the client component
   const filterParams = {
     categories: categories.length ? categories : undefined,
+    departmentIds: deptIds.length ? deptIds : undefined,
     start: searchParams.start,
     end: searchParams.end,
     query: query || undefined,
@@ -129,6 +161,7 @@ export default async function EventsPage({
                 href={buildHref(locale, {
                   q: undefined,
                   category: [],
+                  department: [],
                   start: undefined,
                   end: undefined,
                 })}
@@ -144,6 +177,7 @@ export default async function EventsPage({
                 <DateRangeForm
                   locale={locale}
                   categories={categories}
+                  departments={departments}
                   query={query}
                   start={searchParams.start}
                   end={searchParams.end}
@@ -164,6 +198,18 @@ export default async function EventsPage({
                   selected={categories}
                   locale={locale}
                   textMap={text.categories}
+                />
+              </FilterSection>
+
+              <FilterSection label={text.filter.department}>
+                <MultiCheckbox
+                  param="department"
+                  options={departmentRows.map((d) => d.urlName)}
+                  selected={departments}
+                  locale={locale}
+                  textMap={Object.fromEntries(
+                    departmentRows.map((d) => [d.urlName, d.name])
+                  )}
                 />
               </FilterSection>
             </div>
@@ -187,6 +233,8 @@ export default async function EventsPage({
                 <MobileFilters
                   locale={locale}
                   categories={categories}
+                  departments={departments}
+                  departmentRows={departmentRows}
                   categoryOptions={eventCategoryEnum.enumValues}
                   query={query}
                   start={searchParams.start}

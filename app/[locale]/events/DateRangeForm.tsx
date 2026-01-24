@@ -22,6 +22,7 @@ export function DateRangeForm({
 }: {
   locale: string;
   categories?: string[];
+  departments?: string[];
   query?: string;
   start?: string;
   end?: string;

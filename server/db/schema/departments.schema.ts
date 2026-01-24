@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
 import { clubs, courses, doctorates, faculty, majors, staff } from '.';
+import { eventDepartments } from './events.schema';
 import { notificationDepartments } from './notifications.schema';
 
 export const departments = pgTable('departments', (t) => ({
@@ -25,5 +26,6 @@ export const departmentsRelations = relations(departments, ({ many }) => ({
   faculty: many(faculty),
   majors: many(majors),
   staff: many(staff),
+  eventDepartments: many(eventDepartments),
   notificationDepartments: many(notificationDepartments),
 }));

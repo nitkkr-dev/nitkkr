@@ -1,7 +1,14 @@
-import { check, pgEnum, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import {
+  check,
+  pgEnum,
+  pgTable,
+  primaryKey,
+  uniqueIndex,
+} from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 
 import { clubs } from './clubs.schema';
+import { departments } from './departments.schema';
 
 export const eventCategoryEnum = pgEnum('event_category', [
   'academic',
@@ -32,7 +39,7 @@ export const events = pgTable(
     time: t.varchar('time', { length: 32 }), // Optional - e.g. "4:30 PM"
     location: t.varchar('location', { length: 256 }),
     locationUrl: t.varchar('location_url', { length: 512 }),
-    clubId: t.integer('club_id').references(() => clubs.id),
+    // NOTE: clubId removed - now using junction table for many-to-many
     images: t
       .text('images')
       .array()
@@ -64,9 +71,74 @@ export const events = pgTable(
   })
 );
 
-export const eventsRelations = relations(events, ({ one }) => ({
+// ===================== JUNCTION TABLES =====================
+
+// Junction table: events <-> departments (many-to-many)
+export const eventDepartments = pgTable(
+  'event_departments',
+  (t) => ({
+    eventId: t
+      .integer('event_id')
+      .notNull()
+      .references(() => events.id, { onDelete: 'cascade' }),
+    departmentId: t
+      .integer('department_id')
+      .notNull()
+      .references(() => departments.id, { onDelete: 'cascade' }),
+  }),
+  (table) => ({
+    pk: primaryKey({ columns: [table.eventId, table.departmentId] }),
+  })
+);
+
+// Junction table: events <-> clubs (many-to-many)
+export const eventClubs = pgTable(
+  'event_clubs',
+  (t) => ({
+    eventId: t
+      .integer('event_id')
+      .notNull()
+      .references(() => events.id, { onDelete: 'cascade' }),
+    clubId: t
+      .integer('club_id')
+      .notNull()
+      .references(() => clubs.id, { onDelete: 'cascade' }),
+  }),
+  (table) => ({
+    pk: primaryKey({ columns: [table.eventId, table.clubId] }),
+  })
+);
+
+// ===================== RELATIONS =====================
+
+// Junction table relations
+export const eventDepartmentsRelations = relations(
+  eventDepartments,
+  ({ one }) => ({
+    event: one(events, {
+      fields: [eventDepartments.eventId],
+      references: [events.id],
+    }),
+    department: one(departments, {
+      fields: [eventDepartments.departmentId],
+      references: [departments.id],
+    }),
+  })
+);
+
+export const eventClubsRelations = relations(eventClubs, ({ one }) => ({
+  event: one(events, {
+    fields: [eventClubs.eventId],
+    references: [events.id],
+  }),
   club: one(clubs, {
-    fields: [events.clubId],
+    fields: [eventClubs.clubId],
     references: [clubs.id],
   }),
+}));
+
+// Main events relations
+export const eventsRelations = relations(events, ({ many }) => ({
+  eventDepartments: many(eventDepartments),
+  eventClubs: many(eventClubs),
 }));

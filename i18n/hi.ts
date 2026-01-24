@@ -359,6 +359,7 @@ const text: Translations = {
       title: 'फ़िल्टर',
       date: 'तारीख',
       category: 'श्रेणी',
+      department: 'विभाग',
       startDate: 'आरंभ तिथि',
       endDate: 'समाप्ति तिथि',
       day: 'दिन',
