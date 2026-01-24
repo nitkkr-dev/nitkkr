@@ -133,7 +133,7 @@ export default async function IICPage({
           {/* Top/Left: Vision & Mission Text */}
           <div className="bg-white space-y-6 rounded-2xl p-6 lg:p-8 ">
             <div>
-              <h4 className="text-gray-900 mb-4 text-2xl font-bold">
+              <h4 className="text-gray-900 mb-4 text-2xl font-bold md:text-lg">
                 {text.Institute.cells.iic.vision.title}
               </h4>
               {text.Institute.cells.iic.vision.content.map((vision, index) => (
@@ -179,7 +179,7 @@ export default async function IICPage({
         <div>
           <Heading
             glyphDirection="ltr"
-            heading="h2"
+            heading="h3"
             className="mt-12"
             text={text.Institute.cells.iic.officeOrder.title}
           />
@@ -206,7 +206,7 @@ export default async function IICPage({
         <div>
           <Heading
             glyphDirection="rtl"
-            heading="h2"
+            heading="h3"
             className="mt-12"
             text={text.Institute.cells.iic.activities.title}
           />
@@ -243,7 +243,7 @@ export default async function IICPage({
         </div>
         <Heading
           glyphDirection="ltr"
-          heading="h2"
+          heading="h3"
           className="mt-12"
           text={text.Institute.cells.iic.pillarsOfLeadership}
         />
@@ -263,7 +263,7 @@ export default async function IICPage({
 
         <Heading
           glyphDirection="rtl"
-          heading="h2"
+          heading="h3"
           className="mt-12"
           text={text.Institute.cells.iic.imageGallery}
         />
