@@ -5,7 +5,7 @@ import { TbMail } from 'react-icons/tb';
 import { getTranslations } from '~/i18n/translations';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import NotificationsPanelProps from '~/components/notifications/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import FICGroup from '~/components/fic-group';
 import {
   Table,
@@ -78,11 +78,11 @@ export default async function RACS({
             id="notifications"
             text={text.notifications.title}
           />
-          <NotificationsPanelProps
+          <NotificationsPanel
             locale={locale}
-            category="academic"
+            category="racs"
             showViewAll={true}
-            viewAllHref={`/${locale}/notifications/?category=academic`}
+            viewAllHref={`/${locale}/notifications/?category=miscellaneous`}
             className="w-full"
           />
         </section>

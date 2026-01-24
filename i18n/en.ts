@@ -569,8 +569,12 @@ const text: Translations = {
       examination: 'Examinations',
       result: 'Results',
       hostel: 'Hostels',
+      scholarships: 'Scholarships',
+      placements: 'Placements',
       miscellaneous: 'Miscellaneous',
-      archived: 'Archived',
+      // Hidden categories (for specific pages)
+      scoe: 'SCOE',
+      racs: 'RACS',
     },
     educationType: {
       ug: 'UG',

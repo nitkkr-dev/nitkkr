@@ -536,8 +536,12 @@ export interface Translations {
       examination: string;
       result: string;
       hostel: string;
+      scholarships: string;
+      placements: string;
       miscellaneous: string;
-      archived: string;
+      // Hidden categories
+      scoe: string;
+      racs: string;
     };
     educationType: {
       ug: string;

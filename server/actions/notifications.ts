@@ -1,16 +1,18 @@
 'use server';
 
-import { and, desc, gte, inArray, lt, lte } from 'drizzle-orm';
+import { and, arrayOverlaps, desc, gte, inArray, lt, lte } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 
 import { db } from '~/server/db';
 import {
+  notificationCategoryEnum,
   notificationClubs,
   notificationDepartments,
   notificationHostels,
   notifications,
 } from '~/server/db/schema';
 
+type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 const BATCH_SIZE = 20;
 
 export interface NotificationItem {
@@ -133,6 +135,11 @@ export async function loadMoreNotifications(
     conditions.push(inArray(notifications.id, filteredNotificationIds));
   }
 
+  // Add category filter at DB level
+  if (categories?.length) {
+    conditions.push(arrayOverlaps(notifications.categories, categories as Cat[]));
+  }
+
   // Fetch batch + 1 to check if there are more
   let results = await db.query.notifications.findMany({
     where: conditions.length ? and(...conditions) : undefined,
@@ -140,13 +147,7 @@ export async function loadMoreNotifications(
     limit: BATCH_SIZE + 1,
   });
 
-  // Apply in-memory filters (category, text search)
-  if (categories?.length) {
-    results = results.filter((n) =>
-      n.categories.some((cat) => categories.includes(cat))
-    );
-  }
-
+  // Apply text search in-memory (can't easily do full-text search in Drizzle)
   if (query) {
     const lowerQuery = query.toLowerCase();
     results = results.filter(
