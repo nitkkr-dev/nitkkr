@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import Image from 'next/image';
 import { MdOutlineChecklist } from 'react-icons/md';
 import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
 import { LuShipWheel } from 'react-icons/lu';
 import { VscMortarBoard } from 'react-icons/vsc';
 import { HiCurrencyRupee } from 'react-icons/hi';
 import { BsTools } from 'react-icons/bs';
-import { MdEmail } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -51,11 +49,10 @@ export default async function Administration({
           { label: text.administrationHeads, href: '#administration-heads' },
           { label: text.committees, href: '#committees' },
           { label: text.actsAndStatutes, href: '#acts-and-statutes' },
-          { label: text.deans, href: '#deans' },
         ]}
       />
 
-      <section className="container mt-20">
+      <section className="container mt-4 md:mt-6">
         <Heading
           glyphDirection={'dual'}
           heading={'h3'}
@@ -64,6 +61,7 @@ export default async function Administration({
           href="#board-of-governors"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.constitutionOfBoG,
@@ -94,6 +92,7 @@ export default async function Administration({
           <Suspense fallback={<Loading />}></Suspense>
         </section>
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.senateComposition,
@@ -120,6 +119,7 @@ export default async function Administration({
           href="#administration-heads"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.director,
@@ -146,6 +146,7 @@ export default async function Administration({
           href="#committees"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.financial,
@@ -159,20 +160,6 @@ export default async function Administration({
             },
           ]}
         />
-        {/* DEANS */}
-        <Heading
-          glyphDirection="dual"
-          heading="h3"
-          text={text.deans.toUpperCase()}
-          id="deans"
-          href="#deans"
-        />
-
-        <section className="container my-10">
-          <Suspense fallback={<Loading />}>
-            <Deans />
-          </Suspense>
-        </section>
 
         <Heading
           glyphDirection={'dual'}
@@ -233,90 +220,3 @@ export default async function Administration({
     </>
   );
 }
-
-const Deans = () => {
-  const deans = [
-    {
-      id: 1,
-      name: 'Professor Pratibha Aggarwal',
-      designation: 'Dean of Student Welfare',
-      email: 'jitenderchhabra@nitkkr.ac.in',
-      image: '/images/dean1.jpg', // replace with your actual dean image path
-      description: `India, the land of seekers, is at the cusp of becoming Vishwa Guru all 
-      over again after 1100 years of subjugation, wars, annexures and humiliation. 
-      It is again a free country due to the sacrifices made by our leaders, freedom fighters 
-      and has learnt the art of standing tall in the midst of many a challenge of building 
-      the nation with its rich diversity, cultures, languages all over again since the last 
-      75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
-    },
-    {
-      id: 2,
-      name: 'Professor Pratibha Aggarwal',
-      designation: 'Dean of Student Welfare',
-      email: 'jitenderchhabra@nitkkr.ac.in',
-      image: '/images/dean1.jpg', // replace with your actual dean image path
-      description: `India, the land of seekers, is at the cusp of becoming Vishwa Guru all 
-      over again after 1100 years of subjugation, wars, annexures and humiliation. 
-      It is again a free country due to the sacrifices made by our leaders, freedom fighters 
-      and has learnt the art of standing tall in the midst of many a challenge of building 
-      the nation with its rich diversity, cultures, languages all over again since the last 
-      75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.`,
-    },
-  ];
-
-  return (
-    <section className="space-y-8">
-      {deans.map((dean) => (
-        <article
-          key={dean.id}
-          className="bg-white flex flex-col items-start gap-6 rounded-xl border border-neutral-200 p-6 shadow-md md:flex-row"
-        >
-          {/* Image + Email (left column) */}
-          <div className="flex flex-col items-start">
-            <Image
-              alt={dean.name}
-              className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-              height={0}
-              src={`persons/${dean.id}/image.png`}
-              width={0}
-            />
-            <div className="mt-3 flex items-center gap-2 text-sm text-neutral-800">
-              <MdEmail className="text-[#C5291D]" />
-              <a
-                href={`mailto:${dean.email}`}
-                className="text-[#C5291D] hover:underline"
-              >
-                {dean.email}
-              </a>
-            </div>
-          </div>
-
-          {/* Content (right column) */}
-          <div className="flex-1">
-            <header className="mb-3">
-              <h3
-                className="text-xl font-bold"
-                style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
-              >
-                {dean.name}
-              </h3>
-              <p
-                className="text-lg"
-                style={{ color: '#E13F32', fontFamily: 'DM Serif Display' }}
-              >
-                {dean.designation}
-              </p>
-            </header>
-
-            <p
-              className="text-sm leading-relaxed text-neutral-700"
-              style={{ color: '#000000', fontFamily: 'DM Sans' }}
-            >
-              {dean.description}
-            </p>
-          </div>
-        </article>
-      ))}
-    </section>
-  );
-};

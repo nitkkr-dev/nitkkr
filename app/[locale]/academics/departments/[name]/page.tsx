@@ -9,6 +9,7 @@ import { HiMiniBeaker } from 'react-icons/hi2';
 import { MdBadge, MdEmail } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -244,52 +245,31 @@ export default async function Department({
         ))}
       </section>
 
-      <nav
-        className={cn(
-          'container',
-          'my-10 md:my-12 lg:my-16 xl:my-20',
-          'flex flex-col gap-5 lg:flex-row lg:justify-around'
-        )}
-      >
-        {[
-          {
-            label: text.facultyAndStaff,
-            href: {
-              pathname: `/${locale}/faculty-and-staff`,
-              query: { department: department.urlName },
+      <section className="container">
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
+            {
+              label: text.facultyAndStaff,
+              href: {
+                pathname: `/${locale}/faculty-and-staff`,
+                query: { department: department.urlName },
+              },
+              icon: MdBadge,
             },
-            icon: MdBadge,
-          },
-          {
-            label: text.laboratories,
-            href: `/${locale}/academics/departments/${name}/labs`,
-            icon: HiMiniBeaker,
-          },
-          {
-            label: text.achievements,
-            href: `/${locale}/academics/departments/${name}/achievements`,
-            icon: FaTrophy,
-          },
-        ].map(({ label, href, icon: Icon }, index) => (
-          <Button
-            asChild
-            className={cn(
-              'flex flex-col',
-              'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-            )}
-            key={index}
-            variant="secondary"
-          >
-            <Link href={href}>
-              <Icon className="size-12" />
-              <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                {label}
-              </p>
-            </Link>
-          </Button>
-        ))}
-      </nav>
+            {
+              label: text.laboratories,
+              href: `/${locale}/academics/departments/${name}/labs`,
+              icon: HiMiniBeaker,
+            },
+            {
+              label: text.achievements,
+              href: `/${locale}/academics/departments/${name}/achievements`,
+              icon: FaTrophy,
+            },
+          ]}
+        />
+      </section>
 
       {imageCount !== 0 && (
         <article className="container" id="gallery">

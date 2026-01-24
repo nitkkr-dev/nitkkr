@@ -6,7 +6,7 @@ import { FaGears } from 'react-icons/fa6';
 import { MdArticle } from 'react-icons/md';
 import { RiBriefcase4Line } from 'react-icons/ri';
 
-import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
@@ -17,7 +17,6 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
 
 import clients from './recruiters';
 
@@ -79,77 +78,56 @@ export default async function TrainingAndPlacement({
         />
         <article className="container">
           <Suspense fallback={<Loading />}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {[
+            <ButtonGroup
+              columns={3}
+              buttonArray={[
                 {
                   label: text.stats.content[0],
-                  file: 'Academic-Session-2022-23',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2022-23.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[1],
-                  file: 'Academic-Session-2021-22',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2021-22.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[2],
-                  file: 'Academic-Session-2020-21-FN-24032022',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2020-21-FN-24032022.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[3],
-                  file: 'Academic-Session-2019-20-FN-24032022',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2019-20-FN-24032022.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[4],
-                  file: 'Academic-Session-2018-19-FN-24032022',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2018-19-FN-24032022.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[5],
-                  file: 'Academic-Session-2017_18-21072020',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2017_18-21072020.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[6],
-                  file: 'Academic-Session-2017_18-21072020',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2017_18-21072020.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[7],
-                  file: 'Academic-Session-2017-18-FN-24032022',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2017-18-FN-24032022.pdf',
                   icon: MdArticle,
                 },
                 {
                   label: text.stats.content[8],
-                  file: 'Academic-Session-2016_17-21072020',
+                  href: 'training-and-placement/placement-stats/Academic-Session-2016_17-21072020.pdf',
                   icon: MdArticle,
                 },
-              ].map(({ label, file, icon: Icon }, index) => (
-                <Button
-                  asChild
-                  className={cn(
-                    'flex flex-col',
-                    'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                    'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-                  )}
-                  key={index}
-                  variant="secondary"
-                >
-                  <Link
-                    href={`training-and-placement/placement-stats/${file}.pdf`}
-                    target="_blank"
-                  >
-                    <Icon className="size-12" />
-
-                    <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                      {label}
-                    </p>
-                  </Link>
-                </Button>
-              ))}
-            </div>
+              ]}
+            />
           </Suspense>
         </article>
       </section>
@@ -189,63 +167,35 @@ export default async function TrainingAndPlacement({
           text={text.headings.forrecruiters.toUpperCase()}
           className="container"
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          buttonArray={[
             {
               label: text.forrecruiters.build,
-              file: 'Build-a-Relationship-converted_1',
+              href: 'training-and-placement/for-recruiters/Build-a-Relationship-converted_1.pdf',
               icon: FaGears,
             },
             {
               label: text.forrecruiters.invitaion,
-              file: 'Website-Update-_-Invitation.030823',
+              href: 'training-and-placement/for-recruiters/Website-Update-_-Invitation.030823.pdf',
               icon: FaRegEnvelope,
             },
             {
               label: text.forrecruiters.reach,
-              file: 'Reach-Us',
+              href: 'training-and-placement/for-recruiters/Reach-Us.pdf',
               icon: FaGlobeAsia,
             },
             {
               label: text.about.tnpbrochure,
-              file: 'Training-Placement-Brochure-2023-24',
+              href: 'training-and-placement/for-recruiters/Training-Placement-Brochure-2023-24.pdf',
               icon: MdArticle,
             },
             {
               label: text.about.tnpteam,
-              file: 'Placement-Team-2023-24updated',
+              href: 'training-and-placement/for-recruiters/Placement-Team-2023-24updated.pdf',
               icon: MdArticle,
             },
-          ].map(({ label, file, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link
-                href={`training-and-placement/for-recruiters/${file}.pdf`}
-                target="_blank"
-              >
-                <Icon className="size-12" />
-
-                <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
       <section className="container" id="guide">
         <Heading
@@ -254,52 +204,26 @@ export default async function TrainingAndPlacement({
           text={text.headings.guidelines.toUpperCase()}
           className="container"
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.guidelines.protocol,
-              file: 'PLACEMENT_PROTOCOL_1',
+              href: 'training-and-placement/guidelines/PLACEMENT_PROTOCOL_1.pdf',
               icon: RiBriefcase4Line,
             },
             {
               label: text.guidelines.tnpguidelines,
-              file: 'TP_Cell_Guidelines',
+              href: 'training-and-placement/guidelines/TP_Cell_Guidelines.pdf',
               icon: MdArticle,
             },
             {
               label: text.guidelines.internguidlines,
-              file: 'UG-Internship-Guidelines_final-08042021',
+              href: 'training-and-placement/guidelines/UG-Internship-Guidelines_final-08042021.pdf',
               icon: MdArticle,
             },
-          ].map(({ label, file, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link
-                href={`training-and-placement/guidelines/${file}.pdf`}
-                target="_blank"
-              >
-                <Icon className="size-12" />
-                <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
       <section className="container" id="FAQ">
         <Heading
