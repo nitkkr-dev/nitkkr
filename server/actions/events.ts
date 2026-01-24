@@ -1,8 +1,9 @@
 'use server';
 
-import { desc } from 'drizzle-orm';
+import { desc, inArray } from 'drizzle-orm';
 
 import { db, type eventCategoryEnum } from '~/server/db';
+import { eventDepartments } from '~/server/db/schema/events.schema';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
 const BATCH_SIZE = 20;
@@ -10,17 +11,35 @@ const BATCH_SIZE = 20;
 interface LoadMoreEventsParams {
   cursor: string; // ISO date string
   categories?: string[];
+  departmentIds?: number[];
   start?: string;
   end?: string;
   query?: string;
 }
 
 export async function loadMoreEvents(params: LoadMoreEventsParams) {
-  const { cursor, categories = [], start, end, query } = params;
+  const { cursor, categories = [], departmentIds = [], start, end, query } = params;
 
   const startDate = start ? new Date(start) : undefined;
   const endDate = end ? new Date(end) : undefined;
   const cursorDate = new Date(cursor);
+
+  // Get event IDs that match department filter via junction table
+  let filteredEventIds: number[] | undefined;
+  if (departmentIds.length) {
+    const deptMatches = await db
+      .selectDistinct({
+        eventId: eventDepartments.eventId,
+      })
+      .from(eventDepartments)
+      .where(inArray(eventDepartments.departmentId, departmentIds));
+    filteredEventIds = deptMatches.map((m) => m.eventId);
+
+    // If no events match the department filter, return empty
+    if (filteredEventIds.length === 0) {
+      filteredEventIds = [-1]; // Use impossible ID to return no results
+    }
+  }
 
   // Fetch next batch: items with startDate < cursor (before the cursor)
   let raw = await db.query.events.findMany({
@@ -28,7 +47,8 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
       and(
         lt(e.startDate, cursorDate.toISOString()), // Cursor-based pagination
         startDate ? gte(e.startDate, startDate.toISOString()) : undefined,
-        endDate ? lte(e.startDate, endDate.toISOString()) : undefined
+        endDate ? lte(e.startDate, endDate.toISOString()) : undefined,
+        filteredEventIds ? inArray(e.id, filteredEventIds) : undefined
       ),
     orderBy: (e) => [desc(e.startDate)],
     limit: BATCH_SIZE + 1, // +1 to check if more exist

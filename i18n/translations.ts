@@ -557,6 +557,7 @@ export interface Translations {
       title: string;
       date: string;
       category: string;
+      department: string;
       startDate: string;
       endDate: string;
       day: string;
