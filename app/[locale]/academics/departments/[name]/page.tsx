@@ -13,6 +13,7 @@ import ButtonGroup from '~/components/button-group';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
@@ -145,12 +146,21 @@ export default async function Department({
         />
       </article>
 
+      {/* Notifications Panel for Department */}
+      {department && (
+        <NotificationsPanel
+          locale={locale}
+          departmentIds={[department.id]}
+          className="container my-8"
+        />
+      )}
+
       <section className="container" id="hod-message">
         <Heading
           glyphDirection="rtl"
           heading="h3"
           href="#hod-message"
-          text="HOD's Message"
+          text={text.headings.hod.title}
         />
         <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
           <Image
