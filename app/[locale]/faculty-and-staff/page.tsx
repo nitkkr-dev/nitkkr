@@ -241,82 +241,6 @@ const Departments = async ({
     columns: { id: true, name: true, urlName: true },
   });
 
-  // const selectedDepartments = Array.isArray(department)
-  //   ? department
-  //   : department
-  //     ? [department]
-  //     : [];
-
-  // // Define the updated department value based on selection
-  // const getUpdatedDepartments = (urlName: string) => {
-  //   return selectedDepartments.includes(urlName)
-  //     ? selectedDepartments.filter((d) => d !== urlName)
-  //     : [...selectedDepartments, urlName];
-  // };
-
-  // return select ? (
-  //   <Select navigate>
-  //     <SelectTrigger className="px-4 py-5 sm:w-1/2 lg:w-1/3 xl:hidden">
-  //       <SelectValue
-  //         placeholder={
-  //           selectedDepartments.length
-  //             ? `${selectedDepartments.length} selected`
-  //             : 'Choose a department'
-  //         }
-  //       />
-  //     </SelectTrigger>
-  //     <SelectContent>
-  //       {departments.map(({ name, urlName }, index) => (
-  //         <div key={index} className="flex items-center px-2 py-1">
-  //           <input
-  //             type="checkbox"
-  //             id={`mobile-department-${urlName}`}
-  //             className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-  //             checked={selectedDepartments.includes(urlName)}
-  //             readOnly
-  //           />
-  //           <PreserveParamsLink
-  //             paramToUpdate="department"
-  //             value={getUpdatedDepartments(urlName)}
-  //             className="ml-2 w-full py-1"
-  //           >
-  //             {name}
-  //           </PreserveParamsLink>
-  //         </div>
-  //       ))}
-  //     </SelectContent>
-  //   </Select>
-  // ) : (
-  //   <ol className="w-full space-y-4">
-  //     {departments.map(({ name, urlName }, index) => (
-  //       <li key={index}>
-  //         <PreserveParamsLink
-  //           paramToUpdate="department"
-  //           value={getUpdatedDepartments(urlName)}
-  //           className={cn(
-  //             'flex w-full items-center rounded border p-3',
-  //             selectedDepartments.includes(urlName)
-  //               ? 'bg-primary-50 border-primary-700'
-  //               : 'border-neutral-300'
-  //           )}
-  //         >
-  //           <div className="flex w-full items-center">
-  //             <div className="mr-2">
-  //               <input
-  //                 type="checkbox"
-  //                 id={`department-${urlName}`}
-  //                 className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-  //                 checked={selectedDepartments.includes(urlName)}
-  //                 readOnly
-  //               />
-  //             </div>
-  //             <span className="font-semibold text-shade-dark">{name}</span>
-  //           </div>
-  //         </PreserveParamsLink>
-  //       </li>
-  //     ))}
-  //   </ol>
-  // );
   return (
     <DepartmentsClient
       departments={departments}
@@ -388,82 +312,127 @@ const FacultyList = async ({
   return filteredFaculty.length === 0 ? (
     <NoResultStatus locale={locale} />
   ) : (
-    filteredFaculty.map((faculty, index) => {
-      const isDepartmentHead = departmentHeads.find(
-        ({ facultyId }) => facultyId === faculty.id
-      );
+    filteredFaculty
+      .sort((a, b) => {
+        const aIsHead = departmentHeads.some(
+          ({ facultyId }) => facultyId === a.id
+        );
+        const bIsHead = departmentHeads.some(
+          ({ facultyId }) => facultyId === b.id
+        );
+        return aIsHead === bIsHead ? 0 : aIsHead ? -1 : 1;
+      })
+      .map((faculty, index) => {
+        const isDepartmentHead = departmentHeads.find(
+          ({ facultyId }) => facultyId === faculty.id
+        );
 
-      const profileExternalLinks = {
-        googleScholarId: faculty.googleScholarId,
-        linkedInId: faculty.linkedInId,
-        researchGateId: faculty.researchGateId,
-        scopusId: faculty.scopusId,
-      };
+        const profileExternalLinks = {
+          googleScholarId: faculty.googleScholarId,
+          linkedInId: faculty.linkedInId,
+          researchGateId: faculty.researchGateId,
+          scopusId: faculty.scopusId,
+        };
 
-      return (
-        <li
-          className="rounded border border-primary-700 bg-neutral-50 hover:drop-shadow-md"
-          key={index}
-        >
-          <Link
-            className="flex gap-4 p-2 sm:p-3 md:p-4"
-            href={`/${locale}/faculty-and-staff/${faculty.employeeId}`}
+        return (
+          <li
+            className="rounded border border-primary-700 bg-neutral-50 hover:drop-shadow-md"
+            key={index}
           >
-            <FacultyImage
-              employeeId={faculty.employeeId}
-              facultyId={faculty.id}
-              alt={faculty.person.name}
-              imageUrl={faculty.person.img}
-              width={176}
-              height={176}
-              className="my-auto size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
-            />
-            <main>
-              <header className="mb-1 sm:mb-1 md:mb-2 lg:mb-3">
-                <h4 className="mb-0">{faculty.person.name}</h4>
-                <p>
-                  {faculty.designation}
-                  {isDepartmentHead && ` (${deptartmentHeadText})`}
-                </p>
-              </header>
-              {/* Contact Information */}
-              <ul>
-                <li className="flex items-center gap-2">
-                  <MdEmail className="fill-primary-700" />
-                  {faculty.person.email}
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaPhone className="fill-primary-700" />
-                  {faculty.person.telephone}
-                </li>
-              </ul>
-              {/* Areas of Interest */}
-              {faculty.areasOfInterest &&
-                faculty.areasOfInterest.length > 0 && (
-                  <div className="mt-2">
-                    <ul className="list-none pl-5">
-                      {faculty.areasOfInterest
-                        .slice(0, 1)
-                        .map((area, index) => (
-                          <li key={index}>{area}</li>
-                        ))}
-                      {faculty.areasOfInterest.length > 1 && (
-                        <li>
-                          {faculty.areasOfInterest[1]}{' '}
-                          {faculty.areasOfInterest.length > 2 && (
-                            <span className="text-primary-700">
-                              + {faculty.areasOfInterest.length - 2} more
-                            </span>
-                          )}
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                )}
-            </main>
-            {/* Links */}
-            {/* On large screen */}
-            <div className="my-auto ml-auto flex hidden w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
+            <Link
+              className="flex gap-4 p-2 sm:p-3 md:p-4"
+              href={`/${locale}/faculty-and-staff/${faculty.employeeId}`}
+            >
+              <FacultyImage
+                employeeId={faculty.employeeId}
+                facultyId={faculty.id}
+                alt={faculty.person.name}
+                imageUrl={faculty.person.img}
+                width={176}
+                height={176}
+                className="my-auto size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
+              />
+              <main>
+                <header className="mb-1 sm:mb-1 md:mb-2 lg:mb-3">
+                  <h4 className="mb-0">{faculty.person.name}</h4>
+                  <p>
+                    {faculty.designation}
+                    {isDepartmentHead && ` (${deptartmentHeadText})`}
+                  </p>
+                </header>
+                {/* Contact Information */}
+                <ul>
+                  <li className="flex items-center gap-2">
+                    <MdEmail className="fill-primary-700" />
+                    {faculty.person.email}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <FaPhone className="fill-primary-700" />
+                    {faculty.person.telephone}
+                  </li>
+                </ul>
+                {/* Areas of Interest */}
+                {faculty.areasOfInterest &&
+                  faculty.areasOfInterest.length > 0 && (
+                    <div className="mt-2">
+                      <ul className="list-none pl-5">
+                        {faculty.areasOfInterest
+                          .slice(0, 1)
+                          .map((area, index) => (
+                            <li key={index}>{area}</li>
+                          ))}
+                        {faculty.areasOfInterest.length > 1 && (
+                          <li>
+                            {faculty.areasOfInterest[1]}{' '}
+                            {faculty.areasOfInterest.length > 2 && (
+                              <span className="text-primary-700">
+                                + {faculty.areasOfInterest.length - 2} more
+                              </span>
+                            )}
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+              </main>
+              {/* Links */}
+              {/* On large screen */}
+              <div className="my-auto ml-auto flex hidden w-fit min-w-[168px] flex-col gap-2 border-l-[1px] border-primary-700 pl-4 md:flex">
+                {(
+                  Object.entries(profileExternalLinks) as [
+                    keyof typeof profileExternalLinks,
+                    string,
+                  ][]
+                ).map(([key, value]) => {
+                  if (key in profileExternalLinks) {
+                    return (
+                      <Link
+                        key={key}
+                        className="flex w-fit items-center justify-evenly gap-2 rounded-2xl"
+                        href={
+                          !profileExternalLinks[key]
+                            ? ''
+                            : profileExternalLinks[key]!.startsWith('https')
+                              ? profileExternalLinks[key]!
+                              : `https://${profileExternalLinks[key]!}`
+                        }
+                      >
+                        <Image
+                          alt={key}
+                          src={`faculty-and-staff/${key}.svg`}
+                          height={0}
+                          width={0}
+                          className="mx-auto h-8 w-8"
+                        />
+                        <span>{text.externalLinks[key]}</span>
+                      </Link>
+                    );
+                  }
+                })}
+              </div>
+              {/* On small and medium screens */}
+            </Link>
+            <div className="mx-2 mt-2 flex flex-wrap justify-evenly gap-2 border-t-[1px] border-primary-700 pb-2 pt-3 sm:mx-3 sm:pb-3 sm:pt-4 md:hidden">
               {(
                 Object.entries(profileExternalLinks) as [
                   keyof typeof profileExternalLinks,
@@ -474,21 +443,15 @@ const FacultyList = async ({
                   return (
                     <Link
                       key={key}
-                      className="flex w-fit items-center justify-evenly gap-2 rounded-2xl"
-                      href={
-                        !profileExternalLinks[key]
-                          ? ''
-                          : profileExternalLinks[key]!.startsWith('https')
-                            ? profileExternalLinks[key]!
-                            : `https://${profileExternalLinks[key]!}`
-                      }
+                      className="flex w-fit flex-col items-center gap-2 rounded-2xl"
+                      href={profileExternalLinks[key] ?? ''}
                     >
                       <Image
                         alt={key}
                         src={`faculty-and-staff/${key}.svg`}
                         height={0}
                         width={0}
-                        className="mx-auto h-8 w-8"
+                        className="mx-auto h-12 w-12"
                       />
                       <span>{text.externalLinks[key]}</span>
                     </Link>
@@ -496,38 +459,9 @@ const FacultyList = async ({
                 }
               })}
             </div>
-            {/* On small and medium screens */}
-          </Link>
-          <div className="mx-2 mt-2 flex flex-wrap justify-evenly gap-2 border-t-[1px] border-primary-700 pb-2 pt-3 sm:mx-3 sm:pb-3 sm:pt-4 md:hidden">
-            {(
-              Object.entries(profileExternalLinks) as [
-                keyof typeof profileExternalLinks,
-                string,
-              ][]
-            ).map(([key, value]) => {
-              if (key in profileExternalLinks) {
-                return (
-                  <Link
-                    key={key}
-                    className="flex w-fit flex-col items-center gap-2 rounded-2xl"
-                    href={profileExternalLinks[key] ?? ''}
-                  >
-                    <Image
-                      alt={key}
-                      src={`faculty-and-staff/${key}.svg`}
-                      height={0}
-                      width={0}
-                      className="mx-auto h-12 w-12"
-                    />
-                    <span>{text.externalLinks[key]}</span>
-                  </Link>
-                );
-              }
-            })}
-          </div>
-        </li>
-      );
-    })
+          </li>
+        );
+      })
   );
 };
 

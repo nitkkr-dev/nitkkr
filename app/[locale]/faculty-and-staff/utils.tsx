@@ -147,6 +147,12 @@ export async function FacultyOrStaffComponent({
           sql`continuing_education.faculty_id = faculty.employee_id`
         )
         .as('continuingEducation'),
+      doctoralStudents: db
+        .$count(
+          researchScholars,
+          sql`research_scholars.faculty_id = faculty.employee_id`
+        )
+        .as('doctoralStudents'),
     },
   });
 
@@ -192,7 +198,6 @@ export async function FacultyOrStaffComponent({
   );
 
   const facultyDescription = {
-    doctoralStudents: 0, // Doctoral Student count not implemented
     ...facultyDescriptionTmp, // Original faculty details
     publications: realPublicationsCount, // Use the new count method
   };

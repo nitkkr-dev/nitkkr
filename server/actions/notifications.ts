@@ -137,7 +137,9 @@ export async function loadMoreNotifications(
 
   // Add category filter at DB level
   if (categories?.length) {
-    conditions.push(arrayOverlaps(notifications.categories, categories as Cat[]));
+    conditions.push(
+      arrayOverlaps(notifications.categories, categories as Cat[])
+    );
   }
 
   // Fetch batch + 1 to check if there are more
