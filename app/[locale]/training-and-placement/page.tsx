@@ -17,8 +17,26 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { getTranslations } from '~/i18n/translations';
+import { getS3Url } from '~/server/s3';
 
 import clients from './recruiters';
+
+// Hardcoded PDF base URL and PDF list for placement stats
+const pdfBase = `${getS3Url()}/training-and-placement/placement-stats/`;
+
+const placementStats: string[] = [
+  `${pdfBase}Academic-Session-2024-25.pdf`,
+  `${pdfBase}Academic-Session-2023-24.pdf`,
+  `${pdfBase}Academic-Session-2022-23.pdf`,
+  `${pdfBase}Academic-Session-2021-22.pdf`,
+  `${pdfBase}Academic-Session-2020-21-FN.pdf`,
+  `${pdfBase}Academic-Session-2019-20-FN.pdf`,
+  `${pdfBase}Academic-Session-2018-19-FN.pdf`,
+  `${pdfBase}Academic-Session-2017-18.pdf`,
+  `${pdfBase}Academic-Session-2017-18.pdf`,
+  `${pdfBase}Academic-Session-2017-18-FN.pdf`,
+  `${pdfBase}Academic-Session-2016-17.pdf`,
+];
 
 export default async function TrainingAndPlacement({
   params: { locale },
@@ -80,53 +98,13 @@ export default async function TrainingAndPlacement({
           <Suspense fallback={<Loading />}>
             <ButtonGroup
               columns={3}
-              buttonArray={[
-                {
-                  label: text.stats.content[0],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2022-23.pdf',
+              buttonArray={text.stats.content
+                .slice(0, 11)
+                .map((label, index) => ({
+                  label,
+                  href: placementStats[index],
                   icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[1],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2021-22.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[2],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2020-21-FN-24032022.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[3],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2019-20-FN-24032022.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[4],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2018-19-FN-24032022.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[5],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2017_18-21072020.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[6],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2017_18-21072020.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[7],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2017-18-FN-24032022.pdf',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[8],
-                  href: 'training-and-placement/placement-stats/Academic-Session-2016_17-21072020.pdf',
-                  icon: MdArticle,
-                },
-              ]}
+                }))}
             />
           </Suspense>
         </article>
