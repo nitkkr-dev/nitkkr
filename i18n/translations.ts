@@ -1393,4 +1393,11 @@ export interface Translations {
       list: string[];
     };
   };
+  WebsiteContributors: {
+    pageTitle: string;
+    description: string;
+    passoutYear: string;
+    rollNumber: string;
+    noContributors: string;
+  };
 }
