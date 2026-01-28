@@ -2360,6 +2360,14 @@ rolls down to 60% of the eligible students for second round of placement session
       ],
     },
   },
+  WebsiteContributors: {
+    pageTitle: 'Contributions for Website Development',
+    description:
+      'We extend our heartfelt gratitude to all the students who have contributed to the development and maintenance of the NIT Kurukshetra website. Their dedication, technical expertise, and creative vision have been instrumental in building this digital platform.',
+    passoutYear: 'Passout Year',
+    rollNumber: 'Roll No.',
+    noContributors: 'No contributors found for this year.',
+  },
 };
 
 export default text;
