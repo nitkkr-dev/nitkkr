@@ -187,10 +187,10 @@ const text: Translations = {
     },
     viewMore: 'View More',
     buttons: {
-      hostels: 'Hostels',
       racs: 'RAC-S (ISRO)',
       scoe: 'CoE (Siemens)',
-      tenders: 'Tenders',
+      thoughtLab: 'Thought Lab',
+      hostels: 'Hostels',
     },
   },
   Academics: {
@@ -237,6 +237,67 @@ const text: Translations = {
     whyToJoinUs: 'Why Join Us?',
   },
   Clubs: { title: 'CLUBS' },
+  ThoughtLab: {
+    title: 'Thought Lab',
+    vision: [
+      'To empower the thoughts of youth to build a world of peace, love and universal harmony through the means of science and spirituality.',
+    ],
+    mission: [
+      'To create a spiritual ambience for learning meditation and experiencing inner peace.',
+      'To provide a platform for research on Spiritual Dimensions of life.',
+      'To gain insights on Holistic development through Meditation.',
+      'To enable individuals to gain control over their thoughts, feelings and emotions.',
+      'To create interest among youth for Values & Spirituality.',
+    ],
+    secretaries: {
+      faculty_secretaries: [
+        { name: 'Dr. Dixit Garg', designation: 'Coordinator, Thought Lab' },
+        {
+          name: 'Dr. Than Singh Saini',
+          designation: 'Co-Coordinator, Thought Lab',
+        },
+        {
+          name: 'Dr. Anshu Parashar',
+          designation: 'Co-Coordinator, Thought Lab',
+        },
+        { name: 'Dr. Jagan Nath', designation: 'Co-Coordinator, Thought Lab' },
+        { name: 'Ms. Anjali Taneja', designation: 'Counsellor Psychologist' },
+        { name: 'Renu Munjal', designation: 'Technician, Thought Lab' },
+      ],
+      student_secretaries: [
+        {
+          name: 'Ashish Saini',
+          designation: 'Students Secretary, Thought Lab',
+        },
+        { name: 'Bhawna', designation: 'Students Secretary, Thought Lab' },
+        { name: 'Rajnish', designation: 'Students Secretary, Thought Lab' },
+        {
+          name: 'Vanshika Arora',
+          designation: 'Students Secretary, Thought Lab',
+        },
+      ],
+    },
+    purpose: [
+      'To provide a place for learning meditation and spiritual concepts.',
+      'To create spiritual ambience for experiencing inner peace.',
+      'To provide a platform for research on Spiritual Dimensions of life.',
+      'To gain insights on Holistic development through Meditation.',
+      'To build value based environment among members of organization.',
+      'To create interest among youth for Values & Spirituality.',
+    ],
+    benefits: [
+      'Experience Peace and Empower the Self',
+      'Positive change in personality',
+      'Freedom from stress, anxiety and fear',
+      'Enhance focus and concentration',
+      'Improve decision-making power',
+      'Opportunity to work on Spiritual projects',
+    ],
+    contact: {
+      office: 'Office of Thought Lab, NIT Kurukshetra',
+      website: 'https://thought-labv2.netlify.app/',
+    },
+  },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
     financial: 'FINANCIAL COMMITTEE',
@@ -1768,7 +1829,20 @@ Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
       nss: 'NSS',
       ncc: 'NCC',
     },
-    sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
+    sections: {
+      clubs: { title: 'CLUBS', more: 'Explore all clubs' },
+      council: {
+        title: 'STUDENT COUNCIL',
+        more: 'Explore all student council activities',
+      },
+      events: { title: 'EVENTS', more: 'Explore all events' },
+      thoughtLab: {
+        title: 'THOUGHT LAB',
+        more: 'Explore all thought lab activities',
+      },
+      nss: { title: 'NSS', more: 'Explore all NSS activities' },
+      ncc: { title: 'NCC', more: 'Explore all NCC activities' },
+    },
   },
   DirectorMessage: {
     title: `Director's Message`,

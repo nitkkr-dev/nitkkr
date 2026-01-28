@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import {
+  TbBrain,
   TbBuildingSkyscraper,
-  TbContract,
   TbRocket,
   TbSchool,
 } from 'react-icons/tb';
@@ -28,7 +28,7 @@ interface AnimatePageContentProps {
       hostels: string;
       racs: string;
       scoe: string;
-      tenders: string;
+      thoughtLab: string;
     };
   };
   notificationsSection: ReactNode;
@@ -92,11 +92,6 @@ export default function AnimatePageContent({
       <AnimateButtonGroup
         buttonArray={[
           {
-            label: text.buttons.hostels,
-            href: `/${locale}/institute/hostels`,
-            icon: TbBuildingSkyscraper,
-          },
-          {
             label: text.buttons.racs,
             href: `/${locale}/RACS`,
             icon: TbRocket,
@@ -107,9 +102,14 @@ export default function AnimatePageContent({
             icon: TbSchool,
           },
           {
-            label: text.buttons.tenders,
-            href: `/${locale}/notifications/?category=tender`,
-            icon: TbContract,
+            label: text.buttons.thoughtLab,
+            href: `/${locale}/student-activities/thought-lab`,
+            icon: TbBrain,
+          },
+          {
+            label: text.buttons.hostels,
+            href: `/${locale}/institute/hostels`,
+            icon: TbBuildingSkyscraper,
           },
         ]}
       />
