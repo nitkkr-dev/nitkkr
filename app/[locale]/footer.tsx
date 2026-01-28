@@ -64,6 +64,10 @@ export default async function Footer({ locale }: { locale: string }) {
       href: '/institute/sections/library/membership-and-privileges',
     },
     { name: 'Research Scholars', href: '/faculty-and-staff?tab=scholars' },
+    {
+      name: 'Contributions for Website Development',
+      href: '/contributions-for-website-development',
+    },
   ];
 
   return (
