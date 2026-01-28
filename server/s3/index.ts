@@ -25,4 +25,5 @@ export const getS3Url = (type: 'private' | 'public' = 'public') =>
     : `https://${env.AWS_PRIVATE_S3_NAME}.s3.${env.AWS_S3_REGION}.amazonaws.com/isaac-s3-images`;
 
 export * from './count-children';
+export * from './list-folder-images';
 export * from './upload';

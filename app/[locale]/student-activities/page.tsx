@@ -27,10 +27,13 @@ export default async function StudentActivities({
       <ImageHeader
         title={text.title}
         headings={[
-          { label: text.headings.clubs, href: '#clubs' },
+          { label: text.headings.clubs, href: 'student-activities/clubs' },
           { label: text.headings.council, href: '#council' },
-          { label: text.headings.events, href: '#events' },
-          { label: text.headings.thoughtLab, href: '#thought-lab' },
+          { label: text.headings.events, href: 'student-activities/events' },
+          {
+            label: text.headings.thoughtLab,
+            href: 'student-activities/thought-lab',
+          },
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
         ]}
