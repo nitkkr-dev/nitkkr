@@ -10,6 +10,9 @@ export const websiteContributors = pgTable('website_contributors', (t) => ({
   passoutYear: t.integer().notNull(),
   image: t.varchar({ length: 512 }),
   studentId: t.integer().references(() => students.id),
+  linkedinId: t.varchar({ length: 512 }),
+  githubId: t.varchar({ length: 512 }),
+  designation: t.varchar({ enum: ['developer', 'designer', 'devops'] }),
   createdAt: t.timestamp().defaultNow().notNull(),
 }));
 
