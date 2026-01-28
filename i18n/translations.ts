@@ -67,10 +67,10 @@ export interface Translations {
     };
     viewMore: string;
     buttons: {
-      hostels: string;
       racs: string;
       scoe: string;
-      tenders: string;
+      thoughtLab: string;
+      hostels: string;
     };
   };
   Academics: {
@@ -113,6 +113,28 @@ export interface Translations {
     whyToJoinUs: string;
   };
   Clubs: { title: string };
+  ThoughtLab: {
+    title: string;
+    vision: string[];
+    mission: string[];
+    secretaries: {
+      faculty_secretaries: {
+        name: string;
+        designation: string;
+      }[];
+      student_secretaries: {
+        name: string;
+        designation: string;
+      }[];
+    };
+    purpose: string[];
+    benefits: string[];
+    contact: {
+      office: string;
+      website: string;
+    };
+  };
+
   Committee: {
     building: string;
     financial: string;
@@ -1101,6 +1123,11 @@ export interface Translations {
     };
     sections: {
       clubs: { title: string; more: string };
+      council: { title: string; more: string };
+      events: { title: string; more: string };
+      thoughtLab: { title: string; more: string };
+      nss: { title: string; more: string };
+      ncc: { title: string; more: string };
     };
   };
   Research: {
