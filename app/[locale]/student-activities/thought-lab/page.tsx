@@ -7,11 +7,11 @@ import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url, listFolderImages } from '~/server/s3';
 
-// Define a type for secretary members
-type SecretaryMember = {
+// Change from `type` to `interface` for SecretaryMember to fix the lint error.
+interface SecretaryMember {
   name: string;
   designation: string;
-};
+}
 
 export default async function ThoughtLab({
   params: { locale },
