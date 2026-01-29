@@ -538,6 +538,19 @@ export interface Translations {
     noMoreNotifications: string;
     saveSelection: string;
     viewAll: string;
+    // Notification management (CCN only)
+    addNotification: string;
+    editNotification: string;
+    edit: string;
+    delete: string;
+    notificationTitle: string;
+    notificationContent: string;
+    notificationCategories: string;
+    notificationDate: string;
+    documents: string;
+    uploadDocument: string;
+    save: string;
+    cancel: string;
     filter: {
       title: string;
       date: string;
@@ -615,6 +628,9 @@ export interface Translations {
   NotFound: { title: string; description: string; backHome: string };
   Profile: {
     logout: string;
+    // Section profile (e.g., CCN office)
+    sectionProfile: string;
+    email: string;
     tabs: {
       personal: {
         title: string;

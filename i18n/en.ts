@@ -597,6 +597,19 @@ const text: Translations = {
     noMoreNotifications: 'No more notifications',
     saveSelection: 'Save selection',
     viewAll: 'View All',
+    // Notification management (CCN only)
+    addNotification: 'Add Notification',
+    editNotification: 'Edit Notification',
+    edit: 'Edit',
+    delete: 'Delete',
+    notificationTitle: 'Title',
+    notificationContent: 'Content',
+    notificationCategories: 'Categories',
+    notificationDate: 'Date',
+    documents: 'Documents',
+    uploadDocument: 'Upload Document',
+    save: 'Save',
+    cancel: 'Cancel',
     filter: {
       title: 'Filters',
       date: 'Date',
@@ -955,6 +968,10 @@ const text: Translations = {
     backHome: "Looks like you're lost let's get you back home",
   },
   Profile: {
+    logout: 'Log Out',
+    // Section profile (e.g., CCN office)
+    sectionProfile: 'Section Profile',
+    email: 'Email',
     tabs: {
       personal: {
         title: 'PERSONAL DETAILS',
@@ -1009,7 +1026,6 @@ const text: Translations = {
       bookmarks: { title: 'BOOKMARKS' },
       quickSend: { title: 'QUICK SEND' },
     },
-    logout: 'LOG OUT',
   },
   Programmes: {
     btechAbout:
