@@ -113,26 +113,56 @@ export interface Translations {
     whyToJoinUs: string;
   };
   Clubs: { title: string };
+
   ThoughtLab: {
     title: string;
-    vision: string[];
-    mission: string[];
+    about: string;
+    vision: {
+      heading: string;
+      points: string[];
+    };
+    mission: {
+      heading: string;
+      points: string[];
+    };
     secretaries: {
       faculty_secretaries: {
-        name: string;
-        designation: string;
-      }[];
+        length: number;
+        heading: string;
+        members: {
+          name: string;
+          designation: string;
+        }[];
+      };
       student_secretaries: {
-        name: string;
-        designation: string;
-      }[];
+        heading: string;
+        members: {
+          name: string;
+          designation: string;
+        }[];
+      };
     };
-    purpose: string[];
-    benefits: string[];
+    secretariesSession: string;
+    table: {
+      sno: string;
+      name: string;
+      designation: string;
+    };
+    purpose: {
+      heading: string;
+      points: string[];
+    };
+    benefits: {
+      heading: string;
+      points: string[];
+    };
     contact: {
+      heading: string;
       office: string;
       website: string;
+      websiteLabel: string;
     };
+    gallery: { heading: string };
   };
 
   Committee: {
