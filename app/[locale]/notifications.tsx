@@ -35,7 +35,7 @@ export default async function Notifications({
         className="container"
         glyphDirection="rtl"
         heading="h2"
-        href="#notifications"
+        href={`/${locale}/notifications`}
         text={text.title}
       />
 
