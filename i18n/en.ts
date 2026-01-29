@@ -232,64 +232,100 @@ const text: Translations = {
   Clubs: { title: 'CLUBS' },
   ThoughtLab: {
     title: 'Thought Lab',
-    vision: [
-      'To empower the thoughts of youth to build a world of peace, love and universal harmony through the means of science and spirituality.',
-    ],
-    mission: [
-      'To create a spiritual ambience for learning meditation and experiencing inner peace.',
-      'To provide a platform for research on Spiritual Dimensions of life.',
-      'To gain insights on Holistic development through Meditation.',
-      'To enable individuals to gain control over their thoughts, feelings and emotions.',
-      'To create interest among youth for Values & Spirituality.',
-    ],
+    vision: {
+      heading: 'Vision',
+      points: [
+        'To empower the minds of youth to create a world of peace, love, and universal harmony through science and spirituality.',
+      ],
+    },
+    mission: {
+      heading: 'Mission',
+      points: [
+        'To create a spiritual environment to learn meditation and experience inner peace.',
+        'To provide a platform for research on spiritual dimensions of life.',
+        'To gain insights into holistic development through meditation.',
+        'To enable individuals to gain control over their thoughts, emotions, and impulses.',
+        'To foster interest in values and spirituality among youth.',
+      ],
+    },
     secretaries: {
-      faculty_secretaries: [
-        { name: 'Dr. Dixit Garg', designation: 'Coordinator, Thought Lab' },
-        {
-          name: 'Dr. Than Singh Saini',
-          designation: 'Co-Coordinator, Thought Lab',
-        },
-        {
-          name: 'Dr. Anshu Parashar',
-          designation: 'Co-Coordinator, Thought Lab',
-        },
-        { name: 'Dr. Jagan Nath', designation: 'Co-Coordinator, Thought Lab' },
-        { name: 'Ms. Anjali Taneja', designation: 'Counsellor Psychologist' },
-        { name: 'Renu Munjal', designation: 'Technician, Thought Lab' },
-      ],
-      student_secretaries: [
-        {
-          name: 'Ashish Saini',
-          designation: 'Students Secretary, Thought Lab',
-        },
-        { name: 'Bhawna', designation: 'Students Secretary, Thought Lab' },
-        { name: 'Rajnish', designation: 'Students Secretary, Thought Lab' },
-        {
-          name: 'Vanshika Arora',
-          designation: 'Students Secretary, Thought Lab',
-        },
+      faculty_secretaries: {
+        heading: 'Faculty Secretaries',
+        members: [
+          { name: 'Dr. Dixit Garg', designation: 'Coordinator, Thought Lab' },
+          {
+            name: 'Dr. Than Singh Saini',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          {
+            name: 'Dr. Anshu Parashar',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          {
+            name: 'Dr. Jagan Nath',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          { name: 'Ms. Anjali Taneja', designation: 'Counseling Psychologist' },
+          { name: 'Renu Munjal', designation: 'Technician, Thought Lab' },
+        ],
+
+        length: 0,
+      },
+      student_secretaries: {
+        heading: 'Student Secretaries',
+        members: [
+          {
+            name: 'Ashish Saini',
+            designation: 'Student Secretary, Thought Lab',
+          },
+          { name: 'Bhavna', designation: 'Student Secretary, Thought Lab' },
+          { name: 'Rajneesh', designation: 'Student Secretary, Thought Lab' },
+          {
+            name: 'Vanshika Arora',
+            designation: 'Student Secretary, Thought Lab',
+          },
+        ],
+      },
+    },
+    secretariesSession:
+      'Faculty and Student Secretaries of Thought Lab for the academic session 2025–26.',
+    table: {
+      sno: 'Sr. No.',
+      name: 'Name',
+      designation: 'Designation',
+    },
+    purpose: {
+      heading: 'Purpose',
+      points: [
+        'To provide a space to learn meditation and spiritual concepts.',
+        'To create a spiritual environment to experience inner peace.',
+        'To provide a platform for research on spiritual dimensions of life.',
+        'To gain insights into holistic development through meditation.',
+        'To create a value-based environment among organization members.',
+        'To foster interest in values and spirituality among youth.',
       ],
     },
-    purpose: [
-      'To provide a place for learning meditation and spiritual concepts.',
-      'To create spiritual ambience for experiencing inner peace.',
-      'To provide a platform for research on Spiritual Dimensions of life.',
-      'To gain insights on Holistic development through Meditation.',
-      'To build value based environment among members of organization.',
-      'To create interest among youth for Values & Spirituality.',
-    ],
-    benefits: [
-      'Experience Peace and Empower the Self',
-      'Positive change in personality',
-      'Freedom from stress, anxiety and fear',
-      'Enhance focus and concentration',
-      'Improve decision-making power',
-      'Opportunity to work on Spiritual projects',
-    ],
+    benefits: {
+      heading: 'Benefits',
+      points: [
+        'Experience peace and empower yourself',
+        'Positive changes in personality',
+        'Relief from stress, anxiety, and fear',
+        'Improve concentration and focus',
+        'Enhance decision-making power',
+      ],
+    },
     contact: {
-      office: 'Office of Thought Lab, NIT Kurukshetra',
+      heading: 'Contact Us',
+      office: 'Thought Lab Office, NIT Kurukshetra',
       website: 'https://thought-labv2.netlify.app/',
+      websiteLabel: 'Website',
     },
+    gallery: {
+      heading: 'Image Gallery',
+    },
+    about:
+      'A Thought Lab has been established in the institute, which was inaugurated on 10 May 2022 by the Hon’ble Governor of Haryana. The objective of the Thought Lab is to train people to develop positive and creative thinking so that they can make constructive contributions to their homes, organizations, and society.',
   },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
@@ -1655,7 +1691,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
 
         '05-01-2020 Seniority_list_of_applicants_NT__for_allotment_of_F-type_houses',
         '03-11-2020 Seniority_list_of_applicantsTeaching',
-        '06-08-2020 Seniority_list_of_applicants_Teaching Aug.2020',
+        '06-08-2020 Seniority_list_of_applicants_Teaching_Aug.2020',
 
         '18-02-2020 Seniority list of applicants NT against notified houses on 23.01.2020',
         'seniority_list_of_applicants__Teaching_',
@@ -2174,10 +2210,6 @@ rolls down to 60% of the eligible students for second round of placement session
       'These very traits must guide them in solving many a societal problems and set an example that universities and center of excellence are not isolated spaces for exploration of knowledge alone but contributors to the growth of the nation- through setting up of incubation centers, promote start up culture and entrepreneurial mindset.',
       'In this direction, NIT KKR would end the motions of rote learning and changing the setting for critical thinking, enquiry, debate and discussions while promoting experiential learning by connecting these young minds through NIT KKR – Local community link. No education is complete if the scholar is unable to move from levels of learning to achieve knowledge leading to wisdom. If a nation has to become strong and be a role model for others, my children studying at NIT Kurukshetra should aspire to become torch bearers of Bharat innovations, promote sustainable research and develop technologies for the problems of our Nation first and then conquer the world stage. This will solve our twin problems of brain drain and dollar drain and realize the dream of the Nation, to become numero uno by 2047 i.e. Vikasit Bharat.',
       'Having taken over the charge of Director of one of the oldest REC, now transformed as NIT with the status of Institution of National Importance, I along with my teaching, non-teaching faculty and support staff welcome you and are eagerly waiting for all our dear students to come to the campus, leaving no stone unturned in preparing ourselves in welcoming you. Over the last 4 years, many efforts were made to make your stay and your academic journey memorable. As a leader, I assure you that you will be pampered by creating an atmosphere of comfort of a home, spaces much bigger than a home to explore oneself, provide facilities to explore material progress, and self-realization, while allowing you to dream big. I personally wish each one of you become passionate about life and serve the society at large in the form of technocrats, business men, world leaders etc.  National Education Policy 2020 (NEP 2020) and its implementation is our top priority and many a steps are taken in this regard by bringing a sea change in curriculum and its contents, besides changing the pedagogy for bringing transformation in you.',
-      'I congratulate all student aspirants and their parents to have made efforts in helping them to enter portals of NIT KKR. I Wish all family members and all stake holders of NIT Kurukshetra, the teachers, the students, the parents, alumni and all academic institutions success in their endeavors.  The logo of NIT KKR, has a Motto which reads as follows, and I wish you to follow this Mantra',
-      '"Shramaye Anavarat chesta cha"',
-      'which means "Hard work and consistent efforts leads to excellence"',
-      'Jai Hind…………. Jai Bharat……………',
     ],
     employes: [
       {

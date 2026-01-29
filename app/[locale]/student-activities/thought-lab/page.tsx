@@ -1,11 +1,17 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Gallery from '~/components/ui/gallery';
+import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url, listFolderImages } from '~/server/s3';
+
+// Define a type for secretary members
+type SecretaryMember = {
+  name: string;
+  designation: string;
+};
 
 export default async function ThoughtLab({
   params: { locale },
@@ -17,6 +23,31 @@ export default async function ThoughtLab({
   const galleryImages = await listFolderImages(
     'student-activities/thought-lab/'
   );
+
+  // Prepare table data for secretaries
+  const facultyMembers = text.ThoughtLab.secretaries.faculty_secretaries.members.map(
+    (member: SecretaryMember, idx: number) => ({
+      sno: idx + 1,
+      name: member.name,
+      designation: member.designation,
+    })
+  );
+  const facultyCount = facultyMembers.length;
+  const studentMembers = text.ThoughtLab.secretaries.student_secretaries.members.map(
+    (member: SecretaryMember, idx: number) => ({
+      sno: facultyCount + idx + 1,
+      name: member.name,
+      designation: member.designation,
+    })
+  );
+  const allSecretaries = [...facultyMembers, ...studentMembers];
+
+  // Always show serial number column, and use translation for label
+  const tableHeaders = [
+    { key: 'sno', label: text.ThoughtLab.table.sno },
+    { key: 'name', label: text.ThoughtLab.table.name },
+    { key: 'designation', label: text.ThoughtLab.table.designation },
+  ];
 
   return (
     <>
@@ -34,42 +65,28 @@ export default async function ThoughtLab({
         />
 
         {/* About Description */}
-        <p className="mb-6">
-          A Thought Laboratory (Thought Lab) has been set up in our institute,
-          which was inaugurated by the Hon&apos;ble Governor of Haryana on May
-          10, 2022. The idea of Thought Lab is to train people on how to
-          cultivate positive and creative thoughts and contribute positively at
-          their own homes, organizations, and within society as a whole.
-        </p>
+        <p className="mb-6">{text.ThoughtLab.about}</p>
 
         {/* Vision & Mission Section */}
         <section className="mt-4 flex rounded bg-shade-light p-2">
           <ul>
             <li className="p-3">
-              <h4>Vision</h4>
-              {text.ThoughtLab.vision.map((item, index) => (
+              <h4>{text.ThoughtLab.vision.heading}</h4>
+              {text.ThoughtLab.vision.points.map((item: string, index: number) => (
                 <p className="mb-1" key={index}>
                   {item}
                 </p>
               ))}
             </li>
             <li className="p-3">
-              <h4>Mission</h4>
-              {text.ThoughtLab.mission.map((item, index) => (
+              <h4>{text.ThoughtLab.mission.heading}</h4>
+              {text.ThoughtLab.mission.points.map((item: string, index: number) => (
                 <p className="mb-1" key={index}>
                   {item}
                 </p>
               ))}
             </li>
           </ul>
-
-          {/* <Image
-            src="student-activities/thought-lab/VISASA.jpeg"
-            alt="Thought Lab"
-            className="m-2 size-0 rounded-md lg:size-60"
-            height={128}
-            width={128}
-          /> */}
         </section>
       </section>
 
@@ -78,75 +95,53 @@ export default async function ThoughtLab({
         <Heading
           glyphDirection="ltr"
           heading="h3"
-          text="FACULTY & STUDENT SECRETARIES"
+          text={`${text.ThoughtLab.secretaries.faculty_secretaries.heading.toUpperCase()} & ${text.ThoughtLab.secretaries.student_secretaries.heading.toUpperCase()}`}
         />
-        <p className="mb-4">
-          Faculty &amp; Student Secretaries of Thought Lab for Session 2025-26
-        </p>
+        <p className="mb-4">{text.ThoughtLab.secretariesSession}</p>
 
-        <div className="overflow-x-auto rounded-md border border-primary-500 bg-neutral-50 p-4 shadow-sm">
-          <table className="w-full border-collapse text-left">
-            <thead>
-              <tr className="border-b border-primary-300">
-                <th className="px-4 py-2">S.No.</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Designation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {text.ThoughtLab.secretaries.faculty_secretaries.map(
-                (member, index) => (
-                  <tr key={index} className="border-b border-neutral-200">
-                    <td className="px-4 py-2">{index + 1}</td>
-                    <td className="px-4 py-2">{member.name}</td>
-                    <td className="px-4 py-2">{member.designation}</td>
-                  </tr>
-                )
-              )}
-              {text.ThoughtLab.secretaries.student_secretaries.map(
-                (member, index) => (
-                  <tr key={index} className="border-b border-neutral-200">
-                    <td className="px-4 py-2">
-                      {text.ThoughtLab.secretaries.faculty_secretaries.length +
-                        index +
-                        1}
-                    </td>
-                    <td className="px-4 py-2">{member.name}</td>
-                    <td className="px-4 py-2">{member.designation}</td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
+        <GenericTable
+          headers={tableHeaders}
+          tableData={allSecretaries}
+          showSerialNo={false}
+        />
       </section>
 
       {/* Purpose */}
       <section className="container">
-        <Heading glyphDirection="ltr" heading="h3" text="PURPOSE" />
+        <Heading glyphDirection="ltr" heading="h3" text={text.ThoughtLab.purpose.heading.toUpperCase()} />
         <ul className="list-disc space-y-2 pl-5">
-          {text.ThoughtLab.purpose.map((item, index) => (
-            <li key={index}>{item}</li>
+          {text.ThoughtLab.purpose.points.map((item: string, index: number) => (
+            <li
+              key={index}
+              className="text-[20px] leading-snug md:text-[20px] text-[16px] md:text-[20px] font-normal"
+            >
+              {item}
+            </li>
           ))}
         </ul>
       </section>
 
       {/* Benefits */}
       <section className="container">
-        <Heading glyphDirection="ltr" heading="h3" text="BENEFITS" />
+        <Heading glyphDirection="ltr" heading="h3" text={text.ThoughtLab.benefits.heading.toUpperCase()} />
         <ul className="list-disc space-y-2 pl-5">
-          {text.ThoughtLab.benefits.map((item, index) => (
-            <li key={index}>{item}</li>
+          {text.ThoughtLab.benefits.points.map((item: string, index: number) => (
+            <li
+              key={index}
+              className="text-[20px] leading-snug md:text-[20px] text-[16px] md:text-[20px] font-normal"
+            >
+              {item}
+            </li>
           ))}
         </ul>
       </section>
 
       {/* Contact Us */}
       <section className="container">
-        <Heading glyphDirection="ltr" heading="h3" text="CONTACT US" />
+        <Heading glyphDirection="ltr" heading="h3" text={text.ThoughtLab.contact.heading.toUpperCase()} />
         <p>{text.ThoughtLab.contact.office}</p>
         <p className="mt-2">
-          Website:{' '}
+          {text.ThoughtLab.contact.websiteLabel}{' '}
           <Link
             href={text.ThoughtLab.contact.website}
             className="text-primary-600 hover:text-primary-800 underline"
@@ -158,7 +153,7 @@ export default async function ThoughtLab({
 
       {/* Gallery */}
       <section className="container">
-        <Heading glyphDirection="ltr" heading="h3" text="IMAGE GALLERY" />
+        <Heading glyphDirection="ltr" heading="h3" text={text.ThoughtLab.gallery.heading} />
         <Gallery
           base={getS3Url()}
           images={galleryImages}
