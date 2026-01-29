@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
+import { FaPlus } from 'react-icons/fa';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -14,6 +15,7 @@ import {
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
@@ -41,6 +43,10 @@ export default async function NotificationsPage({
   searchParams: PageSearchParams;
 }) {
   const text = (await getTranslations(locale)).Notifications;
+
+  // Check if user can manage notifications (CCN only)
+  const session = await getServerAuthSession();
+  const canManage = canManageNotifications(session);
 
   // Normalize multi-select params
   const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
@@ -130,6 +136,19 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+
+      {/* Add Notification Button - Only visible to CCN */}
+      {canManage && (
+        <div className="container mt-4 flex justify-end">
+          <Button asChild className="gap-2 px-4 py-2">
+            <Link href={`/${locale}/notifications/add`}>
+              <FaPlus className="size-3" />
+              {text.addNotification}
+            </Link>
+          </Button>
+        </div>
+      )}
+
       <section className="container mb-0 mt-8 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
@@ -245,9 +264,12 @@ export default async function NotificationsPage({
               initialHasMore={hasMore}
               locale={locale}
               filterParams={filterParams}
+              canManage={canManage}
               text={{
                 noNotificationsFound: text.noNotificationsFound,
                 noMoreNotifications: text.noMoreNotifications,
+                edit: text.edit,
+                delete: text.delete,
               }}
             />
           </div>

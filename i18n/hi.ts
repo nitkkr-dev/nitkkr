@@ -895,6 +895,19 @@ const text: Translations = {
     noMoreNotifications: 'कोई और सूचनाएँ नहीं',
     saveSelection: 'चयन सहेजें',
     viewAll: 'सभी देखें',
+    // Notification management (CCN only)
+    addNotification: 'सूचना जोड़ें',
+    editNotification: 'सूचना संपादित करें',
+    edit: 'संपादित करें',
+    delete: 'हटाएं',
+    notificationTitle: 'शीर्षक',
+    notificationContent: 'विषय-वस्तु',
+    notificationCategories: 'श्रेणियाँ',
+    notificationDate: 'तारीख़',
+    documents: 'दस्तावेज़',
+    uploadDocument: 'दस्तावेज़ अपलोड करें',
+    save: 'सहेजें',
+    cancel: 'रद्द करें',
     filter: {
       title: 'फ़िल्टर',
       date: 'तारीख़',
@@ -996,6 +1009,8 @@ const text: Translations = {
       quickSend: { title: 'त्वरित प्रेषण' },
     },
     logout: 'प्रस्थान करें',
+    sectionProfile: 'अनुभाग प्रोफ़ाइल',
+    email: 'ईमेल',
   },
   Programmes: {
     btechAbout:
