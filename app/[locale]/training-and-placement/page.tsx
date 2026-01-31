@@ -23,6 +23,7 @@ import clients from './recruiters';
 
 // Hardcoded PDF base URL and PDF list for placement stats
 const pdfBase = `${getS3Url()}/training-and-placement/placement-stats/`;
+const button_group_bg_image = `${getS3Url()}/assets/horses-2.png`;
 
 const placementStats: string[] = [
   `${pdfBase}Academic-Session-2024-25.pdf`,
@@ -105,6 +106,7 @@ export default async function TrainingAndPlacement({
                   href: placementStats[index],
                   icon: MdArticle,
                 }))}
+              imageurl={button_group_bg_image}
             />
           </Suspense>
         </article>

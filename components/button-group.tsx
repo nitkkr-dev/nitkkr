@@ -5,10 +5,12 @@ import { type IconType } from 'react-icons';
 
 import { Button } from '~/components/buttons';
 import { cn } from '~/lib/utils';
+import { getS3Url } from '~/server/s3';
 
 export default function ButtonGroup({
   buttonArray,
   columns = 4,
+  imageurl = `${getS3Url()}/assets/elephants-3.png`,
 }: {
   buttonArray: {
     label: string;
@@ -17,14 +19,14 @@ export default function ButtonGroup({
     annotation?: string;
   }[];
   columns?: 3 | 4;
+  imageurl?: string;
 }) {
-  // When items are fewer than columns, use flex layout to center them
   const useFlexLayout = buttonArray.length < columns;
-
   return (
     <nav
       className={cn(
         'm-auto my-10',
+        // Removed all background styles from here
         useFlexLayout
           ? 'flex flex-wrap justify-center gap-6 lg:gap-8'
           : columns === 3
@@ -36,9 +38,11 @@ export default function ButtonGroup({
         <Button
           asChild
           className={cn(
-            'flex flex-col text-wrap',
+            'relative flex flex-col overflow-hidden text-wrap',
             'gap-2 sm:gap-3 lg:gap-4 xl:gap-5',
             'h-40 sm:h-48 md:h-52 lg:h-60',
+            'border-gray-800 border-2',
+            'bg-transparent',
             useFlexLayout
               ? 'w-40 sm:w-60 md:w-64 lg:w-72 xl:w-80 2xl:w-96'
               : 'w-full'
@@ -46,9 +50,24 @@ export default function ButtonGroup({
           key={index}
           variant="secondary"
         >
-          <Link href={href}>
-            {Icon && <Icon className="size-12" />}
-            <div className="p-2 text-center font-serif text-base font-semibold sm:text-lg md:p-4 md:text-xl">
+          <Link
+            href={href}
+            className="relative z-10 flex h-full w-full flex-col items-center justify-center"
+          >
+            {/* Background image only within this button */}
+            <div
+              className="absolute inset-0 -z-10"
+              style={{
+                backgroundImage: `url(${imageurl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed',
+                opacity: 0.1,
+              }}
+            />
+
+            {Icon && <Icon className="size-12 drop-shadow-lg" />}
+            <div className="p-2 text-center font-serif text-base font-semibold drop-shadow-lg sm:text-lg md:p-4 md:text-xl">
               <p className="whitespace-normal">{label}</p>
               {annotation && <p>{annotation}</p>}
             </div>
