@@ -41,7 +41,7 @@ export default function ImageHeader({
         }}
       >
         {title && !logoUrl && (
-          <h1 className="container my-auto text-center text-shade-light">
+          <h1 className="container my-auto text-center text-xl text-shade-light md:text-2xl lg:text-3xl xl:text-4xl">
             {title}
           </h1>
         )}

@@ -8,7 +8,7 @@ import GenericTable from '~/components/ui/generic-table';
 import NotificationsPanel from '~/components/notifications/notifications-panel';
 import FICGroup from '~/components/fic-group';
 import { getS3Url } from '~/server/s3';
-export default async function SCoE({
+export default async function CHPD({
   params: { locale },
 }: {
   params: { locale: string };
@@ -17,15 +17,11 @@ export default async function SCoE({
     coursesPage?: string;
   };
 }) {
-  const text = (await getTranslations(locale)).SCoE;
+  const text = (await getTranslations(locale)).CHPD;
   const base = getS3Url();
 
   const CoursesData = text.Courses.list.map((course) => ({
     courseName: course,
-  }));
-
-  const LaboratoriesData = text.Laboratories.list.map((lab) => ({
-    LaboratoriesName: lab,
   }));
 
   return (
@@ -38,7 +34,6 @@ export default async function SCoE({
           { label: text.Mission.title, href: '#mission' },
           { label: text.Head.title, href: '#head' },
           { label: text.Features.title, href: '#features' },
-          { label: text.Laboratories.title, href: '#laboratories' },
           { label: text.Courses.title, href: '#courses' },
           { label: text.How_to_Apply.title, href: '#how-to-apply' },
           { label: text.For_Queries.title, href: '#for-queries' },
@@ -105,7 +100,7 @@ export default async function SCoE({
           viewAllHref={`/${locale}/notifications?category=miscellaneous`}
         />
       </section>
-      {/* HEAD OF SCOE */}
+      {/* HEAD OF CHPD */}
       <section className="container my-2">
         <Heading
           glyphDirection="dual"
@@ -117,7 +112,7 @@ export default async function SCoE({
         <FICGroup
           facultyData={[
             {
-              employeeId: '88',
+              employeeId: '196',
               designation: text.Head.designation,
             },
           ]}
@@ -157,28 +152,6 @@ export default async function SCoE({
           </div>
         </article>
       </section>
-      {/* laboratories */}
-      <section className="container my-4">
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          href="#laboratories"
-          id="laboratories"
-          text={text.Laboratories.title.toUpperCase()}
-        />
-      </section>
-      <GenericTable
-        headers={[
-          {
-            key: 'LaboratoriesName',
-            label: text.Laboratories.LaboratoriesName,
-          },
-        ]}
-        tableData={LaboratoriesData}
-        showSerialNo={true}
-        serialNoLabel={text.Laboratories.srNo}
-        pageParamName="laboratoriesPage"
-      />
       {/* Courses */}
       <section className="container mt-10">
         <Heading
@@ -234,9 +207,9 @@ export default async function SCoE({
             {/* Email */}
             <div className="flex flex-col items-center">
               <a
-                href="mailto:scoe@nitkkr.ac.in"
+                href="mailtoCHPD:@nitkkr.ac.in"
                 className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-32 md:w-32"
-                aria-label="Email SCoE"
+                aria-label="Email CHPD"
               >
                 <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
@@ -247,7 +220,7 @@ export default async function SCoE({
               <a
                 href="tel:+911744233300"
                 className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-32 md:w-32"
-                aria-label="Call SCoE"
+                aria-label="Call CHPD"
               >
                 <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
               </a>
