@@ -4,7 +4,7 @@ import Gallery from '~/components/ui/gallery';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import FICGroup from '~/components/fic-group';
-import { getTranslations } from '~/i18n/translations';
+import { getTranslations, type Translations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 
 export default async function IICPage({
@@ -150,7 +150,7 @@ export default async function IICPage({
               <h4 className="text-gray-900 mb-4 text-2xl font-bold">
                 {text.Institute.cells.iic.mission.title}
               </h4>
-              {text.Institute.cells.iic.mission.content.map(
+              {text.Institute.cells.iic.mission.content?.map(
                 (mission, index) => (
                   <p
                     className="text-gray-700 mb-3 text-lg leading-relaxed"
@@ -159,8 +159,7 @@ export default async function IICPage({
                     {mission}
                   </p>
                 )
-              )}
-            </div>
+              ) ?? null}
           </div>
 
           {/* Right/Bottom: Full coverage image */}
@@ -172,6 +171,7 @@ export default async function IICPage({
               className="object-cover"
               priority
             />
+          </div>
           </div>
         </section>
 
@@ -250,9 +250,9 @@ export default async function IICPage({
         {text.Institute.cells.iic.employes &&
           (() => {
             const iicEmployeeIds = ['87', '130', '1578'];
-            const iicDesignations = text.Institute.cells.iic.employes.map(
+            const iicDesignations = text.Institute.cells.iic.employes?.map(
               (e) => e.position
-            );
+            ) ?? [];
             const facultyData = iicEmployeeIds.map((id, idx) => ({
               employeeId: id,
               designation: iicDesignations[idx] ?? '',

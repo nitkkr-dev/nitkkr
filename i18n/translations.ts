@@ -1292,6 +1292,27 @@ export interface Translations {
       about: string;
       faq: string;
       forrecruiters: string;
+      notifications: string;
+      messagefromdean: string;
+      messagefromfic: string;
+      events: string;
+      tpo: string;
+      fic: string;
+      placementteam: string;
+    };
+    Dean: {
+      name: string;
+      position: string;
+      phone: string;
+      fax: string;
+      mobile: string;
+      email: string;
+    };
+    labels: {
+      phoneNo: string;
+      faxNo: string;
+      mobileNo: string;
+      emailId: string;
     };
     about: {
       content: string[];
