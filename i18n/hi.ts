@@ -182,7 +182,7 @@ const text: Translations = {
       racs: 'RAC-S (इसरो)',
       scoe: 'उत्कृष्टता केंद्र - सीमेंस',
       thoughtLab: 'थॉट लैब',
-      hostels: 'छात्रावास',
+      chpd: 'समग्र एवं व्यक्तित्व विकास केंद्र (CHPD)',
     },
   },
   Academics: {

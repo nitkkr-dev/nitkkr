@@ -70,7 +70,7 @@ export interface Translations {
       racs: string;
       scoe: string;
       thoughtLab: string;
-      hostels: string;
+      chpd: string;
     };
   };
   Academics: {

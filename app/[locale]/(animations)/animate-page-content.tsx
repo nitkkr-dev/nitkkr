@@ -1,12 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  TbBrain,
-  TbBuildingSkyscraper,
-  TbRocket,
-  TbSchool,
-} from 'react-icons/tb';
+import { TbBrain, TbRocket, TbSchool } from 'react-icons/tb';
+import { HiOutlineAcademicCap } from 'react-icons/hi2';
 import { type ReactNode } from 'react';
 
 import Heading from '~/components/heading';
@@ -25,7 +21,7 @@ interface AnimatePageContentProps {
       more: string;
     };
     buttons: {
-      hostels: string;
+      chpd: string;
       racs: string;
       scoe: string;
       thoughtLab: string;
@@ -107,9 +103,9 @@ export default function AnimatePageContent({
             icon: TbBrain,
           },
           {
-            label: text.buttons.hostels,
-            href: `/${locale}/institute/hostels`,
-            icon: TbBuildingSkyscraper,
+            label: text.buttons.chpd,
+            href: `/${locale}/CHPD`,
+            icon: HiOutlineAcademicCap,
           },
         ]}
       />

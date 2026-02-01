@@ -183,7 +183,7 @@ const text: Translations = {
       racs: 'RAC-S (ISRO)',
       scoe: 'CoE (Siemens)',
       thoughtLab: 'Thought Lab',
-      hostels: 'Hostels',
+      chpd: 'CHPD (Holistic Development)',
     },
   },
   Academics: {
@@ -2417,7 +2417,8 @@ rolls down to 60% of the eligible students for second round of placement session
     noContributors: 'No contributors found for this year.',
   },
   CHPD: {
-    welcome: 'Centre Of Excellence for Hollistic and Personality Developement (CHPD)',
+    welcome:
+      'Centre Of Excellence for Hollistic and Personality Developement (CHPD)',
     admission: {
       title: 'Admission Process & Education System',
       process: {

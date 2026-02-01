@@ -50,22 +50,7 @@ export default async function CHPD({
           ))}
         </section>
       </section>
-      {/* notifications */}
-      <section className="container my-10" id="notifications">
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          href="#notifications"
-          id="notifications"
-          text={text.Notifications.title.toUpperCase()}
-        />
-        <NotificationsPanel
-          locale={locale}
-          category="scoe"
-          showViewAll={true}
-          viewAllHref={`/${locale}/notifications?category=miscellaneous`}
-        />
-      </section>
+      {/* Vision & Mission */}
       <section className="container my-16">
         <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-start">
           {/* LEFT: Vision & Mission */}
@@ -99,8 +84,24 @@ export default async function CHPD({
           </div>
         </div>
       </section>
+      {/* notifications */}
+      <section className="container my-10" id="notifications">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#notifications"
+          id="notifications"
+          text={text.Notifications.title.toUpperCase()}
+        />
+        <NotificationsPanel
+          locale={locale}
+          category="scoe"
+          showViewAll={true}
+          viewAllHref={`/${locale}/notifications?category=miscellaneous`}
+        />
+      </section>
       {/* HEAD OF CHPD */}
-      <section className="container my-4">
+      <section className="container my-2">
         <Heading
           glyphDirection="dual"
           heading="h3"
@@ -132,7 +133,7 @@ export default async function CHPD({
               <div>
                 <ul>
                   {text.Features.items.map((item, index) => (
-                    <li key={index} className="flex items-center gap-2">
+                    <li key={index} className="flex items-start gap-2">
                       <Image
                         src={`${base}/research/feather_bullet.png`}
                         alt="bullet"
