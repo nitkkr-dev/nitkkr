@@ -58,7 +58,7 @@ export default function DirectorCard({
         <ul className="mt-2 space-y-0.5 text-xs sm:mt-3 sm:space-y-1 sm:text-sm md:mt-4 md:text-base lg:mt-6 lg:text-lg">
           <li>
             <strong>{labels.phoneNo}</strong>{' '}
-            <span className="text-neutral-900 underline">{phone}</span>
+            <span className="text-neutral-900">{phone}</span>
           </li>
           <li>
             <strong>{labels.faxNo}</strong>{' '}
@@ -66,14 +66,11 @@ export default function DirectorCard({
           </li>
           <li>
             <strong>{labels.mobileNo}</strong>{' '}
-            <span className="text-neutral-900 underline">{mobile}</span>
+            <span className="text-neutral-900">{mobile}</span>
           </li>
           <li>
             <strong>{labels.emailId}</strong>{' '}
-            <a
-              href={`mailto:${email}`}
-              className="text-blue-700 break-all underline"
-            >
+            <a href={`mailto:${email}`} className="text-blue-700 break-all">
               {email}
             </a>
           </li>

@@ -142,14 +142,7 @@ const text: Translations = {
       title: 'DIRECTOR’S CORNER',
       name: 'Prof. B. V. Ramana Reddy',
       quote: [
-        `India, the land of seekers, is at the cusp of becoming Vishwa Guru all
-      over again after 1100 years of subjugation, wars, annexures and
-      humiliation. It is again a free country due to the sacrifices made by our
-      leaders, freedom fighters and has learnt the art of standing tall in the
-      midst of many a challenge of building the nation with its rich diversity,
-      cultures, languages all over again since the last 75 years. Unity in
-      Diversity is our mantra while making our nation stronger in every
-      sphere.`,
+        `My Salutations to one and all whom are embodiments of divine love and true self.India i.e. Bharat (that which revels in light of knowledge and wisdom), the land of seekers, enriched by the depth and vastness of diverse sciences and disciplines, is at the cusp of becoming Vishwa Guru (a global teacher) Vikasit Bharat (a developed Nation, a world leader), all over again, after 1100 years of subjugation, annexes, humiliation and wars.The true Bharat culture which is the core of our wisdom, taught us compassion for all living beings and a sense of oneness with all the nature (Vasudeva Kutumbakam). Bharat today is again a free country due to the sacrifices made by our leaders and freedom fighters. Since the last 79 years, we have learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures and languages.`,
         'I heartily welcome everyone who visits the website of this institution.',
       ],
       more: 'Read more',
@@ -187,10 +180,10 @@ const text: Translations = {
     },
     viewMore: 'View More',
     buttons: {
-      hostels: 'Hostels',
       racs: 'RAC-S (ISRO)',
       scoe: 'CoE (Siemens)',
-      tenders: 'Tenders',
+      thoughtLab: 'Thought Lab',
+      hostels: 'Hostels',
     },
   },
   Academics: {
@@ -237,6 +230,103 @@ const text: Translations = {
     whyToJoinUs: 'Why Join Us?',
   },
   Clubs: { title: 'CLUBS' },
+  ThoughtLab: {
+    title: 'Thought Lab',
+    vision: {
+      heading: 'Vision',
+      points: [
+        'To empower the minds of youth to create a world of peace, love, and universal harmony through science and spirituality.',
+      ],
+    },
+    mission: {
+      heading: 'Mission',
+      points: [
+        'To create a spiritual environment to learn meditation and experience inner peace.',
+        'To provide a platform for research on spiritual dimensions of life.',
+        'To gain insights into holistic development through meditation.',
+        'To enable individuals to gain control over their thoughts, emotions, and impulses.',
+        'To foster interest in values and spirituality among youth.',
+      ],
+    },
+    secretaries: {
+      faculty_secretaries: {
+        heading: 'Faculty Secretaries',
+        members: [
+          { name: 'Dr. Dixit Garg', designation: 'Coordinator, Thought Lab' },
+          {
+            name: 'Dr. Than Singh Saini',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          {
+            name: 'Dr. Anshu Parashar',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          {
+            name: 'Dr. Jagan Nath',
+            designation: 'Co-Coordinator, Thought Lab',
+          },
+          { name: 'Ms. Anjali Taneja', designation: 'Counseling Psychologist' },
+          { name: 'Renu Munjal', designation: 'Technician, Thought Lab' },
+        ],
+
+        length: 0,
+      },
+      student_secretaries: {
+        heading: 'Student Secretaries',
+        members: [
+          {
+            name: 'Ashish Saini',
+            designation: 'Student Secretary, Thought Lab',
+          },
+          { name: 'Bhavna', designation: 'Student Secretary, Thought Lab' },
+          { name: 'Rajneesh', designation: 'Student Secretary, Thought Lab' },
+          {
+            name: 'Vanshika Arora',
+            designation: 'Student Secretary, Thought Lab',
+          },
+        ],
+      },
+    },
+    secretariesSession:
+      'Faculty and Student Secretaries of Thought Lab for the academic session 2025–26.',
+    table: {
+      sno: 'Sr. No.',
+      name: 'Name',
+      designation: 'Designation',
+    },
+    purpose: {
+      heading: 'Purpose',
+      points: [
+        'To provide a space to learn meditation and spiritual concepts.',
+        'To create a spiritual environment to experience inner peace.',
+        'To provide a platform for research on spiritual dimensions of life.',
+        'To gain insights into holistic development through meditation.',
+        'To create a value-based environment among organization members.',
+        'To foster interest in values and spirituality among youth.',
+      ],
+    },
+    benefits: {
+      heading: 'Benefits',
+      points: [
+        'Experience peace and empower yourself',
+        'Positive changes in personality',
+        'Relief from stress, anxiety, and fear',
+        'Improve concentration and focus',
+        'Enhance decision-making power',
+      ],
+    },
+    contact: {
+      heading: 'Contact Us',
+      office: 'Thought Lab Office, NIT Kurukshetra',
+      website: 'https://thought-labv2.netlify.app/',
+      websiteLabel: 'Website',
+    },
+    gallery: {
+      heading: 'Image Gallery',
+    },
+    about:
+      'A Thought Lab has been established in the institute, which was inaugurated on 10 May 2022 by the Hon’ble Governor of Haryana. The objective of the Thought Lab is to train people to develop positive and creative thinking so that they can make constructive contributions to their homes, organizations, and society.',
+  },
   Committee: {
     building: 'BUILDING & WORK COMMITTEE',
     financial: 'FINANCIAL COMMITTEE',
@@ -543,6 +633,19 @@ const text: Translations = {
     noMoreNotifications: 'No more notifications',
     saveSelection: 'Save selection',
     viewAll: 'View All',
+    // Notification management (CCN only)
+    addNotification: 'Add Notification',
+    editNotification: 'Edit Notification',
+    edit: 'Edit',
+    delete: 'Delete',
+    notificationTitle: 'Title',
+    notificationContent: 'Content',
+    notificationCategories: 'Categories',
+    notificationDate: 'Date',
+    documents: 'Documents',
+    uploadDocument: 'Upload Document',
+    save: 'Save',
+    cancel: 'Cancel',
     filter: {
       title: 'Filters',
       date: 'Date',
@@ -901,6 +1004,10 @@ const text: Translations = {
     backHome: "Looks like you're lost let's get you back home",
   },
   Profile: {
+    logout: 'Log Out',
+    // Section profile (e.g., CCN office)
+    sectionProfile: 'Section Profile',
+    email: 'Email',
     tabs: {
       personal: {
         title: 'PERSONAL DETAILS',
@@ -955,7 +1062,6 @@ const text: Translations = {
       bookmarks: { title: 'BOOKMARKS' },
       quickSend: { title: 'QUICK SEND' },
     },
-    logout: 'LOG OUT',
   },
   Programmes: {
     btechAbout:
@@ -1601,7 +1707,7 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
 
         '05-01-2020 Seniority_list_of_applicants_NT__for_allotment_of_F-type_houses',
         '03-11-2020 Seniority_list_of_applicantsTeaching',
-        '06-08-2020 Seniority_list_of_applicants_Teaching Aug.2020',
+        '06-08-2020 Seniority_list_of_applicants_Teaching_Aug.2020',
 
         '18-02-2020 Seniority list of applicants NT against notified houses on 23.01.2020',
         'seniority_list_of_applicants__Teaching_',
@@ -1768,7 +1874,20 @@ Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
       nss: 'NSS',
       ncc: 'NCC',
     },
-    sections: { clubs: { title: 'CLUBS', more: 'Explore all clubs' } },
+    sections: {
+      clubs: { title: 'CLUBS', more: 'Explore all clubs' },
+      council: {
+        title: 'STUDENT COUNCIL',
+        more: 'Explore all student council activities',
+      },
+      events: { title: 'EVENTS', more: 'Explore all events' },
+      thoughtLab: {
+        title: 'THOUGHT LAB',
+        more: 'Explore all thought lab activities',
+      },
+      nss: { title: 'NSS', more: 'Explore all NSS activities' },
+      ncc: { title: 'NCC', more: 'Explore all NCC activities' },
+    },
   },
   DirectorMessage: {
     title: `Director's Message`,
@@ -1955,15 +2074,17 @@ Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
     },
     stats: {
       content: [
-        `Academic Session 2022-23 `,
+        `Academic Session 2024-25`,
+        `Academic Session 2023-24`,
+        `Academic Session 2022-23`,
         `Academic Session 2021-22`,
         `Academic Session 2020-21 FN`,
-        `Academic-Session-2019-20 FN `,
+        `Academic-Session-2019-20 FN`,
         `Academic Session 2018-19 FN`,
-        `Academic Session 2018_19`,
-        `Academic Session 2017_18`,
-        `Academic Session 2017-18 FN `,
-        `Academic Session 2016_17`,
+        `Academic Session 2018-19`,
+        `Academic Session 2017-18`,
+        `Academic Session 2017-18 FN`,
+        `Academic Session 2016-17`,
       ],
     },
     ourrecruiters: {
@@ -2087,8 +2208,24 @@ rolls down to 60% of the eligible students for second round of placement session
       'His vision for NIT KKR: He is focused on implementing NEP 2020 in toto at NIT Kurukshetra. He further wants to change the curriculum from outcome based education model into value based education model from the coming academic session 2022-23. The intent is to transform NIT KKR as Takshashila of yesteryears and bringing back India as Vishva Guru and put NIT KKR at the World map as leading educational institute offering holistic personalities to the World and produce leaders from NIT Kurukshetra. We have entered into 60th year of our existence and are upbeat in going for a yearlong celebration.',
     ],
     DirectorMessage: [
-      'India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.',
-      'India, the land of seekers, is at the cusp of becoming Vishwa Guru all over again after 1100 years of subjugation, wars, annexures and humiliation. It is again a free country due to the sacrifices made by our leaders, freedom fighters and has learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures, languages all over again since the last 75 years. Unity in Diversity is our mantra while making our nation stronger in every sphere.',
+      'MY Salutations to one and all whom are embodiments of divine love and true self.',
+      'India i.e. Bharat (that which revels in light of knowledge and wisdom), the land of seekers, enriched by the depth and vastness of diverse sciences and disciplines, is at the cusp of becoming Vishwa Guru (a global teacher) Vikasit Bharat (a developed Nation, a world leader), all over again, after 1100 years of subjugation, annexes, humiliation and wars.',
+      'The true Bharat culture which is the core of our wisdom, taught us compassion for all living beings and a sense of oneness with all the nature (Vasudeva Kutumbakam). Bharat today is again a free country due to the sacrifices made by our leaders and freedom fighters. Since the last 79 years, we have learnt the art of standing tall in the midst of many a challenge of building the nation with its rich diversity, cultures and languages.',
+      '"Unity in Diversity" is our mantra, as we continue to make our Nation stronger in every sphere. Time has now come for us to revisit our rich cultural heritage, and our traditional knowledge and wisdom, bestowed upon us by Rishis, seers, gurus and Acharyas. Over eons, they have blessed us with the Vedas, the foundational scriptures for humanism (written in hymns and rituals), Upanishads (giving the philosophical content, focusing on ultimate reality and the self), the Puranas (collections of genealogies, legends of kings and deities), and the Itihasas (a collection of epic poems like the Mahabharata and Ramayana narrating moral and spiritual themes).',
+      'Under the aegis of renowned GuruKul system of school education, adopting distinctive pedagogy, the students all over the world came to Bharat to study in our world renowned universities such as Taxashila, Nalanda, Vikramashila, Valabhi, Odantapuri, Somapuri, Ujjain, Kanchi and Pushpagiri, the great seats of higher learning.',
+      'It has been proven without doubt over centuries, that no Nation has ever risen to the stature of a world leader or a happy nation without educating its people. The role of Universities and Centers of Excellence was never in question. Creativity, innovation and hands on experience were given importance, with nature itself serving as the experimental laboratory to unravel the secrets of the universe.',
+      'These Universities rose to international repute not merely because of their endless collection of scriptures, but because   of the value education that they offered. Their true glory lay in the Knowledge on how best a human being can function in this world.  How to use the intelligence that our race possesses in the service of life? Knowledge was transmitted through the famous Guru Shishya Parampara across ages and generations. Students explored a wide range of disciplines, the 64 art forms, through recitation, hands on experience and experiential learning.',
+      'This very land of Kurukshetra, also known as Dharma Kshetra, has taught us to be righteous in our conduct, the upholding of values, and the strength to desist any attacks on oneself or upon the vulnerable. The celestial song of Bhagavat Gita teaches us to achieve a 3600 development- Physical, Mental, Emotional, Spiritual and Social wellbeing.   It shows us the path to becoming leaders par excellence by imbibing qualities such as adaptability, vision, mindfulness, resilience, focus and gratitude.',
+      'The Gita seeks to dispel all our doubts, predicaments, guiding us to explore both the self and the material world outside. A high Spiritual Quotient is a higher dimensional science or intelligence and devotion to God benefits people of every background, age and educational level.  Spirituality is a state of awareness; religion is the means to attain that awareness.',
+      'Our new National Education Policy 2020, is rooted in this ethos. It seeks to move beyond western educational models imposed upon us, which while showing the path of material progress through scientific innovations and technological advancement, often ignored deeper human values. The NEP-2020 revives our traditional knowledge and wisdom to save the world by two crucial ways:',
+      'by developing human excellence, producing individuals who enrich society.',
+      'By fostering sustainable technologies for safe guarding Mother Earth and the future of the mankind.',
+      'Time has proven, that the unchecked pursuit of material wealth has shaken the very ethos of mankind and endangered the sustenance of the world. (as noted in the document on Sustainable Developmental Goals, SDG-17).',
+      'Now is the moment to teach "True / Right Education for knowledge which liberates" (Sa Vidya Ya Vimukthaye), alongside the "Right to Education for all" so that growth and sustenance of mankind may be secured. A fine balance of material growth along with spiritual growth will make the world much more sustainable but also a happy space for all mankind practicing "Value based Educational model" over the current "Outcome based educational model.',
+      'So, what should be the right setting for a great nation like India – and for NIT Kurukshetra in particular- to tap into the full potentialities of young minds? These students drawn from across the nation through a rigorous process of selection through national level testing, toil tirelessly to reach these portals of learning. It is our responsibility to provide them the right environment for teaching and learning, and to allow them to explore their self and progress not only in advancing technologies but also promoting their innate skills of creativity and innovation.',
+      'These very traits must guide them in solving many a societal problems and set an example that universities and center of excellence are not isolated spaces for exploration of knowledge alone but contributors to the growth of the nation- through setting up of incubation centers, promote start up culture and entrepreneurial mindset.',
+      'In this direction, NIT KKR would end the motions of rote learning and changing the setting for critical thinking, enquiry, debate and discussions while promoting experiential learning by connecting these young minds through NIT KKR – Local community link. No education is complete if the scholar is unable to move from levels of learning to achieve knowledge leading to wisdom. If a nation has to become strong and be a role model for others, my children studying at NIT Kurukshetra should aspire to become torch bearers of Bharat innovations, promote sustainable research and develop technologies for the problems of our Nation first and then conquer the world stage. This will solve our twin problems of brain drain and dollar drain and realize the dream of the Nation, to become numero uno by 2047 i.e. Vikasit Bharat.',
+      'Having taken over the charge of Director of one of the oldest REC, now transformed as NIT with the status of Institution of National Importance, I along with my teaching, non-teaching faculty and support staff welcome you and are eagerly waiting for all our dear students to come to the campus, leaving no stone unturned in preparing ourselves in welcoming you. Over the last 4 years, many efforts were made to make your stay and your academic journey memorable. As a leader, I assure you that you will be pampered by creating an atmosphere of comfort of a home, spaces much bigger than a home to explore oneself, provide facilities to explore material progress, and self-realization, while allowing you to dream big. I personally wish each one of you become passionate about life and serve the society at large in the form of technocrats, business men, world leaders etc.  National Education Policy 2020 (NEP 2020) and its implementation is our top priority and many a steps are taken in this regard by bringing a sea change in curriculum and its contents, besides changing the pedagogy for bringing transformation in you.',
     ],
     employes: [
       {
@@ -2270,6 +2407,14 @@ rolls down to 60% of the eligible students for second round of placement session
         'SCoE Internship Program (4.5 months)',
       ],
     },
+  },
+  WebsiteContributors: {
+    pageTitle: 'Contributions for Website Development',
+    description:
+      'We extend our heartfelt gratitude to all the students who have contributed to the development and maintenance of the NIT Kurukshetra website. Their dedication, technical expertise, and creative vision have been instrumental in building this digital platform.',
+    passoutYear: 'Passout Year',
+    rollNumber: 'Roll No.',
+    noContributors: 'No contributors found for this year.',
   },
   CHPD: {
     welcome: 'Centre Of Excellence for Hollistic and Personality Developement (CHPD)',

@@ -67,10 +67,10 @@ export interface Translations {
     };
     viewMore: string;
     buttons: {
-      hostels: string;
       racs: string;
       scoe: string;
-      tenders: string;
+      thoughtLab: string;
+      hostels: string;
     };
   };
   Academics: {
@@ -113,6 +113,58 @@ export interface Translations {
     whyToJoinUs: string;
   };
   Clubs: { title: string };
+
+  ThoughtLab: {
+    title: string;
+    about: string;
+    vision: {
+      heading: string;
+      points: string[];
+    };
+    mission: {
+      heading: string;
+      points: string[];
+    };
+    secretaries: {
+      faculty_secretaries: {
+        length: number;
+        heading: string;
+        members: {
+          name: string;
+          designation: string;
+        }[];
+      };
+      student_secretaries: {
+        heading: string;
+        members: {
+          name: string;
+          designation: string;
+        }[];
+      };
+    };
+    secretariesSession: string;
+    table: {
+      sno: string;
+      name: string;
+      designation: string;
+    };
+    purpose: {
+      heading: string;
+      points: string[];
+    };
+    benefits: {
+      heading: string;
+      points: string[];
+    };
+    contact: {
+      heading: string;
+      office: string;
+      website: string;
+      websiteLabel: string;
+    };
+    gallery: { heading: string };
+  };
+
   Committee: {
     building: string;
     financial: string;
@@ -516,6 +568,19 @@ export interface Translations {
     noMoreNotifications: string;
     saveSelection: string;
     viewAll: string;
+    // Notification management (CCN only)
+    addNotification: string;
+    editNotification: string;
+    edit: string;
+    delete: string;
+    notificationTitle: string;
+    notificationContent: string;
+    notificationCategories: string;
+    notificationDate: string;
+    documents: string;
+    uploadDocument: string;
+    save: string;
+    cancel: string;
     filter: {
       title: string;
       date: string;
@@ -593,6 +658,9 @@ export interface Translations {
   NotFound: { title: string; description: string; backHome: string };
   Profile: {
     logout: string;
+    // Section profile (e.g., CCN office)
+    sectionProfile: string;
+    email: string;
     tabs: {
       personal: {
         title: string;
@@ -1101,6 +1169,11 @@ export interface Translations {
     };
     sections: {
       clubs: { title: string; more: string };
+      council: { title: string; more: string };
+      events: { title: string; more: string };
+      thoughtLab: { title: string; more: string };
+      nss: { title: string; more: string };
+      ncc: { title: string; more: string };
     };
   };
   Research: {
@@ -1365,6 +1438,13 @@ export interface Translations {
       courseName: string;
       list: string[];
     };
+  };
+  WebsiteContributors: {
+    pageTitle: string;
+    description: string;
+    passoutYear: string;
+    rollNumber: string;
+    noContributors: string;
   };
   CHPD: {
     welcome: string;
