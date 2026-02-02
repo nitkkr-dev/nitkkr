@@ -19,17 +19,6 @@ import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
 import { countChildren } from '~/server/s3';
 
-const hodProfile = {
-  name: 'Jitender Kumar Chhabra',
-  designation: 'Professor & Head of Department',
-  email: 'jk.chhabra@nitkkr.ac.in',
-  phone: '+91-1744-233-488',
-  message: [
-    'Welcome to the Department of Computer Engineering at NIT Kurukshetra. Our department has been at the forefront of computer science education and research since its inception, consistently producing industry-ready professionals and innovative researchers.',
-    'We are committed to excellence in teaching, research, and innovation. Our state-of-the-art laboratories, experienced faculty, and strong industry connections provide students with the perfect environment for learning and growth.',
-  ],
-};
-
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
 }
@@ -43,28 +32,41 @@ export default async function Department({
 
   const department = await db.query.departments.findFirst({
     where: (departments, { eq }) => eq(departments.urlName, name),
+    columns: { id: true, name: true, alias: true, urlName: true, about: true, vision: true, mission: true },
     with: { majors: { columns: { degree: true, name: true } } },
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
   const imageCount = await countChildren(`departments/${name}/images`);
-
-  const departmentHead = await db.query.departmentHeads.findFirst({
-    where: (departmentHead, { eq }) =>
-      eq(departmentHead.departmentId, department.id) &&
-      eq(departmentHead.isActive, true),
+  console.log('DEPT DEBUG', { name, department });
+  const allHeads = await db.query.departmentHeads.findMany({
+    where: (departmentHead, { eq }) => eq(departmentHead.departmentId, department.id),
     with: {
       faculty: {
-        columns: { employeeId: true, officeAddress: true },
+        columns: { designation: true, employeeId: true, officeAddress: true },
         with: {
           person: {
-            columns: { email: true, id: true, name: true, telephone: true },
+            columns: { name: true, email: true, telephone: true, img: true },
           },
         },
       },
     },
   });
+  console.log('ALL HEADS FOR DEPT', department.id, allHeads);
+  const departmentHead = allHeads.find((head) => head.isActive) ?? null;
 
+  const hodName = departmentHead?.faculty?.person?.name ?? 'Head of Department';
+  const hodDesignation = departmentHead?.faculty?.designation ?? 'Head of Department';
+  const hodEmail = departmentHead?.faculty?.person?.email ?? '';
+  const hodPhone = departmentHead?.faculty?.person?.telephone ?? '';
+  const hodImg = departmentHead?.faculty?.person?.img ?? '/placeholder-person.jpg';
+  const hodMessage = departmentHead?.message
+    ? [departmentHead.message]
+    : [
+        'Welcome to the department.',
+        'Message from the Head of Department will appear here.'
+      ];
+  console.log('HOD DEBUG', { departmentHead });
   return (
     <>
       <ImageHeader
@@ -164,38 +166,42 @@ export default async function Department({
         />
         <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
           <Image
-            alt={hodProfile.name}
+            alt={hodName}
             className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
             height={256}
             width={256}
-            src="/placeholder-person.jpg"
+            src={hodImg}
           />
           <div className="flex flex-col justify-between">
             <div className="space-y-4">
               <div>
                 <h4 className="text-xl font-medium text-primary-500">
-                  {hodProfile.name}
+                  {hodName}
                 </h4>
-                <p className="text-lg font-medium">{hodProfile.designation}</p>
+                <p className="text-lg font-medium">{hodDesignation}</p>
               </div>
               <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
-                {hodProfile.message.map((paragraph, index) => (
+                {hodMessage.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </blockquote>
             </div>
             <div className="mt-4 flex items-center gap-4">
-              <a
-                className="text-primary-500 hover:underline"
-                href={`mailto:${hodProfile.email}`}
-              >
-                <MdEmail className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.email}
-              </a>
-              <span className="text-primary-500">
-                <FaPhone className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.phone}
-              </span>
+              {hodEmail && (
+                <a
+                  className="text-primary-500 hover:underline"
+                  href={`mailto:${hodEmail}`}
+                >
+                  <MdEmail className="mr-2 inline-block fill-primary-500" />
+                  {hodEmail}
+                </a>
+              )}
+              {hodPhone && (
+                <span className="text-primary-500">
+                  <FaPhone className="mr-2 inline-block fill-primary-500" />
+                  {hodPhone}
+                </span>
+              )}
             </div>
           </div>
         </article>

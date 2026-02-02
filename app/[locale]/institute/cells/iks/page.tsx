@@ -1,6 +1,33 @@
-import { getS3Url } from '~/server/s3';
-import { getTranslations } from '~/i18n/translations';
+import { like, or } from 'drizzle-orm';
+
+import FICGroup from '~/components/fic-group';
 import Gallery from '~/components/ui/gallery';
+import { getTranslations } from '~/i18n/translations';
+import { db } from '~/server/db';
+import { otherOfficers } from '~/server/db/schema';
+import { getS3Url } from '~/server/s3';
+
+// Function to fetch IKS faculty-in-charge from otherOfficers table
+async function fetchIKSFaculty() {
+  const iksOfficers = await db.query.otherOfficers.findMany({
+    where: or(
+      like(otherOfficers.designation, '%IKS%'),
+      like(otherOfficers.designation, '%Indian Knowledge System%')
+    ),
+    with: {
+      faculty: {
+        columns: {
+          employeeId: true,
+        },
+      },
+    },
+  });
+
+  return iksOfficers.map((officer) => ({
+    employeeId: officer.faculty.employeeId,
+    designation: officer.designation,
+  }));
+}
 
 export default async function IKS({
   params: { locale },
@@ -129,6 +156,9 @@ export default async function IKS({
     src: `institute/cells/iks/${i + 1}.jpg`,
   }));
 
+  // Fetch faculty-in-charge data from database
+  const facultyData = await fetchIKSFaculty();
+
   return (
     <>
       {/* heading */}
@@ -169,14 +199,7 @@ export default async function IKS({
           <h3 className="mb-2 font-bold text-primary-300">
             {text.Institute.cells.iks.iksTeam}
           </h3>
-          <ol className="list-decimal space-y-1 pl-5">
-            {team.map((team) => (
-              <li key={team.name}>
-                {team.name}, {team.designation}
-              </li>
-            ))}
-          </ol>
-
+          <FICGroup facultyData={facultyData} />
           <h3 className="mb-2 p-2 font-bold text-primary-300">
             {text.Institute.cells.iks.coordinators}
           </h3>

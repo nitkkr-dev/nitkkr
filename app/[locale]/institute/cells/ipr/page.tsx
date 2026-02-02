@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 import { FaFlask, FaIndianRupeeSign } from 'react-icons/fa6';
 import { FaRegIdCard } from 'react-icons/fa';
 import { BsTools } from 'react-icons/bs';
@@ -12,6 +11,7 @@ import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
+import FICGroup from '~/components/fic-group';
 
 // Fetches IPR data from DB - cache for 5 minutes
 export const revalidate = 300;
@@ -43,19 +43,14 @@ export default async function IPR({
   ];
 
   const facultyIncharge = [
+    // Replace with real employee IDs and designations as needed
     {
-      image: 'fallback/user-image.jpg',
-      name: 'Anshu Parashar',
-      title: 'Computer Application',
-      email: 'anshuparashar@nitkkr.ac.in',
-      phone: '1234567890',
+      employeeId: '88',
+      designation: 'Faculty Incharge',
     },
     {
-      image: 'fallback/user-image.jpg',
-      name: 'Anshu Parashar',
-      title: 'Computer Application',
-      email: 'anshuparashar@nitkkr.ac.in',
-      phone: '1234567890',
+      employeeId: '89',
+      designation: 'Faculty Incharge',
     },
   ];
 
@@ -170,49 +165,7 @@ export default async function IPR({
             heading="h2"
             text={text.Research.ipr.facultyIncharge}
           />
-          <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
-            {facultyIncharge.map((faculty, idx) => (
-              <li
-                key={idx}
-                className="flex w-[70%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
-              >
-                <Image
-                  src={faculty.image}
-                  alt={faculty.name}
-                  width={200}
-                  height={200}
-                  className="h-52 w-52 rounded-lg "
-                />
-                <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
-                  <div>
-                    <h2 className="m-0 text-start text-lg md:text-xl">
-                      {faculty.name}
-                      <span className="block text-lg text-neutral-900">
-                        {faculty.title}
-                      </span>
-                    </h2>
-                  </div>
-                  <section>
-                    <span className="flex items-center space-x-2">
-                      <MdEmail className="text-primary-700" />
-                      <Link
-                        href={`mailto:${faculty.email}`}
-                        className="text-gray-600 break-all hover:text-primary-700 hover:underline"
-                      >
-                        {faculty.email}
-                      </Link>
-                    </span>
-                    <span className="mt-2 flex items-center space-x-2">
-                      <MdOutlineLocalPhone className="text-primary-700" />
-                      <span className="text-gray-600 break-all">
-                        {faculty.phone}
-                      </span>
-                    </span>
-                  </section>
-                </section>
-              </li>
-            ))}
-          </ul>
+          <FICGroup facultyData={facultyIncharge} />
         </div>
         {/* Advisory Commitee */}
         <div>
