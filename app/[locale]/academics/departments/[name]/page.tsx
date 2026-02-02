@@ -52,7 +52,6 @@ export default async function Department({
       },
     },
   });
-  console.log('ALL HEADS FOR DEPT', department.id, allHeads);
   const departmentHead = allHeads.find((head) => head.isActive) ?? null;
 
   const hodName = departmentHead?.faculty?.person?.name ?? 'Head of Department';
