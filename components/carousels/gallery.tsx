@@ -29,8 +29,8 @@ const GalleryCarousel = ({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="m-2 -left-6 text-primary-500 md:-left-10" />
-        <CarouselNext className="m-2 -right-6 text-primary-500 md:-right-10" />
+        <CarouselPrevious className="-left-6 m-2 text-primary-500 md:-left-10" />
+        <CarouselNext className="-right-6 m-2 text-primary-500 md:-right-10" />
       </Carousel>
     </article>
   );
