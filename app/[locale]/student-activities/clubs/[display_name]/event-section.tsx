@@ -56,7 +56,7 @@ export default function EventsSection({
         onOpenChange={(open) => !open && setSelectedEvent(null)}
       >
         <DialogContent
-          className="z-[100] mx-4 mx-auto flex max-w-[90vw] flex-col items-center rounded-xl border border-primary-500 
+          className="z-[100] w-7/12 mx-auto flex max-w-[90vw] flex-col items-center rounded-xl border border-primary-500 
 bg-background p-8 shadow-xl md:max-w-[80vw]
 lg:max-w-[1100px]"
         >
