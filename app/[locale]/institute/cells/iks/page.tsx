@@ -78,61 +78,7 @@ export default async function IKS({
         'Expert talk on “Mental Harmony & Meditation” by Mr. Rudransh Aggarwal, IIT Roorkee on 23.05.2025 at 10:00 AM (1 hour duration) in the Seminar Hall, Computer Engineering Department, NIT Kurukshetra.',
     },
   ];
-  const team = [
-    {
-      name: 'Prof. R.K. Aggarwal',
-      designation: 'Professor-In-Charge, IKS Cell, NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Shabnam',
-      designation: 'Faculty-In-Charge, IKS Cell, NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Sachin Maheshwari',
-      designation: 'Vice Chancellor, GJU Moradabad, UP',
-    },
-    {
-      name: 'Dr. Rajesh Raj',
-      designation: 'Director, Ritanveshi Yogayan Foundation',
-    },
-    {
-      name: 'Dr. Jagan Nath',
-      designation:
-        'Sr. Tech. Officer, Ramchandra Mission (Heartfulness), NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Kuldeep Kumar',
-      designation: 'Assistant Professor, NIT Kurukshetra',
-    },
-    { name: 'Dr. Manasa Reddy', designation: 'Psychologist, NIT Kurukshetra' },
-    {
-      name: 'Dr. Navneet Arora',
-      designation: 'Professor, IIT Roorkee, Dev Samaj',
-    },
-    { name: 'Dr. Navneet', designation: 'Dean, Gurukul Kangri, Haridwar' },
-    {
-      name: 'Dr. Sanjay Sharma',
-      designation: 'Professor, Gautam Buddha University, UP',
-    },
-    { name: 'Dr. Sandeep Arya', designation: 'Dean Faculty, GJU Hisar' },
-    { name: 'Shri Nakul Vashishtha', designation: 'Entrepreneur' },
-    { name: 'Dr. Amita Mittal', designation: 'Assistant Professor, KUK' },
-    { name: 'Mr. Rudransh Aggarwal', designation: 'B.Tech, IIT Roorkee' },
-    { name: 'Dr. Sonam Nagar', designation: 'Brahmkumaris, Gurugram' },
-    {
-      name: 'Shri Mithlesh Kumar Singh',
-      designation: 'Deputy Director, Electrical Safety UP',
-    },
-    { name: 'Shri Ram Kumar Sharma', designation: 'Vidya Vistaar Yojana' },
-    {
-      name: 'Dr. Diksha Arya',
-      designation: 'Assistant Professor, University of Tokyo, Japan',
-    },
-    {
-      name: 'Dr. Kapil Bhatt',
-      designation: 'Assistant Professor, HP University, Shimla',
-    },
-  ];
+
   const coordinators = [
     { name: 'Mr Chandan', education: 'M.Tech' },
     { name: 'Mr Sanjay', education: 'B.Tech' },

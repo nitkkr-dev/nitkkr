@@ -1,9 +1,32 @@
+import { like, or } from 'drizzle-orm';
+
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 import FICGroup from '~/components/fic-group';
+import { db } from '~/server/db';
+import { otherOfficers } from '~/server/db/schema';
+
+// Function to fetch SC/ST liaison officer from otherOfficers table
+async function fetchSCSTFaculty() {
+  const scstOfficers = await db.query.otherOfficers.findMany({
+    where: or(like(otherOfficers.designation, '%sc-st%')),
+    with: {
+      faculty: {
+        columns: {
+          employeeId: true,
+        },
+      },
+    },
+  });
+
+  return scstOfficers.map((officer) => ({
+    employeeId: officer.faculty.employeeId,
+    designation: officer.designation,
+  }));
+}
 
 export default async function SCST({
   params: { locale },
@@ -12,15 +35,11 @@ export default async function SCST({
 }) {
   const text = await getTranslations(locale);
 
-  const facultyIncharge = [{ ...text.Institute.cells.scst.liaisonOfficer }];
   const cellFunctions = text.Institute.cells.scst.cellFunctions;
   const importantLinks = text.Institute.cells.scst.importantLinks;
 
-  // Prepare facultyData for FICGroup
-  const facultyData = facultyIncharge.map((faculty, idx) => ({
-    employeeId: String(idx + 1), // fallback: use index as ID if not present
-    designation: faculty.title,
-  }));
+  // Fetch faculty-in-charge data from database
+  const facultyData = await fetchSCSTFaculty();
 
   return (
     <>

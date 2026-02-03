@@ -32,15 +32,23 @@ export default async function Department({
 
   const department = await db.query.departments.findFirst({
     where: (departments, { eq }) => eq(departments.urlName, name),
-    columns: { id: true, name: true, alias: true, urlName: true, about: true, vision: true, mission: true },
+    columns: {
+      id: true,
+      name: true,
+      alias: true,
+      urlName: true,
+      about: true,
+      vision: true,
+      mission: true,
+    },
     with: { majors: { columns: { degree: true, name: true } } },
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
   const imageCount = await countChildren(`departments/${name}/images`);
-  console.log('DEPT DEBUG', { name, department });
   const allHeads = await db.query.departmentHeads.findMany({
-    where: (departmentHead, { eq }) => eq(departmentHead.departmentId, department.id),
+    where: (departmentHead, { eq }) =>
+      eq(departmentHead.departmentId, department.id),
     with: {
       faculty: {
         columns: { designation: true, employeeId: true, officeAddress: true },
@@ -55,17 +63,16 @@ export default async function Department({
   const departmentHead = allHeads.find((head) => head.isActive) ?? null;
 
   const hodName = departmentHead?.faculty?.person?.name ?? 'Head of Department';
-  const hodDesignation = departmentHead?.faculty?.designation ?? 'Head of Department';
+  const hodDesignation =
+    departmentHead?.faculty?.designation ?? 'Head of Department';
   const hodEmail = departmentHead?.faculty?.person?.email ?? '';
   const hodPhone = departmentHead?.faculty?.person?.telephone ?? '';
-  const hodImg = departmentHead?.faculty?.person?.img ?? '/placeholder-person.jpg';
-  const hodMessage = departmentHead?.message
-    ? [departmentHead.message]
-    : [
-        'Welcome to the department.',
-        'Message from the Head of Department will appear here.'
-      ];
-  console.log('HOD DEBUG', { departmentHead });
+  const hodImg =
+    departmentHead?.faculty?.person?.img ?? '/placeholder-person.jpg';
+  const hodMessage = [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut laoreet dictum, urna erat dictum erat, at cursus enim sapien eget urna.',
+    'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer ac sem nec urna cursus faucibus.',
+  ];
   return (
     <>
       <ImageHeader
