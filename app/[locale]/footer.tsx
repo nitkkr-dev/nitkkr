@@ -33,6 +33,12 @@ export default async function Footer({ locale }: { locale: string }) {
       href: '/institute/sections/library/collection-and-resources',
     },
     { name: 'Medical Facilities', href: '/institute/health-centre' },
+    // Added: Register as Alumni
+    {
+      name: 'Register as Alumni',
+      href: 'https://forms.gle/yznDpHT2nYgHYCY97',
+      target: '_blank',
+    },
   ];
 
   const academicLinks = [
@@ -49,6 +55,18 @@ export default async function Footer({ locale }: { locale: string }) {
       href: '/academics/departments/computer-engineering/labs',
     },
     { name: 'Research Publications', href: '/research/publications' },
+    // Added: NAD Digilocker
+    {
+      name: 'NAD Digilocker',
+      href: 'https://nad.digilocker.gov.in/',
+      target: '_blank',
+    },
+    // Added: NIT KKR @NDL
+    {
+      name: 'NIT KKR @NDL',
+      href: 'https://ndl.iitkgp.ac.in/result?q=%22t%22:%22sourceOrganization%22,%22k%22:%22NIT%20Kurukshetra%22,%22s%22:%5B%5D,%22b%22:%22browse%22:%22sourceOrganization%22,%22filters%22:%5B%22sourceOrganization=%22NIT%20Kurukshetra%22%22%5D',
+      target: '_blank',
+    },
   ];
 
   const resourceLinks = [
@@ -67,6 +85,12 @@ export default async function Footer({ locale }: { locale: string }) {
     {
       name: 'Contributions for Website Development',
       href: '/contributions-for-website-development',
+    },
+    // Added: Council of NITs
+    {
+      name: 'Council of NITs',
+      href: 'http://nitcouncil.org.in/',
+      target: '_blank',
     },
   ];
 
