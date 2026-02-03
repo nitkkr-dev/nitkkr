@@ -100,7 +100,7 @@ const socialIconVariants: Variants = {
 
 interface FooterLinkColumnProps {
   title: string;
-  links: { name: string; href: string }[];
+  links: { name: string; href: string; target?: string }[];
   locale: string;
   className?: string;
 }
@@ -138,12 +138,23 @@ export function AnimateFooterLinkColumn({
               transition: { type: 'spring', stiffness: 400, damping: 20 },
             }}
           >
-            <Link
-              className="text-neutral-500 transition-colors hover:text-shade-light"
-              href={`/${locale}${item.href}`}
-            >
-              {item.name}
-            </Link>
+            {item.target === '_blank' || item.href.startsWith('http') ? (
+              <a
+                className="text-neutral-500 transition-colors hover:text-shade-light"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                className="text-neutral-500 transition-colors hover:text-shade-light"
+                href={`/${locale}${item.href}`}
+              >
+                {item.name}
+              </Link>
+            )}
           </motion.li>
         ))}
       </motion.ul>
