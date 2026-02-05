@@ -1,62 +1,87 @@
 export interface ThoughtLabTranslations {
   title: string;
+
+  tabs: {
+    purpose: string;
+    benefits: string;
+    events: string;
+    facultyMembers: string;
+    studentSecretaries: string;
+    contact: string;
+  };
+
   about: string;
+
   vision: {
     heading: string;
     points: string[];
   };
+
   mission: {
     heading: string;
     points: string[];
   };
-  secretaries: {
-    faculty_secretaries: {
-      length: number;
-      heading: string;
-      members: {
-        name: string;
-        designation: string;
-      }[];
-    };
-    student_secretaries: {
-      heading: string;
-      members: {
-        name: string;
-        designation: string;
-      }[];
-    };
+
+  VisionMissionImage: {
+    src: string;
+    alt: string;
   };
-  secretariesSession: string;
-  table: {
-    sno: string;
-    name: string;
-    designation: string;
+
+  faculty_members: {
+    heading: string;
+    employees: {
+      position: string;
+    }[];
   };
+
+  student_secretaries: {
+    heading: string;
+  };
+
   purpose: {
     heading: string;
     points: string[];
   };
+
   benefits: {
     heading: string;
     points: string[];
   };
+
   contact: {
     heading: string;
     office: string;
     website: string;
     websiteLabel: string;
   };
-  gallery: { heading: string };
+
+  events: {
+    heading: string;
+  };
 }
 
 export const thoughtLabEn: ThoughtLabTranslations = {
   title: 'Thought Lab',
+
+  tabs: {
+    purpose: 'Purpose',
+    benefits: 'Benefits',
+    events: 'Events',
+    facultyMembers: 'Faculty Members',
+    studentSecretaries: 'Student Secretaries',
+    contact: 'Contact',
+  },
+
+  about:
+    'A Thought Laboratory (Thought Lab) has been set up in our institute, which was inaugurated by the Hon’ble Governor of Haryana on May 10, 2022. The idea of Thought Lab is to train people on how to cultivate positive and creative thoughts and contribute positively at their own homes, organizations, and within society as a whole.',
+
   vision: {
     heading: 'Vision',
     points: [
-      'To empower the minds of youth to create a world of peace, love, and universal harmony through science and spirituality.',
+      'To empower the thoughts of youth to build a world of peace, love and universal harmony through the means of science and spirituality.',
     ],
   },
+
   mission: {
     heading: 'Mission',
     points: [
@@ -67,52 +92,31 @@ export const thoughtLabEn: ThoughtLabTranslations = {
       'To foster interest in values and spirituality among youth.',
     ],
   },
-  secretaries: {
-    faculty_secretaries: {
-      heading: 'Faculty Secretaries',
-      members: [
-        { name: 'Dr. Dixit Garg', designation: 'Coordinator, Thought Lab' },
-        {
-          name: 'Dr. Than Singh Saini',
-          designation: 'Co-Coordinator, Thought Lab',
-        },
-        {
-          name: 'Dr. Anshu Parashar',
-          designation: 'Co-Coordinator, Thought Lab',
-        },
-        {
-          name: 'Dr. Jagan Nath',
-          designation: 'Co-Coordinator, Thought Lab',
-        },
-        { name: 'Ms. Anjali Taneja', designation: 'Counseling Psychologist' },
-        { name: 'Renu Munjal', designation: 'Technician, Thought Lab' },
-      ],
 
-      length: 0,
-    },
-    student_secretaries: {
-      heading: 'Student Secretaries',
-      members: [
-        {
-          name: 'Ashish Saini',
-          designation: 'Student Secretary, Thought Lab',
-        },
-        { name: 'Bhavna', designation: 'Student Secretary, Thought Lab' },
-        { name: 'Rajneesh', designation: 'Student Secretary, Thought Lab' },
-        {
-          name: 'Vanshika Arora',
-          designation: 'Student Secretary, Thought Lab',
-        },
-      ],
-    },
+  VisionMissionImage: {
+    src: 'fallback/user-image.jpg',
+    alt: 'Vision and Mission Image',
   },
-  secretariesSession:
-    'Faculty and Student Secretaries of Thought Lab for the academic session 2025–26.',
-  table: {
-    sno: 'Sr. No.',
-    name: 'Name',
-    designation: 'Designation',
+
+  faculty_members: {
+    heading: 'Faculty Members',
+    employees: [
+      {
+        position: 'Coordinator, Thought Lab',
+      },
+      {
+        position: 'Co-Coordinator, Thought Lab',
+      },
+      {
+        position: 'Co-Coordinator, Thought Lab',
+      },
+    ],
   },
+
+  student_secretaries: {
+    heading: 'Student Secretaries',
+  },
+
   purpose: {
     heading: 'Purpose',
     points: [
@@ -124,39 +128,53 @@ export const thoughtLabEn: ThoughtLabTranslations = {
       'To foster interest in values and spirituality among youth.',
     ],
   },
+
   benefits: {
     heading: 'Benefits',
     points: [
       'Experience peace and empower yourself',
       'Positive changes in personality',
       'Relief from stress, anxiety, and fear',
-      'Improve concentration and focus',
-      'Enhance decision-making power',
+      'Enhance concentration and focus',
+      'Improve decision-making power',
+      'Opportunity to work on spiritual projects',
     ],
   },
+
   contact: {
     heading: 'Contact Us',
     office: 'Thought Lab Office, NIT Kurukshetra',
     website: 'https://thought-labv2.netlify.app/',
     websiteLabel: 'Website',
   },
-  gallery: {
-    heading: 'Image Gallery',
+
+  events: {
+    heading: 'EVENTS',
   },
-  about:
-    'A Thought Lab has been established in the institute, which was inaugurated on 10 May 2022 by the Hon’ble Governor of Haryana. The objective of the Thought Lab is to train people to develop positive and creative thinking so that they can make constructive contributions to their homes, organizations, and society.',
 };
 
 export const thoughtLabHi: ThoughtLabTranslations = {
   title: 'विचार प्रयोगशाला',
+
+  tabs: {
+    purpose: 'उद्देश्य',
+    benefits: 'लाभ',
+    events: 'कार्यक्रम',
+    facultyMembers: 'संकाय सदस्य',
+    studentSecretaries: 'छात्र सचिव',
+    contact: 'संपर्क',
+  },
+
   about:
     'संस्थान में एक विचार प्रयोगशाला (थॉट लैब) स्थापित की गई है, जिसका उद्घाटन 10 मई 2022 को हरियाणा के माननीय राज्यपाल द्वारा किया गया। विचार प्रयोगशाला का उद्देश्य लोगों को सकारात्मक और रचनात्मक विचारों को विकसित करने का प्रशिक्षण देना है ताकि वे अपने घर, संगठन और समाज में सकारात्मक योगदान दे सकें।',
+
   vision: {
     heading: 'दृष्टिकोण',
     points: [
       'विज्ञान और आध्यात्मिकता के माध्यम से शांति, प्रेम और सार्वभौमिक सामंजस्य की दुनिया बनाने के लिए युवाओं के विचारों को सशक्त बनाना।',
     ],
   },
+
   mission: {
     heading: 'मिशन',
     points: [
@@ -167,53 +185,12 @@ export const thoughtLabHi: ThoughtLabTranslations = {
       'युवाओं में मूल्यों और आध्यात्मिकता के प्रति रुचि पैदा करना।',
     ],
   },
-  secretaries: {
-    faculty_secretaries: {
-      heading: 'संकाय सचिव',
-      members: [
-        {
-          name: 'डॉ. दीक्षित गर्ग',
-          designation: 'समन्वयक, विचार प्रयोगशाला',
-        },
-        {
-          name: 'डॉ. थान सिंह सैनी',
-          designation: 'सह-समन्वयक, विचार प्रयोगशाला',
-        },
-        {
-          name: 'डॉ. अंशु पराशर',
-          designation: 'सह-समन्वयक, विचार प्रयोगशाला',
-        },
-        { name: 'डॉ. जगन नाथ', designation: 'सह-समन्वयक, विचार प्रयोगशाला' },
-        {
-          name: 'सुश्री अंजलि तनेजा',
-          designation: 'परामर्शदाता मनोवैज्ञानिक',
-        },
-        { name: 'रेनू मुंजाल', designation: 'तकनीशियन, विचार प्रयोगशाला' },
-      ],
 
-      length: 0,
-    },
+  VisionMissionImage: {
+    src: 'fallback/user-image.jpg',
+    alt: 'दृष्टि एवं मिशन',
+  },
 
-    student_secretaries: {
-      heading: 'छात्र सचिव',
-      members: [
-        { name: 'आशीष सैनी', designation: 'छात्र सचिव, विचार प्रयोगशाला' },
-        { name: 'भावना', designation: 'छात्र सचिव, विचार प्रयोगशाला' },
-        { name: 'रजनीश', designation: 'छात्र सचिव, विचार प्रयोगशाला' },
-        {
-          name: 'वंशिका अरोड़ा',
-          designation: 'छात्र सचिव, विचार प्रयोगशाला',
-        },
-      ],
-    },
-  },
-  secretariesSession:
-    'सत्र 2025-26 के लिए विचार प्रयोगशाला के संकाय एवं छात्र सचिव',
-  table: {
-    sno: 'क्रमांक',
-    name: 'नाम',
-    designation: 'पदनाम',
-  },
   purpose: {
     heading: 'उद्देश्य',
     points: [
@@ -225,6 +202,7 @@ export const thoughtLabHi: ThoughtLabTranslations = {
       'युवाओं में मूल्यों और आध्यात्मिकता के प्रति रुचि पैदा करना।',
     ],
   },
+
   benefits: {
     heading: 'लाभ',
     points: [
@@ -233,15 +211,35 @@ export const thoughtLabHi: ThoughtLabTranslations = {
       'तनाव, चिंता और भय से मुक्ति',
       'एकाग्रता और ध्यान केंद्रित करने की क्षमता बढ़ाएं',
       'निर्णय लेने की शक्ति में सुधार',
+      'आध्यात्मिक परियोजनाओं पर काम करने का अवसर',
     ],
   },
+
+  events: { heading: 'कार्यक्रम' },
+
+  faculty_members: {
+    heading: 'संकाय सदस्य',
+    employees: [
+      {
+        position: 'समन्वयक, विचार प्रयोगशाला',
+      },
+      {
+        position: 'सह-समन्वयक, विचार प्रयोगशाला',
+      },
+      {
+        position: 'सह-समन्वयक, विचार प्रयोगशाला',
+      },
+    ],
+  },
+
+  student_secretaries: {
+    heading: 'छात्र सचिव',
+  },
+
   contact: {
     heading: 'संपर्क करें',
     office: 'विचार प्रयोगशाला कार्यालय, एनआईटी कुरुक्षेत्र',
     website: 'https:/thought-labv2.netlify.app/',
     websiteLabel: 'वेबसाइट:',
-  },
-  gallery: {
-    heading: 'चित्र गैलरी',
   },
 };
