@@ -269,7 +269,7 @@ export default async function TrainingAndPlacement({
           </div>
         </article>
       </section>
-      <section className="container" id="stats">
+      <section className="container" id="placement-stats">
         <Heading
           glyphDirection="rtl"
           heading="h3"
@@ -381,7 +381,7 @@ export default async function TrainingAndPlacement({
           glyphDirection="rtl"
           heading="h3"
           href="#student-data"
-          text={text.headings.placementteam.toUpperCase()}
+          text={text.headings.studentcoordinators.toUpperCase()}
         />
         <ul className="grid grid-cols-4 gap-6">
           {sampleStudents.map((member, i) => (
@@ -391,11 +391,11 @@ export default async function TrainingAndPlacement({
           ))}
         </ul>
       </section>
-      <section className="container" id="our">
+      <section className="container" id="recruiters">
         <Heading
           glyphDirection="rtl"
           heading="h3"
-          href="#our"
+          href="#recruiters"
           text={text.headings.ourrecruiters.toUpperCase()}
         />
         <p className=" text-lg  max-md:rounded-t md:w-full md:rounded-r ">

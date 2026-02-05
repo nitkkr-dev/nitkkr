@@ -1299,6 +1299,7 @@ export interface Translations {
       tpo: string;
       fic: string;
       placementteam: string;
+      studentcoordinators: string;
     };
     Dean: {
       name: string;

@@ -2183,6 +2183,7 @@ const text: Translations = {
       tpo: 'प्रशिक्षण और प्लेसमेंट अधिकारी',
       fic: 'प्रभारी संकाय',
       placementteam: 'प्लेसमेंट टीम',
+      studentcoordinators: 'छात्र समन्वयक',
     },
     Dean: {
       name: 'डॉ. प्रशिक्षण और प्लेसमेंट अधिकारी',

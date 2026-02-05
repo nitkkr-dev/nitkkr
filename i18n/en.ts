@@ -2058,6 +2058,7 @@ Centre/empanelled hospital/Govt. hospital after giving preliminary treatment.`,
       tpo: 'Training and Placement Officer',
       fic: 'Faculty In-Charge',
       placementteam: 'Placement Team',
+      studentcoordinators: 'Student Coordinators',
     },
     Dean: {
       name: 'Dr. Training and Placement Officer',
