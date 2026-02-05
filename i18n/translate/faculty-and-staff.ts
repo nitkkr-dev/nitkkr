@@ -8,6 +8,7 @@ export interface FacultyAndStaffTranslations {
     linkedInId: string;
     researchGateId: string;
     scopusId: string;
+    orcidId: string;
   };
   areasOfInterest: string;
   intellectualContributions: {
@@ -54,6 +55,7 @@ export const facultyAndStaffEn: FacultyAndStaffTranslations = {
     linkedInId: 'LinkedIn',
     researchGateId: 'Research Gate',
     scopusId: 'Scopus',
+    orcidId: 'ORCID',
   },
   areasOfInterest: 'Areas of Interest',
   intellectualContributions: {
@@ -100,6 +102,7 @@ export const facultyAndStaffHi: FacultyAndStaffTranslations = {
     linkedInId: 'लिंक्डइन',
     researchGateId: 'रिसर्च गेट',
     scopusId: 'स्कोपस',
+    orcidId: 'ओआरसीआईडी',
   },
   areasOfInterest: 'रुचि के क्षेत्र',
   intellectualContributions: {

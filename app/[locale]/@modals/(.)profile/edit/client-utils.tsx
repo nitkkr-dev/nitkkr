@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/inputs/select';
-import { CardContent, CardFooter } from '~/components/ui';
+import { CardContent, CardFooter, ScrollArea } from '~/components/ui';
 import {
   FormControl,
   FormDescription,
@@ -346,15 +346,23 @@ export function FacultyPersonalDetailsForm({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <CardContent className="grid gap-4 p-6 md:grid-cols-2">
-          {renderFields(
-            form.control,
-            facultyPersonalDetailsSchema.shape,
-            'personalDetails'
-          )}
-        </CardContent>
-        <CardFooter className="flex justify-end border-t pt-4 ">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex min-h-0 flex-1 flex-col"
+      >
+        {/* Scrollable form fields */}
+        <ScrollArea className="min-h-0 flex-1">
+          <CardContent className="grid gap-4 p-6 md:grid-cols-2">
+            {renderFields(
+              form.control,
+              facultyPersonalDetailsSchema.shape,
+              'personalDetails'
+            )}
+          </CardContent>
+        </ScrollArea>
+
+        {/* Fixed Footer */}
+        <CardFooter className="flex flex-shrink-0 justify-end border-t px-6 py-4">
           <Button
             type="button"
             variant="secondary"
