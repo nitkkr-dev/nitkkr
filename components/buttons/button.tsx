@@ -14,8 +14,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: cn(
-          'bg-white border border-neutral-700 text-neutral-700',
-          'hover:border-primary-700 hover:text-primary-700',
+          'border border-neutral-700 bg-primary-700 text-neutral-50',
+          'hover:border-primary-700 hover:text-shade-light',
           'focus:text-white focus:border-primary-700',
           'active:text-white active:border-primary-700 active:bg-primary-700'
         ),

@@ -124,6 +124,13 @@ export const facultyProfileSchemas = {
   }),
 };
 export const facultyPersonalDetailsSchema = z.object({
+  orcidId: z
+    .string()
+    .regex(
+      /^(https?:\/\/)?orcid\.org\/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$/,
+      'Invalid ORCID URL format'
+    )
+    .optional(),
   scopusId: z
     .string()
     .regex(
