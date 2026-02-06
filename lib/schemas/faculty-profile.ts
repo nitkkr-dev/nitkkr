@@ -126,36 +126,61 @@ export const facultyProfileSchemas = {
 export const facultyPersonalDetailsSchema = z.object({
   orcidId: z
     .string()
-    .regex(
-      /^(https?:\/\/)?orcid\.org\/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$/,
+    .trim()
+    .refine(
+      (val) =>
+        val === '' ||
+        /^(https?:\/\/)?orcid\.org\/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}\/?$/.test(
+          val
+        ),
       'Invalid ORCID URL format'
     )
     .optional(),
   scopusId: z
     .string()
-    .regex(
-      /^(https?:\/\/)?(www.)?scopus.com\/authid\/detail.uri\?authorId=\d+-?\d+$/,
+    .trim()
+    .refine(
+      (val) =>
+        val === '' ||
+        /^(https?:\/\/)?(www\.)?scopus\.com\/authid\/detail\.uri\?.*authorId=\d+.*\/?$/.test(
+          val
+        ),
       'Invalid Scopus URL format'
     )
     .optional(),
   linkedInId: z
     .string()
-    .regex(
-      /(https?:\/\/)?(www.)?linkedin.com\/in\/[a-zA-Z0-9-]+$/,
+    .trim()
+    .refine(
+      (val) =>
+        val === '' ||
+        /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-]+\/?(?:\?.*)?$/.test(
+          val
+        ),
       'Invalid LinkedIn URL format'
     )
     .optional(),
   googleScholarId: z
     .string()
-    .regex(
-      /^(https?:\/\/)?scholar.google.co.in\/citations\?user=[a-zA-Z0-9_-]+$/,
+    .trim()
+    .refine(
+      (val) =>
+        val === '' ||
+        /^(https?:\/\/)?scholar\.google\.(?:com|co\.[a-z]{2}|[a-z]{2})\/citations\?.*user=[a-zA-Z0-9_-]+.*\/?$/.test(
+          val
+        ),
       'Invalid Google Scholar URL format'
     )
     .optional(),
   researchGateId: z
     .string()
-    .regex(
-      /^(https?:\/\/)?(www.)?researchgate.net\/profile\/[a-zA-Z0-9_-]+$/,
+    .trim()
+    .refine(
+      (val) =>
+        val === '' ||
+        /^(https?:\/\/)?(www\.)?researchgate\.net\/profile\/[a-zA-Z0-9_-]+\/?$/.test(
+          val
+        ),
       'Invalid ResearchGate URL format'
     )
     .optional(),
