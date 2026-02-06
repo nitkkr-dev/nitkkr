@@ -9,6 +9,7 @@ export * from './curricula';
 export * from './curriculum';
 export * from './dean';
 export * from './deans';
+export * from './deans-page';
 export * from './department';
 export * from './departments';
 export * from './director-message';

@@ -13,6 +13,7 @@ import {
   curriculumHi,
   deanHi,
   deansHi,
+  deansPageHi,
   departmentHi,
   departmentsHi,
   directorMessageHi,
@@ -92,6 +93,7 @@ const text: Translations = {
   Research: researchHi,
   TrainingAndPlacement: trainingAndPlacementHi,
   DirectorPage: directorPageHi,
+  DeansPage: deansPageHi,
   CHPD: chpdHi,
 };
 export default text;

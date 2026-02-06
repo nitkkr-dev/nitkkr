@@ -67,7 +67,7 @@ export default async function Deans({
                     'bg-neutral-50 font-serif text-primary-700',
                     'rounded p-2 drop-shadow hover:drop-shadow-lg xl:p-3'
                   )}
-                  href={`/${locale}/institute/sections/${dean.domain}`}
+                  href={`/${locale}/institute/administration/deans/${dean.domain}`}
                 >
                   <Icon
                     className={cn(
