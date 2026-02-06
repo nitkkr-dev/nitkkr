@@ -2,9 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaGlobeAsia, FaRegEnvelope } from 'react-icons/fa';
-import { FaPhone, FaTrophy } from 'react-icons/fa6';
-import { FaGears } from 'react-icons/fa6';
-import { MdArticle, MdBadge, MdEmail } from 'react-icons/md';
+import { FaGears, FaPhone } from 'react-icons/fa6';
+import { MdArticle, MdEmail } from 'react-icons/md';
 import { RiBriefcase4Line } from 'react-icons/ri';
 
 import { Button } from '~/components/buttons';
@@ -12,7 +11,7 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import NotificationsPanel from '~/components/notifications/notifications-panel';
 import FICGroup from '~/components/fic-group';
-import StudentCard from '~/components/StudentCard';
+import StudentGroup from '~/components/student-group';
 import {
   Accordion,
   AccordionContent,
@@ -29,7 +28,6 @@ import clients from './recruiters';
 
 // Hardcoded PDF base URL and PDF list for placement stats
 const pdfBase = `${getS3Url()}/training-and-placement/placement-stats/`;
-const button_group_bg_image = `${getS3Url()}/assets/horses-2.png`;
 
 const placementStats: string[] = [
   `${pdfBase}Academic-Session-2024-25.pdf`,
@@ -62,59 +60,12 @@ export default async function TrainingAndPlacement({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).TrainingAndPlacement;
-  const sampleStudents = [
-    {
-      academicDetails: {
-        student: {
-          person: {
-            name: 'Rahul Verma',
-            email: 'rahul.verma@nitkkr.ac.in',
-            phone: '9876543210',
-          },
-        },
-        batch: '2022-26',
-      },
-      position: 'President',
-    },
-    {
-      academicDetails: {
-        student: {
-          person: {
-            name: 'Priya Nair',
-            email: 'priya.nair@nitkkr.ac.in',
-            phone: '9123456780',
-          },
-        },
-        batch: '2023-27',
-      },
-      position: 'Vice President',
-    },
-    {
-      academicDetails: {
-        student: {
-          person: {
-            name: 'Karan Malhotra',
-            email: 'karan.m@nitkkr.ac.in',
-            phone: '9012345678',
-          },
-        },
-        batch: '2021-25',
-      },
-      position: 'Technical Lead',
-    },
-    {
-      academicDetails: {
-        student: {
-          person: {
-            name: 'Neha Gupta',
-            email: 'neha.gupta@nitkkr.ac.in',
-            phone: '9988776655',
-          },
-        },
-        batch: '2022-26',
-      },
-      position: 'Coordinator',
-    },
+  // Student coordinators data - replace with actual roll numbers from the database
+  const studentCoordinators = [
+    { rollNumber: '12212070', designation: 'President' },
+    { rollNumber: '12112002', designation: 'Vice President' },
+    { rollNumber: '12112003', designation: 'Technical Lead' },
+    { rollNumber: '12112004', designation: 'Coordinator' },
   ];
 
   return (
@@ -384,13 +335,7 @@ export default async function TrainingAndPlacement({
           href="#student-data"
           text={text.headings.studentcoordinators.toUpperCase()}
         />
-        <ul className="grid grid-cols-4 gap-6">
-          {sampleStudents.map((member, i) => (
-            <li key={i} className="w-full">
-              <StudentCard member={member} />
-            </li>
-          ))}
-        </ul>
+        <StudentGroup studentData={studentCoordinators} />
       </section>
       <section className="container" id="recruiters">
         <Heading
