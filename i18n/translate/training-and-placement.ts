@@ -7,6 +7,28 @@ export interface TrainingAndPlacementTranslations {
     about: string;
     faq: string;
     forrecruiters: string;
+    notifications: string;
+    messagefromdean: string;
+    messagefromfic: string;
+    events: string;
+    tpo: string;
+    fic: string;
+    placementteam: string;
+    studentcoordinators: string;
+  };
+  Dean: {
+    name: string;
+    position: string;
+    phone: string;
+    fax: string;
+    mobile: string;
+    email: string;
+  };
+  labels: {
+    phoneNo: string;
+    faxNo: string;
+    mobileNo: string;
+    emailId: string;
   };
   about: {
     content: string[];
@@ -48,6 +70,28 @@ export const trainingAndPlacementEn: TrainingAndPlacementTranslations = {
     about: 'About us',
     forrecruiters: 'For Recruiters',
     faq: 'FAQ',
+    notifications: 'Notifications',
+    messagefromdean: 'Message from Dean',
+    messagefromfic: 'Message from FIC',
+    events: 'Events',
+    tpo: 'Training and Placement Officer',
+    fic: 'Faculty In-Charge',
+    placementteam: 'Placement Team',
+    studentcoordinators: 'Student Coordinators',
+  },
+  Dean: {
+    name: 'Prof. XYZ',
+    position: 'Dean (Training & Placement)',
+    phone: '+91-1744-233-XXX',
+    fax: '+91-1744-233-XXX',
+    mobile: '+91-XXXXXXXXXX',
+    email: 'dean.tnp@nitkkr.ac.in',
+  },
+  labels: {
+    phoneNo: 'Phone No.',
+    faxNo: 'Fax No.',
+    mobileNo: 'Mobile No.',
+    emailId: 'Email ID',
   },
   about: {
     content: [
@@ -169,14 +213,36 @@ rolls down to 60% of the eligible students for second round of placement session
 };
 
 export const trainingAndPlacementHi: TrainingAndPlacementTranslations = {
-  title: '',
+  title: 'प्रशिक्षण और प्लेसमेंट',
   headings: {
-    ourrecruiters: '',
-    stats: '',
-    guidelines: '',
-    about: '',
-    faq: '',
-    forrecruiters: '',
+    ourrecruiters: 'हमारे भर्तीकर्ता',
+    stats: 'प्लेसमेंट आंकड़े',
+    guidelines: 'दिशानिर्देश',
+    about: 'हमारे बारे में',
+    faq: 'अक्सर पूछे जाने वाले प्रश्न',
+    forrecruiters: 'भर्तीकर्ताओं के लिए',
+    notifications: 'सूचनाएं',
+    messagefromdean: 'डीन का संदेश',
+    messagefromfic: 'एफआईसी का संदेश',
+    events: 'कार्यक्रम',
+    tpo: 'प्रशिक्षण एवं प्लेसमेंट अधिकारी',
+    fic: 'प्रभारी संकाय',
+    placementteam: 'प्लेसमेंट टीम',
+    studentcoordinators: 'छात्र समन्वयक',
+  },
+  Dean: {
+    name: 'प्रो. XYZ',
+    position: 'डीन (प्रशिक्षण और प्लेसमेंट)',
+    phone: '+91-1744-233-XXX',
+    fax: '+91-1744-233-XXX',
+    mobile: '+91-XXXXXXXXXX',
+    email: 'dean.tnp@nitkkr.ac.in',
+  },
+  labels: {
+    phoneNo: 'फोन नंबर',
+    faxNo: 'फैक्स नंबर',
+    mobileNo: 'मोबाइल नंबर',
+    emailId: 'ईमेल आईडी',
   },
   about: {
     content: [],
