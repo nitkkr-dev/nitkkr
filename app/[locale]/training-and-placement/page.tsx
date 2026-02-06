@@ -74,14 +74,11 @@ export default async function TrainingAndPlacement({
         title={text.title}
         headings={[
           { label: text.headings.about, href: '#about' },
-          { label: text.headings.stats, href: '#stats' },
-          { label: text.headings.ourrecruiters, href: '#our' },
-          { label: text.headings.forrecruiters, href: '#for' },
+          { label: text.headings.stats, href: '#placement-stats' },
+          { label: text.headings.ourrecruiters, href: '#recruiters' },
+          { label: text.headings.forrecruiters, href: '#for-recruiters' },
           { label: text.headings.guidelines, href: '#guide' },
-          {
-            label: text.headings.faq,
-            href: '#FAQ',
-          },
+          { label: text.headings.faq, href: '#FAQ' },
         ]}
         src="training-and-placement/header.jpg"
       />
@@ -137,41 +134,41 @@ export default async function TrainingAndPlacement({
           href="#messagefromdean"
           text={text.headings.messagefromdean.toUpperCase()}
         />
-        <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
-          <Image
-            alt={hodProfile.name}
-            className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
-            height={256}
-            width={256}
-            src="/placeholder-person.jpg"
-          />
-          <div className="flex flex-col justify-between">
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-xl font-medium text-primary-500">
-                  {hodProfile.name}
-                </h4>
-                <p className="text-lg font-medium">{hodProfile.designation}</p>
-              </div>
-              <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
-                {hodProfile.message.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </blockquote>
-            </div>
-            <div className="mt-4 flex items-center gap-4">
+        <article className="flex flex-col gap-4 rounded-lg border border-primary-500 bg-shade-light p-4 md:flex-row md:gap-6 md:p-6">
+          <div className="flex flex-col items-center gap-3 md:items-start">
+            <Image
+              alt={hodProfile.name}
+              className="size-36 rounded-lg bg-neutral-200 object-cover md:size-44"
+              height={176}
+              width={176}
+              src="fallback/user-image.jpg"
+            />
+            <div className="flex flex-col gap-1 text-xs text-neutral-700">
               <a
-                className="text-primary-500 hover:underline"
+                className="flex items-center gap-1.5 hover:text-primary-700 hover:underline"
                 href={`mailto:${hodProfile.email}`}
               >
-                <MdEmail className="mr-2 inline-block fill-primary-500" />
+                <MdEmail className="flex-shrink-0 text-primary-700" />
                 {hodProfile.email}
               </a>
-              <span className="text-primary-500">
-                <FaPhone className="mr-2 inline-block fill-primary-500" />
+              <span className="flex items-center gap-1.5">
+                <FaPhone className="flex-shrink-0 text-primary-700" />
                 {hodProfile.phone}
               </span>
             </div>
+          </div>
+          <div className="flex flex-1 flex-col">
+            <h4 className="font-serif text-xl font-bold text-primary-700 md:text-2xl">
+              {hodProfile.name}
+            </h4>
+            <p className="text-sm font-medium text-neutral-700 md:text-base">
+              {hodProfile.designation}
+            </p>
+            <blockquote className="mt-4 space-y-3 border-l-4 border-primary-700 pl-4 text-sm italic text-neutral-800 md:text-base">
+              {hodProfile.message.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </blockquote>
           </div>
         </article>
       </section>
@@ -182,41 +179,41 @@ export default async function TrainingAndPlacement({
           href="#messagefromfic"
           text={text.headings.messagefromfic.toUpperCase()}
         />
-        <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
-          <Image
-            alt={hodProfile.name}
-            className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
-            height={256}
-            width={256}
-            src="/placeholder-person.jpg"
-          />
-          <div className="flex flex-col justify-between">
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-xl font-medium text-primary-500">
-                  {hodProfile.name}
-                </h4>
-                <p className="text-lg font-medium">{hodProfile.designation}</p>
-              </div>
-              <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
-                {hodProfile.message.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </blockquote>
-            </div>
-            <div className="mt-4 flex items-center gap-4">
+        <article className="flex flex-col gap-4 rounded-lg border border-primary-500 bg-shade-light p-4 md:flex-row md:gap-6 md:p-6">
+          <div className="flex flex-col items-center gap-3 md:items-start">
+            <Image
+              alt={hodProfile.name}
+              className="size-36 rounded-lg bg-neutral-200 object-cover md:size-44"
+              height={176}
+              width={176}
+              src="fallback/user-image.jpg"
+            />
+            <div className="flex flex-col gap-1 text-xs text-neutral-700">
               <a
-                className="text-primary-500 hover:underline"
+                className="flex items-center gap-1.5 hover:text-primary-700 hover:underline"
                 href={`mailto:${hodProfile.email}`}
               >
-                <MdEmail className="mr-2 inline-block fill-primary-500" />
+                <MdEmail className="flex-shrink-0 text-primary-700" />
                 {hodProfile.email}
               </a>
-              <span className="text-primary-500">
-                <FaPhone className="mr-2 inline-block fill-primary-500" />
+              <span className="flex items-center gap-1.5">
+                <FaPhone className="flex-shrink-0 text-primary-700" />
                 {hodProfile.phone}
               </span>
             </div>
+          </div>
+          <div className="flex flex-1 flex-col">
+            <h4 className="font-serif text-xl font-bold text-primary-700 md:text-2xl">
+              {hodProfile.name}
+            </h4>
+            <p className="text-sm font-medium text-neutral-700 md:text-base">
+              {hodProfile.designation}
+            </p>
+            <blockquote className="mt-4 space-y-3 border-l-4 border-primary-700 pl-4 text-sm italic text-neutral-800 md:text-base">
+              {hodProfile.message.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </blockquote>
           </div>
         </article>
       </section>
@@ -224,7 +221,7 @@ export default async function TrainingAndPlacement({
         <Heading
           glyphDirection="rtl"
           heading="h3"
-          href="#stats"
+          href="#placement-stats"
           text={text.headings.stats.toUpperCase()}
         />
         <article
@@ -285,7 +282,8 @@ export default async function TrainingAndPlacement({
           href="#tpo"
           text={text.headings.tpo.toUpperCase()}
         />
-        <section className="container mb-10 mt-4" id="director-profile">
+        {/* Check this part. Container is not used */}
+        <div className="container mb-10 mt-4 flex justify-center">
           <DirectorCard
             image="assets/director.jpeg"
             name={text.Dean.name}
@@ -296,7 +294,7 @@ export default async function TrainingAndPlacement({
             email={text.Dean.email}
             labels={text.labels}
           />
-        </section>
+        </div>
       </section>
       <section className="container" id="fic">
         <Heading
@@ -312,12 +310,12 @@ export default async function TrainingAndPlacement({
           ]}
         />
       </section>
-      <section className="container" id="placement-team">
+      <section className="container" id="placement-coordinators">
         <Heading
           glyphDirection="rtl"
           heading="h3"
-          href="#placement-team"
-          text={text.headings.placementteam.toUpperCase()}
+          href="#placement-coordinators"
+          text={text.headings.placementcoordinators.toUpperCase()}
         />
         <FICGroup
           facultyData={[
@@ -365,11 +363,11 @@ export default async function TrainingAndPlacement({
           </Suspense>
         </article>
       </section>
-      <section className="container" id="for">
+      <section className="container" id="for-recruiters">
         <Heading
           glyphDirection="rtl"
           heading="h3"
-          href="#for"
+          href="#for-recruiters"
           text={text.headings.forrecruiters.toUpperCase()}
           className="container"
         />
@@ -500,7 +498,9 @@ export default async function TrainingAndPlacement({
               value={`item-${questionIndex}`}
               className="max-w-full"
             >
-              <AccordionTrigger>{question}</AccordionTrigger>
+              <AccordionTrigger className="text-left">
+                {question}
+              </AccordionTrigger>
               {(text.faq.answers[questionIndex] || []).map(
                 (answer, answerIndex) => (
                   <AccordionContent key={answerIndex}>

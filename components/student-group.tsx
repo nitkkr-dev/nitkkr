@@ -52,7 +52,7 @@ export default async function StudentGroup({ studentData }: StudentGroupProps) {
     .filter(Boolean);
 
   return (
-    <ul className="flex flex-wrap justify-between gap-6">
+    <ul className="flex flex-wrap justify-center gap-6 sm:justify-between">
       {enrichedStudents.map((member) =>
         member ? (
           <li key={member.rollNumber}>

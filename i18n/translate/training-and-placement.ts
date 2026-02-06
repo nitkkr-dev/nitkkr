@@ -13,7 +13,7 @@ export interface TrainingAndPlacementTranslations {
     events: string;
     tpo: string;
     fic: string;
-    placementteam: string;
+    placementcoordinators: string;
     studentcoordinators: string;
   };
   Dean: {
@@ -76,7 +76,7 @@ export const trainingAndPlacementEn: TrainingAndPlacementTranslations = {
     events: 'Events',
     tpo: 'Training and Placement Officer',
     fic: 'Faculty In-Charge',
-    placementteam: 'Placement Team',
+    placementcoordinators: 'Placement Coordinators',
     studentcoordinators: 'Student Coordinators',
   },
   Dean: {
@@ -227,7 +227,7 @@ export const trainingAndPlacementHi: TrainingAndPlacementTranslations = {
     events: 'कार्यक्रम',
     tpo: 'प्रशिक्षण एवं प्लेसमेंट अधिकारी',
     fic: 'प्रभारी संकाय',
-    placementteam: 'प्लेसमेंट टीम',
+    placementcoordinators: 'प्लेसमेंट समन्वयक',
     studentcoordinators: 'छात्र समन्वयक',
   },
   Dean: {
