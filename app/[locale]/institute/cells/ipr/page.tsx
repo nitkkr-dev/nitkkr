@@ -5,13 +5,12 @@ import { FaRegIdCard } from 'react-icons/fa';
 import { BsTools } from 'react-icons/bs';
 import { type IconType } from 'react-icons/lib';
 
-import { cn } from '~/lib/utils';
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 import FICGroup from '~/components/fic-group';
+import ButtonGroup from '~/components/button-group';
 
 // Fetches IPR data from DB - cache for 5 minutes
 export const revalidate = 300;
@@ -246,37 +245,7 @@ export default async function IPR({
             {text.Research.ipr.availableTechnologies.description}
           </h2>
 
-          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
-            {availableTechnologies.map(({ label, href, icon: Icon }, index) => (
-              <Button
-                asChild
-                className={cn(
-                  'xl:gap-5',
-                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
-                )}
-                key={index}
-                variant="secondary"
-              >
-                <Link
-                  href={href}
-                  className="rounded-s-md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
-                    <Icon
-                      className={cn(
-                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
-                      )}
-                    />
-                  </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
-                    {label}
-                  </p>
-                </Link>
-              </Button>
-            ))}
-          </div>
+          <ButtonGroup buttonArray={availableTechnologies} columns={2} />
         </div>
         {/* NITKKR innovations and IP */}
         <div>
@@ -285,32 +254,7 @@ export default async function IPR({
             heading="h2"
             text={text.Research.ipr.nitkkrInnovationsAndIp.title}
           />
-          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
-            {innovations.map(({ label, href, icon: Icon }, index) => (
-              <Button
-                asChild
-                className={cn(
-                  'xl:gap-5',
-                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
-                )}
-                key={index}
-                variant="secondary"
-              >
-                <Link href={href} className="rounded-s-md">
-                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
-                    <Icon
-                      className={cn(
-                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
-                      )}
-                    />
-                  </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
-                    {label}
-                  </p>
-                </Link>
-              </Button>
-            ))}
-          </div>
+          <ButtonGroup buttonArray={innovations} columns={2} />
         </div>
         {/* Gallery  */}
       </main>
