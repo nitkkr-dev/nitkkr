@@ -1,6 +1,33 @@
-import { getS3Url } from '~/server/s3';
-import { getTranslations } from '~/i18n/translations';
+import { like, or } from 'drizzle-orm';
+
+import FICGroup from '~/components/fic-group';
 import Gallery from '~/components/ui/gallery';
+import { getTranslations } from '~/i18n/translations';
+import { db } from '~/server/db';
+import { otherOfficers } from '~/server/db/schema';
+import { getS3Url } from '~/server/s3';
+
+// Function to fetch IKS faculty-in-charge from otherOfficers table
+async function fetchIKSFaculty() {
+  const iksOfficers = await db.query.otherOfficers.findMany({
+    where: or(
+      like(otherOfficers.designation, '%IKS%'),
+      like(otherOfficers.designation, '%Indian Knowledge System%')
+    ),
+    with: {
+      faculty: {
+        columns: {
+          employeeId: true,
+        },
+      },
+    },
+  });
+
+  return iksOfficers.map((officer) => ({
+    employeeId: officer.faculty.employeeId,
+    designation: officer.designation,
+  }));
+}
 
 export default async function IKS({
   params: { locale },
@@ -51,61 +78,7 @@ export default async function IKS({
         'Expert talk on “Mental Harmony & Meditation” by Mr. Rudransh Aggarwal, IIT Roorkee on 23.05.2025 at 10:00 AM (1 hour duration) in the Seminar Hall, Computer Engineering Department, NIT Kurukshetra.',
     },
   ];
-  const team = [
-    {
-      name: 'Prof. R.K. Aggarwal',
-      designation: 'Professor-In-Charge, IKS Cell, NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Shabnam',
-      designation: 'Faculty-In-Charge, IKS Cell, NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Sachin Maheshwari',
-      designation: 'Vice Chancellor, GJU Moradabad, UP',
-    },
-    {
-      name: 'Dr. Rajesh Raj',
-      designation: 'Director, Ritanveshi Yogayan Foundation',
-    },
-    {
-      name: 'Dr. Jagan Nath',
-      designation:
-        'Sr. Tech. Officer, Ramchandra Mission (Heartfulness), NIT Kurukshetra',
-    },
-    {
-      name: 'Dr. Kuldeep Kumar',
-      designation: 'Assistant Professor, NIT Kurukshetra',
-    },
-    { name: 'Dr. Manasa Reddy', designation: 'Psychologist, NIT Kurukshetra' },
-    {
-      name: 'Dr. Navneet Arora',
-      designation: 'Professor, IIT Roorkee, Dev Samaj',
-    },
-    { name: 'Dr. Navneet', designation: 'Dean, Gurukul Kangri, Haridwar' },
-    {
-      name: 'Dr. Sanjay Sharma',
-      designation: 'Professor, Gautam Buddha University, UP',
-    },
-    { name: 'Dr. Sandeep Arya', designation: 'Dean Faculty, GJU Hisar' },
-    { name: 'Shri Nakul Vashishtha', designation: 'Entrepreneur' },
-    { name: 'Dr. Amita Mittal', designation: 'Assistant Professor, KUK' },
-    { name: 'Mr. Rudransh Aggarwal', designation: 'B.Tech, IIT Roorkee' },
-    { name: 'Dr. Sonam Nagar', designation: 'Brahmkumaris, Gurugram' },
-    {
-      name: 'Shri Mithlesh Kumar Singh',
-      designation: 'Deputy Director, Electrical Safety UP',
-    },
-    { name: 'Shri Ram Kumar Sharma', designation: 'Vidya Vistaar Yojana' },
-    {
-      name: 'Dr. Diksha Arya',
-      designation: 'Assistant Professor, University of Tokyo, Japan',
-    },
-    {
-      name: 'Dr. Kapil Bhatt',
-      designation: 'Assistant Professor, HP University, Shimla',
-    },
-  ];
+
   const coordinators = [
     { name: 'Mr Chandan', education: 'M.Tech' },
     { name: 'Mr Sanjay', education: 'B.Tech' },
@@ -128,6 +101,9 @@ export default async function IKS({
   const galleryImages = Array.from({ length: 23 }, (_, i) => ({
     src: `institute/cells/iks/${i + 1}.jpg`,
   }));
+
+  // Fetch faculty-in-charge data from database
+  const facultyData = await fetchIKSFaculty();
 
   return (
     <>
@@ -169,14 +145,7 @@ export default async function IKS({
           <h3 className="mb-2 font-bold text-primary-300">
             {text.Institute.cells.iks.iksTeam}
           </h3>
-          <ol className="list-decimal space-y-1 pl-5">
-            {team.map((team) => (
-              <li key={team.name}>
-                {team.name}, {team.designation}
-              </li>
-            ))}
-          </ol>
-
+          <FICGroup facultyData={facultyData} />
           <h3 className="mb-2 p-2 font-bold text-primary-300">
             {text.Institute.cells.iks.coordinators}
           </h3>

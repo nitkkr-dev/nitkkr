@@ -114,6 +114,7 @@ export async function FacultyOrStaffComponent({
       linkedInId: true,
       researchGateId: true,
       scopusId: true,
+      orcidId: true,
       areasOfInterest: true,
     },
     with: {
@@ -322,19 +323,42 @@ export async function FacultyOrStaffComponent({
           </div>
         </article>
       </section>
+
       {/* Faculty links to external profiles */}
-      <section className="container mb-6 grid grid-cols-2 justify-between max-md:gap-6 md:flex">
-        {(
+      {(() => {
+        // Pre-calculate which external links are present
+        const externalLinksEntries = (
           Object.entries(text.externalLinks) as [
             keyof typeof text.externalLinks,
             string,
           ][]
-        ).map(([key, value]) => {
-          if (key in facultyDescription) {
-            return (
+        ).filter(
+          ([key]) =>
+            key in facultyDescription &&
+            facultyDescription[key as keyof typeof facultyDescription]
+        );
+        const linkCount = externalLinksEntries.length;
+
+        if (linkCount === 0) return null;
+
+        return (
+          <section
+            className={cn(
+              'container mb-6 grid grid-cols-2 gap-6',
+              linkCount <= 3
+                ? 'sm:flex sm:justify-center'
+                : 'md:flex md:justify-between'
+            )}
+          >
+            {externalLinksEntries.map(([key, value]) => (
               <Link
                 key={key}
-                className="flex flex-col justify-evenly rounded-2xl bg-shade-light drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)] md:w-[25%] lg:w-[22%]"
+                className={cn(
+                  'flex flex-col items-center justify-evenly rounded-2xl bg-shade-light p-4 drop-shadow-[0_4px_24px_rgba(0,43,91,0.1)]',
+                  linkCount <= 3
+                    ? 'sm:w-[25%] sm:flex-row md:w-[35%]'
+                    : 'md:w-[19%]'
+                )}
                 href={
                   !facultyDescription[key]
                     ? ''
@@ -342,20 +366,34 @@ export async function FacultyOrStaffComponent({
                       ? facultyDescription[key]!
                       : `https://${facultyDescription[key]!}`
                 }
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   alt={key}
                   src={`faculty-and-staff/${key}.svg`}
                   height={0}
                   width={0}
-                  className="mx-auto aspect-square h-[50%] w-[50%] object-contain"
+                  className={cn(
+                    'mx-auto aspect-square object-contain',
+                    linkCount <= 3
+                      ? 'h-[50%] w-[50%] sm:h-[80px] sm:w-[80px]'
+                      : 'h-[50%] w-[50%]'
+                  )}
                 />
-                <h5 className="mx-auto">{value}</h5>
+                <h5
+                  className={cn(
+                    'mx-auto text-center',
+                    linkCount <= 3 ? 'my-2 sm:my-5 md:my-5' : ''
+                  )}
+                >
+                  {value}
+                </h5>
               </Link>
-            );
-          }
-        })}
-      </section>
+            ))}
+          </section>
+        );
+      })()}
 
       {/* Faculty Intlectual Contribution counts */}
       <section className="container mb-6 justify-between max-md:gap-6">
