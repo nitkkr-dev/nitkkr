@@ -66,7 +66,7 @@ export default async function ThoughtLab({
         />
 
         {/* About Description */}
-        <p className="mb-6">{text.ThoughtLab.about}</p>
+        <p className="mb-6 text-justify">{text.ThoughtLab.about}</p>
 
         {/* Vision & Mission Section */}
         <section className="mt-4 flex rounded bg-shade-light p-2">

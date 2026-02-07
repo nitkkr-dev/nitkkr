@@ -82,7 +82,7 @@ lg:max-w-[1100px]"
                 ))}
               </GalleryCarousel>
 
-              <p className="text-gray-700 w-full text-base leading-relaxed">
+              <p className="text-gray-700 w-full text-justify text-base leading-relaxed">
                 {selectedEvent.description}
               </p>
             </>

@@ -154,12 +154,12 @@ export default async function IKS({
         {/* description */}
         <article className="drop-shadow">
           <h3 className="text-primary-300">{text.Institute.cells.iks.title}</h3>
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Institute.cells.iks.description[0]}
           </p>
         </article>
         <article className="drop-shadow">
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Institute.cells.iks.description[1]}
           </p>
         </article>

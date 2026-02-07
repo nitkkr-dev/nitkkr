@@ -159,7 +159,7 @@ export default async function IPR({
       <main className="container mt-12">
         {/* description */}
         <article className="drop-shadow">
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Research.ipr.description}
           </p>
         </article>
@@ -317,7 +317,7 @@ export default async function IPR({
                       )}
                     />
                   </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                  <p className="max-w-52 text-wrap text-center text-justify font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
                     {label}
                   </p>
                 </Link>
@@ -351,7 +351,7 @@ export default async function IPR({
                       )}
                     />
                   </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
+                  <p className="max-w-52  text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
                     {label}
                   </p>
                 </Link>

@@ -73,7 +73,7 @@ export default async function Accounts({
           heading="h3"
           href="#about"
         />
-        <p>{section?.aboutUs}</p>
+        <p className="text-justify">{section?.aboutUs}</p>
       </article>
 
       <article className="container" id="reports">

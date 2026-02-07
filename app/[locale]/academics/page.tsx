@@ -127,7 +127,7 @@ export default async function Academics({
           </Link>
           <p
             className={cn(
-              'p-2 sm:p-3 md:p-4',
+              'p-2 sm:p-3 md:p-4 text-justify',
               'max-md:rounded-t md:w-full md:rounded-r'
             )}
           >
