@@ -108,7 +108,7 @@ export default async function Library({
         <p
           className={cn(
             'p-2 sm:p-3 md:p-8',
-            'bg-neutral-50 text-lg max-md:rounded-t md:w-full md:rounded-r text-justify'
+            'bg-neutral-50 text-justify text-lg max-md:rounded-t md:w-full md:rounded-r'
           )}
         >
           {text.heading.aboutText}

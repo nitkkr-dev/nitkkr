@@ -98,7 +98,7 @@ export default async function Department({
         <p
           className={cn(
             'p-2 sm:p-3 md:p-4',
-            'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r text-justify'
+            'bg-neutral-50 text-justify max-md:rounded-t md:w-full md:rounded-r'
           )}
         >
           {department.about}
