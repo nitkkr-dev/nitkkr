@@ -44,7 +44,7 @@ export default async function CHPD({
       <section className="container">
         <section className="mb-5 mt-10">
           {text.admission.process.content.map((paragraph, index) => (
-            <p key={index} className="mb-5">
+            <p key={index} className="mb-5 text-justify">
               {paragraph}
             </p>
           ))}
@@ -58,7 +58,9 @@ export default async function CHPD({
             {/* Vision */}
             <section id="vision">
               <h3>{text.Vision.title.toUpperCase()}</h3>
-              <p className=" leading-relaxed ">{text.Vision.description}</p>
+              <p className=" text-justify leading-relaxed ">
+                {text.Vision.description}
+              </p>
             </section>
 
             {/* Mission */}

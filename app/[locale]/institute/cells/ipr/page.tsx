@@ -153,7 +153,7 @@ export default async function IPR({
       <main className="container mt-12">
         {/* description */}
         <article className="drop-shadow">
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Research.ipr.description}
           </p>
         </article>

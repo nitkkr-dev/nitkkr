@@ -59,7 +59,7 @@ export default async function DirectorCorner({
           text={text.title[1]}
         />
         {text.cv.map((item, index) => (
-          <p key={index} className="mb-4">
+          <p key={index} className="mb-4 text-justify">
             {item}
           </p>
         ))}
@@ -74,7 +74,9 @@ export default async function DirectorCorner({
           text={text.title[2]}
         />
         {text.DirectorMessage.map((msg, index) => (
-          <p key={index}>{msg}</p>
+          <p key={index} className="text-justify">
+            {msg}
+          </p>
         ))}
       </section>
 
@@ -86,7 +88,7 @@ export default async function DirectorCorner({
           href="#director-office"
           text={text.title[3]}
         />
-        <ul className="flex w-full flex-col flex-wrap items-center gap-4 sm:gap-5 md:flex-row md:justify-between md:gap-6">
+        <ul className="flex w-full flex-col flex-wrap items-center gap-4 text-justify sm:gap-5 md:flex-row md:justify-between md:gap-6">
           {text.employes.map((employe, index) => (
             <li
               key={index}

@@ -41,7 +41,7 @@ export default async function ThoughtLab({
 
       <section className="container mt-12">
         {/* About Description */}
-        <p className="mb-6">{text.ThoughtLab.about}</p>
+        <p className="mb-6 text-justify">{text.ThoughtLab.about}</p>
 
         {/* Vision & Mission Section */}
         <section className="container my-16">
