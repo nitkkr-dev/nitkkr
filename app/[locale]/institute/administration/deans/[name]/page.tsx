@@ -123,8 +123,7 @@ export default async function DeanCorner({
     <>
       {/* ---------- HEADER ---------- */}
       <ImageHeader
-       title={`${text.title[0]} (${deanTitle.replace(/-/g, ' ').toUpperCase()})`}
-
+        title={`${text.title[0]} (${deanTitle.replace(/-/g, ' ').toUpperCase()})`}
         headings={[
           { label: text.sections[0], href: '#message-from-dean' },
           { label: text.sections[1], href: '#associate-deans' },
