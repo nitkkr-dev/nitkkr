@@ -125,7 +125,7 @@ export default async function IICPage({
       <main className="container mt-12">
         {/* Description */}
         <article className="p-3 drop-shadow">
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Institute.cells.iic.description}
           </p>
         </article>
@@ -138,7 +138,7 @@ export default async function IICPage({
               </h4>
               {text.Institute.cells.iic.vision.content.map((vision, index) => (
                 <p
-                  className="text-gray-700 mb-3 text-lg leading-relaxed"
+                  className="text-gray-700 mb-3 text-justify text-lg leading-relaxed"
                   key={index}
                 >
                   {vision}
@@ -153,7 +153,7 @@ export default async function IICPage({
               {text.Institute.cells.iic.mission.content.map(
                 (mission, index) => (
                   <p
-                    className="text-gray-700 mb-3 text-lg leading-relaxed"
+                    className="text-gray-700 mb-3 text-justify text-lg leading-relaxed"
                     key={index}
                   >
                     {mission}

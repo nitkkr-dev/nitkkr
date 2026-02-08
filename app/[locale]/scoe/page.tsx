@@ -49,7 +49,7 @@ export default async function SCoE({
       <section className="container">
         <section className="mb-5 mt-10">
           {text.admission.process.content.map((paragraph, index) => (
-            <p key={index} className="mb-5">
+            <p key={index} className="mb-5 text-justify">
               {paragraph}
             </p>
           ))}
@@ -63,13 +63,15 @@ export default async function SCoE({
             {/* Vision */}
             <section id="vision">
               <h3>{text.Vision.title.toUpperCase()}</h3>
-              <p className=" leading-relaxed ">{text.Vision.description}</p>
+              <p className=" text-justify leading-relaxed">
+                {text.Vision.description}
+              </p>
             </section>
 
             {/* Mission */}
             <section id="mission">
               <h3>{text.Mission.title.toUpperCase()}</h3>
-              <ul className="list-disc space-y-3 pl-6 text-neutral-900 lg:text-lg">
+              <ul className="list-disc space-y-3 pl-6 text-justify text-neutral-900 lg:text-lg">
                 {text.Mission.points.map((point, idx) => (
                   <li key={idx}>{point}</li>
                 ))}

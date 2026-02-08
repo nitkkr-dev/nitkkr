@@ -88,11 +88,11 @@ export default async function Departments({
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
       <section className="container mt-8 lg:mt-12">
-        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           <span className="mb-1 block">{text.description1}</span>
         </p>
         <br />
-        <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
+        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           <span className="mb-1 block">{text.description2}</span>
         </p>
       </section>

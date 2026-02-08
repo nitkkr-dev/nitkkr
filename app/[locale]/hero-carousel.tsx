@@ -89,7 +89,7 @@ export default function HeroCarousel({ slideshow, title }: HeroCarouselProps) {
                     <h4 className="pl-2 text-sm text-neutral-100 md:text-2xl">
                       {slideTitle}
                     </h4>
-                    <p className="line-clamp-1 pl-2 text-xs text-neutral-100 md:text-lg">
+                    <p className="line-clamp-1 pl-2 text-justify text-xs text-neutral-100 md:text-lg">
                       {subtitle}
                     </p>
                   </article>

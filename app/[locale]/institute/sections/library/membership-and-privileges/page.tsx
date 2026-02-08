@@ -102,10 +102,14 @@ export default async function MembershipAndPrivileges({
           <h4>{text.privileges.careOfBooks}</h4>
           <ol className="container flex list-decimal flex-col space-y-2">
             <li>
-              <p>{text.privileges.careofBooksDescriptionOne}</p>
+              <p className="text-justify">
+                {text.privileges.careofBooksDescriptionOne}
+              </p>
             </li>
             <li>
-              <p>{text.privileges.careofBooksDescriptionTwo}</p>
+              <p className="text-justify">
+                {text.privileges.careofBooksDescriptionTwo}
+              </p>
             </li>
           </ol>
         </article>
@@ -114,13 +118,13 @@ export default async function MembershipAndPrivileges({
           <h4>{text.privileges.otherFacilities}</h4>
           <ol className="container flex list-disc flex-col space-y-2">
             <li>
-              <p>
+              <p className="text-justify">
                 <strong>{text.privileges.reprographicFacilities}</strong>
                 {text.privileges.reprographicFacilitiesDescription}
               </p>
             </li>
             <li>
-              <p>
+              <p className="text-justify">
                 <strong>{text.privileges.binding}</strong>
                 {text.privileges.bindingDescription}
               </p>

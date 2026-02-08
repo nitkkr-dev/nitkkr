@@ -51,7 +51,7 @@ export default function DirectorCard({
         <h3 className="text-base font-bold text-primary-500 sm:text-lg md:text-xl lg:text-2xl">
           {name}
         </h3>
-        <p className="text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
+        <p className="text-justify text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
           {position}
         </p>
 
