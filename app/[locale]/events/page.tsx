@@ -9,10 +9,10 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import Loading from '~/components/loading';
+import { MultiCheckbox } from '~/components/inputs';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { type EventItem, EventsList } from './EventsList';
 import { SearchInput } from './SearchInput';
 
@@ -157,15 +157,15 @@ export default async function EventsPage({
                 />
               </FilterSection>
 
-              <FilterSection label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={eventCategoryEnum.enumValues}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={eventCategoryEnum.enumValues}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                basePath="/events"
+                title={text.filter.category}
+              />
             </div>
           </ScrollArea>
         </aside>

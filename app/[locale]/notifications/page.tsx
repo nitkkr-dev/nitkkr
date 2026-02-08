@@ -13,10 +13,10 @@ import {
   notificationDepartments,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { MultiCheckbox } from '~/components/inputs';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
 
@@ -193,6 +193,7 @@ export default async function NotificationsPage({
                 locale={locale}
                 textMap={text.categories}
                 title={text.filter.category}
+                basePath="/notifications"
               />
 
               <MultiCheckbox
@@ -204,6 +205,7 @@ export default async function NotificationsPage({
                   departmentRows.map((d) => [d.urlName, d.name])
                 )}
                 title={text.filter.department}
+                basePath="/notifications"
               />
             </div>
           </ScrollArea>

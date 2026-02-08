@@ -7,10 +7,10 @@ import { FaTimes } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { MultiCheckbox } from '~/components/inputs';
 import { cn } from '~/lib/utils';
 
 import { DateRangeForm } from './DateRangeForm';
-import { MultiCheckbox } from './MultiCheckbox';
 
 interface Dept {
   id: number;
@@ -217,6 +217,7 @@ export function MobileFilters({
                         locale={locale}
                         textMap={text.categories}
                         title={text.filter.category}
+                        basePath="/notifications"
                       />
                     </div>
 
@@ -231,6 +232,7 @@ export function MobileFilters({
                           departmentRows.map((d) => [d.urlName, d.name])
                         )}
                         title={text.filter.department}
+                        basePath="/notifications"
                       />
                     </div>
                   </div>

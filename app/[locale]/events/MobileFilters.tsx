@@ -7,10 +7,10 @@ import { FaTimes } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { MultiCheckbox } from '~/components/inputs';
 import { cn } from '~/lib/utils';
 
 import { DateRangeForm } from './DateRangeForm';
-import { MultiCheckbox } from './MultiCheckbox';
 
 type Cat = string;
 
@@ -197,16 +197,15 @@ export function MobileFilters({
                     </div>
 
                     {/* Category Filter */}
-                    <div className="rounded bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">
-                        {text.filter.category}
-                      </h3>
+                    <div className="rounded">
                       <MultiCheckbox
                         param="category"
                         options={categoryOptions}
                         selected={categories}
                         locale={locale}
                         textMap={text.categories}
+                        basePath="/events"
+                        title={text.filter.category}
                       />
                     </div>
                   </div>
