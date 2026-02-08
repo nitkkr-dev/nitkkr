@@ -1,20 +1,8 @@
-import Image from 'next/image';
 import { MdCall, MdEmail } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
-import { getS3Url } from '~/server/s3';
-
-interface Event {
-  id: string;
-  title: string;
-  date: string;
-  month: string;
-  day: string;
-  description: string;
-  image: string;
-}
 
 export default async function NSS({
   params: { locale },
@@ -22,7 +10,6 @@ export default async function NSS({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).NSS;
-  const base = getS3Url();
 
   return (
     <>
