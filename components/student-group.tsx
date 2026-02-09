@@ -52,10 +52,10 @@ export default async function StudentGroup({ studentData }: StudentGroupProps) {
     .filter(Boolean);
 
   return (
-    <ul className="flex flex-wrap justify-center gap-6 sm:justify-between">
+    <ul className="grid w-full grid-cols-2 justify-items-center gap-6 md:grid-cols-3 lg:grid-cols-4">
       {enrichedStudents.map((member) =>
         member ? (
-          <li key={member.rollNumber}>
+          <li key={member.rollNumber} className="flex w-full justify-center">
             <StudentCard
               name={member.person.name}
               email={member.person.email}

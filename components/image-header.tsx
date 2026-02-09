@@ -76,23 +76,23 @@ export default function ImageHeader({
             className={cn(
               'p-1 xl:p-2',
               'hidden sm:flex sm:gap-1 md:gap-2',
-              'sticky top-6 z-tabs mx-auto w-fit rounded-full',
+              'sticky top-6 z-tabs mx-auto w-full max-w-[calc(100vw-2rem)] overflow-visible rounded-full',
               'border border-primary-700 bg-background drop-shadow-md',
               'sm:mb-4 sm:mt-48 md:mb-[14px] md:mt-56 lg:mb-[30px] lg:mt-60 xl:mb-[38px] xl:mt-72 2xl:mt-[352px]' // DEPENDS-ON: header.tsx
             )}
           >
             {headings.map(({ label, href }, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                className="group min-w-0 flex-1 overflow-visible transition-[flex-grow] duration-300 ease-in-out hover:flex-[3]"
+              >
                 <Button
                   asChild
-                  className="group rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
+                  className="w-full rounded-full px-4 py-2 text-shade-dark transition-colors duration-300"
                   variant="ghost"
                 >
                   <Link href={href}>
-                    <span
-                      className="block max-w-[10rem] truncate transition-all duration-300 ease-in-out group-hover:max-w-[20rem]"
-                      style={{ minWidth: '0' }}
-                    >
+                    <span className="block truncate transition-all duration-300 ease-in-out group-hover:whitespace-nowrap group-hover:px-2">
                       {label}
                     </span>
                   </Link>

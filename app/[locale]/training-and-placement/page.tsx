@@ -74,7 +74,18 @@ export default async function TrainingAndPlacement({
         title={text.title}
         headings={[
           { label: text.headings.about, href: '#about' },
+          { label: text.headings.notifications, href: '#notification' },
+          { label: text.headings.messagefromdean, href: '#dean-message' },
+          { label: text.headings.messagefromfic, href: '#fic-message' },
           { label: text.headings.stats, href: '#placement-stats' },
+          { label: text.headings.events, href: '#events' },
+          { label: text.headings.tpo, href: '#tpo' },
+          { label: text.headings.fic, href: '#fic' },
+          {
+            label: text.headings.placementcoordinators,
+            href: '#placement-coordinators',
+          },
+          { label: text.headings.studentcoordinators, href: '#student-tnp' },
           { label: text.headings.ourrecruiters, href: '#recruiters' },
           { label: text.headings.forrecruiters, href: '#for-recruiters' },
           { label: text.headings.guidelines, href: '#guide' },
@@ -91,7 +102,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.about.toUpperCase()}
         />
         <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+          <p className="text-base  max-md:rounded-t md:w-full md:rounded-r md:text-lg">
             <span className="mb-1 block">{text.about.content[0]}</span>
             <span className="mb-1 block">{text.about.content[1]}</span>
             <span className="mb-4 mt-4 block">
@@ -122,7 +133,7 @@ export default async function TrainingAndPlacement({
           <NotificationsPanel
             locale={locale}
             category="placements"
-            viewAllHref={`/${locale}/notifications?category=training-and-placement`}
+            viewAllHref={`/${locale}/notifications?category=placements`}
             className="flex-1 lg:w-[65%]"
           />
         </article>
@@ -342,7 +353,7 @@ export default async function TrainingAndPlacement({
           href="#recruiters"
           text={text.headings.ourrecruiters.toUpperCase()}
         />
-        <p className=" text-lg  max-md:rounded-t md:w-full md:rounded-r ">
+        <p className="text-base max-md:rounded-t md:w-full md:rounded-r md:text-lg">
           {text.ourrecruiters.about}
         </p>
         <article className="container">
