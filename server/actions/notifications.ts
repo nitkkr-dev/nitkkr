@@ -1,16 +1,30 @@
 'use server';
 
-import { and, desc, gte, inArray, lt, lte } from 'drizzle-orm';
+import {
+  and,
+  arrayOverlaps,
+  desc,
+  eq,
+  gte,
+  inArray,
+  lt,
+  lte,
+} from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { z } from 'zod';
 
+import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 import {
+  notificationCategoryEnum,
   notificationClubs,
   notificationDepartments,
   notificationHostels,
   notifications,
 } from '~/server/db/schema';
 
+type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 const BATCH_SIZE = 20;
 
 export interface NotificationItem {
@@ -133,6 +147,13 @@ export async function loadMoreNotifications(
     conditions.push(inArray(notifications.id, filteredNotificationIds));
   }
 
+  // Add category filter at DB level
+  if (categories?.length) {
+    conditions.push(
+      arrayOverlaps(notifications.categories, categories as Cat[])
+    );
+  }
+
   // Fetch batch + 1 to check if there are more
   let results = await db.query.notifications.findMany({
     where: conditions.length ? and(...conditions) : undefined,
@@ -140,13 +161,7 @@ export async function loadMoreNotifications(
     limit: BATCH_SIZE + 1,
   });
 
-  // Apply in-memory filters (category, text search)
-  if (categories?.length) {
-    results = results.filter((n) =>
-      n.categories.some((cat) => categories.includes(cat))
-    );
-  }
-
+  // Apply text search in-memory (can't easily do full-text search in Drizzle)
   if (query) {
     const lowerQuery = query.toLowerCase();
     results = results.filter(
@@ -237,4 +252,250 @@ export async function applyDateFilter(formData: FormData) {
 
   const qs = params.toString();
   redirect(`/${locale}/notifications${qs ? `?${qs}` : ''}`);
+}
+
+// ==================== Notification Management (CCN Only) ====================
+
+/**
+ * Zod validation schema for notification data
+ */
+const notificationSchema = z.object({
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(256, 'Title must be 256 characters or less'),
+  content: z.string().optional(),
+  categories: z
+    .array(z.enum(notificationCategoryEnum.enumValues))
+    .min(1, 'At least one category is required'),
+  notificationDate: z.string().optional(), // ISO date string for the notification date
+  documents: z.array(z.string()).optional(), // Array of document URLs
+});
+
+export type NotificationFormData = z.infer<typeof notificationSchema>;
+
+export interface ActionResult {
+  success: boolean;
+  message: string;
+  id?: number;
+}
+
+/**
+ * Add a new notification to the database.
+ * Only authorized users (CCN) can add notifications.
+ *
+ * @param data - The notification data to add
+ * @returns ActionResult indicating success or failure
+ */
+export async function addNotification(
+  data: NotificationFormData
+): Promise<ActionResult> {
+  const session = await getServerAuthSession();
+
+  if (!canManageNotifications(session)) {
+    return { success: false, message: 'Not authorized to add notifications' };
+  }
+
+  const validation = notificationSchema.safeParse(data);
+  if (!validation.success) {
+    return {
+      success: false,
+      message: validation.error.errors[0]?.message ?? 'Invalid data',
+    };
+  }
+
+  try {
+    const notificationDate = validation.data.notificationDate
+      ? new Date(validation.data.notificationDate)
+      : new Date();
+
+    const result = await db
+      .insert(notifications)
+      .values({
+        title: validation.data.title,
+        content: validation.data.content ?? null,
+        categories: validation.data.categories,
+        documents: validation.data.documents ?? [],
+        createdAt: notificationDate,
+        updatedAt: new Date(),
+      })
+      .returning({ id: notifications.id });
+
+    revalidatePath('/');
+    revalidatePath('/[locale]/notifications', 'page');
+
+    return {
+      success: true,
+      message: 'Notification added successfully',
+      id: result[0]?.id,
+    };
+  } catch (error) {
+    console.error('Failed to add notification:', error);
+    // Check for unique constraint violation
+    if (error instanceof Error && error.message.includes('unique constraint')) {
+      return {
+        success: false,
+        message: 'A notification with this title already exists',
+      };
+    }
+    return { success: false, message: 'Failed to add notification' };
+  }
+}
+
+/**
+ * Update an existing notification in the database.
+ * Only authorized users (CCN) can update notifications.
+ *
+ * @param id - The notification ID to update
+ * @param data - The updated notification data
+ * @returns ActionResult indicating success or failure
+ */
+export async function updateNotification(
+  id: number,
+  data: NotificationFormData
+): Promise<ActionResult> {
+  const session = await getServerAuthSession();
+
+  if (!canManageNotifications(session)) {
+    return {
+      success: false,
+      message: 'Not authorized to update notifications',
+    };
+  }
+
+  const validation = notificationSchema.safeParse(data);
+  if (!validation.success) {
+    return {
+      success: false,
+      message: validation.error.errors[0]?.message ?? 'Invalid data',
+    };
+  }
+
+  try {
+    const updateData: {
+      title: string;
+      content: string | null;
+      categories: typeof validation.data.categories;
+      documents: string[];
+      updatedAt: Date;
+      createdAt?: Date;
+    } = {
+      title: validation.data.title,
+      content: validation.data.content ?? null,
+      categories: validation.data.categories,
+      documents: validation.data.documents ?? [],
+      updatedAt: new Date(),
+    };
+
+    // Only update createdAt if a new date was provided
+    if (validation.data.notificationDate) {
+      updateData.createdAt = new Date(validation.data.notificationDate);
+    }
+
+    const result = await db
+      .update(notifications)
+      .set(updateData)
+      .where(eq(notifications.id, id))
+      .returning({ id: notifications.id });
+
+    if (result.length === 0) {
+      return { success: false, message: 'Notification not found' };
+    }
+
+    revalidatePath('/');
+    revalidatePath('/[locale]/notifications', 'page');
+
+    return {
+      success: true,
+      message: 'Notification updated successfully',
+      id: result[0]?.id,
+    };
+  } catch (error) {
+    console.error('Failed to update notification:', error);
+    if (error instanceof Error && error.message.includes('unique constraint')) {
+      return {
+        success: false,
+        message: 'A notification with this title already exists',
+      };
+    }
+    return { success: false, message: 'Failed to update notification' };
+  }
+}
+
+/**
+ * Delete a notification from the database.
+ * Only authorized users (CCN) can delete notifications.
+ *
+ * @param id - The notification ID to delete
+ * @returns ActionResult indicating success or failure
+ */
+export async function deleteNotification(id: number): Promise<ActionResult> {
+  const session = await getServerAuthSession();
+
+  if (!canManageNotifications(session)) {
+    return {
+      success: false,
+      message: 'Not authorized to delete notifications',
+    };
+  }
+
+  try {
+    const result = await db
+      .delete(notifications)
+      .where(eq(notifications.id, id))
+      .returning({ id: notifications.id });
+
+    if (result.length === 0) {
+      return { success: false, message: 'Notification not found' };
+    }
+
+    revalidatePath('/');
+    revalidatePath('/[locale]/notifications', 'page');
+
+    return { success: true, message: 'Notification deleted successfully' };
+  } catch (error) {
+    console.error('Failed to delete notification:', error);
+    return { success: false, message: 'Failed to delete notification' };
+  }
+}
+
+/**
+ * Get a notification by ID for editing.
+ * Only authorized users (CCN) can access this.
+ *
+ * @param id - The notification ID to fetch
+ * @returns The notification data or null if not found/unauthorized
+ */
+export async function getNotificationForEdit(id: number): Promise<{
+  id: number;
+  title: string;
+  content: string | null;
+  categories: string[];
+  documents: string[];
+  createdAt: string;
+} | null> {
+  const session = await getServerAuthSession();
+
+  if (!canManageNotifications(session)) {
+    return null;
+  }
+
+  const notification = await db.query.notifications.findFirst({
+    where: (n, { eq }) => eq(n.id, id),
+    columns: {
+      id: true,
+      title: true,
+      content: true,
+      categories: true,
+      documents: true,
+      createdAt: true,
+    },
+  });
+
+  if (!notification) return null;
+
+  return {
+    ...notification,
+    createdAt: notification.createdAt.toISOString(),
+  };
 }

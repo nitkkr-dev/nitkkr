@@ -9,24 +9,15 @@ import { HiMiniBeaker } from 'react-icons/hi2';
 import { MdBadge, MdEmail } from 'react-icons/md';
 
 import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
 import { countChildren } from '~/server/s3';
-
-const hodProfile = {
-  name: 'Jitender Kumar Chhabra',
-  designation: 'Professor & Head of Department',
-  email: 'jk.chhabra@nitkkr.ac.in',
-  phone: '+91-1744-233-488',
-  message: [
-    'Welcome to the Department of Computer Engineering at NIT Kurukshetra. Our department has been at the forefront of computer science education and research since its inception, consistently producing industry-ready professionals and innovative researchers.',
-    'We are committed to excellence in teaching, research, and innovation. Our state-of-the-art laboratories, experienced faculty, and strong industry connections provide students with the perfect environment for learning and growth.',
-  ],
-};
 
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
@@ -41,28 +32,47 @@ export default async function Department({
 
   const department = await db.query.departments.findFirst({
     where: (departments, { eq }) => eq(departments.urlName, name),
+    columns: {
+      id: true,
+      name: true,
+      alias: true,
+      urlName: true,
+      about: true,
+      vision: true,
+      mission: true,
+    },
     with: { majors: { columns: { degree: true, name: true } } },
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
   const imageCount = await countChildren(`departments/${name}/images`);
-
-  const departmentHead = await db.query.departmentHeads.findFirst({
+  const allHeads = await db.query.departmentHeads.findMany({
     where: (departmentHead, { eq }) =>
-      eq(departmentHead.departmentId, department.id) &&
-      eq(departmentHead.isActive, true),
+      eq(departmentHead.departmentId, department.id),
     with: {
       faculty: {
-        columns: { employeeId: true, officeAddress: true },
+        columns: { designation: true, employeeId: true, officeAddress: true },
         with: {
           person: {
-            columns: { email: true, id: true, name: true, telephone: true },
+            columns: { name: true, email: true, telephone: true, img: true },
           },
         },
       },
     },
   });
+  const departmentHead = allHeads.find((head) => head.isActive) ?? null;
 
+  const hodName = departmentHead?.faculty?.person?.name ?? 'Head of Department';
+  const hodDesignation =
+    departmentHead?.faculty?.designation ?? 'Head of Department';
+  const hodEmail = departmentHead?.faculty?.person?.email ?? '';
+  const hodPhone = departmentHead?.faculty?.person?.telephone ?? '';
+  const hodImg =
+    departmentHead?.faculty?.person?.img ?? '/placeholder-person.jpg';
+  const hodMessage = [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut laoreet dictum, urna erat dictum erat, at cursus enim sapien eget urna.',
+    'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer ac sem nec urna cursus faucibus.',
+  ];
   return (
     <>
       <ImageHeader
@@ -96,7 +106,7 @@ export default async function Department({
         <p
           className={cn(
             'p-2 sm:p-3 md:p-4',
-            'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
+            'bg-neutral-50 text-justify max-md:rounded-t md:w-full md:rounded-r'
           )}
         >
           {department.about}
@@ -124,7 +134,7 @@ export default async function Department({
             heading="h3"
             text={text.headings.vision.toUpperCase()}
           />
-          <p>{department.vision}</p>
+          <p className="text-justify">{department.vision}</p>
 
           <Heading
             className="!mb-0"
@@ -132,7 +142,7 @@ export default async function Department({
             heading="h3"
             text={text.headings.mission.toUpperCase()}
           />
-          <p>{department.mission}</p>
+          <p className="text-justify">{department.mission}</p>
         </section>
 
         <Image
@@ -144,47 +154,60 @@ export default async function Department({
         />
       </article>
 
+      {/* Notifications Panel for Department */}
+      {department && (
+        <NotificationsPanel
+          locale={locale}
+          departmentIds={[department.id]}
+          className="container my-8"
+        />
+      )}
+
       <section className="container" id="hod-message">
         <Heading
           glyphDirection="rtl"
           heading="h3"
           href="#hod-message"
-          text="HOD's Message"
+          text={text.headings.hod.title}
         />
         <article className="flex flex-col gap-6 rounded-lg border border-primary-500 bg-shade-light p-6 md:flex-row md:gap-8 md:p-8">
           <Image
-            alt={hodProfile.name}
+            alt={hodName}
             className="mx-auto size-48 rounded-lg bg-neutral-200 object-cover md:size-64"
             height={256}
             width={256}
-            src="/placeholder-person.jpg"
+            src={hodImg}
           />
           <div className="flex flex-col justify-between">
             <div className="space-y-4">
               <div>
                 <h4 className="text-xl font-medium text-primary-500">
-                  {hodProfile.name}
+                  {hodName}
                 </h4>
-                <p className="text-lg font-medium">{hodProfile.designation}</p>
+                <p className="text-lg font-medium">{hodDesignation}</p>
               </div>
               <blockquote className="space-y-4 border-l-4 border-primary-500 pl-4 text-lg">
-                {hodProfile.message.map((paragraph, index) => (
+                {hodMessage.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </blockquote>
             </div>
             <div className="mt-4 flex items-center gap-4">
-              <a
-                className="text-primary-500 hover:underline"
-                href={`mailto:${hodProfile.email}`}
-              >
-                <MdEmail className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.email}
-              </a>
-              <span className="text-primary-500">
-                <FaPhone className="mr-2 inline-block fill-primary-500" />
-                {hodProfile.phone}
-              </span>
+              {hodEmail && (
+                <a
+                  className="text-primary-500 hover:underline"
+                  href={`mailto:${hodEmail}`}
+                >
+                  <MdEmail className="mr-2 inline-block fill-primary-500" />
+                  {hodEmail}
+                </a>
+              )}
+              {hodPhone && (
+                <span className="text-primary-500">
+                  <FaPhone className="mr-2 inline-block fill-primary-500" />
+                  {hodPhone}
+                </span>
+              )}
             </div>
           </div>
         </article>
@@ -244,52 +267,31 @@ export default async function Department({
         ))}
       </section>
 
-      <nav
-        className={cn(
-          'container',
-          'my-10 md:my-12 lg:my-16 xl:my-20',
-          'flex flex-col gap-5 lg:flex-row lg:justify-around'
-        )}
-      >
-        {[
-          {
-            label: text.facultyAndStaff,
-            href: {
-              pathname: `/${locale}/faculty-and-staff`,
-              query: { department: department.urlName },
+      <section className="container">
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
+            {
+              label: text.facultyAndStaff,
+              href: {
+                pathname: `/${locale}/faculty-and-staff`,
+                query: { department: department.urlName },
+              },
+              icon: MdBadge,
             },
-            icon: MdBadge,
-          },
-          {
-            label: text.laboratories,
-            href: `/${locale}/academics/departments/${name}/labs`,
-            icon: HiMiniBeaker,
-          },
-          {
-            label: text.achievements,
-            href: `/${locale}/academics/departments/${name}/achievements`,
-            icon: FaTrophy,
-          },
-        ].map(({ label, href, icon: Icon }, index) => (
-          <Button
-            asChild
-            className={cn(
-              'flex flex-col',
-              'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-              'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-            )}
-            key={index}
-            variant="secondary"
-          >
-            <Link href={href}>
-              <Icon className="size-12" />
-              <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                {label}
-              </p>
-            </Link>
-          </Button>
-        ))}
-      </nav>
+            {
+              label: text.laboratories,
+              href: `/${locale}/academics/departments/${name}/labs`,
+              icon: HiMiniBeaker,
+            },
+            {
+              label: text.achievements,
+              href: `/${locale}/academics/departments/${name}/achievements`,
+              icon: FaTrophy,
+            },
+          ]}
+        />
+      </section>
 
       {imageCount !== 0 && (
         <article className="container" id="gallery">

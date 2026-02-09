@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import { desc, inArray } from 'drizzle-orm';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
+import { FaPlus } from 'react-icons/fa';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -9,8 +10,9 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import {
-  notificationCategoryEnum,
+  type notificationCategoryEnum,
   notificationDepartments,
+  VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
 import { MultiCheckbox } from '~/components/inputs';
@@ -40,6 +42,10 @@ export default async function NotificationsPage({
   searchParams: PageSearchParams;
 }) {
   const text = (await getTranslations(locale)).Notifications;
+
+  // Check if user can manage notifications (CCN only)
+  const session = await getServerAuthSession();
+  const canManage = canManageNotifications(session);
 
   // Normalize multi-select params
   const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
@@ -85,18 +91,13 @@ export default async function NotificationsPage({
         endDate ? lte(n.createdAt, endDate) : undefined,
         filteredNotificationIds
           ? inArray(n.id, filteredNotificationIds)
-          : undefined
+          : undefined,
+        // Category filter at DB level
+        categories.length ? arrayOverlaps(n.categories, categories) : undefined
       ),
     orderBy: (n) => [desc(n.createdAt)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  // Category filter (multi) - check if any of notification's categories match selected
-  if (categories.length) {
-    raw = raw.filter((n) =>
-      n.categories.some((cat) => categories.includes(cat as Cat))
-    );
-  }
 
   // Text search (title and content)
   if (query) {
@@ -134,6 +135,19 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+
+      {/* Add Notification Button - Only visible to CCN */}
+      {canManage && (
+        <div className="container mt-4 flex justify-end">
+          <Button asChild className="gap-2 px-4 py-2">
+            <Link href={`/${locale}/notifications/add`}>
+              <FaPlus className="size-3" />
+              {text.addNotification}
+            </Link>
+          </Button>
+        </div>
+      )}
+
       <section className="container mb-0 mt-8 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
@@ -226,7 +240,7 @@ export default async function NotificationsPage({
                 categories={categories}
                 departments={departments}
                 departmentRows={departmentRows}
-                categoryOptions={notificationCategoryEnum.enumValues}
+                categoryOptions={VISIBLE_NOTIFICATION_CATEGORIES}
                 query={query}
                 start={searchParams.start}
                 end={searchParams.end}
@@ -249,9 +263,12 @@ export default async function NotificationsPage({
               initialHasMore={hasMore}
               locale={locale}
               filterParams={filterParams}
+              canManage={canManage}
               text={{
                 noNotificationsFound: text.noNotificationsFound,
                 noMoreNotifications: text.noMoreNotifications,
+                edit: text.edit,
+                delete: text.delete,
               }}
             />
           </div>

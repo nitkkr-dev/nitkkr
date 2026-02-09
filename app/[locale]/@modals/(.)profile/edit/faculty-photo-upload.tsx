@@ -9,11 +9,13 @@ import { Button } from '~/components/buttons';
 import { env } from '~/lib/env/client';
 import { toast } from '~/lib/hooks';
 import { uploadMedia } from '~/server/actions/media-upload';
+import { updatePersonProfileImage } from '~/server/actions/faculty-profile';
 
 interface FacultyPhotoUploadProps {
   facultyName: string;
   employeeId: string;
   facultyId: number;
+  currentImageUrl?: string | null;
   onPhotoUploaded?: (url: string) => void;
 }
 
@@ -33,15 +35,24 @@ export function FacultyPhotoUpload({
   facultyName,
   employeeId,
   facultyId,
+  currentImageUrl,
   onPhotoUploaded,
 }: FacultyPhotoUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isCheckingPhoto, setIsCheckingPhoto] = useState(true);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(
+    currentImageUrl ?? null
+  );
+  const [isCheckingPhoto, setIsCheckingPhoto] = useState(!currentImageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Check for existing photo on mount by trying different extensions
+  // Check for existing photo on mount by trying different extensions (only if no currentImageUrl)
   useEffect(() => {
+    if (currentImageUrl) {
+      setPreviewUrl(currentImageUrl);
+      setIsCheckingPhoto(false);
+      return;
+    }
+
     const checkExistingPhoto = async () => {
       const photoUrls = getPhotoUrls(employeeId, facultyId);
 
@@ -60,7 +71,7 @@ export function FacultyPhotoUpload({
     };
 
     void checkExistingPhoto();
-  }, [employeeId, facultyId]);
+  }, [employeeId, facultyId, currentImageUrl]);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -107,13 +118,25 @@ export function FacultyPhotoUpload({
       });
 
       if (result.success && result.url) {
-        toast({
-          title: 'Success',
-          description: 'Profile photo updated successfully.',
-          variant: 'success',
-        });
-        setPreviewUrl(result.url);
-        onPhotoUploaded?.(result.url);
+        // Save the image URL to the persons table
+        const dbResult = await updatePersonProfileImage(result.url);
+
+        if (dbResult.success) {
+          toast({
+            title: 'Success',
+            description: 'Profile photo updated successfully.',
+            variant: 'success',
+          });
+          setPreviewUrl(result.url);
+          onPhotoUploaded?.(result.url);
+        } else {
+          toast({
+            title: 'Warning',
+            description:
+              'Photo uploaded but failed to save to profile. Please try again.',
+            variant: 'error',
+          });
+        }
       } else {
         toast({
           title: 'Error',

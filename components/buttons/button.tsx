@@ -14,26 +14,29 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: cn(
-          'bg-primary-500 text-shade-light',
-          'hover:bg-primary-700',
-          'focus:bg-primary-700',
-          'active:bg-primary-900'
+          'border border-neutral-700 bg-primary-700 text-neutral-50',
+          'hover:border-primary-700 hover:text-shade-light',
+          'focus:text-white focus:border-primary-700',
+          'active:text-white active:border-primary-700 active:bg-primary-700'
         ),
+
         primaryDisabled: 'cursor-not-allowed bg-primary-100 text-shade-light',
         secondary: cn(
-          'border border-primary-700 bg-neutral-50 text-primary-700',
-          'hover:bg-primary-700 hover:text-shade-light',
-          'focus:bg-primary-700 focus:text-shade-light',
-          'active:bg-primary-700 active:text-shade-light'
+          'border border-neutral-700 bg-neutral-50 text-neutral-700',
+          'hover:border-primary-700 hover:text-primary-700',
+          'focus:border-primary-900 focus:text-primary-900',
+          'active:border-primary-700 active:bg-primary-700 active:text-shade-light'
         ),
+
         secondaryDisabled:
           'cursor-not-allowed border border-primary-100 bg-neutral-50 text-neutral-300',
         outline: cn(
-          'border border-primary-500 text-primary-500',
+          'bg-white border border-neutral-700 text-neutral-700',
           'hover:border-primary-700 hover:text-primary-700',
-          'focus:border-primary-700 focus:text-primary-700',
-          'active:border-primary-900 active:text-primary-900'
+          'focus:border-primary-700 focus:text-shade-light',
+          'active:border-primary-700 active:bg-primary-700 active:text-shade-light'
         ),
+
         outlineDisabled: cn(
           'cursor-not-allowed border border-primary-100 text-primary-100'
         ),
@@ -89,6 +92,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     let activeStyles = '';
+
     if (active) {
       if (variant === 'primary') activeStyles = 'bg-primary-700';
       else if (variant === 'secondary')

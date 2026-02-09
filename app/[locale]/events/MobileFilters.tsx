@@ -12,11 +12,19 @@ import { cn } from '~/lib/utils';
 
 import { DateRangeForm } from './DateRangeForm';
 
+interface Dept {
+  id: number;
+  name: string;
+  urlName: string;
+}
+
 type Cat = string;
 
 interface MobileFiltersProps {
   locale: string;
   categories: Cat[];
+  departments: string[];
+  departmentRows: Dept[];
   categoryOptions: readonly string[];
   query: string;
   start?: string;
@@ -28,6 +36,7 @@ interface MobileFiltersProps {
     filter: {
       date: string;
       category: string;
+      department: string;
       startDate: string;
       endDate: string;
       day: string;
@@ -42,6 +51,8 @@ interface MobileFiltersProps {
 export function MobileFilters({
   locale,
   categories,
+  departments,
+  departmentRows,
   categoryOptions,
   query,
   start,
@@ -87,7 +98,8 @@ export function MobileFilters({
 
   // Calculate active filters count (including date filters)
   const dateFiltersCount = (start ? 1 : 0) + (end ? 1 : 0);
-  const activeFiltersCount = categories.length + dateFiltersCount;
+  const activeFiltersCount =
+    categories.length + departments.length + dateFiltersCount;
 
   return (
     <div className="z-50 font-semibold xl:hidden">
@@ -182,6 +194,7 @@ export function MobileFilters({
                       <DateRangeForm
                         locale={locale}
                         categories={categories}
+                        departments={departments}
                         query={query}
                         start={start}
                         end={end}
@@ -206,6 +219,22 @@ export function MobileFilters({
                         textMap={text.categories}
                         basePath="/events"
                         title={text.filter.category}
+                      />
+                    </div>
+
+                    {/* Department Filter */}
+                    <div className="rounded bg-neutral-50 p-4">
+                      <h3 className="mb-2 text-lg font-bold text-primary-700">
+                        {text.filter.department}
+                      </h3>
+                      <MultiCheckbox
+                        param="department"
+                        options={departmentRows.map((d) => d.urlName)}
+                        selected={departments}
+                        locale={locale}
+                        textMap={Object.fromEntries(
+                          departmentRows.map((d) => [d.urlName, d.name])
+                        )}
                       />
                     </div>
                   </div>

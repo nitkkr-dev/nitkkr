@@ -216,6 +216,7 @@ export async function editFacultyProfilePersonalDetails(
         .update(faculty)
         .set({
           officeAddress: validated.officeAddress,
+          orcidId: validated.orcidId,
           scopusId: validated.scopusId,
           linkedInId: validated.linkedInId,
           googleScholarId: validated.googleScholarId,
@@ -239,5 +240,25 @@ export async function editFacultyProfilePersonalDetails(
   } catch (error) {
     console.error('Error updating personal details:', error);
     return { success: false, message: 'Failed to update personal details' };
+  }
+}
+
+export async function updatePersonProfileImage(imageUrl: string) {
+  const session = await getServerAuthSession();
+  if (!session || !session.person.id) {
+    return { success: false, message: 'Not authorized' };
+  }
+
+  try {
+    await db
+      .update(persons)
+      .set({ img: imageUrl })
+      .where(eq(persons.id, session.person.id));
+
+    revalidatePath('/profile');
+    return { success: true, message: 'Profile image updated successfully' };
+  } catch (error) {
+    console.error('Error updating profile image:', error);
+    return { success: false, message: 'Failed to update profile image' };
   }
 }

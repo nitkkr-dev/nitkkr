@@ -8,6 +8,7 @@ export const facultySchema: CollectionCreateSchema = {
     { name: 'designation', type: 'string', index: false, optional: true },
     { name: 'email', type: 'string' },
     { name: 'employeeId', type: 'string', index: false, optional: true },
+    { name: 'img', type: 'string', index: false, optional: true },
     { name: 'name', type: 'string' },
     { name: 'officeAddress', type: 'string', index: false, optional: true },
     { name: 'telephone', type: 'string' },
@@ -19,13 +20,16 @@ export const populateFaculty = async () => {
     await db.query.faculty.findMany({
       columns: { designation: true, employeeId: true, officeAddress: true },
       with: {
-        person: { columns: { email: true, name: true, telephone: true } },
+        person: {
+          columns: { email: true, name: true, telephone: true, img: true },
+        },
       },
     })
   ).map(({ designation, employeeId, officeAddress, person }) => ({
     designation,
     email: person.email,
     employeeId,
+    img: person.img,
     name: person.name,
     officeAddress,
     telephone: person.telephone,
@@ -45,7 +49,6 @@ export const isFacultyDocument = (
     typeof document.email === 'string' &&
     typeof document.employeeId === 'string' &&
     typeof document.name === 'string' &&
-    typeof document.officeAddress === 'string' &&
     typeof document.telephone === 'string'
   );
 };

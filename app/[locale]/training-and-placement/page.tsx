@@ -6,7 +6,7 @@ import { FaGears } from 'react-icons/fa6';
 import { MdArticle } from 'react-icons/md';
 import { RiBriefcase4Line } from 'react-icons/ri';
 
-import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
@@ -17,9 +17,27 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
+import { getS3Url } from '~/server/s3';
 
 import clients from './recruiters';
+
+// Hardcoded PDF base URL and PDF list for placement stats
+const pdfBase = `${getS3Url()}/training-and-placement/placement-stats/`;
+const button_group_bg_image = `${getS3Url()}/assets/horses-2.png`;
+
+const placementStats: string[] = [
+  `${pdfBase}Academic-Session-2024-25.pdf`,
+  `${pdfBase}Academic-Session-2023-24.pdf`,
+  `${pdfBase}Academic-Session-2022-23.pdf`,
+  `${pdfBase}Academic-Session-2021-22.pdf`,
+  `${pdfBase}Academic-Session-2020-21-FN.pdf`,
+  `${pdfBase}Academic-Session-2019-20-FN.pdf`,
+  `${pdfBase}Academic-Session-2018-19-FN.pdf`,
+  `${pdfBase}Academic-Session-2017-18.pdf`,
+  `${pdfBase}Academic-Session-2017-18.pdf`,
+  `${pdfBase}Academic-Session-2017-18-FN.pdf`,
+  `${pdfBase}Academic-Session-2016-17.pdf`,
+];
 
 export default async function TrainingAndPlacement({
   params: { locale },
@@ -54,7 +72,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.about.toUpperCase()}
         />
         <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+          <p className="text-justify text-lg max-md:rounded-t md:w-full md:rounded-r">
             <span className="mb-1 block">{text.about.content[0]}</span>
             <span className="mb-1 block">{text.about.content[1]}</span>
             <span className="mb-4 mt-4 block">
@@ -79,77 +97,17 @@ export default async function TrainingAndPlacement({
         />
         <article className="container">
           <Suspense fallback={<Loading />}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                {
-                  label: text.stats.content[0],
-                  file: 'Academic-Session-2022-23',
+            <ButtonGroup
+              columns={3}
+              buttonArray={text.stats.content
+                .slice(0, 11)
+                .map((label, index) => ({
+                  label,
+                  href: placementStats[index],
                   icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[1],
-                  file: 'Academic-Session-2021-22',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[2],
-                  file: 'Academic-Session-2020-21-FN-24032022',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[3],
-                  file: 'Academic-Session-2019-20-FN-24032022',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[4],
-                  file: 'Academic-Session-2018-19-FN-24032022',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[5],
-                  file: 'Academic-Session-2017_18-21072020',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[6],
-                  file: 'Academic-Session-2017_18-21072020',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[7],
-                  file: 'Academic-Session-2017-18-FN-24032022',
-                  icon: MdArticle,
-                },
-                {
-                  label: text.stats.content[8],
-                  file: 'Academic-Session-2016_17-21072020',
-                  icon: MdArticle,
-                },
-              ].map(({ label, file, icon: Icon }, index) => (
-                <Button
-                  asChild
-                  className={cn(
-                    'flex flex-col',
-                    'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                    'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-                  )}
-                  key={index}
-                  variant="secondary"
-                >
-                  <Link
-                    href={`training-and-placement/placement-stats/${file}.pdf`}
-                    target="_blank"
-                  >
-                    <Icon className="size-12" />
-
-                    <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                      {label}
-                    </p>
-                  </Link>
-                </Button>
-              ))}
-            </div>
+                }))}
+              imageurl={button_group_bg_image}
+            />
           </Suspense>
         </article>
       </section>
@@ -160,7 +118,7 @@ export default async function TrainingAndPlacement({
           href="#our"
           text={text.headings.ourrecruiters.toUpperCase()}
         />
-        <p className=" text-lg  max-md:rounded-t md:w-full md:rounded-r ">
+        <p className="text-justify text-lg max-md:rounded-t md:w-full md:rounded-r">
           {text.ourrecruiters.about}
         </p>
         <article className="container">
@@ -189,63 +147,35 @@ export default async function TrainingAndPlacement({
           text={text.headings.forrecruiters.toUpperCase()}
           className="container"
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          buttonArray={[
             {
               label: text.forrecruiters.build,
-              file: 'Build-a-Relationship-converted_1',
+              href: 'training-and-placement/for-recruiters/Build-a-Relationship-converted_1.pdf',
               icon: FaGears,
             },
             {
               label: text.forrecruiters.invitaion,
-              file: 'Website-Update-_-Invitation.030823',
+              href: 'training-and-placement/for-recruiters/Website-Update-_-Invitation.030823.pdf',
               icon: FaRegEnvelope,
             },
             {
               label: text.forrecruiters.reach,
-              file: 'Reach-Us',
+              href: 'training-and-placement/for-recruiters/Reach-Us.pdf',
               icon: FaGlobeAsia,
             },
             {
               label: text.about.tnpbrochure,
-              file: 'Training-Placement-Brochure-2023-24',
+              href: 'training-and-placement/for-recruiters/Training-Placement-Brochure-2023-24.pdf',
               icon: MdArticle,
             },
             {
               label: text.about.tnpteam,
-              file: 'Placement-Team-2023-24updated',
+              href: 'training-and-placement/for-recruiters/Placement-Team-2023-24updated.pdf',
               icon: MdArticle,
             },
-          ].map(({ label, file, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link
-                href={`training-and-placement/for-recruiters/${file}.pdf`}
-                target="_blank"
-              >
-                <Icon className="size-12" />
-
-                <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
       <section className="container" id="guide">
         <Heading
@@ -254,52 +184,26 @@ export default async function TrainingAndPlacement({
           text={text.headings.guidelines.toUpperCase()}
           className="container"
         />
-        <nav
-          className={cn(
-            'container',
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.guidelines.protocol,
-              file: 'PLACEMENT_PROTOCOL_1',
+              href: 'training-and-placement/guidelines/PLACEMENT_PROTOCOL_1.pdf',
               icon: RiBriefcase4Line,
             },
             {
               label: text.guidelines.tnpguidelines,
-              file: 'TP_Cell_Guidelines',
+              href: 'training-and-placement/guidelines/TP_Cell_Guidelines.pdf',
               icon: MdArticle,
             },
             {
               label: text.guidelines.internguidlines,
-              file: 'UG-Internship-Guidelines_final-08042021',
+              href: 'training-and-placement/guidelines/UG-Internship-Guidelines_final-08042021.pdf',
               icon: MdArticle,
             },
-          ].map(({ label, file, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link
-                href={`training-and-placement/guidelines/${file}.pdf`}
-                target="_blank"
-              >
-                <Icon className="size-12" />
-                <p className="font-serif font-semibold sm:text-lg md:text-lg">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
       <section className="container" id="FAQ">
         <Heading
