@@ -64,7 +64,9 @@ export default async function RACS({
       {/* INTRO – full width */}
       <section className="w-full bg-[#fdf7ed]">
         <div className="mx-auto max-w-7xl px-6 py-6 sm:px-10">
-          <p className="text-base leading-relaxed sm:text-lg">{text.intro}</p>
+          <p className="text-justify text-base leading-relaxed sm:text-lg">
+            {text.intro}
+          </p>
         </div>
       </section>
 
@@ -206,7 +208,7 @@ export default async function RACS({
             </div>
 
             {/* Right – Description */}
-            <p className="text-gray-800 text-justify leading-relaxed">
+            <p className="text-gray-800 text-justify  leading-relaxed">
               {text.researchAreas.description}
             </p>
           </div>

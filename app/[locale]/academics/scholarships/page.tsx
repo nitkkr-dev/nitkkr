@@ -95,7 +95,7 @@ export default async function Scholarships({
           description={text.HCS.about}
           portalHref="https://harchhatravratti.highereduhry.ac.in/"
         >
-          <p>{text.HCS.objectives[0]}</p>
+          <p className="text-justify">{text.HCS.objectives[0]}</p>
         </ScholarshipDisplay>
         <Heading
           glyphDirection={'dual'}
@@ -110,7 +110,7 @@ export default async function Scholarships({
           color="bg-neutral-50"
           portalHref="https://harchhatravratti.highereduhry.ac.in/"
         >
-          <p>{text.RSSO.objectives[0]}</p>
+          <p className="text-justify">{text.RSSO.objectives[0]}</p>
         </ScholarshipDisplay>
         <Heading
           glyphDirection={'dual'}
@@ -149,7 +149,7 @@ export default async function Scholarships({
             heading={'h1'}
             text={text.note.title}
           />
-          <p className="rounded-xl bg-neutral-50 p-5 text-lg text-primary-700">
+          <p className="rounded-xl bg-neutral-50 p-5 text-justify text-lg text-primary-700">
             {text.note.description}
           </p>
         </section>
@@ -177,7 +177,9 @@ async function ScholarshipDisplay(props: ScholarshipProps) {
     >
       <header className={cn('rounded-lg p-5', props.color)}>
         <h2>{text.about}</h2>
-        <p className={cn(!props.description && 'inline')}>{props.about}</p>
+        <p className={cn(!props.description && 'inline text-justify')}>
+          {props.about}
+        </p>
         {!props.description && props.portalHref && (
           <Link
             href={props.portalHref}
@@ -197,7 +199,7 @@ async function ScholarshipDisplay(props: ScholarshipProps) {
           <div className="w-full md:w-1/2">
             <h4 className="mb-2">{text.description}</h4>
             <div className="ml-5 md:ml-0">
-              <p className="inline text-lg">{props.description}</p>
+              <p className="inline text-justify text-lg">{props.description}</p>
               {props.portalHref && (
                 <Link
                   href={props.portalHref}

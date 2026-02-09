@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { cn } from '~/lib/utils';
 
-export default function DirectorCard({
+export default function DeanCard({
   className,
   image,
   name,
@@ -16,9 +16,9 @@ export default function DirectorCard({
   className?: string;
   image: string;
   name: string;
-  position: string;
+  position?: string;
   phone: string;
-  fax: string;
+  fax?: string;
   mobile: string;
   email: string;
   labels: {
@@ -51,7 +51,7 @@ export default function DirectorCard({
         <h3 className="text-base font-bold text-primary-500 sm:text-lg md:text-xl lg:text-2xl">
           {name}
         </h3>
-        <p className="text-justify text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
+        <p className="text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
           {position}
         </p>
 
@@ -60,10 +60,12 @@ export default function DirectorCard({
             <strong>{labels.phoneNo}</strong>{' '}
             <span className="text-neutral-900">{phone}</span>
           </li>
-          <li>
-            <strong>{labels.faxNo}</strong>{' '}
-            <span className="text-neutral-900">{fax}</span>
-          </li>
+          {fax && (
+            <li>
+              <strong>{labels.faxNo}</strong>{' '}
+              <span className="text-neutral-900">{fax}</span>
+            </li>
+          )}
           <li>
             <strong>{labels.mobileNo}</strong>{' '}
             <span className="text-neutral-900">{mobile}</span>

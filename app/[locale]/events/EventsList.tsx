@@ -196,7 +196,7 @@ export function EventsList({
           </div>
         )}
         {!hasMore && items.length > 0 && (
-          <p className="text-sm text-neutral-900 sm:text-base">
+          <p className="text-justify text-sm text-neutral-900 sm:text-base">
             {text.noMoreEvents}
           </p>
         )}

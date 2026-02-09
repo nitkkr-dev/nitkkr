@@ -4,22 +4,23 @@ import type {
   AdministrationTranslations,
   AwardsTranslations,
   CHPDTranslations,
-  ClubTranslations,
   ClubsTranslations,
+  ClubTranslations,
   CommitteeTranslations,
   ConvocationTranslations,
   CopyrightsAndDesignsTranslations,
   CurriculaTranslations,
   CurriculumTranslations,
-  DeanTranslations,
+  DeansPageTranslations,
   DeansTranslations,
-  DepartmentTranslations,
+  DeanTranslations,
   DepartmentsTranslations,
+  DepartmentTranslations,
   DirectorMessageTranslations,
   DirectorPageTranslations,
   EventsTranslations,
-  FAQTranslations,
   FacultyAndStaffTranslations,
+  FAQTranslations,
   FooterTranslations,
   FormsTranslations,
   HeaderTranslations,
@@ -35,17 +36,18 @@ import type {
   ProgrammesTranslations,
   RACSTranslations,
   ResearchTranslations,
-  SCoETranslations,
   ScholarshipsTranslations,
+  SCoETranslations,
   SearchTranslations,
-  SectionTranslations,
   SectionsTranslations,
+  SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
   NCCTranslations,
+  NSSTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -98,10 +100,12 @@ export type {
   SectionTranslations,
   CHPDTranslations,
   DirectorPageTranslations,
+  DeansPageTranslations,
   SCoETranslations,
   ResearchTranslations,
   TrainingAndPlacementTranslations,
   NCCTranslations,
+  NSSTranslations,
 };
 
 export interface Translations {
@@ -148,7 +152,9 @@ export interface Translations {
   Research: ResearchTranslations;
   TrainingAndPlacement: TrainingAndPlacementTranslations;
   DirectorPage: DirectorPageTranslations;
+  DeansPage: DeansPageTranslations;
   SCoE: SCoETranslations;
   CHPD: CHPDTranslations;
   NCC: NCCTranslations;
+  NSS: NSSTranslations;
 }

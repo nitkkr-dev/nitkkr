@@ -106,7 +106,7 @@ export default async function Department({
         <p
           className={cn(
             'p-2 sm:p-3 md:p-4',
-            'bg-neutral-50 max-md:rounded-t md:w-full md:rounded-r'
+            'bg-neutral-50 text-justify max-md:rounded-t md:w-full md:rounded-r'
           )}
         >
           {department.about}
@@ -134,7 +134,7 @@ export default async function Department({
             heading="h3"
             text={text.headings.vision.toUpperCase()}
           />
-          <p>{department.vision}</p>
+          <p className="text-justify">{department.vision}</p>
 
           <Heading
             className="!mb-0"
@@ -142,7 +142,7 @@ export default async function Department({
             heading="h3"
             text={text.headings.mission.toUpperCase()}
           />
-          <p>{department.mission}</p>
+          <p className="text-justify">{department.mission}</p>
         </section>
 
         <Image

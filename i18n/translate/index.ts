@@ -9,6 +9,7 @@ export * from './curricula';
 export * from './curriculum';
 export * from './dean';
 export * from './deans';
+export * from './deans-page';
 export * from './department';
 export * from './departments';
 export * from './director-message';
@@ -44,3 +45,4 @@ export * from './scoe';
 export * from './research';
 export * from './training-and-placement';
 export * from './ncc'
+export * from './nss';

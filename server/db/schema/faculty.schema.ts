@@ -43,6 +43,7 @@ export const faculty = pgTable(
     linkedInId: t.text(),
     researchGateId: t.text(),
     scopusId: t.text(),
+    orcidId: t.text(),
     areasOfInterest: t.text().array().default([]),
   })
   // (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]

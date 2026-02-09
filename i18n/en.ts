@@ -13,6 +13,7 @@ import {
   curriculumEn,
   deanEn,
   deansEn,
+  deansPageEn,
   departmentEn,
   departmentsEn,
   directorMessageEn,
@@ -46,6 +47,7 @@ import {
   trainingAndPlacementEn,
   websiteContributorsEn,
   nccEn,
+  nssEn,
 } from './translate';
 
 const text: Translations = {
@@ -90,11 +92,13 @@ const text: Translations = {
   Research: researchEn,
   TrainingAndPlacement: trainingAndPlacementEn,
   DirectorPage: directorPageEn,
+  DeansPage: deansPageEn,
   otherOfficersPage: otherOfficersPageEn,
   SCoE: scoeEn,
   WebsiteContributors: websiteContributorsEn,
   CHPD: chpdEn,
-  NCC:nccEn
+  NCC:nccEn,
+  NSS: nssEn,
 };
 
 export default text;
