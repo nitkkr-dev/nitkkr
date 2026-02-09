@@ -10,16 +10,16 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import {
-  type notificationCategoryEnum,
+  notificationCategoryEnum,
   notificationDepartments,
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { MultiCheckbox } from '~/components/inputs';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 
 import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
 
@@ -201,27 +201,27 @@ export default async function NotificationsPage({
                 />
               </FilterSection>
 
-              <FilterSection locale={locale} label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={VISIBLE_NOTIFICATION_CATEGORIES}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={notificationCategoryEnum.enumValues}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                title={text.filter.category}
+                basePath="/notifications"
+              />
 
-              <FilterSection locale={locale} label={text.filter.department}>
-                <MultiCheckbox
-                  param="department"
-                  options={departmentRows.map((d) => d.urlName)}
-                  selected={departments}
-                  locale={locale}
-                  textMap={Object.fromEntries(
-                    departmentRows.map((d) => [d.urlName, d.name])
-                  )}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="department"
+                options={departmentRows.map((d) => d.urlName)}
+                selected={departments}
+                locale={locale}
+                textMap={Object.fromEntries(
+                  departmentRows.map((d) => [d.urlName, d.name])
+                )}
+                title={text.filter.department}
+                basePath="/notifications"
+              />
             </div>
           </ScrollArea>
         </aside>
