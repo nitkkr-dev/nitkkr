@@ -45,6 +45,7 @@ import type {
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
+  NCCTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -100,6 +101,7 @@ export type {
   SCoETranslations,
   ResearchTranslations,
   TrainingAndPlacementTranslations,
+  NCCTranslations,
 };
 
 export interface Translations {
@@ -148,4 +150,5 @@ export interface Translations {
   DirectorPage: DirectorPageTranslations;
   SCoE: SCoETranslations;
   CHPD: CHPDTranslations;
+  NCC: NCCTranslations;
 }

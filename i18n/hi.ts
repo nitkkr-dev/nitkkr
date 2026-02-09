@@ -45,6 +45,7 @@ import {
   thoughtLabHi,
   trainingAndPlacementHi,
   websiteContributorsHi,
+  nccHi,
 } from './translate';
 
 const text: Translations = {
@@ -93,5 +94,6 @@ const text: Translations = {
   TrainingAndPlacement: trainingAndPlacementHi,
   DirectorPage: directorPageHi,
   CHPD: chpdHi,
+  NCC:nccHi,
 };
 export default text;
