@@ -92,7 +92,9 @@ const ClubCard = ({
           <p className="font-semibold">{document.name}</p>
         </div>
       </header>
-      <p className="my-auto w-full text-neutral-600">{document.tagline}</p>
+      <p className="my-auto w-full text-justify text-neutral-600">
+        {document.tagline}
+      </p>
     </article>
   </LocalStorageLink>
 );
@@ -188,7 +190,9 @@ const DepartmentCard = ({
     <article className="w-full rounded-lg bg-shade-light p-3 md:px-4">
       <h5 className="text-primary-300">{document.name}</h5>
       {document.majors && (
-        <p className="text-neutral-600">{document.majors.join(', ')}</p>
+        <p className="text-justify text-neutral-600">
+          {document.majors.join(', ')}
+        </p>
       )}
     </article>
   </LocalStorageLink>

@@ -135,7 +135,7 @@ export default async function PatentsAndTechnology({
       {/* INTRODUCTION */}
       <section className="container mt-8 lg:mt-12">
         <p className="text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
-          <span className="mb-1 block">{text.introduction}</span>
+          <span className="mb-1 block text-justify">{text.introduction}</span>
         </p>
       </section>
 
@@ -355,7 +355,7 @@ export default async function PatentsAndTechnology({
         />
 
         <article className="rounded-lg border border-primary-500 bg-shade-light p-2 md:p-4">
-          <p className="text-lg font-medium text-primary-300 lg:text-xl">
+          <p className="text-justify text-lg font-medium text-primary-300 lg:text-xl">
             {text.archive.title}
           </p>
           <div className="mt-4 flex flex-col justify-between">

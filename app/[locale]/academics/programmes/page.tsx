@@ -173,7 +173,7 @@ export default async function Programmes({
           heading="h2"
           text={text.btech.toUpperCase()}
         />
-        <p className="rounded-md bg-neutral-50 p-5">
+        <p className="rounded-md bg-neutral-50 p-5 text-justify">
           <strong>{text.courseOfStudy}</strong> {text.btechAbout}
         </p>
         <br />
@@ -190,7 +190,7 @@ export default async function Programmes({
           heading="h2"
           text={text.mtech.toUpperCase()}
         />
-        <p className="rounded-md bg-neutral-50 p-5">
+        <p className="rounded-md bg-neutral-50 p-5 text-justify">
           <strong>{text.courseOfStudy}</strong> {text.mtechAbout}
         </p>
         <br />

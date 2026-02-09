@@ -48,7 +48,7 @@ export default function ContributorCard({
         <h4 className="mb-1 text-lg font-semibold text-primary-700 sm:text-xl">
           {name}
         </h4>
-        <p className="text-sm text-neutral-600 sm:text-base">
+        <p className="text-justify text-sm text-neutral-600 sm:text-base">
           <span className="font-medium">{rollNumberLabel}:</span> {rollNumber}
         </p>
       </div>

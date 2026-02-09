@@ -88,7 +88,7 @@ function AwardsCard({
         )}
       >
         <h4 className="mt-4 text-xl font-semibold">{text.about}</h4>
-        <p className="text-gray-800 text-base">{about}</p>
+        <p className="text-gray-800 text-justify text-base">{about}</p>
         {children && (
           <>
             <h4 className="mt-4 text-xl font-semibold">{text.criterion}</h4>
@@ -98,7 +98,9 @@ function AwardsCard({
         {description && (
           <>
             <h4 className="mt-4 text-xl font-semibold">{text.criterion}</h4>
-            <p className="text-gray-800 text-base">{description}</p>
+            <p className="text-gray-800 text-justify text-base">
+              {description}
+            </p>
           </>
         )}
       </section>
