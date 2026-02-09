@@ -59,7 +59,7 @@ export default async function ncc({
         <section className='mb-5 mt-10'>
           <p
             style={{ whiteSpace: 'pre-line' }}
-            className={cn('max-md:rounded-t md:w-full md:rounded-r')}
+            className={cn('max-md:rounded-t md:w-full md:rounded-r text-base md:text-lg')}
           >
             {text.description}
           </p>
@@ -70,8 +70,7 @@ export default async function ncc({
         <Heading
           glyphDirection="ltr"
           heading="h3"
-          href="#features"
-          id="features"
+          id="organisationaldetails"
           text={text.headings.organisationalDetails.toUpperCase()}
         />
         <article className="rounded-lg border border-primary-500 bg-shade-light p-2 md:p-4">
@@ -102,13 +101,13 @@ export default async function ncc({
 
       {/* Events */}
       <section className='container my-10'>
-        <Heading glyphDirection="ltr" heading="h2" text={text.headings.events} id="events" />
+        <Heading glyphDirection="ltr" heading="h3" text={text.headings.events.toUpperCase()} id="events" />
       </section>
 
       <section className='container my-10'>
         <Heading
           glyphDirection="rtl"
-          heading="h2"
+          heading="h3"
           text={text.headings.nccOfficers.toUpperCase()}
           id="nccofficers"
         />
@@ -119,14 +118,13 @@ export default async function ncc({
       <section className='container my-10'>
         <Heading
           glyphDirection="ltr"
-          heading="h2"
+          heading="h3"
           text={text.headings.moreAboutNcc.toUpperCase()}
           id="moreaboutncc"
         />
-        <article className="rounded-lg border text-lg border-primary-500 bg-shade-light p-2 md:p-4">
-          <p>{text.moreAbout.intro}</p>
-
-          <p>
+        <article className="rounded-lg border  text-sm md:text-base lg:text-lg border-primary-500 bg-shade-light p-2 md:p-4">
+          <p className=' text-sm md:text-base lg:text-lg'>{text.moreAbout.intro}</p>
+          <p className=' text-sm md:text-base lg:text-lg'>
             {text.moreAbout.trainingAreasTitle}
           </p>
           <ul className="list-disc pl-6">
@@ -135,7 +133,7 @@ export default async function ncc({
             ))}
           </ul>
 
-          <p>
+          <p className=' text-sm md:text-base lg:text-lg'>
             {text.moreAbout.classroomTopicsTitle}
           </p>
           <ul className="list-disc pl-6">
@@ -144,7 +142,7 @@ export default async function ncc({
             ))}
           </ul>
 
-          <p>
+          <p className=' text-sm md:text-base lg:text-lg'>
             {text.moreAbout.socialActivitiesTitle}
           </p>
           <ul className="list-disc pl-6">
@@ -153,21 +151,21 @@ export default async function ncc({
             ))}
           </ul>
 
-          <p>{text.moreAbout.examInfo}</p>
+          <p className=' text-sm md:text-base lg:text-lg'>{text.moreAbout.examInfo}</p>
         </article>
       </section>
 
       <section className='container my-10'>
         <Heading
           glyphDirection="rtl"
-          heading="h2"
+          heading="h3"
           text={text.headings.nccCamps.toUpperCase()}
           id="ncccamps"
         />
-        <article className="rounded-lg border text-lg border-primary-500 bg-shade-light p-2 md:p-4">
-          <p>{text.nccCamps.campsInfo}</p>
+        <article className="rounded-lg border  text-sm md:text-base lg:text-lg border-primary-500 bg-shade-light p-2 md:p-4">
+          <p className=' text-sm md:text-base lg:text-lg'>{text.nccCamps.campsInfo}</p>
           <p className="mt-6">{text.nccCamps.eligibility.title}</p>
-          <p>
+          <p className=' text-sm md:text-base lg:text-lg'>
             {text.nccCamps.eligibility.bCertificate.title}
           </p>
           <ul className="list-decimal pl-6">
@@ -183,11 +181,11 @@ export default async function ncc({
               <li key={i}>{item}</li>
             ))}
           </ul>
-          <p>{text.nccCamps.certificateValue}</p>
-          <p>
+          <p className=' text-sm md:text-base lg:text-lg'>{text.nccCamps.certificateValue}</p>
+          <p className=' text-sm md:text-base lg:text-lg'>
             {text.nccCamps.financialAssistance.title}
           </p>
-          <p>{text.nccCamps.financialAssistance.description}</p>
+          <p className=' text-sm md:text-base lg:text-lg'>{text.nccCamps.financialAssistance.description}</p>
         </article>
       </section>
 
