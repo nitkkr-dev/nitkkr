@@ -35,7 +35,7 @@ export default async function StudentActivities({
             href: 'student-activities/thought-lab',
           },
           { label: text.headings.nss, href: '#nss' },
-          { label: text.headings.ncc, href: '#ncc' },
+          { label: text.headings.ncc, href: 'student-activities/ncc' },
         ]}
         src="student-activities/header.jpg"
       />

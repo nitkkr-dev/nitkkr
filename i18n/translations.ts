@@ -46,6 +46,7 @@ import type {
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
+  NCCTranslations,
   NSSTranslations,
 } from './translate';
 
@@ -103,6 +104,7 @@ export type {
   SCoETranslations,
   ResearchTranslations,
   TrainingAndPlacementTranslations,
+  NCCTranslations,
   NSSTranslations,
 };
 
@@ -153,5 +155,6 @@ export interface Translations {
   DeansPage: DeansPageTranslations;
   SCoE: SCoETranslations;
   CHPD: CHPDTranslations;
+  NCC: NCCTranslations;
   NSS: NSSTranslations;
 }
