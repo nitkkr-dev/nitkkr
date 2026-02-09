@@ -97,7 +97,7 @@ const text: Translations = {
   DirectorPage: directorPageHi,
   DeansPage: deansPageHi,
   CHPD: chpdHi,
-  NCC:nccHi,
+  NCC: nccHi,
   NSS: nssHi,
 };
 export default text;
