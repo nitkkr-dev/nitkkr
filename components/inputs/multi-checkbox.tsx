@@ -27,7 +27,7 @@ export interface MultiCheckboxProps {
   textMap: Record<string, string>;
   /** Base path for URL building (e.g., '/notifications', '/events') */
   basePath: string;
-  /** 
+  /**
    * Variant style:
    * - 'accordion': Collapsible card with title (notifications style)
    * - 'list': Simple scrollable list with "All" option (events style)
@@ -170,6 +170,8 @@ export function MultiCheckbox({
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls={`${param}-content`}
             className="flex w-full items-center justify-between px-3 text-left transition-colors"
           >
             <h3 className="mt-3 text-lg font-bold text-primary-300">{title}</h3>
@@ -183,6 +185,7 @@ export function MultiCheckbox({
 
           {/* Dropdown Content with Animation */}
           <div
+            id={`${param}-content`}
             className={cn(
               'grid transition-all duration-200 ease-in-out',
               isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
@@ -206,7 +209,7 @@ export function MultiCheckbox({
                         [param]: getUpdatedValues(opt),
                       })}
                       className={cn(
-                        'mb-1.5 flex items-center gap-3 rounded-sm border bg-white px-3 py-2.5 transition-colors',
+                        'bg-white mb-1.5 flex items-center gap-3 rounded-sm border px-3 py-2.5 transition-colors',
                         isChecked ? 'border-primary-700' : 'border-neutral-200'
                       )}
                     >
@@ -215,12 +218,12 @@ export function MultiCheckbox({
                           'flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 transition-colors',
                           isChecked
                             ? 'border-primary-700 bg-primary-700'
-                            : 'border-primary-700 bg-white'
+                            : 'bg-white border-primary-700'
                         )}
                       >
                         {isChecked && (
                           <svg
-                            className="h-3 w-3 text-white"
+                            className="text-white h-3 w-3"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -246,13 +249,19 @@ export function MultiCheckbox({
                   <Link
                     scroll={false}
                     href={buildLocalHref({ [param]: [] })}
-                    className="inline-flex items-center rounded-md border border-primary-700 bg-white px-4 py-2 text-center text-sm font-medium text-primary-700 transition-colors hover:bg-primary-700 hover:text-neutral-50"
+                    className="bg-white inline-flex items-center rounded-md border border-primary-700 px-4 py-2 text-center text-sm font-medium text-primary-700 transition-colors hover:bg-primary-700 hover:text-neutral-50"
                     onClick={() => {
-                      if (optionsRef.current) {
-                        optionsRef.current.scrollTo({
-                          top: 0,
-                          behavior: 'smooth',
-                        });
+                      const root = optionsRef.current;
+                      if (root) {
+                        const viewport = root.querySelector<HTMLElement>(
+                          '[data-radix-scroll-area-viewport]'
+                        );
+                        if (viewport) {
+                          viewport.scrollTo({
+                            top: 0,
+                            behavior: 'smooth',
+                          });
+                        }
                       }
                     }}
                   >
@@ -281,7 +290,7 @@ export function MultiCheckbox({
             className={cn(
               'flex w-full items-center rounded border p-2',
               isAllSelected
-                ? 'border-primary-700 bg-primary-50'
+                ? 'bg-primary-50 border-primary-700'
                 : 'border-neutral-300'
             )}
           >
@@ -311,7 +320,7 @@ export function MultiCheckbox({
                 className={cn(
                   'flex w-full items-center rounded border p-2',
                   isChecked
-                    ? 'border-primary-700 bg-primary-50'
+                    ? 'bg-primary-50 border-primary-700'
                     : 'border-neutral-300'
                 )}
               >
