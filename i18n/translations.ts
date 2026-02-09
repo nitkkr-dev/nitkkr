@@ -30,6 +30,7 @@ import type {
   MainTranslations,
   NotFoundTranslations,
   NotificationsTranslations,
+  NSSTranslations,
   OtherOfficersPageTranslations,
   PatentsAndTechnologiesTranslations,
   ProfileTranslations,
@@ -43,10 +44,10 @@ import type {
   SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  StudentCouncilTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
-  NSSTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -88,6 +89,7 @@ export type {
   SectionsTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  StudentCouncilTranslations,
   WebsiteContributorsTranslations,
   FacultyAndStaffTranslations,
   ScholarshipsTranslations,
@@ -138,6 +140,7 @@ export interface Translations {
   Sections: SectionsTranslations;
   Status: StatusTranslations;
   StudentActivities: StudentActivitiesTranslations;
+  StudentCouncil: StudentCouncilTranslations;
   WebsiteContributors: WebsiteContributorsTranslations;
   FacultyAndStaff: FacultyAndStaffTranslations;
   Scholarships: ScholarshipsTranslations;

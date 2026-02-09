@@ -30,6 +30,7 @@ import {
   mainEn,
   notFoundEn,
   notificationsEn,
+  nssEn,
   otherOfficersPageEn,
   patentsAndTechnologiesEn,
   profileEn,
@@ -43,10 +44,10 @@ import {
   sectionsEn,
   statusEn,
   studentActivitiesEn,
+  studentCouncilEn,
   thoughtLabEn,
   trainingAndPlacementEn,
   websiteContributorsEn,
-  nssEn,
 } from './translate';
 
 const text: Translations = {
@@ -87,6 +88,7 @@ const text: Translations = {
   Status: statusEn,
   PatentsAndTechnologies: patentsAndTechnologiesEn,
   StudentActivities: studentActivitiesEn,
+  StudentCouncil: studentCouncilEn,
   DirectorMessage: directorMessageEn,
   Research: researchEn,
   TrainingAndPlacement: trainingAndPlacementEn,

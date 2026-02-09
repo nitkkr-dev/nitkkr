@@ -48,3 +48,4 @@ export * from './senate-composition.schema';
 export * from './senate-agenda-minutes.schema';
 export * from './scsa_minutes.schema';
 export * from './website-contributors.schema';
+export * from './student-council.schema';
