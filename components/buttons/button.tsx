@@ -22,10 +22,10 @@ const buttonVariants = cva(
 
         primaryDisabled: 'cursor-not-allowed bg-primary-100 text-shade-light',
         secondary: cn(
-          'bg-white border border-neutral-700 text-neutral-700',
+          'border border-neutral-700 bg-neutral-50 text-neutral-700',
           'hover:border-primary-700 hover:text-primary-700',
-          'focus:text-white focus:border-primary-700',
-          'active:text-white active:border-primary-700 active:bg-primary-700'
+          'focus:border-primary-900 focus:text-primary-900',
+          'active:border-primary-700 active:bg-primary-700 active:text-shade-light'
         ),
 
         secondaryDisabled:
@@ -33,8 +33,8 @@ const buttonVariants = cva(
         outline: cn(
           'bg-white border border-neutral-700 text-neutral-700',
           'hover:border-primary-700 hover:text-primary-700',
-          'focus:text-white focus:border-primary-700',
-          'active:text-white active:border-primary-700 active:bg-primary-700'
+          'focus:border-primary-700 focus:text-shade-light',
+          'active:border-primary-700 active:bg-primary-700 active:text-shade-light'
         ),
 
         outlineDisabled: cn(

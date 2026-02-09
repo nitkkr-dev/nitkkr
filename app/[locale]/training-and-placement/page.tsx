@@ -102,7 +102,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.about.toUpperCase()}
         />
         <article className="flex max-md:flex-col">
-          <p className="text-base  max-md:rounded-t md:w-full md:rounded-r md:text-lg">
+          <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r md:text-lg">
             <span className="mb-1 block">{text.about.content[0]}</span>
             <span className="mb-1 block">{text.about.content[1]}</span>
             <span className="mb-4 mt-4 block">
@@ -353,7 +353,7 @@ export default async function TrainingAndPlacement({
           href="#recruiters"
           text={text.headings.ourrecruiters.toUpperCase()}
         />
-        <p className="text-base max-md:rounded-t md:w-full md:rounded-r md:text-lg">
+        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r md:text-lg">
           {text.ourrecruiters.about}
         </p>
         <article className="container">

@@ -49,7 +49,7 @@ export default function MessageCard({
       <h3 className="!my-0 h-fit self-center lg:text-4xl">{name}</h3>
       <p
         className={cn(
-          'max-lg:col-span-2 lg:text-xl',
+          'text-justify max-lg:col-span-2 lg:text-xl',
           details && 'lg:row-span-3'
         )}
       >
