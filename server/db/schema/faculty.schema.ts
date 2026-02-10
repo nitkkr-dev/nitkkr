@@ -1,9 +1,8 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import {
   courseLogs,
-  courses,
   departments,
   doctorates,
   persons,
@@ -226,7 +225,6 @@ export const customInformation = pgTable('custom_information', (t) => ({
 
 export const facultyRelations = relations(faculty, ({ many, one }) => ({
   courseLogs: many(courseLogs),
-  courses: many(courses),
   department: one(departments, {
     fields: [faculty.departmentId],
     references: [departments.id],
