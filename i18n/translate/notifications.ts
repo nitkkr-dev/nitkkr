@@ -37,7 +37,6 @@ export interface NotificationsTranslations {
   };
   categories: {
     academic: string;
-    tender: string;
     workshop: string;
     administration: string;
     recruitment: string;
@@ -101,7 +100,6 @@ export const notificationsEn: NotificationsTranslations = {
   },
   categories: {
     academic: 'Academic',
-    tender: 'Tenders',
     workshop: 'Workshops / Seminars',
     administration: 'Administration',
     recruitment: 'Recruitment',
@@ -165,7 +163,6 @@ export const notificationsHi: NotificationsTranslations = {
   },
   categories: {
     academic: 'शैक्षणिक',
-    tender: 'निविदाएँ',
     workshop: 'कार्यशाला / संगोष्ठी',
     administration: 'प्रशासन',
     recruitment: 'भर्ती',

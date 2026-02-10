@@ -43,6 +43,7 @@ import type {
   SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  TendersTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
@@ -89,6 +90,7 @@ export type {
   SectionsTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  TendersTranslations,
   WebsiteContributorsTranslations,
   FacultyAndStaffTranslations,
   ScholarshipsTranslations,
@@ -140,6 +142,7 @@ export interface Translations {
   Sections: SectionsTranslations;
   Status: StatusTranslations;
   StudentActivities: StudentActivitiesTranslations;
+  Tenders: TendersTranslations;
   WebsiteContributors: WebsiteContributorsTranslations;
   FacultyAndStaff: FacultyAndStaffTranslations;
   Scholarships: ScholarshipsTranslations;

@@ -7,7 +7,6 @@ import { hostels } from './hostels.schema';
 
 export const notificationCategoryEnum = pgEnum('notification_category', [
   'academic',
-  'tender',
   'workshop',
   'administration',
   'recruitment',
@@ -30,9 +29,9 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
 // Categories visible in the UI filter
 // Hidden categories (scoe, racs) are excluded - they're used on respective pages
 // and shown when no category filter is applied
+// Note: Tenders are now managed separately in the tenders table
 export const VISIBLE_NOTIFICATION_CATEGORIES = [
   'academic',
-  'tender',
   'workshop',
   'administration',
   'recruitment',
