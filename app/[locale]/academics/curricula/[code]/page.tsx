@@ -26,25 +26,13 @@ export default async function Curriculum({
 }: {
   params: { locale: string; code: string };
 }) {
+  const codeDecoded = decodeURIComponent(code);
   const text = (await getTranslations(locale)).Curriculum;
   const course = await db.query.courses.findFirst({
-    where: (course, { eq }) => eq(course.code, code),
-    with: {
-      coordinator: {
-        with: {
-          person: {
-            columns: {
-              name: true,
-              telephone: true,
-              email: true,
-            },
-          },
-        },
-      },
-    },
+    where: (courses, { eq }) => eq(courses.code, codeDecoded),
   });
   if (!course) notFound();
-
+  
   return (
     <>
       <ImageHeader
@@ -95,37 +83,6 @@ export default async function Curriculum({
               ))}
             </h5>
           </section>
-
-          <aside className="my-auto space-y-4 rounded-md border border-primary-500 bg-shade-light p-5 sm:h-auto md:h-60 md:w-[540px]">
-            <h4 className="mb-6">{text.coordinator}</h4>
-            <article className="flex space-x-4">
-              <Image
-                alt={course.coordinator.person.name}
-                className="size-32 rounded-lg bg-neutral-200"
-                src={`persons/${course.coordinator.id}/image.png`}
-                height={0}
-                width={0}
-              />
-              <section>
-                <h5 className="mb-1">{course.coordinator.person.name}</h5>
-                <p className="font-medium">{course.coordinator.designation}</p>
-                <p>
-                  <a
-                    className="text-primary-500 underline"
-                    href={`mailto:${course.coordinator.person.email}`}
-                  >
-                    <MdEmail className="mr-2 inline-block fill-primary-500" />
-
-                    {course.coordinator.person.email}
-                  </a>
-                </p>
-                <p>
-                  <MdPhone className="mr-2 inline-block fill-primary-500" />
-                  {course.coordinator.person.telephone}
-                </p>
-              </section>
-            </article>
-          </aside>
         </section>
 
         <article className="container">
@@ -183,7 +140,7 @@ export default async function Curriculum({
             <ol className="flex list-disc flex-col space-y-4 p-12">
               {course.essentialReading.map((book, index) => (
                 <li key={index}>
-                  <p className="font-medium text-primary-300 underline">
+                  <p className="font-medium text-primary-300">
                     {book}
                   </p>
                 </li>
