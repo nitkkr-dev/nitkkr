@@ -32,7 +32,7 @@ export default async function Curriculum({
     where: (courses, { eq }) => eq(courses.code, codeDecoded),
   });
   if (!course) notFound();
-  
+
   return (
     <>
       <ImageHeader
@@ -140,9 +140,7 @@ export default async function Curriculum({
             <ol className="flex list-disc flex-col space-y-4 p-12">
               {course.essentialReading.map((book, index) => (
                 <li key={index}>
-                  <p className="font-medium text-primary-300">
-                    {book}
-                  </p>
+                  <p className="font-medium text-primary-300">{book}</p>
                 </li>
               ))}
             </ol>
