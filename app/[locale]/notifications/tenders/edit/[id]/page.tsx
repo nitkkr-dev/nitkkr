@@ -2,7 +2,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { getTranslations } from '~/i18n/translations';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
-import { getTenderById } from '~/server/services/tenders';
+import { getTenderById } from '~/server/actions/tenders';
 import ImageHeader from '~/components/image-header';
 
 import { TenderForm } from '../../TenderForm';
@@ -34,19 +34,7 @@ export default async function EditTenderPage({
 
   return (
     <>
-      <ImageHeader
-        title={text.editTender}
-        src="assets/academics.png"
-        headings={[
-          { label: 'Home', href: `/${locale}` },
-          { label: 'Notifications', href: `/${locale}/notifications` },
-          { label: text.title, href: `/${locale}/notifications/tenders` },
-          {
-            label: text.editTender,
-            href: `/${locale}/notifications/tenders/edit/${id}`,
-          },
-        ]}
-      />
+      <ImageHeader title={text.editTender} src="assets/academics.png" />
 
       <main className="container mx-auto max-w-3xl px-4 py-8">
         <div className="bg-white rounded-lg border border-neutral-200 p-6 shadow-sm">

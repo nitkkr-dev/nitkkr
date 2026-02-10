@@ -23,19 +23,7 @@ export default async function AddTenderPage({
 
   return (
     <>
-      <ImageHeader
-        title={text.addTender}
-        src="assets/academics.png"
-        headings={[
-          { label: 'Home', href: `/${locale}` },
-          { label: 'Notifications', href: `/${locale}/notifications` },
-          { label: text.title, href: `/${locale}/notifications/tenders` },
-          {
-            label: text.addTender,
-            href: `/${locale}/notifications/tenders/add`,
-          },
-        ]}
-      />
+      <ImageHeader title={text.addTender} src="assets/academics.png" />
 
       <main className="container mx-auto max-w-3xl px-4 py-8">
         <div className="bg-white rounded-lg border border-neutral-200 p-6 shadow-sm">

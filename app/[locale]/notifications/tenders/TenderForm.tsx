@@ -10,10 +10,10 @@ import { Input, Textarea } from '~/components/inputs';
 import {
   createTenderAction,
   type TenderFormData,
+  type TenderWithStatus,
   updateTenderAction,
   uploadTenderDocument,
 } from '~/server/actions/tenders';
-import type { TenderWithStatus } from '~/server/services/tenders';
 import type { TendersTranslations } from '~/i18n/translate/tenders';
 
 interface TenderFormProps {
@@ -274,13 +274,13 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
 
         {pdfLink ? (
           <div className="flex items-center gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-3">
-            <FaFilePdf className="text-red-500 h-8 w-8" />
-            <div className="flex-1">
+            <FaFilePdf className="text-red-500 h-8 w-8 flex-shrink-0" />
+            <div className="min-w-0 flex-1">
               <a
                 href={pdfLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-600 font-medium hover:underline"
+                className="text-primary-600 block truncate font-medium hover:underline"
               >
                 {pdfName || 'Document'}
               </a>
@@ -289,7 +289,7 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
             <button
               type="button"
               onClick={handleRemoveDocument}
-              className="text-red-600 hover:bg-red-100 rounded p-1.5 transition-colors"
+              className="text-red-600 hover:bg-red-100 flex-shrink-0 rounded p-1.5 transition-colors"
               title={text.form.removeDocument}
             >
               <FaTrash className="h-4 w-4" />
