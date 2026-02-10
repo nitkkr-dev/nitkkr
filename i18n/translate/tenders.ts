@@ -17,6 +17,7 @@ export interface TendersTranslations {
     extendedDate: string;
     document: string;
     status: string;
+    actions: string;
   };
 
   status: {
@@ -91,6 +92,7 @@ export const tendersEn: TendersTranslations = {
     extendedDate: 'Extended Deadline',
     document: 'Document',
     status: 'Status',
+    actions: 'Actions',
   },
 
   status: {
@@ -165,6 +167,7 @@ export const tendersHi: TendersTranslations = {
     extendedDate: 'विस्तारित समय सीमा',
     document: 'दस्तावेज़',
     status: 'स्थिति',
+    actions: 'कार्रवाई',
   },
 
   status: {

@@ -10,10 +10,10 @@ export const studentCouncil = pgTable('student_council', (t) => ({
   personId: t
     .integer('person_id')
     .notNull()
-    .unique()
+    // .unique() -> Multiple student council members can be from the same person (e.g., if they serve multiple terms), so we can't enforce uniqueness here
     .references(() => persons.id),
 
-  section: t.varchar('section', { length: 16 }),
+  section: t.varchar('section', { length: 32 }),
   category: t.varchar('category', { length: 32 }).notNull(),
   createdAt: t.timestamp('created_at').defaultNow().notNull(),
 
