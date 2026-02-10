@@ -28,6 +28,7 @@ import {
   instituteEn,
   loginEn,
   mainEn,
+  nccEn,
   notFoundEn,
   notificationsEn,
   nssEn,
@@ -98,6 +99,7 @@ const text: Translations = {
   SCoE: scoeEn,
   WebsiteContributors: websiteContributorsEn,
   CHPD: chpdEn,
+  NCC: nccEn,
   NSS: nssEn,
 };
 

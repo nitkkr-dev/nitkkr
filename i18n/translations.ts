@@ -28,6 +28,7 @@ import type {
   InstituteTranslations,
   LoginTranslations,
   MainTranslations,
+  NCCTranslations,
   NotFoundTranslations,
   NotificationsTranslations,
   NSSTranslations,
@@ -105,6 +106,7 @@ export type {
   SCoETranslations,
   ResearchTranslations,
   TrainingAndPlacementTranslations,
+  NCCTranslations,
   NSSTranslations,
 };
 
@@ -156,5 +158,6 @@ export interface Translations {
   DeansPage: DeansPageTranslations;
   SCoE: SCoETranslations;
   CHPD: CHPDTranslations;
+  NCC: NCCTranslations;
   NSS: NSSTranslations;
 }

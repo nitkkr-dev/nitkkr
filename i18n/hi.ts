@@ -28,6 +28,7 @@ import {
   instituteHi,
   loginHi,
   mainHi,
+  nccHi,
   notFoundHi,
   notificationsHi,
   nssHi,
@@ -98,6 +99,7 @@ const text: Translations = {
   DirectorPage: directorPageHi,
   DeansPage: deansPageHi,
   CHPD: chpdHi,
+  NCC: nccHi,
   NSS: nssHi,
 };
 export default text;
