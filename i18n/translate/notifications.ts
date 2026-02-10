@@ -54,6 +54,8 @@ export interface NotificationsTranslations {
     // Hidden categories
     scoe: string;
     racs: string;
+    // Legacy category - kept for backwards compatibility
+    tender: string;
   };
   educationType: {
     ug: string;
@@ -117,6 +119,8 @@ export const notificationsEn: NotificationsTranslations = {
     // Hidden categories (for specific pages)
     scoe: 'SCOE',
     racs: 'RACS',
+    // Legacy category - kept for backwards compatibility
+    tender: 'Tenders',
   },
   educationType: {
     ug: 'UG',
@@ -180,6 +184,8 @@ export const notificationsHi: NotificationsTranslations = {
     // Hidden categories (for specific pages)
     scoe: 'SCOE',
     racs: 'RACS',
+    // Legacy category - kept for backwards compatibility
+    tender: 'निविदाएं',
   },
   educationType: {
     ug: 'स्नातक',
