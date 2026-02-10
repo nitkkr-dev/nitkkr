@@ -44,5 +44,6 @@ export * from './director-page';
 export * from './scoe';
 export * from './research';
 export * from './training-and-placement';
+export * from './tenders';
 export * from './ncc';
 export * from './nss';
