@@ -1,4 +1,5 @@
 export * from './academics';
+export * from './admission';
 export * from './administration';
 export * from './club';
 export * from './clubs';
