@@ -239,29 +239,38 @@ export default async function Department({
             </h4>
             <ol>
               {department.majors
-                .filter(
-                  ({ degree }) =>
-                    (index === 0 && degree === 'B. Tech.') ||
-                    (index === 1 && degree === 'M. Tech.') ||
-                    (index === 2 && degree === 'Ph. D.')
-                )
-                .map(({ name }, index) => (
-                  <li
-                    className={cn(
-                      'rounded bg-neutral-50 p-2',
-                      index === 0 && 'text-primary-300',
-                      index === 1 && 'text-primary-500',
-                      index === 2 && 'text-primary-700'
-                    )}
-                    key={index}
-                  >
-                    <Button asChild variant="link">
-                      <Link href={`/${locale}/academics/curricula`}>
-                        {name}
-                      </Link>
-                    </Button>
-                  </li>
-                ))}
+              .filter(
+                ({ degree }) =>
+                  (index === 0 && degree === 'B. Tech.') ||
+                  (index === 1 && degree === 'M. Tech.') ||
+                  (index === 2 && degree === 'Ph. D.')
+              )
+              .map(({ name, degree }, index) => (
+                <li
+                  className={cn(
+                    'rounded bg-neutral-50 p-2',
+                    index === 0 && 'text-primary-300',
+                    index === 1 && 'text-primary-500',
+                    index === 2 && 'text-primary-700'
+                  )}
+                  key={index}
+                >
+                  <Button asChild variant="link">
+                    <Link
+                      href={{
+                        pathname: `/${locale}/academics/curricula`,
+                        query: {
+                          department: department.urlName,
+                          degree: degree,
+                          major: name,
+                        },
+                      }}
+                    >
+                      {name}
+                    </Link>
+                  </Button>
+                </li>
+              ))}
             </ol>
           </nav>
         ))}
