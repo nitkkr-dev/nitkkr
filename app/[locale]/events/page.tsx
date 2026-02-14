@@ -4,7 +4,10 @@ import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db, eventCategoryEnum } from '~/server/db';
-import { eventDepartments } from '~/server/db/schema/events.schema';
+import {
+  eventDepartments,
+  VISIBLE_EVENT_CATEGORIES,
+} from '~/server/db/schema/events.schema';
 import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
@@ -142,14 +145,14 @@ export default async function EventsPage({
             'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-baseline justify-between pb-2">
+          <div className="flex items-baseline justify-between py-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               {text.filterBy}
             </h2>
             <Button
               asChild
               variant="outline"
-              className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
+              className="bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
             >
               <Link
                 scroll={false}
@@ -167,13 +170,10 @@ export default async function EventsPage({
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            <div className="flex flex-col gap-2 pr-4">
+            <div className="flex flex-col gap-2">
               <FilterSection label={text.filter.date}>
                 <DateRangeForm
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  query={query}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{
@@ -202,7 +202,7 @@ export default async function EventsPage({
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex w-full items-center gap-4">
+          <search className="w-full items-center gap-4 py-2 max-xl:flex">
             <Suspense fallback={<Loading />}>
               <SearchInput
                 defaultValue={query}
@@ -216,10 +216,7 @@ export default async function EventsPage({
                 <MobileFilters
                   locale={locale}
                   categories={categories}
-                  departments={departments}
-                  departmentRows={departmentRows}
-                  categoryOptions={eventCategoryEnum.enumValues}
-                  query={query}
+                  categoryOptions={VISIBLE_EVENT_CATEGORIES}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{

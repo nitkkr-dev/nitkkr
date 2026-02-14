@@ -23,6 +23,19 @@ export const eventCategoryEnum = pgEnum('event_category', [
   'campus-highlights',
 ]);
 
+// Categories visible in the UI filters
+export const VISIBLE_EVENT_CATEGORIES = [
+  'academic',
+  'technical',
+  'cultural',
+  'sports',
+  'clubs-societies',
+  'achievements',
+  'placements',
+  'outreach',
+  'miscellaneous',
+] as const;
+
 export const events = pgTable(
   'events',
   (t) => ({

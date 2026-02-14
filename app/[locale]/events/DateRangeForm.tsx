@@ -21,9 +21,6 @@ export function DateRangeForm({
   text,
 }: {
   locale: string;
-  categories?: string[];
-  departments?: string[];
-  query?: string;
   start?: string;
   end?: string;
   compact?: boolean;
