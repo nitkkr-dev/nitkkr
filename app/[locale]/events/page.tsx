@@ -13,11 +13,14 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import Loading from '~/components/loading';
-import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
+import {
+  DateRangeFilter,
+  MultiCheckbox,
+  SearchInput,
+} from '~/components/inputs';
 
 import { MobileFilters } from './MobileFilters';
 import { type EventItem, EventsList } from './EventsList';
-import { SearchInput } from './SearchInput';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
 const INITIAL_BATCH_SIZE = 20;
@@ -206,6 +209,7 @@ export default async function EventsPage({
               <SearchInput
                 defaultValue={query}
                 placeholder={text.searchPlaceholder}
+                inputId="event-search"
               />
             </Suspense>
 
