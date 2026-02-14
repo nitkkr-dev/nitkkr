@@ -13,9 +13,8 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import Loading from '~/components/loading';
-import { MultiCheckbox } from '~/components/inputs';
+import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
 
-import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
 import { type EventItem, EventsList } from './EventsList';
 import { SearchInput } from './SearchInput';
@@ -172,7 +171,7 @@ export default async function EventsPage({
           <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2">
               <FilterSection label={text.filter.date}>
-                <DateRangeForm
+                <DateRangeFilter
                   locale={locale}
                   start={searchParams.start}
                   end={searchParams.end}
@@ -188,7 +187,7 @@ export default async function EventsPage({
 
               <MultiCheckbox
                 param="category"
-                options={eventCategoryEnum.enumValues}
+                options={VISIBLE_EVENT_CATEGORIES}
                 selected={categories}
                 locale={locale}
                 textMap={text.categories}

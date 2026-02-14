@@ -7,10 +7,8 @@ import { FaTimes } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
-import { MultiCheckbox } from '~/components/inputs';
+import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
 import { cn } from '~/lib/utils';
-
-import { DateRangeForm } from './DateRangeForm';
 
 interface Dept {
   id: number;
@@ -190,11 +188,8 @@ export function MobileFilters({
                       <h3 className="mb-2 text-lg font-bold text-primary-700">
                         {text.filter.date}
                       </h3>
-                      <DateRangeForm
+                      <DateRangeFilter
                         locale={locale}
-                        categories={categories}
-                        departments={departments}
-                        query={query}
                         start={start}
                         end={end}
                         compact
