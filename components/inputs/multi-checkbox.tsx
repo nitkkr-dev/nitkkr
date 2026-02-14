@@ -51,7 +51,7 @@ export function MultiCheckbox({
   variant = 'accordion',
   title,
   select = false,
-  scrollHeight,
+  scrollHeight = 'h-[300px]',
 }: MultiCheckboxProps) {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -278,71 +278,73 @@ export function MultiCheckbox({
 
   // List variant (events style)
   return (
-    <ScrollArea className={scrollHeight ?? 'h-[200px]'}>
-      <ol className="w-full space-y-2 pr-4">
-        {/* All Option */}
-        <li>
-          <Link
-            scroll={false}
-            href={buildLocalHref({
-              [param]: [],
-            })}
-            className={cn(
-              'flex w-full items-center rounded border p-2',
-              isAllSelected
-                ? 'bg-primary-50 border-primary-700'
-                : 'border-neutral-300'
-            )}
-          >
-            <div className="flex w-full items-center">
-              <div className="mr-2">
-                <input
-                  type="checkbox"
-                  id={`${param}-all`}
-                  className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                  checked={isAllSelected}
-                  readOnly
-                />
-              </div>
-              <span className="font-semibold text-shade-dark">All</span>
-            </div>
-          </Link>
-        </li>
-        {sortedOptions.map((opt) => {
-          const isChecked = selected.includes(opt);
-          return (
-            <li key={opt}>
-              <Link
-                scroll={false}
-                href={buildLocalHref({
-                  [param]: getUpdatedValues(opt),
-                })}
-                className={cn(
-                  'flex w-full items-center rounded border p-2',
-                  isChecked
-                    ? 'bg-primary-50 border-primary-700'
-                    : 'border-neutral-300'
-                )}
-              >
-                <div className="flex w-full items-center">
-                  <div className="mr-2">
-                    <input
-                      type="checkbox"
-                      id={`${param}-${opt}`}
-                      className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
-                      checked={isChecked}
-                      readOnly
-                    />
-                  </div>
-                  <span className="font-semibold text-shade-dark">
-                    {textMap[opt] ?? opt}
-                  </span>
+    <div className="w-full rounded border border-primary-300 bg-neutral-100 p-2">
+      <ScrollArea className={scrollHeight ?? 'h-[300px]'}>
+        <ol className="w-full space-y-2 pr-4">
+          {/* All Option */}
+          <li>
+            <Link
+              scroll={false}
+              href={buildLocalHref({
+                [param]: [],
+              })}
+              className={cn(
+                'flex w-full items-center rounded border p-2',
+                isAllSelected
+                  ? 'bg-primary-50 border-primary-700'
+                  : 'border-neutral-300'
+              )}
+            >
+              <div className="flex w-full items-center">
+                <div className="mr-2">
+                  <input
+                    type="checkbox"
+                    id={`${param}-all`}
+                    className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                    checked={isAllSelected}
+                    readOnly
+                  />
                 </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
-    </ScrollArea>
+                <span className="font-semibold text-shade-dark">All</span>
+              </div>
+            </Link>
+          </li>
+          {sortedOptions.map((opt) => {
+            const isChecked = selected.includes(opt);
+            return (
+              <li key={opt}>
+                <Link
+                  scroll={false}
+                  href={buildLocalHref({
+                    [param]: getUpdatedValues(opt),
+                  })}
+                  className={cn(
+                    'flex w-full items-center rounded border p-2',
+                    isChecked
+                      ? 'bg-primary-50 border-primary-700'
+                      : 'border-neutral-300'
+                  )}
+                >
+                  <div className="flex w-full items-center">
+                    <div className="mr-2">
+                      <input
+                        type="checkbox"
+                        id={`${param}-${opt}`}
+                        className="h-4 w-4 rounded border-neutral-300 text-primary-700 focus:ring-primary-700"
+                        checked={isChecked}
+                        readOnly
+                      />
+                    </div>
+                    <span className="font-semibold text-shade-dark">
+                      {textMap[opt] ?? opt}
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      </ScrollArea>
+    </div>
   );
 }
