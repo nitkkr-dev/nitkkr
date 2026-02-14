@@ -15,12 +15,16 @@ import {
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
-import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
+import {
+  DateRangeFilter,
+  MultiCheckbox,
+  SearchInput,
+} from '~/components/inputs';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 
 import { MobileFilters } from './MobileFilters';
 import { NotificationsList } from './NotificationsList';
-import { SearchInput } from './SearchInput';
+// import { SearchInput } from './SearchInput';
 
 type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 
@@ -228,6 +232,7 @@ export default async function NotificationsPage({
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
+              inputId="notification-search"
             />
 
             {/* Mobile Filters Button - shows on < xl */}
