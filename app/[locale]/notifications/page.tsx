@@ -15,10 +15,9 @@ import {
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
-import { MultiCheckbox } from '~/components/inputs';
+import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 
-import { DateRangeForm } from './DateRangeForm';
 import { MobileFilters } from './MobileFilters';
 import { NotificationsList } from './NotificationsList';
 import { SearchInput } from './SearchInput';
@@ -184,11 +183,8 @@ export default async function NotificationsPage({
           <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2 pr-4">
               <FilterSection locale={locale} label={text.filter.date}>
-                <DateRangeForm
+                <DateRangeFilter
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  query={query}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{
@@ -203,7 +199,7 @@ export default async function NotificationsPage({
 
               <MultiCheckbox
                 param="category"
-                options={notificationCategoryEnum.enumValues}
+                options={VISIBLE_NOTIFICATION_CATEGORIES}
                 selected={categories}
                 locale={locale}
                 textMap={text.categories}
