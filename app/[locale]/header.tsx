@@ -77,12 +77,6 @@ export default async function Header({ locale }: { locale: string }) {
       href: 'academics',
       listItems: [
         {
-          title: 'Admission',
-          href: '/academics/admission',
-          description:
-            'Learn about admission process, eligibility, and application details.',
-        },
-        {
           title: 'Departments',
           href: '/academics/departments',
           description:
@@ -104,12 +98,19 @@ export default async function Header({ locale }: { locale: string }) {
           href: '/academics/convocation',
           description: 'Get information on upcoming convocation ceremonies.',
         },
-        // {
-        //   title: 'Awards',
-        //   href: '/academics/awards',
-        //   description:
-        //     'Recognizing excellence in academics, research, and beyond.',
-        // },
+        {
+          title: 'Admission',
+          href: '/academics/admission',
+          description:
+            'Learn about admission process, eligibility, and application details.',
+        },
+        // May remove 'Awards' from the Navigation
+        {
+          title: 'Awards',
+          href: '/academics/awards',
+          description:
+            'Recognizing excellence in academics, research, and beyond.',
+        },
         {
           title: 'Scholarship',
           href: '/academics/scholarships',
