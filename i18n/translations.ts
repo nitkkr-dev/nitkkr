@@ -1,6 +1,7 @@
 // Import interfaces from modular translation files
 import type {
   AcademicsTranslations,
+  AdmissionTranslations,
   AdministrationTranslations,
   AwardsTranslations,
   CHPDTranslations,
@@ -43,9 +44,11 @@ import type {
   SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  TendersTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
+  NCCTranslations,
   NSSTranslations,
 } from './translate';
 
@@ -58,6 +61,7 @@ export async function getTranslations(locale: string): Promise<Translations> {
 // Re-export modular interfaces for external use
 export type {
   AcademicsTranslations,
+  AdmissionTranslations,
   AdministrationTranslations,
   ClubTranslations,
   ClubsTranslations,
@@ -88,6 +92,7 @@ export type {
   SectionsTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  TendersTranslations,
   WebsiteContributorsTranslations,
   FacultyAndStaffTranslations,
   ScholarshipsTranslations,
@@ -103,11 +108,13 @@ export type {
   SCoETranslations,
   ResearchTranslations,
   TrainingAndPlacementTranslations,
+  NCCTranslations,
   NSSTranslations,
 };
 
 export interface Translations {
   Academics: AcademicsTranslations;
+  Admission: AdmissionTranslations;
   Administration: AdministrationTranslations;
   Club: ClubTranslations;
   Clubs: ClubsTranslations;
@@ -138,6 +145,7 @@ export interface Translations {
   Sections: SectionsTranslations;
   Status: StatusTranslations;
   StudentActivities: StudentActivitiesTranslations;
+  Tenders: TendersTranslations;
   WebsiteContributors: WebsiteContributorsTranslations;
   FacultyAndStaff: FacultyAndStaffTranslations;
   Scholarships: ScholarshipsTranslations;
@@ -153,5 +161,6 @@ export interface Translations {
   DeansPage: DeansPageTranslations;
   SCoE: SCoETranslations;
   CHPD: CHPDTranslations;
+  NCC: NCCTranslations;
   NSS: NSSTranslations;
 }

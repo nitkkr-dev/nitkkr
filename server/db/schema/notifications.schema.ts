@@ -32,7 +32,6 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
 // and shown when no category filter is applied
 export const VISIBLE_NOTIFICATION_CATEGORIES = [
   'academic',
-  'tender',
   'workshop',
   'administration',
   'recruitment',

@@ -1,6 +1,7 @@
 import type { Translations } from './translations';
 import {
   academicsHi,
+  admissionHi,
   administrationHi,
   awardsHi,
   chpdHi,
@@ -43,13 +44,16 @@ import {
   sectionsHi,
   statusHi,
   studentActivitiesHi,
+  tendersHi,
   thoughtLabHi,
   trainingAndPlacementHi,
   websiteContributorsHi,
+  nccHi,
   nssHi,
 } from './translate';
 
 const text: Translations = {
+  Admission: admissionHi,
   Awards: awardsHi,
   Administration: administrationHi,
   Main: mainHi,
@@ -87,6 +91,7 @@ const text: Translations = {
   Status: statusHi,
   PatentsAndTechnologies: patentsAndTechnologiesHi,
   StudentActivities: studentActivitiesHi,
+  Tenders: tendersHi,
   DirectorMessage: directorMessageHi,
   otherOfficersPage: otherOfficersPageHi,
   SCoE: scoeHi,
@@ -96,6 +101,7 @@ const text: Translations = {
   DirectorPage: directorPageHi,
   DeansPage: deansPageHi,
   CHPD: chpdHi,
+  NCC: nccHi,
   NSS: nssHi,
 };
 export default text;
