@@ -9,6 +9,7 @@ import {
   VISIBLE_EVENT_CATEGORIES,
 } from '~/server/db/schema/events.schema';
 import { cn } from '~/lib/utils';
+import { buildHref, parseDate, toArray } from '~/lib/helpers';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
@@ -19,6 +20,7 @@ import {
   SearchInput,
 } from '~/components/inputs';
 import { MobileFilters } from '~/components/mobile-filters';
+import { FilterSection } from '~/components/filter-section';
 
 import { type EventItem, EventsList } from './EventsList';
 
@@ -259,54 +261,4 @@ export default async function EventsPage({
       </section>
     </>
   );
-}
-
-/* ---------------------- Filter Section Component ---------------------- */
-function FilterSection({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
-      <div className="flex items-start justify-between">
-        <h3 className="text-xl font-bold text-primary-300">{label}</h3>
-      </div>
-      {children}
-    </section>
-  );
-}
-
-/* ---------------------- Helpers ---------------------- */
-function toArray(v: string | string[] | undefined): string[] {
-  return Array.isArray(v) ? v : v ? [v] : [];
-}
-
-function parseDate(d?: string) {
-  if (!d) return undefined;
-  const date = new Date(d);
-  return isNaN(date.getTime()) ? undefined : date;
-}
-
-function buildHref(locale: string, updates: Record<string, unknown>): string {
-  const params = new URLSearchParams();
-
-  Object.entries(updates).forEach(([k, v]) => {
-    if (v === undefined || (Array.isArray(v) && v.length === 0)) {
-      return;
-    }
-
-    if (Array.isArray(v)) {
-      v.forEach((item) => {
-        if (item) params.append(k, String(item));
-      });
-    } else {
-      params.set(k, String(v));
-    }
-  });
-
-  const qs = params.toString();
-  return `/${locale}/events${qs ? `?${qs}` : ''}`;
 }
