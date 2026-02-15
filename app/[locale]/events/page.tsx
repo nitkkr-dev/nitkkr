@@ -18,8 +18,8 @@ import {
   MultiCheckbox,
   SearchInput,
 } from '~/components/inputs';
+import { MobileFilters } from '~/components/mobile-filters';
 
-import { MobileFilters } from './MobileFilters';
 import { type EventItem, EventsList } from './EventsList';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
@@ -219,16 +219,20 @@ export default async function EventsPage({
               <Suspense fallback={<Loading />}>
                 <MobileFilters
                   locale={locale}
-                  categories={categories}
-                  categoryOptions={VISIBLE_EVENT_CATEGORIES}
+                  basePath="/events"
                   start={searchParams.start}
                   end={searchParams.end}
+                  category={{
+                    options: VISIBLE_EVENT_CATEGORIES,
+                    selected: categories,
+                    textMap: text.categories,
+                    title: text.filter.category,
+                  }}
                   text={{
                     filters: text.filter.title,
                     filterBy: text.filterBy,
                     clearAllFilters: text.clearAllFilters,
                     filter: text.filter,
-                    categories: text.categories,
                   }}
                 />
               </Suspense>

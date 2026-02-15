@@ -15,14 +15,14 @@ import {
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import {
   DateRangeFilter,
   MultiCheckbox,
   SearchInput,
 } from '~/components/inputs';
-import { canManageNotifications, getServerAuthSession } from '~/server/auth';
+import { MobileFilters } from '~/components/mobile-filters';
 
-import { MobileFilters } from './MobileFilters';
 import { NotificationsList } from './NotificationsList';
 // import { SearchInput } from './SearchInput';
 
@@ -239,19 +239,25 @@ export default async function NotificationsPage({
             <div className="flex-shrink-0">
               <MobileFilters
                 locale={locale}
-                categories={categories}
-                departments={departments}
-                departmentRows={departmentRows}
-                categoryOptions={VISIBLE_NOTIFICATION_CATEGORIES}
-                query={query}
+                basePath="/notifications"
                 start={searchParams.start}
                 end={searchParams.end}
+                category={{
+                  options: VISIBLE_NOTIFICATION_CATEGORIES,
+                  selected: categories,
+                  textMap: text.categories,
+                  title: text.filter.category,
+                }}
+                department={{
+                  selected: departments,
+                  rows: departmentRows,
+                  title: text.filter.department,
+                }}
                 text={{
                   filters: text.filter.title,
                   filterBy: text.filterBy,
                   clearAllFilters: text.clearAllFilters,
                   filter: text.filter,
-                  categories: text.categories,
                 }}
               />
             </div>
