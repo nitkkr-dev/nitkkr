@@ -50,6 +50,7 @@ export interface LoadMoreParams {
   start?: string;
   end?: string;
   query?: string;
+  educationType?: string;
 }
 
 export async function loadMoreNotifications(
@@ -64,6 +65,7 @@ export async function loadMoreNotifications(
     start,
     end,
     query,
+    educationType,
   } = params;
 
   const cursorDate = cursor ? new Date(cursor) : undefined;
@@ -75,6 +77,10 @@ export async function loadMoreNotifications(
   if (startDate) conditions.push(gte(notifications.createdAt, startDate));
   if (endDate) conditions.push(lte(notifications.createdAt, endDate));
   if (cursorDate) conditions.push(lt(notifications.createdAt, cursorDate));
+  if (educationType)
+    conditions.push(
+      eq(notifications.educationType, educationType as 'ug' | 'pg' | 'phd')
+    );
 
   // Get notification IDs that match department/club/hostel filters via junction tables
   let filteredNotificationIds: number[] | undefined;

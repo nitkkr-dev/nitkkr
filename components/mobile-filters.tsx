@@ -10,6 +10,17 @@ import { ScrollArea } from '~/components/ui/scroll-area';
 import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
 import { cn } from '~/lib/utils';
 
+// -------------- Mobile Filters ------------------
+// How to customize for different pages:
+// 1. Import and use <MobileFilters> in the page, passing appropriate props
+// 2. For category/department/degreeLevel filters, pass config objects to enable them
+//    - Dept rows should have 'urlName' for building URLs and 'name' for display
+// 3. Provide localized text via the 'text' prop
+// If new filter types are needed in the future,
+// add new optional config props and
+// render corresponding filter components in the panel
+// ------------------------------------------------
+
 interface Dept {
   id: number;
   name: string;
@@ -31,6 +42,14 @@ interface DepartmentFilterConfig {
   title: string;
 }
 
+/** Optional degree level filter config */
+interface DegreeLevelFilterConfig {
+  options: readonly string[];
+  selected: string[];
+  textMap: Record<string, string>;
+  title: string;
+}
+
 interface MobileFiltersProps {
   locale: string;
   /** Base path used for building filter URLs, e.g. '/events' or '/notifications' */
@@ -41,6 +60,8 @@ interface MobileFiltersProps {
   category?: CategoryFilterConfig;
   /** Department filter — pass to enable */
   department?: DepartmentFilterConfig;
+  /** Degree level filter — pass to enable */
+  degreeLevel?: DegreeLevelFilterConfig;
   text: {
     filters: string;
     filterBy: string;
@@ -64,6 +85,7 @@ export function MobileFilters({
   end,
   category,
   department,
+  degreeLevel,
   text,
   className,
 }: MobileFiltersProps) {
@@ -108,6 +130,7 @@ export function MobileFilters({
   const activeFiltersCount =
     (category?.selected.length ?? 0) +
     (department?.selected.length ?? 0) +
+    (degreeLevel?.selected.length ?? 0) +
     dateFiltersCount;
 
   return (
@@ -239,6 +262,21 @@ export function MobileFilters({
                             department.rows.map((d) => [d.urlName, d.name])
                           )}
                           title={department.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
+
+                    {/* Degree Level Filter (conditional) */}
+                    {degreeLevel && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="degreeLevel"
+                          options={degreeLevel.options}
+                          selected={degreeLevel.selected}
+                          locale={locale}
+                          textMap={degreeLevel.textMap}
+                          title={degreeLevel.title}
                           basePath={basePath}
                         />
                       </div>
