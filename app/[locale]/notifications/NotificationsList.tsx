@@ -147,19 +147,20 @@ export function NotificationsList({
             {group.map((n) => (
               <li
                 key={n.id}
-                className="hover:bg-primary-50 group flex items-center justify-between gap-2 rounded px-2 py-1"
+                className="hover:bg-primary-50 group flex flex-col items-start justify-between gap-2 overflow-hidden rounded px-2 py-1 sm:flex-row sm:items-center"
               >
                 <button
                   onClick={() => setSelectedId(n.id)}
-                  className="flex flex-1 items-start gap-2 text-left"
+                  className="flex min-w-0 flex-1 items-start gap-2 text-left"
                 >
                   <MdOutlineKeyboardArrowRight className="text-primary-600 mt-1 size-4 transition-transform group-hover:translate-x-1" />
-                  <p className="truncate">{n.title}</p>
+                  <p className="line-clamp-2 whitespace-normal break-words">
+                    {n.title}
+                  </p>
                 </button>
 
-                {/* Edit/Delete buttons - Only visible to CCN */}
                 {canManage && (
-                  <div className="flex shrink-0 items-center gap-2">
+                  <div className="mt-2 flex shrink-0 flex-row items-center gap-2 sm:mt-0 sm:flex-row">
                     <Link
                       href={`/${locale}/notifications/edit/${n.id}`}
                       className="text-primary-600 hover:text-primary-800 rounded p-1 hover:bg-primary-100"
