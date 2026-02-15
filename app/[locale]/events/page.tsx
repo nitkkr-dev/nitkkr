@@ -4,18 +4,23 @@ import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
 import { db, eventCategoryEnum } from '~/server/db';
-import { eventDepartments } from '~/server/db/schema/events.schema';
+import {
+  eventDepartments,
+  VISIBLE_EVENT_CATEGORIES,
+} from '~/server/db/schema/events.schema';
 import { cn } from '~/lib/utils';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import Loading from '~/components/loading';
+import {
+  DateRangeFilter,
+  MultiCheckbox,
+  SearchInput,
+} from '~/components/inputs';
+import { MobileFilters } from '~/components/mobile-filters';
 
-import { DateRangeForm } from './DateRangeForm';
-import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { type EventItem, EventsList } from './EventsList';
-import { SearchInput } from './SearchInput';
 
 type Cat = (typeof eventCategoryEnum.enumValues)[number];
 const INITIAL_BATCH_SIZE = 20;
@@ -134,6 +139,7 @@ export default async function EventsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+
       <section className="container mb-0 mt-8 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
@@ -142,14 +148,14 @@ export default async function EventsPage({
             'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-baseline justify-between pb-2">
+          <div className="flex items-baseline justify-between py-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               {text.filterBy}
             </h2>
             <Button
               asChild
               variant="outline"
-              className="rounded-sm bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
+              className="bg-neutral-50 px-4 py-2 text-sm text-primary-700 hover:bg-primary-700 hover:text-neutral-50"
             >
               <Link
                 scroll={false}
@@ -167,13 +173,10 @@ export default async function EventsPage({
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            <div className="flex flex-col gap-2 pr-4">
+            <div className="flex flex-col gap-2">
               <FilterSection label={text.filter.date}>
-                <DateRangeForm
+                <DateRangeFilter
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  query={query}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{
@@ -186,27 +189,15 @@ export default async function EventsPage({
                 />
               </FilterSection>
 
-              <FilterSection label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={eventCategoryEnum.enumValues}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
-
-              <FilterSection label={text.filter.department}>
-                <MultiCheckbox
-                  param="department"
-                  options={departmentRows.map((d) => d.urlName)}
-                  selected={departments}
-                  locale={locale}
-                  textMap={Object.fromEntries(
-                    departmentRows.map((d) => [d.urlName, d.name])
-                  )}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={VISIBLE_EVENT_CATEGORIES}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                basePath="/events"
+                title={text.filter.category}
+              />
             </div>
           </ScrollArea>
         </aside>
@@ -214,11 +205,12 @@ export default async function EventsPage({
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex w-full items-center gap-4">
+          <search className="w-full items-center gap-4 py-2 max-xl:flex">
             <Suspense fallback={<Loading />}>
               <SearchInput
                 defaultValue={query}
                 placeholder={text.searchPlaceholder}
+                inputId="event-search"
               />
             </Suspense>
 
@@ -227,19 +219,20 @@ export default async function EventsPage({
               <Suspense fallback={<Loading />}>
                 <MobileFilters
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  departmentRows={departmentRows}
-                  categoryOptions={eventCategoryEnum.enumValues}
-                  query={query}
+                  basePath="/events"
                   start={searchParams.start}
                   end={searchParams.end}
+                  category={{
+                    options: VISIBLE_EVENT_CATEGORIES,
+                    selected: categories,
+                    textMap: text.categories,
+                    title: text.filter.category,
+                  }}
                   text={{
                     filters: text.filter.title,
                     filterBy: text.filterBy,
                     clearAllFilters: text.clearAllFilters,
                     filter: text.filter,
-                    categories: text.categories,
                   }}
                 />
               </Suspense>

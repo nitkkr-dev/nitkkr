@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { cn } from '~/lib/utils';
@@ -14,16 +14,13 @@ interface DateRangeFormText {
   year: string;
 }
 
-export function DateRangeForm({
+export function DateRangeFilter({
   start,
   end,
   compact = false,
   text,
 }: {
   locale: string;
-  categories?: string[];
-  departments?: string[];
-  query?: string;
   start?: string;
   end?: string;
   compact?: boolean;
@@ -36,7 +33,7 @@ export function DateRangeForm({
   const currentYear = new Date().getFullYear();
   const today = new Date();
 
-  const [yearRange, setYearRange] = React.useState<number[]>([
+  const [yearRange, setYearRange] = useState<number[]>([
     start ? new Date(start).getFullYear() : 2000,
     end ? new Date(end).getFullYear() : currentYear,
   ]);
@@ -44,19 +41,33 @@ export function DateRangeForm({
   const startDate = start ? new Date(start) : undefined;
   const endDate = end ? new Date(end) : undefined;
 
-  const [startDay, setStartDay] = React.useState(startDate?.getDate() ?? 1);
-  const [startMonth, setStartMonth] = React.useState(
+  const [startDay, setStartDay] = useState(startDate?.getDate() ?? 1);
+  const [startMonth, setStartMonth] = useState(
     startDate ? startDate.getMonth() + 1 : 1
   );
-  const [endDay, setEndDay] = React.useState(
-    endDate?.getDate() ?? today.getDate()
-  );
-  const [endMonth, setEndMonth] = React.useState(
+  const [endDay, setEndDay] = useState(endDate?.getDate() ?? today.getDate());
+  const [endMonth, setEndMonth] = useState(
     endDate ? endDate.getMonth() + 1 : today.getMonth() + 1
   );
 
+  // Need to update local state if URL params change externally (e.g. back/forward navigation)
+  useEffect(() => {
+    const today = new Date();
+    const startDate = start ? new Date(start) : undefined;
+    const endDate = end ? new Date(end) : undefined;
+
+    setYearRange([
+      startDate?.getFullYear() ?? 2000,
+      endDate?.getFullYear() ?? currentYear,
+    ]);
+    setStartDay(startDate?.getDate() ?? 1);
+    setStartMonth(startDate ? startDate.getMonth() + 1 : 1);
+    setEndDay(endDate?.getDate() ?? today.getDate());
+    setEndMonth(endDate ? endDate.getMonth() + 1 : today.getMonth() + 1);
+  }, [start, end, currentYear]);
+
   // Apply filters to URL - only called on explicit user actions
-  const applyFilters = React.useCallback(
+  const applyFilters = useCallback(
     (newYearRange?: number[]) => {
       const params = new URLSearchParams(searchParams);
       const years = newYearRange ?? yearRange;

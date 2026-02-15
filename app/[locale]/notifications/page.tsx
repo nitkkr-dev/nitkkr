@@ -10,18 +10,21 @@ import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import {
-  type notificationCategoryEnum,
+  notificationCategoryEnum,
   notificationDepartments,
   VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
+import {
+  DateRangeFilter,
+  MultiCheckbox,
+  SearchInput,
+} from '~/components/inputs';
+import { MobileFilters } from '~/components/mobile-filters';
 
-import { DateRangeForm } from './DateRangeForm';
-import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { NotificationsList } from './NotificationsList';
-import { SearchInput } from './SearchInput';
+// import { SearchInput } from './SearchInput';
 
 type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 
@@ -149,7 +152,7 @@ export default async function NotificationsPage({
         </div>
       )}
 
-      <section className="container mb-0 mt-8 flex gap-8">
+      <section className="container mb-0 mt-8 flex gap-12">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
@@ -157,7 +160,7 @@ export default async function NotificationsPage({
             'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-baseline justify-between pb-2">
+          <div className="flex items-baseline justify-between py-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               {text.filterBy}
             </h2>
@@ -182,13 +185,10 @@ export default async function NotificationsPage({
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            <div className="flex flex-col gap-2 pr-4">
+            <div className="flex flex-col gap-2">
               <FilterSection locale={locale} label={text.filter.date}>
-                <DateRangeForm
+                <DateRangeFilter
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  query={query}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{
@@ -201,56 +201,63 @@ export default async function NotificationsPage({
                 />
               </FilterSection>
 
-              <FilterSection locale={locale} label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={VISIBLE_NOTIFICATION_CATEGORIES}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={VISIBLE_NOTIFICATION_CATEGORIES}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                title={text.filter.category}
+                basePath="/notifications"
+              />
 
-              <FilterSection locale={locale} label={text.filter.department}>
-                <MultiCheckbox
-                  param="department"
-                  options={departmentRows.map((d) => d.urlName)}
-                  selected={departments}
-                  locale={locale}
-                  textMap={Object.fromEntries(
-                    departmentRows.map((d) => [d.urlName, d.name])
-                  )}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="department"
+                options={departmentRows.map((d) => d.urlName)}
+                selected={departments}
+                locale={locale}
+                textMap={Object.fromEntries(
+                  departmentRows.map((d) => [d.urlName, d.name])
+                )}
+                title={text.filter.department}
+                basePath="/notifications"
+              />
             </div>
           </ScrollArea>
         </aside>
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex w-full items-center gap-4">
+          <search className="w-full items-center gap-4 py-2 max-xl:flex">
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
+              inputId="notification-search"
             />
 
             {/* Mobile Filters Button - shows on < xl */}
             <div className="flex-shrink-0">
               <MobileFilters
                 locale={locale}
-                categories={categories}
-                departments={departments}
-                departmentRows={departmentRows}
-                categoryOptions={VISIBLE_NOTIFICATION_CATEGORIES}
-                query={query}
+                basePath="/notifications"
                 start={searchParams.start}
                 end={searchParams.end}
+                category={{
+                  options: VISIBLE_NOTIFICATION_CATEGORIES,
+                  selected: categories,
+                  textMap: text.categories,
+                  title: text.filter.category,
+                }}
+                department={{
+                  selected: departments,
+                  rows: departmentRows,
+                  title: text.filter.department,
+                }}
                 text={{
                   filters: text.filter.title,
                   filterBy: text.filterBy,
                   clearAllFilters: text.clearAllFilters,
                   filter: text.filter,
-                  categories: text.categories,
                 }}
               />
             </div>
