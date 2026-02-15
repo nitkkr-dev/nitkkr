@@ -28,8 +28,10 @@ import {
   instituteHi,
   loginHi,
   mainHi,
+  nccHi,
   notFoundHi,
   notificationsHi,
+  nssHi,
   otherOfficersPageHi,
   patentsAndTechnologiesHi,
   profileHi,
@@ -43,12 +45,11 @@ import {
   sectionsHi,
   statusHi,
   studentActivitiesHi,
+  studentCouncilHi,
   tendersHi,
   thoughtLabHi,
   trainingAndPlacementHi,
   websiteContributorsHi,
-  nccHi,
-  nssHi,
 } from './translate';
 
 const text: Translations = {
@@ -101,5 +102,6 @@ const text: Translations = {
   CHPD: chpdHi,
   NCC: nccHi,
   NSS: nssHi,
+  StudentCouncil: studentCouncilHi,
 };
 export default text;

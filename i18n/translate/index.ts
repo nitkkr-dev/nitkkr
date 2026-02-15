@@ -47,3 +47,4 @@ export * from './training-and-placement';
 export * from './tenders';
 export * from './ncc';
 export * from './nss';
+export * from './student-council';

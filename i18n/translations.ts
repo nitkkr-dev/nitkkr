@@ -28,8 +28,10 @@ import type {
   InstituteTranslations,
   LoginTranslations,
   MainTranslations,
+  NCCTranslations,
   NotFoundTranslations,
   NotificationsTranslations,
+  NSSTranslations,
   OtherOfficersPageTranslations,
   PatentsAndTechnologiesTranslations,
   ProfileTranslations,
@@ -43,12 +45,11 @@ import type {
   SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  StudentCouncilTranslations,
   TendersTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
-  NCCTranslations,
-  NSSTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -108,6 +109,7 @@ export type {
   TrainingAndPlacementTranslations,
   NCCTranslations,
   NSSTranslations,
+  StudentCouncilTranslations,
 };
 
 export interface Translations {
@@ -160,4 +162,5 @@ export interface Translations {
   CHPD: CHPDTranslations;
   NCC: NCCTranslations;
   NSS: NSSTranslations;
+  StudentCouncil: StudentCouncilTranslations;
 }
