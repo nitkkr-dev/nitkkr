@@ -1,6 +1,7 @@
 import type { Translations } from './translations';
 import {
   academicsHi,
+  admissionHi,
   administrationHi,
   awardsHi,
   chpdHi,
@@ -52,6 +53,7 @@ import {
 } from './translate';
 
 const text: Translations = {
+  Admission: admissionHi,
   Awards: awardsHi,
   Administration: administrationHi,
   Main: mainHi,

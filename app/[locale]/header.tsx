@@ -99,6 +99,13 @@ export default async function Header({ locale }: { locale: string }) {
           description: 'Get information on upcoming convocation ceremonies.',
         },
         {
+          title: 'Admission',
+          href: '/academics/admission',
+          description:
+            'Learn about admission process, eligibility, and application details.',
+        },
+        // May remove 'Awards' from the Navigation
+        {
           title: 'Awards',
           href: '/academics/awards',
           description:
