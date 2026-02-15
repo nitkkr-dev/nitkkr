@@ -152,7 +152,7 @@ export default async function NotificationsPage({
         </div>
       )}
 
-      <section className="container mb-0 mt-8 flex gap-8">
+      <section className="container mb-0 mt-8 flex gap-12">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
@@ -160,7 +160,7 @@ export default async function NotificationsPage({
             'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-baseline justify-between pb-2">
+          <div className="flex items-baseline justify-between py-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               {text.filterBy}
             </h2>
@@ -185,7 +185,7 @@ export default async function NotificationsPage({
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            <div className="flex flex-col gap-2 pr-4">
+            <div className="flex flex-col gap-2">
               <FilterSection locale={locale} label={text.filter.date}>
                 <DateRangeFilter
                   locale={locale}
@@ -228,7 +228,7 @@ export default async function NotificationsPage({
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex w-full items-center gap-4">
+          <search className="w-full items-center gap-4 py-2 max-xl:flex">
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}

@@ -139,6 +139,7 @@ export default async function EventsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+
       <section className="container mb-0 mt-8 flex gap-8">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
