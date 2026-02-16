@@ -54,6 +54,8 @@ export const notifications = pgTable(
     id: t.serial('id').primaryKey(),
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     content: t.text('content'),
+    /** TipTap rich content stored as JSON */
+    richContent: t.jsonb('rich_content'),
 
     categories: notificationCategoryEnum('categories')
       .array()
