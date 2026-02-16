@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 
 import { Dialog } from '~/components/dialog';
-import { Card, CardHeader } from '~/components/ui';
+import { Card, CardHeader, ScrollArea } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import { getNotificationForEdit } from '~/server/actions/notifications';
@@ -33,37 +33,40 @@ export default async function EditNotificationModal({
   const text = (await getTranslations(locale)).Notifications;
 
   return (
-    <Dialog className="w-full max-w-2xl">
-      <Card className="max-h-[90vh] overflow-y-auto">
-        <CardHeader>
+    <Dialog className="h-[100vh] w-[100vw]">
+      <Card className="flex h-full flex-col">
+        <CardHeader className="shrink-0">
           <h2 className="text-xl font-bold text-primary-700">
             {text.editNotification}
           </h2>
         </CardHeader>
-        <div className="p-6">
-          <NotificationForm
-            locale={locale}
-            notificationId={notificationId}
-            initialData={{
-              title: notification.title,
-              content: notification.content,
-              categories: notification.categories,
-              documents: notification.documents,
-              createdAt: notification.createdAt,
-            }}
-            text={{
-              notificationTitle: text.notificationTitle,
-              notificationContent: text.notificationContent,
-              notificationCategories: text.notificationCategories,
-              notificationDate: text.notificationDate,
-              documents: text.documents,
-              uploadDocument: text.uploadDocument,
-              save: text.save,
-              cancel: text.cancel,
-              categories: text.categories,
-            }}
-          />
-        </div>
+        <ScrollArea className="flex-1">
+          <div className="p-6 pt-0">
+            <NotificationForm
+              locale={locale}
+              notificationId={notificationId}
+              initialData={{
+                title: notification.title,
+                content: notification.content,
+                richContent: notification.richContent,
+                categories: notification.categories,
+                documents: notification.documents,
+                createdAt: notification.createdAt,
+              }}
+              text={{
+                notificationTitle: text.notificationTitle,
+                notificationContent: text.notificationContent,
+                notificationCategories: text.notificationCategories,
+                notificationDate: text.notificationDate,
+                documents: text.documents,
+                uploadDocument: text.uploadDocument,
+                save: text.save,
+                cancel: text.cancel,
+                categories: text.categories,
+              }}
+            />
+          </div>
+        </ScrollArea>
       </Card>
     </Dialog>
   );

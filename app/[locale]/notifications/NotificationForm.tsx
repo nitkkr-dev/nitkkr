@@ -4,9 +4,11 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FaTrash, FaUpload } from 'react-icons/fa';
+import { type JSONContent } from '@tiptap/react';
 
 import { Button } from '~/components/buttons';
 import { Input, Textarea } from '~/components/inputs';
+import { RichTextEditor } from '~/components/editor';
 import { notificationCategoryEnum } from '~/server/db/schema/notifications.schema';
 import {
   addNotification,
@@ -25,6 +27,7 @@ interface NotificationFormProps {
   initialData?: {
     title: string;
     content: string | null;
+    richContent: unknown;
     categories: string[];
     documents?: string[];
     createdAt?: string;
@@ -54,6 +57,9 @@ export function NotificationForm({
 
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [content, setContent] = useState(initialData?.content ?? '');
+  const [richContent, setRichContent] = useState<JSONContent | null>(
+    (initialData?.richContent as JSONContent) ?? null
+  );
   const [categories, setCategories] = useState<Category[]>(
     (initialData?.categories as Category[]) ?? []
   );
@@ -135,9 +141,16 @@ export function NotificationForm({
     setError(null);
     setIsSubmitting(true);
 
+    // Deep-clone richContent to plain objects so it can be serialized
+    // for Server Actions (TipTap JSONContent may carry class prototypes)
+    const plainRichContent = richContent
+      ? (JSON.parse(JSON.stringify(richContent)) as typeof richContent)
+      : undefined;
+
     const data: NotificationFormData = {
       title: title.trim(),
       content: content.trim() || undefined,
+      richContent: plainRichContent,
       categories,
       notificationDate,
       documents,
@@ -215,7 +228,7 @@ export function NotificationForm({
         />
       </div>
 
-      {/* Content */}
+      {/* Description (plain text) */}
       <div className="space-y-2">
         <label
           htmlFor="notification-content"
@@ -228,8 +241,20 @@ export function NotificationForm({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={5}
-          placeholder="Enter notification content (optional)"
+          placeholder="Enter notification description (optional)"
           className="w-full"
+        />
+      </div>
+
+      {/* Rich Content Editor */}
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-neutral-700">
+          Rich Content
+        </label>
+        <RichTextEditor
+          content={richContent}
+          onChange={setRichContent}
+          placeholder="Enter rich notification content (optional)"
         />
       </div>
 
