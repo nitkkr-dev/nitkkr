@@ -24,7 +24,7 @@ export default async function AddNotificationPage({
     <>
       <ImageHeader title={text.addNotification} src="slideshow/image01.jpg" />
       <section className="container my-8">
-        <Card className="mx-auto max-w-2xl">
+        <Card className="mx-auto max-w-5xl">
           <CardHeader>
             <h2 className="text-xl font-bold text-primary-700">
               {text.addNotification}
