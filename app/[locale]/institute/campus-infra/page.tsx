@@ -62,7 +62,7 @@ export default async function CampusInfra({
         </article>
 
         <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+          <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
             <span className="mb-1 mt-2 block font-bold">{text.campus[1]}</span>
             <span className="mb-1 mt-2 block">{text.campus[2]}</span>
             <span className="mb-1 mt-2 block">{text.campus[3]}</span>
@@ -82,7 +82,7 @@ export default async function CampusInfra({
           text={text.headings[1].toUpperCase()}
         />
         <article className="flex max-md:flex-col">
-          <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+          <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
             <span className="mb-1 mt-2 block">{text.infra[1]}</span>
             <span className="mb-1 mt-2 block">{text.infra[2]}</span>
           </p>
@@ -97,7 +97,7 @@ export default async function CampusInfra({
               layout="intrinsic"
               alt="Image 1"
             />
-            <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+            <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
               {text.library.text[0]}
             </p>
           </article>
@@ -113,7 +113,7 @@ export default async function CampusInfra({
               layout="intrinsic"
               alt="Image 2"
             />
-            <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+            <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
               {text.computing.text[0]}
             </p>
           </article>
@@ -128,7 +128,7 @@ export default async function CampusInfra({
               layout="intrinsic"
               alt="Image 3"
             />
-            <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+            <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
               {text.senate.text[0]}
             </p>
           </article>
@@ -143,7 +143,7 @@ export default async function CampusInfra({
               layout="intrinsic"
               alt="Image 4"
             />
-            <p className="text-lg  max-md:rounded-t md:w-full md:rounded-r">
+            <p className="text-justify  text-lg max-md:rounded-t md:w-full md:rounded-r">
               {text.sports.text[0]}
             </p>
           </article>
@@ -159,7 +159,7 @@ export default async function CampusInfra({
           text={text.headings[2].toUpperCase()}
         />
         <article className="mt-2 flex space-y-3 max-md:flex-row">
-          <p>
+          <p className="text-justify">
             <span className="mb-1 mt-2 block">{text.address[0]}</span>
             <span className="mb-1 mt-2 block">{text.address[1]}</span>
             <span className="mb-1 mt-2 block">{text.address[2]}</span>

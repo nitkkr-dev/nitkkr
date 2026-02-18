@@ -20,9 +20,33 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
   'result',
   'hostel',
   'miscellaneous',
-  'archived',
   'placements',
+  'scholarships',
+  // Hidden categories - not shown in UI filter, used on specific pages only
+  'scoe',
+  'racs',
 ]);
+
+// Categories visible in the UI filter
+// Hidden categories (scoe, racs) are excluded - they're used on respective pages
+// and shown when no category filter is applied
+export const VISIBLE_NOTIFICATION_CATEGORIES = [
+  'academic',
+  'workshop',
+  'administration',
+  'recruitment',
+  'admission',
+  'student-activities',
+  'faculty',
+  'research',
+  'alumni',
+  'examination',
+  'result',
+  'hostel',
+  'scholarships',
+  'placements',
+  'miscellaneous',
+] as const;
 
 export const notifications = pgTable(
   'notifications',
@@ -30,6 +54,8 @@ export const notifications = pgTable(
     id: t.serial('id').primaryKey(),
     title: t.varchar('title', { length: 256 }).unique().notNull(),
     content: t.text('content'),
+    /** TipTap rich content stored as JSON */
+    richContent: t.jsonb('rich_content'),
 
     categories: notificationCategoryEnum('categories')
       .array()

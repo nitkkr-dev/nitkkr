@@ -49,28 +49,13 @@ export default async function SCoE({
       <section className="container">
         <section className="mb-5 mt-10">
           {text.admission.process.content.map((paragraph, index) => (
-            <p key={index} className="mb-5">
+            <p key={index} className="mb-5 text-justify">
               {paragraph}
             </p>
           ))}
         </section>
       </section>
-      {/* notifications */}
-      <section className="container my-10" id="notifications">
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          href="#notifications"
-          id="notifications"
-          text={text.Notifications.title.toUpperCase()}
-        />
-        <NotificationsPanel
-          locale={locale}
-          category="academic"
-          showViewAll={true}
-          viewAllHref={`/${locale}/notifications?category=scoe`}
-        />
-      </section>
+      {/* Vision & Mission */}
       <section className="container my-16">
         <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-start">
           {/* LEFT: Vision & Mission */}
@@ -78,13 +63,15 @@ export default async function SCoE({
             {/* Vision */}
             <section id="vision">
               <h3>{text.Vision.title.toUpperCase()}</h3>
-              <p className=" leading-relaxed ">{text.Vision.description}</p>
+              <p className=" text-justify leading-relaxed">
+                {text.Vision.description}
+              </p>
             </section>
 
             {/* Mission */}
             <section id="mission">
               <h3>{text.Mission.title.toUpperCase()}</h3>
-              <ul className="list-disc space-y-3 pl-6 text-neutral-900 lg:text-lg">
+              <ul className="list-disc space-y-3 pl-6 text-justify text-neutral-900 lg:text-lg">
                 {text.Mission.points.map((point, idx) => (
                   <li key={idx}>{point}</li>
                 ))}
@@ -104,7 +91,24 @@ export default async function SCoE({
           </div>
         </div>
       </section>
-      <section className="container my-10">
+      {/* notifications */}
+      <section className="container my-10" id="notifications">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#notifications"
+          id="notifications"
+          text={text.Notifications.title.toUpperCase()}
+        />
+        <NotificationsPanel
+          locale={locale}
+          category="scoe"
+          showViewAll={true}
+          viewAllHref={`/${locale}/notifications?category=miscellaneous`}
+        />
+      </section>
+      {/* HEAD OF SCOE */}
+      <section className="container my-2">
         <Heading
           glyphDirection="dual"
           heading="h3"
@@ -136,7 +140,7 @@ export default async function SCoE({
               <div>
                 <ul>
                   {text.Features.items.map((item, index) => (
-                    <li key={index} className="flex items-center gap-2">
+                    <li key={index} className="flex items-start gap-2">
                       <Image
                         src={`${base}/research/feather_bullet.png`}
                         alt="bullet"
@@ -155,8 +159,8 @@ export default async function SCoE({
           </div>
         </article>
       </section>
-      \{/* laboratories */}
-      <section className="container my-10">
+      {/* laboratories */}
+      <section className="container my-4">
         <Heading
           glyphDirection="ltr"
           heading="h3"
@@ -175,11 +179,12 @@ export default async function SCoE({
         tableData={LaboratoriesData}
         showSerialNo={true}
         serialNoLabel={text.Laboratories.srNo}
+        pageParamName="laboratoriesPage"
       />
       {/* Courses */}
       <section className="container mt-10">
         <Heading
-          glyphDirection="rtl"
+          glyphDirection="ltr"
           heading="h3"
           href="#courses"
           id="courses"
@@ -191,6 +196,7 @@ export default async function SCoE({
         tableData={CoursesData}
         showSerialNo={true}
         serialNoLabel={text.Courses.srNo}
+        pageParamName="coursesPage"
       />
       {/* how to apply */}
       <section className="container my-10">

@@ -5,7 +5,7 @@ import { TbMail } from 'react-icons/tb';
 import { getTranslations } from '~/i18n/translations';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
-import NotificationsPanelProps from '~/components/notifications/notifications-panel';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
 import FICGroup from '~/components/fic-group';
 import {
   Table,
@@ -64,7 +64,9 @@ export default async function RACS({
       {/* INTRO – full width */}
       <section className="w-full bg-[#fdf7ed]">
         <div className="mx-auto max-w-7xl px-6 py-6 sm:px-10">
-          <p className="text-base leading-relaxed sm:text-lg">{text.intro}</p>
+          <p className="text-justify text-base leading-relaxed sm:text-lg">
+            {text.intro}
+          </p>
         </div>
       </section>
 
@@ -78,11 +80,11 @@ export default async function RACS({
             id="notifications"
             text={text.notifications.title}
           />
-          <NotificationsPanelProps
+          <NotificationsPanel
             locale={locale}
-            category="academic"
+            category="racs"
             showViewAll={true}
-            viewAllHref={`/${locale}/notifications/?category=academic`}
+            viewAllHref={`/${locale}/notifications/?category=miscellaneous`}
             className="w-full"
           />
         </section>
@@ -206,7 +208,7 @@ export default async function RACS({
             </div>
 
             {/* Right – Description */}
-            <p className="text-gray-800 text-justify leading-relaxed">
+            <p className="text-gray-800 text-justify  leading-relaxed">
               {text.researchAreas.description}
             </p>
           </div>

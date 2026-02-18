@@ -96,7 +96,7 @@ export default async function CentralWorkshop({
       <ImageHeader title={text.title} src="assets/central-workshop.jpg" />
 
       <section className="container">
-        <p>{section.aboutUs}</p>
+        <p className="text-justify">{section.aboutUs}</p>
 
         <h4>{text.organization}</h4>
         <h5>{text.organizationSub}</h5>

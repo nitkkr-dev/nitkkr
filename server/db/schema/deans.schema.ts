@@ -11,7 +11,6 @@ export const deans = pgTable('deans', (t) => ({
         'academic',
         'estate-and-construction',
         'faculty-welfare',
-        'industry-and-international-relations',
         'planning-and-development',
         'research-and-consultancy',
         'student-welfare',
@@ -23,7 +22,11 @@ export const deans = pgTable('deans', (t) => ({
     .integer()
     .references(() => faculty.id)
     .notNull(),
-  associateFacultyId: t.integer().references(() => faculty.id),
+  associateFacultyIds: t
+    .integer()
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
   staffIds: t
     .integer()
     .array()
@@ -34,15 +37,23 @@ export const deans = pgTable('deans', (t) => ({
     .array()
     .default(sql`'{}'`)
     .notNull(),
+  email: t.varchar(),
+  contactNo: t.varchar({ length: 32 }),
+  message: t
+    .varchar()
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
+  facultyInchargeIds: t
+    .integer()
+    .array()
+    .default(sql`'{}'`)
+    .notNull(),
 }));
 
 export const deansRelations = relations(deans, ({ one }) => ({
   faculty: one(faculty, {
     fields: [deans.facultyId],
-    references: [faculty.id],
-  }),
-  associateFaculty: one(faculty, {
-    fields: [deans.associateFacultyId],
     references: [faculty.id],
   }),
 }));

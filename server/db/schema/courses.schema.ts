@@ -1,16 +1,11 @@
 import { relations, sql } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
-
-import { courseLogs, coursesToMajors, departments, faculty } from '.';
+import { courseLogs, coursesToMajors, departments } from '.';
 
 export const courses = pgTable('courses', (t) => ({
   id: t.smallserial().primaryKey(),
   code: t.varchar({ length: 20 }).unique().notNull(),
   title: t.varchar({ length: 128 }).notNull(),
-  coordinatorId: t
-    .integer()
-    .references(() => faculty.id)
-    .notNull(),
   departmentId: t
     .smallint()
     .references(() => departments.id)
@@ -53,10 +48,6 @@ export const courses = pgTable('courses', (t) => ({
 }));
 
 export const coursesRelations = relations(courses, ({ many, one }) => ({
-  coordinator: one(faculty, {
-    fields: [courses.coordinatorId],
-    references: [faculty.id],
-  }),
   courseLogs: many(courseLogs),
   coursesToMajors: many(coursesToMajors),
   department: one(departments, {

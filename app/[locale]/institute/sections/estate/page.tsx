@@ -1,18 +1,16 @@
 // Revalidate every hour (has DB calls, rarely changes)
 export const revalidate = 3600;
 
-import Link from 'next/link';
 import React from 'react';
 import { Suspense } from 'react';
 import { MdArticle } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Loading from '~/components/loading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
 
 export default async function Estate({
@@ -660,33 +658,13 @@ export default async function Estate({
             <span className="mb-1 block">{text.about[0]}</span>
             <span className="mb-1 block">{text.about[1]}</span>
           </p>
-          <nav
-            className={cn(
-              'container',
-              'my-10 md:my-12 lg:my-16 xl:my-20',
-              'flex flex-col gap-5 lg:flex-row lg:justify-around'
-            )}
-          >
-            {links.map(({ text, href, icon: Icon }, index) => (
-              <Button
-                asChild
-                className={cn(
-                  'flex flex-col',
-                  'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                  'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-                )}
-                key={index}
-                variant="secondary"
-              >
-                <Link href={href}>
-                  <Icon className="size-12" />
-                  <p className="sm:text-md md:text-md lg:text:md font-serif font-semibold">
-                    {text}
-                  </p>
-                </Link>
-              </Button>
-            ))}
-          </nav>
+          <ButtonGroup
+            buttonArray={links.map(({ text, href, icon }) => ({
+              label: text,
+              href,
+              icon,
+            }))}
+          />
         </article>
       </section>
 

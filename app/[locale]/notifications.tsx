@@ -6,12 +6,19 @@ import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getS3Url } from '~/server/s3';
 
+// Categories shown in the home page notification section
+// 'tender' is handled specially - it redirects to the dedicated tenders page
 const notificationCategories = [
   'academic',
-  'tender',
+  'tender', // Special case: redirects to /notifications/tenders
   'workshop',
   'recruitment',
 ] as const;
+
+// Categories that use the NotificationsPanel (excludes 'tender')
+const panelCategories = ['academic', 'workshop', 'recruitment'] as const;
+type PanelCategory = (typeof panelCategories)[number];
+
 export type NotificationCategory = (typeof notificationCategories)[number];
 
 export default async function Notifications({
@@ -22,6 +29,27 @@ export default async function Notifications({
   locale: string;
 }) {
   const text = (await getTranslations(locale)).Notifications;
+  const tendersText = (await getTranslations(locale)).Tenders;
+
+  // Get the category label - 'tender' uses the Tenders translation
+  const getCategoryLabel = (category: NotificationCategory) => {
+    if (category === 'tender') {
+      return tendersText.title;
+    }
+    return text.categories[category];
+  };
+
+  // Get the href for a category - 'tender' redirects to the dedicated page
+  const getCategoryHref = (category: NotificationCategory) => {
+    if (category === 'tender') {
+      return `/${locale}/notifications/tenders`;
+    }
+    return { query: { notificationCategory: category } };
+  };
+
+  // Determine which category to show in the panel (fallback to 'academic' if 'tender' is selected)
+  const panelCategory: PanelCategory =
+    currentCategory === 'tender' ? 'academic' : currentCategory;
 
   return (
     <article
@@ -35,7 +63,7 @@ export default async function Notifications({
         className="container"
         glyphDirection="rtl"
         heading="h2"
-        href="#notifications"
+        href={`/${locale}/notifications`}
         text={text.title}
       />
 
@@ -50,8 +78,8 @@ export default async function Notifications({
             <li className="flex-auto lg:flex-initial" key={index}>
               <Link
                 className="flex"
-                href={{ query: { notificationCategory: category } }}
-                scroll={false}
+                href={getCategoryHref(category)}
+                scroll={category !== 'tender'}
               >
                 <button
                   className={cn(
@@ -64,7 +92,7 @@ export default async function Notifications({
                       : 'lg:bg-opacity-60'
                   )}
                 >
-                  {text.categories[category]}
+                  {getCategoryLabel(category)}
                 </button>
               </Link>
             </li>
@@ -73,7 +101,7 @@ export default async function Notifications({
 
         <NotificationsPanel
           locale={locale}
-          category={currentCategory}
+          category={panelCategory}
           viewAllHref={`/${locale}/notifications`}
           className="rounded-none lg:w-[65%] lg:rounded-xl"
         />

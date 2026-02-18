@@ -22,12 +22,22 @@ export default async function ProfileLayout({
 }) {
   const session = await getServerAuthSession();
   if (!session) return <UnauthorisedStatus locale={locale} />;
-  else if (session.person.type == 'faculty')
+
+  // Handle faculty profile
+  if (session.person.type === 'faculty') {
     return (
       <FacultyOrStaffComponent id={session.person.id} locale={locale}>
         {children}
       </FacultyOrStaffComponent>
     );
+  }
+
+  // Handle section profile (e.g., CCN office) - rendered from page.tsx
+  if (session.person.type === 'section') {
+    return <>{children}</>;
+  }
+
+  // Default: Student profile
   const text = (await getTranslations(locale)).Profile;
 
   const student = (await db.query.students.findFirst({

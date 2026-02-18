@@ -1,17 +1,16 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { BsBuilding, BsDownload } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa';
 import { FaBuildingColumns } from 'react-icons/fa6';
 import { MdPhotoLibrary } from 'react-icons/md';
 import { PiTreeStructureFill } from 'react-icons/pi';
 
-import { BouncyArrowButton, Button } from '~/components/buttons';
+import { BouncyArrowButton } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
 
 export default async function Institute({
   params: { locale },
@@ -257,13 +256,9 @@ export default async function Institute({
           id="cells"
           text={text.cells.headingTitle.toUpperCase()}
         />
-        <nav
-          className={cn(
-            'm-auto',
-            'grid grid-cols-2 gap-6 md:grid-cols-3 lg:gap-6 xl:gap-8'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.cells.iks.title,
               href: `/${locale}/institute/cells/iks`,
@@ -294,26 +289,8 @@ export default async function Institute({
               icon: MdPhotoLibrary,
               annotation: '(OBC & PWD)',
             },
-          ].map(({ label, href, icon: Icon, annotation }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col text-wrap',
-                'gap-2 sm:gap-3 lg:gap-4 xl:gap-5',
-                'mx-auto h-40 w-40 sm:h-48 sm:w-64 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link href={href}>
-                <Icon className={cn('size-12')} />
-                <p className="text-center font-serif font-semibold sm:text-lg md:text-xl">
-                  {label} {annotation}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
 
       {/* QUICK LINKS */}
@@ -325,13 +302,9 @@ export default async function Institute({
           id="quick-links"
           text={text.quickLinks.title.toUpperCase()}
         />
-        <nav
-          className={cn(
-            'm-auto',
-            'grid grid-cols-2 gap-6 md:grid-cols-3 lg:gap-6 xl:gap-8'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.quickLinks.administration,
               href: `/${locale}/institute/administration`,
@@ -356,33 +329,14 @@ export default async function Institute({
               label: text.quickLinks.organisationChart,
               href: `https://nitkkr.ac.in/wp-content/uploads/2022/04/ORGSTRUC5-1.png`,
               icon: PiTreeStructureFill,
-              rotate: true, // A flag to rotate the icon
             },
             {
               label: text.quickLinks.sections,
               href: `/${locale}/institute/sections`,
               icon: FaBuildingColumns,
             },
-          ].map(({ label, href, icon: Icon, rotate }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 sm:gap-3 lg:gap-4 xl:gap-5',
-                'mx-auto h-40 w-40 sm:h-48 sm:w-64 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link href={href}>
-                <Icon className={cn('size-12', { 'rotate-90': rotate })} />
-                <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </section>
     </>
   );

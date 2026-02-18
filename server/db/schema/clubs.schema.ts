@@ -4,7 +4,7 @@ import { pgTable } from 'drizzle-orm/pg-core';
 import { clubMembers } from './club-members.schema';
 import { clubSocials } from './club-socials.schema';
 import { departments } from './departments.schema';
-import { events } from './events.schema';
+import { eventClubs } from './events.schema';
 import { notificationClubs } from './notifications.schema';
 import { persons } from './persons.schema';
 import { clubFacultyHeads } from './club-faculty-heads.schema';
@@ -38,7 +38,7 @@ export const clubs = pgTable('clubs', (t) => ({
 }));
 
 export const clubsRelations = relations(clubs, ({ many, one }) => ({
-  clubEvents: many(events),
+  eventClubs: many(eventClubs),
   clubMembers: many(clubMembers),
   clubSocials: many(clubSocials),
   department: one(departments, {

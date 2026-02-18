@@ -1,24 +1,32 @@
 import Link from 'next/link';
 import React from 'react';
-import { desc, inArray } from 'drizzle-orm';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
+import { FaPlus } from 'react-icons/fa';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 import { cn } from '~/lib/utils';
+import { buildHref, parseDate, toArray } from '~/lib/helpers';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import {
   notificationCategoryEnum,
   notificationDepartments,
+  VISIBLE_NOTIFICATION_CATEGORIES,
 } from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { canManageNotifications, getServerAuthSession } from '~/server/auth';
+import {
+  DateRangeFilter,
+  MultiCheckbox,
+  SearchInput,
+} from '~/components/inputs';
+import { MobileFilters } from '~/components/mobile-filters';
+import { FilterSection } from '~/components/filter-section';
 
-import { DateRangeForm } from './DateRangeForm';
-import { MobileFilters } from './MobileFilters';
-import { MultiCheckbox } from './MultiCheckbox';
 import { NotificationsList } from './NotificationsList';
-import { SearchInput } from './SearchInput';
+// import { SearchInput } from './SearchInput';
 
 type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 
@@ -40,6 +48,10 @@ export default async function NotificationsPage({
   searchParams: PageSearchParams;
 }) {
   const text = (await getTranslations(locale)).Notifications;
+
+  // Check if user can manage notifications (CCN only)
+  const session = await getServerAuthSession();
+  const canManage = canManageNotifications(session);
 
   // Normalize multi-select params
   const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
@@ -85,18 +97,13 @@ export default async function NotificationsPage({
         endDate ? lte(n.createdAt, endDate) : undefined,
         filteredNotificationIds
           ? inArray(n.id, filteredNotificationIds)
-          : undefined
+          : undefined,
+        // Category filter at DB level
+        categories.length ? arrayOverlaps(n.categories, categories) : undefined
       ),
     orderBy: (n) => [desc(n.createdAt)],
     limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  // Category filter (multi) - check if any of notification's categories match selected
-  if (categories.length) {
-    raw = raw.filter((n) =>
-      n.categories.some((cat) => categories.includes(cat as Cat))
-    );
-  }
 
   // Text search (title and content)
   if (query) {
@@ -134,7 +141,20 @@ export default async function NotificationsPage({
   return (
     <>
       <ImageHeader title={text.title} src="slideshow/image01.jpg" />
-      <section className="container mb-0 mt-8 flex gap-8">
+
+      {/* Add Notification Button - Only visible to CCN */}
+      {canManage && (
+        <div className="container mt-4 flex justify-end">
+          <Button asChild className="gap-2 px-4 py-2">
+            <Link href={`/${locale}/notifications/add`}>
+              <FaPlus className="size-3" />
+              {text.addNotification}
+            </Link>
+          </Button>
+        </div>
+      )}
+
+      <section className="container mb-0 mt-8 flex gap-12">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
@@ -142,7 +162,7 @@ export default async function NotificationsPage({
             'sticky top-[88px] self-start'
           )}
         >
-          <div className="flex items-baseline justify-between pb-2">
+          <div className="flex items-baseline justify-between py-2">
             <h2 className="font-serif text-2xl font-bold leading-none text-primary-700">
               {text.filterBy}
             </h2>
@@ -167,13 +187,10 @@ export default async function NotificationsPage({
           </div>
 
           <ScrollArea className="h-[calc(100vh-200px)]">
-            <div className="flex flex-col gap-2 pr-4">
+            <div className="flex flex-col gap-2">
               <FilterSection locale={locale} label={text.filter.date}>
-                <DateRangeForm
+                <DateRangeFilter
                   locale={locale}
-                  categories={categories}
-                  departments={departments}
-                  query={query}
                   start={searchParams.start}
                   end={searchParams.end}
                   text={{
@@ -186,56 +203,63 @@ export default async function NotificationsPage({
                 />
               </FilterSection>
 
-              <FilterSection locale={locale} label={text.filter.category}>
-                <MultiCheckbox
-                  param="category"
-                  options={notificationCategoryEnum.enumValues}
-                  selected={categories}
-                  locale={locale}
-                  textMap={text.categories}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="category"
+                options={VISIBLE_NOTIFICATION_CATEGORIES}
+                selected={categories}
+                locale={locale}
+                textMap={text.categories}
+                title={text.filter.category}
+                basePath="/notifications"
+              />
 
-              <FilterSection locale={locale} label={text.filter.department}>
-                <MultiCheckbox
-                  param="department"
-                  options={departmentRows.map((d) => d.urlName)}
-                  selected={departments}
-                  locale={locale}
-                  textMap={Object.fromEntries(
-                    departmentRows.map((d) => [d.urlName, d.name])
-                  )}
-                />
-              </FilterSection>
+              <MultiCheckbox
+                param="department"
+                options={departmentRows.map((d) => d.urlName)}
+                selected={departments}
+                locale={locale}
+                textMap={Object.fromEntries(
+                  departmentRows.map((d) => [d.urlName, d.name])
+                )}
+                title={text.filter.department}
+                basePath="/notifications"
+              />
             </div>
           </ScrollArea>
         </aside>
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
-          <search className="flex w-full items-center gap-4">
+          <search className="w-full items-center gap-4 py-2 max-xl:flex">
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
+              inputId="notification-search"
             />
 
             {/* Mobile Filters Button - shows on < xl */}
             <div className="flex-shrink-0">
               <MobileFilters
                 locale={locale}
-                categories={categories}
-                departments={departments}
-                departmentRows={departmentRows}
-                categoryOptions={notificationCategoryEnum.enumValues}
-                query={query}
+                basePath="/notifications"
                 start={searchParams.start}
                 end={searchParams.end}
+                category={{
+                  options: VISIBLE_NOTIFICATION_CATEGORIES,
+                  selected: categories,
+                  textMap: text.categories,
+                  title: text.filter.category,
+                }}
+                department={{
+                  selected: departments,
+                  rows: departmentRows,
+                  title: text.filter.department,
+                }}
                 text={{
                   filters: text.filter.title,
                   filterBy: text.filterBy,
                   clearAllFilters: text.clearAllFilters,
                   filter: text.filter,
-                  categories: text.categories,
                 }}
               />
             </div>
@@ -249,9 +273,12 @@ export default async function NotificationsPage({
               initialHasMore={hasMore}
               locale={locale}
               filterParams={filterParams}
+              canManage={canManage}
               text={{
                 noNotificationsFound: text.noNotificationsFound,
                 noMoreNotifications: text.noMoreNotifications,
+                edit: text.edit,
+                delete: text.delete,
               }}
             />
           </div>
@@ -259,65 +286,4 @@ export default async function NotificationsPage({
       </section>
     </>
   );
-}
-
-/* ---------------------- Filters Components ---------------------- */
-
-function FilterSection({
-  label,
-  children,
-  viewAllHref,
-}: {
-  label: string;
-  children: React.ReactNode;
-  viewAllHref?: string;
-  locale?: string;
-}) {
-  return (
-    <section className="rounded border border-primary-100 bg-neutral-50 p-4">
-      <div className="flex items-start justify-between">
-        <h3 className="text-xl font-bold text-primary-300">{label}</h3>
-        {viewAllHref && (
-          <Link
-            href={viewAllHref}
-            className="text-xs font-medium text-primary-700"
-          >
-            View All
-          </Link>
-        )}
-      </div>
-      {children}
-    </section>
-  );
-}
-/* ---------------------- Helpers ---------------------- */
-function toArray(v: string | string[] | undefined): string[] {
-  return Array.isArray(v) ? v : v ? [v] : [];
-}
-
-function parseDate(d?: string) {
-  if (!d) return undefined;
-  const date = new Date(d);
-  return isNaN(date.getTime()) ? undefined : date;
-}
-
-function buildHref(locale: string, updates: Record<string, unknown>): string {
-  const params = new URLSearchParams();
-
-  Object.entries(updates).forEach(([k, v]) => {
-    if (v === undefined || (Array.isArray(v) && v.length === 0)) {
-      return;
-    }
-
-    if (Array.isArray(v)) {
-      v.forEach((item) => {
-        if (item) params.append(k, String(item));
-      });
-    } else {
-      params.set(k, String(v));
-    }
-  });
-
-  const qs = params.toString();
-  return `/${locale}/notifications${qs ? `?${qs}` : ''}`;
 }

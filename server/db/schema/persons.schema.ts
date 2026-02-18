@@ -16,6 +16,7 @@ export const persons = pgTable(
 
     sex: t.varchar({ enum: ['M', 'F', 'O'] }).notNull(),
     dateOfBirth: t.date({ mode: 'date' }),
+    img: t.varchar(),
     roleId: t.smallint().references(() => roles.id),
     type: t.varchar({ enum: ['faculty', 'staff', 'student'] }).notNull(),
     isActive: t.boolean().default(true).notNull(),

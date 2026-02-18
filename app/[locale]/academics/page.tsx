@@ -6,7 +6,7 @@ import { FaTrophy } from 'react-icons/fa6';
 import { HiMiniBeaker } from 'react-icons/hi2';
 import { MdBadge } from 'react-icons/md';
 
-import { Button } from '~/components/buttons';
+import ButtonGroup from '~/components/button-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import NotificationsPanel from '~/components/notifications/notifications-panel';
@@ -127,7 +127,7 @@ export default async function Academics({
           </Link>
           <p
             className={cn(
-              'p-2 sm:p-3 md:p-4',
+              'p-2 text-justify sm:p-3 md:p-4',
               'max-md:rounded-t md:w-full md:rounded-r'
             )}
           >
@@ -143,13 +143,9 @@ export default async function Academics({
           />
           <article>
             <p>{text.programmesDetails}</p>
-            <nav
-              className={cn(
-                'my-10 md:my-12 lg:my-16 xl:my-20',
-                'flex flex-col gap-5 lg:flex-row lg:justify-around'
-              )}
-            >
-              {[
+            <ButtonGroup
+              columns={3}
+              buttonArray={[
                 {
                   label: text.underGraduate,
                   href: `/${locale}/academics/programmes#ug`,
@@ -162,25 +158,8 @@ export default async function Academics({
                   label: text.doctorate,
                   href: `/${locale}/academics/programmes#phd`,
                 },
-              ].map(({ label, href }, index) => (
-                <Button
-                  asChild
-                  className={cn(
-                    'flex flex-col',
-                    'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                    'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-                  )}
-                  key={index}
-                  variant="secondary"
-                >
-                  <Link href={href}>
-                    <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                      {label}
-                    </p>
-                  </Link>
-                </Button>
-              ))}
-            </nav>
+              ]}
+            />
           </article>
         </section>
         <Heading
@@ -214,13 +193,9 @@ export default async function Academics({
             </h4>
           </Link>
         </article>
-        <nav
-          className={cn(
-            'my-10 md:my-12 lg:my-16 xl:my-20',
-            'flex flex-col gap-5 lg:flex-row lg:justify-around'
-          )}
-        >
-          {[
+        <ButtonGroup
+          columns={3}
+          buttonArray={[
             {
               label: text.convocation,
               href: {
@@ -239,26 +214,8 @@ export default async function Academics({
               href: `/${locale}/academics/scholarships`,
               icon: FaTrophy,
             },
-          ].map(({ label, href, icon: Icon }, index) => (
-            <Button
-              asChild
-              className={cn(
-                'flex flex-col',
-                'gap-2 md:gap-3 lg:gap-4 xl:gap-5',
-                'h-40 md:h-48 lg:h-60 lg:w-72 xl:w-80 2xl:w-96'
-              )}
-              key={index}
-              variant="secondary"
-            >
-              <Link href={href}>
-                <Icon className="size-12" />
-                <p className="font-serif font-semibold sm:text-lg md:text-xl">
-                  {label}
-                </p>
-              </Link>
-            </Button>
-          ))}
-        </nav>
+          ]}
+        />
       </main>
     </>
   );

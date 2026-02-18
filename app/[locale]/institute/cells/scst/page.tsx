@@ -1,12 +1,32 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
+import { like, or } from 'drizzle-orm';
 
 import { cn } from '~/lib/utils';
 import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
+import FICGroup from '~/components/fic-group';
+import { db } from '~/server/db';
+import { otherOfficers } from '~/server/db/schema';
+
+// Function to fetch SC/ST liaison officer from otherOfficers table
+async function fetchSCSTFaculty() {
+  const scstOfficers = await db.query.otherOfficers.findMany({
+    where: or(like(otherOfficers.designation, '%sc-st%')),
+    with: {
+      faculty: {
+        columns: {
+          employeeId: true,
+        },
+      },
+    },
+  });
+
+  return scstOfficers.map((officer) => ({
+    employeeId: officer.faculty.employeeId,
+    designation: officer.designation,
+  }));
+}
 
 export default async function SCST({
   params: { locale },
@@ -15,9 +35,11 @@ export default async function SCST({
 }) {
   const text = await getTranslations(locale);
 
-  const facultyIncharge = [{ ...text.Institute.cells.scst.liaisonOfficer }];
   const cellFunctions = text.Institute.cells.scst.cellFunctions;
   const importantLinks = text.Institute.cells.scst.importantLinks;
+
+  // Fetch faculty-in-charge data from database
+  const facultyData = await fetchSCSTFaculty();
 
   return (
     <>
@@ -74,77 +96,7 @@ export default async function SCST({
             text={text.Institute.cells.scst.liaisonOfficerHeading}
             className="mt-12"
           />
-          <ul className="flex w-full flex-col items-center">
-            {facultyIncharge.map((faculty, idx) => (
-              <li
-                key={idx}
-                className="flex w-[90%] max-w-3xl  rounded-lg border border-primary-500 bg-neutral-50 p-1 "
-              >
-                {/* Image - smaller on mobile */}
-                <div className="flex flex-shrink-0 items-center justify-center">
-                  <Image
-                    src={faculty.image}
-                    alt={faculty.name}
-                    width={300}
-                    height={340}
-                    className="xs:h-24 xs:w-24 h-full w-24 rounded-md object-cover sm:h-36 sm:w-36 md:h-52 md:w-52"
-                  />
-                </div>
-
-                {/* Content section - adjusted for mobile row layout */}
-                <section className="xs:ml-3 ml-2 flex flex-col justify-center sm:ml-6 md:ml-8">
-                  {/* Name in red - reduced margin bottom */}
-                  <h2 className="xs:text-xl text-red-600 mb-0 text-lg font-medium sm:text-2xl md:text-3xl">
-                    {faculty.name}
-                  </h2>
-
-                  {/* Title and position - reduced spacing */}
-                  <div className="xs:mb-1 mb-0.5 sm:mb-2">
-                    {' '}
-                    {/* Reduced margin from mb-1/mb-2/mb-4 */}
-                    <p className="xs:text-base text-gray-700 text-sm font-normal leading-tight sm:text-xl md:text-xl">
-                      {' '}
-                      {/* Added leading-tight */}
-                      {faculty.title}
-                    </p>
-                    {!faculty.title.includes('Head') && (
-                      <p className="xs:text-base text-gray-700 mt-0 text-sm font-normal leading-tight sm:text-xl md:text-2xl">
-                        {' '}
-                        {/* Added leading-tight and mt-0 */}
-                        (Head of the Department)
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Contact info */}
-                  <div className="xs:space-y-1 space-y-0.5 sm:space-y-2">
-                    {/* Email with icon */}
-                    <span className="flex items-center">
-                      <span className="xs:h-6 xs:w-6 text-red-600 inline-flex h-5 w-5 items-center justify-center sm:h-7 sm:w-7">
-                        <MdEmail className="xs:text-lg text-base text-primary-700 sm:text-xl" />
-                      </span>
-                      <a
-                        href={`mailto:${faculty.email}`}
-                        className="xs:ml-1.5 xs:text-sm text-gray-700 ml-1 break-all text-xs hover:text-primary-700 hover:underline sm:ml-2 sm:text-base md:text-lg "
-                      >
-                        {faculty.email}
-                      </a>
-                    </span>
-
-                    {/* Phone with icon */}
-                    <span className="flex items-center">
-                      <span className="xs:h-6 xs:w-6 text-red-600 inline-flex h-5 w-5 items-center justify-center sm:h-7 sm:w-7">
-                        <MdOutlineLocalPhone className="xs:text-lg text-base text-primary-700 sm:text-xl" />
-                      </span>
-                      <span className="xs:ml-1.5 xs:text-sm text-gray-700 ml-1 text-xs sm:ml-2 sm:text-base md:text-lg">
-                        {faculty.phone}
-                      </span>
-                    </span>
-                  </div>
-                </section>
-              </li>
-            ))}
-          </ul>
+          <FICGroup facultyData={facultyData} />
         </div>
         {/* IMPORTANT LINKS */}
         {/*  TODO: MAKE IT EXACTLY LIKE THE DESIGN , ADD RELEVENT BACKGROUND */}

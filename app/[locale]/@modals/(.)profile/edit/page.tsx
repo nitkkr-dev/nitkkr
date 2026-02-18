@@ -2,7 +2,7 @@ import { and, eq, getTableColumns } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
 
 import { Dialog } from '~/components/dialog';
-import { Card, CardHeader } from '~/components/ui';
+import { Card, CardHeader, ScrollArea } from '~/components/ui';
 import { facultyProfileSchemas } from '~/lib/schemas/faculty-profile';
 import { cn, formatCamelCase } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -55,6 +55,7 @@ export default async function Page({
           id: true,
           employeeId: true,
           officeAddress: true,
+          orcidId: true,
           scopusId: true,
           linkedInId: true,
           googleScholarId: true,
@@ -69,6 +70,7 @@ export default async function Page({
               telephone: true,
               alternateCountryCode: true,
               alternateTelephone: true,
+              img: true,
             },
           },
         },
@@ -79,7 +81,9 @@ export default async function Page({
           id: result.id,
           employeeId: result.employeeId,
           name: result.person.name,
+          img: result.person.img ?? undefined,
           officeAddress: result.officeAddress,
+          orcidId: result.orcidId ?? undefined,
           scopusId: result.scopusId ?? undefined,
           linkedInId: result.linkedInId ?? undefined,
           googleScholarId: result.googleScholarId ?? undefined,
@@ -98,23 +102,29 @@ export default async function Page({
       <Dialog
         className={cn(
           'container p-0',
-          'max-w-[calc(100vw-2rem)] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]'
+          'min-w-[90vw] sm:max-w-[512px] md:max-w-[640px] lg:max-w-[640px]',
+          'h-[95vh]'
         )}
       >
-        <Card className="rounded-lg border bg-background shadow-sm">
-          <CardHeader className="border-b px-6 py-4">
-            <h2 className="text-lg font-semibold">Edit Personal Details</h2>
+        <Card className="flex h-full flex-col rounded-lg border bg-background shadow-sm">
+          {/* Fixed Header */}
+          <CardHeader className="flex-shrink-0 border-b px-6 py-4">
+            <h2 className="mb-0 text-lg font-semibold">
+              Edit Personal Details
+            </h2>
           </CardHeader>
 
-          {/* Photo Upload Section */}
-          <div className="border-b px-6 py-6">
+          {/* Fixed Photo Upload Section */}
+          <div className="flex-shrink-0 border-b px-6 py-6">
             <FacultyPhotoUpload
               facultyName={personalDetails.name}
               employeeId={personalDetails.employeeId}
               facultyId={personalDetails.id}
+              currentImageUrl={personalDetails.img}
             />
           </div>
 
+          {/* Scrollable Form Content + Fixed Footer inside the form */}
           <FacultyPersonalDetailsForm
             locale={locale}
             existingDetails={personalDetails}

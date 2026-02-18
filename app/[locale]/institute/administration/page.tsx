@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import Image from 'next/image';
 import { MdOutlineChecklist } from 'react-icons/md';
 import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
 import { LuShipWheel } from 'react-icons/lu';
 import { VscMortarBoard } from 'react-icons/vsc';
 import { HiCurrencyRupee } from 'react-icons/hi';
 import { BsTools } from 'react-icons/bs';
-import { MdEmail } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -16,7 +14,6 @@ import { getTranslations } from '~/i18n/translations';
 // Fetches committee data from DB - cache for 1 hour
 export const revalidate = 3600;
 import Loading from '~/components/loading';
-import { CardTitle } from '~/components/ui';
 
 export default async function Administration({
   params: { locale },
@@ -52,7 +49,6 @@ export default async function Administration({
           { label: text.administrationHeads, href: '#administration-heads' },
           { label: text.committees, href: '#committees' },
           { label: text.actsAndStatutes, href: '#acts-and-statutes' },
-          { label: text.deans, href: '#deans' },
         ]}
       />
 
@@ -61,6 +57,7 @@ export default async function Administration({
           {text.description}
         </p>
 
+      <section className="container mt-4 md:mt-6">
         <Heading
           glyphDirection={'dual'}
           heading={'h3'}
@@ -69,6 +66,7 @@ export default async function Administration({
           href="#board-of-governors"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.constitutionOfBoG,
@@ -99,6 +97,7 @@ export default async function Administration({
           <Suspense fallback={<Loading />}></Suspense>
         </section>
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.senateComposition,
@@ -125,6 +124,7 @@ export default async function Administration({
           href="#administration-heads"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.director,
@@ -151,6 +151,7 @@ export default async function Administration({
           href="#committees"
         />
         <ButtonGroup
+          columns={3}
           buttonArray={[
             {
               label: text.financial,
@@ -164,20 +165,6 @@ export default async function Administration({
             },
           ]}
         />
-        {/* DEANS */}
-        <Heading
-          glyphDirection="dual"
-          heading="h3"
-          text={text.deans.toUpperCase()}
-          id="deans"
-          href="#deans"
-        />
-
-        <section className="container my-10">
-          <Suspense fallback={<Loading />}>
-            <Deans />
-          </Suspense>
-        </section>
 
         <Heading
           glyphDirection={'dual'}

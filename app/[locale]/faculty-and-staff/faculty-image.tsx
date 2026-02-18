@@ -15,6 +15,8 @@ interface FacultyImageProps {
   height?: number;
   fill?: boolean;
   sizes?: string;
+  /** The image URL from the persons.img field */
+  imageUrl?: string | null;
 }
 
 const PHOTO_EXTENSIONS = ['jpg', 'png', 'webp'] as const;
@@ -29,11 +31,18 @@ export function FacultyImage({
   height,
   fill,
   sizes,
+  imageUrl,
 }: FacultyImageProps) {
   const [currentExtIndex, setCurrentExtIndex] = useState(0);
   const [useFallback, setUseFallback] = useState(false);
 
   const handleError = () => {
+    // If we have an imageUrl from DB and it fails, go to fallback
+    if (imageUrl) {
+      setUseFallback(true);
+      return;
+    }
+
     if (currentExtIndex < PHOTO_EXTENSIONS.length - 1) {
       // Try next extension
       setCurrentExtIndex((prev) => prev + 1);
@@ -43,9 +52,12 @@ export function FacultyImage({
     }
   };
 
+  // Prioritize imageUrl from DB, then try legacy path, then fallback
   const imageSrc = useFallback
     ? FALLBACK_IMAGE
-    : `${env.NEXT_PUBLIC_AWS_S3_URL}/faculty-and-staff/${employeeId}/${facultyId}.${PHOTO_EXTENSIONS[currentExtIndex]}`;
+    : imageUrl
+      ? imageUrl
+      : `${env.NEXT_PUBLIC_AWS_S3_URL}/faculty-and-staff/${employeeId}/${facultyId}.${PHOTO_EXTENSIONS[currentExtIndex]}`;
 
   if (fill) {
     return (
