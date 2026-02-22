@@ -45,6 +45,10 @@ export const courses = pgTable('courses', (t) => ({
     .array()
     .default(sql`'{}'`)
     .notNull(),
+  introduction_year: t
+    .smallint()
+    .notNull()
+    .default(2025),
 }));
 
 export const coursesRelations = relations(courses, ({ many, one }) => ({
