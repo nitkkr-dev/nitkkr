@@ -1,7 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 
-export const ugPlacementStats = pgTable('placement_stats-UG', (t) => ({
+export const ugPlacementStats = pgTable('placement_stats_ug', (t) => ({
     id: t
         .smallserial()
         .primaryKey(),
