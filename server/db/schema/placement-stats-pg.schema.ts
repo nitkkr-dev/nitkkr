@@ -65,7 +65,7 @@ export const pgPlacementStats = pgTable('placement_stats-PG', (t) => ({
             sql`
                 CASE
                     WHEN number_of_eligible = 0 THEN 0
-                    ELSE (number_of_placed::numeric / number_of_eligible) * 100
+                    ELSE (total_number_of_placed::numeric / number_of_eligible) * 100
                 END
             `
         ),
