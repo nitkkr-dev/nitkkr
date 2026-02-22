@@ -23,6 +23,15 @@ export const pgPlacementStats = pgTable('placement_stats-PG', (t) => ({
     number_of_offers: t
         .smallint()
         .notNull(),
+    number_of_internship: t
+        .smallint()
+        .notNull(),
+    number_of_PPO: t
+        .smallint()
+        .notNull(),
+    total_number_of_placed: t
+        .smallint()
+        .notNull(),
     median_package: t
         .numeric({
             precision: 8, 
