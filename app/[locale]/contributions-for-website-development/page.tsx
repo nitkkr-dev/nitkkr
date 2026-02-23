@@ -1,4 +1,3 @@
-// filepath: /home/uncanny/Desktop/nitkkr/app/[locale]/contributions-for-website-development/page.tsx
 // Revalidate every 5 minutes (has DB calls)
 export const revalidate = 300;
 
@@ -6,15 +5,34 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
+import { getS3Url } from '~/server/s3';
 
-import ContributorCard from './contributor-card';
+import ContributorsTimeline from './contributor-timeline';
 
+const base = getS3Url();
+
+// Define explicit interface for contributors from database
+interface DBContributor {
+  id: number;
+  name: string;
+  rollNumber: string;
+  designation: 'developer' | 'designer' | 'devops' | null;
+  passoutYear: number;
+  image: string | null;
+  linkedinId: string | null;
+  githubId: string | null;
+}
+
+// Type for filtered contributors (designation is guaranteed to be non-null)
 interface Contributor {
   id: number;
   name: string;
   rollNumber: string;
+  designation: 'developer' | 'designer' | 'devops';
   passoutYear: number;
   image: string | null;
+  linkedinId: string | null;
+  githubId: string | null;
 }
 
 export default async function ContributionsPage({
@@ -24,84 +42,97 @@ export default async function ContributionsPage({
 }) {
   const text = (await getTranslations(locale)).WebsiteContributors;
 
-  // Fetch contributors from database
-  const contributors = await db.query.websiteContributors.findMany({
+  // Fetch contributors from DB
+  const contributors = (await db.query.websiteContributors.findMany({
     columns: {
       id: true,
       name: true,
       rollNumber: true,
       passoutYear: true,
       image: true,
+      designation: true,
+      githubId: true,
+      linkedinId: true,
     },
     orderBy: (contributor, { desc, asc }) => [
       desc(contributor.passoutYear),
       asc(contributor.name),
     ],
-  });
+  })) as DBContributor[];
 
-  // Group contributors by passout year
-  const contributorsByYear = contributors.reduce<Record<number, Contributor[]>>(
-    (acc, contributor) => {
-      const year = contributor.passoutYear;
-      if (!acc[year]) {
-        acc[year] = [];
-      }
-      acc[year].push(contributor);
-      return acc;
-    },
-    {}
+  // Filter out contributors with null designation and type assert
+  const filteredContributors = contributors.filter(
+    (contributor): contributor is Contributor =>
+      contributor.designation !== null
   );
 
-  // Get sorted years (descending order)
-  const sortedYears = Object.keys(contributorsByYear)
+  // Group contributors by year (type-safe)
+  const contributorsByYear = filteredContributors.reduce<
+    Record<number, Contributor[]>
+  >((acc, contributor) => {
+    const year = contributor.passoutYear;
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(contributor);
+    return acc;
+  }, {});
+
+  const years = Object.keys(contributorsByYear)
     .map(Number)
-    .sort((a, b) => b - a);
+    .sort((a, b) => a - b);
 
   return (
     <>
-      {/* Header Section */}
+      {/* Header */}
       <ImageHeader title={text.pageTitle} src="assets/landingpagebg-1.png" />
 
-      {/* Description Section */}
-      <section className="container my-8 px-4 sm:px-6">
-        <p className="mx-auto max-w-4xl text-center text-base text-neutral-700 sm:text-lg">
-          {text.description}
-        </p>
-      </section>
+      {/* Main Section */}
+      <section className="relative pb-16">
+        <div className="absolute inset-0 -z-10">
+          <div
+            className="h-full w-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${base}/website-contributors/flower.jpeg)`,
+            }}
+          />
+          <div className="bg-black/60 absolute inset-0 backdrop-blur-sm" />
+        </div>
 
-      {/* Contributors by Year */}
-      <section className="container px-4 pb-12 sm:px-6">
-        {sortedYears.length === 0 ? (
-          <p className="text-center text-neutral-500">{text.noContributors}</p>
-        ) : (
-          sortedYears.map((year) => (
-            <div key={year} className="mb-12">
-              {/* Year Heading */}
-              <Heading
-                glyphDirection="dual"
-                heading="h3"
-                href={`#passout-${year}`}
-                text={`${text.passoutYear} - ${year}`}
-              />
+        {/* Heading + Description */}
+        <div className="container px-4 pt-12 text-center sm:px-6">
+          <p className="mx-auto mt-4 max-w-3xl text-base text-[#A8A8A8] sm:text-lg">
+            {text.description}
+          </p>
+        </div>
 
-              {/* Contributors Grid */}
-              <div
-                id={`passout-${year}`}
-                className="mt-6 flex flex-wrap justify-center gap-6"
-              >
-                {contributorsByYear[year].map((contributor) => (
-                  <ContributorCard
-                    key={contributor.id}
-                    name={contributor.name}
-                    rollNumber={contributor.rollNumber}
-                    image={contributor.image}
-                    rollNumberLabel={text.rollNumber}
-                  />
-                ))}
-              </div>
-            </div>
-          ))
-        )}
+        {/* Batch navigation */}
+        <div className="container mt-12 px-4 sm:px-6">
+          <div className="flex flex-wrap justify-center gap-4">
+            {years.map((year) => {
+              const startYear = year - 4;
+              return (
+                <a
+                  key={year}
+                  href={`#year-${year}`}
+                  className="
+                    rounded-full border
+                    border-[#A8A8A8] px-10 py-4 text-xl
+                    font-semibold text-[#A8A8A8]
+                    transition-colors duration-200
+                    hover:border-[#F5F5F5] hover:text-[#F5F5F5]
+                  "
+                >
+                  {startYear}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <ContributorsTimeline
+          contributorsByYear={contributorsByYear}
+          rollNumberLabel={text.rollNumber}
+        />
       </section>
     </>
   );
