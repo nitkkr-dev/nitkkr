@@ -26,7 +26,7 @@ export const pgPlacementStats = pgTable('placement_stats_pg', (t) => ({
     number_of_internship: t
         .smallint()
         .notNull(),
-    number_of_PPO: t
+    number_of_ppo: t
         .smallint()
         .notNull(),
     total_number_of_placed: t
