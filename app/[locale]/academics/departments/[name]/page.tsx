@@ -281,7 +281,7 @@ export default async function Department({
             },
             {
               label: text.laboratories,
-              href: `/${locale}/academics/departments/${name}/labs`,
+              href: `/${locale}/academics/departments/laboratories`,
               icon: HiMiniBeaker,
             },
             {
