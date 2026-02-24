@@ -5,46 +5,46 @@ export const ugPlacementStats = pgTable('placement_stats_ug', (t) => ({
     id: t
         .smallserial()
         .primaryKey(),
-    academic_session: t
+    academicSession: t
         .text()
         .notNull(),
     programme: t
         .text()
         .notNull(),
-    number_of_eligible: t
+    numberOfEligible: t
         .smallint()
         .notNull(),
-    number_of_placed: t
+    numberOfPlaced: t
         .smallint()
         .notNull(),
-    number_of_offers: t
+    numberOfOffers: t
         .smallint()
         .notNull(),
-    median_package: t
+    medianPackage: t
         .numeric({
             precision: 8, 
             scale: 3
         })
         .notNull(),
-    average_package: t
+    averagePackage: t
         .numeric({
             precision: 8, 
             scale: 3
         })
         .notNull(),
-    lowest_package: t
+    lowestPackage: t
         .numeric({
             precision: 8, 
             scale: 3
         })
         .notNull(),
-    highest_package: t
+    highestPackage: t
         .numeric({
             precision: 8, 
             scale: 3
         })
         .notNull(),
-    percentage_placed: t
+    perecentagePlaced: t
         .numeric({
             precision: 7, 
             scale: 4
@@ -57,4 +57,13 @@ export const ugPlacementStats = pgTable('placement_stats_ug', (t) => ({
                 END
             `
         ),
+    createdAt: t
+        .timestamp()
+        .notNull()
+        .defaultNow(),
+    updatedAt: t
+        .timestamp()
+        .notNull()
+        .defaultNow()
+        .$onUpdate(()=>new Date()),
 }));
