@@ -33,7 +33,7 @@ interface PageSearchParams {
   end?: string;
 }
 
-export default async function AcademicsPage({
+export default async function AcademicNotificationsPage({
   params: { locale },
   searchParams,
 }: {

@@ -7,6 +7,9 @@ import { hostels } from './hostels.schema';
 
 export const notificationCategoryEnum = pgEnum('notification_category', [
   'academic',
+  'roll-sheet',
+  'exam-date-sheet',
+  'academic-calendar',
   'tender',
   'workshop',
   'administration',
@@ -32,6 +35,9 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
 // and shown when no category filter is applied
 export const VISIBLE_NOTIFICATION_CATEGORIES = [
   'academic',
+  'roll-sheet',
+  'exam-date-sheet',
+  'academic-calendar',
   'workshop',
   'administration',
   'recruitment',
