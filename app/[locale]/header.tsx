@@ -117,6 +117,12 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Learn about scholarships, eligibility, and application details.',
         },
+        {
+          title: 'Academic Notifications',
+          href: '/academics/notifications',
+          description:
+            'Stay updated with the latest academic notifications and announcements.',
+        },
       ],
     },
     { label: text.faculty, href: 'faculty-and-staff' },
