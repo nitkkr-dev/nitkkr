@@ -33,11 +33,17 @@ export const notificationCategoryEnum = pgEnum('notification_category', [
 // Categories visible in the UI filter
 // Hidden categories (scoe, racs) are excluded - they're used on respective pages
 // and shown when no category filter is applied
-export const VISIBLE_NOTIFICATION_CATEGORIES = [
-  'academic',
+export const VISIBLE_ACADEMIC_NOTIFICATION_CATEGORIES = [
   'roll-sheet',
   'exam-date-sheet',
   'academic-calendar',
+] as const;
+export const VISIBLE_NOTIFICATION_CATEGORIES = [
+  'academic',
+  // 'roll-sheet',
+  // 'exam-date-sheet',
+  // 'academic-calendar',
+  ...VISIBLE_ACADEMIC_NOTIFICATION_CATEGORIES,
   'workshop',
   'administration',
   'recruitment',

@@ -2,6 +2,7 @@
 
 export interface NotificationsTranslations {
   title: string;
+  academicTitle: string;
   searchPlaceholder: string;
   clearAll: string;
   clearAllFilters: string;
@@ -37,6 +38,9 @@ export interface NotificationsTranslations {
   };
   categories: {
     academic: string;
+    'roll-sheet': string;
+    'exam-date-sheet': string;
+    'academic-calendar': string;
     workshop: string;
     administration: string;
     recruitment: string;
@@ -67,6 +71,7 @@ export interface NotificationsTranslations {
 
 export const notificationsEn: NotificationsTranslations = {
   title: 'Notifications',
+  academicTitle: 'Academic Notifications',
   searchPlaceholder: 'Search by Title/Content',
   clearAll: 'Clear all',
   clearAllFilters: 'Clear All Filters',
@@ -102,6 +107,9 @@ export const notificationsEn: NotificationsTranslations = {
   },
   categories: {
     academic: 'Academic',
+    'roll-sheet': 'Roll Sheet',
+    'exam-date-sheet': 'Exam Date Sheet',
+    'academic-calendar': 'Academic Calendar',
     workshop: 'Workshops / Seminars',
     administration: 'Administration',
     recruitment: 'Recruitment',
@@ -132,6 +140,7 @@ export const notificationsEn: NotificationsTranslations = {
 
 export const notificationsHi: NotificationsTranslations = {
   title: 'सूचनाएँ',
+  academicTitle: 'शैक्षणिक सूचनाएँ',
   searchPlaceholder: 'शीर्षक/विषय-वस्तु द्वारा खोजें',
   clearAll: 'सभी साफ करें',
   clearAllFilters: 'सभी फ़िल्टर साफ करें',
@@ -167,6 +176,9 @@ export const notificationsHi: NotificationsTranslations = {
   },
   categories: {
     academic: 'शैक्षणिक',
+    'roll-sheet': 'रोल शीट',
+    'exam-date-sheet': 'परीक्षा तिथि शीट',
+    'academic-calendar': 'शैक्षणिक कैलेंडर',
     workshop: 'कार्यशाला / संगोष्ठी',
     administration: 'प्रशासन',
     recruitment: 'भर्ती',

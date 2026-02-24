@@ -1,6 +1,7 @@
-import React from 'react';
 import Link from 'next/link';
-import { arrayOverlaps, desc, eq, inArray } from 'drizzle-orm';
+import React from 'react';
+import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
+import { FaPlus } from 'react-icons/fa';
 
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
@@ -9,8 +10,13 @@ import { buildHref, parseDate, toArray } from '~/lib/helpers';
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
-import { notificationDepartments } from '~/server/db/schema/notifications.schema';
+import {
+  notificationCategoryEnum,
+  notificationDepartments,
+  VISIBLE_ACADEMIC_NOTIFICATION_CATEGORIES,
+} from '~/server/db/schema/notifications.schema';
 import { type NotificationItem } from '~/server/actions/notifications';
+import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import {
   DateRangeFilter,
   MultiCheckbox,
@@ -18,17 +24,17 @@ import {
 } from '~/components/inputs';
 import { MobileFilters } from '~/components/mobile-filters';
 import { FilterSection } from '~/components/filter-section';
+import { NotificationsList } from '~/app/notifications/NotificationsList';
+// import { SearchInput } from './SearchInput';
 
-import { NotificationsList } from '../../notifications/NotificationsList';
-
-const DEGREE_LEVELS = ['ug', 'pg', 'phd'] as const;
+type Cat = (typeof notificationCategoryEnum.enumValues)[number];
 
 const INITIAL_BATCH_SIZE = 20;
 
 interface PageSearchParams {
   q?: string;
+  category?: string | string[];
   department?: string | string[];
-  degreeLevel?: string | string[];
   start?: string;
   end?: string;
 }
@@ -40,17 +46,19 @@ export default async function AcademicNotificationsPage({
   params: { locale: string };
   searchParams: PageSearchParams;
 }) {
-  // TODO: Update to use Academics translations when available
-  const text = (await getTranslations(locale)).Admission;
+  const text = (await getTranslations(locale)).Notifications;
+
+  // Check if user can manage notifications (CCN only)
+  const session = await getServerAuthSession();
 
   // Normalize multi-select params
+  const categories = toArray(searchParams.category).filter(Boolean) as Cat[];
   const departments = toArray(searchParams.department).filter(Boolean);
-  const degreeLevels = toArray(searchParams.degreeLevel).filter(Boolean);
   const startDate = parseDate(searchParams.start);
   const endDate = parseDate(searchParams.end);
   const query = (searchParams.q ?? '').trim().toLowerCase();
 
-  // Fetch departments for filter list
+  // Fetch departments (names + urlName) for filter list
   const departmentRows = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
   });
@@ -73,37 +81,29 @@ export default async function AcademicNotificationsPage({
       .where(inArray(notificationDepartments.departmentId, deptIds));
     filteredNotificationIds = deptMatches.map((m) => m.notificationId);
 
+    // If no notifications match the department filter, return empty
     if (filteredNotificationIds.length === 0) {
       filteredNotificationIds = [-1]; // Use impossible ID to return no results
     }
   }
 
-  // Build base query - always filter by 'academic' category
+  // Build base query - fetch only initial batch
   let raw = await db.query.notifications.findMany({
     where: (n, { and, gte, lte }) =>
       and(
-        // Always filter by academic category
+        // Always filter by academics category
         arrayOverlaps(n.categories, ['academic']),
         startDate ? gte(n.createdAt, startDate) : undefined,
         endDate ? lte(n.createdAt, endDate) : undefined,
         filteredNotificationIds
           ? inArray(n.id, filteredNotificationIds)
           : undefined,
-        // Degree level (educationType) filter — single value at DB level
-        degreeLevels.length === 1
-          ? eq(n.educationType, degreeLevels[0] as 'ug' | 'pg' | 'phd')
-          : undefined
+        // Category filter at DB level
+        categories.length ? arrayOverlaps(n.categories, categories) : undefined
       ),
     orderBy: (n) => [desc(n.createdAt)],
-    limit: INITIAL_BATCH_SIZE + 1,
+    limit: INITIAL_BATCH_SIZE + 1, // +1 to check if there are more
   });
-
-  // For multiple degree levels, filter in memory
-  if (degreeLevels.length > 1) {
-    raw = raw.filter(
-      (n) => n.educationType && degreeLevels.includes(n.educationType)
-    );
-  }
 
   // Text search (title and content)
   if (query) {
@@ -129,11 +129,10 @@ export default async function AcademicNotificationsPage({
     createdAt: n.createdAt.toISOString(),
   }));
 
-  // Build filter params for the client component (for infinite scroll)
+  // Build filter params for the client component
   const filterParams = {
-    categories: ['academic'] as string[],
+    categories: categories.length ? categories : undefined,
     departmentIds: deptIds.length ? deptIds : undefined,
-    educationType: degreeLevels.length === 1 ? degreeLevels[0] : undefined,
     start: searchParams.start,
     end: searchParams.end,
     query: query || undefined,
@@ -141,9 +140,9 @@ export default async function AcademicNotificationsPage({
 
   return (
     <>
-      <ImageHeader title={text.title} src="slideshow/image01.jpg" />
+      <ImageHeader title={text.academicTitle} src="slideshow/image01.jpg" />
 
-      <section className="container mb-0 mt-8 flex min-h-screen gap-12">
+      <section className="container mb-0 mt-8 flex gap-12">
         {/* Desktop Sidebar - hidden on mobile */}
         <aside
           className={cn(
@@ -164,8 +163,8 @@ export default async function AcademicNotificationsPage({
                 scroll={false}
                 href={buildHref(locale, {
                   q: undefined,
+                  category: [],
                   department: [],
-                  degreeLevel: [],
                   start: undefined,
                   end: undefined,
                 })}
@@ -177,7 +176,7 @@ export default async function AcademicNotificationsPage({
 
           <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2">
-              <FilterSection label={text.filter.date}>
+              <FilterSection locale={locale} label={text.filter.date}>
                 <DateRangeFilter
                   locale={locale}
                   start={searchParams.start}
@@ -193,12 +192,13 @@ export default async function AcademicNotificationsPage({
               </FilterSection>
 
               <MultiCheckbox
-                param="degreeLevel"
-                options={DEGREE_LEVELS}
-                selected={degreeLevels}
+                param="category"
+                options={VISIBLE_ACADEMIC_NOTIFICATION_CATEGORIES}
+                selected={categories}
                 locale={locale}
-                textMap={text.degreeLevel}
-                title={text.filter.degreeLevel}
+                textMap={text.categories}
+                title={text.filter.category}
+                scrollHeight="h-[150px]"
                 basePath="/academics/notifications"
               />
 
@@ -216,7 +216,6 @@ export default async function AcademicNotificationsPage({
             </div>
           </ScrollArea>
         </aside>
-
         {/* Main Content */}
         <section className="flex grow flex-col space-y-6">
           {/* Search + Mobile Filters */}
@@ -224,7 +223,7 @@ export default async function AcademicNotificationsPage({
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
-              inputId="academics-search"
+              inputId="notification-search"
             />
 
             {/* Mobile Filters Button - shows on < xl */}
@@ -234,11 +233,11 @@ export default async function AcademicNotificationsPage({
                 basePath="/academics/notifications"
                 start={searchParams.start}
                 end={searchParams.end}
-                degreeLevel={{
-                  options: DEGREE_LEVELS,
-                  selected: degreeLevels,
-                  textMap: text.degreeLevel,
-                  title: text.filter.degreeLevel,
+                category={{
+                  options: VISIBLE_ACADEMIC_NOTIFICATION_CATEGORIES,
+                  selected: categories,
+                  textMap: text.categories,
+                  title: text.filter.category,
                 }}
                 department={{
                   selected: departments,
@@ -255,7 +254,7 @@ export default async function AcademicNotificationsPage({
             </div>
           </search>
 
-          {/* Academics List */}
+          {/* Notifications List */}
           <div className="flex-1 rounded-md">
             <NotificationsList
               initialItems={serializedItems}
@@ -263,12 +262,11 @@ export default async function AcademicNotificationsPage({
               initialHasMore={hasMore}
               locale={locale}
               filterParams={filterParams}
-              canManage={false}
               text={{
                 noNotificationsFound: text.noNotificationsFound,
                 noMoreNotifications: text.noMoreNotifications,
-                edit: '',
-                delete: '',
+                edit: text.edit,
+                delete: text.delete,
               }}
             />
           </div>
