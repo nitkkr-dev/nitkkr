@@ -1,6 +1,7 @@
 import type { Translations } from './translations';
 import {
   academicsEn,
+  admissionEn,
   administrationEn,
   awardsEn,
   chpdEn,
@@ -13,6 +14,7 @@ import {
   curriculumEn,
   deanEn,
   deansEn,
+  deansPageEn,
   departmentEn,
   departmentsEn,
   directorMessageEn,
@@ -42,12 +44,16 @@ import {
   sectionsEn,
   statusEn,
   studentActivitiesEn,
+  tendersEn,
   thoughtLabEn,
   trainingAndPlacementEn,
   websiteContributorsEn,
+  nccEn,
+  nssEn,
 } from './translate';
 
 const text: Translations = {
+  Admission: admissionEn,
   Awards: awardsEn,
   Administration: administrationEn,
   Main: mainEn,
@@ -85,14 +91,18 @@ const text: Translations = {
   Status: statusEn,
   PatentsAndTechnologies: patentsAndTechnologiesEn,
   StudentActivities: studentActivitiesEn,
+  Tenders: tendersEn,
   DirectorMessage: directorMessageEn,
   Research: researchEn,
   TrainingAndPlacement: trainingAndPlacementEn,
   DirectorPage: directorPageEn,
+  DeansPage: deansPageEn,
   otherOfficersPage: otherOfficersPageEn,
   SCoE: scoeEn,
   WebsiteContributors: websiteContributorsEn,
   CHPD: chpdEn,
+  NCC: nccEn,
+  NSS: nssEn,
 };
 
 export default text;

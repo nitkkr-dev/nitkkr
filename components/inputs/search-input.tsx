@@ -7,9 +7,11 @@ import { MdSearch } from 'react-icons/md';
 export function SearchInput({
   defaultValue,
   placeholder,
+  inputId = 'search-input',
 }: {
   defaultValue?: string;
   placeholder: string;
+  inputId?: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -32,11 +34,16 @@ export function SearchInput({
     return () => clearTimeout(timer);
   }, [query, searchParams, pathname, router]);
 
+  // Sync input state with defaultValue (from URL/searchParams)
+  useEffect(() => {
+    setQuery(defaultValue ?? '');
+  }, [defaultValue]);
+
   return (
     <div className="relative w-full sm:grow">
       <MdSearch className="pointer-events-none absolute left-3 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-neutral-400" />
       <input
-        id="event-search"
+        id={inputId}
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

@@ -292,6 +292,7 @@ const FacultyList = async ({
       linkedInId: true,
       researchGateId: true,
       scopusId: true,
+      orcidId: true,
       id: true,
     },
     where: selectedDepartmentIds.length
@@ -332,6 +333,7 @@ const FacultyList = async ({
           linkedInId: faculty.linkedInId,
           researchGateId: faculty.researchGateId,
           scopusId: faculty.scopusId,
+          orcidId: faculty.orcidId,
         };
 
         return (
@@ -404,7 +406,10 @@ const FacultyList = async ({
                     string,
                   ][]
                 ).map(([key, value]) => {
-                  if (key in profileExternalLinks) {
+                  if (
+                    key in profileExternalLinks &&
+                    profileExternalLinks[key]
+                  ) {
                     return (
                       <Link
                         key={key}

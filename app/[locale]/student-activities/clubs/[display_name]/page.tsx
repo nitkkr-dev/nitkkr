@@ -331,7 +331,11 @@ export default async function Club({
 
       <main className="container mt-6">
         <article className="drop-shadow">
-          <p className={cn('max-md:rounded-t md:w-full md:rounded-r')}>
+          <p
+            className={cn(
+              'text-justify max-md:rounded-t md:w-full md:rounded-r'
+            )}
+          >
             {club?.aboutUs}
           </p>
         </article>
@@ -345,14 +349,18 @@ export default async function Club({
               <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
                 {text.Club.whyToJoinUs.toUpperCase()}
               </h3>
-              <p className="lg:w-2/3 ">{dummyClubData?.whyToJoinUs}</p>
+              <p className="text-justify lg:w-2/3 ">
+                {dummyClubData?.whyToJoinUs}
+              </p>
             </section>
 
             <section className="flex flex-col pt-12 lg:flex-row">
               <h3 className="text-xl md:text-2xl lg:w-1/3 lg:text-3xl">
                 {text.Club.howToJoinUs.toUpperCase()}
               </h3>
-              <p className="lg:w-2/3">{dummyClubData?.howToJoinUs}</p>
+              <p className="text-justify lg:w-2/3">
+                {dummyClubData?.howToJoinUs}
+              </p>
             </section>
           </article>
         </article>

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { MdCalendarToday, MdOpenInNew } from 'react-icons/md';
+import { type JSONContent } from '@tiptap/react';
 
 import { Dialog, DialogContent, ScrollArea } from '~/components/ui';
 import Loading from '~/components/loading';
+import { RichContentRenderer } from '~/components/editor';
 import {
   getNotificationById,
   type NotificationDetails,
@@ -98,13 +100,25 @@ export function NotificationModal({
               {notification.title}
             </h2>
 
-            {/* Content */}
+            {/* Description (plain text) – shown if present */}
             {notification.content && (
+              <div className="px-4 pt-2 sm:px-6">
+                <p className="whitespace-pre-wrap text-justify text-xs leading-relaxed text-neutral-600 sm:text-sm">
+                  {notification.content}
+                </p>
+              </div>
+            )}
+
+            {/* Rich Content (TipTap JSON) – shown if present */}
+            {notification.richContent && (
               <div className="flex-1 overflow-hidden px-4 sm:px-6">
                 <ScrollArea className="sm:h-54 h-56 lg:h-72">
-                  <p className="whitespace-pre-wrap pr-4 text-justify text-sm leading-relaxed text-neutral-900 sm:text-base">
-                    {notification.content}
-                  </p>
+                  <div className="pr-4">
+                    <RichContentRenderer
+                      content={notification.richContent as JSONContent}
+                      className="text-sm leading-relaxed text-neutral-900 sm:text-base"
+                    />
+                  </div>
                 </ScrollArea>
               </div>
             )}

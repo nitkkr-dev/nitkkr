@@ -36,7 +36,7 @@ export default async function EditNotificationPage({
     <>
       <ImageHeader title={text.editNotification} src="slideshow/image01.jpg" />
       <section className="container my-8">
-        <Card className="mx-auto max-w-2xl">
+        <Card className="mx-auto max-w-5xl">
           <CardHeader>
             <h2 className="text-xl font-bold text-primary-700">
               {text.editNotification}
@@ -49,6 +49,7 @@ export default async function EditNotificationPage({
               initialData={{
                 title: notification.title,
                 content: notification.content,
+                richContent: notification.richContent,
                 categories: notification.categories,
                 documents: notification.documents,
                 createdAt: notification.createdAt,

@@ -216,6 +216,7 @@ export async function editFacultyProfilePersonalDetails(
         .update(faculty)
         .set({
           officeAddress: validated.officeAddress,
+          orcidId: validated.orcidId,
           scopusId: validated.scopusId,
           linkedInId: validated.linkedInId,
           googleScholarId: validated.googleScholarId,

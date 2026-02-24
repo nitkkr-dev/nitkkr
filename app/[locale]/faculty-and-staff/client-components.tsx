@@ -142,7 +142,7 @@ export function MobileFilters({
                         )}
                       </Suspense>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between text-justify">
                       <button
                         onClick={() => setOpen(false)}
                         aria-label="Close filters"

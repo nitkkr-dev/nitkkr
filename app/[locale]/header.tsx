@@ -99,6 +99,13 @@ export default async function Header({ locale }: { locale: string }) {
           description: 'Get information on upcoming convocation ceremonies.',
         },
         {
+          title: 'Admission',
+          href: '/academics/admission',
+          description:
+            'Learn about admission process, eligibility, and application details.',
+        },
+        // May remove 'Awards' from the Navigation
+        {
           title: 'Awards',
           href: '/academics/awards',
           description:
@@ -521,7 +528,7 @@ const MobileSubNavMenu = ({
                 <h4 className="mb-0 origin-bottom-left font-sans font-semibold leading-none text-shade-dark transition-colors transition-transform group-hover:scale-105 group-hover:text-primary-500 group-focus:text-primary-500">
                   {title}
                 </h4>
-                <p className="line-clamp-3 origin-top-left text-sm  leading-snug !text-neutral-600 transition-colors transition-transform group-hover:scale-105 group-hover:text-primary-500 group-focus:text-primary-500">
+                <p className="line-clamp-3 origin-top-left text-justify  text-sm leading-snug !text-neutral-600 transition-colors transition-transform group-hover:scale-105 group-hover:text-primary-500 group-focus:text-primary-500">
                   {description}
                 </p>
               </Link>

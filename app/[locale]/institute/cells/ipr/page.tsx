@@ -1,17 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 import { FaFlask, FaIndianRupeeSign } from 'react-icons/fa6';
 import { FaRegIdCard } from 'react-icons/fa';
 import { BsTools } from 'react-icons/bs';
 import { type IconType } from 'react-icons/lib';
 
-import { cn } from '~/lib/utils';
-import { Button } from '~/components/buttons';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
+import FICGroup from '~/components/fic-group';
+import ButtonGroup from '~/components/button-group';
 
 // Fetches IPR data from DB - cache for 5 minutes
 export const revalidate = 300;
@@ -43,19 +42,14 @@ export default async function IPR({
   ];
 
   const facultyIncharge = [
+    // Replace with real employee IDs and designations as needed
     {
-      image: 'fallback/user-image.jpg',
-      name: 'Anshu Parashar',
-      title: 'Computer Application',
-      email: 'anshuparashar@nitkkr.ac.in',
-      phone: '1234567890',
+      employeeId: '88',
+      designation: 'Faculty Incharge',
     },
     {
-      image: 'fallback/user-image.jpg',
-      name: 'Anshu Parashar',
-      title: 'Computer Application',
-      email: 'anshuparashar@nitkkr.ac.in',
-      phone: '1234567890',
+      employeeId: '89',
+      designation: 'Faculty Incharge',
     },
   ];
 
@@ -159,7 +153,7 @@ export default async function IPR({
       <main className="container mt-12">
         {/* description */}
         <article className="drop-shadow">
-          <p className="d:w-full max-md:rounded-t md:rounded-r">
+          <p className="d:w-full text-justify max-md:rounded-t md:rounded-r">
             {text.Research.ipr.description}
           </p>
         </article>
@@ -170,49 +164,7 @@ export default async function IPR({
             heading="h2"
             text={text.Research.ipr.facultyIncharge}
           />
-          <ul className="flex w-full flex-col flex-wrap items-center space-y-7 md:flex-row md:justify-between lg:space-y-0">
-            {facultyIncharge.map((faculty, idx) => (
-              <li
-                key={idx}
-                className="flex w-[70%] flex-col items-center rounded-lg border border-primary-500 bg-neutral-50 p-4 sm:w-full sm:flex-row lg:w-[48%]"
-              >
-                <Image
-                  src={faculty.image}
-                  alt={faculty.name}
-                  width={200}
-                  height={200}
-                  className="h-52 w-52 rounded-lg "
-                />
-                <section className="ml-6 mt-4 w-full min-w-0 space-y-8 break-words text-center md:mt-0 lg:text-left">
-                  <div>
-                    <h2 className="m-0 text-start text-lg md:text-xl">
-                      {faculty.name}
-                      <span className="block text-lg text-neutral-900">
-                        {faculty.title}
-                      </span>
-                    </h2>
-                  </div>
-                  <section>
-                    <span className="flex items-center space-x-2">
-                      <MdEmail className="text-primary-700" />
-                      <Link
-                        href={`mailto:${faculty.email}`}
-                        className="text-gray-600 break-all hover:text-primary-700 hover:underline"
-                      >
-                        {faculty.email}
-                      </Link>
-                    </span>
-                    <span className="mt-2 flex items-center space-x-2">
-                      <MdOutlineLocalPhone className="text-primary-700" />
-                      <span className="text-gray-600 break-all">
-                        {faculty.phone}
-                      </span>
-                    </span>
-                  </section>
-                </section>
-              </li>
-            ))}
-          </ul>
+          <FICGroup facultyData={facultyIncharge} />
         </div>
         {/* Advisory Commitee */}
         <div>
@@ -293,37 +245,7 @@ export default async function IPR({
             {text.Research.ipr.availableTechnologies.description}
           </h2>
 
-          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
-            {availableTechnologies.map(({ label, href, icon: Icon }, index) => (
-              <Button
-                asChild
-                className={cn(
-                  'xl:gap-5',
-                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
-                )}
-                key={index}
-                variant="secondary"
-              >
-                <Link
-                  href={href}
-                  className="rounded-s-md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
-                    <Icon
-                      className={cn(
-                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
-                      )}
-                    />
-                  </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
-                    {label}
-                  </p>
-                </Link>
-              </Button>
-            ))}
-          </div>
+          <ButtonGroup buttonArray={availableTechnologies} columns={2} />
         </div>
         {/* NITKKR innovations and IP */}
         <div>
@@ -332,32 +254,7 @@ export default async function IPR({
             heading="h2"
             text={text.Research.ipr.nitkkrInnovationsAndIp.title}
           />
-          <div className="m-auto mt-8 grid gap-4 md:grid-cols-2 lg:gap-6">
-            {innovations.map(({ label, href, icon: Icon }, index) => (
-              <Button
-                asChild
-                className={cn(
-                  'xl:gap-5',
-                  'group mx-auto flex h-40 w-72 flex-col gap-2 sm:h-48 sm:w-[22rem] sm:gap-3 md:h-52 md:w-[20rem] lg:h-60 lg:w-[26rem] lg:gap-4'
-                )}
-                key={index}
-                variant="secondary"
-              >
-                <Link href={href} className="rounded-s-md">
-                  <div className="group rounded-full bg-primary-700 p-3 group-hover:bg-neutral-100">
-                    <Icon
-                      className={cn(
-                        'size-8 text-neutral-100 group-hover:text-primary-700 md:size-10 lg:size-12'
-                      )}
-                    />
-                  </div>
-                  <p className="max-w-52 text-wrap text-center font-serif text-sm font-semibold capitalize sm:text-base sm:tracking-wide md:tracking-wider lg:max-w-72 lg:text-lg">
-                    {label}
-                  </p>
-                </Link>
-              </Button>
-            ))}
-          </div>
+          <ButtonGroup buttonArray={innovations} columns={2} />
         </div>
         {/* Gallery  */}
       </main>

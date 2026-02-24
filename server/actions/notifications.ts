@@ -50,6 +50,7 @@ export interface LoadMoreParams {
   start?: string;
   end?: string;
   query?: string;
+  educationType?: string;
 }
 
 export async function loadMoreNotifications(
@@ -64,6 +65,7 @@ export async function loadMoreNotifications(
     start,
     end,
     query,
+    educationType,
   } = params;
 
   const cursorDate = cursor ? new Date(cursor) : undefined;
@@ -75,6 +77,10 @@ export async function loadMoreNotifications(
   if (startDate) conditions.push(gte(notifications.createdAt, startDate));
   if (endDate) conditions.push(lte(notifications.createdAt, endDate));
   if (cursorDate) conditions.push(lt(notifications.createdAt, cursorDate));
+  if (educationType)
+    conditions.push(
+      eq(notifications.educationType, educationType as 'ug' | 'pg' | 'phd')
+    );
 
   // Get notification IDs that match department/club/hostel filters via junction tables
   let filteredNotificationIds: number[] | undefined;
@@ -197,6 +203,7 @@ export interface NotificationDetails {
   id: number;
   title: string;
   content: string | null;
+  richContent: unknown | null;
   categories: string[];
   documents: string[];
   createdAt: string;
@@ -215,6 +222,7 @@ export async function getNotificationById(
     id: notification.id,
     title: notification.title,
     content: notification.content,
+    richContent: notification.richContent ?? null,
     categories: notification.categories,
     documents: notification.documents,
     createdAt: notification.createdAt.toISOString(),
@@ -265,6 +273,7 @@ const notificationSchema = z.object({
     .min(1, 'Title is required')
     .max(256, 'Title must be 256 characters or less'),
   content: z.string().optional(),
+  richContent: z.unknown().optional(), // TipTap JSON – validated structurally on the client
   categories: z
     .array(z.enum(notificationCategoryEnum.enumValues))
     .min(1, 'At least one category is required'),
@@ -314,6 +323,7 @@ export async function addNotification(
       .values({
         title: validation.data.title,
         content: validation.data.content ?? null,
+        richContent: validation.data.richContent ?? null,
         categories: validation.data.categories,
         documents: validation.data.documents ?? [],
         createdAt: notificationDate,
@@ -375,6 +385,7 @@ export async function updateNotification(
     const updateData: {
       title: string;
       content: string | null;
+      richContent: unknown | null;
       categories: typeof validation.data.categories;
       documents: string[];
       updatedAt: Date;
@@ -382,6 +393,7 @@ export async function updateNotification(
     } = {
       title: validation.data.title,
       content: validation.data.content ?? null,
+      richContent: validation.data.richContent ?? null,
       categories: validation.data.categories,
       documents: validation.data.documents ?? [],
       updatedAt: new Date(),
@@ -470,6 +482,7 @@ export async function getNotificationForEdit(id: number): Promise<{
   id: number;
   title: string;
   content: string | null;
+  richContent: unknown | null;
   categories: string[];
   documents: string[];
   createdAt: string;
@@ -486,6 +499,7 @@ export async function getNotificationForEdit(id: number): Promise<{
       id: true,
       title: true,
       content: true,
+      richContent: true,
       categories: true,
       documents: true,
       createdAt: true,
@@ -496,6 +510,7 @@ export async function getNotificationForEdit(id: number): Promise<{
 
   return {
     ...notification,
+    richContent: notification.richContent ?? null,
     createdAt: notification.createdAt.toISOString(),
   };
 }

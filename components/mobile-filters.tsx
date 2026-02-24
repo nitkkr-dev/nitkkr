@@ -7,10 +7,19 @@ import { FaTimes } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
 import { cn } from '~/lib/utils';
 
-import { DateRangeForm } from './DateRangeForm';
-import { MultiCheckbox } from './MultiCheckbox';
+// -------------- Mobile Filters ------------------
+// How to customize for different pages:
+// 1. Import and use <MobileFilters> in the page, passing appropriate props
+// 2. For category/department/degreeLevel filters, pass config objects to enable them
+//    - Dept rows should have 'urlName' for building URLs and 'name' for display
+// 3. Provide localized text via the 'text' prop
+// If new filter types are needed in the future,
+// add new optional config props and
+// render corresponding filter components in the panel
+// ------------------------------------------------
 
 interface Dept {
   id: number;
@@ -18,45 +27,65 @@ interface Dept {
   urlName: string;
 }
 
-type Cat = string;
+/** Optional category filter config */
+interface CategoryFilterConfig {
+  options: readonly string[];
+  selected: string[];
+  textMap: Record<string, string>;
+  title: string;
+}
+
+/** Optional department filter config */
+interface DepartmentFilterConfig {
+  selected: string[];
+  rows: Dept[];
+  title: string;
+}
+
+/** Optional degree level filter config */
+interface DegreeLevelFilterConfig {
+  options: readonly string[];
+  selected: string[];
+  textMap: Record<string, string>;
+  title: string;
+}
 
 interface MobileFiltersProps {
   locale: string;
-  categories: Cat[];
-  departments: string[];
-  departmentRows: Dept[];
-  categoryOptions: readonly string[];
-  query: string;
+  /** Base path used for building filter URLs, e.g. '/events' or '/notifications' */
+  basePath: string;
   start?: string;
   end?: string;
+  /** Category filter — pass to enable */
+  category?: CategoryFilterConfig;
+  /** Department filter — pass to enable */
+  department?: DepartmentFilterConfig;
+  /** Degree level filter — pass to enable */
+  degreeLevel?: DegreeLevelFilterConfig;
   text: {
     filters: string;
     filterBy: string;
     clearAllFilters: string;
     filter: {
       date: string;
-      category: string;
-      department: string;
       startDate: string;
       endDate: string;
       day: string;
       month: string;
       year: string;
     };
-    categories: Record<string, string>;
   };
   className?: string;
 }
 
 export function MobileFilters({
   locale,
-  categories,
-  departments,
-  departmentRows,
-  categoryOptions,
-  query,
+  basePath,
   start,
   end,
+  category,
+  department,
+  degreeLevel,
   text,
   className,
 }: MobileFiltersProps) {
@@ -96,10 +125,13 @@ export function MobileFilters({
     };
   }, [open]);
 
-  // Calculate active filters count (including date filters)
+  // Calculate active filters count
   const dateFiltersCount = (start ? 1 : 0) + (end ? 1 : 0);
   const activeFiltersCount =
-    categories.length + departments.length + dateFiltersCount;
+    (category?.selected.length ?? 0) +
+    (department?.selected.length ?? 0) +
+    (degreeLevel?.selected.length ?? 0) +
+    dateFiltersCount;
 
   return (
     <div className="z-50 font-semibold xl:hidden">
@@ -151,16 +183,14 @@ export function MobileFilters({
             {/* Inner content area */}
             <div className="h-screen min-h-screen bg-[#f7efe6] p-4 md:pt-8 lg:p-8">
               <div className="bg-white flex h-full flex-col overflow-hidden p-5">
-                {' '}
-                {/* Added flex flex-col and overflow-hidden */}
-                {/* 1. FIXED HEADER (Outside ScrollArea) */}
+                {/* 1. FIXED HEADER */}
                 <div className="mb-4 flex flex-col">
                   {/* Close button row */}
-                  <div className="flex justify-end">
+                  <div className="mt-8 flex justify-end sm:mt-12">
                     <button
                       onClick={handleClose}
                       aria-label="Close filters"
-                      className="hover:bg-black/5 mt-8 rounded p-1 sm:mt-12"
+                      className="hover:bg-black/5 rounded p-1"
                     >
                       <FaTimes className="size-5 text-primary-700" />
                     </button>
@@ -173,7 +203,7 @@ export function MobileFilters({
                     </h3>
                     <Link
                       scroll={false}
-                      href={`/${locale}/notifications`}
+                      href={`/${locale}${basePath}`}
                       onClick={handleClose}
                       className="hover:bg-primary-50 rounded border border-primary-700 px-3 py-1 text-sm text-primary-700"
                     >
@@ -181,8 +211,8 @@ export function MobileFilters({
                     </Link>
                   </div>
                 </div>
+
                 {/* 2. SCROLLABLE FILTERS AREA */}
-                {/* Removed hardcoded mt-8 and calc height, replaced with flex-1 */}
                 <ScrollArea className="flex-1 pr-4">
                   <div className="flex flex-col gap-6 pb-4">
                     {/* Date Filter */}
@@ -190,11 +220,8 @@ export function MobileFilters({
                       <h3 className="mb-2 text-lg font-bold text-primary-700">
                         {text.filter.date}
                       </h3>
-                      <DateRangeForm
+                      <DateRangeFilter
                         locale={locale}
-                        categories={categories}
-                        departments={departments}
-                        query={query}
                         start={start}
                         end={end}
                         compact
@@ -208,35 +235,52 @@ export function MobileFilters({
                       />
                     </div>
 
-                    {/* Category Filter */}
-                    <div className="rounded bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">
-                        {text.filter.category}
-                      </h3>
-                      <MultiCheckbox
-                        param="category"
-                        options={categoryOptions}
-                        selected={categories}
-                        locale={locale}
-                        textMap={text.categories}
-                      />
-                    </div>
+                    {/* Category Filter (conditional) */}
+                    {category && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="category"
+                          options={category.options}
+                          selected={category.selected}
+                          locale={locale}
+                          textMap={category.textMap}
+                          title={category.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
 
-                    {/* Department Filter */}
-                    <div className="rounded bg-neutral-50 p-4">
-                      <h3 className="mb-2 text-lg font-bold text-primary-700">
-                        {text.filter.department}
-                      </h3>
-                      <MultiCheckbox
-                        param="department"
-                        options={departmentRows.map((d) => d.urlName)}
-                        selected={departments}
-                        locale={locale}
-                        textMap={Object.fromEntries(
-                          departmentRows.map((d) => [d.urlName, d.name])
-                        )}
-                      />
-                    </div>
+                    {/* Department Filter (conditional) */}
+                    {department && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="department"
+                          options={department.rows.map((d) => d.urlName)}
+                          selected={department.selected}
+                          locale={locale}
+                          textMap={Object.fromEntries(
+                            department.rows.map((d) => [d.urlName, d.name])
+                          )}
+                          title={department.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
+
+                    {/* Degree Level Filter (conditional) */}
+                    {degreeLevel && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="degreeLevel"
+                          options={degreeLevel.options}
+                          selected={degreeLevel.selected}
+                          locale={locale}
+                          textMap={degreeLevel.textMap}
+                          title={degreeLevel.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
                   </div>
                 </ScrollArea>
               </div>

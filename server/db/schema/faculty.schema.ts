@@ -1,9 +1,8 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
 import {
   courseLogs,
-  courses,
   departments,
   doctorates,
   persons,
@@ -43,6 +42,7 @@ export const faculty = pgTable(
     linkedInId: t.text(),
     researchGateId: t.text(),
     scopusId: t.text(),
+    orcidId: t.text(),
     areasOfInterest: t.text().array().default([]),
   })
   // (table) => [uniqueIndex('faculty_employee_id_idx').on(table.employeeId)]
@@ -225,7 +225,6 @@ export const customInformation = pgTable('custom_information', (t) => ({
 
 export const facultyRelations = relations(faculty, ({ many, one }) => ({
   courseLogs: many(courseLogs),
-  courses: many(courses),
   department: one(departments, {
     fields: [faculty.departmentId],
     references: [departments.id],
