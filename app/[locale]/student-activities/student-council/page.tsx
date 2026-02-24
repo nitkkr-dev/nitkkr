@@ -149,6 +149,9 @@ export default async function StudentCouncil({
     studentRepresentativesAcademicData.map((s) => [s.id, s])
   );
 
+  function min(a: number, b: number) {
+    return a < b ? a : b;
+  }
   return (
     <>
       <ImageHeader
@@ -259,7 +262,7 @@ export default async function StudentCouncil({
                   member.personId
                 );
                 const year = academicData?.batch
-                  ? 2026 - academicData.batch
+                  ? min(2026 - academicData.batch, 4)
                   : null;
                 const branchWithDegree = academicData?.major
                   ? `${academicData.major.name} (${academicData.major.degree})`
@@ -268,13 +271,12 @@ export default async function StudentCouncil({
                   roll: studentData?.rollNumber ?? '-',
                   name: member.person.name,
                   contact: member.person.telephone
-                    ? ` ${member.person.telephone}`.trim()
+                    ? `${member.person.telephone}`.trim()
                     : '-',
                   branch: branchWithDegree,
-                  year: year ? ` ${year}` : '-',
+                  year: year ? `${year}` : '-',
                 };
               })}
-              getCount={Promise.resolve([])}
             />
           ) : (
             <p className="text-gray-500 text-center">
