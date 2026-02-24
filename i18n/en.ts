@@ -50,7 +50,9 @@ import {
   websiteContributorsEn,
   nccEn,
   nssEn,
+  laboratoriesEn,
 } from './translate';
+import { Label } from '@radix-ui/react-label';
 
 const text: Translations = {
   Admission: admissionEn,
@@ -103,6 +105,7 @@ const text: Translations = {
   CHPD: chpdEn,
   NCC: nccEn,
   NSS: nssEn,
+  Laboratories: laboratoriesEn,
 };
 
 export default text;
