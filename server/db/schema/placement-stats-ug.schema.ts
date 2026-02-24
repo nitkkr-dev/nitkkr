@@ -44,7 +44,7 @@ export const ugPlacementStats = pgTable('placement_stats_ug', (t) => ({
             scale: 3
         })
         .notNull(),
-    perecentage_placed: t
+    percentage_placed: t
         .numeric({
             precision: 7, 
             scale: 4
