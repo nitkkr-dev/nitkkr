@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 
@@ -45,22 +45,25 @@ export function YearFilterClient() {
   };
 
   return (
-  <div className="relative">
+  <div className="relative w-40">
     <select
       value={selected}
       onChange={handleChange}
       className="
-        w-40
-        rounded-lg
-        border border-primary-100
-        bg-neutral-50
-        px-4 py-2
+        w-full
+        appearance-none
+        rounded-md
+        border border-primary-700
+        bg-white
+        pl-4 pr-10
+        py-2
         text-sm
-        shadow-sm
+        text-primary-700
+        shadow-none
         focus:outline-none
-        focus:ring-2
+        focus:ring-1
         focus:ring-primary-500
-        focus:border-primary-500
+        focus:border-primary-700
         transition
       "
     >
@@ -71,6 +74,24 @@ export function YearFilterClient() {
         </option>
       ))}
     </select>
+
+    {/* Custom Arrow */}
+    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+      <svg
+        className="h-4 w-4 text-primary-700"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </div>
   </div>
 );
 }

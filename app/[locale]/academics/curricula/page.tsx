@@ -3,32 +3,23 @@
 export const revalidate = 300;
 
 /* ---------------- External ---------------- */
-import { Suspense, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { count } from 'drizzle-orm';
 
 /* ---------------- Internal (~/) ---------------- */
-import { ClearFiltersButton, DepartmentsClient, PreserveParamsLink } from '~/app/faculty-and-staff/client-components';
+import { ClearFiltersButton } from '~/app/faculty-and-staff/client-components';
 import { MobileFilters } from '~/components/mobile-filters';
-import search from '~/app/search/search';
 import Heading from '~/components/heading';
 import Loading from '~/components/loading';
-import { ScrollArea } from '~/components/ui/scroll-area';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
-import { cn } from '~/lib/utils';
 import { courses, db } from '~/server/db';
 import { majors } from '~/server/db/schema/majors.schema';
-
+import type { CurriculaTranslations } from '~/i18n/translations'; 
+import { MultiCheckbox } from '~/components/inputs';
 /* ---------------- Relative ---------------- */
-import { FilterListClient } from './utils/FilterListClient';
-import { YearFilterClient } from './utils/year-dropdown';
-
-interface Option {
-  label: string;
-  value: string;
-}
-
+// removed FilterListClient; not needed anymore
+import { YearFilterClient } from '~/components/inputs/year-dropdown';
 
 
 export default async function Curricula({
@@ -39,7 +30,7 @@ export default async function Curricula({
   searchParams: {
     department?: string | string[];
     page?: string;
-    degree?: string | string[];
+    degreeLevel?: string | string[];
     major?: string | string[];
     semester?: string | string[];
     year?: string | string[];
@@ -55,29 +46,29 @@ export default async function Curricula({
 
   const selectedDepartments = Array.isArray(departmentName) ? departmentName : departmentName ? [departmentName] : [];
 
-  const selectedDegrees = Array.isArray(searchParams.degree)
-    ? searchParams.degree
-    : searchParams.degree
-    ? [searchParams.degree]
-    : [];
+  const selectedDegrees = Array.isArray(searchParams.degreeLevel)
+    ? searchParams.degreeLevel
+    : searchParams.degreeLevel
+      ? [searchParams.degreeLevel]
+      : [];
 
   const selectedMajors = Array.isArray(searchParams.major)
     ? searchParams.major
     : searchParams.major
-    ? [searchParams.major]
-    : [];
+      ? [searchParams.major]
+      : [];
 
   const selectedSemesters = Array.isArray(searchParams.semester)
     ? searchParams.semester
     : searchParams.semester
-    ? [searchParams.semester]
-    : [];
+      ? [searchParams.semester]
+      : [];
 
   const selectedYears = Array.isArray(searchParams.year)
     ? searchParams.year
     : searchParams.year
-    ? [searchParams.year]
-    : [];
+      ? [searchParams.year]
+      : [];
 
   const departments = await db.query.departments.findMany({
     columns: { id: true, name: true, urlName: true },
@@ -152,151 +143,156 @@ export default async function Curricula({
         heading="h2"
         text={text.pageTitle}
       />
-      
+
       <main className="container mt-8">
-  <search className="container mb-10">
-    <Suspense fallback={<Loading />}>
+        <search className="container mb-10">
+          <Suspense fallback={<Loading />}>
 
-      {/* Mobile Filters - Only visible on mobile/tablet */}
-      <div className="lg:hidden">
-        <MobileFilters
-        locale={locale}
-        basePath="/academics/curricula"
-        department={{
-          selected: selectedDepartments,
-          rows: departments,
-          title: text.department,
-        }}
-        degreeLevel={{
-          options: degrees.map((d) => d.degree) as readonly string[],
-          selected: selectedDegrees,
-          textMap: Object.fromEntries(
-            degrees.map((d) => [d.degree, d.degree])
-          ),
-          title: text.degree,
-        }}
-        majors={{
-          options: majorOptionsForMobile as readonly string[],
-          selected: selectedMajors,
-          textMap: majorTextMapForMobile,
-          title: text.majors,
-        }}
-        semester={{
-          options: ['1', '2', '3', '4', '5', '6', '7', '8'] as readonly string[],
-          selected: selectedSemesters,
-          textMap: semesterTextMap,
-          title: text.semester,
-        }}
-        yearDropdown={{
-          options: yearOptions as readonly string[],
-          selected: selectedYears.length > 0 ? selectedYears[0] : null,
-          textMap: yearTextMap,
-          title: text.year ?? 'Year',
-        }}
-        text={{
-          filters: text.filterBy,
-          filterBy: text.filterBy,
-          clearAllFilters: 'Clear All Filters',
-          filter: {
-            date: 'Date',
-            startDate: 'Start Date',
-            endDate: 'End Date',
-            day: 'Day',
-            month: 'Month',
-            year: 'Year',
-          },
-        }}
-      />
-      </div>
+            {/* Mobile Filters - Only visible on mobile/tablet */}
+            <div className="lg:hidden">
+              <MobileFilters
+                locale={locale}
+                basePath="/academics/curricula"
+                department={{
+                  selected: selectedDepartments,
+                  rows: departments,
+                  title: text.department,
+                }}
+                degreeLevel={{
+                  options: degrees.map((d) => d.degree) as readonly string[],
+                  selected: selectedDegrees,
+                  textMap: Object.fromEntries(
+                    degrees.map((d) => [d.degree, d.degree])
+                  ),
+                  title: text.degree,
+                }}
+                majors={{
+                  options: majorOptionsForMobile as readonly string[],
+                  selected: selectedMajors,
+                  textMap: majorTextMapForMobile,
+                  title: text.majors,
+                }}
+                semester={{
+                  options: ['1', '2', '3', '4', '5', '6', '7', '8'] as readonly string[],
+                  selected: selectedSemesters,
+                  textMap: semesterTextMap,
+                  title: text.semester,
+                }}
+                yearDropdown={{
+                  options: yearOptions as readonly string[],
+                  selected: selectedYears.length > 0 ? selectedYears[0] : null,
+                  textMap: yearTextMap,
+                  title: text.year ?? 'Year',
+                }}
+                text={{
+                  filters: text.filters ?? text.filterBy,
+                  filterBy: text.filterBy,
+                  clearAllFilters: text.clearAllFilters ?? 'Clear All Filters',
+                  filter: {
+                    date: text.date ?? 'Date',
+                    startDate: text.startDate ?? 'Start Date',
+                    endDate: text.endDate ?? 'End Date',
+                    day: text.day ?? 'Day',
+                    month: text.month ?? 'Month',
+                    year: text.year ?? 'Year',
+                  },
+                }}
+              />
+            </div>
 
-      {/* Desktop Filters - Only visible on desktop */}
-      <div className="hidden lg:block">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-primary-700">{text.filterBy}</h2>
-        <Suspense fallback={<Loading />}>
-            <YearFilterClient />
+            {/* Desktop Filters - Only visible on desktop */}
+            <div className="hidden lg:block">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-primary-700">{text.filterBy}</h2>
+                <Suspense fallback={<Loading />}>
+                  <YearFilterClient />
+                </Suspense>
+                <ClearFiltersButton />
+              </div>
+
+              {/* Filters Row */}
+              <div className="flex flex-col lg:flex-row gap-4">
+
+                {/* Department */}
+                <Suspense fallback={<Loading />}>
+                  <MultiCheckbox
+                    param="department"
+                    options={departments.map((d) => d.urlName) as readonly string[]}
+                    selected={selectedDepartments}
+                    locale={locale}
+                    textMap={Object.fromEntries(
+                      departments.map((d) => [d.urlName, d.name])
+                    )}
+                    basePath="/academics/curricula"
+                    variant="accordion"
+                    scrollHeight="h-[256px]"
+                    title={text.department}
+                  />
+                </Suspense>
+
+                {/* Degree Card */}
+                <Suspense fallback={<Loading />}>
+                  <MultiCheckbox
+                    param="degreeLevel"
+                    options={degrees.map((d) => d.degree) as readonly string[]}
+                    selected={selectedDegrees}
+                    locale={locale}
+                    textMap={Object.fromEntries(degrees.map((d) => [d.degree, d.degree]))}
+                    basePath="/academics/curricula"
+                    variant="accordion"
+                    scrollHeight="h-[256px]"
+                    title={text.degree}
+                  />
+                </Suspense>
+
+                {/* Semester Card */}
+                <Suspense fallback={<Loading />}>
+                  <MultiCheckbox
+                    param="semester"
+                    options={semesterOptions as readonly string[]}
+                    selected={selectedSemesters}
+                    locale={locale}
+                    textMap={semesterTextMap}
+                    basePath="/academics/curricula"
+                    variant="accordion"
+                    scrollHeight="h-[256px]"
+                    title={text.semester}
+                  />
+                </Suspense>
+
+                {/* Majors */}
+                <Suspense fallback={<Loading />}>
+                  <MultiCheckbox
+                    param="major"
+                    options={filteredMajorsForMobile.map((m) => m.name) as readonly string[]}
+                    selected={selectedMajors}
+                    locale={locale}
+                    textMap={Object.fromEntries(filteredMajorsForMobile.map((m) => [m.name, m.name]))}
+                    basePath="/academics/curricula"
+                    variant="accordion"
+                    scrollHeight="h-[256px]"
+                    title={text.majors}
+                  />
+                </Suspense>
+
+              </div>
+            </div>
+
           </Suspense>
-        <ClearFiltersButton />
-      </div>
+        </search>
 
-      {/* Filters Row */}
-      <div className="flex flex-col lg:flex-row gap-4">
-
-        {/* Department */}
-        <div className="flex-1 rounded-lg border border-primary-100 bg-neutral-50 p-5 shadow-sm">
-          <h3 className="mb-4 text-lg font-semibold text-primary-700">
-            {text.department}
-          </h3>
-
-          <ScrollArea className="h-64 pr-2">
-            <Suspense fallback={<Loading />}>
-              <Departments departments={departments} />
-            </Suspense>
-          </ScrollArea>
-        </div>
-
-        {/* Middle Column (Degree + Semester as separate cards) */}
-        <div className="flex-1 flex flex-col gap-4">
-
-          {/* Degree Card */}
-          <div className="flex-1 rounded-lg border border-primary-100 bg-neutral-50 p-5 shadow-sm">
-            <h3 className="mb-4 text-lg font-semibold text-primary-700">
-              {text.degree}
-            </h3>
-
-            <ScrollArea className="h-32 pr-2">
-              <Suspense fallback={<Loading />}>
-                <Degrees degreesData={degrees} />
-              </Suspense>
-            </ScrollArea>
-          </div>
-
-          {/* Semester Card */}
-          <div className="flex-1 rounded-lg border border-primary-100 bg-neutral-50 p-5 shadow-sm">
-            <h3 className="mb-4 text-lg font-semibold text-primary-700">
-              {text.semester}
-            </h3>
-
-            <ScrollArea className="h-16 pr-2">
-              <Suspense fallback={<Loading />}>
-                <Semesters searchParams={searchParams} semesterOptions={semesterOptions} semesterTextMap={semesterTextMap} />
-              </Suspense>
-            </ScrollArea>
-          </div>
-
-        </div>
-
-        {/* Majors */}
-        <div className="flex-1 rounded-lg border border-primary-100 bg-neutral-50 p-5 shadow-sm">
-          <h3 className="mb-4 text-lg font-semibold text-primary-700">
-            {text.majors}
-          </h3>
-
-          <ScrollArea className="h-64 pr-2">
-            <Suspense fallback={<Loading />}>
-              <Majors searchParams={searchParams} majorsData={majorsData} />
-            </Suspense>
-          </ScrollArea>
-        </div>
-
-      </div>
-      </div>
-
-    </Suspense>
-  </search>
-
-  <Suspense fallback={<Loading />}>
-    <Courses
-      page={page}
-      locale={locale}
-      selectedDepartments={selectedDepartments}
-      selectedDegrees={selectedDegrees}
-      selectedMajors={selectedMajors}
-      selectedSemesters={selectedSemesters}
-      selectedYears={selectedYears}
-    />
-  </Suspense>
-</main>
+        <Suspense fallback={<Loading />}>
+          <Courses
+            page={page}
+            locale={locale}
+            selectedDepartments={selectedDepartments}
+            selectedDegrees={selectedDegrees}
+            selectedMajors={selectedMajors}
+            selectedSemesters={selectedSemesters}
+            selectedYears={selectedYears}
+          />
+        </Suspense>
+      </main>
 
 
     </>
@@ -339,7 +335,7 @@ const Courses = async ({
     with: {
       coursesToMajors: {
         columns: {
-          semester: true, 
+          semester: true,
           lectureCredits: true,
           practicalCredits: true,
           tutorialCredits: true,
@@ -452,123 +448,39 @@ const Courses = async ({
 };
 
 const Departments = ({
-  departments,
-}: {
-  departments: { id: number; name: string; urlName: string }[];
-}) => {
-  return (
-    <FilterListClient
-      paramName="department"
-      options={departments.map((d) => ({
-        label: d.name,
-        value: d.urlName,
-      }))}
-    />
-  );
-};
-
-const Degrees = ({
-  degreesData,
-}: {
-  degreesData: { degree: string }[];
-}) => {
-  return (
-    <FilterListClient
-      paramName="degree"
-      options={degreesData.map((d) => ({
-        label: d.degree,
-        value: d.degree,
-      }))}
-    />
-  );
-};
-const Majors = ({
   searchParams,
-  majorsData,
+  departments,
+  locale,
+  basePath,
+  text,
 }: {
-  searchParams: {
-    department?: string | string[];
-    degree?: string | string[];
-  };
-  majorsData: {
-    id: number;
-    name: string;
-    degree: string;
-    department: { urlName: string };
-  }[];
+  searchParams: { department?: string | string[] };
+  departments: { id: number; name: string; urlName: string }[];
+  locale: string;
+  basePath: string;
+  text: CurriculaTranslations;
 }) => {
   const selectedDepartments = Array.isArray(searchParams.department)
     ? searchParams.department
     : searchParams.department
-    ? [searchParams.department]
-    : [];
-
-  const selectedDegrees = Array.isArray(searchParams.degree)
-    ? searchParams.degree
-    : searchParams.degree
-    ? [searchParams.degree]
-    : [];
-
-  const filteredMajors = majorsData.filter((m) => {
-    const departmentMatch =
-      selectedDepartments.length === 0 ||
-      selectedDepartments.includes(m.department.urlName);
-
-    const degreeMatch =
-      selectedDegrees.length === 0 ||
-      selectedDegrees.includes(m.degree);
-
-    return departmentMatch && degreeMatch;
-  });
+      ? [searchParams.department]
+      : [];
 
   return (
-    <FilterListClient
-      paramName="major"
-      options={filteredMajors.map((m) => ({
-        label: m.name,
-        value: m.name,
-      }))}
+    <MultiCheckbox
+      param="department"
+      options={departments.map((d) => d.urlName)}
+      selected={selectedDepartments}
+      locale={locale}
+      textMap={Object.fromEntries(
+        departments.map((d) => [d.urlName, d.name])
+      )}
+      title={text.department}
+      basePath={basePath}
+      variant="accordion"
+      scrollHeight="h-[256px]"
     />
   );
 };
 
-const Semesters = ({
-  searchParams,
-  semesterOptions,
-  semesterTextMap,
-}: {
-  searchParams: {
-    semester?: string | string[];
-  };
-  semesterOptions: string[];
-  semesterTextMap: Record<string, string>;
-}) => {
-  // Get selected semesters from URL
-  const selectedSemesters = Array.isArray(searchParams.semester)
-    ? searchParams.semester
-    : searchParams.semester
-    ? [searchParams.semester]
-    : [];
 
-  // Build semester options using passed data
-  const semestersData = semesterOptions.map((sem) => ({
-    label: semesterTextMap[sem],
-    value: sem,
-  }));
-
-  // If nothing selected → show all
-  // If selected → keep only matching
-  const filteredSemesters =
-    selectedSemesters.length === 0
-      ? semestersData
-      : semestersData.filter((s) =>
-          selectedSemesters.includes(s.value)
-        );
-
-  return (
-    <FilterListClient
-      paramName="semester"
-      options={filteredSemesters}
-    />
-  );
-};

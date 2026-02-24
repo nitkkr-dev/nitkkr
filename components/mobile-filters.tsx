@@ -9,6 +9,7 @@ import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
+import { YearFilterClient } from '~/components/inputs/year-dropdown';
 import { cn } from '~/lib/utils';
 
 // -------------- Mobile Filters ------------------
@@ -291,63 +292,15 @@ export function MobileFilters({
 
                     {/* Year Dropdown Filter (conditional) */}
                     {yearDropdown && (
-                      <div className="rounded-lg border border-primary-100 bg-neutral-50 p-5 shadow-sm">
-                        <h3 className="mb-4 text-lg font-semibold text-primary-700">
-                          {yearDropdown.title}
-                        </h3>
+                      <div className="rounded-lg border border-primary-500 bg-neutral-50 p-5 shadow-sm">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-semibold text-primary-700">
+                            {yearDropdown.title}
+                          </h3>
 
-                        <div className="relative">
-                          <select
-                            value={yearDropdown.selected ?? ''}
-                            onChange={(e) => {
-                              const year = e.target.value;
-                              const params = new URLSearchParams(searchParams.toString());
-
-                              if (year) {
-                                params.set('year', year);
-                              } else {
-                                params.delete('year');
-                              }
-
-                              startTransition(() => {
-                                router.replace(`?${params.toString()}`, { scroll: false });
-                              });
-
-                              handleClose();
-                            }}                                                
-                            className="
-                              w-full
-                              appearance-none
-                              rounded-md
-                              border border-primary-200
-                              bg-white
-                              px-4 py-2
-                              pr-10
-                              text-sm
-                              text-primary-700
-                              shadow-sm
-                              focus:border-primary-600
-                              focus:ring-2
-                              focus:ring-primary-500
-                              focus:outline-none
-                              transition
-                            "
-                          >
-                            <option value="">
-                              Select {yearDropdown.title.toLowerCase()}
-                            </option>
-
-                            {yearDropdown.options.map((option) => (
-                              <option key={option} value={option}>
-                                {yearDropdown.textMap[option] || option}
-                              </option>
-                            ))}
-                          </select>
-
-                          {/* Custom Arrow */}
-                          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-primary-600">
-                            ▼
-                          </span>
+                          <div className="w-40">
+                            <YearFilterClient />
+                          </div>
                         </div>
                       </div>
                     )}
@@ -373,7 +326,7 @@ export function MobileFilters({
                     {degreeLevel && (
                       <div className="rounded">
                         <MultiCheckbox
-                          param="degree"
+                          param="degreeLevel"
                           options={degreeLevel.options}
                           selected={degreeLevel.selected}
                           locale={locale}

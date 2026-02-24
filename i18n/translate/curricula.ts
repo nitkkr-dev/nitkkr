@@ -11,6 +11,13 @@ export interface CurriculaTranslations {
   totalCredits: string;
   syllabus: string;
   filterBy: string;
+  filters?: string; // for mobile filters button text
+  clearAllFilters?: string;
+  date?: string;
+  startDate?: string;
+  endDate?: string;
+  day?: string;
+  month?: string;
   majors: string;
   semester: string;
   year?: string;
@@ -28,6 +35,13 @@ export const curriculaEn: CurriculaTranslations = {
   totalCredits: 'Credits',
   syllabus: 'Syllabus',
   filterBy: 'Filter By',
+  filters: 'Filters',
+  clearAllFilters: 'Clear All Filters',
+  date: 'Date',
+  startDate: 'Start Date',
+  endDate: 'End Date',
+  day: 'Day',
+  month: 'Month',
   majors: 'Majors',
   semester: 'Semester',
   year: 'Year',
@@ -41,6 +55,13 @@ export const curriculaHi: CurriculaTranslations = {
   department: 'विभाग',
   degree: 'डिग्री',
   filterBy: 'फ़िल्टर करें',
+  filters: 'फ़िल्टर',
+  clearAllFilters: 'सभी फ़िल्टर हटाएँ',
+  date: 'तारीख',
+  startDate: 'प्रारंभ तिथि',
+  endDate: 'समाप्ति तिथि',
+  day: 'दिन',
+  month: 'महीना',
   majors: 'विशेषज्ञता',
   semester: 'सेमेस्टर',
   credits: 'व्याख्यान-अभ्यास-व्यावहारिक',
