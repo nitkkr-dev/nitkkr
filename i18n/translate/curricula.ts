@@ -23,7 +23,6 @@ export interface CurriculaTranslations {
   year?: string;
 }
 
-
 export const curriculaEn: CurriculaTranslations = {
   pageTitle: 'CURRICULA',
   code: 'Code',

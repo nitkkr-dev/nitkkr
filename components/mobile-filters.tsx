@@ -366,8 +366,6 @@ export function MobileFilters({
                         />
                       </div>
                     )}
-
-                    
                   </div>
                 </ScrollArea>
               </div>

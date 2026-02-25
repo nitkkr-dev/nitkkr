@@ -15,12 +15,11 @@ import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { courses, db } from '~/server/db';
 import { majors } from '~/server/db/schema/majors.schema';
-import type { CurriculaTranslations } from '~/i18n/translations'; 
+import type { CurriculaTranslations } from '~/i18n/translations';
 import { MultiCheckbox } from '~/components/inputs';
 /* ---------------- Relative ---------------- */
 // removed FilterListClient; not needed anymore
 import { YearFilterClient } from '~/components/inputs/year-dropdown';
-
 
 export default async function Curricula({
   params: { locale },
@@ -44,7 +43,11 @@ export default async function Curricula({
     ? 1
     : Math.max(Number(pageParam ?? '1'), 1);
 
-  const selectedDepartments = Array.isArray(departmentName) ? departmentName : departmentName ? [departmentName] : [];
+  const selectedDepartments = Array.isArray(departmentName)
+    ? departmentName
+    : departmentName
+      ? [departmentName]
+      : [];
 
   const selectedDegrees = Array.isArray(searchParams.degreeLevel)
     ? searchParams.degreeLevel
@@ -93,7 +96,6 @@ export default async function Curricula({
     },
   });
 
-
   // Generate years array for mobile filters
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
@@ -134,7 +136,6 @@ export default async function Curricula({
     filteredMajorsForMobile.map((m) => [m.name, m.name])
   );
 
-
   return (
     <>
       <Heading
@@ -147,7 +148,6 @@ export default async function Curricula({
       <main className="container mt-8">
         <search className="container mb-10">
           <Suspense fallback={<Loading />}>
-
             {/* Mobile Filters - Only visible on mobile/tablet */}
             <div className="lg:hidden">
               <MobileFilters
@@ -173,7 +173,16 @@ export default async function Curricula({
                   title: text.majors,
                 }}
                 semester={{
-                  options: ['1', '2', '3', '4', '5', '6', '7', '8'] as readonly string[],
+                  options: [
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7',
+                    '8',
+                  ] as readonly string[],
                   selected: selectedSemesters,
                   textMap: semesterTextMap,
                   title: text.semester,
@@ -202,8 +211,10 @@ export default async function Curricula({
 
             {/* Desktop Filters - Only visible on desktop */}
             <div className="hidden lg:block">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-primary-700">{text.filterBy}</h2>
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-primary-700">
+                  {text.filterBy}
+                </h2>
                 <Suspense fallback={<Loading />}>
                   <YearFilterClient />
                 </Suspense>
@@ -211,13 +222,14 @@ export default async function Curricula({
               </div>
 
               {/* Filters Row */}
-              <div className="flex flex-col lg:flex-row gap-4">
-
+              <div className="flex flex-col gap-4 lg:flex-row">
                 {/* Department */}
                 <Suspense fallback={<Loading />}>
                   <MultiCheckbox
                     param="department"
-                    options={departments.map((d) => d.urlName) as readonly string[]}
+                    options={
+                      departments.map((d) => d.urlName) as readonly string[]
+                    }
                     selected={selectedDepartments}
                     locale={locale}
                     textMap={Object.fromEntries(
@@ -237,7 +249,9 @@ export default async function Curricula({
                     options={degrees.map((d) => d.degree) as readonly string[]}
                     selected={selectedDegrees}
                     locale={locale}
-                    textMap={Object.fromEntries(degrees.map((d) => [d.degree, d.degree]))}
+                    textMap={Object.fromEntries(
+                      degrees.map((d) => [d.degree, d.degree])
+                    )}
                     basePath="/academics/curricula"
                     variant="accordion"
                     scrollHeight="h-[256px]"
@@ -264,20 +278,24 @@ export default async function Curricula({
                 <Suspense fallback={<Loading />}>
                   <MultiCheckbox
                     param="major"
-                    options={filteredMajorsForMobile.map((m) => m.name) as readonly string[]}
+                    options={
+                      filteredMajorsForMobile.map(
+                        (m) => m.name
+                      ) as readonly string[]
+                    }
                     selected={selectedMajors}
                     locale={locale}
-                    textMap={Object.fromEntries(filteredMajorsForMobile.map((m) => [m.name, m.name]))}
+                    textMap={Object.fromEntries(
+                      filteredMajorsForMobile.map((m) => [m.name, m.name])
+                    )}
                     basePath="/academics/curricula"
                     variant="accordion"
                     scrollHeight="h-[256px]"
                     title={text.majors}
                   />
                 </Suspense>
-
               </div>
             </div>
-
           </Suspense>
         </search>
 
@@ -293,8 +311,6 @@ export default async function Curricula({
           />
         </Suspense>
       </main>
-
-
     </>
   );
 }
@@ -317,15 +333,9 @@ const Courses = async ({
 }) => {
   const text = (await getTranslations(locale)).Curricula;
 
-  const normalizedDepartments = selectedDepartments.map((d) =>
-    d.toLowerCase()
-  );
-  const normalizedDegrees = selectedDegrees.map((d) =>
-    d.toLowerCase()
-  );
-  const normalizedMajors = selectedMajors.map((m) =>
-    m.toLowerCase()
-  );
+  const normalizedDepartments = selectedDepartments.map((d) => d.toLowerCase());
+  const normalizedDegrees = selectedDegrees.map((d) => d.toLowerCase());
+  const normalizedMajors = selectedMajors.map((m) => m.toLowerCase());
 
   const normalizedSemesters = selectedSemesters;
   const normalizedYears = selectedYears.map((y) => y);
@@ -372,15 +382,11 @@ const Courses = async ({
 
           const degreeMatch =
             normalizedDegrees.length === 0 ||
-            normalizedDegrees.includes(
-              major.degree.toLowerCase()
-            );
+            normalizedDegrees.includes(major.degree.toLowerCase());
 
           const majorMatch =
             normalizedMajors.length === 0 ||
-            normalizedMajors.includes(
-              major.name.toLowerCase()
-            );
+            normalizedMajors.includes(major.name.toLowerCase());
 
           const semesterMatch =
             normalizedSemesters.length === 0 ||
@@ -472,9 +478,7 @@ const Departments = ({
       options={departments.map((d) => d.urlName)}
       selected={selectedDepartments}
       locale={locale}
-      textMap={Object.fromEntries(
-        departments.map((d) => [d.urlName, d.name])
-      )}
+      textMap={Object.fromEntries(departments.map((d) => [d.urlName, d.name]))}
       title={text.department}
       basePath={basePath}
       variant="accordion"
@@ -482,5 +486,3 @@ const Departments = ({
     />
   );
 };
-
-
