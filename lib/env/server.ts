@@ -12,7 +12,7 @@ export const env = createEnv({
       .default('development'),
 
     // When true, use @vercel/postgres driver; when false, use node-postgres (pg)
-    VERCEL: z
+    VERCEL_DB: z
       .enum(['true', 'false'])
       .default('false')
       .transform((v) => v === 'true'),

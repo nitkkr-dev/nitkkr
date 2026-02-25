@@ -17,7 +17,7 @@ import * as schema from './schema';
 type DbInstance = ReturnType<typeof vercelDrizzle<typeof schema>>;
 
 function createConnection(): DbInstance {
-  if (env.VERCEL) {
+  if (env.VERCEL_DB) {
     return vercelDrizzle({ casing: 'snake_case', client: sql, schema });
   }
 
