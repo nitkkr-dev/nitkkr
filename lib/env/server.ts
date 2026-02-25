@@ -11,6 +11,12 @@ export const env = createEnv({
       .enum(['development', 'production', 'test'])
       .default('development'),
 
+    // When true, use @vercel/postgres driver; when false, use node-postgres (pg)
+    VERCEL: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((v) => v === 'true'),
+
     POSTGRES_URL: z.string().url(),
 
     NEXTAUTH_URL: z.string().url(),
