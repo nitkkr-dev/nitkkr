@@ -15,11 +15,11 @@ import { revalidatePath } from 'next/cache';
 import { eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
 
-import { env } from '~/lib/env/server';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 import { tenders, type TenderInsert } from '~/server/db/schema/tenders.schema';
 import { uploadFileToS3 } from '~/server/s3/upload';
+import { buildObjectUrl } from '~/server/s3';
 
 import {
   withStatus,
@@ -335,7 +335,7 @@ export async function uploadTenderDocument(
     await uploadFileToS3(file, s3Path);
 
     // Construct the public URL
-    const publicUrl = `https://${env.AWS_PUBLIC_S3_NAME}.s3.${env.AWS_S3_REGION}.amazonaws.com/${s3Path}`;
+    const publicUrl = buildObjectUrl(s3Path);
 
     return {
       success: true,

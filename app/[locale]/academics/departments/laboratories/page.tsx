@@ -26,10 +26,12 @@ export default async function LaboratoriesPage({
   }));
 
   // Prepare Desktop Computers table data
-  const desktopComputersTableData = text.Details.DesktopComputers.items.map((item) => ({
-    name: item.name,
-    quantity: item.quantity,
-  }));
+  const desktopComputersTableData = text.Details.DesktopComputers.items.map(
+    (item) => ({
+      name: item.name,
+      quantity: item.quantity,
+    })
+  );
 
   // Prepare Servers table data
   const serversTableData = text.Details.servers.items.map((item) => ({
@@ -38,14 +40,19 @@ export default async function LaboratoriesPage({
   }));
 
   // Prepare High-End Software table data
-  const highEndSoftwareTableData = text.Details.HighEndSoftware.items.map((item) => ({
-    name: item.name,
-    quantity: item.quantity,
-  }));
+  const highEndSoftwareTableData = text.Details.HighEndSoftware.items.map(
+    (item) => ({
+      name: item.name,
+      quantity: item.quantity,
+    })
+  );
 
   return (
     <>
-      <ImageHeader title={text.title.toUpperCase()} src="slideshow/image01.jpg" />
+      <ImageHeader
+        title={text.title.toUpperCase()}
+        src="slideshow/image01.jpg"
+      />
 
       {/* UG Students Labs Section */}
       <section className="container mt-8 lg:mt-12">
@@ -55,7 +62,7 @@ export default async function LaboratoriesPage({
           heading="h3"
           text={text.UG.heading.toUpperCase()}
         />
-        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-6">
+        <p className="mb-6 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           {text.UG.pretext}
         </p>
 
@@ -73,7 +80,7 @@ export default async function LaboratoriesPage({
           />
         </div>
 
-        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mt-6">
+        <p className="mt-6 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           {text.UG.posttext}
         </p>
       </section>
@@ -86,7 +93,7 @@ export default async function LaboratoriesPage({
           heading="h3"
           text={text.PG.heading.toUpperCase()}
         />
-        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-6">
+        <p className="mb-6 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           {text.PG.pretext}
         </p>
 
@@ -99,22 +106,22 @@ export default async function LaboratoriesPage({
           />
         </div>
 
-        <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mt-6">
+        <p className="mt-6 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
           {text.PG.posttext}
         </p>
       </section>
 
       {/* Details Section */}
-      <section className="container mt-8 lg:mt-12 mb-8">
+      <section className="container mb-8 mt-8 lg:mt-12">
         <Heading
           className="container"
           glyphDirection="ltr"
           heading="h3"
           text={text.Details.heading.toUpperCase()}
         />
-            {/* Servers */}
+        {/* Servers */}
         <div className="mb-8">
-          <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-4">
+          <p className="mb-4 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
             {text.Details.servers.text}
           </p>
           <ul className="list-disc space-y-2 pl-6 text-neutral-900 lg:text-lg">
@@ -128,7 +135,7 @@ export default async function LaboratoriesPage({
 
         {/* Desktop Computers */}
         <div className="mb-8">
-          <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-4">
+          <p className="mb-4 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
             {text.Details.DesktopComputers.text}
           </p>
           <div className="max-h-fit">
@@ -146,7 +153,7 @@ export default async function LaboratoriesPage({
 
         {/* High-End Software */}
         <div className="mb-8">
-          <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-4">
+          <p className="mb-4 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
             High-End Software:
           </p>
           <ul className="list-disc space-y-2 pl-6 text-neutral-900 lg:text-lg">
@@ -160,7 +167,7 @@ export default async function LaboratoriesPage({
 
         {/* Photocopier */}
         <div className="mb-8">
-          <p className="text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg mb-4">
+          <p className="mb-4 text-justify text-base max-md:rounded-t md:w-full md:rounded-r lg:text-lg">
             {text.Details.Photocopier.text}
           </p>
           <ol className="list-disc space-y-2 pl-6 text-neutral-900 lg:text-lg">

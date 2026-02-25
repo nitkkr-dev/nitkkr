@@ -12,6 +12,9 @@ const config = {
     remotePatterns: [
       { protocol: 'https', hostname: env.AWS_PUBLIC_S3_NAME },
       { protocol: 'https', hostname: env.AWS_PRIVATE_S3_NAME },
+      // MinIO local dev
+      { protocol: 'http', hostname: 'localhost', port: '9000' },
+      { protocol: 'http', hostname: '127.0.0.1', port: '9000' },
     ],
   },
 };
