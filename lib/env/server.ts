@@ -18,11 +18,17 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
 
+    // Storage provider: 's3' for AWS S3, 'minio' for local MinIO
+    STORAGE_PROVIDER: z.enum(['s3', 'minio']).default('minio'),
+
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_ACCESS_KEY_SECRET: z.string(),
     AWS_S3_REGION: z.string(),
     AWS_PUBLIC_S3_NAME: z.string(),
     AWS_PRIVATE_S3_NAME: z.string(),
+
+    // MinIO-specific (only needed when STORAGE_PROVIDER=minio)
+    MINIO_ENDPOINT: z.string().url().optional(),
 
     TYPESENSE_HOST: z.string(),
     TYPESENSE_PORT: z.coerce.number(),

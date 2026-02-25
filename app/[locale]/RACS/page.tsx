@@ -7,6 +7,7 @@ import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import NotificationsPanel from '~/components/notifications/notifications-panel';
 import FICGroup from '~/components/fic-group';
+import { getS3Url } from '~/server/s3';
 import {
   Table,
   TableBody,
@@ -23,21 +24,23 @@ export default async function RACS({
 }) {
   const text = (await getTranslations(locale)).RACS;
 
+  const base = getS3Url();
+
   const researchProposalForms = [
     {
-      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Application-for-Grant-of-Funds.pdf',
+      href: `${base}/rac-s/Application-for-Grant-of-Funds.pdf`,
     },
     {
-      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_A.pdf',
+      href: `${base}/rac-s/Form_A.pdf`,
     },
     {
-      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_B.pdf',
+      href: `${base}/rac-s/Form_B.pdf`,
     },
     {
-      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Form_C_terms_conditions.pdf',
+      href: `${base}/rac-s/Form_C_terms_conditions.pdf`,
     },
     {
-      href: 'https://isac-nitkkr-public.s3.ap-south-1.amazonaws.com/isaac-s3-images/rac-s/Research_Areas_of_SAC_March_2023.pdf',
+      href: `${base}/rac-s/Research_Areas_of_SAC_March_2023.pdf`,
     },
   ];
 
