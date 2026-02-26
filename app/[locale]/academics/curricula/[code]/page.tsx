@@ -1,10 +1,8 @@
 // Revalidate every 5 minutes (has DB calls)
 export const revalidate = 300;
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MdEmail, MdPhone } from 'react-icons/md';
 
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';

@@ -8,26 +8,21 @@ interface Option {
   value: string;
 }
 
-export function YearFilterClient() {
-  // dropdown instead of list of checkboxes
+export function YearFilterClient({
+  yearOptions,
+}: {
+  yearOptions: readonly string[];
+}) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const currentYear = new Date().getFullYear();
-
   const years: Option[] = useMemo(() => {
-    const arr: Option[] = [];
-
-    for (let year = currentYear; year >= 1976; year--) {
-      arr.push({
-        label: String(year),
-        value: String(year),
-      });
-    }
-
-    return arr;
-  }, [currentYear]);
+    return yearOptions.map((year) => ({
+      label: year,
+      value: year,
+    }));
+  }, [yearOptions]);
 
   const selected = searchParams?.get('year') ?? '';
 

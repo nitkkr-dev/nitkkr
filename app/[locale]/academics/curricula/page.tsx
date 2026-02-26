@@ -1,10 +1,9 @@
 // Revalidate every 5 minutes (has DB calls)
-
 export const revalidate = 300;
 
 /* ---------------- External ---------------- */
 import { Suspense } from 'react';
-import { count } from 'drizzle-orm';
+import { and, count, eq, inArray, sql} from 'drizzle-orm';
 
 /* ---------------- Internal (~/) ---------------- */
 import { ClearFiltersButton } from '~/app/faculty-and-staff/client-components';
@@ -13,12 +12,11 @@ import Heading from '~/components/heading';
 import Loading from '~/components/loading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
-import { courses, db } from '~/server/db';
+import { courses, coursesToMajors, db } from '~/server/db';
 import { majors } from '~/server/db/schema/majors.schema';
-import type { CurriculaTranslations } from '~/i18n/translations';
+import { departments as departmentsTable } from '~/server/db/schema/departments.schema';
 import { MultiCheckbox } from '~/components/inputs';
 /* ---------------- Relative ---------------- */
-// removed FilterListClient; not needed anymore
 import { YearFilterClient } from '~/components/inputs/year-dropdown';
 
 export default async function Curricula({
@@ -35,6 +33,7 @@ export default async function Curricula({
     year?: string | string[];
   };
 }) {
+  type Degree = typeof majors.$inferSelect.degree;
   const { department: departmentName, page: pageParam } = searchParams;
 
   const text = (await getTranslations(locale)).Curricula;
@@ -49,11 +48,13 @@ export default async function Curricula({
       ? [departmentName]
       : [];
 
-  const selectedDegrees = Array.isArray(searchParams.degreeLevel)
-    ? searchParams.degreeLevel
-    : searchParams.degreeLevel
-      ? [searchParams.degreeLevel]
-      : [];
+  const selectedDegrees = (
+    Array.isArray(searchParams.degreeLevel)
+      ? searchParams.degreeLevel
+      : searchParams.degreeLevel
+        ? [searchParams.degreeLevel]
+        : []
+  ) as Degree[];
 
   const selectedMajors = Array.isArray(searchParams.major)
     ? searchParams.major
@@ -73,19 +74,41 @@ export default async function Curricula({
       ? [searchParams.year]
       : [];
 
-  const departments = await db.query.departments.findMany({
-    columns: { id: true, name: true, urlName: true },
-  });
+  const departments = await db
+    .selectDistinct({
+      id: departmentsTable.id,
+      name: departmentsTable.name,
+      urlName: departmentsTable.urlName,
+    })
+    .from(departmentsTable)
+    .innerJoin(
+      majors,
+      eq(majors.departmentId, departmentsTable.id)
+    )
+    .where(
+      selectedDegrees.length > 0
+        ? inArray(majors.degree, selectedDegrees)
+        : undefined
+    );
 
   const degrees = await db
     .selectDistinct({ degree: majors.degree })
-    .from(majors);
+    .from(majors)
+    .innerJoin(
+      departmentsTable,
+      eq(majors.departmentId, departmentsTable.id)
+    )
+    .where(
+      selectedDepartments.length > 0
+        ? inArray(departmentsTable.urlName, selectedDepartments)
+        : undefined
+    );
 
   const majorsData = await db.query.majors.findMany({
     columns: {
       id: true,
       name: true,
-      degree: true, // ✅ include degree
+      degree: true,
     },
     with: {
       department: {
@@ -96,31 +119,46 @@ export default async function Curricula({
     },
   });
 
-  // Generate years array for mobile filters
-  const currentYear = new Date().getFullYear();
-  const yearOptions = [];
-  const yearTextMap: Record<string, string> = {};
-  for (let year = currentYear; year >= 1976; year--) {
-    const yearStr = String(year);
-    yearOptions.push(yearStr);
-    yearTextMap[yearStr] = yearStr;
-  }
 
-  // Generate semester text map
-  const semesterOptions = ['1', '2', '3', '4', '5', '6', '7', '8'];
-  const semesterTextMap: Record<string, string> = {
-    '1': `${text.semester} 1`,
-    '2': `${text.semester} 2`,
-    '3': `${text.semester} 3`,
-    '4': `${text.semester} 4`,
-    '5': `${text.semester} 5`,
-    '6': `${text.semester} 6`,
-    '7': `${text.semester} 7`,
-    '8': `${text.semester} 8`,
-  };
+  const yearsFromDb = await db.select({ year: sql<number>`DISTINCT introduction_year`, }).from(courses);
+  
+  const yearOptions = yearsFromDb.map((y) => String(y.year)).sort((a, b) => Number(b) - Number(a));
 
-  // prepare majors list for mobile by filtering according to selected department/degree
-  const filteredMajorsForMobile = majorsData.filter((m) => {
+  const yearTextMap = Object.fromEntries(yearOptions.map((year) => [year, year]));
+
+  const semestersFromDb = await db
+    .selectDistinct({
+      semester: coursesToMajors.semester,
+    })
+    .from(coursesToMajors)
+    .innerJoin(
+      majors,
+      eq(coursesToMajors.majorId, majors.id)
+    )
+    .innerJoin(
+      departmentsTable,
+      eq(majors.departmentId, departmentsTable.id)
+    )
+    .where(
+      and(
+        selectedDepartments.length > 0
+          ? inArray(departmentsTable.urlName, selectedDepartments)
+          : undefined,
+        selectedDegrees.length > 0
+          ? inArray(majors.degree, selectedDegrees)
+          : undefined,
+        selectedMajors.length > 0
+          ? inArray(majors.name, selectedMajors)
+          : undefined
+      )
+    );
+
+  const semesterOptions = [...new Set(semestersFromDb.map((c) => c.semester).filter(Boolean).map(String)),].sort((a, b) => Number(a) - Number(b));
+
+  const semesterTextMap: Record<string, string> = Object.fromEntries(semesterOptions.map((sem) => [sem, `${text.semester} ${sem}`]));
+
+  // 1. Filter the majors based on department/degree selections
+  const filteredMajors = majorsData.filter((m) => {
     if (selectedDepartments.length) {
       const deptUrl = m.department?.urlName ?? '';
       if (!selectedDepartments.includes(deptUrl)) return false;
@@ -131,9 +169,12 @@ export default async function Curricula({
     return true;
   });
 
-  const majorOptionsForMobile = filteredMajorsForMobile.map((m) => m.name);
-  const majorTextMapForMobile = Object.fromEntries(
-    filteredMajorsForMobile.map((m) => [m.name, m.name])
+  // 2. Remove duplicate names (e.g., if CS has both B.Tech and M.Tech)
+  const uniqueMajorNames = Array.from(new Set(filteredMajors.map((m) => m.name)));
+  
+  // 3. Create the text map for the Checkboxes
+  const majorTextMap = Object.fromEntries(
+    uniqueMajorNames.map((name) => [name, name])
   );
 
   return (
@@ -167,22 +208,13 @@ export default async function Curricula({
                   title: text.degree,
                 }}
                 majors={{
-                  options: majorOptionsForMobile as readonly string[],
+                  options: uniqueMajorNames as readonly string[],
                   selected: selectedMajors,
-                  textMap: majorTextMapForMobile,
+                  textMap: majorTextMap,
                   title: text.majors,
                 }}
                 semester={{
-                  options: [
-                    '1',
-                    '2',
-                    '3',
-                    '4',
-                    '5',
-                    '6',
-                    '7',
-                    '8',
-                  ] as readonly string[],
+                  options: semesterOptions as readonly string[],
                   selected: selectedSemesters,
                   textMap: semesterTextMap,
                   title: text.semester,
@@ -216,7 +248,7 @@ export default async function Curricula({
                   {text.filterBy}
                 </h2>
                 <Suspense fallback={<Loading />}>
-                  <YearFilterClient />
+                  <YearFilterClient yearOptions={yearOptions} />
                 </Suspense>
                 <ClearFiltersButton />
               </div>
@@ -277,17 +309,13 @@ export default async function Curricula({
                 {/* Majors */}
                 <Suspense fallback={<Loading />}>
                   <MultiCheckbox
+                    // NOTE: This key forces React to completely re-render the component when dependencies change
+                    key={`majors-${selectedDepartments.join('-')}-${selectedDegrees.join('-')}`}
                     param="major"
-                    options={
-                      filteredMajorsForMobile.map(
-                        (m) => m.name
-                      ) as readonly string[]
-                    }
+                    options={uniqueMajorNames as readonly string[]}
                     selected={selectedMajors}
                     locale={locale}
-                    textMap={Object.fromEntries(
-                      filteredMajorsForMobile.map((m) => [m.name, m.name])
-                    )}
+                    textMap={majorTextMap}
                     basePath="/academics/curricula"
                     variant="accordion"
                     scrollHeight="h-[256px]"
@@ -314,6 +342,7 @@ export default async function Curricula({
     </>
   );
 }
+
 const Courses = async ({
   page,
   locale,
@@ -449,40 +478,6 @@ const Courses = async ({
       currentPage={page}
       itemsPerPage={10}
       getCount={db.select({ count: count() }).from(courses)}
-    />
-  );
-};
-
-const Departments = ({
-  searchParams,
-  departments,
-  locale,
-  basePath,
-  text,
-}: {
-  searchParams: { department?: string | string[] };
-  departments: { id: number; name: string; urlName: string }[];
-  locale: string;
-  basePath: string;
-  text: CurriculaTranslations;
-}) => {
-  const selectedDepartments = Array.isArray(searchParams.department)
-    ? searchParams.department
-    : searchParams.department
-      ? [searchParams.department]
-      : [];
-
-  return (
-    <MultiCheckbox
-      param="department"
-      options={departments.map((d) => d.urlName)}
-      selected={selectedDepartments}
-      locale={locale}
-      textMap={Object.fromEntries(departments.map((d) => [d.urlName, d.name]))}
-      title={text.department}
-      basePath={basePath}
-      variant="accordion"
-      scrollHeight="h-[256px]"
     />
   );
 };
