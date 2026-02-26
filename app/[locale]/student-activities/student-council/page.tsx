@@ -149,9 +149,6 @@ export default async function StudentCouncil({
     studentRepresentativesAcademicData.map((s) => [s.id, s])
   );
 
-  function min(a: number, b: number) {
-    return a < b ? a : b;
-  }
   return (
     <>
       <ImageHeader
@@ -252,7 +249,7 @@ export default async function StudentCouncil({
                   key: 'branch',
                   label: text.StudentCouncil.tableHeaders.branch,
                 },
-                { key: 'year', label: text.StudentCouncil.tableHeaders.year },
+                { key: 'batch', label: text.StudentCouncil.tableHeaders.batch },
               ]}
               tableData={studentRepresentatives.map((member) => {
                 const studentData = studentRepresentativesMap.get(
@@ -261,9 +258,6 @@ export default async function StudentCouncil({
                 const academicData = studentRepresentativesAcademicMap.get(
                   member.personId
                 );
-                const year = academicData?.batch
-                  ? min(2026 - academicData.batch, 4)
-                  : null;
                 const branchWithDegree = academicData?.major
                   ? `${academicData.major.name} (${academicData.major.degree})`
                   : '-';
@@ -274,7 +268,7 @@ export default async function StudentCouncil({
                     ? `${member.person.telephone}`.trim()
                     : '-',
                   branch: branchWithDegree,
-                  year: year ? `${year}` : '-',
+                  batch: academicData?.batch ? `${academicData.batch}` : '-',
                 };
               })}
             />

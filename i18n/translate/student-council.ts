@@ -14,7 +14,7 @@ export interface StudentCouncilTranslations {
     name: string;
     contact: string;
     branch: string;
-    year: string;
+    batch: string;
   };
 }
 
@@ -32,7 +32,7 @@ export const studentCouncilEn: StudentCouncilTranslations = {
     name: 'Name',
     contact: 'Contact No.',
     branch: 'Branch & programme',
-    year: 'Year',
+    batch: 'Batch',
   },
 };
 
@@ -50,6 +50,6 @@ export const studentCouncilHi: StudentCouncilTranslations = {
     name: 'नाम',
     contact: 'संपर्क नंबर',
     branch: 'शाखा और कार्यक्रम',
-    year: 'वर्ष',
+    batch: 'बैच',
   },
 };
