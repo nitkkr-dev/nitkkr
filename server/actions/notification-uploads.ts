@@ -1,7 +1,7 @@
 'use server';
 
-import { env } from '~/lib/env/server';
 import { uploadFileToS3 } from '~/server/s3/upload';
+import { buildObjectUrl } from '~/server/s3';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 
 // ─── Constants ───────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ function generateUniqueKey(prefix: string, filename: string): string {
 }
 
 function buildPublicUrl(key: string): string {
-  return `https://${env.AWS_PUBLIC_S3_NAME}.s3.${env.AWS_S3_REGION}.amazonaws.com/${key}`;
+  return buildObjectUrl(key);
 }
 
 // ─── Media Upload (images & videos) ─────────────────────────────────

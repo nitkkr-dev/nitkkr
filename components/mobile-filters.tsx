@@ -299,7 +299,9 @@ export function MobileFilters({
                           </h3>
 
                           <div className="w-40">
-                            <YearFilterClient yearOptions={yearDropdown.options} />
+                            <YearFilterClient
+                              yearOptions={yearDropdown.options}
+                            />
                           </div>
                         </div>
                       </div>

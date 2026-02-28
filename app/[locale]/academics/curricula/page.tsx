@@ -3,7 +3,7 @@ export const revalidate = 300;
 
 /* ---------------- External ---------------- */
 import { Suspense } from 'react';
-import { and, count, eq, inArray, sql} from 'drizzle-orm';
+import { and, count, eq, inArray, sql } from 'drizzle-orm';
 
 /* ---------------- Internal (~/) ---------------- */
 import { ClearFiltersButton } from '~/app/faculty-and-staff/client-components';
@@ -81,10 +81,7 @@ export default async function Curricula({
       urlName: departmentsTable.urlName,
     })
     .from(departmentsTable)
-    .innerJoin(
-      majors,
-      eq(majors.departmentId, departmentsTable.id)
-    )
+    .innerJoin(majors, eq(majors.departmentId, departmentsTable.id))
     .where(
       selectedDegrees.length > 0
         ? inArray(majors.degree, selectedDegrees)
@@ -94,10 +91,7 @@ export default async function Curricula({
   const degrees = await db
     .selectDistinct({ degree: majors.degree })
     .from(majors)
-    .innerJoin(
-      departmentsTable,
-      eq(majors.departmentId, departmentsTable.id)
-    )
+    .innerJoin(departmentsTable, eq(majors.departmentId, departmentsTable.id))
     .where(
       selectedDepartments.length > 0
         ? inArray(departmentsTable.urlName, selectedDepartments)
@@ -119,26 +113,25 @@ export default async function Curricula({
     },
   });
 
+  const yearsFromDb = await db
+    .select({ year: sql<number>`DISTINCT introduction_year` })
+    .from(courses);
 
-  const yearsFromDb = await db.select({ year: sql<number>`DISTINCT introduction_year`, }).from(courses);
-  
-  const yearOptions = yearsFromDb.map((y) => String(y.year)).sort((a, b) => Number(b) - Number(a));
+  const yearOptions = yearsFromDb
+    .map((y) => String(y.year))
+    .sort((a, b) => Number(b) - Number(a));
 
-  const yearTextMap = Object.fromEntries(yearOptions.map((year) => [year, year]));
+  const yearTextMap = Object.fromEntries(
+    yearOptions.map((year) => [year, year])
+  );
 
   const semestersFromDb = await db
     .selectDistinct({
       semester: coursesToMajors.semester,
     })
     .from(coursesToMajors)
-    .innerJoin(
-      majors,
-      eq(coursesToMajors.majorId, majors.id)
-    )
-    .innerJoin(
-      departmentsTable,
-      eq(majors.departmentId, departmentsTable.id)
-    )
+    .innerJoin(majors, eq(coursesToMajors.majorId, majors.id))
+    .innerJoin(departmentsTable, eq(majors.departmentId, departmentsTable.id))
     .where(
       and(
         selectedDepartments.length > 0
@@ -153,9 +146,18 @@ export default async function Curricula({
       )
     );
 
-  const semesterOptions = [...new Set(semestersFromDb.map((c) => c.semester).filter(Boolean).map(String)),].sort((a, b) => Number(a) - Number(b));
+  const semesterOptions = [
+    ...new Set(
+      semestersFromDb
+        .map((c) => c.semester)
+        .filter(Boolean)
+        .map(String)
+    ),
+  ].sort((a, b) => Number(a) - Number(b));
 
-  const semesterTextMap: Record<string, string> = Object.fromEntries(semesterOptions.map((sem) => [sem, `${text.semester} ${sem}`]));
+  const semesterTextMap: Record<string, string> = Object.fromEntries(
+    semesterOptions.map((sem) => [sem, `${text.semester} ${sem}`])
+  );
 
   // 1. Filter the majors based on department/degree selections
   const filteredMajors = majorsData.filter((m) => {
@@ -170,8 +172,10 @@ export default async function Curricula({
   });
 
   // 2. Remove duplicate names (e.g., if CS has both B.Tech and M.Tech)
-  const uniqueMajorNames = Array.from(new Set(filteredMajors.map((m) => m.name)));
-  
+  const uniqueMajorNames = Array.from(
+    new Set(filteredMajors.map((m) => m.name))
+  );
+
   // 3. Create the text map for the Checkboxes
   const majorTextMap = Object.fromEntries(
     uniqueMajorNames.map((name) => [name, name])

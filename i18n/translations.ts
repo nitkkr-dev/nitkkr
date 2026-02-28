@@ -50,6 +50,7 @@ import type {
   WebsiteContributorsTranslations,
   NCCTranslations,
   NSSTranslations,
+  LaboratoriesTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {
@@ -163,4 +164,5 @@ export interface Translations {
   CHPD: CHPDTranslations;
   NCC: NCCTranslations;
   NSS: NSSTranslations;
+  Laboratories: LaboratoriesTranslations;
 }
