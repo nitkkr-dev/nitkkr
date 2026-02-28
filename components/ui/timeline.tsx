@@ -4,7 +4,7 @@ import {
   useMotionValueEvent,
   useScroll,
   useTransform,
-} from 'motion/react';
+} from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface TimelineEntry {
