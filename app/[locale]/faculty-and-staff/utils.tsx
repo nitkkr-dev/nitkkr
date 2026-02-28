@@ -14,7 +14,6 @@ import {
   MdOutlineEdit,
 } from 'react-icons/md';
 import 'server-only';
-import { string } from 'zod';
 
 import {
   PathnameAwareSuspense,
@@ -362,9 +361,9 @@ export async function FacultyOrStaffComponent({
                 href={
                   !facultyDescription[key]
                     ? ''
-                    : facultyDescription[key]!.startsWith('https')
-                      ? facultyDescription[key]!
-                      : `https://${facultyDescription[key]!}`
+                    : facultyDescription[key].startsWith('https')
+                      ? facultyDescription[key]
+                      : `https://${facultyDescription[key]}`
                 }
                 target="_blank"
                 rel="noopener noreferrer"

@@ -54,9 +54,7 @@ export default async function ContributionsPage({
       githubId: true,
       linkedinId: true,
     },
-    orderBy: (contributor, { desc, asc }) => [
-      desc(contributor.passoutYear),
-    ],
+    orderBy: (contributor, { desc, asc }) => [desc(contributor.passoutYear)],
   })) as DBContributor[];
 
   // Filter out contributors with null designation and type assert
