@@ -55,6 +55,7 @@
     "jiti": "^1.21.0",
     "jotai": "^2.11.1",
     "lucide-react": "^0.562.0",
+    "motion": "^12.34.3",
     "negotiator": "^0.6.3",
     "next": "^14.2.26",
     "next-auth": "^4.24.5",
