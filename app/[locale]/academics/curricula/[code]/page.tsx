@@ -64,9 +64,17 @@ export default async function Curriculum({
             </h5>
 
             <h5>{text.objectives}:</h5>
-            {course.objectives.map((objective, index) => (
-              <li key={index}>{objective}</li>
-            ))}
+            {course.objectives.length > 1 ? (
+              <ul className="list-disc space-y-2 pl-5">
+                {course.objectives.map((objective, index) => (
+                  <li key={index}>{objective}</li>
+                ))}
+              </ul>
+            ) : (
+              course.objectives.map((objective, index) => (
+                <p key={index}>{objective}</p>
+              ))
+            )}
 
             <h5 className="mb-2 flex">
               {text.similarCourses}:
@@ -96,13 +104,19 @@ export default async function Curriculum({
                 <AccordionItem key={index} value={section.title}>
                   <AccordionTrigger>{section.title}</AccordionTrigger>
                   <AccordionContent>
-                    <ol className="list-decimal space-y-2 pl-5">
-                      {section.topics.map((topic, subIndex) => (
-                        <li key={subIndex}>
-                          <p>{topic}</p>
-                        </li>
-                      ))}
-                    </ol>
+                    {section.topics.length > 1 ? (
+                      <ol className="list-decimal space-y-2 pl-5">
+                        {section.topics.map((topic, subIndex) => (
+                          <li key={subIndex}>
+                            <p>{topic}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    ) : (
+                      section.topics.map((topic, subIndex) => (
+                        <p key={subIndex}>{topic}</p>
+                      ))
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -135,13 +149,23 @@ export default async function Curriculum({
           />
 
           <section className="rounded-xl border border-primary-500 bg-neutral-50">
-            <ol className="flex list-disc flex-col space-y-4 p-12">
-              {course.essentialReading.map((book, index) => (
-                <li key={index}>
-                  <p className="font-medium text-primary-300">{book}</p>
-                </li>
-              ))}
-            </ol>
+            {course.essentialReading.length > 1 ? (
+              <ol className="flex list-disc flex-col space-y-4 p-12">
+                {course.essentialReading.map((book, index) => (
+                  <li key={index}>
+                    <p className="font-medium text-primary-300">{book}</p>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <div className="p-12">
+                {course.essentialReading.map((book, index) => (
+                  <p key={index} className="font-medium text-primary-300">
+                    {book}
+                  </p>
+                ))}
+              </div>
+            )}
           </section>
         </section>
       </main>
