@@ -56,7 +56,6 @@ export default async function ContributionsPage({
     },
     orderBy: (contributor, { desc, asc }) => [
       desc(contributor.passoutYear),
-      asc(contributor.name),
     ],
   })) as DBContributor[];
 
