@@ -146,7 +146,7 @@ const renderFields = <T extends Record<string, any>>(
                   value={
                     Array.isArray(field.value)
                       ? (field.value as string[]).join(', ')
-                      : (field.value as string) ?? ''
+                      : ((field.value as string) ?? '')
                   }
                   onChange={(e) => {
                     field.onChange(e.target.value);

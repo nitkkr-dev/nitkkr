@@ -12,8 +12,7 @@ export type ValidityStateWithError = {
   [K in keyof ValidityStateFlags]: (input: HTMLInputElement) => string;
 };
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   customValidator?: () => ValidityStateWithError;
   debounceEvery?: number;
   debounceTo?: string;
