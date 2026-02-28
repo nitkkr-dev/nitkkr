@@ -118,7 +118,7 @@ export default async function NotificationsPage({
   const hasMore = raw.length > INITIAL_BATCH_SIZE;
   const initialItems = hasMore ? raw.slice(0, INITIAL_BATCH_SIZE) : raw;
   const initialCursor = hasMore
-    ? initialItems[initialItems.length - 1]?.createdAt.toISOString() ?? null
+    ? (initialItems[initialItems.length - 1]?.createdAt.toISOString() ?? null)
     : null;
 
   // Serialize for client component

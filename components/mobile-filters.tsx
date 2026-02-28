@@ -1,13 +1,15 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { startTransition, useEffect, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { FaTimes } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { DateRangeFilter, MultiCheckbox } from '~/components/inputs';
+import { YearFilterClient } from '~/components/inputs/year-dropdown';
 import { cn } from '~/lib/utils';
 
 // -------------- Mobile Filters ------------------
@@ -50,6 +52,30 @@ interface DegreeLevelFilterConfig {
   title: string;
 }
 
+/** Optional majors filter config */
+interface MajorsFilterConfig {
+  options: readonly string[];
+  selected: string[];
+  textMap: Record<string, string>;
+  title: string;
+}
+
+/** Optional semester filter config */
+interface SemesterFilterConfig {
+  options: readonly string[];
+  selected: string[];
+  textMap: Record<string, string>;
+  title: string;
+}
+
+/** Optional year dropdown filter config */
+interface YearFilterDropdownConfig {
+  options: readonly string[];
+  selected: string | null;
+  textMap: Record<string, string>;
+  title: string;
+}
+
 interface MobileFiltersProps {
   locale: string;
   /** Base path used for building filter URLs, e.g. '/events' or '/notifications' */
@@ -62,6 +88,12 @@ interface MobileFiltersProps {
   department?: DepartmentFilterConfig;
   /** Degree level filter — pass to enable */
   degreeLevel?: DegreeLevelFilterConfig;
+  /** Majors filter — pass to enable */
+  majors?: MajorsFilterConfig;
+  /** Semester filter — pass to enable */
+  semester?: SemesterFilterConfig;
+  /** Year dropdown filter — pass to enable */
+  yearDropdown?: YearFilterDropdownConfig;
   text: {
     filters: string;
     filterBy: string;
@@ -86,9 +118,14 @@ export function MobileFilters({
   category,
   department,
   degreeLevel,
+  majors,
+  semester,
+  yearDropdown,
   text,
   className,
 }: MobileFiltersProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -131,6 +168,9 @@ export function MobileFilters({
     (category?.selected.length ?? 0) +
     (department?.selected.length ?? 0) +
     (degreeLevel?.selected.length ?? 0) +
+    (majors?.selected.length ?? 0) +
+    (semester?.selected.length ?? 0) +
+    (yearDropdown?.selected ? 1 : 0) +
     dateFiltersCount;
 
   return (
@@ -250,6 +290,23 @@ export function MobileFilters({
                       </div>
                     )}
 
+                    {/* Year Dropdown Filter (conditional) */}
+                    {yearDropdown && (
+                      <div className="rounded-lg border border-primary-500 bg-neutral-50 p-5 shadow-sm">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-semibold text-primary-700">
+                            {yearDropdown.title}
+                          </h3>
+
+                          <div className="w-40">
+                            <YearFilterClient
+                              yearOptions={yearDropdown.options}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Department Filter (conditional) */}
                     {department && (
                       <div className="rounded">
@@ -277,6 +334,36 @@ export function MobileFilters({
                           locale={locale}
                           textMap={degreeLevel.textMap}
                           title={degreeLevel.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
+
+                    {/* Majors Filter (conditional) */}
+                    {majors && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="major"
+                          options={majors.options}
+                          selected={majors.selected}
+                          locale={locale}
+                          textMap={majors.textMap}
+                          title={majors.title}
+                          basePath={basePath}
+                        />
+                      </div>
+                    )}
+
+                    {/* Semester Filter (conditional) */}
+                    {semester && (
+                      <div className="rounded">
+                        <MultiCheckbox
+                          param="semester"
+                          options={semester.options}
+                          selected={semester.selected}
+                          locale={locale}
+                          textMap={semester.textMap}
+                          title={semester.title}
                           basePath={basePath}
                         />
                       </div>

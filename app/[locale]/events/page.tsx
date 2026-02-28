@@ -111,7 +111,7 @@ export default async function EventsPage({
   const hasMore = raw.length > INITIAL_BATCH_SIZE;
   const initialItems = hasMore ? raw.slice(0, INITIAL_BATCH_SIZE) : raw;
   const initialCursor = hasMore
-    ? initialItems[initialItems.length - 1]?.startDate ?? null
+    ? (initialItems[initialItems.length - 1]?.startDate ?? null)
     : null;
 
   // Serialize for client component
