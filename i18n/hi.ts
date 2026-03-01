@@ -51,6 +51,7 @@ import {
   nccHi,
   nssHi,
   laboratoriesHi,
+  studentCouncilHi,
 } from './translate';
 
 const text: Translations = {
@@ -105,5 +106,6 @@ const text: Translations = {
   NCC: nccHi,
   NSS: nssHi,
   Laboratories: laboratoriesHi,
+  StudentCouncil: studentCouncilHi,
 };
 export default text;

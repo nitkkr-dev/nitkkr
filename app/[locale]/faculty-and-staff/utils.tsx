@@ -359,10 +359,11 @@ export async function FacultyOrStaffComponent({
                     : 'md:w-[19%]'
                 )}
                 href={
-                  !facultyDescription[key]
+                  !facultyDescription[key] ||
+                  typeof facultyDescription[key] !== 'string'
                     ? ''
-                    : facultyDescription[key].startsWith('https')
-                      ? facultyDescription[key]
+                    : (facultyDescription[key] as string).startsWith('https')
+                      ? (facultyDescription[key] as string)
                       : `https://${facultyDescription[key]}`
                 }
                 target="_blank"

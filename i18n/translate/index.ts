@@ -49,3 +49,4 @@ export * from './tenders';
 export * from './ncc';
 export * from './nss';
 export * from './laboratories';
+export * from './student-council';
