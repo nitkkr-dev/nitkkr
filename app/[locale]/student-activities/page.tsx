@@ -36,20 +36,21 @@ export default async function StudentActivities({
           { label: text.headings.clubs, href: '#clubs' },
           { label: text.headings.societies, href: '#societies' },
           { label: text.headings.events, href: '#events' },
-          { label: text.headings.council, href: '#council' },
-          
+          { label: text.headings.council, href: '#council' }, 
           {label: text.headings.thoughtLab, href: '#thought-lab',},
           { label: text.headings.nss, href: '#nss' },
           { label: text.headings.ncc, href: '#ncc' },
+          
+          
         ]}
         src="student-activities/header.jpg"
       />
-
+<section id="clubs">
       <Heading
         className="container"
         glyphDirection="rtl"
         heading="h3"
-        href="#clubs"
+        href={`/${locale}/student-activities/clubs`}     
         text={text.sections.clubs.title}
       />
 
@@ -59,11 +60,14 @@ export default async function StudentActivities({
         </Suspense>
         
       </section>
-            <Heading
+  </section>
+  <section id="societies">
+
+       <Heading
         className="container"
         glyphDirection="ltr"
         heading="h3"
-        href="#societies"
+        href={`/${locale}/student-activities/societies`}     
         text={text.sections.societies.title}
       />
 
@@ -72,16 +76,21 @@ export default async function StudentActivities({
           <ClubsCarousel locale={locale} />
         </Suspense>
       </section>
+  </section>
+         
+<section id="events">
 
-       <Heading
+   <Heading
         className="container"
         glyphDirection="rtl"
         heading="h3"
-        href="#events"
+        href={`/${locale}/student-activities/events`}     
         text={text.sections.events.title}
       />
+</section>
+      
 
-<section className="container text-center" id="student-tnp">
+<section className="container text-center" id="council">
         <Heading
           glyphDirection="ltr"
           heading="h3"
@@ -103,11 +112,12 @@ export default async function StudentActivities({
           text={text.sections.council.more}
         />
       </section>
+<section id="thought-lab">
 
-              <Heading
+  <Heading
                 glyphDirection="rtl"
                 heading="h3"
-                href="#thought-lab"
+                href={`/${locale}/student-activities/thought-lab`}     
                 text={text.sections.thoughtLab.title}
               />
 
@@ -139,14 +149,18 @@ export default async function StudentActivities({
               
                           {/* Right: Description */}
                           <p className="text-gray-800 text-justify leading-relaxed">
-                            {text.sections.nss.content}
+                            {text.sections.thoughtLab.content}
                           </p>
                         </div>
-              <Heading
+</section>
+              
+        <section id="nss">
+
+           <Heading
                 glyphDirection="ltr"
                 heading="h3"
-                href="#ncc"
-                text={text.sections.ncc.title}
+                 href={`/${locale}/student-activities/nss`}
+                text={text.sections.nss.title}
               />
 
               
@@ -183,12 +197,15 @@ export default async function StudentActivities({
   </div>
 
 </div>
+        </section>
+             
+<section id="ncc">
 
-                        <Heading
+  <Heading
                 glyphDirection="rtl"
                 heading="h3"
-                href="#nss"
-                text={text.sections.nss.title}
+                href={`/${locale}/student-activities/ncc`}
+                text={text.sections.ncc.title}
               />
 
               <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
@@ -221,6 +238,8 @@ export default async function StudentActivities({
                             {text.sections.nss.content}
                           </p>
                         </div>
+</section>
+                        
                
     </>
   );
