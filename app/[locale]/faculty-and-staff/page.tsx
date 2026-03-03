@@ -417,9 +417,9 @@ const FacultyList = async ({
                         href={
                           !profileExternalLinks[key]
                             ? ''
-                            : profileExternalLinks[key]?.startsWith('https')
+                            : profileExternalLinks[key]!.startsWith('https')
                               ? profileExternalLinks[key]!
-                              : `https://${profileExternalLinks[key]}`
+                              : `https://${profileExternalLinks[key]!}`
                         }
                       >
                         <Image
