@@ -121,44 +121,45 @@ export default function GenericTable<T extends Record<string, unknown>>({
 
   return (
     <section className="container">
-      <div className="max-h-96 w-full overflow-x-auto">
-        <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
-          <TableHeader>
-            <TableRow>
-              {showSerialNo && <TableHead>{serialNoLabel}</TableHead>}
-              {headers.map((header, index) => (
-                <TableHead key={index}>
-                  {index === 0 && sortByDateField ? (
-                    <button
-                      onClick={toggleSortOrder}
-                      className="flex items-center gap-1 transition-colors hover:text-primary-700"
-                      aria-label={`Sort by date ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
-                    >
-                      {header.label}
-                      {sortOrder === 'asc' ? (
-                        <FaChevronUp className="h-3 w-3" />
-                      ) : (
-                        <FaChevronDown className="h-3 w-3" />
-                      )}
-                    </button>
-                  ) : (
-                    header.label
-                  )}
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
+      <div className="w-full rounded-md border border-primary-700 shadow-2xl overflow-hidden">
+        <div className="h-[23rem] overflow-x-auto overflow-y-auto">
+          <table className="w-max caption-bottom text-sm">
+            <TableHeader> 
+              <TableRow>
+                {showSerialNo && <TableHead>{serialNoLabel}</TableHead>}
+                {headers.map((header, index) => (
+                  <TableHead key={index}>
+                    {index === 0 && sortByDateField ? (
+                      <button
+                        onClick={toggleSortOrder}
+                        className="flex items-center gap-1 transition-colors hover:text-primary-700"
+                        aria-label={`Sort by date ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
+                      >
+                        {header.label}
+                        {sortOrder === 'asc' ? (
+                          <FaChevronUp className="h-3 w-3" />
+                        ) : (
+                          <FaChevronDown className="h-3 w-3" />
+                        )}
+                      </button>
+                    ) : (
+                      header.label
+                    )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
 
-          <TableBody>
-            <Suspense
-              fallback={
-                <TableRow>
-                  <TableCell colSpan={headers.length + (showSerialNo ? 1 : 0)}>
-                    <Loading />
-                  </TableCell>
-                </TableRow>
-              }
-            >
+            <TableBody>
+              <Suspense
+                fallback={
+                  <TableRow>
+                    <TableCell colSpan={headers.length + (showSerialNo ? 1 : 0)}>
+                      <Loading />
+                    </TableCell>
+                  </TableRow>
+                }
+              >
               {visibleData.map((item, rowIndex) => (
                 <TableRow
                   key={rowIndex}
@@ -202,8 +203,9 @@ export default function GenericTable<T extends Record<string, unknown>>({
                 </TableRow>
               ))}
             </Suspense>
-          </TableBody>
-        </Table>
+            </TableBody>
+          </table>
+        </div>
       </div>
 
       {noOfPages > 1 && (

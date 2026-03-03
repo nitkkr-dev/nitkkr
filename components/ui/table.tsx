@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cn } from '~/lib/utils';
 
-import { ScrollArea } from '.';
+
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -10,20 +10,13 @@ const Table = React.forwardRef<
     scrollAreaClassName?: string;
   }
 >(({ className, scrollAreaClassName, ...props }, ref) => (
-  <ScrollArea
-    className={cn(
-      'relative w-full rounded-md border border-primary-700 shadow-2xl',
-      'px-2 py-3',
-      scrollAreaClassName
-    )}
-    scrollBarClassName="mt-[60px] pb-[60px]"
-  >
+  <div className="flex flex-col w-full rounded-md border border-primary-700 shadow-2xl overflow-hidden">
     <table
       ref={ref}
-      className={cn('w-full caption-bottom text-sm', className)}
+      className={cn('w-max md:w-full caption-bottom text-sm', className)}
       {...props}
     />
-  </ScrollArea>
+  </div>
 ));
 Table.displayName = 'Table';
 
@@ -33,7 +26,7 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn('sticky top-0 bg-background [&_tr]:border-b', className)}
+    className={cn('sticky top-0 z-20 bg-background [&_tr]:border-b', className)}
     {...props}
   />
 ));
