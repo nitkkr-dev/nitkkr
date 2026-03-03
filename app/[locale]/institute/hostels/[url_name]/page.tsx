@@ -109,9 +109,7 @@ export default async function Hostel({
 
         <h4>{text.overview}</h4>
         <ul className="list-inside list-disc">
-          {hostel.overview?.map((paragraph, i) => (
-            <li key={i}>{paragraph}</li>
-          ))}
+          {hostel.overview?.map((paragraph, i) => <li key={i}>{paragraph}</li>)}
         </ul>
         <br />
         <h4>{text.staffOverview}</h4>

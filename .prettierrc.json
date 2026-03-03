@@ -6,13 +6,5 @@
   "tailwindFunctions": ["clsx", "cva"],
   "trailingComma": "es5",
   "tabWidth": 2,
-  "useTabs": false,
-  "overrides": [
-    {
-      "files": "*.json",
-      "options": {
-        "trailingComma": "none"
-      }
-    }
-  ]
+  "useTabs": false
 }
