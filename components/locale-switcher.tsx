@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function LocaleSwitcher({
   children,
@@ -12,20 +12,13 @@ export default function LocaleSwitcher({
   className?: string;
   locale: string;
 }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
+  const pathName = usePathname();
   const redirectedPathName = (locale: string) => {
-    if (!pathname) return '/';
+    if (!pathName) return '/';
 
-    const segments = pathname.split('/');
+    const segments = pathName.split('/');
     segments[1] = locale;
-
-    const newPath = segments.join('/');
-
-    const queryString = searchParams.toString();
-
-    return queryString ? `${newPath}?${queryString}` : newPath;
+    return segments.join('/');
   };
 
   return (

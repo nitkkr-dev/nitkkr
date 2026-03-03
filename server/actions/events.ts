@@ -81,7 +81,7 @@ export async function loadMoreEvents(params: LoadMoreEventsParams) {
   const hasMore = raw.length > BATCH_SIZE;
   const items = hasMore ? raw.slice(0, BATCH_SIZE) : raw;
   const nextCursor = hasMore
-    ? (items[items.length - 1]?.startDate ?? null)
+    ? items[items.length - 1]?.startDate ?? null
     : null;
 
   // Serialize for client

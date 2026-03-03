@@ -22,9 +22,7 @@ export function RichContentRenderer({
 }: RichContentRendererProps) {
   return (
     <div className={className}>
-      {content.content?.map((node, i) => (
-        <RenderNode key={i} node={node} />
-      ))}
+      {content.content?.map((node, i) => <RenderNode key={i} node={node} />)}
     </div>
   );
 }
@@ -40,25 +38,19 @@ function RenderNode({ node }: { node: JSONContent }) {
     case 'bulletList':
       return (
         <ul className="my-2 list-disc space-y-1 pl-6">
-          {node.content?.map((child, i) => (
-            <RenderNode key={i} node={child} />
-          ))}
+          {node.content?.map((child, i) => <RenderNode key={i} node={child} />)}
         </ul>
       );
     case 'orderedList':
       return (
         <ol className="my-2 list-decimal space-y-1 pl-6">
-          {node.content?.map((child, i) => (
-            <RenderNode key={i} node={child} />
-          ))}
+          {node.content?.map((child, i) => <RenderNode key={i} node={child} />)}
         </ol>
       );
     case 'listItem':
       return (
         <li className="my-0.5">
-          {node.content?.map((child, i) => (
-            <RenderNode key={i} node={child} />
-          ))}
+          {node.content?.map((child, i) => <RenderNode key={i} node={child} />)}
         </li>
       );
     case 'image':
@@ -68,9 +60,7 @@ function RenderNode({ node }: { node: JSONContent }) {
     case 'blockquote':
       return (
         <blockquote className="my-2 border-l-4 border-primary-300 pl-4 italic text-neutral-600">
-          {node.content?.map((child, i) => (
-            <RenderNode key={i} node={child} />
-          ))}
+          {node.content?.map((child, i) => <RenderNode key={i} node={child} />)}
         </blockquote>
       );
     case 'hardBreak':

@@ -16,7 +16,7 @@ export default function Page({
     >
       <Search
         currentCategory={
-          (category ?? '' in schema) ? (category as keyof typeof schema) : 'all'
+          category ?? '' in schema ? (category as keyof typeof schema) : 'all'
         }
         locale={locale}
         query={query}
