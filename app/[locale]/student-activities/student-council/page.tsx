@@ -7,6 +7,7 @@ import StudentGroup from '~/components/student-group';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 
+export const revalidate = 300;
 export default async function StudentCouncil({
   params: { locale },
 }: {
