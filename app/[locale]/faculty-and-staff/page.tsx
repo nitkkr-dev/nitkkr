@@ -107,7 +107,7 @@ export default async function FacultyAndStaff({
         <ol className="space-y-4">
           <Suspense
             fallback={<Loading />}
-            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : (departmentName ?? '')}-${Array.isArray(designation) ? designation.join(',') : (designation ?? '')}`}
+            key={`${query ?? ''}-${Array.isArray(departmentName) ? departmentName.join(',') : departmentName ?? ''}-${Array.isArray(designation) ? designation.join(',') : designation ?? ''}`}
           >
             {(!designation || designation?.includes('staff')) && (
               <StaffList
@@ -417,9 +417,9 @@ const FacultyList = async ({
                         href={
                           !profileExternalLinks[key]
                             ? ''
-                            : profileExternalLinks[key].startsWith('https')
-                              ? profileExternalLinks[key]
-                              : `https://${profileExternalLinks[key]}`
+                            : profileExternalLinks[key]!.startsWith('https')
+                              ? profileExternalLinks[key]!
+                              : `https://${profileExternalLinks[key]!}`
                         }
                       >
                         <Image

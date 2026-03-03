@@ -245,7 +245,7 @@ export default async function Department({
                     (index === 1 && degree === 'M. Tech.') ||
                     (index === 2 && degree === 'Ph. D.')
                 )
-                .map(({ name, degree }, index) => (
+                .map(({ name }, index) => (
                   <li
                     className={cn(
                       'rounded bg-neutral-50 p-2',
@@ -256,9 +256,7 @@ export default async function Department({
                     key={index}
                   >
                     <Button asChild variant="link">
-                      <Link
-                        href={`/${locale}/academics/curricula?major=${name}&degreeLevel=${encodeURIComponent(degree)}&department=${department.urlName}`}
-                      >
+                      <Link href={`/${locale}/academics/curricula`}>
                         {name}
                       </Link>
                     </Button>
@@ -283,7 +281,7 @@ export default async function Department({
             },
             {
               label: text.laboratories,
-              href: `/${locale}/academics/departments/${name}/labs`,
+              href: `/${locale}/academics/departments/laboratories`,
               icon: HiMiniBeaker,
             },
             {
