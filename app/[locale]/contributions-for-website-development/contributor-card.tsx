@@ -188,7 +188,7 @@ export default function ContributorCard({
         />
       </div>
 
-      <h4 className="break-words text-center text-xl font-semibold leading-tight text-[#001D3D] px-6">
+      <h4 className="break-words px-6 text-center text-xl font-semibold leading-tight text-[#001D3D]">
         {name}
       </h4>
 
