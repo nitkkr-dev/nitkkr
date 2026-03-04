@@ -3,6 +3,7 @@ export interface TrainingAndPlacementTranslations {
   headings: {
     ourrecruiters: string;
     stats: string;
+    placementReports: string;
     guidelines: string;
     about: string;
     faq: string;
@@ -15,6 +16,17 @@ export interface TrainingAndPlacementTranslations {
     fic: string;
     placementcoordinators: string;
     studentcoordinators: string;
+    pgStatistics: string;
+    ugStatistics: string;
+  };
+  charts: {
+    placementDistribution: string;
+    packageStatistics: string;
+    placementPercentage: string;
+    placementPercentageByDiscipline: string;
+  };
+  buttons: {
+    backToTrainingPlacement: string;
   };
   Dean: {
     name: string;
@@ -66,6 +78,7 @@ export const trainingAndPlacementEn: TrainingAndPlacementTranslations = {
   headings: {
     ourrecruiters: 'Our Recruiters',
     stats: 'Placement Statistics',
+    placementReports: 'Placement Reports',
     guidelines: 'Guidelines',
     about: 'About us',
     forrecruiters: 'For Recruiters',
@@ -78,6 +91,17 @@ export const trainingAndPlacementEn: TrainingAndPlacementTranslations = {
     fic: 'Faculty In-Charge',
     placementcoordinators: 'Placement Coordinators',
     studentcoordinators: 'Student Coordinators',
+    pgStatistics: 'PG (Postgraduate) Placement Statistics',
+    ugStatistics: 'UG (Undergraduate) Placement Statistics',
+  },
+  charts: {
+    placementDistribution: 'Placement Distribution by Programme',
+    packageStatistics: 'Package Statistics by Programme',
+    placementPercentage: 'Placement Percentage by Programme',
+    placementPercentageByDiscipline: 'Placement Percentage by Discipline',
+  },
+  buttons: {
+    backToTrainingPlacement: '← Back to Training & Placement',
   },
   Dean: {
     name: 'Prof. XYZ',
@@ -217,6 +241,7 @@ export const trainingAndPlacementHi: TrainingAndPlacementTranslations = {
   headings: {
     ourrecruiters: 'हमारे भर्तीकर्ता',
     stats: 'प्लेसमेंट आंकड़े',
+    placementReports: 'प्लेसमेंट रिपोर्ट',
     guidelines: 'दिशानिर्देश',
     about: 'हमारे बारे में',
     faq: 'अक्सर पूछे जाने वाले प्रश्न',
@@ -229,6 +254,17 @@ export const trainingAndPlacementHi: TrainingAndPlacementTranslations = {
     fic: 'प्रभारी संकाय',
     placementcoordinators: 'प्लेसमेंट समन्वयक',
     studentcoordinators: 'छात्र समन्वयक',
+    pgStatistics: 'PG (स्नातकोत्तर) प्लेसमेंट आंकड़े',
+    ugStatistics: 'UG (स्नातक) प्लेसमेंट आंकड़े',
+  },
+  charts: {
+    placementDistribution: 'प्रोग्राम के अनुसार प्लेसमेंट वितरण',
+    packageStatistics: 'प्रोग्राम के अनुसार पैकेज आंकड़े',
+    placementPercentage: 'प्रोग्राम के अनुसार प्लेसमेंट प्रतिशत',
+    placementPercentageByDiscipline: 'विषय के अनुसार प्लेसमेंट प्रतिशत',
+  },
+  buttons: {
+    backToTrainingPlacement: '← प्रशिक्षण और प्लेसमेंट पर वापस जाएँ',
   },
   Dean: {
     name: 'प्रो. XYZ',
