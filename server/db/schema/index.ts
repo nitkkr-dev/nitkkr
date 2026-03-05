@@ -50,3 +50,5 @@ export * from './senate-agenda-minutes.schema';
 export * from './scsa_minutes.schema';
 export * from './website-contributors.schema';
 export * from './student-council.schema';
+export * from './placement-stats-pg.schema';
+export * from './placement-stats-ug.schema';

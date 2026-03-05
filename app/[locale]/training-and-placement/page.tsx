@@ -5,13 +5,10 @@ import { FaGlobeAsia, FaRegEnvelope } from 'react-icons/fa';
 import { FaGears, FaPhone } from 'react-icons/fa6';
 import { MdArticle, MdEmail } from 'react-icons/md';
 import { RiBriefcase4Line } from 'react-icons/ri';
+import { sql } from 'drizzle-orm';
 
-import Heading from '~/components/heading';
-import ImageHeader from '~/components/image-header';
-import NotificationsPanel from '~/components/notifications/notifications-panel';
-import FICGroup from '~/components/fic-group';
-import StudentGroup from '~/components/student-group';
-import ButtonGroup from '~/components/button-group';
+import { cn } from '~/lib/utils';
+import { getTranslations } from '~/i18n/translations';
 import {
   Accordion,
   AccordionContent,
@@ -19,29 +16,17 @@ import {
   AccordionTrigger,
 } from '~/components/ui/accordion';
 import { ScrollArea } from '~/components/ui';
-import { getTranslations } from '~/i18n/translations';
-import { getS3Url } from '~/server/s3';
-import { cn } from '~/lib/utils';
+import Heading from '~/components/heading';
+import ImageHeader from '~/components/image-header';
+import NotificationsPanel from '~/components/notifications/notifications-panel';
+import FICGroup from '~/components/fic-group';
+import StudentGroup from '~/components/student-group';
+import ButtonGroup from '~/components/button-group';
+import { db } from '~/server/db';
+import { pgPlacementStats } from '~/server/db/schema/placement-stats-pg.schema';
 
 import DirectorCard from '../institute/administration/director/director-card';
 import clients from './recruiters';
-
-// Hardcoded PDF base URL and PDF list for placement stats
-const pdfBase = `${getS3Url()}/training-and-placement/placement-stats/`;
-
-const placementStats: string[] = [
-  `${pdfBase}Academic-Session-2024-25.pdf`,
-  `${pdfBase}Academic-Session-2023-24.pdf`,
-  `${pdfBase}Academic-Session-2022-23.pdf`,
-  `${pdfBase}Academic-Session-2021-22.pdf`,
-  `${pdfBase}Academic-Session-2020-21-FN.pdf`,
-  `${pdfBase}Academic-Session-2019-20-FN.pdf`,
-  `${pdfBase}Academic-Session-2018-19-FN.pdf`,
-  `${pdfBase}Academic-Session-2017-18.pdf`,
-  `${pdfBase}Academic-Session-2017-18.pdf`,
-  `${pdfBase}Academic-Session-2017-18-FN.pdf`,
-  `${pdfBase}Academic-Session-2016-17.pdf`,
-];
 
 const hodProfile = {
   name: 'Jitender Kumar Chhabra',
@@ -60,6 +45,20 @@ export default async function TrainingAndPlacement({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).TrainingAndPlacement;
+
+  // Fetch unique academic sessions from database
+  const uniqueSessions = await db
+    .selectDistinct({
+      academicSession: pgPlacementStats.academicSession,
+    })
+    .from(pgPlacementStats)
+    .orderBy(sql`${pgPlacementStats.academicSession} DESC`);
+
+  const sessions = uniqueSessions
+    .map((s) => s.academicSession)
+    .sort()
+    .reverse();
+
   // Student coordinators data - replace with actual roll numbers from the database
   const studentCoordinators = [
     { rollNumber: '12212070', designation: 'President' },
@@ -119,7 +118,7 @@ export default async function TrainingAndPlacement({
         </article>
       </section>
 
-      <section className="container" id="notification">
+      <section className="container mb-20" id="notification">
         <Heading
           glyphDirection="rtl"
           heading="h3"
@@ -127,7 +126,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.notifications.toUpperCase()}
         />
         <article
-          className="mt-20 flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
+          className="flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
           id="notification"
         >
           <NotificationsPanel
@@ -228,7 +227,7 @@ export default async function TrainingAndPlacement({
           </div>
         </article>
       </section>
-      <section className="container" id="placement-stats">
+      <section className="container mb-20" id="placement-stats">
         <Heading
           glyphDirection="rtl"
           heading="h3"
@@ -236,7 +235,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.stats.toUpperCase()}
         />
         <article
-          className="mt-20 flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
+          className="flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
           id="notification"
         >
           <section
@@ -249,16 +248,14 @@ export default async function TrainingAndPlacement({
           >
             <ScrollArea type="always" className="flex-1 pr-2 sm:pr-3 md:pr-4">
               <ol className="space-y-2 sm:space-y-4 md:space-y-6">
-                {placementStats.map((href, index) => (
-                  <li key={href} className="flex items-start gap-2">
+                {sessions.map((session) => (
+                  <li key={session} className="flex items-start gap-2">
                     <MdArticle className="mt-0.5 size-4 shrink-0 text-primary-700 sm:mt-1 md:size-5 lg:size-6" />
                     <Link
-                      href={href}
-                      target="_blank"
+                      href={`/${locale}/training-and-placement/stats/${session}`}
                       className="line-clamp-2 text-sm hover:underline sm:line-clamp-1 sm:text-base md:text-lg"
                     >
-                      {text.stats.content[index] ??
-                        `Placement Statistics ${index + 1}`}
+                      Academic Session {session}
                     </Link>
                   </li>
                 ))}
@@ -267,7 +264,7 @@ export default async function TrainingAndPlacement({
           </section>
         </article>
       </section>
-      <section className="container" id="events">
+      <section className="container mb-20" id="events">
         <Heading
           glyphDirection="rtl"
           heading="h3"
@@ -275,7 +272,7 @@ export default async function TrainingAndPlacement({
           text={text.headings.events.toUpperCase()}
         />
         <article
-          className="mt-20 flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
+          className="flex h-[384px] items-start justify-between rounded-xl md:h-[512px]"
           id="notification"
         >
           <NotificationsPanel
