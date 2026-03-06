@@ -45,6 +45,13 @@ export default async function TrainingAndPlacement({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).TrainingAndPlacement;
+  // Student coordinators data - replace with actual roll numbers from the database
+  const studentCoordinators = [
+    { rollNumber: '12212070', designation: 'President' },
+    { rollNumber: '12112002', designation: 'Vice President' },
+    { rollNumber: '12112003', designation: 'Technical Lead' },
+    { rollNumber: '12112004', designation: 'Coordinator' },
+  ];
 
   // Fetch unique academic sessions from database
   const uniqueSessions = await db
@@ -60,12 +67,12 @@ export default async function TrainingAndPlacement({
     .reverse();
 
   // Student coordinators data - replace with actual roll numbers from the database
-  const studentCoordinators = [
-    { rollNumber: '12212070', designation: 'President' },
-    { rollNumber: '12112002', designation: 'Vice President' },
-    { rollNumber: '12112003', designation: 'Technical Lead' },
-    { rollNumber: '12112004', designation: 'Coordinator' },
-  ];
+  // const studentCoordinators = [
+  //   { rollNumber: '12212070', designation: 'President' },
+  //   { rollNumber: '12112002', designation: 'Vice President' },
+  //   { rollNumber: '12112003', designation: 'Technical Lead' },
+  //   { rollNumber: '12112004', designation: 'Coordinator' },
+  // ];
 
   return (
     <>
