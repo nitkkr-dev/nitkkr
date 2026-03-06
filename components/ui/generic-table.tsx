@@ -122,7 +122,8 @@ export default function GenericTable<T extends Record<string, unknown>>({
   return (
     <section className="container">
       <div className="max-h-96 w-full overflow-x-auto">
-        <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+        {/* <Table scrollAreaClassName="h-[23rem] min-w-[500px]"> */}
+        <Table scrollAreaClassName="h-[23rem] min-w-full w-max">
           <TableHeader>
             <TableRow>
               {showSerialNo && <TableHead>{serialNoLabel}</TableHead>}
