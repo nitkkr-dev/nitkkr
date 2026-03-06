@@ -2,28 +2,38 @@ import * as React from 'react';
 
 import { cn } from '~/lib/utils';
 
-import { ScrollArea } from '.';
-
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement> & {
     scrollAreaClassName?: string;
   }
 >(({ className, scrollAreaClassName, ...props }, ref) => (
-  <ScrollArea
+  <div
     className={cn(
       'relative w-full rounded-md border border-primary-700 shadow-2xl',
       'px-2 py-3',
-      scrollAreaClassName
     )}
-    scrollBarClassName="mt-[60px] pb-[60px]"
   >
-    <table
-      ref={ref}
-      className={cn('w-full caption-bottom text-sm', className)}
-      {...props}
-    />
-  </ScrollArea>
+    {/*
+      Single div handles BOTH axes natively:
+      - overflow-x-auto → horizontal scrollbar when table is wider than container
+      - overflow-y-auto → vertical scrollbar when rows exceed the max-height
+      Using native browser scroll avoids Radix ScrollArea's overflow:hidden interference.
+    */}
+    <div
+      className={cn(
+        'w-full overflow-x-auto overflow-y-auto',
+        scrollAreaClassName,
+      )}
+    >
+      <table
+        ref={ref}
+        className={cn('caption-bottom text-sm', className)}
+        style={{ minWidth: 'max-content', width: '100%' }}
+        {...props}
+      />
+    </div>
+  </div>
 ));
 Table.displayName = 'Table';
 
@@ -73,7 +83,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      'border-b-[0.5px] border-neutral-400/50  text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-800 data-[state=selected]:bg-background/10',
+      'border-b-[0.5px] border-neutral-400/50 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-800 data-[state=selected]:bg-background/10',
       className
     )}
     {...props}
@@ -88,7 +98,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'h-12 text-left align-middle font-serif font-normal text-primary-700 [&:has([role=checkbox])]:pr-0',
+      'h-12 text-left align-middle font-serif font-normal text-primary-700 [&:has([role=checkbox])]:pr-0 whitespace-nowrap',
       'px-1 py-2 sm:px-2 md:px-3 lg:px-4',
       'text-sm sm:text-base md:text-lg',
       className

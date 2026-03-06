@@ -121,8 +121,8 @@ export default function GenericTable<T extends Record<string, unknown>>({
 
   return (
     <section className="container">
-      <div className="max-h-96 w-full overflow-x-auto">
-        <Table scrollAreaClassName="h-[23rem] min-w-[500px]">
+      <div className="w-full">
+        <Table scrollAreaClassName="max-h-[23rem]">
           <TableHeader>
             <TableRow>
               {showSerialNo && <TableHead>{serialNoLabel}</TableHead>}
@@ -159,6 +159,16 @@ export default function GenericTable<T extends Record<string, unknown>>({
                 </TableRow>
               }
             >
+              {visibleData.length === 0 && (
+                <TableRow>
+                  <TableCell
+                    colSpan={headers.length + (showSerialNo ? 1 : 0)}
+                    className="py-12 text-center text-neutral-500"
+                  >
+                    No courses found for the selected filters.
+                  </TableCell>
+                </TableRow>
+              )}
               {visibleData.map((item, rowIndex) => (
                 <TableRow
                   key={rowIndex}

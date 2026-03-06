@@ -254,11 +254,9 @@ export default async function Department({
                       index === 2 && 'text-primary-700'
                     )}
                     key={index}
-                  >
+                  > 
                     <Button asChild variant="link">
-                      <Link
-                        href={`/${locale}/academics/curricula?major=${name}&degreeLevel=${encodeURIComponent(degree)}&department=${department.urlName}`}
-                      >
+                      <Link href={`/${locale}/academics/curricula?major=${name}&degreeLevel=${encodeURIComponent(degree)}&department=${department.urlName}`}>
                         {name}
                       </Link>
                     </Button>

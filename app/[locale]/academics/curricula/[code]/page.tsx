@@ -149,23 +149,13 @@ export default async function Curriculum({
           />
 
           <section className="rounded-xl border border-primary-500 bg-neutral-50">
-            {course.essentialReading.length > 1 ? (
-              <ol className="flex list-disc flex-col space-y-4 p-12">
-                {course.essentialReading.map((book, index) => (
-                  <li key={index}>
-                    <p className="font-medium text-primary-300">{book}</p>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <div className="p-12">
-                {course.essentialReading.map((book, index) => (
-                  <p key={index} className="font-medium text-primary-300">
-                    {book}
-                  </p>
-                ))}
-              </div>
-            )}
+            <ol className="flex list-disc flex-col space-y-4 p-12">
+              {course.essentialReading.map((book, index) => (
+                <li key={index}>
+                  <p className="font-medium text-primary-300">{book}</p>
+                </li>
+              ))}
+            </ol>
           </section>
         </section>
       </main>
