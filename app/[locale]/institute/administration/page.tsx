@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { MdOutlineChecklist } from 'react-icons/md';
+import { MdEmail, MdOutlineChecklist } from 'react-icons/md';
 import { TbBuildings, TbContract, TbNotebook } from 'react-icons/tb';
 import { LuShipWheel } from 'react-icons/lu';
 import { VscMortarBoard } from 'react-icons/vsc';
 import { HiCurrencyRupee } from 'react-icons/hi';
 import { BsTools } from 'react-icons/bs';
+import Image from 'next/image';
 
+import { getS3Url } from '~/server/s3';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import ButtonGroup from '~/components/button-group';
@@ -20,6 +22,7 @@ export default async function Administration({
 }: {
   params: { locale: string };
 }) {
+  // const s3baseurl=getS3Url();
   const text = (await getTranslations(locale)).Administration;
 
   const actPointsLinks = [
@@ -49,12 +52,17 @@ export default async function Administration({
           { label: text.administrationHeads, href: '#administration-heads' },
           { label: text.committees, href: '#committees' },
           { label: text.actsAndStatutes, href: '#acts-and-statutes' },
+          { label: text.deansHead, href: '#deans-head' },
         ]}
       />
 
+      <section className="container mt-4 px-6 sm:px-10 md:mt-6">
+        <p className="mb-4 text-justify">{text.description}</p>
+      </section>
+
       <section className="container mt-4 md:mt-6">
         <Heading
-          glyphDirection={'dual'}
+          glyphDirection={'rtl'}
           heading={'h3'}
           text={text.boardOfGovernors.toUpperCase()}
           id="board-of-governors"
@@ -81,7 +89,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="dual"
+          glyphDirection="ltr"
           heading={'h3'}
           text={text.senate.toUpperCase()}
           className="container"
@@ -112,7 +120,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="dual"
+          glyphDirection="rtl"
           heading={'h3'}
           text={text.administrationHeads.toUpperCase()}
           id="administration-heads"
@@ -127,7 +135,7 @@ export default async function Administration({
               icon: LuShipWheel,
             },
             {
-              label: text.deans,
+              label: text.deansHead,
               href: `/${locale}/institute/administration/deans`,
               icon: VscMortarBoard,
             },
@@ -139,7 +147,7 @@ export default async function Administration({
           ]}
         />
         <Heading
-          glyphDirection="dual"
+          glyphDirection="ltr"
           heading={'h3'}
           text={text.committees.toUpperCase()}
           id="committees"
@@ -162,10 +170,9 @@ export default async function Administration({
         />
 
         <Heading
-          glyphDirection={'dual'}
+          glyphDirection={'rtl'}
           heading={'h3'}
           text={text.actsAndStatutes.toUpperCase()}
-          className="container"
           id="acts-and-statutes"
           href="#acts-and-statutes"
         />
@@ -216,6 +223,86 @@ export default async function Administration({
             ))}
           </article>
         </footer>
+        <Heading
+          glyphDirection="ltr"
+          heading={'h3'}
+          text={text.deansHead.toUpperCase()}
+          id="deans-head"
+          href="#deans-head"
+        />
+        <section className="mt-10 space-y-8">
+          {text.deans.map((dean) => (
+            <article
+              key={dean.id}
+              className="bg-white flex flex-col items-start gap-6 rounded-xl border border-neutral-200 p-6 shadow-md md:flex-row"
+            >
+              {/* Image + Email */}
+              <div className="flex flex-row items-start md:flex-col">
+                <Image
+                  alt={dean.name}
+                  className="size-32 rounded lg:size-36 xl:size-40 2xl:size-44"
+                  height={160}
+                  width={160}
+                  src={''}
+                  // `${s3baseurl}/institute/administration/deans/${dean.name}/image.png`
+                />
+
+                <div className="mt-3 hidden items-center gap-2 text-sm text-neutral-800 md:flex">
+                  <MdEmail className="text-[#C5291D]" />
+                  <a
+                    href={`mailto:${dean.email}`}
+                    className="text-[#C5291D] hover:underline"
+                  >
+                    {dean.email}
+                  </a>
+                </div>
+
+                {/* Mobile name */}
+                <header className="mb-3 md:hidden">
+                  <h3
+                    className="text-xl font-bold"
+                    style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
+                  >
+                    {dean.name}
+                  </h3>
+
+                  <p
+                    className="text-lg"
+                    style={{ color: '#E13F32', fontFamily: 'DM Serif Display' }}
+                  >
+                    {dean.designation}
+                  </p>
+                </header>
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-col">
+                <header className="mb-3 hidden md:block">
+                  <h3
+                    className="text-xl font-bold"
+                    style={{ color: '#C5291D', fontFamily: 'DM Serif Display' }}
+                  >
+                    {dean.name}
+                  </h3>
+
+                  <p
+                    className="text-lg"
+                    style={{ color: '#E13F32', fontFamily: 'DM Serif Display' }}
+                  >
+                    {dean.designation}
+                  </p>
+                </header>
+
+                <p
+                  className="text-sm leading-relaxed text-neutral-700"
+                  style={{ color: '#000000', fontFamily: 'DM Sans' }}
+                >
+                  {dean.description}
+                </p>
+              </div>
+            </article>
+          ))}
+        </section>
       </section>
     </>
   );
