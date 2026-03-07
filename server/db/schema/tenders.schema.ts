@@ -18,6 +18,14 @@ import { index, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 /**
+ * Document type for tender documents
+ */
+export interface TenderDocument {
+  url: string;
+  name: string;
+}
+
+/**
  * Main tenders table
  * Note: Status is computed at query time, not stored
  */
@@ -32,11 +40,8 @@ export const tenders = pgTable(
     /** Detailed description of the tender */
     description: t.text('description'),
 
-    /** URL to the tender PDF document */
-    pdfLink: t.text('pdf_link'),
-
-    /** Custom display name for the PDF link (shown in UI) */
-    pdfName: t.varchar('pdf_name', { length: 256 }),
+    /** Array of tender documents with URL and display name */
+    documents: t.json('documents').$type<TenderDocument[]>().default([]),
 
     /** Start date when tender becomes active */
     startDate: t.date('start_date', { mode: 'date' }).notNull(),

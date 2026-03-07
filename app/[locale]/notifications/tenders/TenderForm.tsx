@@ -15,6 +15,7 @@ import {
   uploadTenderDocument,
 } from '~/server/actions/tenders';
 import type { TendersTranslations } from '~/i18n/translate/tenders';
+import type { TenderDocument } from '~/server/db/schema/tenders.schema';
 
 interface TenderFormProps {
   locale: string;
@@ -49,8 +50,11 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
     }
     return '';
   });
-  const [pdfLink, setPdfLink] = useState(tender?.pdfLink ?? '');
-  const [pdfName, setPdfName] = useState(tender?.pdfName ?? '');
+  const [documents, setDocuments] = useState<TenderDocument[]>(
+    tender?.documents ?? []
+  );
+  const [editingDocIndex, setEditingDocIndex] = useState<number | null>(null);
+  const [editingDocName, setEditingDocName] = useState<string>('');
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,12 +76,12 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
       const result = await uploadTenderDocument(formData);
 
       if (result.success && result.url) {
-        setPdfLink(result.url);
-        // Set default display name from filename if not already set
-        if (!pdfName) {
-          const fileName = file.name.replace(/\.[^/.]+$/, ''); // Remove extension
-          setPdfName(fileName);
-        }
+        const fileName = file.name.replace(/\.[^/.]+$/, ''); // Remove extension
+        const newDocument: TenderDocument = {
+          url: result.url,
+          name: fileName,
+        };
+        setDocuments([...documents, newDocument]);
       } else {
         setError(result.message);
       }
@@ -93,9 +97,21 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
     }
   };
 
-  const handleRemoveDocument = () => {
-    setPdfLink('');
-    setPdfName('');
+  const handleRemoveDocument = (index: number) => {
+    setDocuments(documents.filter((_, i) => i !== index));
+    setEditingDocIndex(null);
+  };
+
+  const startEditingDocument = (index: number) => {
+    setEditingDocIndex(index);
+    setEditingDocName(documents[index].name);
+  };
+
+  const saveDocumentName = (index: number) => {
+    const updatedDocuments = [...documents];
+    updatedDocuments[index].name = editingDocName;
+    setDocuments(updatedDocuments);
+    setEditingDocIndex(null);
   };
 
   const validateForm = (): string | null => {
@@ -132,8 +148,7 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
     const data: TenderFormData = {
       title: title.trim(),
       description: description.trim() || undefined,
-      pdfLink: pdfLink || null,
-      pdfName: pdfName.trim() || null,
+      documents,
       startDate,
       endDate,
       extendedDate: extendedDate || null,
@@ -266,89 +281,109 @@ export function TenderForm({ locale, tender, text }: TenderFormProps) {
         </div>
       </div>
 
-      {/* Document Upload */}
+      {/* Documents Upload */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-neutral-700">
           {text.form.document}
         </label>
 
-        {pdfLink ? (
-          <div className="flex items-center gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-3">
-            <FaFilePdf className="text-red-500 h-8 w-8 flex-shrink-0" />
-            <div className="min-w-0 flex-1">
-              <a
-                href={pdfLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-600 block truncate font-medium hover:underline"
+        {/* Documents List */}
+        {documents.length > 0 && (
+          <div className="space-y-2">
+            {documents.map((doc, index) => (
+              <div
+                key={`${doc.url}-${index}`}
+                className="flex items-center gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-3"
               >
-                {pdfName || 'Document'}
-              </a>
-              <p className="truncate text-xs text-neutral-500">{pdfLink}</p>
-            </div>
-            <button
-              type="button"
-              onClick={handleRemoveDocument}
-              className="text-red-600 hover:bg-red-100 flex-shrink-0 rounded p-1.5 transition-colors"
-              title={text.form.removeDocument}
-            >
-              <FaTrash className="h-4 w-4" />
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf"
-              onChange={handleFileUpload}
-              className="hidden"
-              id="document-upload"
-              disabled={isUploading}
-            />
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={isUploading}
-              className="flex items-center gap-2 px-4 py-2"
-            >
-              {isUploading ? (
-                <>
-                  <AiOutlineLoading3Quarters className="h-4 w-4 animate-spin" />
-                  Uploading...
-                </>
-              ) : (
-                <>
-                  <FaUpload className="h-4 w-4" />
-                  {text.form.uploadDocument}
-                </>
-              )}
-            </Button>
-            <span className="text-sm text-neutral-500">PDF only, max 10MB</span>
+                <FaFilePdf className="text-red-500 h-8 w-8 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  {editingDocIndex === index ? (
+                    <div className="flex gap-2">
+                      <Input
+                        type="text"
+                        value={editingDocName}
+                        onChange={(e) => setEditingDocName(e.target.value)}
+                        maxLength={256}
+                        className="flex-1"
+                        id={''}
+                      />
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={() => saveDocumentName(index)}
+                        className="px-3 py-1 text-sm"
+                      >
+                        Save
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-600 block truncate font-medium hover:underline"
+                      >
+                        {doc.name || 'Document'}
+                      </a>
+                      <p className="truncate text-xs text-neutral-500">
+                        {doc.url}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => startEditingDocument(index)}
+                        className="text-primary-600 mt-1 text-sm hover:underline"
+                      >
+                        {text.form.editDocument || 'Edit name'}
+                      </button>
+                    </>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveDocument(index)}
+                  className="text-red-600 hover:bg-red-100 flex-shrink-0 rounded p-1.5 transition-colors"
+                  title={text.form.removeDocument}
+                >
+                  <FaTrash className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
           </div>
         )}
 
-        {/* Document Display Name */}
-        {pdfLink && (
-          <div className="mt-2">
-            <label
-              htmlFor="tender-pdf-name"
-              className="block text-sm font-medium text-neutral-700"
-            >
-              {text.form.documentName}
-            </label>
-            <Input
-              id="tender-pdf-name"
-              type="text"
-              value={pdfName}
-              onChange={(e) => setPdfName(e.target.value)}
-              placeholder={text.form.documentNamePlaceholder}
-              maxLength={256}
-              className="mt-1 w-full"
-            />
-          </div>
-        )}
+        {/* Upload Button */}
+        <div className="flex items-center gap-2">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf"
+            onChange={handleFileUpload}
+            className="hidden"
+            id="document-upload"
+            disabled={isUploading}
+          />
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="flex items-center gap-2 px-4 py-2"
+          >
+            {isUploading ? (
+              <>
+                <AiOutlineLoading3Quarters className="h-4 w-4 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              <>
+                <FaUpload className="h-4 w-4" />
+                {text.form.uploadDocument}
+              </>
+            )}
+          </Button>
+          <span className="text-sm text-neutral-500">PDF only, max 10MB</span>
+        </div>
       </div>
 
       {/* Actions */}

@@ -54,6 +54,7 @@ export interface TendersTranslations {
     documentName: string;
     uploadDocument: string;
     removeDocument: string;
+    editDocument: string;
     titlePlaceholder: string;
     descriptionPlaceholder: string;
     documentNamePlaceholder: string;
@@ -129,6 +130,7 @@ export const tendersEn: TendersTranslations = {
     documentName: 'Document Display Name',
     uploadDocument: 'Upload Document',
     removeDocument: 'Remove',
+    editDocument: 'Edit name',
     titlePlaceholder: 'Enter tender title',
     descriptionPlaceholder: 'Enter tender description (optional)',
     documentNamePlaceholder: 'Enter display name for document',
@@ -204,6 +206,7 @@ export const tendersHi: TendersTranslations = {
     documentName: 'दस्तावेज़ प्रदर्शन नाम',
     uploadDocument: 'दस्तावेज़ अपलोड करें',
     removeDocument: 'हटाएं',
+    editDocument: 'नाम संपादित करें',
     titlePlaceholder: 'निविदा शीर्षक दर्ज करें',
     descriptionPlaceholder: 'निविदा विवरण दर्ज करें (वैकल्पिक)',
     documentNamePlaceholder: 'दस्तावेज़ के लिए प्रदर्शन नाम दर्ज करें',

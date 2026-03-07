@@ -17,15 +17,15 @@ import { z } from 'zod';
 
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
-import { tenders, type TenderInsert } from '~/server/db/schema/tenders.schema';
+import { type TenderInsert, tenders } from '~/server/db/schema/tenders.schema';
 import { uploadFileToS3 } from '~/server/s3/upload';
 import { buildObjectUrl } from '~/server/s3';
 
 import {
-  withStatus,
-  type TenderWithStatus,
   type ActionResult,
   type TenderFormData,
+  type TenderWithStatus,
+  withStatus,
 } from './tenders.utils';
 
 // Re-export types from utils for convenience
@@ -40,13 +40,15 @@ export type { TenderWithStatus, ActionResult, TenderFormData };
 const tenderSchema = z.object({
   title: z.string().min(1, 'Title is required').max(256, 'Title too long'),
   description: z.string().optional(),
-  pdfLink: z
-    .string()
-    .url('Invalid PDF URL')
+  documents: z
+    .array(
+      z.object({
+        url: z.string().url('Invalid document URL'),
+        name: z.string().max(256, 'Document name too long'),
+      })
+    )
     .optional()
-    .or(z.literal(''))
-    .nullable(),
-  pdfName: z.string().max(256, 'PDF name too long').optional().nullable(),
+    .default([]),
   startDate: z.coerce.date(),
   endDate: z.coerce.date(),
   extendedDate: z.coerce.date().optional().nullable(),
@@ -138,9 +140,7 @@ export async function getTenderById(
  * Get the count of tenders (for pagination)
  * @param archived - If true, count archived tenders; otherwise count live
  */
-export async function getTenderCount(
-  archived: boolean = false
-): Promise<number> {
+export async function getTenderCount(archived = false): Promise<number> {
   const condition = archived
     ? sql`GREATEST("tenders"."end_date", COALESCE("tenders"."extended_date", "tenders"."end_date")) < CURRENT_DATE`
     : sql`GREATEST("tenders"."end_date", COALESCE("tenders"."extended_date", "tenders"."end_date")) >= CURRENT_DATE`;
@@ -160,9 +160,9 @@ export async function getTenderCount(
  * @param limit - Number of items per page
  */
 export async function getPaginatedTenders(
-  archived: boolean = false,
-  page: number = 1,
-  limit: number = 10
+  archived = false,
+  page = 1,
+  limit = 10
 ): Promise<TenderWithStatus[]> {
   const offset = (page - 1) * limit;
 
@@ -379,8 +379,7 @@ export async function createTenderAction(
     const tender = await createTender({
       title: validatedData.title,
       description: validatedData.description ?? null,
-      pdfLink: validatedData.pdfLink || null,
-      pdfName: validatedData.pdfName ?? null,
+      documents: validatedData.documents ?? [],
       startDate: validatedData.startDate,
       endDate: validatedData.endDate,
       extendedDate: validatedData.extendedDate ?? null,
@@ -445,8 +444,7 @@ export async function updateTenderAction(
     await updateTender(id, {
       title: validatedData.title,
       description: validatedData.description ?? null,
-      pdfLink: validatedData.pdfLink || null,
-      pdfName: validatedData.pdfName ?? null,
+      documents: validatedData.documents ?? [],
       startDate: validatedData.startDate,
       endDate: validatedData.endDate,
       extendedDate: validatedData.extendedDate ?? null,
@@ -587,9 +585,9 @@ export async function getArchivedTendersAction(): Promise<TenderWithStatus[]> {
  * Get paginated tenders
  */
 export async function getPaginatedTendersAction(
-  archived: boolean = false,
-  page: number = 1,
-  limit: number = 10
+  archived = false,
+  page = 1,
+  limit = 10
 ): Promise<TenderWithStatus[]> {
   return await getPaginatedTenders(archived, page, limit);
 }
@@ -597,8 +595,6 @@ export async function getPaginatedTendersAction(
 /**
  * Get tender count
  */
-export async function getTenderCountAction(
-  archived: boolean = false
-): Promise<number> {
+export async function getTenderCountAction(archived = false): Promise<number> {
   return await getTenderCount(archived);
 }
