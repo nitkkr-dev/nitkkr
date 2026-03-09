@@ -35,7 +35,7 @@ export const tenders = pgTable(
     id: t.serial('id').primaryKey(),
 
     /** Tender title - must be unique */
-    title: t.varchar('title', { length: 256 }).unique().notNull(),
+    title: t.varchar('title', { length: 256 }).notNull(),
 
     /** Detailed description of the tender */
     description: t.text('description'),
