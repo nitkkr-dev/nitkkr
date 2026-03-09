@@ -14,7 +14,7 @@
  * - Instant status updates when admin changes dates
  */
 
-import { index, pgTable, uniqueIndex } from 'drizzle-orm/pg-core';
+import { index, pgTable } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 /**
@@ -34,7 +34,7 @@ export const tenders = pgTable(
   (t) => ({
     id: t.serial('id').primaryKey(),
 
-    /** Tender title - must be unique */
+    /** Tender title - duplicates allowed */
     title: t.varchar('title', { length: 256 }).notNull(),
 
     /** Detailed description of the tender */
@@ -67,8 +67,8 @@ export const tenders = pgTable(
       .notNull(),
   }),
   (table) => ({
-    // Unique index on title for fast lookups and uniqueness
-    titleIndex: uniqueIndex('tenders_title_idx').on(table.title),
+    // Normal index on title (duplicates allowed)
+    titleIndex: index('tenders_title_idx').on(table.title),
 
     // Index on endDate for date-based queries
     endDateIndex: index('tenders_end_date_idx').on(table.endDate),
