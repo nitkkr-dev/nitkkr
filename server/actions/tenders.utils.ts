@@ -9,7 +9,11 @@
  * - 'archived': GREATEST(endDate, extendedDate) < TODAY (past)
  */
 
-import type { Tender, TenderStatus } from '~/server/db/schema/tenders.schema';
+import type {
+  Tender,
+  TenderDocument,
+  TenderStatus,
+} from '~/server/db/schema/tenders.schema';
 
 // ============================================================================
 // Types
@@ -31,8 +35,7 @@ export interface ActionResult {
 export interface TenderFormData {
   title: string;
   description?: string;
-  pdfLink?: string | null;
-  pdfName?: string | null;
+  documents?: TenderDocument[];
   startDate: string;
   endDate: string;
   extendedDate?: string | null;
