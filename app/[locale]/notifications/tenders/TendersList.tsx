@@ -126,20 +126,25 @@ export function TendersList({
                   />
                 </TableCell>
                 <TableCell>
-                  {tender.pdfLink ? (
-                    <a
-                      href={tender.pdfLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:bg-primary-200 inline-flex items-center gap-1.5 whitespace-nowrap rounded bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-colors"
-                      title={tender.pdfName ?? text.viewDocument}
-                    >
-                      <FaFilePdf className="h-4 w-4 flex-shrink-0" />
-                      <span className="max-w-[80px] truncate">
-                        {tender.pdfName ?? text.viewDocument}
-                      </span>
-                      <MdOpenInNew className="h-3 w-3 flex-shrink-0" />
-                    </a>
+                  {tender.documents && tender.documents.length > 0 ? (
+                    <div className="flex flex-col gap-1">
+                      {tender.documents.map((doc, docIndex) => (
+                        <a
+                          key={`${doc.url}-${docIndex}`}
+                          href={doc.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:bg-primary-200 inline-flex items-center gap-1.5 whitespace-nowrap rounded bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-colors"
+                          title={doc.name}
+                        >
+                          <FaFilePdf className="h-4 w-4 flex-shrink-0" />
+                          <span className="max-w-[80px] truncate">
+                            {doc.name || text.viewDocument}
+                          </span>
+                          <MdOpenInNew className="h-3 w-3 flex-shrink-0" />
+                        </a>
+                      ))}
+                    </div>
                   ) : (
                     <span className="text-neutral-400">—</span>
                   )}
