@@ -10,22 +10,18 @@ import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 import { cn } from '~/lib/utils';
 import { parseDate } from '~/lib/helpers';
-
 import ImageHeader from '~/components/image-header';
 import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import { DateRangeFilter, SearchInput } from '~/components/inputs';
 import { FilterSection } from '~/components/filter-section';
-
 import {
   notificationDepartments,
 } from '~/server/db/schema/notifications.schema';
-
 import {
-  getServerAuthSession,
   getHodDepartmentId,
+  getServerAuthSession,
 } from '~/server/auth';
-
 import { type NotificationItem } from '~/server/actions/notifications';
 import { NotificationsList } from '~/app/notifications/NotificationsList';
 

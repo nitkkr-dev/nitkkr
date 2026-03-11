@@ -1,9 +1,8 @@
 import { redirect } from 'next/navigation';
 
 import { getTranslations } from '~/i18n/translations';
-import { getServerAuthSession, getHodDepartmentId } from '~/server/auth';
+import { getHodDepartmentId, getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
-
 import ImageHeader from '~/components/image-header';
 import { NotificationForm } from '~/app/notifications/NotificationForm';
 
