@@ -36,6 +36,19 @@ declare module 'next-auth' {
   }
 }
 
+// Helper function to get the department ID for a logged-in HOD (Head of Department)
+export async function getHodDepartmentId(session: Session | null) {
+  if (!session) return null;
+
+  const hod = await db.query.departmentHeads.findFirst({
+    where: (h, { eq, and }) =>
+      and(eq(h.facultyId, session.person.id), eq(h.isActive, true)),
+    columns: { departmentId: true },
+  });
+
+  return hod?.departmentId ?? null;
+}
+
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session }) {
