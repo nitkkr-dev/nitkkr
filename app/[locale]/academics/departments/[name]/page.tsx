@@ -45,7 +45,7 @@ export default async function Department({
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
-  const imageCount = await countChildren(`departments/${name}/images`);
+  const imageCount = await countChildren(`departments/${name}/images/`);
   const allHeads = await db.query.departmentHeads.findMany({
     where: (departmentHead, { eq }) =>
       eq(departmentHead.departmentId, department.id),
