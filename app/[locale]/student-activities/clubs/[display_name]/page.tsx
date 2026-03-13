@@ -281,7 +281,7 @@ export default async function Club({
   ];
 
   const text = await getTranslations(locale);
-  const imageCount = await countChildren(`clubs/${display_name}/images`);
+  const imageCount = await countChildren(`clubs/${display_name}/images/`);
   type SocialPlatform =
     | 'instagram'
     | 'twitter'
