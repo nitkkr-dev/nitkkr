@@ -58,6 +58,10 @@ export interface ThoughtLabTranslations {
   events: {
     heading: string;
   };
+
+  gallery: {
+    heading: string;
+  };
 }
 
 export const thoughtLabEn: ThoughtLabTranslations = {
@@ -151,6 +155,10 @@ export const thoughtLabEn: ThoughtLabTranslations = {
   events: {
     heading: 'EVENTS',
   },
+
+  gallery: {
+    heading: 'GALLERY',
+  },
 };
 
 export const thoughtLabHi: ThoughtLabTranslations = {
@@ -241,5 +249,9 @@ export const thoughtLabHi: ThoughtLabTranslations = {
     office: 'विचार प्रयोगशाला कार्यालय, एनआईटी कुरुक्षेत्र',
     website: 'https:/thought-labv2.netlify.app/',
     websiteLabel: 'वेबसाइट:',
+  },
+
+  gallery: {
+    heading: 'गैलरी',
   },
 };
