@@ -17,11 +17,8 @@ import {
 import { CtrlLink } from '~/components/link';
 import LocaleSwitcher from '~/components/locale-switcher';
 import MaybeLink from '~/components/maybe-link';
-import {
-  NavigationMenu,
-  NavigationMenuCustomListItem,
-  NavigationMenuList,
-} from '~/components/ui';
+import { NavigationMenuCustomListItem } from '~/components/navigation/custom-menu-item';
+import { NavigationMenu, NavigationMenuList } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { getServerAuthSession } from '~/server/auth';
@@ -182,205 +179,323 @@ export default async function Header({ locale }: { locale: string }) {
 
   return (
     <AnimateHeader>
-      <nav
+      <div
         className={cn(
-          'container flex justify-between',
-          'sm:gap-4 xl:gap-6 2xl:gap-8',
-          'py-2 sm:py-4 md:py-6'
+          'w-full px-[10%]',
+          'relative lg:after:pointer-events-none lg:after:absolute lg:after:bottom-0 lg:after:left-0 lg:after:h-px lg:after:w-full lg:after:bg-neutral-500 lg:after:content-[""]',
+          'lg:grid lg:grid-cols-[auto_1fr]',
+          'lg:gap-x-6 xl:gap-x-8'
         )}
       >
-        <Link href={`/${locale}`}>
-          <Image
-            alt={text.logo}
-            className="rounded-md bg-neutral-50"
-            height={45}
-            width={45}
-            src="assets/nitlogo.png"
-          />
-        </Link>
-        <NavigationMenu>
-          <NavigationMenuList
-            className={cn('hidden grow lg:flex', 'gap-4 xl:gap-5 2xl:gap-6')}
+        {/* ===== LOGO: spans both rows on lg+ ===== */}
+        <Link
+          href={`/${locale}`}
+          className={cn(
+            'hidden shrink-0',
+            'lg:row-span-2 lg:flex lg:items-center',
+            'lg:my-3 lg:group-data-[scrolled]/header:my-1.5'
+          )}
+        >
+          {/* Fixed-width container so nav links don't shift when logo shrinks */}
+          <div
+            className={cn(
+              'flex items-center justify-center',
+
+              'w-[80px] xl:w-[90px]'
+            )}
           >
-            {items.map(({ label, href, isExternal, listItems }, index) => (
-              <NavigationMenuCustomListItem
-                key={index}
-                triggerName={label}
-                locale={locale}
-                isExternal={isExternal}
-                listItems={listItems}
-                href={href}
-                imageDetails={{
-                  src: `${href}/image01.jpg`,
-                  alt: label,
-                  href: '/' + href,
-                }}
-              />
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-
-        <ol className="inline-flex h-10 gap-2">
-          <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
-            <Button
-              asChild
-              className={locale === 'hi' ? 'border-none' : undefined}
-              disabled={locale === 'en'}
-              variant="outline"
-            >
-              <LocaleSwitcher
-                className={cn(
-                  'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
-                  locale === 'en'
-                    ? 'border border-primary-700 text-primary-700'
-                    : 'text-neutral-500'
-                )}
-                locale="en"
-              >
-                <span className="px-3 md:hidden lg:block 2xl:hidden">EN</span>
-                <span className="hidden px-4 md:block lg:hidden 2xl:block">
-                  English
-                </span>
-              </LocaleSwitcher>
-            </Button>
-            <Button
-              asChild
-              className={locale === 'en' ? 'border-none' : undefined}
-              disabled={locale === 'hi'}
-              variant="outline"
-            >
-              <LocaleSwitcher
-                className={cn(
-                  'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
-                  locale === 'hi'
-                    ? 'border border-primary-700 text-primary-700'
-                    : 'text-neutral-500'
-                )}
-                locale="hi"
-              >
-                <span className="px-3 md:hidden lg:block 2xl:hidden">हिं</span>
-                <span className="hidden px-4 md:block lg:hidden 2xl:block">
-                  हिंदी
-                </span>
-              </LocaleSwitcher>
-            </Button>
-          </li>
-          <li>
-            <Button asChild className="xl:hidden" variant="icon">
-              <CtrlLink href={`/${locale}/search`} shortcut="k">
-                <FaMagnifyingGlass className="p-2 text-primary-700" size={40} />
-              </CtrlLink>
-            </Button>
-
-            <Button
-              asChild
+            <Image
+              alt={text.logo}
               className={cn(
-                'hidden xl:flex',
-                'group h-full w-60 gap-3 bg-neutral-50 px-4'
+                'aspect-square rounded-md bg-neutral-50',
+                'transition-all duration-300 ease-in-out',
+
+                'h-[75px] w-[75px] xl:h-[85px] xl:w-[85px]',
+                // When scrolled, shrink to condensed size (container stays same width)
+                'group-data-[scrolled]/header:h-[35px] group-data-[scrolled]/header:w-[35px]'
               )}
-              variant="secondary"
-            >
-              <CtrlLink href={`/${locale}/search`} shortcut="k">
-                <FaMagnifyingGlass size={16} />
-                <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
-                  {text.search}
-                </span>
-                <kbd className="font-sans font-medium opacity-50">
-                  {isMacOS ? '⌘' : 'Ctrl'} K
-                </kbd>
-              </CtrlLink>
-            </Button>
-          </li>
-          <li className="hidden lg:block">
-            <Suspense>
-              <AuthAction
-                locale={locale}
-                text={{
-                  alt: text.profile.alt,
-                  login: text.login,
-                  view: text.profile.view,
-                }}
-              />
-            </Suspense>
-          </li>
-          <li className="z-30 font-semibold lg:hidden">
-            <nav className="flex h-0">
-              <HamburgerButton className="peer sticky z-40 size-10 transition-colors aria-expanded:bg-transparent" />
-              <aside
+              height={90}
+              width={90}
+              src="assets/nitlogo.png"
+            />
+          </div>
+        </Link>
+
+        {/* ===== ROW 1: Institution name + utils (lg+ only, collapses on scroll) ===== */}
+        <div
+          className={cn(
+            'hidden',
+            'lg:flex lg:items-center lg:gap-4 lg:py-1',
+            // Smooth collapse on scroll
+            'overflow-hidden transition-all duration-300 ease-in-out',
+            'lg:max-h-20 lg:opacity-100',
+            'lg:group-data-[scrolled]/header:max-h-0 lg:group-data-[scrolled]/header:!py-0 lg:group-data-[scrolled]/header:opacity-0'
+          )}
+        >
+          {/* Institution name: DM Sans / bold / neutral-700 */}
+          <div className="flex flex-col">
+            <span className="font-sans text-base font-bold text-neutral-700 xl:text-lg 2xl:text-xl">
+              {text.instituteName}
+            </span>
+            <span className="font-sans text-sm font-bold text-neutral-700 xl:text-base">
+              {text.instituteNameHindi}
+            </span>
+          </div>
+
+          {/* Right side: search, locale, login */}
+          <ol className="ml-auto inline-flex h-10 items-center gap-2">
+            <li className="h-full">
+              <Button
+                asChild
                 className={cn(
-                  'fixed left-0 top-0',
-                  'invisible opacity-0 peer-aria-expanded:visible peer-aria-expanded:opacity-100',
-                  'transition-all',
-                  'translate-y-[-100%] peer-aria-expanded:translate-y-0',
-                  'bg-background',
-                  'h-screen w-screen '
+                  'flex',
+                  'group h-full w-60 gap-3 rounded-l bg-neutral-50 px-4'
                 )}
+                variant="secondary"
               >
-                <NavStyleSwitcher />
-                <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
-                  <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
-                    <SwitchNavButton
-                      className="nav-column-academics nav-column-institute nav-column-research invisible my-auto aspect-square !h-full text-xl font-bold"
-                      column="default"
-                      variant="link"
-                    >
-                      <MdArrowBackIosNew className="size-8" />
-                    </SwitchNavButton>
-                  </header>
-                  <ul className="nav-column-default space-y-4 text-base font-semibold">
-                    {items.map(
-                      ({ isExternal, label, href, listItems }, index) => (
-                        <li key={index} className="w-fit">
-                          {listItems ? (
-                            <SwitchNavButton
-                              className="text-left text-shade-dark"
-                              column={href}
-                              text={label + '>'}
-                              variant="link"
-                            />
-                          ) : (
-                            <NavButton
-                              asChild
-                              className="text-left text-shade-dark"
-                              variant="link"
-                            >
-                              <Link
-                                href={isExternal ? href : `/${locale}/${href}`}
-                              >
-                                {label}
-                              </Link>
-                            </NavButton>
-                          )}
-                        </li>
-                      )
-                    )}
-                  </ul>
-                  {/* Mobile Navigation Menu -> only for those having listItems*/}
-                  {items.map((item, idx) =>
-                    item.listItems ? (
-                      <MobileSubNavMenu key={idx} locale={locale} {...item} />
-                    ) : null
+                <CtrlLink href={`/${locale}/search`} shortcut="k">
+                  <FaMagnifyingGlass size={16} />
+                  <span className="grow text-left text-neutral-500 group-hover:text-neutral-100">
+                    {text.search}
+                  </span>
+                  <kbd className="font-sans font-medium opacity-50">
+                    {isMacOS ? '⌘' : 'Ctrl'} K
+                  </kbd>
+                </CtrlLink>
+              </Button>
+            </li>
+            <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
+              <Button
+                asChild
+                className={locale === 'hi' ? 'border-none' : undefined}
+                disabled={locale === 'en'}
+                variant="outline"
+              >
+                <LocaleSwitcher
+                  className={cn(
+                    'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
+                    locale === 'en'
+                      ? 'border border-primary-700 text-primary-700'
+                      : 'text-neutral-500'
                   )}
-                  <footer className="mt-auto flex flex-col gap-y-4 py-4">
-                    <hr className="opacity-50" />
-                    <Suspense>
-                      <AuthAction
-                        locale={locale}
-                        mobile
-                        text={{
-                          alt: text.profile.alt,
-                          login: text.login,
-                          view: text.profile.view,
-                        }}
-                      />
-                    </Suspense>
-                  </footer>
-                </main>
-              </aside>
-            </nav>
-          </li>
-        </ol>
-      </nav>
+                  locale="en"
+                >
+                  <span className="px-4">ENG</span>
+                </LocaleSwitcher>
+              </Button>
+              <Button
+                asChild
+                className={locale === 'en' ? 'border-none' : undefined}
+                disabled={locale === 'hi'}
+                variant="outline"
+              >
+                <LocaleSwitcher
+                  className={cn(
+                    'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
+                    locale === 'hi'
+                      ? 'border border-primary-700 text-primary-700'
+                      : 'text-neutral-500'
+                  )}
+                  locale="hi"
+                >
+                  <span className="px-4">हिंदी</span>
+                </LocaleSwitcher>
+              </Button>
+            </li>
+            <li className="h-full">
+              <Suspense>
+                <AuthAction
+                  locale={locale}
+                  text={{
+                    alt: text.profile.alt,
+                    login: text.login,
+                    view: text.profile.view,
+                  }}
+                />
+              </Suspense>
+            </li>
+          </ol>
+        </div>
+
+        {/* ===== ROW 2: Navigation links (lg+) / Mobile controls (<lg) ===== */}
+        <nav
+          className={cn(
+            'flex items-center',
+            'sm:gap-4 xl:gap-6 2xl:gap-8',
+            'py-2 sm:py-3 lg:py-1.5 lg:group-data-[scrolled]/header:py-3.5'
+          )}
+        >
+          {/* Mobile logo: visible on <lg only */}
+          <Link href={`/${locale}`} className="shrink-0 lg:hidden">
+            <Image
+              alt={text.logo}
+              className="rounded-md bg-neutral-50"
+              height={45}
+              width={45}
+              src="assets/nitlogo.png"
+            />
+          </Link>
+
+          {/* Desktop nav links: DM Sans / medium / h5 size / black / uppercase */}
+          <NavigationMenu>
+            <NavigationMenuList
+              className={cn(
+                'hidden grow lg:flex',
+                'gap-4 xl:gap-5 2xl:gap-6',
+                'font-sans font-medium uppercase text-shade-dark'
+              )}
+            >
+              {items.map(({ label, href, isExternal, listItems }, index) => (
+                <NavigationMenuCustomListItem
+                  key={index}
+                  triggerName={label}
+                  locale={locale}
+                  isExternal={isExternal}
+                  listItems={listItems}
+                  href={href}
+                  imageDetails={{
+                    src: `${href}/image01.jpg`,
+                    alt: label,
+                    href: '/' + href,
+                  }}
+                />
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          {/* Mobile controls: locale, search, hamburger (hidden on lg+) */}
+          <ol className="ml-auto inline-flex h-10 gap-2 lg:hidden">
+            <li className="flex h-full rounded-xl border border-neutral-500 bg-neutral-50">
+              <Button
+                asChild
+                className={locale === 'hi' ? 'border-none' : undefined}
+                disabled={locale === 'en'}
+                variant="outline"
+              >
+                <LocaleSwitcher
+                  className={cn(
+                    'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
+                    locale === 'en'
+                      ? 'border border-primary-700 text-primary-700'
+                      : 'text-neutral-500'
+                  )}
+                  locale="en"
+                >
+                  <span className="px-3 md:hidden">EN</span>
+                  <span className="hidden px-4 md:block">English</span>
+                </LocaleSwitcher>
+              </Button>
+              <Button
+                asChild
+                className={locale === 'en' ? 'border-none' : undefined}
+                disabled={locale === 'hi'}
+                variant="outline"
+              >
+                <LocaleSwitcher
+                  className={cn(
+                    'inline-flex h-full w-1/2 items-center justify-center rounded-xl',
+                    locale === 'hi'
+                      ? 'border border-primary-700 text-primary-700'
+                      : 'text-neutral-500'
+                  )}
+                  locale="hi"
+                >
+                  <span className="px-3 md:hidden">हिं</span>
+                  <span className="hidden px-4 md:block">हिंदी</span>
+                </LocaleSwitcher>
+              </Button>
+            </li>
+            <li>
+              <Button asChild variant="icon">
+                <CtrlLink href={`/${locale}/search`} shortcut="k">
+                  <FaMagnifyingGlass
+                    className="p-2 text-primary-700"
+                    size={40}
+                  />
+                </CtrlLink>
+              </Button>
+            </li>
+            <li className="z-30 font-semibold">
+              <nav className="flex h-0">
+                <HamburgerButton className="peer sticky z-40 size-10 transition-colors aria-expanded:bg-transparent" />
+                <aside
+                  className={cn(
+                    'fixed left-0 top-0',
+                    'invisible opacity-0 peer-aria-expanded:visible peer-aria-expanded:opacity-100',
+                    'transition-all',
+                    'translate-y-[-100%] peer-aria-expanded:translate-y-0',
+                    'bg-background',
+                    'h-screen w-screen '
+                  )}
+                >
+                  <NavStyleSwitcher />
+                  <main className="container flex h-dvh max-h-dvh flex-col xl:gap-6 2xl:gap-8">
+                    <header className="mb-6 mt-2 h-10 sm:mb-8 sm:mt-4 md:mb-10 md:mt-6">
+                      <SwitchNavButton
+                        className="nav-column-academics nav-column-institute nav-column-research invisible my-auto aspect-square !h-full text-xl font-bold"
+                        column="default"
+                        variant="link"
+                      >
+                        <MdArrowBackIosNew className="size-8" />
+                      </SwitchNavButton>
+                    </header>
+                    <ul className="nav-column-default space-y-4 text-base font-semibold">
+                      {items.map(
+                        ({ isExternal, label, href, listItems }, index) => (
+                          <li key={index} className="w-fit">
+                            {listItems ? (
+                              <SwitchNavButton
+                                className="text-left text-shade-dark"
+                                column={href}
+                                text={label + '>'}
+                                variant="link"
+                              />
+                            ) : (
+                              <NavButton
+                                asChild
+                                className="text-left text-shade-dark"
+                                variant="link"
+                              >
+                                <Link
+                                  href={
+                                    isExternal ? href : `/${locale}/${href}`
+                                  }
+                                >
+                                  {label}
+                                </Link>
+                              </NavButton>
+                            )}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                    {/* Mobile Navigation Menu -> only for those having listItems*/}
+                    {items.map((item, idx) =>
+                      item.listItems ? (
+                        <MobileSubNavMenu key={idx} locale={locale} {...item} />
+                      ) : null
+                    )}
+                    <footer className="mt-auto flex flex-col gap-y-4 py-4">
+                      <hr className="opacity-50" />
+                      <Suspense>
+                        <AuthAction
+                          locale={locale}
+                          mobile
+                          text={{
+                            alt: text.profile.alt,
+                            login: text.login,
+                            view: text.profile.view,
+                          }}
+                        />
+                      </Suspense>
+                    </footer>
+                  </main>
+                </aside>
+              </nav>
+            </li>
+          </ol>
+        </nav>
+      </div>
     </AnimateHeader>
   );
 }

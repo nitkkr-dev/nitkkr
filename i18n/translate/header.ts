@@ -12,6 +12,8 @@ export interface HeaderTranslations {
   search: string;
   login: string;
   profile: { alt: string; view: string };
+  instituteName: string;
+  instituteNameHindi: string;
 }
 
 export const headerEn: HeaderTranslations = {
@@ -26,6 +28,8 @@ export const headerEn: HeaderTranslations = {
   search: 'Quick Search...',
   login: 'Login',
   profile: { alt: 'Profile image', view: 'View Profile' },
+  instituteName: 'National Institute of Technology Kurukshetra',
+  instituteNameHindi: 'राष्ट्रीय प्रौद्योगिकी संस्थान कुरुक्षेत्र',
 };
 
 export const headerHi: HeaderTranslations = {
@@ -40,4 +44,6 @@ export const headerHi: HeaderTranslations = {
   search: 'त्वरित खोज...',
   login: 'प्रवेश',
   profile: { alt: 'मेरी छवि', view: 'विवरण देखें' },
+  instituteName: 'National Institute of Technology Kurukshetra',
+  instituteNameHindi: 'राष्ट्रीय प्रौद्योगिकी संस्थान कुरुक्षेत्र',
 };
