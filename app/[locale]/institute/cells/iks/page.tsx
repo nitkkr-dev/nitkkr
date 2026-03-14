@@ -5,7 +5,7 @@ import Gallery from '~/components/ui/gallery';
 import { getTranslations } from '~/i18n/translations';
 import { db } from '~/server/db';
 import { otherOfficers } from '~/server/db/schema';
-import { getS3Url } from '~/server/s3';
+import { getS3Url, listFolderImages } from '~/server/s3';
 
 // Function to fetch IKS faculty-in-charge from otherOfficers table
 async function fetchIKSFaculty() {
@@ -98,9 +98,7 @@ export default async function IKS({
     },
   ];
 
-  const galleryImages = Array.from({ length: 23 }, (_, i) => ({
-    src: `institute/cells/iks/${i + 1}.jpg`,
-  }));
+  const galleryImages = await listFolderImages('institute/cells/iks/');
 
   // Fetch faculty-in-charge data from database
   const facultyData = await fetchIKSFaculty();

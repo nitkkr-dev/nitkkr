@@ -22,64 +22,70 @@ export const listFolderImages = async (
   const images: { src: string }[] = [];
   let continuationToken: string | undefined;
 
-  // Ensure folder path ends with '/'
-  const normalizedFolder = folder.endsWith('/') ? folder : `${folder}/`;
+  try {
+    // Ensure folder path ends with '/'
+    const normalizedFolder = folder.endsWith('/') ? folder : `${folder}/`;
 
-  // Normalize extensions to lowercase
-  const normalizedExtensions = allowedExtensions.map((ext) =>
-    ext.toLowerCase().startsWith('.')
-      ? ext.toLowerCase()
-      : `.${ext.toLowerCase()}`
-  );
-
-  do {
-    const response = await s3.send(
-      new ListObjectsV2Command({
-        Bucket:
-          bucket === 'public'
-            ? env.AWS_PUBLIC_S3_NAME
-            : env.AWS_PRIVATE_S3_NAME,
-        Prefix: `isaac-s3-images/${normalizedFolder}`,
-        ContinuationToken: continuationToken,
-        Delimiter: '/', // This ensures we only get immediate children (not recursive)
-      })
+    // Normalize extensions to lowercase
+    const normalizedExtensions = allowedExtensions.map((ext) =>
+      ext.toLowerCase().startsWith('.')
+        ? ext.toLowerCase()
+        : `.${ext.toLowerCase()}`
     );
 
-    if (response.Contents) {
-      for (const object of response.Contents) {
-        if (!object.Key) continue;
+    do {
+      const response = await s3.send(
+        new ListObjectsV2Command({
+          Bucket:
+            bucket === 'public'
+              ? env.AWS_PUBLIC_S3_NAME
+              : env.AWS_PRIVATE_S3_NAME,
+          Prefix: `isaac-s3-images/${normalizedFolder}`,
+          ContinuationToken: continuationToken,
+          Delimiter: '/', // This ensures we only get immediate children (not recursive)
+        })
+      );
 
-        // Get the filename from the full key
-        const key = object.Key;
-        const fileName = key.split('/').pop();
+      if (response.Contents) {
+        for (const object of response.Contents) {
+          if (!object.Key) continue;
 
-        if (!fileName) continue;
+          // Get the filename from the full key
+          const key = object.Key;
+          const fileName = key.split('/').pop();
 
-        // Check if the file has an allowed extension
-        const hasAllowedExtension = normalizedExtensions.some((ext) =>
-          fileName.toLowerCase().endsWith(ext)
-        );
+          if (!fileName) continue;
 
-        if (hasAllowedExtension) {
-          // Remove the 'isaac-s3-images/' prefix to get the relative path
-          const relativePath = key.replace('isaac-s3-images/', '');
-          images.push({ src: relativePath });
+          // Check if the file has an allowed extension
+          const hasAllowedExtension = normalizedExtensions.some((ext) =>
+            fileName.toLowerCase().endsWith(ext)
+          );
+
+          if (hasAllowedExtension) {
+            // Remove the 'isaac-s3-images/' prefix to get the relative path
+            const relativePath = key.replace('isaac-s3-images/', '');
+            images.push({ src: relativePath });
+          }
         }
       }
-    }
 
-    continuationToken = response.NextContinuationToken;
-  } while (continuationToken);
+      continuationToken = response.NextContinuationToken;
+    } while (continuationToken);
 
-  // Sort images naturally (by filename)
-  images.sort((a, b) => {
-    const nameA = a.src.split('/').pop() ?? '';
-    const nameB = b.src.split('/').pop() ?? '';
-    return nameA.localeCompare(nameB, undefined, {
-      numeric: true,
-      sensitivity: 'base',
+    // Sort images naturally (by filename)
+    images.sort((a, b) => {
+      const nameA = a.src.split('/').pop() ?? '';
+      const nameB = b.src.split('/').pop() ?? '';
+      return nameA.localeCompare(nameB, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
     });
-  });
+  } catch (error) {
+    console.error('S3/MinIO listFolderImages Error:', error);
+    // Return empty array on error so the page still renders without the gallery
+    return [];
+  }
 
   return images;
 };
