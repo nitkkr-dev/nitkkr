@@ -112,7 +112,7 @@ export default async function StudentActivities({
           text={text.sections.council.more}
         />
       </section>
-<section id="thought-lab">
+<section className="container text-center" id="thought-lab">
 
   <Heading
                 glyphDirection="rtl"
@@ -154,7 +154,7 @@ export default async function StudentActivities({
                         </div>
 </section>
               
-        <section id="nss">
+        <section className="container text-center" id="nss">
 
            <Heading
                 glyphDirection="ltr"
@@ -199,7 +199,7 @@ export default async function StudentActivities({
 </div>
         </section>
              
-<section id="ncc">
+<section className="container text-center" id="ncc">
 
   <Heading
                 glyphDirection="rtl"
