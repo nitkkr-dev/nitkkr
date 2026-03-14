@@ -1,11 +1,23 @@
+'use client';
+
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  size,
+  useFloating,
+} from '@floating-ui/react';
 import { cva } from 'class-variance-authority';
-import Image from 'next/image';
-import Link from 'next/link';
 import * as React from 'react';
 import { RxChevronDown } from 'react-icons/rx';
 
 import { cn } from '~/lib/utils';
+
+// Radix UI automatically injects a `position: relative` wrapper <div> around the list to anchor its dropdowns and animations.
+// By default, this injected <div> shrink-wraps. The `[&>div:first-child]:w-full` forces it to expand,
+// allowing the `justify-between` class on the nested <ul> to properly distribute the navigation links.
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -14,13 +26,12 @@ const NavigationMenu = React.forwardRef<
   <NavigationMenuPrimitive.Root
     ref={ref}
     className={cn(
-      'relative z-10 flex max-w-max flex-1 items-center justify-center',
+      'relative z-10 flex flex-1 items-center justify-center [&>div:first-child]:w-full',
       className
     )}
     {...props}
   >
     {children}
-    <NavigationMenuViewport />
   </NavigationMenuPrimitive.Root>
 ));
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
@@ -32,7 +43,7 @@ const NavigationMenuList = React.forwardRef<
   <NavigationMenuPrimitive.List
     ref={ref}
     className={cn(
-      'group flex flex-1 list-none items-center justify-center space-x-1',
+      'flex w-full flex-1 list-none items-center justify-between space-x-1',
       className
     )}
     {...props}
@@ -40,43 +51,165 @@ const NavigationMenuList = React.forwardRef<
 ));
 NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 
-const NavigationMenuItem = NavigationMenuPrimitive.Item;
+interface NavigationMenuItemContextValue {
+  triggerElement: HTMLElement | null;
+  setTriggerElement: (element: HTMLElement | null) => void;
+}
 
-const navigationMenuTriggerStyle = cva(
+const NavigationMenuItemContext =
+  React.createContext<NavigationMenuItemContextValue | null>(null);
+
+const assignRef = <T,>(ref: React.ForwardedRef<T>, value: T) => {
+  if (typeof ref === 'function') {
+    ref(value);
+    return;
+  }
+
+  if (ref) {
+    ref.current = value;
+  }
+};
+
+const NavigationMenuItem = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>
+>(({ className, ...props }, ref) => {
+  const [triggerElement, setTriggerElement] =
+    React.useState<HTMLElement | null>(null);
+
+  return (
+    <NavigationMenuItemContext.Provider
+      value={{ triggerElement, setTriggerElement }}
+    >
+      <NavigationMenuPrimitive.Item
+        ref={ref}
+        className={cn('relative', className)}
+        {...props}
+      />
+    </NavigationMenuItemContext.Provider>
+  );
+});
+NavigationMenuItem.displayName = NavigationMenuPrimitive.Item.displayName;
+
+export const navigationMenuTriggerStyle = cva(
   'hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 group flex max-w-fit rounded-md bg-background transition-colors hover:bg-neutral-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-neutral-100/50 data-[state=open]:bg-neutral-100/50'
 );
 
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <NavigationMenuPrimitive.Trigger
-    ref={ref}
-    className={cn(navigationMenuTriggerStyle(), 'group', className)}
-    {...props}
-  >
-    <p className="w-fit min-w-0 text-pretty text-left text-base">{children}</p>
-    <RxChevronDown
-      className="relative top-[1px] my-auto ml-1 w-5 transition duration-200 group-data-[state=open]:rotate-180"
-      aria-hidden="true"
-    />
-  </NavigationMenuPrimitive.Trigger>
-));
+>(({ className, children, ...props }, ref) => {
+  const itemContext = React.useContext(NavigationMenuItemContext);
+
+  const setTriggerRef = React.useCallback(
+    (node: React.ElementRef<typeof NavigationMenuPrimitive.Trigger> | null) => {
+      assignRef(ref, node);
+      itemContext?.setTriggerElement(node);
+    },
+    [itemContext, ref]
+  );
+
+  return (
+    <NavigationMenuPrimitive.Trigger
+      ref={setTriggerRef}
+      className={cn(navigationMenuTriggerStyle(), 'group', className)}
+      {...props}
+    >
+      <p className="w-fit min-w-0 text-pretty text-left text-base uppercase">
+        {children}
+      </p>
+      <RxChevronDown
+        className="relative top-[1px] my-auto ml-1 w-5 transition duration-200 group-data-[state=open]:rotate-180"
+        aria-hidden="true"
+      />
+    </NavigationMenuPrimitive.Trigger>
+  );
+});
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
 
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
->(({ className, ...props }, ref) => (
-  <NavigationMenuPrimitive.Content
-    ref={ref}
-    className={cn(
-      'left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto',
-      className
-    )}
-    {...props}
-  />
-));
+>(({ className, style, ...props }, ref) => {
+  const itemContext = React.useContext(NavigationMenuItemContext);
+  const { refs, floatingStyles, update } = useFloating({
+    placement: 'bottom',
+    strategy: 'fixed',
+    transform: false,
+    whileElementsMounted: autoUpdate,
+    middleware: [
+      offset(12),
+      flip({ padding: 16 }),
+      shift({ padding: 16 }),
+      size({
+        padding: 16,
+        apply({ availableWidth, availableHeight, elements }) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${Math.max(availableWidth, 0)}px`,
+            maxHeight: `${Math.max(availableHeight, 0)}px`,
+          });
+        },
+      }),
+    ],
+  });
+
+  React.useEffect(() => {
+    if (!itemContext?.triggerElement) {
+      return;
+    }
+
+    refs.setReference(itemContext.triggerElement);
+  }, [itemContext?.triggerElement, refs]);
+
+  const setContentRef = React.useCallback(
+    (node: React.ElementRef<typeof NavigationMenuPrimitive.Content> | null) => {
+      refs.setFloating(node);
+      assignRef(ref, node);
+    },
+    [ref, refs]
+  );
+
+  React.useEffect(() => {
+    const floatingElement = refs.floating.current;
+
+    if (!floatingElement) {
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      if (floatingElement.dataset.state === 'open') {
+        void update();
+      }
+    });
+
+    observer.observe(floatingElement, {
+      attributes: true,
+      attributeFilter: ['data-state'],
+    });
+
+    if (floatingElement.dataset.state === 'open') {
+      void update();
+    }
+
+    return () => observer.disconnect();
+  }, [refs.floating, update]);
+
+  return (
+    <NavigationMenuPrimitive.Content
+      ref={setContentRef}
+      className={cn(
+        'text-neutral-950 z-50 w-auto overflow-hidden rounded-xl border border-neutral-200 bg-shade-light normal-case shadow-lg',
+        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90',
+        className
+      )}
+      style={{
+        ...floatingStyles,
+        ...style,
+      }}
+      {...props}
+    />
+  );
+});
 NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName;
 
 const NavigationMenuLink = NavigationMenuPrimitive.Link;
@@ -117,118 +250,13 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName;
 
-const NavigationMenuCustomListItem = React.forwardRef<
-  React.ElementRef<typeof NavigationMenuPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item> & {
-    locale: string;
-    triggerName: string;
-    isExternal?: boolean;
-    href?: string;
-    listItems?: { title: string; description: string; href: string }[];
-    imageDetails?: { src: string; alt: string; href: string };
-  }
->(
-  (
-    {
-      imageDetails,
-      listItems,
-      triggerName,
-      href,
-      isExternal,
-      locale,
-      ...props
-    },
-    ref
-  ) => {
-    if (!listItems) {
-      return (
-        <NavigationMenuItem {...props} ref={ref}>
-          <Link
-            href={isExternal ? href! : `/${locale}/${href}`}
-            legacyBehavior
-            passHref
-          >
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {triggerName}
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      );
-    }
-    // const imageHeight = listItems.length > 4 ? 4 : listItems.length;
-
-    // equal distribution of items in both columns
-    const imageHeight = Math.ceil(listItems.length / 2);
-
-    return (
-      <NavigationMenuItem {...props} ref={ref}>
-        <NavigationMenuTrigger>{triggerName}</NavigationMenuTrigger>
-        <NavigationMenuContent className="flex max-h-[calc(100vh-82px)] gap-4 p-6 xl:gap-6 2xl:gap-8">
-          {imageDetails && (
-            <Link href={`/${locale}/${href}`} passHref legacyBehavior>
-              <NavigationMenuLink
-                className="group relative flex select-none flex-col justify-end overflow-hidden rounded-xl no-underline outline-none"
-                style={{ width: `${70 * imageHeight}px`, maxWidth: '50vh' }}
-              >
-                <Image
-                  className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
-                  alt=""
-                  src={imageDetails.src}
-                  width={0}
-                  height={0}
-                />
-                <section className="relative z-30 flex h-full w-full flex-col justify-end rounded-xl bg-gradient-to-b from-primary-500/0 to-primary-500 p-2 focus:shadow-md">
-                  <h5 className="!mb-0 origin-bottom-left text-shade-light transition-transform duration-500 ease-in-out group-hover:scale-150">
-                    {imageDetails.alt + '→'}
-                  </h5>
-                </section>
-              </NavigationMenuLink>
-            </Link>
-          )}
-          <ul
-            className={cn(
-              'grid grid-flow-col auto-rows-max gap-4 xl:gap-6 2xl:gap-8'
-            )}
-            style={{
-              gridTemplateRows: `repeat(${imageHeight}, minmax(0, 1fr))`,
-            }}
-          >
-            {listItems.map(({ title, description, href }, index) => (
-              <li key={index}>
-                <NavigationMenuLink asChild>
-                  <Link
-                    className={cn(
-                      'group block w-56 select-none space-y-1 rounded-xl p-3 leading-none no-underline outline-none transition-colors transition-transform duration-500 ease-in-out hover:scale-110 hover:bg-neutral-50 focus:bg-neutral-50'
-                    )}
-                    href={`/${locale}/${href}`}
-                  >
-                    <h6 className="font-sans font-semibold leading-none text-shade-dark group-hover:text-primary-500 group-focus:text-primary-500">
-                      {title}
-                    </h6>
-                    <p className="line-clamp-2 overflow-ellipsis text-sm leading-snug text-neutral-700 group-hover:text-primary-500 group-focus:text-primary-500">
-                      {description}
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            ))}
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-);
-NavigationMenuCustomListItem.displayName = 'NavigationMenuCustomListItem';
-
 export {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuCustomListItem,
   NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
   NavigationMenuViewport,
 };
