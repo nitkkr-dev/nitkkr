@@ -10,7 +10,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail, MdMailOutline, MdOutlineLocalPhone } from 'react-icons/md';
 import { LuFacebook } from 'react-icons/lu';
 
-import { getS3Url } from '~/server/s3';
+import { getS3Url, listFolderImages } from '~/server/s3';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
@@ -29,7 +29,6 @@ import {
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { clubs, db } from '~/server/db';
-import { countChildren } from '~/server/s3';
 
 import EventsSection from './event-section';
 
@@ -281,7 +280,9 @@ export default async function Club({
   ];
 
   const text = await getTranslations(locale);
-  const imageCount = await countChildren(`clubs/${display_name}/images/`);
+  const galleryImages = await listFolderImages(
+    `student-activities/clubs/${display_name}/`
+  );
   type SocialPlatform =
     | 'instagram'
     | 'twitter'
@@ -505,7 +506,7 @@ export default async function Club({
         </Table>
 
         {/* gallery */}
-        {imageCount !== 0 && (
+        {galleryImages.length > 0 && (
           <article id="gallery">
             <Heading
               glyphDirection="rtl"
@@ -513,13 +514,13 @@ export default async function Club({
               text={text.Club.gallery.toUpperCase()}
             />
             <GalleryCarousel className="my-5 w-full">
-              {[...Array<number>(imageCount)].map((_, index) => (
+              {galleryImages.map((image, index) => (
                 <Image
-                  alt={String(index)}
+                  alt={`Gallery image ${index + 1}`}
                   className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
                   height={0}
                   key={index}
-                  src={`clubs/${display_name}/images/${index + 1}.png`}
+                  src={image.src}
                   width={0}
                 />
               ))}

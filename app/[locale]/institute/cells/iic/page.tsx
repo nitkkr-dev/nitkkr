@@ -5,7 +5,7 @@ import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import FICGroup from '~/components/fic-group';
 import { getTranslations } from '~/i18n/translations';
-import { getS3Url } from '~/server/s3';
+import { getS3Url, listFolderImages } from '~/server/s3';
 
 export default async function IICPage({
   params: { locale },
@@ -98,9 +98,12 @@ export default async function IICPage({
     },
   ];
 
-  const galleryImages = Array.from({ length: 23 }, (_, i) => ({
-    src: `institute/cells/iks/${i + 1}.jpg`,
-  }));
+  // const galleryImages = Array.from({ length: 23 }, (_, i) => ({
+  //   src: `institute/cells/iks/${i + 1}.jpg`,
+  // }));
+
+  const galleryImages = await listFolderImages('institute/cells/iks/');
+
   return (
     <>
       {/* Header */}

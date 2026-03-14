@@ -17,7 +17,7 @@ import NotificationsPanel from '~/components/notifications/notifications-panel';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db, departments } from '~/server/db';
-import { countChildren } from '~/server/s3';
+import { listFolderImages } from '~/server/s3';
 
 export async function generateStaticParams() {
   return await db.select({ name: departments.urlName }).from(departments);
@@ -45,7 +45,7 @@ export default async function Department({
   });
   if (!department) notFound(); // FIXME: Remove this once dynamicParams works
 
-  const imageCount = await countChildren(`departments/${name}/images/`);
+  const galleryImages = await listFolderImages(`departments/${name}/`);
   const allHeads = await db.query.departmentHeads.findMany({
     where: (departmentHead, { eq }) =>
       eq(departmentHead.departmentId, department.id),
@@ -295,7 +295,7 @@ export default async function Department({
         />
       </section>
 
-      {imageCount !== 0 && (
+      {galleryImages.length > 0 && (
         <article className="container" id="gallery">
           <Heading
             glyphDirection="rtl"
@@ -303,13 +303,13 @@ export default async function Department({
             text={text.headings.gallery.toUpperCase()}
           />
           <GalleryCarousel className="my-5 w-full">
-            {[...Array<number>(imageCount)].map((_, index) => (
+            {galleryImages.map((image, index) => (
               <Image
-                alt={String(index)}
+                alt={`Gallery image ${index + 1}`}
                 className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
                 height={0}
                 key={index}
-                src={`departments/${name}/images/${index + 1}.png`}
+                src={image.src}
                 width={0}
               />
             ))}

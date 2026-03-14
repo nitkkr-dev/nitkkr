@@ -4,8 +4,9 @@ import { MdCall, MdEmail } from 'react-icons/md';
 import FICGroup from '~/components/fic-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import Gallery from '~/components/ui/gallery';
 import { getTranslations } from '~/i18n/translations';
-import { listFolderImages } from '~/server/s3';
+import { getS3Url, listFolderImages } from '~/server/s3';
 
 export default async function ThoughtLab({
   params: { locale },
@@ -98,7 +99,7 @@ export default async function ThoughtLab({
                   {text.ThoughtLab.purpose.points.map((item, index) => (
                     <li
                       key={index}
-                      className="text-[16px] text-[20px] font-normal leading-snug md:text-[20px] md:text-[20px]"
+                      className="text-[16px] font-normal leading-snug md:text-[20px]"
                     >
                       <span className="font-sans text-sm lg:text-base xl:text-lg">
                         {item}
@@ -129,7 +130,7 @@ export default async function ThoughtLab({
                   {text.ThoughtLab.benefits.points.map((item, index) => (
                     <li
                       key={index}
-                      className="text-[16px] text-[20px] font-normal leading-snug md:text-[20px] md:text-[20px]"
+                      className="text-[16px] font-normal leading-snug md:text-[20px]"
                     >
                       <span className="font-sans text-sm lg:text-base xl:text-lg">
                         {item}
@@ -204,7 +205,7 @@ export default async function ThoughtLab({
             <div className="flex flex-col items-center">
               <a
                 href="mailto:scoe@nitkkr.ac.in"
-                className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-32 md:w-32"
+                className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-20 md:w-20"
                 aria-label="Email SCoE"
               >
                 <MdEmail className="text-3xl sm:text-4xl md:text-5xl" />
@@ -215,7 +216,7 @@ export default async function ThoughtLab({
             <div className="flex flex-col items-center">
               <a
                 href="tel:+911744233300"
-                className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-32 md:w-32"
+                className="flex h-24 w-24 items-center justify-center rounded-full border border-primary-500 bg-shade-light text-primary-700 transition hover:bg-primary-100 md:h-20 md:w-20"
                 aria-label="Call SCoE"
               >
                 <MdCall className="text-3xl sm:text-4xl md:text-5xl" />
@@ -223,6 +224,22 @@ export default async function ThoughtLab({
             </div>
           </div>
         </section>
+      </section>
+
+      {/* Gallery */}
+      <section className="container">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#gallery"
+          id="gallery"
+          text={text.ThoughtLab.gallery.heading.toUpperCase()}
+        />
+        <Gallery
+          base={getS3Url()}
+          images={galleryImages}
+          viewMoreText={text.Main.viewMore}
+        />
       </section>
     </>
   );

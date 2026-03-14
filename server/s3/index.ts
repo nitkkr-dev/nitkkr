@@ -68,6 +68,5 @@ export const buildObjectUrl = (
   return `https://${bucketName}.s3.${env.AWS_S3_REGION}.amazonaws.com/${key}`;
 };
 
-export * from './count-children';
 export * from './list-folder-images';
 export * from './upload';
