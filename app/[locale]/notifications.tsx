@@ -79,7 +79,7 @@ export default async function Notifications({
               <Link
                 className="flex"
                 href={getCategoryHref(category)}
-                scroll={category !== 'tender'}
+                scroll={false}
               >
                 <button
                   className={cn(
