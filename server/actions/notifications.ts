@@ -14,7 +14,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-import { canManageNotifications, getServerAuthSession } from '~/server/auth';
+import { canManageNotifications, getHodDepartmentId, getServerAuthSession } from '~/server/auth';
 import { db } from '~/server/db';
 import {
   notificationCategoryEnum,
@@ -300,8 +300,9 @@ export async function addNotification(
   data: NotificationFormData
 ): Promise<ActionResult> {
   const session = await getServerAuthSession();
-
-  if (!canManageNotifications(session)) {
+  // HODs can also manage notifications for their department, so check if the user is a HOD as well
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return { success: false, message: 'Not authorized to add notifications' };
   }
 
@@ -330,6 +331,15 @@ export async function addNotification(
         updatedAt: new Date(),
       })
       .returning({ id: notifications.id });
+
+    const notificationId = result[0]?.id;
+
+    if (hodDepartmentId && notificationId) {
+      await db.insert(notificationDepartments).values({
+        notificationId: notificationId,
+        departmentId: hodDepartmentId,
+      });
+    }
 
     revalidatePath('/');
     revalidatePath('/[locale]/notifications', 'page');
@@ -365,8 +375,9 @@ export async function updateNotification(
   data: NotificationFormData
 ): Promise<ActionResult> {
   const session = await getServerAuthSession();
-
-  if (!canManageNotifications(session)) {
+  // HODs can also manage notifications for their department, so check if the user is a HOD as well
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return {
       success: false,
       message: 'Not authorized to update notifications',
@@ -380,6 +391,24 @@ export async function updateNotification(
       message: validation.error.errors[0]?.message ?? 'Invalid data',
     };
   }
+
+  // If user is HoD (not CCN), ensure the notification belongs to their department
+if (hodDepartmentId && !canManageNotifications(session)) {
+  const deptLink = await db.query.notificationDepartments.findFirst({
+    where: (n, { eq, and }) =>
+      and(
+        eq(n.notificationId, id),
+        eq(n.departmentId, hodDepartmentId)
+      ),
+  });
+
+  if (!deptLink) {
+    return {
+      success: false,
+      message: 'Not authorized to update this notification',
+    };
+  }
+}
 
   try {
     const updateData: {
@@ -443,13 +472,31 @@ export async function updateNotification(
  */
 export async function deleteNotification(id: number): Promise<ActionResult> {
   const session = await getServerAuthSession();
-
-  if (!canManageNotifications(session)) {
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return {
       success: false,
       message: 'Not authorized to delete notifications',
     };
   }
+  
+  // If user is HoD (not CCN), ensure the notification belongs to their department
+if (hodDepartmentId && !canManageNotifications(session)) {
+  const deptLink = await db.query.notificationDepartments.findFirst({
+    where: (n, { eq, and }) =>
+      and(
+        eq(n.notificationId, id),
+        eq(n.departmentId, hodDepartmentId)
+      ),
+  });
+
+  if (!deptLink) {
+    return {
+      success: false,
+      message: 'Not authorized to delete this notification',
+    };
+  }
+}
 
   try {
     const result = await db
@@ -488,10 +535,25 @@ export async function getNotificationForEdit(id: number): Promise<{
   createdAt: string;
 } | null> {
   const session = await getServerAuthSession();
-
-  if (!canManageNotifications(session)) {
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return null;
   }
+
+  // If user is HoD (not CCN), ensure notification belongs to their department
+if (hodDepartmentId && !canManageNotifications(session)) {
+  const deptLink = await db.query.notificationDepartments.findFirst({
+    where: (n, { eq, and }) =>
+      and(
+        eq(n.notificationId, id),
+        eq(n.departmentId, hodDepartmentId)
+      ),
+  });
+
+  if (!deptLink) {
+    return null;
+  }
+}
 
   const notification = await db.query.notifications.findFirst({
     where: (n, { eq }) => eq(n.id, id),

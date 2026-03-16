@@ -24,6 +24,7 @@ interface NotificationsListProps {
   filterParams: LoadMoreParams;
   /** Whether the current user can manage (add/edit/delete) notifications */
   canManage?: boolean;
+  editBasePath?: string;
   text: {
     noNotificationsFound: string;
     noMoreNotifications: string;
@@ -39,6 +40,7 @@ export function NotificationsList({
   locale,
   filterParams,
   canManage = false,
+  editBasePath = `/${locale}/notifications/edit`,
   text,
 }: NotificationsListProps) {
   const [items, setItems] = useState(initialItems);
@@ -162,12 +164,12 @@ export function NotificationsList({
                 {canManage && (
                   <div className="mt-2 flex shrink-0 flex-row items-center gap-2 sm:mt-0 sm:flex-row">
                     <Link
-                      href={`/${locale}/notifications/edit/${n.id}`}
-                      className="text-primary-600 hover:text-primary-800 rounded p-1 hover:bg-primary-100"
-                      title={text.edit ?? 'Edit'}
-                    >
-                      <FaEdit className="size-4" />
-                    </Link>
+  href={`${editBasePath}/${n.id}`}
+  className="text-primary-600 hover:text-primary-800 rounded p-1 hover:bg-primary-100"
+  title={text.edit ?? 'Edit'}
+>
+  <FaEdit className="size-4" />
+</Link>
                     <button
                       onClick={() => handleDelete(n.id)}
                       disabled={deletingId === n.id}
