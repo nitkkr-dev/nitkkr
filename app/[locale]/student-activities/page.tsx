@@ -9,6 +9,7 @@ import { BouncyArrowButton } from '~/components/buttons';
 import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
+import StudentGroup from '~/components/student-group';
 import Loading from '~/components/loading';
 import { Card, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
@@ -21,37 +22,76 @@ export default async function StudentActivities({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).StudentActivities;
-
+  const studentCoordinators = [
+    { rollNumber: '12212070' },
+    { rollNumber: '12112002' },
+    { rollNumber: '12112003' },
+    { rollNumber: '12112004' },
+  ];
   return (
     <>
       <ImageHeader
         title={text.title}
         headings={[
-          { label: text.headings.clubs, href: 'student-activities/clubs' },
+          { label: text.headings.clubs, href: '#clubs' },
+          { label: text.headings.societies, href: '#societies' },
+          { label: text.headings.events, href: '#events' },
           { label: text.headings.council, href: '#council' },
-          { label: text.headings.events, href: 'student-activities/events' },
-          {
-            label: text.headings.thoughtLab,
-            href: 'student-activities/thought-lab',
-          },
+          { label: text.headings.thoughtLab, href: '#thought-lab' },
           { label: text.headings.nss, href: '#nss' },
-          { label: text.headings.ncc, href: 'student-activities/ncc' },
+          { label: text.headings.ncc, href: '#ncc' },
         ]}
         src="student-activities/header.jpg"
       />
+      <section id="clubs">
+        <Heading
+          className="container"
+          glyphDirection="rtl"
+          heading="h3"
+          href={`/${locale}/student-activities/clubs`}
+          text={text.sections.clubs.title}
+        />
 
-      <Heading
-        className="container"
-        glyphDirection="ltr"
-        heading="h3"
-        href="#clubs"
-        text={text.sections.clubs.title}
-      />
+        <section className="container mb-6 text-center">
+          <Suspense fallback={<Loading />}>
+            <ClubsCarousel locale={locale} />
+          </Suspense>
+        </section>
+      </section>
+      <section id="societies">
+        <Heading
+          className="container"
+          glyphDirection="ltr"
+          heading="h3"
+          href={`/${locale}/student-activities/societies`}
+          text={text.sections.societies.title}
+        />
 
-      <section className="container mb-6 text-center">
-        <Suspense fallback={<Loading />}>
-          <ClubsCarousel locale={locale} />
-        </Suspense>
+        <section className="container mb-6 text-center">
+          <Suspense fallback={<Loading />}>
+            <ClubsCarousel locale={locale} />
+          </Suspense>
+        </section>
+      </section>
+
+      <section id="events">
+        <Heading
+          className="container"
+          glyphDirection="rtl"
+          heading="h3"
+          href={`/${locale}/student-activities/events`}
+          text={text.sections.events.title}
+        />
+      </section>
+
+      <section className="container text-center" id="council">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href="#council"
+          text={text.sections.council.title}
+        />
+        <StudentGroup studentData={studentCoordinators} />
         <BouncyArrowButton
           buttonProps={{
             className: cn(
@@ -63,8 +103,119 @@ export default async function StudentActivities({
             variant: 'outline',
           }}
           linkProps={{ href: `/${locale}/student-activities/clubs` }}
-          text={text.sections.clubs.more}
+          text={text.sections.council.more}
         />
+      </section>
+      <section className="container text-center" id="thought-lab">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href={`/${locale}/student-activities/thought-lab`}
+          text={text.sections.thoughtLab.title}
+        />
+
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          {/* Left: Image with caption */}
+          <div className="relative overflow-hidden rounded-lg shadow-md">
+            {/* Adjust this image */}
+            <Image
+              src={`academics/2.jpg`}
+              alt="Revised IP Policy"
+              width={500}
+              height={200}
+              className="h-auto max-h-80 w-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
+
+            <Link
+              href={`/${locale}/student-activities/thought-lab`}
+              className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
+              target="_blank"
+            >
+              <span className="uppercase"></span>{' '}
+              {text.sections.thoughtLab.title} →
+            </Link>
+          </div>
+
+          {/* Right: Description */}
+          <p className="text-gray-800 text-justify leading-relaxed">
+            {text.sections.thoughtLab.content}
+          </p>
+        </div>
+      </section>
+
+      <section className="container text-center" id="nss">
+        <Heading
+          glyphDirection="ltr"
+          heading="h3"
+          href={`/${locale}/student-activities/nss`}
+          text={text.sections.nss.title}
+        />
+
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          {/* Left: Description */}
+          <p className="text-gray-800 text-justify leading-relaxed">
+            {text.sections.nss.content}
+          </p>
+
+          {/* Right: Image with caption */}
+          <div className="relative overflow-hidden rounded-lg shadow-md">
+            <Image
+              src={`academics/2.jpg`}
+              alt="Revised IP Policy"
+              width={500}
+              height={200}
+              className="h-auto max-h-80 w-full object-cover"
+            />
+
+            <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
+
+            <Link
+              href={`/${locale}/student-activities/nss`}
+              className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
+              target="_blank"
+            >
+              <span className="uppercase"></span> {text.sections.nss.title} →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="container text-center" id="ncc">
+        <Heading
+          glyphDirection="rtl"
+          heading="h3"
+          href={`/${locale}/student-activities/ncc`}
+          text={text.sections.ncc.title}
+        />
+
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+          {/* Left: Image with caption */}
+          <div className="relative overflow-hidden rounded-lg shadow-md">
+            {/* Adjust this image */}
+            <Image
+              src={`academics/2.jpg`}
+              alt="Revised IP Policy"
+              width={500}
+              height={200}
+              className="h-auto max-h-80 w-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-[#000000] to-[#FAFAFA]/25"></div>
+
+            <Link
+              href={`/${locale}/student-activities/ncc`}
+              className="absolute bottom-4 left-4 font-serif text-2xl font-semibold text-shade-light hover:underline"
+              target="_blank"
+            >
+              <span className="uppercase"></span> {text.sections.ncc.title} →
+            </Link>
+          </div>
+
+          {/* Right: Description */}
+          <p className="text-gray-800 text-justify leading-relaxed">
+            {text.sections.nss.content}
+          </p>
+        </div>
       </section>
     </>
   );
@@ -78,7 +229,7 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
   // console.log(clubs);
 
   return (
-    <GalleryCarousel>
+    <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
       {clubs.map(({ alias, name, urlName }, index) => (
         <Link
           className="drop-shadow hover:drop-shadow-xl"
@@ -105,13 +256,12 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
 
             <CardDescription
               className="
-      mt-0.5
+mt-0.5
       flex grow
       items-center justify-center
       overflow-hidden rounded-xl
       p-0
-      leading-none
-    "
+      leading-none "
             >
               <Image
                 alt={alias ?? name}
@@ -124,6 +274,6 @@ const ClubsCarousel = async ({ locale }: { locale: string }) => {
           </Card>
         </Link>
       ))}
-    </GalleryCarousel>
+    </div>
   );
 };
