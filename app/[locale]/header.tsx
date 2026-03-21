@@ -67,6 +67,12 @@ export default async function Header({ locale }: { locale: string }) {
           description:
             'Explore the minds that work hard to maintain our institute’s high reputation and proper functioning!',
         },
+        {
+          title: 'Rules and Policies',
+          href: '/institute/rules-and-policies',
+          description:
+            'Access recruitment rules, service rules, and institutional policies.',
+        },
       ],
     },
     {

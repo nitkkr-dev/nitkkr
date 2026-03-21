@@ -112,6 +112,23 @@ export interface InstituteTranslations {
       };
     };
   };
+  rulesAndPolicies: {
+    title: string;
+    sections: {
+      recruitment: {
+        title: string;
+        links: { label: string; href: string }[];
+      };
+      service: {
+        title: string;
+        links: { label: string; href: string }[];
+      };
+      policies: {
+        title: string;
+        links: { label: string; href: string }[];
+      };
+    };
+  };
 }
 
 export const instituteEn: InstituteTranslations = {
@@ -391,6 +408,112 @@ export const instituteEn: InstituteTranslations = {
       },
     },
   },
+  rulesAndPolicies: {
+    title: 'Rules and Policies',
+    sections: {
+      recruitment: {
+        title: 'Recruitment Rules',
+        links: [
+          {
+            label: 'Implementation of RRs (2019) of Non_Faculty dt.04.04.2019',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Implementation-of-RRs-2019-of-Non_Faculty-dt.04.04.2019-12122019.pdf',
+          },
+          {
+            label: 'F.35-5.2018-TS.III dt.20.02.2019',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/F.35-5.2018-TS.III-dt.20.02.2019-12122019.pdf',
+          },
+          {
+            label:
+              'Recruitment Rules (Under 4-tier flexible faculty structure) for Faculty in NITs – Amended',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/2-Recruitment-Rules-RRs-for-NonTeaching-posts-in-NITs.pdf',
+          },
+          {
+            label: 'Recruitment Rules (RRs) for Non-Teaching posts in NITs',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/2-Recruitment-Rules-RRs-for-NonTeaching-posts-in-NITs.pdf',
+          },
+          {
+            label: 'Modified Assured Career Progression (MACP) Scheme',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/3-Modified-Assured-Career-Prograssion-MACP-Scheme.pdf',
+          },
+          {
+            label:
+              'Recruitment Rules for the faculty posts under four-tier flexible faculty cadre in NITs',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/4-Recruitment-Rules-for-the-faculty-posts-under-four-tier-flaxible-faculty-cadre-in-NITs.pdf',
+          },
+        ],
+      },
+      service: {
+        title: 'Service Rules',
+        links: [
+          {
+            label: 'MACP Rules',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/ACP_Rules.pdf',
+          },
+          {
+            label: 'Memorandum of Association (MOA) and Rules (NIT)',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/MOA.pdf',
+          },
+          {
+            label: 'Memorandum of Association (MOA) and Rules (RECK)',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/ReckRules.pdf',
+          },
+          {
+            label: 'Qualification For Teaching',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Teaching.pdf',
+          },
+          {
+            label: 'Qualification For Non Teaching',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Non_Teaching.pdf',
+          },
+          {
+            label: 'Career Advancement Scheme (CAS)',
+            href: 'https://nitkkr.ac.in/?page_id=13706',
+          },
+          {
+            label: 'Central Civil Services – Leave Rules',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/CLR.pdf',
+          },
+          {
+            label: "CEI (Reservation in Teachers' Cadre) Act, 2019",
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2023/10/CEI-Reservation-in-Teachers-Cadre-Act-2019-21102022_compressed.pdf',
+          },
+        ],
+      },
+      policies: {
+        title: 'Rules and Policies',
+        links: [
+          {
+            label: 'Amended Statutes of NITs',
+            href: '#',
+          },
+          {
+            label: 'Conduct Rules of Employee',
+            href: '#',
+          },
+          {
+            label: 'CPDA Rules',
+            href: '#',
+          },
+          {
+            label: 'Doc Rules',
+            href: '#',
+          },
+          {
+            label: 'Grievances Rules',
+            href: '#',
+          },
+          {
+            label: 'Internal Complaint Committee Rules',
+            href: '#',
+          },
+          {
+            label: 'Cashless Scheme',
+            href: '#',
+          },
+        ],
+      },
+    },
+  },
 };
 
 export const instituteHi: InstituteTranslations = {
@@ -659,6 +782,112 @@ export const instituteHi: InstituteTranslations = {
         title: 'प्रोफेसर (विभागाध्यक्ष)',
         email: 'drarun_goel@yahoo.co.in',
         phone: '01744-233349, 01744-233300',
+      },
+    },
+  },
+  rulesAndPolicies: {
+    title: 'नियम और नीतियां',
+    sections: {
+      recruitment: {
+        title: 'भर्ती नियम',
+        links: [
+          {
+            label: 'गैर-संकाय के आरआर (2019) का कार्यान्वयन दिनांक 04.04.2019',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Implementation-of-RRs-2019-of-Non_Faculty-dt.04.04.2019-12122019.pdf',
+          },
+          {
+            label: 'एफ.35-5.2018-टीएस.III दिनांक 20.02.2019',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/F.35-5.2018-TS.III-dt.20.02.2019-12122019.pdf',
+          },
+          {
+            label:
+              'भर्ती नियम (चार-स्तरीय लचीली संकाय संरचना के तहत) एनआईटी में संकाय के लिए - संशोधित',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/2-Recruitment-Rules-RRs-for-NonTeaching-posts-in-NITs.pdf',
+          },
+          {
+            label: 'अभियांत्रिकी में गैर-शिक्षण पदों के लिए भर्ती नियम (आरआर)',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/2-Recruitment-Rules-RRs-for-NonTeaching-posts-in-NITs.pdf',
+          },
+          {
+            label: 'संशोधित सुनिश्चित कैरियर प्रगति (एमएसीपी) योजना',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/3-Modified-Assured-Career-Prograssion-MACP-Scheme.pdf',
+          },
+          {
+            label:
+              'एनआईटी में चार-स्तरीय लचीली संकाय कैडर के तहत संकाय पदों के लिए भर्ती नियम',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/4-Recruitment-Rules-for-the-faculty-posts-under-four-tier-flaxible-faculty-cadre-in-NITs.pdf',
+          },
+        ],
+      },
+      service: {
+        title: 'सेवा नियम',
+        links: [
+          {
+            label: 'एमएसीपी नियम',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/ACP_Rules.pdf',
+          },
+          {
+            label: 'एमओए और नियम (एनआईटी)',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/MOA.pdf',
+          },
+          {
+            label: 'एमओए और नियम (रेक)',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/ReckRules.pdf',
+          },
+          {
+            label: 'शिक्षण के लिए योग्यता',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Teaching.pdf',
+          },
+          {
+            label: 'गैर-शिक्षण के लिए योग्यता',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/Non_Teaching.pdf',
+          },
+          {
+            label: 'कैरियर उन्नयन योजना (सीएएस)',
+            href: 'https://nitkkr.ac.in/?page_id=13706',
+          },
+          {
+            label: 'केंद्रीय सिविल सेवाएं - अवकाश नियम',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2022/02/CLR.pdf',
+          },
+          {
+            label: 'सीईआई (शिक्षकों के कैडर में आरक्षण) अधिनियम, 2019',
+            href: 'https://nitkkr.ac.in/wp-content/uploads/2023/10/CEI-Reservation-in-Teachers-Cadre-Act-2019-21102022_compressed.pdf',
+          },
+        ],
+      },
+      policies: {
+        title: 'नियम और नीतियां',
+        links: [
+          {
+            label: 'एनआईटी के संशोधित अध्यादेश',
+            href: '#',
+          },
+          {
+            label: 'कर्मचारी आचरण नियम',
+            href: '#',
+          },
+          {
+            label: 'सीपीडीए नियम',
+            href: '#',
+          },
+          {
+            label: 'दस्तावेज़ नियम',
+            href: '#',
+          },
+          {
+            label: 'शिकायत नियम',
+            href: '#',
+          },
+          {
+            label: 'आंतरिक शिकायत समिति नियम',
+            href: '#',
+          },
+          {
+            label: 'कैशलेस योजना',
+            href: '#',
+          },
+        ],
       },
     },
   },
