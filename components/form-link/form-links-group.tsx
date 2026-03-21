@@ -1,4 +1,4 @@
-import FormLinkItem from '~/components/general-administration/form-link-item';
+import FormLinkItem from '~/components/form-link/form-link-item';
 
 export default function FormLinksGroup({
   items,
