@@ -1,5 +1,5 @@
 import Heading from '~/components/heading';
-import FormLinksGroup from '~/components/general-administration/form-links-group';
+import FormLinksGroup from '~/components/form-link/form-links-group';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 
