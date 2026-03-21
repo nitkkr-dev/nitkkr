@@ -1,5 +1,5 @@
 import Heading from '~/components/heading';
-import FormLinksGroup from '~/components/general-administration/form-links-group';
+import FormLinksGroup from '~/components/form-link/form-links-group';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
 
@@ -13,6 +13,21 @@ export default async function GeneralAdministrationForms({
 }) {
   const text = (await getTranslations(locale)).Section.GeneralAdministration
     .forms;
+
+  const formLinks = [
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/1-APPLICATION-FOR-CASUAL-SPECIAL-CASUAL-COMPENSATORY-STATION-LEAVE-RH.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/2-Application-for-Earned-Leave.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/3-APPLICATION-FOR-COMMUTED-HALF-PAY-MATERNITY-LEAVE.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/4-APPLICATION-FOR-AVAILING-OF-LEAVE-TRAVEL-CONCESSION.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/5-Application-for-Institute-Health-Diary.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/6-Option-Form-for-Cashless-Medical-Insurance-Scheme.pdf',
+    'https://nitkkr.ac.in/wp-content/uploads/2022/12/7-NOMINATION-FORM.pdf',
+  ];
+
+  const formItems = text.links.map((label, index) => ({
+    label,
+    href: formLinks[index] ?? '#',
+  }));
 
   return (
     <>
@@ -29,7 +44,7 @@ export default async function GeneralAdministrationForms({
           href="#forms-list"
         />
 
-        <FormLinksGroup items={text.links} />
+        <FormLinksGroup items={formItems} />
       </section>
     </>
   );

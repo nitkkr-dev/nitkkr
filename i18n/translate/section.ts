@@ -255,10 +255,7 @@ export interface SectionTranslations {
     forms: {
       title: string;
       listTitle: string;
-      links: {
-        label: string;
-        href: string;
-      }[];
+      links: string[];
     };
   };
   HealthCentre: {
@@ -932,35 +929,13 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       title: 'General Administration Forms',
       listTitle: 'Leave Application Forms',
       links: [
-        {
-          label:
-            'APPLICATION FOR CASUAL, SPECIAL CASUAL, COMPENSATORY, STATION LEAVE, RH',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/1-APPLICATION-FOR-CASUAL-SPECIAL-CASUAL-COMPENSATORY-STATION-LEAVE-RH.pdf',
-        },
-        {
-          label: 'Application for Earned Leave',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/2-Application-for-Earned-Leave.pdf',
-        },
-        {
-          label: 'APPLICATION FOR COMMUTED, HALF PAY, MATERNITY LEAVE',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/3-APPLICATION-FOR-COMMUTED-HALF-PAY-MATERNITY-LEAVE.pdf',
-        },
-        {
-          label: 'APPLICATION FOR AVAILING OF LEAVE TRAVEL CONCESSION',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/4-APPLICATION-FOR-AVAILING-OF-LEAVE-TRAVEL-CONCESSION.pdf',
-        },
-        {
-          label: 'Application for Institute Health Diary',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/5-Application-for-Institute-Health-Diary.pdf',
-        },
-        {
-          label: 'Option Form for Cashless Medical Insurance Scheme',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/6-Option-Form-for-Cashless-Medical-Insurance-Scheme.pdf',
-        },
-        {
-          label: 'NOMINATION FORM',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/7-NOMINATION-FORM.pdf',
-        },
+        'APPLICATION FOR CASUAL, SPECIAL CASUAL, COMPENSATORY, STATION LEAVE, RH',
+        'Application for Earned Leave',
+        'APPLICATION FOR COMMUTED, HALF PAY, MATERNITY LEAVE',
+        'APPLICATION FOR AVAILING OF LEAVE TRAVEL CONCESSION',
+        'Application for Institute Health Diary',
+        'Option Form for Cashless Medical Insurance Scheme',
+        'NOMINATION FORM',
       ],
     },
   },
@@ -1647,35 +1622,13 @@ export const sectionHi: SectionTranslations = {
       title: 'सामान्य प्रशासन प्रपत्र',
       listTitle: 'अवकाश आवेदन प्रपत्र',
       links: [
-        {
-          label:
-            'आकस्मिक, विशेष आकस्मिक, प्रतिपूरक, स्टेशन अवकाश, आरएच हेतु आवेदन',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/1-APPLICATION-FOR-CASUAL-SPECIAL-CASUAL-COMPENSATORY-STATION-LEAVE-RH.pdf',
-        },
-        {
-          label: 'अर्जित अवकाश हेतु आवेदन',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/2-Application-for-Earned-Leave.pdf',
-        },
-        {
-          label: 'परिवर्तित, अर्ध-वेतन, मातृत्व अवकाश हेतु आवेदन',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/3-APPLICATION-FOR-COMMUTED-HALF-PAY-MATERNITY-LEAVE.pdf',
-        },
-        {
-          label: 'लीव ट्रैवल कन्सेशन प्राप्त करने हेतु आवेदन',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/4-APPLICATION-FOR-AVAILING-OF-LEAVE-TRAVEL-CONCESSION.pdf',
-        },
-        {
-          label: 'संस्थान स्वास्थ्य डायरी हेतु आवेदन',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/5-Application-for-Institute-Health-Diary.pdf',
-        },
-        {
-          label: 'कैशलेस मेडिकल बीमा योजना हेतु विकल्प प्रपत्र',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/6-Option-Form-for-Cashless-Medical-Insurance-Scheme.pdf',
-        },
-        {
-          label: 'नामांकन प्रपत्र',
-          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/7-NOMINATION-FORM.pdf',
-        },
+        'आकस्मिक, विशेष आकस्मिक, प्रतिपूरक, स्टेशन अवकाश, आरएच हेतु आवेदन',
+        'अर्जित अवकाश हेतु आवेदन',
+        'परिवर्तित, अर्ध-वेतन, मातृत्व अवकाश हेतु आवेदन',
+        'लीव ट्रैवल कन्सेशन प्राप्त करने हेतु आवेदन',
+        'संस्थान स्वास्थ्य डायरी हेतु आवेदन',
+        'कैशलेस मेडिकल बीमा योजना हेतु विकल्प प्रपत्र',
+        'नामांकन प्रपत्र',
       ],
     },
   },
