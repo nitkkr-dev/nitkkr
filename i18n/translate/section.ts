@@ -223,7 +223,44 @@ export interface SectionTranslations {
     };
     seniority: string[];
   };
-  GeneralAdministration: {};
+  GeneralAdministration: {
+    title: string;
+    overviewTitle: string;
+    overview: string;
+    navigation: {
+      establishmentSection: string;
+      generalSection: string;
+      forms: string;
+    };
+    establishmentSection: {
+      title: string;
+      aboutTitle: string;
+      about: string;
+      functionsTitle: string;
+      functions: string[];
+      staffTitle: string;
+      staffHeaders: {
+        srNo: string;
+        name: string;
+        responsibility: string;
+      };
+    };
+    generalSection: {
+      title: string;
+      aboutTitle: string;
+      about: string;
+      functionsTitle: string;
+      functions: string[];
+    };
+    forms: {
+      title: string;
+      listTitle: string;
+      links: {
+        label: string;
+        href: string;
+      }[];
+    };
+  };
   HealthCentre: {
     name: string;
     headings: {
@@ -830,7 +867,103 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
       'Seniority_List_of_Applicants',
     ],
   },
-  GeneralAdministration: {},
+  GeneralAdministration: {
+    title: 'General Administration',
+    overviewTitle: 'Overview',
+    overview:
+      'General Administration Section manages establishment services, personnel administration, legal and policy support, and institutional coordination activities.',
+    navigation: {
+      establishmentSection: 'Establishment Section',
+      generalSection: 'General Section',
+      forms: 'Forms',
+    },
+    establishmentSection: {
+      title: 'Establishment Section',
+      aboutTitle: 'About',
+      about:
+        'The Establishment Section handles service records, leave matters, pay and pension processing, and employee-related administrative actions for faculty and non-teaching staff.',
+      functionsTitle: 'Major Functions',
+      functions: [
+        'Maintenance of Personal Files, Service Books, Leave records, Pay fixation etc of faculty and Non Teaching staff',
+        'LTC related activities of all faculty and Non teaching staff',
+        'Confirmation of the employees on completion of probation period',
+        'Promotion, Financial upgradation and pay fixation of all faculty and Non Teaching staff',
+        'Work related with retirement benefits and Pension orders for faculty and non teaching staff',
+        'Works related to disciplinary matters, police verification, performance report etc of the employees',
+        'Grievance Redressal Cell works',
+        'Receipt & issue of mails',
+      ],
+      staffTitle: 'Staff',
+      staffHeaders: {
+        srNo: 'Sr. No.',
+        name: 'Name',
+        responsibility: 'Responsibility',
+      },
+    },
+    generalSection: {
+      title: 'General Section',
+      aboutTitle: 'About',
+      about:
+        'The General Section supports recruitment, institutional approvals, legal work, statutory reporting, and communication/notification workflows.',
+      functionsTitle: 'Major Functions',
+      functions: [
+        'Recruitment of regular faculty & non faculty positions',
+        'Recruitment of contractual non faculty positions',
+        'Engagement of man power through outsourcing mode',
+        'Preparation of General Agenda for the BoG meetings',
+        'Issuance of office orders, notifications on various issues after obtaining approval from the competent authority',
+        'Appreciation to non teaching staff working under different department and sections',
+        'Coordination of training programme for employees',
+        'All legal related works',
+        'Maintain various miscellaneous works relating to General Administration',
+        'Promotion of non-faculty staff',
+        'Coordination work for the Institute Annual Report',
+        'Promotion of Hindi Language',
+        'Public Information/RTI works',
+        'Preparation of Statistical Information',
+        'Advertisement related works',
+        'Issuance of ID Card to the employees',
+        'Facility of Cashless Medical Insurance to the students, employees and their dependants',
+        'Coordination of Online Grievances',
+        'Management of Institute Guest House',
+      ],
+    },
+    forms: {
+      title: 'General Administration Forms',
+      listTitle: 'Leave Application Forms',
+      links: [
+        {
+          label:
+            'APPLICATION FOR CASUAL, SPECIAL CASUAL, COMPENSATORY, STATION LEAVE, RH',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/1-APPLICATION-FOR-CASUAL-SPECIAL-CASUAL-COMPENSATORY-STATION-LEAVE-RH.pdf',
+        },
+        {
+          label: 'Application for Earned Leave',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/2-Application-for-Earned-Leave.pdf',
+        },
+        {
+          label: 'APPLICATION FOR COMMUTED, HALF PAY, MATERNITY LEAVE',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/3-APPLICATION-FOR-COMMUTED-HALF-PAY-MATERNITY-LEAVE.pdf',
+        },
+        {
+          label: 'APPLICATION FOR AVAILING OF LEAVE TRAVEL CONCESSION',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/4-APPLICATION-FOR-AVAILING-OF-LEAVE-TRAVEL-CONCESSION.pdf',
+        },
+        {
+          label: 'Application for Institute Health Diary',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/5-Application-for-Institute-Health-Diary.pdf',
+        },
+        {
+          label: 'Option Form for Cashless Medical Insurance Scheme',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/6-Option-Form-for-Cashless-Medical-Insurance-Scheme.pdf',
+        },
+        {
+          label: 'NOMINATION FORM',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/7-NOMINATION-FORM.pdf',
+        },
+      ],
+    },
+  },
   HealthCentre: {
     name: 'Health Centre',
     headings: {
@@ -1449,7 +1582,103 @@ export const sectionHi: SectionTranslations = {
       'आवेदनकर्ताओं की वरिष्ठता सूची',
     ],
   },
-  GeneralAdministration: {},
+  GeneralAdministration: {
+    title: 'सामान्य प्रशासन',
+    overviewTitle: 'सिंहावलोकन',
+    overview:
+      'सामान्य प्रशासन अनुभाग स्थापना सेवाओं, कार्मिक प्रशासन, विधिक एवं नीतिगत सहायता और संस्थानिक समन्वय कार्यों का संचालन करता है।',
+    navigation: {
+      establishmentSection: 'स्थापना अनुभाग',
+      generalSection: 'सामान्य अनुभाग',
+      forms: 'प्रपत्र',
+    },
+    establishmentSection: {
+      title: 'स्थापना अनुभाग',
+      aboutTitle: 'परिचय',
+      about:
+        'स्थापना अनुभाग संकाय एवं गैर-शिक्षण कर्मचारियों के सेवा अभिलेख, अवकाश प्रकरण, वेतन एवं पेंशन से संबंधित प्रशासनिक कार्यों का निष्पादन करता है।',
+      functionsTitle: 'मुख्य कार्य',
+      functions: [
+        'संकाय एवं गैर-शिक्षण कर्मचारियों की व्यक्तिगत फाइलें, सेवा पुस्तिका, अवकाश अभिलेख, वेतन निर्धारण आदि का संधारण',
+        'सभी संकाय एवं गैर-शिक्षण कर्मचारियों से संबंधित एलटीसी कार्य',
+        'परिवीक्षा अवधि पूर्ण होने पर कर्मचारियों की पुष्टि',
+        'सभी संकाय एवं गैर-शिक्षण कर्मचारियों की पदोन्नति, वित्तीय उन्नयन एवं वेतन निर्धारण',
+        'संकाय एवं गैर-शिक्षण कर्मचारियों के सेवानिवृत्ति लाभ एवं पेंशन आदेश से संबंधित कार्य',
+        'कर्मचारियों के अनुशासनात्मक मामलों, पुलिस सत्यापन, प्रदर्शन प्रतिवेदन आदि से संबंधित कार्य',
+        'शिकायत निवारण प्रकोष्ठ से संबंधित कार्य',
+        'डाक प्राप्ति एवं निर्गमन',
+      ],
+      staffTitle: 'कर्मचारी',
+      staffHeaders: {
+        srNo: 'क्रम सं.',
+        name: 'नाम',
+        responsibility: 'दायित्व',
+      },
+    },
+    generalSection: {
+      title: 'सामान्य अनुभाग',
+      aboutTitle: 'परिचय',
+      about:
+        'सामान्य अनुभाग भर्ती, संस्थानिक अनुमोदन, विधिक प्रकरण, सांविधिक प्रतिवेदन तथा कार्यालयी संचार/अधिसूचना संबंधी प्रक्रियाओं का समन्वय करता है।',
+      functionsTitle: 'मुख्य कार्य',
+      functions: [
+        'नियमित संकाय एवं गैर-संकाय पदों की भर्ती',
+        'संविदा आधारित गैर-संकाय पदों की भर्ती',
+        'आउटसोर्सिंग माध्यम से मानव संसाधन की नियुक्ति',
+        'बोर्ड ऑफ गवर्नर्स बैठकों हेतु सामान्य एजेंडा की तैयारी',
+        'प्राधिकृत स्वीकृति के उपरांत कार्यालय आदेश/अधिसूचनाएं जारी करना',
+        'विभिन्न विभागों एवं अनुभागों में कार्यरत गैर-शिक्षण कर्मचारियों से संबंधित प्रशासकीय समन्वय',
+        'कर्मचारियों के प्रशिक्षण कार्यक्रमों का समन्वय',
+        'सभी विधिक कार्य',
+        'सामान्य प्रशासन से संबंधित विविध कार्यों का संचालन',
+        'गैर-संकाय कर्मचारियों की पदोन्नति',
+        'संस्थान की वार्षिक रिपोर्ट से संबंधित समन्वय कार्य',
+        'हिंदी भाषा प्रोत्साहन से संबंधित कार्य',
+        'जन सूचना/आरटीआई कार्य',
+        'सांख्यिकीय सूचनाओं की तैयारी',
+        'विज्ञापन संबंधी कार्य',
+        'कर्मचारियों को पहचान पत्र जारी करना',
+        'छात्रों, कर्मचारियों एवं उनके आश्रितों हेतु कैशलेस मेडिकल बीमा सुविधा',
+        'ऑनलाइन शिकायतों का समन्वय',
+        'संस्थान अतिथि गृह का प्रबंधन',
+      ],
+    },
+    forms: {
+      title: 'सामान्य प्रशासन प्रपत्र',
+      listTitle: 'अवकाश आवेदन प्रपत्र',
+      links: [
+        {
+          label:
+            'आकस्मिक, विशेष आकस्मिक, प्रतिपूरक, स्टेशन अवकाश, आरएच हेतु आवेदन',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/1-APPLICATION-FOR-CASUAL-SPECIAL-CASUAL-COMPENSATORY-STATION-LEAVE-RH.pdf',
+        },
+        {
+          label: 'अर्जित अवकाश हेतु आवेदन',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/2-Application-for-Earned-Leave.pdf',
+        },
+        {
+          label: 'परिवर्तित, अर्ध-वेतन, मातृत्व अवकाश हेतु आवेदन',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/3-APPLICATION-FOR-COMMUTED-HALF-PAY-MATERNITY-LEAVE.pdf',
+        },
+        {
+          label: 'लीव ट्रैवल कन्सेशन प्राप्त करने हेतु आवेदन',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/4-APPLICATION-FOR-AVAILING-OF-LEAVE-TRAVEL-CONCESSION.pdf',
+        },
+        {
+          label: 'संस्थान स्वास्थ्य डायरी हेतु आवेदन',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/5-Application-for-Institute-Health-Diary.pdf',
+        },
+        {
+          label: 'कैशलेस मेडिकल बीमा योजना हेतु विकल्प प्रपत्र',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/6-Option-Form-for-Cashless-Medical-Insurance-Scheme.pdf',
+        },
+        {
+          label: 'नामांकन प्रपत्र',
+          href: 'https://nitkkr.ac.in/wp-content/uploads/2022/12/7-NOMINATION-FORM.pdf',
+        },
+      ],
+    },
+  },
   HealthCentre: {
     name: 'स्वास्थ्य केंद्र',
     headings: {
