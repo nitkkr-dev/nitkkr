@@ -1,3 +1,4 @@
+import { Sub } from '@radix-ui/react-navigation-menu';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,12 +9,14 @@ import { getS3Url } from '~/server/s3';
 export default function ImageHeader({
   className,
   title,
+  subtitle,
   headings,
   src,
   logoUrl,
 }: {
   className?: string;
   title?: string;
+  subtitle?: string;
   headings?: { label: string; href: string }[];
   src: string;
   logoUrl?: string;
@@ -41,10 +44,18 @@ export default function ImageHeader({
         }}
       >
         {title && !logoUrl && (
-          <h1 className="container my-auto text-center text-xl text-shade-light md:text-2xl lg:text-3xl xl:text-4xl">
-            {title}
-          </h1>
+          <div className="container my-auto text-center">
+            <h1 className="text-xl text-shade-light md:text-2xl lg:text-3xl xl:text-4xl">
+              {title}
+            </h1>
+            {subtitle && (
+              <h2 className="container text-center text-xl text-shade-light md:text-2xl lg:text-3xl xl:text-4xl">
+                {subtitle}
+              </h2>
+            )}
+          </div>
         )}
+
         {/* Title with logo - displayed side by side */}
         {title && logoUrl && (
           <header className="container m-auto flex max-w-[46rem] items-center justify-center">
@@ -61,6 +72,12 @@ export default function ImageHeader({
             <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
               {title.toUpperCase()}
             </h1>
+
+            {subtitle && (
+              <h2 className="mx-2 my-auto text-sm md:text-base lg:text-lg xl:text-xl">
+                {subtitle}
+              </h2>
+            )}
           </header>
         )}
       </section>
