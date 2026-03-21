@@ -112,6 +112,23 @@ export interface InstituteTranslations {
       };
     };
   };
+  rulesAndPolicies: {
+    title: string;
+    sections: {
+      recruitment: {
+        title: string;
+        links: string[];
+      };
+      service: {
+        title: string;
+        links: string[];
+      };
+      policies: {
+        title: string;
+        links: string[];
+      };
+    };
+  };
 }
 
 export const instituteEn: InstituteTranslations = {
@@ -391,6 +408,47 @@ export const instituteEn: InstituteTranslations = {
       },
     },
   },
+  rulesAndPolicies: {
+    title: 'Rules and Policies',
+    sections: {
+      recruitment: {
+        title: 'Recruitment Rules',
+        links: [
+          'Implementation of RRs (2019) of Non_Faculty dt.04.04.2019',
+          'F.35-5.2018-TS.III dt.20.02.2019',
+          'Recruitment Rules (Under 4-tier flexible faculty structure) for Faculty in NITs – Amended',
+          'Recruitment Rules (RRs) for Non-Teaching posts in NITs',
+          'Modified Assured Career Progression (MACP) Scheme',
+          'Recruitment Rules for the faculty posts under four-tier flexible faculty cadre in NITs',
+        ],
+      },
+      service: {
+        title: 'Service Rules',
+        links: [
+          'MACP Rules',
+          'Memorandum of Association (MOA) and Rules (NIT)',
+          'Memorandum of Association (MOA) and Rules (RECK)',
+          'Qualification For Teaching',
+          'Qualification For Non Teaching',
+          'Career Advancement Scheme (CAS)',
+          'Central Civil Services – Leave Rules',
+          "CEI (Reservation in Teachers' Cadre) Act, 2019",
+        ],
+      },
+      policies: {
+        title: 'Rules and Policies',
+        links: [
+          'Amended Statutes of NITs',
+          'Conduct Rules of Employee',
+          'CPDA Rules',
+          'Doc Rules',
+          'Grievances Rules',
+          'Internal Complaint Committee Rules',
+          'Cashless Scheme',
+        ],
+      },
+    },
+  },
 };
 
 export const instituteHi: InstituteTranslations = {
@@ -659,6 +717,47 @@ export const instituteHi: InstituteTranslations = {
         title: 'प्रोफेसर (विभागाध्यक्ष)',
         email: 'drarun_goel@yahoo.co.in',
         phone: '01744-233349, 01744-233300',
+      },
+    },
+  },
+  rulesAndPolicies: {
+    title: 'नियम और नीतियां',
+    sections: {
+      recruitment: {
+        title: 'भर्ती नियम',
+        links: [
+          'गैर-संकाय के आरआर (2019) का कार्यान्वयन दिनांक 04.04.2019',
+          'एफ.35-5.2018-टीएस.III दिनांक 20.02.2019',
+          'भर्ती नियम (चार-स्तरीय लचीली संकाय संरचना के तहत) एनआईटी में संकाय के लिए - संशोधित',
+          'अभियांत्रिकी में गैर-शिक्षण पदों के लिए भर्ती नियम (आरआर)',
+          'संशोधित सुनिश्चित कैरियर प्रगति (एमएसीपी) योजना',
+          'एनआईटी में चार-स्तरीय लचीली संकाय कैडर के तहत संकाय पदों के लिए भर्ती नियम',
+        ],
+      },
+      service: {
+        title: 'सेवा नियम',
+        links: [
+          'एमएसीपी नियम',
+          'एमओए और नियम (एनआईटी)',
+          'एमओए और नियम (रेक)',
+          'शिक्षण के लिए योग्यता',
+          'गैर-शिक्षण के लिए योग्यता',
+          'कैरियर उन्नयन योजना (सीएएस)',
+          'केंद्रीय सिविल सेवाएं - अवकाश नियम',
+          'सीईआई (शिक्षकों के कैडर में आरक्षण) अधिनियम, 2019',
+        ],
+      },
+      policies: {
+        title: 'नियम और नीतियां',
+        links: [
+          'एनआईटी के संशोधित अध्यादेश',
+          'कर्मचारी आचरण नियम',
+          'सीपीडीए नियम',
+          'दस्तावेज़ नियम',
+          'शिकायत नियम',
+          'आंतरिक शिकायत समिति नियम',
+          'कैशलेस योजना',
+        ],
       },
     },
   },
