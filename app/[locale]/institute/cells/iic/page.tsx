@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import Gallery from '~/components/ui/gallery';
+import ImageHeader from '~/components/image-header';
 import Heading from '~/components/heading';
 import GenericTable from '~/components/ui/generic-table';
 import FICGroup from '~/components/fic-group';
@@ -76,24 +77,37 @@ export default async function IICPage({
 
   const activities = [
     {
-      past_activity: "Workshop on 'Design Thinking for Innovation'",
+      upcoming_activity: "Workshop on 'Design Thinking for Innovation'",
+      past_activity:
+        'Inauguration of IIC with Chief Guest Dr. A. P. J. Abdul Kalam',
     },
     {
-      past_activity: "Talk on 'From Campus to Startup' by Alumni Entrepreneurs",
+      upcoming_activity:
+        "Talk on 'From Campus to Startup' by Alumni Entrepreneurs",
+      past_activity:
+        'Inauguration of IIC with Chief Guest Dr. A. P. J. Abdul Kalam',
     },
     {
-      past_activity: 'Idea Pitching Competition with Industry Mentors',
+      upcoming_activity: 'Idea Pitching Competition with Industry Mentors',
+      past_activity:
+        'Inauguration of IIC with Chief Guest Dr. A. P. J. Abdul Kalam',
     },
     {
-      past_activity: "Seminar on 'AI and the Future of Startups'",
+      upcoming_activity: "Seminar on 'AI and the Future of Startups'",
+      past_activity:
+        'Inauguration of IIC with Chief Guest Dr. A. P. J. Abdul Kalam',
     },
     {
+      upcoming_activity: "Panel Discussion on 'Future of AI in Education'",
       past_activity: 'Innovation Bootcamp: 3-Day Product Building Sprint',
     },
     {
+      upcoming_activity: "Hackathon on 'AI for Social Good'",
       past_activity: 'Celebration of National Technology Day with Tech Demos',
     },
     {
+      upcoming_activity:
+        "Webinar on 'Intellectual Property Rights for Startups'",
       past_activity: 'Celebration of National Technology Day with Tech Demos',
     },
   ];
@@ -103,27 +117,16 @@ export default async function IICPage({
   // }));
 
   const galleryImages = await listFolderImages('institute/cells/iks/');
+  console.log('Gallery Images:', galleryImages);
 
   return (
     <>
       {/* Header */}
-      <article
-        className="sm:h-76 md:h-84 lg:h-94 relative flex h-56 w-full bg-cover bg-center xl:h-[448px] 2xl:h-[540px]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.2) 0%, rgba(249, 245, 235, 0.5) 50%,rgba(249, 245, 235, 0.75) 75%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/student-activities/clubs/technobyte/1.jpg')`,
-        }}
-      >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
-            {text.Institute.cells.iic.title}
-          </h1>
-          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">
-              (IIC) {text.Institute.cells.cell}
-            </span>
-          </h1>
-        </div>
-      </article>
+      <ImageHeader
+        src="student-activities/clubs/technobyte/1.jpg"
+        title={text.Institute.cells.iic.title}
+        subtitle={`(IIC) ${text.Institute.cells.cell}`}
+      />
 
       <main className="container mt-12">
         {/* Description */}
@@ -132,50 +135,36 @@ export default async function IICPage({
             {text.Institute.cells.iic.description}
           </p>
         </article>
-        <section className="mt-12 grid gap-8 lg:grid-cols-2 lg:items-center">
-          {/* Top/Left: Vision & Mission Text */}
-          <div className="bg-white space-y-6 rounded-2xl p-6 lg:p-8 ">
-            <div>
-              <h4 className="text-gray-900 mb-4 text-2xl font-bold md:text-lg">
-                {text.Institute.cells.iic.vision.title}
-              </h4>
+
+        <section className="mt-4 flex rounded bg-shade-light p-2">
+          <ul>
+            <li className="p-3">
+              <h4>{text.Institute.cells.iic.vision.title}</h4>
               {text.Institute.cells.iic.vision.content.map((vision, index) => (
-                <p
-                  className="text-gray-700 mb-3 text-justify text-lg leading-relaxed"
-                  key={index}
-                >
+                <p className="mb-1" key={index}>
                   {vision}
                 </p>
               ))}
-            </div>
-
-            <div>
-              <h4 className="text-gray-900 mb-4 text-2xl font-bold">
-                {text.Institute.cells.iic.mission.title}
-              </h4>
+            </li>
+            <li className="p-3">
+              <h4>{text.Institute.cells.iic.mission.title}</h4>
               {text.Institute.cells.iic.mission.content.map(
                 (mission, index) => (
-                  <p
-                    className="text-gray-700 mb-3 text-justify text-lg leading-relaxed"
-                    key={index}
-                  >
+                  <p className="mb-1" key={index}>
                     {mission}
                   </p>
                 )
               )}
-            </div>
-          </div>
+            </li>
+          </ul>
 
-          {/* Right/Bottom: Full coverage image */}
-          <div className="relative overflow-hidden  rounded-2xl">
-            <Image
-              src="/institute/cells/iic/location/cs_dept.jpg"
-              alt="Institute IIC pillars illustration"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          <Image
+            src="slideshow/image02.jpg"
+            alt="placeholder"
+            className="m-2 size-0 rounded-md lg:size-60"
+            height={128}
+            width={128}
+          />
         </section>
 
         {/* Office Order */}
@@ -234,8 +223,8 @@ export default async function IICPage({
               serialNoLabel={text.Institute.cells.iic.officeOrder.srNo}
               headers={[
                 {
-                  key: 'past_activity',
-                  label: text.Institute.cells.iic.activities.pastActivities,
+                  key: 'upcoming_activity',
+                  label: text.Institute.cells.iic.activities.upcomingActivities,
                 },
               ]}
               tableData={activities}

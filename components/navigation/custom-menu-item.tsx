@@ -1,5 +1,5 @@
 // components/navigation/custom-menu-item.tsx
-"use client";
+'use client';
 
 import { cva } from 'class-variance-authority';
 import Image from 'next/image';
@@ -84,7 +84,7 @@ export const NavigationMenuCustomListItem = React.forwardRef<
                 <NavigationMenuLink asChild>
                   <Link
                     className={cn(
-                      'group/menu-item flex w-full min-w-[14rem] max-w-[18rem] flex-col select-none space-y-1 rounded-xl p-2 leading-none no-underline outline-none transition-all duration-300 ease-in-out hover:bg-neutral-50 focus:bg-neutral-50 lg:p-3'
+                      'group/menu-item flex w-full min-w-[14rem] max-w-[18rem] select-none flex-col space-y-1 rounded-xl p-2 leading-none no-underline outline-none transition-all duration-300 ease-in-out hover:bg-neutral-50 focus:bg-neutral-50 lg:p-3'
                     )}
                     href={`/${locale}/${href}`}
                   >
