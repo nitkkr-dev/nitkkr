@@ -12,12 +12,20 @@ import Loading from '~/components/loading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, GalleryCarousel } from '~/components/carousels';
 
 export default async function Library({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const images = [
+    "institute/sections/central-library/library1.jpg",
+    "institute/sections/central-library/library1.jpg",
+    "institute/sections/central-library/library1.jpg",
+    "institute/sections/central-library/library1.jpg",
+    "institute/sections/central-library/library1.jpg",
+  ];
   const contactUsData = [
     {
       name: 'Dr. S. K. Mahajan',
@@ -149,7 +157,7 @@ export default async function Library({
           heading="h3"
           href="#facilities"
           id="facilities"
-          text={text.heading.facilities}
+          text={text.heading.facilities.toUpperCase()}
         />
 
         <ul className="container mt-4 flex flex-col gap-12">
@@ -207,7 +215,7 @@ export default async function Library({
           heading="h3"
           href="#quick-links"
           id="quick-links"
-          text={text.heading.quickLinks}
+          text={text.heading.quickLinks.toUpperCase()}
         />
         <ButtonGroup
           columns={3}
@@ -235,7 +243,7 @@ export default async function Library({
         <Heading
           glyphDirection="ltr"
           heading="h3"
-          text={text.heading.contactUs}
+          text={text.heading.contactUs.toUpperCase()}
           href="#contact-us"
           id="contact-us"
         />
@@ -250,6 +258,52 @@ export default async function Library({
             tableData={contactUsData}
           />
         </Suspense>
+      </section>
+      <section className="container">
+        <div className="max-w-7xl mx-auto px-6">
+
+          <Heading
+            glyphDirection="rtl"
+            heading="h3"
+            text={text.heading.gallery.toUpperCase()}
+            href="#gallery"
+            id="gallery"
+          />
+
+          <Carousel
+            opts={{ align: "start" }}
+            onHoverKeyboardControls
+            className="w-full mt-8"
+          >
+            <CarouselContent>
+              {images.map((src, index) => (
+                <CarouselItem
+                  key={index}
+                  className="basis-full sm:basis-1/2 md:basis-1/3"
+                >
+                  <div className="relative w-full h-64 rounded-md overflow-hidden">
+                    <Image
+                      src={src}
+                      alt={`gallery-${index}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className='text-primary-700' />
+            <CarouselNext className='text-primary-700' />
+          </Carousel>
+
+          <div className="flex justify-center mt-10">
+            <button className="border text-primary-700 font-bold border-primary-700 px-4 py-2 rounded-md hover:bg-black hover:text-white transition">
+              View Full Gallery →
+            </button>
+          </div>
+
+        </div>
       </section>
     </>
   );
