@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 import { db } from '~/server/db';
 import { copyrights, designs, patents } from '~/server/db/schema';
 import { getServerAuthSession } from '~/server/auth';
-import { fetchAndParse } from '~/lib/ipr-scrapper/fetchers';
+// import { fetchAndParse } from '~/lib/ipr-scrapper/fetchers';
 
 interface SourceConfig {
   category: string;
@@ -45,10 +45,10 @@ export async function POST(request: Request) {
     // 2. Run scrapper for each source (NO FILE WRITES)
     const iprData: Record<string, Record<string, string>[]> = {};
 
-    for (const source of config) {
-      const data = await fetchAndParse(source);
-      iprData[source.category] = data;
-    }
+    // for (const source of config) {
+    //   const data = await fetchAndParse(source);
+    //   iprData[source.category] = data;
+    // }
 
     // Log the extracted IPR data
     // console.log(iprData);
