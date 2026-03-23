@@ -11,6 +11,7 @@ import { getTranslations } from '~/i18n/translations';
 import { getS3Url } from '~/server/s3';
 import FICGroup from '~/components/fic-group';
 import ButtonGroup from '~/components/button-group';
+import ImageHeader from '~/components/image-header';
 
 // Fetches IPR data from DB - cache for 5 minutes
 export const revalidate = 300;
@@ -132,23 +133,11 @@ export default async function IPR({
   return (
     <>
       {/* Header */}
-      <article
-        className="sm:h-76 md:h-84 lg:h-94 relative flex h-56 w-full bg-cover bg-center xl:h-[448px] 2xl:h-[540px]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(249, 245, 235, 0.2) 0%, rgba(249, 245, 235, 0.5) 50%,rgba(249, 245, 235, 0.75) 75%, rgba(249, 245, 235, 1) 100%), url('${getS3Url()}/student-activities/clubs/technobyte/1.jpg')`,
-        }}
-      >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 className="mx-2 my-auto text-xl text-neutral-900 md:text-2xl lg:text-3xl xl:text-4xl">
-            {text.Research.ipr.title}
-          </h1>
-          <h1 className="mx-2 my-auto text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-            <span className="text-neutral-900">
-              (IPR) {text.Institute.cells.cell}
-            </span>
-          </h1>
-        </div>
-      </article>
+      <ImageHeader
+        title={text.Research.ipr.title}
+        src="student-activities/clubs/technobyte/1.jpg"
+        subtitle={`(IPR) ${text.Institute.cells.cell}`}
+      />
 
       <main className="container mt-12">
         {/* description */}
