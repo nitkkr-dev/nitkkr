@@ -1,11 +1,14 @@
+import { arrayOverlaps } from 'drizzle-orm';
 import Image from 'next/image';
 import { MdCall, MdEmail } from 'react-icons/md';
 
+import EventSection from '~/components/events/event-section';
 import FICGroup from '~/components/fic-group';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import Gallery from '~/components/ui/gallery';
 import { getTranslations } from '~/i18n/translations';
+import { db, type eventCategoryEnum } from '~/server/db';
 import { getS3Url, listFolderImages } from '~/server/s3';
 
 export default async function ThoughtLab({
@@ -18,6 +21,36 @@ export default async function ThoughtLab({
   const galleryImages = await listFolderImages(
     'student-activities/thought-lab/'
   );
+
+  const eventCategory: (typeof eventCategoryEnum.enumValues)[number] =
+    'thought-lab';
+
+  const rawEvents = await db.query.events
+    .findMany({
+      columns: {
+        id: true,
+        title: true,
+        categories: true,
+        startDate: true,
+        endDate: true,
+        time: true,
+        description: true,
+        images: true,
+        location: true,
+      },
+      where: (event) => arrayOverlaps(event.categories, [eventCategory]),
+      limit: 3,
+    })
+    .catch(() => []);
+
+  // Ensure endDate and time are never null
+  const events = rawEvents.map((event) => ({
+    ...event,
+    endDate: event.endDate ?? '',
+    time: event.time ?? '',
+    description: event.description ?? '',
+    location: event.location ?? '',
+  }));
 
   return (
     <>
@@ -145,15 +178,18 @@ export default async function ThoughtLab({
       </section>
 
       {/* Events */}
-      <section className="container">
-        <Heading
-          glyphDirection="rtl"
-          heading="h3"
-          href="#events"
-          id="events"
-          text={text.ThoughtLab.events.heading.toUpperCase()}
-        />
-      </section>
+      {events.length > 0 && (
+        <section className="container">
+          <Heading
+            glyphDirection="rtl"
+            heading="h3"
+            href="#events"
+            id="events"
+            text={text.ThoughtLab.events.heading.toUpperCase()}
+          />
+          <EventSection events={events} locale={locale} showViewAll={false} />
+        </section>
+      )}
 
       {/* Faculty Member */}
       <section className="container">

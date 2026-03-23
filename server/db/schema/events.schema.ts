@@ -20,6 +20,9 @@ export const eventCategoryEnum = pgEnum('event_category', [
   'placements',
   'outreach',
   'miscellaneous',
+  'thought-lab',
+  'ncc',
+  'nss',
   'campus-highlights',
 ]);
 
@@ -34,6 +37,9 @@ export const VISIBLE_EVENT_CATEGORIES = [
   'placements',
   'outreach',
   'miscellaneous',
+  'thought-lab',
+  'ncc',
+  'nss',
 ] as const;
 
 export const events = pgTable(
