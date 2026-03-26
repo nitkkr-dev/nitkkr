@@ -12,12 +12,22 @@ import Loading from '~/components/loading';
 import GenericTable from '~/components/ui/generic-table';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
+import { GalleryCarousel } from '~/components/carousels';
 
 export default async function Library({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const images = [
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+    'institute/sections/central-library/library1.jpg',
+  ];
   const contactUsData = [
     {
       name: 'Dr. S. K. Mahajan',
@@ -149,7 +159,7 @@ export default async function Library({
           heading="h3"
           href="#facilities"
           id="facilities"
-          text={text.heading.facilities}
+          text={text.heading.facilities.toUpperCase()}
         />
 
         <ul className="container mt-4 flex flex-col gap-12">
@@ -207,7 +217,7 @@ export default async function Library({
           heading="h3"
           href="#quick-links"
           id="quick-links"
-          text={text.heading.quickLinks}
+          text={text.heading.quickLinks.toUpperCase()}
         />
         <ButtonGroup
           columns={3}
@@ -235,7 +245,7 @@ export default async function Library({
         <Heading
           glyphDirection="ltr"
           heading="h3"
-          text={text.heading.contactUs}
+          text={text.heading.contactUs.toUpperCase()}
           href="#contact-us"
           id="contact-us"
         />
@@ -250,6 +260,36 @@ export default async function Library({
             tableData={contactUsData}
           />
         </Suspense>
+      </section>
+      <section className="container">
+        <div className="mx-auto max-w-7xl px-6">
+          <Heading
+            glyphDirection="rtl"
+            heading="h3"
+            text={text.heading.gallery.toUpperCase()}
+            href="#gallery"
+            id="gallery"
+          />
+
+          <GalleryCarousel className="my-5 w-full">
+            {images.map((image, index) => (
+              <Image
+                alt={`Gallery image ${index + 1}`}
+                className="mx-auto size-48 rounded-md sm:size-56 md:size-64"
+                height={0}
+                key={index}
+                src={image}
+                width={0}
+              />
+            ))}
+          </GalleryCarousel>
+
+          <div className="mt-10 flex justify-center">
+            <button className="hover:bg-black hover:text-white rounded-md border border-primary-700 px-4 py-2 font-bold text-primary-700 transition">
+              View Full Gallery →
+            </button>
+          </div>
+        </div>
       </section>
     </>
   );
