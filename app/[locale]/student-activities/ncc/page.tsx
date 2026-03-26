@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { MdCall, MdEmail } from 'react-icons/md';
+import { arrayOverlaps } from 'drizzle-orm';
 
 import ImageHeader from '~/components/image-header';
 import Heading from '~/components/heading';
@@ -7,6 +8,8 @@ import { getS3Url } from '~/server/s3';
 import { cn } from '~/lib/utils';
 import FICGroup from '~/components/fic-group';
 import { getTranslations } from '~/i18n/translations';
+import { db, type eventCategoryEnum } from '~/server/db';
+import EventSection from '~/components/events/event-section';
 
 const nccofficers = [
   {
@@ -30,6 +33,36 @@ export default async function ncc({
 }) {
   const s3BaseUrl = getS3Url();
   const text = (await getTranslations(locale)).NCC;
+
+  const eventCategory: (typeof eventCategoryEnum.enumValues)[number] = 'ncc';
+
+  const rawEvents = await db.query.events
+    .findMany({
+      columns: {
+        id: true,
+        title: true,
+        categories: true,
+        startDate: true,
+        endDate: true,
+        time: true,
+        description: true,
+        images: true,
+        location: true,
+      },
+      where: (event) => arrayOverlaps(event.categories, [eventCategory]),
+      limit: 3,
+    })
+    .catch(() => []);
+
+  // Ensure endDate and time are never null
+  const events = rawEvents.map((event) => ({
+    ...event,
+    endDate: event.endDate ?? '',
+    time: event.time ?? '',
+    description: event.description ?? '',
+    location: event.location ?? '',
+  }));
+
   return (
     <>
       <ImageHeader
@@ -101,14 +134,17 @@ export default async function ncc({
       </section>
 
       {/* Events */}
-      <section className="container my-10">
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          text={text.headings.events.toUpperCase()}
-          id="events"
-        />
-      </section>
+      {events.length > 0 && (
+        <section className="container my-10">
+          <Heading
+            glyphDirection="ltr"
+            heading="h3"
+            text={text.headings.events.toUpperCase()}
+            id="events"
+          />
+          <EventSection events={events} locale={locale} showViewAll={false} />
+        </section>
+      )}
 
       <section className="container my-10">
         <Heading
