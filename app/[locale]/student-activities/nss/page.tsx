@@ -1,8 +1,11 @@
+import { arrayOverlaps } from 'drizzle-orm';
 import { MdCall, MdEmail } from 'react-icons/md';
 
+import EventSection from '~/components/events/event-section';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import { getTranslations } from '~/i18n/translations';
+import { db, type eventCategoryEnum } from '~/server/db';
 
 export default async function NSS({
   params: { locale },
@@ -10,6 +13,35 @@ export default async function NSS({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).NSS;
+
+  const eventCategory: (typeof eventCategoryEnum.enumValues)[number] = 'nss';
+
+  const rawEvents = await db.query.events
+    .findMany({
+      columns: {
+        id: true,
+        title: true,
+        categories: true,
+        startDate: true,
+        endDate: true,
+        time: true,
+        description: true,
+        images: true,
+        location: true,
+      },
+      where: (event) => arrayOverlaps(event.categories, [eventCategory]),
+      limit: 3,
+    })
+    .catch(() => []);
+
+  // Ensure endDate and time are never null
+  const events = rawEvents.map((event) => ({
+    ...event,
+    endDate: event.endDate ?? '',
+    time: event.time ?? '',
+    description: event.description ?? '',
+    location: event.location ?? '',
+  }));
 
   return (
     <>
@@ -25,15 +57,18 @@ export default async function NSS({
       </section>
 
       {/* EVENTS SECTION */}
-      <section className="container my-10" id="events">
-        <Heading
-          glyphDirection="ltr"
-          heading="h3"
-          href="#events"
-          id="events"
-          text={text.Events.title}
-        />
-      </section>
+      {events.length > 0 && (
+        <section className="container my-10" id="events">
+          <Heading
+            glyphDirection="ltr"
+            heading="h3"
+            href="#events"
+            id="events"
+            text={text.Events.title}
+          />
+          <EventSection events={events} locale={locale} showViewAll={false} />
+        </section>
+      )}
 
       {/* CONTACT SECTION */}
       <section className="container mb-4 mt-10" id="contact">
