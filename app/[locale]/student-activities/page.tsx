@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 
 import { BouncyArrowButton } from '~/components/buttons';
-import { GalleryCarousel } from '~/components/carousels';
 import Heading from '~/components/heading';
 import ImageHeader from '~/components/image-header';
 import StudentGroup from '~/components/student-group';
@@ -15,6 +14,7 @@ import { Card, CardDescription, CardTitle } from '~/components/ui';
 import { getTranslations } from '~/i18n/translations';
 import { cn } from '~/lib/utils';
 import { db } from '~/server/db';
+import EventSection from '~/components/events/event-section';
 
 export default async function StudentActivities({
   params: { locale },
@@ -22,6 +22,35 @@ export default async function StudentActivities({
   params: { locale: string };
 }) {
   const text = (await getTranslations(locale)).StudentActivities;
+
+  const rawEvents = await db.query.eventClubs.findMany({
+    with: {
+      event: {
+        columns: {
+          id: true,
+          title: true,
+          categories: true,
+          startDate: true,
+          endDate: true,
+          time: true,
+          description: true,
+          images: true,
+          location: true,
+        },
+      },
+    },
+    limit: 3,
+  });
+
+  // Ensure endDate and time are never null
+  const events = rawEvents.map(({ event }) => ({
+    ...event,
+    endDate: event.endDate ?? '',
+    time: event.time ?? '',
+    description: event.description ?? '',
+    location: event.location ?? '',
+  }));
+
   const studentCoordinators = [
     { rollNumber: '12212070' },
     { rollNumber: '12112002' },
@@ -82,6 +111,14 @@ export default async function StudentActivities({
           href={`/${locale}/student-activities/events`}
           text={text.sections.events.title}
         />
+        <Suspense fallback={<Loading />}>
+          <EventSection
+            events={events}
+            locale={locale}
+            viewAllText={text.sections.events.more}
+            viewAllHref={`/${locale}/student-activities/events`}
+          />
+        </Suspense>
       </section>
 
       <section className="container text-center" id="council">

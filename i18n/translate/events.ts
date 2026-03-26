@@ -31,6 +31,9 @@ export interface EventsTranslations {
     outreach: string;
     miscellaneous: string;
     'campus-highlights': string;
+    'thought-lab': string;
+    ncc: string;
+    nss: string;
   };
   viewAll: string;
 }
@@ -66,6 +69,9 @@ export const eventsEn: EventsTranslations = {
     outreach: 'Outreach',
     miscellaneous: 'Miscellaneous',
     'campus-highlights': 'Campus Highlights',
+    'thought-lab': 'Thought Lab',
+    ncc: 'NCC',
+    nss: 'NSS',
   },
   viewAll: 'View All',
 };
@@ -101,6 +107,9 @@ export const eventsHi: EventsTranslations = {
     outreach: 'आउटरीच',
     miscellaneous: 'विविध',
     'campus-highlights': 'कैंपस हाइलाइट्स',
+    'thought-lab': 'थॉट लैब',
+    ncc: 'एन सी सी',
+    nss: 'एन एस एस',
   },
   viewAll: 'सभी देखें',
 };
