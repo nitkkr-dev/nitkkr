@@ -160,6 +160,7 @@ export default async function Department({
           locale={locale}
           departmentIds={[department.id]}
           className="container my-8"
+          viewAllHref={`/${locale}/academics/departments/${department.urlName}/noticeboard`}
         />
       )}
 

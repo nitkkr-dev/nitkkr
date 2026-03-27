@@ -2,7 +2,11 @@
 
 import { uploadFileToS3 } from '~/server/s3/upload';
 import { buildObjectUrl } from '~/server/s3';
-import { canManageNotifications, getServerAuthSession } from '~/server/auth';
+import {
+  canManageNotifications,
+  getHodDepartmentId,
+  getServerAuthSession,
+} from '~/server/auth';
 
 // ─── Constants ───────────────────────────────────────────────────────
 
@@ -57,7 +61,8 @@ export async function uploadNotificationMedia(
   formData: FormData
 ): Promise<MediaUploadResult> {
   const session = await getServerAuthSession();
-  if (!canManageNotifications(session)) {
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return { success: false, message: 'Not authorised' };
   }
 
@@ -117,7 +122,8 @@ export async function uploadNotificationDocument(
   formData: FormData
 ): Promise<DocumentUploadResult> {
   const session = await getServerAuthSession();
-  if (!canManageNotifications(session)) {
+  const hodDepartmentId = await getHodDepartmentId(session);
+  if (!canManageNotifications(session) && !hodDepartmentId) {
     return { success: false, message: 'Not authorised' };
   }
 
