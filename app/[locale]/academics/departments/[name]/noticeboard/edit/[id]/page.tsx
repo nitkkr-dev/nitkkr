@@ -12,7 +12,6 @@ export default async function EditDepartmentNotificationPage({
 }: {
   params: { locale: string; name: string; id: string };
 }) {
-
   const session = await getServerAuthSession();
   const hodDepartmentId = await getHodDepartmentId(session);
 
@@ -46,9 +45,7 @@ export default async function EditDepartmentNotificationPage({
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8">
-
-        <div className="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
-
+        <div className="bg-white rounded-lg border border-neutral-200 p-6 shadow-sm">
           <h1 className="mb-6 text-xl font-bold text-primary-700">
             Edit Notification
           </h1>
@@ -58,9 +55,7 @@ export default async function EditDepartmentNotificationPage({
             text={text}
             initialData={notification}
           />
-
         </div>
-
       </main>
     </>
   );

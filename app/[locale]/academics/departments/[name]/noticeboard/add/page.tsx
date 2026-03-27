@@ -39,16 +39,12 @@ export default async function AddDepartmentNotificationPage({
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8">
-        <div className="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
+        <div className="bg-white rounded-lg border border-neutral-200 p-6 shadow-sm">
           <h1 className="mb-6 text-xl font-bold text-primary-700">
             Add Notification
           </h1>
 
-          <NotificationForm
-            locale={locale}
-            text={text}
-          />
-
+          <NotificationForm locale={locale} text={text} />
         </div>
       </main>
     </>

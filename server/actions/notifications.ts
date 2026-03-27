@@ -14,7 +14,11 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-import { canManageNotifications, getHodDepartmentId, getServerAuthSession } from '~/server/auth';
+import {
+  canManageNotifications,
+  getHodDepartmentId,
+  getServerAuthSession,
+} from '~/server/auth';
 import { db } from '~/server/db';
 import {
   notificationCategoryEnum,
@@ -393,22 +397,19 @@ export async function updateNotification(
   }
 
   // If user is HoD (not CCN), ensure the notification belongs to their department
-if (hodDepartmentId && !canManageNotifications(session)) {
-  const deptLink = await db.query.notificationDepartments.findFirst({
-    where: (n, { eq, and }) =>
-      and(
-        eq(n.notificationId, id),
-        eq(n.departmentId, hodDepartmentId)
-      ),
-  });
+  if (hodDepartmentId && !canManageNotifications(session)) {
+    const deptLink = await db.query.notificationDepartments.findFirst({
+      where: (n, { eq, and }) =>
+        and(eq(n.notificationId, id), eq(n.departmentId, hodDepartmentId)),
+    });
 
-  if (!deptLink) {
-    return {
-      success: false,
-      message: 'Not authorized to update this notification',
-    };
+    if (!deptLink) {
+      return {
+        success: false,
+        message: 'Not authorized to update this notification',
+      };
+    }
   }
-}
 
   try {
     const updateData: {
@@ -479,24 +480,21 @@ export async function deleteNotification(id: number): Promise<ActionResult> {
       message: 'Not authorized to delete notifications',
     };
   }
-  
-  // If user is HoD (not CCN), ensure the notification belongs to their department
-if (hodDepartmentId && !canManageNotifications(session)) {
-  const deptLink = await db.query.notificationDepartments.findFirst({
-    where: (n, { eq, and }) =>
-      and(
-        eq(n.notificationId, id),
-        eq(n.departmentId, hodDepartmentId)
-      ),
-  });
 
-  if (!deptLink) {
-    return {
-      success: false,
-      message: 'Not authorized to delete this notification',
-    };
+  // If user is HoD (not CCN), ensure the notification belongs to their department
+  if (hodDepartmentId && !canManageNotifications(session)) {
+    const deptLink = await db.query.notificationDepartments.findFirst({
+      where: (n, { eq, and }) =>
+        and(eq(n.notificationId, id), eq(n.departmentId, hodDepartmentId)),
+    });
+
+    if (!deptLink) {
+      return {
+        success: false,
+        message: 'Not authorized to delete this notification',
+      };
+    }
   }
-}
 
   try {
     const result = await db
@@ -541,19 +539,16 @@ export async function getNotificationForEdit(id: number): Promise<{
   }
 
   // If user is HoD (not CCN), ensure notification belongs to their department
-if (hodDepartmentId && !canManageNotifications(session)) {
-  const deptLink = await db.query.notificationDepartments.findFirst({
-    where: (n, { eq, and }) =>
-      and(
-        eq(n.notificationId, id),
-        eq(n.departmentId, hodDepartmentId)
-      ),
-  });
+  if (hodDepartmentId && !canManageNotifications(session)) {
+    const deptLink = await db.query.notificationDepartments.findFirst({
+      where: (n, { eq, and }) =>
+        and(eq(n.notificationId, id), eq(n.departmentId, hodDepartmentId)),
+    });
 
-  if (!deptLink) {
-    return null;
+    if (!deptLink) {
+      return null;
+    }
   }
-}
 
   const notification = await db.query.notifications.findFirst({
     where: (n, { eq }) => eq(n.id, id),

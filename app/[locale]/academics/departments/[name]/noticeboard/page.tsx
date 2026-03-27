@@ -15,13 +15,8 @@ import { Button } from '~/components/buttons';
 import { ScrollArea } from '~/components/ui';
 import { DateRangeFilter, SearchInput } from '~/components/inputs';
 import { FilterSection } from '~/components/filter-section';
-import {
-  notificationDepartments,
-} from '~/server/db/schema/notifications.schema';
-import {
-  getHodDepartmentId,
-  getServerAuthSession,
-} from '~/server/auth';
+import { notificationDepartments } from '~/server/db/schema/notifications.schema';
+import { getHodDepartmentId, getServerAuthSession } from '~/server/auth';
 import { type NotificationItem } from '~/server/actions/notifications';
 import { NotificationsList } from '~/app/notifications/NotificationsList';
 
@@ -40,7 +35,6 @@ export default async function DepartmentNoticeboardPage({
   params: { locale: string; name: string };
   searchParams: PageSearchParams;
 }) {
-
   const text = (await getTranslations(locale)).Notifications;
 
   const session = await getServerAuthSession();
@@ -67,18 +61,14 @@ export default async function DepartmentNoticeboardPage({
       notificationId: notificationDepartments.notificationId,
     })
     .from(notificationDepartments)
-    .where(
-      inArray(notificationDepartments.departmentId, [department.id])
-    );
+    .where(inArray(notificationDepartments.departmentId, [department.id]));
 
   const notificationIds = deptMatches.map((m) => m.notificationId);
 
   let raw = await db.query.notifications.findMany({
     where: (n, { and, gte, lte }) =>
       and(
-        notificationIds.length
-          ? inArray(n.id, notificationIds)
-          : undefined,
+        notificationIds.length ? inArray(n.id, notificationIds) : undefined,
         startDate ? gte(n.createdAt, startDate) : undefined,
         endDate ? lte(n.createdAt, endDate) : undefined
       ),
@@ -138,7 +128,6 @@ export default async function DepartmentNoticeboardPage({
       )}
 
       <section className="container mb-0 mt-8 flex gap-12">
-
         {/* Sidebar */}
         <aside
           className={cn(
@@ -146,10 +135,8 @@ export default async function DepartmentNoticeboardPage({
             'sticky top-[88px] self-start'
           )}
         >
-
           <ScrollArea className="h-[calc(100vh-200px)]">
             <div className="flex flex-col gap-2">
-
               <FilterSection locale={locale} label={text.filter.date}>
                 <DateRangeFilter
                   locale={locale}
@@ -164,29 +151,23 @@ export default async function DepartmentNoticeboardPage({
                   }}
                 />
               </FilterSection>
-
             </div>
           </ScrollArea>
-
         </aside>
 
         {/* Main */}
         <section className="flex grow flex-col space-y-6">
-
           {/* Search */}
           <search className="w-full items-center gap-4 py-2 max-xl:flex">
-
             <SearchInput
               defaultValue={query}
               placeholder={text.searchPlaceholder}
               inputId="notification-search"
             />
-
           </search>
 
           {/* Notifications List */}
           <div className="flex-1 rounded-md">
-
             <NotificationsList
               initialItems={serializedItems}
               initialCursor={initialCursor}
