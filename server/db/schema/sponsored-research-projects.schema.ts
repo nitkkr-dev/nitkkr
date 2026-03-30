@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+
 import { departments } from './departments.schema';
 import { sponsoredResearchProjectsFaculties } from './sponsored-research-projects-faculties.schema';
 

@@ -15,13 +15,13 @@ import {
   developmentProgramsOrganised,
   experience,
   faculty,
+  ipr,
+  outreachActivities,
   persons,
   publications,
   qualifications,
-  outreachActivities,
   researchProjects,
   researchScholars,
-  ipr,
 } from '~/server/db/schema';
 
 // Configuration for each section type
@@ -114,7 +114,7 @@ export async function upsertFacultySection(
       !id &&
       'details' in validated
     ) {
-      const details = validated.details as string;
+      const details = validated.details;
       const publicationLines = details
         .split('\n')
         .filter((line) => line.trim().length > 0);
@@ -245,7 +245,7 @@ export async function editFacultyProfilePersonalDetails(
 
 export async function updatePersonProfileImage(imageUrl: string) {
   const session = await getServerAuthSession();
-  if (!session || !session.person.id) {
+  if (!session?.person.id) {
     return { success: false, message: 'Not authorized' };
   }
 

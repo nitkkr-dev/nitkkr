@@ -1,8 +1,8 @@
 // Import interfaces from modular translation files
 import type {
   AcademicsTranslations,
-  AdmissionTranslations,
   AdministrationTranslations,
+  AdmissionTranslations,
   AwardsTranslations,
   CHPDTranslations,
   ClubsTranslations,
@@ -27,10 +27,13 @@ import type {
   HeaderTranslations,
   HostelsTranslations,
   InstituteTranslations,
+  LaboratoriesTranslations,
   LoginTranslations,
   MainTranslations,
+  NCCTranslations,
   NotFoundTranslations,
   NotificationsTranslations,
+  NSSTranslations,
   OtherOfficersPageTranslations,
   PatentsAndTechnologiesTranslations,
   ProfileTranslations,
@@ -44,14 +47,11 @@ import type {
   SectionTranslations,
   StatusTranslations,
   StudentActivitiesTranslations,
+  StudentCouncilTranslations,
   TendersTranslations,
   ThoughtLabTranslations,
   TrainingAndPlacementTranslations,
   WebsiteContributorsTranslations,
-  NCCTranslations,
-  NSSTranslations,
-  LaboratoriesTranslations,
-  StudentCouncilTranslations,
 } from './translate';
 
 export async function getTranslations(locale: string): Promise<Translations> {

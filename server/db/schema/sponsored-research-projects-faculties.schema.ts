@@ -1,6 +1,7 @@
 import { pgTable } from 'drizzle-orm/pg-core';
-import { sponsoredResearchProjects } from './sponsored-research-projects.schema';
 import { relations } from 'drizzle-orm';
+
+import { sponsoredResearchProjects } from './sponsored-research-projects.schema';
 export const sponsoredResearchProjectsFaculties = pgTable(
   'sponsored_research_projects_faculties',
   (t) => ({

@@ -206,7 +206,12 @@ export interface SectionTranslations {
     };
   };
   CentreOfComputingAndNetworking: {};
-  ElectricalMaintenance: {};
+  ElectricalMaintenance: {
+    headings: string[];
+    links: string[];
+    responsibilitiesTitle: string;
+    responsibilities: string[];
+  };
   Estate: {
     name: string;
     links: string[];
@@ -676,7 +681,45 @@ Saturdays & Holidays: 09.00 am to 05.00 pm`,
     },
   },
   CentreOfComputingAndNetworking: {},
-  ElectricalMaintenance: {},
+  ElectricalMaintenance: {
+    headings: ['About', 'Important Links'],
+    links: [
+      'Electricity Connection Form',
+      'Electricity Disconnection Form',
+      'Online Complaint',
+      'Telephone Complaint',
+    ],
+    responsibilitiesTitle:
+      'Responsibilities and duties discharged by the Electrical Maintenance Section',
+    responsibilities: [
+      'Allocation of maintenance jobs in Institute academic area to outsourcing staff.',
+      'Will report for work in morning shift and be responsible for addressing emergent situations occurring during this shift.',
+      'Operation and maintenance of lifts in all campus areas, keeping track of their AMCs and making payment of AMC in due time.',
+      'Purchase, installation and maintenance of various equipment such as air conditioners, water coolers, UPS systems, desert coolers, exhaust fans, RO systems, etc. in all sections and departments of the institute.',
+      'Proper record of store, diesel, load demand, consumption, etc.',
+      'Monitoring and inspection of all electrical works executed by CPWD in the institute.',
+      'Allocation of maintenance jobs in hostel areas to outsourcing staff.',
+      'Maintenance of street lighting in all campus zones: academic, residential and hostels.',
+      'Operation and maintenance of all DG sets throughout campus and maintaining adequate stock of diesel.',
+      'Load tracking at institute substations and load relief as and when required.',
+      'To maintain and make necessary efforts for substation sustainability.',
+      'Reading, dispatch and recovery of electricity charges from hostel sector, including meter reading, issuing bills and collecting charges.',
+      'Maintenance of water supply motors.',
+      'Purchase, installation and maintenance of firefighting equipment (fire extinguishers) in the campus.',
+      'Allocation of maintenance jobs in residential areas to outsourcing staff.',
+      'Will report for work in morning shift; however, responsible for addressing emergent situations during night shift as well.',
+      'Liaising with UHBVN for bulk electricity supply and maintaining records of institute electricity bills.',
+      'Recovery of electricity charges from residential sector, including meter reading, issuing bills and collecting charges.',
+      'Rewiring works of all old buildings and replacement of old distribution systems with LT panels.',
+      'Commissioning of lifts for persons with disabilities.',
+      'Diesel purchase for whole institute requirements.',
+      'Power-saving measures from time to time, such as replacement of old fixtures with LED and low-wattage electrical appliances.',
+      'To execute and maintain the renewable energy generation system.',
+      'Details sent to the ministry from time to time whenever requisitions are received.',
+      'To process new cases for necessary electrical renovation or institute requirements with the vision of institute growth.',
+      'Purchase of batteries/UPS either through new purchase or buyback, as suitable for the institute.',
+    ],
+  },
   Estate: {
     name: `Estate`,
     links: [
@@ -1376,7 +1419,45 @@ export const sectionHi: SectionTranslations = {
     },
   },
   CentreOfComputingAndNetworking: {},
-  ElectricalMaintenance: {},
+  ElectricalMaintenance: {
+    headings: ['परिचय', 'महत्वपूर्ण लिंक'],
+    links: [
+      'बिजली कनेक्शन फॉर्म',
+      'बिजली डिस्कनेक्शन फॉर्म',
+      'दर सूची',
+      'ऑनलाइन शिकायत',
+    ],
+    responsibilitiesTitle:
+      'इलेक्ट्रिकल मेंटेनेंस सेक्शन द्वारा निर्वहन की जाने वाली जिम्मेदारियां और कर्तव्य',
+    responsibilities: [
+      'संस्थान के अकादमिक क्षेत्र में रखरखाव कार्यों का आवंटन आउटसोर्सिंग स्टाफ को करना।',
+      'प्रातःकालीन पाली में कार्य हेतु उपस्थित रहना और इस पाली में उत्पन्न आपात स्थितियों का समाधान करना।',
+      'पूरे परिसर में लिफ्टों का संचालन एवं रखरखाव, उनकी AMC का अभिलेख रखना तथा समय पर AMC भुगतान सुनिश्चित करना।',
+      'एयर कंडीशनर, वाटर कूलर, UPS सिस्टम, डेजर्ट कूलर, एग्जॉस्ट फैन, RO सिस्टम आदि उपकरणों की खरीद, स्थापना एवं रखरखाव।',
+      'स्टोर, डीज़ल, लोड डिमांड, खपत आदि का उचित रिकॉर्ड रखना।',
+      'संस्थान में CPWD द्वारा किए गए सभी विद्युत कार्यों की निगरानी एवं निरीक्षण करना।',
+      'हॉस्टल क्षेत्र में रखरखाव कार्यों का आवंटन आउटसोर्सिंग स्टाफ को करना।',
+      'सम्पूर्ण परिसर (अकादमिक, आवासीय एवं हॉस्टल) में स्ट्रीट लाइटिंग का रखरखाव।',
+      'पूरे परिसर में DG सेटों का संचालन एवं रखरखाव तथा पर्याप्त डीज़ल स्टॉक बनाए रखना।',
+      'संस्थान के सब-स्टेशनों पर लोड ट्रैकिंग तथा आवश्यकता अनुसार लोड राहत।',
+      'सब-स्टेशन की सततता के लिए आवश्यक प्रयास करना।',
+      'हॉस्टल सेक्टर से बिजली शुल्क की रीडिंग, बिल जारी करना, प्रेषण एवं वसूली कार्य।',
+      'जल आपूर्ति मोटरों का रखरखाव।',
+      'कैम्पस में फायर फाइटिंग उपकरण (फायर एक्सटिंग्विशर) की खरीद, स्थापना एवं रखरखाव।',
+      'आवासीय क्षेत्र में रखरखाव कार्यों का आवंटन आउटसोर्सिंग स्टाफ को करना।',
+      'प्रातःकालीन पाली में रिपोर्ट करना, साथ ही रात्रि पाली की आपात स्थितियों के समाधान हेतु भी उत्तरदायी रहना।',
+      'UHBVN के साथ बल्क बिजली आपूर्ति हेतु समन्वय तथा संस्थान के बिजली बिलों का रिकॉर्ड संधारण।',
+      'आवासीय सेक्टर से बिजली शुल्क की वसूली: मीटर रीडिंग, बिल जारी करना और शुल्क संग्रह।',
+      'पुरानी इमारतों की री-वायरिंग तथा पुराने वितरण तंत्र को LT पैनलों से प्रतिस्थापित करना।',
+      'दिव्यांगजन हेतु लिफ्टों का कमीशनिंग।',
+      'पूरे संस्थान की आवश्यकता के अनुसार डीज़ल क्रय।',
+      'समय-समय पर ऊर्जा बचत उपाय, जैसे पुराने फिटिंग्स को LED/कम वाट क्षमता वाले उपकरणों से बदलना।',
+      'नवीकरणीय ऊर्जा उत्पादन प्रणाली का क्रियान्वयन एवं रखरखाव।',
+      'आवश्यकता प्राप्त होने पर समय-समय पर मंत्रालय को विवरण प्रेषित करना।',
+      'संस्थान की वृद्धि दृष्टि के अनुरूप विद्युत नवीनीकरण/आवश्यकताओं के नए मामलों को प्रोसेस करना।',
+      'संस्थान हेतु उपयुक्तता के अनुसार बैटरी/UPS की खरीद (नई खरीद/बायबैक) करना।',
+    ],
+  },
   Estate: {
     name: `संपदा`,
     links: [

@@ -1,8 +1,8 @@
 import type { Translations } from './translations';
 import {
   academicsHi,
-  admissionHi,
   administrationHi,
+  admissionHi,
   awardsHi,
   chpdHi,
   clubHi,
@@ -27,10 +27,13 @@ import {
   headerHi,
   hostelsHi,
   instituteHi,
+  laboratoriesHi,
   loginHi,
   mainHi,
+  nccHi,
   notFoundHi,
   notificationsHi,
+  nssHi,
   otherOfficersPageHi,
   patentsAndTechnologiesHi,
   profileHi,
@@ -44,14 +47,11 @@ import {
   sectionsHi,
   statusHi,
   studentActivitiesHi,
+  studentCouncilHi,
   tendersHi,
   thoughtLabHi,
   trainingAndPlacementHi,
   websiteContributorsHi,
-  nccHi,
-  nssHi,
-  laboratoriesHi,
-  studentCouncilHi,
 } from './translate';
 
 const text: Translations = {

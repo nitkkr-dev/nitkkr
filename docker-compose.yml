@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: local_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: nitkkr
+      POSTGRES_PASSWORD: nitkkr_secret
+      POSTGRES_DB: local_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql

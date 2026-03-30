@@ -1,5 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { pgTable } from 'drizzle-orm/pg-core';
+
 import { courseLogs, coursesToMajors, departments } from '.';
 
 export const courses = pgTable('courses', (t) => ({

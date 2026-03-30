@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { arrayOverlaps, desc, inArray } from 'drizzle-orm';
 
 import { getTranslations } from '~/i18n/translations';
-import { db, eventCategoryEnum } from '~/server/db';
+import { db, type eventCategoryEnum } from '~/server/db';
 import {
   eventDepartments,
   VISIBLE_EVENT_CATEGORIES,

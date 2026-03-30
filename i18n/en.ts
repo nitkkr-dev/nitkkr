@@ -1,8 +1,10 @@
+import { Label } from '@radix-ui/react-label';
+
 import type { Translations } from './translations';
 import {
   academicsEn,
-  admissionEn,
   administrationEn,
+  admissionEn,
   awardsEn,
   chpdEn,
   clubEn,
@@ -27,10 +29,13 @@ import {
   headerEn,
   hostelsEn,
   instituteEn,
+  laboratoriesEn,
   loginEn,
   mainEn,
+  nccEn,
   notFoundEn,
   notificationsEn,
+  nssEn,
   otherOfficersPageEn,
   patentsAndTechnologiesEn,
   profileEn,
@@ -44,16 +49,12 @@ import {
   sectionsEn,
   statusEn,
   studentActivitiesEn,
+  studentCouncilEn,
   tendersEn,
   thoughtLabEn,
   trainingAndPlacementEn,
   websiteContributorsEn,
-  nccEn,
-  nssEn,
-  laboratoriesEn,
-  studentCouncilEn,
 } from './translate';
-import { Label } from '@radix-ui/react-label';
 
 const text: Translations = {
   Admission: admissionEn,
