@@ -8,6 +8,7 @@ export interface DirectorPageTranslations {
     emailId: string;
   };
   Director: {
+    employeeId: string;
     name: string;
     position: string;
     phone: string;
@@ -27,6 +28,7 @@ export interface DirectorPageTranslations {
   }[];
 
   preDirectors: {
+    employeeId: string;
     name: string;
     position: string;
     image: string;
@@ -53,6 +55,7 @@ export const directorPageEn: DirectorPageTranslations = {
     emailId: 'Email-ID:',
   },
   Director: {
+    employeeId: '',
     name: 'Professor B.V. Ramana Reddy',
     position: 'Director, National Institute of Technology, Kurukshetra',
     phone: '+91-1744-233208',
@@ -112,6 +115,7 @@ export const directorPageEn: DirectorPageTranslations = {
   ],
   preDirectors: [
     {
+      employeeId: '',
       name: 'Professor B.V. Ramana Reddy',
       image: 'assets/director.jpeg',
       position: 'Former Director, NIT Kurukshetra -2022-2025',
@@ -121,6 +125,7 @@ export const directorPageEn: DirectorPageTranslations = {
       email: 'director@nitkkr.ac.in',
     },
     {
+      employeeId: '',
       name: 'Professor B.V. Ramana Reddy',
       image: 'assets/director.jpeg',
       position: 'Former Director, NIT Kurukshetra -2022-2025',
@@ -130,6 +135,7 @@ export const directorPageEn: DirectorPageTranslations = {
       email: 'director@nitkkr.ac.in',
     },
     {
+      employeeId: '',
       name: 'Professor B.V. Ramana Reddy',
       image: 'assets/director.jpeg',
       position: 'Former Director, NIT Kurukshetra -2022-2025',
@@ -151,6 +157,7 @@ export const directorPageHi: DirectorPageTranslations = {
     emailId: '',
   },
   Director: {
+    employeeId: '',
     name: '',
     position: '',
     phone: '',

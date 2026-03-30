@@ -29,6 +29,7 @@ export interface TrainingAndPlacementTranslations {
     backToTrainingPlacement: string;
   };
   Dean: {
+    employeeId: string;
     name: string;
     position: string;
     phone: string;
@@ -104,6 +105,7 @@ export const trainingAndPlacementEn: TrainingAndPlacementTranslations = {
     backToTrainingPlacement: '← Back to Training & Placement',
   },
   Dean: {
+    employeeId: '',
     name: 'Prof. XYZ',
     position: 'Dean (Training & Placement)',
     phone: '+91-1744-233-XXX',
@@ -267,6 +269,7 @@ export const trainingAndPlacementHi: TrainingAndPlacementTranslations = {
     backToTrainingPlacement: '← प्रशिक्षण और प्लेसमेंट पर वापस जाएँ',
   },
   Dean: {
+    employeeId: '',
     name: 'प्रो. XYZ',
     position: 'डीन (प्रशिक्षण और प्लेसमेंट)',
     phone: '+91-1744-233-XXX',
