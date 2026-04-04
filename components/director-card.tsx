@@ -1,140 +1,95 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 
-import { db } from '~/server/db';
+import { cn } from '~/lib/utils';
 
-interface DirectorCardProps {
-  employeeId: string;
+export interface DirectorCardLabels {
+  phoneNo: string;
+  faxNo: string;
+  mobileNo: string;
+  emailId: string;
 }
 
-function formatPhoneNumber(countryCode?: string | null, phone?: string | null) {
-  if (!phone) return '';
-  if (!countryCode) return phone;
-
-  const normalizedCode = countryCode.startsWith('+')
-    ? countryCode
-    : `+${countryCode}`;
-
-  return `${normalizedCode} ${phone}`;
+export interface DirectorCardProfile {
+  image: string;
+  name: string;
+  position: string;
+  phone: string;
+  fax: string;
+  mobile: string;
+  email: string;
 }
 
-export default async function DirectorCard({ employeeId }: DirectorCardProps) {
-  if (!employeeId) return null;
+export interface DirectorCardProps {
+  className?: string;
+  image: string;
+  name: string;
+  position: string;
+  phone: string;
+  fax?: string;
+  mobile: string;
+  email: string;
+  labels: DirectorCardLabels;
+}
 
-  // 🔹 Fetch faculty
-  const facultyMember = await db.query.faculty.findFirst({
-    where: (faculty, { eq }) => eq(faculty.employeeId, employeeId),
-    columns: {
-      designation: true,
-    },
-    with: {
-      person: {
-        columns: {
-          name: true,
-          email: true,
-          telephone: true,
-          countryCode: true,
-          alternateTelephone: true,
-          alternateCountryCode: true,
-          img: true,
-        },
-      },
-    },
-  });
-
-  // 🔹 Fetch staff if not faculty
-  const staffMember = facultyMember
-    ? null
-    : await db.query.staff.findFirst({
-        where: (staff, { eq }) => eq(staff.employeeId, employeeId),
-        columns: {
-          designation: true,
-        },
-        with: {
-          person: {
-            columns: {
-              name: true,
-              email: true,
-              telephone: true,
-              countryCode: true,
-              alternateTelephone: true,
-              alternateCountryCode: true,
-              img: true,
-            },
-          },
-        },
-      });
-
-  const member = facultyMember ?? staffMember;
-
-  if (!member?.person) return null;
-
-  const phone = formatPhoneNumber(
-    member.person.countryCode,
-    member.person.telephone
-  );
-
-  const mobile = formatPhoneNumber(
-    member.person.alternateCountryCode,
-    member.person.alternateTelephone
-  );
-
+export default function DirectorCard({
+  className,
+  image,
+  name,
+  position,
+  phone,
+  fax,
+  mobile,
+  email,
+  labels,
+}: DirectorCardProps) {
   return (
-    <ul className="flex w-full flex-col items-center gap-4 sm:gap-5 md:flex-row md:justify-center md:gap-6">
-      <li className="flex w-[95%] flex-row items-center gap-2 rounded-lg border border-primary-500 bg-neutral-50 p-2 transition-shadow duration-300 hover:shadow-lg sm:w-[90%] sm:gap-3 sm:p-3 md:w-[48%] md:gap-4 md:p-4">
-        {/* Image */}
+    <article
+      className={cn(
+        'mx-auto flex w-[95vw] flex-row items-start gap-3 rounded-xl border border-neutral-300 bg-neutral-50 p-2 shadow-md sm:w-[85vw] sm:gap-4 sm:p-3 md:w-[75vw] md:gap-6 md:p-4 lg:w-[60vw]',
+        className
+      )}
+    >
+      <div className="flex-shrink-0 overflow-hidden rounded-lg shadow-sm">
         <Image
-          src={member.person.img ?? 'fallback/user-image.jpg'}
-          alt={member.person.name}
-          width={200}
-          height={200}
-          className="h-24 w-24 flex-shrink-0 rounded-lg object-cover sm:h-28 sm:w-28 md:h-36 md:w-36 lg:h-44 lg:w-44"
+          alt={name}
+          className="h-auto w-20 rounded-lg object-cover sm:w-28 md:w-36 lg:w-44"
+          height={220}
+          width={180}
+          src={image}
         />
+      </div>
 
-        {/* Info */}
-        <section className="min-w-0 flex-1 space-y-1 break-words text-left sm:space-y-2 md:space-y-3 lg:space-y-4">
-          {/* Name + Designation */}
-          <div>
-            <h3 className="m-0 text-sm font-semibold text-primary-700 sm:text-base md:text-lg lg:text-xl">
-              {member.person.name}
-            </h3>
-            <span className="block text-xs text-neutral-700 sm:text-sm md:text-base lg:text-lg">
-              {member.designation ?? ''}
-            </span>
-          </div>
+      <div className="min-w-0 flex-1">
+        <h3 className="text-base font-bold text-primary-500 sm:text-lg md:text-xl lg:text-2xl">
+          {name}
+        </h3>
+        <p className="text-justify text-sm font-semibold text-neutral-900 sm:text-base md:text-lg lg:text-xl">
+          {position}
+        </p>
 
-          {/* Contact */}
-          <section className="space-y-0.5 sm:space-y-1">
-            {/* Email */}
-            <span className="flex items-center gap-1 text-xs sm:gap-1.5 sm:text-xs md:text-sm lg:gap-2 lg:text-base">
-              <MdEmail className="flex-shrink-0 text-primary-700" />
-              <Link
-                href={`mailto:${member.person.email}`}
-                className="break-all text-neutral-700 hover:text-primary-700 hover:underline"
-              >
-                {member.person.email}
-              </Link>
-            </span>
-
-            {/* Phone */}
-            {phone && (
-              <span className="flex items-center gap-1 text-xs sm:gap-1.5 sm:text-xs md:text-sm lg:gap-2 lg:text-base">
-                <MdOutlineLocalPhone className="flex-shrink-0 text-primary-700" />
-                <span className="break-all text-neutral-700">{phone}</span>
-              </span>
-            )}
-
-            {/* Mobile */}
-            {mobile && (
-              <span className="flex items-center gap-1 text-xs sm:gap-1.5 sm:text-xs md:text-sm lg:gap-2 lg:text-base">
-                <MdOutlineLocalPhone className="flex-shrink-0 text-primary-700" />
-                <span className="break-all text-neutral-700">{mobile}</span>
-              </span>
-            )}
-          </section>
-        </section>
-      </li>
-    </ul>
+        <ul className="mt-2 space-y-0.5 text-xs sm:mt-3 sm:space-y-1 sm:text-sm md:mt-4 md:text-base lg:mt-6 lg:text-lg">
+          <li>
+            <strong>{labels.phoneNo}</strong>{' '}
+            <span className="text-neutral-900">{phone}</span>
+          </li>
+          {fax && (
+            <li>
+              <strong>{labels.faxNo}</strong>{' '}
+              <span className="text-neutral-900">{fax}</span>
+            </li>
+          )}
+          <li>
+            <strong>{labels.mobileNo}</strong>{' '}
+            <span className="text-neutral-900">{mobile}</span>
+          </li>
+          <li>
+            <strong>{labels.emailId}</strong>{' '}
+            <a href={`mailto:${email}`} className="text-blue-700 break-all">
+              {email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
   );
 }

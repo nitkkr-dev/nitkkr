@@ -5,8 +5,7 @@ import { MdEmail, MdOutlineLocalPhone } from 'react-icons/md';
 import Heading from '~/components/heading';
 import { getTranslations } from '~/i18n/translations';
 import ImageHeader from '~/components/image-header';
-
-import DirectorCard from '../../../../../components/director-card';
+import DirectorCard from '~/components/director-card';
 
 export default async function DirectorCorner({
   params: { locale },
@@ -38,7 +37,16 @@ export default async function DirectorCorner({
           href="#director-profile"
           text={text.title[0]}
         />
-        <DirectorCard employeeId={text.Director.employeeId} />
+        <DirectorCard
+          image={text.Director.image}
+          name={text.Director.name}
+          position={text.Director.position}
+          phone={text.Director.phone}
+          fax={text.Director.fax}
+          mobile={text.Director.mobile}
+          email={text.Director.email}
+          labels={text.labels}
+        />
       </section>
 
       {/* ---------- BRIEF CV OF DIRECTOR ---------- */}
@@ -134,7 +142,16 @@ export default async function DirectorCorner({
         />
         {text.preDirectors.map((director, index) => (
           <div key={index} className="mb-6">
-            <DirectorCard employeeId={director.employeeId} />
+            <DirectorCard
+              image={director.image}
+              name={director.name}
+              position={director.position}
+              phone={director.phone}
+              fax={director.fax}
+              mobile={director.mobile}
+              email={director.email}
+              labels={text.labels}
+            />
           </div>
         ))}
       </section>
