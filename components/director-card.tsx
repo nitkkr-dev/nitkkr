@@ -2,6 +2,35 @@ import Image from 'next/image';
 
 import { cn } from '~/lib/utils';
 
+export interface DirectorCardLabels {
+  phoneNo: string;
+  faxNo: string;
+  mobileNo: string;
+  emailId: string;
+}
+
+export interface DirectorCardProfile {
+  image: string;
+  name: string;
+  position: string;
+  phone: string;
+  fax: string;
+  mobile: string;
+  email: string;
+}
+
+export interface DirectorCardProps {
+  className?: string;
+  image: string;
+  name: string;
+  position: string;
+  phone: string;
+  fax?: string;
+  mobile: string;
+  email: string;
+  labels: DirectorCardLabels;
+}
+
 export default function DirectorCard({
   className,
   image,
@@ -12,22 +41,7 @@ export default function DirectorCard({
   mobile,
   email,
   labels,
-}: {
-  className?: string;
-  image: string;
-  name: string;
-  position: string;
-  phone: string;
-  fax: string;
-  mobile: string;
-  email: string;
-  labels: {
-    phoneNo: string;
-    faxNo: string;
-    mobileNo: string;
-    emailId: string;
-  };
-}) {
+}: DirectorCardProps) {
   return (
     <article
       className={cn(
@@ -35,7 +49,6 @@ export default function DirectorCard({
         className
       )}
     >
-      {/* Director Image */}
       <div className="flex-shrink-0 overflow-hidden rounded-lg shadow-sm">
         <Image
           alt={name}
@@ -46,7 +59,6 @@ export default function DirectorCard({
         />
       </div>
 
-      {/* Director Info */}
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-bold text-primary-500 sm:text-lg md:text-xl lg:text-2xl">
           {name}
@@ -60,10 +72,12 @@ export default function DirectorCard({
             <strong>{labels.phoneNo}</strong>{' '}
             <span className="text-neutral-900">{phone}</span>
           </li>
-          <li>
-            <strong>{labels.faxNo}</strong>{' '}
-            <span className="text-neutral-900">{fax}</span>
-          </li>
+          {fax && (
+            <li>
+              <strong>{labels.faxNo}</strong>{' '}
+              <span className="text-neutral-900">{fax}</span>
+            </li>
+          )}
           <li>
             <strong>{labels.mobileNo}</strong>{' '}
             <span className="text-neutral-900">{mobile}</span>

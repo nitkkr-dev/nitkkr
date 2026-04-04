@@ -8,6 +8,7 @@ export interface DirectorPageTranslations {
     emailId: string;
   };
   Director: {
+    image: string;
     name: string;
     position: string;
     phone: string;
@@ -27,9 +28,9 @@ export interface DirectorPageTranslations {
   }[];
 
   preDirectors: {
+    image: string;
     name: string;
     position: string;
-    image: string;
     phone: string;
     fax: string;
     mobile: string;
@@ -53,6 +54,7 @@ export const directorPageEn: DirectorPageTranslations = {
     emailId: 'Email-ID:',
   },
   Director: {
+    image: 'assets/director.jpeg',
     name: 'Professor B.V. Ramana Reddy',
     position: 'Director, National Institute of Technology, Kurukshetra',
     phone: '+91-1744-233208',
@@ -151,6 +153,7 @@ export const directorPageHi: DirectorPageTranslations = {
     emailId: '',
   },
   Director: {
+    image: 'assets/director.jpeg',
     name: '',
     position: '',
     phone: '',

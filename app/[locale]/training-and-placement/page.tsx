@@ -24,8 +24,8 @@ import StudentGroup from '~/components/student-group';
 import ButtonGroup from '~/components/button-group';
 import { db } from '~/server/db';
 import { pgPlacementStats } from '~/server/db/schema/placement-stats-pg.schema';
+import DeanCard from '~/components/dean-card';
 
-import DirectorCard from '../institute/administration/director/director-card';
 import clients from './recruiters';
 
 const hodProfile = {
@@ -292,15 +292,10 @@ export default async function TrainingAndPlacement({
         />
         {/* Check this part. Container is not used */}
         <div className="container mb-10 mt-4 flex justify-center">
-          <DirectorCard
-            image="assets/director.jpeg"
-            name={text.Dean.name}
-            position={text.Dean.position}
-            phone={text.Dean.phone}
-            fax={text.Dean.fax}
-            mobile={text.Dean.mobile}
-            email={text.Dean.email}
+          <DeanCard
+            personId={text.Dean.personId}
             labels={text.labels}
+            fallbackProfile={text.Dean}
           />
         </div>
       </section>
