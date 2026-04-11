@@ -27,6 +27,8 @@ interface TendersListProps {
   deletingId?: number | null;
 }
 
+export default TendersList;
+
 export function TendersList({
   tenders,
   locale,
