@@ -1,9 +1,11 @@
 'use client';
 
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
+// Removed stray comment
 import { Button } from '~/components/buttons';
 import {
   deleteTenderAction,
@@ -11,7 +13,7 @@ import {
 } from '~/server/actions/tenders';
 import type { TendersTranslations } from '~/i18n/translate/tenders';
 
-import { TendersList } from './TendersList';
+import TendersList from './TendersList';
 
 interface TendersPageClientProps {
   allTenders: TenderWithStatus[];
@@ -41,7 +43,6 @@ export function TendersPageClient({
   // Handle delete - updates state for both tabs
   const handleDelete = async (id: number) => {
     if (!confirm(text.confirmDelete)) return;
-
     setDeletingId(id);
     try {
       const result = await deleteTenderAction(id);
@@ -58,6 +59,8 @@ export function TendersPageClient({
     }
   };
 
+  // Removed duplicate import statement for Link
+  // import Link from 'next/link';
   return (
     <main className="container mx-auto px-4 py-8">
       {/* Header with Add button */}
@@ -99,15 +102,17 @@ export function TendersPageClient({
       </div>
 
       {/* Tenders List */}
-      <TendersList
-        tenders={displayedTenders}
-        locale={locale}
-        canManage={canManage}
-        text={text}
-        isArchived={activeTab === 'archived'}
-        onDelete={handleDelete}
-        deletingId={deletingId}
-      />
+      <Suspense fallback={<div>Loading tenders...</div>}>
+        <TendersList
+          tenders={displayedTenders}
+          locale={locale}
+          canManage={canManage}
+          text={text}
+          isArchived={activeTab === 'archived'}
+          onDelete={handleDelete}
+          deletingId={deletingId}
+        />
+      </Suspense>
     </main>
   );
 }
