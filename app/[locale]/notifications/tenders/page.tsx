@@ -1,9 +1,6 @@
-import { Suspense } from 'react';
-
 import { getTranslations } from '~/i18n/translations';
 import { canManageNotifications, getServerAuthSession } from '~/server/auth';
 import ImageHeader from '~/components/image-header';
-import Loading from '~/components/loading';
 import { getAllTenders } from '~/server/actions/tenders';
 
 import { TendersPageClient } from './TendersPageClient';
@@ -29,14 +26,12 @@ export default async function TendersPage({
     <>
       <ImageHeader title={text.title} src="assets/academics.png" />
 
-      <Suspense fallback={<Loading />}>
-        <TendersPageClient
-          allTenders={allTenders}
-          locale={locale}
-          canManage={canManage}
-          text={text}
-        />
-      </Suspense>
+      <TendersPageClient
+        allTenders={allTenders}
+        locale={locale}
+        canManage={canManage}
+        text={text}
+      />
     </>
   );
 }

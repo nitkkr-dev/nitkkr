@@ -1,19 +1,38 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
-// Removed stray comment
 import { Button } from '~/components/buttons';
+import { DynamicLazy } from '~/components/lazy/DynamicLazy';
 import {
   deleteTenderAction,
   type TenderWithStatus,
 } from '~/server/actions/tenders';
 import type { TendersTranslations } from '~/i18n/translate/tenders';
 
-import TendersList from './TendersList';
+type LazyTendersListProps = React.JSX.IntrinsicAttributes & {
+  tenders: TenderWithStatus[];
+  locale: string;
+  canManage: boolean;
+  text: TendersTranslations;
+  isArchived: boolean;
+  onDelete?: (id: number) => Promise<void>;
+  deletingId?: number | null;
+};
+
+const LazyTendersList = DynamicLazy<LazyTendersListProps>(
+  () => import('./TendersList').then((mod) => ({ default: mod.default })),
+  {
+    fallback: (
+      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-8 text-center text-neutral-600">
+        Loading tenders...
+      </div>
+    ),
+  }
+);
 
 interface TendersPageClientProps {
   allTenders: TenderWithStatus[];
@@ -59,8 +78,6 @@ export function TendersPageClient({
     }
   };
 
-  // Removed duplicate import statement for Link
-  // import Link from 'next/link';
   return (
     <main className="container mx-auto px-4 py-8">
       {/* Header with Add button */}
@@ -81,6 +98,8 @@ export function TendersPageClient({
       <div className="mb-6 flex gap-2">
         <button
           onClick={() => setActiveTab('live')}
+          onMouseEnter={() => void LazyTendersList.preload()}
+          onFocus={() => void LazyTendersList.preload()}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
             activeTab === 'live'
               ? 'text-white bg-primary-700'
@@ -91,6 +110,8 @@ export function TendersPageClient({
         </button>
         <button
           onClick={() => setActiveTab('archived')}
+          onMouseEnter={() => void LazyTendersList.preload()}
+          onFocus={() => void LazyTendersList.preload()}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
             activeTab === 'archived'
               ? 'text-white bg-primary-700'
@@ -102,17 +123,15 @@ export function TendersPageClient({
       </div>
 
       {/* Tenders List */}
-      <Suspense fallback={<div>Loading tenders...</div>}>
-        <TendersList
-          tenders={displayedTenders}
-          locale={locale}
-          canManage={canManage}
-          text={text}
-          isArchived={activeTab === 'archived'}
-          onDelete={handleDelete}
-          deletingId={deletingId}
-        />
-      </Suspense>
+      <LazyTendersList
+        tenders={displayedTenders}
+        locale={locale}
+        canManage={canManage}
+        text={text}
+        isArchived={activeTab === 'archived'}
+        onDelete={handleDelete}
+        deletingId={deletingId}
+      />
     </main>
   );
 }
